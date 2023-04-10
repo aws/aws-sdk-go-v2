@@ -632,8 +632,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "af-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -645,8 +645,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -658,8 +658,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -671,8 +671,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -684,8 +684,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-northeast-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -697,8 +697,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -710,8 +710,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -723,8 +723,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -736,8 +736,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -749,8 +749,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -762,8 +762,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -775,8 +775,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -788,8 +788,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -801,8 +801,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -814,8 +814,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -827,8 +827,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -840,8 +840,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "me-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -853,8 +853,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -866,8 +866,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -879,8 +879,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -892,8 +892,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -905,8 +905,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -918,8 +918,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -931,8 +931,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-west-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -944,8 +944,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -957,8 +957,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-west-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -970,8 +970,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -983,8 +983,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -996,8 +996,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1009,8 +1009,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-northwest-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1022,8 +1022,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1035,8 +1035,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1048,8 +1048,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1061,8 +1061,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1074,8 +1074,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1087,8 +1087,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-gov-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1100,8 +1100,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-gov-west-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1113,8 +1113,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1126,8 +1126,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1139,8 +1139,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1152,8 +1152,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-iso-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1163,8 +1163,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1176,8 +1176,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1187,8 +1187,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1200,8 +1200,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1211,8 +1211,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1224,8 +1224,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1235,8 +1235,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1248,8 +1248,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1273,8 +1273,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1285,8 +1285,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -1484,7 +1484,7 @@
                 "managedTerminationProtection": {
                     "target": "com.amazonaws.ecs#ManagedTerminationProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The managed termination protection setting to use for the Auto Scaling group capacity\n\t\t\tprovider. This determines whether the Auto Scaling group has managed termination\n\t\t\tprotection. The default is off.</p>\n         <important>\n            <p>When using managed termination protection, managed scaling must also be used\n\t\t\t\totherwise managed termination protection doesn't work.</p>\n         </important>\n         <p>When managed termination protection is on, Amazon ECS prevents the Amazon EC2 instances in an Auto\n\t\t\tScaling group that contain tasks from being terminated during a scale-in action. The\n\t\t\tAuto Scaling group and each instance in the Auto Scaling group must have instance\n\t\t\tprotection from scale-in actions enabled as well. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>\n         <p>When managed termination protection is off, your Amazon EC2 instances aren't protected from\n\t\t\ttermination when the Auto Scaling group scales in.</p>"
+                        "smithy.api#documentation": "<p>The managed termination protection setting to use for the Auto Scaling group capacity\n\t\t\tprovider. This determines whether the Auto Scaling group has managed termination\n\t\t\tprotection. The default is off.</p>\n         <important>\n            <p>When using managed termination protection, managed scaling must also be used\n\t\t\t\totherwise managed termination protection doesn't work.</p>\n         </important>\n         <p>When managed termination protection is on, Amazon ECS prevents the Amazon EC2 instances in an Auto\n\t\t\tScaling group that contain tasks from being terminated during a scale-in action. The\n\t\t\tAuto Scaling group and each instance in the Auto Scaling group must have instance\n\t\t\tprotection from scale-in actions on as well. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>\n         <p>When managed termination protection is off, your Amazon EC2 instances aren't protected from\n\t\t\ttermination when the Auto Scaling group scales in.</p>"
                     }
                 }
             },
@@ -2009,7 +2009,7 @@
                 "namespace": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service and don't specify\n\t\t\ta Service Connect configuration. The namespace name can include up to 1024 characters.\n\t\t\tThe name is case-sensitive. The name can't include hyphens (-), tilde (~), greater than\n\t\t\t(>), less than (<), or slash (/).</p>\n         <p>If you enter an existing namespace name or ARN, then that namespace will be used.\n\t\t\tAny namespace type is supported. The namespace must be in this account and this Amazon Web Services\n\t\t\tRegion.</p>\n         <p>If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a\n\t\t\tCloud Map namespace with the \"API calls\" method of instance discovery only. This instance\n\t\t\tdiscovery method is the \"HTTP\" namespace type in the Command Line Interface. Other types of instance\n\t\t\tdiscovery aren't used by Service Connect.</p>\n         <p>If you update the service with an empty string <code>\"\"</code> for the namespace name,\n\t\t\tthe cluster configuration for Service Connect is removed. Note that the namespace will\n\t\t\tremain in Cloud Map and must be deleted separately.</p>\n         <p>For more information about Cloud Map, see <a href=\"https://docs.aws.amazon.com/\">Working\n\t\t\t\twith Services</a> in the <i>Cloud Map Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service and don't specify\n\t\t\ta Service Connect configuration. The namespace name can include up to 1024 characters.\n\t\t\tThe name is case-sensitive. The name can't include hyphens (-), tilde (~), greater than\n\t\t\t(>), less than (<), or slash (/).</p>\n         <p>If you enter an existing namespace name or ARN, then that namespace will be used.\n\t\t\tAny namespace type is supported. The namespace must be in this account and this Amazon Web Services\n\t\t\tRegion.</p>\n         <p>If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a\n\t\t\tCloud Map namespace with the \"API calls\" method of instance discovery only. This instance\n\t\t\tdiscovery method is the \"HTTP\" namespace type in the Command Line Interface. Other types of instance\n\t\t\tdiscovery aren't used by Service Connect.</p>\n         <p>If you update the service with an empty string <code>\"\"</code> for the namespace name,\n\t\t\tthe cluster configuration for Service Connect is removed. Note that the namespace will\n\t\t\tremain in Cloud Map and must be deleted separately.</p>\n         <p>For more information about Cloud Map, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html\">Working\n\t\t\t\twith Services</a> in the <i>Cloud Map Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2024,13 +2024,13 @@
                 "name": {
                     "target": "com.amazonaws.ecs#ClusterSettingName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cluster setting. The only supported value is\n\t\t\t\t<code>containerInsights</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the cluster setting. The value is <code>containerInsights</code> .</p>"
                     }
                 },
                 "value": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value to set for the cluster setting. The supported values are <code>enabled</code> and\n\t\t\t\t<code>disabled</code>. If <code>enabled</code> is specified, CloudWatch Container Insights\n\t\t\twill be enabled for the cluster, otherwise it will be off unless the\n\t\t\t\t<code>containerInsights</code> account setting is turned on. If a cluster value is\n\t\t\tspecified, it will override the <code>containerInsights</code> value set with <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html\">PutAccountSetting</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html\">PutAccountSettingDefault</a>.</p>"
+                        "smithy.api#documentation": "<p>The value to set for the cluster setting. The supported values are <code>enabled</code> and\n\t\t\t\t<code>disabled</code>. </p>\n         <p>If you set <code>name</code> to  <code>containerInsights</code> and <code>value</code>\n\t\t\tto <code>enabled</code>, CloudWatch Container Insights will be on for the cluster, otherwise\n\t\t\tit will be off unless the <code>containerInsights</code> account setting is turned on.\n\t\t\tIf a cluster value is specified, it will override the <code>containerInsights</code>\n\t\t\tvalue set with <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html\">PutAccountSetting</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html\">PutAccountSettingDefault</a>.</p>"
                     }
                 }
             },
@@ -3069,7 +3069,7 @@
                 "taskDefinition": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or\n\t\t\tfull ARN of the task definition to run in your service. If a <code>revision</code>\n\t\t\tisn't specified, the latest <code>ACTIVE</code> revision is used.</p>\n         <p>A task definition must be specified if the service uses either the <code>ECS</code> or\n\t\t\t\t<code>CODE_DEPLOY</code> deployment controllers.</p>"
+                        "smithy.api#documentation": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or\n\t\t\tfull ARN of the task definition to run in your service. If a <code>revision</code>\n\t\t\tisn't specified, the latest <code>ACTIVE</code> revision is used.</p>\n         <p>A task definition must be specified if the service uses either the <code>ECS</code> or\n\t\t\t\t<code>CODE_DEPLOY</code> deployment controllers.</p>\n         <p>For more information about deployment types, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a>.</p>"
                     }
                 },
                 "loadBalancers": {
@@ -3185,7 +3185,7 @@
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Determines whether the execute command functionality is enabled for the service. If\n\t\t\t\t<code>true</code>, this enables execute command functionality on all containers in\n\t\t\tthe service tasks.</p>"
+                        "smithy.api#documentation": "<p>Determines whether the execute command functionality is turned on for the service. If\n\t\t\t\t<code>true</code>, this enables execute command functionality on all containers in\n\t\t\tthe service tasks.</p>"
                     }
                 },
                 "serviceConnectConfiguration": {
@@ -3913,7 +3913,7 @@
                 "rolloutState": {
                     "target": "com.amazonaws.ecs#DeploymentRolloutState",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>The <code>rolloutState</code> of a service is only returned for services that use\n\t\t\t\tthe rolling update (<code>ECS</code>) deployment type that aren't behind a\n\t\t\t\tClassic Load Balancer.</p>\n         </note>\n         <p>The rollout state of the deployment. When a service deployment is started, it begins\n\t\t\tin an <code>IN_PROGRESS</code> state. When the service reaches a steady state, the\n\t\t\tdeployment transitions to a <code>COMPLETED</code> state. If the service fails to reach\n\t\t\ta steady state and circuit breaker is enabled, the deployment transitions to a\n\t\t\t\t<code>FAILED</code> state. A deployment in <code>FAILED</code> state doesn't launch\n\t\t\tany new tasks. For more information, see <a>DeploymentCircuitBreaker</a>.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>The <code>rolloutState</code> of a service is only returned for services that use\n\t\t\t\tthe rolling update (<code>ECS</code>) deployment type that aren't behind a\n\t\t\t\tClassic Load Balancer.</p>\n         </note>\n         <p>The rollout state of the deployment. When a service deployment is started, it begins\n\t\t\tin an <code>IN_PROGRESS</code> state. When the service reaches a steady state, the\n\t\t\tdeployment transitions to a <code>COMPLETED</code> state. If the service fails to reach\n\t\t\ta steady state and circuit breaker is turned on, the deployment transitions to a\n\t\t\t\t<code>FAILED</code> state. A deployment in <code>FAILED</code> state doesn't launch\n\t\t\tany new tasks. For more information, see <a>DeploymentCircuitBreaker</a>.</p>"
                     }
                 },
                 "rolloutStateReason": {
@@ -3991,7 +3991,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The deployment circuit breaker can only be used for services using the rolling\n\t\t\t\tupdate (<code>ECS</code>) deployment type.</p>\n         </note>\n         <p>The <b>deployment circuit breaker</b> determines whether a\n\t\t\tservice deployment will fail if the service can't reach a steady state. If enabled, a\n\t\t\tservice deployment will transition to a failed state and stop launching new tasks. You\n\t\t\tcan also configure Amazon ECS to roll back your service to the last completed deployment\n\t\t\tafter a failure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Rolling\n\t\t\t\tupdate</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>The deployment circuit breaker can only be used for services using the rolling\n\t\t\t\tupdate (<code>ECS</code>) deployment type.</p>\n         </note>\n         <p>The <b>deployment circuit breaker</b> determines whether a\n\t\t\tservice deployment will fail if the service can't reach a steady state. If it is turned on, a\n\t\t\tservice deployment will transition to a failed state and stop launching new tasks. You\n\t\t\tcan also configure Amazon ECS to roll back your service to the last completed deployment\n\t\t\tafter a failure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Rolling\n\t\t\t\tupdate</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#DeploymentConfiguration": {
@@ -5065,13 +5065,13 @@
                 "accessPointId": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EFS access point ID to use. If an access point is specified, the root directory\n\t\t\tvalue specified in the <code>EFSVolumeConfiguration</code> must either be omitted or set\n\t\t\tto <code>/</code> which will enforce the path set on the EFS access point. If an access\n\t\t\tpoint is used, transit encryption must be enabled in the\n\t\t\t\t<code>EFSVolumeConfiguration</code>. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Working with Amazon\n\t\t\t\tEFS access points</a> in the <i>Amazon Elastic File System User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EFS access point ID to use. If an access point is specified, the root directory\n\t\t\tvalue specified in the <code>EFSVolumeConfiguration</code> must either be omitted or set\n\t\t\tto <code>/</code> which will enforce the path set on the EFS access point. If an access\n\t\t\tpoint is used, transit encryption must be on in the\n\t\t\t\t<code>EFSVolumeConfiguration</code>. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Working with Amazon\n\t\t\t\tEFS access points</a> in the <i>Amazon Elastic File System User Guide</i>.</p>"
                     }
                 },
                 "iam": {
                     "target": "com.amazonaws.ecs#EFSAuthorizationConfigIAM",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether to use the Amazon ECS task role defined in a task definition when\n\t\t\tmounting the Amazon EFS file system. If enabled, transit encryption must be enabled in the\n\t\t\t\t<code>EFSVolumeConfiguration</code>. If this parameter is omitted, the default value\n\t\t\tof <code>DISABLED</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints\">Using\n\t\t\t\tAmazon EFS access points</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Determines whether to use the Amazon ECS task role defined in a task definition when\n\t\t\tmounting the Amazon EFS file system. If it is turned on, transit encryption must be turned on in the\n\t\t\t\t<code>EFSVolumeConfiguration</code>. If this parameter is omitted, the default value\n\t\t\tof <code>DISABLED</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints\">Using\n\t\t\t\tAmazon EFS access points</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -5132,7 +5132,7 @@
                 "transitEncryption": {
                     "target": "com.amazonaws.ecs#EFSTransitEncryption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether to use encryption for Amazon EFS data in transit between the Amazon ECS host\n\t\t\tand the Amazon EFS server. Transit encryption must be enabled if Amazon EFS IAM authorization is\n\t\t\tused. If this parameter is omitted, the default value of <code>DISABLED</code> is used.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html\">Encrypting data in transit</a> in\n\t\t\tthe <i>Amazon Elastic File System User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Determines whether to use encryption for Amazon EFS data in transit between the Amazon ECS host\n\t\t\tand the Amazon EFS server. Transit encryption must be turned on if Amazon EFS IAM authorization is\n\t\t\tused. If this parameter is omitted, the default value of <code>DISABLED</code> is used.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html\">Encrypting data in transit</a> in\n\t\t\tthe <i>Amazon Elastic File System User Guide</i>.</p>"
                     }
                 },
                 "transitEncryptionPort": {
@@ -5210,7 +5210,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n         <note>\n            <p>This parameter is only supported for tasks hosted on Fargate using\n\t\t\t\tLinux platform version <code>1.4.0</code> or later. This parameter is not supported\n\t\t\t\tfor Windows containers on Fargate.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n         <note>\n            <p>For tasks using the Fargate launch type, the task requires\n\t\t\t\tthe following platforms:</p>\n            <ul>\n               <li>\n                  <p>Linux platform version <code>1.4.0</code> or later.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.ecs#ExecuteCommand": {
@@ -5242,7 +5242,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a command remotely on a container within a task.</p>\n         <p>If you use a condition key in your IAM policy to refine the conditions for the policy\n\t\t\tstatement, for example limit the actions to a specific cluster, you receive an\n\t\t\t\t<code>AccessDeniedException</code> when there is a mismatch between the condition\n\t\t\tkey value and the corresponding parameter value.</p>\n         <p>For information about required permissions and considerations, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.htm\">Using Amazon ECS Exec for\n\t\t\tdebugging</a> in the <i>Amazon ECS Developer Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Runs a command remotely on a container within a task.</p>\n         <p>If you use a condition key in your IAM policy to refine the conditions for the policy\n\t\t\tstatement, for example limit the actions to a specific cluster, you receive an\n\t\t\t\t<code>AccessDeniedException</code> when there is a mismatch between the condition\n\t\t\tkey value and the corresponding parameter value.</p>\n         <p>For information about required permissions and considerations, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html\">Using Amazon ECS Exec for\n\t\t\tdebugging</a> in the <i>Amazon ECS Developer Guide</i>. </p>"
             }
         },
         "com.amazonaws.ecs#ExecuteCommandConfiguration": {
@@ -5613,7 +5613,7 @@
                 "protectedTasks": {
                     "target": "com.amazonaws.ecs#ProtectedTasks",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tasks with the following information.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>taskArn</code>: The task ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>protectionEnabled</code>: The protection status of the task. If scale-in\n\t\t\t\t\tprotection is enabled for a task, the value is <code>true</code>. Otherwise, it\n\t\t\t\t\tis <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expirationDate</code>: The epoch time when protection for the task will\n\t\t\t\t\texpire.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of tasks with the following information.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>taskArn</code>: The task ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>protectionEnabled</code>: The protection status of the task. If scale-in\n\t\t\t\t\tprotection is turned on for a task, the value is <code>true</code>. Otherwise, it\n\t\t\t\t\tis <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expirationDate</code>: The epoch time when protection for the task will\n\t\t\t\t\texpire.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "failures": {
@@ -7034,7 +7034,7 @@
                 "name": {
                     "target": "com.amazonaws.ecs#ManagedAgentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the managed agent. When the execute command feature is enabled, the\n\t\t\tmanaged agent name is <code>ExecuteCommandAgent</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the managed agent. When the execute command feature is turned on, the\n\t\t\tmanaged agent name is <code>ExecuteCommandAgent</code>.</p>"
                     }
                 },
                 "reason": {
@@ -7147,7 +7147,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The managed scaling settings for the Auto Scaling group capacity provider.</p>\n         <p>When managed scaling is enabled, Amazon ECS manages the scale-in and scale-out actions of\n\t\t\tthe Auto Scaling group. Amazon ECS manages a target tracking scaling policy using an Amazon ECS\n\t\t\tmanaged CloudWatch metric with the specified <code>targetCapacity</code> value as the target\n\t\t\tvalue for the metric. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling\">Using managed scaling</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>If managed scaling is off, the user must manage the scaling of the Auto Scaling\n\t\t\tgroup.</p>"
+                "smithy.api#documentation": "<p>The managed scaling settings for the Auto Scaling group capacity provider.</p>\n         <p>When managed scaling is turned on, Amazon ECS manages the scale-in and scale-out actions of\n\t\t\tthe Auto Scaling group. Amazon ECS manages a target tracking scaling policy using an Amazon ECS\n\t\t\tmanaged CloudWatch metric with the specified <code>targetCapacity</code> value as the target\n\t\t\tvalue for the metric. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling\">Using managed scaling</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>If managed scaling is off, the user must manage the scaling of the Auto Scaling\n\t\t\tgroup.</p>"
             }
         },
         "com.amazonaws.ecs#ManagedScalingInstanceWarmupPeriod": {
@@ -7641,7 +7641,7 @@
                 "hostPort": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on the container instance to reserve for your container.</p>\n         <p>If you specify a <code>containerPortRange</code>, leave this field empty and the value of\n\t\t\tthe <code>hostPort</code> is set as follows:</p>\n         <ul>\n            <li>\n               <p>For containers in a task with the <code>awsvpc</code> network mode, the\n\t\t\t\t\t\t<code>hostPort</code> is set to the same value as the\n\t\t\t\t\t\t<code>containerPort</code>. This is a static mapping strategy.</p>\n            </li>\n            <li>\n               <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS\n\t\t\t\t\tagent finds open ports on the host and automaticaly binds them to the container\n\t\t\t\t\tports. This is a dynamic mapping strategy.</p>\n            </li>\n         </ul>\n         <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, the <code>hostPort</code> can either be left blank or set to the same\n\t\t\tvalue as the <code>containerPort</code>.</p>\n         <p>If you use containers in a task with the <code>bridge</code> network mode, you can\n\t\t\tspecify a non-reserved host port for your container port mapping, or you can omit the\n\t\t\t\t<code>hostPort</code> (or set it to <code>0</code>) while specifying a\n\t\t\t\t<code>containerPort</code> and your container automatically receives a port in the\n\t\t\tephemeral port range for your container instance operating system and Docker\n\t\t\tversion.</p>\n         <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the\n\t\t\tinstance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel\n\t\t\tparameter is unavailable, the default ephemeral port range from 49153 through 65535 is\n\t\t\tused. Do not attempt to specify a host port in the ephemeral port range as these are\n\t\t\treserved for automatic assignment. In general, ports below 32768 are outside of the\n\t\t\tephemeral port range.</p>\n         <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the\n\t\t\tAmazon ECS container agent ports 51678-51680. Any host port that was previously specified in\n\t\t\ta running task is also reserved while the task is running. That is, after a task stops,\n\t\t\tthe host port is released. The current reserved ports are displayed in the\n\t\t\t<code>remainingResources</code> of <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html\">DescribeContainerInstances</a>\n\t\t\toutput. A container instance can have up to 100 reserved ports at a time. This number\n\t\t\tincludes the default reserved ports. Automatically assigned ports aren't included in the\n\t\t\t100 reserved ports quota.</p>"
+                        "smithy.api#documentation": "<p>The port number on the container instance to reserve for your container.</p>\n         <p>If you specify a <code>containerPortRange</code>, leave this field empty and the value of\n\t\t\tthe <code>hostPort</code> is set as follows:</p>\n         <ul>\n            <li>\n               <p>For containers in a task with the <code>awsvpc</code> network mode, the\n\t\t\t\t\t\t<code>hostPort</code> is set to the same value as the\n\t\t\t\t\t\t<code>containerPort</code>. This is a static mapping strategy.</p>\n            </li>\n            <li>\n               <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds\n\t\t\t\t\topen ports on the host and automatically binds them to the container ports. This\n\t\t\t\t\tis a dynamic mapping strategy.</p>\n            </li>\n         </ul>\n         <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, the <code>hostPort</code> can either be left blank or set to the same\n\t\t\tvalue as the <code>containerPort</code>.</p>\n         <p>If you use containers in a task with the <code>bridge</code> network mode, you can\n\t\t\tspecify a non-reserved host port for your container port mapping, or you can omit the\n\t\t\t\t<code>hostPort</code> (or set it to <code>0</code>) while specifying a\n\t\t\t\t<code>containerPort</code> and your container automatically receives a port in the\n\t\t\tephemeral port range for your container instance operating system and Docker\n\t\t\tversion.</p>\n         <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the\n\t\t\tinstance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel\n\t\t\tparameter is unavailable, the default ephemeral port range from 49153 through 65535 is\n\t\t\tused. Do not attempt to specify a host port in the ephemeral port range as these are\n\t\t\treserved for automatic assignment. In general, ports below 32768 are outside of the\n\t\t\tephemeral port range.</p>\n         <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the\n\t\t\tAmazon ECS container agent ports 51678-51680. Any host port that was previously specified in\n\t\t\ta running task is also reserved while the task is running. That is, after a task stops,\n\t\t\tthe host port is released. The current reserved ports are displayed in the\n\t\t\t<code>remainingResources</code> of <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html\">DescribeContainerInstances</a>\n\t\t\toutput. A container instance can have up to 100 reserved ports at a time. This number\n\t\t\tincludes the default reserved ports. Automatically assigned ports aren't included in the\n\t\t\t100 reserved ports quota.</p>"
                     }
                 },
                 "protocol": {
@@ -7808,7 +7808,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies an account setting. Account settings are set on a per-Region basis.</p>\n         <p>If you change the account setting for the root user, the default settings for all of\n\t\t\tthe users and roles that no individual account setting was specified are reset for.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html\">Account\n\t\t\t\tSettings</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When <code>serviceLongArnFormat</code>, <code>taskLongArnFormat</code>, or\n\t\t\t\t<code>containerInstanceLongArnFormat</code> are specified, the Amazon Resource Name\n\t\t\t(ARN) and resource ID format of the resource type for a specified user, role, or\n\t\t\tthe root user for an account is affected. The opt-in and opt-out account setting must be\n\t\t\tset for each Amazon ECS resource separately. The ARN and resource ID format of a resource\n\t\t\tis defined by the opt-in status of the user or role that created the resource. You\n\t\t\tmust turn on this setting to use Amazon ECS features such as resource tagging.</p>\n         <p>When <code>awsvpcTrunking</code> is specified, the elastic network interface (ENI)\n\t\t\tlimit for any new container instances that support the feature is changed. If\n\t\t\t\t<code>awsvpcTrunking</code> is enabled, any new container instances that support the\n\t\t\tfeature are launched have the increased ENI limits available to them. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html\">Elastic Network\n\t\t\t\tInterface Trunking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When <code>containerInsights</code> is specified, the default setting indicating\n\t\t\twhether CloudWatch Container Insights is enabled for your clusters is changed. If\n\t\t\t\t<code>containerInsights</code> is enabled, any new clusters that are created will\n\t\t\thave Container Insights enabled unless you disable it during cluster creation. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html\">CloudWatch\n\t\t\t\tContainer Insights</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Modifies an account setting. Account settings are set on a per-Region basis.</p>\n         <p>If you change the root user account setting, the default settings are reset for  users\n\t\t\tand roles that do not have specified individual account settings. For more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html\">Account\n\t\t\t\tSettings</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When <code>serviceLongArnFormat</code>, <code>taskLongArnFormat</code>, or\n\t\t\t\t<code>containerInstanceLongArnFormat</code> are specified, the Amazon Resource Name\n\t\t\t(ARN) and resource ID format of the resource type for a specified user, role, or\n\t\t\tthe root user for an account is affected. The opt-in and opt-out account setting must be\n\t\t\tset for each Amazon ECS resource separately. The ARN and resource ID format of a resource\n\t\t\tis defined by the opt-in status of the user or role that created the resource. You\n\t\t\tmust turn on this setting to use Amazon ECS features such as resource tagging.</p>\n         <p>When <code>awsvpcTrunking</code> is specified, the elastic network interface (ENI)\n\t\t\tlimit for any new container instances that support the feature is changed. If\n\t\t\t\t<code>awsvpcTrunking</code> is turned on, any new container instances that support the\n\t\t\tfeature are launched have the increased ENI limits available to them. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html\">Elastic Network\n\t\t\t\tInterface Trunking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When <code>containerInsights</code> is specified, the default setting indicating whether\n\t\t\tAmazon Web Services CloudWatch Container Insights is turned on for your clusters is changed. If\n\t\t\t\t<code>containerInsights</code> is turned on, any new clusters that are created will\n\t\t\thave Container Insights turned on unless you disable it during cluster creation. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html\">CloudWatch\n\t\t\t\tContainer Insights</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#PutAccountSettingDefault": {
@@ -7840,7 +7840,7 @@
                 "name": {
                     "target": "com.amazonaws.ecs#SettingName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource name for which to modify the account setting. If\n\t\t\t\t<code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is\n\t\t\taffected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for\n\t\t\tyour Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is\n\t\t\tspecified, the ARN and resource ID for your Amazon ECS container instances is affected. If\n\t\t\t\t<code>awsvpcTrunking</code> is specified, the ENI limit for your Amazon ECS container\n\t\t\tinstances is affected. If <code>containerInsights</code> is specified, the default\n\t\t\tsetting for CloudWatch Container Insights for your clusters is affected.</p>\n         <p>Fargate is transitioning from task count-based quotas to vCPU-based quotas. You can\n\t\t\tset the name to <code>fargateVCPULimit</code> to opt in or opt out of the vCPU-based\n\t\t\tquotas. For information about the opt in timeline, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline\">Fargate vCPU-based quotas timeline</a> in the\n\t\t\t\t<i>Amazon ECS Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The resource name for which to modify the account setting. If\n\t\t\t\t<code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is\n\t\t\taffected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for\n\t\t\tyour Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is\n\t\t\tspecified, the ARN and resource ID for your Amazon ECS container instances is affected. If\n\t\t\t\t<code>awsvpcTrunking</code> is specified, the ENI limit for your Amazon ECS container\n\t\t\tinstances is affected. If <code>containerInsights</code> is specified, the default\n\t\t\tsetting for Amazon Web Services CloudWatch Container Insights for your clusters is affected. </p>\n         <p>When you specify <code>fargateFIPSMode</code> for the <code>name</code> and\n\t\t\t\t<code>enabled</code> for the <code>value</code>, Fargate uses FIPS-140 compliant\n\t\t\tcryptographic algorithms on your tasks. For more information about FIPS-140 compliance\n\t\t\twith Fargate, see <a href=\"https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html\"> Amazon Web Services Fargate Federal Information Processing Standard (FIPS) 140-2\n\t\t\t\tcompliance</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7876,7 +7876,7 @@
                 "name": {
                     "target": "com.amazonaws.ecs#SettingName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon ECS resource name for which to modify the account setting. If\n\t\t\t\t<code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is\n\t\t\taffected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for\n\t\t\tyour Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is\n\t\t\tspecified, the ARN and resource ID for your Amazon ECS container instances is affected. If\n\t\t\t\t<code>awsvpcTrunking</code> is specified, the elastic network interface (ENI) limit\n\t\t\tfor your Amazon ECS container instances is affected. If <code>containerInsights</code> is\n\t\t\tspecified, the default setting for CloudWatch Container Insights for your clusters is\n\t\t\taffected.</p>",
+                        "smithy.api#documentation": "<p>The Amazon ECS resource name for which to modify the account setting. If\n\t\t\t\t<code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is\n\t\t\taffected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for\n\t\t\tyour Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is\n\t\t\tspecified, the ARN and resource ID for your Amazon ECS container instances is affected. If\n\t\t\t\t<code>awsvpcTrunking</code> is specified, the elastic network interface (ENI) limit\n\t\t\tfor your Amazon ECS container instances is affected. If <code>containerInsights</code> is\n\t\t\tspecified, the default setting for Amazon Web Services CloudWatch Container Insights for your clusters is\n\t\t\taffected. If <code>fargateFIPSMode</code> is specified, Fargate FIPS 140 compliance is\n\t\t\taffected.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8268,7 +8268,7 @@
                 "ephemeralStorage": {
                     "target": "com.amazonaws.ecs#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n         <note>\n            <p>This parameter is only supported for tasks hosted on Fargate using\n\t\t\t\tthe following platform versions:</p>\n            <ul>\n               <li>\n                  <p>Linux platform version <code>1.4.0</code> or later.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n         <note>\n            <p>For tasks using the Fargate launch type, the task requires\n\t\t\t\tthe following platforms:</p>\n            <ul>\n               <li>\n                  <p>Linux platform version <code>1.4.0</code> or later.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "runtimePlatform": {
@@ -8413,7 +8413,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The type and amount of a resource to assign to a container. The supported resource types are\n\t\t\tGPUs and Elastic Inference accelerators. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html\">Working with\n\t\t\t\tGPUs on Amazon ECS</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/url-ecs-dev;ecs-inference.html\">Working with\n\t\t\t\tAmazon Elastic Inference on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>\n         </p>"
+                "smithy.api#documentation": "<p>The type and amount of a resource to assign to a container. The supported resource types are\n\t\t\tGPUs and Elastic Inference accelerators. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html\">Working with\n\t\t\t\tGPUs on Amazon ECS</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html\">Working with\n\t\t\t\tAmazon Elastic Inference on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>\n         </p>"
             }
         },
         "com.amazonaws.ecs#ResourceRequirements": {
@@ -8942,7 +8942,7 @@
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Determines whether the execute command functionality is enabled for the service. If\n\t\t\t\t<code>true</code>, the execute command functionality is enabled for all containers\n\t\t\tin tasks as part of the service.</p>"
+                        "smithy.api#documentation": "<p>Determines whether the execute command functionality is turned on for the service. If\n\t\t\t\t<code>true</code>, the execute command functionality is turned on for all containers\n\t\t\tin tasks as part of the service.</p>"
                     }
                 }
             },
@@ -8991,7 +8991,7 @@
                 "namespace": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace for use with Service Connect. The namespace must be in\n\t\t\tthe same Amazon Web Services Region as the Amazon ECS service and cluster. The type of namespace doesn't\n\t\t\taffect Service Connect. For more information about Cloud Map, see <a href=\"https://docs.aws.amazon.com/\">Working with Services</a> in the\n\t\t\t<i>Cloud Map Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace for use with Service Connect. The namespace must be in\n\t\t\tthe same Amazon Web Services Region as the Amazon ECS service and cluster. The type of namespace doesn't\n\t\t\taffect Service Connect. For more information about Cloud Map, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html\">Working with Services</a> in the\n\t\t\t<i>Cloud Map Developer Guide</i>.</p>"
                     }
                 },
                 "services": {
@@ -9274,6 +9274,12 @@
                     "traits": {
                         "smithy.api#enumValue": "containerInsights"
                     }
+                },
+                "FARGATE_FIPS_MODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fargateFIPSMode"
+                    }
                 }
             }
         },
@@ -9370,7 +9376,7 @@
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether or not the execute command functionality is enabled for the task. If\n\t\t\t\t<code>true</code>, this enables execute command functionality on all containers in\n\t\t\tthe task.</p>"
+                        "smithy.api#documentation": "<p>Whether or not the execute command functionality is turned on for the task. If\n\t\t\t\t<code>true</code>, this enables execute command functionality on all containers in\n\t\t\tthe task.</p>"
                     }
                 },
                 "group": {
@@ -9950,7 +9956,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The execute command cannot run. This error can be caused by any of the following\n\t\t\tconfiguration issues:</p>\n         <ul>\n            <li>\n               <p>Incorrect IAM permissions</p>\n            </li>\n            <li>\n               <p>The SSM agent is not installed or is not running</p>\n            </li>\n            <li>\n               <p> There is an interface Amazon VPC endpoint for Amazon ECS, but there is not one for\n\t\t\t\t\tfor Systems Manager Session Manager</p>\n            </li>\n         </ul>\n         <p>For information about how to troubleshoot the issues, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html\">Troubleshooting issues with ECS\n\t\t\t\tExec</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The execute command cannot run. This error can be caused by any of the following\n\t\t\tconfiguration issues:</p>\n         <ul>\n            <li>\n               <p>Incorrect IAM permissions</p>\n            </li>\n            <li>\n               <p>The SSM agent is not installed or is not running</p>\n            </li>\n            <li>\n               <p> There is an interface Amazon VPC endpoint for Amazon ECS, but there is not one for Systems\n\t\t\t\t\tManager Session Manager</p>\n            </li>\n         </ul>\n         <p>For information about how to troubleshoot the issues, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html\">Troubleshooting issues with ECS\n\t\t\t\tExec</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -10056,7 +10062,7 @@
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Determines whether execute command functionality is enabled for this task. If\n\t\t\t\t<code>true</code>, execute command functionality is enabled on all the containers in\n\t\t\tthe task.</p>"
+                        "smithy.api#documentation": "<p>Determines whether execute command functionality is turned on for this task. If\n\t\t\t\t<code>true</code>, execute command functionality is turned on all the containers in\n\t\t\tthe task.</p>"
                     }
                 },
                 "executionStoppedAt": {
@@ -10419,7 +10425,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing a constraint on task placement in the task definition. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html\">Task placement constraints</a> in the\n\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <note>\n            <p>Task placement constraints aren't supported for tasks run on Fargate.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The constraint on task placement in the task definition. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html\">Task placement constraints</a> in the\n\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <note>\n            <p>Task placement constraints aren't supported for tasks run on Fargate.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecs#TaskDefinitionPlacementConstraintType": {
@@ -11665,7 +11671,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the protection status of a task. You can set <code>protectionEnabled</code> to\n\t\t\t\t<code>true</code> to protect your task from termination during scale-in events from\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html\">Service\n\t\t\t\tAutoscaling</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">deployments</a>.</p>\n         <p>Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the\n\t\t\t\t<code>protectionEnabled</code> property making the task eligible for termination by\n\t\t\ta subsequent scale-in event.</p>\n         <p>You can specify a custom expiration period for task protection from 1 minute to up to\n\t\t\t2,880 minutes (48 hours). To specify the custom expiration period, set the\n\t\t\t\t<code>expiresInMinutes</code> property. The <code>expiresInMinutes</code> property\n\t\t\tis always reset when you invoke this operation for a task that already has\n\t\t\t\t<code>protectionEnabled</code> set to <code>true</code>. You can keep extending the\n\t\t\tprotection expiration period of a task by invoking this operation repeatedly.</p>\n         <p>To learn more about Amazon ECS task protection, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html\">Task scale-in\n\t\t\t\tprotection</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>\n         <note>\n            <p>This operation is only supported for tasks belonging to an Amazon ECS service. Invoking\n\t\t\t\tthis operation for a standalone task will result in an <code>TASK_NOT_VALID</code>\n\t\t\t\tfailure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html\">API failure\n\t\t\t\t\treasons</a>.</p>\n         </note>\n         <important>\n            <p>If you prefer to set task protection from within the container, we recommend using\n\t\t\t\tthe <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html\">Task scale-in protection endpoint</a>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates the protection status of a task. You can set <code>protectionEnabled</code> to\n\t\t\t\t<code>true</code> to protect your task from termination during scale-in events from\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html\">Service\n\t\t\t\tAutoscaling</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">deployments</a>.</p>\n         <p>Task-protection, by default, expires after 2 hours at which point Amazon ECS clears the\n\t\t\t\t<code>protectionEnabled</code> property making the task eligible for termination by\n\t\t\ta subsequent scale-in event.</p>\n         <p>You can specify a custom expiration period for task protection from 1 minute to up to\n\t\t\t2,880 minutes (48 hours). To specify the custom expiration period, set the\n\t\t\t\t<code>expiresInMinutes</code> property. The <code>expiresInMinutes</code> property\n\t\t\tis always reset when you invoke this operation for a task that already has\n\t\t\t\t<code>protectionEnabled</code> set to <code>true</code>. You can keep extending the\n\t\t\tprotection expiration period of a task by invoking this operation repeatedly.</p>\n         <p>To learn more about Amazon ECS task protection, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html\">Task scale-in\n\t\t\t\tprotection</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>\n         <note>\n            <p>This operation is only supported for tasks belonging to an Amazon ECS service. Invoking\n\t\t\t\tthis operation for a standalone task will result in an <code>TASK_NOT_VALID</code>\n\t\t\t\tfailure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html\">API failure\n\t\t\t\t\treasons</a>.</p>\n         </note>\n         <important>\n            <p>If you prefer to set task protection from within the container, we recommend using\n\t\t\t\tthe <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html\">Task scale-in protection endpoint</a>.</p>\n         </important>"
             }
         },
         "com.amazonaws.ecs#UpdateTaskProtectionRequest": {
@@ -11710,7 +11716,7 @@
                 "protectedTasks": {
                     "target": "com.amazonaws.ecs#ProtectedTasks",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tasks with the following information.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>taskArn</code>: The task ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>protectionEnabled</code>: The protection status of the task. If scale-in\n\t\t\t\t\tprotection is enabled for a task, the value is <code>true</code>. Otherwise, it\n\t\t\t\t\tis <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expirationDate</code>: The epoch time when protection for the task will\n\t\t\t\t\texpire.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of tasks with the following information.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>taskArn</code>: The task ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>protectionEnabled</code>: The protection status of the task. If scale-in\n\t\t\t\t\tprotection is turned on for a task, the value is <code>true</code>. Otherwise, it\n\t\t\t\t\tis <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expirationDate</code>: The epoch time when protection for the task will\n\t\t\t\t\texpire.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "failures": {

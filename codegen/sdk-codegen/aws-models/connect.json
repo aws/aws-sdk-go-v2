@@ -1381,9 +1381,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "af-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1394,9 +1394,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-northeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1407,9 +1407,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-northeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1420,9 +1420,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-southeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1433,9 +1433,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-southeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1446,9 +1446,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ca-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1459,9 +1459,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1472,9 +1472,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1485,9 +1485,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1498,9 +1498,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1511,9 +1511,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1524,9 +1524,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1537,9 +1537,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1550,9 +1550,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1563,9 +1563,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1576,9 +1576,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1589,9 +1589,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1602,9 +1602,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1615,9 +1615,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1628,9 +1628,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1641,9 +1641,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1654,9 +1654,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1667,9 +1667,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1678,9 +1678,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1691,9 +1691,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1702,9 +1702,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1715,9 +1715,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1726,9 +1726,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1739,9 +1739,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1750,9 +1750,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1763,9 +1763,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1776,9 +1776,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1790,8 +1790,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1801,9 +1801,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1813,9 +1813,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2678,6 +2678,23 @@
                 "smithy.api#pattern": "^[a-z]{2}(-[a-z]+){1,2}(-[0-9])?$"
             }
         },
+        "com.amazonaws.connect#BehaviorType": {
+            "type": "enum",
+            "members": {
+                "ROUTE_CURRENT_CHANNEL_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE_CURRENT_CHANNEL_ONLY"
+                    }
+                },
+                "ROUTE_ANY_CHANNEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE_ANY_CHANNEL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#Boolean": {
             "type": "boolean",
             "traits": {
@@ -2788,14 +2805,14 @@
                 "ContentType": {
                     "target": "com.amazonaws.connect#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>,\n    <code>text/markdown</code>, and <code>application/json</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>,\n   <code>text/markdown</code>, <code>application/json</code>, and \n   <code>application/vnd.amazonaws.connect.message.interactive.response</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connect#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the chat message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are\n     Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of\n     12000. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The content of the chat message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are\n     Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of\n     12000. </p>\n            </li>\n            <li>\n               <p>For <code>application/vnd.amazonaws.connect.message.interactive.response</code>, the Length\n     Constraints are Minimum of 1, Maximum of 12288.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5684,6 +5701,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains credentials to use for federation.</p>"
+            }
+        },
+        "com.amazonaws.connect#CrossChannelBehavior": {
+            "type": "structure",
+            "members": {
+                "BehaviorType": {
+                    "target": "com.amazonaws.connect#BehaviorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the other channels that can be routed to an agent handling their current channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the cross-channel routing behavior that allows an agent working on a contact in \n   one channel to be offered a contact from a different channel.</p>"
             }
         },
         "com.amazonaws.connect#CurrentMetric": {
@@ -9729,7 +9761,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the\n   retrieval of historical metrics data. The time must be later than the start time\n   timestamp.</p>\n         <p>The time range between the start and end time must be less than 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the\n   retrieval of historical metrics data. The time must be later than the start time\n   timestamp.  It cannot be later than the current timestamp.</p>\n         <p>The time range between the start and end time must be less than 24 hours.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9749,7 +9781,7 @@
                 "Metrics": {
                     "target": "com.amazonaws.connect#MetricsV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, groupings, and filters for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics definitions</a> in the <i>Amazon Connect Administrator's\n    Guide</i>.</p>\n         <dl>\n            <dt>AGENT_ADHERENT_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_OCCUPANCY</dt>\n            <dd>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_SCHEDULE_ADHERENCE</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AGENT_SCHEDULED_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AGENT_CONNECTING_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. For now, this metric only\n      supports the following as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>AVG_QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>,\n      <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_BY_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>MAX_QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_ANSWERED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_CONTACTS_ABANDONED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_CONTACTS_DISCONNECTED </dt>\n            <dd>\n               <p>Valid metric filter key: <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_RETRY_CALLBACK_ATTEMPTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, groupings, and filters for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics definitions</a> in the <i>Amazon Connect Administrator's\n    Guide</i>.</p>\n         <dl>\n            <dt>AGENT_ADHERENT_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_OCCUPANCY</dt>\n            <dd>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_SCHEDULE_ADHERENCE</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AGENT_SCHEDULED_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AGENT_CONNECTING_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. For now, this metric only\n      supports the following as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>AVG_QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>,\n      <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_BY_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>MAX_QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_ANSWERED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_ABANDONED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_DISCONNECTED </dt>\n            <dd>\n               <p>Valid metric filter key: <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_RETRY_CALLBACK_ATTEMPTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14850,6 +14882,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of contacts an agent can have on a channel simultaneously.</p>\n         <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p>\n         <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p>\n         <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CrossChannelBehavior": {
+                    "target": "com.amazonaws.connect#CrossChannelBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the cross-channel routing behavior for each channel that is enabled for this Routing \n   Profile. For example, this allows you to offer an agent a different contact from another channel \n   when they are currently working with a contact from a Voice channel.</p>"
                     }
                 }
             },

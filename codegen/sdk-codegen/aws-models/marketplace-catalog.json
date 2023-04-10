@@ -47,10 +47,16 @@
                     "target": "com.amazonaws.marketplacecatalog#CancelChangeSet"
                 },
                 {
+                    "target": "com.amazonaws.marketplacecatalog#DeleteResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.marketplacecatalog#DescribeChangeSet"
                 },
                 {
                     "target": "com.amazonaws.marketplacecatalog#DescribeEntity"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#GetResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.marketplacecatalog#ListChangeSets"
@@ -60,6 +66,9 @@
                 },
                 {
                     "target": "com.amazonaws.marketplacecatalog#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#PutResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.marketplacecatalog#StartChangeSet"
@@ -83,7 +92,7 @@
                     "name": "aws-marketplace"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and\n            update capabilities. An entity can be a product or an offer on AWS Marketplace. </p>\n        <p>You can automate your entity update process by integrating the AWS Marketplace Catalog\n            API with your AWS Marketplace product build or deployment pipelines. You can also create\n            your own applications on top of the Catalog API to manage your products on AWS\n            Marketplace.</p>",
+                "smithy.api#documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and\n            update capabilities. An entity can be a product or an offer on AWS Marketplace. </p>\n         <p>You can automate your entity update process by integrating the AWS Marketplace Catalog\n            API with your AWS Marketplace product build or deployment pipelines. You can also create\n            your own applications on top of the Catalog API to manage your products on AWS\n            Marketplace.</p>",
                 "smithy.api#title": "AWS Marketplace Catalog Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -446,8 +455,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -459,8 +468,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -472,8 +481,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -485,8 +494,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -498,8 +507,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -511,8 +520,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -524,8 +533,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -537,8 +546,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -550,8 +559,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -563,8 +572,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -576,8 +585,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -589,8 +598,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -602,8 +622,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -615,8 +646,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -628,8 +670,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -641,8 +694,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -654,8 +707,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -667,8 +720,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -679,8 +732,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -691,9 +744,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -709,7 +768,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Access is denied.</p>",
+                "smithy.api#documentation": "<p>Access is denied.</p>\n         <p>HTTP status code: 403</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -770,6 +829,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#CancelChangeSetResponse": {
@@ -787,6 +849,9 @@
                         "smithy.api#documentation": "<p>The ARN associated with the change set referenced in this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#Catalog": {
@@ -805,7 +870,7 @@
                 "ChangeType": {
                     "target": "com.amazonaws.marketplacecatalog#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Change types are single string values that describe your intention for the change.\n            Each change type is unique for each <code>EntityType</code> provided in the change's\n            scope.</p>",
+                        "smithy.api#documentation": "<p>Change types are single string values that describe your intention for the change.\n            Each change type is unique for each <code>EntityType</code> provided in the change's\n            scope. For more information on change types available for single-AMI products, see\n                <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information on change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -825,7 +890,7 @@
                 "Details": {
                     "target": "com.amazonaws.marketplacecatalog#Json",
                     "traits": {
-                        "smithy.api#documentation": "<p>This object contains details specific to the change type of the requested\n            change.</p>",
+                        "smithy.api#documentation": "<p>This object contains details specific to the change type of the requested\n            change. For more\n            information on change types available for single-AMI products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information on change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1031,6 +1096,63 @@
                 "smithy.api#pattern": "^([\\d]{4})\\-(1[0-2]|0[1-9])\\-(3[01]|0[1-9]|[12][\\d])T(2[0-3]|[01][\\d]):([0-5][\\d]):([0-5][\\d])Z$"
             }
         },
+        "com.amazonaws.marketplacecatalog#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacecatalog#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacecatalog#DeleteResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacecatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a resource-based policy on an Entity that is identified by its resource\n            ARN.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/DeleteResourcePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Entity resource that is associated with the\n            resource policy.</p>",
+                        "smithy.api#httpQuery": "resourceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DeleteResourcePolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplacecatalog#DescribeChangeSet": {
             "type": "operation",
             "input": {
@@ -1084,6 +1206,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#DescribeChangeSetResponse": {
@@ -1143,6 +1268,9 @@
                         "smithy.api#documentation": "<p>An array of <code>ChangeSummary</code> objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#DescribeEntity": {
@@ -1201,6 +1329,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#DescribeEntityResponse": {
@@ -1236,6 +1367,9 @@
                         "smithy.api#documentation": "<p>This stringified JSON object includes the details of the entity.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#Entity": {
@@ -1398,13 +1532,13 @@
                 "Name": {
                     "target": "com.amazonaws.marketplacecatalog#FilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>For <code>ListEntities</code>, the supported value for this is an\n                <code>EntityId</code>.</p>\n        <p>For <code>ListChangeSets</code>, the supported values are as follows:</p>"
+                        "smithy.api#documentation": "<p>For <code>ListEntities</code>, the supported value for this is an\n                <code>EntityId</code>.</p>\n         <p>For <code>ListChangeSets</code>, the supported values are as follows:</p>"
                     }
                 },
                 "ValueList": {
                     "target": "com.amazonaws.marketplacecatalog#ValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>ListEntities</code> - This is a list of unique <code>EntityId</code>s.</p>\n        <p>\n            <code>ListChangeSets</code> - The supported filter names and associated\n                <code>ValueList</code>s is as follows:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ChangeSetName</code> - The supported <code>ValueList</code> is a list of\n                    non-unique <code>ChangeSetName</code>s. These are defined when you call the\n                        <code>StartChangeSet</code> action.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Status</code> - The supported <code>ValueList</code> is a list of\n                    statuses for all change set requests.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EntityId</code> - The supported <code>ValueList</code> is a list of\n                    unique <code>EntityId</code>s.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BeforeStartTime</code> - The supported <code>ValueList</code> is a list\n                    of all change sets that started before the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AfterStartTime</code> - The supported <code>ValueList</code> is a list\n                    of all change sets that started after the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BeforeEndTime</code> - The supported <code>ValueList</code> is a list of\n                    all change sets that ended before the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AfterEndTime</code> - The supported <code>ValueList</code> is a list of\n                    all change sets that ended after the filter value.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            <code>ListEntities</code> - This is a list of unique <code>EntityId</code>s.</p>\n         <p>\n            <code>ListChangeSets</code> - The supported filter names and associated\n                <code>ValueList</code>s is as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ChangeSetName</code> - The supported <code>ValueList</code> is a list of\n                    non-unique <code>ChangeSetName</code>s. These are defined when you call the\n                        <code>StartChangeSet</code> action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - The supported <code>ValueList</code> is a list of\n                    statuses for all change set requests.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EntityId</code> - The supported <code>ValueList</code> is a list of\n                    unique <code>EntityId</code>s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BeforeStartTime</code> - The supported <code>ValueList</code> is a list\n                    of all change sets that started before the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AfterStartTime</code> - The supported <code>ValueList</code> is a list\n                    of all change sets that started after the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BeforeEndTime</code> - The supported <code>ValueList</code> is a list of\n                    all change sets that ended before the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AfterEndTime</code> - The supported <code>ValueList</code> is a list of\n                    all change sets that ended after the filter value.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1444,6 +1578,70 @@
                 "smithy.api#pattern": "^(.)+$"
             }
         },
+        "com.amazonaws.marketplacecatalog#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacecatalog#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacecatalog#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacecatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a resource-based policy of an Entity that is identified by its resource\n            ARN.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/GetResourcePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Entity resource that is associated with the\n            resource policy.</p>",
+                        "smithy.api#httpQuery": "resourceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourcePolicyJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy document to set; formatted in JSON.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplacecatalog#Identifier": {
             "type": "string",
             "traits": {
@@ -1462,7 +1660,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There was an internal service exception.</p>",
+                "smithy.api#documentation": "<p>There was an internal service exception.</p>\n         <p>HTTP status code: 500</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -1500,7 +1698,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of change sets owned by the account being used to make the call. You\n            can filter this list by providing any combination of <code>entityId</code>,\n                <code>ChangeSetName</code>, and status. If you provide more than one filter, the API\n            operation applies a logical AND between the filters.</p>\n        <p>You can describe a change during the 60-day request history retention period for API\n            calls.</p>",
+                "smithy.api#documentation": "<p>Returns the list of change sets owned by the account being used to make the call. You\n            can filter this list by providing any combination of <code>entityId</code>,\n                <code>ChangeSetName</code>, and status. If you provide more than one filter, the API\n            operation applies a logical AND between the filters.</p>\n         <p>You can describe a change during the 60-day request history retention period for API\n            calls.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListChangeSets",
@@ -1510,6 +1708,15 @@
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListChangeSetsMaxResultInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
                 }
             }
         },
@@ -1536,7 +1743,7 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.marketplacecatalog#MaxResultInteger",
+                    "target": "com.amazonaws.marketplacecatalog#ListChangeSetsMaxResultInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results returned by a single call. This value must be provided\n            in the next call to retrieve the next set of results. By default, this value is\n            20.</p>"
                     }
@@ -1547,6 +1754,9 @@
                         "smithy.api#documentation": "<p>The token value retrieved from a previous call to access the next page of\n            results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#ListChangeSetsResponse": {
@@ -1564,6 +1774,9 @@
                         "smithy.api#documentation": "<p>The value of the next token, if it exists. Null if there are no more results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#ListEntities": {
@@ -1605,6 +1818,15 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#ListEntitiesMaxResultInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#ListEntitiesRequest": {
             "type": "structure",
             "members": {
@@ -1641,11 +1863,17 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.marketplacecatalog#MaxResultInteger",
+                    "target": "com.amazonaws.marketplacecatalog#ListEntitiesMaxResultInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the upper limit of the elements on a single page. If a value isn't provided,\n            the default value is 20.</p>"
                     }
+                },
+                "OwnershipType": {
+                    "target": "com.amazonaws.marketplacecatalog#OwnershipType"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#ListEntitiesResponse": {
@@ -1663,6 +1891,9 @@
                         "smithy.api#documentation": "<p>The value of the next token if it exists. Null if there is no more result.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#ListTagsForResource": {
@@ -1709,6 +1940,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#ListTagsForResourceResponse": {
@@ -1726,15 +1960,9 @@
                         "smithy.api#documentation": "<p>Required. A list of objects specifying each key name and value. Number of objects\n            allowed: 1-50.</p>"
                     }
                 }
-            }
-        },
-        "com.amazonaws.marketplacecatalog#MaxResultInteger": {
-            "type": "integer",
+            },
             "traits": {
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 20
-                }
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#NextToken": {
@@ -1745,6 +1973,86 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\w+=.:@\\-\\/]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OwnershipType": {
+            "type": "enum",
+            "members": {
+                "SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacecatalog#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacecatalog#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacecatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a resource-based policy to an Entity. Examples of an entity include:\n                <code>AmiProduct</code> and <code>ContainerProduct</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/PutResourcePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Entity resource you want to associate with a\n            resource policy. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourcePolicyJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy document to set; formatted in JSON.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#RequestedChangeList": {
@@ -1806,7 +2114,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified resource wasn't found.</p>",
+                "smithy.api#documentation": "<p>The specified resource wasn't found.</p>\n         <p>HTTP status code: 404</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -1822,6 +2130,16 @@
                 "smithy.api#documentation": "<p>Currently, the specified resource is not supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 415
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResourcePolicyJson": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10240
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.marketplacecatalog#ServiceQuotaExceededException": {
@@ -1843,7 +2161,7 @@
                 "SortBy": {
                     "target": "com.amazonaws.marketplacecatalog#SortBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>For <code>ListEntities</code>, supported attributes include\n                <code>LastModifiedDate</code> (default), <code>Visibility</code>,\n                <code>EntityId</code>, and <code>Name</code>.</p>\n        <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code>\n            and <code>EndTime</code>.</p>"
+                        "smithy.api#documentation": "<p>For <code>ListEntities</code>, supported attributes include\n                <code>LastModifiedDate</code> (default), <code>Visibility</code>,\n                <code>EntityId</code>, and <code>Name</code>.</p>\n         <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code>\n            and <code>EndTime</code>.</p>"
                     }
                 },
                 "SortOrder": {
@@ -1916,7 +2234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to request changes for your entities. Within a single\n                <code>ChangeSet</code>, you can't start the same change type against the same entity\n            multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities\n            targeted by the different changes are locked until the change set has completed (either\n            succeeded, cancelled, or failed). If you try to start a change set containing a change\n            against an entity that is already locked, you will receive a\n                <code>ResourceInUseException</code> error.</p>\n        <p>For example, you can't start the <code>ChangeSet</code> described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic because it contains two changes to run the same\n            change type (<code>AddRevisions</code>) against the same entity\n                (<code>entity-id@1</code>).</p>\n        <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>.</p>",
+                "smithy.api#documentation": "<p>Allows you to request changes for your entities. Within a single\n                <code>ChangeSet</code>, you can't start the same change type against the same entity\n            multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities\n            targeted by the different changes are locked until the change set has completed (either\n            succeeded, cancelled, or failed). If you try to start a change set containing a change\n            against an entity that is already locked, you will receive a\n                <code>ResourceInUseException</code> error.</p>\n         <p>For example, you can't start the <code>ChangeSet</code> described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic because it contains two changes to run the same\n            change type (<code>AddRevisions</code>) against the same entity\n                (<code>entity-id@1</code>).</p>\n         <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>. For information on change types for single-AMI\n            products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Als, for more information on change types\n            available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/StartChangeSet",
@@ -1960,6 +2278,9 @@
                         "smithy.api#documentation": "<p>A list of objects specifying each key name and value for the\n                <code>ChangeSetTags</code> property.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#StartChangeSetResponse": {
@@ -1977,6 +2298,9 @@
                         "smithy.api#documentation": "<p>The ARN associated to the unique identifier generated for the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#Tag": {
@@ -2019,7 +2343,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 200
                 }
             }
         },
@@ -2031,7 +2355,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 200
                 }
             }
         },
@@ -2086,11 +2410,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.marketplacecatalog#TagValue": {
             "type": "string",
@@ -2110,7 +2440,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Too many requests.</p>",
+                "smithy.api#documentation": "<p>Too many requests.</p>\n         <p>HTTP status code: 429</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -2166,11 +2496,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecatalog#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.marketplacecatalog#ValidationException": {
             "type": "structure",
@@ -2180,7 +2516,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An error occurred during validation.</p>",
+                "smithy.api#documentation": "<p>An error occurred during validation.</p>\n         <p>HTTP status code: 422</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 422
             }
