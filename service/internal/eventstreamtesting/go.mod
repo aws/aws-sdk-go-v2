@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.17.8
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.10
 	github.com/aws/aws-sdk-go-v2/credentials v1.13.20
-	golang.org/x/net v0.1.0
+	golang.org/x/net v0.7.0
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
