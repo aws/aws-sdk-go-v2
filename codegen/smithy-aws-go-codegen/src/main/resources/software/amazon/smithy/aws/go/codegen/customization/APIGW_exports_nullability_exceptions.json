@@ -542,6 +542,7 @@
     "com.amazonaws.mediaconnect#MediaConnect": [
         "com.amazonaws.mediaconnect#__double",
         "com.amazonaws.mediaconnect#__integer",
+	"com.amazonaws.mediaconnect#__listOf__integer$member",
         "com.amazonaws.mediaconnect#AddMediaStreamRequest$ClockRate",
         "com.amazonaws.mediaconnect#AddMediaStreamRequest$MediaStreamId",
         "com.amazonaws.mediaconnect#AddOutputRequest$MaxLatency",
