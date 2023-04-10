@@ -1,0 +1,8 @@
+{
+    "id": "7014a714-c344-4164-aca6-a5db2306b71d",
+    "type": "bugfix",
+    "description": "Fix APIGW exports nullability exceptions strictness.",
+    "modules": [
+        "codegen"
+    ]
+}
