@@ -69,8 +69,8 @@ type ModifyEndpointAccessOutput struct {
 	// The subnet group name where Amazon Redshift chooses to deploy the endpoint.
 	SubnetGroupName *string
 
-	// The connection endpoint for connecting to an Amazon Redshift cluster through the
-	// proxy.
+	// The connection endpoint for connecting to an Amazon Redshift cluster through
+	// the proxy.
 	VpcEndpoint *types.VpcEndpoint
 
 	// The security groups associated with the endpoint.

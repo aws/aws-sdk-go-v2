@@ -45,8 +45,8 @@ type GetUsageTotalsOutput struct {
 	// the preceding 30 days.
 	TimeRange types.TimeRange
 
-	// An array of objects that contains the results of the query. Each object contains
-	// the data for a specific usage metric.
+	// An array of objects that contains the results of the query. Each object
+	// contains the data for a specific usage metric.
 	UsageTotals []types.UsageTotal
 
 	// Metadata pertaining to the operation's result.

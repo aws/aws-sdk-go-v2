@@ -34,8 +34,8 @@ type ListConfigurationsInput struct {
 	// results, the response includes a NextToken parameter.
 	MaxResults int32
 
-	// The paginated results marker. When the result of the operation is truncated, the
-	// call returns NextToken in the response. To get the next batch, provide this
+	// The paginated results marker. When the result of the operation is truncated,
+	// the call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
 	NextToken *string
 

@@ -125,8 +125,8 @@ func (c *Client) addOperationListPageResolutionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListPageResolutionsAPIClient is a client that implements the ListPageResolutions
-// operation.
+// ListPageResolutionsAPIClient is a client that implements the
+// ListPageResolutions operation.
 type ListPageResolutionsAPIClient interface {
 	ListPageResolutions(context.Context, *ListPageResolutionsInput, ...func(*Options)) (*ListPageResolutionsOutput, error)
 }

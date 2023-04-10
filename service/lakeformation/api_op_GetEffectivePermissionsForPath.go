@@ -13,8 +13,8 @@ import (
 )
 
 // Returns the Lake Formation permissions for a specified table or database
-// resource located at a path in Amazon S3. GetEffectivePermissionsForPath will not
-// return databases and tables if the catalog is encrypted.
+// resource located at a path in Amazon S3. GetEffectivePermissionsForPath will
+// not return databases and tables if the catalog is encrypted.
 func (c *Client) GetEffectivePermissionsForPath(ctx context.Context, params *GetEffectivePermissionsForPathInput, optFns ...func(*Options)) (*GetEffectivePermissionsForPathOutput, error) {
 	if params == nil {
 		params = &GetEffectivePermissionsForPathInput{}

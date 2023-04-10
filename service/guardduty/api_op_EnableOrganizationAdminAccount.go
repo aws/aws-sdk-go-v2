@@ -29,8 +29,8 @@ func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *Ena
 
 type EnableOrganizationAdminAccountInput struct {
 
-	// The Amazon Web Services Account ID for the organization account to be enabled as
-	// a GuardDuty delegated administrator.
+	// The Amazon Web Services Account ID for the organization account to be enabled
+	// as a GuardDuty delegated administrator.
 	//
 	// This member is required.
 	AdminAccountId *string

@@ -44,8 +44,8 @@ type ListPullRequestsInput struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	// Optional. The status of the pull request. If used, this refines the results to

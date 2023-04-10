@@ -79,8 +79,8 @@ type CreateWorldExportJobOutput struct {
 	// the request is not valid. AllWorldGenerationFailed All of the worlds in the
 	// world generation job failed. This can happen if your worldCount is greater than
 	// 50 or less than 1. For more information about troubleshooting WorldForge, see
-	// Troubleshooting Simulation WorldForge
-	// (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html).
+	// Troubleshooting Simulation WorldForge (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html)
+	// .
 	FailureCode types.WorldExportJobErrorCode
 
 	// The IAM role that the world export process uses to access the Amazon S3 bucket

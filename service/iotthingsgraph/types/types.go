@@ -60,7 +60,7 @@ type EntityDescription struct {
 // An object that filters an entity search. Multiple filters function as OR
 // criteria in the search. For example a search that includes a NAMESPACE and a
 // REFERENCED_ENTITY_ID filter searches for entities in the specified namespace
-// that use the entity specified by the value of REFERENCED_ENTITY_ID.
+// that use the entity specified by the value of REFERENCED_ENTITY_ID .
 type EntityFilter struct {
 
 	// The name of the entity search filter field. REFERENCED_ENTITY_ID filters on
@@ -215,8 +215,8 @@ type SystemInstanceDescription struct {
 	noSmithyDocumentSerde
 }
 
-// An object that filters a system instance search. Multiple filters function as OR
-// criteria in the search. For example a search that includes a
+// An object that filters a system instance search. Multiple filters function as
+// OR criteria in the search. For example a search that includes a
 // GREENGRASS_GROUP_NAME and a STATUS filter searches for system instances in the
 // specified Greengrass group that have the specified status.
 type SystemInstanceFilter struct {

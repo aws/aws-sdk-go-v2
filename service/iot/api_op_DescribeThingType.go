@@ -12,8 +12,7 @@ import (
 )
 
 // Gets information about the specified thing type. Requires permission to access
-// the DescribeThingType
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// the DescribeThingType (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeThingType(ctx context.Context, params *DescribeThingTypeInput, optFns ...func(*Options)) (*DescribeThingTypeOutput, error) {
 	if params == nil {

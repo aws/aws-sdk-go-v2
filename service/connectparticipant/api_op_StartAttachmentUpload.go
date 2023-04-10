@@ -13,10 +13,10 @@ import (
 )
 
 // Provides a pre-signed Amazon S3 URL in response for uploading the file directly
-// to S3. ConnectionToken is used for invoking this API instead of
-// ParticipantToken. The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication
-// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+// to S3. ConnectionToken is used for invoking this API instead of ParticipantToken
+// . The Amazon Connect Participant Service APIs do not use Signature Version 4
+// authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// .
 func (c *Client) StartAttachmentUpload(ctx context.Context, params *StartAttachmentUploadInput, optFns ...func(*Options)) (*StartAttachmentUploadOutput, error) {
 	if params == nil {
 		params = &StartAttachmentUploadInput{}
@@ -47,8 +47,8 @@ type StartAttachmentUploadInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	//
 	// This member is required.
 	ClientToken *string
@@ -59,9 +59,8 @@ type StartAttachmentUploadInput struct {
 	ConnectionToken *string
 
 	// Describes the MIME file type of the attachment. For a list of supported file
-	// types, see Feature specifications
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html) in
-	// the Amazon Connect Administrator Guide.
+	// types, see Feature specifications (https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html)
+	// in the Amazon Connect Administrator Guide.
 	//
 	// This member is required.
 	ContentType *string

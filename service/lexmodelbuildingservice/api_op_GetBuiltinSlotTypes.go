@@ -13,8 +13,7 @@ import (
 )
 
 // Gets a list of built-in slot types that meet the specified criteria. For a list
-// of built-in slot types, see Slot Type Reference
-// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
+// of built-in slot types, see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
 // in the Alexa Skills Kit. This operation requires permission for the
 // lex:GetBuiltInSlotTypes action.
 func (c *Client) GetBuiltinSlotTypes(ctx context.Context, params *GetBuiltinSlotTypesInput, optFns ...func(*Options)) (*GetBuiltinSlotTypesOutput, error) {
@@ -130,8 +129,8 @@ func (c *Client) addOperationGetBuiltinSlotTypesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetBuiltinSlotTypesAPIClient is a client that implements the GetBuiltinSlotTypes
-// operation.
+// GetBuiltinSlotTypesAPIClient is a client that implements the
+// GetBuiltinSlotTypes operation.
 type GetBuiltinSlotTypesAPIClient interface {
 	GetBuiltinSlotTypes(context.Context, *GetBuiltinSlotTypesInput, ...func(*Options)) (*GetBuiltinSlotTypesOutput, error)
 }

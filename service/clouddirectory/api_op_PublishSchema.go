@@ -30,7 +30,7 @@ func (c *Client) PublishSchema(ctx context.Context, params *PublishSchemaInput, 
 type PublishSchemaInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the development schema.
-	// For more information, see arns.
+	// For more information, see arns .
 	//
 	// This member is required.
 	DevelopmentSchemaArn *string
@@ -55,7 +55,7 @@ type PublishSchemaInput struct {
 type PublishSchemaOutput struct {
 
 	// The ARN that is associated with the published schema. For more information, see
-	// arns.
+	// arns .
 	PublishedSchemaArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -36,13 +36,12 @@ type RebootDBInstanceInput struct {
 
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing DBInstance.
+	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// When true, the reboot is conducted through a MultiAZ failover. Constraint: You
+	// When true , the reboot is conducted through a MultiAZ failover. Constraint: You
 	// can't specify true if the instance is not configured for MultiAZ.
 	ForceFailover *bool
 
@@ -51,8 +50,8 @@ type RebootDBInstanceInput struct {
 
 type RebootDBInstanceOutput struct {
 
-	// Contains the details of an Amazon Neptune DB instance. This data type is used as
-	// a response element in the DescribeDBInstances action.
+	// Contains the details of an Amazon Neptune DB instance. This data type is used
+	// as a response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

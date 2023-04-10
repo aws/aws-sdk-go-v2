@@ -32,8 +32,8 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 // attached.
 type ListTagsInput struct {
 
-	// Specify the ARN for the Elasticsearch domain to which the tags are attached that
-	// you want to view.
+	// Specify the ARN for the Elasticsearch domain to which the tags are attached
+	// that you want to view.
 	//
 	// This member is required.
 	ARN *string

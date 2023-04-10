@@ -39,14 +39,14 @@ type DescribeEventsInput struct {
 	// The number of minutes worth of events to retrieve.
 	Duration *int32
 
-	// The end of the time interval for which to retrieve events, specified in ISO 8601
-	// format. Example: 2017-03-30T07:03:49.555Z
+	// The end of the time interval for which to retrieve events, specified in ISO
+	// 8601 format. Example: 2017-03-30T07:03:49.555Z
 	EndTime *time.Time
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -63,8 +63,8 @@ type DescribeEventsInput struct {
 	// are returned.
 	SourceType types.SourceType
 
-	// The beginning of the time interval to retrieve events for, specified in ISO 8601
-	// format. Example: 2017-03-30T07:03:49.555Z
+	// The beginning of the time interval to retrieve events for, specified in ISO
+	// 8601 format. Example: 2017-03-30T07:03:49.555Z
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

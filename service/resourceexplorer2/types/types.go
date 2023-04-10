@@ -17,9 +17,8 @@ type BatchGetViewError struct {
 	// This member is required.
 	ErrorMessage *string
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view for which Resource Explorer failed to retrieve details.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view for which Resource Explorer failed to retrieve details.
 	//
 	// This member is required.
 	ViewArn *string
@@ -27,15 +26,14 @@ type BatchGetViewError struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an additional property that describes a resource, that you can
-// optionally include in the view. This lets you view that property in search
+// Information about an additional property that describes a resource, that you
+// can optionally include in the view. This lets you view that property in search
 // results, and filter your search results based on the value of the property.
 type IncludedProperty struct {
 
 	// The name of the property that is included in this view. You can specify the
 	// following property names for this field:
-	//
-	// * Tags
+	//   - Tags
 	//
 	// This member is required.
 	Name *string
@@ -43,50 +41,45 @@ type IncludedProperty struct {
 	noSmithyDocumentSerde
 }
 
-// An index is the data store used by Amazon Web Services Resource Explorer to hold
-// information about your Amazon Web Services resources that the service discovers.
-// Creating an index in an Amazon Web Services Region turns on Resource Explorer
-// and lets it discover your resources. By default, an index is local, meaning that
-// it contains information about resources in only the same Region as the index.
-// However, you can promote the index of one Region in the account by calling
-// UpdateIndexType to convert it into an aggregator index. The aggregator index
-// receives a replicated copy of the index information from all other Regions where
-// Resource Explorer is turned on. This allows search operations in that Region to
-// return results from all Regions in the account.
+// An index is the data store used by Amazon Web Services Resource Explorer to
+// hold information about your Amazon Web Services resources that the service
+// discovers. Creating an index in an Amazon Web Services Region turns on Resource
+// Explorer and lets it discover your resources. By default, an index is local,
+// meaning that it contains information about resources in only the same Region as
+// the index. However, you can promote the index of one Region in the account by
+// calling UpdateIndexType to convert it into an aggregator index. The aggregator
+// index receives a replicated copy of the index information from all other Regions
+// where Resource Explorer is turned on. This allows search operations in that
+// Region to return results from all Regions in the account.
 type Index struct {
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the index.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the index.
 	Arn *string
 
 	// The Amazon Web Services Region in which the index exists.
 	Region *string
 
 	// The type of index. It can be one of the following values:
-	//
-	// * LOCAL – The index
-	// contains information about resources from only the same Amazon Web Services
-	// Region.
-	//
-	// * AGGREGATOR – Resource Explorer replicates copies of the indexed
-	// information about resources in all other Amazon Web Services Regions to the
-	// aggregator index. This lets search results in the Region with the aggregator
-	// index to include resources from all Regions in the account where Resource
-	// Explorer is turned on.
+	//   - LOCAL – The index contains information about resources from only the same
+	//   Amazon Web Services Region.
+	//   - AGGREGATOR – Resource Explorer replicates copies of the indexed information
+	//   about resources in all other Amazon Web Services Regions to the aggregator
+	//   index. This lets search results in the Region with the aggregator index to
+	//   include resources from all Regions in the account where Resource Explorer is
+	//   turned on.
 	Type IndexType
 
 	noSmithyDocumentSerde
 }
 
-// A resource in Amazon Web Services that Amazon Web Services Resource Explorer has
-// discovered, and for which it has stored information in the index of the Amazon
-// Web Services Region that contains the resource.
+// A resource in Amazon Web Services that Amazon Web Services Resource Explorer
+// has discovered, and for which it has stored information in the index of the
+// Amazon Web Services Region that contains the resource.
 type Resource struct {
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resource.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource.
 	Arn *string
 
 	// The date and time that Resource Explorer last queried this resource and updated
@@ -122,12 +115,10 @@ type ResourceCount struct {
 
 	// Indicates whether the TotalResources value represents an exhaustive count of
 	// search results.
-	//
-	// * If True, it indicates that the search was exhaustive. Every
-	// resource that matches the query was counted.
-	//
-	// * If False, then the search
-	// reached the limit of 1,000 matching results, and stopped counting.
+	//   - If True , it indicates that the search was exhaustive. Every resource that
+	//   matches the query was counted.
+	//   - If False , then the search reached the limit of 1,000 matching results, and
+	//   stopped counting.
 	Complete *bool
 
 	// The number of resources that match the search query. This value can't exceed
@@ -160,10 +151,10 @@ type ResourceProperty struct {
 // set.
 type SearchFilter struct {
 
-	// The string that contains the search keywords, prefixes, and operators to control
-	// the results that can be returned by a Search operation. For more details, see
-	// Search query syntax
-	// (https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html).
+	// The string that contains the search keywords, prefixes, and operators to
+	// control the results that can be returned by a Search operation. For more
+	// details, see Search query syntax (https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html)
+	// .
 	//
 	// This member is required.
 	FilterString *string
@@ -201,8 +192,8 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-// A view is a structure that defines a set of filters that provide a view into the
-// information in the Amazon Web Services Resource Explorer index. The filters
+// A view is a structure that defines a set of filters that provide a view into
+// the information in the Amazon Web Services Resource Explorer index. The filters
 // specify which information from the index is visible to the users of the view.
 // For example, you can specify filters that include only resources that are tagged
 // with the key "ENV" and the value "DEVELOPMENT" in the results returned by this
@@ -210,8 +201,8 @@ type ValidationExceptionField struct {
 // tagged with "ENV" and "PRODUCTION".
 type View struct {
 
-	// An array of SearchFilter objects that specify which resources can be included in
-	// the results of queries made using this view.
+	// An array of SearchFilter objects that specify which resources can be included
+	// in the results of queries made using this view.
 	Filters *SearchFilter
 
 	// A structure that contains additional information about the view.
@@ -223,18 +214,16 @@ type View struct {
 	// The Amazon Web Services account that owns this view.
 	Owner *string
 
-	// An Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// an Amazon Web Services account, an organization, or an organizational unit (OU)
-	// that specifies whether this view includes resources from only the specified
+	// An Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of an Amazon Web Services account, an organization, or an organizational unit
+	// (OU) that specifies whether this view includes resources from only the specified
 	// Amazon Web Services account, all accounts in the specified organization, or all
 	// accounts in the specified OU. If not specified, the value defaults to the Amazon
 	// Web Services account used to call this operation.
 	Scope *string
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view.
 	ViewArn *string
 
 	noSmithyDocumentSerde

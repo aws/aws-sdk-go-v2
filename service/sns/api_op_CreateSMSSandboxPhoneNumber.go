@@ -19,9 +19,8 @@ import (
 // Amazon Web Services account is in the SMS sandbox, you can use all of the
 // features of Amazon SNS. However, you can send SMS messages only to verified
 // destination phone numbers. For more information, including how to move out of
-// the sandbox to send messages without restrictions, see SMS sandbox
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in the Amazon
-// SNS Developer Guide.
+// the sandbox to send messages without restrictions, see SMS sandbox (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// in the Amazon SNS Developer Guide.
 func (c *Client) CreateSMSSandboxPhoneNumber(ctx context.Context, params *CreateSMSSandboxPhoneNumberInput, optFns ...func(*Options)) (*CreateSMSSandboxPhoneNumberOutput, error) {
 	if params == nil {
 		params = &CreateSMSSandboxPhoneNumberInput{}
@@ -46,7 +45,7 @@ type CreateSMSSandboxPhoneNumberInput struct {
 	// This member is required.
 	PhoneNumber *string
 
-	// The language to use for sending the OTP. The default value is en-US.
+	// The language to use for sending the OTP. The default value is en-US .
 	LanguageCode types.LanguageCodeString
 
 	noSmithyDocumentSerde

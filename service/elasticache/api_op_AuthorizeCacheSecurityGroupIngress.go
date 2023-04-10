@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows network ingress to a cache security group. Applications using ElastiCache
-// must be running on Amazon EC2, and Amazon EC2 security groups are used as the
-// authorization mechanism. You cannot authorize ingress from an Amazon EC2
-// security group in one region to an ElastiCache cluster in another region.
+// Allows network ingress to a cache security group. Applications using
+// ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are
+// used as the authorization mechanism. You cannot authorize ingress from an Amazon
+// EC2 security group in one region to an ElastiCache cluster in another region.
 func (c *Client) AuthorizeCacheSecurityGroupIngress(ctx context.Context, params *AuthorizeCacheSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
 	if params == nil {
 		params = &AuthorizeCacheSecurityGroupIngressInput{}
@@ -38,14 +38,14 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 	// This member is required.
 	CacheSecurityGroupName *string
 
-	// The Amazon EC2 security group to be authorized for ingress to the cache security
-	// group.
+	// The Amazon EC2 security group to be authorized for ingress to the cache
+	// security group.
 	//
 	// This member is required.
 	EC2SecurityGroupName *string
 
-	// The Amazon account number of the Amazon EC2 security group owner. Note that this
-	// is not the same thing as an Amazon access key ID - you must provide a valid
+	// The Amazon account number of the Amazon EC2 security group owner. Note that
+	// this is not the same thing as an Amazon access key ID - you must provide a valid
 	// Amazon account number for this parameter.
 	//
 	// This member is required.
@@ -57,14 +57,9 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 type AuthorizeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:
-	//
-	// *
-	// AuthorizeCacheSecurityGroupIngress
-	//
-	// * CreateCacheSecurityGroup
-	//
-	// *
-	// RevokeCacheSecurityGroupIngress
+	//   - AuthorizeCacheSecurityGroupIngress
+	//   - CreateCacheSecurityGroup
+	//   - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 
 	// Metadata pertaining to the operation's result.

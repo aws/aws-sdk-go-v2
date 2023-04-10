@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Evaluates a specified session based on audio data accumulated during a streaming
-// Amazon Connect Voice ID call.
+// Evaluates a specified session based on audio data accumulated during a
+// streaming Amazon Connect Voice ID call.
 func (c *Client) EvaluateSession(ctx context.Context, params *EvaluateSessionInput, optFns ...func(*Options)) (*EvaluateSessionOutput, error) {
 	if params == nil {
 		params = &EvaluateSessionInput{}
@@ -65,11 +65,11 @@ type EvaluateSessionOutput struct {
 
 	// The current status of audio streaming for this session. This field is useful to
 	// infer next steps when the Authentication or Fraud Detection results are empty or
-	// the decision is NOT_ENOUGH_SPEECH. In this situation, if the StreamingStatus is
-	// ONGOING/PENDING_CONFIGURATION, it can mean that the client should call the API
-	// again later, after Voice ID has enough audio to produce a result. If the
-	// decision remains NOT_ENOUGH_SPEECH even after StreamingStatus is ENDED, it means
-	// that the previously streamed session did not have enough speech to perform
+	// the decision is NOT_ENOUGH_SPEECH . In this situation, if the StreamingStatus
+	// is ONGOING/PENDING_CONFIGURATION , it can mean that the client should call the
+	// API again later, after Voice ID has enough audio to produce a result. If the
+	// decision remains NOT_ENOUGH_SPEECH even after StreamingStatus is ENDED , it
+	// means that the previously streamed session did not have enough speech to perform
 	// evaluation, and a new streaming session is needed to try again.
 	StreamingStatus types.StreamingStatus
 

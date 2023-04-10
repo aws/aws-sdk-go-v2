@@ -44,8 +44,8 @@ type RetrieveTapeArchiveInput struct {
 	// This member is required.
 	GatewayARN *string
 
-	// The Amazon Resource Name (ARN) of the virtual tape you want to retrieve from the
-	// virtual tape shelf (VTS).
+	// The Amazon Resource Name (ARN) of the virtual tape you want to retrieve from
+	// the virtual tape shelf (VTS).
 	//
 	// This member is required.
 	TapeARN *string

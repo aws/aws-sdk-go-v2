@@ -13,8 +13,7 @@ import (
 )
 
 // List the device certificates signed by the specified CA certificate. Requires
-// permission to access the ListCertificatesByCA
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the ListCertificatesByCA (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListCertificatesByCA(ctx context.Context, params *ListCertificatesByCAInput, optFns ...func(*Options)) (*ListCertificatesByCAOutput, error) {
 	if params == nil {

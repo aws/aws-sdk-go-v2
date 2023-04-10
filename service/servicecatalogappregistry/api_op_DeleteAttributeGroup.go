@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an attribute group, specified either by its attribute group ID, name, or
-// ARN.
+// Deletes an attribute group, specified either by its attribute group ID, name,
+// or ARN.
 func (c *Client) DeleteAttributeGroup(ctx context.Context, params *DeleteAttributeGroupInput, optFns ...func(*Options)) (*DeleteAttributeGroupOutput, error) {
 	if params == nil {
 		params = &DeleteAttributeGroupInput{}

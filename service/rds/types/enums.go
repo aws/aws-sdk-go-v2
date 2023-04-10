@@ -188,8 +188,8 @@ const (
 	DBProxyEndpointStatusDeleting                   DBProxyEndpointStatus = "deleting"
 )
 
-// Values returns all known values for DBProxyEndpointStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DBProxyEndpointStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DBProxyEndpointStatus) Values() []DBProxyEndpointStatus {
 	return []DBProxyEndpointStatus{
@@ -261,9 +261,9 @@ const (
 	EngineFamilySqlserver  EngineFamily = "SQLSERVER"
 )
 
-// Values returns all known values for EngineFamily. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EngineFamily. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EngineFamily) Values() []EngineFamily {
 	return []EngineFamily{
 		"MYSQL",
@@ -475,8 +475,8 @@ const (
 	WriteForwardingStatusUnknown   WriteForwardingStatus = "unknown"
 )
 
-// Values returns all known values for WriteForwardingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for WriteForwardingStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (WriteForwardingStatus) Values() []WriteForwardingStatus {
 	return []WriteForwardingStatus{

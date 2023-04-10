@@ -11,12 +11,12 @@ import (
 // Serverless.
 type ConfigParameter struct {
 
-	// The key of the parameter. The options are auto_mv, datestyle,
-	// enable_case_sensitivity_identifier, enable_user_activity_logging, query_group,
-	// search_path, and query monitoring metrics that let you define performance
+	// The key of the parameter. The options are auto_mv , datestyle ,
+	// enable_case_sensitivity_identifier , enable_user_activity_logging , query_group
+	// , search_path , and query monitoring metrics that let you define performance
 	// boundaries. For more information about query monitoring rules and available
-	// metrics, see Query monitoring metrics for Amazon Redshift Serverless
-	// (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
+	// metrics, see Query monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
+	// .
 	ParameterKey *string
 
 	// The value of the parameter to set.
@@ -102,8 +102,8 @@ type Namespace struct {
 	// your data.
 	KmsKeyId *string
 
-	// The types of logs the namespace can export. Available export types are User log,
-	// Connection log, and User activity log.
+	// The types of logs the namespace can export. Available export types are User
+	// log, Connection log, and User activity log.
 	LogExports []LogExport
 
 	// The Amazon Resource Name (ARN) associated with a namespace.
@@ -114,9 +114,8 @@ type Namespace struct {
 
 	// The name of the namespace. Must be between 3-64 alphanumeric characters in
 	// lowercase, and it cannot be a reserved word. A list of reserved words can be
-	// found in Reserved Words
-	// (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
-	// Amazon Redshift Database Developer Guide.
+	// found in Reserved Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+	// in the Amazon Redshift Database Developer Guide.
 	NamespaceName *string
 
 	// The status of the namespace.
@@ -148,8 +147,8 @@ type NetworkInterface struct {
 // created every 30 minutes and kept for 24 hours.
 type RecoveryPoint struct {
 
-	// The Amazon Resource Name (ARN) of the namespace the recovery point is associated
-	// with.
+	// The Amazon Resource Name (ARN) of the namespace the recovery point is
+	// associated with.
 	NamespaceArn *string
 
 	// The name of the namespace the recovery point is associated with.
@@ -255,7 +254,7 @@ type Snapshot struct {
 type TableRestoreStatus struct {
 
 	// A description of the status of the table restore request. Status values include
-	// SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+	// SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
 	Message *string
 
 	// The namespace of the table being restored from.
@@ -284,7 +283,7 @@ type TableRestoreStatus struct {
 	SourceTableName *string
 
 	// A value that describes the current state of the table restore request. Possible
-	// values include SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+	// values include SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
 	Status *string
 
 	// The ID of the RestoreTableFromSnapshot request.
@@ -352,8 +351,8 @@ type UsageLimit struct {
 	noSmithyDocumentSerde
 }
 
-// The connection endpoint for connecting to Amazon Redshift Serverless through the
-// proxy.
+// The connection endpoint for connecting to Amazon Redshift Serverless through
+// the proxy.
 type VpcEndpoint struct {
 
 	// One or more network interfaces of the endpoint. Also known as an interface
@@ -389,12 +388,12 @@ type Workgroup struct {
 	BaseCapacity *int32
 
 	// An array of parameters to set for advanced control over a database. The options
-	// are auto_mv, datestyle, enable_case_sensitivity_identifier,
-	// enable_user_activity_logging, query_group, , search_path, and query monitoring
-	// metrics that let you define performance boundaries. For more information about
-	// query monitoring rules and available metrics, see  Query monitoring metrics for
-	// Amazon Redshift Serverless
-	// (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
+	// are auto_mv , datestyle , enable_case_sensitivity_identifier ,
+	// enable_user_activity_logging , query_group , , search_path , and query
+	// monitoring metrics that let you define performance boundaries. For more
+	// information about query monitoring rules and available metrics, see Query
+	// monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
+	// .
 	ConfigParameters []ConfigParameter
 
 	// The creation date of the workgroup.

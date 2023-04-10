@@ -14,12 +14,12 @@
 // supports three types of load balancers: Application Load Balancers, Network Load
 // Balancers, and Classic Load Balancers. You can select a load balancer based on
 // your application needs. For more information, see the Elastic Load Balancing
-// User Guide (https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/).
-// This reference covers the 2012-06-01 API, which supports Classic Load Balancers.
-// The 2015-12-01 API supports Application Load Balancers and Network Load
-// Balancers. To get started, create a load balancer with one or more listeners
-// using CreateLoadBalancer. Register your instances with the load balancer using
-// RegisterInstancesWithLoadBalancer. All Elastic Load Balancing operations are
-// idempotent, which means that they complete at most one time. If you repeat an
-// operation, it succeeds with a 200 OK response code.
+// User Guide (https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/)
+// . This reference covers the 2012-06-01 API, which supports Classic Load
+// Balancers. The 2015-12-01 API supports Application Load Balancers and Network
+// Load Balancers. To get started, create a load balancer with one or more
+// listeners using CreateLoadBalancer . Register your instances with the load
+// balancer using RegisterInstancesWithLoadBalancer . All Elastic Load Balancing
+// operations are idempotent, which means that they complete at most one time. If
+// you repeat an operation, it succeeds with a 200 OK response code.
 package elasticloadbalancing

@@ -12,8 +12,8 @@ import (
 )
 
 // Creates an endpoint for an object storage system that DataSync can access for a
-// transfer. For more information, see Creating a location for object storage
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
+// transfer. For more information, see Creating a location for object storage (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html)
+// .
 func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *CreateLocationObjectStorageInput, optFns ...func(*Options)) (*CreateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &CreateLocationObjectStorageInput{}
@@ -43,8 +43,9 @@ type CreateLocationObjectStorageInput struct {
 	// This member is required.
 	BucketName *string
 
-	// Specifies the domain name or IP address of the object storage server. A DataSync
-	// agent uses this hostname to mount the object storage server in a network.
+	// Specifies the domain name or IP address of the object storage server. A
+	// DataSync agent uses this hostname to mount the object storage server in a
+	// network.
 	//
 	// This member is required.
 	ServerHostname *string
@@ -60,9 +61,9 @@ type CreateLocationObjectStorageInput struct {
 	// Specifies a certificate to authenticate with an object storage system that uses
 	// a private or self-signed certificate authority (CA). You must specify a
 	// Base64-encoded .pem file (for example,
-	// file:///home/user/.ssh/storage_sys_certificate.pem). The certificate can be up
+	// file:///home/user/.ssh/storage_sys_certificate.pem ). The certificate can be up
 	// to 32768 bytes (before Base64 encoding). To use this parameter, configure
-	// ServerProtocol to HTTPS.
+	// ServerProtocol to HTTPS .
 	ServerCertificate []byte
 
 	// Specifies the port that your object storage server accepts inbound network

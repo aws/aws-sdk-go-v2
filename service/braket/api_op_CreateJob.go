@@ -30,8 +30,8 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 type CreateJobInput struct {
 
-	// Definition of the Amazon Braket job to be created. Specifies the container image
-	// the job uses and information about the Python scripts used for entry and
+	// Definition of the Amazon Braket job to be created. Specifies the container
+	// image the job uses and information about the Python scripts used for entry and
 	// training.
 	//
 	// This member is required.

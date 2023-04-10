@@ -13,8 +13,7 @@ import (
 // Returns a list of tags that are associated with a resource group, specified by
 // an ARN. Minimum permissions To run this command, you must have the following
 // permissions:
-//
-// * resource-groups:GetTags
+//   - resource-groups:GetTags
 func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...func(*Options)) (*GetTagsOutput, error) {
 	if params == nil {
 		params = &GetTagsInput{}

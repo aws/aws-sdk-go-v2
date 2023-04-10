@@ -7,15 +7,14 @@ import (
 	"time"
 )
 
-// A record of a presented X509 credential to CreateSession
-// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html).
+// A record of a presented X509 credential to CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+// .
 type CredentialSummary struct {
 
 	// Indicates whether the credential is enabled.
 	Enabled *bool
 
-	// Indicates whether the CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// Indicates whether the CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation was successful.
 	Failed *bool
 
@@ -23,8 +22,7 @@ type CredentialSummary struct {
 	// end-entity certificate.
 	Issuer *string
 
-	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	SeenAt *time.Time
 
@@ -75,16 +73,14 @@ type CrlDetail struct {
 // instance.
 type InstanceProperty struct {
 
-	// Indicates whether the CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// Indicates whether the CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation was successful.
 	Failed *bool
 
 	// A list of instanceProperty objects.
 	Properties map[string]string
 
-	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	SeenAt *time.Time
 
@@ -118,13 +114,11 @@ type ProfileDetail struct {
 	// The unique identifier of the profile.
 	ProfileId *string
 
-	// Specifies whether instance properties are required in CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// Specifies whether instance properties are required in CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// requests with this profile.
 	RequireInstanceProperties *bool
 
-	// A list of IAM roles that this profile can assume in a CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// A list of IAM roles that this profile can assume in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	RoleArns []string
 
@@ -161,9 +155,8 @@ type SourceData interface {
 }
 
 // The root certificate of the Certificate Manager Private Certificate Authority
-// specified by this ARN is used in trust validation for CreateSession
-// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-// operations. Included for trust anchors of type AWS_ACM_PCA.
+// specified by this ARN is used in trust validation for CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+// operations. Included for trust anchors of type AWS_ACM_PCA .
 type SourceDataMemberAcmPcaArn struct {
 	Value string
 
@@ -173,7 +166,7 @@ type SourceDataMemberAcmPcaArn struct {
 func (*SourceDataMemberAcmPcaArn) isSourceData() {}
 
 // The PEM-encoded data for the certificate anchor. Included for trust anchors of
-// type CERTIFICATE_BUNDLE.
+// type CERTIFICATE_BUNDLE .
 type SourceDataMemberX509CertificateData struct {
 	Value string
 
@@ -198,8 +191,8 @@ type SubjectDetail struct {
 	// The specified instance properties associated with the request.
 	InstanceProperties []InstanceProperty
 
-	// The ISO-8601 timestamp of the last time this Subject requested temporary session
-	// credentials.
+	// The ISO-8601 timestamp of the last time this Subject requested temporary
+	// session credentials.
 	LastSeenAt *time.Time
 
 	// The ARN of the resource.
@@ -222,16 +215,14 @@ type SubjectDetail struct {
 type SubjectSummary struct {
 
 	// The ISO-8601 time stamp of when the certificate was first used in a
-	// CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	CreatedAt *time.Time
 
 	// The enabled status of the Subject.
 	Enabled *bool
 
-	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	LastSeenAt *time.Time
 

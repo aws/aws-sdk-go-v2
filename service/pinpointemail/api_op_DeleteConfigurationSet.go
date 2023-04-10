@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an existing configuration set. In Amazon Pinpoint, configuration sets are
-// groups of rules that you can apply to the emails you send. You apply a
+// Delete an existing configuration set. In Amazon Pinpoint, configuration sets
+// are groups of rules that you can apply to the emails you send. You apply a
 // configuration set to an email by including a reference to the configuration set
 // in the headers of the email. When you apply a configuration set to an email, all
 // of the rules in that configuration set are applied to the email.
@@ -41,8 +41,8 @@ type DeleteConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type DeleteConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

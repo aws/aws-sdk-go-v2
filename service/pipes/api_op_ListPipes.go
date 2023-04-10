@@ -13,9 +13,8 @@ import (
 )
 
 // Get the pipes associated with this account. For more information about pipes,
-// see Amazon EventBridge Pipes
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html) in the
-// Amazon EventBridge User Guide.
+// see Amazon EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
+// in the Amazon EventBridge User Guide.
 func (c *Client) ListPipes(ctx context.Context, params *ListPipesInput, optFns ...func(*Options)) (*ListPipesOutput, error) {
 	if params == nil {
 		params = &ListPipesInput{}
@@ -42,8 +41,9 @@ type ListPipesInput struct {
 	// The maximum number of pipes to include in the response.
 	Limit *int32
 
-	// A value that will return a subset of the pipes associated with this account. For
-	// example, "NamePrefix": "ABC" will return all endpoints with "ABC" in the name.
+	// A value that will return a subset of the pipes associated with this account.
+	// For example, "NamePrefix": "ABC" will return all endpoints with "ABC" in the
+	// name.
 	NamePrefix *string
 
 	// If nextToken is returned, there are more results available. The value of

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Lambda function URL. When you delete a function URL, you can't recover
-// it. Creating a new function URL results in a different URL address.
+// Deletes a Lambda function URL. When you delete a function URL, you can't
+// recover it. Creating a new function URL results in a different URL address.
 func (c *Client) DeleteFunctionUrlConfig(ctx context.Context, params *DeleteFunctionUrlConfigInput, optFns ...func(*Options)) (*DeleteFunctionUrlConfigOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionUrlConfigInput{}
@@ -30,18 +30,11 @@ func (c *Client) DeleteFunctionUrlConfig(ctx context.Context, params *DeleteFunc
 type DeleteFunctionUrlConfigInput struct {
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name – my-function.
-	//
-	// *
-	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	// *
-	// Partial ARN – 123456789012:function:my-function.
-	//
-	// The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name – my-function .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string

@@ -31,7 +31,7 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 type DescribeJobInput struct {
 
 	// The automatically generated ID for a job, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	JobId *string

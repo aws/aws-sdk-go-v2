@@ -58,21 +58,21 @@ type PutMethodResponseInput struct {
 	// Gateway can send back to the caller. A key defines a method response header name
 	// and the associated value is a Boolean flag indicating whether the method
 	// response parameter is required or not. The method response header names must
-	// match the pattern of method.response.header.{name}, where name is a valid and
+	// match the pattern of method.response.header.{name} , where name is a valid and
 	// unique header name. The response parameter names defined here are available in
 	// the integration response to be mapped from an integration response header
-	// expressed in integration.response.header.{name}, a static value enclosed within
-	// a pair of single quotes (e.g., 'application/json'), or a JSON expression from
+	// expressed in integration.response.header.{name} , a static value enclosed within
+	// a pair of single quotes (e.g., 'application/json' ), or a JSON expression from
 	// the back-end response payload in the form of
-	// integration.response.body.{JSON-expression}, where JSON-expression is a valid
+	// integration.response.body.{JSON-expression} , where JSON-expression is a valid
 	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]bool
 
 	noSmithyDocumentSerde
 }
 
-// Represents a method response of a given HTTP status code returned to the client.
-// The method response is passed from the back end through the associated
+// Represents a method response of a given HTTP status code returned to the
+// client. The method response is passed from the back end through the associated
 // integration response that can be transformed using a mapping template.
 type PutMethodResponseOutput struct {
 
@@ -85,14 +85,14 @@ type PutMethodResponseOutput struct {
 	// Gateway can send back to the caller. A key defines a method response header and
 	// the value specifies whether the associated method response header is required or
 	// not. The expression of the key must match the pattern
-	// method.response.header.{name}, where name is a valid and unique header name. API
-	// Gateway passes certain integration response data to the method response headers
-	// specified here according to the mapping you prescribe in the API's
+	// method.response.header.{name} , where name is a valid and unique header name.
+	// API Gateway passes certain integration response data to the method response
+	// headers specified here according to the mapping you prescribe in the API's
 	// IntegrationResponse. The integration response data that can be mapped include an
-	// integration response header expressed in integration.response.header.{name}, a
-	// static value enclosed within a pair of single quotes (e.g., 'application/json'),
-	// or a JSON expression from the back-end response payload in the form of
-	// integration.response.body.{JSON-expression}, where JSON-expression is a valid
+	// integration response header expressed in integration.response.header.{name} , a
+	// static value enclosed within a pair of single quotes (e.g., 'application/json'
+	// ), or a JSON expression from the back-end response payload in the form of
+	// integration.response.body.{JSON-expression} , where JSON-expression is a valid
 	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]bool
 

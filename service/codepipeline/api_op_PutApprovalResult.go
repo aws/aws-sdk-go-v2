@@ -52,8 +52,8 @@ type PutApprovalResultInput struct {
 	// This member is required.
 	StageName *string
 
-	// The system-generated token used to identify a unique approval request. The token
-	// for each open approval request can be obtained using the GetPipelineState
+	// The system-generated token used to identify a unique approval request. The
+	// token for each open approval request can be obtained using the GetPipelineState
 	// action. It is used to validate that the approval request corresponding to this
 	// token is still valid.
 	//

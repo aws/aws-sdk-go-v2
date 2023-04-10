@@ -15,16 +15,11 @@ import (
 // configuration, all the fields are updated with the values provided in the
 // request. You cannot update some fields independent of others. To update a cache
 // policy configuration:
-//
-// * Use GetCachePolicyConfig to get the current
-// configuration.
-//
-// * Locally modify the fields in the cache policy configuration
-// that you want to update.
-//
-// * Call UpdateCachePolicy by providing the entire cache
-// policy configuration, including the fields that you modified and those that you
-// didn't.
+//   - Use GetCachePolicyConfig to get the current configuration.
+//   - Locally modify the fields in the cache policy configuration that you want
+//     to update.
+//   - Call UpdateCachePolicy by providing the entire cache policy configuration,
+//     including the fields that you modified and those that you didn't.
 func (c *Client) UpdateCachePolicy(ctx context.Context, params *UpdateCachePolicyInput, optFns ...func(*Options)) (*UpdateCachePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateCachePolicyInput{}
@@ -47,15 +42,15 @@ type UpdateCachePolicyInput struct {
 	// This member is required.
 	CachePolicyConfig *types.CachePolicyConfig
 
-	// The unique identifier for the cache policy that you are updating. The identifier
-	// is returned in a cache behavior's CachePolicyId field in the response to
-	// GetDistributionConfig.
+	// The unique identifier for the cache policy that you are updating. The
+	// identifier is returned in a cache behavior's CachePolicyId field in the
+	// response to GetDistributionConfig .
 	//
 	// This member is required.
 	Id *string
 
 	// The version of the cache policy that you are updating. The version is returned
-	// in the cache policy's ETag field in the response to GetCachePolicyConfig.
+	// in the cache policy's ETag field in the response to GetCachePolicyConfig .
 	IfMatch *string
 
 	noSmithyDocumentSerde

@@ -11,8 +11,7 @@ import (
 )
 
 // The ListTagsLogGroup operation is on the path to deprecation. We recommend that
-// you use ListTagsForResource
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html)
+// you use ListTagsForResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html)
 // instead. Lists the tags for the specified log group.
 //
 // Deprecated: Please use the generic tagging API ListTagsForResource

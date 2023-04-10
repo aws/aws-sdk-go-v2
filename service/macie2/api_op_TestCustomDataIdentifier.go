@@ -28,8 +28,8 @@ func (c *Client) TestCustomDataIdentifier(ctx context.Context, params *TestCusto
 
 type TestCustomDataIdentifierInput struct {
 
-	// The regular expression (regex) that defines the pattern to match. The expression
-	// can contain as many as 512 characters.
+	// The regular expression (regex) that defines the pattern to match. The
+	// expression can contain as many as 512 characters.
 	//
 	// This member is required.
 	Regex *string

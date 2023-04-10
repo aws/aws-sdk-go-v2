@@ -115,8 +115,8 @@ func (c *Client) addOperationListMulticastGroupsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListMulticastGroupsAPIClient is a client that implements the ListMulticastGroups
-// operation.
+// ListMulticastGroupsAPIClient is a client that implements the
+// ListMulticastGroups operation.
 type ListMulticastGroupsAPIClient interface {
 	ListMulticastGroups(context.Context, *ListMulticastGroupsInput, ...func(*Options)) (*ListMulticastGroupsOutput, error)
 }

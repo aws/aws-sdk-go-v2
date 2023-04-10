@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the attributes for Amazon ECS resources within a specified target type and
-// cluster. When you specify a target type and cluster, ListAttributes returns a
-// list of attribute objects, one for each attribute on each resource. You can
+// Lists the attributes for Amazon ECS resources within a specified target type
+// and cluster. When you specify a target type and cluster, ListAttributes returns
+// a list of attribute objects, one for each attribute on each resource. You can
 // filter the list of results to a single attribute name to only return results
 // that have that name. You can also filter the results by attribute name and
 // value. You can do this, for example, to see which container instances in a
-// cluster are running a Linux AMI (ecs.os-type=linux).
+// cluster are running a Linux AMI ( ecs.os-type=linux ).
 func (c *Client) ListAttributes(ctx context.Context, params *ListAttributesInput, optFns ...func(*Options)) (*ListAttributesOutput, error) {
 	if params == nil {
 		params = &ListAttributesInput{}
@@ -64,7 +64,7 @@ type ListAttributesInput struct {
 	// The nextToken value returned from a ListAttributes request indicating that more
 	// results are available to fulfill the request and further calls are needed. If
 	// maxResults was provided, it's possible the number of results to be fewer than
-	// maxResults. This token should be treated as an opaque identifier that is only
+	// maxResults . This token should be treated as an opaque identifier that is only
 	// used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
@@ -78,8 +78,8 @@ type ListAttributesOutput struct {
 	Attributes []types.Attribute
 
 	// The nextToken value to include in a future ListAttributes request. When the
-	// results of a ListAttributes request exceed maxResults, this value can be used to
-	// retrieve the next page of results. This value is null when there are no more
+	// results of a ListAttributes request exceed maxResults , this value can be used
+	// to retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
 

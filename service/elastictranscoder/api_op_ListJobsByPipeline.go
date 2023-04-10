@@ -40,7 +40,8 @@ type ListJobsByPipelineInput struct {
 	PipelineId *string
 
 	// To list jobs in chronological order by the date and time that they were
-	// submitted, enter true. To list jobs in reverse chronological order, enter false.
+	// submitted, enter true . To list jobs in reverse chronological order, enter false
+	// .
 	Ascending *string
 
 	// When Elastic Transcoder returns more than one page of results, use pageToken in
@@ -58,7 +59,7 @@ type ListJobsByPipelineOutput struct {
 
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the jobs in the specified pipeline fit on one page or when you've
-	// reached the last page of results, the value of NextPageToken is null.
+	// reached the last page of results, the value of NextPageToken is null .
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

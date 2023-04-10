@@ -12,17 +12,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a block list to exlcude certain queries from suggestions. Any query that
-// contains words or phrases specified in the block list is blocked or filtered out
-// from being shown as a suggestion. You need to provide the file location of your
-// block list text file in your S3 bucket. In your text file, enter each block word
-// or phrase on a separate line. For information on the current quota limits for
-// block lists, see Quotas for Amazon Kendra
-// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
-// CreateQuerySuggestionsBlockList is currently not supported in the Amazon Web
+// Creates a block list to exlcude certain queries from suggestions. Any query
+// that contains words or phrases specified in the block list is blocked or
+// filtered out from being shown as a suggestion. You need to provide the file
+// location of your block list text file in your S3 bucket. In your text file,
+// enter each block word or phrase on a separate line. For information on the
+// current quota limits for block lists, see Quotas for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
+// . CreateQuerySuggestionsBlockList is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region. For an example of creating a block list for
-// query suggestions using the Python SDK, see Query suggestions block list
-// (https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#suggestions-block-list).
+// query suggestions using the Python SDK, see Query suggestions block list (https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#suggestions-block-list)
+// .
 func (c *Client) CreateQuerySuggestionsBlockList(ctx context.Context, params *CreateQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*CreateQuerySuggestionsBlockListOutput, error) {
 	if params == nil {
 		params = &CreateQuerySuggestionsBlockListInput{}
@@ -55,16 +54,16 @@ type CreateQuerySuggestionsBlockListInput struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access your S3
 	// bucket that contains the block list text file. For more information, see IAM
-	// access roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// access roles for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html)
+	// .
 	//
 	// This member is required.
 	RoleArn *string
 
 	// The S3 path to your block list text file in your S3 bucket. Each block word or
 	// phrase should be on a separate line in a text file. For information on the
-	// current quota limits for block lists, see Quotas for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
+	// current quota limits for block lists, see Quotas for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
+	// .
 	//
 	// This member is required.
 	SourceS3Path *types.S3Path

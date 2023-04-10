@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to a trail, event data store, or channel, up to a limit of
-// 50. Overwrites an existing tag's value when a new value is specified for an
+// Adds one or more tags to a trail, event data store, or channel, up to a limit
+// of 50. Overwrites an existing tag's value when a new value is specified for an
 // existing tag key. Tag key names must be unique; you cannot have two keys with
 // the same name but different values. If you specify a key without a value, the
 // tag will be created with the specified key and a value of null. You can tag a

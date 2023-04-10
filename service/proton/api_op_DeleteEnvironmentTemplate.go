@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// If no other major or minor versions of an environment template exist, delete the
-// environment template.
+// If no other major or minor versions of an environment template exist, delete
+// the environment template.
 func (c *Client) DeleteEnvironmentTemplate(ctx context.Context, params *DeleteEnvironmentTemplateInput, optFns ...func(*Options)) (*DeleteEnvironmentTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentTemplateInput{}

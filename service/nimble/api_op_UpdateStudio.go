@@ -36,8 +36,8 @@ type UpdateStudioInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The IAM role that Studio Admins will assume when logging in to the Nimble Studio
-	// portal.
+	// The IAM role that Studio Admins will assume when logging in to the Nimble
+	// Studio portal.
 	AdminRoleArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

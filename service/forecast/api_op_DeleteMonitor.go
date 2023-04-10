@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a monitor resource. You can only delete a monitor resource with a status
-// of ACTIVE, ACTIVE_STOPPED, CREATE_FAILED, or CREATE_STOPPED.
+// Deletes a monitor resource. You can only delete a monitor resource with a
+// status of ACTIVE , ACTIVE_STOPPED , CREATE_FAILED , or CREATE_STOPPED .
 func (c *Client) DeleteMonitor(ctx context.Context, params *DeleteMonitorInput, optFns ...func(*Options)) (*DeleteMonitorOutput, error) {
 	if params == nil {
 		params = &DeleteMonitorInput{}

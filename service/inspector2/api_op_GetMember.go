@@ -29,8 +29,8 @@ func (c *Client) GetMember(ctx context.Context, params *GetMemberInput, optFns .
 
 type GetMemberInput struct {
 
-	// The Amazon Web Services account ID of the member account to retrieve information
-	// on.
+	// The Amazon Web Services account ID of the member account to retrieve
+	// information on.
 	//
 	// This member is required.
 	AccountId *string

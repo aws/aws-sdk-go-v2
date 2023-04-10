@@ -33,20 +33,16 @@ type UpdateProtectionGroupInput struct {
 
 	// Defines how Shield combines resource data for the group in order to detect,
 	// mitigate, and report events.
-	//
-	// * Sum - Use the total traffic across the group.
-	// This is a good choice for most cases. Examples include Elastic IP addresses for
-	// EC2 instances that scale manually or automatically.
-	//
-	// * Mean - Use the average of
-	// the traffic across the group. This is a good choice for resources that share
-	// traffic uniformly. Examples include accelerators and load balancers.
-	//
-	// * Max -
-	// Use the highest traffic from each resource. This is useful for resources that
-	// don't share traffic and for resources that share that traffic in a non-uniform
-	// way. Examples include Amazon CloudFront distributions and origin resources for
-	// CloudFront distributions.
+	//   - Sum - Use the total traffic across the group. This is a good choice for
+	//   most cases. Examples include Elastic IP addresses for EC2 instances that scale
+	//   manually or automatically.
+	//   - Mean - Use the average of the traffic across the group. This is a good
+	//   choice for resources that share traffic uniformly. Examples include accelerators
+	//   and load balancers.
+	//   - Max - Use the highest traffic from each resource. This is useful for
+	//   resources that don't share traffic and for resources that share that traffic in
+	//   a non-uniform way. Examples include Amazon CloudFront distributions and origin
+	//   resources for CloudFront distributions.
 	//
 	// This member is required.
 	Aggregation types.ProtectionGroupAggregation
@@ -71,9 +67,9 @@ type UpdateProtectionGroupInput struct {
 	// it for any other Pattern setting.
 	Members []string
 
-	// The resource type to include in the protection group. All protected resources of
-	// this type are included in the protection group. You must set this when you set
-	// Pattern to BY_RESOURCE_TYPE and you must not set it for any other Pattern
+	// The resource type to include in the protection group. All protected resources
+	// of this type are included in the protection group. You must set this when you
+	// set Pattern to BY_RESOURCE_TYPE and you must not set it for any other Pattern
 	// setting.
 	ResourceType types.ProtectedResourceType
 

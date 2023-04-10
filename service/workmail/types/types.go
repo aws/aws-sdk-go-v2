@@ -10,8 +10,8 @@ import (
 // A rule that controls access to an WorkMail organization.
 type AccessControlRule struct {
 
-	// Access protocol actions to include in the rule. Valid values include ActiveSync,
-	// AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+	// Access protocol actions to include in the rule. Valid values include ActiveSync
+	// , AutoDiscover , EWS , IMAP , SMTP , WindowsOutlook , and WebMail .
 	Actions []string
 
 	// The date that the rule was created.
@@ -36,7 +36,7 @@ type AccessControlRule struct {
 	Name *string
 
 	// Access protocol actions to exclude from the rule. Valid values include
-	// ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+	// ActiveSync , AutoDiscover , EWS , IMAP , SMTP , WindowsOutlook , and WebMail .
 	NotActions []string
 
 	// Impersonation role IDs to exclude from the rule.
@@ -54,7 +54,7 @@ type AccessControlRule struct {
 	noSmithyDocumentSerde
 }
 
-// List all the AvailabilityConfiguration's for the given WorkMail organization.
+// List all the AvailabilityConfiguration 's for the given WorkMail organization.
 type AvailabilityConfiguration struct {
 
 	// The date and time at which the availability configuration was created.
@@ -66,11 +66,11 @@ type AvailabilityConfiguration struct {
 	// Displays the domain to which the provider applies.
 	DomainName *string
 
-	// If ProviderType is EWS, then this field contains
-	// RedactedEwsAvailabilityProvider. Otherwise, it is not required.
+	// If ProviderType is EWS , then this field contains
+	// RedactedEwsAvailabilityProvider . Otherwise, it is not required.
 	EwsProvider *RedactedEwsAvailabilityProvider
 
-	// If ProviderType is LAMBDA then this field contains LambdaAvailabilityProvider.
+	// If ProviderType is LAMBDA then this field contains LambdaAvailabilityProvider .
 	// Otherwise, it is not required.
 	LambdaProvider *LambdaAvailabilityProvider
 
@@ -117,10 +117,10 @@ type Delegate struct {
 // A DNS record uploaded to your DNS provider.
 type DnsRecord struct {
 
-	// The DNS hostname.- For example, domain.example.com.
+	// The DNS hostname.- For example, domain.example.com .
 	Hostname *string
 
-	// The RFC 1035 record type. Possible values: CNAME, A, MX.
+	// The RFC 1035 record type. Possible values: CNAME , A , MX .
 	Type *string
 
 	// The value returned by the DNS for a query to that hostname and record type.
@@ -131,8 +131,8 @@ type DnsRecord struct {
 
 // The domain to associate with an WorkMail organization. When you configure a
 // domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are
-// added to the organization when you create it. For more information, see Adding a
-// domain (https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html)
+// added to the organization when you create it. For more information, see Adding
+// a domain (https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html)
 // in the WorkMail Administrator Guide.
 type Domain struct {
 
@@ -171,8 +171,8 @@ type EwsAvailabilityProvider struct {
 // The configuration applied to an organization's folders by its retention policy.
 type FolderConfiguration struct {
 
-	// The action to take on the folder contents at the end of the folder configuration
-	// period.
+	// The action to take on the folder contents at the end of the folder
+	// configuration period.
 	//
 	// This member is required.
 	Action RetentionAction
@@ -249,7 +249,7 @@ type ImpersonationRole struct {
 type ImpersonationRule struct {
 
 	// The effect of the rule when it matches the input. Allowed effect values are
-	// ALLOW or DENY.
+	// ALLOW or DENY .
 	//
 	// This member is required.
 	Effect AccessEffect
@@ -384,7 +384,7 @@ type MobileDeviceAccessOverride struct {
 	// The device to which the override applies.
 	DeviceId *string
 
-	// The effect of the override, ALLOW or DENY.
+	// The effect of the override, ALLOW or DENY .
 	Effect MobileDeviceAccessRuleEffect
 
 	// The WorkMail user to which the access override applies.
@@ -417,7 +417,7 @@ type MobileDeviceAccessRule struct {
 	// Device user agents that a rule will match.
 	DeviceUserAgents []string
 
-	// The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+	// The effect of the rule when it matches. Allowed values are ALLOW or DENY .
 	Effect MobileDeviceAccessRuleEffect
 
 	// The ID assigned to a mobile access rule.
@@ -429,15 +429,15 @@ type MobileDeviceAccessRule struct {
 	// Device models that a rule will not match. All other device models will match.
 	NotDeviceModels []string
 
-	// Device operating systems that a rule will not match. All other device types will
-	// match.
+	// Device operating systems that a rule will not match. All other device types
+	// will match.
 	NotDeviceOperatingSystems []string
 
 	// Device types that a rule will not match. All other device types will match.
 	NotDeviceTypes []string
 
-	// Device user agents that a rule will not match. All other device user agents will
-	// match.
+	// Device user agents that a rule will not match. All other device user agents
+	// will match.
 	NotDeviceUserAgents []string
 
 	noSmithyDocumentSerde
@@ -481,12 +481,12 @@ type Permission struct {
 	// This member is required.
 	GranteeType MemberType
 
-	// The permissions granted to the grantee. SEND_AS allows the grantee to send email
-	// as the owner of the mailbox (the grantee is not mentioned on these emails).
-	// SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the
-	// mailbox (the grantee is not mentioned as the physical sender of these emails).
-	// FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other
-	// folder-level permissions set on the mailbox.
+	// The permissions granted to the grantee. SEND_AS allows the grantee to send
+	// email as the owner of the mailbox (the grantee is not mentioned on these
+	// emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner
+	// of the mailbox (the grantee is not mentioned as the physical sender of these
+	// emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective
+	// of other folder-level permissions set on the mailbox.
 	//
 	// This member is required.
 	PermissionValues []PermissionType

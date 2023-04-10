@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a long-lived token. A refresh token is a JWT token used to get an access
-// token. With an access token, you can call AssumeRoleWithWebIdentity to get role
-// credentials that you can use to call License Manager to manage the specified
-// license.
+// Creates a long-lived token. A refresh token is a JWT token used to get an
+// access token. With an access token, you can call AssumeRoleWithWebIdentity to
+// get role credentials that you can use to call License Manager to manage the
+// specified license.
 func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optFns ...func(*Options)) (*CreateTokenOutput, error) {
 	if params == nil {
 		params = &CreateTokenInput{}
@@ -37,8 +37,8 @@ type CreateTokenInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of
-	// the JWT token.
+	// Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim
+	// of the JWT token.
 	//
 	// This member is required.
 	LicenseArn *string
@@ -50,8 +50,8 @@ type CreateTokenInput struct {
 	// Manager does not check whether the roles are in use.
 	RoleArns []string
 
-	// Data specified by the caller to be included in the JWT token. The data is mapped
-	// to the amr claim of the JWT token.
+	// Data specified by the caller to be included in the JWT token. The data is
+	// mapped to the amr claim of the JWT token.
 	TokenProperties []string
 
 	noSmithyDocumentSerde

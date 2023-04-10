@@ -54,8 +54,8 @@ type ListBranchesOutput struct {
 	// This member is required.
 	Branches []types.Branch
 
-	// A pagination token. If a non-null pagination token is returned in a result, pass
-	// its value in another request to retrieve more entries.
+	// A pagination token. If a non-null pagination token is returned in a result,
+	// pass its value in another request to retrieve more entries.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

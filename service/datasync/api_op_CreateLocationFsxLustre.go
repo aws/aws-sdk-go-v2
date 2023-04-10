@@ -56,8 +56,8 @@ type CreateLocationFsxLustreInput struct {
 
 type CreateLocationFsxLustreOutput struct {
 
-	// The Amazon Resource Name (ARN) of the FSx for Lustre file system location that's
-	// created.
+	// The Amazon Resource Name (ARN) of the FSx for Lustre file system location
+	// that's created.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.

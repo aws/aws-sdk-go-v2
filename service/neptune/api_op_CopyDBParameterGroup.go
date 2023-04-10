@@ -30,14 +30,11 @@ func (c *Client) CopyDBParameterGroup(ctx context.Context, params *CopyDBParamet
 type CopyDBParameterGroupInput struct {
 
 	// The identifier or ARN for the source DB parameter group. For information about
-	// creating an ARN, see  Constructing an Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
-	// Constraints:
-	//
-	// * Must specify a valid DB parameter group.
-	//
-	// * Must specify a valid
-	// DB parameter group identifier, for example my-db-param-group, or a valid ARN.
+	// creating an ARN, see Constructing an Amazon Resource Name (ARN) (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing)
+	// . Constraints:
+	//   - Must specify a valid DB parameter group.
+	//   - Must specify a valid DB parameter group identifier, for example
+	//   my-db-param-group , or a valid ARN.
 	//
 	// This member is required.
 	SourceDBParameterGroupIdentifier *string
@@ -48,18 +45,10 @@ type CopyDBParameterGroupInput struct {
 	TargetDBParameterGroupDescription *string
 
 	// The identifier for the copied DB parameter group. Constraints:
-	//
-	// * Cannot be
-	// null, empty, or blank.
-	//
-	// * Must contain from 1 to 255 letters, numbers, or
-	// hyphens.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
-	//
+	//   - Cannot be null, empty, or blank.
+	//   - Must contain from 1 to 255 letters, numbers, or hyphens.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: my-db-parameter-group
 	//
 	// This member is required.

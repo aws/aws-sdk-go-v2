@@ -13,22 +13,18 @@ import (
 
 // Increases or decreases the stream's data retention period by the value that you
 // specify. To indicate whether you want to increase or decrease the data retention
-// period, specify the Operation parameter in the request body. In the request, you
-// must specify either the StreamName or the StreamARN. The retention period that
-// you specify replaces the current value. This operation requires permission for
-// the KinesisVideo:UpdateDataRetention action. Changing the data retention period
-// affects the data in the stream as follows:
-//
-// * If the data retention period is
-// increased, existing data is retained for the new retention period. For example,
-// if the data retention period is increased from one hour to seven hours, all
-// existing data is retained for seven hours.
-//
-// * If the data retention period is
-// decreased, existing data is retained for the new retention period. For example,
-// if the data retention period is decreased from seven hours to one hour, all
-// existing data is retained for one hour, and any data older than one hour is
-// deleted immediately.
+// period, specify the Operation parameter in the request body. In the request,
+// you must specify either the StreamName or the StreamARN . The retention period
+// that you specify replaces the current value. This operation requires permission
+// for the KinesisVideo:UpdateDataRetention action. Changing the data retention
+// period affects the data in the stream as follows:
+//   - If the data retention period is increased, existing data is retained for
+//     the new retention period. For example, if the data retention period is increased
+//     from one hour to seven hours, all existing data is retained for seven hours.
+//   - If the data retention period is decreased, existing data is retained for
+//     the new retention period. For example, if the data retention period is decreased
+//     from seven hours to one hour, all existing data is retained for one hour, and
+//     any data older than one hour is deleted immediately.
 func (c *Client) UpdateDataRetention(ctx context.Context, params *UpdateDataRetentionInput, optFns ...func(*Options)) (*UpdateDataRetentionOutput, error) {
 	if params == nil {
 		params = &UpdateDataRetentionInput{}

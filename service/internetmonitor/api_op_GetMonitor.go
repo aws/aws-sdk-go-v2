@@ -52,8 +52,7 @@ type GetMonitorOutput struct {
 	// city-network is the location (city) where clients access your application
 	// resources from and the network or ASN, such as an internet service provider
 	// (ISP), that clients access the resources through. This limit helps control
-	// billing costs. To learn more, see Choosing a city-network maximum value
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+	// billing costs. To learn more, see Choosing a city-network maximum value  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	//
 	// This member is required.

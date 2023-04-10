@@ -36,9 +36,9 @@ type DeleteRecommendationTemplateInput struct {
 	// This member is required.
 	RecommendationTemplateArn *string
 
-	// Used for an idempotency token. A client token is a unique, case-sensitive string
-	// of up to 64 ASCII characters. You should not reuse the same client token for
-	// other API requests.
+	// Used for an idempotency token. A client token is a unique, case-sensitive
+	// string of up to 64 ASCII characters. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
 	noSmithyDocumentSerde

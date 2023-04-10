@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a definition for a job that monitors data quality and drift. For
-// information about model monitor, see Amazon SageMaker Model Monitor
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html).
+// information about model monitor, see Amazon SageMaker Model Monitor (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html)
+// .
 func (c *Client) CreateDataQualityJobDefinition(ctx context.Context, params *CreateDataQualityJobDefinitionInput, optFns ...func(*Options)) (*CreateDataQualityJobDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateDataQualityJobDefinitionInput{}
@@ -73,8 +73,7 @@ type CreateDataQualityJobDefinitionInput struct {
 	StoppingCondition *types.MonitoringStoppingCondition
 
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
+	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 

@@ -35,9 +35,9 @@ type UpdateParameterGroupInput struct {
 	// This member is required.
 	ParameterGroupName *string
 
-	// An array of parameter names and values for the parameter update. You must supply
-	// at least one parameter name and value; subsequent arguments are optional. A
-	// maximum of 20 parameters may be updated per request.
+	// An array of parameter names and values for the parameter update. You must
+	// supply at least one parameter name and value; subsequent arguments are optional.
+	// A maximum of 20 parameters may be updated per request.
 	//
 	// This member is required.
 	ParameterNameValues []types.ParameterNameValue

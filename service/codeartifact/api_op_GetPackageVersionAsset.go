@@ -43,8 +43,8 @@ type GetPackageVersionAssetInput struct {
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of the package version with the requested asset
-	// file.
+	// A format that specifies the type of the package version with the requested
+	// asset file.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -54,7 +54,7 @@ type GetPackageVersionAssetInput struct {
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2).
+	// A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
@@ -69,20 +69,13 @@ type GetPackageVersionAssetInput struct {
 	DomainOwner *string
 
 	// The namespace of the package version with the requested asset file. The package
-	// version component that specifies its namespace depends on its type. For
-	// example:
+	// version component that specifies its namespace depends on its type. For example:
 	//
-	// * The namespace of a Maven package version is its groupId.
-	//
-	// * The
-	// namespace of an npm package version is its scope.
-	//
-	// * Python and NuGet package
-	// versions do not contain a corresponding component, package versions of those
-	// formats do not have a namespace.
-	//
-	// * The namespace of a generic package is its
-	// namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The name of the package version revision that contains the requested asset.
@@ -99,7 +92,7 @@ type GetPackageVersionAssetOutput struct {
 	// The name of the asset that is downloaded.
 	AssetName *string
 
-	// A string that contains the package version (for example, 3.5.2).
+	// A string that contains the package version (for example, 3.5.2 ).
 	PackageVersion *string
 
 	// The name of the package version revision that contains the downloaded asset.

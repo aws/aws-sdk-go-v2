@@ -32,7 +32,7 @@ func (c *Client) GetSystemInstance(ctx context.Context, params *GetSystemInstanc
 type GetSystemInstanceInput struct {
 
 	// The ID of the system deployment instance. This value is returned by
-	// CreateSystemInstance. The ID should be in the following format.
+	// CreateSystemInstance . The ID should be in the following format.
 	// urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME
 	//
 	// This member is required.

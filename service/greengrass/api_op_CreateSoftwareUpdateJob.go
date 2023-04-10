@@ -32,8 +32,8 @@ func (c *Client) CreateSoftwareUpdateJob(ctx context.Context, params *CreateSoft
 
 type CreateSoftwareUpdateJobInput struct {
 
-	// The IAM Role that Greengrass will use to create pre-signed URLs pointing towards
-	// the update artifact.
+	// The IAM Role that Greengrass will use to create pre-signed URLs pointing
+	// towards the update artifact.
 	//
 	// This member is required.
 	S3UrlSignerRole *string

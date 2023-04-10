@@ -17,10 +17,9 @@ import (
 // provider configuration and associate it to your cluster. After configuring
 // authentication to your cluster you can create Kubernetes roles and clusterroles
 // to assign permissions to the roles, and then bind the roles to the identities
-// using Kubernetes rolebindings and clusterrolebindings. For more information see
-// Using RBAC Authorization
-// (https://kubernetes.io/docs/reference/access-authn-authz/rbac/) in the
-// Kubernetes documentation.
+// using Kubernetes rolebindings and clusterrolebindings . For more information see
+// Using RBAC Authorization (https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+// in the Kubernetes documentation.
 func (c *Client) AssociateIdentityProviderConfig(ctx context.Context, params *AssociateIdentityProviderConfigInput, optFns ...func(*Options)) (*AssociateIdentityProviderConfigOutput, error) {
 	if params == nil {
 		params = &AssociateIdentityProviderConfigInput{}

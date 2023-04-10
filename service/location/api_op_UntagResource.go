@@ -31,9 +31,7 @@ type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource from which you want to remove
 	// tags.
-	//
-	// * Format example:
-	// arn:aws:geo:region:account-id:resourcetype/ExampleResource
+	//   - Format example: arn:aws:geo:region:account-id:resourcetype/ExampleResource
 	//
 	// This member is required.
 	ResourceArn *string

@@ -57,8 +57,8 @@ type DeleteMembersInput struct {
 
 type DeleteMembersOutput struct {
 
-	// The list of Amazon Web Services account identifiers for the member accounts that
-	// Detective successfully removed from the behavior graph.
+	// The list of Amazon Web Services account identifiers for the member accounts
+	// that Detective successfully removed from the behavior graph.
 	AccountIds []string
 
 	// The list of member accounts that Detective was not able to remove from the

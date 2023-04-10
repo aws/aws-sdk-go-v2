@@ -14,9 +14,9 @@
 // collection of resources as a single unit called a stack. CloudFormation creates
 // and deletes all member resources of the stack together and manages all
 // dependencies between the resources for you. For more information about
-// CloudFormation, see the CloudFormation product page
-// (http://aws.amazon.com/cloudformation/). CloudFormation makes use of other
-// Amazon Web Services products. If you need additional technical information about
-// a specific Amazon Web Services product, you can find the product's technical
-// documentation at docs.aws.amazon.com (https://docs.aws.amazon.com/).
+// CloudFormation, see the CloudFormation product page (http://aws.amazon.com/cloudformation/)
+// . CloudFormation makes use of other Amazon Web Services products. If you need
+// additional technical information about a specific Amazon Web Services product,
+// you can find the product's technical documentation at docs.aws.amazon.com (https://docs.aws.amazon.com/)
+// .
 package cloudformation

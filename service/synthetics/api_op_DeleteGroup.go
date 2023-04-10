@@ -32,8 +32,8 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// Specifies which group to delete. You can specify the group name, the ARN, or the
-	// group ID as the GroupIdentifier.
+	// Specifies which group to delete. You can specify the group name, the ARN, or
+	// the group ID as the GroupIdentifier .
 	//
 	// This member is required.
 	GroupIdentifier *string

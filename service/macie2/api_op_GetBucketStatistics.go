@@ -42,8 +42,8 @@ type GetBucketStatisticsOutput struct {
 	// The total number of buckets.
 	BucketCount int64
 
-	// The total number of buckets that are publicly accessible due to a combination of
-	// permissions settings for each bucket.
+	// The total number of buckets that are publicly accessible due to a combination
+	// of permissions settings for each bucket.
 	BucketCountByEffectivePermission *types.BucketCountByEffectivePermission
 
 	// The total number of buckets whose settings do or don't specify default
@@ -59,9 +59,9 @@ type GetBucketStatisticsOutput struct {
 	// CloudFront origin access controls (OACs).
 	BucketCountBySharedAccessType *types.BucketCountBySharedAccessType
 
-	// The aggregated sensitive data discovery statistics for the buckets. If automated
-	// sensitive data discovery is currently disabled for your account, the value for
-	// each statistic is 0.
+	// The aggregated sensitive data discovery statistics for the buckets. If
+	// automated sensitive data discovery is currently disabled for your account, the
+	// value for each statistic is 0.
 	BucketStatisticsBySensitivity *types.BucketStatisticsBySensitivity
 
 	// The total number of objects that Amazon Macie can analyze in the buckets. These
@@ -102,9 +102,9 @@ type GetBucketStatisticsOutput struct {
 	// extension for a supported file or storage format.
 	UnclassifiableObjectCount *types.ObjectLevelStatistics
 
-	// The total storage size, in bytes, of the objects that Amazon Macie can't analyze
-	// in the buckets. These objects don't use a supported storage class or don't have
-	// a file name extension for a supported file or storage format.
+	// The total storage size, in bytes, of the objects that Amazon Macie can't
+	// analyze in the buckets. These objects don't use a supported storage class or
+	// don't have a file name extension for a supported file or storage format.
 	UnclassifiableObjectSizeInBytes *types.ObjectLevelStatistics
 
 	// Metadata pertaining to the operation's result.

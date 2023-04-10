@@ -15,15 +15,14 @@ import (
 
 // Retrieves IDs and annotations for traces available for a specified time frame
 // using an optional filter. To get the full traces, pass the trace IDs to
-// BatchGetTraces. A filter expression can target traced requests that hit specific
-// service nodes or edges, have errors, or come from a known user. For example, the
-// following filter expression targets traces that pass through api.example.com:
-// service("api.example.com") This filter expression finds traces that have an
-// annotation named account with the value 12345: annotation.account = "12345" For
-// a full list of indexed fields and keywords that you can use in filter
-// expressions, see Using Filter Expressions
-// (https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html) in
-// the Amazon Web Services X-Ray Developer Guide.
+// BatchGetTraces . A filter expression can target traced requests that hit
+// specific service nodes or edges, have errors, or come from a known user. For
+// example, the following filter expression targets traces that pass through
+// api.example.com : service("api.example.com") This filter expression finds
+// traces that have an annotation named account with the value 12345 :
+// annotation.account = "12345" For a full list of indexed fields and keywords that
+// you can use in filter expressions, see Using Filter Expressions (https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
+// in the Amazon Web Services X-Ray Developer Guide.
 func (c *Client) GetTraceSummaries(ctx context.Context, params *GetTraceSummariesInput, optFns ...func(*Options)) (*GetTraceSummariesOutput, error) {
 	if params == nil {
 		params = &GetTraceSummariesInput{}
@@ -51,12 +50,12 @@ type GetTraceSummariesInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// Specify a filter expression to retrieve trace summaries for services or requests
-	// that meet certain requirements.
+	// Specify a filter expression to retrieve trace summaries for services or
+	// requests that meet certain requirements.
 	FilterExpression *string
 
-	// Specify the pagination token returned by a previous request to retrieve the next
-	// page of results.
+	// Specify the pagination token returned by a previous request to retrieve the
+	// next page of results.
 	NextToken *string
 
 	// Set to true to get summaries for only a subset of available traces.
@@ -78,9 +77,9 @@ type GetTraceSummariesOutput struct {
 	// The start time of this page of results.
 	ApproximateTime *time.Time
 
-	// If the requested time frame contained more than one page of results, you can use
-	// this token to retrieve the next page. The first page contains the most recent
-	// results, closest to the end of the time frame.
+	// If the requested time frame contained more than one page of results, you can
+	// use this token to retrieve the next page. The first page contains the most
+	// recent results, closest to the end of the time frame.
 	NextToken *string
 
 	// Trace IDs and annotations for traces that were found in the specified time

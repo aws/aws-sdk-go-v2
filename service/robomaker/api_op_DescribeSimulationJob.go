@@ -75,8 +75,8 @@ type DescribeSimulationJobOutput struct {
 	FailureCode types.SimulationJobErrorCode
 
 	// Details about why the simulation job failed. For more information about
-	// troubleshooting, see Troubleshooting
-	// (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html).
+	// troubleshooting, see Troubleshooting (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html)
+	// .
 	FailureReason *string
 
 	// The IAM role that allows the simulation instance to call the AWS APIs that are

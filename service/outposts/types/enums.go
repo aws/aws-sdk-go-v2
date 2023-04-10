@@ -45,9 +45,9 @@ const (
 	AssetTypeCompute AssetType = "COMPUTE"
 )
 
-// Values returns all known values for AssetType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AssetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"COMPUTE",
@@ -266,9 +266,9 @@ const (
 	OrderTypeReplacement OrderType = "REPLACEMENT"
 )
 
-// Values returns all known values for OrderType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OrderType) Values() []OrderType {
 	return []OrderType{
 		"OUTPOST",
@@ -346,9 +346,9 @@ const (
 	PowerDrawKvaPower30Kva PowerDrawKva = "POWER_30_KVA"
 )
 
-// Values returns all known values for PowerDrawKva. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PowerDrawKva. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PowerDrawKva) Values() []PowerDrawKva {
 	return []PowerDrawKva{
 		"POWER_5_KVA",
@@ -402,9 +402,9 @@ const (
 	ResourceTypeOrder   ResourceType = "ORDER"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"OUTPOST",
@@ -442,8 +442,8 @@ const (
 	SupportedHardwareTypeServer SupportedHardwareType = "SERVER"
 )
 
-// Values returns all known values for SupportedHardwareType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SupportedHardwareType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SupportedHardwareType) Values() []SupportedHardwareType {
 	return []SupportedHardwareType{

@@ -43,9 +43,9 @@ type InferICD10CMInput struct {
 
 type InferICD10CMOutput struct {
 
-	// The medical conditions detected in the text linked to ICD-10-CM concepts. If the
-	// action is successful, the service sends back an HTTP 200 response, as well as
-	// the entities detected.
+	// The medical conditions detected in the text linked to ICD-10-CM concepts. If
+	// the action is successful, the service sends back an HTTP 200 response, as well
+	// as the entities detected.
 	//
 	// This member is required.
 	Entities []types.ICD10CMEntity
@@ -55,8 +55,8 @@ type InferICD10CMOutput struct {
 	// documents.
 	ModelVersion *string
 
-	// If the result of the previous request to InferICD10CM was truncated, include the
-	// PaginationToken to fetch the next page of medical condition entities.
+	// If the result of the previous request to InferICD10CM was truncated, include
+	// the PaginationToken to fetch the next page of medical condition entities.
 	PaginationToken *string
 
 	// Metadata pertaining to the operation's result.

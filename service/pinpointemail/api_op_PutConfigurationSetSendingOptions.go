@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enable or disable email sending for messages that use a particular configuration
-// set in a specific AWS Region.
+// Enable or disable email sending for messages that use a particular
+// configuration set in a specific AWS Region.
 func (c *Client) PutConfigurationSetSendingOptions(ctx context.Context, params *PutConfigurationSetSendingOptionsInput, optFns ...func(*Options)) (*PutConfigurationSetSendingOptionsOutput, error) {
 	if params == nil {
 		params = &PutConfigurationSetSendingOptionsInput{}
@@ -37,15 +37,15 @@ type PutConfigurationSetSendingOptionsInput struct {
 	// This member is required.
 	ConfigurationSetName *string
 
-	// If true, email sending is enabled for the configuration set. If false, email
+	// If true , email sending is enabled for the configuration set. If false , email
 	// sending is disabled for the configuration set.
 	SendingEnabled bool
 
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutConfigurationSetSendingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

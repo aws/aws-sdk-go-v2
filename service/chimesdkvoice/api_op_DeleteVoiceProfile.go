@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a voice profile, including its voice print and enrollment data. WARNING:
-// This action is not reversible.
+// Deletes a voice profile, including its voice print and enrollment data.
+// WARNING: This action is not reversible.
 func (c *Client) DeleteVoiceProfile(ctx context.Context, params *DeleteVoiceProfileInput, optFns ...func(*Options)) (*DeleteVoiceProfileOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceProfileInput{}

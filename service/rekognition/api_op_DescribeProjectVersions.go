@@ -17,7 +17,7 @@ import (
 )
 
 // Lists and describes the versions of a model in an Amazon Rekognition Custom
-// Labels project. You can specify up to 10 model versions in ProjectVersionArns.
+// Labels project. You can specify up to 10 model versions in ProjectVersionArns .
 // If you don't specify a value, descriptions for all model versions in the project
 // are returned. This operation requires permissions to perform the
 // rekognition:DescribeProjectVersions action.
@@ -59,7 +59,8 @@ type DescribeProjectVersionsInput struct {
 	// descriptions are returned. A version name is part of a model (ProjectVersion)
 	// ARN. For example, my-model.2020-01-21T09.10.15 is the version name in the
 	// following ARN.
-	// arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123.
+	// arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123
+	// .
 	VersionNames []string
 
 	noSmithyDocumentSerde
@@ -253,9 +254,10 @@ type ProjectVersionRunningWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ProjectVersionRunningWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ProjectVersionRunningWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -454,10 +456,10 @@ type ProjectVersionTrainingCompletedWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ProjectVersionTrainingCompletedWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ProjectVersionTrainingCompletedWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

@@ -13,12 +13,10 @@ import (
 
 // Creates a Resolver endpoint. There are two types of Resolver endpoints, inbound
 // and outbound:
-//
-// * An inbound Resolver endpoint forwards DNS queries to the DNS
-// service for a VPC from your network.
-//
-// * An outbound Resolver endpoint forwards
-// DNS queries from the DNS service for a VPC to your network.
+//   - An inbound Resolver endpoint forwards DNS queries to the DNS service for a
+//     VPC from your network.
+//   - An outbound Resolver endpoint forwards DNS queries from the DNS service for
+//     a VPC to your network.
 func (c *Client) CreateResolverEndpoint(ctx context.Context, params *CreateResolverEndpointInput, optFns ...func(*Options)) (*CreateResolverEndpointOutput, error) {
 	if params == nil {
 		params = &CreateResolverEndpointInput{}
@@ -37,19 +35,17 @@ func (c *Client) CreateResolverEndpoint(ctx context.Context, params *CreateResol
 type CreateResolverEndpointInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of running the operation twice. CreatorRequestId can
-	// be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
 
 	// Specify the applicable value:
-	//
-	// * INBOUND: Resolver forwards DNS queries to the
-	// DNS service for a VPC from your network
-	//
-	// * OUTBOUND: Resolver forwards DNS
-	// queries from the DNS service for a VPC to your network
+	//   - INBOUND : Resolver forwards DNS queries to the DNS service for a VPC from
+	//   your network
+	//   - OUTBOUND : Resolver forwards DNS queries from the DNS service for a VPC to
+	//   your network
 	//
 	// This member is required.
 	Direction types.ResolverEndpointDirection

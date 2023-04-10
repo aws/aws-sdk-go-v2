@@ -13,9 +13,8 @@ import (
 )
 
 // Describes a root volume replacement task. For more information, see Replace a
-// root volume
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// root volume (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeReplaceRootVolumeTasks(ctx context.Context, params *DescribeReplaceRootVolumeTasksInput, optFns ...func(*Options)) (*DescribeReplaceRootVolumeTasksOutput, error) {
 	if params == nil {
 		params = &DescribeReplaceRootVolumeTasksInput{}
@@ -35,20 +34,19 @@ type DescribeReplaceRootVolumeTasksInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// Filter to use:
-	//
-	// * instance-id - The ID of the instance for which the root volume
-	// replacement task was created.
+	//   - instance-id - The ID of the instance for which the root volume replacement
+	//   task was created.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -149,8 +147,8 @@ var _ DescribeReplaceRootVolumeTasksAPIClient = (*Client)(nil)
 type DescribeReplaceRootVolumeTasksPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -38,9 +38,9 @@ type DeleteDomainPermissionsPolicyInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The current revision of the resource policy to be deleted. This revision is used
-	// for optimistic locking, which prevents others from overwriting your changes to
-	// the domain's resource policy.
+	// The current revision of the resource policy to be deleted. This revision is
+	// used for optimistic locking, which prevents others from overwriting your changes
+	// to the domain's resource policy.
 	PolicyRevision *string
 
 	noSmithyDocumentSerde

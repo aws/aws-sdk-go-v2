@@ -34,7 +34,7 @@ type UpdateFunctionInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The FunctionDataSource name.
+	// The Function DataSource name.
 	//
 	// This member is required.
 	DataSourceName *string
@@ -49,8 +49,8 @@ type UpdateFunctionInput struct {
 	// This member is required.
 	Name *string
 
-	// The function code that contains the request and response functions. When code is
-	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// The function code that contains the request and response functions. When code
+	// is used, the runtime is required. The runtime value must be APPSYNC_JS .
 	Code *string
 
 	// The Function description.

@@ -134,16 +134,16 @@ func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(
 	return nil
 }
 
-// ListResourcesAssociatedToCustomLineItemAPIClient is a client that implements the
-// ListResourcesAssociatedToCustomLineItem operation.
+// ListResourcesAssociatedToCustomLineItemAPIClient is a client that implements
+// the ListResourcesAssociatedToCustomLineItem operation.
 type ListResourcesAssociatedToCustomLineItemAPIClient interface {
 	ListResourcesAssociatedToCustomLineItem(context.Context, *ListResourcesAssociatedToCustomLineItemInput, ...func(*Options)) (*ListResourcesAssociatedToCustomLineItemOutput, error)
 }
 
 var _ ListResourcesAssociatedToCustomLineItemAPIClient = (*Client)(nil)
 
-// ListResourcesAssociatedToCustomLineItemPaginatorOptions is the paginator options
-// for ListResourcesAssociatedToCustomLineItem
+// ListResourcesAssociatedToCustomLineItemPaginatorOptions is the paginator
+// options for ListResourcesAssociatedToCustomLineItem
 type ListResourcesAssociatedToCustomLineItemPaginatorOptions struct {
 	// (Optional) The maximum number of resource associations to be retrieved.
 	Limit int32

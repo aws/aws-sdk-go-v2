@@ -32,22 +32,19 @@ type UpdateResolverConfigInput struct {
 
 	// Indicates whether or not the Resolver will create autodefined rules for reverse
 	// DNS lookups. This is enabled by default. Disabling this option will also affect
-	// EC2-Classic instances using ClassicLink. For more information, see ClassicLink
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 guide. We are retiring EC2-Classic on August 15, 2022. We
+	// EC2-Classic instances using ClassicLink. For more information, see ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
+	// in the Amazon EC2 guide. We are retiring EC2-Classic on August 15, 2022. We
 	// recommend that you migrate from EC2-Classic to a VPC. For more information, see
-	// Migrate from EC2-Classic to a VPC
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-	// Amazon EC2 guide and the blog EC2-Classic Networking is Retiring – Here’s How to
-	// Prepare
-	// (http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/).
-	// It can take some time for the status change to be completed.
+	// Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
+	// in the Amazon EC2 guide and the blog EC2-Classic Networking is Retiring –
+	// Here’s How to Prepare (http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/)
+	// . It can take some time for the status change to be completed.
 	//
 	// This member is required.
 	AutodefinedReverseFlag types.AutodefinedReverseFlag
 
-	// Resource ID of the Amazon VPC that you want to update the Resolver configuration
-	// for.
+	// Resource ID of the Amazon VPC that you want to update the Resolver
+	// configuration for.
 	//
 	// This member is required.
 	ResourceId *string

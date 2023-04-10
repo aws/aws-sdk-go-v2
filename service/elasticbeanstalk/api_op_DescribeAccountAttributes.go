@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns attributes related to AWS Elastic Beanstalk that are associated with the
-// calling AWS account. The result currently has one set of attributes—resource
+// Returns attributes related to AWS Elastic Beanstalk that are associated with
+// the calling AWS account. The result currently has one set of attributes—resource
 // quotas.
 func (c *Client) DescribeAccountAttributes(ctx context.Context, params *DescribeAccountAttributesInput, optFns ...func(*Options)) (*DescribeAccountAttributesOutput, error) {
 	if params == nil {

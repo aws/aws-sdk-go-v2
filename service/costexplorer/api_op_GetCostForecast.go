@@ -39,20 +39,13 @@ type GetCostForecastInput struct {
 
 	// Which metric Cost Explorer uses to create your forecast. For more information
 	// about blended and unblended rates, see Why does the "blended" annotation appear
-	// on some line items in my bill?
-	// (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
-	// Valid values for a GetCostForecast call are the following:
-	//
-	// * AMORTIZED_COST
-	//
-	// *
-	// BLENDED_COST
-	//
-	// * NET_AMORTIZED_COST
-	//
-	// * NET_UNBLENDED_COST
-	//
-	// * UNBLENDED_COST
+	// on some line items in my bill? (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/)
+	// . Valid values for a GetCostForecast call are the following:
+	//   - AMORTIZED_COST
+	//   - BLENDED_COST
+	//   - NET_AMORTIZED_COST
+	//   - NET_UNBLENDED_COST
+	//   - UNBLENDED_COST
 	//
 	// This member is required.
 	Metric types.Metric
@@ -65,57 +58,29 @@ type GetCostForecastInput struct {
 
 	// The filters that you want to use to filter your forecast. The GetCostForecast
 	// API supports filtering by the following dimensions:
-	//
-	// * AZ
-	//
-	// * INSTANCE_TYPE
-	//
-	// *
-	// LINKED_ACCOUNT
-	//
-	// * LINKED_ACCOUNT_NAME
-	//
-	// * OPERATION
-	//
-	// * PURCHASE_TYPE
-	//
-	// * REGION
-	//
-	// *
-	// SERVICE
-	//
-	// * USAGE_TYPE
-	//
-	// * USAGE_TYPE_GROUP
-	//
-	// * RECORD_TYPE
-	//
-	// * OPERATING_SYSTEM
-	//
-	// *
-	// TENANCY
-	//
-	// * SCOPE
-	//
-	// * PLATFORM
-	//
-	// * SUBSCRIPTION_ID
-	//
-	// * LEGAL_ENTITY_NAME
-	//
-	// *
-	// DEPLOYMENT_OPTION
-	//
-	// * DATABASE_ENGINE
-	//
-	// * INSTANCE_TYPE_FAMILY
-	//
-	// *
-	// BILLING_ENTITY
-	//
-	// * RESERVATION_ID
-	//
-	// * SAVINGS_PLAN_ARN
+	//   - AZ
+	//   - INSTANCE_TYPE
+	//   - LINKED_ACCOUNT
+	//   - LINKED_ACCOUNT_NAME
+	//   - OPERATION
+	//   - PURCHASE_TYPE
+	//   - REGION
+	//   - SERVICE
+	//   - USAGE_TYPE
+	//   - USAGE_TYPE_GROUP
+	//   - RECORD_TYPE
+	//   - OPERATING_SYSTEM
+	//   - TENANCY
+	//   - SCOPE
+	//   - PLATFORM
+	//   - SUBSCRIPTION_ID
+	//   - LEGAL_ENTITY_NAME
+	//   - DEPLOYMENT_OPTION
+	//   - DATABASE_ENGINE
+	//   - INSTANCE_TYPE_FAMILY
+	//   - BILLING_ENTITY
+	//   - RESERVATION_ID
+	//   - SAVINGS_PLAN_ARN
 	Filter *types.Expression
 
 	// Cost Explorer always returns the mean forecast as a single point. You can
@@ -134,7 +99,7 @@ type GetCostForecastOutput struct {
 	// days. For MONTHLY forecasts, this is a list of months.
 	ForecastResultsByTime []types.ForecastResult
 
-	// How much you are forecasted to spend over the forecast period, in USD.
+	// How much you are forecasted to spend over the forecast period, in USD .
 	Total *types.MetricValue
 
 	// Metadata pertaining to the operation's result.

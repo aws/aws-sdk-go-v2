@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Updates a timeline event. You can update events of type Custom Event.
+// Updates a timeline event. You can update events of type Custom Event .
 func (c *Client) UpdateTimelineEvent(ctx context.Context, params *UpdateTimelineEventInput, optFns ...func(*Options)) (*UpdateTimelineEventOutput, error) {
 	if params == nil {
 		params = &UpdateTimelineEventInput{}
@@ -31,8 +31,8 @@ func (c *Client) UpdateTimelineEvent(ctx context.Context, params *UpdateTimeline
 
 type UpdateTimelineEventInput struct {
 
-	// The ID of the event to update. You can use ListTimelineEvents to find an event's
-	// ID.
+	// The ID of the event to update. You can use ListTimelineEvents to find an
+	// event's ID.
 	//
 	// This member is required.
 	EventId *string
@@ -49,8 +49,8 @@ type UpdateTimelineEventInput struct {
 	// A short description of the event.
 	EventData *string
 
-	// Updates all existing references in a TimelineEvent. A reference is an Amazon Web
-	// Services resource involved or associated with the incident. To specify a
+	// Updates all existing references in a TimelineEvent . A reference is an Amazon
+	// Web Services resource involved or associated with the incident. To specify a
 	// reference, enter its Amazon Resource Name (ARN). You can also specify a related
 	// item associated with that resource. For example, to specify an Amazon DynamoDB
 	// (DynamoDB) table as a resource, use its ARN. You can also specify an Amazon
@@ -63,7 +63,7 @@ type UpdateTimelineEventInput struct {
 	// The time that the event occurred.
 	EventTime *time.Time
 
-	// The type of event. You can update events of type Custom Event.
+	// The type of event. You can update events of type Custom Event .
 	EventType *string
 
 	noSmithyDocumentSerde

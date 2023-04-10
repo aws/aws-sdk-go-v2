@@ -182,9 +182,9 @@ const (
 	EventTypeVoiceTtlExpired        EventType = "VOICE_TTL_EXPIRED"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"ALL",
@@ -298,9 +298,9 @@ const (
 	NumberStatusDeleted        NumberStatus = "DELETED"
 )
 
-// Values returns all known values for NumberStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NumberStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (NumberStatus) Values() []NumberStatus {
 	return []NumberStatus{
 		"PENDING",
@@ -364,8 +364,8 @@ const (
 	PhoneNumberFilterNameDeletionProtectionEnabled PhoneNumberFilterName = "deletion-protection-enabled"
 )
 
-// Values returns all known values for PhoneNumberFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PhoneNumberFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberFilterName) Values() []PhoneNumberFilterName {
 	return []PhoneNumberFilterName{
@@ -457,8 +457,8 @@ const (
 	RequestableNumberTypeTenDlc   RequestableNumberType = "TEN_DLC"
 )
 
-// Values returns all known values for RequestableNumberType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RequestableNumberType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RequestableNumberType) Values() []RequestableNumberType {
 	return []RequestableNumberType{
@@ -484,9 +484,9 @@ const (
 	ResourceTypeRegistration     ResourceType = "registration"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"account",
@@ -783,9 +783,9 @@ const (
 	VoiceMessageBodyTextTypeSsml VoiceMessageBodyTextType = "SSML"
 )
 
-// Values returns all known values for VoiceMessageBodyTextType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VoiceMessageBodyTextType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceMessageBodyTextType) Values() []VoiceMessageBodyTextType {
 	return []VoiceMessageBodyTextType{
 		"TEXT",

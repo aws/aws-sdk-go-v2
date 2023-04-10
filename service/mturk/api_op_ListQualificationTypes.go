@@ -44,8 +44,8 @@ type ListQualificationTypesInput struct {
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Specifies that only Qualification types that the Requester created are returned.
-	// If false, the operation returns all Qualification types.
+	// Specifies that only Qualification types that the Requester created are
+	// returned. If false, the operation returns all Qualification types.
 	MustBeOwnedByCaller *bool
 
 	// If the previous response was incomplete (because there is more data to

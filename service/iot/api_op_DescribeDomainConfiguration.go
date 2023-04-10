@@ -13,8 +13,7 @@ import (
 )
 
 // Gets summary information about a domain configuration. Requires permission to
-// access the DescribeDomainConfiguration
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// access the DescribeDomainConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeDomainConfiguration(ctx context.Context, params *DescribeDomainConfigurationInput, optFns ...func(*Options)) (*DescribeDomainConfigurationOutput, error) {
 	if params == nil {

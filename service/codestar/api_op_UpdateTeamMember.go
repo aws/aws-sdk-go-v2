@@ -42,8 +42,7 @@ type UpdateTeamMemberInput struct {
 	UserArn *string
 
 	// The role assigned to the user in the project. Project roles have different
-	// levels of access. For more information, see Working with Teams
-	// (http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html)
+	// levels of access. For more information, see Working with Teams (http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html)
 	// in the AWS CodeStar User Guide.
 	ProjectRole *string
 
@@ -65,8 +64,8 @@ type UpdateTeamMemberOutput struct {
 	// SSH public key associated with the user's profile.
 	RemoteAccessAllowed *bool
 
-	// The Amazon Resource Name (ARN) of the user whose team membership attributes were
-	// updated.
+	// The Amazon Resource Name (ARN) of the user whose team membership attributes
+	// were updated.
 	UserArn *string
 
 	// Metadata pertaining to the operation's result.

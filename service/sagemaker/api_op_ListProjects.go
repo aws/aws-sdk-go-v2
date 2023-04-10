@@ -44,14 +44,14 @@ type ListProjectsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListProjects request was truncated, the response
-	// includes a NextToken. To retrieve the next set of projects, use the token in the
-	// next request.
+	// includes a NextToken . To retrieve the next set of projects, use the token in
+	// the next request.
 	NextToken *string
 
-	// The field by which to sort results. The default is CreationTime.
+	// The field by which to sort results. The default is CreationTime .
 	SortBy types.ProjectSortBy
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.ProjectSortOrder
 
 	noSmithyDocumentSerde
@@ -65,7 +65,7 @@ type ListProjectsOutput struct {
 	ProjectSummaryList []types.ProjectSummary
 
 	// If the result of the previous ListCompilationJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model compilation
+	// response includes a NextToken . To retrieve the next set of model compilation
 	// jobs, use the token in the next request.
 	NextToken *string
 

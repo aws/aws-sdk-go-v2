@@ -42,7 +42,7 @@ type ListWorkersWithQualificationTypeInput struct {
 	// Pagination Token
 	NextToken *string
 
-	// The status of the Qualifications to return. Can be Granted | Revoked.
+	// The status of the Qualifications to return. Can be Granted | Revoked .
 	Status types.QualificationStatus
 
 	noSmithyDocumentSerde

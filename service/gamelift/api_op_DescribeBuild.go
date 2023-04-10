@@ -13,10 +13,8 @@ import (
 
 // Retrieves properties for a custom game build. To request a build resource,
 // specify a build ID. If successful, an object containing the build properties is
-// returned. Learn more  Upload a Custom Server Build
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)All
-// APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// returned. Learn more Upload a Custom Server Build (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
+// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeBuild(ctx context.Context, params *DescribeBuildInput, optFns ...func(*Options)) (*DescribeBuildOutput, error) {
 	if params == nil {
 		params = &DescribeBuildInput{}
@@ -34,8 +32,8 @@ func (c *Client) DescribeBuild(ctx context.Context, params *DescribeBuildInput, 
 
 type DescribeBuildInput struct {
 
-	// A unique identifier for the build to retrieve properties for. You can use either
-	// the build ID or ARN value.
+	// A unique identifier for the build to retrieve properties for. You can use
+	// either the build ID or ARN value.
 	//
 	// This member is required.
 	BuildId *string

@@ -11,7 +11,7 @@ import (
 )
 
 // Delete the FeatureGroup and any data that was written to the OnlineStore of the
-// FeatureGroup. Data cannot be accessed from the OnlineStore immediately after
+// FeatureGroup . Data cannot be accessed from the OnlineStore immediately after
 // DeleteFeatureGroup is called. Data written into the OfflineStore will not be
 // deleted. The Amazon Web Services Glue database and tables that are automatically
 // created for your OfflineStore are not deleted.

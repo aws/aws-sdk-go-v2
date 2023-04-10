@@ -39,7 +39,7 @@ type ListPipelineParametersForExecutionInput struct {
 	MaxResults *int32
 
 	// If the result of the previous ListPipelineParametersForExecution request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
+	// truncated, the response includes a NextToken . To retrieve the next set of
 	// parameters, use the token in the next request.
 	NextToken *string
 
@@ -49,7 +49,7 @@ type ListPipelineParametersForExecutionInput struct {
 type ListPipelineParametersForExecutionOutput struct {
 
 	// If the result of the previous ListPipelineParametersForExecution request was
-	// truncated, the response includes a NextToken. To retrieve the next set of
+	// truncated, the response includes a NextToken . To retrieve the next set of
 	// parameters, use the token in the next request.
 	NextToken *string
 

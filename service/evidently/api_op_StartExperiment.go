@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Starts an existing experiment. To create an experiment, use CreateExperiment
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html).
+// Starts an existing experiment. To create an experiment, use CreateExperiment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html)
+// .
 func (c *Client) StartExperiment(ctx context.Context, params *StartExperimentInput, optFns ...func(*Options)) (*StartExperimentOutput, error) {
 	if params == nil {
 		params = &StartExperimentInput{}
@@ -30,8 +30,8 @@ func (c *Client) StartExperiment(ctx context.Context, params *StartExperimentInp
 
 type StartExperimentInput struct {
 
-	// The date and time to end the experiment. This must be no more than 30 days after
-	// the experiment starts.
+	// The date and time to end the experiment. This must be no more than 30 days
+	// after the experiment starts.
 	//
 	// This member is required.
 	AnalysisCompleteTime *time.Time

@@ -36,8 +36,8 @@ type PutAuthPolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service for which
-	// the policy is created.
+	// The ID or Amazon Resource Name (ARN) of the service network or service for
+	// which the policy is created.
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -52,11 +52,10 @@ type PutAuthPolicyOutput struct {
 	Policy *string
 
 	// The state of the auth policy. The auth policy is only active when the auth type
-	// is set to AWS_IAM. If you provide a policy, then authentication and
+	// is set to AWS_IAM . If you provide a policy, then authentication and
 	// authorization decisions are made based on this policy and the client's IAM
-	// policy. If the Auth type is NONE, then, any auth policy you provide will remain
-	// inactive. For more information, see Create a service network
-	// (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network)
+	// policy. If the Auth type is NONE , then, any auth policy you provide will remain
+	// inactive. For more information, see Create a service network (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network)
 	// in the Amazon VPC Lattice User Guide.
 	State types.AuthPolicyState
 

@@ -61,9 +61,9 @@ const (
 	BucketLocationConstraintEuCentral1   BucketLocationConstraint = "eu-central-1"
 )
 
-// Values returns all known values for BucketLocationConstraint. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BucketLocationConstraint. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BucketLocationConstraint) Values() []BucketLocationConstraint {
 	return []BucketLocationConstraint{
 		"EU",
@@ -281,9 +281,9 @@ const (
 	JobStatusSuspended  JobStatus = "Suspended"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"Active",
@@ -328,9 +328,9 @@ const (
 	MFADeleteDisabled MFADelete = "Disabled"
 )
 
-// Values returns all known values for MFADelete. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for MFADelete. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MFADelete) Values() []MFADelete {
 	return []MFADelete{
 		"Enabled",
@@ -368,9 +368,10 @@ const (
 	MultiRegionAccessPointStatusDeleting                  MultiRegionAccessPointStatus = "DELETING"
 )
 
-// Values returns all known values for MultiRegionAccessPointStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MultiRegionAccessPointStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (MultiRegionAccessPointStatus) Values() []MultiRegionAccessPointStatus {
 	return []MultiRegionAccessPointStatus{
 		"READY",
@@ -554,8 +555,8 @@ const (
 	ReplicationRuleStatusDisabled ReplicationRuleStatus = "Disabled"
 )
 
-// Values returns all known values for ReplicationRuleStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ReplicationRuleStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationRuleStatus) Values() []ReplicationRuleStatus {
 	return []ReplicationRuleStatus{
@@ -626,8 +627,8 @@ const (
 	ReplicationTimeStatusDisabled ReplicationTimeStatus = "Disabled"
 )
 
-// Values returns all known values for ReplicationTimeStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ReplicationTimeStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationTimeStatus) Values() []ReplicationTimeStatus {
 	return []ReplicationTimeStatus{
@@ -825,9 +826,9 @@ const (
 	S3PermissionWriteAcp    S3Permission = "WRITE_ACP"
 )
 
-// Values returns all known values for S3Permission. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for S3Permission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (S3Permission) Values() []S3Permission {
 	return []S3Permission{
 		"FULL_CONTROL",
@@ -892,9 +893,10 @@ const (
 	SseKmsEncryptedObjectsStatusDisabled SseKmsEncryptedObjectsStatus = "Disabled"
 )
 
-// Values returns all known values for SseKmsEncryptedObjectsStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SseKmsEncryptedObjectsStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (SseKmsEncryptedObjectsStatus) Values() []SseKmsEncryptedObjectsStatus {
 	return []SseKmsEncryptedObjectsStatus{
 		"Enabled",

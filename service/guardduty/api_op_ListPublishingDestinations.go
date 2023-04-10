@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of publishing destinations associated with the specified
-// detectorId.
+// detectorId .
 func (c *Client) ListPublishingDestinations(ctx context.Context, params *ListPublishingDestinationsInput, optFns ...func(*Options)) (*ListPublishingDestinationsOutput, error) {
 	if params == nil {
 		params = &ListPublishingDestinationsInput{}
@@ -39,8 +39,8 @@ type ListPublishingDestinationsInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults int32
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string
@@ -56,8 +56,8 @@ type ListPublishingDestinationsOutput struct {
 	// This member is required.
 	Destinations []types.Destination
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string

@@ -51,7 +51,7 @@ type GetCoreNetworkChangeEventsInput struct {
 
 type GetCoreNetworkChangeEventsOutput struct {
 
-	// The response to GetCoreNetworkChangeEventsRequest.
+	// The response to GetCoreNetworkChangeEventsRequest .
 	CoreNetworkChangeEvents []types.CoreNetworkChangeEvent
 
 	// The token for the next page of results.

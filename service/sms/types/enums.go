@@ -10,9 +10,10 @@ const (
 	AppLaunchConfigurationStatusConfigured    AppLaunchConfigurationStatus = "CONFIGURED"
 )
 
-// Values returns all known values for AppLaunchConfigurationStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AppLaunchConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (AppLaunchConfigurationStatus) Values() []AppLaunchConfigurationStatus {
 	return []AppLaunchConfigurationStatus{
 		"NOT_CONFIGURED",
@@ -72,8 +73,8 @@ const (
 	AppReplicationConfigurationStatusConfigured    AppReplicationConfigurationStatus = "CONFIGURED"
 )
 
-// Values returns all known values for AppReplicationConfigurationStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for AppReplicationConfigurationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AppReplicationConfigurationStatus) Values() []AppReplicationConfigurationStatus {
@@ -141,9 +142,9 @@ const (
 	AppStatusDeleteFailed AppStatus = "DELETE_FAILED"
 )
 
-// Values returns all known values for AppStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AppStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AppStatus) Values() []AppStatus {
 	return []AppStatus{
 		"CREATING",
@@ -162,8 +163,8 @@ const (
 	AppValidationStrategySsm AppValidationStrategy = "SSM"
 )
 
-// Values returns all known values for AppValidationStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AppValidationStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AppValidationStrategy) Values() []AppValidationStrategy {
 	return []AppValidationStrategy{
@@ -239,9 +240,9 @@ const (
 	OutputFormatYaml OutputFormat = "YAML"
 )
 
-// Values returns all known values for OutputFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"JSON",
@@ -390,9 +391,9 @@ const (
 	ServerValidationStrategyUserdata ServerValidationStrategy = "USERDATA"
 )
 
-// Values returns all known values for ServerValidationStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServerValidationStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerValidationStrategy) Values() []ServerValidationStrategy {
 	return []ServerValidationStrategy{
 		"USERDATA",

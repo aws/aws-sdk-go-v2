@@ -34,9 +34,9 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request could not be processed because of conflict in the current state of
-// the resource. For example, if you're using a Create API (such as
-// CreateAssistant) that accepts name, a conflicting resource (usually with the
-// same name) is being created or mutated.
+// the resource. For example, if you're using a Create API (such as CreateAssistant
+// ) that accepts name, a conflicting resource (usually with the same name) is
+// being created or mutated.
 type ConflictException struct {
 	Message *string
 
@@ -62,8 +62,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided revisionId does not match, indicating the content has been modified
-// since it was last read.
+// The provided revisionId does not match, indicating the content has been
+// modified since it was last read.
 type PreconditionFailedException struct {
 	Message *string
 
@@ -117,8 +117,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've exceeded your service quota. To perform the requested action, remove some
-// of the relevant resources, or use service quotas to request a service quota
+// You've exceeded your service quota. To perform the requested action, remove
+// some of the relevant resources, or use service quotas to request a service quota
 // increase.
 type ServiceQuotaExceededException struct {
 	Message *string

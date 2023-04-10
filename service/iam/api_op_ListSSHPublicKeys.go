@@ -16,8 +16,7 @@ import (
 // user. If none exists, the operation returns an empty list. The SSH public keys
 // returned by this operation are used only for authenticating the IAM user to an
 // CodeCommit repository. For more information about using SSH keys to authenticate
-// to an CodeCommit repository, see Set up CodeCommit for SSH connections
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// to an CodeCommit repository, see Set up CodeCommit for SSH connections (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the CodeCommit User Guide. Although each user is limited to a small number of
 // keys, you can still paginate the results using the MaxItems and Marker
 // parameters.
@@ -46,19 +45,19 @@ type ListSSHPublicKeysInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
 	// The name of the IAM user to list SSH public keys for. If none is specified, the
 	// UserName field is determined implicitly based on the Amazon Web Services access
-	// key used to sign the request. This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
-	// and lowercase alphanumeric characters with no spaces. You can also include any
-	// of the following characters: _+=,.@-
+	// key used to sign the request. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
+	// ) a string of characters consisting of upper and lowercase alphanumeric
+	// characters with no spaces. You can also include any of the following characters:
+	// _+=,.@-
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -71,11 +70,11 @@ type ListSSHPublicKeysOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated is true, this element is present and contains the value to use
+	// When IsTruncated is true , this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
@@ -160,10 +159,10 @@ var _ ListSSHPublicKeysAPIClient = (*Client)(nil)
 type ListSSHPublicKeysPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 

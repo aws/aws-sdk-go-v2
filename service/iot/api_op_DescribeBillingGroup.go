@@ -12,8 +12,7 @@ import (
 )
 
 // Returns information about a billing group. Requires permission to access the
-// DescribeBillingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DescribeBillingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeBillingGroup(ctx context.Context, params *DescribeBillingGroupInput, optFns ...func(*Options)) (*DescribeBillingGroupOutput, error) {
 	if params == nil {

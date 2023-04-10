@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Provides information about the specified custom vocabulary filter. To get a list
-// of your custom vocabulary filters, use the operation.
+// Provides information about the specified custom vocabulary filter. To get a
+// list of your custom vocabulary filters, use the operation.
 func (c *Client) GetVocabularyFilter(ctx context.Context, params *GetVocabularyFilterInput, optFns ...func(*Options)) (*GetVocabularyFilterOutput, error) {
 	if params == nil {
 		params = &GetVocabularyFilterInput{}
@@ -50,7 +50,7 @@ type GetVocabularyFilterOutput struct {
 	LanguageCode types.LanguageCode
 
 	// The date and time the specified custom vocabulary filter was last modified.
-	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 

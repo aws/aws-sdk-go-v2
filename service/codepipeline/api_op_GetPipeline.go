@@ -13,7 +13,7 @@ import (
 
 // Returns the metadata, structure, stages, and actions of a pipeline. Can be used
 // to return the entire structure of a pipeline in JSON format, which can then be
-// modified and used to update the pipeline structure with UpdatePipeline.
+// modified and used to update the pipeline structure with UpdatePipeline .
 func (c *Client) GetPipeline(ctx context.Context, params *GetPipelineInput, optFns ...func(*Options)) (*GetPipelineOutput, error) {
 	if params == nil {
 		params = &GetPipelineInput{}
@@ -38,8 +38,8 @@ type GetPipelineInput struct {
 	// This member is required.
 	Name *string
 
-	// The version number of the pipeline. If you do not specify a version, defaults to
-	// the current version.
+	// The version number of the pipeline. If you do not specify a version, defaults
+	// to the current version.
 	Version *int32
 
 	noSmithyDocumentSerde
@@ -48,8 +48,8 @@ type GetPipelineInput struct {
 // Represents the output of a GetPipeline action.
 type GetPipelineOutput struct {
 
-	// Represents the pipeline metadata information returned as part of the output of a
-	// GetPipeline action.
+	// Represents the pipeline metadata information returned as part of the output of
+	// a GetPipeline action.
 	Metadata *types.PipelineMetadata
 
 	// Represents the structure of actions and stages to be performed in the pipeline.

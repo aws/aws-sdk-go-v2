@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of identity pools registered with Cognito. ListIdentityPoolUsage can
-// only be called with developer credentials. You cannot make this API call with
-// the temporary user credentials provided by Cognito Identity.
+// Gets a list of identity pools registered with Cognito. ListIdentityPoolUsage
+// can only be called with developer credentials. You cannot make this API call
+// with the temporary user credentials provided by Cognito Identity.
 // ListIdentityPoolUsage The following examples have been edited for readability.
 // POST / HTTP/1.1 CONTENT-TYPE: application/json X-AMZN-REQUESTID:
 // 9be7c425-ef05-48c0-aef3-9f0ff2fe17d3 X-AMZ-TARGET:

@@ -72,19 +72,12 @@ type DescribeModelCardOutput struct {
 	ModelCardName *string
 
 	// The approval status of the model card within your organization. Different
-	// organizations might have different criteria for model card review and
-	// approval.
-	//
-	// * Draft: The model card is a work in progress.
-	//
-	// * PendingReview: The
-	// model card is pending review.
-	//
-	// * Approved: The model card is approved.
-	//
-	// *
-	// Archived: The model card is archived. No more updates should be made to the
-	// model card, but it can still be exported.
+	// organizations might have different criteria for model card review and approval.
+	//   - Draft : The model card is a work in progress.
+	//   - PendingReview : The model card is pending review.
+	//   - Approved : The model card is approved.
+	//   - Archived : The model card is archived. No more updates should be made to the
+	//   model card, but it can still be exported.
 	//
 	// This member is required.
 	ModelCardStatus types.ModelCardStatus
@@ -103,23 +96,12 @@ type DescribeModelCardOutput struct {
 
 	// The processing status of model card deletion. The ModelCardProcessingStatus
 	// updates throughout the different deletion steps.
-	//
-	// * DeletePending: Model card
-	// deletion request received.
-	//
-	// * DeleteInProgress: Model card deletion is in
-	// progress.
-	//
-	// * ContentDeleted: Deleted model card content.
-	//
-	// * ExportJobsDeleted:
-	// Deleted all export jobs associated with the model card.
-	//
-	// * DeleteCompleted:
-	// Successfully deleted the model card.
-	//
-	// * DeleteFailed: The model card failed to
-	// delete.
+	//   - DeletePending : Model card deletion request received.
+	//   - DeleteInProgress : Model card deletion is in progress.
+	//   - ContentDeleted : Deleted model card content.
+	//   - ExportJobsDeleted : Deleted all export jobs associated with the model card.
+	//   - DeleteCompleted : Successfully deleted the model card.
+	//   - DeleteFailed : The model card failed to delete.
 	ModelCardProcessingStatus types.ModelCardProcessingStatus
 
 	// The security configuration used to protect model card content.

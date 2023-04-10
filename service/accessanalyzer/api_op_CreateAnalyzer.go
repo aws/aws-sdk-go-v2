@@ -43,8 +43,8 @@ type CreateAnalyzerInput struct {
 	// This member is required.
 	Type types.Type
 
-	// Specifies the archive rules to add for the analyzer. Archive rules automatically
-	// archive findings that meet the criteria you define for the rule.
+	// Specifies the archive rules to add for the analyzer. Archive rules
+	// automatically archive findings that meet the criteria you define for the rule.
 	ArchiveRules []types.InlineArchiveRule
 
 	// A client token.

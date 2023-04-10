@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The number of documents in the request exceeds the limit of 25. Try your request
-// again with fewer documents.
+// The number of documents in the request exceeds the limit of 25. Try your
+// request again with fewer documents.
 type BatchSizeLimitExceededException struct {
 	Message *string
 
@@ -195,8 +195,8 @@ func (e *KmsKeyValidationException) ErrorCode() string {
 }
 func (e *KmsKeyValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resource name is already in use. Use a different name and try your
-// request again.
+// The specified resource name is already in use. Use a different name and try
+// your request again.
 type ResourceInUseException struct {
 	Message *string
 
@@ -276,8 +276,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resource is not available. Check the resource and try your request
-// again.
+// The specified resource is not available. Check the resource and try your
+// request again.
 type ResourceUnavailableException struct {
 	Message *string
 
@@ -412,9 +412,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 
 // Amazon Comprehend can't process the language of the input text. For custom
 // entity recognition APIs, only English, Spanish, French, Italian, German, or
-// Portuguese are accepted. For a list of supported languages, Supported languages
-// (https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html) in
-// the Comprehend Developer Guide.
+// Portuguese are accepted. For a list of supported languages, Supported languages (https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html)
+// in the Comprehend Developer Guide.
 type UnsupportedLanguageException struct {
 	Message *string
 

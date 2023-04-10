@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a specified crawler from the Glue Data Catalog, unless the crawler state
-// is RUNNING.
+// Removes a specified crawler from the Glue Data Catalog, unless the crawler
+// state is RUNNING .
 func (c *Client) DeleteCrawler(ctx context.Context, params *DeleteCrawlerInput, optFns ...func(*Options)) (*DeleteCrawlerOutput, error) {
 	if params == nil {
 		params = &DeleteCrawlerInput{}

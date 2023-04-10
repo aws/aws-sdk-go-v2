@@ -41,8 +41,8 @@ type DisassociateQualificationFromWorkerInput struct {
 	// This member is required.
 	WorkerId *string
 
-	// A text message that explains why the Qualification was revoked. The user who had
-	// the Qualification sees this message.
+	// A text message that explains why the Qualification was revoked. The user who
+	// had the Qualification sees this message.
 	Reason *string
 
 	noSmithyDocumentSerde

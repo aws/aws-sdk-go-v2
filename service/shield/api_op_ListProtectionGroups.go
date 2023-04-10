@@ -32,8 +32,8 @@ func (c *Client) ListProtectionGroups(ctx context.Context, params *ListProtectio
 
 type ListProtectionGroupsInput struct {
 
-	// Narrows the set of protection groups that the call retrieves. You can retrieve a
-	// single protection group by its name and you can retrieve all protection groups
+	// Narrows the set of protection groups that the call retrieves. You can retrieve
+	// a single protection group by its name and you can retrieve all protection groups
 	// that are configured with specific pattern or aggregation settings. You can
 	// provide up to one criteria per filter type. Shield Advanced returns the
 	// protection groups that exactly match all of the search criteria that you

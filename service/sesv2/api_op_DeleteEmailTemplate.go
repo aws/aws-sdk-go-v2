@@ -28,8 +28,8 @@ func (c *Client) DeleteEmailTemplate(ctx context.Context, params *DeleteEmailTem
 }
 
 // Represents a request to delete an email template. For more information, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// .
 type DeleteEmailTemplateInput struct {
 
 	// The name of the template to be deleted.
@@ -40,8 +40,8 @@ type DeleteEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-// If the action is successful, the service sends back an HTTP 200 response with an
-// empty HTTP body.
+// If the action is successful, the service sends back an HTTP 200 response with
+// an empty HTTP body.
 type DeleteEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

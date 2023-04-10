@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified dimension from your Amazon Web Services accounts. Requires
-// permission to access the DeleteDimension
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Removes the specified dimension from your Amazon Web Services accounts.
+// Requires permission to access the DeleteDimension (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteDimension(ctx context.Context, params *DeleteDimensionInput, optFns ...func(*Options)) (*DeleteDimensionOutput, error) {
 	if params == nil {

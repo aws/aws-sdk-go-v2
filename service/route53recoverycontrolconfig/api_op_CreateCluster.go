@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new cluster. A cluster is a set of redundant Regional endpoints against
-// which you can run API calls to update or get the state of one or more routing
-// controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an
-// array of the five cluster endpoints (one for each supported Amazon Web Services
-// Region) that you can use with API calls to the cluster data plane.
+// Create a new cluster. A cluster is a set of redundant Regional endpoints
+// against which you can run API calls to update or get the state of one or more
+// routing controls. Each cluster has a name, status, Amazon Resource Name (ARN),
+// and an array of the five cluster endpoints (one for each supported Amazon Web
+// Services Region) that you can use with API calls to the cluster data plane.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}

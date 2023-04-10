@@ -29,10 +29,10 @@ func (c *Client) GetBasePathMapping(ctx context.Context, params *GetBasePathMapp
 // Request to describe a BasePathMapping resource.
 type GetBasePathMappingInput struct {
 
-	// The base path name that callers of the API must provide as part of the URL after
-	// the domain name. This value must be unique for all of the mappings across a
-	// single API. Specify '(none)' if you do not want callers to specify any base path
-	// name after the domain name.
+	// The base path name that callers of the API must provide as part of the URL
+	// after the domain name. This value must be unique for all of the mappings across
+	// a single API. Specify '(none)' if you do not want callers to specify any base
+	// path name after the domain name.
 	//
 	// This member is required.
 	BasePath *string
@@ -45,12 +45,12 @@ type GetBasePathMappingInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the base path that callers of the API must provide as part of the URL
-// after the domain name.
+// Represents the base path that callers of the API must provide as part of the
+// URL after the domain name.
 type GetBasePathMappingOutput struct {
 
-	// The base path name that callers of the API must provide as part of the URL after
-	// the domain name.
+	// The base path name that callers of the API must provide as part of the URL
+	// after the domain name.
 	BasePath *string
 
 	// The string identifier of the associated RestApi.

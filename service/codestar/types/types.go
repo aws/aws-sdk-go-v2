@@ -11,9 +11,9 @@ import (
 // repository after project creation.
 type Code struct {
 
-	// The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or
-	// GitHub. After AWS CodeStar provisions the new repository, the source code files
-	// provided with the project request are placed in the repository.
+	// The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit
+	// or GitHub. After AWS CodeStar provisions the new repository, the source code
+	// files provided with the project request are placed in the repository.
 	//
 	// This member is required.
 	Destination *CodeDestination
@@ -40,9 +40,9 @@ type CodeCommitCodeDestination struct {
 	noSmithyDocumentSerde
 }
 
-// The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or
-// GitHub. After AWS CodeStar provisions the new repository, the source code files
-// provided with the project request are placed in the repository.
+// The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit
+// or GitHub. After AWS CodeStar provisions the new repository, the source code
+// files provided with the project request are placed in the repository.
 type CodeDestination struct {
 
 	// Information about the AWS CodeCommit repository to be created in AWS CodeStar.
@@ -172,8 +172,7 @@ type S3Location struct {
 type TeamMember struct {
 
 	// The role assigned to the user in the project. Project roles have different
-	// levels of access. For more information, see Working with Teams
-	// (http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html)
+	// levels of access. For more information, see Working with Teams (http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html)
 	// in the AWS CodeStar User Guide.
 	//
 	// This member is required.
@@ -191,8 +190,8 @@ type TeamMember struct {
 	noSmithyDocumentSerde
 }
 
-// The toolchain template file provided with the project request. AWS CodeStar uses
-// the template to provision the toolchain stack in AWS CloudFormation.
+// The toolchain template file provided with the project request. AWS CodeStar
+// uses the template to provision the toolchain stack in AWS CloudFormation.
 type Toolchain struct {
 
 	// The Amazon S3 location where the toolchain template file provided with the
@@ -218,8 +217,8 @@ type Toolchain struct {
 // creation.
 type ToolchainSource struct {
 
-	// The Amazon S3 bucket where the toolchain template file provided with the project
-	// request is stored.
+	// The Amazon S3 bucket where the toolchain template file provided with the
+	// project request is stored.
 	//
 	// This member is required.
 	S3 *S3Location

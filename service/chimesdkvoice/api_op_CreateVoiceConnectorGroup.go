@@ -13,9 +13,9 @@ import (
 
 // Creates an Amazon Chime SDK Voice Connector group under the administrator's AWS
 // account. You can associate Amazon Chime SDK Voice Connectors with the Voice
-// Connector group by including VoiceConnectorItems in the request. You can include
-// Voice Connectors from different AWS Regions in your group. This creates a fault
-// tolerant mechanism for fallback in case of availability events.
+// Connector group by including VoiceConnectorItems in the request. You can
+// include Voice Connectors from different AWS Regions in your group. This creates
+// a fault tolerant mechanism for fallback in case of availability events.
 func (c *Client) CreateVoiceConnectorGroup(ctx context.Context, params *CreateVoiceConnectorGroupInput, optFns ...func(*Options)) (*CreateVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &CreateVoiceConnectorGroupInput{}

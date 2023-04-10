@@ -29,14 +29,11 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 
 type CopyDBClusterParameterGroupInput struct {
 
-	// The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter
-	// group. For information about creating an ARN, see  Constructing an ARN for
-	// Amazon RDS
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
+	// The identifier or Amazon Resource Name (ARN) for the source DB cluster
+	// parameter group. For information about creating an ARN, see Constructing an ARN
+	// for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon Aurora User Guide. Constraints:
-	//
-	// * Must specify a valid DB cluster
-	// parameter group.
+	//   - Must specify a valid DB cluster parameter group.
 	//
 	// This member is required.
 	SourceDBClusterParameterGroupIdentifier *string
@@ -47,26 +44,17 @@ type CopyDBClusterParameterGroupInput struct {
 	TargetDBClusterParameterGroupDescription *string
 
 	// The identifier for the copied DB cluster parameter group. Constraints:
-	//
-	// * Can't
-	// be null, empty, or blank
-	//
-	// * Must contain from 1 to 255 letters, numbers, or
-	// hyphens
-	//
-	// * First character must be a letter
-	//
-	// * Can't end with a hyphen or
-	// contain two consecutive hyphens
-	//
+	//   - Can't be null, empty, or blank
+	//   - Must contain from 1 to 255 letters, numbers, or hyphens
+	//   - First character must be a letter
+	//   - Can't end with a hyphen or contain two consecutive hyphens
 	// Example: my-cluster-param-group1
 	//
 	// This member is required.
 	TargetDBClusterParameterGroupIdentifier *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -74,8 +62,9 @@ type CopyDBClusterParameterGroupInput struct {
 
 type CopyDBClusterParameterGroupOutput struct {
 
-	// Contains the details of an Amazon RDS DB cluster parameter group. This data type
-	// is used as a response element in the DescribeDBClusterParameterGroups action.
+	// Contains the details of an Amazon RDS DB cluster parameter group. This data
+	// type is used as a response element in the DescribeDBClusterParameterGroups
+	// action.
 	DBClusterParameterGroup *types.DBClusterParameterGroup
 
 	// Metadata pertaining to the operation's result.

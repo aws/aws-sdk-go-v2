@@ -41,7 +41,7 @@ type ListRecommendationsInput struct {
 	// position in the list of recommendations.
 	NextToken *string
 
-	// The number of results to show in a single call to ListRecommendations. If the
+	// The number of results to show in a single call to ListRecommendations . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no
@@ -130,8 +130,8 @@ func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRecommendationsAPIClient is a client that implements the ListRecommendations
-// operation.
+// ListRecommendationsAPIClient is a client that implements the
+// ListRecommendations operation.
 type ListRecommendationsAPIClient interface {
 	ListRecommendations(context.Context, *ListRecommendationsInput, ...func(*Options)) (*ListRecommendationsOutput, error)
 }
@@ -141,7 +141,7 @@ var _ ListRecommendationsAPIClient = (*Client)(nil)
 // ListRecommendationsPaginatorOptions is the paginator options for
 // ListRecommendations
 type ListRecommendationsPaginatorOptions struct {
-	// The number of results to show in a single call to ListRecommendations. If the
+	// The number of results to show in a single call to ListRecommendations . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no

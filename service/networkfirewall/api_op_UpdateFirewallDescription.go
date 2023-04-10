@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the description for the specified firewall. Use the description to help
-// you identify the firewall when you're working with it.
+// Modifies the description for the specified firewall. Use the description to
+// help you identify the firewall when you're working with it.
 func (c *Client) UpdateFirewallDescription(ctx context.Context, params *UpdateFirewallDescriptionInput, optFns ...func(*Options)) (*UpdateFirewallDescriptionOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallDescriptionInput{}
@@ -29,8 +29,8 @@ func (c *Client) UpdateFirewallDescription(ctx context.Context, params *UpdateFi
 
 type UpdateFirewallDescriptionInput struct {
 
-	// The new description for the firewall. If you omit this setting, Network Firewall
-	// removes the description for the firewall.
+	// The new description for the firewall. If you omit this setting, Network
+	// Firewall removes the description for the firewall.
 	Description *string
 
 	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
@@ -51,7 +51,7 @@ type UpdateFirewallDescriptionInput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -80,7 +80,7 @@ type UpdateFirewallDescriptionOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

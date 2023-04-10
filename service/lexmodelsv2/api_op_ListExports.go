@@ -37,14 +37,14 @@ type ListExportsInput struct {
 	// The version of the bot to list exports for.
 	BotVersion *string
 
-	// Provides the specification of a filter used to limit the exports in the response
-	// to only those that match the filter specification. You can only specify one
-	// filter and one string to filter on.
+	// Provides the specification of a filter used to limit the exports in the
+	// response to only those that match the filter specification. You can only specify
+	// one filter and one string to filter on.
 	Filters []types.ExportFilter
 
-	// Specifies the resources that should be exported. If you don't specify a resource
-	// type in the filters parameter, both bot locales and custom vocabularies are
-	// exported.
+	// Specifies the resources that should be exported. If you don't specify a
+	// resource type in the filters parameter, both bot locales and custom
+	// vocabularies are exported.
 	LocaleId *string
 
 	// The maximum number of exports to return in each page of results. If there are
@@ -54,9 +54,9 @@ type ListExportsInput struct {
 
 	// If the response from the ListExports operation contains more results that
 	// specified in the maxResults parameter, a token is returned in the response. Use
-	// the returned token in the nextToken parameter of a ListExports request to return
-	// the next page of results. For a complete set of results, call the ListExports
-	// operation until the nextToken returned in the response is null.
+	// the returned token in the nextToken parameter of a ListExports request to
+	// return the next page of results. For a complete set of results, call the
+	// ListExports operation until the nextToken returned in the response is null.
 	NextToken *string
 
 	// Determines the field that the list of exports is sorted by. You can sort by the
@@ -75,16 +75,16 @@ type ListExportsOutput struct {
 	BotVersion *string
 
 	// Summary information for the exports that meet the filter criteria specified in
-	// the request. The length of the list is specified in the maxResults parameter. If
-	// there are more exports available, the nextToken field contains a token to get
-	// the next page of results.
+	// the request. The length of the list is specified in the maxResults parameter.
+	// If there are more exports available, the nextToken field contains a token to
+	// get the next page of results.
 	ExportSummaries []types.ExportSummary
 
 	// The locale specified in the request.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListExports operation. If the nextToken field is present, you send the
+	// A token that indicates whether there are more results to return in a response
+	// to the ListExports operation. If the nextToken field is present, you send the
 	// contents as the nextToken parameter of a ListExports operation request to get
 	// the next page of results.
 	NextToken *string

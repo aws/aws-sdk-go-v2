@@ -40,19 +40,20 @@ type GetAutomatedDiscoveryConfigurationOutput struct {
 	// specifies S3 buckets to exclude from automated sensitive data discovery.
 	ClassificationScopeId *string
 
-	// The date and time, in UTC and extended ISO 8601 format, when automated sensitive
-	// data discovery was most recently disabled for the account. This value is null if
-	// automated sensitive data discovery wasn't enabled and subsequently disabled for
-	// the account.
+	// The date and time, in UTC and extended ISO 8601 format, when automated
+	// sensitive data discovery was most recently disabled for the account. This value
+	// is null if automated sensitive data discovery wasn't enabled and subsequently
+	// disabled for the account.
 	DisabledAt *time.Time
 
-	// The date and time, in UTC and extended ISO 8601 format, when automated sensitive
-	// data discovery was initially enabled for the account. This value is null if
-	// automated sensitive data discovery has never been enabled for the account.
+	// The date and time, in UTC and extended ISO 8601 format, when automated
+	// sensitive data discovery was initially enabled for the account. This value is
+	// null if automated sensitive data discovery has never been enabled for the
+	// account.
 	FirstEnabledAt *time.Time
 
-	// The date and time, in UTC and extended ISO 8601 format, when automated sensitive
-	// data discovery was most recently enabled or disabled for the account.
+	// The date and time, in UTC and extended ISO 8601 format, when automated
+	// sensitive data discovery was most recently enabled or disabled for the account.
 	LastUpdatedAt *time.Time
 
 	// The unique identifier for the sensitivity inspection template that's used when

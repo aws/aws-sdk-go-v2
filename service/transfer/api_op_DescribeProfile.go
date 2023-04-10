@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details of the profile that's specified by the ProfileId.
+// Returns the details of the profile that's specified by the ProfileId .
 func (c *Client) DescribeProfile(ctx context.Context, params *DescribeProfileInput, optFns ...func(*Options)) (*DescribeProfileOutput, error) {
 	if params == nil {
 		params = &DescribeProfileInput{}

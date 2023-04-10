@@ -36,7 +36,7 @@ type ListVpcEndpointAccessInput struct {
 	// This member is required.
 	DomainName *string
 
-	// If your initial ListVpcEndpointAccess operation returns a nextToken, you can
+	// If your initial ListVpcEndpointAccess operation returns a nextToken , you can
 	// include the returned nextToken in subsequent ListVpcEndpointAccess operations,
 	// which returns results in the next page.
 	NextToken *string
@@ -46,8 +46,7 @@ type ListVpcEndpointAccessInput struct {
 
 type ListVpcEndpointAccessOutput struct {
 
-	// A list of IAM principals
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
+	// A list of IAM principals (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
 	// that can currently access the domain.
 	//
 	// This member is required.

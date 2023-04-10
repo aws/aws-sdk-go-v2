@@ -19,11 +19,10 @@ import (
 
 // Returns descriptive information about an Amazon EKS cluster. The API server
 // endpoint and certificate authority data returned by this operation are required
-// for kubelet and kubectl to communicate with your Kubernetes API server. For more
-// information, see Create a kubeconfig for Amazon EKS
-// (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html). The
-// API server endpoint and certificate authority data aren't available until the
-// cluster reaches the ACTIVE state.
+// for kubelet and kubectl to communicate with your Kubernetes API server. For
+// more information, see Create a kubeconfig for Amazon EKS (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
+// . The API server endpoint and certificate authority data aren't available until
+// the cluster reaches the ACTIVE state.
 func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInput, optFns ...func(*Options)) (*DescribeClusterOutput, error) {
 	if params == nil {
 		params = &DescribeClusterInput{}
@@ -144,8 +143,8 @@ type ClusterActiveWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ClusterActiveWaiter will use default max delay of 120 seconds. Note
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ClusterActiveWaiter will use default max delay of 120 seconds. Note
 	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -194,9 +193,10 @@ func (w *ClusterActiveWaiter) Wait(ctx context.Context, params *DescribeClusterI
 	return err
 }
 
-// WaitForOutput calls the waiter function for ClusterActive waiter and returns the
-// output of the successful operation. The maxWaitDur is the maximum wait duration
-// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+// WaitForOutput calls the waiter function for ClusterActive waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *ClusterActiveWaiter) WaitForOutput(ctx context.Context, params *DescribeClusterInput, maxWaitDur time.Duration, optFns ...func(*ClusterActiveWaiterOptions)) (*DescribeClusterOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -337,9 +337,9 @@ type ClusterDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ClusterDeletedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ClusterDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

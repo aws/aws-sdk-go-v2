@@ -29,8 +29,8 @@ func (c *Client) ListPricingRulesAssociatedToPricingPlan(ctx context.Context, pa
 
 type ListPricingRulesAssociatedToPricingPlanInput struct {
 
-	// The Amazon Resource Name (ARN) of the pricing plan for which associations are to
-	// be listed.
+	// The Amazon Resource Name (ARN) of the pricing plan for which associations are
+	// to be listed.
 	//
 	// This member is required.
 	PricingPlanArn *string
@@ -132,16 +132,16 @@ func (c *Client) addOperationListPricingRulesAssociatedToPricingPlanMiddlewares(
 	return nil
 }
 
-// ListPricingRulesAssociatedToPricingPlanAPIClient is a client that implements the
-// ListPricingRulesAssociatedToPricingPlan operation.
+// ListPricingRulesAssociatedToPricingPlanAPIClient is a client that implements
+// the ListPricingRulesAssociatedToPricingPlan operation.
 type ListPricingRulesAssociatedToPricingPlanAPIClient interface {
 	ListPricingRulesAssociatedToPricingPlan(context.Context, *ListPricingRulesAssociatedToPricingPlanInput, ...func(*Options)) (*ListPricingRulesAssociatedToPricingPlanOutput, error)
 }
 
 var _ ListPricingRulesAssociatedToPricingPlanAPIClient = (*Client)(nil)
 
-// ListPricingRulesAssociatedToPricingPlanPaginatorOptions is the paginator options
-// for ListPricingRulesAssociatedToPricingPlan
+// ListPricingRulesAssociatedToPricingPlanPaginatorOptions is the paginator
+// options for ListPricingRulesAssociatedToPricingPlan
 type ListPricingRulesAssociatedToPricingPlanPaginatorOptions struct {
 	// The optional maximum number of pricing rule associations to retrieve.
 	Limit int32

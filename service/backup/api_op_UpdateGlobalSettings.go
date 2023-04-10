@@ -32,7 +32,7 @@ type UpdateGlobalSettingsInput struct {
 
 	// A value for isCrossAccountBackupEnabled and a Region. Example:
 	// update-global-settings --global-settings isCrossAccountBackupEnabled=false
-	// --region us-west-2.
+	// --region us-west-2 .
 	GlobalSettings map[string]string
 
 	noSmithyDocumentSerde

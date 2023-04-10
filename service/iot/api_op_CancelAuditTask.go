@@ -12,8 +12,7 @@ import (
 
 // Cancels an audit that is in progress. The audit can be either scheduled or on
 // demand. If the audit isn't in progress, an "InvalidRequestException" occurs.
-// Requires permission to access the CancelAuditTask
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Requires permission to access the CancelAuditTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CancelAuditTask(ctx context.Context, params *CancelAuditTaskInput, optFns ...func(*Options)) (*CancelAuditTaskOutput, error) {
 	if params == nil {

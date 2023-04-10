@@ -12,13 +12,12 @@ import (
 
 // Deletes a specified instance, which terminates the associated Amazon EC2
 // instance. You must stop an instance before you can delete it. For more
-// information, see Deleting Instances
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-delete.html).
-// Required Permissions: To use this action, an IAM user must have a Manage
+// information, see Deleting Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-delete.html)
+// . Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DeleteInstance(ctx context.Context, params *DeleteInstanceInput, optFns ...func(*Options)) (*DeleteInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteInstanceInput{}

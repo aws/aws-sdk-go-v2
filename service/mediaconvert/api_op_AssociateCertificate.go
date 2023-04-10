@@ -29,8 +29,8 @@ func (c *Client) AssociateCertificate(ctx context.Context, params *AssociateCert
 
 type AssociateCertificateInput struct {
 
-	// The ARN of the ACM certificate that you want to associate with your MediaConvert
-	// resource.
+	// The ARN of the ACM certificate that you want to associate with your
+	// MediaConvert resource.
 	//
 	// This member is required.
 	Arn *string

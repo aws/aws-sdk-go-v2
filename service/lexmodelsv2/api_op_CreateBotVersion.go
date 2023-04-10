@@ -60,8 +60,8 @@ type CreateBotVersionOutput struct {
 	BotId *string
 
 	// When you send a request to create or update a bot, Amazon Lex sets the status
-	// response element to Creating. After Amazon Lex builds the bot, it sets status to
-	// Available. If Amazon Lex can't build the bot, it sets status to Failed.
+	// response element to Creating . After Amazon Lex builds the bot, it sets status
+	// to Available . If Amazon Lex can't build the bot, it sets status to Failed .
 	BotStatus types.BotStatus
 
 	// The version number assigned to the version.

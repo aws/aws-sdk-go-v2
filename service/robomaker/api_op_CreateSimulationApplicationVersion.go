@@ -43,8 +43,8 @@ type CreateSimulationApplicationVersionInput struct {
 	// simulation application.
 	ImageDigest *string
 
-	// The Amazon S3 eTag identifier for the zip file bundle that you use to create the
-	// simulation application.
+	// The Amazon S3 eTag identifier for the zip file bundle that you use to create
+	// the simulation application.
 	S3Etags []string
 
 	noSmithyDocumentSerde

@@ -13,13 +13,12 @@ import (
 	"time"
 )
 
-// Deploys a specific version of a robot application to robots in a fleet. This API
-// is no longer supported and will throw an error if used. The robot application
-// must have a numbered applicationVersion for consistency reasons. To create a new
-// version, use CreateRobotApplicationVersion or see Creating a Robot Application
-// Version
-// (https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html).
-// After 90 days, deployment jobs expire and will be deleted. They will no longer
+// Deploys a specific version of a robot application to robots in a fleet. This
+// API is no longer supported and will throw an error if used. The robot
+// application must have a numbered applicationVersion for consistency reasons. To
+// create a new version, use CreateRobotApplicationVersion or see Creating a Robot
+// Application Version (https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html)
+// . After 90 days, deployment jobs expire and will be deleted. They will no longer
 // be accessible.
 //
 // Deprecated: AWS RoboMaker is unable to process this request as the support for
@@ -84,9 +83,8 @@ type CreateDeploymentJobOutput struct {
 
 	// The failure code of the simulation job if it failed: BadPermissionError AWS
 	// Greengrass requires a service-level role permission to access other services.
-	// The role must include the AWSGreengrassResourceAccessRolePolicy managed policy
-	// (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor).
-	// ExtractingBundleFailure The robot application could not be extracted from the
+	// The role must include the AWSGreengrassResourceAccessRolePolicy managed policy (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor)
+	// . ExtractingBundleFailure The robot application could not be extracted from the
 	// bundle. FailureThresholdBreached The percentage of robots that could not be
 	// updated exceeded the percentage set for the deployment.
 	// GreengrassDeploymentFailed The robot application could not be deployed to the

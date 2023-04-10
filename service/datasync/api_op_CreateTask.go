@@ -50,12 +50,12 @@ type CreateTaskInput struct {
 
 	// Specifies a list of filter rules that exclude specific data during your
 	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
 	Excludes []types.FilterRule
 
 	// Specifies a list of filter rules that include specific data during your
 	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
 	Includes []types.FilterRule
 
 	// The name of a task. This value is a text reference that is used to identify the
@@ -65,14 +65,14 @@ type CreateTaskInput struct {
 	// Specifies the configuration options for a task. Some options include preserving
 	// file or object metadata and verifying data integrity. You can also override
 	// these options before starting an individual run of a task (also known as a task
-	// execution). For more information, see StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
+	// execution). For more information, see StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
+	// .
 	Options *types.Options
 
 	// Specifies a schedule used to periodically transfer files from a source to a
 	// destination location. The schedule should be specified in UTC time. For more
-	// information, see Scheduling your task
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html).
+	// information, see Scheduling your task (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
+	// .
 	Schedule *types.TaskSchedule
 
 	// Specifies the tags that you want to apply to the Amazon Resource Name (ARN)

@@ -47,20 +47,20 @@ type CreateUsageLimitInput struct {
 	FeatureType types.UsageLimitFeatureType
 
 	// The type of limit. Depending on the feature type, this can be based on a time
-	// duration or data size. If FeatureType is spectrum, then LimitType must be
-	// data-scanned. If FeatureType is concurrency-scaling, then LimitType must be
-	// time. If FeatureType is cross-region-datasharing, then LimitType must be
-	// data-scanned.
+	// duration or data size. If FeatureType is spectrum , then LimitType must be
+	// data-scanned . If FeatureType is concurrency-scaling , then LimitType must be
+	// time . If FeatureType is cross-region-datasharing , then LimitType must be
+	// data-scanned .
 	//
 	// This member is required.
 	LimitType types.UsageLimitLimitType
 
 	// The action that Amazon Redshift takes when the limit is reached. The default is
-	// log. For more information about this parameter, see UsageLimit.
+	// log. For more information about this parameter, see UsageLimit .
 	BreachAction types.UsageLimitBreachAction
 
 	// The time period that the amount applies to. A weekly period begins on Sunday.
-	// The default is monthly.
+	// The default is monthly .
 	Period types.UsageLimitPeriod
 
 	// A list of tag instances.
@@ -76,16 +76,11 @@ type CreateUsageLimitOutput struct {
 	// amount is in terabytes (TB).
 	Amount int64
 
-	// The action that Amazon Redshift takes when the limit is reached. Possible values
-	// are:
-	//
-	// * log - To log an event in a system table. The default is log.
-	//
-	// *
-	// emit-metric - To emit CloudWatch metrics.
-	//
-	// * disable - To disable the feature
-	// until the next usage period begins.
+	// The action that Amazon Redshift takes when the limit is reached. Possible
+	// values are:
+	//   - log - To log an event in a system table. The default is log.
+	//   - emit-metric - To emit CloudWatch metrics.
+	//   - disable - To disable the feature until the next usage period begins.
 	BreachAction types.UsageLimitBreachAction
 
 	// The identifier of the cluster with a usage limit.
@@ -99,7 +94,7 @@ type CreateUsageLimitOutput struct {
 	LimitType types.UsageLimitLimitType
 
 	// The time period that the amount applies to. A weekly period begins on Sunday.
-	// The default is monthly.
+	// The default is monthly .
 	Period types.UsageLimitPeriod
 
 	// A list of tag instances.

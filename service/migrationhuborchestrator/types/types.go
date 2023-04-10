@@ -112,8 +112,9 @@ type StepAutomationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A map of key value pairs that is generated when you create a migration workflow.
-// The key value pairs will differ based on your selection of the template.
+// A map of key value pairs that is generated when you create a migration
+// workflow. The key value pairs will differ based on your selection of the
+// template.
 //
 // The following types satisfy this interface:
 //
@@ -227,8 +228,8 @@ type TemplateStepSummary struct {
 	// The previous step.
 	Previous []string
 
-	// The action type of the step. You must run and update the status of a manual step
-	// for the workflow to continue after the completion of the step.
+	// The action type of the step. You must run and update the status of a manual
+	// step for the workflow to continue after the completion of the step.
 	StepActionType StepActionType
 
 	// The ID of the step group.
@@ -407,8 +408,8 @@ type WorkflowStepSummary struct {
 	// The status message of the migration workflow.
 	StatusMessage *string
 
-	// The action type of the step. You must run and update the status of a manual step
-	// for the workflow to continue after the completion of the step.
+	// The action type of the step. You must run and update the status of a manual
+	// step for the workflow to continue after the completion of the step.
 	StepActionType StepActionType
 
 	// The ID of the step.

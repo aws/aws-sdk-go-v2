@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a maintenance window execution that is already in progress and cancels any
-// tasks in the window that haven't already starting running. Tasks already in
+// Stops a maintenance window execution that is already in progress and cancels
+// any tasks in the window that haven't already starting running. Tasks already in
 // progress will continue to completion.
 func (c *Client) CancelMaintenanceWindowExecution(ctx context.Context, params *CancelMaintenanceWindowExecutionInput, optFns ...func(*Options)) (*CancelMaintenanceWindowExecutionOutput, error) {
 	if params == nil {

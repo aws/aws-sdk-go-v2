@@ -34,29 +34,19 @@ type CheckDomainAvailabilityInput struct {
 
 	// The name of the domain that you want to get availability for. The top-level
 	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of
-	// supported TLDs, see Domains that You Can Register with Amazon Route 53
-	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// supported TLDs, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
 	// following characters:
-	//
-	// * Letters a through z. Domain names are not case
-	// sensitive.
-	//
-	// * Numbers 0 through 9.
-	//
-	// * Hyphen (-). You can't specify a hyphen at
-	// the beginning or end of a label.
-	//
-	// * Period (.) to separate the labels in the
-	// name, such as the . in example.com.
-	//
-	// Internationalized domain names are not
-	// supported for some top-level domains. To determine whether the TLD that you want
-	// to use supports internationalized domain names, see Domains that You Can
-	// Register with Amazon Route 53
-	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
-	// For more information, see Formatting Internationalized Domain Names
-	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
+	//   - Letters a through z. Domain names are not case sensitive.
+	//   - Numbers 0 through 9.
+	//   - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
+	//   - Period (.) to separate the labels in the name, such as the . in example.com
+	//   .
+	// Internationalized domain names are not supported for some top-level domains. To
+	// determine whether the TLD that you want to use supports internationalized domain
+	// names, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// . For more information, see Formatting Internationalized Domain Names (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns)
+	// .
 	//
 	// This member is required.
 	DomainName *string
@@ -71,7 +61,7 @@ type CheckDomainAvailabilityInput struct {
 type CheckDomainAvailabilityOutput struct {
 
 	// Whether the domain name is available for registering. You can register only
-	// domains designated as AVAILABLE. Valid values: AVAILABLE The domain name is
+	// domains designated as AVAILABLE . Valid values: AVAILABLE The domain name is
 	// available. AVAILABLE_RESERVED The domain name is reserved under specific
 	// conditions. AVAILABLE_PREORDER The domain name is available and can be
 	// preordered. DONT_KNOW The TLD registry didn't reply with a definitive answer

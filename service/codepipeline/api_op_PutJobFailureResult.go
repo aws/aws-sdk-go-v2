@@ -37,7 +37,7 @@ type PutJobFailureResultInput struct {
 	FailureDetails *types.FailureDetails
 
 	// The unique system-generated ID of the job that failed. This is the same ID
-	// returned from PollForJobs.
+	// returned from PollForJobs .
 	//
 	// This member is required.
 	JobId *string

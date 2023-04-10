@@ -34,24 +34,14 @@ type CreateWorkflowInput struct {
 
 	// Specifies the details for the steps that are in the specified workflow. The TYPE
 	// specifies which of the following actions is being taken for this step.
-	//
-	// * COPY -
-	// Copy the file to another location.
-	//
-	// * CUSTOM - Perform a custom step with an
-	// Lambda function target.
-	//
-	// * DECRYPT - Decrypt a file that was encrypted before it
-	// was uploaded.
-	//
-	// * DELETE - Delete the file.
-	//
-	// * TAG - Add a tag to the
-	// file.
-	//
-	// Currently, copying and tagging are supported only on S3. For file
-	// location, you specify either the Amazon S3 bucket and key, or the Amazon EFS
-	// file system ID and path.
+	//   - COPY - Copy the file to another location.
+	//   - CUSTOM - Perform a custom step with an Lambda function target.
+	//   - DECRYPT - Decrypt a file that was encrypted before it was uploaded.
+	//   - DELETE - Delete the file.
+	//   - TAG - Add a tag to the file.
+	// Currently, copying and tagging are supported only on S3. For file location, you
+	// specify either the Amazon S3 bucket and key, or the Amazon EFS file system ID
+	// and path.
 	//
 	// This member is required.
 	Steps []types.WorkflowStep
@@ -59,10 +49,11 @@ type CreateWorkflowInput struct {
 	// A textual description for the workflow.
 	Description *string
 
-	// Specifies the steps (actions) to take if errors are encountered during execution
-	// of the workflow. For custom steps, the lambda function needs to send FAILURE to
-	// the call back API to kick off the exception steps. Additionally, if the lambda
-	// does not send SUCCESS before it times out, the exception steps are executed.
+	// Specifies the steps (actions) to take if errors are encountered during
+	// execution of the workflow. For custom steps, the lambda function needs to send
+	// FAILURE to the call back API to kick off the exception steps. Additionally, if
+	// the lambda does not send SUCCESS before it times out, the exception steps are
+	// executed.
 	OnExceptionSteps []types.WorkflowStep
 
 	// Key-value pairs that can be used to group and search for workflows. Tags are

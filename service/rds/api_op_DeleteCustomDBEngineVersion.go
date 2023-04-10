@@ -14,23 +14,18 @@ import (
 
 // Deletes a custom engine version. To run this command, make sure you meet the
 // following prerequisites:
+//   - The CEV must not be the default for RDS Custom. If it is, change the
+//     default before running this command.
+//   - The CEV must not be associated with an RDS Custom DB instance, RDS Custom
+//     instance snapshot, or automated backup of your RDS Custom instance.
 //
-// * The CEV must not be the default for RDS Custom. If
-// it is, change the default before running this command.
-//
-// * The CEV must not be
-// associated with an RDS Custom DB instance, RDS Custom instance snapshot, or
-// automated backup of your RDS Custom instance.
-//
-// Typically, deletion takes a few
-// minutes. The MediaImport service that imports files from Amazon S3 to create
-// CEVs isn't integrated with Amazon Web Services CloudTrail. If you turn on data
-// logging for Amazon RDS in CloudTrail, calls to the DeleteCustomDbEngineVersion
-// event aren't logged. However, you might see calls from the API gateway that
-// accesses your Amazon S3 bucket. These calls originate from the MediaImport
-// service for the DeleteCustomDbEngineVersion event. For more information, see
-// Deleting a CEV
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.delete)
+// Typically, deletion takes a few minutes. The MediaImport service that imports
+// files from Amazon S3 to create CEVs isn't integrated with Amazon Web Services
+// CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to
+// the DeleteCustomDbEngineVersion event aren't logged. However, you might see
+// calls from the API gateway that accesses your Amazon S3 bucket. These calls
+// originate from the MediaImport service for the DeleteCustomDbEngineVersion
+// event. For more information, see Deleting a CEV (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.delete)
 // in the Amazon RDS User Guide.
 func (c *Client) DeleteCustomDBEngineVersion(ctx context.Context, params *DeleteCustomDBEngineVersionInput, optFns ...func(*Options)) (*DeleteCustomDBEngineVersionOutput, error) {
 	if params == nil {
@@ -50,7 +45,7 @@ func (c *Client) DeleteCustomDBEngineVersion(ctx context.Context, params *Delete
 type DeleteCustomDBEngineVersionInput struct {
 
 	// The database engine. The only supported engines are custom-oracle-ee and
-	// custom-oracle-ee-cdb.
+	// custom-oracle-ee-cdb .
 	//
 	// This member is required.
 	Engine *string
@@ -66,7 +61,7 @@ type DeleteCustomDBEngineVersionInput struct {
 }
 
 // This data type is used as a response element in the action
-// DescribeDBEngineVersions.
+// DescribeDBEngineVersions .
 type DeleteCustomDBEngineVersionOutput struct {
 
 	// The creation time of the DB engine version.
@@ -76,8 +71,7 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// uses to create a custom engine version (CEV). RDS Custom applies the patches in
 	// the order in which they're listed in the manifest. You can set the Oracle home,
 	// Oracle base, and UNIX/Linux user and group using the installation parameters.
-	// For more information, see JSON fields in the CEV manifest
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields)
+	// For more information, see JSON fields in the CEV manifest (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields)
 	// in the Amazon RDS User Guide.
 	CustomDBEngineVersionManifest *string
 
@@ -128,15 +122,13 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// The major engine version of the CEV.
 	MajorEngineVersion *string
 
-	// The status of the DB engine version, either available or deprecated.
+	// The status of the DB engine version, either available or deprecated .
 	Status *string
 
 	// A list of the supported CA certificate identifiers. For more information, see
-	// Using SSL/TLS to encrypt a connection to a DB instance
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
-	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
-	// cluster
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
+	// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
 	// in the Amazon Aurora User Guide.
 	SupportedCACertificateIdentifiers []string
 
@@ -147,13 +139,13 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// A list of the supported DB engine modes.
 	SupportedEngineModes []string
 
-	// A list of features supported by the DB engine. The supported features vary by DB
-	// engine and DB engine version. To determine the supported features for a specific
-	// DB engine and DB engine version using the CLI, use the following command: aws
-	// rds describe-db-engine-versions --engine --engine-version  For example, to
-	// determine the supported features for RDS for PostgreSQL version 13.3 using the
-	// CLI, use the following command: aws rds describe-db-engine-versions --engine
-	// postgres --engine-version 13.3 The supported features are listed under
+	// A list of features supported by the DB engine. The supported features vary by
+	// DB engine and DB engine version. To determine the supported features for a
+	// specific DB engine and DB engine version using the CLI, use the following
+	// command: aws rds describe-db-engine-versions --engine --engine-version  For
+	// example, to determine the supported features for RDS for PostgreSQL version 13.3
+	// using the CLI, use the following command: aws rds describe-db-engine-versions
+	// --engine postgres --engine-version 13.3 The supported features are listed under
 	// SupportedFeatureNames in the output.
 	SupportedFeatureNames []string
 
@@ -181,16 +173,15 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// types specified by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs bool
 
-	// A value that indicates whether you can use Aurora parallel query with a specific
-	// DB engine version.
+	// A value that indicates whether you can use Aurora parallel query with a
+	// specific DB engine version.
 	SupportsParallelQuery bool
 
 	// Indicates whether the database engine version supports read replicas.
 	SupportsReadReplica bool
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
 	TagList []types.Tag
 
 	// A list of engine versions that this database engine version can be upgraded to.

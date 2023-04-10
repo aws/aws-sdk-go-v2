@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the flag, ChangeProtection, which indicates whether it is possible to
-// change the firewall. If the flag is set to TRUE, the firewall is protected from
+// Modifies the flag, ChangeProtection , which indicates whether it is possible to
+// change the firewall. If the flag is set to TRUE , the firewall is protected from
 // changes. This setting helps protect against accidentally changing a firewall
 // that's in use.
 func (c *Client) UpdateFirewallPolicyChangeProtection(ctx context.Context, params *UpdateFirewallPolicyChangeProtectionInput, optFns ...func(*Options)) (*UpdateFirewallPolicyChangeProtectionOutput, error) {
@@ -34,7 +34,7 @@ type UpdateFirewallPolicyChangeProtectionInput struct {
 	// A setting indicating whether the firewall is protected against a change to the
 	// firewall policy association. Use this setting to protect against accidentally
 	// modifying the firewall policy for a firewall that is in use. When you create a
-	// firewall, the operation initializes this setting to TRUE.
+	// firewall, the operation initializes this setting to TRUE .
 	//
 	// This member is required.
 	FirewallPolicyChangeProtection bool
@@ -57,7 +57,7 @@ type UpdateFirewallPolicyChangeProtectionInput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -77,7 +77,7 @@ type UpdateFirewallPolicyChangeProtectionOutput struct {
 	// A setting indicating whether the firewall is protected against a change to the
 	// firewall policy association. Use this setting to protect against accidentally
 	// modifying the firewall policy for a firewall that is in use. When you create a
-	// firewall, the operation initializes this setting to TRUE.
+	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
 	// An optional token that you can use for optimistic locking. Network Firewall
@@ -89,7 +89,7 @@ type UpdateFirewallPolicyChangeProtectionOutput struct {
 	// change to the firewall, provide the token in your update request. Network
 	// Firewall uses the token to ensure that the firewall hasn't changed since you
 	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException. If this happens, retrieve the firewall again to get a
+	// InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

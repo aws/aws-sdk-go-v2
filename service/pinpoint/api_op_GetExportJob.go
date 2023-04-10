@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the status and settings of a specific export job for
-// an application.
+// Retrieves information about the status and settings of a specific export job
+// for an application.
 func (c *Client) GetExportJob(ctx context.Context, params *GetExportJobInput, optFns ...func(*Options)) (*GetExportJobOutput, error) {
 	if params == nil {
 		params = &GetExportJobInput{}

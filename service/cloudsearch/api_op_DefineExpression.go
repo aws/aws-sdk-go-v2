@@ -13,8 +13,7 @@ import (
 
 // Configures an Expression for the search domain. Used to create new expressions
 // and modify existing ones. If the expression exists, the new configuration
-// replaces the old one. For more information, see Configuring Expressions
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+// replaces the old one. For more information, see Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DefineExpression(ctx context.Context, params *DefineExpressionInput, optFns ...func(*Options)) (*DefineExpressionOutput, error) {
 	if params == nil {
@@ -43,9 +42,9 @@ type DefineExpressionInput struct {
 	// This member is required.
 	DomainName *string
 
-	// A named expression that can be evaluated at search time. Can be used to sort the
-	// search results, define other expressions, or return computed information in the
-	// search results.
+	// A named expression that can be evaluated at search time. Can be used to sort
+	// the search results, define other expressions, or return computed information in
+	// the search results.
 	//
 	// This member is required.
 	Expression *types.Expression

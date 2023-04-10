@@ -11,8 +11,8 @@ import (
 )
 
 // Starts a crawl using the specified crawler, regardless of what is scheduled. If
-// the crawler is already running, returns a CrawlerRunningException
-// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException).
+// the crawler is already running, returns a CrawlerRunningException (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException)
+// .
 func (c *Client) StartCrawler(ctx context.Context, params *StartCrawlerInput, optFns ...func(*Options)) (*StartCrawlerOutput, error) {
 	if params == nil {
 		params = &StartCrawlerInput{}

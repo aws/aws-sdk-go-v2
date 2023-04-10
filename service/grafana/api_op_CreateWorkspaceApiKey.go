@@ -12,8 +12,7 @@ import (
 
 // Creates a Grafana API key for the workspace. This key can be used to
 // authenticate requests sent to the workspace's HTTP API. See
-// https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
-// (https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html)
+// https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html (https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html)
 // for available APIs and example requests.
 func (c *Client) CreateWorkspaceApiKey(ctx context.Context, params *CreateWorkspaceApiKeyInput, optFns ...func(*Options)) (*CreateWorkspaceApiKeyOutput, error) {
 	if params == nil {
@@ -37,13 +36,13 @@ type CreateWorkspaceApiKeyInput struct {
 	// This member is required.
 	KeyName *string
 
-	// Specifies the permission level of the key. Valid values: VIEWER|EDITOR|ADMIN
+	// Specifies the permission level of the key. Valid values: VIEWER | EDITOR | ADMIN
 	//
 	// This member is required.
 	KeyRole *string
 
-	// Specifies the time in seconds until the key expires. Keys can be valid for up to
-	// 30 days.
+	// Specifies the time in seconds until the key expires. Keys can be valid for up
+	// to 30 days.
 	//
 	// This member is required.
 	SecondsToLive *int32
@@ -58,8 +57,8 @@ type CreateWorkspaceApiKeyInput struct {
 
 type CreateWorkspaceApiKeyOutput struct {
 
-	// The key token. Use this value as a bearer token to authenticate HTTP requests to
-	// the workspace.
+	// The key token. Use this value as a bearer token to authenticate HTTP requests
+	// to the workspace.
 	//
 	// This member is required.
 	Key *string

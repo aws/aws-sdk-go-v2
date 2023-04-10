@@ -15,8 +15,8 @@ type smithyDocument interface {
 	isSmithyDocument()
 }
 
-// github.com/aws/aws-sdk-go-v2/service/iottwinmaker/internal/document.Interface is
-// a JSON-like data model type that is protocol agnostic and is usedto send
+// github.com/aws/aws-sdk-go-v2/service/iottwinmaker/internal/document.Interface
+// is a JSON-like data model type that is protocol agnostic and is usedto send
 // open-content to a service.
 type Interface interface {
 	smithyDocument

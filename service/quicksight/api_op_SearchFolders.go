@@ -34,9 +34,10 @@ type SearchFoldersInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The filters to apply to the search. Currently, you can search only by the parent
-	// folder ARN. For example, "Filters": [ { "Name": "PARENT_FOLDER_ARN", "Operator":
-	// "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:folder/folderId" } ].
+	// The filters to apply to the search. Currently, you can search only by the
+	// parent folder ARN. For example, "Filters": [ { "Name": "PARENT_FOLDER_ARN",
+	// "Operator": "StringEquals", "Value":
+	// "arn:aws:quicksight:us-east-1:1:folder/folderId" } ] .
 	//
 	// This member is required.
 	Filters []types.FolderSearchFilter
@@ -52,8 +53,8 @@ type SearchFoldersInput struct {
 
 type SearchFoldersOutput struct {
 
-	// A structure that contains all of the folders in the Amazon Web Services account.
-	// This structure provides basic information about the folders.
+	// A structure that contains all of the folders in the Amazon Web Services
+	// account. This structure provides basic information about the folders.
 	FolderSummaryList []types.FolderSummary
 
 	// The token for the next set of results, or null if there are no more results.

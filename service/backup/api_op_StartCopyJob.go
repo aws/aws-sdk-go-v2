@@ -33,13 +33,13 @@ type StartCopyJobInput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a destination backup
 	// vault to copy to; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
 	//
 	// This member is required.
 	DestinationBackupVaultArn *string
 
 	// Specifies the IAM role ARN used to copy the target recovery point; for example,
-	// arn:aws:iam::123456789012:role/S3Access.
+	// arn:aws:iam::123456789012:role/S3Access .
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -60,7 +60,7 @@ type StartCopyJobInput struct {
 	SourceBackupVaultName *string
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to StartCopyJob. Retrying a successful request with the same
+	// identical calls to StartCopyJob . Retrying a successful request with the same
 	// idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
@@ -71,8 +71,7 @@ type StartCopyJobInput struct {
 	// the “transition to cold after days” setting. The “transition to cold after days”
 	// setting cannot be changed after a backup has been transitioned to cold. Resource
 	// types that are able to be transitioned to cold storage are listed in the
-	// "Lifecycle to cold storage" section of the  Feature availability by resource
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+	// "Lifecycle to cold storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *types.Lifecycle
 
@@ -85,8 +84,8 @@ type StartCopyJobOutput struct {
 	CopyJobId *string
 
 	// The date and time that a copy job is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 

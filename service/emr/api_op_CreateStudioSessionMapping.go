@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies
-// a session policy to refine Studio permissions for that user or group. Use
-// CreateStudioSessionMapping to assign users to a Studio when you use IAM Identity
-// Center authentication. For instructions on how to assign users to a Studio when
-// you use IAM authentication, see Assign a user or group to your EMR Studio
-// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-manage-users.html#emr-studio-assign-users-groups).
+// Maps a user or group to the Amazon EMR Studio specified by StudioId , and
+// applies a session policy to refine Studio permissions for that user or group.
+// Use CreateStudioSessionMapping to assign users to a Studio when you use IAM
+// Identity Center authentication. For instructions on how to assign users to a
+// Studio when you use IAM authentication, see Assign a user or group to your EMR
+// Studio (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-manage-users.html#emr-studio-assign-users-groups)
+// .
 func (c *Client) CreateStudioSessionMapping(ctx context.Context, params *CreateStudioSessionMappingInput, optFns ...func(*Options)) (*CreateStudioSessionMappingOutput, error) {
 	if params == nil {
 		params = &CreateStudioSessionMappingInput{}
@@ -43,8 +44,8 @@ type CreateStudioSessionMappingInput struct {
 	// The Amazon Resource Name (ARN) for the session policy that will be applied to
 	// the user or group. You should specify the ARN for the session policy that you
 	// want to apply, not the ARN of your user role. For more information, see Create
-	// an EMR Studio User Role with Session Policies
-	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html).
+	// an EMR Studio User Role with Session Policies (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html)
+	// .
 	//
 	// This member is required.
 	SessionPolicyArn *string
@@ -54,19 +55,15 @@ type CreateStudioSessionMappingInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The globally unique identifier (GUID) of the user or group from the IAM Identity
-	// Center Identity Store. For more information, see UserId
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
-	// and GroupId
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId)
+	// The globally unique identifier (GUID) of the user or group from the IAM
+	// Identity Center Identity Store. For more information, see UserId (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// and GroupId (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId)
 	// in the IAM Identity Center Identity Store API Reference. Either IdentityName or
 	// IdentityId must be specified, but not both.
 	IdentityId *string
 
-	// The name of the user or group. For more information, see UserName
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
-	// and DisplayName
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
+	// The name of the user or group. For more information, see UserName (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
+	// and DisplayName (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
 	// in the IAM Identity Center Identity Store API Reference. Either IdentityName or
 	// IdentityId must be specified, but not both.
 	IdentityName *string

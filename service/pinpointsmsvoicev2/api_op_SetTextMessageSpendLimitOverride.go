@@ -11,7 +11,7 @@ import (
 )
 
 // Sets an account level monthly spend limit override for sending text messages.
-// The requested spend limit must be less than or equal to the MaxLimit, which is
+// The requested spend limit must be less than or equal to the MaxLimit , which is
 // set by Amazon Web Services.
 func (c *Client) SetTextMessageSpendLimitOverride(ctx context.Context, params *SetTextMessageSpendLimitOverrideInput, optFns ...func(*Options)) (*SetTextMessageSpendLimitOverrideOutput, error) {
 	if params == nil {

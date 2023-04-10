@@ -16,12 +16,12 @@ import (
 	"time"
 )
 
-// Requests a description of a specified set of deployments. This call accepts only
-// one resource-identifying parameter. Required Permissions: To use this action, an
-// IAM user must have a Show, Deploy, or Manage permissions level for the stack, or
-// an attached policy that explicitly grants permissions. For more information
-// about user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Requests a description of a specified set of deployments. This call accepts
+// only one resource-identifying parameter. Required Permissions: To use this
+// action, an IAM user must have a Show, Deploy, or Manage permissions level for
+// the stack, or an attached policy that explicitly grants permissions. For more
+// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeDeployments(ctx context.Context, params *DescribeDeploymentsInput, optFns ...func(*Options)) (*DescribeDeploymentsOutput, error) {
 	if params == nil {
 		params = &DescribeDeploymentsInput{}
@@ -127,8 +127,8 @@ func (c *Client) addOperationDescribeDeploymentsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeDeploymentsAPIClient is a client that implements the DescribeDeployments
-// operation.
+// DescribeDeploymentsAPIClient is a client that implements the
+// DescribeDeployments operation.
 type DescribeDeploymentsAPIClient interface {
 	DescribeDeployments(context.Context, *DescribeDeploymentsInput, ...func(*Options)) (*DescribeDeploymentsOutput, error)
 }
@@ -149,9 +149,10 @@ type DeploymentSuccessfulWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DeploymentSuccessfulWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DeploymentSuccessfulWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

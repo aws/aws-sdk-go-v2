@@ -17,8 +17,7 @@ import (
 // search results by any resource property in a ascending or descending order. You
 // can query against the following value types: numeric, text, Boolean, and
 // timestamp. The Search API may provide access to otherwise restricted data. See
-// Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html)
+// Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference (https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html)
 // for more information.
 func (c *Client) Search(ctx context.Context, params *SearchInput, optFns ...func(*Options)) (*SearchOutput, error) {
 	if params == nil {
@@ -45,23 +44,23 @@ type SearchInput struct {
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// If more than MaxResults resources match the specified SearchExpression, the
-	// response includes a NextToken. The NextToken can be passed to the next
+	// If more than MaxResults resources match the specified SearchExpression , the
+	// response includes a NextToken . The NextToken can be passed to the next
 	// SearchRequest to continue retrieving results.
 	NextToken *string
 
 	// A Boolean conditional statement. Resources must satisfy this condition to be
 	// included in search results. You must provide at least one subexpression, filter,
-	// or nested filter. The maximum number of recursive SubExpressions, NestedFilters,
-	// and Filters that can be included in a SearchExpression object is 50.
+	// or nested filter. The maximum number of recursive SubExpressions , NestedFilters
+	// , and Filters that can be included in a SearchExpression object is 50.
 	SearchExpression *types.SearchExpression
 
-	// The name of the resource property used to sort the SearchResults. The default is
-	// LastModifiedTime.
+	// The name of the resource property used to sort the SearchResults . The default
+	// is LastModifiedTime .
 	SortBy *string
 
-	// How SearchResults are ordered. Valid values are Ascending or Descending. The
-	// default is Descending.
+	// How SearchResults are ordered. Valid values are Ascending or Descending . The
+	// default is Descending .
 	SortOrder types.SearchSortOrder
 
 	noSmithyDocumentSerde

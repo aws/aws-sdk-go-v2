@@ -39,7 +39,7 @@ type UpdateRouteCalculatorInput struct {
 	// Updates the description for the route calculator resource.
 	Description *string
 
-	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	// No longer used. If included, the only allowed value is RequestBasedUsage .
 	//
 	// Deprecated: Deprecated. If included, the only allowed value is
 	// RequestBasedUsage.
@@ -50,11 +50,10 @@ type UpdateRouteCalculatorInput struct {
 
 type UpdateRouteCalculatorOutput struct {
 
-	// The Amazon Resource Name (ARN) of the updated route calculator resource. Used to
-	// specify a resource across AWS.
-	//
-	// * Format example:
-	// arn:aws:geo:region:account-id:route- calculator/ExampleCalculator
+	// The Amazon Resource Name (ARN) of the updated route calculator resource. Used
+	// to specify a resource across AWS.
+	//   - Format example: arn:aws:geo:region:account-id:route-
+	//   calculator/ExampleCalculator
 	//
 	// This member is required.
 	CalculatorArn *string
@@ -64,9 +63,8 @@ type UpdateRouteCalculatorOutput struct {
 	// This member is required.
 	CalculatorName *string
 
-	// The timestamp for when the route calculator was last updated in  ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ.
+	// The timestamp for when the route calculator was last updated in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	//
 	// This member is required.
 	UpdateTime *time.Time

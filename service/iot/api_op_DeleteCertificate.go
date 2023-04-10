@@ -14,8 +14,7 @@ import (
 // policy or IoT thing attached to it or if its status is set to ACTIVE. To delete
 // a certificate, first use the DetachPolicy action to detach all policies. Next,
 // use the UpdateCertificate action to set the certificate to the INACTIVE status.
-// Requires permission to access the DeleteCertificate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Requires permission to access the DeleteCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificateInput, optFns ...func(*Options)) (*DeleteCertificateOutput, error) {
 	if params == nil {
@@ -41,8 +40,8 @@ type DeleteCertificateInput struct {
 	// This member is required.
 	CertificateId *string
 
-	// Forces the deletion of a certificate if it is inactive and is not attached to an
-	// IoT thing.
+	// Forces the deletion of a certificate if it is inactive and is not attached to
+	// an IoT thing.
 	ForceDelete bool
 
 	noSmithyDocumentSerde

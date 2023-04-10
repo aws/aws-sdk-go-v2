@@ -9,5 +9,5 @@
 // results can get insights into the collective datasets without either party
 // getting access to the other party's raw data. To learn more about AWS Clean
 // Rooms concepts, procedures, and best practices, see the AWS Clean Rooms User
-// Guide (https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html).
+// Guide (https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html) .
 package cleanrooms

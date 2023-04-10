@@ -34,10 +34,10 @@ type ListMonitorsInput struct {
 	// The number of monitor objects that you want to return with this call.
 	MaxResults int32
 
-	// The status of a monitor. This includes the status of the data processing for the
-	// monitor and the status of the monitor itself. For information about the statuses
-	// for a monitor, see  Monitor
-	// (https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html).
+	// The status of a monitor. This includes the status of the data processing for
+	// the monitor and the status of the monitor itself. For information about the
+	// statuses for a monitor, see Monitor (https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html)
+	// .
 	MonitorStatus *string
 
 	// The token for the next set of results. You receive this token from a previous

@@ -13,8 +13,7 @@ import (
 )
 
 // View a list of environment account connections. For more information, see
-// Environment account connections
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+// Environment account connections (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
 // in the Proton User guide.
 func (c *Client) ListEnvironmentAccountConnections(ctx context.Context, params *ListEnvironmentAccountConnectionsInput, optFns ...func(*Options)) (*ListEnvironmentAccountConnectionsOutput, error) {
 	if params == nil {

@@ -14,26 +14,20 @@ import (
 // service principal (acm.amazonaws.com). These permissions allow ACM to issue and
 // renew ACM certificates that reside in the same Amazon Web Services account as
 // the CA. If you revoke these permissions, ACM will no longer renew the affected
-// certificates automatically. Permissions can be granted with the CreatePermission
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html)
-// action and listed with the ListPermissions
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html)
+// certificates automatically. Permissions can be granted with the CreatePermission (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html)
+// action and listed with the ListPermissions (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html)
 // action. About Permissions
-//
-// * If the private CA and the certificates it issues
-// reside in the same account, you can use CreatePermission to grant permissions
-// for ACM to carry out automatic certificate renewals.
-//
-// * For automatic
-// certificate renewal to succeed, the ACM service principal needs permissions to
-// create, retrieve, and list certificates.
-//
-// * If the private CA and the ACM
-// certificates reside in different accounts, then permissions cannot be used to
-// enable automatic renewals. Instead, the ACM certificate owner must set up a
-// resource-based policy to enable cross-account issuance and renewals. For more
-// information, see Using a Resource Based Policy with Amazon Web Services Private
-// CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html).
+//   - If the private CA and the certificates it issues reside in the same
+//     account, you can use CreatePermission to grant permissions for ACM to carry
+//     out automatic certificate renewals.
+//   - For automatic certificate renewal to succeed, the ACM service principal
+//     needs permissions to create, retrieve, and list certificates.
+//   - If the private CA and the ACM certificates reside in different accounts,
+//     then permissions cannot be used to enable automatic renewals. Instead, the ACM
+//     certificate owner must set up a resource-based policy to enable cross-account
+//     issuance and renewals. For more information, see Using a Resource Based
+//     Policy with Amazon Web Services Private CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html)
+//     .
 func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionInput, optFns ...func(*Options)) (*DeletePermissionOutput, error) {
 	if params == nil {
 		params = &DeletePermissionInput{}
@@ -52,8 +46,7 @@ func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionI
 type DeletePermissionInput struct {
 
 	// The Amazon Resource Number (ARN) of the private CA that issued the permissions.
-	// You can find the CA's ARN by calling the ListCertificateAuthorities
-	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
+	// You can find the CA's ARN by calling the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
 	// action. This must have the following form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .

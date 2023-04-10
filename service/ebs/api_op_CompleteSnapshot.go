@@ -12,8 +12,8 @@ import (
 )
 
 // Seals and completes the snapshot after all of the required blocks of data have
-// been written to it. Completing the snapshot changes the status to completed. You
-// cannot write new blocks to a snapshot after it has been completed.
+// been written to it. Completing the snapshot changes the status to completed .
+// You cannot write new blocks to a snapshot after it has been completed.
 func (c *Client) CompleteSnapshot(ctx context.Context, params *CompleteSnapshotInput, optFns ...func(*Options)) (*CompleteSnapshotOutput, error) {
 	if params == nil {
 		params = &CompleteSnapshotInput{}
@@ -49,11 +49,11 @@ type CompleteSnapshotInput struct {
 	Checksum *string
 
 	// The aggregation method used to generate the checksum. Currently, the only
-	// supported aggregation method is LINEAR.
+	// supported aggregation method is LINEAR .
 	ChecksumAggregationMethod types.ChecksumAggregationMethod
 
 	// The algorithm used to generate the checksum. Currently, the only supported
-	// algorithm is SHA256.
+	// algorithm is SHA256 .
 	ChecksumAlgorithm types.ChecksumAlgorithm
 
 	noSmithyDocumentSerde

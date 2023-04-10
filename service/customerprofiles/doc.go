@@ -9,6 +9,6 @@
 // applications, such as Salesforce (CRM), ServiceNow (ITSM), and your enterprise
 // resource planning (ERP), with contact history from your Amazon Connect contact
 // center. If you're new to Amazon Connect, you might find it helpful to review the
-// Amazon Connect Administrator Guide
-// (https://docs.aws.amazon.com/connect/latest/adminguide/).
+// Amazon Connect Administrator Guide (https://docs.aws.amazon.com/connect/latest/adminguide/)
+// .
 package customerprofiles

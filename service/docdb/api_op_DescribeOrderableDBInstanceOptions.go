@@ -28,7 +28,7 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 	return out, nil
 }
 
-// Represents the input to DescribeOrderableDBInstanceOptions.
+// Represents the input to DescribeOrderableDBInstanceOptions .
 type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// The name of the engine to retrieve instance options for.
@@ -53,7 +53,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -69,12 +69,12 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeOrderableDBInstanceOptions.
+// Represents the output of DescribeOrderableDBInstanceOptions .
 type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The options that are available for a particular orderable instance.

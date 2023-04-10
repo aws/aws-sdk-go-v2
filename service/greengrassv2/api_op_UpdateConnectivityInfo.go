@@ -14,12 +14,10 @@ import (
 // Updates connectivity information for a Greengrass core device. Connectivity
 // information includes endpoints and ports where client devices can connect to an
 // MQTT broker on the core device. When a client device calls the IoT Greengrass
-// discovery API
-// (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html),
-// IoT Greengrass returns connectivity information for all of the core devices
+// discovery API (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html)
+// , IoT Greengrass returns connectivity information for all of the core devices
 // where the client device can connect. For more information, see Connect client
-// devices to core devices
-// (https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html)
+// devices to core devices (https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html)
 // in the IoT Greengrass Version 2 Developer Guide.
 func (c *Client) UpdateConnectivityInfo(ctx context.Context, params *UpdateConnectivityInfoInput, optFns ...func(*Options)) (*UpdateConnectivityInfoOutput, error) {
 	if params == nil {

@@ -47,8 +47,8 @@ type DescribeCommentsInput struct {
 	// The maximum number of items to return.
 	Limit *int32
 
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
+	// The marker for the next set of results. This marker was received from a
+	// previous call.
 	Marker *string
 
 	noSmithyDocumentSerde
@@ -59,8 +59,8 @@ type DescribeCommentsOutput struct {
 	// The list of comments for the specified document version.
 	Comments []types.Comment
 
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
+	// The marker for the next set of results. This marker was received from a
+	// previous call.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

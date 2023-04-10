@@ -30,11 +30,8 @@ func (c *Client) ListReceivedLicensesForOrganization(ctx context.Context, params
 type ListReceivedLicensesForOrganizationInput struct {
 
 	// Filters to scope the results. The following filters are supported:
-	//
-	// *
-	// Beneficiary
-	//
-	// * ProductSKU
+	//   - Beneficiary
+	//   - ProductSKU
 	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.

@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Retrieves the phone number settings for the administrator's AWS account, such as
-// the default outbound calling name.
+// Retrieves the phone number settings for the administrator's AWS account, such
+// as the default outbound calling name.
 func (c *Client) GetPhoneNumberSettings(ctx context.Context, params *GetPhoneNumberSettingsInput, optFns ...func(*Options)) (*GetPhoneNumberSettingsOutput, error) {
 	if params == nil {
 		params = &GetPhoneNumberSettingsInput{}

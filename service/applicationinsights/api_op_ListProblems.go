@@ -48,8 +48,8 @@ type ListProblemsInput struct {
 	// The name of the resource group.
 	ResourceGroupName *string
 
-	// The time when the problem was detected, in epoch seconds. If you don't specify a
-	// time frame for the request, problems within the past seven days are returned.
+	// The time when the problem was detected, in epoch seconds. If you don't specify
+	// a time frame for the request, problems within the past seven days are returned.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

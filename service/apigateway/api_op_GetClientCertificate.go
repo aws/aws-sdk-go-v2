@@ -38,8 +38,8 @@ type GetClientCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a client certificate used to configure client-side SSL authentication
-// while sending requests to the integration endpoint.
+// Represents a client certificate used to configure client-side SSL
+// authentication while sending requests to the integration endpoint.
 type GetClientCertificateOutput struct {
 
 	// The identifier of the client certificate.

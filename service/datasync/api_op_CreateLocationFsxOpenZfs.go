@@ -12,10 +12,9 @@ import (
 )
 
 // Creates an endpoint for an Amazon FSx for OpenZFS file system that DataSync can
-// access for a transfer. For more information, see Creating a location for FSx for
-// OpenZFS
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html).
-// Request parameters related to SMB aren't supported with the
+// access for a transfer. For more information, see Creating a location for FSx
+// for OpenZFS (https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html)
+// . Request parameters related to SMB aren't supported with the
 // CreateLocationFsxOpenZfs operation.
 func (c *Client) CreateLocationFsxOpenZfs(ctx context.Context, params *CreateLocationFsxOpenZfsInput, optFns ...func(*Options)) (*CreateLocationFsxOpenZfsOutput, error) {
 	if params == nil {
@@ -50,7 +49,7 @@ type CreateLocationFsxOpenZfsInput struct {
 	// This member is required.
 	SecurityGroupArns []string
 
-	// A subdirectory in the location's path that must begin with /fsx. DataSync uses
+	// A subdirectory in the location's path that must begin with /fsx . DataSync uses
 	// this subdirectory to read or write data (depending on whether the file system is
 	// a source or destination location).
 	Subdirectory *string

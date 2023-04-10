@@ -12,7 +12,7 @@ import (
 
 // Deletes a slot type from a bot locale. If a slot is using the slot type, Amazon
 // Lex throws a ResourceInUseException exception. To avoid the exception, set the
-// skipResourceInUseCheck parameter to true.
+// skipResourceInUseCheck parameter to true .
 func (c *Client) DeleteSlotType(ctx context.Context, params *DeleteSlotTypeInput, optFns ...func(*Options)) (*DeleteSlotTypeOutput, error) {
 	if params == nil {
 		params = &DeleteSlotTypeInput{}
@@ -42,8 +42,8 @@ type DeleteSlotTypeInput struct {
 
 	// The identifier of the language and locale that the slot type will be deleted
 	// from. The string must match one of the supported locales. For more information,
-	// see Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string

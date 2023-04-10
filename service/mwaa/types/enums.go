@@ -43,9 +43,9 @@ const (
 	LoggingLevelDebug    LoggingLevel = "DEBUG"
 )
 
-// Values returns all known values for LoggingLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LoggingLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LoggingLevel) Values() []LoggingLevel {
 	return []LoggingLevel{
 		"CRITICAL",
@@ -133,9 +133,9 @@ const (
 	UpdateStatusFailed  UpdateStatus = "FAILED"
 )
 
-// Values returns all known values for UpdateStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateStatus) Values() []UpdateStatus {
 	return []UpdateStatus{
 		"SUCCESS",

@@ -35,90 +35,73 @@ func (c *Client) DescribeDataSources(ctx context.Context, params *DescribeDataSo
 type DescribeDataSourcesInput struct {
 
 	// The equal to operator. The DataSource results will have FilterVariable values
-	// that exactly match the value specified with EQ.
+	// that exactly match the value specified with EQ .
 	EQ *string
 
-	// Use one of the following variables to filter a list of DataSource:
-	//
-	// * CreatedAt
-	// - Sets the search criteria to DataSource creation dates.
-	//
-	// * Status - Sets the
-	// search criteria to DataSource statuses.
-	//
-	// * Name - Sets the search criteria to
-	// the contents of DataSourceName.
-	//
-	// * DataUri - Sets the search criteria to the URI
-	// of data files used to create the DataSource. The URI can identify either a file
-	// or an Amazon Simple Storage Service (Amazon S3) bucket or directory.
-	//
-	// * IAMUser
-	// - Sets the search criteria to the user account that invoked the DataSource
-	// creation.
+	// Use one of the following variables to filter a list of DataSource :
+	//   - CreatedAt - Sets the search criteria to DataSource creation dates.
+	//   - Status - Sets the search criteria to DataSource statuses.
+	//   - Name - Sets the search criteria to the contents of DataSource Name .
+	//   - DataUri - Sets the search criteria to the URI of data files used to create
+	//   the DataSource . The URI can identify either a file or an Amazon Simple
+	//   Storage Service (Amazon S3) bucket or directory.
+	//   - IAMUser - Sets the search criteria to the user account that invoked the
+	//   DataSource creation.
 	FilterVariable types.DataSourceFilterVariable
 
 	// The greater than or equal to operator. The DataSource results will have
 	// FilterVariable values that are greater than or equal to the value specified with
-	// GE.
+	// GE .
 	GE *string
 
 	// The greater than operator. The DataSource results will have FilterVariable
-	// values that are greater than the value specified with GT.
+	// values that are greater than the value specified with GT .
 	GT *string
 
 	// The less than or equal to operator. The DataSource results will have
-	// FilterVariable values that are less than or equal to the value specified with
-	// LE.
+	// FilterVariable values that are less than or equal to the value specified with LE
+	// .
 	LE *string
 
 	// The less than operator. The DataSource results will have FilterVariable values
-	// that are less than the value specified with LT.
+	// that are less than the value specified with LT .
 	LT *string
 
 	// The maximum number of DataSource to include in the result.
 	Limit *int32
 
 	// The not equal to operator. The DataSource results will have FilterVariable
-	// values not equal to the value specified with NE.
+	// values not equal to the value specified with NE .
 	NE *string
 
 	// The ID of the page in the paginated results.
 	NextToken *string
 
-	// A string that is found at the beginning of a variable, such as Name or Id. For
-	// example, a DataSource could have the Name2014-09-09-HolidayGiftMailer. To search
-	// for this DataSource, select Name for the FilterVariable and any of the following
-	// strings for the Prefix:
-	//
-	// * 2014-09
-	//
-	// * 2014-09-09
-	//
-	// * 2014-09-09-Holiday
+	// A string that is found at the beginning of a variable, such as Name or Id . For
+	// example, a DataSource could have the Name 2014-09-09-HolidayGiftMailer . To
+	// search for this DataSource , select Name for the FilterVariable and any of the
+	// following strings for the Prefix :
+	//   - 2014-09
+	//   - 2014-09-09
+	//   - 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
-	// DataSource.
-	//
-	// * asc - Arranges the list in ascending order (A-Z, 0-9).
-	//
-	// * dsc -
-	// Arranges the list in descending order (Z-A, 9-0).
-	//
-	// Results are sorted by
-	// FilterVariable.
+	// DataSource .
+	//   - asc - Arranges the list in ascending order (A-Z, 0-9).
+	//   - dsc - Arranges the list in descending order (Z-A, 9-0).
+	// Results are sorted by FilterVariable .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
 }
 
 // Represents the query results from a DescribeDataSources operation. The content
-// is essentially a list of DataSource.
+// is essentially a list of DataSource .
 type DescribeDataSourcesOutput struct {
 
-	// An ID of the next page in the paginated results that indicates at least one more
-	// page follows.
+	// An ID of the next page in the paginated results that indicates at least one
+	// more page follows.
 	NextToken *string
 
 	// A list of DataSource that meet the search criteria.
@@ -190,8 +173,8 @@ func (c *Client) addOperationDescribeDataSourcesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeDataSourcesAPIClient is a client that implements the DescribeDataSources
-// operation.
+// DescribeDataSourcesAPIClient is a client that implements the
+// DescribeDataSources operation.
 type DescribeDataSourcesAPIClient interface {
 	DescribeDataSources(context.Context, *DescribeDataSourcesInput, ...func(*Options)) (*DescribeDataSourcesOutput, error)
 }
@@ -295,9 +278,10 @@ type DataSourceAvailableWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DataSourceAvailableWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DataSourceAvailableWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -337,9 +321,9 @@ func NewDataSourceAvailableWaiter(client DescribeDataSourcesAPIClient, optFns ..
 	}
 }
 
-// Wait calls the waiter function for DataSourceAvailable waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for DataSourceAvailable waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *DataSourceAvailableWaiter) Wait(ctx context.Context, params *DescribeDataSourcesInput, maxWaitDur time.Duration, optFns ...func(*DataSourceAvailableWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

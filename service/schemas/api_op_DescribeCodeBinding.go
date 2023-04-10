@@ -139,8 +139,8 @@ func (c *Client) addOperationDescribeCodeBindingMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeCodeBindingAPIClient is a client that implements the DescribeCodeBinding
-// operation.
+// DescribeCodeBindingAPIClient is a client that implements the
+// DescribeCodeBinding operation.
 type DescribeCodeBindingAPIClient interface {
 	DescribeCodeBinding(context.Context, *DescribeCodeBindingInput, ...func(*Options)) (*DescribeCodeBindingOutput, error)
 }
@@ -160,9 +160,9 @@ type CodeBindingExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, CodeBindingExistsWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, CodeBindingExistsWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -210,10 +210,10 @@ func (w *CodeBindingExistsWaiter) Wait(ctx context.Context, params *DescribeCode
 	return err
 }
 
-// WaitForOutput calls the waiter function for CodeBindingExists waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for CodeBindingExists waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *CodeBindingExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeCodeBindingInput, maxWaitDur time.Duration, optFns ...func(*CodeBindingExistsWaiterOptions)) (*DescribeCodeBindingOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

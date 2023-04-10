@@ -12,8 +12,7 @@ import (
 )
 
 // Gets information about a tunnel identified by the unique tunnel id. Requires
-// permission to access the DescribeTunnel
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the DescribeTunnel (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeTunnel(ctx context.Context, params *DescribeTunnelInput, optFns ...func(*Options)) (*DescribeTunnelOutput, error) {
 	if params == nil {

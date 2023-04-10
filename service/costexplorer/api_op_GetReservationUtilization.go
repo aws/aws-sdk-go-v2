@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the reservation utilization for your account. Management account in an
-// organization have access to member accounts. You can filter data by dimensions
-// in a time period. You can use GetDimensionValues to determine the possible
-// dimension values. Currently, you can group only by SUBSCRIPTION_ID.
+// Retrieves the reservation utilization for your account. Management account in
+// an organization have access to member accounts. You can filter data by
+// dimensions in a time period. You can use GetDimensionValues to determine the
+// possible dimension values. Currently, you can group only by SUBSCRIPTION_ID .
 func (c *Client) GetReservationUtilization(ctx context.Context, params *GetReservationUtilizationInput, optFns ...func(*Options)) (*GetReservationUtilizationOutput, error) {
 	if params == nil {
 		params = &GetReservationUtilizationInput{}
@@ -34,55 +34,40 @@ type GetReservationUtilizationInput struct {
 
 	// Sets the start and end dates for retrieving Reserved Instance (RI) utilization.
 	// The start date is inclusive, but the end date is exclusive. For example, if
-	// start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is
+	// start is 2017-01-01 and end is 2017-05-01 , then the cost and usage data is
 	// retrieved from 2017-01-01 up to and including 2017-04-30 but not including
-	// 2017-05-01.
+	// 2017-05-01 .
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
 
 	// Filters utilization data by dimensions. You can filter by the following
 	// dimensions:
-	//
-	// * AZ
-	//
-	// * CACHE_ENGINE
-	//
-	// * DEPLOYMENT_OPTION
-	//
-	// * INSTANCE_TYPE
-	//
-	// *
-	// LINKED_ACCOUNT
-	//
-	// * OPERATING_SYSTEM
-	//
-	// * PLATFORM
-	//
-	// * REGION
-	//
-	// * SERVICE
-	//
-	// * SCOPE
-	//
-	// *
-	// TENANCY
-	//
-	// GetReservationUtilization uses the same Expression
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	//   - AZ
+	//   - CACHE_ENGINE
+	//   - DEPLOYMENT_OPTION
+	//   - INSTANCE_TYPE
+	//   - LINKED_ACCOUNT
+	//   - OPERATING_SYSTEM
+	//   - PLATFORM
+	//   - REGION
+	//   - SERVICE
+	//   - SCOPE
+	//   - TENANCY
+	// GetReservationUtilization uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension,
 	// and nesting is supported up to only one level deep. If there are multiple values
 	// for a dimension, they are OR'd together.
 	Filter *types.Expression
 
 	// If GroupBy is set, Granularity can't be set. If Granularity isn't set, the
-	// response object doesn't include Granularity, either MONTHLY or DAILY. If both
-	// GroupBy and Granularity aren't set, GetReservationUtilization defaults to DAILY.
-	// The GetReservationUtilization operation supports only DAILY and MONTHLY
+	// response object doesn't include Granularity , either MONTHLY or DAILY . If both
+	// GroupBy and Granularity aren't set, GetReservationUtilization defaults to DAILY
+	// . The GetReservationUtilization operation supports only DAILY and MONTHLY
 	// granularities.
 	Granularity types.Granularity
 
-	// Groups only by SUBSCRIPTION_ID. Metadata is included.
+	// Groups only by SUBSCRIPTION_ID . Metadata is included.
 	GroupBy []types.GroupDefinition
 
 	// The maximum number of objects that you returned for this request. If more
@@ -97,49 +82,25 @@ type GetReservationUtilizationInput struct {
 	NextPageToken *string
 
 	// The value that you want to sort the data by. The following values are supported
-	// for Key:
-	//
-	// * UtilizationPercentage
-	//
-	// * UtilizationPercentageInUnits
-	//
-	// *
-	// PurchasedHours
-	//
-	// * PurchasedUnits
-	//
-	// * TotalActualHours
-	//
-	// * TotalActualUnits
-	//
-	// *
-	// UnusedHours
-	//
-	// * UnusedUnits
-	//
-	// * OnDemandCostOfRIHoursUsed
-	//
-	// * NetRISavings
-	//
-	// *
-	// TotalPotentialRISavings
-	//
-	// * AmortizedUpfrontFee
-	//
-	// * AmortizedRecurringFee
-	//
-	// *
-	// TotalAmortizedFee
-	//
-	// * RICostForUnusedHours
-	//
-	// * RealizedSavings
-	//
-	// *
-	// UnrealizedSavings
-	//
-	// The supported values for SortOrder are ASCENDING and
-	// DESCENDING.
+	// for Key :
+	//   - UtilizationPercentage
+	//   - UtilizationPercentageInUnits
+	//   - PurchasedHours
+	//   - PurchasedUnits
+	//   - TotalActualHours
+	//   - TotalActualUnits
+	//   - UnusedHours
+	//   - UnusedUnits
+	//   - OnDemandCostOfRIHoursUsed
+	//   - NetRISavings
+	//   - TotalPotentialRISavings
+	//   - AmortizedUpfrontFee
+	//   - AmortizedRecurringFee
+	//   - TotalAmortizedFee
+	//   - RICostForUnusedHours
+	//   - RealizedSavings
+	//   - UnrealizedSavings
+	// The supported values for SortOrder are ASCENDING and DESCENDING .
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde

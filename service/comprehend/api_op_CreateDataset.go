@@ -13,9 +13,8 @@ import (
 )
 
 // Creates a dataset to upload training or test data for a model associated with a
-// flywheel. For more information about datasets, see  Flywheel overview
-// (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html) in the
-// Amazon Comprehend Developer Guide.
+// flywheel. For more information about datasets, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
+// in the Amazon Comprehend Developer Guide.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -55,8 +54,8 @@ type CreateDatasetInput struct {
 	// Amazon Comprehend generates one.
 	ClientRequestToken *string
 
-	// The dataset type. You can specify that the data in a dataset is for training the
-	// model or for testing the model.
+	// The dataset type. You can specify that the data in a dataset is for training
+	// the model or for testing the model.
 	DatasetType types.DatasetType
 
 	// Description of the dataset.

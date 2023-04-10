@@ -34,8 +34,8 @@ type UpdateSiteInput struct {
 	// This member is required.
 	Id *string
 
-	// A valid ISO 3166-1 alpha-2 code for the country in which the site resides. e.g.,
-	// US.
+	// A valid ISO 3166-1 alpha-2 code for the country in which the site resides.
+	// e.g., US.
 	CountryCode *string
 
 	// A high-level description of the site.
@@ -69,8 +69,8 @@ type UpdateSiteOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// A valid ISO 3166-1 alpha-2 code for the country in which the site resides. e.g.,
-	// US.
+	// A valid ISO 3166-1 alpha-2 code for the country in which the site resides.
+	// e.g., US.
 	CountryCode *string
 
 	// A high-level description of the site.

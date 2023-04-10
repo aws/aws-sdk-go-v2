@@ -42,12 +42,8 @@ type UpdateDatasetInput struct {
 	DatasetTitle *string
 
 	// The format in which the Dataset data is structured.
-	//
-	// * TABULAR – Data is
-	// structured in a tabular format.
-	//
-	// * NON_TABULAR – Data is structured in a
-	// non-tabular format.
+	//   - TABULAR – Data is structured in a tabular format.
+	//   - NON_TABULAR – Data is structured in a non-tabular format.
 	//
 	// This member is required.
 	Kind types.DatasetKind

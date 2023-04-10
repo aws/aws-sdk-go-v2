@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The query search index. Requires permission to access the SearchIndex
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// The query search index. Requires permission to access the SearchIndex (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optFns ...func(*Options)) (*SearchIndexOutput, error) {
 	if params == nil {
@@ -31,9 +30,9 @@ func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optF
 
 type SearchIndexInput struct {
 
-	// The search query string. For more information about the search query syntax, see
-	// Query syntax
-	// (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html).
+	// The search query string. For more information about the search query syntax,
+	// see Query syntax (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html)
+	// .
 	//
 	// This member is required.
 	QueryString *string

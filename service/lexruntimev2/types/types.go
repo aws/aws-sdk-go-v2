@@ -10,7 +10,7 @@ import (
 // can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you
 // can set a context using the , , or operations. Use a context to indicate to
 // Amazon Lex V2 intents that should be used as follow-up intents. For example, if
-// the active context is order-fulfilled, only intents that have order-fulfilled
+// the active context is order-fulfilled , only intents that have order-fulfilled
 // configured as a trigger are considered for follow up.
 type ActiveContext struct {
 
@@ -63,8 +63,9 @@ type ActiveContextTimeToLive struct {
 type AudioInputEvent struct {
 
 	// The encoding used for the audio chunk. You must use 8 KHz PCM 16-bit
-	// mono-channel little-endian format. The value of the field should be: audio/lpcm;
-	// sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false
+	// mono-channel little-endian format. The value of the field should be:
+	// audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1;
+	// is-big-endian=false
 	//
 	// This member is required.
 	ContentType *string
@@ -76,8 +77,8 @@ type AudioInputEvent struct {
 	// Amazon Lex V2.
 	ClientTimestampMillis int64
 
-	// A unique identifier that your application assigns to the event. You can use this
-	// to identify events in logs.
+	// A unique identifier that your application assigns to the event. You can use
+	// this to identify events in logs.
 	EventId *string
 
 	noSmithyDocumentSerde
@@ -91,12 +92,12 @@ type AudioResponseEvent struct {
 	AudioChunk []byte
 
 	// The encoding of the audio chunk. This is the same as the encoding configure in
-	// the contentType field of the ConfigurationEvent.
+	// the contentType field of the ConfigurationEvent .
 	ContentType *string
 
-	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in the
-	// form RESPONSE-N, where N is a number starting with one and incremented for each
-	// event sent by Amazon Lex V2 in the current session.
+	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in
+	// the form RESPONSE-N , where N is a number starting with one and incremented for
+	// each event sent by Amazon Lex V2 in the current session.
 	EventId *string
 
 	noSmithyDocumentSerde
@@ -137,33 +138,21 @@ type ConfigurationEvent struct {
 
 	// The message that Amazon Lex V2 returns in the response can be either text or
 	// speech based on the responseContentType value.
-	//
-	// * If the value is
-	// text/plain;charset=utf-8, Amazon Lex V2 returns text in the response.
-	//
-	// * If the
-	// value begins with audio/, Amazon Lex V2 returns speech in the response. Amazon
-	// Lex V2 uses Amazon Polly to generate the speech using the configuration that you
-	// specified in the requestContentType parameter. For example, if you specify
-	// audio/mpeg as the value, Amazon Lex V2 returns speech in the MPEG format.
-	//
-	// * If
-	// the value is audio/pcm, the speech returned is audio/pcm in 16-bit,
-	// little-endian format.
-	//
-	// * The following are the accepted values:
-	//
-	// * audio/mpeg
-	//
-	// *
-	// audio/ogg
-	//
-	// * audio/pcm
-	//
-	// * audio/* (defaults to mpeg)
-	//
-	// * text/plain;
-	// charset=utf-8
+	//   - If the value is text/plain;charset=utf-8 , Amazon Lex V2 returns text in the
+	//   response.
+	//   - If the value begins with audio/ , Amazon Lex V2 returns speech in the
+	//   response. Amazon Lex V2 uses Amazon Polly to generate the speech using the
+	//   configuration that you specified in the requestContentType parameter. For
+	//   example, if you specify audio/mpeg as the value, Amazon Lex V2 returns speech
+	//   in the MPEG format.
+	//   - If the value is audio/pcm , the speech returned is audio/pcm in 16-bit,
+	//   little-endian format.
+	//   - The following are the accepted values:
+	//   - audio/mpeg
+	//   - audio/ogg
+	//   - audio/pcm
+	//   - audio/* (defaults to mpeg)
+	//   - text/plain; charset=utf-8
 	//
 	// This member is required.
 	ResponseContentType *string
@@ -179,23 +168,21 @@ type ConfigurationEvent struct {
 	// Amazon Lex V2 doesn't wait for the prompt to finish playing on the client.
 	DisablePlayback bool
 
-	// A unique identifier that your application assigns to the event. You can use this
-	// to identify events in logs.
+	// A unique identifier that your application assigns to the event. You can use
+	// this to identify events in logs.
 	EventId *string
 
 	// Request-specific information passed between the client application and Amazon
 	// Lex V2. The namespace x-amz-lex: is reserved for special attributes. Don't
-	// create any request attributes for prefix x-amz-lex:.
+	// create any request attributes for prefix x-amz-lex: .
 	RequestAttributes map[string]string
 
 	// The state of the user's session with Amazon Lex V2.
 	SessionState *SessionState
 
-	// A list of messages to send to the user. If you set the welcomeMessage field, you
-	// must also set the DialogAction
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html)
-	// structure's type
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type)
+	// A list of messages to send to the user. If you set the welcomeMessage field,
+	// you must also set the DialogAction (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html)
+	// structure's type (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type)
 	// field.
 	WelcomeMessages []Message
 
@@ -207,37 +194,25 @@ type DialogAction struct {
 
 	// The next action that the bot should take in its interaction with the user. The
 	// possible values are:
+	//   - Close - Indicates that there will not be a response from the user. For
+	//   example, the statement "Your order has been placed" does not require a response.
 	//
-	// * Close - Indicates that there will not be a response from
-	// the user. For example, the statement "Your order has been placed" does not
-	// require a response.
-	//
-	// * ConfirmIntent - The next action is asking the user if the
-	// intent is complete and ready to be fulfilled. This is a yes/no question such as
-	// "Place the order?"
-	//
-	// * Delegate - The next action is determined by Amazon Lex
-	// V2.
-	//
-	// * ElicitIntent - The next action is to elicit an intent from the user.
-	//
-	// *
-	// ElicitSlot - The next action is to elicit a slot value from the user.
+	//   - ConfirmIntent - The next action is asking the user if the intent is complete
+	//   and ready to be fulfilled. This is a yes/no question such as "Place the order?"
+	//   - Delegate - The next action is determined by Amazon Lex V2.
+	//   - ElicitIntent - The next action is to elicit an intent from the user.
+	//   - ElicitSlot - The next action is to elicit a slot value from the user.
 	//
 	// This member is required.
 	Type DialogActionType
 
 	// Configures the slot to use spell-by-letter or spell-by-word style. When you use
-	// a style on a slot, users can spell out their input to make it clear to your
-	// bot.
+	// a style on a slot, users can spell out their input to make it clear to your bot.
 	//
-	// * Spell by letter - "b" "o" "b"
-	//
-	// * Spell by word - "b as in boy" "o as in
-	// oscar" "b as in boy"
-	//
-	// For more information, see  Using spelling to enter slot
-	// values  (https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html).
+	//   - Spell by letter - "b" "o" "b"
+	//   - Spell by word - "b as in boy" "o as in oscar" "b as in boy"
+	// For more information, see  Using spelling to enter slot values  (https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html)
+	// .
 	SlotElicitationStyle StyleType
 
 	// The name of the slot that should be elicited from the user.
@@ -259,16 +234,16 @@ type DisconnectionEvent struct {
 	// Amazon Lex V2.
 	ClientTimestampMillis int64
 
-	// A unique identifier that your application assigns to the event. You can use this
-	// to identify events in logs.
+	// A unique identifier that your application assigns to the event. You can use
+	// this to identify events in logs.
 	EventId *string
 
 	noSmithyDocumentSerde
 }
 
-// A DTMF character sent from the client application. DTMF characters are typically
-// sent from a phone keypad to represent numbers. For example, you can have Amazon
-// Lex V2 process a credit card number input from a phone.
+// A DTMF character sent from the client application. DTMF characters are
+// typically sent from a phone keypad to represent numbers. For example, you can
+// have Amazon Lex V2 process a credit card number input from a phone.
 type DTMFInputEvent struct {
 
 	// The DTMF character that the user pressed. The allowed characters are A - D, 0 -
@@ -281,8 +256,8 @@ type DTMFInputEvent struct {
 	// Amazon Lex V2.
 	ClientTimestampMillis int64
 
-	// A unique identifier that your application assigns to the event. You can use this
-	// to identify events in logs.
+	// A unique identifier that your application assigns to the event. You can use
+	// this to identify events in logs.
 	EventId *string
 
 	noSmithyDocumentSerde
@@ -303,13 +278,13 @@ type ElicitSubSlot struct {
 	noSmithyDocumentSerde
 }
 
-// Event that Amazon Lex V2 sends to indicate that the stream is still open between
-// the client application and Amazon Lex V2
+// Event that Amazon Lex V2 sends to indicate that the stream is still open
+// between the client application and Amazon Lex V2
 type HeartbeatEvent struct {
 
-	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in the
-	// form RESPONSE-N, where N is a number starting with one and incremented for each
-	// event sent by Amazon Lex V2 in the current session.
+	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in
+	// the form RESPONSE-N , where N is a number starting with one and incremented for
+	// each event sent by Amazon Lex V2 in the current session.
 	EventId *string
 
 	noSmithyDocumentSerde
@@ -321,14 +296,15 @@ type HeartbeatEvent struct {
 // with a button on the card.
 type ImageResponseCard struct {
 
-	// The title to display on the response card. The format of the title is determined
-	// by the platform displaying the response card.
+	// The title to display on the response card. The format of the title is
+	// determined by the platform displaying the response card.
 	//
 	// This member is required.
 	Title *string
 
-	// A list of buttons that should be displayed on the response card. The arrangement
-	// of the buttons is determined by the platform that displays the button.
+	// A list of buttons that should be displayed on the response card. The
+	// arrangement of the buttons is determined by the platform that displays the
+	// button.
 	Buttons []Button
 
 	// The URL of an image to display on the response card. The image URL must be
@@ -354,8 +330,8 @@ type Intent struct {
 	// Contains information about whether fulfillment of the intent has been confirmed.
 	ConfirmationState ConfirmationState
 
-	// A map of all of the slots for the intent. The name of the slot maps to the value
-	// of the slot. If a slot has not been filled, the value is null.
+	// A map of all of the slots for the intent. The name of the slot maps to the
+	// value of the slot. If a slot has not been filled, the value is null.
 	Slots map[string]Slot
 
 	// Contains fulfillment information for the intent.
@@ -368,9 +344,9 @@ type Intent struct {
 // and Amazon Lex V2.
 type IntentResultEvent struct {
 
-	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in the
-	// form RESPONSE-N, where N is a number starting with one and incremented for each
-	// event sent by Amazon Lex V2 in the current session.
+	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in
+	// the form RESPONSE-N , where N is a number starting with one and incremented for
+	// each event sent by Amazon Lex V2 in the current session.
 	EventId *string
 
 	// Indicates whether the input to the operation was text or speech.
@@ -407,7 +383,7 @@ type Interpretation struct {
 	Intent *Intent
 
 	// Determines the threshold where Amazon Lex V2 will insert the
-	// AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning
+	// AMAZON.FallbackIntent , AMAZON.KendraSearchIntent , or both when returning
 	// alternative intents in a response. AMAZON.FallbackIntent and
 	// AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
 	NluConfidence *ConfidenceScore
@@ -449,8 +425,8 @@ type PlaybackCompletionEvent struct {
 	// Amazon Lex V2.
 	ClientTimestampMillis int64
 
-	// A unique identifier that your application assigns to the event. You can use this
-	// to identify events in logs.
+	// A unique identifier that your application assigns to the event. You can use
+	// this to identify events in logs.
 	EventId *string
 
 	noSmithyDocumentSerde
@@ -468,9 +444,9 @@ type PlaybackInterruptionEvent struct {
 	// the interruption.
 	CausedByEventId *string
 
-	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in the
-	// form RESPONSE-N, where N is a number starting with one and incremented for each
-	// event sent by Amazon Lex V2 in the current session.
+	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in
+	// the form RESPONSE-N , where N is a number starting with one and incremented for
+	// each event sent by Amazon Lex V2 in the current session.
 	EventId *string
 
 	// Indicates the type of user input that Amazon Lex V2 detected.
@@ -516,16 +492,15 @@ type RuntimeHintDetails struct {
 // runtime hints are preferred in the resolution. You can provide hints for a
 // maximum of 100 intents. You can provide a maximum of 100 slots. Before you can
 // use runtime hints with an existing bot, you must first rebuild the bot. For more
-// information, see Using runtime hints to improve recognition of slot values
-// (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html).
+// information, see Using runtime hints to improve recognition of slot values (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html)
+// .
 type RuntimeHints struct {
 
 	// A list of the slots in the intent that should have runtime hints added, and the
-	// phrases that should be added for each slot. The first level of the slotHints map
-	// is the name of the intent. The second level is the name of the slot within the
-	// intent. For more information, see Using hints to improve accuracy
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html). The intent name
-	// and slot name must exist.
+	// phrases that should be added for each slot. The first level of the slotHints
+	// map is the name of the intent. The second level is the name of the slot within
+	// the intent. For more information, see Using hints to improve accuracy (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html)
+	// . The intent name and slot name must exist.
 	SlotHints map[string]map[string]RuntimeHintDetails
 
 	noSmithyDocumentSerde
@@ -546,9 +521,8 @@ type RuntimeHintValue struct {
 // Provides information about the sentiment expressed in a user's response in a
 // conversation. Sentiments are determined using Amazon Comprehend. Sentiments are
 // only returned if they are enabled for the bot. For more information, see
-// Determine Sentiment
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html) in the
-// Amazon Comprehend developer guide.
+// Determine Sentiment  (https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html)
+// in the Amazon Comprehend developer guide.
 type SentimentResponse struct {
 
 	// The overall sentiment expressed in the user's response. This is the sentiment
@@ -615,9 +589,9 @@ type SessionState struct {
 // A value that Amazon Lex V2 uses to fulfill an intent.
 type Slot struct {
 
-	// When the shape value is List, it indicates that the values field contains a list
-	// of slot values. When the value is Scalar, it indicates that the value field
-	// contains a single value.
+	// When the shape value is List , it indicates that the values field contains a
+	// list of slot values. When the value is Scalar , it indicates that the value
+	// field contains a single value.
 	Shape Shape
 
 	// The constituent sub slots of a composite slot.
@@ -684,15 +658,10 @@ func (*StartConversationRequestEventStreamMemberDisconnectionEvent) isStartConve
 // DTMF information sent to Amazon Lex V2 by your application. Amazon Lex V2
 // accumulates the DMTF information from when the user sends the first character
 // and ends
-//
-// * when there's a pause longer that the value configured for the end
-// timeout.
-//
-// * when there's a digit that is the configured end character.
-//
-// * when
-// Amazon Lex V2 accumulates characters equal to the maximum DTMF character
-// configuration.
+//   - when there's a pause longer that the value configured for the end timeout.
+//   - when there's a digit that is the configured end character.
+//   - when Amazon Lex V2 accumulates characters equal to the maximum DTMF
+//     character configuration.
 type StartConversationRequestEventStreamMemberDTMFInputEvent struct {
 	Value DTMFInputEvent
 
@@ -750,8 +719,8 @@ type StartConversationResponseEventStreamMemberAudioResponseEvent struct {
 func (*StartConversationResponseEventStreamMemberAudioResponseEvent) isStartConversationResponseEventStream() {
 }
 
-// Event that Amazon Lex V2 sends to indicate that the stream is still open between
-// the client application and Amazon Lex V2
+// Event that Amazon Lex V2 sends to indicate that the stream is still open
+// between the client application and Amazon Lex V2
 type StartConversationResponseEventStreamMemberHeartbeatEvent struct {
 	Value HeartbeatEvent
 
@@ -822,8 +791,8 @@ type TextInputEvent struct {
 	// Amazon Lex V2.
 	ClientTimestampMillis int64
 
-	// A unique identifier that your application assigns to the event. You can use this
-	// to identify events in logs.
+	// A unique identifier that your application assigns to the event. You can use
+	// this to identify events in logs.
 	EventId *string
 
 	noSmithyDocumentSerde
@@ -833,9 +802,9 @@ type TextInputEvent struct {
 // the user.
 type TextResponseEvent struct {
 
-	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in the
-	// form RESPONSE-N, where N is a number starting with one and incremented for each
-	// event sent by Amazon Lex V2 in the current session.
+	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in
+	// the form RESPONSE-N , where N is a number starting with one and incremented for
+	// each event sent by Amazon Lex V2 in the current session.
 	EventId *string
 
 	// A list of messages to send to the user. Messages are ordered based on the order
@@ -850,9 +819,9 @@ type TextResponseEvent struct {
 // transcript of voice audio.
 type TranscriptEvent struct {
 
-	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in the
-	// form RESPONSE-N, where N is a number starting with one and incremented for each
-	// event sent by Amazon Lex V2 in the current session.
+	// A unique identifier of the event sent by Amazon Lex V2. The identifier is in
+	// the form RESPONSE-N , where N is a number starting with one and incremented for
+	// each event sent by Amazon Lex V2 in the current session.
 	EventId *string
 
 	// The transcript of the voice audio from the user.

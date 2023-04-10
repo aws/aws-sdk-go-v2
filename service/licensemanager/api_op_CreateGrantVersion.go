@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a new version of the specified grant. For more information, see Granted
-// licenses in License Manager
-// (https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html)
+// licenses in License Manager (https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html)
 // in the License Manager User Guide.
 func (c *Client) CreateGrantVersion(ctx context.Context, params *CreateGrantVersionInput, optFns ...func(*Options)) (*CreateGrantVersionOutput, error) {
 	if params == nil {

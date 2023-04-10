@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the policies attached to the specified thing group. Requires permission to
-// access the ListAttachedPolicies
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Lists the policies attached to the specified thing group. Requires permission
+// to access the ListAttachedPolicies (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListAttachedPolicies(ctx context.Context, params *ListAttachedPoliciesInput, optFns ...func(*Options)) (*ListAttachedPoliciesOutput, error) {
 	if params == nil {

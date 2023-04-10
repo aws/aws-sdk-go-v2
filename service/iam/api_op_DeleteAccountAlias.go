@@ -12,9 +12,8 @@ import (
 
 // Deletes the specified Amazon Web Services account alias. For information about
 // using an Amazon Web Services account alias, see Using an alias for your Amazon
-// Web Services account ID
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html) in the IAM
-// User Guide.
+// Web Services account ID (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
+// in the IAM User Guide.
 func (c *Client) DeleteAccountAlias(ctx context.Context, params *DeleteAccountAliasInput, optFns ...func(*Options)) (*DeleteAccountAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAccountAliasInput{}
@@ -33,7 +32,7 @@ func (c *Client) DeleteAccountAlias(ctx context.Context, params *DeleteAccountAl
 type DeleteAccountAliasInput struct {
 
 	// The name of the account alias to delete. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
 	// consisting of lowercase letters, digits, and dashes. You cannot start or finish
 	// with a dash, nor can you have two dashes in a row.
 	//

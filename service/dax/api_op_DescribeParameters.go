@@ -35,14 +35,14 @@ type DescribeParametersInput struct {
 	ParameterGroupName *string
 
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved. The value for MaxResults must be between
-	// 20 and 100.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved. The value for MaxResults must be
+	// between 20 and 100.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
+	// includes only results beyond the token, up to the value specified by MaxResults .
 	NextToken *string
 
 	// How the parameter is defined. For example, system denotes a system-defined

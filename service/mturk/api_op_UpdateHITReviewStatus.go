@@ -35,13 +35,10 @@ type UpdateHITReviewStatusInput struct {
 	// This member is required.
 	HITId *string
 
-	// Specifies how to update the HIT status. Default is False.
-	//
-	// * Setting this to
-	// false will only transition a HIT from Reviewable to Reviewing
-	//
-	// * Setting this to
-	// true will only transition a HIT from Reviewing to Reviewable
+	// Specifies how to update the HIT status. Default is False .
+	//   - Setting this to false will only transition a HIT from Reviewable to
+	//   Reviewing
+	//   - Setting this to true will only transition a HIT from Reviewing to Reviewable
 	Revert *bool
 
 	noSmithyDocumentSerde

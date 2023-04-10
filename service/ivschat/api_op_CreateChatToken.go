@@ -77,8 +77,8 @@ type CreateChatTokenOutput struct {
 	// The issued client token, encrypted.
 	Token *string
 
-	// Time after which the token is no longer valid and cannot be used to connect to a
-	// room. This is an ISO 8601 timestamp; note that this is returned as a string.
+	// Time after which the token is no longer valid and cannot be used to connect to
+	// a room. This is an ISO 8601 timestamp; note that this is returned as a string.
 	TokenExpirationTime *time.Time
 
 	// Metadata pertaining to the operation's result.

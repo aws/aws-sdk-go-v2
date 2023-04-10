@@ -36,8 +36,8 @@ func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfig
 // The input for the PutConfigurationRecorder action.
 type PutConfigurationRecorderInput struct {
 
-	// The configuration recorder object that records each configuration change made to
-	// the resources.
+	// The configuration recorder object that records each configuration change made
+	// to the resources.
 	//
 	// This member is required.
 	ConfigurationRecorder *types.ConfigurationRecorder

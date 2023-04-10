@@ -45,8 +45,8 @@ type DescribeDataRepositoryTasksInput struct {
 	// lifecycle state.
 	Filters []types.DataRepositoryTaskFilter
 
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	MaxResults *int32
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
@@ -147,8 +147,8 @@ var _ DescribeDataRepositoryTasksAPIClient = (*Client)(nil)
 // DescribeDataRepositoryTasksPaginatorOptions is the paginator options for
 // DescribeDataRepositoryTasks
 type DescribeDataRepositoryTasksPaginatorOptions struct {
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

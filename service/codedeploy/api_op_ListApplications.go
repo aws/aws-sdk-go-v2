@@ -44,8 +44,8 @@ type ListApplicationsOutput struct {
 	// A list of application names.
 	Applications []string
 
-	// If a large amount of information is returned, an identifier is also returned. It
-	// can be used in a subsequent list applications call to return the next set of
+	// If a large amount of information is returned, an identifier is also returned.
+	// It can be used in a subsequent list applications call to return the next set of
 	// applications in the list.
 	NextToken *string
 

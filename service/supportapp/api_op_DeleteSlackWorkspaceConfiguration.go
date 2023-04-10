@@ -30,7 +30,7 @@ func (c *Client) DeleteSlackWorkspaceConfiguration(ctx context.Context, params *
 type DeleteSlackWorkspaceConfigurationInput struct {
 
 	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
-	// T012ABCDEFG.
+	// T012ABCDEFG .
 	//
 	// This member is required.
 	TeamId *string

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a SageMaker experiment. An experiment is a collection of trials that are
-// observed, compared and evaluated as a group. A trial is a set of steps, called
-// trial components, that produce a machine learning model. In the Studio UI,
-// trials are referred to as run groups and trial components are referred to as
+// Creates a SageMaker experiment. An experiment is a collection of trials that
+// are observed, compared and evaluated as a group. A trial is a set of steps,
+// called trial components, that produce a machine learning model. In the Studio
+// UI, trials are referred to as run groups and trial components are referred to as
 // runs. The goal of an experiment is to determine the components that produce the
 // best model. Multiple trials are performed, each one isolating and measuring the
 // impact of a change to one or more inputs, while keeping the remaining inputs
@@ -56,7 +56,7 @@ type CreateExperimentInput struct {
 	Description *string
 
 	// The name of the experiment as displayed. The name doesn't need to be unique. If
-	// you don't specify DisplayName, the value in ExperimentName is displayed.
+	// you don't specify DisplayName , the value in ExperimentName is displayed.
 	DisplayName *string
 
 	// A list of tags to associate with the experiment. You can use Search API to

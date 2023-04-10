@@ -30,9 +30,9 @@ func (c *Client) ListResourceTypes(ctx context.Context, params *ListResourceType
 
 type ListResourceTypesInput struct {
 
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service
@@ -49,17 +49,11 @@ type ListResourceTypesInput struct {
 
 	// Specifies that you want the results to include only resources that have the
 	// specified scope.
-	//
-	// * ALL – the results include both global and regional resources
-	// or resource types.
-	//
-	// * GLOBAL – the results include only global resources or
-	// resource types.
-	//
-	// * REGIONAL – the results include only regional resources or
-	// resource types.
-	//
-	// The default value is ALL.
+	//   - ALL – the results include both global and regional resources or resource
+	//   types.
+	//   - GLOBAL – the results include only global resources or resource types.
+	//   - REGIONAL – the results include only regional resources or resource types.
+	// The default value is ALL .
 	ResourceRegionScope types.ResourceRegionScopeFilter
 
 	noSmithyDocumentSerde
@@ -70,7 +64,7 @@ type ListResourceTypesOutput struct {
 	// If present, this value indicates that more output is available than is included
 	// in the current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null. This
+	// repeat this until the NextToken response element comes back as null . This
 	// indicates that this is the last page of results.
 	NextToken *string
 
@@ -154,9 +148,9 @@ var _ ListResourceTypesAPIClient = (*Client)(nil)
 
 // ListResourceTypesPaginatorOptions is the paginator options for ListResourceTypes
 type ListResourceTypesPaginatorOptions struct {
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service

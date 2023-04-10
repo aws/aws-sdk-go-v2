@@ -27,11 +27,9 @@ import (
 // CloudSearch configuration service DescribeDomains action. A domain's endpoints
 // are also displayed on the domain dashboard in the Amazon CloudSearch console.
 // For more information about formatting your data for Amazon CloudSearch, see
-// Preparing Your Data
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/preparing-data.html)
+// Preparing Your Data (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/preparing-data.html)
 // in the Amazon CloudSearch Developer Guide. For more information about uploading
-// data for indexing, see Uploading Data
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/uploading-data.html)
+// data for indexing, see Uploading Data (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/uploading-data.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) UploadDocuments(ctx context.Context, params *UploadDocumentsInput, optFns ...func(*Options)) (*UploadDocumentsOutput, error) {
 	if params == nil {
@@ -53,10 +51,8 @@ type UploadDocumentsInput struct {
 
 	// The format of the batch you are uploading. Amazon CloudSearch supports two
 	// document batch formats:
-	//
-	// * application/json
-	//
-	// * application/xml
+	//   - application/json
+	//   - application/xml
 	//
 	// This member is required.
 	ContentType types.ContentType
@@ -78,7 +74,7 @@ type UploadDocumentsOutput struct {
 	// The number of documents that were deleted from the search domain.
 	Deletes int64
 
-	// The status of an UploadDocumentsRequest.
+	// The status of an UploadDocumentsRequest .
 	Status *string
 
 	// Any warnings returned by the document service about the documents being

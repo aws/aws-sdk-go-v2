@@ -30,8 +30,8 @@ type AcknowledgeAlarmActionRequest struct {
 	RequestId *string
 
 	// The value of the key used as a filter to select only the alarms associated with
-	// the key
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
+	// the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
+	// .
 	KeyValue *string
 
 	// The note that you can leave when you acknowledge the alarm.
@@ -56,8 +56,8 @@ type Alarm struct {
 	CreationTime *time.Time
 
 	// The value of the key used as a filter to select only the alarms associated with
-	// the key
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
+	// the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
+	// .
 	KeyValue *string
 
 	// The time the alarm was last updated, in the Unix epoch format.
@@ -78,31 +78,21 @@ type AlarmState struct {
 	// Information needed to evaluate data.
 	RuleEvaluation *RuleEvaluation
 
-	// The name of the alarm state. The state name can be one of the following
-	// values:
-	//
-	// * DISABLED - When the alarm is in the DISABLED state, it isn't ready to
-	// evaluate data. To enable the alarm, you must change the alarm to the NORMAL
-	// state.
-	//
-	// * NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate
-	// data.
-	//
-	// * ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.
-	//
-	// *
-	// ACKNOWLEDGED - When the alarm is in the ACKNOWLEDGED state, the alarm was
-	// invoked and you acknowledged the alarm.
-	//
-	// * SNOOZE_DISABLED - When the alarm is
-	// in the SNOOZE_DISABLED state, the alarm is disabled for a specified period of
-	// time. After the snooze time, the alarm automatically changes to the NORMAL
-	// state.
-	//
-	// * LATCHED - When the alarm is in the LATCHED state, the alarm was
-	// invoked. However, the data that the alarm is currently evaluating is within the
-	// specified range. To change the alarm to the NORMAL state, you must acknowledge
-	// the alarm.
+	// The name of the alarm state. The state name can be one of the following values:
+	//   - DISABLED - When the alarm is in the DISABLED state, it isn't ready to
+	//   evaluate data. To enable the alarm, you must change the alarm to the NORMAL
+	//   state.
+	//   - NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate data.
+	//   - ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.
+	//   - ACKNOWLEDGED - When the alarm is in the ACKNOWLEDGED state, the alarm was
+	//   invoked and you acknowledged the alarm.
+	//   - SNOOZE_DISABLED - When the alarm is in the SNOOZE_DISABLED state, the alarm
+	//   is disabled for a specified period of time. After the snooze time, the alarm
+	//   automatically changes to the NORMAL state.
+	//   - LATCHED - When the alarm is in the LATCHED state, the alarm was invoked.
+	//   However, the data that the alarm is currently evaluating is within the specified
+	//   range. To change the alarm to the NORMAL state, you must acknowledge the
+	//   alarm.
 	StateName AlarmStateName
 
 	// Contains information about alarm state changes.
@@ -124,64 +114,39 @@ type AlarmSummary struct {
 	CreationTime *time.Time
 
 	// The value of the key used as a filter to select only the alarms associated with
-	// the key
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
+	// the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
+	// .
 	KeyValue *string
 
 	// The time the alarm was last updated, in the Unix epoch format.
 	LastUpdateTime *time.Time
 
-	// The name of the alarm state. The state name can be one of the following
-	// values:
-	//
-	// * DISABLED - When the alarm is in the DISABLED state, it isn't ready to
-	// evaluate data. To enable the alarm, you must change the alarm to the NORMAL
-	// state.
-	//
-	// * NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate
-	// data.
-	//
-	// * ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.
-	//
-	// *
-	// ACKNOWLEDGED - When the alarm is in the ACKNOWLEDGED state, the alarm was
-	// invoked and you acknowledged the alarm.
-	//
-	// * SNOOZE_DISABLED - When the alarm is
-	// in the SNOOZE_DISABLED state, the alarm is disabled for a specified period of
-	// time. After the snooze time, the alarm automatically changes to the NORMAL
-	// state.
-	//
-	// * LATCHED - When the alarm is in the LATCHED state, the alarm was
-	// invoked. However, the data that the alarm is currently evaluating is within the
-	// specified range. To change the alarm to the NORMAL state, you must acknowledge
-	// the alarm.
+	// The name of the alarm state. The state name can be one of the following values:
+	//   - DISABLED - When the alarm is in the DISABLED state, it isn't ready to
+	//   evaluate data. To enable the alarm, you must change the alarm to the NORMAL
+	//   state.
+	//   - NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate data.
+	//   - ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.
+	//   - ACKNOWLEDGED - When the alarm is in the ACKNOWLEDGED state, the alarm was
+	//   invoked and you acknowledged the alarm.
+	//   - SNOOZE_DISABLED - When the alarm is in the SNOOZE_DISABLED state, the alarm
+	//   is disabled for a specified period of time. After the snooze time, the alarm
+	//   automatically changes to the NORMAL state.
+	//   - LATCHED - When the alarm is in the LATCHED state, the alarm was invoked.
+	//   However, the data that the alarm is currently evaluating is within the specified
+	//   range. To change the alarm to the NORMAL state, you must acknowledge the
+	//   alarm.
 	StateName AlarmStateName
 
 	noSmithyDocumentSerde
 }
 
 // Contains error messages associated with one of the following requests:
-//
-// *
-// BatchAcknowledgeAlarm
-// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchAcknowledgeAlarm.html)
-//
-// *
-// BatchDisableAlarm
-// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDisableAlarm.html)
-//
-// *
-// BatchEnableAlarm
-// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchEnableAlarm.html)
-//
-// *
-// BatchResetAlarm
-// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchResetAlarm.html)
-//
-// *
-// BatchSnoozeAlarm
-// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html)
+//   - BatchAcknowledgeAlarm (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchAcknowledgeAlarm.html)
+//   - BatchDisableAlarm (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDisableAlarm.html)
+//   - BatchEnableAlarm (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchEnableAlarm.html)
+//   - BatchResetAlarm (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchResetAlarm.html)
+//   - BatchSnoozeAlarm (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html)
 type BatchAlarmActionErrorEntry struct {
 
 	// The error code.
@@ -206,9 +171,8 @@ type BatchDeleteDetectorErrorEntry struct {
 	ErrorMessage *string
 
 	// The ID of the message that caused the error. (See the value of the "messageId"
-	// in the detectors
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDeleteDetector.html#iotevents-iotevents-data_BatchDeleteDetector-request-detectors)
-	// object of the DeleteDetectorRequest.)
+	// in the detectors (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDeleteDetector.html#iotevents-iotevents-data_BatchDeleteDetector-request-detectors)
+	// object of the DeleteDetectorRequest .)
 	MessageId *string
 
 	noSmithyDocumentSerde
@@ -223,8 +187,8 @@ type BatchPutMessageErrorEntry struct {
 	// A message that describes the error.
 	ErrorMessage *string
 
-	// The ID of the message that caused the error. (See the value corresponding to the
-	// "messageId" key in the "message" object.)
+	// The ID of the message that caused the error. (See the value corresponding to
+	// the "messageId" key in the "message" object.)
 	MessageId *string
 
 	noSmithyDocumentSerde
@@ -253,25 +217,14 @@ type CustomerAction struct {
 	AcknowledgeActionConfiguration *AcknowledgeActionConfiguration
 
 	// The name of the action. The action name can be one of the following values:
-	//
-	// *
-	// SNOOZE - When you snooze the alarm, the alarm state changes to
-	// SNOOZE_DISABLED.
-	//
-	// * ENABLE - When you enable the alarm, the alarm state changes
-	// to NORMAL.
-	//
-	// * DISABLE - When you disable the alarm, the alarm state changes to
-	// DISABLED.
-	//
-	// * ACKNOWLEDGE - When you acknowledge the alarm, the alarm state
-	// changes to ACKNOWLEDGED.
-	//
-	// * RESET - When you reset the alarm, the alarm state
-	// changes to NORMAL.
-	//
-	// For more information, see the AlarmState
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_AlarmState.html)
+	//   - SNOOZE - When you snooze the alarm, the alarm state changes to
+	//   SNOOZE_DISABLED .
+	//   - ENABLE - When you enable the alarm, the alarm state changes to NORMAL .
+	//   - DISABLE - When you disable the alarm, the alarm state changes to DISABLED .
+	//   - ACKNOWLEDGE - When you acknowledge the alarm, the alarm state changes to
+	//   ACKNOWLEDGED .
+	//   - RESET - When you reset the alarm, the alarm state changes to NORMAL .
+	// For more information, see the AlarmState (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_AlarmState.html)
 	// API.
 	ActionName CustomerActionName
 
@@ -298,14 +251,13 @@ type DeleteDetectorRequest struct {
 	// This member is required.
 	DetectorModelName *string
 
-	// The ID to assign to the DeleteDetectorRequest. Each "messageId" must be unique
+	// The ID to assign to the DeleteDetectorRequest . Each "messageId" must be unique
 	// within each batch sent.
 	//
 	// This member is required.
 	MessageId *string
 
-	// The value of the key
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateDetectorModel.html#iotevents-CreateDetectorModel-request-key)
+	// The value of the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateDetectorModel.html#iotevents-CreateDetectorModel-request-key)
 	// used to identify the detector.
 	KeyValue *string
 
@@ -324,8 +276,8 @@ type Detector struct {
 	// The version of the detector model that created this detector (instance).
 	DetectorModelVersion *string
 
-	// The value of the key (identifying the device or system) that caused the creation
-	// of this detector (instance).
+	// The value of the key (identifying the device or system) that caused the
+	// creation of this detector (instance).
 	KeyValue *string
 
 	// The time the detector (instance) was last updated.
@@ -402,8 +354,8 @@ type DetectorSummary struct {
 	// The version of the detector model that created this detector (instance).
 	DetectorModelVersion *string
 
-	// The value of the key (identifying the device or system) that caused the creation
-	// of this detector (instance).
+	// The value of the key (identifying the device or system) that caused the
+	// creation of this detector (instance).
 	KeyValue *string
 
 	// The time the detector (instance) was last updated.
@@ -438,8 +390,8 @@ type DisableAlarmActionRequest struct {
 	RequestId *string
 
 	// The value of the key used as a filter to select only the alarms associated with
-	// the key
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
+	// the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
+	// .
 	KeyValue *string
 
 	// The note that you can leave when you disable the alarm.
@@ -471,8 +423,8 @@ type EnableAlarmActionRequest struct {
 	RequestId *string
 
 	// The value of the key used as a filter to select only the alarms associated with
-	// the key
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
+	// the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
+	// .
 	KeyValue *string
 
 	// The note that you can leave when you enable the alarm.
@@ -530,8 +482,8 @@ type ResetAlarmActionRequest struct {
 	RequestId *string
 
 	// The value of the key used as a filter to select only the alarms associated with
-	// the key
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
+	// the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
+	// .
 	KeyValue *string
 
 	// The note that you can leave when you reset the alarm.
@@ -597,8 +549,8 @@ type SnoozeAlarmActionRequest struct {
 	SnoozeDuration *int32
 
 	// The value of the key used as a filter to select only the alarms associated with
-	// the key
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
+	// the key (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key)
+	// .
 	KeyValue *string
 
 	// The note that you can leave when you snooze the alarm.
@@ -610,7 +562,7 @@ type SnoozeAlarmActionRequest struct {
 // Contains the configuration information of alarm state changes.
 type StateChangeConfiguration struct {
 
-	// The trigger type. If the value is SNOOZE_TIMEOUT, the snooze duration ends and
+	// The trigger type. If the value is SNOOZE_TIMEOUT , the snooze duration ends and
 	// the alarm automatically changes to the NORMAL state.
 	TriggerType TriggerType
 
@@ -620,7 +572,7 @@ type StateChangeConfiguration struct {
 // Contains information about alarm state changes.
 type SystemEvent struct {
 
-	// The event type. If the value is STATE_CHANGE, the event contains information
+	// The event type. If the value is STATE_CHANGE , the event contains information
 	// about alarm state changes.
 	EventType EventType
 
@@ -679,7 +631,7 @@ type UpdateDetectorRequest struct {
 	// This member is required.
 	DetectorModelName *string
 
-	// The ID to assign to the detector update "message". Each "messageId" must be
+	// The ID to assign to the detector update "message" . Each "messageId" must be
 	// unique within each batch sent.
 	//
 	// This member is required.

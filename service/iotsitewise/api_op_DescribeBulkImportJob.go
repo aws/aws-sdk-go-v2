@@ -13,9 +13,8 @@ import (
 	"time"
 )
 
-// Retrieves information about a bulk import job request. For more information, see
-// Describe a bulk import job (CLI)
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html)
+// Retrieves information about a bulk import job request. For more information,
+// see Describe a bulk import job (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html)
 // in the Amazon Simple Storage Service User Guide.
 func (c *Client) DescribeBulkImportJob(ctx context.Context, params *DescribeBulkImportJobInput, optFns ...func(*Options)) (*DescribeBulkImportJobOutput, error) {
 	if params == nil {
@@ -55,8 +54,8 @@ type DescribeBulkImportJobOutput struct {
 	// This member is required.
 	Files []types.File
 
-	// Contains the configuration information of a job, such as the file format used to
-	// save data in Amazon S3.
+	// Contains the configuration information of a job, such as the file format used
+	// to save data in Amazon S3.
 	//
 	// This member is required.
 	JobConfiguration *types.JobConfiguration
@@ -81,35 +80,25 @@ type DescribeBulkImportJobOutput struct {
 	// This member is required.
 	JobName *string
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the IAM role that allows IoT SiteWise to read Amazon S3 data.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the IAM role that allows IoT SiteWise to read Amazon S3 data.
 	//
 	// This member is required.
 	JobRoleArn *string
 
 	// The status of the bulk import job can be one of following values.
-	//
-	// * PENDING –
-	// IoT SiteWise is waiting for the current bulk import job to finish.
-	//
-	// * CANCELLED
-	// – The bulk import job has been canceled.
-	//
-	// * RUNNING – IoT SiteWise is processing
-	// your request to import your data from Amazon S3.
-	//
-	// * COMPLETED – IoT SiteWise
-	// successfully completed your request to import data from Amazon S3.
-	//
-	// * FAILED –
-	// IoT SiteWise couldn't process your request to import data from Amazon S3. You
-	// can use logs saved in the specified error report location in Amazon S3 to
-	// troubleshoot issues.
-	//
-	// * COMPLETED_WITH_FAILURES – IoT SiteWise completed your
-	// request to import data from Amazon S3 with errors. You can use logs saved in the
-	// specified error report location in Amazon S3 to troubleshoot issues.
+	//   - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
+	//   - CANCELLED – The bulk import job has been canceled.
+	//   - RUNNING – IoT SiteWise is processing your request to import your data from
+	//   Amazon S3.
+	//   - COMPLETED – IoT SiteWise successfully completed your request to import data
+	//   from Amazon S3.
+	//   - FAILED – IoT SiteWise couldn't process your request to import data from
+	//   Amazon S3. You can use logs saved in the specified error report location in
+	//   Amazon S3 to troubleshoot issues.
+	//   - COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data
+	//   from Amazon S3 with errors. You can use logs saved in the specified error report
+	//   location in Amazon S3 to troubleshoot issues.
 	//
 	// This member is required.
 	JobStatus types.JobStatus

@@ -20,30 +20,26 @@ import (
 // notebooks. Each notebook demonstrates how to use SageMaker with a specific
 // algorithm or with a machine learning framework. After receiving the request,
 // SageMaker does the following:
+//   - Creates a network interface in the SageMaker VPC.
+//   - (Option) If you specified SubnetId , SageMaker creates a network interface
+//     in your own VPC, which is inferred from the subnet ID that you provide in the
+//     input. When creating this network interface, SageMaker attaches the security
+//     group that you specified in the request to the network interface that it creates
+//     in your VPC.
+//   - Launches an EC2 instance of the type specified in the request in the
+//     SageMaker VPC. If you specified SubnetId of your VPC, SageMaker specifies both
+//     network interfaces when launching this instance. This enables inbound traffic
+//     from your own VPC to the notebook instance, assuming that the security groups
+//     allow it.
 //
-// * Creates a network interface in the SageMaker
-// VPC.
-//
-// * (Option) If you specified SubnetId, SageMaker creates a network
-// interface in your own VPC, which is inferred from the subnet ID that you provide
-// in the input. When creating this network interface, SageMaker attaches the
-// security group that you specified in the request to the network interface that
-// it creates in your VPC.
-//
-// * Launches an EC2 instance of the type specified in the
-// request in the SageMaker VPC. If you specified SubnetId of your VPC, SageMaker
-// specifies both network interfaces when launching this instance. This enables
-// inbound traffic from your own VPC to the notebook instance, assuming that the
-// security groups allow it.
-//
-// After creating the notebook instance, SageMaker
-// returns its Amazon Resource Name (ARN). You can't change the name of a notebook
-// instance after you create it. After SageMaker creates the notebook instance, you
-// can connect to the Jupyter server and work in Jupyter notebooks. For example,
-// you can write code to explore a dataset that you can use for model training,
-// train a model, host models by creating SageMaker endpoints, and validate hosted
-// models. For more information, see How It Works
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
+// After creating the notebook instance, SageMaker returns its Amazon Resource
+// Name (ARN). You can't change the name of a notebook instance after you create
+// it. After SageMaker creates the notebook instance, you can connect to the
+// Jupyter server and work in Jupyter notebooks. For example, you can write code to
+// explore a dataset that you can use for model training, train a model, host
+// models by creating SageMaker endpoints, and validate hosted models. For more
+// information, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html)
+// .
 func (c *Client) CreateNotebookInstance(ctx context.Context, params *CreateNotebookInstanceInput, optFns ...func(*Options)) (*CreateNotebookInstanceOutput, error) {
 	if params == nil {
 		params = &CreateNotebookInstanceInput{}
@@ -75,50 +71,46 @@ type CreateNotebookInstanceInput struct {
 	// instance, SageMaker assumes this role to perform tasks on your behalf. You must
 	// grant this role necessary permissions so SageMaker can perform these tasks. The
 	// policy must allow the SageMaker service principal (sagemaker.amazonaws.com)
-	// permissions to assume this role. For more information, see SageMaker Roles
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
-	// able to pass this role to SageMaker, the caller of this API must have the
-	// iam:PassRole permission.
+	// permissions to assume this role. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
+	// . To be able to pass this role to SageMaker, the caller of this API must have
+	// the iam:PassRole permission.
 	//
 	// This member is required.
 	RoleArn *string
 
 	// A list of Elastic Inference (EI) instance types to associate with this notebook
 	// instance. Currently, only one instance type can be associated with a notebook
-	// instance. For more information, see Using Elastic Inference in Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	// instance. For more information, see Using Elastic Inference in Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html)
+	// .
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
 	// An array of up to three Git repositories to associate with the notebook
 	// instance. These can be either the names of Git repositories stored as resources
 	// in your account, or the URL of Git repositories in Amazon Web Services
-	// CodeCommit
-	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
-	// other Git repository. These repositories are cloned at the same level as the
-	// default repository of your notebook instance. For more information, see
-	// Associating Git Repositories with SageMaker Notebook Instances
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other Git repository. These repositories are cloned at the same level
+	// as the default repository of your notebook instance. For more information, see
+	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
+	// .
 	AdditionalCodeRepositories []string
 
 	// A Git repository to associate with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
 	// in your account, or the URL of a Git repository in Amazon Web Services
-	// CodeCommit
-	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
-	// other Git repository. When you open a notebook instance, it opens in the
-	// directory that contains this repository. For more information, see Associating
-	// Git Repositories with SageMaker Notebook Instances
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other Git repository. When you open a notebook instance, it opens in
+	// the directory that contains this repository. For more information, see
+	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
+	// .
 	DefaultCodeRepository *string
 
-	// Sets whether SageMaker provides internet access to the notebook instance. If you
-	// set this to Disabled this notebook instance is able to access resources only in
-	// your VPC, and is not be able to connect to SageMaker training and endpoint
-	// services unless you configure a NAT Gateway in your VPC. For more information,
-	// see Notebook Instances Are Internet-Enabled by Default
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access).
-	// You can set the value of this parameter to Disabled only if you set a value for
-	// the SubnetId parameter.
+	// Sets whether SageMaker provides internet access to the notebook instance. If
+	// you set this to Disabled this notebook instance is able to access resources
+	// only in your VPC, and is not be able to connect to SageMaker training and
+	// endpoint services unless you configure a NAT Gateway in your VPC. For more
+	// information, see Notebook Instances Are Internet-Enabled by Default (https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access)
+	// . You can set the value of this parameter to Disabled only if you set a value
+	// for the SubnetId parameter.
 	DirectInternetAccess types.DirectInternetAccess
 
 	// Information on the IMDS configuration of the notebook instance
@@ -127,29 +119,28 @@ type CreateNotebookInstanceInput struct {
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
 	// key that SageMaker uses to encrypt data on the storage volume attached to your
 	// notebook instance. The KMS key you provide must be enabled. For information, see
-	// Enabling and Disabling Keys
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html) in
-	// the Amazon Web Services Key Management Service Developer Guide.
+	// Enabling and Disabling Keys (https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html)
+	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 
 	// The name of a lifecycle configuration to associate with the notebook instance.
 	// For information about lifestyle configurations, see Step 2.1: (Optional)
-	// Customize a Notebook Instance
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
+	// Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
+	// .
 	LifecycleConfigName *string
 
 	// The platform identifier of the notebook instance runtime environment.
 	PlatformIdentifier *string
 
 	// Whether root access is enabled or disabled for users of the notebook instance.
-	// The default value is Enabled. Lifecycle configurations need root access to be
+	// The default value is Enabled . Lifecycle configurations need root access to be
 	// able to set up a notebook instance. Because of this, lifecycle configurations
 	// associated with a notebook instance always run with root access even if you
 	// disable root access for users.
 	RootAccess types.RootAccess
 
-	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be
-	// for the same VPC as specified in the subnet.
+	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must
+	// be for the same VPC as specified in the subnet.
 	SecurityGroupIds []string
 
 	// The ID of the subnet in a VPC to which you would like to have a connectivity
@@ -158,8 +149,8 @@ type CreateNotebookInstanceInput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags []types.Tag
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance.

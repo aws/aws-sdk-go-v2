@@ -14,10 +14,9 @@ import (
 
 // Returns a list of attribute values. Attributes are similar to the details in a
 // Price List API offer file. For a list of available attributes, see Offer File
-// Definitions
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs)
-// in the Billing and Cost Management User Guide
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html).
+// Definitions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs)
+// in the Billing and Cost Management User Guide (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html)
+// .
 func (c *Client) GetAttributeValues(ctx context.Context, params *GetAttributeValuesInput, optFns ...func(*Options)) (*GetAttributeValuesOutput, error) {
 	if params == nil {
 		params = &GetAttributeValuesInput{}
@@ -36,13 +35,13 @@ func (c *Client) GetAttributeValues(ctx context.Context, params *GetAttributeVal
 type GetAttributeValuesInput struct {
 
 	// The name of the attribute that you want to retrieve the values for, such as
-	// volumeType.
+	// volumeType .
 	//
 	// This member is required.
 	AttributeName *string
 
 	// The service code for the service whose attributes you want to retrieve. For
-	// example, if you want the retrieve an EC2 attribute, use AmazonEC2.
+	// example, if you want the retrieve an EC2 attribute, use AmazonEC2 .
 	//
 	// This member is required.
 	ServiceCode *string
@@ -60,7 +59,7 @@ type GetAttributeValuesInput struct {
 type GetAttributeValuesOutput struct {
 
 	// The list of values for an attribute. For example, Throughput Optimized HDD and
-	// Provisioned IOPS are two available values for the AmazonEC2volumeType.
+	// Provisioned IOPS are two available values for the AmazonEC2 volumeType .
 	AttributeValues []types.AttributeValue
 
 	// The pagination token that indicates the next set of results to retrieve.

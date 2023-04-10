@@ -54,9 +54,9 @@ type AssertionRule struct {
 	// This member is required.
 	Status Status
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -64,13 +64,13 @@ type AssertionRule struct {
 	noSmithyDocumentSerde
 }
 
-// An update to an assertion rule. You can update the name or the evaluation period
-// (wait period). If you don't specify one of the items to update, the item is
-// unchanged.
+// An update to an assertion rule. You can update the name or the evaluation
+// period (wait period). If you don't specify one of the items to update, the item
+// is unchanged.
 type AssertionRuleUpdate struct {
 
-	// The name of the assertion rule. You can use any non-white space character in the
-	// name.
+	// The name of the assertion rule. You can use any non-white space character in
+	// the name.
 	//
 	// This member is required.
 	Name *string
@@ -80,9 +80,9 @@ type AssertionRuleUpdate struct {
 	// This member is required.
 	SafetyRuleArn *string
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -190,8 +190,8 @@ type GatingRule struct {
 	// This member is required.
 	Name *string
 
-	// The criteria that you set for gating routing controls that designate how many of
-	// the routing control states must be ON to allow you to update target routing
+	// The criteria that you set for gating routing controls that designate how many
+	// of the routing control states must be ON to allow you to update target routing
 	// control states.
 	//
 	// This member is required.
@@ -218,9 +218,9 @@ type GatingRule struct {
 	// This member is required.
 	TargetControls []string
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -243,9 +243,9 @@ type GatingRuleUpdate struct {
 	// This member is required.
 	SafetyRuleArn *string
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -269,8 +269,8 @@ type NewAssertionRule struct {
 	// This member is required.
 	ControlPanelArn *string
 
-	// The name of the assertion rule. You can use any non-white space character in the
-	// name.
+	// The name of the assertion rule. You can use any non-white space character in
+	// the name.
 	//
 	// This member is required.
 	Name *string
@@ -285,9 +285,9 @@ type NewAssertionRule struct {
 	// This member is required.
 	RuleConfig *RuleConfig
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -333,9 +333,9 @@ type NewGatingRule struct {
 	// This member is required.
 	TargetControls []string
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -389,9 +389,9 @@ type Rule struct {
 	noSmithyDocumentSerde
 }
 
-// The rule configuration for an assertion rule. That is, the criteria that you set
-// for specific assertion controls (routing controls) that specify how many control
-// states must be ON after a transaction completes.
+// The rule configuration for an assertion rule. That is, the criteria that you
+// set for specific assertion controls (routing controls) that specify how many
+// control states must be ON after a transaction completes.
 type RuleConfig struct {
 
 	// Logical negation of the rule. If the rule would usually evaluate true, it's
@@ -400,8 +400,8 @@ type RuleConfig struct {
 	// This member is required.
 	Inverted bool
 
-	// The value of N, when you specify an ATLEAST rule type. That is, Threshold is the
-	// number of controls that must be set when you specify an ATLEAST type.
+	// The value of N, when you specify an ATLEAST rule type. That is, Threshold is
+	// the number of controls that must be set when you specify an ATLEAST type.
 	//
 	// This member is required.
 	Threshold int32

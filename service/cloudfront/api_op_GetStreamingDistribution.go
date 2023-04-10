@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// Gets information about a specified RTMP distribution, including the distribution
-// configuration.
+// Gets information about a specified RTMP distribution, including the
+// distribution configuration.
 func (c *Client) GetStreamingDistribution(ctx context.Context, params *GetStreamingDistributionInput, optFns ...func(*Options)) (*GetStreamingDistributionOutput, error) {
 	if params == nil {
 		params = &GetStreamingDistributionInput{}
@@ -48,7 +48,7 @@ type GetStreamingDistributionInput struct {
 type GetStreamingDistributionOutput struct {
 
 	// The current version of the streaming distribution's information. For example:
-	// E2QWRUHAPOMQZL.
+	// E2QWRUHAPOMQZL .
 	ETag *string
 
 	// The streaming distribution's information.
@@ -146,10 +146,10 @@ type StreamingDistributionDeployedWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StreamingDistributionDeployedWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StreamingDistributionDeployedWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -199,8 +199,8 @@ func (w *StreamingDistributionDeployedWaiter) Wait(ctx context.Context, params *
 	return err
 }
 
-// WaitForOutput calls the waiter function for StreamingDistributionDeployed waiter
-// and returns the output of the successful operation. The maxWaitDur is the
+// WaitForOutput calls the waiter function for StreamingDistributionDeployed
+// waiter and returns the output of the successful operation. The maxWaitDur is the
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *StreamingDistributionDeployedWaiter) WaitForOutput(ctx context.Context, params *GetStreamingDistributionInput, maxWaitDur time.Duration, optFns ...func(*StreamingDistributionDeployedWaiterOptions)) (*GetStreamingDistributionOutput, error) {

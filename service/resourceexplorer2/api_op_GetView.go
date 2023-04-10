@@ -29,9 +29,8 @@ func (c *Client) GetView(ctx context.Context, params *GetViewInput, optFns ...fu
 
 type GetViewInput struct {
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view that you want information about.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view that you want information about.
 	//
 	// This member is required.
 	ViewArn *string

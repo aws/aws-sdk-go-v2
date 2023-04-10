@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiate a manual deployment of the latest commit in a source code repository or
-// the latest image in a source image repository to an App Runner service. For a
+// Initiate a manual deployment of the latest commit in a source code repository
+// or the latest image in a source image repository to an App Runner service. For a
 // source code repository, App Runner retrieves the commit and builds a Docker
 // image. For a source image repository, App Runner retrieves the latest Docker
 // image. In both cases, App Runner then deploys the new image to your service and

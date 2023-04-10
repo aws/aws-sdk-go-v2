@@ -31,11 +31,10 @@ func (c *Client) ListAppAssessments(ctx context.Context, params *ListAppAssessme
 
 type ListAppAssessmentsInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	AppArn *string
 
 	// The name for the assessment.
@@ -48,19 +47,19 @@ type ListAppAssessmentsInput struct {
 	ComplianceStatus types.ComplianceStatus
 
 	// Specifies the entity that invoked a specific assessment, either a User or the
-	// System.
+	// System .
 	Invoker types.AssessmentInvoker
 
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
 	NextToken *string
 
 	// The default is to sort by ascending startTime. To sort by descending startTime,
-	// set reverseOrder to true.
+	// set reverseOrder to true .
 	ReverseOrder *bool
 
 	noSmithyDocumentSerde
@@ -156,8 +155,8 @@ var _ ListAppAssessmentsAPIClient = (*Client)(nil)
 // ListAppAssessments
 type ListAppAssessmentsPaginatorOptions struct {
 	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// than the specified MaxResults value, a token is included in the response so
+	// that the remaining results can be retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

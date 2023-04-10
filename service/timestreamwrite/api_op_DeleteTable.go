@@ -16,8 +16,7 @@ import (
 // Timestream database table is deleted, the time-series data stored in the table
 // cannot be recovered. Due to the nature of distributed retries, the operation can
 // return either success or a ResourceNotFoundException. Clients should consider
-// them equivalent. See code sample
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html)
+// them equivalent. See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html)
 // for details.
 func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
 	if params == nil {

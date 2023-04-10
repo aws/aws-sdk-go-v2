@@ -41,9 +41,9 @@ type Assignment struct {
 	// submitted results.
 	AutoApprovalTime *time.Time
 
-	// The date and time of the deadline for the assignment. This value is derived from
-	// the deadline specification for the HIT and the date and time the Worker accepted
-	// the HIT.
+	// The date and time of the deadline for the assignment. This value is derived
+	// from the deadline specification for the HIT and the date and time the Worker
+	// accepted the HIT.
 	Deadline *time.Time
 
 	// The ID of the HIT.
@@ -53,8 +53,8 @@ type Assignment struct {
 	// RejectionTime is the date and time the Requester rejected the results.
 	RejectionTime *time.Time
 
-	// The feedback string included with the call to the ApproveAssignment operation or
-	// the RejectAssignment operation, if the Requester approved or rejected the
+	// The feedback string included with the call to the ApproveAssignment operation
+	// or the RejectAssignment operation, if the Requester approved or rejected the
 	// assignment and specified feedback.
 	RequesterFeedback *string
 
@@ -138,8 +138,8 @@ type HIT struct {
 	// search results.
 	Keywords *string
 
-	// The number of times the HIT can be accepted and completed before the HIT becomes
-	// unavailable.
+	// The number of times the HIT can be accepted and completed before the HIT
+	// becomes unavailable.
 	MaxAssignments *int32
 
 	// The number of assignments for this HIT that are available for Workers to accept.
@@ -163,8 +163,8 @@ type HIT struct {
 	// either a QuestionForm, HTMLQuestion or an ExternalQuestion data structure.
 	Question *string
 
-	// An arbitrary data field the Requester who created the HIT can use. This field is
-	// visible only to the creator of the HIT.
+	// An arbitrary data field the Requester who created the HIT can use. This field
+	// is visible only to the creator of the HIT.
 	RequesterAnnotation *string
 
 	// A string representing a currency amount.
@@ -203,8 +203,8 @@ type Locale struct {
 	// This member is required.
 	Country *string
 
-	// The state or subdivision of the locale. A valid ISO 3166-2 subdivision code. For
-	// example, the code WA refers to the state of Washington.
+	// The state or subdivision of the locale. A valid ISO 3166-2 subdivision code.
+	// For example, the code WA refers to the state of Washington.
 	Subdivision *string
 
 	noSmithyDocumentSerde
@@ -216,14 +216,9 @@ type NotificationSpecification struct {
 
 	// The target for notification messages. The Destination’s format is determined by
 	// the specified Transport:
-	//
-	// * When Transport is Email, the Destination is your
-	// email address.
-	//
-	// * When Transport is SQS, the Destination is your queue URL.
-	//
-	// *
-	// When Transport is SNS, the Destination is the ARN of your topic.
+	//   - When Transport is Email, the Destination is your email address.
+	//   - When Transport is SQS, the Destination is your queue URL.
+	//   - When Transport is SNS, the Destination is the ARN of your topic.
 	//
 	// This member is required.
 	Destination *string
@@ -455,8 +450,8 @@ type QualificationType struct {
 	// False.
 	AutoGranted *bool
 
-	// The Qualification integer value to use for automatically granted Qualifications,
-	// if AutoGranted is true. This is 1 by default.
+	// The Qualification integer value to use for automatically granted
+	// Qualifications, if AutoGranted is true. This is 1 by default.
 	AutoGrantedValue *int32
 
 	// The date and time the Qualification type was created.
@@ -489,12 +484,12 @@ type QualificationType struct {
 	// Inactive.
 	QualificationTypeStatus QualificationTypeStatus
 
-	// The amount of time, in seconds, Workers must wait after taking the Qualification
-	// test before they can take it again. Workers can take a Qualification test
-	// multiple times if they were not granted the Qualification from a previous
-	// attempt, or if the test offers a gradient score and they want a better score. If
-	// not specified, retries are disabled and Workers can request a Qualification only
-	// once.
+	// The amount of time, in seconds, Workers must wait after taking the
+	// Qualification test before they can take it again. Workers can take a
+	// Qualification test multiple times if they were not granted the Qualification
+	// from a previous attempt, or if the test offers a gradient score and they want a
+	// better score. If not specified, retries are disabled and Workers can request a
+	// Qualification only once.
 	RetryDelayInSeconds *int64
 
 	// The questions for a Qualification test associated with this Qualification type
@@ -591,10 +586,10 @@ type ReviewResultDetail struct {
 	// HIT.
 	QuestionId *string
 
-	// The HITID or AssignmentId about which this result was taken. Note that HIT-level
-	// Review Policies will often emit results about both the HIT itself and its
-	// Assignments, while Assignment-level review policies generally only emit results
-	// about the Assignment itself.
+	// The HITID or AssignmentId about which this result was taken. Note that
+	// HIT-level Review Policies will often emit results about both the HIT itself and
+	// its Assignments, while Assignment-level review policies generally only emit
+	// results about the Assignment itself.
 	SubjectId *string
 
 	// The type of the object from the SubjectId field.

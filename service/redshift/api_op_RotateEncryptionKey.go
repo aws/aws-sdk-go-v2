@@ -29,8 +29,9 @@ func (c *Client) RotateEncryptionKey(ctx context.Context, params *RotateEncrypti
 
 type RotateEncryptionKeyInput struct {
 
-	// The unique identifier of the cluster that you want to rotate the encryption keys
-	// for. Constraints: Must be the name of valid cluster that has encryption enabled.
+	// The unique identifier of the cluster that you want to rotate the encryption
+	// keys for. Constraints: Must be the name of valid cluster that has encryption
+	// enabled.
 	//
 	// This member is required.
 	ClusterIdentifier *string

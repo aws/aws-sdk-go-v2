@@ -40,15 +40,15 @@ type DescribeReservedNodesInput struct {
 	// that the remaining results can be retrieved.
 	MaxResults *int32
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	NextToken *string
 
 	// The node type filter value. Use this parameter to show only those reservations
-	// matching the specified node type. For more information, see Supported node types
-	// (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported).
+	// matching the specified node type. For more information, see Supported node types (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported)
+	// .
 	NodeType *string
 
 	// The offering type filter value. Use this parameter to show only the available
@@ -69,9 +69,9 @@ type DescribeReservedNodesInput struct {
 
 type DescribeReservedNodesOutput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	NextToken *string
 

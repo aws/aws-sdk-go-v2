@@ -81,8 +81,8 @@ type GetDataQualityRulesetEvaluationRunOutput struct {
 	Status types.TaskStatusType
 
 	// The timeout for a run in minutes. This is the maximum time that a run can
-	// consume resources before it is terminated and enters TIMEOUT status. The default
-	// is 2,880 minutes (48 hours).
+	// consume resources before it is terminated and enters TIMEOUT status. The
+	// default is 2,880 minutes (48 hours).
 	Timeout *int32
 
 	// Metadata pertaining to the operation's result.

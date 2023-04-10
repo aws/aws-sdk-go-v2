@@ -43,8 +43,8 @@ type ListRemoteAccessSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the response from the server after AWS Device Farm makes a request to
-// return information about the remote access session.
+// Represents the response from the server after AWS Device Farm makes a request
+// to return information about the remote access session.
 type ListRemoteAccessSessionsOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which

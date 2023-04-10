@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A list of the channels moderated by an AppInstanceUser. The x-amz-chime-bearer
+// A list of the channels moderated by an AppInstanceUser . The x-amz-chime-bearer
 // request header is mandatory. Use the AppInstanceUserArn of the user that makes
 // the API call as the value in the header.
 func (c *Client) ListChannelsModeratedByAppInstanceUser(ctx context.Context, params *ListChannelsModeratedByAppInstanceUserInput, optFns ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error) {

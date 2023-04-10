@@ -10,8 +10,8 @@ import (
 // Amplify project.
 type BackendAPIAppSyncAuthSettings struct {
 
-	// The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication
-	// setting to access your data models.
+	// The Amazon Cognito user pool ID, if Amazon Cognito was used as an
+	// authentication setting to access your data models.
 	CognitoUserPoolId *string
 
 	// The API key description for API_KEY, if it was used as an authentication
@@ -32,8 +32,8 @@ type BackendAPIAppSyncAuthSettings struct {
 	// The expiry time for the OpenID authentication mechanism.
 	OpenIDIatTTL *string
 
-	// The openID issuer URL, if openID was used as an authentication setting to access
-	// your data models.
+	// The openID issuer URL, if openID was used as an authentication setting to
+	// access your data models.
 	OpenIDIssueURL *string
 
 	// The OpenID provider name, if OpenID was used as an authentication mechanism to
@@ -188,12 +188,12 @@ type CreateBackendAuthForgotPasswordConfig struct {
 	// This member is required.
 	DeliveryMethod DeliveryMethod
 
-	// (DEPRECATED) The configuration for the email sent when an app user forgets their
-	// password.
+	// (DEPRECATED) The configuration for the email sent when an app user forgets
+	// their password.
 	EmailSettings *EmailSettings
 
-	// (DEPRECATED) The configuration for the SMS message sent when an app user forgets
-	// their password.
+	// (DEPRECATED) The configuration for the SMS message sent when an app user
+	// forgets their password.
 	SmsSettings *SmsSettings
 
 	noSmithyDocumentSerde
@@ -288,8 +288,8 @@ type CreateBackendAuthPasswordPolicyConfig struct {
 // Amplify project.
 type CreateBackendAuthResourceConfig struct {
 
-	// Defines whether you want to configure only authentication or both authentication
-	// and authorization settings.
+	// Defines whether you want to configure only authentication or both
+	// authentication and authorization settings.
 	//
 	// This member is required.
 	AuthResources AuthResources
@@ -313,8 +313,8 @@ type CreateBackendAuthResourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the Amazon Cognito user pool configuration for the auth resource to be
-// configured for your Amplify project.
+// Describes the Amazon Cognito user pool configuration for the auth resource to
+// be configured for your Amplify project.
 type CreateBackendAuthUserPoolConfig struct {
 
 	// The required attributes to sign up new users in the user pool.
@@ -345,8 +345,8 @@ type CreateBackendAuthUserPoolConfig struct {
 	// configured as a part of your Amplify project.
 	OAuth *CreateBackendAuthOAuthConfig
 
-	// Describes the password policy for your Amazon Cognito user pool, configured as a
-	// part of your Amplify project.
+	// Describes the password policy for your Amazon Cognito user pool, configured as
+	// a part of your Amplify project.
 	PasswordPolicy *CreateBackendAuthPasswordPolicyConfig
 
 	// Describes the email or SMS verification message for your Amazon Cognito user
@@ -515,12 +515,12 @@ type UpdateBackendAuthForgotPasswordConfig struct {
 	// messages to app users that want to recover their password.
 	DeliveryMethod DeliveryMethod
 
-	// (DEPRECATED) The configuration for the email sent when an app user forgets their
-	// password.
+	// (DEPRECATED) The configuration for the email sent when an app user forgets
+	// their password.
 	EmailSettings *EmailSettings
 
-	// (DEPRECATED) The configuration for the SMS message sent when an Amplify app user
-	// forgets their password.
+	// (DEPRECATED) The configuration for the SMS message sent when an Amplify app
+	// user forgets their password.
 	SmsSettings *SmsSettings
 
 	noSmithyDocumentSerde
@@ -580,8 +580,8 @@ type UpdateBackendAuthOAuthConfig struct {
 // part of your Amplify project.
 type UpdateBackendAuthPasswordPolicyConfig struct {
 
-	// Describes additional constraints on password requirements to sign in to the auth
-	// resource, configured as a part of your Amplify project.
+	// Describes additional constraints on password requirements to sign in to the
+	// auth resource, configured as a part of your Amplify project.
 	AdditionalConstraints []AdditionalConstraintsElement
 
 	// Describes the minimum length of the password required to sign in to the auth
@@ -636,8 +636,8 @@ type UpdateBackendAuthUserPoolConfig struct {
 	// configured as a part of your Amplify project.
 	OAuth *UpdateBackendAuthOAuthConfig
 
-	// Describes the password policy for your Amazon Cognito user pool, configured as a
-	// part of your Amplify project.
+	// Describes the password policy for your Amazon Cognito user pool, configured as
+	// a part of your Amplify project.
 	PasswordPolicy *UpdateBackendAuthPasswordPolicyConfig
 
 	// Describes the email or SMS verification message for your Amazon Cognito user

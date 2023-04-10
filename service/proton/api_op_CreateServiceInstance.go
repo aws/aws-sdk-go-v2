@@ -52,16 +52,15 @@ type CreateServiceInstanceInput struct {
 
 	// An optional list of metadata items that you can associate with the Proton
 	// service instance. A tag is a key-value pair. For more information, see Proton
-	// resources and tagging
-	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
-	// Proton User Guide.
+	// resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+	// in the Proton User Guide.
 	Tags []types.Tag
 
 	// To create a new major and minor version of the service template, exclude major
-	// Version.
+	// Version .
 	TemplateMajorVersion *string
 
-	// To create a new minor version of the service template, include a major Version.
+	// To create a new minor version of the service template, include a major Version .
 	TemplateMinorVersion *string
 
 	noSmithyDocumentSerde

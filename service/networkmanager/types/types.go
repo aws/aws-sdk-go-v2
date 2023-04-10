@@ -339,9 +339,9 @@ type CoreNetworkChange struct {
 	// The resource identifier.
 	Identifier *string
 
-	// Uniquely identifies the path for a change within the changeset. For example, the
-	// IdentifierPath for a core network segment change might be
-	// "CORE_NETWORK_SEGMENT/us-east-1/devsegment".
+	// Uniquely identifies the path for a change within the changeset. For example,
+	// the IdentifierPath for a core network segment change might be
+	// "CORE_NETWORK_SEGMENT/us-east-1/devsegment" .
 	IdentifierPath *string
 
 	// The new value for a core network
@@ -366,9 +366,9 @@ type CoreNetworkChangeEvent struct {
 	// The timestamp for an event change in status.
 	EventTime *time.Time
 
-	// Uniquely identifies the path for a change within the changeset. For example, the
-	// IdentifierPath for a core network segment change might be
-	// "CORE_NETWORK_SEGMENT/us-east-1/devsegment".
+	// Uniquely identifies the path for a change within the changeset. For example,
+	// the IdentifierPath for a core network segment change might be
+	// "CORE_NETWORK_SEGMENT/us-east-1/devsegment" .
 	IdentifierPath *string
 
 	// The status of the core network change event.
@@ -778,40 +778,21 @@ type NetworkResource struct {
 
 	// The resource type. The following are the supported resource types for Direct
 	// Connect:
-	//
-	// * dxcon
-	//
-	// * dx-gateway
-	//
-	// * dx-vif
-	//
-	// The following are the supported
-	// resource types for Network Manager:
-	//
-	// * connection
-	//
-	// * device
-	//
-	// * link
-	//
-	// * site
-	//
-	// The
-	// following are the supported resource types for Amazon VPC:
-	//
-	// *
-	// customer-gateway
-	//
-	// * transit-gateway
-	//
-	// * transit-gateway-attachment
-	//
-	// *
-	// transit-gateway-connect-peer
-	//
-	// * transit-gateway-route-table
-	//
-	// * vpn-connection
+	//   - dxcon
+	//   - dx-gateway
+	//   - dx-vif
+	// The following are the supported resource types for Network Manager:
+	//   - connection
+	//   - device
+	//   - link
+	//   - site
+	// The following are the supported resource types for Amazon VPC:
+	//   - customer-gateway
+	//   - transit-gateway
+	//   - transit-gateway-attachment
+	//   - transit-gateway-connect-peer
+	//   - transit-gateway-route-table
+	//   - vpn-connection
 	ResourceType *string
 
 	// The tags.
@@ -869,10 +850,10 @@ type NetworkRoute struct {
 	// The ID of the prefix list.
 	PrefixListId *string
 
-	// The route state. The possible values are active and blackhole.
+	// The route state. The possible values are active and blackhole .
 	State RouteState
 
-	// The route type. The possible values are propagated and static.
+	// The route type. The possible values are propagated and static .
 	Type RouteType
 
 	noSmithyDocumentSerde
@@ -940,18 +921,18 @@ type NetworkTelemetry struct {
 type OrganizationStatus struct {
 
 	// The current service-linked role (SLR) deployment status for an Amazon Web
-	// Services Organization's accounts. This will be either SUCCEEDED or IN_PROGRESS.
+	// Services Organization's accounts. This will be either SUCCEEDED or IN_PROGRESS .
 	AccountStatusList []AccountStatus
 
 	// The status of the organization's AWS service access. This will be ENABLED or
-	// DISABLED.
+	// DISABLED .
 	OrganizationAwsServiceAccessStatus *string
 
 	// The ID of an Amazon Web Services Organization.
 	OrganizationId *string
 
 	// The status of the SLR deployment for the account. This will be either SUCCEEDED
-	// or IN_PROGRESS.
+	// or IN_PROGRESS .
 	SLRDeploymentStatus *string
 
 	noSmithyDocumentSerde
@@ -993,7 +974,7 @@ type Peering struct {
 	// The ID of the peering attachment.
 	PeeringId *string
 
-	// The type of peering. This will be TRANSIT_GATEWAY.
+	// The type of peering. This will be TRANSIT_GATEWAY .
 	PeeringType PeeringType
 
 	// The resource ARN of the peer.
@@ -1048,8 +1029,8 @@ type RouteAnalysis struct {
 	// The ID of the global network.
 	GlobalNetworkId *string
 
-	// Indicates whether to analyze the return path. The return path is not analyzed if
-	// the forward path analysis does not succeed.
+	// Indicates whether to analyze the return path. The return path is not analyzed
+	// if the forward path analysis does not succeed.
 	IncludeReturnPath bool
 
 	// The ID of the AWS account that created the route analysis.
@@ -1081,42 +1062,29 @@ type RouteAnalysis struct {
 type RouteAnalysisCompletion struct {
 
 	// The reason code. Available only if a connection is not found.
-	//
-	// *
-	// BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND - Found a black hole route with the
-	// destination CIDR block.
-	//
-	// * CYCLIC_PATH_DETECTED - Found the same resource
-	// multiple times while traversing the path.
-	//
-	// *
-	// INACTIVE_ROUTE_FOR_DESTINATION_FOUND - Found an inactive route with the
-	// destination CIDR block.
-	//
-	// * MAX_HOPS_EXCEEDED - Analysis exceeded 64 hops without
-	// finding the destination.
-	//
-	// * ROUTE_NOT_FOUND - Cannot find a route table with the
-	// destination CIDR block.
-	//
-	// * TGW_ATTACH_ARN_NO_MATCH - Found an attachment, but
-	// not with the correct destination ARN.
-	//
-	// * TGW_ATTACH_NOT_FOUND - Cannot find an
-	// attachment.
-	//
-	// * TGW_ATTACH_NOT_IN_TGW - Found an attachment, but not to the
-	// correct transit gateway.
-	//
-	// * TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND - The state
-	// of the route table association is not associated.
+	//   - BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND - Found a black hole route with the
+	//   destination CIDR block.
+	//   - CYCLIC_PATH_DETECTED - Found the same resource multiple times while
+	//   traversing the path.
+	//   - INACTIVE_ROUTE_FOR_DESTINATION_FOUND - Found an inactive route with the
+	//   destination CIDR block.
+	//   - MAX_HOPS_EXCEEDED - Analysis exceeded 64 hops without finding the
+	//   destination.
+	//   - ROUTE_NOT_FOUND - Cannot find a route table with the destination CIDR block.
+	//   - TGW_ATTACH_ARN_NO_MATCH - Found an attachment, but not with the correct
+	//   destination ARN.
+	//   - TGW_ATTACH_NOT_FOUND - Cannot find an attachment.
+	//   - TGW_ATTACH_NOT_IN_TGW - Found an attachment, but not to the correct transit
+	//   gateway.
+	//   - TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND - The state of the route table
+	//   association is not associated.
 	ReasonCode RouteAnalysisCompletionReasonCode
 
 	// Additional information about the path. Available only if a connection is not
 	// found.
 	ReasonContext map[string]string
 
-	// The result of the analysis. If the status is NOT_CONNECTED, check the reason
+	// The result of the analysis. If the status is NOT_CONNECTED , check the reason
 	// code.
 	ResultCode RouteAnalysisCompletionResultCode
 
@@ -1302,7 +1270,8 @@ type TransitGatewayRouteTableAttachment struct {
 
 	// The ARN of the transit gateway attachment route table. For example,
 	// "TransitGatewayRouteTableArn":
-	// "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456".
+	// "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"
+	// .
 	TransitGatewayRouteTableArn *string
 
 	noSmithyDocumentSerde
@@ -1344,7 +1313,7 @@ type VpcOptions struct {
 
 	// Indicates whether appliance mode is supported. If enabled, traffic flow between
 	// a source and destination use the same Availability Zone for the VPC attachment
-	// for the lifetime of that flow. The default value is false.
+	// for the lifetime of that flow. The default value is false .
 	ApplianceModeSupport bool
 
 	// Indicates whether IPv6 is supported.

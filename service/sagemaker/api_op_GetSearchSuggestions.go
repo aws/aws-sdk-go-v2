@@ -13,7 +13,7 @@ import (
 
 // An auto-complete API for the search functionality in the SageMaker console. It
 // returns suggestions of possible matches for the property name to use in Search
-// queries. Provides suggestions for HyperParameters, Tags, and Metrics.
+// queries. Provides suggestions for HyperParameters , Tags , and Metrics .
 func (c *Client) GetSearchSuggestions(ctx context.Context, params *GetSearchSuggestionsInput, optFns ...func(*Options)) (*GetSearchSuggestionsOutput, error) {
 	if params == nil {
 		params = &GetSearchSuggestionsInput{}
@@ -44,7 +44,7 @@ type GetSearchSuggestionsInput struct {
 
 type GetSearchSuggestionsOutput struct {
 
-	// A list of property names for a Resource that match a SuggestionQuery.
+	// A list of property names for a Resource that match a SuggestionQuery .
 	PropertyNameSuggestions []types.PropertyNameSuggestion
 
 	// Metadata pertaining to the operation's result.

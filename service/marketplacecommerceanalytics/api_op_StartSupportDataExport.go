@@ -47,15 +47,11 @@ type StartSupportDataExportInput struct {
 	// Code, Customer Guid, Subscription Guid, Subscription Start Date, Organization,
 	// AWS Account Id, Given Name, Surname, Telephone Number, Email, Title, Country
 	// Code, ZIP Code, Operation Type, and Operation Time.
-	//
-	// *
-	// customer_support_contacts_data Customer support contact data. The data set will
-	// contain all changes (Creates, Updates, and Deletes) to customer support contact
-	// data from the date specified in the from_date parameter.
-	//
-	// *
-	// test_customer_support_contacts_data An example data set containing static test
-	// data in the same format as customer_support_contacts_data
+	//   - customer_support_contacts_data Customer support contact data. The data set
+	//   will contain all changes (Creates, Updates, and Deletes) to customer support
+	//   contact data from the date specified in the from_date parameter.
+	//   - test_customer_support_contacts_data An example data set containing static
+	//   test data in the same format as customer_support_contacts_data
 	//
 	// This member is required.
 	DataSetType types.SupportDataSetType
@@ -77,14 +73,14 @@ type StartSupportDataExportInput struct {
 	// This member is required.
 	RoleNameArn *string
 
-	// Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data
-	// set has been published or if an error has occurred.
+	// Amazon Resource Name (ARN) for the SNS Topic that will be notified when the
+	// data set has been published or if an error has occurred.
 	//
 	// This member is required.
 	SnsTopicArn *string
 
-	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS
-	// notification message and the data set metadata file.
+	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon
+	// SNS notification message and the data set metadata file.
 	CustomerDefinedValues map[string]string
 
 	// (Optional) The desired S3 prefix for the published data set, similar to a

@@ -74,7 +74,7 @@ type GetSlotTypeOutput struct {
 	SlotTypeConfigurations []types.SlotTypeConfiguration
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For more
-	// information, see PutSlotType.
+	// information, see PutSlotType .
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
 
 	// The version of the slot type.

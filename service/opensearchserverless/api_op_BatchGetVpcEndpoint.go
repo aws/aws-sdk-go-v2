@@ -13,8 +13,8 @@ import (
 
 // Returns attributes for one or more VPC endpoints associated with the current
 // account. For more information, see Access Amazon OpenSearch Serverless using an
-// interface endpoint
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html).
+// interface endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
+// .
 func (c *Client) BatchGetVpcEndpoint(ctx context.Context, params *BatchGetVpcEndpointInput, optFns ...func(*Options)) (*BatchGetVpcEndpointOutput, error) {
 	if params == nil {
 		params = &BatchGetVpcEndpointInput{}

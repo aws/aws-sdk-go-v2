@@ -14,8 +14,8 @@ import (
 // Adds one or more key-value tags to a Kinesis Data Analytics application. Note
 // that the maximum number of application tags includes system tags. The maximum
 // number of user-defined application tags is 50. For more information, see Using
-// Tagging
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
+// Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html)
+// .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

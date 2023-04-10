@@ -12,9 +12,9 @@ import (
 )
 
 // Update template sync configuration parameters, except for the templateName and
-// templateType. Repository details (branch, name, and provider) should be of a
+// templateType . Repository details (branch, name, and provider) should be of a
 // linked repository. A linked repository is a repository that has been registered
-// with Proton. For more information, see CreateRepository.
+// with Proton. For more information, see CreateRepository .
 func (c *Client) UpdateTemplateSyncConfig(ctx context.Context, params *UpdateTemplateSyncConfigInput, optFns ...func(*Options)) (*UpdateTemplateSyncConfigOutput, error) {
 	if params == nil {
 		params = &UpdateTemplateSyncConfigInput{}
@@ -37,7 +37,7 @@ type UpdateTemplateSyncConfigInput struct {
 	// This member is required.
 	Branch *string
 
-	// The repository name (for example, myrepos/myrepo).
+	// The repository name (for example, myrepos/myrepo ).
 	//
 	// This member is required.
 	RepositoryName *string

@@ -30,13 +30,13 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 // Represents the input of a CreateApplication operation.
 type CreateApplicationInput struct {
 
-	// The name of the application. This name must be unique with the applicable IAM or
-	// Amazon Web Services account.
+	// The name of the application. This name must be unique with the applicable IAM
+	// or Amazon Web Services account.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// The destination platform type for the deployment (Lambda, Server, or ECS).
+	// The destination platform type for the deployment ( Lambda , Server , or ECS ).
 	ComputePlatform types.ComputePlatform
 
 	// The metadata that you apply to CodeDeploy applications to help you organize and

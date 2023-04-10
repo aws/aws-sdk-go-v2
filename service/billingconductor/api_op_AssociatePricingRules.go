@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Connects an array of PricingRuleArns to a defined PricingPlan. The maximum
+// Connects an array of PricingRuleArns to a defined PricingPlan . The maximum
 // number PricingRuleArn that can be associated in one call is 30.
 func (c *Client) AssociatePricingRules(ctx context.Context, params *AssociatePricingRulesInput, optFns ...func(*Options)) (*AssociatePricingRulesOutput, error) {
 	if params == nil {

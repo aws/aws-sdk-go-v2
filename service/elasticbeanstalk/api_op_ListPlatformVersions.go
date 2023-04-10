@@ -14,10 +14,10 @@ import (
 
 // Lists the platform versions available for your account in an AWS Region.
 // Provides summary information about each platform version. Compare to
-// DescribePlatformVersion, which provides full details about a single platform
+// DescribePlatformVersion , which provides full details about a single platform
 // version. For definitions of platform version and other platform-related terms,
-// see AWS Elastic Beanstalk Platforms Glossary
-// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
+// see AWS Elastic Beanstalk Platforms Glossary (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html)
+// .
 func (c *Client) ListPlatformVersions(ctx context.Context, params *ListPlatformVersionsInput, optFns ...func(*Options)) (*ListPlatformVersionsOutput, error) {
 	if params == nil {
 		params = &ListPlatformVersionsInput{}
@@ -53,7 +53,7 @@ type ListPlatformVersionsInput struct {
 
 type ListPlatformVersionsOutput struct {
 
-	// In a paginated request, if this value isn't null, it's the token that you can
+	// In a paginated request, if this value isn't null , it's the token that you can
 	// pass in a subsequent request to get the next response page.
 	NextToken *string
 

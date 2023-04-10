@@ -15,8 +15,8 @@ import (
 // resource-identifying parameter. Required Permissions: To use this action, an IAM
 // user must have a Show, Deploy, or Manage permissions level for the stack, or an
 // attached policy that explicitly grants permissions. For more information about
-// user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeCommands(ctx context.Context, params *DescribeCommandsInput, optFns ...func(*Options)) (*DescribeCommandsOutput, error) {
 	if params == nil {
 		params = &DescribeCommandsInput{}
@@ -34,9 +34,9 @@ func (c *Client) DescribeCommands(ctx context.Context, params *DescribeCommandsI
 
 type DescribeCommandsInput struct {
 
-	// An array of command IDs. If you include this parameter, DescribeCommands returns
-	// a description of the specified commands. Otherwise, it returns a description of
-	// every command.
+	// An array of command IDs. If you include this parameter, DescribeCommands
+	// returns a description of the specified commands. Otherwise, it returns a
+	// description of every command.
 	CommandIds []string
 
 	// The deployment ID. If you include this parameter, DescribeCommands returns a

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds an alert subscription to a cost anomaly detection monitor. You can use each
-// subscription to define subscribers with email or SNS notifications. Email
+// Adds an alert subscription to a cost anomaly detection monitor. You can use
+// each subscription to define subscribers with email or SNS notifications. Email
 // subscribers can set an absolute or percentage threshold and a time frequency for
 // receiving notifications.
 func (c *Client) CreateAnomalySubscription(ctx context.Context, params *CreateAnomalySubscriptionInput, optFns ...func(*Options)) (*CreateAnomalySubscriptionOutput, error) {
@@ -37,33 +37,21 @@ type CreateAnomalySubscriptionInput struct {
 	// This member is required.
 	AnomalySubscription *types.AnomalySubscription
 
-	// An optional list of tags to associate with the specified AnomalySubscription
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html).
-	// You can use resource tags to control access to your subscription using IAM
+	// An optional list of tags to associate with the specified AnomalySubscription (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html)
+	// . You can use resource tags to control access to your subscription using IAM
 	// policies. Each tag consists of a key and a value, and each key must be unique
 	// for the resource. The following restrictions apply to resource tags:
-	//
-	// * Although
-	// the maximum number of array members is 200, you can assign a maximum of 50
-	// user-tags to one resource. The remaining are reserved for Amazon Web Services
-	// use
-	//
-	// * The maximum length of a key is 128 characters
-	//
-	// * The maximum length of a
-	// value is 256 characters
-	//
-	// * Keys and values can only contain alphanumeric
-	// characters, spaces, and any of the following: _.:/=+@-
-	//
-	// * Keys and values are
-	// case sensitive
-	//
-	// * Keys and values are trimmed for any leading or trailing
-	// whitespaces
-	//
-	// * Don’t use aws: as a prefix for your keys. This prefix is reserved
-	// for Amazon Web Services use
+	//   - Although the maximum number of array members is 200, you can assign a
+	//   maximum of 50 user-tags to one resource. The remaining are reserved for Amazon
+	//   Web Services use
+	//   - The maximum length of a key is 128 characters
+	//   - The maximum length of a value is 256 characters
+	//   - Keys and values can only contain alphanumeric characters, spaces, and any
+	//   of the following: _.:/=+@-
+	//   - Keys and values are case sensitive
+	//   - Keys and values are trimmed for any leading or trailing whitespaces
+	//   - Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon
+	//   Web Services use
 	ResourceTags []types.ResourceTag
 
 	noSmithyDocumentSerde

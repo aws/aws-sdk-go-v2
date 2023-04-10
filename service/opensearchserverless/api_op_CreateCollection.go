@@ -13,8 +13,8 @@ import (
 )
 
 // Creates a new OpenSearch Serverless collection. For more information, see
-// Creating and managing Amazon OpenSearch Serverless collections
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html).
+// Creating and managing Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html)
+// .
 func (c *Client) CreateCollection(ctx context.Context, params *CreateCollectionInput, optFns ...func(*Options)) (*CreateCollectionOutput, error) {
 	if params == nil {
 		params = &CreateCollectionInput{}

@@ -12,8 +12,8 @@ import (
 
 // Deletes a custom location. Before deleting a custom location, review any fleets
 // currently using the custom location and deregister the location if it is in use.
-// For more information see, DeregisterCompute
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeregisterCompute.html).
+// For more information see, DeregisterCompute (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeregisterCompute.html)
+// .
 func (c *Client) DeleteLocation(ctx context.Context, params *DeleteLocationInput, optFns ...func(*Options)) (*DeleteLocationOutput, error) {
 	if params == nil {
 		params = &DeleteLocationInput{}

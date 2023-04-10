@@ -3,10 +3,10 @@
 // Package iotdeviceadvisor provides the API client, operations, and parameter
 // types for AWS IoT Core Device Advisor.
 //
-// Amazon Web Services IoT Core Device Advisor is a cloud-based, fully managed test
-// capability for validating IoT devices during device software development. Device
-// Advisor provides pre-built tests that you can use to validate IoT devices for
-// reliable and secure connectivity with Amazon Web Services IoT Core before
+// Amazon Web Services IoT Core Device Advisor is a cloud-based, fully managed
+// test capability for validating IoT devices during device software development.
+// Device Advisor provides pre-built tests that you can use to validate IoT devices
+// for reliable and secure connectivity with Amazon Web Services IoT Core before
 // deploying devices to production. By using Device Advisor, you can confirm that
 // your devices can connect to Amazon Web Services IoT Core, follow security best
 // practices and, if applicable, receive software updates from IoT Device

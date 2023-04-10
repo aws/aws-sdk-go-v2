@@ -59,8 +59,8 @@ type GetConnectorDefinitionVersionOutput struct {
 	// The ARN of the connector definition version.
 	Arn *string
 
-	// The time, in milliseconds since the epoch, when the connector definition version
-	// was created.
+	// The time, in milliseconds since the epoch, when the connector definition
+	// version was created.
 	CreationTimestamp *string
 
 	// Information about the connector definition version.

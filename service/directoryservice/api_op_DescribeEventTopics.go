@@ -48,8 +48,8 @@ type DescribeEventTopicsInput struct {
 // The result of a DescribeEventTopic request.
 type DescribeEventTopicsOutput struct {
 
-	// A list of Amazon SNS topic names that receive status messages from the specified
-	// Directory ID.
+	// A list of Amazon SNS topic names that receive status messages from the
+	// specified Directory ID.
 	EventTopics []types.EventTopic
 
 	// Metadata pertaining to the operation's result.

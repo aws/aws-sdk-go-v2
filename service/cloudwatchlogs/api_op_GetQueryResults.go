@@ -12,19 +12,17 @@ import (
 )
 
 // Returns the results from the specified query. Only the fields requested in the
-// query are returned, along with a @ptr field, which is the identifier for the log
-// record. You can use the value of @ptr in a GetLogRecord
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html)
+// query are returned, along with a @ptr field, which is the identifier for the
+// log record. You can use the value of @ptr in a GetLogRecord (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html)
 // operation to get the full log record. GetQueryResults does not start running a
-// query. To run a query, use StartQuery
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html).
-// If the value of the Status field in the output is Running, this operation
-// returns only partial results. If you see a value of Scheduled or Running for the
-// status, you can retry the operation later to see the final results. If you are
-// using CloudWatch cross-account observability, you can use this operation in a
-// monitoring account to start queries in linked source accounts. For more
-// information, see CloudWatch cross-account observability
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
+// query. To run a query, use StartQuery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
+// . If the value of the Status field in the output is Running , this operation
+// returns only partial results. If you see a value of Scheduled or Running for
+// the status, you can retry the operation later to see the final results. If you
+// are using CloudWatch cross-account observability, you can use this operation in
+// a monitoring account to start queries in linked source accounts. For more
+// information, see CloudWatch cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
+// .
 func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInput, optFns ...func(*Options)) (*GetQueryResultsOutput, error) {
 	if params == nil {
 		params = &GetQueryResultsInput{}
@@ -54,20 +52,21 @@ type GetQueryResultsOutput struct {
 
 	// The log events that matched the query criteria during the most recent time it
 	// ran. The results value is an array of arrays. Each log event is one object in
-	// the top-level array. Each of these log event objects is an array of field/value
+	// the top-level array. Each of these log event objects is an array of field / value
 	// pairs.
 	Results [][]types.ResultField
 
-	// Includes the number of log events scanned by the query, the number of log events
-	// that matched the query criteria, and the total number of bytes in the log events
-	// that were scanned. These values reflect the full raw results of the query.
+	// Includes the number of log events scanned by the query, the number of log
+	// events that matched the query criteria, and the total number of bytes in the log
+	// events that were scanned. These values reflect the full raw results of the
+	// query.
 	Statistics *types.QueryStatistics
 
 	// The status of the most recent running of the query. Possible values are
-	// Cancelled, Complete, Failed, Running, Scheduled, Timeout, and Unknown. Queries
-	// time out after 15 minutes of runtime. To avoid having your queries time out,
-	// reduce the time range being searched or partition your query into a number of
-	// queries.
+	// Cancelled , Complete , Failed , Running , Scheduled , Timeout , and Unknown .
+	// Queries time out after 15 minutes of runtime. To avoid having your queries time
+	// out, reduce the time range being searched or partition your query into a number
+	// of queries.
 	Status types.QueryStatus
 
 	// Metadata pertaining to the operation's result.

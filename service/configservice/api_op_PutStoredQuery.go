@@ -36,8 +36,8 @@ func (c *Client) PutStoredQuery(ctx context.Context, params *PutStoredQueryInput
 
 type PutStoredQueryInput struct {
 
-	// A list of StoredQuery objects. The mandatory fields are QueryName and
-	// Expression. When you are creating a query, you must provide a query name and an
+	// A list of StoredQuery objects. The mandatory fields are QueryName and Expression
+	// . When you are creating a query, you must provide a query name and an
 	// expression. When you are updating a query, you must provide a query name but
 	// updating the description is optional.
 	//

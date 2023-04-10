@@ -60,10 +60,10 @@ type AlgorithmImage struct {
 	noSmithyDocumentSerde
 }
 
-// When the solution performs AutoML (performAutoML is true in CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)),
-// Amazon Personalize determines which recipe, from the specified list, optimizes
-// the given metric. Amazon Personalize then uses that recipe for the solution.
+// When the solution performs AutoML ( performAutoML is true in CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+// ), Amazon Personalize determines which recipe, from the specified list,
+// optimizes the given metric. Amazon Personalize then uses that recipe for the
+// solution.
 type AutoMLConfig struct {
 
 	// The metric to optimize.
@@ -75,9 +75,8 @@ type AutoMLConfig struct {
 	noSmithyDocumentSerde
 }
 
-// When the solution performs AutoML (performAutoML is true in CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)),
-// specifies the recipe that best optimized the specified metric.
+// When the solution performs AutoML ( performAutoML is true in CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+// ), specifies the recipe that best optimized the specified metric.
 type AutoMLResult struct {
 
 	// The Amazon Resource Name (ARN) of the best recipe.
@@ -132,14 +131,10 @@ type BatchInferenceJob struct {
 
 	// The status of the batch inference job. The status is one of the following
 	// values:
-	//
-	// * PENDING
-	//
-	// * IN PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE FAILED
+	//   - PENDING
+	//   - IN PROGRESS
+	//   - ACTIVE
+	//   - CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -148,11 +143,11 @@ type BatchInferenceJob struct {
 // The configuration details of a batch inference job.
 type BatchInferenceJobConfig struct {
 
-	// A string to string map specifying the exploration configuration hyperparameters,
-	// including explorationWeight and explorationItemAgeCutOff, you want to use to
-	// configure the amount of item exploration Amazon Personalize uses when
-	// recommending items. See User-Personalization
-	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html).
+	// A string to string map specifying the exploration configuration
+	// hyperparameters, including explorationWeight and explorationItemAgeCutOff , you
+	// want to use to configure the amount of item exploration Amazon Personalize uses
+	// when recommending items. See User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// .
 	ItemExplorationConfig map[string]string
 
 	noSmithyDocumentSerde
@@ -173,8 +168,8 @@ type BatchInferenceJobInput struct {
 // The output configuration parameters of a batch inference job.
 type BatchInferenceJobOutput struct {
 
-	// Information on the Amazon S3 bucket in which the batch inference job's output is
-	// stored.
+	// Information on the Amazon S3 bucket in which the batch inference job's output
+	// is stored.
 	//
 	// This member is required.
 	S3DataDestination *S3DataConfig
@@ -182,10 +177,8 @@ type BatchInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-// A truncated version of the BatchInferenceJob
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_BatchInferenceJob.html).
-// The ListBatchInferenceJobs
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchInferenceJobs.html)
+// A truncated version of the BatchInferenceJob (https://docs.aws.amazon.com/personalize/latest/dg/API_BatchInferenceJob.html)
+// . The ListBatchInferenceJobs (https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchInferenceJobs.html)
 // operation returns a list of batch inference job summaries.
 type BatchInferenceJobSummary struct {
 
@@ -209,14 +202,10 @@ type BatchInferenceJobSummary struct {
 
 	// The status of the batch inference job. The status is one of the following
 	// values:
-	//
-	// * PENDING
-	//
-	// * IN PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE FAILED
+	//   - PENDING
+	//   - IN PROGRESS
+	//   - ACTIVE
+	//   - CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -259,20 +248,15 @@ type BatchSegmentJob struct {
 	// the batch segment job.
 	RoleArn *string
 
-	// The Amazon Resource Name (ARN) of the solution version used by the batch segment
-	// job to generate batch segments.
+	// The Amazon Resource Name (ARN) of the solution version used by the batch
+	// segment job to generate batch segments.
 	SolutionVersionArn *string
 
-	// The status of the batch segment job. The status is one of the following
-	// values:
-	//
-	// * PENDING
-	//
-	// * IN PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE FAILED
+	// The status of the batch segment job. The status is one of the following values:
+	//   - PENDING
+	//   - IN PROGRESS
+	//   - ACTIVE
+	//   - CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -300,10 +284,8 @@ type BatchSegmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-// A truncated version of the BatchSegmentJob
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_BatchSegmentJob.html)
-// datatype. ListBatchSegmentJobs
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchSegmentJobs.html)
+// A truncated version of the BatchSegmentJob (https://docs.aws.amazon.com/personalize/latest/dg/API_BatchSegmentJob.html)
+// datatype. ListBatchSegmentJobs (https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchSegmentJobs.html)
 // operation returns a list of batch segment job summaries.
 type BatchSegmentJobSummary struct {
 
@@ -322,28 +304,23 @@ type BatchSegmentJobSummary struct {
 	// The time at which the batch segment job was last updated.
 	LastUpdatedDateTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the solution version used by the batch segment
-	// job to generate batch segments.
+	// The Amazon Resource Name (ARN) of the solution version used by the batch
+	// segment job to generate batch segments.
 	SolutionVersionArn *string
 
-	// The status of the batch segment job. The status is one of the following
-	// values:
-	//
-	// * PENDING
-	//
-	// * IN PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE FAILED
+	// The status of the batch segment job. The status is one of the following values:
+	//   - PENDING
+	//   - IN PROGRESS
+	//   - ACTIVE
+	//   - CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
 // An object that describes the deployment of a solution version. For more
-// information on campaigns, see CreateCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html).
+// information on campaigns, see CreateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html)
+// .
 type Campaign struct {
 
 	// The Amazon Resource Name (ARN) of the campaign.
@@ -362,8 +339,7 @@ type Campaign struct {
 	LastUpdatedDateTime *time.Time
 
 	// Provides a summary of the properties of a campaign update. For a complete
-	// listing, call the DescribeCampaign
-	// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+	// listing, call the DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
 	// API.
 	LatestCampaignUpdate *CampaignUpdateSummary
 
@@ -378,12 +354,8 @@ type Campaign struct {
 	SolutionVersionArn *string
 
 	// The status of the campaign. A campaign can be in one of the following states:
-	//
-	// *
-	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -393,20 +365,18 @@ type Campaign struct {
 type CampaignConfig struct {
 
 	// Specifies the exploration configuration hyperparameters, including
-	// explorationWeight and explorationItemAgeCutOff, you want to use to configure the
-	// amount of item exploration Amazon Personalize uses when recommending items.
+	// explorationWeight and explorationItemAgeCutOff , you want to use to configure
+	// the amount of item exploration Amazon Personalize uses when recommending items.
 	// Provide itemExplorationConfig data only if your solution uses the
-	// User-Personalization
-	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
 	// recipe.
 	ItemExplorationConfig map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of the properties of a campaign. For a complete listing, call
-// the DescribeCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+// Provides a summary of the properties of a campaign. For a complete listing,
+// call the DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
 // API.
 type CampaignSummary struct {
 
@@ -426,20 +396,15 @@ type CampaignSummary struct {
 	Name *string
 
 	// The status of the campaign. A campaign can be in one of the following states:
-	//
-	// *
-	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a campaign update. For a complete
-// listing, call the DescribeCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+// listing, call the DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
 // API.
 type CampaignUpdateSummary struct {
 
@@ -464,11 +429,8 @@ type CampaignUpdateSummary struct {
 
 	// The status of the campaign update. A campaign update can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-	// FAILED
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -514,12 +476,9 @@ type Dataset struct {
 	DatasetGroupArn *string
 
 	// One of the following values:
-	//
-	// * Interactions
-	//
-	// * Items
-	//
-	// * Users
+	//   - Interactions
+	//   - Items
+	//   - Users
 	DatasetType *string
 
 	// A time stamp that shows when the dataset was updated.
@@ -532,24 +491,17 @@ type Dataset struct {
 	SchemaArn *string
 
 	// The status of the dataset. A dataset can be in one of the following states:
-	//
-	// *
-	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
 // Describes a job that exports a dataset to an Amazon S3 bucket. For more
-// information, see CreateDatasetExportJob
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html).
-// A dataset export job can be in one of the following states:
-//
-// * CREATE PENDING >
-// CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// information, see CreateDatasetExportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html)
+// . A dataset export job can be in one of the following states:
+//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 type DatasetExportJob struct {
 
 	// The creation date and time (in Unix time) of the dataset export job.
@@ -564,10 +516,10 @@ type DatasetExportJob struct {
 	// If a dataset export job fails, provides the reason why.
 	FailureReason *string
 
-	// The data to export, based on how you imported the data. You can choose to export
-	// BULK data that you imported using a dataset import job, PUT data that you
-	// imported incrementally (using the console, PutEvents, PutUsers and PutItems
-	// operations), or ALL for both types. The default value is PUT.
+	// The data to export, based on how you imported the data. You can choose to
+	// export BULK data that you imported using a dataset import job, PUT data that
+	// you imported incrementally (using the console, PutEvents, PutUsers and PutItems
+	// operations), or ALL for both types. The default value is PUT .
 	IngestionMode IngestionMode
 
 	// The name of the export job.
@@ -587,9 +539,7 @@ type DatasetExportJob struct {
 
 	// The status of the dataset export job. A dataset export job can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-	// FAILED
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -607,8 +557,7 @@ type DatasetExportJobOutput struct {
 }
 
 // Provides a summary of the properties of a dataset export job. For a complete
-// listing, call the DescribeDatasetExportJob
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html)
+// listing, call the DescribeDatasetExportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html)
 // API.
 type DatasetExportJobSummary struct {
 
@@ -630,23 +579,20 @@ type DatasetExportJobSummary struct {
 
 	// The status of the dataset export job. A dataset export job can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-	// FAILED
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
 // A dataset group is a collection of related datasets (Interactions, User, and
-// Item). You create a dataset group by calling CreateDatasetGroup
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html).
-// You then create a dataset and add it to a dataset group by calling CreateDataset
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html). The
-// dataset group is used to create and train a solution by calling CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html). A
-// dataset group can contain only one of each type of dataset. You can specify an
-// Key Management Service (KMS) key to encrypt the datasets in the group.
+// Item). You create a dataset group by calling CreateDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html)
+// . You then create a dataset and add it to a dataset group by calling
+// CreateDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
+// . The dataset group is used to create and train a solution by calling
+// CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+// . A dataset group can contain only one of each type of dataset. You can specify
+// an Key Management Service (KMS) key to encrypt the datasets in the group.
 type DatasetGroup struct {
 
 	// The creation date and time (in Unix time) of the dataset group.
@@ -676,19 +622,15 @@ type DatasetGroup struct {
 
 	// The current status of the dataset group. A dataset group can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-	// FAILED
-	//
-	// * DELETE PENDING
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of the properties of a dataset group. For a complete listing,
-// call the DescribeDatasetGroup
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html)
+// Provides a summary of the properties of a dataset group. For a complete
+// listing, call the DescribeDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html)
 // API.
 type DatasetGroupSummary struct {
 
@@ -712,24 +654,18 @@ type DatasetGroupSummary struct {
 
 	// The status of the dataset group. A dataset group can be in one of the following
 	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
-	// DELETE PENDING
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes a job that imports training data from a data source (Amazon S3 bucket)
-// to an Amazon Personalize dataset. For more information, see
-// CreateDatasetImportJob
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html).
-// A dataset import job can be in one of the following states:
-//
-// * CREATE PENDING >
-// CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// Describes a job that imports training data from a data source (Amazon S3
+// bucket) to an Amazon Personalize dataset. For more information, see
+// CreateDatasetImportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html)
+// . A dataset import job can be in one of the following states:
+//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 type DatasetImportJob struct {
 
 	// The creation date and time (in Unix time) of the dataset import job.
@@ -765,17 +701,14 @@ type DatasetImportJob struct {
 
 	// The status of the dataset import job. A dataset import job can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-	// FAILED
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a dataset import job. For a complete
-// listing, call the DescribeDatasetImportJob
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html)
+// listing, call the DescribeDatasetImportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html)
 // API.
 type DatasetImportJobSummary struct {
 
@@ -789,8 +722,8 @@ type DatasetImportJobSummary struct {
 	FailureReason *string
 
 	// The import mode the dataset import job used to update the data in the dataset.
-	// For more information see Updating existing bulk data
-	// (https://docs.aws.amazon.com/personalize/latest/dg/updating-existing-bulk-data.html).
+	// For more information see Updating existing bulk data (https://docs.aws.amazon.com/personalize/latest/dg/updating-existing-bulk-data.html)
+	// .
 	ImportMode ImportMode
 
 	// The name of the dataset import job.
@@ -802,17 +735,15 @@ type DatasetImportJobSummary struct {
 
 	// The status of the dataset import job. A dataset import job can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-	// FAILED
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
 // Describes the schema for a dataset. For more information on schemas, see
-// CreateSchema
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html).
+// CreateSchema (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html)
+// .
 type DatasetSchema struct {
 
 	// The date and time (in Unix time) that the schema was created.
@@ -837,8 +768,8 @@ type DatasetSchema struct {
 }
 
 // Provides a summary of the properties of a dataset schema. For a complete
-// listing, call the DescribeSchema
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html) API.
+// listing, call the DescribeSchema (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html)
+// API.
 type DatasetSchemaSummary struct {
 
 	// The date and time (in Unix time) that the schema was created.
@@ -860,8 +791,7 @@ type DatasetSchemaSummary struct {
 }
 
 // Provides a summary of the properties of a dataset. For a complete listing, call
-// the DescribeDataset
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html)
+// the DescribeDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html)
 // API.
 type DatasetSummary struct {
 
@@ -872,15 +802,10 @@ type DatasetSummary struct {
 	DatasetArn *string
 
 	// The dataset type. One of the following values:
-	//
-	// * Interactions
-	//
-	// * Items
-	//
-	// *
-	// Users
-	//
-	// * Event-Interactions
+	//   - Interactions
+	//   - Items
+	//   - Users
+	//   - Event-Interactions
 	DatasetType *string
 
 	// The date and time (in Unix time) that the dataset was last updated.
@@ -890,12 +815,8 @@ type DatasetSummary struct {
 	Name *string
 
 	// The status of the dataset. A dataset can be in one of the following states:
-	//
-	// *
-	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1006,25 +927,21 @@ type EventTracker struct {
 	// The name of the event tracker.
 	Name *string
 
-	// The status of the event tracker. An event tracker can be in one of the following
-	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
-	// DELETE PENDING > DELETE IN_PROGRESS
+	// The status of the event tracker. An event tracker can be in one of the
+	// following states:
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
-	// The ID of the event tracker. Include this ID in requests to the PutEvents
-	// (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html) API.
+	// The ID of the event tracker. Include this ID in requests to the PutEvents (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html)
+	// API.
 	TrackingId *string
 
 	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of an event tracker. For a complete
-// listing, call the DescribeEventTracker
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html)
+// listing, call the DescribeEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html)
 // API.
 type EventTrackerSummary struct {
 
@@ -1040,13 +957,10 @@ type EventTrackerSummary struct {
 	// The name of the event tracker.
 	Name *string
 
-	// The status of the event tracker. An event tracker can be in one of the following
-	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
-	// DELETE PENDING > DELETE IN_PROGRESS
+	// The status of the event tracker. An event tracker can be in one of the
+	// following states:
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1072,11 +986,9 @@ type FeatureTransformation struct {
 	// The name of the feature transformation.
 	Name *string
 
-	// The status of the feature transformation. A feature transformation can be in one
-	// of the following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
-	// CREATE FAILED
+	// The status of the feature transformation. A feature transformation can be in
+	// one of the following states:
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1098,10 +1010,10 @@ type Filter struct {
 	// The ARN of the filter.
 	FilterArn *string
 
-	// Specifies the type of item interactions to filter out of recommendation results.
-	// The filter expression must follow specific format rules. For information about
-	// filter expression structure and syntax, see Filter expressions
-	// (https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html).
+	// Specifies the type of item interactions to filter out of recommendation
+	// results. The filter expression must follow specific format rules. For
+	// information about filter expression structure and syntax, see Filter expressions (https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html)
+	// .
 	FilterExpression *string
 
 	// The time at which the filter was last updated.
@@ -1169,7 +1081,7 @@ type HPOObjective struct {
 	// A regular expression for finding the metric in the training job logs.
 	MetricRegex *string
 
-	// The type of the metric. Valid values are Maximize and Minimize.
+	// The type of the metric. Valid values are Maximize and Minimize .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -1179,11 +1091,11 @@ type HPOObjective struct {
 type HPOResourceConfig struct {
 
 	// The maximum number of training jobs when you create a solution version. The
-	// maximum value for maxNumberOfTrainingJobs is 40.
+	// maximum value for maxNumberOfTrainingJobs is 40 .
 	MaxNumberOfTrainingJobs *string
 
-	// The maximum number of parallel training jobs when you create a solution version.
-	// The maximum value for maxParallelTrainingJobs is 10.
+	// The maximum number of parallel training jobs when you create a solution
+	// version. The maximum value for maxParallelTrainingJobs is 10 .
 	MaxParallelTrainingJobs *string
 
 	noSmithyDocumentSerde
@@ -1221,8 +1133,8 @@ type IntegerHyperParameterRange struct {
 }
 
 // Contains information on a metric that a metric attribution reports on. For more
-// information, see Measuring impact of recommendations
-// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+// information, see Measuring impact of recommendations (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html)
+// .
 type MetricAttribute struct {
 
 	// The metric's event type.
@@ -1230,7 +1142,7 @@ type MetricAttribute struct {
 	// This member is required.
 	EventType *string
 
-	// The attribute's expression. Available functions are SUM() or SAMPLECOUNT(). For
+	// The attribute's expression. Available functions are SUM() or SAMPLECOUNT() . For
 	// SUM() functions, provide the dataset type (either Interactions or Items) and
 	// column to sum as a parameter. For example SUM(Items.PRICE).
 	//
@@ -1249,8 +1161,8 @@ type MetricAttribute struct {
 // Contains information on a metric attribution. A metric attribution creates
 // reports on the data that you import into Amazon Personalize. Depending on how
 // you import the data, you can view reports in Amazon CloudWatch or Amazon S3. For
-// more information, see Measuring impact of recommendations
-// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+// more information, see Measuring impact of recommendations (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html)
+// .
 type MetricAttribution struct {
 
 	// The metric attribution's creation date time.
@@ -1285,8 +1197,8 @@ type MetricAttributionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM service role that has permissions to
 	// add data to your output Amazon S3 bucket and add metrics to Amazon CloudWatch.
-	// For more information, see Measuring impact of recommendations
-	// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+	// For more information, see Measuring impact of recommendations (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html)
+	// .
 	//
 	// This member is required.
 	RoleArn *string
@@ -1298,8 +1210,8 @@ type MetricAttributionOutput struct {
 }
 
 // Provides a summary of the properties of a metric attribution. For a complete
-// listing, call the DescribeMetricAttribution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeMetricAttribution.html).
+// listing, call the DescribeMetricAttribution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeMetricAttribution.html)
+// .
 type MetricAttributionSummary struct {
 
 	// The metric attribution's creation date time.
@@ -1325,8 +1237,8 @@ type MetricAttributionSummary struct {
 
 // Describes the additional objective for the solution, such as maximizing
 // streaming minutes or increasing revenue. For more information see Optimizing a
-// solution
-// (https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html).
+// solution (https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html)
+// .
 type OptimizationObjective struct {
 
 	// The numerical metadata column in an Items dataset related to the optimization
@@ -1342,8 +1254,7 @@ type OptimizationObjective struct {
 }
 
 // Provides information about a recipe. Each recipe provides an algorithm that
-// Amazon Personalize uses in model training when you use the CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+// Amazon Personalize uses in model training when you use the CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
 // operation.
 type Recipe struct {
 
@@ -1370,13 +1281,9 @@ type Recipe struct {
 	RecipeArn *string
 
 	// One of the following values:
-	//
-	// * PERSONALIZED_RANKING
-	//
-	// * RELATED_ITEMS
-	//
-	// *
-	// USER_PERSONALIZATION
+	//   - PERSONALIZED_RANKING
+	//   - RELATED_ITEMS
+	//   - USER_PERSONALIZATION
 	RecipeType *string
 
 	// The status of the recipe.
@@ -1386,8 +1293,8 @@ type Recipe struct {
 }
 
 // Provides a summary of the properties of a recipe. For a complete listing, call
-// the DescribeRecipe
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecipe.html) API.
+// the DescribeRecipe (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecipe.html)
+// API.
 type RecipeSummary struct {
 
 	// The date and time (in Unix time) that the recipe was created.
@@ -1413,8 +1320,7 @@ type RecipeSummary struct {
 
 // Describes a recommendation generator for a Domain dataset group. You create a
 // recommender in a Domain dataset group for a specific domain use case (domain
-// recipe), and specify the recommender in a GetRecommendations
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
+// recipe), and specify the recommender in a GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
 // request.
 type Recommender struct {
 
@@ -1435,8 +1341,8 @@ type Recommender struct {
 	LatestRecommenderUpdate *RecommenderUpdateSummary
 
 	// Provides evaluation metrics that help you determine the performance of a
-	// recommender. For more information, see  Evaluating a recommender
-	// (https://docs.aws.amazon.com/personalize/latest/dg/evaluating-recommenders.html).
+	// recommender. For more information, see Evaluating a recommender (https://docs.aws.amazon.com/personalize/latest/dg/evaluating-recommenders.html)
+	// .
 	ModelMetrics map[string]float64
 
 	// The name of the recommender.
@@ -1454,14 +1360,10 @@ type Recommender struct {
 
 	// The status of the recommender. A recommender can be in one of the following
 	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
-	// STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS >
-	// ACTIVE
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
+	//   IN_PROGRESS > ACTIVE
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1471,8 +1373,8 @@ type Recommender struct {
 type RecommenderConfig struct {
 
 	// Specifies the exploration configuration hyperparameters, including
-	// explorationWeight and explorationItemAgeCutOff, you want to use to configure the
-	// amount of item exploration Amazon Personalize uses when recommending items.
+	// explorationWeight and explorationItemAgeCutOff , you want to use to configure
+	// the amount of item exploration Amazon Personalize uses when recommending items.
 	// Provide itemExplorationConfig data only if your recommenders generate
 	// personalized recommendations for a user (not popular items or similar items).
 	ItemExplorationConfig map[string]string
@@ -1512,22 +1414,17 @@ type RecommenderSummary struct {
 
 	// The status of the recommender. A recommender can be in one of the following
 	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
-	// STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS >
-	// ACTIVE
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
+	//   IN_PROGRESS > ACTIVE
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a recommender update. For a complete
-// listing, call the DescribeRecommender
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html)
+// listing, call the DescribeRecommender (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html)
 // API.
 type RecommenderUpdateSummary struct {
 
@@ -1545,14 +1442,10 @@ type RecommenderUpdateSummary struct {
 
 	// The status of the recommender update. A recommender can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-	// FAILED
-	//
-	// * STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
-	// IN_PROGRESS > ACTIVE
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
+	//   IN_PROGRESS > ACTIVE
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1588,8 +1481,8 @@ type Solution struct {
 	DatasetGroupArn *string
 
 	// The event type (for example, 'click' or 'like') that is used for training the
-	// model. If no eventType is provided, Amazon Personalize uses all interactions for
-	// training with equal weight regardless of type.
+	// model. If no eventType is provided, Amazon Personalize uses all interactions
+	// for training with equal weight regardless of type.
 	EventType *string
 
 	// The date and time (in Unix time) that the solution was last updated.
@@ -1603,12 +1496,12 @@ type Solution struct {
 
 	// When true, Amazon Personalize performs a search for the best
 	// USER_PERSONALIZATION recipe from the list specified in the solution
-	// configuration (recipeArn must not be specified). When false (the default),
+	// configuration ( recipeArn must not be specified). When false (the default),
 	// Amazon Personalize uses recipeArn for training.
 	PerformAutoML bool
 
 	// Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The
-	// default is false.
+	// default is false .
 	PerformHPO bool
 
 	// The ARN of the recipe used to create the solution.
@@ -1621,12 +1514,8 @@ type Solution struct {
 	SolutionConfig *SolutionConfig
 
 	// The status of the solution. A solution can be in one of the following states:
-	//
-	// *
-	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1638,9 +1527,8 @@ type SolutionConfig struct {
 	// Lists the hyperparameter names and ranges.
 	AlgorithmHyperParameters map[string]string
 
-	// The AutoMLConfig
-	// (https://docs.aws.amazon.com/personalize/latest/dg/API_AutoMLConfig.html) object
-	// containing a list of recipes to search when AutoML is performed.
+	// The AutoMLConfig (https://docs.aws.amazon.com/personalize/latest/dg/API_AutoMLConfig.html)
+	// object containing a list of recipes to search when AutoML is performed.
 	AutoMLConfig *AutoMLConfig
 
 	// Only events with a value greater than or equal to this threshold are used for
@@ -1655,16 +1543,15 @@ type SolutionConfig struct {
 
 	// Describes the additional objective for the solution, such as maximizing
 	// streaming minutes or increasing revenue. For more information see Optimizing a
-	// solution
-	// (https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html).
+	// solution (https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html)
+	// .
 	OptimizationObjective *OptimizationObjective
 
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of the properties of a solution. For a complete listing, call
-// the DescribeSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
+// Provides a summary of the properties of a solution. For a complete listing,
+// call the DescribeSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
 // API.
 type SolutionSummary struct {
 
@@ -1684,20 +1571,15 @@ type SolutionSummary struct {
 	SolutionArn *string
 
 	// The status of the solution. A solution can be in one of the following states:
-	//
-	// *
-	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// An object that provides information about a specific version of a Solution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_Solution.html) in a
-// Custom dataset group.
+// An object that provides information about a specific version of a Solution (https://docs.aws.amazon.com/personalize/latest/dg/API_Solution.html)
+// in a Custom dataset group.
 type SolutionVersion struct {
 
 	// The date and time (in Unix time) that this version of the solution was created.
@@ -1721,11 +1603,11 @@ type SolutionVersion struct {
 
 	// When true, Amazon Personalize searches for the most optimal recipe according to
 	// the solution configuration. When false (the default), Amazon Personalize uses
-	// recipeArn.
+	// recipeArn .
 	PerformAutoML bool
 
 	// Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The
-	// default is false.
+	// default is false .
 	PerformHPO bool
 
 	// The ARN of the recipe used in the solution.
@@ -1742,19 +1624,12 @@ type SolutionVersion struct {
 
 	// The status of the solution version. A solution version can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING
-	//
-	// * CREATE IN_PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE
-	// FAILED
-	//
-	// * CREATE STOPPING
-	//
-	// * CREATE STOPPED
+	//   - CREATE PENDING
+	//   - CREATE IN_PROGRESS
+	//   - ACTIVE
+	//   - CREATE FAILED
+	//   - CREATE STOPPING
+	//   - CREATE STOPPED
 	Status *string
 
 	// The time used to train the model. You are billed for the time it takes to train
@@ -1767,25 +1642,22 @@ type SolutionVersion struct {
 	// solution's training data, while the UPDATE option processes only the data that
 	// has changed in comparison to the input solution. Choose UPDATE when you want to
 	// incrementally update your solution version instead of creating an entirely new
-	// one. The UPDATE option can only be used when you already have an active solution
-	// version created from the input solution using the FULL option and the input
-	// solution was trained with the User-Personalization
-	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
-	// recipe or the HRNN-Coldstart
-	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
+	// one. The UPDATE option can only be used when you already have an active
+	// solution version created from the input solution using the FULL option and the
+	// input solution was trained with the User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// recipe or the HRNN-Coldstart (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
 	// recipe.
 	TrainingMode TrainingMode
 
-	// If hyperparameter optimization was performed, contains the hyperparameter values
-	// of the best performing model.
+	// If hyperparameter optimization was performed, contains the hyperparameter
+	// values of the best performing model.
 	TunedHPOParams *TunedHPOParams
 
 	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a solution version. For a complete
-// listing, call the DescribeSolutionVersion
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
+// listing, call the DescribeSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
 // API.
 type SolutionVersionSummary struct {
 
@@ -1803,9 +1675,7 @@ type SolutionVersionSummary struct {
 
 	// The status of the solution version. A solution version can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
-	// FAILED
+	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1813,8 +1683,8 @@ type SolutionVersionSummary struct {
 
 // The optional metadata that you apply to resources to help you categorize and
 // organize them. Each tag consists of a key and an optional value, both of which
-// you define. For more information see Tagging Personalize resources
-// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html).
+// you define. For more information see Tagging Personalize resources (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+// .
 type Tag struct {
 
 	// One part of a key-value pair that makes up a tag. A key is a general label that

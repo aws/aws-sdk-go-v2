@@ -17,8 +17,8 @@ type Action interface {
 	isAction()
 }
 
-// The Systems Manager automation document to start as the runbook at the beginning
-// of the incident.
+// The Systems Manager automation document to start as the runbook at the
+// beginning of the incident.
 type ActionMemberSsmAutomation struct {
 	Value SsmAutomation
 
@@ -119,10 +119,10 @@ type ChatChannelMemberEmpty struct {
 
 func (*ChatChannelMemberEmpty) isChatChannel() {}
 
-// A conditional statement with which to compare a value, after a timestamp, before
-// a timestamp, or equal to a string or integer. If multiple conditions are
-// specified, the conditionals become an ANDed statement. If multiple values are
-// specified for a conditional, the values are ORd.
+// A conditional statement with which to compare a value, after a timestamp,
+// before a timestamp, or equal to a string or integer. If multiple conditions are
+// specified, the conditionals become an AND ed statement. If multiple values are
+// specified for a conditional, the values are OR d.
 //
 // The following types satisfy this interface:
 //
@@ -182,8 +182,8 @@ type DynamicSsmParameterValue interface {
 	isDynamicSsmParameterValue()
 }
 
-// Variable dynamic parameters. A parameter value is determined when an incident is
-// created.
+// Variable dynamic parameters. A parameter value is determined when an incident
+// is created.
 type DynamicSsmParameterValueMemberVariable struct {
 	Value VariableType
 
@@ -209,7 +209,7 @@ type EventReference interface {
 	isEventReference()
 }
 
-// The ID of a RelatedItem referenced in a TimelineEvent.
+// The ID of a RelatedItem referenced in a TimelineEvent .
 type EventReferenceMemberRelatedItemId struct {
 	Value string
 
@@ -219,7 +219,7 @@ type EventReferenceMemberRelatedItemId struct {
 func (*EventReferenceMemberRelatedItemId) isEventReference() {}
 
 // The Amazon Resource Name (ARN) of an Amazon Web Services resource referenced in
-// a TimelineEvent.
+// a TimelineEvent .
 type EventReferenceMemberResource struct {
 	Value string
 
@@ -241,7 +241,7 @@ type EventSummary struct {
 	// This member is required.
 	EventTime *time.Time
 
-	// The type of event. The timeline event must be Custom Event.
+	// The type of event. The timeline event must be Custom Event .
 	//
 	// This member is required.
 	EventType *string
@@ -256,7 +256,7 @@ type EventSummary struct {
 	// This member is required.
 	IncidentRecordArn *string
 
-	// A list of references in a TimelineEvent.
+	// A list of references in a TimelineEvent .
 	EventReferences []EventReference
 
 	noSmithyDocumentSerde
@@ -363,7 +363,7 @@ type IncidentRecordSource struct {
 	// This member is required.
 	Source *string
 
-	// The service principal that assumed the role specified in createdBy. If no
+	// The service principal that assumed the role specified in createdBy . If no
 	// service principal assumed the role this will be left blank.
 	InvokedBy *string
 
@@ -401,8 +401,8 @@ type IncidentRecordSummary struct {
 	// This member is required.
 	Status IncidentRecordStatus
 
-	// The title of the incident. This value is either provided by the response plan or
-	// overwritten on creation.
+	// The title of the incident. This value is either provided by the response plan
+	// or overwritten on creation.
 	//
 	// This member is required.
 	Title *string
@@ -646,7 +646,7 @@ type RelatedItem struct {
 	// This member is required.
 	Identifier *ItemIdentifier
 
-	// A unique ID for a RelatedItem. Don't specify this parameter when you add a
+	// A unique ID for a RelatedItem . Don't specify this parameter when you add a
 	// RelatedItem by using the UpdateRelatedItems API action.
 	GeneratedId *string
 
@@ -733,8 +733,8 @@ type ReplicationSet struct {
 	noSmithyDocumentSerde
 }
 
-// The resource policy that allows Incident Manager to perform actions on resources
-// on your behalf.
+// The resource policy that allows Incident Manager to perform actions on
+// resources on your behalf.
 type ResourcePolicy struct {
 
 	// The JSON blob that describes the policy.
@@ -792,8 +792,8 @@ type SsmAutomation struct {
 	// The automation document's version to use when running.
 	DocumentVersion *string
 
-	// The key-value pair to resolve dynamic parameter values when processing a Systems
-	// Manager Automation runbook.
+	// The key-value pair to resolve dynamic parameter values when processing a
+	// Systems Manager Automation runbook.
 	DynamicParameters map[string]DynamicSsmParameterValue
 
 	// The key-value pair parameters to use when running the automation document.
@@ -840,7 +840,7 @@ type TimelineEvent struct {
 	// This member is required.
 	IncidentRecordArn *string
 
-	// A list of references in a TimelineEvent.
+	// A list of references in a TimelineEvent .
 	EventReferences []EventReference
 
 	noSmithyDocumentSerde
@@ -850,9 +850,9 @@ type TimelineEvent struct {
 type TriggerDetails struct {
 
 	// Identifies the service that sourced the event. All events sourced from within
-	// Amazon Web Services begin with "aws." Customer-generated events can have any
-	// value here, as long as it doesn't begin with "aws." We recommend the use of Java
-	// package-name style reverse domain-name strings.
+	// Amazon Web Services begin with " aws. " Customer-generated events can have any
+	// value here, as long as it doesn't begin with " aws. " We recommend the use of
+	// Java package-name style reverse domain-name strings.
 	//
 	// This member is required.
 	Source *string

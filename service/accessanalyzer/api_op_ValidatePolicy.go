@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests the validation of a policy and returns a list of findings. The findings
-// help you identify issues and provide actionable recommendations to resolve the
-// issue and enable you to author functional policies that meet security best
-// practices.
+// Requests the validation of a policy and returns a list of findings. The
+// findings help you identify issues and provide actionable recommendations to
+// resolve the issue and enable you to author functional policies that meet
+// security best practices.
 func (c *Client) ValidatePolicy(ctx context.Context, params *ValidatePolicyInput, optFns ...func(*Options)) (*ValidatePolicyOutput, error) {
 	if params == nil {
 		params = &ValidatePolicyInput{}
@@ -61,7 +61,7 @@ type ValidatePolicyInput struct {
 	NextToken *string
 
 	// The type of resource to attach to your resource policy. Specify a value for the
-	// policy validation resource type only if the policy type is RESOURCE_POLICY. For
+	// policy validation resource type only if the policy type is RESOURCE_POLICY . For
 	// example, to validate a resource policy to attach to an Amazon S3 bucket, you can
 	// choose AWS::S3::Bucket for the policy validation resource type. For resource
 	// types not supported as valid values, IAM Access Analyzer runs policy checks that

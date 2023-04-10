@@ -11,24 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Record from a FeatureGroup in the OnlineStore. Feature Store supports
-// both SOFT_DELETE and HARD_DELETE. For SOFT_DELETE (default), feature columns are
-// set to null and the record is no longer retrievable by GetRecord or
-// BatchGetRecord. For HARD_DELETE, the complete Record is removed from the
-// OnlineStore. In both cases, Feature Store appends the deleted record marker to
-// the OfflineStore with feature values set to null, is_deleted value set to True,
-// and EventTime set to the delete input EventTime. Note that the EventTime
-// specified in DeleteRecord should be set later than the EventTime of the existing
-// record in the OnlineStore for that RecordIdentifer. If it is not, the deletion
-// does not occur:
-//
-// * For SOFT_DELETE, the existing (undeleted) record remains in
-// the OnlineStore, though the delete record marker is still written to the
-// OfflineStore.
-//
-// * HARD_DELETE returns EventTime: 400 ValidationException to
-// indicate that the delete operation failed. No delete record marker is written to
-// the OfflineStore.
+// Deletes a Record from a FeatureGroup in the OnlineStore . Feature Store supports
+// both SOFT_DELETE and HARD_DELETE . For SOFT_DELETE (default), feature columns
+// are set to null and the record is no longer retrievable by GetRecord or
+// BatchGetRecord . For HARD_DELETE , the complete Record is removed from the
+// OnlineStore . In both cases, Feature Store appends the deleted record marker to
+// the OfflineStore with feature values set to null , is_deleted value set to True
+// , and EventTime set to the delete input EventTime . Note that the EventTime
+// specified in DeleteRecord should be set later than the EventTime of the
+// existing record in the OnlineStore for that RecordIdentifer . If it is not, the
+// deletion does not occur:
+//   - For SOFT_DELETE , the existing (undeleted) record remains in the OnlineStore
+//     , though the delete record marker is still written to the OfflineStore .
+//   - HARD_DELETE returns EventTime : 400 ValidationException to indicate that the
+//     delete operation failed. No delete record marker is written to the
+//     OfflineStore .
 func (c *Client) DeleteRecord(ctx context.Context, params *DeleteRecordInput, optFns ...func(*Options)) (*DeleteRecordOutput, error) {
 	if params == nil {
 		params = &DeleteRecordInput{}
@@ -64,12 +61,12 @@ type DeleteRecordInput struct {
 	RecordIdentifierValueAsString *string
 
 	// The name of the deletion mode for deleting the record. By default, the deletion
-	// mode is set to SoftDelete.
+	// mode is set to SoftDelete .
 	DeletionMode types.DeletionMode
 
 	// A list of stores from which you're deleting the record. By default, Feature
 	// Store deletes the record from all of the stores that you're using for the
-	// FeatureGroup.
+	// FeatureGroup .
 	TargetStores []types.TargetStore
 
 	noSmithyDocumentSerde

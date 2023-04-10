@@ -35,8 +35,7 @@ type CreateCloudFormationChangeSetInput struct {
 	ApplicationId *string
 
 	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// CloudFormation CreateChangeSet (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	//
 	// This member is required.
@@ -49,57 +48,44 @@ type CreateCloudFormationChangeSetInput struct {
 	// acknowledge their capabilities by specifying this parameter.The only valid
 	// values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, and
 	// CAPABILITY_AUTO_EXPAND.The following resources require you to specify
-	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM: AWS::IAM::Group
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html),
-	// AWS::IAM::InstanceProfile
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html),
-	// AWS::IAM::Policy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html),
-	// and AWS::IAM::Role
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html).
-	// If the application contains IAM resources, you can specify either CAPABILITY_IAM
-	// or CAPABILITY_NAMED_IAM. If the application contains IAM resources with custom
-	// names, you must specify CAPABILITY_NAMED_IAM.The following resources require you
-	// to specify CAPABILITY_RESOURCE_POLICY: AWS::Lambda::Permission
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html),
-	// AWS::IAM:Policy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html),
-	// AWS::ApplicationAutoScaling::ScalingPolicy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html),
-	// AWS::S3::BucketPolicy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html),
-	// AWS::SQS::QueuePolicy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html),
-	// and AWS::SNS:TopicPolicy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html).Applications
-	// that contain one or more nested applications require you to specify
-	// CAPABILITY_AUTO_EXPAND.If your application template contains any of the above
-	// resources, we recommend that you review all permissions associated with the
-	// application before deploying. If you don't specify this parameter for an
+	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM: AWS::IAM::Group (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
+	// , AWS::IAM::InstanceProfile (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
+	// , AWS::IAM::Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html)
+	// , and AWS::IAM::Role (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
+	// . If the application contains IAM resources, you can specify either
+	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM. If the application contains IAM
+	// resources with custom names, you must specify CAPABILITY_NAMED_IAM.The following
+	// resources require you to specify CAPABILITY_RESOURCE_POLICY:
+	// AWS::Lambda::Permission (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html)
+	// , AWS::IAM:Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html)
+	// , AWS::ApplicationAutoScaling::ScalingPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html)
+	// , AWS::S3::BucketPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html)
+	// , AWS::SQS::QueuePolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html)
+	// , and AWS::SNS:TopicPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html)
+	// .Applications that contain one or more nested applications require you to
+	// specify CAPABILITY_AUTO_EXPAND.If your application template contains any of the
+	// above resources, we recommend that you review all permissions associated with
+	// the application before deploying. If you don't specify this parameter for an
 	// application that requires capabilities, the call will fail.
 	Capabilities []string
 
 	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// CloudFormation CreateChangeSet (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	ChangeSetName *string
 
 	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// CloudFormation CreateChangeSet (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	ClientToken *string
 
 	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// CloudFormation CreateChangeSet (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	Description *string
 
 	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// CloudFormation CreateChangeSet (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	NotificationArns []string
 
@@ -107,24 +93,20 @@ type CreateCloudFormationChangeSetInput struct {
 	ParameterOverrides []types.ParameterValue
 
 	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// CloudFormation CreateChangeSet (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	ResourceTypes []string
 
 	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// CloudFormation CreateChangeSet (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	RollbackConfiguration *types.RollbackConfiguration
 
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
+	// The semantic version of the application: https://semver.org/ (https://semver.org/)
 	SemanticVersion *string
 
 	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// CloudFormation CreateChangeSet (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	Tags []types.Tag
 
@@ -144,8 +126,7 @@ type CreateCloudFormationChangeSetOutput struct {
 	// length of 1.Pattern: ARN:[-a-zA-Z0-9:/]*
 	ChangeSetId *string
 
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
+	// The semantic version of the application: https://semver.org/ (https://semver.org/)
 	SemanticVersion *string
 
 	// The unique ID of the stack.

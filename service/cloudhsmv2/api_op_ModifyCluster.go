@@ -35,7 +35,7 @@ type ModifyClusterInput struct {
 	BackupRetentionPolicy *types.BackupRetentionPolicy
 
 	// The identifier (ID) of the cluster that you want to modify. To find the cluster
-	// ID, use DescribeClusters.
+	// ID, use DescribeClusters .
 	//
 	// This member is required.
 	ClusterId *string

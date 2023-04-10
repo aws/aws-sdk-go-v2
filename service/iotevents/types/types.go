@@ -10,11 +10,11 @@ import (
 // Specifies whether to get notified for alarm state changes.
 type AcknowledgeFlow struct {
 
-	// The value must be TRUE or FALSE. If TRUE, you receive a notification when the
+	// The value must be TRUE or FALSE . If TRUE , you receive a notification when the
 	// alarm state changes. You must choose to acknowledge the notification before the
-	// alarm state can return to NORMAL. If FALSE, you won't receive notifications. The
-	// alarm automatically changes to the NORMAL state when the input property value
-	// returns to the specified range.
+	// alarm state can return to NORMAL . If FALSE , you won't receive notifications.
+	// The alarm automatically changes to the NORMAL state when the input property
+	// value returns to the specified range.
 	//
 	// This member is required.
 	Enabled *bool
@@ -31,35 +31,31 @@ type Action struct {
 	// Writes to the DynamoDB table that you created. The default action payload
 	// contains all attribute-value pairs that have the information about the detector
 	// model instance and the event that triggered the action. You can customize the
-	// payload
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html).
-	// One column of the DynamoDB table receives all attribute-value pairs in the
-	// payload that you specify. For more information, see Actions
-	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html)
+	// payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html)
+	// . One column of the DynamoDB table receives all attribute-value pairs in the
+	// payload that you specify. For more information, see Actions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html)
 	// in AWS IoT Events Developer Guide.
 	DynamoDB *DynamoDBAction
 
 	// Writes to the DynamoDB table that you created. The default action payload
 	// contains all attribute-value pairs that have the information about the detector
 	// model instance and the event that triggered the action. You can customize the
-	// payload
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A
-	// separate column of the DynamoDB table receives one attribute-value pair in the
-	// payload that you specify. For more information, see Actions
-	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html)
+	// payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html)
+	// . A separate column of the DynamoDB table receives one attribute-value pair in
+	// the payload that you specify. For more information, see Actions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html)
 	// in AWS IoT Events Developer Guide.
 	DynamoDBv2 *DynamoDBv2Action
 
-	// Sends information about the detector model instance and the event that triggered
-	// the action to an Amazon Kinesis Data Firehose delivery stream.
+	// Sends information about the detector model instance and the event that
+	// triggered the action to an Amazon Kinesis Data Firehose delivery stream.
 	Firehose *FirehoseAction
 
 	// Sends AWS IoT Events input, which passes information about the detector model
 	// instance and the event that triggered the action.
 	IotEvents *IotEventsAction
 
-	// Sends information about the detector model instance and the event that triggered
-	// the action to an asset property in AWS IoT SiteWise .
+	// Sends information about the detector model instance and the event that
+	// triggered the action to an asset property in AWS IoT SiteWise .
 	IotSiteWise *IotSiteWiseAction
 
 	// Publishes an MQTT message with the given topic to the AWS IoT message broker.
@@ -81,8 +77,8 @@ type Action struct {
 	// Sends an Amazon SNS message.
 	Sns *SNSTopicPublishAction
 
-	// Sends information about the detector model instance and the event that triggered
-	// the action to an Amazon SQS queue.
+	// Sends information about the detector model instance and the event that
+	// triggered the action to an Amazon SQS queue.
 	Sqs *SqsAction
 
 	noSmithyDocumentSerde
@@ -94,115 +90,92 @@ type AlarmAction struct {
 
 	// Defines an action to write to the Amazon DynamoDB table that you created. The
 	// standard action payload contains all the information about the detector model
-	// instance and the event that triggered the action. You can customize the payload
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html).
-	// One column of the DynamoDB table receives all attribute-value pairs in the
+	// instance and the event that triggered the action. You can customize the payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html)
+	// . One column of the DynamoDB table receives all attribute-value pairs in the
 	// payload that you specify. You must use expressions for all parameters in
-	// DynamoDBAction. The expressions accept literals, operators, functions,
+	// DynamoDBAction . The expressions accept literals, operators, functions,
 	// references, and substitution templates. Examples
-	//
-	// * For literal values, the
-	// expressions must contain single quotes. For example, the value for the
-	// hashKeyType parameter can be 'STRING'.
-	//
-	// * For references, you must specify
-	// either variables or input values. For example, the value for the hashKeyField
-	// parameter can be $input.GreenhouseInput.name.
-	//
-	// * For a substitution template,
-	// you must use ${}, and the template must be in single quotes. A substitution
-	// template can also contain a combination of literals, operators, functions,
-	// references, and substitution templates. In the following example, the value for
-	// the hashKeyValue parameter uses a substitution template.
-	// '${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'
-	//
-	// * For a
-	// string concatenation, you must use +. A string concatenation can also contain a
-	// combination of literals, operators, functions, references, and substitution
-	// templates. In the following example, the value for the tableName parameter uses
-	// a string concatenation. 'GreenhouseTemperatureTable ' +
-	// $input.GreenhouseInput.date
-	//
-	// For more information, see Expressions
-	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+	//   - For literal values, the expressions must contain single quotes. For
+	//   example, the value for the hashKeyType parameter can be 'STRING' .
+	//   - For references, you must specify either variables or input values. For
+	//   example, the value for the hashKeyField parameter can be
+	//   $input.GreenhouseInput.name .
+	//   - For a substitution template, you must use ${} , and the template must be in
+	//   single quotes. A substitution template can also contain a combination of
+	//   literals, operators, functions, references, and substitution templates. In the
+	//   following example, the value for the hashKeyValue parameter uses a
+	//   substitution template. '${$input.GreenhouseInput.temperature * 6 / 5 + 32}
+	//   in Fahrenheit'
+	//   - For a string concatenation, you must use + . A string concatenation can also
+	//   contain a combination of literals, operators, functions, references, and
+	//   substitution templates. In the following example, the value for the tableName
+	//   parameter uses a string concatenation. 'GreenhouseTemperatureTable ' +
+	//   $input.GreenhouseInput.date
+	// For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 	// in the AWS IoT Events Developer Guide. If the defined payload type is a string,
 	// DynamoDBAction writes non-JSON data to the DynamoDB table as binary data. The
 	// DynamoDB console displays the data as Base64-encoded text. The value for the
-	// payloadField parameter is _raw.
+	// payloadField parameter is _raw .
 	DynamoDB *DynamoDBAction
 
 	// Defines an action to write to the Amazon DynamoDB table that you created. The
 	// default action payload contains all the information about the detector model
-	// instance and the event that triggered the action. You can customize the payload
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A
-	// separate column of the DynamoDB table receives one attribute-value pair in the
-	// payload that you specify. You must use expressions for all parameters in
-	// DynamoDBv2Action. The expressions accept literals, operators, functions,
+	// instance and the event that triggered the action. You can customize the payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html)
+	// . A separate column of the DynamoDB table receives one attribute-value pair in
+	// the payload that you specify. You must use expressions for all parameters in
+	// DynamoDBv2Action . The expressions accept literals, operators, functions,
 	// references, and substitution templates. Examples
-	//
-	// * For literal values, the
-	// expressions must contain single quotes. For example, the value for the tableName
-	// parameter can be 'GreenhouseTemperatureTable'.
-	//
-	// * For references, you must
-	// specify either variables or input values. For example, the value for the
-	// tableName parameter can be $variable.ddbtableName.
-	//
-	// * For a substitution
-	// template, you must use ${}, and the template must be in single quotes. A
-	// substitution template can also contain a combination of literals, operators,
-	// functions, references, and substitution templates. In the following example, the
-	// value for the contentExpression parameter in Payload uses a substitution
-	// template. '{\"sensorID\": \"${$input.GreenhouseInput.sensor_id}\",
-	// \"temperature\": \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}'
-	//
-	// * For
-	// a string concatenation, you must use +. A string concatenation can also contain
-	// a combination of literals, operators, functions, references, and substitution
-	// templates. In the following example, the value for the tableName parameter uses
-	// a string concatenation. 'GreenhouseTemperatureTable ' +
-	// $input.GreenhouseInput.date
-	//
-	// For more information, see Expressions
-	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+	//   - For literal values, the expressions must contain single quotes. For
+	//   example, the value for the tableName parameter can be
+	//   'GreenhouseTemperatureTable' .
+	//   - For references, you must specify either variables or input values. For
+	//   example, the value for the tableName parameter can be $variable.ddbtableName .
+	//   - For a substitution template, you must use ${} , and the template must be in
+	//   single quotes. A substitution template can also contain a combination of
+	//   literals, operators, functions, references, and substitution templates. In the
+	//   following example, the value for the contentExpression parameter in Payload
+	//   uses a substitution template. '{\"sensorID\":
+	//   \"${$input.GreenhouseInput.sensor_id}\", \"temperature\":
+	//   \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}'
+	//   - For a string concatenation, you must use + . A string concatenation can also
+	//   contain a combination of literals, operators, functions, references, and
+	//   substitution templates. In the following example, the value for the tableName
+	//   parameter uses a string concatenation. 'GreenhouseTemperatureTable ' +
+	//   $input.GreenhouseInput.date
+	// For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 	// in the AWS IoT Events Developer Guide. The value for the type parameter in
-	// Payload must be JSON.
+	// Payload must be JSON .
 	DynamoDBv2 *DynamoDBv2Action
 
-	// Sends information about the detector model instance and the event that triggered
-	// the action to an Amazon Kinesis Data Firehose delivery stream.
+	// Sends information about the detector model instance and the event that
+	// triggered the action to an Amazon Kinesis Data Firehose delivery stream.
 	Firehose *FirehoseAction
 
 	// Sends an AWS IoT Events input, passing in information about the detector model
 	// instance and the event that triggered the action.
 	IotEvents *IotEventsAction
 
-	// Sends information about the detector model instance and the event that triggered
-	// the action to a specified asset property in AWS IoT SiteWise. You must use
-	// expressions for all parameters in IotSiteWiseAction. The expressions accept
+	// Sends information about the detector model instance and the event that
+	// triggered the action to a specified asset property in AWS IoT SiteWise. You must
+	// use expressions for all parameters in IotSiteWiseAction . The expressions accept
 	// literals, operators, functions, references, and substitutions templates.
 	// Examples
-	//
-	// * For literal values, the expressions must contain single quotes. For
-	// example, the value for the propertyAlias parameter can be
-	// '/company/windfarm/3/turbine/7/temperature'.
-	//
-	// * For references, you must specify
-	// either variables or input values. For example, the value for the assetId
-	// parameter can be $input.TurbineInput.assetId1.
-	//
-	// * For a substitution template,
-	// you must use ${}, and the template must be in single quotes. A substitution
-	// template can also contain a combination of literals, operators, functions,
-	// references, and substitution templates. In the following example, the value for
-	// the propertyAlias parameter uses a substitution template.
-	// 'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/
-	// ${$input.TemperatureInput.sensorData.turbineID}/temperature'
-	//
-	// You must specify
-	// either propertyAlias or both assetId and propertyId to identify the target asset
-	// property in AWS IoT SiteWise. For more information, see Expressions
-	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+	//   - For literal values, the expressions must contain single quotes. For
+	//   example, the value for the propertyAlias parameter can be
+	//   '/company/windfarm/3/turbine/7/temperature' .
+	//   - For references, you must specify either variables or input values. For
+	//   example, the value for the assetId parameter can be
+	//   $input.TurbineInput.assetId1 .
+	//   - For a substitution template, you must use ${} , and the template must be in
+	//   single quotes. A substitution template can also contain a combination of
+	//   literals, operators, functions, references, and substitution templates. In the
+	//   following example, the value for the propertyAlias parameter uses a
+	//   substitution template.
+	//   'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/
+	//   ${$input.TemperatureInput.sensorData.turbineID}/temperature'
+	// You must specify either propertyAlias or both assetId and propertyId to
+	// identify the target asset property in AWS IoT SiteWise. For more information,
+	// see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 	// in the AWS IoT Events Developer Guide.
 	IotSiteWise *IotSiteWiseAction
 
@@ -217,8 +190,8 @@ type AlarmAction struct {
 	// Information required to publish the Amazon SNS message.
 	Sns *SNSTopicPublishAction
 
-	// Sends information about the detector model instance and the event that triggered
-	// the action to an Amazon SQS queue.
+	// Sends information about the detector model instance and the event that
+	// triggered the action to an Amazon SQS queue.
 	Sqs *SqsAction
 
 	noSmithyDocumentSerde
@@ -266,9 +239,8 @@ type AlarmModelSummary struct {
 type AlarmModelVersionSummary struct {
 
 	// The ARN of the alarm model. For more information, see Amazon Resource Names
-	// (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
 	AlarmModelArn *string
 
 	// The name of the alarm model.
@@ -284,26 +256,18 @@ type AlarmModelVersionSummary struct {
 	LastUpdateTime *time.Time
 
 	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
-	// resources. For more information, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
 	RoleArn *string
 
 	// The status of the alarm model. The status can be one of the following values:
-	//
-	// *
-	// ACTIVE - The alarm model is active and it's ready to evaluate data.
-	//
-	// *
-	// ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm
-	// model can take up to a few minutes.
-	//
-	// * INACTIVE - The alarm model is inactive,
-	// so it isn't ready to evaluate data. Check your alarm model information and
-	// update the alarm model.
-	//
-	// * FAILED - You couldn't create or update the alarm
-	// model. Check your alarm model information and try again.
+	//   - ACTIVE - The alarm model is active and it's ready to evaluate data.
+	//   - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an
+	//   alarm model can take up to a few minutes.
+	//   - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data.
+	//   Check your alarm model information and update the alarm model.
+	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
+	//   model information and try again.
 	Status AlarmModelVersionStatus
 
 	// Contains information about the status of the alarm model version.
@@ -335,22 +299,16 @@ type AlarmRule struct {
 // Contains the result of the analysis.
 type AnalysisResult struct {
 
-	// The severity level of the analysis result. Based on the severity level, analysis
-	// results fall into three general categories:
-	//
-	// * INFO - An information result
-	// tells you about a significant field in your detector model. This type of result
-	// usually doesn't require immediate action.
-	//
-	// * WARNING - A warning result draws
-	// special attention to fields that might cause issues for your detector model. We
-	// recommend that you review warnings and take necessary actions before you use
-	// your detector model in production environments. Otherwise, the detector model
-	// might not work as expected.
-	//
-	// * ERROR - An error result notifies you about a
-	// problem found in your detector model. You must fix all errors before you can
-	// publish your detector model.
+	// The severity level of the analysis result. Based on the severity level,
+	// analysis results fall into three general categories:
+	//   - INFO - An information result tells you about a significant field in your
+	//   detector model. This type of result usually doesn't require immediate action.
+	//   - WARNING - A warning result draws special attention to fields that might
+	//   cause issues for your detector model. We recommend that you review warnings and
+	//   take necessary actions before you use your detector model in production
+	//   environments. Otherwise, the detector model might not work as expected.
+	//   - ERROR - An error result notifies you about a problem found in your detector
+	//   model. You must fix all errors before you can publish your detector model.
 	Level AnalysisResultLevel
 
 	// Contains one or more locations that you can use to locate the fields in your
@@ -360,43 +318,29 @@ type AnalysisResult struct {
 	// Contains additional information about the analysis result.
 	Message *string
 
-	// The type of the analysis result. Analyses fall into the following types based on
-	// the validators used to generate the analysis result:
-	//
-	// * supported-actions - You
-	// must specify AWS IoT Events supported actions that work with other AWS services
-	// in a supported AWS Region.
-	//
-	// * service-limits - Resources or API operations can't
-	// exceed service quotas (also known as limits). Update your detector model or
-	// request a quota increase.
-	//
-	// * structure - The detector model must follow a
-	// structure that AWS IoT Events supports.
-	//
-	// * expression-syntax - Your expression
-	// must follow the required syntax.
-	//
-	// * data-type - Data types referenced in the
-	// detector model must be compatible.
-	//
-	// * referenced-data - You must define the data
-	// referenced in your detector model before you can use the data.
-	//
-	// *
-	// referenced-resource - Resources that the detector model uses must be
-	// available.
-	//
-	// For more information, see Running detector model analyses
-	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html)
+	// The type of the analysis result. Analyses fall into the following types based
+	// on the validators used to generate the analysis result:
+	//   - supported-actions - You must specify AWS IoT Events supported actions that
+	//   work with other AWS services in a supported AWS Region.
+	//   - service-limits - Resources or API operations can't exceed service quotas
+	//   (also known as limits). Update your detector model or request a quota increase.
+	//   - structure - The detector model must follow a structure that AWS IoT Events
+	//   supports.
+	//   - expression-syntax - Your expression must follow the required syntax.
+	//   - data-type - Data types referenced in the detector model must be compatible.
+	//   - referenced-data - You must define the data referenced in your detector model
+	//   before you can use the data.
+	//   - referenced-resource - Resources that the detector model uses must be
+	//   available.
+	// For more information, see Running detector model analyses (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html)
 	// in the AWS IoT Events Developer Guide.
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains information that you can use to locate the field in your detector model
-// that the analysis result references.
+// Contains information that you can use to locate the field in your detector
+// model that the analysis result references.
 type AnalysisResultLocation struct {
 
 	// A JsonPath (https://github.com/json-path/JsonPath) expression that identifies
@@ -407,30 +351,22 @@ type AnalysisResultLocation struct {
 }
 
 // A structure that contains timestamp information. For more information, see
-// TimeInNanos
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html)
+// TimeInNanos (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html)
 // in the AWS IoT SiteWise API Reference. You must use expressions for all
-// parameters in AssetPropertyTimestamp. The expressions accept literals,
+// parameters in AssetPropertyTimestamp . The expressions accept literals,
 // operators, functions, references, and substitution templates. Examples
+//   - For literal values, the expressions must contain single quotes. For
+//     example, the value for the timeInSeconds parameter can be '1586400675' .
+//   - For references, you must specify either variables or input values. For
+//     example, the value for the offsetInNanos parameter can be $variable.time .
+//   - For a substitution template, you must use ${} , and the template must be in
+//     single quotes. A substitution template can also contain a combination of
+//     literals, operators, functions, references, and substitution templates. In the
+//     following example, the value for the timeInSeconds parameter uses a
+//     substitution template. '${$input.TemperatureInput.sensorData.timestamp /
+//     1000}'
 //
-// * For
-// literal values, the expressions must contain single quotes. For example, the
-// value for the timeInSeconds parameter can be '1586400675'.
-//
-// * For references,
-// you must specify either variables or input values. For example, the value for
-// the offsetInNanos parameter can be $variable.time.
-//
-// * For a substitution
-// template, you must use ${}, and the template must be in single quotes. A
-// substitution template can also contain a combination of literals, operators,
-// functions, references, and substitution templates. In the following example, the
-// value for the timeInSeconds parameter uses a substitution template.
-// '${$input.TemperatureInput.sensorData.timestamp / 1000}'
-//
-// For more information,
-// see Expressions
-// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+// For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type AssetPropertyTimestamp struct {
 
@@ -440,7 +376,7 @@ type AssetPropertyTimestamp struct {
 	// This member is required.
 	TimeInSeconds *string
 
-	// The nanosecond offset converted from timeInSeconds. The valid range is between
+	// The nanosecond offset converted from timeInSeconds . The valid range is between
 	// 0-999999999.
 	OffsetInNanos *string
 
@@ -448,28 +384,22 @@ type AssetPropertyTimestamp struct {
 }
 
 // A structure that contains value information. For more information, see
-// AssetPropertyValue
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html)
+// AssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html)
 // in the AWS IoT SiteWise API Reference. You must use expressions for all
-// parameters in AssetPropertyValue. The expressions accept literals, operators,
+// parameters in AssetPropertyValue . The expressions accept literals, operators,
 // functions, references, and substitution templates. Examples
+//   - For literal values, the expressions must contain single quotes. For
+//     example, the value for the quality parameter can be 'GOOD' .
+//   - For references, you must specify either variables or input values. For
+//     example, the value for the quality parameter can be
+//     $input.TemperatureInput.sensorData.quality .
 //
-// * For literal
-// values, the expressions must contain single quotes. For example, the value for
-// the quality parameter can be 'GOOD'.
-//
-// * For references, you must specify either
-// variables or input values. For example, the value for the quality parameter can
-// be $input.TemperatureInput.sensorData.quality.
-//
-// For more information, see
-// Expressions
-// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+// For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type AssetPropertyValue struct {
 
-	// The quality of the asset property value. The value must be 'GOOD', 'BAD', or
-	// 'UNCERTAIN'.
+	// The quality of the asset property value. The value must be 'GOOD' , 'BAD' , or
+	// 'UNCERTAIN' .
 	Quality *string
 
 	// The timestamp associated with the asset property value. The default is the
@@ -483,38 +413,28 @@ type AssetPropertyValue struct {
 }
 
 // A structure that contains an asset property value. For more information, see
-// Variant
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html)
+// Variant (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html)
 // in the AWS IoT SiteWise API Reference. You must use expressions for all
-// parameters in AssetPropertyVariant. The expressions accept literals, operators,
+// parameters in AssetPropertyVariant . The expressions accept literals, operators,
 // functions, references, and substitution templates. Examples
+//   - For literal values, the expressions must contain single quotes. For
+//     example, the value for the integerValue parameter can be '100' .
+//   - For references, you must specify either variables or parameters. For
+//     example, the value for the booleanValue parameter can be $variable.offline .
+//   - For a substitution template, you must use ${} , and the template must be in
+//     single quotes. A substitution template can also contain a combination of
+//     literals, operators, functions, references, and substitution templates. In the
+//     following example, the value for the doubleValue parameter uses a substitution
+//     template. '${$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32}'
 //
-// * For literal
-// values, the expressions must contain single quotes. For example, the value for
-// the integerValue parameter can be '100'.
-//
-// * For references, you must specify
-// either variables or parameters. For example, the value for the booleanValue
-// parameter can be $variable.offline.
-//
-// * For a substitution template, you must use
-// ${}, and the template must be in single quotes. A substitution template can also
-// contain a combination of literals, operators, functions, references, and
-// substitution templates. In the following example, the value for the doubleValue
-// parameter uses a substitution template.
-// '${$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32}'
-//
-// For more
-// information, see Expressions
-// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+// For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide. You must specify one of the following
-// value types, depending on the dataType of the specified asset property. For more
-// information, see AssetProperty
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html)
+// value types, depending on the dataType of the specified asset property. For
+// more information, see AssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html)
 // in the AWS IoT SiteWise API Reference.
 type AssetPropertyVariant struct {
 
-	// The asset property value is a Boolean value that must be 'TRUE' or 'FALSE'. You
+	// The asset property value is a Boolean value that must be 'TRUE' or 'FALSE' . You
 	// must use an expression, and the evaluated result should be a Boolean value.
 	BooleanValue *string
 
@@ -535,17 +455,17 @@ type AssetPropertyVariant struct {
 
 // The attributes from the JSON payload that are made available by the input.
 // Inputs are derived from messages sent to the AWS IoT Events system using
-// BatchPutMessage. Each such message contains a JSON payload. Those attributes
+// BatchPutMessage . Each such message contains a JSON payload. Those attributes
 // (and their paired values) specified here are available for use in the condition
 // expressions used by detectors.
 type Attribute struct {
 
 	// An expression that specifies an attribute-value pair in a JSON structure. Use
 	// this to specify an attribute from the JSON payload that is made available by the
-	// input. Inputs are derived from messages sent to AWS IoT Events
-	// (BatchPutMessage). Each such message contains a JSON payload. The attribute (and
-	// its paired value) specified here are available for use in the condition
-	// expressions used by detectors. Syntax: ....
+	// input. Inputs are derived from messages sent to AWS IoT Events ( BatchPutMessage
+	// ). Each such message contains a JSON payload. The attribute (and its paired
+	// value) specified here are available for use in the condition expressions used
+	// by detectors. Syntax: ....
 	//
 	// This member is required.
 	JsonPath *string
@@ -701,45 +621,37 @@ type DetectorModelVersionSummary struct {
 
 // Defines an action to write to the Amazon DynamoDB table that you created. The
 // standard action payload contains all the information about the detector model
-// instance and the event that triggered the action. You can customize the payload
-// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html).
-// One column of the DynamoDB table receives all attribute-value pairs in the
+// instance and the event that triggered the action. You can customize the payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html)
+// . One column of the DynamoDB table receives all attribute-value pairs in the
 // payload that you specify. You must use expressions for all parameters in
-// DynamoDBAction. The expressions accept literals, operators, functions,
+// DynamoDBAction . The expressions accept literals, operators, functions,
 // references, and substitution templates. Examples
+//   - For literal values, the expressions must contain single quotes. For
+//     example, the value for the hashKeyType parameter can be 'STRING' .
+//   - For references, you must specify either variables or input values. For
+//     example, the value for the hashKeyField parameter can be
+//     $input.GreenhouseInput.name .
+//   - For a substitution template, you must use ${} , and the template must be in
+//     single quotes. A substitution template can also contain a combination of
+//     literals, operators, functions, references, and substitution templates. In the
+//     following example, the value for the hashKeyValue parameter uses a
+//     substitution template. '${$input.GreenhouseInput.temperature * 6 / 5 + 32}
+//     in Fahrenheit'
+//   - For a string concatenation, you must use + . A string concatenation can also
+//     contain a combination of literals, operators, functions, references, and
+//     substitution templates. In the following example, the value for the tableName
+//     parameter uses a string concatenation. 'GreenhouseTemperatureTable ' +
+//     $input.GreenhouseInput.date
 //
-// * For literal values, the
-// expressions must contain single quotes. For example, the value for the
-// hashKeyType parameter can be 'STRING'.
-//
-// * For references, you must specify
-// either variables or input values. For example, the value for the hashKeyField
-// parameter can be $input.GreenhouseInput.name.
-//
-// * For a substitution template,
-// you must use ${}, and the template must be in single quotes. A substitution
-// template can also contain a combination of literals, operators, functions,
-// references, and substitution templates. In the following example, the value for
-// the hashKeyValue parameter uses a substitution template.
-// '${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'
-//
-// * For a
-// string concatenation, you must use +. A string concatenation can also contain a
-// combination of literals, operators, functions, references, and substitution
-// templates. In the following example, the value for the tableName parameter uses
-// a string concatenation. 'GreenhouseTemperatureTable ' +
-// $input.GreenhouseInput.date
-//
-// For more information, see Expressions
-// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+// For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide. If the defined payload type is a string,
 // DynamoDBAction writes non-JSON data to the DynamoDB table as binary data. The
 // DynamoDB console displays the data as Base64-encoded text. The value for the
-// payloadField parameter is _raw.
+// payloadField parameter is _raw .
 type DynamoDBAction struct {
 
-	// The name of the hash key (also called the partition key). The hashKeyField value
-	// must match the partition key of the target DynamoDB table.
+	// The name of the hash key (also called the partition key). The hashKeyField
+	// value must match the partition key of the target DynamoDB table.
 	//
 	// This member is required.
 	HashKeyField *string
@@ -749,53 +661,42 @@ type DynamoDBAction struct {
 	// This member is required.
 	HashKeyValue *string
 
-	// The name of the DynamoDB table. The tableName value must match the table name of
-	// the target DynamoDB table.
+	// The name of the DynamoDB table. The tableName value must match the table name
+	// of the target DynamoDB table.
 	//
 	// This member is required.
 	TableName *string
 
 	// The data type for the hash key (also called the partition key). You can specify
 	// the following values:
-	//
-	// * 'STRING' - The hash key is a string.
-	//
-	// * 'NUMBER' - The
-	// hash key is a number.
-	//
-	// If you don't specify hashKeyType, the default value is
-	// 'STRING'.
+	//   - 'STRING' - The hash key is a string.
+	//   - 'NUMBER' - The hash key is a number.
+	// If you don't specify hashKeyType , the default value is 'STRING' .
 	HashKeyType *string
 
 	// The type of operation to perform. You can specify the following values:
-	//
-	// *
-	// 'INSERT' - Insert data as a new item into the DynamoDB table. This item uses the
-	// specified hash key as a partition key. If you specified a range key, the item
-	// uses the range key as a sort key.
-	//
-	// * 'UPDATE' - Update an existing item of the
-	// DynamoDB table with new data. This item's partition key must match the specified
-	// hash key. If you specified a range key, the range key must match the item's sort
-	// key.
-	//
-	// * 'DELETE' - Delete an existing item of the DynamoDB table. This item's
-	// partition key must match the specified hash key. If you specified a range key,
-	// the range key must match the item's sort key.
-	//
-	// If you don't specify this
-	// parameter, AWS IoT Events triggers the 'INSERT' operation.
+	//   - 'INSERT' - Insert data as a new item into the DynamoDB table. This item uses
+	//   the specified hash key as a partition key. If you specified a range key, the
+	//   item uses the range key as a sort key.
+	//   - 'UPDATE' - Update an existing item of the DynamoDB table with new data. This
+	//   item's partition key must match the specified hash key. If you specified a range
+	//   key, the range key must match the item's sort key.
+	//   - 'DELETE' - Delete an existing item of the DynamoDB table. This item's
+	//   partition key must match the specified hash key. If you specified a range key,
+	//   the range key must match the item's sort key.
+	// If you don't specify this parameter, AWS IoT Events triggers the 'INSERT'
+	// operation.
 	Operation *string
 
 	// Information needed to configure the payload. By default, AWS IoT Events
 	// generates a standard payload in JSON for any action. This action payload
 	// contains all attribute-value pairs that have the information about the detector
 	// model instance and the event triggered the action. To configure the action
-	// payload, you can use contentExpression.
+	// payload, you can use contentExpression .
 	Payload *Payload
 
 	// The name of the DynamoDB column that receives the action payload. If you don't
-	// specify this parameter, the name of the DynamoDB column is payload.
+	// specify this parameter, the name of the DynamoDB column is payload .
 	PayloadField *string
 
 	// The name of the range key (also called the sort key). The rangeKeyField value
@@ -804,14 +705,9 @@ type DynamoDBAction struct {
 
 	// The data type for the range key (also called the sort key), You can specify the
 	// following values:
-	//
-	// * 'STRING' - The range key is a string.
-	//
-	// * 'NUMBER' - The
-	// range key is number.
-	//
-	// If you don't specify rangeKeyField, the default value is
-	// 'STRING'.
+	//   - 'STRING' - The range key is a string.
+	//   - 'NUMBER' - The range key is number.
+	// If you don't specify rangeKeyField , the default value is 'STRING' .
 	RangeKeyType *string
 
 	// The value of the range key (also called the sort key).
@@ -822,40 +718,32 @@ type DynamoDBAction struct {
 
 // Defines an action to write to the Amazon DynamoDB table that you created. The
 // default action payload contains all the information about the detector model
-// instance and the event that triggered the action. You can customize the payload
-// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A
-// separate column of the DynamoDB table receives one attribute-value pair in the
-// payload that you specify. You must use expressions for all parameters in
-// DynamoDBv2Action. The expressions accept literals, operators, functions,
+// instance and the event that triggered the action. You can customize the payload (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html)
+// . A separate column of the DynamoDB table receives one attribute-value pair in
+// the payload that you specify. You must use expressions for all parameters in
+// DynamoDBv2Action . The expressions accept literals, operators, functions,
 // references, and substitution templates. Examples
+//   - For literal values, the expressions must contain single quotes. For
+//     example, the value for the tableName parameter can be
+//     'GreenhouseTemperatureTable' .
+//   - For references, you must specify either variables or input values. For
+//     example, the value for the tableName parameter can be $variable.ddbtableName .
+//   - For a substitution template, you must use ${} , and the template must be in
+//     single quotes. A substitution template can also contain a combination of
+//     literals, operators, functions, references, and substitution templates. In the
+//     following example, the value for the contentExpression parameter in Payload
+//     uses a substitution template. '{\"sensorID\":
+//     \"${$input.GreenhouseInput.sensor_id}\", \"temperature\":
+//     \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}'
+//   - For a string concatenation, you must use + . A string concatenation can also
+//     contain a combination of literals, operators, functions, references, and
+//     substitution templates. In the following example, the value for the tableName
+//     parameter uses a string concatenation. 'GreenhouseTemperatureTable ' +
+//     $input.GreenhouseInput.date
 //
-// * For literal values, the
-// expressions must contain single quotes. For example, the value for the tableName
-// parameter can be 'GreenhouseTemperatureTable'.
-//
-// * For references, you must
-// specify either variables or input values. For example, the value for the
-// tableName parameter can be $variable.ddbtableName.
-//
-// * For a substitution
-// template, you must use ${}, and the template must be in single quotes. A
-// substitution template can also contain a combination of literals, operators,
-// functions, references, and substitution templates. In the following example, the
-// value for the contentExpression parameter in Payload uses a substitution
-// template. '{\"sensorID\": \"${$input.GreenhouseInput.sensor_id}\",
-// \"temperature\": \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}'
-//
-// * For
-// a string concatenation, you must use +. A string concatenation can also contain
-// a combination of literals, operators, functions, references, and substitution
-// templates. In the following example, the value for the tableName parameter uses
-// a string concatenation. 'GreenhouseTemperatureTable ' +
-// $input.GreenhouseInput.date
-//
-// For more information, see Expressions
-// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+// For more information, see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide. The value for the type parameter in
-// Payload must be JSON.
+// Payload must be JSON .
 type DynamoDBv2Action struct {
 
 	// The name of the DynamoDB table.
@@ -867,7 +755,7 @@ type DynamoDBv2Action struct {
 	// generates a standard payload in JSON for any action. This action payload
 	// contains all attribute-value pairs that have the information about the detector
 	// model instance and the event triggered the action. To configure the action
-	// payload, you can use contentExpression.
+	// payload, you can use contentExpression .
 	Payload *Payload
 
 	noSmithyDocumentSerde
@@ -878,15 +766,15 @@ type EmailConfiguration struct {
 
 	// The email address that sends emails. If you use the AWS IoT Events managed AWS
 	// Lambda function to manage your emails, you must verify the email address that
-	// sends emails in Amazon SES
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
+	// sends emails in Amazon SES (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html)
+	// .
 	//
 	// This member is required.
 	From *string
 
 	// Contains the information of one or more recipients who receive the emails. You
-	// must add the users that receive emails to your AWS SSO store
-	// (https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html).
+	// must add the users that receive emails to your AWS SSO store (https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html)
+	// .
 	//
 	// This member is required.
 	Recipients *EmailRecipients
@@ -910,8 +798,8 @@ type EmailContent struct {
 }
 
 // Contains the information of one or more recipients who receive the emails. You
-// must add the users that receive emails to your AWS SSO store
-// (https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html).
+// must add the users that receive emails to your AWS SSO store (https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html)
+// .
 type EmailRecipients struct {
 
 	// Specifies one or more recipients who receive the email.
@@ -939,8 +827,8 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
-// Sends information about the detector model instance and the event that triggered
-// the action to an Amazon Kinesis Data Firehose delivery stream.
+// Sends information about the detector model instance and the event that
+// triggered the action to an Amazon Kinesis Data Firehose delivery stream.
 type FirehoseAction struct {
 
 	// The name of the Kinesis Data Firehose delivery stream where the data is written.
@@ -964,8 +852,8 @@ type FirehoseAction struct {
 // were created based on this alarm model.
 type InitializationConfiguration struct {
 
-	// The value must be TRUE or FALSE. If FALSE, all alarm instances created based on
-	// the alarm model are activated. The default value is TRUE.
+	// The value must be TRUE or FALSE . If FALSE , all alarm instances created based
+	// on the alarm model are activated. The default value is TRUE .
 	//
 	// This member is required.
 	DisabledOnInitialization *bool
@@ -1024,9 +912,9 @@ type InputDefinition struct {
 
 	// The attributes from the JSON payload that are made available by the input.
 	// Inputs are derived from messages sent to the AWS IoT Events system using
-	// BatchPutMessage. Each such message contains a JSON payload, and those attributes
-	// (and their paired values) specified here are available for use in the condition
-	// expressions used by detectors that monitor this input.
+	// BatchPutMessage . Each such message contains a JSON payload, and those
+	// attributes (and their paired values) specified here are available for use in the
+	// condition expressions used by detectors that monitor this input.
 	//
 	// This member is required.
 	Attributes []Attribute
@@ -1097,40 +985,36 @@ type IotEventsInputIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// Sends information about the detector model instance and the event that triggered
-// the action to a specified asset property in AWS IoT SiteWise. You must use
-// expressions for all parameters in IotSiteWiseAction. The expressions accept
+// Sends information about the detector model instance and the event that
+// triggered the action to a specified asset property in AWS IoT SiteWise. You must
+// use expressions for all parameters in IotSiteWiseAction . The expressions accept
 // literals, operators, functions, references, and substitutions templates.
 // Examples
+//   - For literal values, the expressions must contain single quotes. For
+//     example, the value for the propertyAlias parameter can be
+//     '/company/windfarm/3/turbine/7/temperature' .
+//   - For references, you must specify either variables or input values. For
+//     example, the value for the assetId parameter can be
+//     $input.TurbineInput.assetId1 .
+//   - For a substitution template, you must use ${} , and the template must be in
+//     single quotes. A substitution template can also contain a combination of
+//     literals, operators, functions, references, and substitution templates. In the
+//     following example, the value for the propertyAlias parameter uses a
+//     substitution template.
+//     'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/
+//     ${$input.TemperatureInput.sensorData.turbineID}/temperature'
 //
-// * For literal values, the expressions must contain single quotes. For
-// example, the value for the propertyAlias parameter can be
-// '/company/windfarm/3/turbine/7/temperature'.
-//
-// * For references, you must specify
-// either variables or input values. For example, the value for the assetId
-// parameter can be $input.TurbineInput.assetId1.
-//
-// * For a substitution template,
-// you must use ${}, and the template must be in single quotes. A substitution
-// template can also contain a combination of literals, operators, functions,
-// references, and substitution templates. In the following example, the value for
-// the propertyAlias parameter uses a substitution template.
-// 'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/
-// ${$input.TemperatureInput.sensorData.turbineID}/temperature'
-//
-// You must specify
-// either propertyAlias or both assetId and propertyId to identify the target asset
-// property in AWS IoT SiteWise. For more information, see Expressions
-// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
+// You must specify either propertyAlias or both assetId and propertyId to
+// identify the target asset property in AWS IoT SiteWise. For more information,
+// see Expressions (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type IotSiteWiseAction struct {
 
 	// The ID of the asset that has the specified property.
 	AssetId *string
 
-	// A unique identifier for this entry. You can use the entry ID to track which data
-	// entry causes an error in case of failure. The default is a new unique
+	// A unique identifier for this entry. You can use the entry ID to track which
+	// data entry causes an error in case of failure. The default is a new unique
 	// identifier.
 	EntryId *string
 
@@ -1140,8 +1024,8 @@ type IotSiteWiseAction struct {
 	// The ID of the asset property.
 	PropertyId *string
 
-	// The value to send to the asset property. This value contains timestamp, quality,
-	// and value (TQV) information.
+	// The value to send to the asset property. This value contains timestamp,
+	// quality, and value (TQV) information.
 	PropertyValue *AssetPropertyValue
 
 	noSmithyDocumentSerde
@@ -1177,7 +1061,7 @@ type IotSiteWiseInputIdentifier struct {
 type IotTopicPublishAction struct {
 
 	// The MQTT topic of the message. You can use a string expression that includes
-	// variables ($variable.) and input values ($input..) as the topic string.
+	// variables ( $variable. ) and input values ( $input.. ) as the topic string.
 	//
 	// This member is required.
 	MqttTopic *string
@@ -1235,8 +1119,8 @@ type LoggingOptions struct {
 type NotificationAction struct {
 
 	// Specifies an AWS Lambda function to manage alarm notifications. You can create
-	// one or use the AWS Lambda function provided by AWS IoT Events
-	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html).
+	// one or use the AWS Lambda function provided by AWS IoT Events (https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html)
+	// .
 	//
 	// This member is required.
 	Action *NotificationTargetActions
@@ -1251,8 +1135,8 @@ type NotificationAction struct {
 }
 
 // Specifies an AWS Lambda function to manage alarm notifications. You can create
-// one or use the AWS Lambda function provided by AWS IoT Events
-// (https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html).
+// one or use the AWS Lambda function provided by AWS IoT Events (https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html)
+// .
 type NotificationTargetActions struct {
 
 	// Calls a Lambda function, passing in information about the detector model
@@ -1266,18 +1150,18 @@ type NotificationTargetActions struct {
 type OnEnterLifecycle struct {
 
 	// Specifies the actions that are performed when the state is entered and the
-	// condition is TRUE.
+	// condition is TRUE .
 	Events []Event
 
 	noSmithyDocumentSerde
 }
 
 // When exiting this state, perform these actions if the specified condition is
-// TRUE.
+// TRUE .
 type OnExitLifecycle struct {
 
 	// Specifies the actions that are performed when the state is exited and the
-	// condition is TRUE.
+	// condition is TRUE .
 	Events []Event
 
 	noSmithyDocumentSerde
@@ -1300,18 +1184,18 @@ type OnInputLifecycle struct {
 // generates a standard payload in JSON for any action. This action payload
 // contains all attribute-value pairs that have the information about the detector
 // model instance and the event triggered the action. To configure the action
-// payload, you can use contentExpression.
+// payload, you can use contentExpression .
 type Payload struct {
 
-	// The content of the payload. You can use a string expression that includes quoted
-	// strings (''), variables ($variable.), input values ($input..), string
-	// concatenations, and quoted strings that contain ${} as the content. The
+	// The content of the payload. You can use a string expression that includes
+	// quoted strings ( '' ), variables ( $variable. ), input values ( $input.. ),
+	// string concatenations, and quoted strings that contain ${} as the content. The
 	// recommended maximum size of a content expression is 1 KB.
 	//
 	// This member is required.
 	ContentExpression *string
 
-	// The value of the payload type can be either STRING or JSON.
+	// The value of the payload type can be either STRING or JSON .
 	//
 	// This member is required.
 	Type PayloadType
@@ -1345,9 +1229,8 @@ type ResetTimerAction struct {
 type RoutedResource struct {
 
 	// The ARN of the routed resource. For more information, see Amazon Resource Names
-	// (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
 	Arn *string
 
 	// The name of the routed resource.
@@ -1365,7 +1248,7 @@ type SetTimerAction struct {
 	TimerName *string
 
 	// The duration of the timer, in seconds. You can use a string expression that
-	// includes numbers, variables ($variable.), and input values ($input..) as the
+	// includes numbers, variables ( $variable. ), and input values ( $input.. ) as the
 	// duration. The range of the duration is 1-31622400 seconds. To ensure accuracy,
 	// the minimum duration is 60 seconds. The evaluated result of the duration is
 	// rounded down to the nearest whole number.
@@ -1425,9 +1308,9 @@ type SimpleRule struct {
 // Contains the configuration information of SMS notifications.
 type SMSConfiguration struct {
 
-	// Specifies one or more recipients who receive the message. You must add the users
-	// that receive SMS messages to your AWS SSO store
-	// (https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html).
+	// Specifies one or more recipients who receive the message. You must add the
+	// users that receive SMS messages to your AWS SSO store (https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html)
+	// .
 	//
 	// This member is required.
 	Recipients []RecipientDetail
@@ -1456,8 +1339,8 @@ type SNSTopicPublishAction struct {
 	noSmithyDocumentSerde
 }
 
-// Sends information about the detector model instance and the event that triggered
-// the action to an Amazon SQS queue.
+// Sends information about the detector model instance and the event that
+// triggered the action to an Amazon SQS queue.
 type SqsAction struct {
 
 	// The URL of the SQS queue where the data is written.
@@ -1469,16 +1352,16 @@ type SqsAction struct {
 	// queue.
 	Payload *Payload
 
-	// Set this to TRUE if you want the data to be base-64 encoded before it is written
-	// to the queue. Otherwise, set this to FALSE.
+	// Set this to TRUE if you want the data to be base-64 encoded before it is
+	// written to the queue. Otherwise, set this to FALSE.
 	UseBase64 *bool
 
 	noSmithyDocumentSerde
 }
 
 // Contains information about your identity source in AWS Single Sign-On. For more
-// information, see the AWS Single Sign-On User Guide
-// (https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html).
+// information, see the AWS Single Sign-On User Guide (https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)
+// .
 type SSOIdentity struct {
 
 	// The ID of the AWS SSO identity store.
@@ -1504,11 +1387,11 @@ type State struct {
 	OnEnter *OnEnterLifecycle
 
 	// When exiting this state, perform these actions if the specified condition is
-	// TRUE.
+	// TRUE .
 	OnExit *OnExitLifecycle
 
 	// When an input is received and the condition is TRUE, perform the specified
-	// actions.
+	// actions .
 	OnInput *OnInputLifecycle
 
 	noSmithyDocumentSerde
@@ -1534,8 +1417,8 @@ type Tag struct {
 // evaluates to TRUE.
 type TransitionEvent struct {
 
-	// Required. A Boolean expression that when TRUE causes the actions to be performed
-	// and the nextState to be entered.
+	// Required. A Boolean expression that when TRUE causes the actions to be
+	// performed and the nextState to be entered.
 	//
 	// This member is required.
 	Condition *string

@@ -48,7 +48,7 @@ type GetDestinationOutput struct {
 	// The rule name or topic rule to send messages to.
 	Expression *string
 
-	// The type of value in Expression.
+	// The type of value in Expression .
 	ExpressionType types.ExpressionType
 
 	// The name of the resource.

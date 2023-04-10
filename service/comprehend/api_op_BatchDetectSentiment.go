@@ -12,7 +12,7 @@ import (
 )
 
 // Inspects a batch of documents and returns an inference of the prevailing
-// sentiment, POSITIVE, NEUTRAL, MIXED, or NEGATIVE, in each one.
+// sentiment, POSITIVE , NEUTRAL , MIXED , or NEGATIVE , in each one.
 func (c *Client) BatchDetectSentiment(ctx context.Context, params *BatchDetectSentimentInput, optFns ...func(*Options)) (*BatchDetectSentimentOutput, error) {
 	if params == nil {
 		params = &BatchDetectSentimentInput{}

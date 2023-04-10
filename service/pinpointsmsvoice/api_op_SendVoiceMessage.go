@@ -37,16 +37,16 @@ type SendVoiceMessageInput struct {
 	// The name of the configuration set that you want to use to send the message.
 	ConfigurationSetName *string
 
-	// An object that contains a voice message and information about the recipient that
-	// you want to send it to.
+	// An object that contains a voice message and information about the recipient
+	// that you want to send it to.
 	Content *types.VoiceMessageContent
 
 	// The phone number that you want to send the voice message to.
 	DestinationPhoneNumber *string
 
-	// The phone number that Amazon Pinpoint should use to send the voice message. This
-	// isn't necessarily the phone number that appears on recipients' devices when they
-	// receive the message, because you can specify a CallerId parameter in the
+	// The phone number that Amazon Pinpoint should use to send the voice message.
+	// This isn't necessarily the phone number that appears on recipients' devices when
+	// they receive the message, because you can specify a CallerId parameter in the
 	// request.
 	OriginationPhoneNumber *string
 

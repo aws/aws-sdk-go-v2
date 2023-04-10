@@ -13,13 +13,11 @@ import (
 )
 
 // Creates a new Amazon Chime SDK meeting in the specified media Region, with
-// attendees. For more information about specifying media Regions, see Amazon Chime
-// SDK Media Regions
-// (https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html) in
-// the Amazon Chime Developer Guide. For more information about the Amazon Chime
-// SDK, see Using the Amazon Chime SDK
-// (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html) in the Amazon
-// Chime Developer Guide.
+// attendees. For more information about specifying media Regions, see Amazon
+// Chime SDK Media Regions (https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html)
+// in the Amazon Chime Developer Guide. For more information about the Amazon Chime
+// SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html)
+// in the Amazon Chime Developer Guide.
 func (c *Client) CreateMeetingWithAttendees(ctx context.Context, params *CreateMeetingWithAttendeesInput, optFns ...func(*Options)) (*CreateMeetingWithAttendeesOutput, error) {
 	if params == nil {
 		params = &CreateMeetingWithAttendeesInput{}
@@ -55,11 +53,11 @@ type CreateMeetingWithAttendeesInput struct {
 	// This member is required.
 	ExternalMeetingId *string
 
-	// The Region in which to create the meeting. Available values: af-south-1,
-	// ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-	// ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2,
-	// eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2. Available
-	// values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
+	// The Region in which to create the meeting. Available values: af-south-1 ,
+	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
+	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
+	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
+	// Available values in AWS GovCloud (US) Regions: us-gov-east-1 , us-gov-west-1 .
 	//
 	// This member is required.
 	MediaRegion *string
@@ -71,8 +69,8 @@ type CreateMeetingWithAttendeesInput struct {
 	// Reserved.
 	MeetingHostId *string
 
-	// The configuration for resource targets to receive notifications when meeting and
-	// attendee events occur.
+	// The configuration for resource targets to receive notifications when meeting
+	// and attendee events occur.
 	NotificationsConfiguration *types.NotificationsConfiguration
 
 	// When specified, replicates the media from the primary meeting to the new
@@ -98,7 +96,7 @@ type CreateMeetingWithAttendeesOutput struct {
 	// the attendees is returned, along with error codes and error messages.
 	Errors []types.CreateAttendeeError
 
-	// The meeting information, including the meeting ID and MediaPlacement.
+	// The meeting information, including the meeting ID and MediaPlacement .
 	Meeting *types.Meeting
 
 	// Metadata pertaining to the operation's result.

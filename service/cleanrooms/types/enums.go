@@ -29,8 +29,8 @@ const (
 	AggregateFunctionNameAvg           AggregateFunctionName = "AVG"
 )
 
-// Values returns all known values for AggregateFunctionName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AggregateFunctionName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AggregateFunctionName) Values() []AggregateFunctionName {
 	return []AggregateFunctionName{
@@ -209,9 +209,9 @@ const (
 	MembershipQueryLogStatusDisabled MembershipQueryLogStatus = "DISABLED"
 )
 
-// Values returns all known values for MembershipQueryLogStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MembershipQueryLogStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MembershipQueryLogStatus) Values() []MembershipQueryLogStatus {
 	return []MembershipQueryLogStatus{
 		"ENABLED",
@@ -249,9 +249,9 @@ const (
 	MemberStatusRemoved MemberStatus = "REMOVED"
 )
 
-// Values returns all known values for MemberStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MemberStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MemberStatus) Values() []MemberStatus {
 	return []MemberStatus{
 		"INVITED",
@@ -315,9 +315,9 @@ const (
 	ResourceTypeConfiguredTableAssociation ResourceType = "CONFIGURED_TABLE_ASSOCIATION"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CONFIGURED_TABLE",
@@ -335,9 +335,9 @@ const (
 	ResultFormatParquet ResultFormat = "PARQUET"
 )
 
-// Values returns all known values for ResultFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResultFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResultFormat) Values() []ResultFormat {
 	return []ResultFormat{
 		"CSV",

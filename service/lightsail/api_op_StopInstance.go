@@ -15,12 +15,11 @@ import (
 // start a stopped instance, Lightsail assigns a new public IP address to the
 // instance. To use the same IP address after stopping and starting an instance,
 // create a static IP address and attach it to the instance. For more information,
-// see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip).
-// The stop instance operation supports tag-based access control via resource tags
-// applied to the resource identified by instance name. For more information, see
-// the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip)
+// . The stop instance operation supports tag-based access control via resource
+// tags applied to the resource identified by instance name . For more information,
+// see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) StopInstance(ctx context.Context, params *StopInstanceInput, optFns ...func(*Options)) (*StopInstanceOutput, error) {
 	if params == nil {
 		params = &StopInstanceInput{}
@@ -43,10 +42,10 @@ type StopInstanceInput struct {
 	// This member is required.
 	InstanceName *string
 
-	// When set to True, forces a Lightsail instance that is stuck in a stopping state
-	// to stop. Only use the force parameter if your instance is stuck in the stopping
-	// state. In any other state, your instance should stop normally without adding
-	// this parameter to your API request.
+	// When set to True , forces a Lightsail instance that is stuck in a stopping
+	// state to stop. Only use the force parameter if your instance is stuck in the
+	// stopping state. In any other state, your instance should stop normally without
+	// adding this parameter to your API request.
 	Force *bool
 
 	noSmithyDocumentSerde

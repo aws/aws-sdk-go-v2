@@ -12,8 +12,7 @@ import (
 )
 
 // Gets the indexing configuration. Requires permission to access the
-// GetIndexingConfiguration
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// GetIndexingConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) GetIndexingConfiguration(ctx context.Context, params *GetIndexingConfigurationInput, optFns ...func(*Options)) (*GetIndexingConfigurationOutput, error) {
 	if params == nil {

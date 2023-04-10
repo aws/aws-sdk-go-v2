@@ -12,8 +12,8 @@ import (
 )
 
 // Creates the specified WorkSpace bundle. For more information about creating
-// WorkSpace bundles, see  Create a Custom WorkSpaces Image and Bundle
-// (https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html).
+// WorkSpace bundles, see Create a Custom WorkSpaces Image and Bundle (https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html)
+// .
 func (c *Client) CreateWorkspaceBundle(ctx context.Context, params *CreateWorkspaceBundleInput, optFns ...func(*Options)) (*CreateWorkspaceBundleOutput, error) {
 	if params == nil {
 		params = &CreateWorkspaceBundleInput{}
@@ -61,7 +61,7 @@ type CreateWorkspaceBundleInput struct {
 
 	// The tags associated with the bundle. To add tags at the same time when you're
 	// creating the bundle, you must create an IAM policy that grants your IAM user
-	// permissions to use workspaces:CreateTags.
+	// permissions to use workspaces:CreateTags .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -35,14 +35,14 @@ type ModifyDBProxyEndpointInput struct {
 	// This member is required.
 	DBProxyEndpointName *string
 
-	// The new identifier for the DBProxyEndpoint. An identifier must begin with a
+	// The new identifier for the DBProxyEndpoint . An identifier must begin with a
 	// letter and must contain only ASCII letters, digits, and hyphens; it can't end
 	// with a hyphen or contain two consecutive hyphens.
 	NewDBProxyEndpointName *string
 
-	// The VPC security group IDs for the DB proxy endpoint. When the DB proxy endpoint
-	// uses a different VPC than the original proxy, you also specify a different set
-	// of security group IDs than for the original proxy.
+	// The VPC security group IDs for the DB proxy endpoint. When the DB proxy
+	// endpoint uses a different VPC than the original proxy, you also specify a
+	// different set of security group IDs than for the original proxy.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde

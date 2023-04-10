@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes one or more specified images, if the image names
-// or image ARNs are provided. Otherwise, all images in the account are described.
+// Retrieves a list that describes one or more specified images, if the image
+// names or image ARNs are provided. Otherwise, all images in the account are
+// described.
 func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput, optFns ...func(*Options)) (*DescribeImagesOutput, error) {
 	if params == nil {
 		params = &DescribeImagesInput{}

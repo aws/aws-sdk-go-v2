@@ -277,10 +277,9 @@ func (e *ChannelNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 
 // This exception is thrown when trusted access has not been enabled between
 // CloudTrail and Organizations. For more information, see Enabling Trusted Access
-// with Other Amazon Web Services Services
-// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
-// and Prepare For Creating a Trail For Your Organization
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
+// with Other Amazon Web Services Services (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
+// and Prepare For Creating a Trail For Your Organization (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html)
+// .
 type CloudTrailAccessNotEnabledException struct {
 	Message *string
 
@@ -488,8 +487,8 @@ func (e *EventDataStoreAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified event data store ARN is not valid or does not map to an event data
-// store in your account.
+// The specified event data store ARN is not valid or does not map to an event
+// data store in your account.
 type EventDataStoreARNInvalidException struct {
 	Message *string
 
@@ -598,8 +597,8 @@ func (e *EventDataStoreNotFoundException) ErrorCode() string {
 }
 func (e *EventDataStoreNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The event data store cannot be deleted because termination protection is enabled
-// for it.
+// The event data store cannot be deleted because termination protection is
+// enabled for it.
 type EventDataStoreTerminationProtectedException struct {
 	Message *string
 
@@ -679,8 +678,8 @@ func (e *InactiveEventDataStoreException) ErrorCode() string {
 }
 func (e *InactiveEventDataStoreException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified query cannot be canceled because it is in the FINISHED, FAILED,
-// TIMED_OUT, or CANCELLED state.
+// The specified query cannot be canceled because it is in the FINISHED , FAILED ,
+// TIMED_OUT , or CANCELLED state.
 type InactiveQueryException struct {
 	Message *string
 
@@ -707,7 +706,7 @@ func (e *InactiveQueryException) ErrorCode() string {
 func (e *InactiveQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // If you run GetInsightSelectors on a trail that does not have Insights events
-// enabled, the operation throws the exception InsightNotEnabledException.
+// enabled, the operation throws the exception InsightNotEnabledException .
 type InsightNotEnabledException struct {
 	Message *string
 
@@ -908,8 +907,7 @@ func (e *InvalidCloudWatchLogsRoleArnException) ErrorFault() smithy.ErrorFault {
 
 // A date range for the query was specified that is not valid. Be sure that the
 // start time is chronologically before the end time. For more information about
-// writing a query, see Create or edit a query
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html)
+// writing a query, see Create or edit a query (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html)
 // in the CloudTrail User Guide.
 type InvalidDateRangeException struct {
 	Message *string
@@ -937,7 +935,7 @@ func (e *InvalidDateRangeException) ErrorCode() string {
 func (e *InvalidDateRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs if an event category that is not valid is specified as a value of
-// EventCategory.
+// EventCategory .
 type InvalidEventCategoryException struct {
 	Message *string
 
@@ -1028,22 +1026,15 @@ func (e *InvalidEventDataStoreStatusException) ErrorFault() smithy.ErrorFault {
 // conditions in all advanced event selectors is allowed. A trail is limited to 250
 // data resources. These data resources can be distributed across event selectors,
 // but the overall total cannot exceed 250. You can:
-//
-// * Specify a valid number of
-// event selectors (1 to 5) for a trail.
-//
-// * Specify a valid number of data
-// resources (1 to 250) for an event selector. The limit of number of resources on
-// an individual event selector is configurable up to 250. However, this upper
-// limit is allowed only if the total number of data resources does not exceed 250
-// across all event selectors for a trail.
-//
-// * Specify up to 500 values for all
-// conditions in all advanced event selectors for a trail.
-//
-// * Specify a valid value
-// for a parameter. For example, specifying the ReadWriteType parameter with a
-// value of read-only is not valid.
+//   - Specify a valid number of event selectors (1 to 5) for a trail.
+//   - Specify a valid number of data resources (1 to 250) for an event selector.
+//     The limit of number of resources on an individual event selector is configurable
+//     up to 250. However, this upper limit is allowed only if the total number of data
+//     resources does not exceed 250 across all event selectors for a trail.
+//   - Specify up to 500 values for all conditions in all advanced event selectors
+//     for a trail.
+//   - Specify a valid value for a parameter. For example, specifying the
+//     ReadWriteType parameter with a value of read-only is not valid.
 type InvalidEventSelectorsException struct {
 	Message *string
 
@@ -1230,8 +1221,8 @@ func (e *InvalidMaxResultsException) ErrorCode() string {
 }
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A token that is not valid, or a token that was previously used in a request with
-// different parameters. This exception is thrown if the token is not valid.
+// A token that is not valid, or a token that was previously used in a request
+// with different parameters. This exception is thrown if the token is not valid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -1314,8 +1305,7 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 
 // The query that was submitted has validation errors, or uses incorrect syntax or
 // unsupported keywords. For more information about writing a query, see Create or
-// edit a query
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html)
+// edit a query (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html)
 // in the CloudTrail User Guide.
 type InvalidQueryStatementException struct {
 	Message *string
@@ -1499,8 +1489,8 @@ func (e *InvalidTagParameterException) ErrorCode() string {
 }
 func (e *InvalidTagParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Occurs if the timestamp values are not valid. Either the start time occurs after
-// the end time, or the time range is outside the range of possible values.
+// Occurs if the timestamp values are not valid. Either the start time occurs
+// after the end time, or the time range is outside the range of possible values.
 type InvalidTimeRangeException struct {
 	Message *string
 
@@ -1554,21 +1544,13 @@ func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // This exception is thrown when the provided trail name is not valid. Trail names
 // must meet the following requirements:
-//
-// * Contain only ASCII letters (a-z, A-Z),
-// numbers (0-9), periods (.), underscores (_), or dashes (-)
-//
-// * Start with a
-// letter or number, and end with a letter or number
-//
-// * Be between 3 and 128
-// characters
-//
-// * Have no adjacent periods, underscores or dashes. Names like
-// my-_namespace and my--namespace are not valid.
-//
-// * Not be in IP address format
-// (for example, 192.168.5.4)
+//   - Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+//     underscores (_), or dashes (-)
+//   - Start with a letter or number, and end with a letter or number
+//   - Be between 3 and 128 characters
+//   - Have no adjacent periods, underscores or dashes. Names like my-_namespace
+//     and my--namespace are not valid.
+//   - Not be in IP address format (for example, 192.168.5.4)
 type InvalidTrailNameException struct {
 	Message *string
 
@@ -1647,9 +1629,9 @@ func (e *KmsKeyDisabledException) ErrorCode() string {
 }
 func (e *KmsKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the KMS key does not exist, when the S3 bucket and
-// the KMS key are not in the same region, or when the KMS key associated with the
-// Amazon SNS topic either does not exist or is not in the same region.
+// This exception is thrown when the KMS key does not exist, when the S3 bucket
+// and the KMS key are not in the same region, or when the KMS key associated with
+// the Amazon SNS topic either does not exist or is not in the same region.
 type KmsKeyNotFoundException struct {
 	Message *string
 
@@ -1788,13 +1770,12 @@ func (e *NotOrganizationManagementAccountException) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the Amazon Web Services account making the request
-// to create or update an organization trail or event data store is not the
+// This exception is thrown when the Amazon Web Services account making the
+// request to create or update an organization trail or event data store is not the
 // management account for an organization in Organizations. For more information,
-// see Prepare For Creating a Trail For Your Organization
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html)
-// or Create an event data store
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store.html).
+// see Prepare For Creating a Trail For Your Organization (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html)
+// or Create an event data store (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store.html)
+// .
 type NotOrganizationMasterAccountException struct {
 	Message *string
 
@@ -1934,7 +1915,7 @@ func (e *QueryIdNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 
 // This exception is thrown when the provided resource does not exist, or the ARN
 // format of the resource is not valid. The following is the valid format for a
-// resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel.
+// resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel .
 type ResourceARNNotValidException struct {
 	Message *string
 
@@ -2015,15 +1996,11 @@ func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { retur
 // This exception is thrown when the resouce-based policy has syntax errors, or
 // contains a principal that is not valid. The following are requirements for the
 // resource policy:
-//
-// * Contains only one action: cloudtrail-data:PutAuditEvents
-//
-// *
-// Contains at least one statement. The policy can have a maximum of 20
-// statements.
-//
-// * Each statement contains at least one principal. A statement can
-// have a maximum of 50 principals.
+//   - Contains only one action: cloudtrail-data:PutAuditEvents
+//   - Contains at least one statement. The policy can have a maximum of 20
+//     statements.
+//   - Each statement contains at least one principal. A statement can have a
+//     maximum of 50 principals.
 type ResourcePolicyNotValidException struct {
 	Message *string
 

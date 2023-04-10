@@ -39,10 +39,10 @@ type RestoreClusterFromSnapshotInput struct {
 	// This member is required.
 	SnapshotArn *string
 
-	// The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster. The
-	// KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key.
-	// If you are creating a cluster using the same Amazon account that owns this KMS
-	// encryption key, you can use the KMS key alias instead of the ARN as the KMS
+	// The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.
+	// The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption
+	// key. If you are creating a cluster using the same Amazon account that owns this
+	// KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS
 	// encryption key. If an encryption key is not specified here, Elastic DocumentDB
 	// uses the default encryption key that KMS creates for your account. Your account
 	// has a different default encryption key for each Amazon Region.

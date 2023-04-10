@@ -30,8 +30,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource that a tag list is requested for.
-	// It must be the ARN of an App Runner resource.
+	// The Amazon Resource Name (ARN) of the resource that a tag list is requested
+	// for. It must be the ARN of an App Runner resource.
 	//
 	// This member is required.
 	ResourceArn *string

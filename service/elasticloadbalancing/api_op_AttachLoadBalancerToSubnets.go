@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more subnets to the set of configured subnets for the specified load
-// balancer. The load balancer evenly distributes requests across all registered
-// subnets. For more information, see Add or Remove Subnets for Your Load Balancer
-// in a VPC
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html)
+// Adds one or more subnets to the set of configured subnets for the specified
+// load balancer. The load balancer evenly distributes requests across all
+// registered subnets. For more information, see Add or Remove Subnets for Your
+// Load Balancer in a VPC (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html)
 // in the Classic Load Balancers Guide.
 func (c *Client) AttachLoadBalancerToSubnets(ctx context.Context, params *AttachLoadBalancerToSubnetsInput, optFns ...func(*Options)) (*AttachLoadBalancerToSubnetsOutput, error) {
 	if params == nil {

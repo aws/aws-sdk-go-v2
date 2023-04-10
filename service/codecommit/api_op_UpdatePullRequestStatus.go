@@ -30,13 +30,13 @@ func (c *Client) UpdatePullRequestStatus(ctx context.Context, params *UpdatePull
 type UpdatePullRequestStatusInput struct {
 
 	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests.
+	// ListPullRequests .
 	//
 	// This member is required.
 	PullRequestId *string
 
 	// The status of the pull request. The only valid operations are to update the
-	// status from OPEN to OPEN, OPEN to CLOSED or from CLOSED to CLOSED.
+	// status from OPEN to OPEN , OPEN to CLOSED or from CLOSED to CLOSED .
 	//
 	// This member is required.
 	PullRequestStatus types.PullRequestStatusEnum

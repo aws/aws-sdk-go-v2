@@ -55,8 +55,8 @@ type CreateNetworkAnalyzerConfigurationInput struct {
 	// the WirelessDeviceId of the resource to add in the input array.
 	WirelessDevices []string
 
-	// Wireless gateway resources to add to the network analyzer configuration. Provide
-	// the WirelessGatewayId of the resource to add in the input array.
+	// Wireless gateway resources to add to the network analyzer configuration.
+	// Provide the WirelessGatewayId of the resource to add in the input array.
 	WirelessGateways []string
 
 	noSmithyDocumentSerde

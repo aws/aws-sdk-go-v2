@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery
-// is an IPAM component that enables IPAM to manage and monitor resources that
-// belong to the owning account.
+// Disassociates a resource discovery from an Amazon VPC IPAM. A resource
+// discovery is an IPAM component that enables IPAM to manage and monitor resources
+// that belong to the owning account.
 func (c *Client) DisassociateIpamResourceDiscovery(ctx context.Context, params *DisassociateIpamResourceDiscoveryInput, optFns ...func(*Options)) (*DisassociateIpamResourceDiscoveryOutput, error) {
 	if params == nil {
 		params = &DisassociateIpamResourceDiscoveryInput{}
@@ -38,8 +38,8 @@ type DisassociateIpamResourceDiscoveryInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

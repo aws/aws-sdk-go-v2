@@ -20,8 +20,7 @@ import (
 // extension association is a specified relationship between an extension and an
 // AppConfig resource, such as an application or a configuration profile. For more
 // information about extensions and associations, see Working with AppConfig
-// extensions
-// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) CreateExtensionAssociation(ctx context.Context, params *CreateExtensionAssociationInput, optFns ...func(*Options)) (*CreateExtensionAssociationOutput, error) {
 	if params == nil {
@@ -58,10 +57,10 @@ type CreateExtensionAssociationInput struct {
 	// marked Required must be entered for this field.
 	Parameters map[string]string
 
-	// Adds one or more tags for the specified extension association. Tags are metadata
-	// that help you categorize resources in different ways, for example, by purpose,
-	// owner, or environment. Each tag consists of a key and an optional value, both of
-	// which you define.
+	// Adds one or more tags for the specified extension association. Tags are
+	// metadata that help you categorize resources in different ways, for example, by
+	// purpose, owner, or environment. Each tag consists of a key and an optional
+	// value, both of which you define.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -84,8 +83,8 @@ type CreateExtensionAssociationOutput struct {
 	// The parameter names and values defined in the association.
 	Parameters map[string]string
 
-	// The ARNs of applications, configuration profiles, or environments defined in the
-	// association.
+	// The ARNs of applications, configuration profiles, or environments defined in
+	// the association.
 	ResourceArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -29,16 +29,11 @@ func (c *Client) StopInferenceExperiment(ctx context.Context, params *StopInfere
 
 type StopInferenceExperimentInput struct {
 
-	// Array of key-value pairs, with names of variants mapped to actions. The possible
-	// actions are the following:
-	//
-	// * Promote - Promote the shadow variant to a
-	// production variant
-	//
-	// * Remove - Delete the variant
-	//
-	// * Retain - Keep the variant
-	// as it is
+	// Array of key-value pairs, with names of variants mapped to actions. The
+	// possible actions are the following:
+	//   - Promote - Promote the shadow variant to a production variant
+	//   - Remove - Delete the variant
+	//   - Retain - Keep the variant as it is
 	//
 	// This member is required.
 	ModelVariantActions map[string]types.ModelVariantAction
@@ -56,11 +51,8 @@ type StopInferenceExperimentInput struct {
 
 	// The desired state of the experiment after stopping. The possible states are the
 	// following:
-	//
-	// * Completed: The experiment completed successfully
-	//
-	// * Cancelled: The
-	// experiment was canceled
+	//   - Completed : The experiment completed successfully
+	//   - Cancelled : The experiment was canceled
 	DesiredState types.InferenceExperimentStopDesiredState
 
 	// The reason for stopping the experiment.

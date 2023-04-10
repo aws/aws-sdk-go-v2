@@ -24,8 +24,8 @@ import (
 const ServiceID = "Sagemaker Edge"
 const ServiceAPIVersion = "2020-09-23"
 
-// Client provides the API client to make operations call for Amazon Sagemaker Edge
-// Manager.
+// Client provides the API client to make operations call for Amazon Sagemaker
+// Edge Manager.
 type Client struct {
 	options Options
 }
@@ -115,7 +115,7 @@ type Options struct {
 	Retryer aws.Retryer
 
 	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
-	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
+	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig . You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment

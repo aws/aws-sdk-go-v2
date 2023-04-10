@@ -42,7 +42,7 @@ type ListEmailIdentitiesInput struct {
 	// position in the list of identities.
 	NextToken *string
 
-	// The number of results to show in a single call to ListEmailIdentities. If the
+	// The number of results to show in a single call to ListEmailIdentities . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 0, and can be no
@@ -61,8 +61,8 @@ type ListEmailIdentitiesOutput struct {
 	EmailIdentities []types.IdentityInfo
 
 	// A token that indicates that there are additional configuration sets to list. To
-	// view additional configuration sets, issue another request to
-	// ListEmailIdentities, and pass this token in the NextToken parameter.
+	// view additional configuration sets, issue another request to ListEmailIdentities
+	// , and pass this token in the NextToken parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -131,8 +131,8 @@ func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEmailIdentitiesAPIClient is a client that implements the ListEmailIdentities
-// operation.
+// ListEmailIdentitiesAPIClient is a client that implements the
+// ListEmailIdentities operation.
 type ListEmailIdentitiesAPIClient interface {
 	ListEmailIdentities(context.Context, *ListEmailIdentitiesInput, ...func(*Options)) (*ListEmailIdentitiesOutput, error)
 }
@@ -142,7 +142,7 @@ var _ ListEmailIdentitiesAPIClient = (*Client)(nil)
 // ListEmailIdentitiesPaginatorOptions is the paginator options for
 // ListEmailIdentities
 type ListEmailIdentitiesPaginatorOptions struct {
-	// The number of results to show in a single call to ListEmailIdentities. If the
+	// The number of results to show in a single call to ListEmailIdentities . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 0, and can be no

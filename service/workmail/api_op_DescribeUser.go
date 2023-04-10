@@ -55,8 +55,8 @@ type DescribeUserOutput struct {
 	// The email of the user.
 	Email *string
 
-	// The date and time at which the user was enabled for WorkMailusage, in UNIX epoch
-	// time format.
+	// The date and time at which the user was enabled for WorkMailusage, in UNIX
+	// epoch time format.
 	EnabledDate *time.Time
 
 	// The name for the user.

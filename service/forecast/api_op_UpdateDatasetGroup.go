@@ -12,8 +12,7 @@ import (
 
 // Replaces the datasets in a dataset group with the specified datasets. The Status
 // of the dataset group must be ACTIVE before you can use the dataset group to
-// create a predictor. Use the DescribeDatasetGroup
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
+// create a predictor. Use the DescribeDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
 // operation to get the status.
 func (c *Client) UpdateDatasetGroup(ctx context.Context, params *UpdateDatasetGroupInput, optFns ...func(*Options)) (*UpdateDatasetGroupOutput, error) {
 	if params == nil {

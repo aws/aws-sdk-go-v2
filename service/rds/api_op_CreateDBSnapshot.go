@@ -32,33 +32,23 @@ type CreateDBSnapshotInput struct {
 
 	// The identifier of the DB instance that you want to create the snapshot of.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing DBInstance.
+	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
 	// The identifier for the DB snapshot. Constraints:
-	//
-	// * Can't be null, empty, or
-	// blank
-	//
-	// * Must contain from 1 to 255 letters, numbers, or hyphens
-	//
-	// * First
-	// character must be a letter
-	//
-	// * Can't end with a hyphen or contain two consecutive
-	// hyphens
-	//
+	//   - Can't be null, empty, or blank
+	//   - Must contain from 1 to 255 letters, numbers, or hyphens
+	//   - First character must be a letter
+	//   - Can't end with a hyphen or contain two consecutive hyphens
 	// Example: my-snapshot-id
 	//
 	// This member is required.
 	DBSnapshotIdentifier *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

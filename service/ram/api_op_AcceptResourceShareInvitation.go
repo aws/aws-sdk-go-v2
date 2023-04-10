@@ -32,9 +32,8 @@ func (c *Client) AcceptResourceShareInvitation(ctx context.Context, params *Acce
 
 type AcceptResourceShareInvitationInput struct {
 
-	// The Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the invitation that you want to accept.
+	// The Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the invitation that you want to accept.
 	//
 	// This member is required.
 	ResourceShareInvitationArn *string
@@ -43,9 +42,9 @@ type AcceptResourceShareInvitationInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value.
-	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
-	// this value, then Amazon Web Services generates a random one for you.
+	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
+	// . If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
 	ClientToken *string
 
 	noSmithyDocumentSerde

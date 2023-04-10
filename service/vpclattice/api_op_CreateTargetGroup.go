@@ -14,9 +14,8 @@ import (
 
 // Creates a target group. A target group is a collection of targets, or compute
 // resources, that run your application or service. A target group can only be used
-// by a single service. For more information, see Target groups
-// (https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html) in the
-// Amazon VPC Lattice User Guide.
+// by a single service. For more information, see Target groups (https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html)
+// in the Amazon VPC Lattice User Guide.
 func (c *Client) CreateTargetGroup(ctx context.Context, params *CreateTargetGroupInput, optFns ...func(*Options)) (*CreateTargetGroupOutput, error) {
 	if params == nil {
 		params = &CreateTargetGroupInput{}
@@ -52,8 +51,8 @@ type CreateTargetGroupInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
-	// The target group configuration. If type is set to LAMBDA, this parameter doesn't
-	// apply.
+	// The target group configuration. If type is set to LAMBDA , this parameter
+	// doesn't apply.
 	Config *types.TargetGroupConfig
 
 	// The tags for the target group.
@@ -67,8 +66,8 @@ type CreateTargetGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the target group.
 	Arn *string
 
-	// The target group configuration. If type is set to LAMBDA, this parameter doesn't
-	// apply.
+	// The target group configuration. If type is set to LAMBDA , this parameter
+	// doesn't apply.
 	Config *types.TargetGroupConfig
 
 	// The ID of the target group.
@@ -78,8 +77,8 @@ type CreateTargetGroupOutput struct {
 	Name *string
 
 	// The operation's status. You can retry the operation if the status is
-	// CREATE_FAILED. However, if you retry it while the status is CREATE_IN_PROGRESS,
-	// there is no change in the status.
+	// CREATE_FAILED . However, if you retry it while the status is CREATE_IN_PROGRESS
+	// , there is no change in the status.
 	Status types.TargetGroupStatus
 
 	// The type of target group.

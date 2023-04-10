@@ -10,9 +10,9 @@ const (
 	CurrencyCodeUsd CurrencyCode = "USD"
 )
 
-// Values returns all known values for CurrencyCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CurrencyCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CurrencyCode) Values() []CurrencyCode {
 	return []CurrencyCode{
 		"CNY",
@@ -67,9 +67,9 @@ const (
 	SavingsPlanPaymentOptionNoUpfront      SavingsPlanPaymentOption = "No Upfront"
 )
 
-// Values returns all known values for SavingsPlanPaymentOption. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SavingsPlanPaymentOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanPaymentOption) Values() []SavingsPlanPaymentOption {
 	return []SavingsPlanPaymentOption{
 		"All Upfront",

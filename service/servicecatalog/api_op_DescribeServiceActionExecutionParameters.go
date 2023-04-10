@@ -41,10 +41,8 @@ type DescribeServiceActionExecutionParametersInput struct {
 	ServiceActionId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

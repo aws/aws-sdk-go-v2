@@ -15,24 +15,21 @@ import (
 // Returns a list of tags. You can return tags from a specific resource by
 // specifying an ARN, or you can return all tags for a given type of resource, such
 // as clusters, snapshots, and so on. The following are limitations for
-// DescribeTags:
+// DescribeTags :
+//   - You cannot specify an ARN and a resource-type value together in the same
+//     request.
+//   - You cannot use the MaxRecords and Marker parameters together with the ARN
+//     parameter.
+//   - The MaxRecords parameter can be a range from 10 to 50 results to return in a
+//     request.
 //
-// * You cannot specify an ARN and a resource-type value together in
-// the same request.
-//
-// * You cannot use the MaxRecords and Marker parameters
-// together with the ARN parameter.
-//
-// * The MaxRecords parameter can be a range from
-// 10 to 50 results to return in a request.
-//
-// If you specify both tag keys and tag
-// values in the same request, Amazon Redshift returns all resources that match any
-// combination of the specified keys and values. For example, if you have owner and
-// environment for tag keys, and admin and test for tag values, all resources that
-// have any combination of those values are returned. If both tag keys and values
-// are omitted from the request, resources are returned regardless of whether they
-// have tag keys or values associated with them.
+// If you specify both tag keys and tag values in the same request, Amazon
+// Redshift returns all resources that match any combination of the specified keys
+// and values. For example, if you have owner and environment for tag keys, and
+// admin and test for tag values, all resources that have any combination of those
+// values are returned. If both tag keys and values are omitted from the request,
+// resources are returned regardless of whether they have tag keys or values
+// associated with them.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}
@@ -64,51 +61,37 @@ type DescribeTagsInput struct {
 	MaxRecords *int32
 
 	// The Amazon Resource Name (ARN) for which you want to describe the tag or tags.
-	// For example, arn:aws:redshift:us-east-2:123456789:cluster:t1.
+	// For example, arn:aws:redshift:us-east-2:123456789:cluster:t1 .
 	ResourceName *string
 
 	// The type of resource with which you want to view tags. Valid resource types
 	// are:
-	//
-	// * Cluster
-	//
-	// * CIDR/IP
-	//
-	// * EC2 security group
-	//
-	// * Snapshot
-	//
-	// * Cluster security
-	// group
-	//
-	// * Subnet group
-	//
-	// * HSM connection
-	//
-	// * HSM certificate
-	//
-	// * Parameter group
-	//
-	// *
-	// Snapshot copy grant
-	//
-	// For more information about Amazon Redshift resource types
-	// and constructing ARNs, go to Specifying Policy Elements: Actions, Effects,
-	// Resources, and Principals
-	// (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
+	//   - Cluster
+	//   - CIDR/IP
+	//   - EC2 security group
+	//   - Snapshot
+	//   - Cluster security group
+	//   - Subnet group
+	//   - HSM connection
+	//   - HSM certificate
+	//   - Parameter group
+	//   - Snapshot copy grant
+	// For more information about Amazon Redshift resource types and constructing
+	// ARNs, go to Specifying Policy Elements: Actions, Effects, Resources, and
+	// Principals (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
 	// in the Amazon Redshift Cluster Management Guide.
 	ResourceType *string
 
 	// A tag key or keys for which you want to return all matching resources that are
 	// associated with the specified key or keys. For example, suppose that you have
-	// resources tagged with keys called owner and environment. If you specify both of
+	// resources tagged with keys called owner and environment . If you specify both of
 	// these tag keys in the request, Amazon Redshift returns a response with all
 	// resources that have either or both of these tag keys associated with them.
 	TagKeys []string
 
 	// A tag value or values for which you want to return all matching resources that
 	// are associated with the specified value or values. For example, suppose that you
-	// have resources tagged with values called admin and test. If you specify both of
+	// have resources tagged with values called admin and test . If you specify both of
 	// these tag values in the request, Amazon Redshift returns a response with all
 	// resources that have either or both of these tag values associated with them.
 	TagValues []string

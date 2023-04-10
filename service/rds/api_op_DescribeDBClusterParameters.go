@@ -12,12 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the detailed parameter list for a particular DB cluster parameter group.
-// For more information on Amazon Aurora, see  What is Amazon Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// Returns the detailed parameter list for a particular DB cluster parameter
+// group. For more information on Amazon Aurora, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see  Multi-AZ DB cluster deployments
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide.
 func (c *Client) DescribeDBClusterParameters(ctx context.Context, params *DescribeDBClusterParametersInput, optFns ...func(*Options)) (*DescribeDBClusterParametersOutput, error) {
 	if params == nil {
@@ -38,9 +36,7 @@ type DescribeDBClusterParametersInput struct {
 
 	// The name of a specific DB cluster parameter group to return parameter details
 	// for. Constraints:
-	//
-	// * If supplied, must match the name of an existing
-	// DBClusterParameterGroup.
+	//   - If supplied, must match the name of an existing DBClusterParameterGroup.
 	//
 	// This member is required.
 	DBClusterParameterGroupName *string
@@ -50,7 +46,7 @@ type DescribeDBClusterParametersInput struct {
 
 	// An optional pagination token provided by a previous DescribeDBClusterParameters
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -60,7 +56,7 @@ type DescribeDBClusterParametersInput struct {
 	MaxRecords *int32
 
 	// A value that indicates to return only parameters for a specific source.
-	// Parameter sources can be engine, service, or customer.
+	// Parameter sources can be engine , service , or customer .
 	Source *string
 
 	noSmithyDocumentSerde
@@ -72,7 +68,7 @@ type DescribeDBClusterParametersOutput struct {
 
 	// An optional pagination token provided by a previous DescribeDBClusterParameters
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// Provides a list of parameters for the DB cluster parameter group.

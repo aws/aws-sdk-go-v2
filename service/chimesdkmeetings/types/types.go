@@ -6,13 +6,13 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and
-// JoinToken. The JoinToken allows a client to authenticate and join as the
-// specified attendee. The JoinToken expires when the meeting ends, or when
-// DeleteAttendee is called. After that, the attendee is unable to join the
-// meeting. We recommend securely transferring each JoinToken from your server
-// application to the client so that no other client has access to the token except
-// for the one authorized to represent the attendee.
+// An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and JoinToken
+// . The JoinToken allows a client to authenticate and join as the specified
+// attendee. The JoinToken expires when the meeting ends, or when DeleteAttendee
+// is called. After that, the attendee is unable to join the meeting. We recommend
+// securely transferring each JoinToken from your server application to the client
+// so that no other client has access to the token except for the one authorized to
+// represent the attendee.
 type Attendee struct {
 
 	// The Amazon Chime SDK attendee ID.
@@ -22,23 +22,18 @@ type Attendee struct {
 	// capabilities with a set of values that control what the capabilities can do,
 	// such as SendReceive data. For more information about those values, see . When
 	// using capabilities, be aware of these corner cases:
-	//
-	// * You can't set content
-	// capabilities to SendReceive or Receive unless you also set video capabilities to
-	// SendReceive or Receive. If you don't set the video capability to receive, the
-	// response will contain an HTTP 400 Bad Request status code. However, you can set
-	// your video capability to receive and you set your content capability to not
-	// receive.
-	//
-	// * When you change an audio capability from None or Receive to Send or
-	// SendReceive , and if the attendee left their microphone unmuted, audio will flow
-	// from the attendee to the other meeting participants.
-	//
-	// * When you change a video
-	// or content capability from None or Receive to Send or SendReceive , and if the
-	// attendee turned on their video or content streams, remote attendess can receive
-	// those streams, but only after media renegotiation between the client and the
-	// Amazon Chime back-end server.
+	//   - You can't set content capabilities to SendReceive or Receive unless you also
+	//   set video capabilities to SendReceive or Receive . If you don't set the video
+	//   capability to receive, the response will contain an HTTP 400 Bad Request status
+	//   code. However, you can set your video capability to receive and you set your
+	//   content capability to not receive.
+	//   - When you change an audio capability from None or Receive to Send or
+	//   SendReceive , and if the attendee left their microphone unmuted, audio will
+	//   flow from the attendee to the other meeting participants.
+	//   - When you change a video or content capability from None or Receive to Send
+	//   or SendReceive , and if the attendee turned on their video or content streams,
+	//   remote attendess can receive those streams, but only after media renegotiation
+	//   between the client and the Amazon Chime back-end server.
 	Capabilities *AttendeeCapabilities
 
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
@@ -57,23 +52,18 @@ type Attendee struct {
 // capabilities with a set of values that control what the capabilities can do,
 // such as SendReceive data. For more information about those values, see . When
 // using capabilities, be aware of these corner cases:
-//
-// * You can't set content
-// capabilities to SendReceive or Receive unless you also set video capabilities to
-// SendReceive or Receive. If you don't set the video capability to receive, the
-// response will contain an HTTP 400 Bad Request status code. However, you can set
-// your video capability to receive and you set your content capability to not
-// receive.
-//
-// * When you change an audio capability from None or Receive to Send or
-// SendReceive , and if the attendee left their microphone unmuted, audio will flow
-// from the attendee to the other meeting participants.
-//
-// * When you change a video
-// or content capability from None or Receive to Send or SendReceive , and if the
-// attendee turned on their video or content streams, remote attendess can receive
-// those streams, but only after media renegotiation between the client and the
-// Amazon Chime back-end server.
+//   - You can't set content capabilities to SendReceive or Receive unless you also
+//     set video capabilities to SendReceive or Receive . If you don't set the video
+//     capability to receive, the response will contain an HTTP 400 Bad Request status
+//     code. However, you can set your video capability to receive and you set your
+//     content capability to not receive.
+//   - When you change an audio capability from None or Receive to Send or
+//     SendReceive , and if the attendee left their microphone unmuted, audio will
+//     flow from the attendee to the other meeting participants.
+//   - When you change a video or content capability from None or Receive to Send
+//     or SendReceive , and if the attendee turned on their video or content streams,
+//     remote attendess can receive those streams, but only after media renegotiation
+//     between the client and the Amazon Chime back-end server.
 type AttendeeCapabilities struct {
 
 	// The audio capability assigned to an attendee.
@@ -196,7 +186,7 @@ type EngineTranscribeSettings struct {
 	// transcription output. Content redaction is performed only upon complete
 	// transcription of the audio segments. You can’t set ContentRedactionType and
 	// ContentIdentificationType in the same request. If you set both, your request
-	// returns a BadRequestException.
+	// returns a BadRequestException .
 	ContentRedactionType TranscribeContentRedactionType
 
 	// Generates partial transcription results that are less likely to change as
@@ -223,11 +213,11 @@ type EngineTranscribeSettings struct {
 	PartialResultsStability TranscribePartialResultsStability
 
 	// Lists the PII entity types you want to identify or redact. To specify entity
-	// types, you must enable ContentIdentificationType or ContentRedactionType.
+	// types, you must enable ContentIdentificationType or ContentRedactionType .
 	// PIIEntityTypes must be comma-separated. The available values are:
-	// BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV,
-	// CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.
-	// PiiEntityTypes is an optional parameter with a default value of ALL.
+	// BANK_ACCOUNT_NUMBER , BANK_ROUTING, CREDIT_DEBIT_NUMBER , CREDIT_DEBIT_CVV ,
+	// CREDIT_DEBIT_EXPIRY , PIN , EMAIL , ADDRESS , NAME , PHONE , SSN , and ALL .
+	// PiiEntityTypes is an optional parameter with a default value of ALL .
 	PiiEntityTypes *string
 
 	// Language code for the preferred language.
@@ -291,11 +281,11 @@ type Meeting struct {
 	// The media placement for the meeting.
 	MediaPlacement *MediaPlacement
 
-	// The Region in which you create the meeting. Available values: af-south-1,
-	// ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-	// ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2,
-	// eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2. Available
-	// values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
+	// The Region in which you create the meeting. Available values: af-south-1 ,
+	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
+	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
+	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
+	// Available values in AWS GovCloud (US) Regions: us-gov-east-1 , us-gov-west-1 .
 	MediaRegion *string
 
 	// The ARN of the meeting.
@@ -328,8 +318,8 @@ type MeetingFeaturesConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for resource targets to receive notifications when meeting and
-// attendee events occur.
+// The configuration for resource targets to receive notifications when meeting
+// and attendee events occur.
 type NotificationsConfiguration struct {
 
 	// The ARN of the AWS Lambda function in the notifications configuration.
@@ -361,7 +351,7 @@ type Tag struct {
 }
 
 // The configuration for the current transcription operation. Must contain
-// EngineTranscribeSettings or EngineTranscribeMedicalSettings.
+// EngineTranscribeSettings or EngineTranscribeMedicalSettings .
 type TranscriptionConfiguration struct {
 
 	// The transcription configuration settings passed to Amazon Transcribe Medical.

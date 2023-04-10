@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all groups in the account, displaying their names, unique IDs,
-// and ARNs. The groups from all Regions are returned.
+// Returns a list of all groups in the account, displaying their names, unique
+// IDs, and ARNs. The groups from all Regions are returned.
 func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns ...func(*Options)) (*ListGroupsOutput, error) {
 	if params == nil {
 		params = &ListGroupsInput{}
@@ -35,8 +35,8 @@ type ListGroupsInput struct {
 	// the ListGroups operation. If you omit this parameter, the default of 20 is used.
 	MaxResults *int32
 
-	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent operation to retrieve the next set of results.
+	// A token that indicates that there is more data available. You can use this
+	// token in a subsequent operation to retrieve the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,8 +47,8 @@ type ListGroupsOutput struct {
 	// An array of structures that each contain information about one group.
 	Groups []types.GroupSummary
 
-	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent ListGroups operation to retrieve the next set of results.
+	// A token that indicates that there is more data available. You can use this
+	// token in a subsequent ListGroups operation to retrieve the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

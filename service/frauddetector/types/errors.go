@@ -8,7 +8,7 @@ import (
 )
 
 // An exception indicating Amazon Fraud Detector does not have the needed
-// permissions. This can occur if you submit a request, such as PutExternalModel,
+// permissions. This can occur if you submit a request, such as PutExternalModel ,
 // that specifies a role that is not in your account.
 type AccessDeniedException struct {
 	Message *string

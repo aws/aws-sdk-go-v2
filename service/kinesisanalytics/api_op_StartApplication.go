@@ -14,17 +14,15 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Starts the specified Amazon Kinesis Analytics
+// Analytics API V2 Documentation . Starts the specified Amazon Kinesis Analytics
 // application. After creating an application, you must exclusively call this
 // operation to start your application. After the application starts, it begins
 // consuming the input data, processes it, and writes the output to the configured
 // destination. The application status must be READY for you to start an
 // application. You can get the application status in the console or using the
-// DescribeApplication
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+// DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 // operation. After you start the application, you can stop the application from
-// processing the input by calling the StopApplication
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_StopApplication.html)
+// processing the input by calling the StopApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_StopApplication.html)
 // operation. This operation requires permissions to perform the
 // kinesisanalytics:StartApplication action.
 func (c *Client) StartApplication(ctx context.Context, params *StartApplicationInput, optFns ...func(*Options)) (*StartApplicationOutput, error) {

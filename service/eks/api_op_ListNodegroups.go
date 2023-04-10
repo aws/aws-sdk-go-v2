@@ -36,13 +36,13 @@ type ListNodegroupsInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// The maximum number of node group results returned by ListNodegroups in paginated
-	// output. When you use this parameter, ListNodegroups returns only maxResults
-	// results in a single page along with a nextToken response element. You can see
-	// the remaining results of the initial request by sending another ListNodegroups
-	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If you don't use this parameter, ListNodegroups returns up to 100 results and a
-	// nextToken value if applicable.
+	// The maximum number of node group results returned by ListNodegroups in
+	// paginated output. When you use this parameter, ListNodegroups returns only
+	// maxResults results in a single page along with a nextToken response element.
+	// You can see the remaining results of the initial request by sending another
+	// ListNodegroups request with the returned nextToken value. This value can be
+	// between 1 and 100. If you don't use this parameter, ListNodegroups returns up
+	// to 100 results and a nextToken value if applicable.
 	MaxResults *int32
 
 	// The nextToken value returned from a previous paginated ListNodegroups request
@@ -57,8 +57,8 @@ type ListNodegroupsInput struct {
 type ListNodegroupsOutput struct {
 
 	// The nextToken value to include in a future ListNodegroups request. When the
-	// results of a ListNodegroups request exceed maxResults, you can use this value to
-	// retrieve the next page of results. This value is null when there are no more
+	// results of a ListNodegroups request exceed maxResults , you can use this value
+	// to retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
 
@@ -144,13 +144,13 @@ var _ ListNodegroupsAPIClient = (*Client)(nil)
 
 // ListNodegroupsPaginatorOptions is the paginator options for ListNodegroups
 type ListNodegroupsPaginatorOptions struct {
-	// The maximum number of node group results returned by ListNodegroups in paginated
-	// output. When you use this parameter, ListNodegroups returns only maxResults
-	// results in a single page along with a nextToken response element. You can see
-	// the remaining results of the initial request by sending another ListNodegroups
-	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If you don't use this parameter, ListNodegroups returns up to 100 results and a
-	// nextToken value if applicable.
+	// The maximum number of node group results returned by ListNodegroups in
+	// paginated output. When you use this parameter, ListNodegroups returns only
+	// maxResults results in a single page along with a nextToken response element.
+	// You can see the remaining results of the initial request by sending another
+	// ListNodegroups request with the returned nextToken value. This value can be
+	// between 1 and 100. If you don't use this parameter, ListNodegroups returns up
+	// to 100 results and a nextToken value if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

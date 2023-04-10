@@ -34,8 +34,9 @@ type ListPlaceIndexesInput struct {
 	// Default value: 100
 	MaxResults *int32
 
-	// The pagination token specifying which page of results to return in the response.
-	// If no token is provided, the default page is the first page. Default value: null
+	// The pagination token specifying which page of results to return in the
+	// response. If no token is provided, the default page is the first page. Default
+	// value: null
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,8 +49,8 @@ type ListPlaceIndexesOutput struct {
 	// This member is required.
 	Entries []types.ListPlaceIndexesResponseEntry
 
-	// A pagination token indicating that there are additional pages available. You can
-	// use the token in a new request to fetch the next page of results.
+	// A pagination token indicating that there are additional pages available. You
+	// can use the token in a new request to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

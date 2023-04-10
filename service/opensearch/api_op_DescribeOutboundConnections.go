@@ -14,8 +14,8 @@ import (
 
 // Lists all the outbound cross-cluster connections for a local (source) Amazon
 // OpenSearch Service domain. For more information, see Cross-cluster search for
-// Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
+// Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
+// .
 func (c *Client) DescribeOutboundConnections(ctx context.Context, params *DescribeOutboundConnectionsInput, optFns ...func(*Options)) (*DescribeOutboundConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeOutboundConnectionsInput{}
@@ -41,7 +41,7 @@ type DescribeOutboundConnectionsInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial DescribeOutboundConnections operation returns a nextToken, you
+	// If your initial DescribeOutboundConnections operation returns a nextToken , you
 	// can include the returned nextToken in subsequent DescribeOutboundConnections
 	// operations, which returns results in the next page.
 	NextToken *string

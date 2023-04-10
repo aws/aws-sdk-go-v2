@@ -14,8 +14,7 @@ import (
 // Firewall Manager uses to record SNS logs. To perform this action outside of the
 // console, you must configure the SNS topic to allow the Firewall Manager role
 // AWSServiceRoleForFMS to publish SNS logs. For more information, see Firewall
-// Manager required permissions for API actions
-// (https://docs.aws.amazon.com/waf/latest/developerguide/fms-api-permissions-ref.html)
+// Manager required permissions for API actions (https://docs.aws.amazon.com/waf/latest/developerguide/fms-api-permissions-ref.html)
 // in the Firewall Manager Developer Guide.
 func (c *Client) PutNotificationChannel(ctx context.Context, params *PutNotificationChannelInput, optFns ...func(*Options)) (*PutNotificationChannelOutput, error) {
 	if params == nil {
@@ -40,8 +39,8 @@ type PutNotificationChannelInput struct {
 	// This member is required.
 	SnsRoleName *string
 
-	// The Amazon Resource Name (ARN) of the SNS topic that collects notifications from
-	// Firewall Manager.
+	// The Amazon Resource Name (ARN) of the SNS topic that collects notifications
+	// from Firewall Manager.
 	//
 	// This member is required.
 	SnsTopicArn *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// While a job's JobState value is New, you can update some of the information
+// While a job's JobState value is New , you can update some of the information
 // associated with a job. Once the job changes to a different job state, usually
 // within 60 minutes of the job being created, this action is no longer available.
 func (c *Client) UpdateJob(ctx context.Context, params *UpdateJobInput, optFns ...func(*Options)) (*UpdateJobOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) UpdateJob(ctx context.Context, params *UpdateJobInput, optFns .
 type UpdateJobInput struct {
 
 	// The job ID of the job that you want to update, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	JobId *string
@@ -43,8 +43,8 @@ type UpdateJobInput struct {
 	// The updated description of this job's JobMetadata object.
 	Description *string
 
-	// The updated ID for the forwarding address for a job. This field is not supported
-	// in most regions.
+	// The updated ID for the forwarding address for a job. This field is not
+	// supported in most regions.
 	ForwardingAddressId *string
 
 	// The new or updated Notification object.
@@ -60,9 +60,8 @@ type UpdateJobInput struct {
 	Resources *types.JobResource
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
-	// job. To create a role ARN, use the CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)Identity
-	// and Access Management (IAM) API action.
+	// job. To create a role ARN, use the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// Identity and Access Management (IAM) API action.
 	RoleARN *string
 
 	// The updated shipping option value of this job's ShippingDetails object.

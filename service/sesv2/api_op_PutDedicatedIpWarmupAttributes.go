@@ -43,8 +43,8 @@ type PutDedicatedIpWarmupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutDedicatedIpWarmupAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

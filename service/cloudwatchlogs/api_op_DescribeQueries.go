@@ -41,7 +41,7 @@ type DescribeQueriesInput struct {
 	NextToken *string
 
 	// Limits the returned queries to only those that have the specified status. Valid
-	// values are Cancelled, Complete, Failed, Running, and Scheduled.
+	// values are Cancelled , Complete , Failed , Running , and Scheduled .
 	Status types.QueryStatus
 
 	noSmithyDocumentSerde

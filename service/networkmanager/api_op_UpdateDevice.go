@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the details for an existing device. To remove information for any of the
-// parameters, specify an empty string.
+// Updates the details for an existing device. To remove information for any of
+// the parameters, specify an empty string.
 func (c *Client) UpdateDevice(ctx context.Context, params *UpdateDeviceInput, optFns ...func(*Options)) (*UpdateDeviceOutput, error) {
 	if params == nil {
 		params = &UpdateDeviceInput{}

@@ -34,8 +34,8 @@ type DescribeBucketsInput struct {
 	// The criteria to use to filter the query results.
 	Criteria map[string]types.BucketCriteriaAdditionalProperties
 
-	// The maximum number of items to include in each page of the response. The default
-	// value is 50.
+	// The maximum number of items to include in each page of the response. The
+	// default value is 50.
 	MaxResults int32
 
 	// The nextToken string that specifies which page of results to return in a
@@ -134,8 +134,8 @@ var _ DescribeBucketsAPIClient = (*Client)(nil)
 
 // DescribeBucketsPaginatorOptions is the paginator options for DescribeBuckets
 type DescribeBucketsPaginatorOptions struct {
-	// The maximum number of items to include in each page of the response. The default
-	// value is 50.
+	// The maximum number of items to include in each page of the response. The
+	// default value is 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

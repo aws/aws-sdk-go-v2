@@ -44,8 +44,8 @@ type UpdateStreamProcessorInput struct {
 	// A list of parameters you want to delete from the stream processor.
 	ParametersToDelete []types.StreamProcessorParameterToDelete
 
-	// Specifies locations in the frames where Amazon Rekognition checks for objects or
-	// people. This is an optional parameter for label detection stream processors.
+	// Specifies locations in the frames where Amazon Rekognition checks for objects
+	// or people. This is an optional parameter for label detection stream processors.
 	RegionsOfInterestForUpdate []types.RegionOfInterest
 
 	// The stream processor settings that you want to update. Label detection settings

@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-// Begins the export of discovered data to an S3 bucket. If you specify agentIds in
-// a filter, the task exports up to 72 hours of detailed data collected by the
+// Begins the export of discovered data to an S3 bucket. If you specify agentIds
+// in a filter, the task exports up to 72 hours of detailed data collected by the
 // identified Application Discovery Agent, including network, process, and
 // performance details. A time range for exported agent data may be set by using
-// startTime and endTime. Export of detailed agent data is limited to five
+// startTime and endTime . Export of detailed agent data is limited to five
 // concurrently running exports. If you do not include an agentIds filter, summary
 // data is exported that includes both Amazon Web Services Agentless Discovery
 // Connector data and summary data from Amazon Web Services Discovery Agents.
@@ -43,14 +43,14 @@ type StartExportTaskInput struct {
 	// most recent data collected by the agent.
 	EndTime *time.Time
 
-	// The file format for the returned export data. Default value is CSV. Note: The
+	// The file format for the returned export data. Default value is CSV . Note: The
 	// GRAPHML option has been deprecated.
 	ExportDataFormat []types.ExportDataFormat
 
 	// If a filter is present, it selects the single agentId of the Application
 	// Discovery Agent for which data is exported. The agentId can be found in the
-	// results of the DescribeAgents API or CLI. If no filter is present, startTime and
-	// endTime are ignored and exported data includes both Agentless Discovery
+	// results of the DescribeAgents API or CLI. If no filter is present, startTime
+	// and endTime are ignored and exported data includes both Agentless Discovery
 	// Connector data and summary data from Application Discovery agents.
 	Filters []types.ExportFilter
 

@@ -48,26 +48,27 @@ type CreateLocationHdfsInput struct {
 	// This member is required.
 	NameNodes []types.HdfsNameNode
 
-	// The size of data blocks to write into the HDFS cluster. The block size must be a
-	// multiple of 512 bytes. The default block size is 128 mebibytes (MiB).
+	// The size of data blocks to write into the HDFS cluster. The block size must be
+	// a multiple of 512 bytes. The default block size is 128 mebibytes (MiB).
 	BlockSize *int32
 
 	// The Kerberos key table (keytab) that contains mappings between the defined
 	// Kerberos principal and the encrypted keys. You can load the keytab from a file
 	// by providing the file's address. If you're using the CLI, it performs base64
 	// encoding for you. Otherwise, provide the base64-encoded text. If KERBEROS is
-	// specified for AuthenticationType, this parameter is required.
+	// specified for AuthenticationType , this parameter is required.
 	KerberosKeytab []byte
 
-	// The krb5.conf file that contains the Kerberos configuration information. You can
-	// load the krb5.conf file by providing the file's address. If you're using the
-	// CLI, it performs the base64 encoding for you. Otherwise, provide the
-	// base64-encoded text. If KERBEROS is specified for AuthenticationType, this
+	// The krb5.conf file that contains the Kerberos configuration information. You
+	// can load the krb5.conf file by providing the file's address. If you're using
+	// the CLI, it performs the base64 encoding for you. Otherwise, provide the
+	// base64-encoded text. If KERBEROS is specified for AuthenticationType , this
 	// parameter is required.
 	KerberosKrb5Conf []byte
 
-	// The Kerberos principal with access to the files and folders on the HDFS cluster.
-	// If KERBEROS is specified for AuthenticationType, this parameter is required.
+	// The Kerberos principal with access to the files and folders on the HDFS
+	// cluster. If KERBEROS is specified for AuthenticationType , this parameter is
+	// required.
 	KerberosPrincipal *string
 
 	// The URI of the HDFS cluster's Key Management Server (KMS).
@@ -76,8 +77,8 @@ type CreateLocationHdfsInput struct {
 	// The Quality of Protection (QOP) configuration specifies the Remote Procedure
 	// Call (RPC) and data transfer protection settings configured on the Hadoop
 	// Distributed File System (HDFS) cluster. If QopConfiguration isn't specified,
-	// RpcProtection and DataTransferProtection default to PRIVACY. If you set
-	// RpcProtection or DataTransferProtection, the other parameter assumes the same
+	// RpcProtection and DataTransferProtection default to PRIVACY . If you set
+	// RpcProtection or DataTransferProtection , the other parameter assumes the same
 	// value.
 	QopConfiguration *types.QopConfiguration
 
@@ -86,16 +87,16 @@ type CreateLocationHdfsInput struct {
 	ReplicationFactor *int32
 
 	// The user name used to identify the client on the host operating system. If
-	// SIMPLE is specified for AuthenticationType, this parameter is required.
+	// SIMPLE is specified for AuthenticationType , this parameter is required.
 	SimpleUser *string
 
 	// A subdirectory in the HDFS cluster. This subdirectory is used to read data from
 	// or write data to the HDFS cluster. If the subdirectory isn't specified, it will
-	// default to /.
+	// default to / .
 	Subdirectory *string
 
-	// The key-value pair that represents the tag that you want to add to the location.
-	// The value can be an empty string. We recommend using tags to name your
+	// The key-value pair that represents the tag that you want to add to the
+	// location. The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []types.TagListEntry
 

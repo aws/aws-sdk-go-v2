@@ -61,8 +61,8 @@ type GetWorkflowExecutionOutput struct {
 	// The current runtime status for the specified runtime instance of the workflow.
 	Status types.WorkflowExecutionStatus
 
-	// The total number of steps in the specified runtime instance of the workflow that
-	// ran. This number should equal the sum of the step counts for steps that
+	// The total number of steps in the specified runtime instance of the workflow
+	// that ran. This number should equal the sum of the step counts for steps that
 	// succeeded, were skipped, and failed.
 	TotalStepCount int32
 

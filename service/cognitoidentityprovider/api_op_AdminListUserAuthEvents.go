@@ -53,8 +53,8 @@ type AdminListUserAuthEventsInput struct {
 
 type AdminListUserAuthEventsOutput struct {
 
-	// The response object. It includes the EventID, EventType, CreationDate,
-	// EventRisk, and EventResponse.
+	// The response object. It includes the EventID , EventType , CreationDate ,
+	// EventRisk , and EventResponse .
 	AuthEvents []types.AuthEventType
 
 	// A pagination token.

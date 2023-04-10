@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a dataset. This operation doesn't support datasets that include uploaded
-// files as a source. Partial updates are not supported by this operation.
+// Updates a dataset. This operation doesn't support datasets that include
+// uploaded files as a source. Partial updates are not supported by this operation.
 func (c *Client) UpdateDataSet(ctx context.Context, params *UpdateDataSetInput, optFns ...func(*Options)) (*UpdateDataSetOutput, error) {
 	if params == nil {
 		params = &UpdateDataSetInput{}
@@ -35,8 +35,8 @@ type UpdateDataSetInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dataset that you want to update. This ID is unique per Amazon Web
-	// Services Region for each Amazon Web Services account.
+	// The ID for the dataset that you want to update. This ID is unique per Amazon
+	// Web Services Region for each Amazon Web Services account.
 	//
 	// This member is required.
 	DataSetId *string
@@ -60,8 +60,8 @@ type UpdateDataSetInput struct {
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []types.ColumnGroup
 
-	// A set of one or more definitions of a ColumnLevelPermissionRule
-	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html).
+	// A set of one or more definitions of a ColumnLevelPermissionRule (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html)
+	// .
 	ColumnLevelPermissionRules []types.ColumnLevelPermissionRule
 
 	// The usage configuration to apply to child datasets that reference this dataset
@@ -90,12 +90,12 @@ type UpdateDataSetOutput struct {
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
 
-	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region for each Amazon Web Services account.
+	// The ID for the dataset that you want to create. This ID is unique per Amazon
+	// Web Services Region for each Amazon Web Services account.
 	DataSetId *string
 
-	// The ARN for the ingestion, which is triggered as a result of dataset creation if
-	// the import mode is SPICE.
+	// The ARN for the ingestion, which is triggered as a result of dataset creation
+	// if the import mode is SPICE.
 	IngestionArn *string
 
 	// The ID of the ingestion, which is triggered as a result of dataset creation if

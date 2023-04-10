@@ -12,14 +12,9 @@ import (
 )
 
 // Does the following:
-//
-// * Adds new Attributes, Rules, or ObjectTypes.
-//
-// * Updates
-// existing Attributes, Rules, or ObjectTypes.
-//
-// * Deletes existing Attributes,
-// Rules, or ObjectTypes.
+//   - Adds new Attributes , Rules , or ObjectTypes .
+//   - Updates existing Attributes , Rules , or ObjectTypes .
+//   - Deletes existing Attributes , Rules , or ObjectTypes .
 func (c *Client) UpdateFacet(ctx context.Context, params *UpdateFacetInput, optFns ...func(*Options)) (*UpdateFacetOutput, error) {
 	if params == nil {
 		params = &UpdateFacetInput{}
@@ -42,14 +37,14 @@ type UpdateFacetInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
-	// information, see arns.
+	// The Amazon Resource Name (ARN) that is associated with the Facet . For more
+	// information, see arns .
 	//
 	// This member is required.
 	SchemaArn *string
 
-	// List of attributes that need to be updated in a given schema Facet. Each
-	// attribute is followed by AttributeAction, which specifies the type of update
+	// List of attributes that need to be updated in a given schema Facet . Each
+	// attribute is followed by AttributeAction , which specifies the type of update
 	// operation to perform.
 	AttributeUpdates []types.FacetAttributeUpdate
 

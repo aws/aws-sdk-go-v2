@@ -13,8 +13,8 @@ import (
 
 // Modifies attributes of a specified VPC endpoint. The attributes that you can
 // modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load
-// Balancer). For more information, see the Amazon Web Services PrivateLink Guide
-// (https://docs.aws.amazon.com/vpc/latest/privatelink/).
+// Balancer). For more information, see the Amazon Web Services PrivateLink Guide (https://docs.aws.amazon.com/vpc/latest/privatelink/)
+// .
 func (c *Client) ModifyVpcEndpoint(ctx context.Context, params *ModifyVpcEndpointInput, optFns ...func(*Options)) (*ModifyVpcEndpointOutput, error) {
 	if params == nil {
 		params = &ModifyVpcEndpointInput{}
@@ -54,8 +54,8 @@ type ModifyVpcEndpointInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The IP address type for the endpoint.

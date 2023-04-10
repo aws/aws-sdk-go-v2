@@ -44,8 +44,8 @@ type BatchDeleteScheduledActionInput struct {
 
 type BatchDeleteScheduledActionOutput struct {
 
-	// The names of the scheduled actions that could not be deleted, including an error
-	// message.
+	// The names of the scheduled actions that could not be deleted, including an
+	// error message.
 	FailedScheduledActions []types.FailedScheduledUpdateGroupActionRequest
 
 	// Metadata pertaining to the operation's result.

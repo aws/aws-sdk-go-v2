@@ -12,10 +12,10 @@ import (
 )
 
 // Explicitly sets the quantity of devices to renew for an offering, starting from
-// the effectiveDate of the next period. The API returns a NotEligible error if the
-// user is not permitted to invoke the operation. If you must be able to invoke
-// this operation, contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com).
+// the effectiveDate of the next period. The API returns a NotEligible error if
+// the user is not permitted to invoke the operation. If you must be able to invoke
+// this operation, contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// .
 func (c *Client) RenewOffering(ctx context.Context, params *RenewOfferingInput, optFns ...func(*Options)) (*RenewOfferingOutput, error) {
 	if params == nil {
 		params = &RenewOfferingInput{}

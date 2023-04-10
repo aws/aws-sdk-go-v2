@@ -12,8 +12,7 @@ import (
 )
 
 // Removes an IndexField from the search domain. For more information, see
-// Configuring Index Fields
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
+// Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DeleteIndexField(ctx context.Context, params *DeleteIndexFieldInput, optFns ...func(*Options)) (*DeleteIndexFieldOutput, error) {
 	if params == nil {

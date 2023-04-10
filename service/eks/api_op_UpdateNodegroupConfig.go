@@ -56,8 +56,8 @@ type UpdateNodegroupConfigInput struct {
 	ScalingConfig *types.NodegroupScalingConfig
 
 	// The Kubernetes taints to be applied to the nodes in the node group after the
-	// update. For more information, see Node taints on managed node groups
-	// (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html).
+	// update. For more information, see Node taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
+	// .
 	Taints *types.UpdateTaintsPayload
 
 	// The node group update configuration.

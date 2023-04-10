@@ -50,8 +50,8 @@ type SampleChannelDataInput struct {
 
 type SampleChannelDataOutput struct {
 
-	// The list of message samples. Each sample message is returned as a base64-encoded
-	// string.
+	// The list of message samples. Each sample message is returned as a
+	// base64-encoded string.
 	Payloads [][]byte
 
 	// Metadata pertaining to the operation's result.

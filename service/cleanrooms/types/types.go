@@ -40,8 +40,8 @@ type AggregationConstraint struct {
 	// This member is required.
 	Minimum *int32
 
-	// The type of aggregation the constraint allows. The only valid value is currently
-	// `COUNT_DISTINCT`.
+	// The type of aggregation the constraint allows. The only valid value is
+	// currently `COUNT_DISTINCT`.
 	//
 	// This member is required.
 	Type AggregationType
@@ -104,14 +104,14 @@ type AnalysisRuleAggregation struct {
 	// This member is required.
 	JoinColumns []string
 
-	// Columns that must meet a specific threshold value (after an aggregation function
-	// is applied to it) for each output row to be returned.
+	// Columns that must meet a specific threshold value (after an aggregation
+	// function is applied to it) for each output row to be returned.
 	//
 	// This member is required.
 	OutputConstraints []AggregationConstraint
 
-	// Set of scalar functions that are allowed to be used on dimension columns and the
-	// output of aggregation of metrics.
+	// Set of scalar functions that are allowed to be used on dimension columns and
+	// the output of aggregation of metrics.
 	//
 	// This member is required.
 	ScalarFunctions []ScalarFunctions
@@ -126,8 +126,8 @@ type AnalysisRuleAggregation struct {
 // A type of analysis rule that enables row-level analysis.
 type AnalysisRuleList struct {
 
-	// Columns that can be used to join a configured table with the table of the member
-	// who can query and another members' configured tables.
+	// Columns that can be used to join a configured table with the table of the
+	// member who can query and another members' configured tables.
 	//
 	// This member is required.
 	JoinColumns []string
@@ -601,8 +601,8 @@ type ConfiguredTableAssociationSummary struct {
 // The configured table summary for the objects listed by the request.
 type ConfiguredTableSummary struct {
 
-	// The analysis method for the configured tables. The only valid value is currently
-	// `DIRECT_QUERY`.
+	// The analysis method for the configured tables. The only valid value is
+	// currently `DIRECT_QUERY`.
 	//
 	// This member is required.
 	AnalysisMethod AnalysisMethod
@@ -1201,8 +1201,8 @@ type SchemaSummary struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The analysis method for the associated schema. The only valid value is currently
-	// `DIRECT_QUERY`.
+	// The analysis method for the associated schema. The only valid value is
+	// currently `DIRECT_QUERY`.
 	AnalysisMethod AnalysisMethod
 
 	noSmithyDocumentSerde

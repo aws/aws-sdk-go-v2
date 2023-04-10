@@ -78,9 +78,9 @@ const (
 	FormalityInformal Formality = "INFORMAL"
 )
 
-// Values returns all known values for Formality. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Formality. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Formality) Values() []Formality {
 	return []Formality{
 		"FORMAL",
@@ -101,9 +101,9 @@ const (
 	JobStatusStopped            JobStatus = "STOPPED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -183,9 +183,9 @@ const (
 	ProfanityMask Profanity = "MASK"
 )
 
-// Values returns all known values for Profanity. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Profanity. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Profanity) Values() []Profanity {
 	return []Profanity{
 		"MASK",
@@ -201,8 +201,8 @@ const (
 	TerminologyDataFormatTsv TerminologyDataFormat = "TSV"
 )
 
-// Values returns all known values for TerminologyDataFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TerminologyDataFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TerminologyDataFormat) Values() []TerminologyDataFormat {
 	return []TerminologyDataFormat{

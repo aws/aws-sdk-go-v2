@@ -19,29 +19,16 @@ import (
 // associated with the Multi-Region Access Point, only the Multi-Region Access
 // Point itself. This action will always be routed to the US West (Oregon) Region.
 // For more information about the restrictions around managing Multi-Region Access
-// Points, see Managing Multi-Region Access Points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// Points, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. This request is asynchronous, meaning that you
 // might receive a response before the command has completed. When this request
 // provides a response, it provides a token that you can use to monitor the status
-// of the request with DescribeMultiRegionAccessPointOperation. The following
-// actions are related to DeleteMultiRegionAccessPoint:
-//
-// *
-// CreateMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-//
-// *
-// DescribeMultiRegionAccessPointOperation
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
-//
-// *
-// GetMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
-//
-// *
-// ListMultiRegionAccessPoints
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
+// of the request with DescribeMultiRegionAccessPointOperation . The following
+// actions are related to DeleteMultiRegionAccessPoint :
+//   - CreateMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
+//   - DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
+//   - GetMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
+//   - ListMultiRegionAccessPoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
 func (c *Client) DeleteMultiRegionAccessPoint(ctx context.Context, params *DeleteMultiRegionAccessPointInput, optFns ...func(*Options)) (*DeleteMultiRegionAccessPointOutput, error) {
 	if params == nil {
 		params = &DeleteMultiRegionAccessPointInput{}
@@ -82,8 +69,7 @@ type DeleteMultiRegionAccessPointInput struct {
 type DeleteMultiRegionAccessPointOutput struct {
 
 	// The request token associated with the request. You can use this token with
-	// DescribeMultiRegionAccessPointOperation
-	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
+	// DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
 	// to determine the status of asynchronous requests.
 	RequestTokenARN *string
 

@@ -14,8 +14,7 @@ import (
 
 // Returns a list of parameter settings for the specified parameter group family.
 // For more information about parameters and parameter groups, go to Amazon
-// Redshift Parameter Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DescribeDefaultClusterParameters(ctx context.Context, params *DescribeDefaultClusterParametersInput, optFns ...func(*Options)) (*DescribeDefaultClusterParametersOutput, error) {
 	if params == nil {
@@ -40,11 +39,11 @@ type DescribeDefaultClusterParametersInput struct {
 	ParameterGroupFamily *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeDefaultClusterParameters request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
+	// response records. When the results of a DescribeDefaultClusterParameters
+	// request exceed the value specified in MaxRecords , Amazon Web Services returns a
+	// value in the Marker field of the response. You can retrieve the next set of
+	// response records by providing the returned marker value in the Marker parameter
+	// and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of

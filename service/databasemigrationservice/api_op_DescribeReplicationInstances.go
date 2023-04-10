@@ -43,7 +43,7 @@ type DescribeReplicationInstancesInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -59,7 +59,7 @@ type DescribeReplicationInstancesOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The replication instances described.
@@ -244,10 +244,10 @@ type ReplicationInstanceAvailableWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationInstanceAvailableWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationInstanceAvailableWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -519,8 +519,8 @@ type ReplicationInstanceDeletedWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationInstanceDeletedWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationInstanceDeletedWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

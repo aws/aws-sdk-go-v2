@@ -52,14 +52,13 @@ type CreateTriggerInput struct {
 	EventBatchingCondition *types.EventBatchingCondition
 
 	// A predicate to specify when the new trigger should fire. This field is required
-	// when the trigger type is CONDITIONAL.
+	// when the trigger type is CONDITIONAL .
 	Predicate *types.Predicate
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules for
-	// Jobs and Crawlers
-	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, you would specify: cron(15
-	// 12 * * ? *). This field is required when the trigger type is SCHEDULED.
+	// Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
+	// . For example, to run something every day at 12:15 UTC, you would specify:
+	// cron(15 12 * * ? *) . This field is required when the trigger type is SCHEDULED.
 	Schedule *string
 
 	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is

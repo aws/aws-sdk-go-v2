@@ -26,9 +26,9 @@ const (
 	DeviceStatusSignedOut DeviceStatus = "SIGNED_OUT"
 )
 
-// Values returns all known values for DeviceStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeviceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceStatus) Values() []DeviceStatus {
 	return []DeviceStatus{
 		"ACTIVE",
@@ -50,9 +50,9 @@ const (
 	DomainStatusFailedToDisassociate DomainStatus = "FAILED_TO_DISASSOCIATE"
 )
 
-// Values returns all known values for DomainStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DomainStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"PENDING_VALIDATION",

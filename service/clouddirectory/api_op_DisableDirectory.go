@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the specified directory. Disabled directories cannot be read or written
-// to. Only enabled directories can be disabled. Disabled directories may be
-// reenabled.
+// Disables the specified directory. Disabled directories cannot be read or
+// written to. Only enabled directories can be disabled. Disabled directories may
+// be reenabled.
 func (c *Client) DisableDirectory(ctx context.Context, params *DisableDirectoryInput, optFns ...func(*Options)) (*DisableDirectoryOutput, error) {
 	if params == nil {
 		params = &DisableDirectoryInput{}

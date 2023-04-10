@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation allows a search on DATABASE resources by TagCondition. This
+// This operation allows a search on DATABASE resources by TagCondition . This
 // operation is used by admins who want to grant user permissions on certain
-// TagConditions. Before making a grant, the admin can use SearchDatabasesByTags to
-// find all resources where the given TagConditions are valid to verify whether the
-// returned resources can be shared.
+// TagConditions . Before making a grant, the admin can use SearchDatabasesByTags
+// to find all resources where the given TagConditions are valid to verify whether
+// the returned resources can be shared.
 func (c *Client) SearchDatabasesByLFTags(ctx context.Context, params *SearchDatabasesByLFTagsInput, optFns ...func(*Options)) (*SearchDatabasesByLFTagsOutput, error) {
 	if params == nil {
 		params = &SearchDatabasesByLFTagsInput{}
@@ -34,7 +34,7 @@ func (c *Client) SearchDatabasesByLFTags(ctx context.Context, params *SearchData
 
 type SearchDatabasesByLFTagsInput struct {
 
-	// A list of conditions (LFTag structures) to search for in database resources.
+	// A list of conditions ( LFTag structures) to search for in database resources.
 	//
 	// This member is required.
 	Expression []types.LFTag

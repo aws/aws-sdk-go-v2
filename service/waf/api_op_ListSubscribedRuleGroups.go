@@ -11,13 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of RuleGroup objects that you are subscribed to.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Returns an array of RuleGroup objects that you are subscribed
+// to.
 func (c *Client) ListSubscribedRuleGroups(ctx context.Context, params *ListSubscribedRuleGroupsInput, optFns ...func(*Options)) (*ListSubscribedRuleGroupsOutput, error) {
 	if params == nil {
 		params = &ListSubscribedRuleGroupsInput{}
@@ -36,13 +35,13 @@ func (c *Client) ListSubscribedRuleGroups(ctx context.Context, params *ListSubsc
 type ListSubscribedRuleGroupsInput struct {
 
 	// Specifies the number of subscribed rule groups that you want AWS WAF to return
-	// for this request. If you have more objects than the number you specify for
-	// Limit, the response includes a NextMarker value that you can use to get another
+	// for this request. If you have more objects than the number you specify for Limit
+	// , the response includes a NextMarker value that you can use to get another
 	// batch of objects.
 	Limit int32
 
-	// If you specify a value for Limit and you have more ByteMatchSetssubscribed rule
-	// groups than the value of Limit, AWS WAF returns a NextMarker value in the
+	// If you specify a value for Limit and you have more ByteMatchSets subscribed rule
+	// groups than the value of Limit , AWS WAF returns a NextMarker value in the
 	// response that allows you to list another group of subscribed rule groups. For
 	// the second and subsequent ListSubscribedRuleGroupsRequest requests, specify the
 	// value of NextMarker from the previous response to get information about another

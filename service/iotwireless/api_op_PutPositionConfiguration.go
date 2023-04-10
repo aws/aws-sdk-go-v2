@@ -13,8 +13,7 @@ import (
 
 // Put position configuration for a given resource. This action is no longer
 // supported. Calls to update the position configuration should use the
-// UpdateResourcePosition
-// (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html)
+// UpdateResourcePosition (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html)
 // API operation instead.
 //
 // Deprecated: This operation is no longer supported.
@@ -46,8 +45,8 @@ type PutPositionConfigurationInput struct {
 	// This member is required.
 	ResourceType types.PositionResourceType
 
-	// The position data destination that describes the AWS IoT rule that processes the
-	// device's position data for use by AWS IoT Core for LoRaWAN.
+	// The position data destination that describes the AWS IoT rule that processes
+	// the device's position data for use by AWS IoT Core for LoRaWAN.
 	Destination *string
 
 	// The positioning solvers used to update the position configuration of the

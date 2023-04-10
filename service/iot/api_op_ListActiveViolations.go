@@ -13,8 +13,7 @@ import (
 )
 
 // Lists the active violations for a given Device Defender security profile.
-// Requires permission to access the ListActiveViolations
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Requires permission to access the ListActiveViolations (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListActiveViolations(ctx context.Context, params *ListActiveViolationsInput, optFns ...func(*Options)) (*ListActiveViolationsOutput, error) {
 	if params == nil {

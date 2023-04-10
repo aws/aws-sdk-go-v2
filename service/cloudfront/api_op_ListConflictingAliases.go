@@ -19,16 +19,15 @@ import (
 // protect the information of ones that you don't own. Use this operation to find
 // aliases that are in use in CloudFront that conflict or overlap with the provided
 // alias. For example, if you provide www.example.com as input, the returned list
-// can include www.example.com and the overlapping wildcard alternate domain name
-// (*.example.com), if they exist. If you provide *.example.com as input, the
+// can include www.example.com and the overlapping wildcard alternate domain name (
+// *.example.com ), if they exist. If you provide *.example.com as input, the
 // returned list can include *.example.com and any alternate domain names covered
-// by that wildcard (for example, www.example.com, test.example.com,
-// dev.example.com, and so on), if they exist. To list conflicting aliases, you
+// by that wildcard (for example, www.example.com , test.example.com ,
+// dev.example.com , and so on), if they exist. To list conflicting aliases, you
 // provide the alias to search and the ID of a distribution in your account that
 // has an attached SSL/TLS certificate that includes the provided alias. For more
 // information, including how to set up the distribution and certificate, see
-// Moving an alternate domain name to a different distribution
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move)
+// Moving an alternate domain name to a different distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move)
 // in the Amazon CloudFront Developer Guide. You can optionally specify the maximum
 // number of items to receive in the response. If the total number of items in the
 // list exceeds the maximum that you specify, or the default maximum, the response
@@ -63,10 +62,10 @@ type ListConflictingAliasesInput struct {
 	// This member is required.
 	DistributionId *string
 
-	// Use this field when paginating results to indicate where to begin in the list of
-	// conflicting aliases. The response includes conflicting aliases in the list that
-	// occur after the marker. To get the next page of the list, set this field's value
-	// to the value of NextMarker from the current page's response.
+	// Use this field when paginating results to indicate where to begin in the list
+	// of conflicting aliases. The response includes conflicting aliases in the list
+	// that occur after the marker. To get the next page of the list, set this field's
+	// value to the value of NextMarker from the current page's response.
 	Marker *string
 
 	// The maximum number of conflicting aliases that you want in the response.

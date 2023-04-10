@@ -12,9 +12,9 @@ const (
 	AnalysisTypeBinaryAnalysis     AnalysisType = "BINARY_ANALYSIS"
 )
 
-// Values returns all known values for AnalysisType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AnalysisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisType) Values() []AnalysisType {
 	return []AnalysisType{
 		"SOURCE_CODE_ANALYSIS",
@@ -58,9 +58,10 @@ const (
 	ApplicationComponentCriteriaErrorCategory  ApplicationComponentCriteria = "ERROR_CATEGORY"
 )
 
-// Values returns all known values for ApplicationComponentCriteria. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ApplicationComponentCriteria. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ApplicationComponentCriteria) Values() []ApplicationComponentCriteria {
 	return []ApplicationComponentCriteria{
 		"NOT_DEFINED",
@@ -284,9 +285,9 @@ const (
 	ConditionNotContains Condition = "NOT_CONTAINS"
 )
 
-// Values returns all known values for Condition. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Condition. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Condition) Values() []Condition {
 	return []Condition{
 		"EQUALS",
@@ -305,9 +306,10 @@ const (
 	DatabaseManagementPreferenceNoPreference DatabaseManagementPreference = "No preference"
 )
 
-// Values returns all known values for DatabaseManagementPreference. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatabaseManagementPreference. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DatabaseManagementPreference) Values() []DatabaseManagementPreference {
 	return []DatabaseManagementPreference{
 		"AWS-managed",
@@ -344,9 +346,9 @@ const (
 	GroupNameExternalSourceType GroupName = "ExternalSourceType"
 )
 
-// Values returns all known values for GroupName. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for GroupName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (GroupName) Values() []GroupName {
 	return []GroupName{
 		"ExternalId",
@@ -370,8 +372,8 @@ const (
 	HeterogeneousTargetDatabaseEngineMongoDb            HeterogeneousTargetDatabaseEngine = "MongoDB"
 )
 
-// Values returns all known values for HeterogeneousTargetDatabaseEngine. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for HeterogeneousTargetDatabaseEngine. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (HeterogeneousTargetDatabaseEngine) Values() []HeterogeneousTargetDatabaseEngine {
@@ -507,9 +509,9 @@ const (
 	OutputFormatJson  OutputFormat = "Json"
 )
 
-// Values returns all known values for OutputFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"Excel",
@@ -524,9 +526,9 @@ const (
 	PipelineTypeAzureDevops PipelineType = "AZURE_DEVOPS"
 )
 
-// Values returns all known values for PipelineType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PipelineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineType) Values() []PipelineType {
 	return []PipelineType{
 		"AZURE_DEVOPS",
@@ -583,8 +585,8 @@ const (
 	RuntimeAnalysisStatusAnalysisFailed        RuntimeAnalysisStatus = "ANALYSIS_FAILED"
 )
 
-// Values returns all known values for RuntimeAnalysisStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RuntimeAnalysisStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RuntimeAnalysisStatus) Values() []RuntimeAnalysisStatus {
 	return []RuntimeAnalysisStatus{
@@ -732,9 +734,9 @@ const (
 	ServerOsTypeOther                     ServerOsType = "Other"
 )
 
-// Values returns all known values for ServerOsType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServerOsType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServerOsType) Values() []ServerOsType {
 	return []ServerOsType{
 		"WindowsServer",
@@ -773,9 +775,9 @@ const (
 	SortOrderDesc SortOrder = "DESC"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASC",

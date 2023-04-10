@@ -12,9 +12,8 @@ import (
 
 // Deletes the specified inline policy that is embedded in the specified IAM user.
 // A user can also have managed policies attached to it. To detach a managed policy
-// from a user, use DetachUserPolicy. For more information about policies, refer to
-// Managed policies and inline policies
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// from a user, use DetachUserPolicy . For more information about policies, refer
+// to Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) DeleteUserPolicy(ctx context.Context, params *DeleteUserPolicyInput, optFns ...func(*Options)) (*DeleteUserPolicyOutput, error) {
 	if params == nil {
@@ -34,7 +33,7 @@ func (c *Client) DeleteUserPolicy(ctx context.Context, params *DeleteUserPolicyI
 type DeleteUserPolicyInput struct {
 
 	// The name identifying the policy document to delete. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
@@ -42,10 +41,10 @@ type DeleteUserPolicyInput struct {
 	PolicyName *string
 
 	// The name (friendly name, not ARN) identifying the user that the policy is
-	// embedded in. This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
-	// and lowercase alphanumeric characters with no spaces. You can also include any
-	// of the following characters: _+=,.@-
+	// embedded in. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
+	// ) a string of characters consisting of upper and lowercase alphanumeric
+	// characters with no spaces. You can also include any of the following characters:
+	// _+=,.@-
 	//
 	// This member is required.
 	UserName *string

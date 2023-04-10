@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the pipeline identifiers for all active pipelines that you have permission
-// to access. POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1
+// Lists the pipeline identifiers for all active pipelines that you have
+// permission to access. POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1
 // X-Amz-Target: DataPipeline.ListPipelines Content-Length: 14 Host:
 // datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
 // Authorization: AuthParams {} Status: x-amzn-RequestId:
@@ -53,7 +53,7 @@ type ListPipelinesOutput struct {
 
 	// The pipeline identifiers. If you require additional information about the
 	// pipelines, you can use these identifiers to call DescribePipelines and
-	// GetPipelineDefinition.
+	// GetPipelineDefinition .
 	//
 	// This member is required.
 	PipelineIdList []types.PipelineIdName

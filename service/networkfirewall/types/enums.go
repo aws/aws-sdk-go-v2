@@ -202,8 +202,8 @@ const (
 	ResourceManagedStatusAccount ResourceManagedStatus = "ACCOUNT"
 )
 
-// Values returns all known values for ResourceManagedStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ResourceManagedStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceManagedStatus) Values() []ResourceManagedStatus {
 	return []ResourceManagedStatus{
@@ -274,9 +274,9 @@ const (
 	RuleOrderStrictOrder        RuleOrder = "STRICT_ORDER"
 )
 
-// Values returns all known values for RuleOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RuleOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RuleOrder) Values() []RuleOrder {
 	return []RuleOrder{
 		"DEFAULT_ACTION_ORDER",
@@ -314,8 +314,8 @@ const (
 	StatefulRuleDirectionAny     StatefulRuleDirection = "ANY"
 )
 
-// Values returns all known values for StatefulRuleDirection. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StatefulRuleDirection. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StatefulRuleDirection) Values() []StatefulRuleDirection {
 	return []StatefulRuleDirection{
@@ -384,8 +384,8 @@ const (
 	StreamExceptionPolicyContinue StreamExceptionPolicy = "CONTINUE"
 )
 
-// Values returns all known values for StreamExceptionPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StreamExceptionPolicy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StreamExceptionPolicy) Values() []StreamExceptionPolicy {
 	return []StreamExceptionPolicy{

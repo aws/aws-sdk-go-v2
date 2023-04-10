@@ -32,8 +32,8 @@ func (c *Client) SkipWaitTimeForInstanceTermination(ctx context.Context, params 
 
 type SkipWaitTimeForInstanceTerminationInput struct {
 
-	// The unique ID of a blue/green deployment for which you want to skip the instance
-	// termination wait time.
+	// The unique ID of a blue/green deployment for which you want to skip the
+	// instance termination wait time.
 	DeploymentId *string
 
 	noSmithyDocumentSerde

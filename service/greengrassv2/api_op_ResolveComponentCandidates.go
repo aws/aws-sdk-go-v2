@@ -24,7 +24,7 @@ import (
 // specifies to use the version from the Amazon Web Services Cloud. To use this
 // operation, you must use the data plane API endpoint and authenticate with an IoT
 // device certificate. For more information, see IoT Greengrass endpoints and
-// quotas (https://docs.aws.amazon.com/general/latest/gr/greengrass.html).
+// quotas (https://docs.aws.amazon.com/general/latest/gr/greengrass.html) .
 func (c *Client) ResolveComponentCandidates(ctx context.Context, params *ResolveComponentCandidatesInput, optFns ...func(*Options)) (*ResolveComponentCandidatesOutput, error) {
 	if params == nil {
 		params = &ResolveComponentCandidatesInput{}
@@ -53,9 +53,9 @@ type ResolveComponentCandidatesInput struct {
 
 type ResolveComponentCandidatesOutput struct {
 
-	// A list of components that meet the requirements that you specify in the request.
-	// This list includes each component's recipe that you can use to install the
-	// component.
+	// A list of components that meet the requirements that you specify in the
+	// request. This list includes each component's recipe that you can use to install
+	// the component.
 	ResolvedComponentVersions []types.ResolvedComponentVersion
 
 	// Metadata pertaining to the operation's result.

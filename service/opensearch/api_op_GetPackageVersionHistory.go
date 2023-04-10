@@ -14,8 +14,8 @@ import (
 
 // Returns a list of Amazon OpenSearch Service package versions, along with their
 // creation time and commit message. For more information, see Custom packages for
-// Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) GetPackageVersionHistory(ctx context.Context, params *GetPackageVersionHistoryInput, optFns ...func(*Options)) (*GetPackageVersionHistoryOutput, error) {
 	if params == nil {
 		params = &GetPackageVersionHistoryInput{}
@@ -43,7 +43,7 @@ type GetPackageVersionHistoryInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial GetPackageVersionHistory operation returns a nextToken, you can
+	// If your initial GetPackageVersionHistory operation returns a nextToken , you can
 	// include the returned nextToken in subsequent GetPackageVersionHistory
 	// operations, which returns results in the next page.
 	NextToken *string

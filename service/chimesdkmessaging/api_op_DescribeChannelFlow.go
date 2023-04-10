@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of a channel flow in an Amazon Chime AppInstance. This
+// Returns the full details of a channel flow in an Amazon Chime AppInstance . This
 // is a developer API.
 func (c *Client) DescribeChannelFlow(ctx context.Context, params *DescribeChannelFlowInput, optFns ...func(*Options)) (*DescribeChannelFlowOutput, error) {
 	if params == nil {

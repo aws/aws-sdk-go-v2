@@ -30,7 +30,7 @@ func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput
 
 type GetEnvironmentInput struct {
 
-	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
+	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment .
 	//
 	// This member is required.
 	Name *string

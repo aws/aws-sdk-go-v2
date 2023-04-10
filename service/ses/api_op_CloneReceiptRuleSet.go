@@ -13,9 +13,8 @@ import (
 // Creates a receipt rule set by cloning an existing one. All receipt rules and
 // configurations are copied to the new receipt rule set and are completely
 // independent of the source rule set. For information about setting up rule sets,
-// see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html).
-// You can execute this operation no more than once per second.
+// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) CloneReceiptRuleSet(ctx context.Context, params *CloneReceiptRuleSetInput, optFns ...func(*Options)) (*CloneReceiptRuleSetOutput, error) {
 	if params == nil {
 		params = &CloneReceiptRuleSetInput{}
@@ -33,8 +32,8 @@ func (c *Client) CloneReceiptRuleSet(ctx context.Context, params *CloneReceiptRu
 
 // Represents a request to create a receipt rule set by cloning an existing one.
 // You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type CloneReceiptRuleSetInput struct {
 
 	// The name of the rule set to clone.
@@ -43,15 +42,10 @@ type CloneReceiptRuleSetInput struct {
 	OriginalRuleSetName *string
 
 	// The name of the rule set to create. The name must:
-	//
-	// * This value can only
-	// contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes
-	// (-).
-	//
-	// * Start and end with a letter or number.
-	//
-	// * Contain less than 64
-	// characters.
+	//   - This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
+	//   underscores (_), or dashes (-).
+	//   - Start and end with a letter or number.
+	//   - Contain less than 64 characters.
 	//
 	// This member is required.
 	RuleSetName *string

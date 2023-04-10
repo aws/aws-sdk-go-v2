@@ -57,9 +57,9 @@ type DenyCustomRoutingTrafficInput struct {
 	// the endpoint group. The default value is FALSE.
 	DenyAllTrafficToEndpoint *bool
 
-	// A list of specific Amazon EC2 instance IP addresses (destination addresses) in a
-	// subnet that you want to prevent from receiving traffic. The IP addresses must be
-	// a subset of the IP addresses allowed for the VPC subnet associated with the
+	// A list of specific Amazon EC2 instance IP addresses (destination addresses) in
+	// a subnet that you want to prevent from receiving traffic. The IP addresses must
+	// be a subset of the IP addresses allowed for the VPC subnet associated with the
 	// endpoint group.
 	DestinationAddresses []string
 

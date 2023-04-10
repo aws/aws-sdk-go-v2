@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the safety rules (the assertion rules and gating rules) that you've defined
-// for the routing controls in a control panel.
+// List the safety rules (the assertion rules and gating rules) that you've
+// defined for the routing controls in a control panel.
 func (c *Client) ListSafetyRules(ctx context.Context, params *ListSafetyRulesInput, optFns ...func(*Options)) (*ListSafetyRulesOutput, error) {
 	if params == nil {
 		params = &ListSafetyRulesInput{}

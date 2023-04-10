@@ -34,13 +34,14 @@ type AddRoleToDBClusterInput struct {
 	DBClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB
-	// cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole.
+	// cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole .
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The name of the feature for the DB cluster that the IAM role is to be associated
-	// with. For information about supported feature names, see DBEngineVersion.
+	// The name of the feature for the DB cluster that the IAM role is to be
+	// associated with. For information about supported feature names, see
+	// DBEngineVersion .
 	FeatureName *string
 
 	noSmithyDocumentSerde

@@ -11,8 +11,7 @@ import (
 )
 
 // Ends message streaming on a specified contact. To restart message streaming on
-// that contact, call the StartContactStreaming
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html)
+// that contact, call the StartContactStreaming (https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html)
 // API.
 func (c *Client) StopContactStreaming(ctx context.Context, params *StopContactStreamingInput, optFns ...func(*Options)) (*StopContactStreamingOutput, error) {
 	if params == nil {
@@ -37,8 +36,7 @@ type StopContactStreamingInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

@@ -35,10 +35,9 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the most recent credential report has expired.
-// To generate a new credential report, use GenerateCredentialReport. For more
-// information about credential report expiration, see Getting credential reports
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
-// the IAM User Guide.
+// To generate a new credential report, use GenerateCredentialReport . For more
+// information about credential report expiration, see Getting credential reports (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
+// in the IAM User Guide.
 type CredentialReportExpiredException struct {
 	Message *string
 
@@ -65,7 +64,7 @@ func (e *CredentialReportExpiredException) ErrorCode() string {
 func (e *CredentialReportExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the credential report does not exist. To
-// generate a credential report, use GenerateCredentialReport.
+// generate a credential report, use GenerateCredentialReport .
 type CredentialReportNotPresentException struct {
 	Message *string
 
@@ -258,8 +257,8 @@ func (e *EntityTemporarilyUnmodifiableException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// The request was rejected because the authentication code was not recognized. The
-// error message describes the specific error.
+// The request was rejected because the authentication code was not recognized.
+// The error message describes the specific error.
 type InvalidAuthenticationCodeException struct {
 	Message *string
 
@@ -584,8 +583,8 @@ func (e *PolicyEvaluationException) ErrorCode() string {
 }
 func (e *PolicyEvaluationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request failed because Amazon Web Services service role policies can only be
-// attached to the service-linked role for that service.
+// The request failed because Amazon Web Services service role policies can only
+// be attached to the service-linked role for that service.
 type PolicyNotAttachableException struct {
 	Message *string
 

@@ -13,10 +13,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up
-// to 10 times per second, per account. For an overview on tagging DynamoDB
-// resources, see Tagging for DynamoDB
-// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
+// List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource
+// up to 10 times per second, per account. For an overview on tagging DynamoDB
+// resources, see Tagging for DynamoDB (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
 // in the Amazon DynamoDB Developer Guide.
 func (c *Client) ListTagsOfResource(ctx context.Context, params *ListTagsOfResourceInput, optFns ...func(*Options)) (*ListTagsOfResourceOutput, error) {
 	if params == nil {

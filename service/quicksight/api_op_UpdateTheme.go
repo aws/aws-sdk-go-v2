@@ -52,9 +52,9 @@ type UpdateThemeInput struct {
 	// The name for the theme.
 	Name *string
 
-	// A description of the theme version that you're updating Every time that you call
-	// UpdateTheme, you create a new version of the theme. Each version of the theme
-	// maintains a description of the version in VersionDescription.
+	// A description of the theme version that you're updating Every time that you
+	// call UpdateTheme , you create a new version of the theme. Each version of the
+	// theme maintains a description of the version in VersionDescription .
 	VersionDescription *string
 
 	noSmithyDocumentSerde

@@ -36,12 +36,12 @@ type ModifyPrivateDnsNameOptionsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA
-	// records.
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS
+	// AAAA records.
 	EnableResourceNameDnsAAAARecord *bool
 
 	// Indicates whether to respond to DNS queries for instance hostnames with DNS A

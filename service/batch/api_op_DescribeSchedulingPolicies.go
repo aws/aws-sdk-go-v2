@@ -27,7 +27,7 @@ func (c *Client) DescribeSchedulingPolicies(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// Contains the parameters for DescribeSchedulingPolicies.
+// Contains the parameters for DescribeSchedulingPolicies .
 type DescribeSchedulingPoliciesInput struct {
 
 	// A list of up to 100 scheduling policy Amazon Resource Name (ARN) entries.

@@ -32,8 +32,8 @@ func (c *Client) ListEventLogs(ctx context.Context, params *ListEventLogsInput, 
 type ListEventLogsInput struct {
 
 	// The time after which you do not want any events retrieved, in coordinated
-	// universal time (UTC) timestamp format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// universal time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -44,8 +44,8 @@ type ListEventLogsInput struct {
 	SpaceName *string
 
 	// The date and time when you want to start retrieving events, in coordinated
-	// universal time (UTC) timestamp format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// universal time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	//
 	// This member is required.
 	StartTime *time.Time

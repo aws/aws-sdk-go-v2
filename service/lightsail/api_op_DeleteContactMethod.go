@@ -16,8 +16,8 @@ import (
 // mobile phone number contact method in each Amazon Web Services Region. However,
 // SMS text messaging is not supported in some Amazon Web Services Regions, and SMS
 // text messages cannot be sent to some countries/regions. For more information,
-// see Notifications in Amazon Lightsail
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications).
+// see Notifications in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications)
+// .
 func (c *Client) DeleteContactMethod(ctx context.Context, params *DeleteContactMethodInput, optFns ...func(*Options)) (*DeleteContactMethodOutput, error) {
 	if params == nil {
 		params = &DeleteContactMethodInput{}

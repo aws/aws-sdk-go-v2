@@ -21,17 +21,15 @@ import (
 // multiple Availability Zones and fronted by an Elastic Load Balancing Network
 // Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC
 // subnets to provide connectivity from the control plane instances to the nodes
-// (for example, to support kubectl exec, logs, and proxy data flows). Amazon EKS
-// nodes run in your Amazon Web Services account and connect to your cluster's
+// (for example, to support kubectl exec , logs , and proxy data flows). Amazon
+// EKS nodes run in your Amazon Web Services account and connect to your cluster's
 // control plane over the Kubernetes API server endpoint and a certificate file
 // that is created for your cluster. In most cases, it takes several minutes to
 // create a cluster. After you create an Amazon EKS cluster, you must configure
 // your Kubernetes tooling to communicate with the API server and launch nodes into
-// your cluster. For more information, see Managing Cluster Authentication
-// (https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html) and
-// Launching Amazon EKS nodes
-// (https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html) in the
-// Amazon EKS User Guide.
+// your cluster. For more information, see Managing Cluster Authentication (https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html)
+// and Launching Amazon EKS nodes (https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html)
+// in the Amazon EKS User Guide.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}
@@ -56,22 +54,19 @@ type CreateClusterInput struct {
 
 	// The VPC configuration that's used by the cluster control plane. Amazon EKS VPC
 	// resources have specific requirements to work properly with Kubernetes. For more
-	// information, see Cluster VPC Considerations
-	// (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html) and Cluster
-	// Security Group Considerations
-	// (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html) in the
-	// Amazon EKS User Guide. You must specify at least two subnets. You can specify up
-	// to five security groups. However, we recommend that you use a dedicated security
-	// group for your cluster control plane.
+	// information, see Cluster VPC Considerations (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
+	// and Cluster Security Group Considerations (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
+	// in the Amazon EKS User Guide. You must specify at least two subnets. You can
+	// specify up to five security groups. However, we recommend that you use a
+	// dedicated security group for your cluster control plane.
 	//
 	// This member is required.
 	ResourcesVpcConfig *types.VpcConfigRequest
 
-	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for the
-	// Kubernetes control plane to make calls to Amazon Web Services API operations on
-	// your behalf. For more information, see Amazon EKS Service IAM Role
-	// (https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html) in the
-	// Amazon EKS User Guide .
+	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
+	// the Kubernetes control plane to make calls to Amazon Web Services API operations
+	// on your behalf. For more information, see Amazon EKS Service IAM Role (https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html)
+	// in the Amazon EKS User Guide .
 	//
 	// This member is required.
 	RoleArn *string
@@ -88,17 +83,15 @@ type CreateClusterInput struct {
 
 	// Enable or disable exporting the Kubernetes control plane logs for your cluster
 	// to CloudWatch Logs. By default, cluster control plane logs aren't exported to
-	// CloudWatch Logs. For more information, see Amazon EKS Cluster control plane logs
-	// (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) in
-	// the Amazon EKS User Guide . CloudWatch Logs ingestion, archive storage, and data
-	// scanning rates apply to exported control plane logs. For more information, see
-	// CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/).
+	// CloudWatch Logs. For more information, see Amazon EKS Cluster control plane logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
+	// in the Amazon EKS User Guide . CloudWatch Logs ingestion, archive storage, and
+	// data scanning rates apply to exported control plane logs. For more information,
+	// see CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/) .
 	Logging *types.Logging
 
 	// An object representing the configuration of your local Amazon EKS cluster on an
 	// Amazon Web Services Outpost. Before creating a local cluster on an Outpost,
-	// review Local clusters for Amazon EKS on Amazon Web Services Outposts
-	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html)
+	// review Local clusters for Amazon EKS on Amazon Web Services Outposts (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html)
 	// in the Amazon EKS User Guide. This object isn't available for creating Amazon
 	// EKS clusters on the Amazon Web Services cloud.
 	OutpostConfig *types.OutpostConfigRequest

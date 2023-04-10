@@ -44,8 +44,8 @@ type GetEmailTemplateInput struct {
 // The following element is returned by the service.
 type GetEmailTemplateOutput struct {
 
-	// The content of the email template, composed of a subject line, an HTML part, and
-	// a text-only part.
+	// The content of the email template, composed of a subject line, an HTML part,
+	// and a text-only part.
 	//
 	// This member is required.
 	TemplateContent *types.EmailTemplateContent

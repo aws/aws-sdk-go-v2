@@ -14,7 +14,7 @@ import (
 
 // Returns an array of ChannelInfo objects. Each object describes a signaling
 // channel. To retrieve only those channels that satisfy a specific condition, you
-// can specify a ChannelNameCondition.
+// can specify a ChannelNameCondition .
 func (c *Client) ListSignalingChannels(ctx context.Context, params *ListSignalingChannelsInput, optFns ...func(*Options)) (*ListSignalingChannelsOutput, error) {
 	if params == nil {
 		params = &ListSignalingChannelsInput{}
@@ -51,8 +51,8 @@ type ListSignalingChannelsOutput struct {
 	// An array of ChannelInfo objects.
 	ChannelInfoList []types.ChannelInfo
 
-	// If the response is truncated, the call returns this element with a token. To get
-	// the next batch of streams, use this token in your next request.
+	// If the response is truncated, the call returns this element with a token. To
+	// get the next batch of streams, use this token in your next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

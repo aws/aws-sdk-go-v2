@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to either upgrade your domain or perform an Upgrade eligibility check
-// to a compatible Elasticsearch version.
+// Allows you to either upgrade your domain or perform an Upgrade eligibility
+// check to a compatible Elasticsearch version.
 func (c *Client) UpgradeElasticsearchDomain(ctx context.Context, params *UpgradeElasticsearchDomainInput, optFns ...func(*Options)) (*UpgradeElasticsearchDomainOutput, error) {
 	if params == nil {
 		params = &UpgradeElasticsearchDomainInput{}

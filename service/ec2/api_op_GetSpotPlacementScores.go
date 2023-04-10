@@ -16,9 +16,8 @@ import (
 // the specified target capacity and compute requirements. You can specify your
 // compute requirements either by using InstanceRequirementsWithMetadata and
 // letting Amazon EC2 choose the optimal instance types to fulfill your Spot
-// request, or you can specify the instance types by using InstanceTypes. For more
-// information, see Spot placement score
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html)
+// request, or you can specify the instance types by using InstanceTypes . For more
+// information, see Spot placement score (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) GetSpotPlacementScores(ctx context.Context, params *GetSpotPlacementScoresInput, optFns ...func(*Options)) (*GetSpotPlacementScoresOutput, error) {
 	if params == nil {
@@ -44,26 +43,26 @@ type GetSpotPlacementScoresInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with those attributes. If you specify
-	// InstanceRequirementsWithMetadata, you can't specify InstanceTypes.
+	// InstanceRequirementsWithMetadata , you can't specify InstanceTypes .
 	InstanceRequirementsWithMetadata *types.InstanceRequirementsWithMetadataRequest
 
-	// The instance types. We recommend that you specify at least three instance types.
-	// If you specify one or two instance types, or specify variations of a single
-	// instance type (for example, an m3.xlarge with and without instance storage), the
-	// returned placement score will always be low. If you specify InstanceTypes, you
-	// can't specify InstanceRequirementsWithMetadata.
+	// The instance types. We recommend that you specify at least three instance
+	// types. If you specify one or two instance types, or specify variations of a
+	// single instance type (for example, an m3.xlarge with and without instance
+	// storage), the returned placement score will always be low. If you specify
+	// InstanceTypes , you can't specify InstanceRequirementsWithMetadata .
 	InstanceTypes []string
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -71,7 +70,7 @@ type GetSpotPlacementScoresInput struct {
 	NextToken *string
 
 	// The Regions used to narrow down the list of Regions to be scored. Enter the
-	// Region code, for example, us-east-1.
+	// Region code, for example, us-east-1 .
 	RegionNames []string
 
 	// Specify true so that the response returns a list of scored Availability Zones.
@@ -93,11 +92,11 @@ type GetSpotPlacementScoresOutput struct {
 	// value is null when there are no more items to return.
 	NextToken *string
 
-	// The Spot placement score for the top 10 Regions or Availability Zones, scored on
-	// a scale from 1 to 10. Each score  reflects how likely it is that each Region or
-	// Availability Zone will succeed at fulfilling the specified target capacity  at
-	// the time of the Spot placement score request. A score of 10 means that your Spot
-	// capacity request is highly likely to succeed in that Region or Availability
+	// The Spot placement score for the top 10 Regions or Availability Zones, scored
+	// on a scale from 1 to 10. Each score  reflects how likely it is that each Region
+	// or Availability Zone will succeed at fulfilling the specified target capacity
+	// at the time of the Spot placement score request. A score of 10 means that your
+	// Spot capacity request is highly likely to succeed in that Region or Availability
 	// Zone. If you request a Spot placement score for Regions, a high score assumes
 	// that your fleet request will be configured to use all Availability Zones and the
 	// capacity-optimized allocation strategy. If you request a Spot placement score
@@ -190,8 +189,8 @@ var _ GetSpotPlacementScoresAPIClient = (*Client)(nil)
 type GetSpotPlacementScoresPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

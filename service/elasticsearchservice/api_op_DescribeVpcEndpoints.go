@@ -39,9 +39,9 @@ type DescribeVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the DescribeVpcEndpoints operation. Returns
-// a list containing configuration details and status of the VPC Endpoints as well
-// as a list containing error responses of the endpoints that could not be
+// Container for response parameters to the DescribeVpcEndpoints operation.
+// Returns a list containing configuration details and status of the VPC Endpoints
+// as well as a list containing error responses of the endpoints that could not be
 // described
 type DescribeVpcEndpointsOutput struct {
 

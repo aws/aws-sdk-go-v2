@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of all log groups that are being monitored and tagged by DevOps
-// Guru.
+// Returns the list of all log groups that are being monitored and tagged by
+// DevOps Guru.
 func (c *Client) ListMonitoredResources(ctx context.Context, params *ListMonitoredResourcesInput, optFns ...func(*Options)) (*ListMonitoredResourcesOutput, error) {
 	if params == nil {
 		params = &ListMonitoredResourcesInput{}

@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The request was denied because of insufficient access or permissions. Check with
-// an administrator to verify your permissions.
+// The request was denied because of insufficient access or permissions. Check
+// with an administrator to verify your permissions.
 type AccessDeniedException struct {
 	Message *string
 
@@ -60,8 +60,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request has failed to process because of an unknown server error, exception,
-// or failure.
+// The request has failed to process because of an unknown server error,
+// exception, or failure.
 type InternalServerException struct {
 	Message *string
 
@@ -113,8 +113,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation was denied because the request would exceed the maximum quota
-// (https://docs.aws.amazon.com/location/latest/developerguide/location-quotas.html)
+// The operation was denied because the request would exceed the maximum quota (https://docs.aws.amazon.com/location/latest/developerguide/location-quotas.html)
 // set for Amazon Location Service.
 type ServiceQuotaExceededException struct {
 	Message *string

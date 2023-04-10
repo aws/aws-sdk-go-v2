@@ -45,7 +45,7 @@ type Certificate struct {
 	StateReason *string
 
 	// The function that the registered certificate performs. Valid values include
-	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	// ClientLDAPS or ClientCertAuth . The default value is ClientLDAPS .
 	Type CertificateType
 
 	noSmithyDocumentSerde
@@ -67,7 +67,7 @@ type CertificateInfo struct {
 	State CertificateState
 
 	// The function that the registered certificate performs. Valid values include
-	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	// ClientLDAPS or ClientCertAuth . The default value is ClientLDAPS .
 	Type CertificateType
 
 	noSmithyDocumentSerde
@@ -125,8 +125,9 @@ type Computer struct {
 // another domain.
 type ConditionalForwarder struct {
 
-	// The IP addresses of the remote DNS server associated with RemoteDomainName. This
-	// is the IP address of the DNS server that your conditional forwarder points to.
+	// The IP addresses of the remote DNS server associated with RemoteDomainName.
+	// This is the IP address of the DNS server that your conditional forwarder points
+	// to.
 	DnsIpAddrs []string
 
 	// The fully qualified domain name (FQDN) of the remote domains pointed to by the
@@ -134,7 +135,7 @@ type ConditionalForwarder struct {
 	RemoteDomainName *string
 
 	// The replication scope of the conditional forwarder. The only allowed value is
-	// Domain, which will replicate the conditional forwarder to all of the domain
+	// Domain , which will replicate the conditional forwarder to all of the domain
 	// controllers for your Amazon Web Services directory.
 	ReplicationScope ReplicationScope
 
@@ -153,13 +154,9 @@ type DirectoryConnectSettings struct {
 
 	// The user name of an account in your self-managed directory that is used to
 	// connect to the directory. This account must have the following permissions:
-	//
-	// *
-	// Read users and groups
-	//
-	// * Create computer objects
-	//
-	// * Join computers to the domain
+	//   - Read users and groups
+	//   - Create computer objects
+	//   - Join computers to the domain
 	//
 	// This member is required.
 	CustomerUserName *string
@@ -204,13 +201,13 @@ type DirectoryConnectSettingsDescription struct {
 // Contains information about an Directory Service directory.
 type DirectoryDescription struct {
 
-	// The access URL for the directory, such as http://.awsapps.com. If no alias has
-	// been created for the directory,  is the directory identifier, such as
-	// d-XXXXXXXXXX.
+	// The access URL for the directory, such as http://.awsapps.com . If no alias has
+	// been created for the directory, is the directory identifier, such as
+	// d-XXXXXXXXXX .
 	AccessUrl *string
 
-	// The alias for the directory. If no alias has been created for the directory, the
-	// alias is the directory identifier, such as d-XXXXXXXXXX.
+	// The alias for the directory. If no alias has been created for the directory,
+	// the alias is the directory identifier, such as d-XXXXXXXXXX .
 	Alias *string
 
 	// A DirectoryConnectSettingsDescription object that contains additional
@@ -261,9 +258,9 @@ type DirectoryDescription struct {
 	RegionsInfo *RegionsInfo
 
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your Amazon Web Services organization (ORGANIZATIONS) or
-	// with any Amazon Web Services account by sending a shared directory request
-	// (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization ( ORGANIZATIONS )
+	// or with any Amazon Web Services account by sending a shared directory request (
+	// HANDSHAKE ).
 	ShareMethod ShareMethod
 
 	// A directory share request that is sent by the directory owner to the directory
@@ -281,7 +278,7 @@ type DirectoryDescription struct {
 	Size DirectorySize
 
 	// Indicates if single sign-on is enabled for the directory. For more information,
-	// see EnableSso and DisableSso.
+	// see EnableSso and DisableSso .
 	SsoEnabled bool
 
 	// The current stage of the directory.
@@ -453,10 +450,10 @@ type IpRouteInfo struct {
 	// The date and time the address block was added to the directory.
 	AddedDateTime *time.Time
 
-	// IP address block in the IpRoute.
+	// IP address block in the IpRoute .
 	CidrIp *string
 
-	// Description of the IpRouteInfo.
+	// Description of the IpRouteInfo .
 	Description *string
 
 	// Identifier (ID) of the directory associated with the IP addresses.
@@ -537,8 +534,8 @@ type OwnerDirectoryDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a Remote Authentication Dial In User Service (RADIUS)
-// server.
+// Contains information about a Remote Authentication Dial In User Service
+// (RADIUS) server.
 type RadiusSettings struct {
 
 	// The protocol specified for your RADIUS endpoints.
@@ -589,7 +586,7 @@ type RegionDescription struct {
 	// Specifies when the Region replication began.
 	LaunchTime *time.Time
 
-	// The name of the Region. For example, us-east-1.
+	// The name of the Region. For example, us-east-1 .
 	RegionName *string
 
 	// Specifies whether the Region is the primary Region or an additional Region.
@@ -611,8 +608,8 @@ type RegionDescription struct {
 // replication.
 type RegionsInfo struct {
 
-	// Lists the Regions where the directory has been replicated, excluding the primary
-	// Region.
+	// Lists the Regions where the directory has been replicated, excluding the
+	// primary Region.
 	AdditionalRegions []string
 
 	// The Region where the Managed Microsoft AD directory was originally created.
@@ -639,7 +636,7 @@ type SchemaExtensionInfo struct {
 	// The current status of the schema extension.
 	SchemaExtensionStatus SchemaExtensionStatus
 
-	// The reason for the SchemaExtensionStatus.
+	// The reason for the SchemaExtensionStatus .
 	SchemaExtensionStatusReason *string
 
 	// The date and time that the schema extension started being applied to the
@@ -658,7 +655,7 @@ type Setting struct {
 	Name *string
 
 	// The value of the directory setting for which to retrieve information. For
-	// example, for TLS_1_0, the valid values are: Enable and Disable.
+	// example, for TLS_1_0 , the valid values are: Enable and Disable .
 	//
 	// This member is required.
 	Value *string
@@ -692,7 +689,7 @@ type SettingEntry struct {
 
 	// The overall status of the request to update the directory setting request. If
 	// the directory setting is deployed in more than one region, and the request fails
-	// in any region, the overall status is Failed.
+	// in any region, the overall status is Failed .
 	RequestStatus DirectoryConfigurationStatus
 
 	// The last status message for the directory status request.
@@ -701,7 +698,7 @@ type SettingEntry struct {
 	// The value that was last requested for the directory setting.
 	RequestedValue *string
 
-	// The type of directory setting. For example, Protocol or Cipher.
+	// The type of directory setting. For example, Protocol or Cipher .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -717,17 +714,17 @@ type SharedDirectory struct {
 	// The date and time that the shared directory was last updated.
 	LastUpdatedDateTime *time.Time
 
-	// Identifier of the directory owner account, which contains the directory that has
-	// been shared to the consumer account.
+	// Identifier of the directory owner account, which contains the directory that
+	// has been shared to the consumer account.
 	OwnerAccountId *string
 
 	// Identifier of the directory in the directory owner account.
 	OwnerDirectoryId *string
 
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your Amazon Web Services organization (ORGANIZATIONS) or
-	// with any Amazon Web Services account by sending a shared directory request
-	// (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization ( ORGANIZATIONS )
+	// or with any Amazon Web Services account by sending a shared directory request (
+	// HANDSHAKE ).
 	ShareMethod ShareMethod
 
 	// A directory share request that is sent by the directory owner to the directory
@@ -739,7 +736,7 @@ type SharedDirectory struct {
 	ShareStatus ShareStatus
 
 	// Identifier of the directory consumer account that has access to the shared
-	// directory (OwnerDirectoryId) in the directory owner account.
+	// directory ( OwnerDirectoryId ) in the directory owner account.
 	SharedAccountId *string
 
 	// Identifier of the shared directory in the directory consumer account. This
@@ -915,7 +912,7 @@ type UpdateInfoEntry struct {
 	noSmithyDocumentSerde
 }
 
-// The value for a given type of UpdateSettings.
+// The value for a given type of UpdateSettings .
 type UpdateValue struct {
 
 	// The OS update related settings.

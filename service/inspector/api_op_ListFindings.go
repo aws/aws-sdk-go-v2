@@ -61,10 +61,10 @@ type ListFindingsOutput struct {
 	// This member is required.
 	FindingArns []string
 
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to be
-	// listed, this parameter is set to null.
+	// When a response is generated, if there is more data to be listed, this
+	// parameter is present in the response and contains the value to use for the
+	// nextToken parameter in a subsequent pagination request. If there is no more data
+	// to be listed, this parameter is set to null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

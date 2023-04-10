@@ -15,16 +15,10 @@ import (
 )
 
 // Removes the PublicAccessBlock configuration for an Amazon Web Services account.
-// For more information, see  Using Amazon S3 block public access
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html).
-// Related actions include:
-//
-// * GetPublicAccessBlock
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html)
-//
-// *
-// PutPublicAccessBlock
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html)
+// For more information, see Using Amazon S3 block public access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
+// . Related actions include:
+//   - GetPublicAccessBlock (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html)
+//   - PutPublicAccessBlock (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html)
 func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePublicAccessBlockInput, optFns ...func(*Options)) (*DeletePublicAccessBlockOutput, error) {
 	if params == nil {
 		params = &DeletePublicAccessBlockInput{}

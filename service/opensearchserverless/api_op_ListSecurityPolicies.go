@@ -39,7 +39,7 @@ type ListSecurityPoliciesInput struct {
 	// You can use nextToken to get the next page of results. The default is 20.
 	MaxResults *int32
 
-	// If your initial ListSecurityPolicies operation returns a nextToken, you can
+	// If your initial ListSecurityPolicies operation returns a nextToken , you can
 	// include the returned nextToken in subsequent ListSecurityPolicies operations,
 	// which returns results in the next page.
 	NextToken *string

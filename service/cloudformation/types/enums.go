@@ -115,9 +115,9 @@ const (
 	ChangeActionDynamic ChangeAction = "Dynamic"
 )
 
-// Values returns all known values for ChangeAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeAction) Values() []ChangeAction {
 	return []ChangeAction{
 		"Add",
@@ -209,9 +209,9 @@ const (
 	ChangeSourceAutomatic          ChangeSource = "Automatic"
 )
 
-// Values returns all known values for ChangeSource. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeSource) Values() []ChangeSource {
 	return []ChangeSource{
 		"ResourceReference",
@@ -473,9 +473,9 @@ const (
 	OnFailureDelete    OnFailure = "DELETE"
 )
 
-// Values returns all known values for OnFailure. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for OnFailure. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OnFailure) Values() []OnFailure {
 	return []OnFailure{
 		"DO_NOTHING",
@@ -586,8 +586,8 @@ const (
 	RegionConcurrencyTypeParallel   RegionConcurrencyType = "PARALLEL"
 )
 
-// Values returns all known values for RegionConcurrencyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RegionConcurrencyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RegionConcurrencyType) Values() []RegionConcurrencyType {
 	return []RegionConcurrencyType{
@@ -625,9 +625,9 @@ const (
 	RegistryTypeHook     RegistryType = "HOOK"
 )
 
-// Values returns all known values for RegistryType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RegistryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RegistryType) Values() []RegistryType {
 	return []RegistryType{
 		"RESOURCE",
@@ -894,9 +894,9 @@ const (
 	StackResourceDriftStatusNotChecked StackResourceDriftStatus = "NOT_CHECKED"
 )
 
-// Values returns all known values for StackResourceDriftStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StackResourceDriftStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StackResourceDriftStatus) Values() []StackResourceDriftStatus {
 	return []StackResourceDriftStatus{
 		"IN_SYNC",
@@ -917,9 +917,10 @@ const (
 	StackSetDriftDetectionStatusStopped        StackSetDriftDetectionStatus = "STOPPED"
 )
 
-// Values returns all known values for StackSetDriftDetectionStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StackSetDriftDetectionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (StackSetDriftDetectionStatus) Values() []StackSetDriftDetectionStatus {
 	return []StackSetDriftDetectionStatus{
 		"COMPLETED",

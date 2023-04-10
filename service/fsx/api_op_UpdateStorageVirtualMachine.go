@@ -30,7 +30,7 @@ func (c *Client) UpdateStorageVirtualMachine(ctx context.Context, params *Update
 
 type UpdateStorageVirtualMachineInput struct {
 
-	// The ID of the SVM that you want to update, in the format svm-0123456789abcdef0.
+	// The ID of the SVM that you want to update, in the format svm-0123456789abcdef0 .
 	//
 	// This member is required.
 	StorageVirtualMachineId *string

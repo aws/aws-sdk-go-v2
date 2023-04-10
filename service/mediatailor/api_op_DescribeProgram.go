@@ -13,8 +13,7 @@ import (
 )
 
 // Describes a program within a channel. For information about programs, see
-// Working with programs
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
+// Working with programs (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
 // in the MediaTailor User Guide.
 func (c *Client) DescribeProgram(ctx context.Context, params *DescribeProgramInput, optFns ...func(*Options)) (*DescribeProgramOutput, error) {
 	if params == nil {

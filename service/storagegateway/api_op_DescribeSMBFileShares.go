@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a description for one or more Server Message Block (SMB) file shares from a
-// S3 File Gateway. This operation is only supported for S3 File Gateways.
+// Gets a description for one or more Server Message Block (SMB) file shares from
+// a S3 File Gateway. This operation is only supported for S3 File Gateways.
 func (c *Client) DescribeSMBFileShares(ctx context.Context, params *DescribeSMBFileSharesInput, optFns ...func(*Options)) (*DescribeSMBFileSharesOutput, error) {
 	if params == nil {
 		params = &DescribeSMBFileSharesInput{}

@@ -12,7 +12,7 @@ import (
 )
 
 // Updates information about the publishing destination specified by the
-// destinationId.
+// destinationId .
 func (c *Client) UpdatePublishingDestination(ctx context.Context, params *UpdatePublishingDestinationInput, optFns ...func(*Options)) (*UpdatePublishingDestinationOutput, error) {
 	if params == nil {
 		params = &UpdatePublishingDestinationInput{}
@@ -40,8 +40,8 @@ type UpdatePublishingDestinationInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn of
-	// the publishing destination.
+	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn
+	// of the publishing destination.
 	DestinationProperties *types.DestinationProperties
 
 	noSmithyDocumentSerde

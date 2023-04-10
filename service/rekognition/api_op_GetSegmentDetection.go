@@ -13,29 +13,29 @@ import (
 )
 
 // Gets the segment detection results of a Amazon Rekognition Video analysis
-// started by StartSegmentDetection. Segment detection with Amazon Rekognition
+// started by StartSegmentDetection . Segment detection with Amazon Rekognition
 // Video is an asynchronous operation. You start segment detection by calling
-// StartSegmentDetection which returns a job identifier (JobId). When the segment
+// StartSegmentDetection which returns a job identifier ( JobId ). When the segment
 // detection operation finishes, Amazon Rekognition publishes a completion status
 // to the Amazon Simple Notification Service topic registered in the initial call
-// to StartSegmentDetection. To get the results of the segment detection operation,
-// first check that the status value published to the Amazon SNS topic is
-// SUCCEEDED. if so, call GetSegmentDetection and pass the job identifier (JobId)
-// from the initial call of StartSegmentDetection. GetSegmentDetection returns
-// detected segments in an array (Segments) of SegmentDetection objects. Segments
-// is sorted by the segment types specified in the SegmentTypes input parameter of
-// StartSegmentDetection. Each element of the array includes the detected segment,
-// the precentage confidence in the acuracy of the detected segment, the type of
-// the segment, and the frame in which the segment was detected. Use
-// SelectedSegmentTypes to find out the type of segment detection requested in the
-// call to StartSegmentDetection. Use the MaxResults parameter to limit the number
-// of segment detections returned. If there are more results than specified in
-// MaxResults, the value of NextToken in the operation response contains a
-// pagination token for getting the next set of results. To get the next page of
-// results, call GetSegmentDetection and populate the NextToken request parameter
-// with the token value returned from the previous call to GetSegmentDetection. For
-// more information, see Detecting video segments in stored video in the Amazon
-// Rekognition Developer Guide.
+// to StartSegmentDetection . To get the results of the segment detection
+// operation, first check that the status value published to the Amazon SNS topic
+// is SUCCEEDED . if so, call GetSegmentDetection and pass the job identifier (
+// JobId ) from the initial call of StartSegmentDetection . GetSegmentDetection
+// returns detected segments in an array ( Segments ) of SegmentDetection objects.
+// Segments is sorted by the segment types specified in the SegmentTypes input
+// parameter of StartSegmentDetection . Each element of the array includes the
+// detected segment, the precentage confidence in the acuracy of the detected
+// segment, the type of the segment, and the frame in which the segment was
+// detected. Use SelectedSegmentTypes to find out the type of segment detection
+// requested in the call to StartSegmentDetection . Use the MaxResults parameter
+// to limit the number of segment detections returned. If there are more results
+// than specified in MaxResults , the value of NextToken in the operation response
+// contains a pagination token for getting the next set of results. To get the next
+// page of results, call GetSegmentDetection and populate the NextToken request
+// parameter with the token value returned from the previous call to
+// GetSegmentDetection . For more information, see Detecting video segments in
+// stored video in the Amazon Rekognition Developer Guide.
 func (c *Client) GetSegmentDetection(ctx context.Context, params *GetSegmentDetectionInput, optFns ...func(*Options)) (*GetSegmentDetectionOutput, error) {
 	if params == nil {
 		params = &GetSegmentDetectionInput{}
@@ -55,7 +55,7 @@ type GetSegmentDetectionInput struct {
 
 	// Job identifier for the text detection operation for which you want results
 	// returned. You get the job identifer from an initial call to
-	// StartSegmentDetection.
+	// StartSegmentDetection .
 	//
 	// This member is required.
 	JobId *string
@@ -77,7 +77,7 @@ type GetSegmentDetectionOutput struct {
 	// object contains metadata for a single audio stream. Audio information in an
 	// AudioMetadata objects includes the audio codec, the number of audio channels,
 	// the duration of the audio stream, and the sample rate. Audio metadata is
-	// returned in each page of information returned by GetSegmentDetection.
+	// returned in each page of information returned by GetSegmentDetection .
 	AudioMetadata []types.AudioMetadata
 
 	// Current status of the segment detection job.
@@ -90,12 +90,12 @@ type GetSegmentDetectionOutput struct {
 
 	// An array of segments detected in a video. The array is sorted by the segment
 	// types (TECHNICAL_CUE or SHOT) specified in the SegmentTypes input parameter of
-	// StartSegmentDetection. Within each segment type the array is sorted by timestamp
-	// values.
+	// StartSegmentDetection . Within each segment type the array is sorted by
+	// timestamp values.
 	Segments []types.SegmentDetection
 
 	// An array containing the segment types requested in the call to
-	// StartSegmentDetection.
+	// StartSegmentDetection .
 	SelectedSegmentTypes []types.SegmentTypeInfo
 
 	// If the job fails, StatusMessage provides a descriptive error message.
@@ -105,7 +105,7 @@ type GetSegmentDetectionOutput struct {
 	// array. The object contains information about the video stream in the input file
 	// that Amazon Rekognition Video chose to analyze. The VideoMetadata object
 	// includes the video codec, video format and other information. Video metadata is
-	// returned in each page of information returned by GetSegmentDetection.
+	// returned in each page of information returned by GetSegmentDetection .
 	VideoMetadata []types.VideoMetadata
 
 	// Metadata pertaining to the operation's result.
@@ -177,8 +177,8 @@ func (c *Client) addOperationGetSegmentDetectionMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetSegmentDetectionAPIClient is a client that implements the GetSegmentDetection
-// operation.
+// GetSegmentDetectionAPIClient is a client that implements the
+// GetSegmentDetection operation.
 type GetSegmentDetectionAPIClient interface {
 	GetSegmentDetection(context.Context, *GetSegmentDetectionInput, ...func(*Options)) (*GetSegmentDetectionOutput, error)
 }

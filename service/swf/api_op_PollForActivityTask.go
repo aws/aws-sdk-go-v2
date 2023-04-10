@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used by workers to get an ActivityTask from the specified activity taskList.
+// Used by workers to get an ActivityTask from the specified activity taskList .
 // This initiates a long poll, where the service holds the HTTP connection open and
 // responds as soon as a task becomes available. The maximum time the service holds
 // on to the request before responding is 60 seconds. If no task is available
@@ -22,24 +22,17 @@ import (
 // timeout to at least 70 seconds (10 seconds higher than the maximum time service
 // may hold the poll request). Access Control You can use IAM policies to control
 // this action's access to Amazon SWF resources as follows:
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - Constrain the taskList.name parameter by using a Condition element with the
+//     swf:taskList.name key to allow the action to access only certain task lists.
 //
-// * Use a Resource
-// element with the domain name to limit the action to only specified domains.
-//
-// *
-// Use an Action element to allow or deny permission to call this action.
-//
-// *
-// Constrain the taskList.name parameter by using a Condition element with the
-// swf:taskList.name key to allow the action to access only certain task lists.
-//
-// If
-// the caller doesn't have sufficient permissions to invoke the action, or the
+// If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
-// associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
+// associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 func (c *Client) PollForActivityTask(ctx context.Context, params *PollForActivityTaskInput, optFns ...func(*Options)) (*PollForActivityTaskOutput, error) {
 	if params == nil {
@@ -65,8 +58,8 @@ type PollForActivityTaskInput struct {
 
 	// Specifies the task list to poll for activity tasks. The specified string must
 	// not start or end with whitespace. It must not contain a : (colon), / (slash), |
-	// (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also,
-	// it must not be the literal string arn.
+	// (vertical bar), or any control characters ( \u0000-\u001f | \u007f-\u009f ).
+	// Also, it must not be the literal string arn .
 	//
 	// This member is required.
 	TaskList *types.TaskList
@@ -97,8 +90,9 @@ type PollForActivityTaskOutput struct {
 	// This member is required.
 	StartedEventId int64
 
-	// The opaque string used as a handle on the task. This token is used by workers to
-	// communicate progress and response information back to the system about the task.
+	// The opaque string used as a handle on the task. This token is used by workers
+	// to communicate progress and response information back to the system about the
+	// task.
 	//
 	// This member is required.
 	TaskToken *string

@@ -17,8 +17,7 @@ import (
 // Amazon Web Services authored extensions provided by AppConfig. For most use
 // cases, to create your own extension, you must create an Lambda function to
 // perform any computation and processing defined in the extension. For more
-// information about extensions, see Working with AppConfig extensions
-// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// information about extensions, see Working with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) CreateExtension(ctx context.Context, params *CreateExtensionInput, optFns ...func(*Options)) (*CreateExtensionOutput, error) {
 	if params == nil {

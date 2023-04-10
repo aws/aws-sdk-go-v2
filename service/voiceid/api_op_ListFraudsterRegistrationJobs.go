@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the fraudster registration jobs in the domain with the given
-// JobStatus. If JobStatus is not provided, this lists all fraudster registration
-// jobs in the given domain.
+// Lists all the fraudster registration jobs in the domain with the given JobStatus
+// . If JobStatus is not provided, this lists all fraudster registration jobs in
+// the given domain.
 func (c *Client) ListFraudsterRegistrationJobs(ctx context.Context, params *ListFraudsterRegistrationJobsInput, optFns ...func(*Options)) (*ListFraudsterRegistrationJobsOutput, error) {
 	if params == nil {
 		params = &ListFraudsterRegistrationJobsInput{}

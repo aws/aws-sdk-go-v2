@@ -29,13 +29,12 @@ func (c *Client) ModifyDBInstance(ctx context.Context, params *ModifyDBInstanceI
 	return out, nil
 }
 
-// Represents the input to ModifyDBInstance.
+// Represents the input to ModifyDBInstance .
 type ModifyDBInstanceInput struct {
 
 	// The instance identifier. This value is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing DBInstance.
+	//   - Must match the identifier of an existing DBInstance .
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -43,7 +42,7 @@ type ModifyDBInstanceInput struct {
 	// Specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the instance. If this parameter is set to
-	// false, changes to the instance are applied during the next maintenance window.
+	// false , changes to the instance are applied during the next maintenance window.
 	// Some parameter changes can cause an outage and are applied on the next reboot.
 	// Default: false
 	ApplyImmediately bool
@@ -59,32 +58,26 @@ type ModifyDBInstanceInput struct {
 	// snapshots of the DB instance. By default, tags are not copied.
 	CopyTagsToSnapshot *bool
 
-	// The new compute and memory capacity of the instance; for example, db.r5.large.
+	// The new compute and memory capacity of the instance; for example, db.r5.large .
 	// Not all instance classes are available in all Amazon Web Services Regions. If
 	// you modify the instance class, an outage occurs during the change. The change is
-	// applied during the next maintenance window, unless ApplyImmediately is specified
-	// as true for this request. Default: Uses existing setting.
+	// applied during the next maintenance window, unless ApplyImmediately is
+	// specified as true for this request. Default: Uses existing setting.
 	DBInstanceClass *string
 
 	// A value that indicates whether to enable Performance Insights for the DB
-	// Instance. For more information, see Using Amazon Performance Insights
-	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).
+	// Instance. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
+	// .
 	EnablePerformanceInsights *bool
 
-	// The new instance identifier for the instance when renaming an instance. When you
-	// change the instance identifier, an instance reboot occurs immediately if you set
-	// Apply Immediately to true. It occurs during the next maintenance window if you
-	// set Apply Immediately to false. This value is stored as a lowercase string.
+	// The new instance identifier for the instance when renaming an instance. When
+	// you change the instance identifier, an instance reboot occurs immediately if you
+	// set Apply Immediately to true . It occurs during the next maintenance window if
+	// you set Apply Immediately to false . This value is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	// * The
-	// first character must be a letter.
-	//
-	// * Cannot end with a hyphen or contain two
-	// consecutive hyphens.
-	//
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
 

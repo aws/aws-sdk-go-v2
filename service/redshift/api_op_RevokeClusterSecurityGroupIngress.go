@@ -13,9 +13,8 @@ import (
 
 // Revokes an ingress rule in an Amazon Redshift security group for a previously
 // authorized IP range or Amazon EC2 security group. To add an ingress rule, see
-// AuthorizeClusterSecurityGroupIngress. For information about managing security
-// groups, go to Amazon Redshift Cluster Security Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// AuthorizeClusterSecurityGroupIngress . For information about managing security
+// groups, go to Amazon Redshift Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) RevokeClusterSecurityGroupIngress(ctx context.Context, params *RevokeClusterSecurityGroupIngressInput, optFns ...func(*Options)) (*RevokeClusterSecurityGroupIngressOutput, error) {
 	if params == nil {
@@ -45,8 +44,8 @@ type RevokeClusterSecurityGroupIngressInput struct {
 	CIDRIP *string
 
 	// The name of the EC2 Security Group whose access is to be revoked. If
-	// EC2SecurityGroupName is specified, EC2SecurityGroupOwnerId must also be provided
-	// and CIDRIP cannot be provided.
+	// EC2SecurityGroupName is specified, EC2SecurityGroupOwnerId must also be
+	// provided and CIDRIP cannot be provided.
 	EC2SecurityGroupName *string
 
 	// The Amazon Web Services account number of the owner of the security group

@@ -18,8 +18,8 @@ import (
 // detector per account per Region. All data sources are enabled in a new detector
 // by default. There might be regional differences because some data sources might
 // not be available in all the Amazon Web Services Regions where GuardDuty is
-// presently supported. For more information, see Regions and endpoints
-// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+// presently supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
+// .
 func (c *Client) CreateDetector(ctx context.Context, params *CreateDetectorInput, optFns ...func(*Options)) (*CreateDetectorOutput, error) {
 	if params == nil {
 		params = &CreateDetectorInput{}
@@ -48,8 +48,8 @@ type CreateDetectorInput struct {
 	// Describes which data sources will be enabled for the detector. There might be
 	// regional differences because some data sources might not be available in all the
 	// Amazon Web Services Regions where GuardDuty is presently supported. For more
-	// information, see Regions and endpoints
-	// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+	// information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
+	// .
 	//
 	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.DataSourceConfigurations

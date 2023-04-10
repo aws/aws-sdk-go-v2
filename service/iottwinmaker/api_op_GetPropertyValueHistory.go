@@ -15,8 +15,8 @@ import (
 
 // Retrieves information about the history of a time series property value for a
 // component, component type, entity, or workspace. You must specify a value for
-// workspaceId. For entity-specific queries, specify values for componentName and
-// entityId. For cross-entity quries, specify a value for componentTypeId.
+// workspaceId . For entity-specific queries, specify values for componentName and
+// entityId . For cross-entity quries, specify a value for componentTypeId .
 func (c *Client) GetPropertyValueHistory(ctx context.Context, params *GetPropertyValueHistoryInput, optFns ...func(*Options)) (*GetPropertyValueHistoryOutput, error) {
 	if params == nil {
 		params = &GetPropertyValueHistoryInput{}
@@ -57,8 +57,8 @@ type GetPropertyValueHistoryInput struct {
 	EndDateTime *time.Time
 
 	// The ISO8601 DateTime of the latest property value to return. For more
-	// information about the ISO8601 DateTime format, see the data type PropertyValue
-	// (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html).
+	// information about the ISO8601 DateTime format, see the data type PropertyValue (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html)
+	// .
 	EndTime *string
 
 	// The ID of the entity.
@@ -88,8 +88,8 @@ type GetPropertyValueHistoryInput struct {
 	StartDateTime *time.Time
 
 	// The ISO8601 DateTime of the earliest property value to return. For more
-	// information about the ISO8601 DateTime format, see the data type PropertyValue
-	// (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html).
+	// information about the ISO8601 DateTime format, see the data type PropertyValue (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html)
+	// .
 	StartTime *string
 
 	noSmithyDocumentSerde

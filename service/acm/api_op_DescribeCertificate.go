@@ -40,8 +40,8 @@ type DescribeCertificateInput struct {
 	// The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the
 	// following form:
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	//
 	// This member is required.
 	CertificateArn *string
@@ -123,8 +123,8 @@ func (c *Client) addOperationDescribeCertificateMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeCertificateAPIClient is a client that implements the DescribeCertificate
-// operation.
+// DescribeCertificateAPIClient is a client that implements the
+// DescribeCertificate operation.
 type DescribeCertificateAPIClient interface {
 	DescribeCertificate(context.Context, *DescribeCertificateInput, ...func(*Options)) (*DescribeCertificateOutput, error)
 }
@@ -145,9 +145,10 @@ type CertificateValidatedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, CertificateValidatedWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, CertificateValidatedWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

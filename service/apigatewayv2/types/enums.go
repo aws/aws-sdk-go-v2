@@ -128,9 +128,9 @@ const (
 	EndpointTypeEdge     EndpointType = "EDGE"
 )
 
-// Values returns all known values for EndpointType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointType) Values() []EndpointType {
 	return []EndpointType{
 		"REGIONAL",
@@ -171,9 +171,9 @@ const (
 	LoggingLevelOff   LoggingLevel = "OFF"
 )
 
-// Values returns all known values for LoggingLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LoggingLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LoggingLevel) Values() []LoggingLevel {
 	return []LoggingLevel{
 		"ERROR",
@@ -210,9 +210,9 @@ const (
 	ProtocolTypeHttp      ProtocolType = "HTTP"
 )
 
-// Values returns all known values for ProtocolType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProtocolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ProtocolType) Values() []ProtocolType {
 	return []ProtocolType{
 		"WEBSOCKET",

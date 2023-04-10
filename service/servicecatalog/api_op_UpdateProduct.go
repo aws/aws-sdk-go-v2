@@ -35,10 +35,8 @@ type UpdateProductInput struct {
 	Id *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The tags to add to the product.
@@ -63,10 +61,8 @@ type UpdateProductInput struct {
 	// the connection source artifact. This automatically manages the product's
 	// artifacts based on changes to the source. The SourceConnection parameter
 	// consists of the following sub-fields.
-	//
-	// * Type
-	//
-	// * ConnectionParamters
+	//   - Type
+	//   - ConnectionParamters
 	SourceConnection *types.SourceConnection
 
 	// The updated support description for the product.

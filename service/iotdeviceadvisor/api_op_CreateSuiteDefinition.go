@@ -13,8 +13,7 @@ import (
 )
 
 // Creates a Device Advisor test suite. Requires permission to access the
-// CreateSuiteDefinition
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// CreateSuiteDefinition (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateSuiteDefinition(ctx context.Context, params *CreateSuiteDefinitionInput, optFns ...func(*Options)) (*CreateSuiteDefinitionOutput, error) {
 	if params == nil {

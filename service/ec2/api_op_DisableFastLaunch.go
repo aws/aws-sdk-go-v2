@@ -42,8 +42,8 @@ type DisableFastLaunchInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// Forces the image settings to turn off faster launching for your Windows AMI.
@@ -70,12 +70,12 @@ type DisableFastLaunchOutput struct {
 	// The owner of the Windows AMI for which faster launching was turned off.
 	OwnerId *string
 
-	// The pre-provisioning resource type that must be cleaned after turning off faster
-	// launching for the Windows AMI. Supported values include: snapshot.
+	// The pre-provisioning resource type that must be cleaned after turning off
+	// faster launching for the Windows AMI. Supported values include: snapshot .
 	ResourceType types.FastLaunchResourceType
 
-	// Parameters that were used for faster launching for the Windows AMI before faster
-	// launching was turned off. This informs the clean-up process.
+	// Parameters that were used for faster launching for the Windows AMI before
+	// faster launching was turned off. This informs the clean-up process.
 	SnapshotConfiguration *types.FastLaunchSnapshotConfigurationResponse
 
 	// The current state of faster launching for the specified Windows AMI.

@@ -33,9 +33,7 @@ type DescribeDBLogFilesInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you
 	// want to list. Constraints:
-	//
-	// * Must match the identifier of an existing
-	// DBInstance.
+	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -67,7 +65,7 @@ type DescribeDBLogFilesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response from a call to DescribeDBLogFiles.
+// The response from a call to DescribeDBLogFiles .
 type DescribeDBLogFilesOutput struct {
 
 	// The DB log files returned.

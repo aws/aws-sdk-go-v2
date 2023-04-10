@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Pauses a specified Dev Environment and places it in a non-running state. Stopped
-// Dev Environments do not consume compute minutes.
+// Pauses a specified Dev Environment and places it in a non-running state.
+// Stopped Dev Environments do not consume compute minutes.
 func (c *Client) StopDevEnvironment(ctx context.Context, params *StopDevEnvironmentInput, optFns ...func(*Options)) (*StopDevEnvironmentOutput, error) {
 	if params == nil {
 		params = &StopDevEnvironmentInput{}

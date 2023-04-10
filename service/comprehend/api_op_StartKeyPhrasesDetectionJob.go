@@ -32,8 +32,8 @@ func (c *Client) StartKeyPhrasesDetectionJob(ctx context.Context, params *StartK
 type StartKeyPhrasesDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
-	// read access to your input data. For more information, see Role-based permissions
-	// (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions).
+	// read access to your input data. For more information, see Role-based permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
+	// .
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -72,18 +72,15 @@ type StartKeyPhrasesDetectionJobInput struct {
 	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
 	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
 	// the following formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// *
-	// Amazon Resource Name (ARN) of a KMS Key:
-	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - Amazon Resource Name (ARN) of a KMS Key:
+	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
 	// containing the resources you are using for your key phrases detection job. For
-	// more information, see Amazon VPC
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	// more information, see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
+	// .
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -104,17 +101,10 @@ type StartKeyPhrasesDetectionJobOutput struct {
 	JobId *string
 
 	// The status of the job.
-	//
-	// * SUBMITTED - The job has been received and is queued
-	// for processing.
-	//
-	// * IN_PROGRESS - Amazon Comprehend is processing the job.
-	//
-	// *
-	// COMPLETED - The job was successfully completed and the output is available.
-	//
-	// *
-	// FAILED - The job did not complete. To get details, use the operation.
+	//   - SUBMITTED - The job has been received and is queued for processing.
+	//   - IN_PROGRESS - Amazon Comprehend is processing the job.
+	//   - COMPLETED - The job was successfully completed and the output is available.
+	//   - FAILED - The job did not complete. To get details, use the operation.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

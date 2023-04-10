@@ -12,7 +12,7 @@ import (
 )
 
 // This operation allows you to perform reads and singleton writes on data stored
-// in DynamoDB, using PartiQL. For PartiQL reads (SELECT statement), if the total
+// in DynamoDB, using PartiQL. For PartiQL reads ( SELECT statement), if the total
 // number of processed items exceeds the maximum dataset size limit of 1 MB, the
 // read stops and results are returned to the user as a LastEvaluatedKey value to
 // continue the read in a subsequent operation. If the filter criteria in WHERE
@@ -21,7 +21,7 @@ import (
 // (if using the Limit parameter) or a maximum of 1 MB of data (and then apply any
 // filtering to the results using WHERE clause). If LastEvaluatedKey is present in
 // the response, you need to paginate the result set. If NextToken is present, you
-// need to paginate the result set and include NextToken.
+// need to paginate the result set and include NextToken .
 func (c *Client) ExecuteStatement(ctx context.Context, params *ExecuteStatementInput, optFns ...func(*Options)) (*ExecuteStatementOutput, error) {
 	if params == nil {
 		params = &ExecuteStatementInput{}
@@ -44,7 +44,7 @@ type ExecuteStatementInput struct {
 	// This member is required.
 	Statement *string
 
-	// The consistency of a read operation. If set to true, then a strongly consistent
+	// The consistency of a read operation. If set to true , then a strongly consistent
 	// read is used; otherwise, an eventually consistent read is used.
 	ConsistentRead *bool
 
@@ -67,19 +67,14 @@ type ExecuteStatementInput struct {
 
 	// Determines the level of detail about either provisioned or on-demand throughput
 	// consumption that is returned in the response:
-	//
-	// * INDEXES - The response includes
-	// the aggregate ConsumedCapacity for the operation, together with ConsumedCapacity
-	// for each table and secondary index that was accessed. Note that some operations,
-	// such as GetItem and BatchGetItem, do not access any indexes at all. In these
-	// cases, specifying INDEXES will only return ConsumedCapacity information for
-	// table(s).
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity
-	// for the operation.
-	//
-	// * NONE - No ConsumedCapacity details are included in the
-	// response.
+	//   - INDEXES - The response includes the aggregate ConsumedCapacity for the
+	//   operation, together with ConsumedCapacity for each table and secondary index
+	//   that was accessed. Note that some operations, such as GetItem and BatchGetItem
+	//   , do not access any indexes at all. In these cases, specifying INDEXES will
+	//   only return ConsumedCapacity information for table(s).
+	//   - TOTAL - The response includes only the aggregate ConsumedCapacity for the
+	//   operation.
+	//   - NONE - No ConsumedCapacity details are included in the response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
 
 	noSmithyDocumentSerde
@@ -90,8 +85,7 @@ type ExecuteStatementOutput struct {
 	// The capacity units consumed by an operation. The data returned includes the
 	// total provisioned throughput consumed, along with statistics for the table and
 	// any indexes involved in the operation. ConsumedCapacity is only returned if the
-	// request asked for it. For more information, see Provisioned Throughput
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// request asked for it. For more information, see Provisioned Throughput (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *types.ConsumedCapacity
 

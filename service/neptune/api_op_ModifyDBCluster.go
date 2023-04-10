@@ -33,9 +33,7 @@ type ModifyDBClusterInput struct {
 
 	// The DB cluster identifier for the cluster being modified. This parameter is not
 	// case-sensitive. Constraints:
-	//
-	// * Must match the identifier of an existing
-	// DBCluster.
+	//   - Must match the identifier of an existing DBCluster.
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -46,28 +44,27 @@ type ModifyDBClusterInput struct {
 	// the DB cluster's current version.
 	AllowMajorVersionUpgrade bool
 
-	// A value that specifies whether the modifications in this request and any pending
-	// modifications are asynchronously applied as soon as possible, regardless of the
-	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter is set
-	// to false, changes to the DB cluster are applied during the next maintenance
-	// window. The ApplyImmediately parameter only affects NewDBClusterIdentifier
-	// values. If you set the ApplyImmediately parameter value to false, then changes
-	// to NewDBClusterIdentifier values are applied during the next maintenance window.
-	// All other changes are applied immediately, regardless of the value of the
-	// ApplyImmediately parameter. Default: false
+	// A value that specifies whether the modifications in this request and any
+	// pending modifications are asynchronously applied as soon as possible, regardless
+	// of the PreferredMaintenanceWindow setting for the DB cluster. If this parameter
+	// is set to false , changes to the DB cluster are applied during the next
+	// maintenance window. The ApplyImmediately parameter only affects
+	// NewDBClusterIdentifier values. If you set the ApplyImmediately parameter value
+	// to false, then changes to NewDBClusterIdentifier values are applied during the
+	// next maintenance window. All other changes are applied immediately, regardless
+	// of the value of the ApplyImmediately parameter. Default: false
 	ApplyImmediately bool
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
-	//
-	// * Must be a value from 1 to 35
+	//   - Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to
 	// CloudWatch Logs for a specific DB cluster.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
-	// If set to true, tags are copied to any snapshot of the DB cluster that is
+	// If set to true , tags are copied to any snapshot of the DB cluster that is
 	// created.
 	CopyTagsToSnapshot *bool
 
@@ -75,16 +72,13 @@ type ModifyDBClusterInput struct {
 	DBClusterParameterGroupName *string
 
 	// The name of the DB parameter group to apply to all instances of the DB cluster.
-	// When you apply a parameter group using DBInstanceParameterGroupName, parameter
+	// When you apply a parameter group using DBInstanceParameterGroupName , parameter
 	// changes aren't applied during the next maintenance window but instead are
 	// applied immediately. Default: The existing name setting Constraints:
-	//
-	// * The DB
-	// parameter group must be in the same DB parameter group family as the target DB
-	// cluster version.
-	//
-	// * The DBInstanceParameterGroupName parameter is only valid in
-	// combination with the AllowMajorVersionUpgrade parameter.
+	//   - The DB parameter group must be in the same DB parameter group family as the
+	//   target DB cluster version.
+	//   - The DBInstanceParameterGroupName parameter is only valid in combination with
+	//   the AllowMajorVersionUpgrade parameter.
 	DBInstanceParameterGroupName *string
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.
@@ -96,13 +90,12 @@ type ModifyDBClusterInput struct {
 	// to database accounts, and otherwise false. Default: false
 	EnableIAMDatabaseAuthentication *bool
 
-	// The version number of the database engine to which you want to upgrade. Changing
-	// this parameter results in an outage. The change is applied during the next
-	// maintenance window unless the ApplyImmediately parameter is set to true. For a
-	// list of valid engine versions, see Engine Releases for Amazon Neptune
-	// (https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html), or
-	// call DescribeDBEngineVersions
-	// (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions).
+	// The version number of the database engine to which you want to upgrade.
+	// Changing this parameter results in an outage. The change is applied during the
+	// next maintenance window unless the ApplyImmediately parameter is set to true.
+	// For a list of valid engine versions, see Engine Releases for Amazon Neptune (https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html)
+	// , or call DescribeDBEngineVersions (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions)
+	// .
 	EngineVersion *string
 
 	// Not supported by Neptune.
@@ -110,17 +103,10 @@ type ModifyDBClusterInput struct {
 
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
-	//
-	// * Must contain from 1
-	// to 63 letters, numbers, or hyphens
-	//
-	// * The first character must be a letter
-	//
-	// *
-	// Cannot end with a hyphen or contain two consecutive hyphens
-	//
-	// Example:
-	// my-cluster2
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens
+	//   - The first character must be a letter
+	//   - Cannot end with a hyphen or contain two consecutive hyphens
+	// Example: my-cluster2
 	NewDBClusterIdentifier *string
 
 	// Not supported by Neptune.
@@ -131,19 +117,13 @@ type ModifyDBClusterInput struct {
 	Port *int32
 
 	// The daily time range during which automated backups are created if automated
-	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each Amazon
-	// Region. Constraints:
-	//
-	// * Must be in the format hh24:mi-hh24:mi.
-	//
-	// * Must be in
-	// Universal Coordinated Time (UTC).
-	//
-	// * Must not conflict with the preferred
-	// maintenance window.
-	//
-	// * Must be at least 30 minutes.
+	// backups are enabled, using the BackupRetentionPeriod parameter. The default is
+	// a 30-minute window selected at random from an 8-hour block of time for each
+	// Amazon Region. Constraints:
+	//   - Must be in the format hh24:mi-hh24:mi .
+	//   - Must be in Universal Coordinated Time (UTC).
+	//   - Must not conflict with the preferred maintenance window.
+	//   - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
@@ -154,8 +134,7 @@ type ModifyDBClusterInput struct {
 	PreferredMaintenanceWindow *string
 
 	// Contains the scaling configuration of a Neptune Serverless DB cluster. For more
-	// information, see Using Amazon Neptune Serverless
-	// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+	// information, see Using Amazon Neptune Serverless (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
 	// in the Amazon Neptune User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
 

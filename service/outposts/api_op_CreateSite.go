@@ -46,10 +46,9 @@ type CreateSiteInput struct {
 	// different from the shipping address.
 	OperatingAddress *types.Address
 
-	// Information about the physical and logistical details for the rack at this site.
-	// For more information about hardware requirements for racks, see Network
-	// readiness checklist
-	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist)
+	// Information about the physical and logistical details for the rack at this
+	// site. For more information about hardware requirements for racks, see Network
+	// readiness checklist (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist)
 	// in the Amazon Web Services Outposts User Guide.
 	RackPhysicalProperties *types.RackPhysicalProperties
 

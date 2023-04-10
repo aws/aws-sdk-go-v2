@@ -13,7 +13,7 @@ import (
 )
 
 // Creates an empty Amazon Lookout for Vision project. After you create the
-// project, add a dataset by calling CreateDataset. This operation requires
+// project, add a dataset by calling CreateDataset . This operation requires
 // permissions to perform the lookoutvision:CreateProject operation.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
@@ -39,14 +39,14 @@ type CreateProjectInput struct {
 
 	// ClientToken is an idempotency token that ensures a call to CreateProject
 	// completes only once. You choose the value to pass. For example, An issue might
-	// prevent you from getting a response from CreateProject. In this case, safely
+	// prevent you from getting a response from CreateProject . In this case, safely
 	// retry your call to CreateProject by using the same ClientToken parameter value.
-	// If you don't supply a value for ClientToken, the AWS SDK you are using inserts a
-	// value for you. This prevents retries after a network error from making multiple
-	// project creation requests. You'll need to provide your own value for other use
-	// cases. An error occurs if the other input parameters are not the same as in the
-	// first request. Using a different value for ClientToken is considered a new call
-	// to CreateProject. An idempotency token is active for 8 hours.
+	// If you don't supply a value for ClientToken , the AWS SDK you are using inserts
+	// a value for you. This prevents retries after a network error from making
+	// multiple project creation requests. You'll need to provide your own value for
+	// other use cases. An error occurs if the other input parameters are not the same
+	// as in the first request. Using a different value for ClientToken is considered
+	// a new call to CreateProject . An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	noSmithyDocumentSerde

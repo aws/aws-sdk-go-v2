@@ -17,11 +17,10 @@ import (
 // object that you provided, and returns the function's result (the modified event
 // object) in the response. The response also contains function logs and error
 // messages, if any exist. For more information about testing functions, see
-// Testing functions
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function)
+// Testing functions (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function)
 // in the Amazon CloudFront Developer Guide. To test a function, you provide the
-// function's name and version (ETag value) along with the event object. To get the
-// function's name and version, you can use ListFunctions and DescribeFunction.
+// function's name and version ( ETag value) along with the event object. To get
+// the function's name and version, you can use ListFunctions and DescribeFunction .
 func (c *Client) TestFunction(ctx context.Context, params *TestFunctionInput, optFns ...func(*Options)) (*TestFunctionOutput, error) {
 	if params == nil {
 		params = &TestFunctionInput{}
@@ -40,15 +39,14 @@ func (c *Client) TestFunction(ctx context.Context, params *TestFunctionInput, op
 type TestFunctionInput struct {
 
 	// The event object to test the function with. For more information about the
-	// structure of the event object, see Testing functions
-	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function)
+	// structure of the event object, see Testing functions (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// This member is required.
 	EventObject []byte
 
-	// The current version (ETag value) of the function that you are testing, which you
-	// can get using DescribeFunction.
+	// The current version ( ETag value) of the function that you are testing, which
+	// you can get using DescribeFunction .
 	//
 	// This member is required.
 	IfMatch *string
@@ -58,7 +56,7 @@ type TestFunctionInput struct {
 	// This member is required.
 	Name *string
 
-	// The stage of the function that you are testing, either DEVELOPMENT or LIVE.
+	// The stage of the function that you are testing, either DEVELOPMENT or LIVE .
 	Stage types.FunctionStage
 
 	noSmithyDocumentSerde

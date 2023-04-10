@@ -20,16 +20,13 @@ import (
 // parameters to control the pagination of the results. Set maxResults to the
 // number of cases that you want to display on each page, and use nextToken to
 // specify the resumption of pagination.
-//
-// * You must have a Business, Enterprise
-// On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-// API.
-//
-// * If you call the Amazon Web Services Support API from an account that
-// doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
-// SubscriptionRequiredException error message appears. For information about
-// changing your support plan, see Amazon Web Services Support
-// (http://aws.amazon.com/premiumsupport/).
+//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
+//     use the Amazon Web Services Support API.
+//   - If you call the Amazon Web Services Support API from an account that
+//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     SubscriptionRequiredException error message appears. For information about
+//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
+//     .
 func (c *Client) DescribeCommunications(ctx context.Context, params *DescribeCommunicationsInput, optFns ...func(*Options)) (*DescribeCommunicationsOutput, error) {
 	if params == nil {
 		params = &DescribeCommunicationsInput{}

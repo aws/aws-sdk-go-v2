@@ -42,15 +42,13 @@ type UpdateProvisioningArtifactInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// Indicates whether the product version is active. Inactive provisioning artifacts
-	// are invisible to end users. End users cannot launch or update a provisioned
-	// product from an inactive provisioning artifact.
+	// Indicates whether the product version is active. Inactive provisioning
+	// artifacts are invisible to end users. End users cannot launch or update a
+	// provisioned product from an inactive provisioning artifact.
 	Active *bool
 
 	// The updated description of the provisioning artifact.

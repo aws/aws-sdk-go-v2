@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Linux subscriptions that have been discovered. If you have linked your
-// organization, the returned results will include data aggregated across your
+// Lists the Linux subscriptions that have been discovered. If you have linked
+// your organization, the returned results will include data aggregated across your
 // accounts in Organizations.
 func (c *Client) ListLinuxSubscriptions(ctx context.Context, params *ListLinuxSubscriptionsInput, optFns ...func(*Options)) (*ListLinuxSubscriptionsOutput, error) {
 	if params == nil {
@@ -39,17 +39,11 @@ type ListLinuxSubscriptionsInput struct {
 	// filter by the name of Subscription with an optional operator to see
 	// subscriptions that match, partially match, or don't match a certain
 	// subscription's name. The valid names for this filter are:
-	//
-	// * Subscription
-	//
-	// The
-	// valid Operators for this filter are:
-	//
-	// * contains
-	//
-	// * equals
-	//
-	// * Notequal
+	//   - Subscription
+	// The valid Operators for this filter are:
+	//   - contains
+	//   - equals
+	//   - Notequal
 	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.

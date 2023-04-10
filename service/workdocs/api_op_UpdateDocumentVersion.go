@@ -14,7 +14,7 @@ import (
 // Changes the status of the document version to ACTIVE. Amazon WorkDocs also sets
 // its document container to ACTIVE. This is the last step in a document upload,
 // after the client uploads the document to an S3-presigned URL returned by
-// InitiateDocumentVersionUpload.
+// InitiateDocumentVersionUpload .
 func (c *Client) UpdateDocumentVersion(ctx context.Context, params *UpdateDocumentVersionInput, optFns ...func(*Options)) (*UpdateDocumentVersionOutput, error) {
 	if params == nil {
 		params = &UpdateDocumentVersionInput{}

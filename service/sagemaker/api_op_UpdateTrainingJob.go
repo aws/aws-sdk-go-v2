@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a model training job to request a new Debugger profiling configuration or
-// to change warm pool retention length.
+// Update a model training job to request a new Debugger profiling configuration
+// or to change warm pool retention length.
 func (c *Client) UpdateTrainingJob(ctx context.Context, params *UpdateTrainingJobInput, optFns ...func(*Options)) (*UpdateTrainingJobOutput, error) {
 	if params == nil {
 		params = &UpdateTrainingJobInput{}

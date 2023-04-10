@@ -31,26 +31,18 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 type CreateClusterInput struct {
 
 	// The name of the Elastic DocumentDB cluster administrator. Constraints:
-	//
-	// * Must
-	// be from 1 to 63 letters or numbers.
-	//
-	// * The first character must be a letter.
-	//
-	// *
-	// Cannot be a reserved word.
+	//   - Must be from 1 to 63 letters or numbers.
+	//   - The first character must be a letter.
+	//   - Cannot be a reserved word.
 	//
 	// This member is required.
 	AdminUserName *string
 
 	// The password for the Elastic DocumentDB cluster administrator and can contain
 	// any printable ASCII characters. Constraints:
-	//
-	// * Must contain from 8 to 100
-	// characters.
-	//
-	// * Cannot contain a forward slash (/), double quote ("), or the "at"
-	// symbol (@).
+	//   - Must contain from 8 to 100 characters.
+	//   - Cannot contain a forward slash (/), double quote ("), or the "at" symbol
+	//   (@).
 	//
 	// This member is required.
 	AdminUserPassword *string
@@ -62,15 +54,9 @@ type CreateClusterInput struct {
 
 	// The name of the new Elastic DocumentDB cluster. This parameter is stored as a
 	// lowercase string. Constraints:
-	//
-	// * Must contain from 1 to 63 letters, numbers, or
-	// hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
-	//
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster
 	//
 	// This member is required.
@@ -89,10 +75,10 @@ type CreateClusterInput struct {
 	// The client token for the Elastic DocumentDB cluster.
 	ClientToken *string
 
-	// The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster. The
-	// KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key.
-	// If you are creating a cluster using the same Amazon account that owns this KMS
-	// encryption key, you can use the KMS key alias instead of the ARN as the KMS
+	// The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.
+	// The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption
+	// key. If you are creating a cluster using the same Amazon account that owns this
+	// KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS
 	// encryption key. If an encryption key is not specified, Elastic DocumentDB uses
 	// the default encryption key that KMS creates for your account. Your account has a
 	// different default encryption key for each Amazon Region.

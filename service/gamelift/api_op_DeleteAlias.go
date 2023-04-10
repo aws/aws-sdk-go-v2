@@ -12,9 +12,8 @@ import (
 
 // Deletes an alias. This operation removes all record of the alias. Game clients
 // attempting to access a server process using the deleted alias receive an error.
-// To delete an alias, specify the alias ID to be deleted. Related actions All APIs
-// by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// To delete an alias, specify the alias ID to be deleted. Related actions All
+// APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optFns ...func(*Options)) (*DeleteAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAliasInput{}
@@ -32,8 +31,8 @@ func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optF
 
 type DeleteAliasInput struct {
 
-	// A unique identifier of the alias that you want to delete. You can use either the
-	// alias ID or ARN value.
+	// A unique identifier of the alias that you want to delete. You can use either
+	// the alias ID or ARN value.
 	//
 	// This member is required.
 	AliasId *string

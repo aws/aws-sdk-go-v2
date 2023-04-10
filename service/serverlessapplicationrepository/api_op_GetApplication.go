@@ -69,8 +69,8 @@ type GetApplicationOutput struct {
 	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
-	// A link to a license file of the app that matches the spdxLicenseID value of your
-	// application.Maximum size 5 MB
+	// A link to a license file of the app that matches the spdxLicenseID value of
+	// your application.Maximum size 5 MB
 	LicenseUrl *string
 
 	// The name of the application.Minimum length=1. Maximum length=140Pattern:
@@ -84,8 +84,8 @@ type GetApplicationOutput struct {
 	// A valid identifier from https://spdx.org/licenses/.
 	SpdxLicenseId *string
 
-	// The URL to the public profile of a verified author. This URL is submitted by the
-	// author.
+	// The URL to the public profile of a verified author. This URL is submitted by
+	// the author.
 	VerifiedAuthorUrl *string
 
 	// Version information about the application.

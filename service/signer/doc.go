@@ -11,12 +11,10 @@
 // Signer to sign Lambda zip files in S3. With code signing for IoT, you can sign
 // code for any IoT device that is supported by AWS. IoT code signing is available
 // for Amazon FreeRTOS (http://docs.aws.amazon.com/freertos/latest/userguide/) and
-// AWS IoT Device Management
-// (http://docs.aws.amazon.com/iot/latest/developerguide/), and is integrated with
-// AWS Certificate Manager (ACM)
-// (http://docs.aws.amazon.com/acm/latest/userguide/). In order to sign code, you
-// import a third-party code signing certificate using ACM, and use that to sign
-// updates in Amazon FreeRTOS and AWS IoT Device Management. For more information
-// about AWS Signer, see the AWS Signer Developer Guide
-// (http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html).
+// AWS IoT Device Management (http://docs.aws.amazon.com/iot/latest/developerguide/)
+// , and is integrated with AWS Certificate Manager (ACM) (http://docs.aws.amazon.com/acm/latest/userguide/)
+// . In order to sign code, you import a third-party code signing certificate using
+// ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device
+// Management. For more information about AWS Signer, see the AWS Signer Developer
+// Guide (http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html) .
 package signer

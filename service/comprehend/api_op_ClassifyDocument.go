@@ -18,9 +18,8 @@ import (
 // the input document, the API response includes an entry in Errors that describes
 // the errors. If the system detects a document-level error in your input document,
 // the API returns an InvalidRequestException error response. For details about
-// this exception, see  Errors in semi-structured documents
-// (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html) in
-// the Comprehend Developer Guide.
+// this exception, see Errors in semi-structured documents (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html)
+// in the Comprehend Developer Guide.
 func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentInput, optFns ...func(*Options)) (*ClassifyDocumentOutput, error) {
 	if params == nil {
 		params = &ClassifyDocumentInput{}
@@ -39,8 +38,8 @@ func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentI
 type ClassifyDocumentInput struct {
 
 	// The Amazon Resource Number (ARN) of the endpoint. For information about
-	// endpoints, see Managing endpoints
-	// (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
+	// endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
+	// .
 	//
 	// This member is required.
 	EndpointArn *string
@@ -51,18 +50,17 @@ type ClassifyDocumentInput struct {
 	// base64-encoded bytes. If your code uses an Amazon Web Services SDK to classify
 	// documents, the SDK may encode the document file bytes for you. The maximum
 	// length of this field depends on the input document type. For details, see
-	// Inputs for real-time custom analysis
-	// (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html) in the
-	// Comprehend Developer Guide. If you use the Bytes parameter, do not use the Text
-	// parameter.
+	// Inputs for real-time custom analysis (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html)
+	// in the Comprehend Developer Guide. If you use the Bytes parameter, do not use
+	// the Text parameter.
 	Bytes []byte
 
-	// Provides configuration parameters to override the default actions for extracting
-	// text from PDF documents and image files.
+	// Provides configuration parameters to override the default actions for
+	// extracting text from PDF documents and image files.
 	DocumentReaderConfig *types.DocumentReaderConfig
 
-	// The document text to be analyzed. If you enter text using this parameter, do not
-	// use the Bytes parameter.
+	// The document text to be analyzed. If you enter text using this parameter, do
+	// not use the Bytes parameter.
 	Text *string
 
 	noSmithyDocumentSerde
@@ -76,8 +74,8 @@ type ClassifyDocumentOutput struct {
 	// be a dog or a cat, but not both at the same time.
 	Classes []types.DocumentClass
 
-	// Extraction information about the document. This field is present in the response
-	// only if your request includes the Byte parameter.
+	// Extraction information about the document. This field is present in the
+	// response only if your request includes the Byte parameter.
 	DocumentMetadata *types.DocumentMetadata
 
 	// The document type for each page in the input document. This field is present in

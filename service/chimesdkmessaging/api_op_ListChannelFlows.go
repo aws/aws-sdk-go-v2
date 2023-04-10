@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated lists of all the channel flows created under a single Chime.
-// This is a developer API.
+// Returns a paginated lists of all the channel flows created under a single
+// Chime. This is a developer API.
 func (c *Client) ListChannelFlows(ctx context.Context, params *ListChannelFlowsInput, optFns ...func(*Options)) (*ListChannelFlowsOutput, error) {
 	if params == nil {
 		params = &ListChannelFlowsInput{}

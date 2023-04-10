@@ -56,8 +56,8 @@ type ListTemplatesOutput struct {
 	// This member is required.
 	Templates []types.TemplateSummary
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

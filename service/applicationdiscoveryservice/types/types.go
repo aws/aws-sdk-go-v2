@@ -131,119 +131,78 @@ type ContinuousExportDescription struct {
 	S3Bucket *string
 
 	// An object which describes how the data is stored.
-	//
-	// * databaseName - the name of
-	// the Glue database used to store the schema.
+	//   - databaseName - the name of the Glue database used to store the schema.
 	SchemaStorageConfig map[string]string
 
 	// The timestamp representing when the continuous export was started.
 	StartTime *time.Time
 
 	// Describes the status of the export. Can be one of the following values:
-	//
-	// *
-	// START_IN_PROGRESS - setting up resources to start continuous export.
-	//
-	// *
-	// START_FAILED - an error occurred setting up continuous export. To recover, call
-	// start-continuous-export again.
-	//
-	// * ACTIVE - data is being exported to the
-	// customer bucket.
-	//
-	// * ERROR - an error occurred during export. To fix the issue,
-	// call stop-continuous-export and start-continuous-export.
-	//
-	// * STOP_IN_PROGRESS -
-	// stopping the export.
-	//
-	// * STOP_FAILED - an error occurred stopping the export. To
-	// recover, call stop-continuous-export again.
-	//
-	// * INACTIVE - the continuous export
-	// has been stopped. Data is no longer being exported to the customer bucket.
+	//   - START_IN_PROGRESS - setting up resources to start continuous export.
+	//   - START_FAILED - an error occurred setting up continuous export. To recover,
+	//   call start-continuous-export again.
+	//   - ACTIVE - data is being exported to the customer bucket.
+	//   - ERROR - an error occurred during export. To fix the issue, call
+	//   stop-continuous-export and start-continuous-export.
+	//   - STOP_IN_PROGRESS - stopping the export.
+	//   - STOP_FAILED - an error occurred stopping the export. To recover, call
+	//   stop-continuous-export again.
+	//   - INACTIVE - the continuous export has been stopped. Data is no longer being
+	//   exported to the customer bucket.
 	Status ContinuousExportStatus
 
 	// Contains information about any errors that have occurred. This data type can
 	// have the following values:
-	//
-	// * ACCESS_DENIED - You don’t have permission to start
-	// Data Exploration in Amazon Athena. Contact your Amazon Web Services
-	// administrator for help. For more information, see Setting Up Amazon Web Services
-	// Application Discovery Service
-	// (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html)
-	// in the Application Discovery Service User Guide.
-	//
-	// *
-	// DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis Data
-	// Firehose delivery streams. Reduce the number of streams or request a limit
-	// increase and try again. For more information, see Kinesis Data Streams Limits
-	// (http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html) in
-	// the Amazon Kinesis Data Streams Developer Guide.
-	//
-	// * FIREHOSE_ROLE_MISSING - The
-	// Data Exploration feature is in an error state because your IAM User is missing
-	// the AWSApplicationDiscoveryServiceFirehose role. Turn on Data Exploration in
-	// Amazon Athena and try again. For more information, see Step 3: Provide
-	// Application Discovery Service Access to Non-Administrator Users by Attaching
-	// Policies
-	// (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy)
-	// in the Application Discovery Service User Guide.
-	//
-	// *
-	// FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an error
-	// state because your IAM User is missing one or more of the Kinesis data delivery
-	// streams.
-	//
-	// * INTERNAL_FAILURE - The Data Exploration feature is in an error state
-	// because of an internal failure. Try again later. If this problem persists,
-	// contact Amazon Web Services Support.
-	//
-	// * LAKE_FORMATION_ACCESS_DENIED - You don't
-	// have sufficient lake formation permissions to start continuous export. For more
-	// information, see  Upgrading Amazon Web Services Glue Data Permissions to the
-	// Amazon Web Services Lake Formation Model
-	// (http://docs.aws.amazon.com/lake-formation/latest/dg/upgrade-glue-lake-formation.html)
-	// in the Amazon Web Services Lake Formation Developer Guide. You can use one of
-	// the following two ways to resolve this issue.
-	//
-	// * If you don’t want to use the
-	// Lake Formation permission model, you can change the default Data Catalog
-	// settings to use only Amazon Web Services Identity and Access Management (IAM)
-	// access control for new databases. For more information, see Change Data Catalog
-	// Settings
-	// (https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#setup-change-cat-settings)
-	// in the Lake Formation Developer Guide.
-	//
-	// * You can give the service-linked IAM
-	// roles AWSServiceRoleForApplicationDiscoveryServiceContinuousExport and
-	// AWSApplicationDiscoveryServiceFirehose the required Lake Formation permissions.
-	// For more information, see  Granting Database Permissions
-	// (https://docs.aws.amazon.com/lake-formation/latest/dg/granting-database-permissions.html)
-	// in the Lake Formation Developer Guide.
-	//
-	// *
-	// AWSServiceRoleForApplicationDiscoveryServiceContinuousExport - Grant database
-	// creator permissions, which gives the role database creation ability and implicit
-	// permissions for any created tables. For more information, see  Implicit Lake
-	// Formation Permissions
-	// (https://docs.aws.amazon.com/lake-formation/latest/dg/implicit-permissions.html)
-	// in the Lake Formation Developer Guide.
-	//
-	// * AWSApplicationDiscoveryServiceFirehose
-	// - Grant describe permissions for all tables in the database.
-	//
-	// *
-	// S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce
-	// the number of S3 buckets or request a limit increase and try again. For more
-	// information, see Bucket Restrictions and Limitations
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html) in the
-	// Amazon Simple Storage Service Developer Guide.
-	//
-	// * S3_NOT_SIGNED_UP - Your
-	// account is not signed up for the Amazon S3 service. You must sign up before you
-	// can use Amazon S3. You can sign up at the following URL:
-	// https://aws.amazon.com/s3 (https://aws.amazon.com/s3).
+	//   - ACCESS_DENIED - You don’t have permission to start Data Exploration in
+	//   Amazon Athena. Contact your Amazon Web Services administrator for help. For more
+	//   information, see Setting Up Amazon Web Services Application Discovery Service (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html)
+	//   in the Application Discovery Service User Guide.
+	//   - DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis
+	//   Data Firehose delivery streams. Reduce the number of streams or request a limit
+	//   increase and try again. For more information, see Kinesis Data Streams Limits (http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)
+	//   in the Amazon Kinesis Data Streams Developer Guide.
+	//   - FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error state
+	//   because your IAM User is missing the AWSApplicationDiscoveryServiceFirehose
+	//   role. Turn on Data Exploration in Amazon Athena and try again. For more
+	//   information, see Step 3: Provide Application Discovery Service Access to
+	//   Non-Administrator Users by Attaching Policies (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy)
+	//   in the Application Discovery Service User Guide.
+	//   - FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an
+	//   error state because your IAM User is missing one or more of the Kinesis data
+	//   delivery streams.
+	//   - INTERNAL_FAILURE - The Data Exploration feature is in an error state
+	//   because of an internal failure. Try again later. If this problem persists,
+	//   contact Amazon Web Services Support.
+	//   - LAKE_FORMATION_ACCESS_DENIED - You don't have sufficient lake formation
+	//   permissions to start continuous export. For more information, see Upgrading
+	//   Amazon Web Services Glue Data Permissions to the Amazon Web Services Lake
+	//   Formation Model  (http://docs.aws.amazon.com/lake-formation/latest/dg/upgrade-glue-lake-formation.html)
+	//   in the Amazon Web Services Lake Formation Developer Guide. You can use one of
+	//   the following two ways to resolve this issue.
+	//   - If you don’t want to use the Lake Formation permission model, you can
+	//   change the default Data Catalog settings to use only Amazon Web Services
+	//   Identity and Access Management (IAM) access control for new databases. For more
+	//   information, see Change Data Catalog Settings (https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#setup-change-cat-settings)
+	//   in the Lake Formation Developer Guide.
+	//   - You can give the service-linked IAM roles
+	//   AWSServiceRoleForApplicationDiscoveryServiceContinuousExport and
+	//   AWSApplicationDiscoveryServiceFirehose the required Lake Formation permissions.
+	//   For more information, see Granting Database Permissions (https://docs.aws.amazon.com/lake-formation/latest/dg/granting-database-permissions.html)
+	//   in the Lake Formation Developer Guide.
+	//   - AWSServiceRoleForApplicationDiscoveryServiceContinuousExport - Grant
+	//   database creator permissions, which gives the role database creation ability and
+	//   implicit permissions for any created tables. For more information, see
+	//   Implicit Lake Formation Permissions  (https://docs.aws.amazon.com/lake-formation/latest/dg/implicit-permissions.html)
+	//   in the Lake Formation Developer Guide.
+	//   - AWSApplicationDiscoveryServiceFirehose - Grant describe permissions for all
+	//   tables in the database.
+	//   - S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets.
+	//   Reduce the number of S3 buckets or request a limit increase and try again. For
+	//   more information, see Bucket Restrictions and Limitations (http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
+	//   in the Amazon Simple Storage Service Developer Guide.
+	//   - S3_NOT_SIGNED_UP - Your account is not signed up for the Amazon S3 service.
+	//   You must sign up before you can use Amazon S3. You can sign up at the following
+	//   URL: https://aws.amazon.com/s3 (https://aws.amazon.com/s3) .
 	StatusDetail *string
 
 	// The timestamp that represents when this continuous export was stopped.
@@ -402,8 +361,7 @@ type CustomerMeCollectorInfo struct {
 }
 
 // Used to select which agent's data is to be exported. A single agent ID may be
-// selected for export using the StartExportTask
-// (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html)
+// selected for export using the StartExportTask (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html)
 // action.
 type ExportFilter struct {
 
@@ -412,15 +370,14 @@ type ExportFilter struct {
 	// This member is required.
 	Condition *string
 
-	// A single ExportFilter name. Supported filters: agentIds.
+	// A single ExportFilter name. Supported filters: agentIds .
 	//
 	// This member is required.
 	Name *string
 
 	// A single agent ID for a Discovery Agent. An agent ID can be found using the
-	// DescribeAgents
-	// (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeAgents.html)
-	// action. Typically an ADS agent ID is in the form o-0123456789abcdef0.
+	// DescribeAgents (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeAgents.html)
+	// action. Typically an ADS agent ID is in the form o-0123456789abcdef0 .
 	//
 	// This member is required.
 	Values []string
@@ -452,30 +409,29 @@ type ExportInfo struct {
 	// This member is required.
 	StatusMessage *string
 
-	// A URL for an Amazon S3 bucket where you can review the exported data. The URL is
-	// displayed only if the export succeeded.
+	// A URL for an Amazon S3 bucket where you can review the exported data. The URL
+	// is displayed only if the export succeeded.
 	ConfigurationsDownloadUrl *string
 
 	// If true, the export of agent information exceeded the size limit for a single
 	// export and the exported data is incomplete for the requested time range. To
 	// address this, select a smaller time range for the export by using startDate and
-	// endDate.
+	// endDate .
 	IsTruncated bool
 
 	// The endTime used in the StartExportTask request. If no endTime was requested,
-	// this result does not appear in ExportInfo.
+	// this result does not appear in ExportInfo .
 	RequestedEndTime *time.Time
 
 	// The value of startTime parameter in the StartExportTask request. If no startTime
-	// was requested, this result does not appear in ExportInfo.
+	// was requested, this result does not appear in ExportInfo .
 	RequestedStartTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// A filter that can use conditional operators. For more information about filters,
-// see Querying Discovered Configuration Items
-// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html)
+// A filter that can use conditional operators. For more information about
+// filters, see Querying Discovered Configuration Items (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html)
 // in the Amazon Web Services Application Discovery Service User Guide.
 type Filter struct {
 
@@ -520,8 +476,8 @@ type ImportTask struct {
 	// the import task request was sent.
 	ClientRequestToken *string
 
-	// A link to a compressed archive folder (in the ZIP format) that contains an error
-	// log and a file of failed records. You can use these two files to quickly
+	// A link to a compressed archive folder (in the ZIP format) that contains an
+	// error log and a file of failed records. You can use these two files to quickly
 	// identify records that failed, why they failed, and correct those records.
 	// Afterward, you can upload the corrected file to your Amazon S3 bucket and create
 	// another import task request. This field also includes authorization information
@@ -532,16 +488,16 @@ type ImportTask struct {
 	// file and attempt importing it again.
 	ErrorsAndFailedEntriesZip *string
 
-	// The time that the import task request finished, presented in the Unix time stamp
-	// format.
+	// The time that the import task request finished, presented in the Unix time
+	// stamp format.
 	ImportCompletionTime *time.Time
 
 	// The time that the import task request was deleted, presented in the Unix time
 	// stamp format.
 	ImportDeletedTime *time.Time
 
-	// The time that the import task request was made, presented in the Unix time stamp
-	// format.
+	// The time that the import task request was made, presented in the Unix time
+	// stamp format.
 	ImportRequestTime *time.Time
 
 	// The unique ID for a specific import task. These IDs aren't globally unique, but
@@ -647,7 +603,7 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// The tag filter. Valid names are: tagKey, tagValue, configurationId.
+// The tag filter. Valid names are: tagKey , tagValue , configurationId .
 type TagFilter struct {
 
 	// A name of the tag filter.

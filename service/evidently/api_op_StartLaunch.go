@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an existing launch. To create a launch, use CreateLaunch
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateLaunch.html).
+// Starts an existing launch. To create a launch, use CreateLaunch (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateLaunch.html)
+// .
 func (c *Client) StartLaunch(ctx context.Context, params *StartLaunchInput, optFns ...func(*Options)) (*StartLaunchOutput, error) {
 	if params == nil {
 		params = &StartLaunchInput{}

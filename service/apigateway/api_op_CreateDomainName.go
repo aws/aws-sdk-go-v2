@@ -82,16 +82,16 @@ type CreateDomainNameInput struct {
 	// source.
 	RegionalCertificateArn *string
 
-	// The user-friendly name of the certificate that will be used by regional endpoint
-	// for this domain name.
+	// The user-friendly name of the certificate that will be used by regional
+	// endpoint for this domain name.
 	RegionalCertificateName *string
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0 and TLS_1_2.
+	// The valid values are TLS_1_0 and TLS_1_2 .
 	SecurityPolicy types.SecurityPolicy
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
-	// tag key can be up to 128 characters and must not start with aws:. The tag value
+	// tag key can be up to 128 characters and must not start with aws: . The tag value
 	// can be up to 256 characters.
 	Tags map[string]string
 
@@ -128,12 +128,12 @@ type CreateDomainNameOutput struct {
 	// Endpoints for API Gateway.
 	DistributionHostedZoneId *string
 
-	// The custom domain name as an API host name, for example, my-api.example.com.
+	// The custom domain name as an API host name, for example, my-api.example.com .
 	DomainName *string
 
 	// The status of the DomainName migration. The valid values are AVAILABLE and
-	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
-	// the existing operation is complete. If it is AVAILABLE, the domain can be
+	// UPDATING . If the status is UPDATING , the domain cannot be modified further
+	// until the existing operation is complete. If it is AVAILABLE , the domain can be
 	// updated.
 	DomainNameStatus types.DomainNameStatus
 
@@ -155,12 +155,12 @@ type CreateDomainNameOutput struct {
 	// imported or private CA certificate ARN as the regionalCertificateArn.
 	OwnershipVerificationCertificateArn *string
 
-	// The reference to an AWS-managed certificate that will be used for validating the
-	// regional domain name. AWS Certificate Manager is the only supported source.
+	// The reference to an AWS-managed certificate that will be used for validating
+	// the regional domain name. AWS Certificate Manager is the only supported source.
 	RegionalCertificateArn *string
 
-	// The name of the certificate that will be used for validating the regional domain
-	// name.
+	// The name of the certificate that will be used for validating the regional
+	// domain name.
 	RegionalCertificateName *string
 
 	// The domain name associated with the regional endpoint for this custom domain
@@ -169,13 +169,13 @@ type CreateDomainNameOutput struct {
 	// by API Gateway when you create a regional endpoint.
 	RegionalDomainName *string
 
-	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For
-	// more information, see Set up a Regional Custom Domain Name and AWS Regions and
-	// Endpoints for API Gateway.
+	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.
+	// For more information, see Set up a Regional Custom Domain Name and AWS Regions
+	// and Endpoints for API Gateway.
 	RegionalHostedZoneId *string
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0 and TLS_1_2.
+	// The valid values are TLS_1_0 and TLS_1_2 .
 	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.

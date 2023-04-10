@@ -17,8 +17,7 @@ import (
 )
 
 // Returns the current status of a resource operation request. For more
-// information, see Tracking the progress of resource operation requests
-// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track)
+// information, see Tracking the progress of resource operation requests (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track)
 // in the Amazon Web Services Cloud Control API User Guide.
 func (c *Client) GetResourceRequestStatus(ctx context.Context, params *GetResourceRequestStatusInput, optFns ...func(*Options)) (*GetResourceRequestStatusOutput, error) {
 	if params == nil {
@@ -143,9 +142,10 @@ type ResourceRequestSuccessWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ResourceRequestSuccessWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ResourceRequestSuccessWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -185,9 +185,9 @@ func NewResourceRequestSuccessWaiter(client GetResourceRequestStatusAPIClient, o
 	}
 }
 
-// Wait calls the waiter function for ResourceRequestSuccess waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for ResourceRequestSuccess waiter. The
+// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
+// required and must be greater than zero.
 func (w *ResourceRequestSuccessWaiter) Wait(ctx context.Context, params *GetResourceRequestStatusInput, maxWaitDur time.Duration, optFns ...func(*ResourceRequestSuccessWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -28,10 +28,9 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resource share that you want to remove tags from. The tags are removed from
-	// the resource share, not the resources in the resource share.
+	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource share that you want to remove tags from. The tags are removed
+	// from the resource share, not the resources in the resource share.
 	//
 	// This member is required.
 	ResourceShareArn *string

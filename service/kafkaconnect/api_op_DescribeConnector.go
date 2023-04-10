@@ -75,8 +75,8 @@ type DescribeConnectorOutput struct {
 	// Details of encryption in transit to the Apache Kafka cluster.
 	KafkaClusterEncryptionInTransit *types.KafkaClusterEncryptionInTransitDescription
 
-	// The version of Kafka Connect. It has to be compatible with both the Apache Kafka
-	// cluster's version and the plugins.
+	// The version of Kafka Connect. It has to be compatible with both the Apache
+	// Kafka cluster's version and the plugins.
 	KafkaConnectVersion *string
 
 	// Details about delivering logs to Amazon CloudWatch Logs.

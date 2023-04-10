@@ -41,14 +41,14 @@ type AssociateOriginationIdentityInput struct {
 
 	// The origination identity to use, such as PhoneNumberId, PhoneNumberArn,
 	// SenderId, or SenderIdArn. You can use DescribePhoneNumbers to find the values
-	// for PhoneNumberId and PhoneNumberArn, while DescribeSenderIds can be used to get
-	// the values for SenderId and SenderIdArn.
+	// for PhoneNumberId and PhoneNumberArn, while DescribeSenderIds can be used to
+	// get the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
 
-	// The pool to update with the new Identity. This value can be either the PoolId or
-	// PoolArn, and you can find these values using DescribePools.
+	// The pool to update with the new Identity. This value can be either the PoolId
+	// or PoolArn, and you can find these values using DescribePools .
 	//
 	// This member is required.
 	PoolId *string

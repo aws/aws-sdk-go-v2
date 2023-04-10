@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified sign-in delegate groups with the specified Amazon Chime
-// account.
+// Associates the specified sign-in delegate groups with the specified Amazon
+// Chime account.
 func (c *Client) AssociateSigninDelegateGroupsWithAccount(ctx context.Context, params *AssociateSigninDelegateGroupsWithAccountInput, optFns ...func(*Options)) (*AssociateSigninDelegateGroupsWithAccountOutput, error) {
 	if params == nil {
 		params = &AssociateSigninDelegateGroupsWithAccountInput{}

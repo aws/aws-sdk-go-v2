@@ -43,8 +43,8 @@ type ImportApiKeysInput struct {
 	// This member is required.
 	Format types.ApiKeysFormat
 
-	// A query parameter to indicate whether to rollback ApiKey importation (true) or
-	// not (false) when error is encountered.
+	// A query parameter to indicate whether to rollback ApiKey importation ( true ) or
+	// not ( false ) when error is encountered.
 	FailOnWarnings bool
 
 	noSmithyDocumentSerde

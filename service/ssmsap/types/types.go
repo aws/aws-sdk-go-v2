@@ -50,8 +50,8 @@ type ApplicationCredential struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The secret ID created in AWS Secrets Manager to store the credentials of the SAP
-	// application.
+	// The secret ID created in AWS Secrets Manager to store the credentials of the
+	// SAP application.
 	//
 	// This member is required.
 	SecretId *string
@@ -125,8 +125,8 @@ type ComponentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The SAP HANA database of the application registered with AWS Systems Manager for
-// SAP.
+// The SAP HANA database of the application registered with AWS Systems Manager
+// for SAP.
 type Database struct {
 
 	// The ID of the application.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with
-// cost allocation reporting to track costs that are associated with Amazon
+// Adds metadata tags to an Amazon DocumentDB resource. You can use these tags
+// with cost allocation reporting to track costs that are associated with Amazon
 // DocumentDB resources or in a Condition statement in an Identity and Access
 // Management (IAM) policy for Amazon DocumentDB.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
@@ -30,7 +30,7 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 	return out, nil
 }
 
-// Represents the input to AddTagsToResource.
+// Represents the input to AddTagsToResource .
 type AddTagsToResourceInput struct {
 
 	// The Amazon DocumentDB resource that the tags are added to. This value is an

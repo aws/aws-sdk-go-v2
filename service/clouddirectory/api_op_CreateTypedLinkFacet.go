@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a TypedLinkFacet. For more information, see Typed Links
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+// Creates a TypedLinkFacet . For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+// .
 func (c *Client) CreateTypedLinkFacet(ctx context.Context, params *CreateTypedLinkFacetInput, optFns ...func(*Options)) (*CreateTypedLinkFacetOutput, error) {
 	if params == nil {
 		params = &CreateTypedLinkFacetInput{}
@@ -36,7 +36,7 @@ type CreateTypedLinkFacetInput struct {
 	Facet *types.TypedLinkFacet
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns.
+	// information, see arns .
 	//
 	// This member is required.
 	SchemaArn *string

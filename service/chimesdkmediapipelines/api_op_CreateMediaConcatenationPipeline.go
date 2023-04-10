@@ -52,7 +52,7 @@ type CreateMediaConcatenationPipelineInput struct {
 
 type CreateMediaConcatenationPipelineOutput struct {
 
-	// A media concatenation pipeline object, the ID, source type, MediaPipelineARN,
+	// A media concatenation pipeline object, the ID, source type, MediaPipelineARN ,
 	// and sink of a media concatenation pipeline object.
 	MediaConcatenationPipeline *types.MediaConcatenationPipeline
 

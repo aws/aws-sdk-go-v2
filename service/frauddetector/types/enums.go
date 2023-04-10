@@ -79,8 +79,8 @@ const (
 	DetectorVersionStatusInactive DetectorVersionStatus = "INACTIVE"
 )
 
-// Values returns all known values for DetectorVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DetectorVersionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DetectorVersionStatus) Values() []DetectorVersionStatus {
 	return []DetectorVersionStatus{
@@ -188,8 +188,8 @@ const (
 	ModelOutputDataFormatJsonlines ModelOutputDataFormat = "APPLICATION_JSONLINES"
 )
 
-// Values returns all known values for ModelOutputDataFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ModelOutputDataFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ModelOutputDataFormat) Values() []ModelOutputDataFormat {
 	return []ModelOutputDataFormat{
@@ -300,9 +300,9 @@ const (
 	UnlabeledEventsTreatmentAuto   UnlabeledEventsTreatment = "AUTO"
 )
 
-// Values returns all known values for UnlabeledEventsTreatment. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UnlabeledEventsTreatment. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnlabeledEventsTreatment) Values() []UnlabeledEventsTreatment {
 	return []UnlabeledEventsTreatment{
 		"IGNORE",

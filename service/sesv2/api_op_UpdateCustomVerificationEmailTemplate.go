@@ -12,8 +12,7 @@ import (
 
 // Updates an existing custom verification email template. For more information
 // about custom verification email templates, see Using custom verification email
-// templates
-// (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
+// templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
 // in the Amazon SES Developer Guide. You can execute this operation no more than
 // once per second.
 func (c *Client) UpdateCustomVerificationEmailTemplate(ctx context.Context, params *UpdateCustomVerificationEmailTemplateInput, optFns ...func(*Options)) (*UpdateCustomVerificationEmailTemplateOutput, error) {
@@ -53,8 +52,7 @@ type UpdateCustomVerificationEmailTemplateInput struct {
 
 	// The content of the custom verification email. The total size of the email must
 	// be less than 10 MB. The message body may contain HTML, with some limitations.
-	// For more information, see Custom verification email frequently asked questions
-	// (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq)
+	// For more information, see Custom verification email frequently asked questions (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq)
 	// in the Amazon SES Developer Guide.
 	//
 	// This member is required.
@@ -73,8 +71,8 @@ type UpdateCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-// If the action is successful, the service sends back an HTTP 200 response with an
-// empty HTTP body.
+// If the action is successful, the service sends back an HTTP 200 response with
+// an empty HTTP body.
 type UpdateCustomVerificationEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

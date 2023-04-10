@@ -45,9 +45,9 @@ type SendProjectSessionActionInput struct {
 	// Represents a single step from a DataBrew recipe to be performed.
 	RecipeStep *types.RecipeStep
 
-	// The index from which to preview a step. This index is used to preview the result
-	// of steps that have already been applied, so that the resulting view frame is
-	// from earlier in the view frame stack.
+	// The index from which to preview a step. This index is used to preview the
+	// result of steps that have already been applied, so that the resulting view frame
+	// is from earlier in the view frame stack.
 	StepIndex *int32
 
 	// Represents the data being transformed during an action.

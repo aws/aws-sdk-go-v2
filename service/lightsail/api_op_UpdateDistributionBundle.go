@@ -43,8 +43,7 @@ type UpdateDistributionBundleInput struct {
 	BundleId *string
 
 	// The name of the distribution for which to update the bundle. Use the
-	// GetDistributions action to get a list of distribution names that you can
-	// specify.
+	// GetDistributions action to get a list of distribution names that you can specify.
 	DistributionName *string
 
 	noSmithyDocumentSerde

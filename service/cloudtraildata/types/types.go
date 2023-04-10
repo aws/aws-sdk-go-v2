@@ -10,8 +10,8 @@ import (
 // to log.
 type AuditEvent struct {
 
-	// The content of an audit event that comes from the event, such as userIdentity,
-	// userAgent, and eventSource.
+	// The content of an audit event that comes from the event, such as userIdentity ,
+	// userAgent , and eventSource .
 	//
 	// This member is required.
 	EventData *string
@@ -51,9 +51,9 @@ type AuditEventResultEntry struct {
 type ResultErrorEntry struct {
 
 	// The error code for events that could not be ingested by CloudTrail. Possible
-	// error codes include: FieldTooLong, FieldNotFound, InvalidChecksum, InvalidData,
-	// InvalidRecipient, InvalidEventSource, AccountNotSubscribed, Throttling, and
-	// InternalFailure.
+	// error codes include: FieldTooLong , FieldNotFound , InvalidChecksum ,
+	// InvalidData , InvalidRecipient , InvalidEventSource , AccountNotSubscribed ,
+	// Throttling , and InternalFailure .
 	//
 	// This member is required.
 	ErrorCode *string

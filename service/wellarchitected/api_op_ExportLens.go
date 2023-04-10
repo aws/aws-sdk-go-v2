@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Export an existing lens. Only the owner of a lens can export it. Lenses provided
-// by Amazon Web Services (Amazon Web Services Official Content) cannot be
+// Export an existing lens. Only the owner of a lens can export it. Lenses
+// provided by Amazon Web Services (Amazon Web Services Official Content) cannot be
 // exported. Lenses are defined in JSON. For more information, see JSON format
-// specification
-// (https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html)
+// specification (https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html)
 // in the Well-Architected Tool User Guide. Disclaimer Do not include or gather
 // personal identifiable information (PII) of end users or other identifiable
 // individuals in or via your custom lenses. If your custom lens or those shared
@@ -40,12 +39,12 @@ func (c *Client) ExportLens(ctx context.Context, params *ExportLensInput, optFns
 type ExportLensInput struct {
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
-	// arn:aws:wellarchitected:us-east-1::lens/serverless. Note that some operations
+	// the lens alias, such as serverless , or the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
 	// Services official lenses. For custom lenses, this is the lens ARN, such as
-	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef.
-	// Each lens is identified by its LensSummary$LensAlias.
+	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
+	// . Each lens is identified by its LensSummary$LensAlias .
 	//
 	// This member is required.
 	LensAlias *string

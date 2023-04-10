@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the GCM channel for an application or updates the status and settings of
-// the GCM channel for an application.
+// Enables the GCM channel for an application or updates the status and settings
+// of the GCM channel for an application.
 func (c *Client) UpdateGcmChannel(ctx context.Context, params *UpdateGcmChannelInput, optFns ...func(*Options)) (*UpdateGcmChannelOutput, error) {
 	if params == nil {
 		params = &UpdateGcmChannelInput{}

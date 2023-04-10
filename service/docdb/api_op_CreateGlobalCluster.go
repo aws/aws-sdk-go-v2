@@ -35,7 +35,7 @@ func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalCl
 	return out, nil
 }
 
-// Represents the input to CreateGlobalCluster.
+// Represents the input to CreateGlobalCluster .
 type CreateGlobalClusterInput struct {
 
 	// The cluster identifier of the new global cluster.

@@ -21,12 +21,10 @@ import (
 // specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all
 // codes. Rule changes are propagated to instances within the security group as
 // quickly as possible. However, a small delay might occur. For more information
-// about VPC security group quotas, see Amazon VPC quotas
-// (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html). We
-// are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a
-// VPC. For more information, see Migrate from EC2-Classic to a VPC
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// about VPC security group quotas, see Amazon VPC quotas (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)
+// . We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
+// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) AuthorizeSecurityGroupIngress(ctx context.Context, params *AuthorizeSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeSecurityGroupIngressOutput, error) {
 	if params == nil {
 		params = &AuthorizeSecurityGroupIngressInput{}
@@ -52,8 +50,8 @@ type AuthorizeSecurityGroupIngressInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// If the protocol is TCP or UDP, this is the start of the port range. If the
@@ -76,13 +74,12 @@ type AuthorizeSecurityGroupIngressInput struct {
 	// The sets of IP permissions.
 	IpPermissions []types.IpPermission
 
-	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers
-	// (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). To
-	// specify icmpv6, use a set of IP permissions. [VPC only] Use -1 to specify all
-	// protocols. If you specify -1 or a protocol other than tcp, udp, or icmp, traffic
-	// on all ports is allowed, regardless of any ports you specify. Alternatively, use
-	// a set of IP permissions to specify multiple rules and a description for the
-	// rule.
+	// The IP protocol name ( tcp , udp , icmp ) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
+	// ). To specify icmpv6 , use a set of IP permissions. [VPC only] Use -1 to
+	// specify all protocols. If you specify -1 or a protocol other than tcp , udp , or
+	// icmp , traffic on all ports is allowed, regardless of any ports you specify.
+	// Alternatively, use a set of IP permissions to specify multiple rules and a
+	// description for the rule.
 	IpProtocol *string
 
 	// [EC2-Classic, default VPC] The name of the source security group. You can't

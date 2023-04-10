@@ -32,18 +32,17 @@ func (c *Client) ListAccessPolicies(ctx context.Context, params *ListAccessPolic
 
 type ListAccessPoliciesInput struct {
 
-	// The ARN of the IAM user. For more information, see IAM ARNs
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
-	// the IAM User Guide. This parameter is required if you specify IAM for
-	// identityType.
+	// The ARN of the IAM user. For more information, see IAM ARNs (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
+	// in the IAM User Guide. This parameter is required if you specify IAM for
+	// identityType .
 	IamArn *string
 
 	// The ID of the identity. This parameter is required if you specify USER or GROUP
-	// for identityType.
+	// for identityType .
 	IdentityId *string
 
 	// The type of identity (IAM Identity Center user, IAM Identity Center group, or
-	// IAM user). This parameter is required if you specify identityId.
+	// IAM user). This parameter is required if you specify identityId .
 	IdentityType types.IdentityType
 
 	// The maximum number of results to return for each paginated request. Default: 50
@@ -52,11 +51,11 @@ type ListAccessPoliciesInput struct {
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
-	// The ID of the resource. This parameter is required if you specify resourceType.
+	// The ID of the resource. This parameter is required if you specify resourceType .
 	ResourceId *string
 
 	// The type of resource (portal or project). This parameter is required if you
-	// specify resourceId.
+	// specify resourceId .
 	ResourceType types.ResourceType
 
 	noSmithyDocumentSerde

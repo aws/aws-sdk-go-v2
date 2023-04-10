@@ -13,9 +13,9 @@ import (
 )
 
 // Defines a ProfileObjectType. To add or remove tags on an existing ObjectType,
-// see  TagResource
-// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)/UntagResource
-// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html).
+// see TagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)
+// / UntagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html)
+// .
 func (c *Client) PutProfileObjectType(ctx context.Context, params *PutProfileObjectTypeInput, optFns ...func(*Options)) (*PutProfileObjectTypeOutput, error) {
 	if params == nil {
 		params = &PutProfileObjectTypeInput{}
@@ -49,10 +49,10 @@ type PutProfileObjectTypeInput struct {
 	ObjectTypeName *string
 
 	// Indicates whether a profile should be created when data is received if one
-	// doesn’t exist for an object of this type. The default is FALSE. If the
-	// AllowProfileCreation flag is set to FALSE, then the service tries to fetch a
+	// doesn’t exist for an object of this type. The default is FALSE . If the
+	// AllowProfileCreation flag is set to FALSE , then the service tries to fetch a
 	// standard profile and associate this object with the profile. If it is set to
-	// TRUE, and if no match is found, then the service creates a new standard profile.
+	// TRUE , and if no match is found, then the service creates a new standard profile.
 	AllowProfileCreation bool
 
 	// The customer-provided key to encrypt the profile object that will be created in
@@ -74,13 +74,13 @@ type PutProfileObjectTypeInput struct {
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
-	// A unique identifier for the object template. For some attributes in the request,
-	// the service will use the default value from the object template when TemplateId
-	// is present. If these attributes are present in the request, the service may
-	// return a BadRequestException. These attributes include: AllowProfileCreation,
-	// SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if
-	// AllowProfileCreation is set to true when TemplateId is set, the service may
-	// return a BadRequestException.
+	// A unique identifier for the object template. For some attributes in the
+	// request, the service will use the default value from the object template when
+	// TemplateId is present. If these attributes are present in the request, the
+	// service may return a BadRequestException . These attributes include:
+	// AllowProfileCreation, SourceLastUpdatedTimestampFormat, Fields, and Keys. For
+	// example, if AllowProfileCreation is set to true when TemplateId is set, the
+	// service may return a BadRequestException .
 	TemplateId *string
 
 	noSmithyDocumentSerde
@@ -99,10 +99,10 @@ type PutProfileObjectTypeOutput struct {
 	ObjectTypeName *string
 
 	// Indicates whether a profile should be created when data is received if one
-	// doesn’t exist for an object of this type. The default is FALSE. If the
-	// AllowProfileCreation flag is set to FALSE, then the service tries to fetch a
+	// doesn’t exist for an object of this type. The default is FALSE . If the
+	// AllowProfileCreation flag is set to FALSE , then the service tries to fetch a
 	// standard profile and associate this object with the profile. If it is set to
-	// TRUE, and if no match is found, then the service creates a new standard profile.
+	// TRUE , and if no match is found, then the service creates a new standard profile.
 	AllowProfileCreation bool
 
 	// The timestamp of when the domain was created.
@@ -125,10 +125,9 @@ type PutProfileObjectTypeOutput struct {
 	LastUpdatedAt *time.Time
 
 	// The format of your sourceLastUpdatedTimestamp that was previously set up in
-	// fields that were parsed using SimpleDateFormat
-	// (https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html). If
-	// you have sourceLastUpdatedTimestamp in your field, you must set up
-	// sourceLastUpdatedTimestampFormat.
+	// fields that were parsed using SimpleDateFormat (https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html)
+	// . If you have sourceLastUpdatedTimestamp in your field, you must set up
+	// sourceLastUpdatedTimestampFormat .
 	SourceLastUpdatedTimestampFormat *string
 
 	// The tags used to organize, track, or control access for this resource.

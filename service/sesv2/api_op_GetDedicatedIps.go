@@ -36,8 +36,8 @@ type GetDedicatedIpsInput struct {
 	// position of the dedicated IP pool in the list of IP pools.
 	NextToken *string
 
-	// The number of results to show in a single call to GetDedicatedIpsRequest. If the
-	// number of results is larger than the number you specified in this parameter,
+	// The number of results to show in a single call to GetDedicatedIpsRequest . If
+	// the number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
@@ -56,9 +56,9 @@ type GetDedicatedIpsOutput struct {
 	// Services account.
 	DedicatedIps []types.DedicatedIp
 
-	// A token that indicates that there are additional dedicated IP addresses to list.
-	// To view additional addresses, issue another request to GetDedicatedIps, passing
-	// this token in the NextToken parameter.
+	// A token that indicates that there are additional dedicated IP addresses to
+	// list. To view additional addresses, issue another request to GetDedicatedIps ,
+	// passing this token in the NextToken parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ var _ GetDedicatedIpsAPIClient = (*Client)(nil)
 
 // GetDedicatedIpsPaginatorOptions is the paginator options for GetDedicatedIps
 type GetDedicatedIpsPaginatorOptions struct {
-	// The number of results to show in a single call to GetDedicatedIpsRequest. If the
-	// number of results is larger than the number you specified in this parameter,
+	// The number of results to show in a single call to GetDedicatedIpsRequest . If
+	// the number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	Limit int32

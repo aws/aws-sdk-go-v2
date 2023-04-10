@@ -167,8 +167,8 @@ func (e *InvalidLayerException) ErrorCode() string {
 }
 func (e *InvalidLayerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The layer part size is not valid, or the first byte specified is not consecutive
-// to the last byte of a previous layer part upload.
+// The layer part size is not valid, or the first byte specified is not
+// consecutive to the last byte of a previous layer part upload.
 type InvalidLayerPartException struct {
 	Message *string
 
@@ -308,8 +308,8 @@ func (e *LayerAlreadyExistsException) ErrorCode() string {
 }
 func (e *LayerAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified layer is not available because it is not associated with an image.
-// Unassociated image layers may be cleaned up at any time.
+// The specified layer is not available because it is not associated with an
+// image. Unassociated image layers may be cleaned up at any time.
 type LayerInaccessibleException struct {
 	Message *string
 
@@ -361,8 +361,8 @@ func (e *LayerPartTooSmallException) ErrorCode() string {
 }
 func (e *LayerPartTooSmallException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified layers could not be found, or the specified layer is not valid for
-// this repository.
+// The specified layers could not be found, or the specified layer is not valid
+// for this repository.
 type LayersNotFoundException struct {
 	Message *string
 
@@ -471,10 +471,9 @@ func (e *LifecyclePolicyPreviewNotFoundException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// The operation did not succeed because it would have exceeded a service limit for
-// your account. For more information, see Amazon ECR service quotas
-// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html) in
-// the Amazon Elastic Container Registry User Guide.
+// The operation did not succeed because it would have exceeded a service limit
+// for your account. For more information, see Amazon ECR service quotas (https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)
+// in the Amazon Elastic Container Registry User Guide.
 type LimitExceededException struct {
 	Message *string
 
@@ -663,9 +662,9 @@ func (e *RepositoryNotEmptyException) ErrorCode() string {
 }
 func (e *RepositoryNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified repository could not be found. Check the spelling of the specified
-// repository and ensure that you are performing operations on the correct
-// registry.
+// The specified repository could not be found. Check the spelling of the
+// specified repository and ensure that you are performing operations on the
+// correct registry.
 type RepositoryNotFoundException struct {
 	Message *string
 
@@ -771,8 +770,8 @@ func (e *ServerException) ErrorCode() string {
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The list of tags on the repository is over the limit. The maximum number of tags
-// that can be applied to a repository is 50.
+// The list of tags on the repository is over the limit. The maximum number of
+// tags that can be applied to a repository is 50.
 type TooManyTagsException struct {
 	Message *string
 

@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of all user or group session mappings for the Amazon EMR Studio
-// specified by StudioId.
+// specified by StudioId .
 func (c *Client) ListStudioSessionMappings(ctx context.Context, params *ListStudioSessionMappingsInput, optFns ...func(*Options)) (*ListStudioSessionMappingsOutput, error) {
 	if params == nil {
 		params = &ListStudioSessionMappingsInput{}

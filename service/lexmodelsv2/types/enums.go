@@ -46,8 +46,8 @@ const (
 	AggregatedUtterancesSortAttributeMissedCount AggregatedUtterancesSortAttribute = "MissedCount"
 )
 
-// Values returns all known values for AggregatedUtterancesSortAttribute. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for AggregatedUtterancesSortAttribute. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AggregatedUtterancesSortAttribute) Values() []AggregatedUtterancesSortAttribute {
@@ -83,9 +83,9 @@ const (
 	AudioRecognitionStrategyUseSlotValuesAsCustomVocabulary AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"
 )
 
-// Values returns all known values for AudioRecognitionStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AudioRecognitionStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AudioRecognitionStrategy) Values() []AudioRecognitionStrategy {
 	return []AudioRecognitionStrategy{
 		"UseSlotValuesAsCustomVocabulary",
@@ -296,9 +296,9 @@ const (
 	BotStatusUpdating   BotStatus = "Updating"
 )
 
-// Values returns all known values for BotStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BotStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BotStatus) Values() []BotStatus {
 	return []BotStatus{
 		"Creating",
@@ -369,9 +369,10 @@ const (
 	BuiltInSlotTypeSortAttributeSlotTypeSignature BuiltInSlotTypeSortAttribute = "SlotTypeSignature"
 )
 
-// Values returns all known values for BuiltInSlotTypeSortAttribute. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BuiltInSlotTypeSortAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (BuiltInSlotTypeSortAttribute) Values() []BuiltInSlotTypeSortAttribute {
 	return []BuiltInSlotTypeSortAttribute{
 		"SlotTypeSignature",
@@ -462,9 +463,9 @@ const (
 	ErrorCodeInternalServerFailure ErrorCode = "INTERNAL_SERVER_FAILURE"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"DUPLICATE_INPUT",
@@ -534,9 +535,9 @@ const (
 	ExportStatusDeleting   ExportStatus = "Deleting"
 )
 
-// Values returns all known values for ExportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatus) Values() []ExportStatus {
 	return []ExportStatus{
 		"InProgress",
@@ -644,9 +645,9 @@ const (
 	ImportStatusDeleting   ImportStatus = "Deleting"
 )
 
-// Values returns all known values for ImportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImportStatus) Values() []ImportStatus {
 	return []ImportStatus{
 		"InProgress",
@@ -736,9 +737,9 @@ const (
 	MessageSelectionStrategyOrdered MessageSelectionStrategy = "Ordered"
 )
 
-// Values returns all known values for MessageSelectionStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageSelectionStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MessageSelectionStrategy) Values() []MessageSelectionStrategy {
 	return []MessageSelectionStrategy{
 		"Random",
@@ -868,9 +869,9 @@ const (
 	SlotShapeList   SlotShape = "List"
 )
 
-// Values returns all known values for SlotShape. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SlotShape. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SlotShape) Values() []SlotShape {
 	return []SlotShape{
 		"Scalar",
@@ -962,8 +963,8 @@ const (
 	SlotTypeSortAttributeLastUpdatedDateTime SlotTypeSortAttribute = "LastUpdatedDateTime"
 )
 
-// Values returns all known values for SlotTypeSortAttribute. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SlotTypeSortAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SlotTypeSortAttribute) Values() []SlotTypeSortAttribute {
 	return []SlotTypeSortAttribute{
@@ -1000,9 +1001,9 @@ const (
 	SortOrderDescending SortOrder = "Descending"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"Ascending",

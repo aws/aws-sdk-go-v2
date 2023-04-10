@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the details about one feature. You must already know the feature name.
-// To retrieve a list of features in your account, use ListFeatures
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListFeatures.html).
+// To retrieve a list of features in your account, use ListFeatures (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListFeatures.html)
+// .
 func (c *Client) GetFeature(ctx context.Context, params *GetFeatureInput, optFns ...func(*Options)) (*GetFeatureOutput, error) {
 	if params == nil {
 		params = &GetFeatureInput{}

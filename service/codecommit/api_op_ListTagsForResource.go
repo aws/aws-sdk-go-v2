@@ -12,8 +12,7 @@ import (
 
 // Gets information about AWS tags for a specified Amazon Resource Name (ARN) in
 // AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit
-// Resources and Operations
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+// Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
 // in the AWS CodeCommit User Guide.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
@@ -38,8 +37,8 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde

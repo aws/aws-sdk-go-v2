@@ -14,11 +14,10 @@ import (
 // Creates an Evidently feature that you want to launch or test. You can define up
 // to five variations of a feature, and use these variations in your launches and
 // experiments. A feature must be created in a project. For information about
-// creating a project, see CreateProject
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html).
-// Don't use this operation to update an existing feature. Instead, use
-// UpdateFeature
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html).
+// creating a project, see CreateProject (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html)
+// . Don't use this operation to update an existing feature. Instead, use
+// UpdateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html)
+// .
 func (c *Client) CreateFeature(ctx context.Context, params *CreateFeatureInput, optFns ...func(*Options)) (*CreateFeatureOutput, error) {
 	if params == nil {
 		params = &CreateFeatureInput{}
@@ -46,17 +45,17 @@ type CreateFeatureInput struct {
 	// This member is required.
 	Project *string
 
-	// An array of structures that contain the configuration of the feature's different
-	// variations.
+	// An array of structures that contain the configuration of the feature's
+	// different variations.
 	//
 	// This member is required.
 	Variations []types.VariationConfig
 
-	// The name of the variation to use as the default variation. The default variation
-	// is served to users who are not allocated to any ongoing launches or experiments
-	// of this feature. This variation must also be listed in the variations structure.
-	// If you omit defaultVariation, the first variation listed in the variations
-	// structure is used as the default variation.
+	// The name of the variation to use as the default variation. The default
+	// variation is served to users who are not allocated to any ongoing launches or
+	// experiments of this feature. This variation must also be listed in the
+	// variations structure. If you omit defaultVariation , the first variation listed
+	// in the variations structure is used as the default variation.
 	DefaultVariation *string
 
 	// An optional description of the feature.
@@ -81,8 +80,8 @@ type CreateFeatureInput struct {
 	// with certain tag values. Tags don't have any semantic meaning to Amazon Web
 	// Services and are interpreted strictly as strings of characters. You can
 	// associate as many as 50 tags with a feature. For more information, see Tagging
-	// Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags map[string]string
 
 	noSmithyDocumentSerde

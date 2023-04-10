@@ -35,7 +35,7 @@ type DescribeGlobalSettingsInput struct {
 
 type DescribeGlobalSettingsOutput struct {
 
-	// The status of the flag isCrossAccountBackupEnabled.
+	// The status of the flag isCrossAccountBackupEnabled .
 	GlobalSettings map[string]string
 
 	// The date and time that the flag isCrossAccountBackupEnabled was last updated.

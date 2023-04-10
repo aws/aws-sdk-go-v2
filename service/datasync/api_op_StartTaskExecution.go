@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an DataSync task. For each task, you can only run one task execution at a
-// time. There are several phases to a task execution. For more information, see
-// Task execution statuses
-// (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses).
+// Starts an DataSync task. For each task, you can only run one task execution at
+// a time. There are several phases to a task execution. For more information, see
+// Task execution statuses (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses)
+// .
 func (c *Client) StartTaskExecution(ctx context.Context, params *StartTaskExecutionInput, optFns ...func(*Options)) (*StartTaskExecutionOutput, error) {
 	if params == nil {
 		params = &StartTaskExecutionInput{}
@@ -41,13 +41,13 @@ type StartTaskExecutionInput struct {
 	// Specifies a list of filter rules that determines which files to exclude from a
 	// task. The list contains a single filter string that consists of the patterns to
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2".
+	// "/folder1|/folder2" .
 	Excludes []types.FilterRule
 
 	// Specifies a list of filter rules that determines which files to include when
 	// running a task. The pattern should contain a single filter string that consists
 	// of the patterns to include. The patterns are delimited by "|" (that is, a pipe),
-	// for example, "/folder1|/folder2".
+	// for example, "/folder1|/folder2" .
 	Includes []types.FilterRule
 
 	// Configures your DataSync task settings. These options include how DataSync

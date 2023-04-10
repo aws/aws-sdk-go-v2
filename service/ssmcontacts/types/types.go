@@ -38,7 +38,7 @@ type Contact struct {
 	ContactArn *string
 
 	// Refers to the type of contact. A single contact is type PERSONAL and an
-	// escalation plan is type ESCALATION.
+	// escalation plan is type ESCALATION .
 	//
 	// This member is required.
 	Type ContactType
@@ -82,12 +82,9 @@ type ContactChannel struct {
 
 	// The type of the contact channel. Incident Manager supports three contact
 	// methods:
-	//
-	// * SMS
-	//
-	// * VOICE
-	//
-	// * EMAIL
+	//   - SMS
+	//   - VOICE
+	//   - EMAIL
 	Type ChannelType
 
 	noSmithyDocumentSerde
@@ -99,14 +96,9 @@ type ContactChannelAddress struct {
 
 	// The format is dependent on the type of the contact channel. The following are
 	// the expected formats:
-	//
-	// * SMS - '+' followed by the country code and phone
-	// number
-	//
-	// * VOICE - '+' followed by the country code and phone number
-	//
-	// * EMAIL -
-	// any standard email format
+	//   - SMS - '+' followed by the country code and phone number
+	//   - VOICE - '+' followed by the country code and phone number
+	//   - EMAIL - any standard email format
 	SimpleAddress *string
 
 	noSmithyDocumentSerde
@@ -292,12 +284,12 @@ type PreviewOverride struct {
 // Records events during an engagement.
 type Receipt struct {
 
-	// The time receipt was SENT, DELIVERED, or READ.
+	// The time receipt was SENT , DELIVERED , or READ .
 	//
 	// This member is required.
 	ReceiptTime *time.Time
 
-	// The type follows the engagement cycle, SENT, DELIVERED, and READ.
+	// The type follows the engagement cycle, SENT , DELIVERED , and READ .
 	//
 	// This member is required.
 	ReceiptType ReceiptType
@@ -412,8 +404,8 @@ type RotationOverride struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The Amazon Resource Names (ARNs) of the contacts assigned to the override of the
-	// on-call rotation.
+	// The Amazon Resource Names (ARNs) of the contacts assigned to the override of
+	// the on-call rotation.
 	//
 	// This member is required.
 	NewContactIds []string
@@ -474,8 +466,8 @@ type ShiftDetails struct {
 // specified contacts or contact methods.
 type Stage struct {
 
-	// The time to wait until beginning the next stage. The duration can only be set to
-	// 0 if a target is specified.
+	// The time to wait until beginning the next stage. The duration can only be set
+	// to 0 if a target is specified.
 	//
 	// This member is required.
 	DurationInMinutes *int32

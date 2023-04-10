@@ -36,7 +36,7 @@ type DescribeSettingsInput struct {
 	DirectoryId *string
 
 	// The DescribeSettingsResult.NextToken value from a previous call to
-	// DescribeSettings. Pass null if this is the first call.
+	// DescribeSettings . Pass null if this is the first call.
 	NextToken *string
 
 	// The status of the directory settings for which to retrieve information.
@@ -56,9 +56,9 @@ type DescribeSettingsOutput struct {
 	NextToken *string
 
 	// The list of SettingEntry objects that were retrieved. It is possible that this
-	// list contains less than the number of items specified in the Limit member of the
-	// request. This occurs if there are less than the requested number of items left
-	// to retrieve, or if the limitations of the operation have been exceeded.
+	// list contains less than the number of items specified in the Limit member of
+	// the request. This occurs if there are less than the requested number of items
+	// left to retrieve, or if the limitations of the operation have been exceeded.
 	SettingEntries []types.SettingEntry
 
 	// Metadata pertaining to the operation's result.

@@ -116,8 +116,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned when a transaction cannot be written to the journal due to a failure in
-// the verification phase of optimistic concurrency control (OCC).
+// Returned when a transaction cannot be written to the journal due to a failure
+// in the verification phase of optimistic concurrency control (OCC).
 type OccConflictException struct {
 	Message *string
 

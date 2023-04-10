@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all existing endpoints that you've created. For information about
-// endpoints, see Managing endpoints
-// (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
+// Gets a list of all existing endpoints that you've created. For information
+// about endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
+// .
 func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, optFns ...func(*Options)) (*ListEndpointsOutput, error) {
 	if params == nil {
 		params = &ListEndpointsInput{}
@@ -32,9 +32,9 @@ func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, 
 
 type ListEndpointsInput struct {
 
-	// Filters the endpoints that are returned. You can filter endpoints on their name,
-	// model, status, or the date and time that they were created. You can only set one
-	// filter at a time.
+	// Filters the endpoints that are returned. You can filter endpoints on their
+	// name, model, status, or the date and time that they were created. You can only
+	// set one filter at a time.
 	Filter *types.EndpointFilter
 
 	// The maximum number of results to return in each page. The default is 100.

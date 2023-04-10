@@ -17,8 +17,7 @@ import (
 // API responds with a state of “pending”. After the parameter modifications are
 // successfully applied to the instance, the state of the modifications changes
 // from “pending” to “applied” in subsequent describe-instances API calls. For more
-// information, see Instance metadata and user data
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
+// information, see Instance metadata and user data (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) ModifyInstanceMetadataOptions(ctx context.Context, params *ModifyInstanceMetadataOptionsInput, optFns ...func(*Options)) (*ModifyInstanceMetadataOptionsOutput, error) {
 	if params == nil {
@@ -44,13 +43,13 @@ type ModifyInstanceMetadataOptionsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// Enables or disables the HTTP metadata endpoint on your instances. If this
 	// parameter is not specified, the existing state is maintained. If you specify a
-	// value of disabled, you cannot access your instance metadata.
+	// value of disabled , you cannot access your instance metadata.
 	HttpEndpoint types.InstanceMetadataEndpointState
 
 	// Enables or disables the IPv6 endpoint for the instance metadata service. This
@@ -64,29 +63,24 @@ type ModifyInstanceMetadataOptionsInput struct {
 	HttpPutResponseHopLimit *int32
 
 	// IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in
-	// other words, set the use of IMDSv2 to optional) or required (in other words, set
-	// the use of IMDSv2 to required).
-	//
-	// * optional - When IMDSv2 is optional, you can
-	// choose to retrieve instance metadata with or without a session token in your
-	// request. If you retrieve the IAM role credentials without a token, the IMDSv1
-	// role credentials are returned. If you retrieve the IAM role credentials using a
-	// valid session token, the IMDSv2 role credentials are returned.
-	//
-	// * required -
-	// When IMDSv2 is required, you must send a session token with any instance
-	// metadata retrieval requests. In this state, retrieving the IAM role credentials
-	// always returns IMDSv2 credentials; IMDSv1 credentials are not
-	// available.
-	//
+	// other words, set the use of IMDSv2 to optional ) or required (in other words,
+	// set the use of IMDSv2 to required ).
+	//   - optional - When IMDSv2 is optional, you can choose to retrieve instance
+	//   metadata with or without a session token in your request. If you retrieve the
+	//   IAM role credentials without a token, the IMDSv1 role credentials are returned.
+	//   If you retrieve the IAM role credentials using a valid session token, the IMDSv2
+	//   role credentials are returned.
+	//   - required - When IMDSv2 is required, you must send a session token with any
+	//   instance metadata retrieval requests. In this state, retrieving the IAM role
+	//   credentials always returns IMDSv2 credentials; IMDSv1 credentials are not
+	//   available.
 	// Default: optional
 	HttpTokens types.HttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
 	// to disabled to turn off access to instance tags from the instance metadata. For
-	// more information, see Work with instance tags using the instance metadata
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS).
-	// Default: disabled
+	// more information, see Work with instance tags using the instance metadata (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS)
+	// . Default: disabled
 	InstanceMetadataTags types.InstanceMetadataTagsState
 
 	noSmithyDocumentSerde

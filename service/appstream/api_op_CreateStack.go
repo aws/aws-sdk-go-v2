@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a stack to start streaming applications to users. A stack consists of an
-// associated fleet, user access policies, and storage configurations.
+// Creates a stack to start streaming applications to users. A stack consists of
+// an associated fleet, user access policies, and storage configurations.
 func (c *Client) CreateStack(ctx context.Context, params *CreateStackInput, optFns ...func(*Options)) (*CreateStackOutput, error) {
 	if params == nil {
 		params = &CreateStackInput{}
@@ -50,13 +50,13 @@ type CreateStackInput struct {
 	// The stack name to display.
 	DisplayName *string
 
-	// The domains where AppStream 2.0 streaming sessions can be embedded in an iframe.
-	// You must approve the domains that you want to host embedded AppStream 2.0
-	// streaming sessions.
+	// The domains where AppStream 2.0 streaming sessions can be embedded in an
+	// iframe. You must approve the domains that you want to host embedded AppStream
+	// 2.0 streaming sessions.
 	EmbedHostDomains []string
 
-	// The URL that users are redirected to after they click the Send Feedback link. If
-	// no URL is specified, no Send Feedback link is displayed.
+	// The URL that users are redirected to after they click the Send Feedback link.
+	// If no URL is specified, no Send Feedback link is displayed.
 	FeedbackURL *string
 
 	// The URL that users are redirected to after their streaming session ends.
@@ -74,8 +74,7 @@ type CreateStackInput struct {
 	// Environment=. If you do not specify a value, the value is set to an empty
 	// string. Generally allowed characters are: letters, numbers, and spaces
 	// representable in UTF-8, and the following special characters: _ . : / = + \ - @
-	// For more information about tags, see Tagging Your Resources
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
+	// For more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	Tags map[string]string
 

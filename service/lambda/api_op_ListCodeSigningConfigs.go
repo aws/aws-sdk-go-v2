@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of code signing configurations
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html). A
-// request returns up to 10,000 configurations per call. You can use the MaxItems
-// parameter to return fewer configurations per call.
+// Returns a list of code signing configurations (https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html)
+// . A request returns up to 10,000 configurations per call. You can use the
+// MaxItems parameter to return fewer configurations per call.
 func (c *Client) ListCodeSigningConfigs(ctx context.Context, params *ListCodeSigningConfigsInput, optFns ...func(*Options)) (*ListCodeSigningConfigsOutput, error) {
 	if params == nil {
 		params = &ListCodeSigningConfigsInput{}

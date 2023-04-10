@@ -14,9 +14,8 @@ import (
 // Lists the entries (images) within a dataset. An entry is a JSON Line that
 // contains the information for a single image, including the image location,
 // assigned labels, and object location bounding boxes. For more information, see
-// Creating a manifest file
-// (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html).
-// JSON Lines in the response include information about non-terminal errors found
+// Creating a manifest file (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html)
+// . JSON Lines in the response include information about non-terminal errors found
 // in the dataset. Non terminal errors are reported in errors lists within each
 // JSON Line. The same information is reported in the training and testing
 // validation result manifests that Amazon Rekognition Custom Labels creates during
@@ -50,14 +49,14 @@ type ListDatasetEntriesInput struct {
 	// if one or more of the labels in ContainsLabels exist in the entry.
 	ContainsLabels []string
 
-	// Specifies an error filter for the response. Specify True to only include entries
-	// that have errors.
+	// Specifies an error filter for the response. Specify True to only include
+	// entries that have errors.
 	HasErrors *bool
 
 	// Specify true to get only the JSON Lines where the image is labeled. Specify
 	// false to get only the JSON Lines where the image isn't labeled. If you don't
-	// specify Labeled, ListDatasetEntries returns JSON Lines for labeled and unlabeled
-	// images.
+	// specify Labeled , ListDatasetEntries returns JSON Lines for labeled and
+	// unlabeled images.
 	Labeled *bool
 
 	// The maximum number of results to return per paginated call. The largest value
@@ -71,10 +70,10 @@ type ListDatasetEntriesInput struct {
 	NextToken *string
 
 	// If specified, ListDatasetEntries only returns JSON Lines where the value of
-	// SourceRefContains is part of the source-ref field. The source-ref field contains
-	// the Amazon S3 location of the image. You can use SouceRefContains for tasks such
-	// as getting the JSON Line for a single image, or gettting JSON Lines for all
-	// images within a specific folder.
+	// SourceRefContains is part of the source-ref field. The source-ref field
+	// contains the Amazon S3 location of the image. You can use SouceRefContains for
+	// tasks such as getting the JSON Line for a single image, or gettting JSON Lines
+	// for all images within a specific folder.
 	SourceRefContains *string
 
 	noSmithyDocumentSerde

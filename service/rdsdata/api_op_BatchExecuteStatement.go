@@ -15,12 +15,12 @@ import (
 // insert operations for multiple records using a DML statement with different
 // parameter sets. Bulk operations can provide a significant performance
 // improvement over individual insert and update operations. If a call isn't part
-// of a transaction because it doesn't include the transactionID parameter, changes
-// that result from the call are committed automatically. There isn't a fixed upper
-// limit on the number of parameter sets. However, the maximum size of the HTTP
-// request submitted through the Data API is 4 MiB. If the request exceeds this
-// limit, the Data API returns an error and doesn't process the request. This 4-MiB
-// limit includes the size of the HTTP headers and the JSON notation in the
+// of a transaction because it doesn't include the transactionID parameter,
+// changes that result from the call are committed automatically. There isn't a
+// fixed upper limit on the number of parameter sets. However, the maximum size of
+// the HTTP request submitted through the Data API is 4 MiB. If the request exceeds
+// this limit, the Data API returns an error and doesn't process the request. This
+// 4-MiB limit includes the size of the HTTP headers and the JSON notation in the
 // request. Thus, the number of parameter sets that you can include depends on a
 // combination of factors, such as the size of the SQL statement and the size of
 // each parameter set. The response size limit is 1 MiB. If the call returns more
@@ -51,8 +51,8 @@ type BatchExecuteStatementInput struct {
 
 	// The ARN of the secret that enables access to the DB cluster. Enter the database
 	// user name and password for the credentials in the secret. For information about
-	// creating the secret, see Create a database secret
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
+	// creating the secret, see Create a database secret (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html)
+	// .
 	//
 	// This member is required.
 	SecretArn *string
@@ -66,16 +66,12 @@ type BatchExecuteStatementInput struct {
 	// The name of the database.
 	Database *string
 
-	// The parameter set for the batch operation. The SQL statement is executed as many
-	// times as the number of parameter sets provided. To execute a SQL statement with
-	// no parameters, use one of the following options:
-	//
-	// * Specify one or more empty
-	// parameter sets.
-	//
-	// * Use the ExecuteStatement operation instead of the
-	// BatchExecuteStatement operation.
-	//
+	// The parameter set for the batch operation. The SQL statement is executed as
+	// many times as the number of parameter sets provided. To execute a SQL statement
+	// with no parameters, use one of the following options:
+	//   - Specify one or more empty parameter sets.
+	//   - Use the ExecuteStatement operation instead of the BatchExecuteStatement
+	//   operation.
 	// Array parameters are not supported.
 	ParameterSets [][]types.SqlParameter
 

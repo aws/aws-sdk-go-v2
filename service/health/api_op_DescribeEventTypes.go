@@ -15,8 +15,7 @@ import (
 // Returns the event types that meet the specified filter criteria. You can use
 // this API operation to find information about the Health event, such as the
 // category, Amazon Web Services service, and event code. The metadata for each
-// event appears in the EventType
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html)
+// event appears in the EventType (https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html)
 // object. If you don't specify a filter criteria, the API operation returns all
 // event types, in no particular order. This API operation uses pagination. Specify
 // the nextToken parameter in the next request to return more results.
@@ -61,9 +60,9 @@ type DescribeEventTypesInput struct {
 type DescribeEventTypesOutput struct {
 
 	// A list of event types that match the filter criteria. Event types have a
-	// category (issue, accountNotification, or scheduledChange), a service (for
-	// example, EC2, RDS, DATAPIPELINE, BILLING), and a code (in the format
-	// AWS_SERVICE_DESCRIPTION ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT).
+	// category ( issue , accountNotification , or scheduledChange ), a service (for
+	// example, EC2 , RDS , DATAPIPELINE , BILLING ), and a code (in the format
+	// AWS_SERVICE_DESCRIPTION ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT ).
 	EventTypes []types.EventType
 
 	// If the results of a search are large, only a portion of the results are

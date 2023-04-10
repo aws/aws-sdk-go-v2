@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The resource to tag. Tags are key-value pairs that you can associate with Amazon
-// resources to help with organization, access control, and cost tracking. For more
-// information, see Tagging AWS Elemental MediaTailor Resources
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+// The resource to tag. Tags are key-value pairs that you can associate with
+// Amazon resources to help with organization, access control, and cost tracking.
+// For more information, see Tagging AWS Elemental MediaTailor Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html)
+// .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -39,7 +39,7 @@ type TagResourceInput struct {
 	// The tags to assign to the resource. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	//
 	// This member is required.
 	Tags map[string]string

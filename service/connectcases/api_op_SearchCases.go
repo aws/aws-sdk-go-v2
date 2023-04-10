@@ -14,8 +14,8 @@ import (
 
 // Searches for cases within their associated Cases domain. Search results are
 // returned as a paginated list of abridged case documents. For customer_id you
-// must provide the full customer profile ARN in this format:  arn:aws:profile:your
-// AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID.
+// must provide the full customer profile ARN in this format: arn:aws:profile:your
+// AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID .
 func (c *Client) SearchCases(ctx context.Context, params *SearchCasesInput, optFns ...func(*Options)) (*SearchCasesOutput, error) {
 	if params == nil {
 		params = &SearchCasesInput{}
@@ -70,8 +70,8 @@ type SearchCasesOutput struct {
 	// This member is required.
 	Cases []*types.SearchCasesResponseItem
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -133,8 +133,8 @@ func (c *Client) addOperationListWirelessDevicesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListWirelessDevicesAPIClient is a client that implements the ListWirelessDevices
-// operation.
+// ListWirelessDevicesAPIClient is a client that implements the
+// ListWirelessDevices operation.
 type ListWirelessDevicesAPIClient interface {
 	ListWirelessDevices(context.Context, *ListWirelessDevicesInput, ...func(*Options)) (*ListWirelessDevicesOutput, error)
 }

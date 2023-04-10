@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Deprecated. Use AllocateHostedConnection instead. Creates a hosted connection on
-// an interconnect. Allocates a VLAN number and a specified amount of bandwidth for
-// use by a hosted connection on the specified interconnect. Intended for use by
-// Direct Connect Partners only.
+// Deprecated. Use AllocateHostedConnection instead. Creates a hosted connection
+// on an interconnect. Allocates a VLAN number and a specified amount of bandwidth
+// for use by a hosted connection on the specified interconnect. Intended for use
+// by Direct Connect Partners only.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) AllocateConnectionOnInterconnect(ctx context.Context, params *AllocateConnectionOnInterconnectInput, optFns ...func(*Options)) (*AllocateConnectionOnInterconnectOutput, error) {
@@ -92,39 +92,24 @@ type AllocateConnectionOnInterconnectOutput struct {
 	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
-	//
-	// * ordering:
-	// The initial state of a hosted connection provisioned on an interconnect. The
-	// connection stays in the ordering state until the owner of the hosted connection
-	// confirms or declines the connection order.
-	//
-	// * requested: The initial state of a
-	// standard connection. The connection stays in the requested state until the
-	// Letter of Authorization (LOA) is sent to the customer.
-	//
-	// * pending: The
-	// connection has been approved and is being initialized.
-	//
-	// * available: The network
-	// link is up and the connection is ready for use.
-	//
-	// * down: The network link is
-	// down.
-	//
-	// * deleting: The connection is being deleted.
-	//
-	// * deleted: The connection
-	// has been deleted.
-	//
-	// * rejected: A hosted connection in the ordering state enters
-	// the rejected state if it is deleted by the customer.
-	//
-	// * unknown: The state of
-	// the connection is not available.
+	//   - ordering : The initial state of a hosted connection provisioned on an
+	//   interconnect. The connection stays in the ordering state until the owner of the
+	//   hosted connection confirms or declines the connection order.
+	//   - requested : The initial state of a standard connection. The connection stays
+	//   in the requested state until the Letter of Authorization (LOA) is sent to the
+	//   customer.
+	//   - pending : The connection has been approved and is being initialized.
+	//   - available : The network link is up and the connection is ready for use.
+	//   - down : The network link is down.
+	//   - deleting : The connection is being deleted.
+	//   - deleted : The connection has been deleted.
+	//   - rejected : A hosted connection in the ordering state enters the rejected
+	//   state if it is deleted by the customer.
+	//   - unknown : The state of the connection is not available.
 	ConnectionState types.ConnectionState
 
 	// The MAC Security (MACsec) connection encryption mode. The valid values are
-	// no_encrypt, should_encrypt, and must_encrypt.
+	// no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the connection supports a secondary BGP peer in the same
@@ -156,8 +141,8 @@ type AllocateConnectionOnInterconnectOutput struct {
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
-	// are Encryption Up, which means that there is an active Connection Key Name, or
-	// Encryption Down.
+	// are Encryption Up , which means that there is an active Connection Key Name, or
+	// Encryption Down .
 	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.

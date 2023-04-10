@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provision a CIDR to an IPAM pool. You can use this action to provision new CIDRs
-// to a top-level pool or to transfer a CIDR from a top-level pool to a pool within
-// it. For more information, see Provision CIDRs to pools
-// (https://docs.aws.amazon.com/vpc/latest/ipam/prov-cidr-ipam.html) in the Amazon
-// VPC IPAM User Guide.
+// Provision a CIDR to an IPAM pool. You can use this action to provision new
+// CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool
+// within it. For more information, see Provision CIDRs to pools (https://docs.aws.amazon.com/vpc/latest/ipam/prov-cidr-ipam.html)
+// in the Amazon VPC IPAM User Guide.
 func (c *Client) ProvisionIpamPoolCidr(ctx context.Context, params *ProvisionIpamPoolCidrInput, optFns ...func(*Options)) (*ProvisionIpamPoolCidrOutput, error) {
 	if params == nil {
 		params = &ProvisionIpamPoolCidrInput{}
@@ -49,14 +48,14 @@ type ProvisionIpamPoolCidrInput struct {
 	CidrAuthorizationContext *types.IpamCidrAuthorizationContext
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// of the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The netmask length of the CIDR you'd like to provision to a pool. Can be used

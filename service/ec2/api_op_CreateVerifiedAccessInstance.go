@@ -33,8 +33,8 @@ func (c *Client) CreateVerifiedAccessInstance(ctx context.Context, params *Creat
 type CreateVerifiedAccessInstanceInput struct {
 
 	// A unique, case-sensitive token that you provide to ensure idempotency of your
-	// modification request. For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// modification request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// A description for the Amazon Web Services Verified Access instance.
@@ -42,8 +42,8 @@ type CreateVerifiedAccessInstanceInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The tags to assign to the Amazon Web Services Verified Access instance.

@@ -11,8 +11,8 @@ import (
 )
 
 // Returns complete information about one link. To use this operation, provide the
-// link ARN. To retrieve a list of link ARNs, use ListLinks
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html).
+// link ARN. To retrieve a list of link ARNs, use ListLinks (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html)
+// .
 func (c *Client) GetLink(ctx context.Context, params *GetLinkInput, optFns ...func(*Options)) (*GetLinkOutput, error) {
 	if params == nil {
 		params = &GetLinkInput{}

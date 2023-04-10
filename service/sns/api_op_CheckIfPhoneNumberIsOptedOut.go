@@ -44,12 +44,10 @@ type CheckIfPhoneNumberIsOptedOutInput struct {
 type CheckIfPhoneNumberIsOptedOutOutput struct {
 
 	// Indicates whether the phone number is opted out:
-	//
-	// * true – The phone number is
-	// opted out, meaning you cannot publish SMS messages to it.
-	//
-	// * false – The phone
-	// number is opted in, meaning you can publish SMS messages to it.
+	//   - true – The phone number is opted out, meaning you cannot publish SMS
+	//   messages to it.
+	//   - false – The phone number is opted in, meaning you can publish SMS messages
+	//   to it.
 	IsOptedOut bool
 
 	// Metadata pertaining to the operation's result.

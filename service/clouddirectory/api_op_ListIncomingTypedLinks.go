@@ -13,8 +13,8 @@ import (
 
 // Returns a paginated list of all the incoming TypedLinkSpecifier information for
 // an object. It also supports filtering by typed link facet and identity
-// attributes. For more information, see Typed Links
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+// .
 func (c *Client) ListIncomingTypedLinks(ctx context.Context, params *ListIncomingTypedLinksInput, optFns ...func(*Options)) (*ListIncomingTypedLinksOutput, error) {
 	if params == nil {
 		params = &ListIncomingTypedLinksInput{}
@@ -32,8 +32,8 @@ func (c *Client) ListIncomingTypedLinks(ctx context.Context, params *ListIncomin
 
 type ListIncomingTypedLinksInput struct {
 
-	// The Amazon Resource Name (ARN) of the directory where you want to list the typed
-	// links.
+	// The Amazon Resource Name (ARN) of the directory where you want to list the
+	// typed links.
 	//
 	// This member is required.
 	DirectoryArn *string

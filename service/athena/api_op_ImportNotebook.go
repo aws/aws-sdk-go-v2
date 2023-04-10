@@ -41,7 +41,7 @@ type ImportNotebookInput struct {
 	// This member is required.
 	Payload *string
 
-	// The notebook content type. Currently, the only valid type is IPYNB.
+	// The notebook content type. Currently, the only valid type is IPYNB .
 	//
 	// This member is required.
 	Type types.NotebookType
@@ -51,12 +51,12 @@ type ImportNotebookInput struct {
 	// This member is required.
 	WorkGroup *string
 
-	// A unique case-sensitive string used to ensure the request to import the notebook
-	// is idempotent (executes only once). This token is listed as not required because
-	// Amazon Web Services SDKs (for example the Amazon Web Services SDK for Java)
-	// auto-generate the token for you. If you are not using the Amazon Web Services
-	// SDK or the Amazon Web Services CLI, you must provide this token or the action
-	// will fail.
+	// A unique case-sensitive string used to ensure the request to import the
+	// notebook is idempotent (executes only once). This token is listed as not
+	// required because Amazon Web Services SDKs (for example the Amazon Web Services
+	// SDK for Java) auto-generate the token for you. If you are not using the Amazon
+	// Web Services SDK or the Amazon Web Services CLI, you must provide this token or
+	// the action will fail.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

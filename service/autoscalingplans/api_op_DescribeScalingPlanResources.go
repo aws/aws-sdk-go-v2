@@ -34,7 +34,7 @@ type DescribeScalingPlanResourcesInput struct {
 	// This member is required.
 	ScalingPlanName *string
 
-	// The version number of the scaling plan. Currently, the only valid value is 1.
+	// The version number of the scaling plan. Currently, the only valid value is 1 .
 	//
 	// This member is required.
 	ScalingPlanVersion *int64

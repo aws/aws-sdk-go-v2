@@ -40,8 +40,8 @@ type CreateRecommenderConfigurationInput struct {
 
 type CreateRecommenderConfigurationOutput struct {
 
-	// Provides information about Amazon Pinpoint configuration settings for retrieving
-	// and processing data from a recommender model.
+	// Provides information about Amazon Pinpoint configuration settings for
+	// retrieving and processing data from a recommender model.
 	//
 	// This member is required.
 	RecommenderConfigurationResponse *types.RecommenderConfigurationResponse

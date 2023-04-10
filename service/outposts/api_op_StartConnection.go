@@ -13,12 +13,10 @@ import (
 // Amazon Web Services uses this action to install Outpost servers. Starts the
 // connection required for Outpost server installation. Use CloudTrail to monitor
 // this action or Amazon Web Services managed policy for Amazon Web Services
-// Outposts to secure it. For more information, see  Amazon Web Services managed
-// policies for Amazon Web Services Outposts
-// (https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html)
-// and  Logging Amazon Web Services Outposts API calls with Amazon Web Services
-// CloudTrail
-// (https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html)
+// Outposts to secure it. For more information, see Amazon Web Services managed
+// policies for Amazon Web Services Outposts (https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html)
+// and Logging Amazon Web Services Outposts API calls with Amazon Web Services
+// CloudTrail (https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html)
 // in the Amazon Web Services Outposts User Guide.
 func (c *Client) StartConnection(ctx context.Context, params *StartConnectionInput, optFns ...func(*Options)) (*StartConnectionOutput, error) {
 	if params == nil {

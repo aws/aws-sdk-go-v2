@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DB cluster snapshot attribute names and values for a manual DB
-// cluster snapshot. When sharing snapshots with other Amazon Web Services
+// Returns a list of DB cluster snapshot attribute names and values for a manual
+// DB cluster snapshot. When sharing snapshots with other Amazon Web Services
 // accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and
 // a list of IDs for the Amazon Web Services accounts that are authorized to copy
 // or restore the manual DB cluster snapshot. If all is included in the list of

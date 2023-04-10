@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the number of traffic policy instances that are associated with the current
-// Amazon Web Services account.
+// Gets the number of traffic policy instances that are associated with the
+// current Amazon Web Services account.
 func (c *Client) GetTrafficPolicyInstanceCount(ctx context.Context, params *GetTrafficPolicyInstanceCountInput, optFns ...func(*Options)) (*GetTrafficPolicyInstanceCountOutput, error) {
 	if params == nil {
 		params = &GetTrafficPolicyInstanceCountInput{}

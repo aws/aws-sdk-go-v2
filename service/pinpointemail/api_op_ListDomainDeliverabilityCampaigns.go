@@ -15,8 +15,8 @@ import (
 
 // Retrieve deliverability data for all the campaigns that used a specific domain
 // to send email during a specified time range. This data is available for a domain
-// only if you enabled the Deliverability dashboard
-// (PutDeliverabilityDashboardOption operation) for the domain.
+// only if you enabled the Deliverability dashboard (
+// PutDeliverabilityDashboardOption operation) for the domain.
 func (c *Client) ListDomainDeliverabilityCampaigns(ctx context.Context, params *ListDomainDeliverabilityCampaignsInput, optFns ...func(*Options)) (*ListDomainDeliverabilityCampaignsOutput, error) {
 	if params == nil {
 		params = &ListDomainDeliverabilityCampaignsInput{}
@@ -34,8 +34,8 @@ func (c *Client) ListDomainDeliverabilityCampaigns(ctx context.Context, params *
 
 // Retrieve deliverability data for all the campaigns that used a specific domain
 // to send email during a specified time range. This data is available for a domain
-// only if you enabled the Deliverability dashboard
-// (PutDeliverabilityDashboardOption operation) for the domain.
+// only if you enabled the Deliverability dashboard (
+// PutDeliverabilityDashboardOption operation) for the domain.
 type ListDomainDeliverabilityCampaignsInput struct {
 
 	// The last day, in Unix time format, that you want to obtain deliverability data
@@ -72,8 +72,8 @@ type ListDomainDeliverabilityCampaignsInput struct {
 
 // An array of objects that provide deliverability data for all the campaigns that
 // used a specific domain to send email during a specified time range. This data is
-// available for a domain only if you enabled the Deliverability dashboard
-// (PutDeliverabilityDashboardOption operation) for the domain.
+// available for a domain only if you enabled the Deliverability dashboard (
+// PutDeliverabilityDashboardOption operation) for the domain.
 type ListDomainDeliverabilityCampaignsOutput struct {
 
 	// An array of responses, one for each campaign that used the domain to send email

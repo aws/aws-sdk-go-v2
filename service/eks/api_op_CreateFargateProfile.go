@@ -23,22 +23,19 @@ import (
 // selectors in the Fargate profile, then that pod is run on Fargate. When you
 // create a Fargate profile, you must specify a pod execution role to use with the
 // pods that are scheduled with the profile. This role is added to the cluster's
-// Kubernetes Role Based Access Control
-// (https://kubernetes.io/docs/admin/authorization/rbac/) (RBAC) for authorization
-// so that the kubelet that is running on the Fargate infrastructure can register
-// with your Amazon EKS cluster so that it can appear in your cluster as a node.
-// The pod execution role also provides IAM permissions to the Fargate
-// infrastructure to allow read access to Amazon ECR image repositories. For more
-// information, see Pod Execution Role
-// (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html) in
-// the Amazon EKS User Guide. Fargate profiles are immutable. However, you can
+// Kubernetes Role Based Access Control (https://kubernetes.io/docs/admin/authorization/rbac/)
+// (RBAC) for authorization so that the kubelet that is running on the Fargate
+// infrastructure can register with your Amazon EKS cluster so that it can appear
+// in your cluster as a node. The pod execution role also provides IAM permissions
+// to the Fargate infrastructure to allow read access to Amazon ECR image
+// repositories. For more information, see Pod Execution Role (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html)
+// in the Amazon EKS User Guide. Fargate profiles are immutable. However, you can
 // create a new updated profile to replace an existing profile and then delete the
 // original after the updated profile has finished creating. If any Fargate
-// profiles in a cluster are in the DELETING status, you must wait for that Fargate
-// profile to finish deleting before you can create any other profiles in that
-// cluster. For more information, see Fargate Profile
-// (https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html) in the
-// Amazon EKS User Guide.
+// profiles in a cluster are in the DELETING status, you must wait for that
+// Fargate profile to finish deleting before you can create any other profiles in
+// that cluster. For more information, see Fargate Profile (https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html)
+// in the Amazon EKS User Guide.
 func (c *Client) CreateFargateProfile(ctx context.Context, params *CreateFargateProfileInput, optFns ...func(*Options)) (*CreateFargateProfileOutput, error) {
 	if params == nil {
 		params = &CreateFargateProfileInput{}
@@ -70,9 +67,8 @@ type CreateFargateProfileInput struct {
 	// match the selectors in the Fargate profile. The pod execution role allows
 	// Fargate infrastructure to register with your cluster as a node, and it provides
 	// read access to Amazon ECR image repositories. For more information, see Pod
-	// Execution Role
-	// (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html) in
-	// the Amazon EKS User Guide.
+	// Execution Role (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html)
+	// in the Amazon EKS User Guide.
 	//
 	// This member is required.
 	PodExecutionRoleArn *string

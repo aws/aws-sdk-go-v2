@@ -26,8 +26,8 @@ type ApplicationDependencySummary struct {
 type ApplicationPolicyStatement struct {
 
 	// For the list of actions supported for this operation, see Application
-	// Permissions
-	// (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions).
+	// Permissions (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions)
+	// .
 	//
 	// This member is required.
 	Actions []string
@@ -37,8 +37,7 @@ type ApplicationPolicyStatement struct {
 	// This member is required.
 	Principals []string
 
-	// An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id)
+	// An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id)
 	// global condition key.
 	PrincipalOrgIDs []string
 
@@ -84,7 +83,7 @@ type ApplicationSummary struct {
 	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
-	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/).
+	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/) .
 	SpdxLicenseId *string
 
 	noSmithyDocumentSerde
@@ -119,9 +118,9 @@ type ParameterDefinition struct {
 	// only uppercase and lowercase letters and numbers.
 	ConstraintDescription *string
 
-	// A value of the appropriate type for the template to use if no value is specified
-	// when a stack is created. If you define constraints for the parameter, you must
-	// specify a value that adheres to those constraints.
+	// A value of the appropriate type for the template to use if no value is
+	// specified when a stack is created. If you define constraints for the parameter,
+	// you must specify a value that adheres to those constraints.
 	DefaultValue *string
 
 	// A string of up to 4,000 characters that describes the parameter.
@@ -131,12 +130,12 @@ type ParameterDefinition struct {
 	// to allow for String types.
 	MaxLength int32
 
-	// A numeric value that determines the largest numeric value that you want to allow
-	// for Number types.
+	// A numeric value that determines the largest numeric value that you want to
+	// allow for Number types.
 	MaxValue int32
 
-	// An integer value that determines the smallest number of characters that you want
-	// to allow for String types.
+	// An integer value that determines the smallest number of characters that you
+	// want to allow for String types.
 	MinLength int32
 
 	// A numeric value that determines the smallest numeric value that you want to
@@ -186,42 +185,36 @@ type ParameterValue struct {
 	noSmithyDocumentSerde
 }
 
-// This property corresponds to the AWS CloudFormation RollbackConfiguration
-// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
+// This property corresponds to the AWS CloudFormation RollbackConfiguration (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 // Data Type.
 type RollbackConfiguration struct {
 
 	// This property corresponds to the content of the same name for the AWS
-	// CloudFormation RollbackConfiguration
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
+	// CloudFormation RollbackConfiguration (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 	// Data Type.
 	MonitoringTimeInMinutes int32
 
 	// This property corresponds to the content of the same name for the AWS
-	// CloudFormation RollbackConfiguration
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
+	// CloudFormation RollbackConfiguration (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 	// Data Type.
 	RollbackTriggers []RollbackTrigger
 
 	noSmithyDocumentSerde
 }
 
-// This property corresponds to the AWS CloudFormation RollbackTrigger
-// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
+// This property corresponds to the AWS CloudFormation RollbackTrigger (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
 // Data Type.
 type RollbackTrigger struct {
 
 	// This property corresponds to the content of the same name for the AWS
-	// CloudFormation RollbackTrigger
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
+	// CloudFormation RollbackTrigger (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
 	// Data Type.
 	//
 	// This member is required.
 	Arn *string
 
 	// This property corresponds to the content of the same name for the AWS
-	// CloudFormation RollbackTrigger
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
+	// CloudFormation RollbackTrigger (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
 	// Data Type.
 	//
 	// This member is required.
@@ -230,23 +223,20 @@ type RollbackTrigger struct {
 	noSmithyDocumentSerde
 }
 
-// This property corresponds to the AWS CloudFormation Tag
-// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag) Data
-// Type.
+// This property corresponds to the AWS CloudFormation Tag (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag)
+// Data Type.
 type Tag struct {
 
 	// This property corresponds to the content of the same name for the AWS
-	// CloudFormation Tag
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag) Data
-	// Type.
+	// CloudFormation Tag (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag)
+	// Data Type.
 	//
 	// This member is required.
 	Key *string
 
 	// This property corresponds to the content of the same name for the AWS
-	// CloudFormation  Tag
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag) Data
-	// Type.
+	// CloudFormation Tag (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag)
+	// Data Type.
 	//
 	// This member is required.
 	Value *string
@@ -279,33 +269,24 @@ type Version struct {
 	// acknowledge their capabilities by specifying this parameter.The only valid
 	// values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, and
 	// CAPABILITY_AUTO_EXPAND.The following resources require you to specify
-	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM: AWS::IAM::Group
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html),
-	// AWS::IAM::InstanceProfile
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html),
-	// AWS::IAM::Policy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html),
-	// and AWS::IAM::Role
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html).
-	// If the application contains IAM resources, you can specify either CAPABILITY_IAM
-	// or CAPABILITY_NAMED_IAM. If the application contains IAM resources with custom
-	// names, you must specify CAPABILITY_NAMED_IAM.The following resources require you
-	// to specify CAPABILITY_RESOURCE_POLICY: AWS::Lambda::Permission
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html),
-	// AWS::IAM:Policy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html),
-	// AWS::ApplicationAutoScaling::ScalingPolicy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html),
-	// AWS::S3::BucketPolicy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html),
-	// AWS::SQS::QueuePolicy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html),
-	// and AWS::SNS::TopicPolicy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html).Applications
-	// that contain one or more nested applications require you to specify
-	// CAPABILITY_AUTO_EXPAND.If your application template contains any of the above
-	// resources, we recommend that you review all permissions associated with the
-	// application before deploying. If you don't specify this parameter for an
+	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM: AWS::IAM::Group (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
+	// , AWS::IAM::InstanceProfile (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
+	// , AWS::IAM::Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html)
+	// , and AWS::IAM::Role (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
+	// . If the application contains IAM resources, you can specify either
+	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM. If the application contains IAM
+	// resources with custom names, you must specify CAPABILITY_NAMED_IAM.The following
+	// resources require you to specify CAPABILITY_RESOURCE_POLICY:
+	// AWS::Lambda::Permission (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html)
+	// , AWS::IAM:Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html)
+	// , AWS::ApplicationAutoScaling::ScalingPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html)
+	// , AWS::S3::BucketPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html)
+	// , AWS::SQS::QueuePolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html)
+	// , and AWS::SNS::TopicPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html)
+	// .Applications that contain one or more nested applications require you to
+	// specify CAPABILITY_AUTO_EXPAND.If your application template contains any of the
+	// above resources, we recommend that you review all permissions associated with
+	// the application before deploying. If you don't specify this parameter for an
 	// application that requires capabilities, the call will fail.
 	//
 	// This member is required.
@@ -317,8 +298,7 @@ type Version struct {
 	// This member is required.
 	ResourcesSupported bool
 
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
+	// The semantic version of the application: https://semver.org/ (https://semver.org/)
 	//
 	// This member is required.
 	SemanticVersion *string
@@ -352,8 +332,7 @@ type VersionSummary struct {
 	// This member is required.
 	CreationTime *string
 
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
+	// The semantic version of the application: https://semver.org/ (https://semver.org/)
 	//
 	// This member is required.
 	SemanticVersion *string

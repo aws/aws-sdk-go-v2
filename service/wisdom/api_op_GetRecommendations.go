@@ -12,12 +12,11 @@ import (
 )
 
 // Retrieves recommendations for the specified session. To avoid retrieving the
-// same recommendations in subsequent calls, use NotifyRecommendationsReceived
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_NotifyRecommendationsReceived.html).
-// This API supports long-polling behavior with the waitTimeSeconds parameter.
+// same recommendations in subsequent calls, use NotifyRecommendationsReceived (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_NotifyRecommendationsReceived.html)
+// . This API supports long-polling behavior with the waitTimeSeconds parameter.
 // Short poll is the default behavior and only returns recommendations already
-// available. To perform a manual query against an assistant, use QueryAssistant
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html).
+// available. To perform a manual query against an assistant, use QueryAssistant (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html)
+// .
 func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendationsInput, optFns ...func(*Options)) (*GetRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetRecommendationsInput{}
@@ -52,7 +51,7 @@ type GetRecommendationsInput struct {
 
 	// The duration (in seconds) for which the call waits for a recommendation to be
 	// made available before returning. If a recommendation is available, the call
-	// returns sooner than WaitTimeSeconds. If no messages are available and the wait
+	// returns sooner than WaitTimeSeconds . If no messages are available and the wait
 	// time expires, the call returns successfully with an empty list.
 	WaitTimeSeconds int32
 

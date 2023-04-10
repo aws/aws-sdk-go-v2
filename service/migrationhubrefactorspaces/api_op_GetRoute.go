@@ -69,7 +69,7 @@ type GetRouteOutput struct {
 	Error *types.ErrorResponse
 
 	// Indicates whether to match all subpaths of the given source path. If this value
-	// is false, requests must match the source path exactly before they are forwarded
+	// is false , requests must match the source path exactly before they are forwarded
 	// to this route's service.
 	IncludeChildPaths *bool
 

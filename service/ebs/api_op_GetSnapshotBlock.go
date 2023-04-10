@@ -33,7 +33,8 @@ type GetSnapshotBlockInput struct {
 	// The block index of the block in which to read the data. A block index is a
 	// logical index in units of 512 KiB blocks. To identify the block index, divide
 	// the logical offset of the data in the logical volume by the block size (logical
-	// offset of data/524288). The logical offset of the data must be 512 KiB aligned.
+	// offset of data/ 524288 ). The logical offset of the data must be 512 KiB
+	// aligned.
 	//
 	// This member is required.
 	BlockIndex *int32
@@ -46,9 +47,8 @@ type GetSnapshotBlockInput struct {
 
 	// The ID of the snapshot containing the block from which to get data. If the
 	// specified snapshot is encrypted, you must have permission to use the KMS key
-	// that was used to encrypt the snapshot. For more information, see  Using
-	// encryption
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html)
+	// that was used to encrypt the snapshot. For more information, see Using
+	// encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// This member is required.

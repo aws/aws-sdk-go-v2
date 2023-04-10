@@ -13,9 +13,8 @@ import (
 )
 
 // Describes one or more of your DHCP options sets. For more information, see DHCP
-// options sets
-// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the
-// Amazon Virtual Private Cloud User Guide.
+// options sets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)
+// in the Amazon Virtual Private Cloud User Guide.
 func (c *Client) DescribeDhcpOptions(ctx context.Context, params *DescribeDhcpOptionsInput, optFns ...func(*Options)) (*DescribeDhcpOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeDhcpOptionsInput{}
@@ -39,38 +38,28 @@ type DescribeDhcpOptionsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * dhcp-options-id - The ID of a DHCP options set.
-	//
-	// * key -
-	// The key for one of the options (for example, domain-name).
-	//
-	// * value - The value
-	// for one of the options.
-	//
-	// * owner-id - The ID of the Amazon Web Services account
-	// that owns the DHCP options set.
-	//
-	// * tag: - The key/value combination of a tag
-	// assigned to the resource. Use the tag key in the filter name and the tag value
-	// as the filter value. For example, to find all resources that have a tag with the
-	// key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA
-	// for the filter value.
-	//
-	// * tag-key - The key of a tag assigned to the resource.
-	// Use this filter to find all resources assigned a tag with a specific key,
-	// regardless of the tag value.
+	//   - dhcp-options-id - The ID of a DHCP options set.
+	//   - key - The key for one of the options (for example, domain-name ).
+	//   - value - The value for one of the options.
+	//   - owner-id - The ID of the Amazon Web Services account that owns the DHCP
+	//   options set.
+	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
+	//   tag key in the filter name and the tag value as the filter value. For example,
+	//   to find all resources that have a tag with the key Owner and the value TeamA ,
+	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
+	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -155,8 +144,8 @@ func (c *Client) addOperationDescribeDhcpOptionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeDhcpOptionsAPIClient is a client that implements the DescribeDhcpOptions
-// operation.
+// DescribeDhcpOptionsAPIClient is a client that implements the
+// DescribeDhcpOptions operation.
 type DescribeDhcpOptionsAPIClient interface {
 	DescribeDhcpOptions(context.Context, *DescribeDhcpOptionsInput, ...func(*Options)) (*DescribeDhcpOptionsOutput, error)
 }
@@ -168,8 +157,8 @@ var _ DescribeDhcpOptionsAPIClient = (*Client)(nil)
 type DescribeDhcpOptionsPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

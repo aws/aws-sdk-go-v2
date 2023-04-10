@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details of the specified receipt rule. For information about setting
-// up receipt rules, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html).
-// You can execute this operation no more than once per second.
+// Returns the details of the specified receipt rule. For information about
+// setting up receipt rules, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) DescribeReceiptRule(ctx context.Context, params *DescribeReceiptRuleInput, optFns ...func(*Options)) (*DescribeReceiptRuleOutput, error) {
 	if params == nil {
 		params = &DescribeReceiptRuleInput{}
@@ -31,9 +30,9 @@ func (c *Client) DescribeReceiptRule(ctx context.Context, params *DescribeReceip
 }
 
 // Represents a request to return the details of a receipt rule. You use receipt
-// rules to receive email with Amazon SES. For more information, see the Amazon SES
-// Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// rules to receive email with Amazon SES. For more information, see the Amazon
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type DescribeReceiptRuleInput struct {
 
 	// The name of the receipt rule.

@@ -33,25 +33,19 @@ type ListAvailableResourceMetricsInput struct {
 
 	// An immutable identifier for a data source that is unique within an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. To
-	// use an Amazon RDS DB instance as a data source, specify its DbiResourceId value.
-	// For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VWZ.
+	// use an Amazon RDS DB instance as a data source, specify its DbiResourceId
+	// value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VWZ .
 	//
 	// This member is required.
 	Identifier *string
 
 	// The types of metrics to return in the response. Valid values in the array
 	// include the following:
-	//
-	// * os (OS counter metrics) - All engines
-	//
-	// * db (DB load
-	// metrics) - All engines except for Amazon DocumentDB
-	//
-	// * db.sql.stats (per-SQL
-	// metrics) - All engines except for Amazon DocumentDB
-	//
-	// * db.sql_tokenized.stats
-	// (per-SQL digest metrics) - All engines except for Amazon DocumentDB
+	//   - os (OS counter metrics) - All engines
+	//   - db (DB load metrics) - All engines except for Amazon DocumentDB
+	//   - db.sql.stats (per-SQL metrics) - All engines except for Amazon DocumentDB
+	//   - db.sql_tokenized.stats (per-SQL digest metrics) - All engines except for
+	//   Amazon DocumentDB
 	//
 	// This member is required.
 	MetricTypes []string
@@ -67,7 +61,7 @@ type ListAvailableResourceMetricsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	NextToken *string
 
 	noSmithyDocumentSerde

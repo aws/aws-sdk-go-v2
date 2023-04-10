@@ -10,9 +10,9 @@ const (
 	ClipFragmentSelectorTypeServerTimestamp   ClipFragmentSelectorType = "SERVER_TIMESTAMP"
 )
 
-// Values returns all known values for ClipFragmentSelectorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClipFragmentSelectorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClipFragmentSelectorType) Values() []ClipFragmentSelectorType {
 	return []ClipFragmentSelectorType{
 		"PRODUCER_TIMESTAMP",
@@ -64,9 +64,10 @@ const (
 	DASHDisplayFragmentTimestampNever  DASHDisplayFragmentTimestamp = "NEVER"
 )
 
-// Values returns all known values for DASHDisplayFragmentTimestamp. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DASHDisplayFragmentTimestamp. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DASHDisplayFragmentTimestamp) Values() []DASHDisplayFragmentTimestamp {
 	return []DASHDisplayFragmentTimestamp{
 		"ALWAYS",
@@ -82,9 +83,9 @@ const (
 	DASHFragmentSelectorTypeServerTimestamp   DASHFragmentSelectorType = "SERVER_TIMESTAMP"
 )
 
-// Values returns all known values for DASHFragmentSelectorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DASHFragmentSelectorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DASHFragmentSelectorType) Values() []DASHFragmentSelectorType {
 	return []DASHFragmentSelectorType{
 		"PRODUCER_TIMESTAMP",

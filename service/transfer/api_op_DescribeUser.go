@@ -37,9 +37,9 @@ type DescribeUserInput struct {
 	// This member is required.
 	ServerId *string
 
-	// The name of the user assigned to one or more servers. User names are part of the
-	// sign-in credentials to use the Transfer Family service and perform file transfer
-	// tasks.
+	// The name of the user assigned to one or more servers. User names are part of
+	// the sign-in credentials to use the Transfer Family service and perform file
+	// transfer tasks.
 	//
 	// This member is required.
 	UserName *string

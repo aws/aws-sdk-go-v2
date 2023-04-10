@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Provides basic information for the specified fleet, excluding identity provider,
-// networking, and device configuration details.
+// Provides basic information for the specified fleet, excluding identity
+// provider, networking, and device configuration details.
 //
 // Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
 // future version of the SDK.

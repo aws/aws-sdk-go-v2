@@ -49,8 +49,8 @@ type ListRecordingConfigurationsOutput struct {
 	// This member is required.
 	RecordingConfigurations []types.RecordingConfigurationSummary
 
-	// If there are more recording configurations than maxResults, use nextToken in the
-	// request to get the next set.
+	// If there are more recording configurations than maxResults , use nextToken in
+	// the request to get the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

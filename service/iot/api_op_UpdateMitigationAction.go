@@ -12,8 +12,7 @@ import (
 )
 
 // Updates the definition for the specified mitigation action. Requires permission
-// to access the UpdateMitigationAction
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// to access the UpdateMitigationAction (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateMitigationAction(ctx context.Context, params *UpdateMitigationActionInput, optFns ...func(*Options)) (*UpdateMitigationActionOutput, error) {
 	if params == nil {
@@ -32,9 +31,9 @@ func (c *Client) UpdateMitigationAction(ctx context.Context, params *UpdateMitig
 
 type UpdateMitigationActionInput struct {
 
-	// The friendly name for the mitigation action. You cannot change the name by using
-	// UpdateMitigationAction. Instead, you must delete and recreate the mitigation
-	// action with the new name.
+	// The friendly name for the mitigation action. You cannot change the name by
+	// using UpdateMitigationAction . Instead, you must delete and recreate the
+	// mitigation action with the new name.
 	//
 	// This member is required.
 	ActionName *string

@@ -16,24 +16,21 @@ import (
 // time. To add a staging label to a version when it is already attached to another
 // version, Secrets Manager first removes it from the other version first and then
 // attaches it to this one. For more information about versions and staging labels,
-// see Concepts: Version
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version).
-// The staging labels that you specify in the VersionStage parameter are added to
-// the existing list of staging labels for the version. You can move the AWSCURRENT
-// staging label to this version by including it in this call. Whenever you move
-// AWSCURRENT, Secrets Manager automatically moves the label AWSPREVIOUS to the
-// version that AWSCURRENT was removed from. If this action results in the last
-// label being removed from a version, then the version is considered to be
+// see Concepts: Version (https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version)
+// . The staging labels that you specify in the VersionStage parameter are added
+// to the existing list of staging labels for the version. You can move the
+// AWSCURRENT staging label to this version by including it in this call. Whenever
+// you move AWSCURRENT , Secrets Manager automatically moves the label AWSPREVIOUS
+// to the version that AWSCURRENT was removed from. If this action results in the
+// last label being removed from a version, then the version is considered to be
 // 'deprecated' and can be deleted by Secrets Manager. Secrets Manager generates a
 // CloudTrail log entry when you call this action. Do not include sensitive
 // information in request parameters because it might be logged. For more
-// information, see Logging Secrets Manager events with CloudTrail
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
-// Required permissions: secretsmanager:UpdateSecretVersionStage. For more
-// information, see  IAM policy actions for Secrets Manager
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
-// and Authentication and access control in Secrets Manager
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
+// information, see Logging Secrets Manager events with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
+// . Required permissions: secretsmanager:UpdateSecretVersionStage . For more
+// information, see IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
+// and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
+// .
 func (c *Client) UpdateSecretVersionStage(ctx context.Context, params *UpdateSecretVersionStageInput, optFns ...func(*Options)) (*UpdateSecretVersionStageOutput, error) {
 	if params == nil {
 		params = &UpdateSecretVersionStageInput{}
@@ -53,8 +50,8 @@ type UpdateSecretVersionStageInput struct {
 
 	// The ARN or the name of the secret with the version and staging labelsto modify.
 	// For an ARN, we recommend that you specify a complete ARN rather than a partial
-	// ARN. See Finding a secret from a partial ARN
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+	// ARN. See Finding a secret from a partial ARN (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen)
+	// .
 	//
 	// This member is required.
 	SecretId *string

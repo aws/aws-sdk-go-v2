@@ -88,8 +88,8 @@ func (e *PreconditionFailedException) ErrorCode() string {
 }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You asked to describe a resource that doesn't exist. Check the resource that you
-// are requesting and try again.
+// You asked to describe a resource that doesn't exist. Check the resource that
+// you are requesting and try again.
 type ResourceNotFoundException struct {
 	Message *string
 

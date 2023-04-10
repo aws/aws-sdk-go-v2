@@ -18,15 +18,10 @@ import (
 // might specify your pipeline with the imagePipelineArn filter. If you don't
 // specify a filter, Image Builder returns an aggregation for your account. To
 // streamline results, you can use the following filters in your request:
-//
-// *
-// accountId
-//
-// * imageBuildVersionArn
-//
-// * imagePipelineArn
-//
-// * vulnerabilityId
+//   - accountId
+//   - imageBuildVersionArn
+//   - imagePipelineArn
+//   - vulnerabilityId
 func (c *Client) ListImageScanFindingAggregations(ctx context.Context, params *ListImageScanFindingAggregationsInput, optFns ...func(*Options)) (*ListImageScanFindingAggregationsOutput, error) {
 	if params == nil {
 		params = &ListImageScanFindingAggregationsInput{}
@@ -60,21 +55,14 @@ type ListImageScanFindingAggregationsOutput struct {
 
 	// The aggregation type specifies what type of key is used to group the image scan
 	// findings. Image Builder returns results based on the request filter. If you
-	// didn't specify a filter in the request, the type defaults to accountId.
+	// didn't specify a filter in the request, the type defaults to accountId .
 	// Aggregation types
-	//
-	// * accountId
-	//
-	// * imageBuildVersionArn
-	//
-	// * imagePipelineArn
-	//
-	// *
-	// vulnerabilityId
-	//
-	// Each aggregation includes counts by severity level for medium
-	// severity and higher level findings, plus a total for all of the findings for
-	// each key value.
+	//   - accountId
+	//   - imageBuildVersionArn
+	//   - imagePipelineArn
+	//   - vulnerabilityId
+	// Each aggregation includes counts by severity level for medium severity and
+	// higher level findings, plus a total for all of the findings for each key value.
 	AggregationType *string
 
 	// The next token used for paginated responses. When this field isn't empty, there

@@ -29,8 +29,8 @@ func (c *Client) ListNetworkProfiles(ctx context.Context, params *ListNetworkPro
 
 type ListNetworkProfilesInput struct {
 
-	// The Amazon Resource Name (ARN) of the project for which you want to list network
-	// profiles.
+	// The Amazon Resource Name (ARN) of the project for which you want to list
+	// network profiles.
 	//
 	// This member is required.
 	Arn *string
@@ -39,8 +39,8 @@ type ListNetworkProfilesInput struct {
 	// can be used to return the next set of items in the list.
 	NextToken *string
 
-	// The type of network profile to return information about. Valid values are listed
-	// here.
+	// The type of network profile to return information about. Valid values are
+	// listed here.
 	Type types.NetworkProfileType
 
 	noSmithyDocumentSerde

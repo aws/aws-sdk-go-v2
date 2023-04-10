@@ -48,7 +48,7 @@ type DescribeTaskExecutionOutput struct {
 	BytesCompressed int64
 
 	// The total number of bytes that are involved in the transfer. For the number of
-	// bytes sent over the network, see BytesCompressed.
+	// bytes sent over the network, see BytesCompressed .
 	BytesTransferred int64
 
 	// The number of logical bytes written to the destination Amazon Web Services
@@ -66,24 +66,24 @@ type DescribeTaskExecutionOutput struct {
 	// destination locations and finding the delta that needs to be transferred.
 	EstimatedFilesToTransfer int64
 
-	// A list of filter rules that exclude specific data during your transfer. For more
-	// information and examples, see Filtering data transferred by DataSync
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// A list of filter rules that exclude specific data during your transfer. For
+	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// .
 	Excludes []types.FilterRule
 
 	// The actual number of files that was transferred over the network. This value is
 	// calculated and updated on an ongoing basis during the TRANSFERRING phase of the
 	// task execution. It's updated periodically when each file is read from the source
 	// and sent over the network. If failures occur during a transfer, this value can
-	// be less than EstimatedFilesToTransfer. In some cases, this value can also be
-	// greater than EstimatedFilesToTransfer. This element is implementation-specific
+	// be less than EstimatedFilesToTransfer . In some cases, this value can also be
+	// greater than EstimatedFilesToTransfer . This element is implementation-specific
 	// for some location types, so don't use it as an indicator for a correct file
 	// number or to monitor your task execution.
 	FilesTransferred int64
 
-	// A list of filter rules that include specific data during your transfer. For more
-	// information and examples, see Filtering data transferred by DataSync
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// A list of filter rules that include specific data during your transfer. For
+	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// .
 	Includes []types.FilterRule
 
 	// Configures your DataSync task settings. These options include how DataSync
@@ -108,7 +108,7 @@ type DescribeTaskExecutionOutput struct {
 	// executed. For example, a TaskExecution value with the ARN
 	// arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b
 	// executed the task with the ARN
-	// arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2.
+	// arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2 .
 	TaskExecutionArn *string
 
 	// Metadata pertaining to the operation's result.

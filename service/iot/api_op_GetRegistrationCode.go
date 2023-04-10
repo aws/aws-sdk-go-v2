@@ -11,8 +11,7 @@ import (
 )
 
 // Gets a registration code used to register a CA certificate with IoT. Requires
-// permission to access the GetRegistrationCode
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the GetRegistrationCode (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) GetRegistrationCode(ctx context.Context, params *GetRegistrationCodeInput, optFns ...func(*Options)) (*GetRegistrationCodeOutput, error) {
 	if params == nil {

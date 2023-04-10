@@ -11,28 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the logging configuration for the specified firewall. To change the logging
-// configuration, retrieve the LoggingConfiguration by calling
-// DescribeLoggingConfiguration, then change it and provide the modified object to
+// Sets the logging configuration for the specified firewall. To change the
+// logging configuration, retrieve the LoggingConfiguration by calling
+// DescribeLoggingConfiguration , then change it and provide the modified object to
 // this update call. You must change the logging configuration one
-// LogDestinationConfig at a time inside the retrieved LoggingConfiguration object.
-// You can perform only one of the following actions in any call to
-// UpdateLoggingConfiguration:
+// LogDestinationConfig at a time inside the retrieved LoggingConfiguration
+// object. You can perform only one of the following actions in any call to
+// UpdateLoggingConfiguration :
+//   - Create a new log destination object by adding a single LogDestinationConfig
+//     array element to LogDestinationConfigs .
+//   - Delete a log destination object by removing a single LogDestinationConfig
+//     array element from LogDestinationConfigs .
+//   - Change the LogDestination setting in a single LogDestinationConfig array
+//     element.
 //
-// * Create a new log destination object by adding a
-// single LogDestinationConfig array element to LogDestinationConfigs.
-//
-// * Delete a
-// log destination object by removing a single LogDestinationConfig array element
-// from LogDestinationConfigs.
-//
-// * Change the LogDestination setting in a single
-// LogDestinationConfig array element.
-//
-// You can't change the LogDestinationType or
-// LogType in a LogDestinationConfig. To change these settings, delete the existing
-// LogDestinationConfig object and create a new one, using two separate calls to
-// this update operation.
+// You can't change the LogDestinationType or LogType in a LogDestinationConfig .
+// To change these settings, delete the existing LogDestinationConfig object and
+// create a new one, using two separate calls to this update operation.
 func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateLoggingConfigurationInput, optFns ...func(*Options)) (*UpdateLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateLoggingConfigurationInput{}
@@ -75,7 +70,7 @@ type UpdateLoggingConfigurationOutput struct {
 	// after you create it.
 	FirewallName *string
 
-	// Defines how Network Firewall performs logging for a Firewall.
+	// Defines how Network Firewall performs logging for a Firewall .
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

@@ -54,15 +54,15 @@ type CreateCrawlerInput struct {
 
 	// Crawler configuration information. This versioned JSON string allows users to
 	// specify aspects of a crawler's behavior. For more information, see Setting
-	// crawler configuration options
-	// (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
+	// crawler configuration options (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)
+	// .
 	Configuration *string
 
 	// The name of the SecurityConfiguration structure to be used by this crawler.
 	CrawlerSecurityConfiguration *string
 
 	// The Glue database where results are written, such as:
-	// arn:aws:daylight:us-east-1::database/sometable/*.
+	// arn:aws:daylight:us-east-1::database/sometable/* .
 	DatabaseName *string
 
 	// A description of the new crawler.
@@ -79,10 +79,9 @@ type CreateCrawlerInput struct {
 	RecrawlPolicy *types.RecrawlPolicy
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules for
-	// Jobs and Crawlers
-	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, you would specify: cron(15
-	// 12 * * ? *).
+	// Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
+	// . For example, to run something every day at 12:15 UTC, you would specify:
+	// cron(15 12 * * ? *) .
 	Schedule *string
 
 	// The policy for the crawler's update and deletion behavior.

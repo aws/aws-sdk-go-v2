@@ -42,14 +42,14 @@ type PutBackupVaultLockConfigurationInput struct {
 	// This member is required.
 	BackupVaultName *string
 
-	// The Backup Vault Lock configuration that specifies the number of days before the
-	// lock date. For example, setting ChangeableForDays to 30 on Jan. 1, 2022 at 8pm
-	// UTC will set the lock date to Jan. 31, 2022 at 8pm UTC. Backup enforces a
+	// The Backup Vault Lock configuration that specifies the number of days before
+	// the lock date. For example, setting ChangeableForDays to 30 on Jan. 1, 2022 at
+	// 8pm UTC will set the lock date to Jan. 31, 2022 at 8pm UTC. Backup enforces a
 	// 72-hour cooling-off period before Vault Lock takes effect and becomes immutable.
-	// Therefore, you must set ChangeableForDays to 3 or greater. Before the lock date,
-	// you can delete Vault Lock from the vault using
+	// Therefore, you must set ChangeableForDays to 3 or greater. Before the lock
+	// date, you can delete Vault Lock from the vault using
 	// DeleteBackupVaultLockConfiguration or change the Vault Lock configuration using
-	// PutBackupVaultLockConfiguration. On and after the lock date, the Vault Lock
+	// PutBackupVaultLockConfiguration . On and after the lock date, the Vault Lock
 	// becomes immutable and cannot be changed or deleted. If this parameter is not
 	// specified, you can delete Vault Lock from the vault using
 	// DeleteBackupVaultLockConfiguration or change the Vault Lock configuration using

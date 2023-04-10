@@ -30,14 +30,13 @@ func (c *Client) AssociateLambdaFunction(ctx context.Context, params *AssociateL
 
 type AssociateLambdaFunctionInput struct {
 
-	// The Amazon Resource Name (ARN) for the Lambda function being associated. Maximum
-	// number of characters allowed is 140.
+	// The Amazon Resource Name (ARN) for the Lambda function being associated.
+	// Maximum number of characters allowed is 140.
 	//
 	// This member is required.
 	FunctionArn *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

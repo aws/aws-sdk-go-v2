@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers an endpoint under an Amazon Chime AppInstanceUser. The endpoint
+// Registers an endpoint under an Amazon Chime AppInstanceUser . The endpoint
 // receives messages for a user. For push notifications, the endpoint is a mobile
 // device used to receive mobile push notifications for a user.
 func (c *Client) RegisterAppInstanceUserEndpoint(ctx context.Context, params *RegisterAppInstanceUserEndpointInput, optFns ...func(*Options)) (*RegisterAppInstanceUserEndpointOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) RegisterAppInstanceUserEndpoint(ctx context.Context, params *Re
 
 type RegisterAppInstanceUserEndpointInput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	//
 	// This member is required.
 	AppInstanceUserArn *string
@@ -43,7 +43,7 @@ type RegisterAppInstanceUserEndpointInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The attributes of an Endpoint.
+	// The attributes of an Endpoint .
 	//
 	// This member is required.
 	EndpointAttributes *types.EndpointAttributes
@@ -53,29 +53,22 @@ type RegisterAppInstanceUserEndpointInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The type of the AppInstanceUserEndpoint. Supported types:
-	//
-	// * APNS: The mobile
-	// notification service for an Apple device.
-	//
-	// * APNS_SANDBOX: The sandbox
-	// environment of the mobile notification service for an Apple device.
-	//
-	// * GCM: The
-	// mobile notification service for an Android device.
-	//
-	// Populate the ResourceArn
-	// value of each type as PinpointAppArn.
+	// The type of the AppInstanceUserEndpoint . Supported types:
+	//   - APNS : The mobile notification service for an Apple device.
+	//   - APNS_SANDBOX : The sandbox environment of the mobile notification service
+	//   for an Apple device.
+	//   - GCM : The mobile notification service for an Android device.
+	// Populate the ResourceArn value of each type as PinpointAppArn .
 	//
 	// This member is required.
 	Type types.AppInstanceUserEndpointType
 
-	// Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive
-	// messages. ALL indicates the endpoint receives all messages. NONE indicates the
-	// endpoint receives no messages.
+	// Boolean that controls whether the AppInstanceUserEndpoint is opted in to
+	// receive messages. ALL indicates the endpoint receives all messages. NONE
+	// indicates the endpoint receives no messages.
 	AllowMessages types.AllowMessages
 
-	// The name of the AppInstanceUserEndpoint.
+	// The name of the AppInstanceUserEndpoint .
 	Name *string
 
 	noSmithyDocumentSerde
@@ -83,10 +76,10 @@ type RegisterAppInstanceUserEndpointInput struct {
 
 type RegisterAppInstanceUserEndpointOutput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
-	// The unique identifier of the AppInstanceUserEndpoint.
+	// The unique identifier of the AppInstanceUserEndpoint .
 	EndpointId *string
 
 	// Metadata pertaining to the operation's result.

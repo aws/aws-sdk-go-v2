@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the templates available in Migration Hub Orchestrator to create a migration
-// workflow.
+// List the templates available in Migration Hub Orchestrator to create a
+// migration workflow.
 func (c *Client) ListTemplates(ctx context.Context, params *ListTemplatesInput, optFns ...func(*Options)) (*ListTemplatesOutput, error) {
 	if params == nil {
 		params = &ListTemplatesInput{}

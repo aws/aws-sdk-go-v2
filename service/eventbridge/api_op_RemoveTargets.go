@@ -47,15 +47,15 @@ type RemoveTargetsInput struct {
 	// This member is required.
 	Rule *string
 
-	// The name or ARN of the event bus associated with the rule. If you omit this, the
-	// default event bus is used.
+	// The name or ARN of the event bus associated with the rule. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	// If this is a managed rule, created by an Amazon Web Services service on your
 	// behalf, you must specify Force as True to remove targets. This parameter is
 	// ignored for rules that are not managed rules. You can check whether a rule is a
-	// managed rule by using DescribeRule or ListRules and checking the ManagedBy field
-	// of the response.
+	// managed rule by using DescribeRule or ListRules and checking the ManagedBy
+	// field of the response.
 	Force bool
 
 	noSmithyDocumentSerde

@@ -52,7 +52,7 @@ type ListTableRestoreStatusInput struct {
 
 type ListTableRestoreStatusOutput struct {
 
-	// If your initial ListTableRestoreStatus operation returns a nextToken, you can
+	// If your initial ListTableRestoreStatus operation returns a nextToken , you can
 	// include the returned nextToken in following ListTableRestoreStatus operations.
 	// This will returns results on the next page.
 	NextToken *string

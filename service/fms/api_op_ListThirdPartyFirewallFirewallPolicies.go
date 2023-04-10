@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of all of the third-party firewall policies that are associated
-// with the third-party firewall administrator's account.
+// Retrieves a list of all of the third-party firewall policies that are
+// associated with the third-party firewall administrator's account.
 func (c *Client) ListThirdPartyFirewallFirewallPolicies(ctx context.Context, params *ListThirdPartyFirewallFirewallPoliciesInput, optFns ...func(*Options)) (*ListThirdPartyFirewallFirewallPoliciesOutput, error) {
 	if params == nil {
 		params = &ListThirdPartyFirewallFirewallPoliciesInput{}
@@ -46,11 +46,11 @@ type ListThirdPartyFirewallFirewallPoliciesInput struct {
 	// This member is required.
 	ThirdPartyFirewall types.ThirdPartyFirewall
 
-	// If the previous response included a NextToken element, the specified third-party
-	// firewall vendor is associated with more third-party firewall policies. To get
-	// more third-party firewall policies, submit another
+	// If the previous response included a NextToken element, the specified
+	// third-party firewall vendor is associated with more third-party firewall
+	// policies. To get more third-party firewall policies, submit another
 	// ListThirdPartyFirewallFirewallPoliciesRequest request. For the value of
-	// NextToken, specify the value of NextToken from the previous response. If the
+	// NextToken , specify the value of NextToken from the previous response. If the
 	// previous response didn't include a NextToken element, there are no more
 	// third-party firewall policies to get.
 	NextToken *string

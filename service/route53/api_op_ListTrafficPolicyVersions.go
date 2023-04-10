@@ -12,7 +12,7 @@ import (
 )
 
 // Gets information about all of the versions for a specified traffic policy.
-// Traffic policy versions are listed in numerical order by VersionNumber.
+// Traffic policy versions are listed in numerical order by VersionNumber .
 func (c *Client) ListTrafficPolicyVersions(ctx context.Context, params *ListTrafficPolicyVersionsInput, optFns ...func(*Options)) (*ListTrafficPolicyVersionsOutput, error) {
 	if params == nil {
 		params = &ListTrafficPolicyVersionsInput{}
@@ -41,15 +41,15 @@ type ListTrafficPolicyVersionsInput struct {
 	// The maximum number of traffic policy versions that you want Amazon Route 53 to
 	// include in the response body for this request. If the specified traffic policy
 	// has more than MaxItems versions, the value of IsTruncated in the response is
-	// true, and the value of the TrafficPolicyVersionMarker element is the ID of the
+	// true , and the value of the TrafficPolicyVersionMarker element is the ID of the
 	// first version that Route 53 will return if you submit another request.
 	MaxItems *int32
 
-	// For your first request to ListTrafficPolicyVersions, don't include the
+	// For your first request to ListTrafficPolicyVersions , don't include the
 	// TrafficPolicyVersionMarker parameter. If you have more traffic policy versions
-	// than the value of MaxItems, ListTrafficPolicyVersions returns only the first
+	// than the value of MaxItems , ListTrafficPolicyVersions returns only the first
 	// group of MaxItems versions. To get more traffic policy versions, submit another
-	// ListTrafficPolicyVersions request. For the value of TrafficPolicyVersionMarker,
+	// ListTrafficPolicyVersions request. For the value of TrafficPolicyVersionMarker ,
 	// specify the value of TrafficPolicyVersionMarker in the previous response.
 	TrafficPolicyVersionMarker *string
 
@@ -61,8 +61,8 @@ type ListTrafficPolicyVersionsOutput struct {
 
 	// A flag that indicates whether there are more traffic policies to be listed. If
 	// the response was truncated, you can get the next group of traffic policies by
-	// submitting another ListTrafficPolicyVersions request and specifying the value of
-	// NextMarker in the marker parameter.
+	// submitting another ListTrafficPolicyVersions request and specifying the value
+	// of NextMarker in the marker parameter.
 	//
 	// This member is required.
 	IsTruncated bool
@@ -79,11 +79,11 @@ type ListTrafficPolicyVersionsOutput struct {
 	// This member is required.
 	TrafficPolicies []types.TrafficPolicy
 
-	// If IsTruncated is true, the value of TrafficPolicyVersionMarker identifies the
+	// If IsTruncated is true , the value of TrafficPolicyVersionMarker identifies the
 	// first traffic policy that Amazon Route 53 will return if you submit another
 	// request. Call ListTrafficPolicyVersions again and specify the value of
 	// TrafficPolicyVersionMarker in the TrafficPolicyVersionMarker request parameter.
-	// This element is present only if IsTruncated is true.
+	// This element is present only if IsTruncated is true .
 	//
 	// This member is required.
 	TrafficPolicyVersionMarker *string

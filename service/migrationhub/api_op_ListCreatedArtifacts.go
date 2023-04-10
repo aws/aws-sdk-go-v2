@@ -14,15 +14,10 @@ import (
 
 // Lists the created artifacts attached to a given migration task in an update
 // stream. This API has the following traits:
-//
-// * Gets the list of the created
-// artifacts while migration is taking place.
-//
-// * Shows the artifacts created by the
-// migration tool that was associated by the AssociateCreatedArtifact API.
-//
-// * Lists
-// created artifacts in a paginated interface.
+//   - Gets the list of the created artifacts while migration is taking place.
+//   - Shows the artifacts created by the migration tool that was associated by
+//     the AssociateCreatedArtifact API.
+//   - Lists created artifacts in a paginated interface.
 func (c *Client) ListCreatedArtifacts(ctx context.Context, params *ListCreatedArtifactsInput, optFns ...func(*Options)) (*ListCreatedArtifactsOutput, error) {
 	if params == nil {
 		params = &ListCreatedArtifactsInput{}
@@ -40,8 +35,8 @@ func (c *Client) ListCreatedArtifacts(ctx context.Context, params *ListCreatedAr
 
 type ListCreatedArtifactsInput struct {
 
-	// Unique identifier that references the migration task. Do not store personal data
-	// in this field.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// This member is required.
 	MigrationTaskName *string
@@ -56,7 +51,7 @@ type ListCreatedArtifactsInput struct {
 
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in NextToken.
+	// returned token in NextToken .
 	NextToken *string
 
 	noSmithyDocumentSerde

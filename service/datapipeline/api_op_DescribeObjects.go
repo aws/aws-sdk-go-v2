@@ -48,7 +48,7 @@ func (c *Client) DescribeObjects(ctx context.Context, params *DescribeObjectsInp
 type DescribeObjectsInput struct {
 
 	// The IDs of the pipeline objects that contain the definitions to be described.
-	// You can pass as many as 25 identifiers in a single call to DescribeObjects.
+	// You can pass as many as 25 identifiers in a single call to DescribeObjects .
 	//
 	// This member is required.
 	ObjectIds []string

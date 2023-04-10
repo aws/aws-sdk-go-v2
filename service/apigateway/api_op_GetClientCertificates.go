@@ -31,8 +31,8 @@ func (c *Client) GetClientCertificates(ctx context.Context, params *GetClientCer
 // A request to get information about a collection of ClientCertificate resources.
 type GetClientCertificatesInput struct {
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// The current pagination position in the paged result set.
@@ -130,8 +130,8 @@ var _ GetClientCertificatesAPIClient = (*Client)(nil)
 // GetClientCertificatesPaginatorOptions is the paginator options for
 // GetClientCertificates
 type GetClientCertificatesPaginatorOptions struct {
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

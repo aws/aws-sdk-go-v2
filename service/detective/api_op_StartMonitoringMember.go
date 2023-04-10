@@ -11,14 +11,11 @@ import (
 )
 
 // Sends a request to enable data ingest for a member account that has a status of
-// ACCEPTED_BUT_DISABLED. For valid member accounts, the status is updated as
+// ACCEPTED_BUT_DISABLED . For valid member accounts, the status is updated as
 // follows.
-//
-// * If Detective enabled the member account, then the new status is
-// ENABLED.
-//
-// * If Detective cannot enable the member account, the status remains
-// ACCEPTED_BUT_DISABLED.
+//   - If Detective enabled the member account, then the new status is ENABLED .
+//   - If Detective cannot enable the member account, the status remains
+//     ACCEPTED_BUT_DISABLED .
 func (c *Client) StartMonitoringMember(ctx context.Context, params *StartMonitoringMemberInput, optFns ...func(*Options)) (*StartMonitoringMemberOutput, error) {
 	if params == nil {
 		params = &StartMonitoringMemberInput{}
@@ -37,7 +34,7 @@ func (c *Client) StartMonitoringMember(ctx context.Context, params *StartMonitor
 type StartMonitoringMemberInput struct {
 
 	// The account ID of the member account to try to enable. The account must be an
-	// invited member account with a status of ACCEPTED_BUT_DISABLED.
+	// invited member account with a status of ACCEPTED_BUT_DISABLED .
 	//
 	// This member is required.
 	AccountId *string

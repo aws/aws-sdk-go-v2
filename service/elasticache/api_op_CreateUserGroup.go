@@ -12,8 +12,7 @@ import (
 )
 
 // For Redis engine version 6.0 onwards: Creates a Redis user group. For more
-// information, see Using Role Based Access Control (RBAC)
-// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html)
+// information, see Using Role Based Access Control (RBAC) (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html)
 func (c *Client) CreateUserGroup(ctx context.Context, params *CreateUserGroupInput, optFns ...func(*Options)) (*CreateUserGroupOutput, error) {
 	if params == nil {
 		params = &CreateUserGroupInput{}

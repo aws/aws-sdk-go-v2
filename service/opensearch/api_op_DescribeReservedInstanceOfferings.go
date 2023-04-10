@@ -14,8 +14,8 @@ import (
 
 // Describes the available Amazon OpenSearch Service Reserved Instance offerings
 // for a given Region. For more information, see Reserved Instances in Amazon
-// OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html).
+// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html)
+// .
 func (c *Client) DescribeReservedInstanceOfferings(ctx context.Context, params *DescribeReservedInstanceOfferingsInput, optFns ...func(*Options)) (*DescribeReservedInstanceOfferingsOutput, error) {
 	if params == nil {
 		params = &DescribeReservedInstanceOfferingsInput{}
@@ -39,8 +39,8 @@ type DescribeReservedInstanceOfferingsInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial DescribeReservedInstanceOfferings operation returns a nextToken,
-	// you can include the returned nextToken in subsequent
+	// If your initial DescribeReservedInstanceOfferings operation returns a nextToken
+	// , you can include the returned nextToken in subsequent
 	// DescribeReservedInstanceOfferings operations, which returns results in the next
 	// page.
 	NextToken *string

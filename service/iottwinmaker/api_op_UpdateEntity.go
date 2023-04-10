@@ -41,8 +41,8 @@ type UpdateEntityInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// An object that maps strings to the component updates in the request. Each string
-	// in the mapping must be unique to this object.
+	// An object that maps strings to the component updates in the request. Each
+	// string in the mapping must be unique to this object.
 	ComponentUpdates map[string]types.ComponentUpdateRequest
 
 	// The description of the entity.

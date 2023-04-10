@@ -27,8 +27,8 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestjson1Deserialize(t *testing.T
 		Body          []byte
 		ExpectResult  *IgnoreQueryParamsInResponseOutput
 	}{
-		// Query parameters must be ignored when serializing the output of an operation. As
-		// of January 2021, server implementations are expected to respond with a JSON
+		// Query parameters must be ignored when serializing the output of an operation.
+		// As of January 2021, server implementations are expected to respond with a JSON
 		// object regardless of if the output parameters are empty.
 		"RestJsonIgnoreQueryParamsInResponse": {
 			StatusCode: 200,
@@ -39,9 +39,9 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestjson1Deserialize(t *testing.T
 			Body:          []byte(`{}`),
 			ExpectResult:  &IgnoreQueryParamsInResponseOutput{},
 		},
-		// This test is similar to RestJsonIgnoreQueryParamsInResponse, but it ensures that
-		// clients gracefully handle responses from the server that do not serialize an
-		// empty JSON object.
+		// This test is similar to RestJsonIgnoreQueryParamsInResponse, but it ensures
+		// that clients gracefully handle responses from the server that do not serialize
+		// an empty JSON object.
 		"RestJsonIgnoreQueryParamsInResponseNoPayload": {
 			StatusCode:   200,
 			Body:         []byte(``),

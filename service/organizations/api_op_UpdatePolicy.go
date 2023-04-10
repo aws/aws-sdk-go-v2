@@ -42,17 +42,16 @@ type UpdatePolicyInput struct {
 
 	// If provided, the new content for the policy. The text must be correctly
 	// formatted JSON that complies with the syntax for the policy's type. For more
-	// information, see Service Control Policy Syntax
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
+	// information, see Service Control Policy Syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
 	// in the Organizations User Guide.
 	Content *string
 
 	// If provided, the new description for the policy.
 	Description *string
 
-	// If provided, the new name for the policy. The regex pattern
-	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
-	// string of any of the characters in the ASCII character range.
+	// If provided, the new name for the policy. The regex pattern (http://wikipedia.org/wiki/regex)
+	// that is used to validate this parameter is a string of any of the characters in
+	// the ASCII character range.
 	Name *string
 
 	noSmithyDocumentSerde

@@ -74,8 +74,8 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	// The task status for an invocation.
 	Status types.MaintenanceWindowExecutionStatus
 
-	// The details explaining the status. Details are only available for certain status
-	// values.
+	// The details explaining the status. Details are only available for certain
+	// status values.
 	StatusDetails *string
 
 	// The task execution ID.

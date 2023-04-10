@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets all of the model versions for the specified model type or for the specified
-// model type and model ID. You can also get details for a single, specified model
-// version.
+// Gets all of the model versions for the specified model type or for the
+// specified model type and model ID. You can also get details for a single,
+// specified model version.
 func (c *Client) DescribeModelVersions(ctx context.Context, params *DescribeModelVersionsInput, optFns ...func(*Options)) (*DescribeModelVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeModelVersionsInput{}

@@ -40,8 +40,8 @@ type ListIpRoutesInput struct {
 	// items is specified by the limitations of the operation.
 	Limit *int32
 
-	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes. Pass null
-	// if this is the first call.
+	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes . Pass
+	// null if this is the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type ListIpRoutesInput struct {
 
 type ListIpRoutesOutput struct {
 
-	// A list of IpRoutes.
+	// A list of IpRoute s.
 	IpRoutesInfo []types.IpRouteInfo
 
 	// If not null, more results are available. Pass this value for the NextToken

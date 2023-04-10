@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets usage details (for example, data storage) about a particular identity pool.
-// This API can only be called with developer credentials. You cannot call this API
-// with the temporary user credentials provided by Cognito Identity.
+// Gets usage details (for example, data storage) about a particular identity
+// pool. This API can only be called with developer credentials. You cannot call
+// this API with the temporary user credentials provided by Cognito Identity.
 // DescribeIdentityPoolUsage The following examples have been edited for
 // readability. POST / HTTP/1.1 CONTENT-TYPE: application/json X-AMZN-REQUESTID:
 // 8dc0e749-c8cd-48bd-8520-da6be00d528b X-AMZ-TARGET:
@@ -49,8 +49,9 @@ func (c *Client) DescribeIdentityPoolUsage(ctx context.Context, params *Describe
 // A request for usage information about the identity pool.
 type DescribeIdentityPoolUsageInput struct {
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	//
 	// This member is required.
 	IdentityPoolId *string

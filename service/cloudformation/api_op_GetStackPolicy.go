@@ -43,8 +43,7 @@ type GetStackPolicyInput struct {
 type GetStackPolicyOutput struct {
 
 	// Structure containing the stack policy body. (For more information, go to
-	// Prevent Updates to Stack Resources
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
+	// Prevent Updates to Stack Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
 	// in the CloudFormation User Guide.)
 	StackPolicyBody *string
 

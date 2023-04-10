@@ -44,9 +44,9 @@ type ListInstanceTypeDetailsInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial ListInstanceTypeDetails operation returns a nextToken, you can
-	// include the returned nextToken in subsequent ListInstanceTypeDetails operations,
-	// which returns results in the next page.
+	// If your initial ListInstanceTypeDetails operation returns a nextToken , you can
+	// include the returned nextToken in subsequent ListInstanceTypeDetails
+	// operations, which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde

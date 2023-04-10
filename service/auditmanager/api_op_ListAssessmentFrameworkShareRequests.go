@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of sent or received share requests for custom frameworks in Audit
-// Manager.
+// Returns a list of sent or received share requests for custom frameworks in
+// Audit Manager.
 func (c *Client) ListAssessmentFrameworkShareRequests(ctx context.Context, params *ListAssessmentFrameworkShareRequestsInput, optFns ...func(*Options)) (*ListAssessmentFrameworkShareRequestsOutput, error) {
 	if params == nil {
 		params = &ListAssessmentFrameworkShareRequestsInput{}

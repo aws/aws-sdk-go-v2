@@ -31,8 +31,8 @@ func (c *Client) ListStandardsControlAssociations(ctx context.Context, params *L
 
 type ListStandardsControlAssociationsInput struct {
 
-	// The identifier of the control (identified with SecurityControlId,
-	// SecurityControlArn, or a mix of both parameters) that you want to determine the
+	// The identifier of the control (identified with SecurityControlId ,
+	// SecurityControlArn , or a mix of both parameters) that you want to determine the
 	// enablement status of in each enabled standard.
 	//
 	// This member is required.
@@ -55,8 +55,8 @@ type ListStandardsControlAssociationsInput struct {
 
 type ListStandardsControlAssociationsOutput struct {
 
-	// An array that provides the enablement status and other details for each security
-	// control that applies to each enabled standard.
+	// An array that provides the enablement status and other details for each
+	// security control that applies to each enabled standard.
 	//
 	// This member is required.
 	StandardsControlAssociationSummaries []types.StandardsControlAssociationSummary

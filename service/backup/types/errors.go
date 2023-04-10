@@ -194,8 +194,8 @@ func (e *InvalidResourceStateException) ErrorCode() string {
 }
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A limit in the request has been exceeded; for example, a maximum number of items
-// allowed in a request.
+// A limit in the request has been exceeded; for example, a maximum number of
+// items allowed in a request.
 type LimitExceededException struct {
 	Message *string
 

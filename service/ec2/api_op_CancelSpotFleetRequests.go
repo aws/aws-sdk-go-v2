@@ -44,15 +44,15 @@ type CancelSpotFleetRequestsInput struct {
 	// Indicates whether to terminate the associated instances when the Spot Fleet
 	// request is canceled. The default is to terminate the instances. To let the
 	// instances continue to run after the Spot Fleet request is canceled, specify
-	// no-terminate-instances.
+	// no-terminate-instances .
 	//
 	// This member is required.
 	TerminateInstances *bool
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

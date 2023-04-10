@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the monitoring configurations for the component. The configuration input
-// parameter is an escaped JSON of the configuration and should match the schema of
-// what is returned by DescribeComponentConfigurationRecommendation.
+// Updates the monitoring configurations for the component. The configuration
+// input parameter is an escaped JSON of the configuration and should match the
+// schema of what is returned by DescribeComponentConfigurationRecommendation .
 func (c *Client) UpdateComponentConfiguration(ctx context.Context, params *UpdateComponentConfigurationInput, optFns ...func(*Options)) (*UpdateComponentConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateComponentConfigurationInput{}
@@ -47,12 +47,11 @@ type UpdateComponentConfigurationInput struct {
 
 	// The configuration settings of the component. The value is the escaped JSON of
 	// the configuration. For more information about the JSON format, see Working with
-	// JSON
-	// (https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html).
-	// You can send a request to DescribeComponentConfigurationRecommendation to see
+	// JSON (https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html)
+	// . You can send a request to DescribeComponentConfigurationRecommendation to see
 	// the recommended configuration for a component. For the complete format of the
-	// component configuration file, see Component Configuration
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html).
+	// component configuration file, see Component Configuration (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html)
+	// .
 	ComponentConfiguration *string
 
 	// Indicates whether the application component is monitored.

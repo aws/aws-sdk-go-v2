@@ -39,8 +39,8 @@ type UpdateVariableInput struct {
 	// The new description.
 	Description *string
 
-	// The variable type. For more information see Variable types
-	// (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).
+	// The variable type. For more information see Variable types (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types)
+	// .
 	VariableType *string
 
 	noSmithyDocumentSerde

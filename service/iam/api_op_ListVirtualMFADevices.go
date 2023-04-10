@@ -14,11 +14,11 @@ import (
 
 // Lists the virtual MFA devices defined in the Amazon Web Services account by
 // assignment status. If you do not specify an assignment status, the operation
-// returns a list of all virtual MFA devices. Assignment status can be Assigned,
-// Unassigned, or Any. IAM resource-listing operations return a subset of the
+// returns a list of all virtual MFA devices. Assignment status can be Assigned ,
+// Unassigned , or Any . IAM resource-listing operations return a subset of the
 // available attributes for the resource. For example, this operation does not
 // return tags, even though they are an attribute of the returned object. To view
-// tag information for a virtual MFA device, see ListMFADeviceTags. You can
+// tag information for a virtual MFA device, see ListMFADeviceTags . You can
 // paginate the results using the MaxItems and Marker parameters.
 func (c *Client) ListVirtualMFADevices(ctx context.Context, params *ListVirtualMFADevicesInput, optFns ...func(*Options)) (*ListVirtualMFADevicesOutput, error) {
 	if params == nil {
@@ -37,8 +37,8 @@ func (c *Client) ListVirtualMFADevices(ctx context.Context, params *ListVirtualM
 
 type ListVirtualMFADevicesInput struct {
 
-	// The status (Unassigned or Assigned) of the devices to list. If you do not
-	// specify an AssignmentStatus, the operation defaults to Any, which lists both
+	// The status ( Unassigned or Assigned ) of the devices to list. If you do not
+	// specify an AssignmentStatus , the operation defaults to Any , which lists both
 	// assigned and unassigned virtual MFA devices.,
 	AssignmentStatus types.AssignmentStatusType
 
@@ -50,10 +50,10 @@ type ListVirtualMFADevicesInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
@@ -73,11 +73,11 @@ type ListVirtualMFADevicesOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated is true, this element is present and contains the value to use
+	// When IsTruncated is true , this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
@@ -160,10 +160,10 @@ var _ ListVirtualMFADevicesAPIClient = (*Client)(nil)
 type ListVirtualMFADevicesPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 

@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of certificate ARNs and domain names. You can request that only
-// certificates that match a specific status be listed. You can also filter by
+// Retrieves a list of certificate ARNs and domain names. You can request that
+// only certificates that match a specific status be listed. You can also filter by
 // specific attributes of the certificate. Default filtering returns only RSA_2048
-// certificates. For more information, see Filters.
+// certificates. For more information, see Filters .
 func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesInput, optFns ...func(*Options)) (*ListCertificatesOutput, error) {
 	if params == nil {
 		params = &ListCertificatesInput{}
@@ -41,21 +41,21 @@ type ListCertificatesInput struct {
 
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response. If additional items exist beyond the number you
-	// specify, the NextToken element is sent in the response. Use this NextToken value
-	// in a subsequent request to retrieve additional items.
+	// specify, the NextToken element is sent in the response. Use this NextToken
+	// value in a subsequent request to retrieve additional items.
 	MaxItems *int32
 
-	// Use this parameter only when paginating results and only in a subsequent request
-	// after you receive a response with truncated results. Set it to the value of
-	// NextToken from the response you just received.
+	// Use this parameter only when paginating results and only in a subsequent
+	// request after you receive a response with truncated results. Set it to the value
+	// of NextToken from the response you just received.
 	NextToken *string
 
-	// Specifies the field to sort results by. If you specify SortBy, you must also
-	// specify SortOrder.
+	// Specifies the field to sort results by. If you specify SortBy , you must also
+	// specify SortOrder .
 	SortBy types.SortBy
 
-	// Specifies the order of sorted results. If you specify SortOrder, you must also
-	// specify SortBy.
+	// Specifies the order of sorted results. If you specify SortOrder , you must also
+	// specify SortBy .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -148,8 +148,8 @@ var _ ListCertificatesAPIClient = (*Client)(nil)
 type ListCertificatesPaginatorOptions struct {
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response. If additional items exist beyond the number you
-	// specify, the NextToken element is sent in the response. Use this NextToken value
-	// in a subsequent request to retrieve additional items.
+	// specify, the NextToken element is sent in the response. Use this NextToken
+	// value in a subsequent request to retrieve additional items.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

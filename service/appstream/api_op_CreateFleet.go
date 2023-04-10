@@ -32,105 +32,47 @@ type CreateFleetInput struct {
 
 	// The instance type to use when launching fleet instances. The following instance
 	// types are available:
-	//
-	// * stream.standard.small
-	//
-	// * stream.standard.medium
-	//
-	// *
-	// stream.standard.large
-	//
-	// * stream.standard.xlarge
-	//
-	// * stream.standard.2xlarge
-	//
-	// *
-	// stream.compute.large
-	//
-	// * stream.compute.xlarge
-	//
-	// * stream.compute.2xlarge
-	//
-	// *
-	// stream.compute.4xlarge
-	//
-	// * stream.compute.8xlarge
-	//
-	// * stream.memory.large
-	//
-	// *
-	// stream.memory.xlarge
-	//
-	// * stream.memory.2xlarge
-	//
-	// * stream.memory.4xlarge
-	//
-	// *
-	// stream.memory.8xlarge
-	//
-	// * stream.memory.z1d.large
-	//
-	// * stream.memory.z1d.xlarge
-	//
-	// *
-	// stream.memory.z1d.2xlarge
-	//
-	// * stream.memory.z1d.3xlarge
-	//
-	// *
-	// stream.memory.z1d.6xlarge
-	//
-	// * stream.memory.z1d.12xlarge
-	//
-	// *
-	// stream.graphics-design.large
-	//
-	// * stream.graphics-design.xlarge
-	//
-	// *
-	// stream.graphics-design.2xlarge
-	//
-	// * stream.graphics-design.4xlarge
-	//
-	// *
-	// stream.graphics-desktop.2xlarge
-	//
-	// * stream.graphics.g4dn.xlarge
-	//
-	// *
-	// stream.graphics.g4dn.2xlarge
-	//
-	// * stream.graphics.g4dn.4xlarge
-	//
-	// *
-	// stream.graphics.g4dn.8xlarge
-	//
-	// * stream.graphics.g4dn.12xlarge
-	//
-	// *
-	// stream.graphics.g4dn.16xlarge
-	//
-	// * stream.graphics-pro.4xlarge
-	//
-	// *
-	// stream.graphics-pro.8xlarge
-	//
-	// * stream.graphics-pro.16xlarge
-	//
-	// The following
-	// instance types are available for Elastic fleets:
-	//
-	// * stream.standard.small
-	//
-	// *
-	// stream.standard.medium
-	//
-	// * stream.standard.large
-	//
-	// * stream.standard.xlarge
-	//
-	// *
-	// stream.standard.2xlarge
+	//   - stream.standard.small
+	//   - stream.standard.medium
+	//   - stream.standard.large
+	//   - stream.standard.xlarge
+	//   - stream.standard.2xlarge
+	//   - stream.compute.large
+	//   - stream.compute.xlarge
+	//   - stream.compute.2xlarge
+	//   - stream.compute.4xlarge
+	//   - stream.compute.8xlarge
+	//   - stream.memory.large
+	//   - stream.memory.xlarge
+	//   - stream.memory.2xlarge
+	//   - stream.memory.4xlarge
+	//   - stream.memory.8xlarge
+	//   - stream.memory.z1d.large
+	//   - stream.memory.z1d.xlarge
+	//   - stream.memory.z1d.2xlarge
+	//   - stream.memory.z1d.3xlarge
+	//   - stream.memory.z1d.6xlarge
+	//   - stream.memory.z1d.12xlarge
+	//   - stream.graphics-design.large
+	//   - stream.graphics-design.xlarge
+	//   - stream.graphics-design.2xlarge
+	//   - stream.graphics-design.4xlarge
+	//   - stream.graphics-desktop.2xlarge
+	//   - stream.graphics.g4dn.xlarge
+	//   - stream.graphics.g4dn.2xlarge
+	//   - stream.graphics.g4dn.4xlarge
+	//   - stream.graphics.g4dn.8xlarge
+	//   - stream.graphics.g4dn.12xlarge
+	//   - stream.graphics.g4dn.16xlarge
+	//   - stream.graphics-pro.4xlarge
+	//   - stream.graphics-pro.8xlarge
+	//   - stream.graphics-pro.16xlarge
+	// The following instance types are available for Elastic fleets:
+	//   - stream.standard.small
+	//   - stream.standard.medium
+	//   - stream.standard.large
+	//   - stream.standard.xlarge
+	//   - stream.standard.2xlarge
 	//
 	// This member is required.
 	InstanceType *string
@@ -178,8 +120,7 @@ type CreateFleetInput struct {
 	// session with temporary credentials. AppStream 2.0 retrieves the temporary
 	// credentials and creates the appstream_machine_role credential profile on the
 	// instance. For more information, see Using an IAM Role to Grant Permissions to
-	// Applications and Scripts Running on AppStream 2.0 Streaming Instances
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// Applications and Scripts Running on AppStream 2.0 Streaming Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string
 
@@ -225,14 +166,14 @@ type CreateFleetInput struct {
 	// Elastic fleets.
 	Platform types.PlatformType
 
-	// The S3 location of the session scripts configuration zip file. This only applies
-	// to Elastic fleets.
+	// The S3 location of the session scripts configuration zip file. This only
+	// applies to Elastic fleets.
 	SessionScriptS3Location *types.S3Location
 
-	// The AppStream 2.0 view that is displayed to your users when they stream from the
-	// fleet. When APP is specified, only the windows of applications opened by users
-	// display. When DESKTOP is specified, the standard desktop that is provided by the
-	// operating system displays. The default value is APP.
+	// The AppStream 2.0 view that is displayed to your users when they stream from
+	// the fleet. When APP is specified, only the windows of applications opened by
+	// users display. When DESKTOP is specified, the standard desktop that is provided
+	// by the operating system displays. The default value is APP .
 	StreamView types.StreamView
 
 	// The tags to associate with the fleet. A tag is a key-value pair, and the value
@@ -240,14 +181,13 @@ type CreateFleetInput struct {
 	// Environment=. If you do not specify a value, the value is set to an empty
 	// string. Generally allowed characters are: letters, numbers, and spaces
 	// representable in UTF-8, and the following special characters: _ . : / = + \ - @
-	// For more information, see Tagging Your Resources
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
+	// For more information, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	Tags map[string]string
 
-	// The USB device filter strings that specify which USB devices a user can redirect
-	// to the fleet streaming session, when using the Windows native client. This is
-	// allowed but not required for Elastic fleets.
+	// The USB device filter strings that specify which USB devices a user can
+	// redirect to the fleet streaming session, when using the Windows native client.
+	// This is allowed but not required for Elastic fleets.
 	UsbDeviceFilterStrings []string
 
 	// The VPC configuration for the fleet. This is required for Elastic fleets, but

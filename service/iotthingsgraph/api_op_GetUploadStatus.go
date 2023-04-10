@@ -53,7 +53,7 @@ type GetUploadStatusOutput struct {
 	// This member is required.
 	UploadId *string
 
-	// The status of the upload. The initial status is IN_PROGRESS. The response show
+	// The status of the upload. The initial status is IN_PROGRESS . The response show
 	// all validation failures if the upload fails.
 	//
 	// This member is required.

@@ -18,8 +18,7 @@ import (
 // cross-Region features are supported between other Regions and your current
 // Region. This operation supports pagination. To return information about the
 // Regions that are enabled for your account, or all Regions, use the EC2 operation
-// DescribeRegions. For more information, see  DescribeRegions
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html)
+// DescribeRegions . For more information, see  DescribeRegions (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html)
 // in the Amazon EC2 API Reference.
 func (c *Client) DescribeSourceRegions(ctx context.Context, params *DescribeSourceRegionsInput, optFns ...func(*Options)) (*DescribeSourceRegionsOutput, error) {
 	if params == nil {
@@ -43,7 +42,7 @@ type DescribeSourceRegionsInput struct {
 
 	// An optional pagination token provided by a previous DescribeSourceRegions
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -52,10 +51,9 @@ type DescribeSourceRegionsInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The source Amazon Web Services Region name. For example, us-east-1.
+	// The source Amazon Web Services Region name. For example, us-east-1 .
 	// Constraints:
-	//
-	// * Must specify a valid Amazon Web Services Region name.
+	//   - Must specify a valid Amazon Web Services Region name.
 	RegionName *string
 
 	noSmithyDocumentSerde
@@ -67,7 +65,7 @@ type DescribeSourceRegionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// A list of SourceRegion instances that contains each source Amazon Web Services

@@ -132,9 +132,9 @@ const (
 	EventTypeOriginResponse EventType = "origin-response"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"viewer-request",
@@ -437,8 +437,8 @@ const (
 	OriginRequestPolicyCookieBehaviorAllExcept OriginRequestPolicyCookieBehavior = "allExcept"
 )
 
-// Values returns all known values for OriginRequestPolicyCookieBehavior. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for OriginRequestPolicyCookieBehavior. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OriginRequestPolicyCookieBehavior) Values() []OriginRequestPolicyCookieBehavior {
@@ -461,8 +461,8 @@ const (
 	OriginRequestPolicyHeaderBehaviorAllExcept                       OriginRequestPolicyHeaderBehavior = "allExcept"
 )
 
-// Values returns all known values for OriginRequestPolicyHeaderBehavior. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for OriginRequestPolicyHeaderBehavior. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OriginRequestPolicyHeaderBehavior) Values() []OriginRequestPolicyHeaderBehavior {
@@ -485,9 +485,9 @@ const (
 	OriginRequestPolicyQueryStringBehaviorAllExcept OriginRequestPolicyQueryStringBehavior = "allExcept"
 )
 
-// Values returns all known values for OriginRequestPolicyQueryStringBehavior. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for OriginRequestPolicyQueryStringBehavior.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OriginRequestPolicyQueryStringBehavior) Values() []OriginRequestPolicyQueryStringBehavior {
 	return []OriginRequestPolicyQueryStringBehavior{
@@ -544,8 +544,8 @@ const (
 	RealtimeMetricsSubscriptionStatusDisabled RealtimeMetricsSubscriptionStatus = "Disabled"
 )
 
-// Values returns all known values for RealtimeMetricsSubscriptionStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for RealtimeMetricsSubscriptionStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (RealtimeMetricsSubscriptionStatus) Values() []RealtimeMetricsSubscriptionStatus {

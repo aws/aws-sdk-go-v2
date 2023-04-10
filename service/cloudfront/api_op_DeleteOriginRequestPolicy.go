@@ -15,7 +15,7 @@ import (
 // the origin request policy from all cache behaviors, then delete the origin
 // request policy. To delete an origin request policy, you must provide the
 // policy's identifier and version. To get the identifier, you can use
-// ListOriginRequestPolicies or GetOriginRequestPolicy.
+// ListOriginRequestPolicies or GetOriginRequestPolicy .
 func (c *Client) DeleteOriginRequestPolicy(ctx context.Context, params *DeleteOriginRequestPolicyInput, optFns ...func(*Options)) (*DeleteOriginRequestPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteOriginRequestPolicyInput{}
@@ -34,15 +34,15 @@ func (c *Client) DeleteOriginRequestPolicy(ctx context.Context, params *DeleteOr
 type DeleteOriginRequestPolicyInput struct {
 
 	// The unique identifier for the origin request policy that you are deleting. To
-	// get the identifier, you can use ListOriginRequestPolicies.
+	// get the identifier, you can use ListOriginRequestPolicies .
 	//
 	// This member is required.
 	Id *string
 
 	// The version of the origin request policy that you are deleting. The version is
 	// the origin request policy's ETag value, which you can get using
-	// ListOriginRequestPolicies, GetOriginRequestPolicy, or
-	// GetOriginRequestPolicyConfig.
+	// ListOriginRequestPolicies , GetOriginRequestPolicy , or
+	// GetOriginRequestPolicyConfig .
 	IfMatch *string
 
 	noSmithyDocumentSerde

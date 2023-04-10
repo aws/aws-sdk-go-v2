@@ -11,8 +11,7 @@ import (
 )
 
 // Adds or updates tags for a resource in AWS CodeCommit. For a list of valid
-// resources in AWS CodeCommit, see CodeCommit Resources and Operations
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+// resources in AWS CodeCommit, see CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
 // in the AWS CodeCommit User Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

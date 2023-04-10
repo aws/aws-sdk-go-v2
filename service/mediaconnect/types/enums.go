@@ -11,9 +11,9 @@ const (
 	AlgorithmAes256 Algorithm = "aes256"
 )
 
-// Values returns all known values for Algorithm. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Algorithm. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Algorithm) Values() []Algorithm {
 	return []Algorithm{
 		"aes128",
@@ -94,9 +94,9 @@ const (
 	EncodingNamePcm      EncodingName = "pcm"
 )
 
-// Values returns all known values for EncodingName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EncodingName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EncodingName) Values() []EncodingName {
 	return []EncodingName{
 		"jxsv",
@@ -132,9 +132,9 @@ const (
 	FailoverModeFailover FailoverMode = "FAILOVER"
 )
 
-// Values returns all known values for FailoverMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FailoverMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FailoverMode) Values() []FailoverMode {
 	return []FailoverMode{
 		"MERGE",
@@ -287,8 +287,8 @@ const (
 	RangeFullprotect Range = "FULLPROTECT"
 )
 
-// Values returns all known values for Range. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Range. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Range) Values() []Range {
 	return []Range{
@@ -327,9 +327,9 @@ const (
 	ResourceTypeMbpsOutboundBandwidth ResourceType = "Mbps_Outbound_Bandwidth"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Mbps_Outbound_Bandwidth",
@@ -382,8 +382,8 @@ const (
 	StateDisabled State = "DISABLED"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{

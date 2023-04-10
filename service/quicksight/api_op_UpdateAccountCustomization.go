@@ -59,8 +59,8 @@ type UpdateAccountCustomizationOutput struct {
 	// Services Region.
 	AccountCustomization *types.AccountCustomization
 
-	// The Amazon Resource Name (ARN) for the updated customization for this Amazon Web
-	// Services account.
+	// The Amazon Resource Name (ARN) for the updated customization for this Amazon
+	// Web Services account.
 	Arn *string
 
 	// The ID for the Amazon Web Services account that you want to update Amazon

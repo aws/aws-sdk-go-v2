@@ -19,17 +19,15 @@ import (
 // are encrypted with AES-256 is supported. This is an asynchronous call. If all
 // the required information is provided, this operation initiates an export task
 // and responds with the ID of the task. After the task has started, you can use
-// DescribeExportTasks
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html)
-// to get the status of the export task. Each account can only have one active
-// (RUNNING or PENDING) export task at a time. To cancel an export task, use
-// CancelExportTask
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html).
-// You can export logs from multiple log groups or multiple time ranges to the same
-// S3 bucket. To separate log data for each export task, specify a prefix to be
-// used as the Amazon S3 key prefix for all exported objects. Time-based sorting on
-// chunks of log data inside an exported file is not guaranteed. You can sort the
-// exported log field data by using Linux utilities.
+// DescribeExportTasks (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html)
+// to get the status of the export task. Each account can only have one active (
+// RUNNING or PENDING ) export task at a time. To cancel an export task, use
+// CancelExportTask (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html)
+// . You can export logs from multiple log groups or multiple time ranges to the
+// same S3 bucket. To separate log data for each export task, specify a prefix to
+// be used as the Amazon S3 key prefix for all exported objects. Time-based sorting
+// on chunks of log data inside an exported file is not guaranteed. You can sort
+// the exported log field data by using Linux utilities.
 func (c *Client) CreateExportTask(ctx context.Context, params *CreateExportTaskInput, optFns ...func(*Options)) (*CreateExportTaskOutput, error) {
 	if params == nil {
 		params = &CreateExportTaskInput{}
@@ -54,7 +52,7 @@ type CreateExportTaskInput struct {
 	Destination *string
 
 	// The start time of the range for the request, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier
+	// milliseconds after Jan 1, 1970 00:00:00 UTC . Events with a timestamp earlier
 	// than this time are not exported.
 	//
 	// This member is required.
@@ -66,7 +64,7 @@ type CreateExportTaskInput struct {
 	LogGroupName *string
 
 	// The end time of the range for the request, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+	// milliseconds after Jan 1, 1970 00:00:00 UTC . Events with a timestamp later than
 	// this time are not exported. You must specify a time that is not earlier than
 	// when this log group was created.
 	//
@@ -74,7 +72,7 @@ type CreateExportTaskInput struct {
 	To *int64
 
 	// The prefix used as the start of the key for every object exported. If you don't
-	// specify a value, the default is exportedlogs.
+	// specify a value, the default is exportedlogs .
 	DestinationPrefix *string
 
 	// Export only log streams that match the provided prefix. If you don't specify a

@@ -18,8 +18,7 @@ import (
 // the parameter empty to retrieve all connection records. If successful, the
 // retrieved information includes both active and pending connections. Active
 // connections identify the IpV4 CIDR block that the VPC uses to connect. Related
-// actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *DescribeVpcPeeringConnectionsInput, optFns ...func(*Options)) (*DescribeVpcPeeringConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeVpcPeeringConnectionsInput{}

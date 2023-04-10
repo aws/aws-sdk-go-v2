@@ -44,8 +44,8 @@ type DescribeOrganizationConfigRuleStatusesInput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The names of organization Config rules for which you want status details. If you
-	// do not specify any names, Config returns details for all your organization
+	// The names of organization Config rules for which you want status details. If
+	// you do not specify any names, Config returns details for all your organization
 	// Config rules.
 	OrganizationConfigRuleNames []string
 

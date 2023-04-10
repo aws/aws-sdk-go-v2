@@ -12,8 +12,8 @@ import (
 )
 
 // Modifies the parameters of a DB parameter group. To modify more than one
-// parameter, submit a list of the following: ParameterName, ParameterValue, and
-// ApplyMethod. A maximum of 20 parameters can be modified in a single request.
+// parameter, submit a list of the following: ParameterName , ParameterValue , and
+// ApplyMethod . A maximum of 20 parameters can be modified in a single request.
 // Changes to dynamic parameters are applied immediately. Changes to static
 // parameters require a reboot without failover to the DB instance associated with
 // the parameter group before the change can take effect. After you modify a DB
@@ -23,8 +23,8 @@ import (
 // parameter group is used as the default for a new DB instance. This is especially
 // important for parameters that are critical when creating the default database
 // for a DB instance, such as the character set for the default database defined by
-// the character_set_database parameter. You can use the Parameter Groups option of
-// the Amazon Neptune console or the DescribeDBParameters command to verify that
+// the character_set_database parameter. You can use the Parameter Groups option
+// of the Amazon Neptune console or the DescribeDBParameters command to verify that
 // your DB parameter group has been created or modified.
 func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBParameterGroupInput, optFns ...func(*Options)) (*ModifyDBParameterGroupOutput, error) {
 	if params == nil {
@@ -44,9 +44,7 @@ func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBPar
 type ModifyDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
-	//
-	// * If supplied, must match the
-	// name of an existing DBParameterGroup.
+	//   - If supplied, must match the name of an existing DBParameterGroup.
 	//
 	// This member is required.
 	DBParameterGroupName *string

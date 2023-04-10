@@ -42,8 +42,8 @@ type UpdateCostCategoryDefinitionInput struct {
 	RuleVersion types.CostCategoryRuleVersion
 
 	// The Expression object used to categorize costs. For more information, see
-	// CostCategoryRule
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
+	// CostCategoryRule  (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html)
+	// .
 	//
 	// This member is required.
 	Rules []types.CostCategoryRule

@@ -13,9 +13,9 @@ import (
 	"sync"
 )
 
-// Configure your Lambda functions to stream response payloads back to clients. For
-// more information, see Configuring a Lambda function to stream responses
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html).
+// Configure your Lambda functions to stream response payloads back to clients.
+// For more information, see Configuring a Lambda function to stream responses (https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html)
+// .
 func (c *Client) InvokeWithResponseStream(ctx context.Context, params *InvokeWithResponseStreamInput, optFns ...func(*Options)) (*InvokeWithResponseStreamOutput, error) {
 	if params == nil {
 		params = &InvokeWithResponseStreamInput{}
@@ -34,18 +34,11 @@ func (c *Client) InvokeWithResponseStream(ctx context.Context, params *InvokeWit
 type InvokeWithResponseStreamInput struct {
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name – my-function.
-	//
-	// *
-	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	// *
-	// Partial ARN – 123456789012:function:my-function.
-	//
-	// The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name – my-function .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -55,14 +48,11 @@ type InvokeWithResponseStreamInput struct {
 	ClientContext *string
 
 	// Use one of the following options:
-	//
-	// * RequestResponse (default) – Invoke the
-	// function synchronously. Keep the connection open until the function returns a
-	// response or times out. The API operation response includes the function response
-	// and additional data.
-	//
-	// * DryRun – Validate parameter values and verify that the
-	// IAM user or role has permission to invoke the function.
+	//   - RequestResponse (default) – Invoke the function synchronously. Keep the
+	//   connection open until the function returns a response or times out. The API
+	//   operation response includes the function response and additional data.
+	//   - DryRun – Validate parameter values and verify that the IAM user or role has
+	//   permission to invoke the function.
 	InvocationType types.ResponseStreamingInvocationType
 
 	// Set to Tail to include the execution log in the response. Applies to
@@ -70,8 +60,8 @@ type InvokeWithResponseStreamInput struct {
 	LogType types.LogType
 
 	// The JSON that you want to provide to your Lambda function as input. You can
-	// enter the JSON directly. For example, --payload '{ "key": "value" }'. You can
-	// also specify a file path. For example, --payload file://payload.json.
+	// enter the JSON directly. For example, --payload '{ "key": "value" }' . You can
+	// also specify a file path. For example, --payload file://payload.json .
 	Payload []byte
 
 	// The alias name.

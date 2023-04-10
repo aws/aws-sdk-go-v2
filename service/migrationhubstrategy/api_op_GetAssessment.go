@@ -29,7 +29,7 @@ func (c *Client) GetAssessment(ctx context.Context, params *GetAssessmentInput, 
 
 type GetAssessmentInput struct {
 
-	// The assessmentid returned by StartAssessment.
+	// The assessmentid returned by StartAssessment .
 	//
 	// This member is required.
 	Id *string

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all CloudFront functions in your Amazon Web Services account. You
-// can optionally apply a filter to return only the functions that are in the
-// specified stage, either DEVELOPMENT or LIVE. You can optionally specify the
+// Gets a list of all CloudFront functions in your Amazon Web Services account.
+// You can optionally apply a filter to return only the functions that are in the
+// specified stage, either DEVELOPMENT or LIVE . You can optionally specify the
 // maximum number of items to receive in the response. If the total number of items
 // in the list exceeds the maximum that you specify, or the default maximum, the
 // response is paginated. To get the next page of items, send a subsequent request
@@ -45,8 +45,8 @@ type ListFunctionsInput struct {
 	// The maximum number of functions that you want in the response.
 	MaxItems *int32
 
-	// An optional filter to return only the functions that are in the specified stage,
-	// either DEVELOPMENT or LIVE.
+	// An optional filter to return only the functions that are in the specified
+	// stage, either DEVELOPMENT or LIVE .
 	Stage types.FunctionStage
 
 	noSmithyDocumentSerde

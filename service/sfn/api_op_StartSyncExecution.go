@@ -81,8 +81,8 @@ type StartSyncExecutionOutput struct {
 	// This member is required.
 	StopDate *time.Time
 
-	// An object that describes workflow billing details, including billed duration and
-	// memory use.
+	// An object that describes workflow billing details, including billed duration
+	// and memory use.
 	BillingDetails *types.BillingDetails
 
 	// A more detailed explanation of the cause of the failure.

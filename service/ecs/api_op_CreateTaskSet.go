@@ -13,8 +13,7 @@ import (
 
 // Create a task set in the specified cluster and service. This is used when a
 // service uses the EXTERNAL deployment controller type. For more information, see
-// Amazon ECS deployment types
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// Amazon ECS deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) CreateTaskSet(ctx context.Context, params *CreateTaskSetInput, optFns ...func(*Options)) (*CreateTaskSetOutput, error) {
 	if params == nil {
@@ -64,8 +63,8 @@ type CreateTaskSetInput struct {
 	// CreateCapacityProvider API operation. To use a Fargate capacity provider,
 	// specify either the FARGATE or FARGATE_SPOT capacity providers. The Fargate
 	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
-	// to update the list of available capacity providers for a cluster after the
+	// with a cluster to be used. The PutClusterCapacityProviders API operation is
+	// used to update the list of available capacity providers for a cluster after the
 	// cluster is created.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
@@ -74,15 +73,14 @@ type CreateTaskSetInput struct {
 	// allowed.
 	ClientToken *string
 
-	// An optional non-unique tag that identifies this task set in external systems. If
-	// the task set is associated with a service discovery registry, the tasks in this
-	// task set will have the ECS_TASK_SET_EXTERNAL_ID Cloud Map attribute set to the
-	// provided value.
+	// An optional non-unique tag that identifies this task set in external systems.
+	// If the task set is associated with a service discovery registry, the tasks in
+	// this task set will have the ECS_TASK_SET_EXTERNAL_ID Cloud Map attribute set to
+	// the provided value.
 	ExternalId *string
 
 	// The launch type that new tasks in the task set uses. For more information, see
-	// Amazon ECS launch types
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
+	// Amazon ECS launch types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
 	// specified, the capacityProviderStrategy parameter must be omitted.
 	LaunchType types.LaunchType
@@ -105,39 +103,28 @@ type CreateTaskSetInput struct {
 	Scale *types.Scale
 
 	// The details of the service discovery registries to assign to this task set. For
-	// more information, see Service discovery
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+	// more information, see Service discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html)
+	// .
 	ServiceRegistries []types.ServiceRegistry
 
 	// The metadata that you apply to the task set to help you categorize and organize
 	// them. Each tag consists of a key and an optional value. You define both. When a
 	// service is deleted, the tags are deleted. The following basic restrictions apply
 	// to tags:
-	//
-	// * Maximum number of tags per resource - 50
-	//
-	// * For each resource, each
-	// tag key must be unique, and each tag key can have only one value.
-	//
-	// * Maximum key
-	// length - 128 Unicode characters in UTF-8
-	//
-	// * Maximum value length - 256 Unicode
-	// characters in UTF-8
-	//
-	// * If your tagging schema is used across multiple services
-	// and resources, remember that other services may have restrictions on allowed
-	// characters. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following characters: + - = . _ : / @.
-	//
-	// * Tag
-	// keys and values are case-sensitive.
-	//
-	// * Do not use aws:, AWS:, or any upper or
-	// lowercase combination of such as a prefix for either keys or values as it is
-	// reserved for Amazon Web Services use. You cannot edit or delete tag keys or
-	// values with this prefix. Tags with this prefix do not count against your tags
-	// per resource limit.
+	//   - Maximum number of tags per resource - 50
+	//   - For each resource, each tag key must be unique, and each tag key can have
+	//   only one value.
+	//   - Maximum key length - 128 Unicode characters in UTF-8
+	//   - Maximum value length - 256 Unicode characters in UTF-8
+	//   - If your tagging schema is used across multiple services and resources,
+	//   remember that other services may have restrictions on allowed characters.
+	//   Generally allowed characters are: letters, numbers, and spaces representable in
+	//   UTF-8, and the following characters: + - = . _ : / @.
+	//   - Tag keys and values are case-sensitive.
+	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
+	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
+	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
+	//   prefix do not count against your tags per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

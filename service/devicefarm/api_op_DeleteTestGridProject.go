@@ -31,7 +31,7 @@ func (c *Client) DeleteTestGridProject(ctx context.Context, params *DeleteTestGr
 type DeleteTestGridProjectInput struct {
 
 	// The ARN of the project to delete, from CreateTestGridProject or
-	// ListTestGridProjects.
+	// ListTestGridProjects .
 	//
 	// This member is required.
 	ProjectArn *string

@@ -144,16 +144,16 @@ type EntitlementUsage struct {
 	noSmithyDocumentSerde
 }
 
-// A filter name and value pair that is used to return more specific results from a
-// describe operation. Filters can be used to match a set of resources by specific
-// criteria, such as tags, attributes, or IDs.
+// A filter name and value pair that is used to return more specific results from
+// a describe operation. Filters can be used to match a set of resources by
+// specific criteria, such as tags, attributes, or IDs.
 type Filter struct {
 
 	// Name of the filter. Filter names are case-sensitive.
 	Name *string
 
-	// The value of the filter, which is case-sensitive. You can only specify one value
-	// for the filter.
+	// The value of the filter, which is case-sensitive. You can only specify one
+	// value for the filter.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -428,7 +428,7 @@ type LicenseConfiguration struct {
 // Describes an association with a license configuration.
 type LicenseConfigurationAssociation struct {
 
-	// Scope of AMI associations. The possible value is cross-account.
+	// Scope of AMI associations. The possible value is cross-account .
 	AmiAssociationScope *string
 
 	// Time when the license configuration was associated with the resource.
@@ -476,8 +476,7 @@ type LicenseConversionContext struct {
 	// The Usage operation value that corresponds to the license type you are
 	// converting your resource from. For more information about which platforms
 	// correspond to which usage operation values see Sample data: usage operation by
-	// platform
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html#billing-info)
+	// platform  (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html#billing-info)
 	UsageOperation *string
 
 	noSmithyDocumentSerde
@@ -555,7 +554,7 @@ type LicenseSpecification struct {
 	// This member is required.
 	LicenseConfigurationArn *string
 
-	// Scope of AMI associations. The possible value is cross-account.
+	// Scope of AMI associations. The possible value is cross-account .
 	AmiAssociationScope *string
 
 	noSmithyDocumentSerde
@@ -596,30 +595,23 @@ type Metadata struct {
 
 // The options you can specify when you create a new version of a grant, such as
 // activation override behavior. For more information, see Granted licenses in
-// License Manager
-// (https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html)
+// License Manager (https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html)
 // in the License Manager User Guide.
 type Options struct {
 
-	// An activation option for your grant that determines the behavior of activating a
-	// grant. Activation options can only be used with granted licenses sourced from
+	// An activation option for your grant that determines the behavior of activating
+	// a grant. Activation options can only be used with granted licenses sourced from
 	// the Amazon Web Services Marketplace. Additionally, the operation must specify
 	// the value of ACTIVE for the Status parameter.
-	//
-	// * As a license administrator, you
-	// can optionally specify an ActivationOverrideBehavior when activating a grant.
-	//
-	// *
-	// As a grantor, you can optionally specify an ActivationOverrideBehavior when you
-	// activate a grant for a grantee account in your organization.
-	//
-	// * As a grantee, if
-	// the grantor creating the distributed grant doesn’t specify an
-	// ActivationOverrideBehavior, you can optionally specify one when you are
-	// activating the grant.
-	//
-	// DISTRIBUTED_GRANTS_ONLY Use this value to activate a
-	// grant without replacing any member account’s active grants for the same product.
+	//   - As a license administrator, you can optionally specify an
+	//   ActivationOverrideBehavior when activating a grant.
+	//   - As a grantor, you can optionally specify an ActivationOverrideBehavior when
+	//   you activate a grant for a grantee account in your organization.
+	//   - As a grantee, if the grantor creating the distributed grant doesn’t specify
+	//   an ActivationOverrideBehavior , you can optionally specify one when you are
+	//   activating the grant.
+	// DISTRIBUTED_GRANTS_ONLY Use this value to activate a grant without replacing
+	// any member account’s active grants for the same product.
 	// ALL_GRANTS_PERMITTED_BY_ISSUER Use this value to activate a grant and disable
 	// other active grants in any member accounts for the same product. This action
 	// will also replace their previously activated grants with this activated grant.
@@ -647,54 +639,38 @@ type ProductInformation struct {
 	// type of filter being declared, and a ProductInformationFilterValue that
 	// specifies the value to filter on. Accepted values for
 	// ProductInformationFilterName are listed here along with descriptions and valid
-	// options for ProductInformationFilterComparator. The following filters and are
-	// supported when the resource type is SSM_MANAGED:
-	//
-	// * Application Name - The name
-	// of the application. Logical operator is EQUALS.
-	//
-	// * Application Publisher - The
-	// publisher of the application. Logical operator is EQUALS.
-	//
-	// * Application Version
-	// - The version of the application. Logical operator is EQUALS.
-	//
-	// * Platform Name -
-	// The name of the platform. Logical operator is EQUALS.
-	//
-	// * Platform Type - The
-	// platform type. Logical operator is EQUALS.
-	//
-	// * Tag:key - The key of a tag
-	// attached to an Amazon Web Services resource you wish to exclude from automated
-	// discovery. Logical operator is NOT_EQUALS. The key for your tag must be appended
-	// to Tag: following the example: Tag:name-of-your-key.
-	// ProductInformationFilterValue is optional if you are not using values for the
-	// key.
-	//
-	// * AccountId - The 12-digit ID of an Amazon Web Services account you wish
-	// to exclude from automated discovery. Logical operator is NOT_EQUALS.
-	//
-	// * License
-	// Included - The type of license included. Logical operators are EQUALS and
-	// NOT_EQUALS. Possible values are: sql-server-enterprise | sql-server-standard |
-	// sql-server-web | windows-server-datacenter.
-	//
-	// The following filters and logical
-	// operators are supported when the resource type is RDS:
-	//
-	// * Engine Edition - The
-	// edition of the database engine. Logical operator is EQUALS. Possible values are:
-	// oracle-ee | oracle-se | oracle-se1 | oracle-se2.
-	//
-	// * License Pack - The license
-	// pack. Logical operator is EQUALS. Possible values are: data guard | diagnostic
-	// pack sqlt | tuning pack sqlt | ols | olap.
+	// options for ProductInformationFilterComparator . The following filters and are
+	// supported when the resource type is SSM_MANAGED :
+	//   - Application Name - The name of the application. Logical operator is EQUALS .
+	//   - Application Publisher - The publisher of the application. Logical operator
+	//   is EQUALS .
+	//   - Application Version - The version of the application. Logical operator is
+	//   EQUALS .
+	//   - Platform Name - The name of the platform. Logical operator is EQUALS .
+	//   - Platform Type - The platform type. Logical operator is EQUALS .
+	//   - Tag:key - The key of a tag attached to an Amazon Web Services resource you
+	//   wish to exclude from automated discovery. Logical operator is NOT_EQUALS . The
+	//   key for your tag must be appended to Tag: following the example:
+	//   Tag:name-of-your-key . ProductInformationFilterValue is optional if you are
+	//   not using values for the key.
+	//   - AccountId - The 12-digit ID of an Amazon Web Services account you wish to
+	//   exclude from automated discovery. Logical operator is NOT_EQUALS .
+	//   - License Included - The type of license included. Logical operators are
+	//   EQUALS and NOT_EQUALS . Possible values are: sql-server-enterprise |
+	//   sql-server-standard | sql-server-web | windows-server-datacenter .
+	// The following filters and logical operators are supported when the resource
+	// type is RDS :
+	//   - Engine Edition - The edition of the database engine. Logical operator is
+	//   EQUALS . Possible values are: oracle-ee | oracle-se | oracle-se1 | oracle-se2
+	//   .
+	//   - License Pack - The license pack. Logical operator is EQUALS . Possible
+	//   values are: data guard | diagnostic pack sqlt | tuning pack sqlt | ols | olap
+	//   .
 	//
 	// This member is required.
 	ProductInformationFilterList []ProductInformationFilter
 
-	// Resource type. The possible values are SSM_MANAGED | RDS.
+	// Resource type. The possible values are SSM_MANAGED | RDS .
 	//
 	// This member is required.
 	ResourceType *string
@@ -765,8 +741,8 @@ type ReportFrequency struct {
 	// Time period between each report. The period can be daily, weekly, or monthly.
 	Period ReportFrequencyType
 
-	// Number of times within the frequency period that a report is generated. The only
-	// supported value is 1.
+	// Number of times within the frequency period that a report is generated. The
+	// only supported value is 1 .
 	Value *int32
 
 	noSmithyDocumentSerde
@@ -877,7 +853,7 @@ type TokenData struct {
 	// Amazon Resource Names (ARN) of the roles included in the token.
 	RoleArns []string
 
-	// Token status. The possible values are AVAILABLE and DELETED.
+	// Token status. The possible values are AVAILABLE and DELETED .
 	Status *string
 
 	// Token ID.
@@ -886,7 +862,7 @@ type TokenData struct {
 	// Data specified by the caller.
 	TokenProperties []string
 
-	// Type of token generated. The supported value is REFRESH_TOKEN.
+	// Type of token generated. The supported value is REFRESH_TOKEN .
 	TokenType *string
 
 	noSmithyDocumentSerde

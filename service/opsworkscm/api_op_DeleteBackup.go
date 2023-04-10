@@ -32,8 +32,8 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 
 type DeleteBackupInput struct {
 
-	// The ID of the backup to delete. Run the DescribeBackups command to get a list of
-	// backup IDs. Backup IDs are in the format ServerName-yyyyMMddHHmmssSSS.
+	// The ID of the backup to delete. Run the DescribeBackups command to get a list
+	// of backup IDs. Backup IDs are in the format ServerName-yyyyMMddHHmmssSSS .
 	//
 	// This member is required.
 	BackupId *string

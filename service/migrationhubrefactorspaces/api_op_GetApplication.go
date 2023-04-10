@@ -72,8 +72,8 @@ type GetApplicationOutput struct {
 	// The name of the application.
 	Name *string
 
-	// The Amazon Web Services account ID of the application owner (which is always the
-	// same as the environment owner account ID).
+	// The Amazon Web Services account ID of the application owner (which is always
+	// the same as the environment owner account ID).
 	OwnerAccountId *string
 
 	// The proxy type of the proxy created within the application.

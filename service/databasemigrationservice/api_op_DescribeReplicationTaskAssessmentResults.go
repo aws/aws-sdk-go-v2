@@ -15,8 +15,7 @@ import (
 // Returns the task assessment results from the Amazon S3 bucket that DMS creates
 // in your Amazon Web Services account. This action always returns the latest
 // results. For more information about DMS task assessments, see Creating a task
-// assessment report
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
+// assessment report (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
 // in the Database Migration Service User Guide.
 func (c *Client) DescribeReplicationTaskAssessmentResults(ctx context.Context, params *DescribeReplicationTaskAssessmentResultsInput, optFns ...func(*Options)) (*DescribeReplicationTaskAssessmentResultsOutput, error) {
 	if params == nil {
@@ -37,7 +36,7 @@ type DescribeReplicationTaskAssessmentResultsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -61,7 +60,7 @@ type DescribeReplicationTaskAssessmentResultsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The task assessment report.

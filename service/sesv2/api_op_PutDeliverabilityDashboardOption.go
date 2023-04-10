@@ -18,8 +18,8 @@ import (
 // Deliverability dashboard, you pay a monthly subscription charge, in addition to
 // any other fees that you accrue by using Amazon SES and other Amazon Web Services
 // services. For more information about the features and cost of a Deliverability
-// dashboard subscription, see Amazon SES Pricing
-// (http://aws.amazon.com/ses/pricing/).
+// dashboard subscription, see Amazon SES Pricing (http://aws.amazon.com/ses/pricing/)
+// .
 func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *PutDeliverabilityDashboardOptionInput, optFns ...func(*Options)) (*PutDeliverabilityDashboardOptionOutput, error) {
 	if params == nil {
 		params = &PutDeliverabilityDashboardOptionInput{}
@@ -42,18 +42,18 @@ func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *P
 // you use the Deliverability dashboard, you pay a monthly subscription charge, in
 // addition to any other fees that you accrue by using Amazon SES and other Amazon
 // Web Services services. For more information about the features and cost of a
-// Deliverability dashboard subscription, see Amazon Pinpoint Pricing
-// (http://aws.amazon.com/pinpoint/pricing/).
+// Deliverability dashboard subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/)
+// .
 type PutDeliverabilityDashboardOptionInput struct {
 
 	// Specifies whether to enable the Deliverability dashboard. To enable the
-	// dashboard, set this value to true.
+	// dashboard, set this value to true .
 	//
 	// This member is required.
 	DashboardEnabled bool
 
-	// An array of objects, one for each verified domain that you use to send email and
-	// enabled the Deliverability dashboard for.
+	// An array of objects, one for each verified domain that you use to send email
+	// and enabled the Deliverability dashboard for.
 	SubscribedDomains []types.DomainDeliverabilityTrackingOption
 
 	noSmithyDocumentSerde

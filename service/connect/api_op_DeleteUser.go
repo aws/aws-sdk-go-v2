@@ -12,9 +12,8 @@ import (
 
 // Deletes a user account from the specified Amazon Connect instance. For
 // information about what happens to a user's data when their account is deleted,
-// see Delete Users from Your Amazon Connect Instance
-// (https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html) in the
-// Amazon Connect Administrator Guide.
+// see Delete Users from Your Amazon Connect Instance (https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}
@@ -32,8 +31,7 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 
 type DeleteUserInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

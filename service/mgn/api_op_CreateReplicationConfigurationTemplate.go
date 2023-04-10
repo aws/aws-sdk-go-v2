@@ -70,8 +70,8 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	ReplicationServerInstanceType *string
 
-	// Request to configure the Replication Server Security group ID during Replication
-	// Settings template creation.
+	// Request to configure the Replication Server Security group ID during
+	// Replication Settings template creation.
 	//
 	// This member is required.
 	ReplicationServersSecurityGroupsIDs []string

@@ -113,8 +113,8 @@ func (e *ConcurrentOperationException) ErrorCode() string {
 }
 func (e *ConcurrentOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource handler has returned that the downstream service generated an error
-// that doesn't map to any other handler error code.
+// The resource handler has returned that the downstream service generated an
+// error that doesn't map to any other handler error code.
 type GeneralServiceException struct {
 	Message *string
 
@@ -221,8 +221,8 @@ func (e *InvalidCredentialsException) ErrorCode() string {
 }
 func (e *InvalidCredentialsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource handler has returned that invalid input from the user has generated
-// a generic exception.
+// The resource handler has returned that invalid input from the user has
+// generated a generic exception.
 type InvalidRequestException struct {
 	Message *string
 

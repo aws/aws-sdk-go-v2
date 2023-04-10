@@ -14,9 +14,9 @@ import (
 // Gets an origin request policy configuration. To get an origin request policy
 // configuration, you must provide the policy's identifier. If the origin request
 // policy is attached to a distribution's cache behavior, you can get the policy's
-// identifier using ListDistributions or GetDistribution. If the origin request
+// identifier using ListDistributions or GetDistribution . If the origin request
 // policy is not attached to a cache behavior, you can get the identifier using
-// ListOriginRequestPolicies.
+// ListOriginRequestPolicies .
 func (c *Client) GetOriginRequestPolicyConfig(ctx context.Context, params *GetOriginRequestPolicyConfigInput, optFns ...func(*Options)) (*GetOriginRequestPolicyConfigOutput, error) {
 	if params == nil {
 		params = &GetOriginRequestPolicyConfigInput{}
@@ -36,9 +36,9 @@ type GetOriginRequestPolicyConfigInput struct {
 
 	// The unique identifier for the origin request policy. If the origin request
 	// policy is attached to a distribution's cache behavior, you can get the policy's
-	// identifier using ListDistributions or GetDistribution. If the origin request
+	// identifier using ListDistributions or GetDistribution . If the origin request
 	// policy is not attached to a cache behavior, you can get the identifier using
-	// ListOriginRequestPolicies.
+	// ListOriginRequestPolicies .
 	//
 	// This member is required.
 	Id *string

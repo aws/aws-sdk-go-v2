@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the attributes of an existing template. The template attributes that can
-// be modified include name, description, layoutConfiguration, requiredFields, and
-// status. At least one of these attributes must not be null. If a null value is
-// provided for a given attribute, that attribute is ignored and its current value
-// is preserved.
+// Updates the attributes of an existing template. The template attributes that
+// can be modified include name , description , layoutConfiguration ,
+// requiredFields , and status . At least one of these attributes must not be null.
+// If a null value is provided for a given attribute, that attribute is ignored and
+// its current value is preserved.
 func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput, optFns ...func(*Options)) (*UpdateTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateTemplateInput{}
@@ -52,8 +52,8 @@ type UpdateTemplateInput struct {
 	// The name of the template. It must be unique per domain.
 	Name *string
 
-	// A list of fields that must contain a value for a case to be successfully created
-	// with this template.
+	// A list of fields that must contain a value for a case to be successfully
+	// created with this template.
 	RequiredFields []types.RequiredField
 
 	// The status of the template.

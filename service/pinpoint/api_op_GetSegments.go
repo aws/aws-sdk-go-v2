@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the configuration, dimension, and other settings for
-// all the segments that are associated with an application.
+// Retrieves information about the configuration, dimension, and other settings
+// for all the segments that are associated with an application.
 func (c *Client) GetSegments(ctx context.Context, params *GetSegmentsInput, optFns ...func(*Options)) (*GetSegmentsOutput, error) {
 	if params == nil {
 		params = &GetSegmentsInput{}

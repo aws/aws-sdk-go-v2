@@ -43,8 +43,8 @@ type CancelCommandInput struct {
 	noSmithyDocumentSerde
 }
 
-// Whether or not the command was successfully canceled. There is no guarantee that
-// a request can be canceled.
+// Whether or not the command was successfully canceled. There is no guarantee
+// that a request can be canceled.
 type CancelCommandOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,12 +56,12 @@ type ListFileSharesOutput struct {
 	// An array of information about the S3 File Gateway's file shares.
 	FileShareInfoList []types.FileShareInfo
 
-	// If the request includes Marker, the response returns that value in this field.
+	// If the request includes Marker , the response returns that value in this field.
 	Marker *string
 
 	// If a value is present, there are more file shares to return. In a subsequent
-	// request, use NextMarker as the value for Marker to retrieve the next set of file
-	// shares.
+	// request, use NextMarker as the value for Marker to retrieve the next set of
+	// file shares.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.

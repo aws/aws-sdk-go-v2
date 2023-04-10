@@ -32,44 +32,27 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// The name of the engine to retrieve DB instance options for. Valid Values:
-	//
-	// *
-	// aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
-	//
-	// *
-	// aurora-postgresql
-	//
-	// * mariadb
-	//
-	// * mysql
-	//
-	// * oracle-ee
-	//
-	// * oracle-ee-cdb
-	//
-	// *
-	// oracle-se2
-	//
-	// * oracle-se2-cdb
-	//
-	// * postgres
-	//
-	// * sqlserver-ee
-	//
-	// * sqlserver-se
-	//
-	// *
-	// sqlserver-ex
-	//
-	// * sqlserver-web
+	//   - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
+	//   - aurora-postgresql
+	//   - mariadb
+	//   - mysql
+	//   - oracle-ee
+	//   - oracle-ee-cdb
+	//   - oracle-se2
+	//   - oracle-se2-cdb
+	//   - postgres
+	//   - sqlserver-ee
+	//   - sqlserver-se
+	//   - sqlserver-ex
+	//   - sqlserver-web
 	//
 	// This member is required.
 	Engine *string
 
-	// The Availability Zone group associated with a Local Zone. Specify this parameter
-	// to retrieve available offerings for the Local Zones in the group. Omit this
-	// parameter to show the available offerings in the specified Amazon Web Services
-	// Region. This setting doesn't apply to RDS Custom.
+	// The Availability Zone group associated with a Local Zone. Specify this
+	// parameter to retrieve available offerings for the Local Zones in the group. Omit
+	// this parameter to show the available offerings in the specified Amazon Web
+	// Services Region. This setting doesn't apply to RDS Custom.
 	AvailabilityZoneGroup *string
 
 	// The DB instance class filter value. Specify this parameter to show only the
@@ -91,7 +74,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// An optional pagination token provided by a previous
 	// DescribeOrderableDBInstanceOptions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -100,9 +83,9 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// Default: 100 Constraints: Minimum 20, maximum 10000.
 	MaxRecords *int32
 
-	// A value that indicates whether to show only VPC or non-VPC offerings. RDS Custom
-	// supports only VPC offerings. RDS Custom supports only VPC offerings. If you
-	// describe non-VPC offerings for RDS Custom, the output shows VPC offerings.
+	// A value that indicates whether to show only VPC or non-VPC offerings. RDS
+	// Custom supports only VPC offerings. RDS Custom supports only VPC offerings. If
+	// you describe non-VPC offerings for RDS Custom, the output shows VPC offerings.
 	Vpc *bool
 
 	noSmithyDocumentSerde
@@ -114,7 +97,7 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// An optional pagination token provided by a previous OrderableDBInstanceOptions
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// An OrderableDBInstanceOption structure containing information about orderable

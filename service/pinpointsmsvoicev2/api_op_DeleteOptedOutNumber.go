@@ -59,8 +59,8 @@ type DeleteOptedOutNumberOutput struct {
 	// The phone number that was removed from the OptOutList.
 	OptedOutNumber *string
 
-	// The time that the number was removed at, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time that the number was removed at, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	OptedOutTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

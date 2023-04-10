@@ -37,18 +37,18 @@ type BatchGetRumMetricDefinitionsInput struct {
 	AppMonitorName *string
 
 	// The type of destination that you want to view metrics for. Valid values are
-	// CloudWatch and Evidently.
+	// CloudWatch and Evidently .
 	//
 	// This member is required.
 	Destination types.MetricDestination
 
-	// This parameter is required if Destination is Evidently. If Destination is
-	// CloudWatch, do not use this parameter. This parameter specifies the ARN of the
+	// This parameter is required if Destination is Evidently . If Destination is
+	// CloudWatch , do not use this parameter. This parameter specifies the ARN of the
 	// Evidently experiment that corresponds to the destination.
 	DestinationArn *string
 
-	// The maximum number of results to return in one operation. The default is 50. The
-	// maximum that you can specify is 100. To retrieve the remaining results, make
+	// The maximum number of results to return in one operation. The default is 50.
+	// The maximum that you can specify is 100. To retrieve the remaining results, make
 	// another call with the returned NextToken value.
 	MaxResults *int32
 
@@ -149,8 +149,8 @@ var _ BatchGetRumMetricDefinitionsAPIClient = (*Client)(nil)
 // BatchGetRumMetricDefinitionsPaginatorOptions is the paginator options for
 // BatchGetRumMetricDefinitions
 type BatchGetRumMetricDefinitionsPaginatorOptions struct {
-	// The maximum number of results to return in one operation. The default is 50. The
-	// maximum that you can specify is 100. To retrieve the remaining results, make
+	// The maximum number of results to return in one operation. The default is 50.
+	// The maximum that you can specify is 100. To retrieve the remaining results, make
 	// another call with the returned NextToken value.
 	Limit int32
 

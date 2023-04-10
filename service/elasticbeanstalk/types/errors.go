@@ -143,8 +143,8 @@ func (e *ManagedActionInvalidStateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Unable to perform the specified operation because another operation that effects
-// an element in this activity is already in progress.
+// Unable to perform the specified operation because another operation that
+// effects an element in this activity is already in progress.
 type OperationInProgressException struct {
 	Message *string
 
@@ -252,15 +252,11 @@ func (e *ResourceTypeNotSupportedException) ErrorCode() string {
 }
 func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified S3 bucket does not belong to the S3 region in which the service is
-// running. The following regions are supported:
-//
-// * IAD/us-east-1
-//
-// *
-// PDX/us-west-2
-//
-// * DUB/eu-west-1
+// The specified S3 bucket does not belong to the S3 region in which the service
+// is running. The following regions are supported:
+//   - IAD/us-east-1
+//   - PDX/us-west-2
+//   - DUB/eu-west-1
 type S3LocationNotInServiceRegionException struct {
 	Message *string
 

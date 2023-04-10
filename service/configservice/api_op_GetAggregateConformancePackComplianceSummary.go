@@ -43,8 +43,8 @@ type GetAggregateConformancePackComplianceSummaryInput struct {
 	// AggregateConformancePackComplianceSummaryFilters object.
 	Filters *types.AggregateConformancePackComplianceSummaryFilters
 
-	// Groups the result based on Amazon Web Services account ID or Amazon Web Services
-	// Region.
+	// Groups the result based on Amazon Web Services account ID or Amazon Web
+	// Services Region.
 	GroupByKey types.AggregateConformancePackComplianceSummaryGroupKey
 
 	// The maximum number of results returned on each page. The default is maximum. If
@@ -63,8 +63,8 @@ type GetAggregateConformancePackComplianceSummaryOutput struct {
 	// Returns a list of AggregateConformancePackComplianceSummary object.
 	AggregateConformancePackComplianceSummaries []types.AggregateConformancePackComplianceSummary
 
-	// Groups the result based on Amazon Web Services account ID or Amazon Web Services
-	// Region.
+	// Groups the result based on Amazon Web Services account ID or Amazon Web
+	// Services Region.
 	GroupByKey *string
 
 	// The nextToken string returned on a previous page that you use to get the next

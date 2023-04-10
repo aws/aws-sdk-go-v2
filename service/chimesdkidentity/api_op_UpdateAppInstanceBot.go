@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the name and metadata of an AppInstanceBot.
+// Updates the name and metadata of an AppInstanceBot .
 func (c *Client) UpdateAppInstanceBot(ctx context.Context, params *UpdateAppInstanceBotInput, optFns ...func(*Options)) (*UpdateAppInstanceBotOutput, error) {
 	if params == nil {
 		params = &UpdateAppInstanceBotInput{}
@@ -28,17 +28,17 @@ func (c *Client) UpdateAppInstanceBot(ctx context.Context, params *UpdateAppInst
 
 type UpdateAppInstanceBotInput struct {
 
-	// The ARN of the AppInstanceBot.
+	// The ARN of the AppInstanceBot .
 	//
 	// This member is required.
 	AppInstanceBotArn *string
 
-	// The metadata of the AppInstanceBot.
+	// The metadata of the AppInstanceBot .
 	//
 	// This member is required.
 	Metadata *string
 
-	// The name of the AppInstanceBot.
+	// The name of the AppInstanceBot .
 	//
 	// This member is required.
 	Name *string
@@ -48,7 +48,7 @@ type UpdateAppInstanceBotInput struct {
 
 type UpdateAppInstanceBotOutput struct {
 
-	// The ARN of the AppInstanceBot.
+	// The ARN of the AppInstanceBot .
 	AppInstanceBotArn *string
 
 	// Metadata pertaining to the operation's result.

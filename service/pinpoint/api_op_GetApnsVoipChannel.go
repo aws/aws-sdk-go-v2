@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the status and settings of the APNs VoIP channel for
-// an application.
+// Retrieves information about the status and settings of the APNs VoIP channel
+// for an application.
 func (c *Client) GetApnsVoipChannel(ctx context.Context, params *GetApnsVoipChannelInput, optFns ...func(*Options)) (*GetApnsVoipChannelOutput, error) {
 	if params == nil {
 		params = &GetApnsVoipChannelInput{}

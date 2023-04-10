@@ -38,8 +38,8 @@ type ListRotationsInput struct {
 	NextToken *string
 
 	// A filter to include rotations in list results based on their common prefix. For
-	// example, entering prod returns a list of all rotation names that begin with
-	// prod, such as production and prod-1.
+	// example, entering prod returns a list of all rotation names that begin with prod
+	// , such as production and prod-1 .
 	RotationNamePrefix *string
 
 	noSmithyDocumentSerde

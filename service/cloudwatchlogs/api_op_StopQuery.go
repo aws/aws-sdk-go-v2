@@ -30,7 +30,7 @@ func (c *Client) StopQuery(ctx context.Context, params *StopQueryInput, optFns .
 
 type StopQueryInput struct {
 
-	// The ID number of the query to stop. To find this ID number, use DescribeQueries.
+	// The ID number of the query to stop. To find this ID number, use DescribeQueries .
 	//
 	// This member is required.
 	QueryId *string

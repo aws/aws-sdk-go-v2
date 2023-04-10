@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a callback for asynchronous custom steps. The ExecutionId, WorkflowId, and
-// Token are passed to the target resource during execution of a custom step of a
-// workflow. You must include those with their callback as well as providing a
+// Sends a callback for asynchronous custom steps. The ExecutionId , WorkflowId ,
+// and Token are passed to the target resource during execution of a custom step
+// of a workflow. You must include those with their callback as well as providing a
 // status.
 func (c *Client) SendWorkflowStepState(ctx context.Context, params *SendWorkflowStepStateInput, optFns ...func(*Options)) (*SendWorkflowStepStateOutput, error) {
 	if params == nil {

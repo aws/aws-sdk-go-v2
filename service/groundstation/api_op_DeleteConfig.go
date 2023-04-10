@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Config.
+// Deletes a Config .
 func (c *Client) DeleteConfig(ctx context.Context, params *DeleteConfigInput, optFns ...func(*Options)) (*DeleteConfigOutput, error) {
 	if params == nil {
 		params = &DeleteConfigInput{}
@@ -29,12 +29,12 @@ func (c *Client) DeleteConfig(ctx context.Context, params *DeleteConfigInput, op
 
 type DeleteConfigInput struct {
 
-	// UUID of a Config.
+	// UUID of a Config .
 	//
 	// This member is required.
 	ConfigId *string
 
-	// Type of a Config.
+	// Type of a Config .
 	//
 	// This member is required.
 	ConfigType types.ConfigCapabilityType
@@ -44,13 +44,13 @@ type DeleteConfigInput struct {
 
 type DeleteConfigOutput struct {
 
-	// ARN of a Config.
+	// ARN of a Config .
 	ConfigArn *string
 
-	// UUID of a Config.
+	// UUID of a Config .
 	ConfigId *string
 
-	// Type of a Config.
+	// Type of a Config .
 	ConfigType types.ConfigCapabilityType
 
 	// Metadata pertaining to the operation's result.

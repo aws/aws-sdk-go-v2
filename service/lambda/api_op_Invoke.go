@@ -11,46 +11,39 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Invokes a Lambda function. You can invoke a function synchronously (and wait for
-// the response), or asynchronously. To invoke a function asynchronously, set
-// InvocationType to Event. For synchronous invocation
-// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html), details
-// about the function response, including errors, are included in the response body
-// and headers. For either invocation type, you can find more information in the
-// execution log
-// (https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html) and
-// trace (https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html). When an
-// error occurs, your function may be invoked multiple times. Retry behavior varies
-// by error type, client, event source, and invocation type. For example, if you
-// invoke a function asynchronously and it returns an error, Lambda executes the
-// function up to two more times. For more information, see Error handling and
-// automatic retries in Lambda
-// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html). For
-// asynchronous invocation
-// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html), Lambda
-// adds events to a queue before sending them to your function. If your function
-// does not have enough capacity to keep up with the queue, events may be lost.
-// Occasionally, your function may receive the same event multiple times, even if
-// no error occurs. To retain events that were not processed, configure your
-// function with a dead-letter queue
-// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq).
-// The status code in the API response doesn't reflect function errors. Error codes
-// are reserved for errors that prevent your function from executing, such as
-// permissions errors, quota
-// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// Invokes a Lambda function. You can invoke a function synchronously (and wait
+// for the response), or asynchronously. To invoke a function asynchronously, set
+// InvocationType to Event . For synchronous invocation (https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html)
+// , details about the function response, including errors, are included in the
+// response body and headers. For either invocation type, you can find more
+// information in the execution log (https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html)
+// and trace (https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html) .
+// When an error occurs, your function may be invoked multiple times. Retry
+// behavior varies by error type, client, event source, and invocation type. For
+// example, if you invoke a function asynchronously and it returns an error, Lambda
+// executes the function up to two more times. For more information, see Error
+// handling and automatic retries in Lambda (https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html)
+// . For asynchronous invocation (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html)
+// , Lambda adds events to a queue before sending them to your function. If your
+// function does not have enough capacity to keep up with the queue, events may be
+// lost. Occasionally, your function may receive the same event multiple times,
+// even if no error occurs. To retain events that were not processed, configure
+// your function with a dead-letter queue (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq)
+// . The status code in the API response doesn't reflect function errors. Error
+// codes are reserved for errors that prevent your function from executing, such as
+// permissions errors, quota (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
 // errors, or issues with your function's code and configuration. For example,
 // Lambda returns TooManyRequestsException if running the function would cause you
-// to exceed a concurrency limit at either the account level
-// (ConcurrentInvocationLimitExceeded) or function level
-// (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long
+// to exceed a concurrency limit at either the account level (
+// ConcurrentInvocationLimitExceeded ) or function level (
+// ReservedFunctionConcurrentInvocationLimitExceeded ). For functions with a long
 // timeout, your client might disconnect during synchronous invocation while it
 // waits for a response. Configure your HTTP client, SDK, firewall, proxy, or
 // operating system to allow for long connections with timeout or keep-alive
-// settings. This operation requires permission for the lambda:InvokeFunction
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html) action.
-// For details on how to set up permissions for cross-account invocations, see
-// Granting function access to other accounts
-// (https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke).
+// settings. This operation requires permission for the lambda:InvokeFunction (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html)
+// action. For details on how to set up permissions for cross-account invocations,
+// see Granting function access to other accounts (https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke)
+// .
 func (c *Client) Invoke(ctx context.Context, params *InvokeInput, optFns ...func(*Options)) (*InvokeOutput, error) {
 	if params == nil {
 		params = &InvokeInput{}
@@ -69,19 +62,12 @@ func (c *Client) Invoke(ctx context.Context, params *InvokeInput, optFns ...func
 type InvokeInput struct {
 
 	// The name of the Lambda function, version, or alias. Name formats
-	//
-	// * Function
-	// name – my-function (name-only), my-function:v1 (with alias).
-	//
-	// * Function ARN –
-	// arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	// * Partial ARN –
-	// 123456789012:function:my-function.
-	//
-	// You can append a version number or alias to
-	// any of the formats. The length constraint applies only to the full ARN. If you
-	// specify only the function name, it is limited to 64 characters in length.
+	//   - Function name – my-function (name-only), my-function:v1 (with alias).
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// You can append a version number or alias to any of the formats. The length
+	// constraint applies only to the full ARN. If you specify only the function name,
+	// it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -91,18 +77,14 @@ type InvokeInput struct {
 	ClientContext *string
 
 	// Choose from the following options.
-	//
-	// * RequestResponse (default) – Invoke the
-	// function synchronously. Keep the connection open until the function returns a
-	// response or times out. The API response includes the function response and
-	// additional data.
-	//
-	// * Event – Invoke the function asynchronously. Send events that
-	// fail multiple times to the function's dead-letter queue (if one is configured).
-	// The API response only includes a status code.
-	//
-	// * DryRun – Validate parameter
-	// values and verify that the user or role has permission to invoke the function.
+	//   - RequestResponse (default) – Invoke the function synchronously. Keep the
+	//   connection open until the function returns a response or times out. The API
+	//   response includes the function response and additional data.
+	//   - Event – Invoke the function asynchronously. Send events that fail multiple
+	//   times to the function's dead-letter queue (if one is configured). The API
+	//   response only includes a status code.
+	//   - DryRun – Validate parameter values and verify that the user or role has
+	//   permission to invoke the function.
 	InvocationType types.InvocationType
 
 	// Set to Tail to include the execution log in the response. Applies to
@@ -110,8 +92,8 @@ type InvokeInput struct {
 	LogType types.LogType
 
 	// The JSON that you want to provide to your Lambda function as input. You can
-	// enter the JSON directly. For example, --payload '{ "key": "value" }'. You can
-	// also specify a file path. For example, --payload file://payload.json.
+	// enter the JSON directly. For example, --payload '{ "key": "value" }' . You can
+	// also specify a file path. For example, --payload file://payload.json .
 	Payload []byte
 
 	// Specify a version or alias to invoke a published version of the function.

@@ -13,8 +13,7 @@ import (
 )
 
 // Lists certificates that are being transferred but not yet accepted. Requires
-// permission to access the ListOutgoingCertificates
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the ListOutgoingCertificates (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListOutgoingCertificates(ctx context.Context, params *ListOutgoingCertificatesInput, optFns ...func(*Options)) (*ListOutgoingCertificatesOutput, error) {
 	if params == nil {

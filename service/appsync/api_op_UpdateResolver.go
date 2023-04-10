@@ -47,29 +47,26 @@ type UpdateResolverInput struct {
 	// The caching configuration for the resolver.
 	CachingConfig *types.CachingConfig
 
-	// The resolver code that contains the request and response functions. When code is
-	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// The resolver code that contains the request and response functions. When code
+	// is used, the runtime is required. The runtime value must be APPSYNC_JS .
 	Code *string
 
 	// The new data source name.
 	DataSourceName *string
 
 	// The resolver type.
+	//   - UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type.
+	//   You can use a UNIT resolver to run a GraphQL query against a single data source.
 	//
-	// * UNIT: A UNIT resolver type. A UNIT resolver is the default
-	// resolver type. You can use a UNIT resolver to run a GraphQL query against a
-	// single data source.
-	//
-	// * PIPELINE: A PIPELINE resolver type. You can use a
-	// PIPELINE resolver to invoke a series of Function objects in a serial manner. You
-	// can use a pipeline resolver to run a GraphQL query against multiple data
-	// sources.
+	//   - PIPELINE: A PIPELINE resolver type. You can use a PIPELINE resolver to
+	//   invoke a series of Function objects in a serial manner. You can use a pipeline
+	//   resolver to run a GraphQL query against multiple data sources.
 	Kind types.ResolverKind
 
 	// The maximum batching size for a resolver.
 	MaxBatchSize int32
 
-	// The PipelineConfig.
+	// The PipelineConfig .
 	PipelineConfig *types.PipelineConfig
 
 	// The new request mapping template. A resolver uses a request mapping template to

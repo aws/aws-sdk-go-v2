@@ -30,7 +30,7 @@ func (c *Client) DisassociateFirewallRuleGroup(ctx context.Context, params *Disa
 
 type DisassociateFirewallRuleGroupInput struct {
 
-	// The identifier of the FirewallRuleGroupAssociation.
+	// The identifier of the FirewallRuleGroupAssociation .
 	//
 	// This member is required.
 	FirewallRuleGroupAssociationId *string

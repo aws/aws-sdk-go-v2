@@ -35,7 +35,7 @@ func (c *Client) SearchSystemTemplates(ctx context.Context, params *SearchSystem
 type SearchSystemTemplatesInput struct {
 
 	// An array of filters that limit the result set. The only valid filter is
-	// FLOW_TEMPLATE_ID.
+	// FLOW_TEMPLATE_ID .
 	Filters []types.SystemTemplateFilter
 
 	// The maximum number of results to return in the response.

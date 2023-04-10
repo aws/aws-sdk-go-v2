@@ -48,7 +48,7 @@ type ListDevEndpointsInput struct {
 
 type ListDevEndpointsOutput struct {
 
-	// The names of all the DevEndpoints in the account, or the DevEndpoints with the
+	// The names of all the DevEndpoint s in the account, or the DevEndpoint s with the
 	// specified tags.
 	DevEndpointNames []string
 

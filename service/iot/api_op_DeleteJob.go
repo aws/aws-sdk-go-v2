@@ -16,8 +16,7 @@ import (
 // "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is
 // already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have
 // status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will
-// occur. Requires permission to access the DeleteJob
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// occur. Requires permission to access the DeleteJob (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteJob(ctx context.Context, params *DeleteJobInput, optFns ...func(*Options)) (*DeleteJobOutput, error) {
 	if params == nil {

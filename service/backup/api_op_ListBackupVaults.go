@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of recovery point storage containers along with information about
-// them.
+// Returns a list of recovery point storage containers along with information
+// about them.
 func (c *Client) ListBackupVaults(ctx context.Context, params *ListBackupVaultsInput, optFns ...func(*Options)) (*ListBackupVaultsOutput, error) {
 	if params == nil {
 		params = &ListBackupVaultsInput{}

@@ -40,7 +40,7 @@ type ListContactsInput struct {
 	NextToken *string
 
 	// The type of contact. A contact is type PERSONAL and an escalation plan is type
-	// ESCALATION.
+	// ESCALATION .
 	Type types.ContactType
 
 	noSmithyDocumentSerde

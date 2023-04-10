@@ -53,7 +53,7 @@ type AuthenticationResult struct {
 
 	// The authentication score for the speaker whose authentication result is
 	// produced. This value is only present if the authentication decision is either
-	// ACCEPT or REJECT.
+	// ACCEPT or REJECT .
 	Score *int32
 
 	noSmithyDocumentSerde
@@ -134,7 +134,7 @@ type DomainSummary struct {
 	// The timestamp of when the domain was last updated.
 	UpdatedAt *time.Time
 
-	// Provides information about watchlistDetails and DefaultWatchlistID.
+	// Provides information about watchlistDetails and DefaultWatchlistID .
 	WatchlistDetails *WatchlistDetails
 
 	noSmithyDocumentSerde
@@ -144,7 +144,7 @@ type DomainSummary struct {
 type EnrollmentConfig struct {
 
 	// The action to take when the specified speaker is already enrolled in the
-	// specified domain. The default value is SKIP, which skips the enrollment for the
+	// specified domain. The default value is SKIP , which skips the enrollment for the
 	// existing speaker. Setting the value to OVERWRITE replaces the existing voice
 	// prints and enrollment audio stored for that speaker with new data generated from
 	// the latest audio.
@@ -156,12 +156,12 @@ type EnrollmentConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The fraud detection configuration to be used during the batch speaker enrollment
-// job.
+// The fraud detection configuration to be used during the batch speaker
+// enrollment job.
 type EnrollmentJobFraudDetectionConfig struct {
 
 	// The action to take when the given speaker is flagged by the fraud detection
-	// system. The default value is FAIL, which fails the speaker enrollment. Changing
+	// system. The default value is FAIL , which fails the speaker enrollment. Changing
 	// this value to IGNORE results in the speaker being enrolled even if they are
 	// flagged by the fraud detection system.
 	FraudDetectionAction FraudDetectionAction
@@ -217,8 +217,8 @@ type FraudDetectionResult struct {
 	// The FraudDetectionConfiguration used to generate this fraud detection result.
 	Configuration *FraudDetectionConfiguration
 
-	// The fraud detection decision produced by Voice ID, processed against the current
-	// session state and streamed audio of the speaker.
+	// The fraud detection decision produced by Voice ID, processed against the
+	// current session state and streamed audio of the speaker.
 	Decision FraudDetectionDecision
 
 	// The unique identifier for this fraud detection result. Given there can be
@@ -229,8 +229,8 @@ type FraudDetectionResult struct {
 	FraudDetectionResultId *string
 
 	// The reason speaker was flagged by the fraud detection system. This is only be
-	// populated if fraud detection Decision is HIGH_RISK, and the following possible
-	// values: KNOWN_FRAUDSTER and VOICE_SPOOFING.
+	// populated if fraud detection Decision is HIGH_RISK , and the following possible
+	// values: KNOWN_FRAUDSTER and VOICE_SPOOFING .
 	Reasons []FraudDetectionReason
 
 	// Details about each risk analyzed for this speaker. Currently, this contains
@@ -294,7 +294,7 @@ type FraudsterRegistrationJob struct {
 
 	// Contains details that are populated when an entire batch job fails. In cases of
 	// individual registration job failures, the batch job as a whole doesn't fail; it
-	// is completed with a JobStatus of COMPLETED_WITH_ERRORS. You can use the job
+	// is completed with a JobStatus of COMPLETED_WITH_ERRORS . You can use the job
 	// output file to identify the individual registration requests that failed.
 	FailureDetails *FailureDetails
 
@@ -342,7 +342,7 @@ type FraudsterRegistrationJobSummary struct {
 
 	// Contains details that are populated when an entire batch job fails. In cases of
 	// individual registration job failures, the batch job as a whole doesn't fail; it
-	// is completed with a JobStatus of COMPLETED_WITH_ERRORS. You can use the job
+	// is completed with a JobStatus of COMPLETED_WITH_ERRORS . You can use the job
 	// output file to identify the individual registration requests that failed.
 	FailureDetails *FailureDetails
 
@@ -383,8 +383,8 @@ type FraudsterSummary struct {
 // The configuration containing input file information for a batch job.
 type InputDataConfig struct {
 
-	// The S3 location for the input manifest file that contains the list of individual
-	// enrollment or registration job requests.
+	// The S3 location for the input manifest file that contains the list of
+	// individual enrollment or registration job requests.
 	//
 	// This member is required.
 	S3Uri *string
@@ -413,7 +413,7 @@ type KnownFraudsterRisk struct {
 
 	// The identifier of the fraudster that is the closest match to the speaker. If
 	// there are no fraudsters registered in a given domain, or if there are no
-	// fraudsters with a non-zero RiskScore, this value is null.
+	// fraudsters with a non-zero RiskScore, this value is null .
 	GeneratedFraudsterId *string
 
 	noSmithyDocumentSerde
@@ -424,8 +424,8 @@ type OutputDataConfig struct {
 
 	// The S3 path of the folder where Voice ID writes the job output file. It has a
 	// *.out extension. For example, if the input file name is input-file.json and the
-	// output folder path is s3://output-bucket/output-folder, the full output file
-	// path is s3://output-bucket/output-folder/job-Id/input-file.json.out.
+	// output folder path is s3://output-bucket/output-folder , the full output file
+	// path is s3://output-bucket/output-folder/job-Id/input-file.json.out .
 	//
 	// This member is required.
 	S3Uri *string
@@ -442,7 +442,7 @@ type OutputDataConfig struct {
 type RegistrationConfig struct {
 
 	// The action to take when a fraudster is identified as a duplicate. The default
-	// action is SKIP, which skips registering the duplicate fraudster. Setting the
+	// action is SKIP , which skips registering the duplicate fraudster. Setting the
 	// value to REGISTER_AS_NEW always registers a new fraudster into the specified
 	// domain.
 	DuplicateRegistrationAction DuplicateRegistrationAction
@@ -458,8 +458,8 @@ type RegistrationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration containing information about the customer managed key used for
-// encrypting customer data.
+// The configuration containing information about the customer managed key used
+// for encrypting customer data.
 type ServerSideEncryptionConfiguration struct {
 
 	// The identifier of the KMS key to use to encrypt data stored by Voice ID. Voice
@@ -547,7 +547,7 @@ type SpeakerEnrollmentJob struct {
 
 	// Contains details that are populated when an entire batch job fails. In cases of
 	// individual registration job failures, the batch job as a whole doesn't fail; it
-	// is completed with a JobStatus of COMPLETED_WITH_ERRORS. You can use the job
+	// is completed with a JobStatus of COMPLETED_WITH_ERRORS . You can use the job
 	// output file to identify the individual registration requests that failed.
 	FailureDetails *FailureDetails
 
@@ -589,7 +589,7 @@ type SpeakerEnrollmentJobSummary struct {
 
 	// Contains details that are populated when an entire batch job fails. In cases of
 	// individual registration job failures, the batch job as a whole doesn't fail; it
-	// is completed with a JobStatus of COMPLETED_WITH_ERRORS. You can use the job
+	// is completed with a JobStatus of COMPLETED_WITH_ERRORS . You can use the job
 	// output file to identify the individual registration requests that failed.
 	FailureDetails *FailureDetails
 

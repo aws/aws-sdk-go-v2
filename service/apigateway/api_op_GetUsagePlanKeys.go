@@ -39,8 +39,8 @@ type GetUsagePlanKeysInput struct {
 	// This member is required.
 	UsagePlanId *string
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// A query parameter specifying the name of the to-be-returned usage plan keys.
@@ -144,8 +144,8 @@ var _ GetUsagePlanKeysAPIClient = (*Client)(nil)
 
 // GetUsagePlanKeysPaginatorOptions is the paginator options for GetUsagePlanKeys
 type GetUsagePlanKeysPaginatorOptions struct {
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

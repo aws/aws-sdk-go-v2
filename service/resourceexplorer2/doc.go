@@ -13,22 +13,19 @@
 // which you turn the service on, to simplify your cross-Region workloads. Resource
 // Explorer scans the resources in each of the Amazon Web Services Regions in your
 // Amazon Web Services account in which you turn on Resource Explorer. Resource
-// Explorer creates and maintains an index
-// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-index)
+// Explorer creates and maintains an index (https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-index)
 // in each Region, with the details of that Region's resources. You can search
-// across all of the indexed Regions in your account
-// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html)
+// across all of the indexed Regions in your account (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html)
 // by designating one of your Amazon Web Services Regions to contain the aggregator
 // index for the account. When you promote a local index in a Region to become the
-// aggregator index for the account
-// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html),
-// Resource Explorer automatically replicates the index information from all local
-// indexes in the other Regions to the aggregator index. Therefore, the Region with
-// the aggregator index has a copy of all resource information for all Regions in
-// the account where you turned on Resource Explorer. As a result, views in the
-// aggregator index Region include resources from all of the indexed Regions in
-// your account. For more information about Amazon Web Services Resource Explorer,
-// including how to enable and configure the service, see the Amazon Web Services
-// Resource Explorer User Guide
-// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/).
+// aggregator index for the account (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html)
+// , Resource Explorer automatically replicates the index information from all
+// local indexes in the other Regions to the aggregator index. Therefore, the
+// Region with the aggregator index has a copy of all resource information for all
+// Regions in the account where you turned on Resource Explorer. As a result, views
+// in the aggregator index Region include resources from all of the indexed Regions
+// in your account. For more information about Amazon Web Services Resource
+// Explorer, including how to enable and configure the service, see the Amazon Web
+// Services Resource Explorer User Guide (https://docs.aws.amazon.com/resource-explorer/latest/userguide/)
+// .
 package resourceexplorer2

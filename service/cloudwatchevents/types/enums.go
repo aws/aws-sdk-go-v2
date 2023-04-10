@@ -15,9 +15,9 @@ const (
 	ApiDestinationHttpMethodDelete  ApiDestinationHttpMethod = "DELETE"
 )
 
-// Values returns all known values for ApiDestinationHttpMethod. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ApiDestinationHttpMethod. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApiDestinationHttpMethod) Values() []ApiDestinationHttpMethod {
 	return []ApiDestinationHttpMethod{
 		"POST",
@@ -60,9 +60,9 @@ const (
 	ArchiveStateUpdateFailed ArchiveState = "UPDATE_FAILED"
 )
 
-// Values returns all known values for ArchiveState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ArchiveState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ArchiveState) Values() []ArchiveState {
 	return []ArchiveState{
 		"ENABLED",
@@ -227,8 +227,8 @@ const (
 	PlacementStrategyTypeBinpack PlacementStrategyType = "binpack"
 )
 
-// Values returns all known values for PlacementStrategyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PlacementStrategyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementStrategyType) Values() []PlacementStrategyType {
 	return []PlacementStrategyType{
@@ -288,9 +288,9 @@ const (
 	RuleStateDisabled RuleState = "DISABLED"
 )
 
-// Values returns all known values for RuleState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RuleState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RuleState) Values() []RuleState {
 	return []RuleState{
 		"ENABLED",

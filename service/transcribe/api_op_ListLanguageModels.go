@@ -50,7 +50,7 @@ type ListLanguageModelsInput struct {
 
 	// Returns only custom language models with the specified status. Language models
 	// are ordered by creation date, with the newest model first. If you don't include
-	// StatusEquals, all custom language models are returned.
+	// StatusEquals , all custom language models are returned.
 	StatusEquals types.ModelStatus
 
 	noSmithyDocumentSerde

@@ -21,8 +21,8 @@ import (
 // that contain private information that you don't want available to all Amazon
 // accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but
 // only by specifying a list of authorized Amazon account IDs for the ValuesToAdd
-// parameter. You can't use all as a value for that parameter in this case. To view
-// which Amazon accounts have access to copy or restore a manual DB cluster
+// parameter. You can't use all as a value for that parameter in this case. To
+// view which Amazon accounts have access to copy or restore a manual DB cluster
 // snapshot, or whether a manual DB cluster snapshot public or private, use the
 // DescribeDBClusterSnapshotAttributes API action.
 func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *ModifyDBClusterSnapshotAttributeInput, optFns ...func(*Options)) (*ModifyDBClusterSnapshotAttributeOutput, error) {
@@ -42,9 +42,9 @@ func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *M
 
 type ModifyDBClusterSnapshotAttributeInput struct {
 
-	// The name of the DB cluster snapshot attribute to modify. To manage authorization
-	// for other Amazon accounts to copy or restore a manual DB cluster snapshot, set
-	// this value to restore.
+	// The name of the DB cluster snapshot attribute to modify. To manage
+	// authorization for other Amazon accounts to copy or restore a manual DB cluster
+	// snapshot, set this value to restore .
 	//
 	// This member is required.
 	AttributeName *string
@@ -55,20 +55,20 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	DBClusterSnapshotIdentifier *string
 
 	// A list of DB cluster snapshot attributes to add to the attribute specified by
-	// AttributeName. To authorize other Amazon accounts to copy or restore a manual DB
-	// cluster snapshot, set this list to include one or more Amazon account IDs, or
+	// AttributeName . To authorize other Amazon accounts to copy or restore a manual
+	// DB cluster snapshot, set this list to include one or more Amazon account IDs, or
 	// all to make the manual DB cluster snapshot restorable by any Amazon account. Do
 	// not add the all value for any manual DB cluster snapshots that contain private
 	// information that you don't want available to all Amazon accounts.
 	ValuesToAdd []string
 
 	// A list of DB cluster snapshot attributes to remove from the attribute specified
-	// by AttributeName. To remove authorization for other Amazon accounts to copy or
+	// by AttributeName . To remove authorization for other Amazon accounts to copy or
 	// restore a manual DB cluster snapshot, set this list to include one or more
 	// Amazon account identifiers, or all to remove authorization for any Amazon
-	// account to copy or restore the DB cluster snapshot. If you specify all, an
-	// Amazon account whose account ID is explicitly added to the restore attribute can
-	// still copy or restore a manual DB cluster snapshot.
+	// account to copy or restore the DB cluster snapshot. If you specify all , an
+	// Amazon account whose account ID is explicitly added to the restore attribute
+	// can still copy or restore a manual DB cluster snapshot.
 	ValuesToRemove []string
 
 	noSmithyDocumentSerde

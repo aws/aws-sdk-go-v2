@@ -43,7 +43,7 @@ type GetComplianceDetailsByResourceInput struct {
 
 	// The unique ID of Amazon Web Services resource execution for which you want to
 	// retrieve evaluation results. You need to only provide either a
-	// ResourceEvaluationID or a ResourceID and ResourceType.
+	// ResourceEvaluationID or a ResourceID and ResourceType .
 	ResourceEvaluationId *string
 
 	// The ID of the Amazon Web Services resource for which you want compliance

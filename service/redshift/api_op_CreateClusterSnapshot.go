@@ -12,9 +12,8 @@ import (
 )
 
 // Creates a manual snapshot of the specified cluster. The cluster must be in the
-// available state. For more information about working with snapshots, go to Amazon
-// Redshift Snapshots
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// available state. For more information about working with snapshots, go to
+// Amazon Redshift Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) CreateClusterSnapshot(ctx context.Context, params *CreateClusterSnapshotInput, optFns ...func(*Options)) (*CreateClusterSnapshotOutput, error) {
 	if params == nil {
@@ -41,17 +40,10 @@ type CreateClusterSnapshotInput struct {
 	// A unique identifier for the snapshot that you are requesting. This identifier
 	// must be unique for all snapshots within the Amazon Web Services account.
 	// Constraints:
-	//
-	// * Cannot be null, empty, or blank
-	//
-	// * Must contain from 1 to 255
-	// alphanumeric characters or hyphens
-	//
-	// * First character must be a letter
-	//
-	// * Cannot
-	// end with a hyphen or contain two consecutive hyphens
-	//
+	//   - Cannot be null, empty, or blank
+	//   - Must contain from 1 to 255 alphanumeric characters or hyphens
+	//   - First character must be a letter
+	//   - Cannot end with a hyphen or contain two consecutive hyphens
 	// Example: my-snapshot-id
 	//
 	// This member is required.

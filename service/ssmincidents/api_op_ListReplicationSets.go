@@ -114,8 +114,8 @@ func (c *Client) addOperationListReplicationSetsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListReplicationSetsAPIClient is a client that implements the ListReplicationSets
-// operation.
+// ListReplicationSetsAPIClient is a client that implements the
+// ListReplicationSets operation.
 type ListReplicationSetsAPIClient interface {
 	ListReplicationSets(context.Context, *ListReplicationSetsInput, ...func(*Options)) (*ListReplicationSetsOutput, error)
 }

@@ -13,22 +13,16 @@ import (
 
 // Updates the attributes of the specified link aggregation group (LAG). You can
 // update the following LAG attributes:
+//   - The name of the LAG.
+//   - The value for the minimum number of connections that must be operational
+//     for the LAG itself to be operational.
+//   - The LAG's MACsec encryption mode. Amazon Web Services assigns this value to
+//     each connection which is part of the LAG.
+//   - The tags
 //
-// * The name of the LAG.
-//
-// * The value for
-// the minimum number of connections that must be operational for the LAG itself to
-// be operational.
-//
-// * The LAG's MACsec encryption mode. Amazon Web Services assigns
-// this value to each connection which is part of the LAG.
-//
-// * The tags
-//
-// If you
-// adjust the threshold value for the minimum number of operational connections,
-// ensure that the new value does not cause the LAG to fall below the threshold and
-// become non-operational.
+// If you adjust the threshold value for the minimum number of operational
+// connections, ensure that the new value does not cause the LAG to fall below the
+// threshold and become non-operational.
 func (c *Client) UpdateLag(ctx context.Context, params *UpdateLagInput, optFns ...func(*Options)) (*UpdateLagOutput, error) {
 	if params == nil {
 		params = &UpdateLagInput{}
@@ -90,8 +84,8 @@ type UpdateLagOutput struct {
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
 
-	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt,
-	// should_encrypt, and must_encrypt.
+	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt ,
+	// should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
@@ -108,26 +102,14 @@ type UpdateLagOutput struct {
 	LagName *string
 
 	// The state of the LAG. The following are the possible values:
-	//
-	// * requested: The
-	// initial state of a LAG. The LAG stays in the requested state until the Letter of
-	// Authorization (LOA) is available.
-	//
-	// * pending: The LAG has been approved and is
-	// being initialized.
-	//
-	// * available: The network link is established and the LAG is
-	// ready for use.
-	//
-	// * down: The network link is down.
-	//
-	// * deleting: The LAG is being
-	// deleted.
-	//
-	// * deleted: The LAG is deleted.
-	//
-	// * unknown: The state of the LAG is not
-	// available.
+	//   - requested : The initial state of a LAG. The LAG stays in the requested state
+	//   until the Letter of Authorization (LOA) is available.
+	//   - pending : The LAG has been approved and is being initialized.
+	//   - available : The network link is established and the LAG is ready for use.
+	//   - down : The network link is down.
+	//   - deleting : The LAG is being deleted.
+	//   - deleted : The LAG is deleted.
+	//   - unknown : The state of the LAG is not available.
 	LagState types.LagState
 
 	// The location of the LAG.
@@ -143,8 +125,8 @@ type UpdateLagOutput struct {
 	// for the LAG itself to be operational.
 	MinimumLinks int32
 
-	// The number of physical dedicated connections bundled by the LAG, up to a maximum
-	// of 10.
+	// The number of physical dedicated connections bundled by the LAG, up to a
+	// maximum of 10.
 	NumberOfConnections int32
 
 	// The ID of the Amazon Web Services account that owns the LAG.

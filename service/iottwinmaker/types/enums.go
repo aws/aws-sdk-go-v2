@@ -53,9 +53,9 @@ const (
 	ErrorCodeSyncProcessingError   ErrorCode = "SYNC_PROCESSING_ERROR"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"VALIDATION_ERROR",
@@ -73,9 +73,9 @@ const (
 	GroupTypeTabular GroupType = "TABULAR"
 )
 
-// Values returns all known values for GroupType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for GroupType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (GroupType) Values() []GroupType {
 	return []GroupType{
 		"TABULAR",
@@ -106,8 +106,8 @@ const (
 	OrderDescending Order = "DESCENDING"
 )
 
-// Values returns all known values for Order. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Order. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Order) Values() []Order {
 	return []Order{
@@ -242,8 +242,8 @@ const (
 	ScopeWorkspace Scope = "WORKSPACE"
 )
 
-// Values returns all known values for Scope. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Scope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Scope) Values() []Scope {
 	return []Scope{
@@ -263,8 +263,8 @@ const (
 	StateError    State = "ERROR"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
@@ -287,9 +287,9 @@ const (
 	SyncJobStateError        SyncJobState = "ERROR"
 )
 
-// Values returns all known values for SyncJobState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SyncJobState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SyncJobState) Values() []SyncJobState {
 	return []SyncJobState{
 		"CREATING",
@@ -383,9 +383,9 @@ const (
 	UpdateReasonOverwritten       UpdateReason = "OVERWRITTEN"
 )
 
-// Values returns all known values for UpdateReason. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpdateReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateReason) Values() []UpdateReason {
 	return []UpdateReason{
 		"DEFAULT",

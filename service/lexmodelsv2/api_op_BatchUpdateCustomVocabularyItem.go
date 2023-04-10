@@ -40,16 +40,16 @@ type BatchUpdateCustomVocabularyItemInput struct {
 	// This member is required.
 	BotVersion *string
 
-	// A list of custom vocabulary items with updated fields. Each entry must contain a
-	// phrase and can optionally contain a displayAs and/or a weight.
+	// A list of custom vocabulary items with updated fields. Each entry must contain
+	// a phrase and can optionally contain a displayAs and/or a weight.
 	//
 	// This member is required.
 	CustomVocabularyItemList []types.CustomVocabularyItem
 
 	// The identifier of the language and locale where this custom vocabulary is used.
 	// The string must match one of the supported locales. For more information, see
-	// Supported Languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -71,8 +71,8 @@ type BatchUpdateCustomVocabularyItemOutput struct {
 
 	// The identifier of the language and locale where this custom vocabulary is used.
 	// The string must match one of the supported locales. For more information, see
-	// Supported Languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	LocaleId *string
 
 	// A list of custom vocabulary items that were successfully updated during the

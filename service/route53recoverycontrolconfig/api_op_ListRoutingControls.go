@@ -124,8 +124,8 @@ func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRoutingControlsAPIClient is a client that implements the ListRoutingControls
-// operation.
+// ListRoutingControlsAPIClient is a client that implements the
+// ListRoutingControls operation.
 type ListRoutingControlsAPIClient interface {
 	ListRoutingControls(context.Context, *ListRoutingControlsInput, ...func(*Options)) (*ListRoutingControlsOutput, error)
 }

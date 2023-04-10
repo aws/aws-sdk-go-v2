@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Checks out the specified license. If the account that created the license is the
-// same that is performing the check out, you must specify the account as the
+// Checks out the specified license. If the account that created the license is
+// the same that is performing the check out, you must specify the account as the
 // beneficiary.
 func (c *Client) CheckoutLicense(ctx context.Context, params *CheckoutLicenseInput, optFns ...func(*Options)) (*CheckoutLicenseOutput, error) {
 	if params == nil {

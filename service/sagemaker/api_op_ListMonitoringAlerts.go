@@ -39,7 +39,7 @@ type ListMonitoringAlertsInput struct {
 	MaxResults *int32
 
 	// If the result of the previous ListMonitoringAlerts request was truncated, the
-	// response includes a NextToken. To retrieve the next set of alerts in the
+	// response includes a NextToken . To retrieve the next set of alerts in the
 	// history, use the token in the next request.
 	NextToken *string
 
@@ -51,8 +51,8 @@ type ListMonitoringAlertsOutput struct {
 	// A JSON array where each element is a summary for a monitoring alert.
 	MonitoringAlertSummaries []types.MonitoringAlertSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of alerts, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of alerts, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

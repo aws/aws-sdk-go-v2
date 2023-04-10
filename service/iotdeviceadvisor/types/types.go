@@ -113,8 +113,7 @@ type SuiteRunConfiguration struct {
 }
 
 // Information about the suite run. Requires permission to access the
-// SuiteRunInformation
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// SuiteRunInformation (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 type SuiteRunInformation struct {
 
@@ -167,28 +166,16 @@ type TestCaseRun struct {
 	StartTime *time.Time
 
 	// Provides the test case run status. Status is one of the following:
-	//
-	// * PASS: Test
-	// passed.
-	//
-	// * FAIL: Test failed.
-	//
-	// * PENDING: Test has not started running but is
-	// scheduled.
-	//
-	// * RUNNING: Test is running.
-	//
-	// * STOPPING: Test is performing cleanup
-	// steps. You will see this status only if you stop a suite run.
-	//
-	// * STOPPED Test is
-	// stopped. You will see this status only if you stop a suite run.
-	//
-	// *
-	// PASS_WITH_WARNINGS: Test passed with warnings.
-	//
-	// * ERORR: Test faced an error
-	// when running due to an internal issue.
+	//   - PASS : Test passed.
+	//   - FAIL : Test failed.
+	//   - PENDING : Test has not started running but is scheduled.
+	//   - RUNNING : Test is running.
+	//   - STOPPING : Test is performing cleanup steps. You will see this status only
+	//   if you stop a suite run.
+	//   - STOPPED Test is stopped. You will see this status only if you stop a suite
+	//   run.
+	//   - PASS_WITH_WARNINGS : Test passed with warnings.
+	//   - ERORR : Test faced an error when running due to an internal issue.
 	Status Status
 
 	// Provides the test case run definition ID.
@@ -216,28 +203,16 @@ type TestCaseScenario struct {
 	Failure *string
 
 	// Provides the test case scenario status. Status is one of the following:
-	//
-	// * PASS:
-	// Test passed.
-	//
-	// * FAIL: Test failed.
-	//
-	// * PENDING: Test has not started running but
-	// is scheduled.
-	//
-	// * RUNNING: Test is running.
-	//
-	// * STOPPING: Test is performing
-	// cleanup steps. You will see this status only if you stop a suite run.
-	//
-	// * STOPPED
-	// Test is stopped. You will see this status only if you stop a suite run.
-	//
-	// *
-	// PASS_WITH_WARNINGS: Test passed with warnings.
-	//
-	// * ERORR: Test faced an error
-	// when running due to an internal issue.
+	//   - PASS : Test passed.
+	//   - FAIL : Test failed.
+	//   - PENDING : Test has not started running but is scheduled.
+	//   - RUNNING : Test is running.
+	//   - STOPPING : Test is performing cleanup steps. You will see this status only
+	//   if you stop a suite run.
+	//   - STOPPED Test is stopped. You will see this status only if you stop a suite
+	//   run.
+	//   - PASS_WITH_WARNINGS : Test passed with warnings.
+	//   - ERORR : Test faced an error when running due to an internal issue.
 	Status TestCaseScenarioStatus
 
 	//
@@ -247,11 +222,8 @@ type TestCaseScenario struct {
 	TestCaseScenarioId *string
 
 	// Provides test case scenario type. Type is one of the following:
-	//
-	// * Advanced
-	//
-	// *
-	// Basic
+	//   - Advanced
+	//   - Basic
 	TestCaseScenarioType TestCaseScenarioType
 
 	noSmithyDocumentSerde

@@ -17,7 +17,7 @@ import (
 // Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate.
 // Your AWS workloads can authenticate with the trust anchor using certificates
 // issued by the trusted Certificate Authority (CA) in exchange for temporary AWS
-// credentials. Required permissions: rolesanywhere:CreateTrustAnchor.
+// credentials. Required permissions: rolesanywhere:CreateTrustAnchor .
 func (c *Client) CreateTrustAnchor(ctx context.Context, params *CreateTrustAnchorInput, optFns ...func(*Options)) (*CreateTrustAnchorOutput, error) {
 	if params == nil {
 		params = &CreateTrustAnchorInput{}

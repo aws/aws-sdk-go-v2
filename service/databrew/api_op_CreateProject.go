@@ -51,8 +51,8 @@ type CreateProjectInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Represents the sample size and sampling type for DataBrew to use for interactive
-	// data analysis.
+	// Represents the sample size and sampling type for DataBrew to use for
+	// interactive data analysis.
 	Sample *types.Sample
 
 	// Metadata tags to apply to this project.

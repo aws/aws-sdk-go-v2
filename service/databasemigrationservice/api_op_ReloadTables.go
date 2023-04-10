@@ -41,8 +41,8 @@ type ReloadTablesInput struct {
 	// This member is required.
 	TablesToReload []types.TableToReload
 
-	// Options for reload. Specify data-reload to reload the data and re-validate it if
-	// validation is enabled. Specify validate-only to re-validate the table. This
+	// Options for reload. Specify data-reload to reload the data and re-validate it
+	// if validation is enabled. Specify validate-only to re-validate the table. This
 	// option applies only when validation is enabled for the task. Valid values:
 	// data-reload, validate-only Default value is data-reload.
 	ReloadOption types.ReloadOptionValue

@@ -32,11 +32,10 @@ func (c *Client) UpdateAppVersionAppComponent(ctx context.Context, params *Updat
 
 type UpdateAppVersionAppComponentInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -54,8 +53,8 @@ type UpdateAppVersionAppComponentInput struct {
 	Name *string
 
 	// The type of Application Component. For more information about the types of
-	// Application Component, see Grouping resources in an AppComponent
-	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html).
+	// Application Component, see Grouping resources in an AppComponent (https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html)
+	// .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -63,11 +62,10 @@ type UpdateAppVersionAppComponentInput struct {
 
 type UpdateAppVersionAppComponentOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string

@@ -200,7 +200,7 @@ func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return sm
 // trying to delete. The body of the exception contains a JSON object that
 // describes the resource. { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
 //
-// "resourceReference": {
+//	"resourceReference": {
 //
 //	"name": string, "version": string } }
 type ResourceInUseException struct {

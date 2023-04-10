@@ -17,8 +17,7 @@ import (
 // store in the HSM. In addition to creating the HSM certificate, you must create
 // an Amazon Redshift HSM configuration that provides a cluster the information
 // needed to store and use encryption keys in the HSM. For more information, go to
-// Hardware Security Modules
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM)
+// Hardware Security Modules (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) CreateHsmClientCertificate(ctx context.Context, params *CreateHsmClientCertificateInput, optFns ...func(*Options)) (*CreateHsmClientCertificateOutput, error) {
 	if params == nil {
@@ -37,8 +36,8 @@ func (c *Client) CreateHsmClientCertificate(ctx context.Context, params *CreateH
 
 type CreateHsmClientCertificateInput struct {
 
-	// The identifier to be assigned to the new HSM client certificate that the cluster
-	// will use to connect to the HSM to use the database encryption keys.
+	// The identifier to be assigned to the new HSM client certificate that the
+	// cluster will use to connect to the HSM to use the database encryption keys.
 	//
 	// This member is required.
 	HsmClientCertificateIdentifier *string

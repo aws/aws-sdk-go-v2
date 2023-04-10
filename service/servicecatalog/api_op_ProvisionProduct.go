@@ -15,14 +15,13 @@ import (
 // Provisions the specified product. A provisioned product is a resourced instance
 // of a product. For example, provisioning a product that's based on an
 // CloudFormation template launches an CloudFormation stack and its underlying
-// resources. You can check the status of this request using DescribeRecord. If the
-// request contains a tag key with an empty list of values, there's a tag conflict
-// for that key. Don't include conflicted keys as tags, or this will cause the
-// error "Parameter validation failed: Missing required parameter in
+// resources. You can check the status of this request using DescribeRecord . If
+// the request contains a tag key with an empty list of values, there's a tag
+// conflict for that key. Don't include conflicted keys as tags, or this will cause
+// the error "Parameter validation failed: Missing required parameter in
 // Tags[N]:Value". When provisioning a product that's been added to a portfolio,
 // you must grant your user, group, or role access to the portfolio. For more
-// information, see Granting users access
-// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)
+// information, see Granting users access (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)
 // in the Service Catalog User Guide.
 func (c *Client) ProvisionProduct(ctx context.Context, params *ProvisionProductInput, optFns ...func(*Options)) (*ProvisionProductOutput, error) {
 	if params == nil {
@@ -54,10 +53,8 @@ type ProvisionProductInput struct {
 	ProvisionedProductName *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
@@ -66,7 +63,7 @@ type ProvisionProductInput struct {
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths. You must provide the name or ID, but
+	// paths for a product, use ListLaunchPaths . You must provide the name or ID, but
 	// not both.
 	PathId *string
 
@@ -87,8 +84,8 @@ type ProvisionProductInput struct {
 	// both.
 	ProvisioningArtifactName *string
 
-	// Parameters specified by the administrator that are required for provisioning the
-	// product.
+	// Parameters specified by the administrator that are required for provisioning
+	// the product.
 	ProvisioningParameters []types.ProvisioningParameter
 
 	// An object that contains information about the provisioning preferences for a

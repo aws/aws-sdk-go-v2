@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within an
-// application.
+// Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within
+// an application.
 func (c *Client) ListRoutes(ctx context.Context, params *ListRoutesInput, optFns ...func(*Options)) (*ListRoutesOutput, error) {
 	if params == nil {
 		params = &ListRoutesInput{}

@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently bans a member from a channel. Moderators can't add banned members to
-// a channel. To undo a ban, you first have to DeleteChannelBan, and then
-// CreateChannelMembership. Bans are cleaned up when you delete users or channels.
+// Permanently bans a member from a channel. Moderators can't add banned members
+// to a channel. To undo a ban, you first have to DeleteChannelBan , and then
+// CreateChannelMembership . Bans are cleaned up when you delete users or channels.
 // If you ban a user who is already part of a channel, that user is automatically
-// kicked from the channel. The x-amz-chime-bearer request header is mandatory. Use
-// the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the
-// value in the header.
+// kicked from the channel. The x-amz-chime-bearer request header is mandatory.
+// Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as
+// the value in the header.
 func (c *Client) CreateChannelBan(ctx context.Context, params *CreateChannelBanInput, optFns ...func(*Options)) (*CreateChannelBanOutput, error) {
 	if params == nil {
 		params = &CreateChannelBanInput{}

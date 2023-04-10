@@ -435,9 +435,8 @@ func (e *TooManyRequestsException) ErrorCode() string {
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've exceeded the number of tags allowed for a resource. For more information,
-// see Tag restrictions
-// (https://docs.aws.amazon.com/servicequotas/latest/userguide/sq-tagging.html#sq-tagging-restrictions)
+// You've exceeded the number of tags allowed for a resource. For more
+// information, see Tag restrictions (https://docs.aws.amazon.com/servicequotas/latest/userguide/sq-tagging.html#sq-tagging-restrictions)
 // in the Service Quotas User Guide.
 type TooManyTagsException struct {
 	Message *string

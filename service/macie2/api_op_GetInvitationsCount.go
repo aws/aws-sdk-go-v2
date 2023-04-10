@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the count of Amazon Macie membership invitations that were received by
-// an account.
+// Retrieves the count of Amazon Macie membership invitations that were received
+// by an account.
 func (c *Client) GetInvitationsCount(ctx context.Context, params *GetInvitationsCountInput, optFns ...func(*Options)) (*GetInvitationsCountOutput, error) {
 	if params == nil {
 		params = &GetInvitationsCountInput{}
@@ -33,8 +33,8 @@ type GetInvitationsCountInput struct {
 
 type GetInvitationsCountOutput struct {
 
-	// The total number of invitations that were received by the account, not including
-	// the currently accepted invitation.
+	// The total number of invitations that were received by the account, not
+	// including the currently accepted invitation.
 	InvitationsCount int64
 
 	// Metadata pertaining to the operation's result.

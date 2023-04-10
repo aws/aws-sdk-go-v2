@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// Retrieves a list that describes one or more specified fleets, if the fleet names
-// are provided. Otherwise, all fleets in the account are described.
+// Retrieves a list that describes one or more specified fleets, if the fleet
+// names are provided. Otherwise, all fleets in the account are described.
 func (c *Client) DescribeFleets(ctx context.Context, params *DescribeFleetsInput, optFns ...func(*Options)) (*DescribeFleetsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetsInput{}
@@ -141,9 +141,9 @@ type FleetStartedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, FleetStartedWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, FleetStartedWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -363,9 +363,9 @@ type FleetStoppedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, FleetStoppedWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, FleetStoppedWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

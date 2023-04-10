@@ -20,8 +20,7 @@ import (
 // a DS node type, you can also choose to change to another DS node type of the
 // same size during restore. If you restore a cluster into a VPC, you must provide
 // a cluster subnet group where you want the cluster restored. For more information
-// about working with snapshots, go to Amazon Redshift Snapshots
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// about working with snapshots, go to Amazon Redshift Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) RestoreFromClusterSnapshot(ctx context.Context, params *RestoreFromClusterSnapshotInput, optFns ...func(*Options)) (*RestoreFromClusterSnapshotOutput, error) {
 	if params == nil {
@@ -42,19 +41,11 @@ type RestoreFromClusterSnapshotInput struct {
 
 	// The identifier of the cluster that will be created from restoring the snapshot.
 	// Constraints:
-	//
-	// * Must contain from 1 to 63 alphanumeric characters or hyphens.
-	//
-	// *
-	// Alphabetic characters must be lowercase.
-	//
-	// * First character must be a letter.
-	//
-	// *
-	// Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	// * Must be unique
-	// for all clusters within an Amazon Web Services account.
+	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//   - Alphabetic characters must be lowercase.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must be unique for all clusters within an Amazon Web Services account.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -62,18 +53,18 @@ type RestoreFromClusterSnapshotInput struct {
 	// Reserved.
 	AdditionalInfo *string
 
-	// If true, major version upgrades can be applied during the maintenance window to
+	// If true , major version upgrades can be applied during the maintenance window to
 	// the Amazon Redshift engine that is running on the cluster. Default: true
 	AllowVersionUpgrade *bool
 
-	// This parameter is retired. It does not set the AQUA configuration status. Amazon
-	// Redshift automatically determines whether to use AQUA (Advanced Query
+	// This parameter is retired. It does not set the AQUA configuration status.
+	// Amazon Redshift automatically determines whether to use AQUA (Advanced Query
 	// Accelerator).
 	AquaConfigurationStatus types.AquaConfigurationStatus
 
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
-	// can still create manual snapshots when you want with CreateClusterSnapshot. You
+	// can still create manual snapshots when you want with CreateClusterSnapshot . You
 	// can't disable automated snapshots for RA3 node types. Set the automated
 	// retention period from 1-35 days. Default: The value selected for the cluster
 	// from which the snapshot was taken. Constraints: Must be a value from 0 to 35.
@@ -87,19 +78,13 @@ type RestoreFromClusterSnapshotInput struct {
 	// Availability Zones after the cluster is restored.
 	AvailabilityZoneRelocation *bool
 
-	// The name of the parameter group to be associated with this cluster. Default: The
-	// default Amazon Redshift cluster parameter group. For information about the
-	// default parameter group, go to Working with Amazon Redshift Parameter Groups
-	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html).
-	// Constraints:
-	//
-	// * Must be 1 to 255 alphanumeric characters or hyphens.
-	//
-	// * First
-	// character must be a letter.
-	//
-	// * Cannot end with a hyphen or contain two
-	// consecutive hyphens.
+	// The name of the parameter group to be associated with this cluster. Default:
+	// The default Amazon Redshift cluster parameter group. For information about the
+	// default parameter group, go to Working with Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+	// . Constraints:
+	//   - Must be 1 to 255 alphanumeric characters or hyphens.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	ClusterParameterGroupName *string
 
 	// A list of security groups to be associated with this cluster. Default: The
@@ -126,12 +111,11 @@ type RestoreFromClusterSnapshotInput struct {
 	// with Key Management Service (KMS) and a customer managed key.
 	Encrypted *bool
 
-	// An option that specifies whether to create the cluster with enhanced VPC routing
-	// enabled. To create a cluster that uses enhanced VPC routing, the cluster must be
-	// in a VPC. For more information, see Enhanced VPC Routing
-	// (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html) in
-	// the Amazon Redshift Cluster Management Guide. If this option is true, enhanced
-	// VPC routing is enabled. Default: false
+	// An option that specifies whether to create the cluster with enhanced VPC
+	// routing enabled. To create a cluster that uses enhanced VPC routing, the cluster
+	// must be in a VPC. For more information, see Enhanced VPC Routing (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
+	// in the Amazon Redshift Cluster Management Guide. If this option is true ,
+	// enhanced VPC routing is enabled. Default: false
 	EnhancedVpcRouting *bool
 
 	// Specifies the name of the HSM client certificate the Amazon Redshift cluster
@@ -146,25 +130,25 @@ type RestoreFromClusterSnapshotInput struct {
 	// cluster to access other Amazon Web Services services. You must supply the IAM
 	// roles in their Amazon Resource Name (ARN) format. The maximum number of IAM
 	// roles that you can associate is subject to a quota. For more information, go to
-	// Quotas and limits
-	// (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// Quotas and limits (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	IamRoles []string
 
-	// The Key Management Service (KMS) key ID of the encryption key that encrypts data
-	// in the cluster restored from a shared snapshot. You can also provide the key ID
-	// when you restore from an unencrypted snapshot to an encrypted cluster in the
-	// same account. Additionally, you can specify a new KMS key ID when you restore
-	// from an encrypted snapshot in the same account in order to change it. In that
-	// case, the restored cluster is encrypted with the new KMS key ID.
+	// The Key Management Service (KMS) key ID of the encryption key that encrypts
+	// data in the cluster restored from a shared snapshot. You can also provide the
+	// key ID when you restore from an unencrypted snapshot to an encrypted cluster in
+	// the same account. Additionally, you can specify a new KMS key ID when you
+	// restore from an encrypted snapshot in the same account in order to change it. In
+	// that case, the restored cluster is encrypted with the new KMS key ID.
 	KmsKeyId *string
 
 	// The name of the maintenance track for the restored cluster. When you take a
-	// snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The
-	// snapshot might be on a different track than the cluster that was the source for
-	// the snapshot. For example, suppose that you take a snapshot of a cluster that is
-	// on the current track and then change the cluster to be on the trailing track. In
-	// this case, the snapshot and the source cluster are on different tracks.
+	// snapshot, the snapshot inherits the MaintenanceTrack value from the cluster.
+	// The snapshot might be on a different track than the cluster that was the source
+	// for the snapshot. For example, suppose that you take a snapshot of a cluster
+	// that is on the current track and then change the cluster to be on the trailing
+	// track. In this case, the snapshot and the source cluster are on different
+	// tracks.
 	MaintenanceTrackName *string
 
 	// The default number of days to retain a manual snapshot. If the value is -1, the
@@ -182,39 +166,38 @@ type RestoreFromClusterSnapshotInput struct {
 	// only restore a dc1.large instance type into another dc1.large instance type or
 	// dc2.large instance type. You can't restore dc1.8xlarge to dc2.8xlarge. First
 	// restore to a dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more
-	// information about node types, see  About Clusters and Nodes
-	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes)
+	// information about node types, see About Clusters and Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes)
 	// in the Amazon Redshift Cluster Management Guide.
 	NodeType *string
 
 	// The number of nodes specified when provisioning the restored cluster.
 	NumberOfNodes *int32
 
-	// The Amazon Web Services account used to create or copy the snapshot. Required if
-	// you are restoring a snapshot you do not own, optional if you own the snapshot.
+	// The Amazon Web Services account used to create or copy the snapshot. Required
+	// if you are restoring a snapshot you do not own, optional if you own the
+	// snapshot.
 	OwnerAccount *string
 
-	// The port number on which the cluster accepts connections. Default: The same port
-	// as the original cluster. Constraints: Must be between 1115 and 65535.
+	// The port number on which the cluster accepts connections. Default: The same
+	// port as the original cluster. Constraints: Must be between 1115 and 65535 .
 	Port *int32
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can
 	// occur. Format: ddd:hh24:mi-ddd:hh24:mi Default: The value selected for the
 	// cluster from which the snapshot was taken. For more information about the time
-	// blocks for each region, see Maintenance Windows
-	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows)
+	// blocks for each region, see Maintenance Windows (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows)
 	// in Amazon Redshift Cluster Management Guide. Valid Days: Mon | Tue | Wed | Thu |
 	// Fri | Sat | Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
-	// If true, the cluster can be accessed from a public network.
+	// If true , the cluster can be accessed from a public network.
 	PubliclyAccessible *bool
 
 	// The identifier of the target reserved node offering.
 	ReservedNodeId *string
 
 	// The Amazon Resource Name (ARN) of the snapshot associated with the message to
-	// restore from a cluster. You must specify this parameter or snapshotIdentifier,
+	// restore from a cluster. You must specify this parameter or snapshotIdentifier ,
 	// but not both.
 	SnapshotArn *string
 
@@ -224,7 +207,7 @@ type RestoreFromClusterSnapshotInput struct {
 	SnapshotClusterIdentifier *string
 
 	// The name of the snapshot from which to create the new cluster. This parameter
-	// isn't case sensitive. You must specify this parameter or snapshotArn, but not
+	// isn't case sensitive. You must specify this parameter or snapshotArn , but not
 	// both. Example: my-snapshot-id
 	SnapshotIdentifier *string
 

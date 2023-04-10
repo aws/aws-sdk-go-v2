@@ -12,8 +12,8 @@ import (
 )
 
 // Creates an endpoint for an Amazon S3 bucket that DataSync can access for a
-// transfer. For more information, see Create an Amazon S3 location
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli).
+// transfer. For more information, see Create an Amazon S3 location (https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli)
+// .
 func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3Input, optFns ...func(*Options)) (*CreateLocationS3Output, error) {
 	if params == nil {
 		params = &CreateLocationS3Input{}
@@ -48,27 +48,27 @@ type CreateLocationS3Input struct {
 	// If you're using DataSync on an Amazon Web Services Outpost, specify the Amazon
 	// Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more
 	// information about launching a DataSync agent on an Amazon Web Services Outpost,
-	// see Deploy your DataSync agent on Outposts
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent).
+	// see Deploy your DataSync agent on Outposts (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent)
+	// .
 	AgentArns []string
 
 	// The Amazon S3 storage class that you want to store your files in when this
 	// location is used as a task destination. For buckets in Amazon Web Services
 	// Regions, the storage class defaults to Standard. For buckets on Outposts, the
 	// storage class defaults to Amazon Web Services S3 Outposts. For more information
-	// about S3 storage classes, see Amazon S3 Storage Classes
-	// (http://aws.amazon.com/s3/storage-classes/). Some storage classes have behaviors
-	// that can affect your S3 storage cost. For detailed information, see
-	// Considerations when working with S3 storage classes in DataSync
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
+	// about S3 storage classes, see Amazon S3 Storage Classes (http://aws.amazon.com/s3/storage-classes/)
+	// . Some storage classes have behaviors that can affect your S3 storage cost. For
+	// detailed information, see Considerations when working with S3 storage classes
+	// in DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
+	// .
 	S3StorageClass types.S3StorageClass
 
 	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used
 	// to read data from the S3 source location or write data to the S3 destination.
 	Subdirectory *string
 
-	// The key-value pair that represents the tag that you want to add to the location.
-	// The value can be an empty string. We recommend using tags to name your
+	// The key-value pair that represents the tag that you want to add to the
+	// location. The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []types.TagListEntry
 

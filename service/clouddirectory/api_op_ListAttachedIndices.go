@@ -129,8 +129,8 @@ func (c *Client) addOperationListAttachedIndicesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListAttachedIndicesAPIClient is a client that implements the ListAttachedIndices
-// operation.
+// ListAttachedIndicesAPIClient is a client that implements the
+// ListAttachedIndices operation.
 type ListAttachedIndicesAPIClient interface {
 	ListAttachedIndices(context.Context, *ListAttachedIndicesInput, ...func(*Options)) (*ListAttachedIndicesOutput, error)
 }

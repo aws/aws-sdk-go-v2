@@ -31,8 +31,8 @@ func (c *Client) ModifyReplicationGroupShardConfiguration(ctx context.Context, p
 // Represents the input for a ModifyReplicationGroupShardConfiguration operation.
 type ModifyReplicationGroupShardConfigurationInput struct {
 
-	// Indicates that the shard reconfiguration process begins immediately. At present,
-	// the only permitted value for this parameter is true. Value: true
+	// Indicates that the shard reconfiguration process begins immediately. At
+	// present, the only permitted value for this parameter is true . Value: true
 	//
 	// This member is required.
 	ApplyImmediately bool
@@ -51,24 +51,25 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
-	// NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster.
+	// NodeGroupsToRemove is a list of NodeGroupId s to remove from the cluster.
 	// ElastiCache for Redis will attempt to remove all node groups listed by
 	// NodeGroupsToRemove from the cluster.
 	NodeGroupsToRemove []string
 
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
-	// NodeGroupsToRetain is a list of NodeGroupIds to retain in the cluster.
+	// NodeGroupsToRetain is a list of NodeGroupId s to retain in the cluster.
 	// ElastiCache for Redis will attempt to remove all node groups except those listed
 	// by NodeGroupsToRetain from the cluster.
 	NodeGroupsToRetain []string
 
 	// Specifies the preferred availability zones for each node group in the cluster.
-	// If the value of NodeGroupCount is greater than the current number of node groups
-	// (shards), you can use this parameter to specify the preferred availability zones
-	// of the cluster's shards. If you omit this parameter ElastiCache selects
-	// availability zones for you. You can specify this parameter only if the value of
-	// NodeGroupCount is greater than the current number of node groups (shards).
+	// If the value of NodeGroupCount is greater than the current number of node
+	// groups (shards), you can use this parameter to specify the preferred
+	// availability zones of the cluster's shards. If you omit this parameter
+	// ElastiCache selects availability zones for you. You can specify this parameter
+	// only if the value of NodeGroupCount is greater than the current number of node
+	// groups (shards).
 	ReshardingConfiguration []types.ReshardingConfiguration
 
 	noSmithyDocumentSerde

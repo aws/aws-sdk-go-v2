@@ -14,11 +14,9 @@ import (
 
 // Retrieves a paginated list of associated assets. You can use this operation to
 // do the following:
-//
-// * List child assets associated to a parent asset by a
-// hierarchy that you specify.
-//
-// * List an asset's parent asset.
+//   - List child assets associated to a parent asset by a hierarchy that you
+//     specify.
+//   - List an asset's parent asset.
 func (c *Client) ListAssociatedAssets(ctx context.Context, params *ListAssociatedAssetsInput, optFns ...func(*Options)) (*ListAssociatedAssetsOutput, error) {
 	if params == nil {
 		params = &ListAssociatedAssetsInput{}
@@ -42,13 +40,10 @@ type ListAssociatedAssetsInput struct {
 	AssetId *string
 
 	// The ID of the hierarchy by which child assets are associated to the asset. To
-	// find a hierarchy ID, use the DescribeAsset
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html)
-	// or DescribeAssetModel
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html)
+	// find a hierarchy ID, use the DescribeAsset (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html)
+	// or DescribeAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html)
 	// operations. This parameter is required if you choose CHILD for
-	// traversalDirection. For more information, see Asset hierarchies
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
+	// traversalDirection . For more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the IoT SiteWise User Guide.
 	HierarchyId *string
 
@@ -59,14 +54,9 @@ type ListAssociatedAssetsInput struct {
 	NextToken *string
 
 	// The direction to list associated assets. Choose one of the following options:
-	//
-	// *
-	// CHILD – The list includes all child assets associated to the asset. The
-	// hierarchyId parameter is required if you choose CHILD.
-	//
-	// * PARENT – The list
-	// includes the asset's parent asset.
-	//
+	//   - CHILD – The list includes all child assets associated to the asset. The
+	//   hierarchyId parameter is required if you choose CHILD .
+	//   - PARENT – The list includes the asset's parent asset.
 	// Default: CHILD
 	TraversalDirection types.TraversalDirection
 

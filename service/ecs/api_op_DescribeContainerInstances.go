@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more container instances. Returns metadata about each container
-// instance requested.
+// Describes one or more container instances. Returns metadata about each
+// container instance requested.
 func (c *Client) DescribeContainerInstances(ctx context.Context, params *DescribeContainerInstancesInput, optFns ...func(*Options)) (*DescribeContainerInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeContainerInstancesInput{}

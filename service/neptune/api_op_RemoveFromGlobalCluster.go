@@ -37,8 +37,8 @@ type RemoveFromGlobalClusterInput struct {
 	// This member is required.
 	DbClusterIdentifier *string
 
-	// The identifier of the Neptune global database from which to detach the specified
-	// Neptune DB cluster.
+	// The identifier of the Neptune global database from which to detach the
+	// specified Neptune DB cluster.
 	//
 	// This member is required.
 	GlobalClusterIdentifier *string
@@ -49,8 +49,8 @@ type RemoveFromGlobalClusterInput struct {
 type RemoveFromGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database. This data type is
-	// used as a response element for the CreateGlobalCluster, DescribeGlobalClusters,
-	// ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and
+	// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
+	// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
 	// RemoveFromGlobalCluster actions.
 	GlobalCluster *types.GlobalCluster
 

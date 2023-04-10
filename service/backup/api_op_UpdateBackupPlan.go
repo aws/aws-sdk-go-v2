@@ -13,7 +13,7 @@ import (
 )
 
 // Updates an existing backup plan identified by its backupPlanId with the input
-// document in JSON format. The new version is uniquely identified by a VersionId.
+// document in JSON format. The new version is uniquely identified by a VersionId .
 func (c *Client) UpdateBackupPlan(ctx context.Context, params *UpdateBackupPlanInput, optFns ...func(*Options)) (*UpdateBackupPlanOutput, error) {
 	if params == nil {
 		params = &UpdateBackupPlanInput{}
@@ -32,7 +32,7 @@ func (c *Client) UpdateBackupPlan(ctx context.Context, params *UpdateBackupPlanI
 type UpdateBackupPlanInput struct {
 
 	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
-	// sets of Rules.
+	// sets of Rules .
 	//
 	// This member is required.
 	BackupPlan *types.BackupPlanInput
@@ -52,15 +52,15 @@ type UpdateBackupPlanOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
 	// example,
-	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50.
+	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50 .
 	BackupPlanArn *string
 
 	// Uniquely identifies a backup plan.
 	BackupPlanId *string
 
 	// The date and time a backup plan is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 

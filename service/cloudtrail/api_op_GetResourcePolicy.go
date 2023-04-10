@@ -31,7 +31,7 @@ type GetResourcePolicyInput struct {
 
 	// The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
 	// resource-based policy. The following is the format of a resource ARN:
-	// arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel.
+	// arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel .
 	//
 	// This member is required.
 	ResourceArn *string

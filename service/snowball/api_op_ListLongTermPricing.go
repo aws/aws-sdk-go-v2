@@ -116,8 +116,8 @@ func (c *Client) addOperationListLongTermPricingMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListLongTermPricingAPIClient is a client that implements the ListLongTermPricing
-// operation.
+// ListLongTermPricingAPIClient is a client that implements the
+// ListLongTermPricing operation.
 type ListLongTermPricingAPIClient interface {
 	ListLongTermPricing(context.Context, *ListLongTermPricingInput, ...func(*Options)) (*ListLongTermPricingOutput, error)
 }

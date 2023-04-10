@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all channels associated with a specified channel flow. You can associate a
-// channel flow with multiple channels, but you can only associate a channel with
+// Lists all channels associated with a specified channel flow. You can associate
+// a channel flow with multiple channels, but you can only associate a channel with
 // one channel flow. This is a developer API.
 func (c *Client) ListChannelsAssociatedWithChannelFlow(ctx context.Context, params *ListChannelsAssociatedWithChannelFlowInput, optFns ...func(*Options)) (*ListChannelsAssociatedWithChannelFlowOutput, error) {
 	if params == nil {

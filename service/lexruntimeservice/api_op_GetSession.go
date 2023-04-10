@@ -39,8 +39,8 @@ type GetSessionInput struct {
 	// This member is required.
 	BotName *string
 
-	// The ID of the client application user. Amazon Lex uses this to identify a user's
-	// conversation with your bot.
+	// The ID of the client application user. Amazon Lex uses this to identify a
+	// user's conversation with your bot.
 	//
 	// This member is required.
 	UserId *string
@@ -56,9 +56,9 @@ type GetSessionInput struct {
 type GetSessionOutput struct {
 
 	// A list of active contexts for the session. A context can be set when an intent
-	// is fulfilled or by calling the PostContent, PostText, or PutSession operation.
-	// You can use a context to control the intents that can follow up an intent, or to
-	// modify the operation of your application.
+	// is fulfilled or by calling the PostContent , PostText , or PutSession
+	// operation. You can use a context to control the intents that can follow up an
+	// intent, or to modify the operation of your application.
 	ActiveContexts []types.ActiveContext
 
 	// Describes the current state of the bot.
@@ -71,8 +71,8 @@ type GetSessionOutput struct {
 	// request, the array contains only the intents with the specified label.
 	RecentIntentSummaryView []types.IntentSummary
 
-	// Map of key/value pairs representing the session-specific context information. It
-	// contains application information passed between Amazon Lex and a client
+	// Map of key/value pairs representing the session-specific context information.
+	// It contains application information passed between Amazon Lex and a client
 	// application.
 	SessionAttributes map[string]string
 

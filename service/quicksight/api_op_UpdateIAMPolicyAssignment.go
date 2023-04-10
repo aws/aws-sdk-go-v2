@@ -13,7 +13,7 @@ import (
 
 // Updates an existing IAM policy assignment. This operation updates only the
 // optional parameter or parameters that are specified in the request. This
-// overwrites all of the users included in Identities.
+// overwrites all of the users included in Identities .
 func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIAMPolicyAssignmentInput, optFns ...func(*Options)) (*UpdateIAMPolicyAssignmentOutput, error) {
 	if params == nil {
 		params = &UpdateIAMPolicyAssignmentInput{}
@@ -49,16 +49,11 @@ type UpdateIAMPolicyAssignmentInput struct {
 	Namespace *string
 
 	// The status of the assignment. Possible values are as follows:
-	//
-	// * ENABLED -
-	// Anything specified in this assignment is used when creating the data source.
-	//
-	// *
-	// DISABLED - This assignment isn't used when creating the data source.
-	//
-	// * DRAFT -
-	// This assignment is an unfinished draft and isn't used when creating the data
-	// source.
+	//   - ENABLED - Anything specified in this assignment is used when creating the
+	//   data source.
+	//   - DISABLED - This assignment isn't used when creating the data source.
+	//   - DRAFT - This assignment is an unfinished draft and isn't used when creating
+	//   the data source.
 	AssignmentStatus types.AssignmentStatus
 
 	// The Amazon QuickSight users, groups, or both that you want to assign the policy
@@ -81,16 +76,11 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:
-	//
-	// * ENABLED -
-	// Anything specified in this assignment is used when creating the data source.
-	//
-	// *
-	// DISABLED - This assignment isn't used when creating the data source.
-	//
-	// * DRAFT -
-	// This assignment is an unfinished draft and isn't used when creating the data
-	// source.
+	//   - ENABLED - Anything specified in this assignment is used when creating the
+	//   data source.
+	//   - DISABLED - This assignment isn't used when creating the data source.
+	//   - DRAFT - This assignment is an unfinished draft and isn't used when creating
+	//   the data source.
 	AssignmentStatus types.AssignmentStatus
 
 	// The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.

@@ -41,7 +41,8 @@ type DescribeRecoveryPointInput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for
 	// example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	//
 	// This member is required.
 	RecoveryPointArn *string
@@ -55,7 +56,7 @@ type DescribeRecoveryPointOutput struct {
 	BackupSizeInBytes *int64
 
 	// An ARN that uniquely identifies a backup vault; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
 	BackupVaultArn *string
 
 	// The name of a logical container where backups are stored. Backup vaults are
@@ -76,14 +77,13 @@ type DescribeRecoveryPointOutput struct {
 
 	// This is the identifier of a resource within a composite group, such as nested
 	// (child) recovery point belonging to a composite (parent) stack. The ID is
-	// transferred from the  logical ID
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax)
+	// transferred from the logical ID (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax)
 	// within a stack.
 	CompositeMemberIdentifier *string
 
 	// Contains identifying information about the creation of a recovery point,
-	// including the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId
-	// of the backup plan used to create it.
+	// including the BackupPlanArn , BackupPlanId , BackupPlanVersion , and
+	// BackupRuleId of the backup plan used to create it.
 	CreatedBy *types.RecoveryPointCreator
 
 	// The date and time that a recovery point is created, in Unix format and
@@ -93,11 +93,11 @@ type DescribeRecoveryPointOutput struct {
 	CreationDate *time.Time
 
 	// The server-side encryption key used to protect your backups; for example,
-	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
+	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	EncryptionKeyArn *string
 
 	// Specifies the IAM role ARN used to create the target recovery point; for
-	// example, arn:aws:iam::123456789012:role/S3Access.
+	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string
 
 	// A Boolean value that is returned as TRUE if the specified recovery point is
@@ -122,18 +122,19 @@ type DescribeRecoveryPointOutput struct {
 	// after days” setting. The “transition to cold after days” setting cannot be
 	// changed after a backup has been transitioned to cold. Resource types that are
 	// able to be transitioned to cold storage are listed in the "Lifecycle to cold
-	// storage" section of the  Feature availability by resource
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+	// storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *types.Lifecycle
 
-	// This is an ARN that uniquely identifies a parent (composite) recovery point; for
-	// example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// This is an ARN that uniquely identifies a parent (composite) recovery point;
+	// for example,
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	ParentRecoveryPointArn *string
 
 	// An ARN that uniquely identifies a recovery point; for example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	RecoveryPointArn *string
 
 	// An ARN that uniquely identifies a saved resource. The format of the ARN depends
@@ -151,37 +152,36 @@ type DescribeRecoveryPointOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies the source vault where
 	// the resource was originally backed up in; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:BackupVault. If the recovery is
+	// arn:aws:backup:us-east-1:123456789012:vault:BackupVault . If the recovery is
 	// restored to the same Amazon Web Services account or Region, this value will be
-	// null.
+	// null .
 	SourceBackupVaultArn *string
 
 	// A status code specifying the state of the recovery point. PARTIAL status
 	// indicates Backup could not create the recovery point before the backup window
-	// closed. To increase your backup plan window using the API, see UpdateBackupPlan
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html).
-	// You can also increase your backup plan window using the Console by choosing and
-	// editing your backup plan. EXPIRED status indicates that the recovery point has
-	// exceeded its retention period, but Backup lacks permission or is otherwise
-	// unable to delete it. To manually delete these recovery points, see  Step 3:
-	// Delete the recovery points
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups)
-	// in the Clean up resources section of Getting started. STOPPED status occurs on a
-	// continuous backup where a user has taken some action that causes the continuous
-	// backup to be disabled. This can be caused by the removal of permissions, turning
-	// off versioning, turning off events being sent to EventBridge, or disabling the
-	// EventBridge rules that are put in place by Backup. To resolve STOPPED status,
-	// ensure that all requested permissions are in place and that versioning is
-	// enabled on the S3 bucket. Once these conditions are met, the next instance of a
-	// backup rule running will result in a new continuous recovery point being
-	// created. The recovery points with STOPPED status do not need to be deleted.
+	// closed. To increase your backup plan window using the API, see UpdateBackupPlan (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html)
+	// . You can also increase your backup plan window using the Console by choosing
+	// and editing your backup plan. EXPIRED status indicates that the recovery point
+	// has exceeded its retention period, but Backup lacks permission or is otherwise
+	// unable to delete it. To manually delete these recovery points, see Step 3:
+	// Delete the recovery points (https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups)
+	// in the Clean up resources section of Getting started. STOPPED status occurs on
+	// a continuous backup where a user has taken some action that causes the
+	// continuous backup to be disabled. This can be caused by the removal of
+	// permissions, turning off versioning, turning off events being sent to
+	// EventBridge, or disabling the EventBridge rules that are put in place by Backup.
+	// To resolve STOPPED status, ensure that all requested permissions are in place
+	// and that versioning is enabled on the S3 bucket. Once these conditions are met,
+	// the next instance of a backup rule running will result in a new continuous
+	// recovery point being created. The recovery points with STOPPED status do not
+	// need to be deleted.
 	Status types.RecoveryPointStatus
 
 	// A status message explaining the reason for the recovery point deletion failure.
 	StatusMessage *string
 
-	// Specifies the storage class of the recovery point. Valid values are WARM or
-	// COLD.
+	// Specifies the storage class of the recovery point. Valid values are WARM or COLD
+	// .
 	StorageClass types.StorageClass
 
 	// Metadata pertaining to the operation's result.

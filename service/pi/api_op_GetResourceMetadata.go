@@ -33,7 +33,7 @@ type GetResourceMetadataInput struct {
 	// An immutable identifier for a data source that is unique for an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. To
 	// use a DB instance as a data source, specify its DbiResourceId value. For
-	// example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
+	// example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
 	//
 	// This member is required.
 	Identifier *string
@@ -55,7 +55,7 @@ type GetResourceMetadataOutput struct {
 	// An immutable identifier for a data source that is unique for an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. To
 	// use a DB instance as a data source, specify its DbiResourceId value. For
-	// example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
+	// example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
 	Identifier *string
 
 	// Metadata pertaining to the operation's result.

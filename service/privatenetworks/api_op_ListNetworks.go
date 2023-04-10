@@ -32,13 +32,11 @@ func (c *Client) ListNetworks(ctx context.Context, params *ListNetworksInput, op
 type ListNetworksInput struct {
 
 	// The filters.
-	//
-	// * STATUS - The status (AVAILABLE | CREATED | DELETED |
-	// DEPROVISIONING | PROVISIONING).
-	//
-	// Filter values are case sensitive. If you
-	// specify multiple values for a filter, the values are joined with an OR, and the
-	// request returns all results that match any of the specified values.
+	//   - STATUS - The status ( AVAILABLE | CREATED | DELETED | DEPROVISIONING |
+	//   PROVISIONING ).
+	// Filter values are case sensitive. If you specify multiple values for a filter,
+	// the values are joined with an OR , and the request returns all results that
+	// match any of the specified values.
 	Filters map[string][]string
 
 	// The maximum number of results to return.

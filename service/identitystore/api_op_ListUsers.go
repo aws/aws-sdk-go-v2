@@ -32,7 +32,7 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 
 type ListUsersInput struct {
 
-	// The globally unique identifier for the identity store, such as d-1234567890. In
+	// The globally unique identifier for the identity store, such as d-1234567890 . In
 	// this example, d- is a fixed prefix, and 1234567890 is a randomly generated
 	// string that contains numbers and lower case letters. This value is generated at
 	// the time that a new identity store is created.
@@ -47,9 +47,9 @@ type ListUsersInput struct {
 	// GetGroupId API instead.
 	Filters []types.Filter
 
-	// The maximum number of results to be returned per request. This parameter is used
-	// in the ListUsers and ListGroups requests to specify how many results to return
-	// in one page. The length limit is 50 characters.
+	// The maximum number of results to be returned per request. This parameter is
+	// used in the ListUsers and ListGroups requests to specify how many results to
+	// return in one page. The length limit is 50 characters.
 	MaxResults *int32
 
 	// The pagination token used for the ListUsers and ListGroups API operations. This
@@ -152,9 +152,9 @@ var _ ListUsersAPIClient = (*Client)(nil)
 
 // ListUsersPaginatorOptions is the paginator options for ListUsers
 type ListUsersPaginatorOptions struct {
-	// The maximum number of results to be returned per request. This parameter is used
-	// in the ListUsers and ListGroups requests to specify how many results to return
-	// in one page. The length limit is 50 characters.
+	// The maximum number of results to be returned per request. This parameter is
+	// used in the ListUsers and ListGroups requests to specify how many results to
+	// return in one page. The length limit is 50 characters.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

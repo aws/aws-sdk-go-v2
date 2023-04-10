@@ -29,8 +29,9 @@ func (c *Client) BatchDisassociateResource(ctx context.Context, params *BatchDis
 
 type BatchDisassociateResourceInput struct {
 
-	// The uniform resource identifiers (URI) of resources that should be disassociated
-	// from the resource set. The URIs must be Amazon Resource Names (ARNs).
+	// The uniform resource identifiers (URI) of resources that should be
+	// disassociated from the resource set. The URIs must be Amazon Resource Names
+	// (ARNs).
 	//
 	// This member is required.
 	Items []string

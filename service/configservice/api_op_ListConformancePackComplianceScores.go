@@ -19,7 +19,7 @@ import (
 // view of the compliance state of your conformance packs. You can use it to
 // identify, investigate, and understand the level of compliance in your
 // conformance packs. Conformance packs with no evaluation results will have a
-// compliance score of INSUFFICIENT_DATA.
+// compliance score of INSUFFICIENT_DATA .
 func (c *Client) ListConformancePackComplianceScores(ctx context.Context, params *ListConformancePackComplianceScoresInput, optFns ...func(*Options)) (*ListConformancePackComplianceScoresOutput, error) {
 	if params == nil {
 		params = &ListConformancePackComplianceScoresInput{}
@@ -37,7 +37,7 @@ func (c *Client) ListConformancePackComplianceScores(ctx context.Context, params
 
 type ListConformancePackComplianceScoresInput struct {
 
-	// Filters the results based on the ConformancePackComplianceScoresFilters.
+	// Filters the results based on the ConformancePackComplianceScoresFilters .
 	Filters *types.ConformancePackComplianceScoresFilters
 
 	// The maximum number of conformance pack compliance scores returned on each page.
@@ -48,8 +48,8 @@ type ListConformancePackComplianceScoresInput struct {
 	NextToken *string
 
 	// Sorts your conformance pack compliance scores in either ascending or descending
-	// order, depending on SortOrder. By default, conformance pack compliance scores
-	// are sorted in alphabetical order by name of the conformance pack. Enter SCORE,
+	// order, depending on SortOrder . By default, conformance pack compliance scores
+	// are sorted in alphabetical order by name of the conformance pack. Enter SCORE ,
 	// to sort conformance pack compliance scores by the numerical value of the
 	// compliance score.
 	SortBy types.SortBy
@@ -58,9 +58,9 @@ type ListConformancePackComplianceScoresInput struct {
 	// Either in ascending or descending order. By default, conformance pack compliance
 	// scores are sorted in alphabetical order by name of the conformance pack.
 	// Conformance pack compliance scores are sorted in reverse alphabetical order if
-	// you enter DESCENDING. You can sort conformance pack compliance scores by the
+	// you enter DESCENDING . You can sort conformance pack compliance scores by the
 	// numerical value of the compliance score by entering SCORE in the SortBy action.
-	// When compliance scores are sorted by SCORE, conformance packs with a compliance
+	// When compliance scores are sorted by SCORE , conformance packs with a compliance
 	// score of INSUFFICIENT_DATA will be last when sorting by ascending order and
 	// first when sorting by descending order.
 	SortOrder types.SortOrder
@@ -156,8 +156,8 @@ type ListConformancePackComplianceScoresAPIClient interface {
 
 var _ ListConformancePackComplianceScoresAPIClient = (*Client)(nil)
 
-// ListConformancePackComplianceScoresPaginatorOptions is the paginator options for
-// ListConformancePackComplianceScores
+// ListConformancePackComplianceScoresPaginatorOptions is the paginator options
+// for ListConformancePackComplianceScores
 type ListConformancePackComplianceScoresPaginatorOptions struct {
 	// The maximum number of conformance pack compliance scores returned on each page.
 	Limit int32

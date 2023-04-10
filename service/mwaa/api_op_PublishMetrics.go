@@ -37,8 +37,8 @@ type PublishMetricsInput struct {
 
 	// Internal only. Publishes metrics to Amazon CloudWatch. To learn more about the
 	// metrics published to Amazon CloudWatch, see Amazon MWAA performance metrics in
-	// Amazon CloudWatch
-	// (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html).
+	// Amazon CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html)
+	// .
 	//
 	// This member is required.
 	MetricData []types.MetricDatum

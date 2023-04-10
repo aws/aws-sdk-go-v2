@@ -30,10 +30,10 @@ func (c *Client) ListContactLists(ctx context.Context, params *ListContactListsI
 
 type ListContactListsInput struct {
 
-	// A string token indicating that there might be additional contact lists available
-	// to be listed. Use the token provided in the Response to use in the subsequent
-	// call to ListContactLists with the same parameters to retrieve the next page of
-	// contact lists.
+	// A string token indicating that there might be additional contact lists
+	// available to be listed. Use the token provided in the Response to use in the
+	// subsequent call to ListContactLists with the same parameters to retrieve the
+	// next page of contact lists.
 	NextToken *string
 
 	// Maximum number of contact lists to return at once. Use this parameter to
@@ -50,9 +50,9 @@ type ListContactListsOutput struct {
 	// The available contact lists.
 	ContactLists []types.ContactList
 
-	// A string token indicating that there might be additional contact lists available
-	// to be listed. Copy this token to a subsequent call to ListContactLists with the
-	// same parameters to retrieve the next page of contact lists.
+	// A string token indicating that there might be additional contact lists
+	// available to be listed. Copy this token to a subsequent call to ListContactLists
+	// with the same parameters to retrieve the next page of contact lists.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

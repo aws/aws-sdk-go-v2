@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a classifier in the user's account. This can be a GrokClassifier, an
-// XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of
-// the request is present.
+// Creates a classifier in the user's account. This can be a GrokClassifier , an
+// XMLClassifier , a JsonClassifier , or a CsvClassifier , depending on which field
+// of the request is present.
 func (c *Client) CreateClassifier(ctx context.Context, params *CreateClassifierInput, optFns ...func(*Options)) (*CreateClassifierOutput, error) {
 	if params == nil {
 		params = &CreateClassifierInput{}

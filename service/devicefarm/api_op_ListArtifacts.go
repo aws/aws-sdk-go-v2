@@ -37,12 +37,9 @@ type ListArtifactsInput struct {
 	Arn *string
 
 	// The artifacts' type. Allowed values include:
-	//
-	// * FILE
-	//
-	// * LOG
-	//
-	// * SCREENSHOT
+	//   - FILE
+	//   - LOG
+	//   - SCREENSHOT
 	//
 	// This member is required.
 	Type types.ArtifactCategory

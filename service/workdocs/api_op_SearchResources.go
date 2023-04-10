@@ -31,8 +31,8 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 
 type SearchResourcesInput struct {
 
-	// A list of attributes to include in the response. Used to request fields that are
-	// not normally returned in a standard response.
+	// A list of attributes to include in the response. Used to request fields that
+	// are not normally returned in a standard response.
 	AdditionalResponseFields []types.AdditionalResponseFieldType
 
 	// Amazon WorkDocs authentication token. Not required when using Amazon Web
@@ -60,8 +60,9 @@ type SearchResourcesInput struct {
 	// and content
 	QueryScopes []types.SearchQueryScopeType
 
-	// The String to search for. Searches across different text fields based on request
-	// parameters. Use double quotes around the query string for exact phrase matches.
+	// The String to search for. Searches across different text fields based on
+	// request parameters. Use double quotes around the query string for exact phrase
+	// matches.
 	QueryText *string
 
 	noSmithyDocumentSerde

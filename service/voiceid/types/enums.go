@@ -46,9 +46,9 @@ const (
 	ConflictTypeFraudsterMustBelongToAtLeastOneWatchlist ConflictType = "FRAUDSTER_MUST_BELONG_TO_AT_LEAST_ONE_WATCHLIST"
 )
 
-// Values returns all known values for ConflictType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConflictType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictType) Values() []ConflictType {
 	return []ConflictType{
 		"ANOTHER_ACTIVE_STREAM",
@@ -73,9 +73,9 @@ const (
 	DomainStatusSuspended DomainStatus = "SUSPENDED"
 )
 
-// Values returns all known values for DomainStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DomainStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"ACTIVE",
@@ -110,9 +110,9 @@ const (
 	ExistingEnrollmentActionOverwrite ExistingEnrollmentAction = "OVERWRITE"
 )
 
-// Values returns all known values for ExistingEnrollmentAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExistingEnrollmentAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExistingEnrollmentAction) Values() []ExistingEnrollmentAction {
 	return []ExistingEnrollmentAction{
 		"SKIP",
@@ -214,9 +214,9 @@ const (
 	ResourceTypeWatchlist         ResourceType = "WATCHLIST"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"BATCH_JOB",

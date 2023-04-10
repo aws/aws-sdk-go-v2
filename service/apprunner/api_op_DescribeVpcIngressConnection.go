@@ -29,8 +29,8 @@ func (c *Client) DescribeVpcIngressConnection(ctx context.Context, params *Descr
 
 type DescribeVpcIngressConnectionInput struct {
 
-	// The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you
-	// want a description for.
+	// The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that
+	// you want a description for.
 	//
 	// This member is required.
 	VpcIngressConnectionArn *string

@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Returns a list of existing backup jobs for an authenticated account for the last
-// 30 days. For a longer period of time, consider using these monitoring tools
-// (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html).
+// Returns a list of existing backup jobs for an authenticated account for the
+// last 30 days. For a longer period of time, consider using these monitoring tools (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+// .
 func (c *Client) ListBackupJobs(ctx context.Context, params *ListBackupJobsInput, optFns ...func(*Options)) (*ListBackupJobsOutput, error) {
 	if params == nil {
 		params = &ListBackupJobsInput{}
@@ -66,36 +66,18 @@ type ListBackupJobsInput struct {
 	ByResourceArn *string
 
 	// Returns only backup jobs for the specified resources:
-	//
-	// * Aurora for Amazon
-	// Aurora
-	//
-	// * DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
-	//
-	// *
-	// DynamoDB for Amazon DynamoDB
-	//
-	// * EBS for Amazon Elastic Block Store
-	//
-	// * EC2 for
-	// Amazon Elastic Compute Cloud
-	//
-	// * EFS for Amazon Elastic File System
-	//
-	// * FSx for
-	// Amazon FSx
-	//
-	// * Neptune for Amazon Neptune
-	//
-	// * RDS for Amazon Relational Database
-	// Service
-	//
-	// * Storage Gateway for Storage Gateway
-	//
-	// * S3 for Amazon S3
-	//
-	// *
-	// VirtualMachine for virtual machines
+	//   - Aurora for Amazon Aurora
+	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//   - DynamoDB for Amazon DynamoDB
+	//   - EBS for Amazon Elastic Block Store
+	//   - EC2 for Amazon Elastic Compute Cloud
+	//   - EFS for Amazon Elastic File System
+	//   - FSx for Amazon FSx
+	//   - Neptune for Amazon Neptune
+	//   - RDS for Amazon Relational Database Service
+	//   - Storage Gateway for Storage Gateway
+	//   - S3 for Amazon S3
+	//   - VirtualMachine for virtual machines
 	ByResourceType *string
 
 	// Returns only backup jobs that are in the specified state.

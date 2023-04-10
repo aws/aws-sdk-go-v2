@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an analysis in Amazon QuickSight. Analyses can be created either from a
-// template or from an AnalysisDefinition.
+// template or from an AnalysisDefinition .
 func (c *Client) CreateAnalysis(ctx context.Context, params *CreateAnalysisInput, optFns ...func(*Options)) (*CreateAnalysisOutput, error) {
 	if params == nil {
 		params = &CreateAnalysisInput{}
@@ -30,8 +30,8 @@ func (c *Client) CreateAnalysis(ctx context.Context, params *CreateAnalysisInput
 
 type CreateAnalysisInput struct {
 
-	// The ID for the analysis that you're creating. This ID displays in the URL of the
-	// analysis.
+	// The ID for the analysis that you're creating. This ID displays in the URL of
+	// the analysis.
 	//
 	// This member is required.
 	AnalysisId *string
@@ -41,15 +41,15 @@ type CreateAnalysisInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// A descriptive name for the analysis that you're creating. This name displays for
-	// the analysis in the Amazon QuickSight console.
+	// A descriptive name for the analysis that you're creating. This name displays
+	// for the analysis in the Amazon QuickSight console.
 	//
 	// This member is required.
 	Name *string
 
-	// The definition of an analysis. A definition is the data model of all features in
-	// a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must
-	// be provided in order for the request to be valid.
+	// The definition of an analysis. A definition is the data model of all features
+	// in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition
+	// must be provided in order for the request to be valid.
 	Definition *types.AnalysisDefinition
 
 	// The parameter names and override values that you want to use. An analysis can
@@ -60,7 +60,7 @@ type CreateAnalysisInput struct {
 	// an analysis. You can use the Permissions structure to grant permissions by
 	// providing a list of Identity and Access Management (IAM) action information for
 	// each principal listed by Amazon Resource Name (ARN). To specify no permissions,
-	// omit Permissions.
+	// omit Permissions .
 	Permissions []types.ResourcePermission
 
 	// A source entity to use for the analysis that you're creating. This metadata

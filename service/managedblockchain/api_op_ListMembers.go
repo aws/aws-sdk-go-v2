@@ -36,9 +36,9 @@ type ListMembersInput struct {
 	// This member is required.
 	NetworkId *string
 
-	// An optional Boolean value. If provided, the request is limited either to members
-	// that the current Amazon Web Services account owns (true) or that other Amazon
-	// Web Services accountsn own (false). If omitted, all members are listed.
+	// An optional Boolean value. If provided, the request is limited either to
+	// members that the current Amazon Web Services account owns ( true ) or that other
+	// Amazon Web Services accountsn own ( false ). If omitted, all members are listed.
 	IsOwned *bool
 
 	// The maximum number of members to return in the request.
@@ -50,8 +50,8 @@ type ListMembersInput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// An optional status specifier. If provided, only members currently in this status
-	// are listed.
+	// An optional status specifier. If provided, only members currently in this
+	// status are listed.
 	Status types.MemberStatus
 
 	noSmithyDocumentSerde

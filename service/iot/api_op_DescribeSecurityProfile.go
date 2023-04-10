@@ -13,8 +13,7 @@ import (
 )
 
 // Gets information about a Device Defender security profile. Requires permission
-// to access the DescribeSecurityProfile
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// to access the DescribeSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeSecurityProfile(ctx context.Context, params *DescribeSecurityProfileInput, optFns ...func(*Options)) (*DescribeSecurityProfileOutput, error) {
 	if params == nil {
@@ -45,7 +44,7 @@ type DescribeSecurityProfileOutput struct {
 
 	// Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
 	// A list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors, but it is also retained for any
+	// for any metric used in the profile's behaviors , but it is also retained for any
 	// metric specified here.
 	//
 	// Deprecated: Use additionalMetricsToRetainV2.
@@ -71,8 +70,8 @@ type DescribeSecurityProfileOutput struct {
 	// The ARN of the security profile.
 	SecurityProfileArn *string
 
-	// A description of the security profile (associated with the security profile when
-	// it was created or updated).
+	// A description of the security profile (associated with the security profile
+	// when it was created or updated).
 	SecurityProfileDescription *string
 
 	// The name of the security profile.

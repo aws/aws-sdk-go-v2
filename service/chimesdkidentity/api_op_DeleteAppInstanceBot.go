@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AppInstanceBot.
+// Deletes an AppInstanceBot .
 func (c *Client) DeleteAppInstanceBot(ctx context.Context, params *DeleteAppInstanceBotInput, optFns ...func(*Options)) (*DeleteAppInstanceBotOutput, error) {
 	if params == nil {
 		params = &DeleteAppInstanceBotInput{}

@@ -55,7 +55,7 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	Persistence types.ChannelMessagePersistenceType
 
-	// The type of message, STANDARD or CONTROL.
+	// The type of message, STANDARD or CONTROL .
 	//
 	// This member is required.
 	Type types.ChannelMessageType

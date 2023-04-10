@@ -14,7 +14,7 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Updates an existing Amazon Kinesis Analytics
+// Analytics API V2 Documentation . Updates an existing Amazon Kinesis Analytics
 // application. Using this API, you can update application code, input
 // configuration, and output configuration. Note that Amazon Kinesis Analytics
 // updates the CurrentApplicationVersionId each time you update your application.
@@ -47,8 +47,7 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ApplicationUpdate *types.ApplicationUpdate
 
-	// The current application version ID. You can use the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// The current application version ID. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get this value.
 	//
 	// This member is required.

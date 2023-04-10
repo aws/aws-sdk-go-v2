@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates resource record sets in a specified hosted zone based on the settings in
-// a specified traffic policy version. In addition, CreateTrafficPolicyInstance
+// Creates resource record sets in a specified hosted zone based on the settings
+// in a specified traffic policy version. In addition, CreateTrafficPolicyInstance
 // associates the resource record sets with a specified domain name (such as
 // example.com) or subdomain name (such as www.example.com). Amazon Route 53
 // responds to DNS queries for the domain or subdomain name by using the resource
@@ -32,8 +32,8 @@ func (c *Client) CreateTrafficPolicyInstance(ctx context.Context, params *Create
 	return out, nil
 }
 
-// A complex type that contains information about the resource record sets that you
-// want to create based on a specified traffic policy.
+// A complex type that contains information about the resource record sets that
+// you want to create based on a specified traffic policy.
 type CreateTrafficPolicyInstanceInput struct {
 
 	// The ID of the hosted zone that you want Amazon Route 53 to create resource
@@ -55,14 +55,14 @@ type CreateTrafficPolicyInstanceInput struct {
 	// This member is required.
 	TTL *int64
 
-	// The ID of the traffic policy that you want to use to create resource record sets
-	// in the specified hosted zone.
+	// The ID of the traffic policy that you want to use to create resource record
+	// sets in the specified hosted zone.
 	//
 	// This member is required.
 	TrafficPolicyId *string
 
-	// The version of the traffic policy that you want to use to create resource record
-	// sets in the specified hosted zone.
+	// The version of the traffic policy that you want to use to create resource
+	// record sets in the specified hosted zone.
 	//
 	// This member is required.
 	TrafficPolicyVersion *int32

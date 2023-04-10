@@ -56,8 +56,8 @@ type BatchUpsertTableRowsInput struct {
 	// This member is required.
 	TableId *string
 
-	// The ID of the workbook where the rows are being upserted. If a workbook with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook where the rows are being upserted. If a workbook with
+	// the specified id could not be found, this API throws ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string

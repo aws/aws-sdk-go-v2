@@ -27,9 +27,9 @@ const (
 	As2TransportHttp As2Transport = "HTTP"
 )
 
-// Values returns all known values for As2Transport. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for As2Transport. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (As2Transport) Values() []As2Transport {
 	return []As2Transport{
 		"HTTP",
@@ -45,8 +45,8 @@ const (
 	CertificateStatusTypeInactive        CertificateStatusType = "INACTIVE"
 )
 
-// Values returns all known values for CertificateStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CertificateStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateStatusType) Values() []CertificateStatusType {
 	return []CertificateStatusType{
@@ -193,9 +193,9 @@ const (
 	EndpointTypeVpcEndpoint EndpointType = "VPC_ENDPOINT"
 )
 
-// Values returns all known values for EndpointType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointType) Values() []EndpointType {
 	return []EndpointType{
 		"PUBLIC",
@@ -452,8 +452,8 @@ const (
 	StateStopFailed  State = "STOP_FAILED"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
@@ -475,9 +475,9 @@ const (
 	TlsSessionResumptionModeEnforced TlsSessionResumptionMode = "ENFORCED"
 )
 
-// Values returns all known values for TlsSessionResumptionMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TlsSessionResumptionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TlsSessionResumptionMode) Values() []TlsSessionResumptionMode {
 	return []TlsSessionResumptionMode{
 		"DISABLED",

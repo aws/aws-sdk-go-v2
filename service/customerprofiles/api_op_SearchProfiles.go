@@ -67,15 +67,11 @@ type SearchProfilesInput struct {
 	// any key-value(s) pairs specified in the AdditionalSearchKeys list. This
 	// parameter influences which profiles will be returned in the response in the
 	// following manner:
-	//
-	// * AND - The response only includes profiles that match all of
-	// the search keys.
-	//
-	// * OR - The response includes profiles that match at least one
-	// of the search keys.
-	//
-	// The OR relationship is the default behavior if this
-	// parameter is not included in the request.
+	//   - AND - The response only includes profiles that match all of the search keys.
+	//   - OR - The response includes profiles that match at least one of the search
+	//   keys.
+	// The OR relationship is the default behavior if this parameter is not included
+	// in the request.
 	LogicalOperator types.LogicalOperator
 
 	// The maximum number of objects returned per page. The default is 20 if this

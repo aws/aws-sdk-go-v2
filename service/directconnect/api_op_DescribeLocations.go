@@ -13,7 +13,7 @@ import (
 
 // Lists the Direct Connect locations in the current Amazon Web Services Region.
 // These are the locations that can be selected when calling CreateConnection or
-// CreateInterconnect.
+// CreateInterconnect .
 func (c *Client) DescribeLocations(ctx context.Context, params *DescribeLocationsInput, optFns ...func(*Options)) (*DescribeLocationsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationsInput{}

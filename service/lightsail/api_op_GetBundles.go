@@ -37,8 +37,8 @@ type GetBundlesInput struct {
 	// use this parameter to view Lightsail for Research bundles.
 	AppCategory types.AppCategory
 
-	// A Boolean value that indicates whether to include inactive (unavailable) bundles
-	// in the response of your request.
+	// A Boolean value that indicates whether to include inactive (unavailable)
+	// bundles in the response of your request.
 	IncludeInactive *bool
 
 	// The token to advance to the next page of results from your request. To get a

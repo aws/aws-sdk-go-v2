@@ -41,13 +41,14 @@ type ImportDocumentationPartsInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// A query parameter to specify whether to rollback the documentation importation
-	// (true) or not (false) when a warning is encountered. The default value is false.
+	// A query parameter to specify whether to rollback the documentation importation (
+	// true ) or not ( false ) when a warning is encountered. The default value is
+	// false .
 	FailOnWarnings bool
 
-	// A query parameter to indicate whether to overwrite (OVERWRITE) any existing
-	// DocumentationParts definition or to merge (MERGE) the new definition into the
-	// existing one. The default value is MERGE.
+	// A query parameter to indicate whether to overwrite ( OVERWRITE ) any existing
+	// DocumentationParts definition or to merge ( MERGE ) the new definition into the
+	// existing one. The default value is MERGE .
 	Mode types.PutMode
 
 	noSmithyDocumentSerde

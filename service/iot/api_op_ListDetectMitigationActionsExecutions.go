@@ -14,8 +14,7 @@ import (
 )
 
 // Lists mitigation actions executions for a Device Defender ML Detect Security
-// Profile. Requires permission to access the ListDetectMitigationActionsExecutions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Profile. Requires permission to access the ListDetectMitigationActionsExecutions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListDetectMitigationActionsExecutions(ctx context.Context, params *ListDetectMitigationActionsExecutionsInput, optFns ...func(*Options)) (*ListDetectMitigationActionsExecutionsOutput, error) {
 	if params == nil {
@@ -34,8 +33,8 @@ func (c *Client) ListDetectMitigationActionsExecutions(ctx context.Context, para
 
 type ListDetectMitigationActionsExecutionsInput struct {
 
-	// The end of the time period for which ML Detect mitigation actions executions are
-	// returned.
+	// The end of the time period for which ML Detect mitigation actions executions
+	// are returned.
 	EndTime *time.Time
 
 	// The maximum number of results to return at one time. The default is 25.

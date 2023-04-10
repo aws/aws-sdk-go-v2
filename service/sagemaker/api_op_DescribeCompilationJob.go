@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Returns information about a model compilation job. To create a model compilation
-// job, use CreateCompilationJob. To get information about multiple model
-// compilation jobs, use ListCompilationJobs.
+// Returns information about a model compilation job. To create a model
+// compilation job, use CreateCompilationJob . To get information about multiple
+// model compilation jobs, use ListCompilationJobs .
 func (c *Client) DescribeCompilationJob(ctx context.Context, params *DescribeCompilationJobInput, optFns ...func(*Options)) (*DescribeCompilationJobOutput, error) {
 	if params == nil {
 		params = &DescribeCompilationJobInput{}
@@ -79,8 +79,8 @@ type DescribeCompilationJobOutput struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// Information about the location in Amazon S3 that has been configured for storing
-	// the model artifacts used in the compilation job.
+	// Information about the location in Amazon S3 that has been configured for
+	// storing the model artifacts used in the compilation job.
 	//
 	// This member is required.
 	ModelArtifacts *types.ModelArtifacts
@@ -104,8 +104,8 @@ type DescribeCompilationJobOutput struct {
 	// This member is required.
 	StoppingCondition *types.StoppingCondition
 
-	// The time when the model compilation job on a compilation job instance ended. For
-	// a successful or stopped job, this is when the job's model artifacts have
+	// The time when the model compilation job on a compilation job instance ended.
+	// For a successful or stopped job, this is when the job's model artifacts have
 	// finished uploading. For a failed job, this is when Amazon SageMaker detected
 	// that the job failed.
 	CompilationEndTime *time.Time
@@ -133,7 +133,7 @@ type DescribeCompilationJobOutput struct {
 	// A VpcConfig object that specifies the VPC that you want your compilation job to
 	// connect to. Control access to your models by configuring the VPC. For more
 	// information, see Protect Compilation Jobs by Using an Amazon Virtual Private
-	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html).
+	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html) .
 	VpcConfig *types.NeoVpcConfig
 
 	// Metadata pertaining to the operation's result.

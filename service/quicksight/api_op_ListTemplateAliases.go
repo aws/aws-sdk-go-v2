@@ -133,8 +133,8 @@ func (c *Client) addOperationListTemplateAliasesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTemplateAliasesAPIClient is a client that implements the ListTemplateAliases
-// operation.
+// ListTemplateAliasesAPIClient is a client that implements the
+// ListTemplateAliases operation.
 type ListTemplateAliasesAPIClient interface {
 	ListTemplateAliases(context.Context, *ListTemplateAliasesInput, ...func(*Options)) (*ListTemplateAliasesOutput, error)
 }

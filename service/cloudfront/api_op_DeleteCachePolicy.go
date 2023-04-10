@@ -14,7 +14,7 @@ import (
 // cache behavior. First update your distributions to remove the cache policy from
 // all cache behaviors, then delete the cache policy. To delete a cache policy, you
 // must provide the policy's identifier and version. To get these values, you can
-// use ListCachePolicies or GetCachePolicy.
+// use ListCachePolicies or GetCachePolicy .
 func (c *Client) DeleteCachePolicy(ctx context.Context, params *DeleteCachePolicyInput, optFns ...func(*Options)) (*DeleteCachePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteCachePolicyInput{}
@@ -33,14 +33,14 @@ func (c *Client) DeleteCachePolicy(ctx context.Context, params *DeleteCachePolic
 type DeleteCachePolicyInput struct {
 
 	// The unique identifier for the cache policy that you are deleting. To get the
-	// identifier, you can use ListCachePolicies.
+	// identifier, you can use ListCachePolicies .
 	//
 	// This member is required.
 	Id *string
 
 	// The version of the cache policy that you are deleting. The version is the cache
-	// policy's ETag value, which you can get using ListCachePolicies, GetCachePolicy,
-	// or GetCachePolicyConfig.
+	// policy's ETag value, which you can get using ListCachePolicies , GetCachePolicy
+	// , or GetCachePolicyConfig .
 	IfMatch *string
 
 	noSmithyDocumentSerde

@@ -50,7 +50,7 @@ type CreateInvalidationOutput struct {
 	Invalidation *types.Invalidation
 
 	// The fully qualified URI of the distribution and invalidation batch request,
-	// including the Invalidation ID.
+	// including the Invalidation ID .
 	Location *string
 
 	// Metadata pertaining to the operation's result.

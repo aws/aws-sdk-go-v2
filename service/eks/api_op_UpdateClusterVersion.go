@@ -18,7 +18,7 @@ import (
 // DescribeUpdate API operation. Cluster updates are asynchronous, and they should
 // finish within a few minutes. During an update, the cluster status moves to
 // UPDATING (this status transition is eventually consistent). When the update is
-// complete (either Failed or Successful), the cluster status moves to Active. If
+// complete (either Failed or Successful ), the cluster status moves to Active . If
 // your cluster has managed node groups attached to it, all of your node groups’
 // Kubernetes versions must match the cluster’s Kubernetes version in order to
 // update the cluster to a new Kubernetes version.

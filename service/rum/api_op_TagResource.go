@@ -21,8 +21,8 @@ import (
 // associated with the alarm. If you specify a tag key that is already associated
 // with the resource, the new tag value that you specify replaces the previous
 // value for that tag. You can associate as many as 50 tags with a resource. For
-// more information, see Tagging Amazon Web Services resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+// more information, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+// .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

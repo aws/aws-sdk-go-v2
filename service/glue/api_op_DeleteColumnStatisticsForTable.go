@@ -11,7 +11,7 @@ import (
 )
 
 // Retrieves table statistics of columns. The Identity and Access Management (IAM)
-// permission required for this operation is DeleteTable.
+// permission required for this operation is DeleteTable .
 func (c *Client) DeleteColumnStatisticsForTable(ctx context.Context, params *DeleteColumnStatisticsForTableInput, optFns ...func(*Options)) (*DeleteColumnStatisticsForTableOutput, error) {
 	if params == nil {
 		params = &DeleteColumnStatisticsForTableInput{}

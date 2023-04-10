@@ -30,8 +30,7 @@ func (c *Client) ListApprovedOrigins(ctx context.Context, params *ListApprovedOr
 
 type ListApprovedOriginsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -124,8 +123,8 @@ func (c *Client) addOperationListApprovedOriginsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListApprovedOriginsAPIClient is a client that implements the ListApprovedOrigins
-// operation.
+// ListApprovedOriginsAPIClient is a client that implements the
+// ListApprovedOrigins operation.
 type ListApprovedOriginsAPIClient interface {
 	ListApprovedOrigins(context.Context, *ListApprovedOriginsInput, ...func(*Options)) (*ListApprovedOriginsOutput, error)
 }

@@ -50,10 +50,10 @@ type CreateRotationInput struct {
 
 	// The time zone to base the rotation’s activity on in Internet Assigned Numbers
 	// Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
-	// "Asia/Seoul". For more information, see the Time Zone Database
-	// (https://www.iana.org/time-zones) on the IANA website. Designators for time
-	// zones that don’t support Daylight Savings Time rules, such as Pacific Standard
-	// Time (PST) and Pacific Daylight Time (PDT), are not supported.
+	// "Asia/Seoul". For more information, see the Time Zone Database (https://www.iana.org/time-zones)
+	// on the IANA website. Designators for time zones that don’t support Daylight
+	// Savings Time rules, such as Pacific Standard Time (PST) and Pacific Daylight
+	// Time (PDT), are not supported.
 	//
 	// This member is required.
 	TimeZoneId *string
@@ -67,9 +67,8 @@ type CreateRotationInput struct {
 
 	// Optional metadata to assign to the rotation. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For more
-	// information, see Tagging Incident Manager resources
-	// (https://docs.aws.amazon.com/incident-manager/latest/userguide/tagging.html) in
-	// the Incident Manager User Guide.
+	// information, see Tagging Incident Manager resources (https://docs.aws.amazon.com/incident-manager/latest/userguide/tagging.html)
+	// in the Incident Manager User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

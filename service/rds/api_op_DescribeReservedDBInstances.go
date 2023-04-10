@@ -35,9 +35,9 @@ type DescribeReservedDBInstancesInput struct {
 	// reservations matching the specified DB instances class.
 	DBInstanceClass *string
 
-	// The duration filter value, specified in years or seconds. Specify this parameter
-	// to show only reservations for this duration. Valid Values: 1 | 3 | 31536000 |
-	// 94608000
+	// The duration filter value, specified in years or seconds. Specify this
+	// parameter to show only reservations for this duration. Valid Values: 1 | 3 |
+	// 31536000 | 94608000
 	Duration *string
 
 	// This parameter isn't currently supported.
@@ -50,7 +50,7 @@ type DescribeReservedDBInstancesInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more than the
@@ -64,16 +64,16 @@ type DescribeReservedDBInstancesInput struct {
 	MultiAZ *bool
 
 	// The offering type filter value. Specify this parameter to show only the
-	// available offerings matching the specified offering type. Valid Values: "Partial
-	// Upfront" | "All Upfront" | "No Upfront"
+	// available offerings matching the specified offering type. Valid Values:
+	// "Partial Upfront" | "All Upfront" | "No Upfront"
 	OfferingType *string
 
 	// The product description filter value. Specify this parameter to show only those
 	// reservations matching the specified product description.
 	ProductDescription *string
 
-	// The reserved DB instance identifier filter value. Specify this parameter to show
-	// only the reservation that matches the specified reservation ID.
+	// The reserved DB instance identifier filter value. Specify this parameter to
+	// show only the reservation that matches the specified reservation ID.
 	ReservedDBInstanceId *string
 
 	// The offering identifier filter value. Specify this parameter to show only
@@ -89,7 +89,7 @@ type DescribeReservedDBInstancesOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// A list of reserved DB instances.

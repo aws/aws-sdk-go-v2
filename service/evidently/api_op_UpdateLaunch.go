@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a launch of a given feature. Don't use this operation to update the tags
-// of an existing launch. Instead, use TagResource
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html).
+// Updates a launch of a given feature. Don't use this operation to update the
+// tags of an existing launch. Instead, use TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
+// .
 func (c *Client) UpdateLaunch(ctx context.Context, params *UpdateLaunchInput, optFns ...func(*Options)) (*UpdateLaunchOutput, error) {
 	if params == nil {
 		params = &UpdateLaunchInput{}
@@ -54,8 +54,9 @@ type UpdateLaunchInput struct {
 
 	// When Evidently assigns a particular user session to a launch, it must use a
 	// randomization ID to determine which variation the user session is served. This
-	// randomization ID is a combination of the entity ID and randomizationSalt. If you
-	// omit randomizationSalt, Evidently uses the launch name as the randomizationSalt.
+	// randomization ID is a combination of the entity ID and randomizationSalt . If
+	// you omit randomizationSalt , Evidently uses the launch name as the
+	// randomizationSalt .
 	RandomizationSalt *string
 
 	// An array of structures that define the traffic allocation percentages among the

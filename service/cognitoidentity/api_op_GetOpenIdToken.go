@@ -10,7 +10,7 @@ import (
 )
 
 // Gets an OpenID token, using a known Cognito ID. This known Cognito ID is
-// returned by GetId. You can optionally add additional logins for the identity.
+// returned by GetId . You can optionally add additional logins for the identity.
 // Supplying multiple logins creates an implicit link. The OpenID token is valid
 // for 10 minutes. This is a public API. You do not need any credentials to call
 // this API.
@@ -41,7 +41,7 @@ type GetOpenIdTokenInput struct {
 	// When using graph.facebook.com and www.amazon.com, supply the access_token
 	// returned from the provider's authflow. For accounts.google.com, an Amazon
 	// Cognito user pool provider, or any other OpenID Connect provider, always include
-	// the id_token.
+	// the id_token .
 	Logins map[string]string
 
 	noSmithyDocumentSerde
@@ -50,8 +50,8 @@ type GetOpenIdTokenInput struct {
 // Returned in response to a successful GetOpenIdToken request.
 type GetOpenIdTokenOutput struct {
 
-	// A unique identifier in the format REGION:GUID. Note that the IdentityId returned
-	// may not match the one passed on input.
+	// A unique identifier in the format REGION:GUID. Note that the IdentityId
+	// returned may not match the one passed on input.
 	IdentityId *string
 
 	// An OpenID token, valid for 10 minutes.

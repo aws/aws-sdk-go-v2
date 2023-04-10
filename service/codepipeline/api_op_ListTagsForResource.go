@@ -126,8 +126,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }

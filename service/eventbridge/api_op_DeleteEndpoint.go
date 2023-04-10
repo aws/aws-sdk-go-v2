@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an existing global endpoint. For more information about global endpoints,
-// see Making applications Regional-fault tolerant with global endpoints and event
-// replication
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
+// Delete an existing global endpoint. For more information about global
+// endpoints, see Making applications Regional-fault tolerant with global
+// endpoints and event replication (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
 // in the Amazon EventBridge User Guide.
 func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput, optFns ...func(*Options)) (*DeleteEndpointOutput, error) {
 	if params == nil {
@@ -33,7 +32,7 @@ func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput
 type DeleteEndpointInput struct {
 
 	// The name of the endpoint you want to delete. For example,
-	// "Name":"us-east-2-custom_bus_A-endpoint"..
+	// "Name":"us-east-2-custom_bus_A-endpoint" ..
 	//
 	// This member is required.
 	Name *string

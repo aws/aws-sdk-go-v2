@@ -48,7 +48,7 @@ type GetPackageVersionReadmeInput struct {
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2).
+	// A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
@@ -62,15 +62,12 @@ type GetPackageVersionReadmeInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The namespace of the package version with the requested readme file. The package
-	// version component that specifies its namespace depends on its type. For
+	// The namespace of the package version with the requested readme file. The
+	// package version component that specifies its namespace depends on its type. For
 	// example:
-	//
-	// * The namespace of an npm package version is its scope.
-	//
-	// * Python and
-	// NuGet package versions do not contain a corresponding component, package
-	// versions of those formats do not have a namespace.
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -81,18 +78,13 @@ type GetPackageVersionReadmeOutput struct {
 	// The format of the package with the requested readme file.
 	Format types.PackageFormat
 
-	// The namespace of the package version with the requested readme file. The package
-	// version component that specifies its namespace depends on its type. For
+	// The namespace of the package version with the requested readme file. The
+	// package version component that specifies its namespace depends on its type. For
 	// example:
-	//
-	// * The namespace of a Maven package version is its groupId.
-	//
-	// * The
-	// namespace of an npm package version is its scope.
-	//
-	// * Python and NuGet package
-	// versions do not contain a corresponding component, package versions of those
-	// formats do not have a namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
 	Namespace *string
 
 	// The name of the package that contains the returned readme file.

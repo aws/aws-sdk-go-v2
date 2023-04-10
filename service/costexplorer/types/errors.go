@@ -137,8 +137,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your request parameters changed between pages. Try again with the old parameters
-// or without a pagination token.
+// Your request parameters changed between pages. Try again with the old
+// parameters or without a pagination token.
 type RequestChangedException struct {
 	Message *string
 
@@ -302,7 +302,7 @@ func (e *UnknownSubscriptionException) ErrorFault() smithy.ErrorFault { return s
 
 // Cost Explorer was unable to identify the usage unit. Provide
 // UsageType/UsageTypeGroup filter selections that contain matching units, for
-// example: hours.
+// example: hours .
 type UnresolvableUsageUnitException struct {
 	Message *string
 

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the code signing configuration. Changes to the code signing configuration
-// take effect the next time a user tries to deploy a code package to the function.
+// Update the code signing configuration. Changes to the code signing
+// configuration take effect the next time a user tries to deploy a code package to
+// the function.
 func (c *Client) UpdateCodeSigningConfig(ctx context.Context, params *UpdateCodeSigningConfigInput, optFns ...func(*Options)) (*UpdateCodeSigningConfigOutput, error) {
 	if params == nil {
 		params = &UpdateCodeSigningConfigInput{}

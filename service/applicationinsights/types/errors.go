@@ -163,8 +163,8 @@ func (e *TagsAlreadyExistException) ErrorCode() string {
 }
 func (e *TagsAlreadyExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of the provided tags is beyond the limit, or the number of total tags
-// you are trying to attach to the specified resource exceeds the limit.
+// The number of the provided tags is beyond the limit, or the number of total
+// tags you are trying to attach to the specified resource exceeds the limit.
 type TooManyTagsException struct {
 	Message *string
 

@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action to a specific child (nested) recovery point removes the relationship
-// between the specified recovery point and its parent (composite) recovery point.
+// This action to a specific child (nested) recovery point removes the
+// relationship between the specified recovery point and its parent (composite)
+// recovery point.
 func (c *Client) DisassociateRecoveryPointFromParent(ctx context.Context, params *DisassociateRecoveryPointFromParentInput, optFns ...func(*Options)) (*DisassociateRecoveryPointFromParentOutput, error) {
 	if params == nil {
 		params = &DisassociateRecoveryPointFromParentInput{}

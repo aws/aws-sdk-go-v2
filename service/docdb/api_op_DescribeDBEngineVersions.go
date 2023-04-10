@@ -28,13 +28,12 @@ func (c *Client) DescribeDBEngineVersions(ctx context.Context, params *DescribeD
 	return out, nil
 }
 
-// Represents the input to DescribeDBEngineVersions.
+// Represents the input to DescribeDBEngineVersions .
 type DescribeDBEngineVersionsInput struct {
 
 	// The name of a specific parameter group family to return details for.
 	// Constraints:
-	//
-	// * If provided, must match an existing DBParameterGroupFamily.
+	//   - If provided, must match an existing DBParameterGroupFamily .
 	DBParameterGroupFamily *string
 
 	// Indicates that only the default version of the specified engine or engine and
@@ -51,18 +50,18 @@ type DescribeDBEngineVersionsInput struct {
 	Filters []types.Filter
 
 	// If this parameter is specified and the requested engine supports the
-	// CharacterSetName parameter for CreateDBInstance, the response includes a list of
-	// supported character sets for each engine version.
+	// CharacterSetName parameter for CreateDBInstance , the response includes a list
+	// of supported character sets for each engine version.
 	ListSupportedCharacterSets *bool
 
 	// If this parameter is specified and the requested engine supports the TimeZone
-	// parameter for CreateDBInstance, the response includes a list of supported time
+	// parameter for CreateDBInstance , the response includes a list of supported time
 	// zones for each engine version.
 	ListSupportedTimezones *bool
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -74,7 +73,7 @@ type DescribeDBEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeDBEngineVersions.
+// Represents the output of DescribeDBEngineVersions .
 type DescribeDBEngineVersionsOutput struct {
 
 	// Detailed information about one or more engine versions.
@@ -82,7 +81,7 @@ type DescribeDBEngineVersionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

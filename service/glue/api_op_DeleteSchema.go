@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the entire schema set, including the schema set and all of its versions.
-// To get the status of the delete operation, you can call GetSchema API after the
-// asynchronous call. Deleting a registry will deactivate all online operations for
-// the schema, such as the GetSchemaByDefinition, and RegisterSchemaVersion APIs.
+// Deletes the entire schema set, including the schema set and all of its
+// versions. To get the status of the delete operation, you can call GetSchema API
+// after the asynchronous call. Deleting a registry will deactivate all online
+// operations for the schema, such as the GetSchemaByDefinition , and
+// RegisterSchemaVersion APIs.
 func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, optFns ...func(*Options)) (*DeleteSchemaOutput, error) {
 	if params == nil {
 		params = &DeleteSchemaInput{}
@@ -32,8 +33,8 @@ func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, op
 
 type DeleteSchemaInput struct {
 
-	// This is a wrapper structure that may contain the schema name and Amazon Resource
-	// Name (ARN).
+	// This is a wrapper structure that may contain the schema name and Amazon
+	// Resource Name (ARN).
 	//
 	// This member is required.
 	SchemaId *types.SchemaId

@@ -178,19 +178,12 @@ type ReplicationJob struct {
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
 	// value can be any of the following:
-	//
-	// * KMS key ID
-	//
-	// * KMS key alias
-	//
-	// * ARN
-	// referring to the KMS key ID
-	//
-	// * ARN referring to the KMS key alias
-	//
-	// If encrypted
-	// is enabled but a KMS key ID is not specified, the customer's default KMS key for
-	// Amazon EBS is used.
+	//   - KMS key ID
+	//   - KMS key alias
+	//   - ARN referring to the KMS key ID
+	//   - ARN referring to the KMS key alias
+	// If encrypted is enabled but a KMS key ID is not specified, the customer's
+	// default KMS key for Amazon EBS is used.
 	KmsKeyId *string
 
 	// The ID of the latest Amazon Machine Image (AMI).
@@ -256,19 +249,12 @@ type ReplicationRun struct {
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
 	// value can be any of the following:
-	//
-	// * KMS key ID
-	//
-	// * KMS key alias
-	//
-	// * ARN
-	// referring to the KMS key ID
-	//
-	// * ARN referring to the KMS key alias
-	//
-	// If encrypted
-	// is true but a KMS key ID is not specified, the customer's default KMS key for
-	// Amazon EBS is used.
+	//   - KMS key ID
+	//   - KMS key alias
+	//   - ARN referring to the KMS key ID
+	//   - ARN referring to the KMS key alias
+	// If encrypted is true but a KMS key ID is not specified, the customer's default
+	// KMS key for Amazon EBS is used.
 	KmsKeyId *string
 
 	// The ID of the replication run.
@@ -395,8 +381,8 @@ type ServerGroupValidationConfiguration struct {
 // Launch configuration for a server.
 type ServerLaunchConfiguration struct {
 
-	// Indicates whether a publicly accessible IP address is created when launching the
-	// server.
+	// Indicates whether a publicly accessible IP address is created when launching
+	// the server.
 	AssociatePublicIpAddress *bool
 
 	// Location of an Amazon S3 object.
@@ -459,19 +445,12 @@ type ServerReplicationParameters struct {
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
 	// value can be any of the following:
-	//
-	// * KMS key ID
-	//
-	// * KMS key alias
-	//
-	// * ARN
-	// referring to the KMS key ID
-	//
-	// * ARN referring to the KMS key alias
-	//
-	// If encrypted
-	// is enabled but a KMS key ID is not specified, the customer's default KMS key for
-	// Amazon EBS is used.
+	//   - KMS key ID
+	//   - KMS key alias
+	//   - ARN referring to the KMS key ID
+	//   - ARN referring to the KMS key alias
+	// If encrypted is enabled but a KMS key ID is not specified, the customer's
+	// default KMS key for Amazon EBS is used.
 	KmsKeyId *string
 
 	// The license type for creating a replication job for the server.

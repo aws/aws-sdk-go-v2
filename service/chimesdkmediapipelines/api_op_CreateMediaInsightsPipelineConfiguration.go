@@ -31,8 +31,8 @@ func (c *Client) CreateMediaInsightsPipelineConfiguration(ctx context.Context, p
 
 type CreateMediaInsightsPipelineConfigurationInput struct {
 
-	// The elements in the request, such as a processor for Amazon Transcribe or a sink
-	// for a Kinesis Data Stream.
+	// The elements in the request, such as a processor for Amazon Transcribe or a
+	// sink for a Kinesis Data Stream.
 	//
 	// This member is required.
 	Elements []types.MediaInsightsPipelineConfigurationElement
@@ -42,8 +42,9 @@ type CreateMediaInsightsPipelineConfigurationInput struct {
 	// This member is required.
 	MediaInsightsPipelineConfigurationName *string
 
-	// The ARN of the role used by the service to access Amazon Web Services resources,
-	// including Transcribe and Transcribe Call Analytics, on the caller’s behalf.
+	// The ARN of the role used by the service to access Amazon Web Services
+	// resources, including Transcribe and Transcribe Call Analytics , on the caller’s
+	// behalf.
 	//
 	// This member is required.
 	ResourceAccessRoleArn *string
@@ -51,8 +52,8 @@ type CreateMediaInsightsPipelineConfigurationInput struct {
 	// The unique identifier for the media insights pipeline configuration request.
 	ClientRequestToken *string
 
-	// The configuration settings for the real-time alerts in a media insights pipeline
-	// configuration.
+	// The configuration settings for the real-time alerts in a media insights
+	// pipeline configuration.
 	RealTimeAlertConfiguration *types.RealTimeAlertConfiguration
 
 	// The tags assigned to the media insights pipeline configuration.

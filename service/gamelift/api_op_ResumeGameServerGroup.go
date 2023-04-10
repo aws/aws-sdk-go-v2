@@ -20,9 +20,8 @@ import (
 // and status reason for more information on why group activity is suspended. To
 // resume activity, specify a game server group ARN and the type of activity to be
 // resumed. If successful, a GameServerGroup object is returned showing that the
-// resumed activity is no longer listed in SuspendedActions. Learn more GameLift
-// FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// resumed activity is no longer listed in SuspendedActions . Learn more GameLift
+// FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameServerGroupInput, optFns ...func(*Options)) (*ResumeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &ResumeGameServerGroupInput{}

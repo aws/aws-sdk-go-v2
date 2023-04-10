@@ -41,7 +41,7 @@ type DescribeCustomVocabularyMetadataInput struct {
 	BotVersion *string
 
 	// The locale to return the custom vocabulary information for. The locale must be
-	// en_GB.
+	// en_GB .
 	//
 	// This member is required.
 	LocaleId *string

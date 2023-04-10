@@ -49,9 +49,9 @@ const (
 	DeliverabilityTestStatusCompleted  DeliverabilityTestStatus = "COMPLETED"
 )
 
-// Values returns all known values for DeliverabilityTestStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeliverabilityTestStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliverabilityTestStatus) Values() []DeliverabilityTestStatus {
 	return []DeliverabilityTestStatus{
 		"IN_PROGRESS",
@@ -117,9 +117,9 @@ const (
 	EventTypeRenderingFailure EventType = "RENDERING_FAILURE"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"SEND",
@@ -142,9 +142,9 @@ const (
 	IdentityTypeManagedDomain IdentityType = "MANAGED_DOMAIN"
 )
 
-// Values returns all known values for IdentityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityType) Values() []IdentityType {
 	return []IdentityType{
 		"EMAIL_ADDRESS",
@@ -183,9 +183,9 @@ const (
 	TlsPolicyOptional TlsPolicy = "OPTIONAL"
 )
 
-// Values returns all known values for TlsPolicy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TlsPolicy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TlsPolicy) Values() []TlsPolicy {
 	return []TlsPolicy{
 		"REQUIRE",
@@ -201,9 +201,9 @@ const (
 	WarmupStatusDone       WarmupStatus = "DONE"
 )
 
-// Values returns all known values for WarmupStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WarmupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WarmupStatus) Values() []WarmupStatus {
 	return []WarmupStatus{
 		"IN_PROGRESS",

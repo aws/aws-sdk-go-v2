@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified application version to have the specified properties. If a
-// property (for example, description) is not provided, the value remains
+// Updates the specified application version to have the specified properties. If
+// a property (for example, description ) is not provided, the value remains
 // unchanged. To clear properties, specify an empty string.
 func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApplicationVersionInput, optFns ...func(*Options)) (*UpdateApplicationVersionOutput, error) {
 	if params == nil {

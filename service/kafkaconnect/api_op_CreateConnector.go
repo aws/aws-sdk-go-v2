@@ -60,8 +60,8 @@ type CreateConnectorInput struct {
 	// This member is required.
 	KafkaClusterEncryptionInTransit *types.KafkaClusterEncryptionInTransit
 
-	// The version of Kafka Connect. It has to be compatible with both the Apache Kafka
-	// cluster's version and the plugins.
+	// The version of Kafka Connect. It has to be compatible with both the Apache
+	// Kafka cluster's version and the plugins.
 	//
 	// This member is required.
 	KafkaConnectVersion *string

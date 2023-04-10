@@ -48,7 +48,7 @@ type GetTableInput struct {
 
 	// The time as of when to read the table contents. If not set, the most recent
 	// transaction commit time will be used. Cannot be specified along with
-	// TransactionId.
+	// TransactionId .
 	QueryAsOfTime *time.Time
 
 	// The transaction ID at which to read the table contents.

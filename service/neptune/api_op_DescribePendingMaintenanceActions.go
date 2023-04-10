@@ -33,21 +33,18 @@ type DescribePendingMaintenanceActionsInput struct {
 
 	// A filter that specifies one or more resources to return pending maintenance
 	// actions for. Supported filters:
-	//
-	// * db-cluster-id - Accepts DB cluster
-	// identifiers and DB cluster Amazon Resource Names (ARNs). The results list will
-	// only include pending maintenance actions for the DB clusters identified by these
-	// ARNs.
-	//
-	// * db-instance-id - Accepts DB instance identifiers and DB instance ARNs.
-	// The results list will only include pending maintenance actions for the DB
-	// instances identified by these ARNs.
+	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	//   Resource Names (ARNs). The results list will only include pending maintenance
+	//   actions for the DB clusters identified by these ARNs.
+	//   - db-instance-id - Accepts DB instance identifiers and DB instance ARNs. The
+	//   results list will only include pending maintenance actions for the DB instances
+	//   identified by these ARNs.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
 	// DescribePendingMaintenanceActions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to a number of records
-	// specified by MaxRecords.
+	// specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -67,7 +64,7 @@ type DescribePendingMaintenanceActionsOutput struct {
 	// An optional pagination token provided by a previous
 	// DescribePendingMaintenanceActions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to a number of records
-	// specified by MaxRecords.
+	// specified by MaxRecords .
 	Marker *string
 
 	// A list of the pending maintenance actions for the resource.

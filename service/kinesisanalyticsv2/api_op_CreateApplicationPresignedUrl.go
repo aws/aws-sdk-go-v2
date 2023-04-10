@@ -45,7 +45,7 @@ type CreateApplicationPresignedUrlInput struct {
 	ApplicationName *string
 
 	// The type of the extension for which to create and return a URL. Currently, the
-	// only valid extension URL type is FLINK_DASHBOARD_URL.
+	// only valid extension URL type is FLINK_DASHBOARD_URL .
 	//
 	// This member is required.
 	UrlType types.UrlType

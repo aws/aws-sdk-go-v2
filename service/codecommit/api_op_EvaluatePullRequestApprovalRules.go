@@ -36,7 +36,7 @@ type EvaluatePullRequestApprovalRulesInput struct {
 	PullRequestId *string
 
 	// The system-generated ID for the pull request revision. To retrieve the most
-	// recent revision ID for a pull request, use GetPullRequest.
+	// recent revision ID for a pull request, use GetPullRequest .
 	//
 	// This member is required.
 	RevisionId *string

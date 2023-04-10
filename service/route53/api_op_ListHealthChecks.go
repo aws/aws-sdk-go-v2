@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve a list of the health checks that are associated with the current Amazon
-// Web Services account.
+// Retrieve a list of the health checks that are associated with the current
+// Amazon Web Services account.
 func (c *Client) ListHealthChecks(ctx context.Context, params *ListHealthChecksInput, optFns ...func(*Options)) (*ListHealthChecksOutput, error) {
 	if params == nil {
 		params = &ListHealthChecksInput{}
@@ -33,18 +33,18 @@ func (c *Client) ListHealthChecks(ctx context.Context, params *ListHealthChecksI
 // current Amazon Web Services account.
 type ListHealthChecksInput struct {
 
-	// If the value of IsTruncated in the previous response was true, you have more
+	// If the value of IsTruncated in the previous response was true , you have more
 	// health checks. To get another group, submit another ListHealthChecks request.
-	// For the value of marker, specify the value of NextMarker from the previous
+	// For the value of marker , specify the value of NextMarker from the previous
 	// response, which is the ID of the first health check that Amazon Route 53 will
 	// return if you submit another request. If the value of IsTruncated in the
-	// previous response was false, there are no more health checks to get.
+	// previous response was false , there are no more health checks to get.
 	Marker *string
 
 	// The maximum number of health checks that you want ListHealthChecks to return in
 	// response to the current request. Amazon Route 53 returns a maximum of 100 items.
-	// If you set MaxItems to a value greater than 100, Route 53 returns only the first
-	// 100 health checks.
+	// If you set MaxItems to a value greater than 100, Route 53 returns only the
+	// first 100 health checks.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -67,7 +67,7 @@ type ListHealthChecksOutput struct {
 	// This member is required.
 	IsTruncated bool
 
-	// For the second and subsequent calls to ListHealthChecks, Marker is the value
+	// For the second and subsequent calls to ListHealthChecks , Marker is the value
 	// that you specified for the marker parameter in the previous request.
 	//
 	// This member is required.
@@ -79,7 +79,7 @@ type ListHealthChecksOutput struct {
 	// This member is required.
 	MaxItems *int32
 
-	// If IsTruncated is true, the value of NextMarker identifies the first health
+	// If IsTruncated is true , the value of NextMarker identifies the first health
 	// check that Amazon Route 53 returns if you submit another ListHealthChecks
 	// request and specify the value of NextMarker in the marker parameter.
 	NextMarker *string
@@ -162,8 +162,8 @@ var _ ListHealthChecksAPIClient = (*Client)(nil)
 type ListHealthChecksPaginatorOptions struct {
 	// The maximum number of health checks that you want ListHealthChecks to return in
 	// response to the current request. Amazon Route 53 returns a maximum of 100 items.
-	// If you set MaxItems to a value greater than 100, Route 53 returns only the first
-	// 100 health checks.
+	// If you set MaxItems to a value greater than 100, Route 53 returns only the
+	// first 100 health checks.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

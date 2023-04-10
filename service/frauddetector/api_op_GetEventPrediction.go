@@ -12,7 +12,7 @@ import (
 )
 
 // Evaluates an event against a detector version. If a version ID is not provided,
-// the detector’s (ACTIVE) version is used.
+// the detector’s ( ACTIVE ) version is used.
 func (c *Client) GetEventPrediction(ctx context.Context, params *GetEventPredictionInput, optFns ...func(*Options)) (*GetEventPredictionOutput, error) {
 	if params == nil {
 		params = &GetEventPredictionInput{}

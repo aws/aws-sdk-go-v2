@@ -14,12 +14,11 @@ import (
 // Adds one or more tags to the specified Amazon Lightsail resource. Each resource
 // can have a maximum of 50 tags. Each tag consists of a key and an optional value.
 // Tag keys must be unique per resource. For more information about tags, see the
-// Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
-// The tag resource operation supports tag-based access control via request tags
-// and resource tags applied to the resource identified by resource name. For more
-// information, see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags)
+// . The tag resource operation supports tag-based access control via request tags
+// and resource tags applied to the resource identified by resource name . For more
+// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

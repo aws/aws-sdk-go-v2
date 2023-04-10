@@ -15,26 +15,23 @@ import (
 // account. Organizations sends email on your behalf to the email address that is
 // associated with the other account's owner. The invitation is implemented as a
 // Handshake whose details are in the response.
+//   - You can invite Amazon Web Services accounts only from the same seller as
+//     the management account. For example, if your organization's management account
+//     was created by Amazon Internet Services Pvt. Ltd (AISPL), an Amazon Web Services
+//     seller in India, you can invite only other AISPL accounts to your organization.
+//     You can't combine accounts from AISPL and Amazon Web Services or from any other
+//     Amazon Web Services seller. For more information, see Consolidated Billing in
+//     India (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html)
+//     .
+//   - If you receive an exception that indicates that you exceeded your account
+//     limits for the organization or that the operation failed because your
+//     organization is still initializing, wait one hour and then try again. If the
+//     error persists after an hour, contact Amazon Web Services Support (https://console.aws.amazon.com/support/home#/)
+//     .
 //
-// * You can invite Amazon Web
-// Services accounts only from the same seller as the management account. For
-// example, if your organization's management account was created by Amazon
-// Internet Services Pvt. Ltd (AISPL), an Amazon Web Services seller in India, you
-// can invite only other AISPL accounts to your organization. You can't combine
-// accounts from AISPL and Amazon Web Services or from any other Amazon Web
-// Services seller. For more information, see Consolidated Billing in India
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html).
-//
-// *
-// If you receive an exception that indicates that you exceeded your account limits
-// for the organization or that the operation failed because your organization is
-// still initializing, wait one hour and then try again. If the error persists
-// after an hour, contact Amazon Web Services Support
-// (https://console.aws.amazon.com/support/home#/).
-//
-// If the request includes tags,
-// then the requester must have the organizations:TagResource permission. This
-// operation can be called only from the organization's management account.
+// If the request includes tags, then the requester must have the
+// organizations:TagResource permission. This operation can be called only from the
+// organization's management account.
 func (c *Client) InviteAccountToOrganization(ctx context.Context, params *InviteAccountToOrganizationInput, optFns ...func(*Options)) (*InviteAccountToOrganizationOutput, error) {
 	if params == nil {
 		params = &InviteAccountToOrganizationInput{}
@@ -56,10 +53,10 @@ type InviteAccountToOrganizationInput struct {
 	// to join your organization. This is a JSON object that contains the following
 	// elements: { "Type": "ACCOUNT", "Id": "< account id number >" } If you use the
 	// CLI, you can submit this as a single string, similar to the following example:
-	// --target Id=123456789012,Type=ACCOUNT If you specify "Type": "ACCOUNT", you must
-	// provide the Amazon Web Services account ID number as the Id. If you specify
-	// "Type": "EMAIL", you must specify the email address that is associated with the
-	// account. --target Id=diego@example.com,Type=EMAIL
+	// --target Id=123456789012,Type=ACCOUNT If you specify "Type": "ACCOUNT" , you
+	// must provide the Amazon Web Services account ID number as the Id . If you
+	// specify "Type": "EMAIL" , you must specify the email address that is associated
+	// with the account. --target Id=diego@example.com,Type=EMAIL
 	//
 	// This member is required.
 	Target *types.HandshakeParty
@@ -71,8 +68,7 @@ type InviteAccountToOrganizationInput struct {
 	// A list of tags that you want to attach to the account when it becomes a member
 	// of the organization. For each tag in the list, you must specify both a tag key
 	// and a value. You can set the value to an empty string, but you can't set it to
-	// null. For more information about tagging, see Tagging Organizations resources
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
+	// null . For more information about tagging, see Tagging Organizations resources (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
 	// in the Organizations User Guide. Any tags in the request are checked for
 	// compliance with any applicable tag policies when the request is made. The
 	// request is rejected if the tags in the request don't match the requirements of
@@ -89,8 +85,8 @@ type InviteAccountToOrganizationInput struct {
 
 type InviteAccountToOrganizationOutput struct {
 
-	// A structure that contains details about the handshake that is created to support
-	// this invitation request.
+	// A structure that contains details about the handshake that is created to
+	// support this invitation request.
 	Handshake *types.Handshake
 
 	// Metadata pertaining to the operation's result.

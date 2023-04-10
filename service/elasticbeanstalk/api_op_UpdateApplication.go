@@ -12,7 +12,7 @@ import (
 )
 
 // Updates the specified application to have the specified properties. If a
-// property (for example, description) is not provided, the value remains
+// property (for example, description ) is not provided, the value remains
 // unchanged. To clear these properties, specify an empty string.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {

@@ -274,9 +274,9 @@ func (e *TeamMemberNotFoundException) ErrorCode() string {
 }
 func (e *TeamMemberNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A user profile with that name already exists in this region for the AWS account.
-// AWS CodeStar user profile names must be unique within a region for the AWS
-// account.
+// A user profile with that name already exists in this region for the AWS
+// account. AWS CodeStar user profile names must be unique within a region for the
+// AWS account.
 type UserProfileAlreadyExistsException struct {
 	Message *string
 

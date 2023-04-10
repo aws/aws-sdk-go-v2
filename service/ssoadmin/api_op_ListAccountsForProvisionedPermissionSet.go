@@ -43,7 +43,7 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 	// This member is required.
 	PermissionSetArn *string
 
-	// The maximum number of results to display for the PermissionSet.
+	// The maximum number of results to display for the PermissionSet .
 	MaxResults *int32
 
 	// The pagination token for the list API. Initially the value is null. Use the
@@ -58,7 +58,7 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 
 type ListAccountsForProvisionedPermissionSetOutput struct {
 
-	// The list of AWS AccountIds.
+	// The list of AWS AccountIds .
 	AccountIds []string
 
 	// The pagination token for the list API. Initially the value is null. Use the
@@ -134,18 +134,18 @@ func (c *Client) addOperationListAccountsForProvisionedPermissionSetMiddlewares(
 	return nil
 }
 
-// ListAccountsForProvisionedPermissionSetAPIClient is a client that implements the
-// ListAccountsForProvisionedPermissionSet operation.
+// ListAccountsForProvisionedPermissionSetAPIClient is a client that implements
+// the ListAccountsForProvisionedPermissionSet operation.
 type ListAccountsForProvisionedPermissionSetAPIClient interface {
 	ListAccountsForProvisionedPermissionSet(context.Context, *ListAccountsForProvisionedPermissionSetInput, ...func(*Options)) (*ListAccountsForProvisionedPermissionSetOutput, error)
 }
 
 var _ ListAccountsForProvisionedPermissionSetAPIClient = (*Client)(nil)
 
-// ListAccountsForProvisionedPermissionSetPaginatorOptions is the paginator options
-// for ListAccountsForProvisionedPermissionSet
+// ListAccountsForProvisionedPermissionSetPaginatorOptions is the paginator
+// options for ListAccountsForProvisionedPermissionSet
 type ListAccountsForProvisionedPermissionSetPaginatorOptions struct {
-	// The maximum number of results to display for the PermissionSet.
+	// The maximum number of results to display for the PermissionSet .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

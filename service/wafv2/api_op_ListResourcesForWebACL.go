@@ -14,7 +14,7 @@ import (
 // Retrieves an array of the Amazon Resource Names (ARNs) for the regional
 // resources that are associated with the specified web ACL. If you want the list
 // of Amazon CloudFront resources, use the CloudFront call
-// ListDistributionsByWebACLId.
+// ListDistributionsByWebACLId .
 func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourcesForWebACLInput, optFns ...func(*Options)) (*ListResourcesForWebACLOutput, error) {
 	if params == nil {
 		params = &ListResourcesForWebACLInput{}
@@ -41,7 +41,7 @@ type ListResourcesForWebACLInput struct {
 	// application can be an Application Load Balancer (ALB), an Amazon API Gateway
 	// REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
 	// service. If you don't provide a resource type, the call uses the resource type
-	// APPLICATION_LOAD_BALANCER. Default: APPLICATION_LOAD_BALANCER
+	// APPLICATION_LOAD_BALANCER . Default: APPLICATION_LOAD_BALANCER
 	ResourceType types.ResourceType
 
 	noSmithyDocumentSerde

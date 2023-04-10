@@ -13,11 +13,10 @@ import (
 	"time"
 )
 
-// Lists events for a given source identifier and source type. You can also specify
-// a start and end time. For more information on DMS events, see Working with
-// Events and Notifications
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the
-// Database Migration Service User Guide.
+// Lists events for a given source identifier and source type. You can also
+// specify a start and end time. For more information on DMS events, see Working
+// with Events and Notifications (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html)
+// in the Database Migration Service User Guide.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -44,12 +43,12 @@ type DescribeEventsInput struct {
 	// A list of event categories for the source type that you've chosen.
 	EventCategories []string
 
-	// Filters applied to events. The only valid filter is replication-instance-id.
+	// Filters applied to events. The only valid filter is replication-instance-id .
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -78,7 +77,7 @@ type DescribeEventsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

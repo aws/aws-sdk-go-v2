@@ -54,11 +54,11 @@ type StartSessionInput struct {
 	// The session description.
 	Description *string
 
-	// The notebook version. This value is supplied automatically for notebook sessions
-	// in the Athena console and is not required for programmatic session access. The
-	// only valid notebook version is Athena notebook version 1. If you specify a value
-	// for NotebookVersion, you must also specify a value for NotebookId. See
-	// EngineConfiguration$AdditionalConfigs.
+	// The notebook version. This value is supplied automatically for notebook
+	// sessions in the Athena console and is not required for programmatic session
+	// access. The only valid notebook version is Athena notebook version 1 . If you
+	// specify a value for NotebookVersion , you must also specify a value for
+	// NotebookId . See EngineConfiguration$AdditionalConfigs .
 	NotebookVersion *string
 
 	// The idle timeout in minutes for the session.
@@ -74,8 +74,8 @@ type StartSessionOutput struct {
 
 	// The state of the session. A description of each state follows. CREATING - The
 	// session is being started, including acquiring resources. CREATED - The session
-	// has been started. IDLE - The session is able to accept a calculation. BUSY - The
-	// session is processing another task and is unable to accept a calculation.
+	// has been started. IDLE - The session is able to accept a calculation. BUSY -
+	// The session is processing another task and is unable to accept a calculation.
 	// TERMINATING - The session is in the process of shutting down. TERMINATED - The
 	// session and its resources are no longer running. DEGRADED - The session has no
 	// healthy coordinators. FAILED - Due to a failure, the session and its resources

@@ -13,8 +13,7 @@ import (
 
 // Creates a traffic distribution group given an Amazon Connect instance that has
 // been replicated. For more information about creating traffic distribution
-// groups, see Set up traffic distribution groups
-// (https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html)
+// groups, see Set up traffic distribution groups (https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) CreateTrafficDistributionGroup(ctx context.Context, params *CreateTrafficDistributionGroupInput, optFns ...func(*Options)) (*CreateTrafficDistributionGroupOutput, error) {
 	if params == nil {
@@ -47,8 +46,8 @@ type CreateTrafficDistributionGroupInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// A description for the traffic distribution group.

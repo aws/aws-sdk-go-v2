@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a dynamic thing group. Requires permission to access the
-// CreateDynamicThingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// CreateDynamicThingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateDynamicThingGroup(ctx context.Context, params *CreateDynamicThingGroupInput, optFns ...func(*Options)) (*CreateDynamicThingGroupOutput, error) {
 	if params == nil {
@@ -32,9 +31,8 @@ func (c *Client) CreateDynamicThingGroup(ctx context.Context, params *CreateDyna
 
 type CreateDynamicThingGroupInput struct {
 
-	// The dynamic thing group search query string. See Query Syntax
-	// (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html) for
-	// information about query string syntax.
+	// The dynamic thing group search query string. See Query Syntax (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html)
+	// for information about query string syntax.
 	//
 	// This member is required.
 	QueryString *string
@@ -44,12 +42,13 @@ type CreateDynamicThingGroupInput struct {
 	// This member is required.
 	ThingGroupName *string
 
-	// The dynamic thing group index name. Currently one index is supported:
-	// AWS_Things.
+	// The dynamic thing group index name. Currently one index is supported: AWS_Things
+	// .
 	IndexName *string
 
-	// The dynamic thing group query version. Currently one query version is supported:
-	// "2017-09-30". If not specified, the query version defaults to this value.
+	// The dynamic thing group query version. Currently one query version is
+	// supported: "2017-09-30". If not specified, the query version defaults to this
+	// value.
 	QueryVersion *string
 
 	// Metadata which can be used to manage the dynamic thing group.

@@ -73,8 +73,8 @@ type FixedResponseAction struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a forward action. You can use forward actions to route requests to one
-// or more target groups.
+// Describes a forward action. You can use forward actions to route requests to
+// one or more target groups.
 type ForwardAction struct {
 
 	// The target groups. Traffic matching the rule is forwarded to the specified
@@ -174,9 +174,9 @@ type HealthCheckConfig struct {
 	Matcher Matcher
 
 	// The destination for health checks on the targets. If the protocol version is
-	// HTTP/1.1 or HTTP/2, specify a valid URI (for example, /path?query). The default
-	// path is /. Health checks are not supported if the protocol version is gRPC,
-	// however, you can choose HTTP/1.1 or HTTP/2 and specify a valid URI.
+	// HTTP/1.1 or HTTP/2 , specify a valid URI (for example, /path?query ). The
+	// default path is / . Health checks are not supported if the protocol version is
+	// gRPC , however, you can choose HTTP/1.1 or HTTP/2 and specify a valid URI.
 	Path *string
 
 	// The port used when performing health checks on targets. The default setting is
@@ -184,11 +184,11 @@ type HealthCheckConfig struct {
 	Port *int32
 
 	// The protocol used when performing health checks on targets. The possible
-	// protocols are HTTP and HTTPS. The default is HTTP.
+	// protocols are HTTP and HTTPS . The default is HTTP .
 	Protocol TargetGroupProtocol
 
-	// The protocol version used when performing health checks on targets. The possible
-	// protocol versions are HTTP1 and HTTP2.
+	// The protocol version used when performing health checks on targets. The
+	// possible protocol versions are HTTP1 and HTTP2 .
 	ProtocolVersion HealthCheckProtocolVersion
 
 	// The number of consecutive failed health checks required before considering a
@@ -306,7 +306,7 @@ type PathMatchTypeMemberPrefix struct {
 func (*PathMatchTypeMemberPrefix) isPathMatchType() {}
 
 // Describes the action for a rule. Each rule must include exactly one of the
-// following types of actions: forward or fixed-response, and it must be the last
+// following types of actions: forward or fixed-response , and it must be the last
 // action to be performed.
 //
 // The following types satisfy this interface:
@@ -372,8 +372,8 @@ type RuleSummary struct {
 	// requests.
 	IsDefault *bool
 
-	// The date and time that the listener rule was last updated, specified in ISO-8601
-	// format.
+	// The date and time that the listener rule was last updated, specified in
+	// ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The name of the rule.
@@ -594,16 +594,16 @@ type ServiceSummary struct {
 // Describes a target.
 type Target struct {
 
-	// The ID of the target. If the target type of the target group is INSTANCE, this
+	// The ID of the target. If the target type of the target group is INSTANCE , this
 	// is an instance ID. If the target type is IP , this is an IP address. If the
-	// target type is LAMBDA, this is the ARN of the Lambda function. If the target
-	// type is ALB, this is the ARN of the Application Load Balancer.
+	// target type is LAMBDA , this is the ARN of the Lambda function. If the target
+	// type is ALB , this is the ARN of the Application Load Balancer.
 	//
 	// This member is required.
 	Id *string
 
-	// The port on which the target is listening. For HTTP, the default is 80. For
-	// HTTPS, the default is 443.
+	// The port on which the target is listening. For HTTP, the default is 80 . For
+	// HTTPS, the default is 443 .
 	Port *int32
 
 	noSmithyDocumentSerde
@@ -618,10 +618,10 @@ type TargetFailure struct {
 	// The failure message.
 	FailureMessage *string
 
-	// The ID of the target. If the target type of the target group is INSTANCE, this
+	// The ID of the target. If the target type of the target group is INSTANCE , this
 	// is an instance ID. If the target type is IP , this is an IP address. If the
-	// target type is LAMBDA, this is the ARN of the Lambda function. If the target
-	// type is ALB, this is the ARN of the Application Load Balancer.
+	// target type is LAMBDA , this is the ARN of the Lambda function. If the target
+	// type is ALB , this is the ARN of the Application Load Balancer.
 	Id *string
 
 	// The port on which the target is listening. This parameter doesn't apply if the
@@ -635,7 +635,7 @@ type TargetFailure struct {
 // target group configuration.
 type TargetGroupConfig struct {
 
-	// The port on which the targets are listening. For HTTP, the default is 80. For
+	// The port on which the targets are listening. For HTTP, the default is 80 . For
 	// HTTPS, the default is 443
 	//
 	// This member is required.
@@ -656,11 +656,11 @@ type TargetGroupConfig struct {
 	HealthCheck *HealthCheckConfig
 
 	// The type of IP address used for the target group. The possible values are ipv4
-	// and ipv6. This is an optional parameter. If not specified, the IP address type
-	// defaults to ipv4.
+	// and ipv6 . This is an optional parameter. If not specified, the IP address type
+	// defaults to ipv4 .
 	IpAddressType IpAddressType
 
-	// The protocol version. Default value is HTTP1.
+	// The protocol version. Default value is HTTP1 .
 	ProtocolVersion TargetGroupProtocolVersion
 
 	noSmithyDocumentSerde
@@ -680,8 +680,8 @@ type TargetGroupSummary struct {
 	Id *string
 
 	// The type of IP address used for the target group. The possible values are ipv4
-	// and ipv6. This is an optional parameter. If not specified, the IP address type
-	// defaults to ipv4.
+	// and ipv6 . This is an optional parameter. If not specified, the IP address type
+	// defaults to ipv4 .
 	IpAddressType IpAddressType
 
 	// The date and time that the target group was last updated, specified in ISO-8601
@@ -715,10 +715,10 @@ type TargetGroupSummary struct {
 // Summary information about a target.
 type TargetSummary struct {
 
-	// The ID of the target. If the target type of the target group is INSTANCE, this
+	// The ID of the target. If the target type of the target group is INSTANCE , this
 	// is an instance ID. If the target type is IP , this is an IP address. If the
-	// target type is LAMBDA, this is the ARN of the Lambda function. If the target
-	// type is ALB, this is the ARN of the Application Load Balancer.
+	// target type is LAMBDA , this is the ARN of the Lambda function. If the target
+	// type is ALB , this is the ARN of the Application Load Balancer.
 	Id *string
 
 	// The port on which the target is listening.
@@ -728,23 +728,14 @@ type TargetSummary struct {
 	ReasonCode *string
 
 	// The status of the target.
-	//
-	// * Draining: The target is being deregistered. No new
-	// connections will be sent to this target while current connections are being
-	// drained. Default draining time is 5 minutes.
-	//
-	// * Unavailable: Health checks are
-	// unavailable for the target group.
-	//
-	// * Healthy: The target is healthy.
-	//
-	// *
-	// Unhealthy: The target is unhealthy.
-	//
-	// * Initial: Initial health checks on the
-	// target are being performed.
-	//
-	// * Unused: Target group is not used in a service.
+	//   - Draining : The target is being deregistered. No new connections will be sent
+	//   to this target while current connections are being drained. Default draining
+	//   time is 5 minutes.
+	//   - Unavailable : Health checks are unavailable for the target group.
+	//   - Healthy : The target is healthy.
+	//   - Unhealthy : The target is unhealthy.
+	//   - Initial : Initial health checks on the target are being performed.
+	//   - Unused : Target group is not used in a service.
 	Status TargetStatus
 
 	noSmithyDocumentSerde

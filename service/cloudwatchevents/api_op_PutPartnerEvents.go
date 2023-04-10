@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is used by SaaS partners to write events to a customer's partner event bus.
-// Amazon Web Services customers do not use this operation.
+// This is used by SaaS partners to write events to a customer's partner event
+// bus. Amazon Web Services customers do not use this operation.
 func (c *Client) PutPartnerEvents(ctx context.Context, params *PutPartnerEventsInput, optFns ...func(*Options)) (*PutPartnerEventsOutput, error) {
 	if params == nil {
 		params = &PutPartnerEventsInput{}

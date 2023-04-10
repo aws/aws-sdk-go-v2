@@ -31,9 +31,8 @@ func (c *Client) DeleteView(ctx context.Context, params *DeleteViewInput, optFns
 
 type DeleteViewInput struct {
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view that you want to delete.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view that you want to delete.
 	//
 	// This member is required.
 	ViewArn *string
@@ -43,9 +42,8 @@ type DeleteViewInput struct {
 
 type DeleteViewOutput struct {
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view that you successfully deleted.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view that you successfully deleted.
 	ViewArn *string
 
 	// Metadata pertaining to the operation's result.

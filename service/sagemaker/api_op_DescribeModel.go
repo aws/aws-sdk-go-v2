@@ -63,7 +63,7 @@ type DescribeModelOutput struct {
 	// The containers in the inference pipeline.
 	Containers []types.ContainerDefinition
 
-	// If True, no inbound or outbound network calls can be made to or from the model
+	// If True , no inbound or outbound network calls can be made to or from the model
 	// container.
 	EnableNetworkIsolation bool
 
@@ -75,8 +75,7 @@ type DescribeModelOutput struct {
 	PrimaryContainer *types.ContainerDefinition
 
 	// A VpcConfig object that specifies the VPC that this model has access to. For
-	// more information, see Protect Endpoints by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
+	// more information, see Protect Endpoints by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 	VpcConfig *types.VpcConfig
 
 	// Metadata pertaining to the operation's result.

@@ -53,8 +53,8 @@ type GetVehicleOutput struct {
 	// The ARN of a decoder manifest associated with the vehicle.
 	DecoderManifestArn *string
 
-	// The time the vehicle was last updated in seconds since epoch (January 1, 1970 at
-	// midnight UTC time).
+	// The time the vehicle was last updated in seconds since epoch (January 1, 1970
+	// at midnight UTC time).
 	LastModificationTime *time.Time
 
 	// The ARN of a vehicle model (model manifest) associated with the vehicle.

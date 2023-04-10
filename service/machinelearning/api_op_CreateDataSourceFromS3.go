@@ -12,25 +12,25 @@ import (
 )
 
 // Creates a DataSource object. A DataSource references data that can be used to
-// perform CreateMLModel, CreateEvaluation, or CreateBatchPrediction operations.
+// perform CreateMLModel , CreateEvaluation , or CreateBatchPrediction operations.
 // CreateDataSourceFromS3 is an asynchronous operation. In response to
-// CreateDataSourceFromS3, Amazon Machine Learning (Amazon ML) immediately returns
-// and sets the DataSource status to PENDING. After the DataSource has been created
-// and is ready for use, Amazon ML sets the Status parameter to COMPLETED.
+// CreateDataSourceFromS3 , Amazon Machine Learning (Amazon ML) immediately returns
+// and sets the DataSource status to PENDING . After the DataSource has been
+// created and is ready for use, Amazon ML sets the Status parameter to COMPLETED .
 // DataSource in the COMPLETED or PENDING state can be used to perform only
-// CreateMLModel, CreateEvaluation or CreateBatchPrediction operations. If Amazon
+// CreateMLModel , CreateEvaluation or CreateBatchPrediction operations. If Amazon
 // ML can't accept the input source, it sets the Status parameter to FAILED and
 // includes an error message in the Message attribute of the GetDataSource
-// operation response. The observation data used in a DataSource should be ready to
-// use; that is, it should have a consistent structure, and missing data values
+// operation response. The observation data used in a DataSource should be ready
+// to use; that is, it should have a consistent structure, and missing data values
 // should be kept to a minimum. The observation data must reside in one or more
 // .csv files in an Amazon Simple Storage Service (Amazon S3) location, along with
 // a schema that describes the data items by name and type. The same schema must be
-// used for all of the data files referenced by the DataSource. After the
+// used for all of the data files referenced by the DataSource . After the
 // DataSource has been created, it's ready to use in evaluations and batch
-// predictions. If you plan to use the DataSource to train an MLModel, the
+// predictions. If you plan to use the DataSource to train an MLModel , the
 // DataSource also needs a recipe. A recipe describes how each input variable will
-// be used in training an MLModel. Will the variable be included or excluded from
+// be used in training an MLModel . Will the variable be included or excluded from
 // training? Will the variable be manipulated; for example, will it be combined
 // with another variable or will it be split apart into word combinations? The
 // recipe provides answers to these questions.
@@ -51,37 +51,30 @@ func (c *Client) CreateDataSourceFromS3(ctx context.Context, params *CreateDataS
 
 type CreateDataSourceFromS3Input struct {
 
-	// A user-supplied identifier that uniquely identifies the DataSource.
+	// A user-supplied identifier that uniquely identifies the DataSource .
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// The data specification of a DataSource:
-	//
-	// * DataLocationS3 - The Amazon S3
-	// location of the observation data.
-	//
-	// * DataSchemaLocationS3 - The Amazon S3
-	// location of the DataSchema.
-	//
-	// * DataSchema - A JSON string representing the
-	// schema. This is not required if DataSchemaUri is specified.
-	//
-	// * DataRearrangement
-	// - A JSON string that represents the splitting and rearrangement requirements for
-	// the Datasource. Sample -
-	// "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	// The data specification of a DataSource :
+	//   - DataLocationS3 - The Amazon S3 location of the observation data.
+	//   - DataSchemaLocationS3 - The Amazon S3 location of the DataSchema .
+	//   - DataSchema - A JSON string representing the schema. This is not required if
+	//   DataSchemaUri is specified.
+	//   - DataRearrangement - A JSON string that represents the splitting and
+	//   rearrangement requirements for the Datasource . Sample -
+	//   "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
 	//
 	// This member is required.
 	DataSpec *types.S3DataSpec
 
-	// The compute statistics for a DataSource. The statistics are generated from the
-	// observation data referenced by a DataSource. Amazon ML uses the statistics
+	// The compute statistics for a DataSource . The statistics are generated from the
+	// observation data referenced by a DataSource . Amazon ML uses the statistics
 	// internally during MLModel training. This parameter must be set to true if the
 	// DataSource needs to be used for MLModel training.
 	ComputeStatistics bool
 
-	// A user-supplied name or description of the DataSource.
+	// A user-supplied name or description of the DataSource .
 	DataSourceName *string
 
 	noSmithyDocumentSerde
@@ -93,8 +86,8 @@ type CreateDataSourceFromS3Input struct {
 // GetBatchPrediction operation and checking the Status parameter.
 type CreateDataSourceFromS3Output struct {
 
-	// A user-supplied ID that uniquely identifies the DataSource. This value should be
-	// identical to the value of the DataSourceID in the request.
+	// A user-supplied ID that uniquely identifies the DataSource . This value should
+	// be identical to the value of the DataSourceID in the request.
 	DataSourceId *string
 
 	// Metadata pertaining to the operation's result.

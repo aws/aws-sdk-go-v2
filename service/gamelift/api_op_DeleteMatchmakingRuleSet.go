@@ -13,9 +13,7 @@ import (
 // Deletes an existing matchmaking rule set. To delete the rule set, provide the
 // rule set name. Rule sets cannot be deleted if they are currently being used by a
 // matchmaking configuration. Learn more
-//
-// * Build a rule set
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
+//   - Build a rule set (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMatchmakingRuleSetInput, optFns ...func(*Options)) (*DeleteMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &DeleteMatchmakingRuleSetInput{}

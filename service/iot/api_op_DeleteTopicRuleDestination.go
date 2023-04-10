@@ -11,8 +11,7 @@ import (
 )
 
 // Deletes a topic rule destination. Requires permission to access the
-// DeleteTopicRuleDestination
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DeleteTopicRuleDestination (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteTopicRuleDestination(ctx context.Context, params *DeleteTopicRuleDestinationInput, optFns ...func(*Options)) (*DeleteTopicRuleDestinationOutput, error) {
 	if params == nil {

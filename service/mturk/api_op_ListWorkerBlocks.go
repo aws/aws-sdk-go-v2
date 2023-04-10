@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListWorkersBlocks operation retrieves a list of Workers who are blocked from
-// working on your HITs.
+// The ListWorkersBlocks operation retrieves a list of Workers who are blocked
+// from working on your HITs.
 func (c *Client) ListWorkerBlocks(ctx context.Context, params *ListWorkerBlocksInput, optFns ...func(*Options)) (*ListWorkerBlocksOutput, error) {
 	if params == nil {
 		params = &ListWorkerBlocksInput{}

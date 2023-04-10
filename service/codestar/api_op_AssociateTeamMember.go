@@ -33,8 +33,8 @@ type AssociateTeamMemberInput struct {
 	// This member is required.
 	ProjectId *string
 
-	// The AWS CodeStar project role that will apply to this user. This role determines
-	// what actions a user can take in an AWS CodeStar project.
+	// The AWS CodeStar project role that will apply to this user. This role
+	// determines what actions a user can take in an AWS CodeStar project.
 	//
 	// This member is required.
 	ProjectRole *string
@@ -59,8 +59,8 @@ type AssociateTeamMemberInput struct {
 
 type AssociateTeamMemberOutput struct {
 
-	// The user- or system-generated token from the initial request that can be used to
-	// repeat the request.
+	// The user- or system-generated token from the initial request that can be used
+	// to repeat the request.
 	ClientRequestToken *string
 
 	// Metadata pertaining to the operation's result.

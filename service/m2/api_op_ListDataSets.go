@@ -16,8 +16,8 @@ import (
 // Mainframe Modernization, data sets are associated with applications deployed on
 // runtime environments. This is known as importing data sets. Currently, Amazon
 // Web Services Mainframe Modernization can import data sets into catalogs using
-// CreateDataSetImportTask
-// (https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateDataSetImportTask.html).
+// CreateDataSetImportTask (https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateDataSetImportTask.html)
+// .
 func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
 	if params == nil {
 		params = &ListDataSetsInput{}

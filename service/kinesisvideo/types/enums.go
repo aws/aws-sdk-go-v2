@@ -201,9 +201,9 @@ const (
 	MediaUriTypeFileUri MediaUriType = "FILE_URI"
 )
 
-// Values returns all known values for MediaUriType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MediaUriType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MediaUriType) Values() []MediaUriType {
 	return []MediaUriType{
 		"RTSP_URI",
@@ -285,9 +285,10 @@ const (
 	UpdateDataRetentionOperationDecreaseDataRetention UpdateDataRetentionOperation = "DECREASE_DATA_RETENTION"
 )
 
-// Values returns all known values for UpdateDataRetentionOperation. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpdateDataRetentionOperation. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (UpdateDataRetentionOperation) Values() []UpdateDataRetentionOperation {
 	return []UpdateDataRetentionOperation{
 		"INCREASE_DATA_RETENTION",

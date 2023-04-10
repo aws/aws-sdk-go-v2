@@ -54,8 +54,8 @@ type UpdateBudgetActionInput struct {
 	// Specifies all of the type-specific parameters.
 	Definition *types.Definition
 
-	// The role passed for action execution and reversion. Roles and actions must be in
-	// the same account.
+	// The role passed for action execution and reversion. Roles and actions must be
+	// in the same account.
 	ExecutionRoleArn *string
 
 	// The type of a notification. It must be ACTUAL or FORECASTED.

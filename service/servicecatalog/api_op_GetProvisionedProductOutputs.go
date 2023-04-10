@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API takes either a ProvisonedProductId or a ProvisionedProductName, along
+// This API takes either a ProvisonedProductId or a ProvisionedProductName , along
 // with a list of one or more output keys, and responds with the key/value pairs of
 // those outputs.
 func (c *Client) GetProvisionedProductOutputs(ctx context.Context, params *GetProvisionedProductOutputsInput, optFns ...func(*Options)) (*GetProvisionedProductOutputsOutput, error) {
@@ -33,10 +33,8 @@ func (c *Client) GetProvisionedProductOutputs(ctx context.Context, params *GetPr
 type GetProvisionedProductOutputsInput struct {
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The list of keys that the API should return with their values. If none are

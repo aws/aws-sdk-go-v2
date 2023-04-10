@@ -14,9 +14,8 @@ import (
 
 // Creates an Amazon EKS add-on. Amazon EKS add-ons help to automate the
 // provisioning and lifecycle management of common operational software for Amazon
-// EKS clusters. For more information, see Amazon EKS add-ons
-// (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) in the
-// Amazon EKS User Guide.
+// EKS clusters. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
+// in the Amazon EKS User Guide.
 func (c *Client) CreateAddon(ctx context.Context, params *CreateAddonInput, optFns ...func(*Options)) (*CreateAddonOutput, error) {
 	if params == nil {
 		params = &CreateAddonInput{}
@@ -35,8 +34,7 @@ func (c *Client) CreateAddon(ctx context.Context, params *CreateAddonInput, optF
 type CreateAddonInput struct {
 
 	// The name of the add-on. The name must match one of the names that
-	// DescribeAddonVersions
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html)
+	// DescribeAddonVersions (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html)
 	// returns.
 	//
 	// This member is required.
@@ -48,8 +46,8 @@ type CreateAddonInput struct {
 	ClusterName *string
 
 	// The version of the add-on. The version must match one of the versions returned
-	// by DescribeAddonVersions
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html).
+	// by DescribeAddonVersions (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html)
+	// .
 	AddonVersion *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -57,28 +55,22 @@ type CreateAddonInput struct {
 	ClientRequestToken *string
 
 	// The set of configuration values for the add-on that's created. The values that
-	// you provide are validated against the schema in DescribeAddonConfiguration
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html).
+	// you provide are validated against the schema in DescribeAddonConfiguration (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html)
+	// .
 	ConfigurationValues *string
 
 	// How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are
 	// handled based on the value you choose:
+	//   - None – If the self-managed version of the add-on is installed on your
+	//   cluster, Amazon EKS doesn't change the value. Creation of the add-on might fail.
 	//
-	// * None – If the self-managed version of
-	// the add-on is installed on your cluster, Amazon EKS doesn't change the value.
-	// Creation of the add-on might fail.
-	//
-	// * Overwrite – If the self-managed version of
-	// the add-on is installed on your cluster and the Amazon EKS default value is
-	// different than the existing value, Amazon EKS changes the value to the Amazon
-	// EKS default value.
-	//
-	// * Preserve – Not supported. You can set this value when
-	// updating an add-on though. For more information, see UpdateAddon
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html).
-	//
-	// If
-	// you don't currently have the self-managed version of the add-on installed on
+	//   - Overwrite – If the self-managed version of the add-on is installed on your
+	//   cluster and the Amazon EKS default value is different than the existing value,
+	//   Amazon EKS changes the value to the Amazon EKS default value.
+	//   - Preserve – Not supported. You can set this value when updating an add-on
+	//   though. For more information, see UpdateAddon (https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html)
+	//   .
+	// If you don't currently have the self-managed version of the add-on installed on
 	// your cluster, the Amazon EKS add-on is installed. Amazon EKS sets all values to
 	// default values, regardless of the option that you specify.
 	ResolveConflicts types.ResolveConflicts
@@ -87,12 +79,10 @@ type CreateAddonInput struct {
 	// service account. The role must be assigned the IAM permissions required by the
 	// add-on. If you don't specify an existing IAM role, then the add-on uses the
 	// permissions assigned to the node IAM role. For more information, see Amazon EKS
-	// node IAM role
-	// (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html) in the
-	// Amazon EKS User Guide. To specify an existing IAM role, you must have an IAM
-	// OpenID Connect (OIDC) provider created for your cluster. For more information,
-	// see Enabling IAM roles for service accounts on your cluster
-	// (https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+	// node IAM role (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
+	// in the Amazon EKS User Guide. To specify an existing IAM role, you must have an
+	// IAM OpenID Connect (OIDC) provider created for your cluster. For more
+	// information, see Enabling IAM roles for service accounts on your cluster (https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
 	// in the Amazon EKS User Guide.
 	ServiceAccountRoleArn *string
 
@@ -105,9 +95,8 @@ type CreateAddonInput struct {
 
 type CreateAddonOutput struct {
 
-	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons
-	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) in the
-	// Amazon EKS User Guide.
+	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
+	// in the Amazon EKS User Guide.
 	Addon *types.Addon
 
 	// Metadata pertaining to the operation's result.

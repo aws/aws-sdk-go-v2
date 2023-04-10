@@ -12,9 +12,9 @@ import (
 
 // Removes the tags of a given resource. Tags are metadata which can be used to
 // manage a resource. To tag a resource, the caller account must be the same as the
-// resource’s OwnerAccountId. Tagging resources in other accounts is not supported.
-// Amazon Web Services Migration Hub Refactor Spaces does not propagate tags to
-// orchestrated resources, such as an environment’s transit gateway.
+// resource’s OwnerAccountId . Tagging resources in other accounts is not
+// supported. Amazon Web Services Migration Hub Refactor Spaces does not propagate
+// tags to orchestrated resources, such as an environment’s transit gateway.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

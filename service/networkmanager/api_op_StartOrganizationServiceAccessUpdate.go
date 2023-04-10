@@ -30,7 +30,7 @@ func (c *Client) StartOrganizationServiceAccessUpdate(ctx context.Context, param
 
 type StartOrganizationServiceAccessUpdateInput struct {
 
-	// The action to take for the update request. This can be either ENABLE or DISABLE.
+	// The action to take for the update request. This can be either ENABLE or DISABLE .
 	//
 	// This member is required.
 	Action *string

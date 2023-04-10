@@ -40,7 +40,7 @@ type UpdateFieldLevelEncryptionProfileInput struct {
 	Id *string
 
 	// The value of the ETag header that you received when retrieving the profile
-	// identity to update. For example: E2QWRUHAPOMQZL.
+	// identity to update. For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde

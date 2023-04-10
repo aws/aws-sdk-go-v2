@@ -9,8 +9,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the URLs that can be used with a Git client to clone a
-// source repository.
+// Returns information about the URLs that can be used with a Git client to clone
+// a source repository.
 func (c *Client) GetSourceRepositoryCloneUrls(ctx context.Context, params *GetSourceRepositoryCloneUrlsInput, optFns ...func(*Options)) (*GetSourceRepositoryCloneUrlsOutput, error) {
 	if params == nil {
 		params = &GetSourceRepositoryCloneUrlsInput{}

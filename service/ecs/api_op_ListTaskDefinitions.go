@@ -50,13 +50,13 @@ type ListTaskDefinitionsInput struct {
 	// The nextToken value returned from a ListTaskDefinitions request indicating that
 	// more results are available to fulfill the request and further calls will be
 	// needed. If maxResults was provided, it is possible the number of results to be
-	// fewer than maxResults. This token should be treated as an opaque identifier that
-	// is only used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// fewer than maxResults . This token should be treated as an opaque identifier
+	// that is only used to retrieve the next items in a list and not for other
+	// programmatic purposes.
 	NextToken *string
 
-	// The order to sort the results in. Valid values are ASC and DESC. By default,
-	// (ASC) task definitions are listed lexicographically by family name and in
+	// The order to sort the results in. Valid values are ASC and DESC . By default, (
+	// ASC ) task definitions are listed lexicographically by family name and in
 	// ascending numerical order by revision so that the newest task definitions in a
 	// family are listed last. Setting this parameter to DESC reverses the sort order
 	// on family name and revision. This is so that the newest task definitions in a
@@ -65,7 +65,7 @@ type ListTaskDefinitionsInput struct {
 
 	// The task definition status to filter the ListTaskDefinitions results with. By
 	// default, only ACTIVE task definitions are listed. By setting this parameter to
-	// INACTIVE, you can view task definitions that are INACTIVE as long as an active
+	// INACTIVE , you can view task definitions that are INACTIVE as long as an active
 	// task or service still references them. If you paginate the resulting output, be
 	// sure to keep the status value constant in each subsequent request.
 	Status types.TaskDefinitionStatus
@@ -75,10 +75,10 @@ type ListTaskDefinitionsInput struct {
 
 type ListTaskDefinitionsOutput struct {
 
-	// The nextToken value to include in a future ListTaskDefinitions request. When the
-	// results of a ListTaskDefinitions request exceed maxResults, this value can be
-	// used to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// The nextToken value to include in a future ListTaskDefinitions request. When
+	// the results of a ListTaskDefinitions request exceed maxResults , this value can
+	// be used to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
 	// The list of task definition Amazon Resource Name (ARN) entries for the
@@ -151,8 +151,8 @@ func (c *Client) addOperationListTaskDefinitionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTaskDefinitionsAPIClient is a client that implements the ListTaskDefinitions
-// operation.
+// ListTaskDefinitionsAPIClient is a client that implements the
+// ListTaskDefinitions operation.
 type ListTaskDefinitionsAPIClient interface {
 	ListTaskDefinitions(context.Context, *ListTaskDefinitionsInput, ...func(*Options)) (*ListTaskDefinitionsOutput, error)
 }

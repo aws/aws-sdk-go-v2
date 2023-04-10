@@ -28,7 +28,7 @@ func (c *Client) EnableRegion(ctx context.Context, params *EnableRegionInput, op
 
 type EnableRegionInput struct {
 
-	// Specifies the Region-code for a given Region name (for example, af-south-1).
+	// Specifies the Region-code for a given Region name (for example, af-south-1 ).
 	// When you enable a Region, Amazon Web Services performs actions to prepare your
 	// account in that Region, such as distributing your IAM resources to the Region.
 	// This process takes a few minutes for most accounts, but it can take several
@@ -38,21 +38,17 @@ type EnableRegionInput struct {
 	// This member is required.
 	RegionName *string
 
-	// Specifies the 12-digit account ID number of the Amazon Web Services account that
-	// you want to access or modify with this operation. If you don't specify this
+	// Specifies the 12-digit account ID number of the Amazon Web Services account
+	// that you want to access or modify with this operation. If you don't specify this
 	// parameter, it defaults to the Amazon Web Services account of the identity used
 	// to call the operation. To use this parameter, the caller must be an identity in
-	// the organization's management account
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account)
+	// the organization's management account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account)
 	// or a delegated administrator account. The specified account ID must also be a
-	// member account in the same organization. The organization must have all features
-	// enabled
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html),
-	// and the organization must have trusted access
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
-	// enabled for the Account Management service, and optionally a delegated admin
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
-	// account assigned. The management account can't specify its own AccountId. It
+	// member account in the same organization. The organization must have all
+	// features enabled (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
+	// , and the organization must have trusted access (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
+	// enabled for the Account Management service, and optionally a delegated admin (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
+	// account assigned. The management account can't specify its own AccountId . It
 	// must call the operation in standalone context by not including the AccountId
 	// parameter. To call this operation on an account that is not a member of an
 	// organization, don't specify this parameter. Instead, call the operation using an

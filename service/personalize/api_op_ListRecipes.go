@@ -43,7 +43,7 @@ type ListRecipesInput struct {
 	// of recipes (if they exist).
 	NextToken *string
 
-	// The default is SERVICE.
+	// The default is SERVICE .
 	RecipeProvider types.RecipeProvider
 
 	noSmithyDocumentSerde

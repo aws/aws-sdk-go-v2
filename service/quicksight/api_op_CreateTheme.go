@@ -13,8 +13,7 @@ import (
 
 // Creates a theme. A theme is set of configuration options for color and layout.
 // Themes apply to analyses and dashboards. For more information, see Using Themes
-// in Amazon QuickSight
-// (https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html)
+// in Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html)
 // in the Amazon QuickSight User Guide.
 func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optFns ...func(*Options)) (*CreateThemeOutput, error) {
 	if params == nil {
@@ -68,9 +67,9 @@ type CreateThemeInput struct {
 	// to the resource.
 	Tags []types.Tag
 
-	// A description of the first version of the theme that you're creating. Every time
-	// UpdateTheme is called, a new version is created. Each version of the theme has a
-	// description of the version in the VersionDescription field.
+	// A description of the first version of the theme that you're creating. Every
+	// time UpdateTheme is called, a new version is created. Each version of the theme
+	// has a description of the version in the VersionDescription field.
 	VersionDescription *string
 
 	noSmithyDocumentSerde

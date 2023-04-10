@@ -12,12 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the metadata for one service or a list of the metadata for all services.
-// Use this without a service code to get the service codes for all services. Use
-// it with a service code, such as AmazonEC2, to get information specific to that
-// service, such as the attribute names available for that service. For example,
-// some of the attribute names available for EC2 are volumeType, maxIopsVolume,
-// operation, locationType, and instanceCapacity10xlarge.
+// Returns the metadata for one service or a list of the metadata for all
+// services. Use this without a service code to get the service codes for all
+// services. Use it with a service code, such as AmazonEC2 , to get information
+// specific to that service, such as the attribute names available for that
+// service. For example, some of the attribute names available for EC2 are
+// volumeType , maxIopsVolume , operation , locationType , and
+// instanceCapacity10xlarge .
 func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesInput, optFns ...func(*Options)) (*DescribeServicesOutput, error) {
 	if params == nil {
 		params = &DescribeServicesInput{}
@@ -46,7 +47,7 @@ type DescribeServicesInput struct {
 	NextToken *string
 
 	// The code for the service whose information you want to retrieve, such as
-	// AmazonEC2. You can use the ServiceCode to filter the results in a GetProducts
+	// AmazonEC2 . You can use the ServiceCode to filter the results in a GetProducts
 	// call. To retrieve a list of all services, leave this blank.
 	ServiceCode *string
 
@@ -55,7 +56,7 @@ type DescribeServicesInput struct {
 
 type DescribeServicesOutput struct {
 
-	// The format version of the response. For example, aws_v1.
+	// The format version of the response. For example, aws_v1 .
 	FormatVersion *string
 
 	// The pagination token for the next set of retrievable results.

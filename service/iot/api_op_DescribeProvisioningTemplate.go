@@ -12,9 +12,8 @@ import (
 	"time"
 )
 
-// Returns information about a provisioning template. Requires permission to access
-// the DescribeProvisioningTemplate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Returns information about a provisioning template. Requires permission to
+// access the DescribeProvisioningTemplate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeProvisioningTemplate(ctx context.Context, params *DescribeProvisioningTemplateInput, optFns ...func(*Options)) (*DescribeProvisioningTemplateOutput, error) {
 	if params == nil {
@@ -76,9 +75,9 @@ type DescribeProvisioningTemplateOutput struct {
 
 	// The type you define in a provisioning template. You can create a template with
 	// only one type. You can't change the template type after its creation. The
-	// default value is FLEET_PROVISIONING. For more information about provisioning
-	// template, see: Provisioning template
-	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html).
+	// default value is FLEET_PROVISIONING . For more information about provisioning
+	// template, see: Provisioning template (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
+	// .
 	Type types.TemplateType
 
 	// Metadata pertaining to the operation's result.

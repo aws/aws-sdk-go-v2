@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified trial. All trial components that make up the trial must be
-// deleted first. Use the DescribeTrialComponent API to get the list of trial
+// Deletes the specified trial. All trial components that make up the trial must
+// be deleted first. Use the DescribeTrialComponent API to get the list of trial
 // components.
 func (c *Client) DeleteTrial(ctx context.Context, params *DeleteTrialInput, optFns ...func(*Options)) (*DeleteTrialOutput, error) {
 	if params == nil {

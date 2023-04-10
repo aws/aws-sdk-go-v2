@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates member accounts of the current Amazon Web Services account by specifying
-// a list of Amazon Web Services account IDs. This step is a prerequisite for
-// managing the associated member accounts either by invitation or through an
-// organization. When using Create Members as an organizations delegated
-// administrator this action will enable GuardDuty in the added member accounts,
-// with the exception of the organization delegated administrator account, which
-// must enable GuardDuty prior to being added as a member. If you are adding
-// accounts by invitation, use this action after GuardDuty has bee enabled in
-// potential member accounts and before using InviteMembers
-// (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html).
+// Creates member accounts of the current Amazon Web Services account by
+// specifying a list of Amazon Web Services account IDs. This step is a
+// prerequisite for managing the associated member accounts either by invitation or
+// through an organization. When using Create Members as an organizations
+// delegated administrator this action will enable GuardDuty in the added member
+// accounts, with the exception of the organization delegated administrator
+// account, which must enable GuardDuty prior to being added as a member. If you
+// are adding accounts by invitation, use this action after GuardDuty has bee
+// enabled in potential member accounts and before using InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// .
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
 		params = &CreateMembersInput{}

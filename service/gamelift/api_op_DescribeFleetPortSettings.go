@@ -16,20 +16,16 @@ import (
 // use to access server processes in the fleet. Game sessions that are running on
 // instances in the fleet must use connections that fall in this range. This
 // operation can be used in the following ways:
+//   - To retrieve the inbound connection permissions for a fleet, identify the
+//     fleet's unique identifier.
+//   - To check the status of recent updates to a fleet remote location, specify
+//     the fleet ID and a location. Port setting updates can take time to propagate
+//     across all locations.
 //
-// * To retrieve the inbound
-// connection permissions for a fleet, identify the fleet's unique identifier.
-//
-// *
-// To check the status of recent updates to a fleet remote location, specify the
-// fleet ID and a location. Port setting updates can take time to propagate across
-// all locations.
-//
-// If successful, a set of IpPermission objects is returned for the
-// requested fleet ID. When a location is specified, a pending status is included.
-// If the requested fleet has been deleted, the result set is empty. Learn more
-// Setting up GameLift fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// If successful, a set of IpPermission objects is returned for the requested
+// fleet ID. When a location is specified, a pending status is included. If the
+// requested fleet has been deleted, the result set is empty. Learn more Setting
+// up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *DescribeFleetPortSettingsInput, optFns ...func(*Options)) (*DescribeFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetPortSettingsInput{}
@@ -54,7 +50,7 @@ type DescribeFleetPortSettingsInput struct {
 	FleetId *string
 
 	// A remote location to check for status of port setting updates. Use the Amazon
-	// Web Services Region code format, such as us-west-2.
+	// Web Services Region code format, such as us-west-2 .
 	Location *string
 
 	noSmithyDocumentSerde
@@ -62,11 +58,10 @@ type DescribeFleetPortSettingsInput struct {
 
 type DescribeFleetPortSettingsOutput struct {
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
-	// assigned to a GameLift fleet resource and uniquely identifies it. ARNs are
-	// unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
+	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
+	// are unique across all Regions. Format is
+	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 
 	// A unique identifier for the fleet that was requested.
@@ -76,7 +71,7 @@ type DescribeFleetPortSettingsOutput struct {
 	InboundPermissions []types.IpPermission
 
 	// The requested fleet location, expressed as an Amazon Web Services Region code,
-	// such as us-west-2.
+	// such as us-west-2 .
 	Location *string
 
 	// The current status of updates to the fleet's port settings in the requested

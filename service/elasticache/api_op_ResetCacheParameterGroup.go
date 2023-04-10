@@ -39,25 +39,22 @@ type ResetCacheParameterGroupInput struct {
 	CacheParameterGroupName *string
 
 	// An array of parameter names to reset to their default values. If
-	// ResetAllParameters is true, do not use ParameterNameValues. If
-	// ResetAllParameters is false, you must specify the name of at least one parameter
-	// to reset.
+	// ResetAllParameters is true , do not use ParameterNameValues . If
+	// ResetAllParameters is false , you must specify the name of at least one
+	// parameter to reset.
 	ParameterNameValues []types.ParameterNameValue
 
-	// If true, all parameters in the cache parameter group are reset to their default
-	// values. If false, only the parameters listed by ParameterNameValues are reset to
-	// their default values. Valid values: true | false
+	// If true , all parameters in the cache parameter group are reset to their default
+	// values. If false , only the parameters listed by ParameterNameValues are reset
+	// to their default values. Valid values: true | false
 	ResetAllParameters bool
 
 	noSmithyDocumentSerde
 }
 
 // Represents the output of one of the following operations:
-//
-// *
-// ModifyCacheParameterGroup
-//
-// * ResetCacheParameterGroup
+//   - ModifyCacheParameterGroup
+//   - ResetCacheParameterGroup
 type ResetCacheParameterGroupOutput struct {
 
 	// The name of the cache parameter group.

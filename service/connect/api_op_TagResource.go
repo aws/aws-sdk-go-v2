@@ -13,10 +13,9 @@ import (
 // Adds the specified tags to the specified resource. Some of the supported
 // resource types are agents, routing profiles, queues, quick connects, contact
 // flows, agent statuses, hours of operation, phone numbers, security profiles, and
-// task templates. For a complete list, see Tagging resources in Amazon Connect
-// (https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html). For sample
-// policies that use tags, see Amazon Connect Identity-Based Policy Examples
-// (https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html)
+// task templates. For a complete list, see Tagging resources in Amazon Connect (https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html)
+// . For sample policies that use tags, see Amazon Connect Identity-Based Policy
+// Examples (https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

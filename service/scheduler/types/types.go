@@ -12,15 +12,15 @@ import (
 // ECS tasks that use the awsvpc network mode.
 type AwsVpcConfiguration struct {
 
-	// Specifies the subnets associated with the task. These subnets must all be in the
-	// same VPC. You can specify as many as 16 subnets.
+	// Specifies the subnets associated with the task. These subnets must all be in
+	// the same VPC. You can specify as many as 16 subnets.
 	//
 	// This member is required.
 	Subnets []string
 
 	// Specifies whether the task's elastic network interface receives a public IP
-	// address. You can specify ENABLED only when LaunchType in EcsParameters is set to
-	// FARGATE.
+	// address. You can specify ENABLED only when LaunchType in EcsParameters is set
+	// to FARGATE .
 	AssignPublicIp AssignPublicIp
 
 	// Specifies the security groups associated with the task. These security groups
@@ -46,9 +46,9 @@ type CapacityProviderStrategyItem struct {
 	// used.
 	Base int32
 
-	// The weight value designates the relative percentage of the total number of tasks
-	// launched that should use the specified capacity provider. The weight value is
-	// taken into consideration after the base value, if defined, is satisfied.
+	// The weight value designates the relative percentage of the total number of
+	// tasks launched that should use the specified capacity provider. The weight value
+	// is taken into consideration after the base value, if defined, is satisfied.
 	Weight int32
 
 	noSmithyDocumentSerde
@@ -60,20 +60,19 @@ type CapacityProviderStrategyItem struct {
 // delivered to a target to the queue.
 type DeadLetterConfig struct {
 
-	// The Amazon Resource Name (ARN) of the SQS queue specified as the destination for
-	// the dead-letter queue.
+	// The Amazon Resource Name (ARN) of the SQS queue specified as the destination
+	// for the dead-letter queue.
 	Arn *string
 
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the Amazon ECS RunTask
-// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html) API
-// operation.
+// The templated target type for the Amazon ECS RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html)
+// API operation.
 type EcsParameters struct {
 
-	// The Amazon Resource Name (ARN) of the task definition to use if the event target
-	// is an Amazon ECS task.
+	// The Amazon Resource Name (ARN) of the task definition to use if the event
+	// target is an Amazon ECS task.
 	//
 	// This member is required.
 	TaskDefinitionArn *string
@@ -82,14 +81,13 @@ type EcsParameters struct {
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
-	// information, see Tagging Your Amazon ECS Resources
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon ECS Developer Guide.
 	EnableECSManagedTags *bool
 
-	// Whether or not to enable the execute command functionality for the containers in
-	// this task. If true, this enables execute command functionality on all containers
-	// in the task.
+	// Whether or not to enable the execute command functionality for the containers
+	// in this task. If true, this enables execute command functionality on all
+	// containers in the task.
 	EnableExecuteCommand *bool
 
 	// Specifies an ECS task group for the task. The maximum length is 255 characters.
@@ -99,31 +97,29 @@ type EcsParameters struct {
 	// you specify here must match one of the launch type (compatibilities) of the
 	// target task. The FARGATE value is supported only in the Regions where Fargate
 	// with Amazon ECS is supported. For more information, see AWS Fargate on Amazon
-	// ECS
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html)
+	// ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html)
 	// in the Amazon ECS Developer Guide.
 	LaunchType LaunchType
 
 	// This structure specifies the network configuration for an ECS task.
 	NetworkConfiguration *NetworkConfiguration
 
-	// An array of placement constraint objects to use for the task. You can specify up
-	// to 10 constraints per task (including constraints in the task definition and
+	// An array of placement constraint objects to use for the task. You can specify
+	// up to 10 constraints per task (including constraints in the task definition and
 	// those specified at runtime).
 	PlacementConstraints []PlacementConstraint
 
 	// The task placement strategy for a task or service.
 	PlacementStrategy []PlacementStrategy
 
-	// Specifies the platform version for the task. Specify only the numeric portion of
-	// the platform version, such as 1.1.0.
+	// Specifies the platform version for the task. Specify only the numeric portion
+	// of the platform version, such as 1.1.0 .
 	PlatformVersion *string
 
-	// Specifies whether to propagate the tags from the task definition to the task. If
-	// no value is specified, the tags are not propagated. Tags can only be propagated
-	// to the task during task creation. To add tags to a task after task creation, use
-	// Amazon ECS's TagResource
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html)
+	// Specifies whether to propagate the tags from the task definition to the task.
+	// If no value is specified, the tags are not propagated. Tags can only be
+	// propagated to the task during task creation. To add tags to a task after task
+	// creation, use Amazon ECS's TagResource (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html)
 	// API action.
 	PropagateTags PropagateTags
 
@@ -132,24 +128,22 @@ type EcsParameters struct {
 
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
-	// define. For more information, see RunTask
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html) in
-	// the Amazon ECS API Reference.
+	// define. For more information, see RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html)
+	// in the Amazon ECS API Reference.
 	Tags []map[string]string
 
-	// The number of tasks to create based on TaskDefinition. The default is 1.
+	// The number of tasks to create based on TaskDefinition . The default is 1 .
 	TaskCount *int32
 
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the EventBridge PutEvents
-// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
+// The templated target type for the EventBridge PutEvents (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
 // API operation.
 type EventBridgeParameters struct {
 
-	// A free-form string, with a maximum of 128 characters, used to decide what fields
-	// to expect in the event detail.
+	// A free-form string, with a maximum of 128 characters, used to decide what
+	// fields to expect in the event detail.
 	//
 	// This member is required.
 	DetailType *string
@@ -162,8 +156,8 @@ type EventBridgeParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Allows you to configure a time window during which EventBridge Scheduler invokes
-// the schedule.
+// Allows you to configure a time window during which EventBridge Scheduler
+// invokes the schedule.
 type FlexibleTimeWindow struct {
 
 	// Determines whether the schedule is invoked within a flexible time window.
@@ -181,9 +175,8 @@ type FlexibleTimeWindow struct {
 type KinesisParameters struct {
 
 	// Specifies the shard to which EventBridge Scheduler sends the event. For more
-	// information, see Amazon Kinesis Data Streams terminology and concepts
-	// (https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html) in the Amazon
-	// Kinesis Streams Developer Guide.
+	// information, see Amazon Kinesis Data Streams terminology and concepts (https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html)
+	// in the Amazon Kinesis Streams Developer Guide.
 	//
 	// This member is required.
 	PartitionKey *string
@@ -194,8 +187,8 @@ type KinesisParameters struct {
 // Specifies the network configuration for an ECS task.
 type NetworkConfiguration struct {
 
-	// Specifies the Amazon VPC subnets and security groups for the task, and whether a
-	// public IP address is to be used. This structure is relevant only for ECS tasks
+	// Specifies the Amazon VPC subnets and security groups for the task, and whether
+	// a public IP address is to be used. This structure is relevant only for ECS tasks
 	// that use the awsvpc network mode.
 	AwsvpcConfiguration *AwsVpcConfiguration
 
@@ -206,9 +199,8 @@ type NetworkConfiguration struct {
 type PlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. You cannot
-	// specify an expression if the constraint type is distinctInstance. For more
-	// information, see Cluster query language
-	// (https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html)
+	// specify an expression if the constraint type is distinctInstance . For more
+	// information, see Cluster query language (https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html)
 	// in the Amazon ECS Developer Guide.
 	Expression *string
 
@@ -224,10 +216,10 @@ type PlacementConstraint struct {
 type PlacementStrategy struct {
 
 	// The field to apply the placement strategy against. For the spread placement
-	// strategy, valid values are instanceId (or instanceId, which has the same
+	// strategy, valid values are instanceId (or instanceId , which has the same
 	// effect), or any platform or custom attribute that is applied to a container
-	// instance, such as attribute:ecs.availability-zone. For the binpack placement
-	// strategy, valid values are cpu and memory. For the random placement strategy,
+	// instance, such as attribute:ecs.availability-zone . For the binpack placement
+	// strategy, valid values are cpu and memory . For the random placement strategy,
 	// this field is not used.
 	Field *string
 
@@ -277,8 +269,7 @@ type SageMakerPipelineParameter struct {
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the Amazon SageMaker StartPipelineExecution
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html)
+// The templated target type for the Amazon SageMaker StartPipelineExecution (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html)
 // API operation.
 type SageMakerPipelineParameters struct {
 
@@ -337,13 +328,11 @@ type ScheduleSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the Amazon SQS SendMessage
-// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
+// The templated target type for the Amazon SQS SendMessage (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
 // API operation. Contains the message group ID to use when the target is a FIFO
 // queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have
 // content-based deduplication enabled. For more information, see Using the Amazon
-// SQS message deduplication ID
-// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
+// SQS message deduplication ID (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 // in the Amazon SQS Developer Guide.
 type SqsParameters struct {
 
@@ -392,13 +381,11 @@ type Target struct {
 	// delivered to a target to the queue.
 	DeadLetterConfig *DeadLetterConfig
 
-	// The templated target type for the Amazon ECS RunTask
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html) API
-	// operation.
+	// The templated target type for the Amazon ECS RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html)
+	// API operation.
 	EcsParameters *EcsParameters
 
-	// The templated target type for the EventBridge PutEvents
-	// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
+	// The templated target type for the EventBridge PutEvents (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
 	// API operation.
 	EventBridgeParameters *EventBridgeParameters
 
@@ -417,18 +404,15 @@ type Target struct {
 	// EventBridge Scheduler will try to deliver the event to a target.
 	RetryPolicy *RetryPolicy
 
-	// The templated target type for the Amazon SageMaker StartPipelineExecution
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html)
+	// The templated target type for the Amazon SageMaker StartPipelineExecution (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html)
 	// API operation.
 	SageMakerPipelineParameters *SageMakerPipelineParameters
 
-	// The templated target type for the Amazon SQS SendMessage
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
+	// The templated target type for the Amazon SQS SendMessage (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
 	// API operation. Contains the message group ID to use when the target is a FIFO
 	// queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have
 	// content-based deduplication enabled. For more information, see Using the Amazon
-	// SQS message deduplication ID
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
+	// SQS message deduplication ID (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 	// in the Amazon SQS Developer Guide.
 	SqsParameters *SqsParameters
 

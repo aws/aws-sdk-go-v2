@@ -407,8 +407,8 @@ func (e *DirectoryUnavailableException) ErrorCode() string {
 }
 func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum allowed number of domain controllers per directory was exceeded. The
-// default limit per directory is 20 domain controllers.
+// The maximum allowed number of domain controllers per directory was exceeded.
+// The default limit per directory is 20 domain controllers.
 type DomainControllerLimitExceededException struct {
 	Message *string
 
@@ -606,8 +606,8 @@ func (e *InvalidClientAuthStatusException) ErrorCode() string {
 }
 func (e *InvalidClientAuthStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The LDAP activities could not be performed because they are limited by the LDAPS
-// status.
+// The LDAP activities could not be performed because they are limited by the
+// LDAPS status.
 type InvalidLDAPSStatusException struct {
 	Message *string
 

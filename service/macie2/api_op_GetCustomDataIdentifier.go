@@ -47,9 +47,9 @@ type GetCustomDataIdentifierOutput struct {
 	// identifier was created.
 	CreatedAt *time.Time
 
-	// Specifies whether the custom data identifier was deleted. If you delete a custom
-	// data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft
-	// deletes the identifier.
+	// Specifies whether the custom data identifier was deleted. If you delete a
+	// custom data identifier, Amazon Macie doesn't delete it permanently. Instead, it
+	// soft deletes the identifier.
 	Deleted bool
 
 	// The custom description of the custom data identifier.

@@ -12,10 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The newer BatchGetDeploymentTargets should be used instead because it works with
-// all compute types. ListDeploymentInstances throws an exception if it is used
-// with a compute platform other than EC2/On-premises or Lambda. Lists the instance
-// for a deployment associated with the IAM user or Amazon Web Services account.
+// The newer BatchGetDeploymentTargets should be used instead because it works
+// with all compute types. ListDeploymentInstances throws an exception if it is
+// used with a compute platform other than EC2/On-premises or Lambda. Lists the
+// instance for a deployment associated with the IAM user or Amazon Web Services
+// account.
 //
 // Deprecated: This operation is deprecated, use ListDeploymentTargets instead.
 func (c *Client) ListDeploymentInstances(ctx context.Context, params *ListDeploymentInstancesInput, optFns ...func(*Options)) (*ListDeploymentInstancesOutput, error) {
@@ -42,23 +43,13 @@ type ListDeploymentInstancesInput struct {
 	DeploymentId *string
 
 	// A subset of instances to list by status:
-	//
-	// * Pending: Include those instances
-	// with pending deployments.
-	//
-	// * InProgress: Include those instances where
-	// deployments are still in progress.
-	//
-	// * Succeeded: Include those instances with
-	// successful deployments.
-	//
-	// * Failed: Include those instances with failed
-	// deployments.
-	//
-	// * Skipped: Include those instances with skipped deployments.
-	//
-	// *
-	// Unknown: Include those instances with deployments in an unknown state.
+	//   - Pending : Include those instances with pending deployments.
+	//   - InProgress : Include those instances where deployments are still in
+	//   progress.
+	//   - Succeeded : Include those instances with successful deployments.
+	//   - Failed : Include those instances with failed deployments.
+	//   - Skipped : Include those instances with skipped deployments.
+	//   - Unknown : Include those instances with deployments in an unknown state.
 	InstanceStatusFilter []types.InstanceStatus
 
 	// The set of instances in a blue/green deployment, either those in the original
@@ -79,8 +70,8 @@ type ListDeploymentInstancesOutput struct {
 	// A list of instance IDs.
 	InstancesList []string
 
-	// If a large amount of information is returned, an identifier is also returned. It
-	// can be used in a subsequent list deployment instances call to return the next
+	// If a large amount of information is returned, an identifier is also returned.
+	// It can be used in a subsequent list deployment instances call to return the next
 	// set of deployment instances in the list.
 	NextToken *string
 

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an order for phone numbers to be provisioned. For toll-free numbers, you
-// cannot use the Amazon Chime Business Calling product type. For numbers outside
-// the U.S., you must use the Amazon Chime SIP Media Application Dial-In product
-// type.
+// Creates an order for phone numbers to be provisioned. For toll-free numbers,
+// you cannot use the Amazon Chime Business Calling product type. For numbers
+// outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In
+// product type.
 func (c *Client) CreatePhoneNumberOrder(ctx context.Context, params *CreatePhoneNumberOrderInput, optFns ...func(*Options)) (*CreatePhoneNumberOrderOutput, error) {
 	if params == nil {
 		params = &CreatePhoneNumberOrderInput{}

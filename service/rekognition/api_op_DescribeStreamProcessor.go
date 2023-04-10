@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Provides information about a stream processor created by CreateStreamProcessor.
+// Provides information about a stream processor created by CreateStreamProcessor .
 // You can get information about the input and output streams, the input parameters
 // for the face recognition being performed, and the current status of the stream
 // processor.
@@ -55,8 +55,8 @@ type DescribeStreamProcessorOutput struct {
 	// Kinesis video stream that provides the source streaming video.
 	Input *types.StreamProcessorInput
 
-	// The identifier for your AWS Key Management Service key (AWS KMS key). This is an
-	// optional parameter for label detection stream processors.
+	// The identifier for your AWS Key Management Service key (AWS KMS key). This is
+	// an optional parameter for label detection stream processors.
 	KmsKeyId *string
 
 	// The time, in Unix format, the stream processor was last updated. For example,
@@ -81,8 +81,8 @@ type DescribeStreamProcessorOutput struct {
 	// Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
 	Output *types.StreamProcessorOutput
 
-	// Specifies locations in the frames where Amazon Rekognition checks for objects or
-	// people. This is an optional parameter for label detection stream processors.
+	// Specifies locations in the frames where Amazon Rekognition checks for objects
+	// or people. This is an optional parameter for label detection stream processors.
 	RegionsOfInterest []types.RegionOfInterest
 
 	// ARN of the IAM role that allows access to the stream processor.

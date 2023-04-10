@@ -16,7 +16,7 @@ import (
 // specifies True during the creation of the nested change set, then
 // DeleteChangeSet will delete all change sets that belong to the stacks hierarchy
 // and will also delete all change sets for nested stacks with the status of
-// REVIEW_IN_PROGRESS.
+// REVIEW_IN_PROGRESS .
 func (c *Client) DeleteChangeSet(ctx context.Context, params *DeleteChangeSetInput, optFns ...func(*Options)) (*DeleteChangeSetOutput, error) {
 	if params == nil {
 		params = &DeleteChangeSetInput{}

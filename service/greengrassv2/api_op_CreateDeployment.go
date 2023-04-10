@@ -21,8 +21,7 @@ import (
 // devices. Every deployment has a revision number that indicates how many
 // deployment revisions you define for a target. Use this operation to create a new
 // revision of an existing deployment. For more information, see the Create
-// deployments
-// (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
+// deployments (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
 // in the IoT Greengrass V2 Developer Guide.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
@@ -41,9 +40,8 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 
 type CreateDeploymentInput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target IoT thing or thing group. When creating a subdeployment, the
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the target IoT thing or thing group. When creating a subdeployment, the
 	// targetARN can only be a thing group.
 	//
 	// This member is required.
@@ -75,15 +73,13 @@ type CreateDeploymentInput struct {
 	// configuration.
 	IotJobConfiguration *types.DeploymentIoTJobConfiguration
 
-	// The parent deployment's target ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The parent deployment's target ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// within a subdeployment.
 	ParentTargetArn *string
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources
-	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the IoT Greengrass V2 Developer Guide.
+	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
+	// in the IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -94,9 +90,8 @@ type CreateDeploymentOutput struct {
 	// The ID of the deployment.
 	DeploymentId *string
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the IoT job that applies the deployment to target devices.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the IoT job that applies the deployment to target devices.
 	IotJobArn *string
 
 	// The ID of the IoT job that applies the deployment to target devices.

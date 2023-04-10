@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Function.
+// Deletes a Function .
 func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput, optFns ...func(*Options)) (*DeleteFunctionOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionInput{}

@@ -37,8 +37,8 @@ type DescribeAccountAttributesInput struct {
 // Data returned by the DescribeAccountAttributes action.
 type DescribeAccountAttributesOutput struct {
 
-	// A list of AccountQuota objects. Within this list, each quota has a name, a count
-	// of usage toward the quota maximum, and a maximum value for the quota.
+	// A list of AccountQuota objects. Within this list, each quota has a name, a
+	// count of usage toward the quota maximum, and a maximum value for the quota.
 	AccountQuotas []types.AccountQuota
 
 	// Metadata pertaining to the operation's result.

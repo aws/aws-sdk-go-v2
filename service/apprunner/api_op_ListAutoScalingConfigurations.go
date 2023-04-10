@@ -17,7 +17,7 @@ import (
 // configuration name or the revisions for all active configurations in your
 // account. You can optionally query only the latest revision of each requested
 // name. To retrieve a full description of a particular configuration revision,
-// call and provide one of the ARNs returned by ListAutoScalingConfigurations.
+// call and provide one of the ARNs returned by ListAutoScalingConfigurations .
 func (c *Client) ListAutoScalingConfigurations(ctx context.Context, params *ListAutoScalingConfigurationsInput, optFns ...func(*Options)) (*ListAutoScalingConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListAutoScalingConfigurationsInput{}
@@ -46,14 +46,14 @@ type ListAutoScalingConfigurationsInput struct {
 	LatestOnly bool
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
 	// identical to the ones that are specified in the initial request. If you don't
-	// specify NextToken, the request retrieves the first result page.
+	// specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -67,8 +67,8 @@ type ListAutoScalingConfigurationsOutput struct {
 	// This member is required.
 	AutoScalingConfigurationSummaryList []types.AutoScalingConfigurationSummary
 
-	// The token that you can pass in a subsequent request to get the next result page.
-	// It's returned in a paginated request.
+	// The token that you can pass in a subsequent request to get the next result
+	// page. It's returned in a paginated request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -149,7 +149,7 @@ var _ ListAutoScalingConfigurationsAPIClient = (*Client)(nil)
 // ListAutoScalingConfigurations
 type ListAutoScalingConfigurationsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	Limit int32
 

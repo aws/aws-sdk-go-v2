@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies an existing classifier (a GrokClassifier, an XMLClassifier, a
-// JsonClassifier, or a CsvClassifier, depending on which field is present).
+// Modifies an existing classifier (a GrokClassifier , an XMLClassifier , a
+// JsonClassifier , or a CsvClassifier , depending on which field is present).
 func (c *Client) UpdateClassifier(ctx context.Context, params *UpdateClassifierInput, optFns ...func(*Options)) (*UpdateClassifierOutput, error) {
 	if params == nil {
 		params = &UpdateClassifierInput{}

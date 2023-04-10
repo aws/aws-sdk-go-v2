@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the log patterns in the specific log LogPatternSet.
+// Lists the log patterns in the specific log LogPatternSet .
 func (c *Client) ListLogPatterns(ctx context.Context, params *ListLogPatternsInput, optFns ...func(*Options)) (*ListLogPatternsOutput, error) {
 	if params == nil {
 		params = &ListLogPatternsInput{}

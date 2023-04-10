@@ -36,13 +36,14 @@ type ListFargateProfilesInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// The maximum number of Fargate profile results returned by ListFargateProfiles in
-	// paginated output. When you use this parameter, ListFargateProfiles returns only
-	// maxResults results in a single page along with a nextToken response element. You
-	// can see the remaining results of the initial request by sending another
-	// ListFargateProfiles request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListFargateProfiles returns
-	// up to 100 results and a nextToken value if applicable.
+	// The maximum number of Fargate profile results returned by ListFargateProfiles
+	// in paginated output. When you use this parameter, ListFargateProfiles returns
+	// only maxResults results in a single page along with a nextToken response
+	// element. You can see the remaining results of the initial request by sending
+	// another ListFargateProfiles request with the returned nextToken value. This
+	// value can be between 1 and 100. If you don't use this parameter,
+	// ListFargateProfiles returns up to 100 results and a nextToken value if
+	// applicable.
 	MaxResults *int32
 
 	// The nextToken value returned from a previous paginated ListFargateProfiles
@@ -59,10 +60,10 @@ type ListFargateProfilesOutput struct {
 	// A list of all of the Fargate profiles associated with the specified cluster.
 	FargateProfileNames []string
 
-	// The nextToken value to include in a future ListFargateProfiles request. When the
-	// results of a ListFargateProfiles request exceed maxResults, you can use this
-	// value to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// The nextToken value to include in a future ListFargateProfiles request. When
+	// the results of a ListFargateProfiles request exceed maxResults , you can use
+	// this value to retrieve the next page of results. This value is null when there
+	// are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,8 +135,8 @@ func (c *Client) addOperationListFargateProfilesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListFargateProfilesAPIClient is a client that implements the ListFargateProfiles
-// operation.
+// ListFargateProfilesAPIClient is a client that implements the
+// ListFargateProfiles operation.
 type ListFargateProfilesAPIClient interface {
 	ListFargateProfiles(context.Context, *ListFargateProfilesInput, ...func(*Options)) (*ListFargateProfilesOutput, error)
 }
@@ -145,13 +146,14 @@ var _ ListFargateProfilesAPIClient = (*Client)(nil)
 // ListFargateProfilesPaginatorOptions is the paginator options for
 // ListFargateProfiles
 type ListFargateProfilesPaginatorOptions struct {
-	// The maximum number of Fargate profile results returned by ListFargateProfiles in
-	// paginated output. When you use this parameter, ListFargateProfiles returns only
-	// maxResults results in a single page along with a nextToken response element. You
-	// can see the remaining results of the initial request by sending another
-	// ListFargateProfiles request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListFargateProfiles returns
-	// up to 100 results and a nextToken value if applicable.
+	// The maximum number of Fargate profile results returned by ListFargateProfiles
+	// in paginated output. When you use this parameter, ListFargateProfiles returns
+	// only maxResults results in a single page along with a nextToken response
+	// element. You can see the remaining results of the initial request by sending
+	// another ListFargateProfiles request with the returned nextToken value. This
+	// value can be between 1 and 100. If you don't use this parameter,
+	// ListFargateProfiles returns up to 100 results and a nextToken value if
+	// applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

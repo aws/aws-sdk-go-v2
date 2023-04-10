@@ -7,11 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// EnableHealthServiceAccessForOrganization
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
+// EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
 // is already in progress. Wait for the action to complete before trying again. To
-// get the current status, use the DescribeHealthServiceStatusForOrganization
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeHealthServiceStatusForOrganization.html)
+// get the current status, use the DescribeHealthServiceStatusForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeHealthServiceStatusForOrganization.html)
 // operation.
 type ConcurrentModificationException struct {
 	Message *string
@@ -38,7 +36,7 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified pagination token (nextToken) is not valid.
+// The specified pagination token ( nextToken ) is not valid.
 type InvalidPaginationToken struct {
 	Message *string
 

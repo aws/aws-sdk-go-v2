@@ -13,7 +13,7 @@ import (
 )
 
 // Lists all available signing profiles in your AWS account. Returns only profiles
-// with an ACTIVE status unless the includeCanceled request field is set to true.
+// with an ACTIVE status unless the includeCanceled request field is set to true .
 // If additional jobs remain to be listed, code signing returns a nextToken value.
 // Use this value in subsequent calls to ListSigningJobs to fetch the remaining
 // values. You can continue calling ListSigningJobs with your maxResults parameter
@@ -36,7 +36,7 @@ func (c *Client) ListSigningProfiles(ctx context.Context, params *ListSigningPro
 
 type ListSigningProfilesInput struct {
 
-	// Designates whether to include profiles with the status of CANCELED.
+	// Designates whether to include profiles with the status of CANCELED .
 	IncludeCanceled bool
 
 	// The maximum number of profiles to be returned.
@@ -63,8 +63,9 @@ type ListSigningProfilesOutput struct {
 	// Value for specifying the next set of paginated results to return.
 	NextToken *string
 
-	// A list of profiles that are available in the AWS account. This includes profiles
-	// with the status of CANCELED if the includeCanceled parameter is set to true.
+	// A list of profiles that are available in the AWS account. This includes
+	// profiles with the status of CANCELED if the includeCanceled parameter is set to
+	// true .
 	Profiles []types.SigningProfile
 
 	// Metadata pertaining to the operation's result.
@@ -133,8 +134,8 @@ func (c *Client) addOperationListSigningProfilesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListSigningProfilesAPIClient is a client that implements the ListSigningProfiles
-// operation.
+// ListSigningProfilesAPIClient is a client that implements the
+// ListSigningProfiles operation.
 type ListSigningProfilesAPIClient interface {
 	ListSigningProfiles(context.Context, *ListSigningProfilesInput, ...func(*Options)) (*ListSigningProfilesOutput, error)
 }

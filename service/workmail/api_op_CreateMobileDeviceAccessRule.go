@@ -30,7 +30,7 @@ func (c *Client) CreateMobileDeviceAccessRule(ctx context.Context, params *Creat
 
 type CreateMobileDeviceAccessRuleInput struct {
 
-	// The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+	// The effect of the rule when it matches. Allowed values are ALLOW or DENY .
 	//
 	// This member is required.
 	Effect types.MobileDeviceAccessRuleEffect

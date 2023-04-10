@@ -49,8 +49,7 @@ type CreateProjectInput struct {
 	ProjectDescription *string
 
 	// A list of key-value pairs that contain metadata for the project. For more
-	// information, see Tagging your IoT SiteWise resources
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
+	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 
@@ -59,9 +58,8 @@ type CreateProjectInput struct {
 
 type CreateProjectOutput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the project, which has the following format.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the project, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}
 	//
 	// This member is required.

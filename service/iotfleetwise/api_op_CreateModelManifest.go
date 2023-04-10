@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a vehicle model (model manifest) that specifies signals (attributes,
-// branches, sensors, and actuators). For more information, see Vehicle models
-// (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/vehicle-models.html)
+// branches, sensors, and actuators). For more information, see Vehicle models (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/vehicle-models.html)
 // in the Amazon Web Services IoT FleetWise Developer Guide.
 func (c *Client) CreateModelManifest(ctx context.Context, params *CreateModelManifestInput, optFns ...func(*Options)) (*CreateModelManifestOutput, error) {
 	if params == nil {

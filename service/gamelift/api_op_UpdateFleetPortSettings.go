@@ -14,14 +14,13 @@ import (
 // Updates permissions that allow inbound traffic to connect to game sessions that
 // are being hosted on instances in the fleet. To update settings, specify the
 // fleet ID to be updated and specify the changes to be made. List the permissions
-// you want to add in InboundPermissionAuthorizations, and permissions you want to
-// remove in InboundPermissionRevocations. Permissions to be removed must match
+// you want to add in InboundPermissionAuthorizations , and permissions you want to
+// remove in InboundPermissionRevocations . Permissions to be removed must match
 // existing fleet permissions. If successful, the fleet ID for the updated fleet is
 // returned. For fleets with remote locations, port setting updates can take time
 // to propagate across all locations. You can check the status of updates in each
 // location by calling DescribeFleetPortSettings with a location name. Learn more
-// Setting up GameLift fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFleetPortSettingsInput, optFns ...func(*Options)) (*UpdateFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateFleetPortSettingsInput{}
@@ -56,11 +55,10 @@ type UpdateFleetPortSettingsInput struct {
 
 type UpdateFleetPortSettingsOutput struct {
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
-	// assigned to a GameLift fleet resource and uniquely identifies it. ARNs are
-	// unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
+	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
+	// are unique across all Regions. Format is
+	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 
 	// A unique identifier for the fleet that was updated.

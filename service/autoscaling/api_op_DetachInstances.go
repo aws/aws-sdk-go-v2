@@ -18,9 +18,8 @@ import (
 // detached. If there is a Classic Load Balancer attached to the Auto Scaling
 // group, the instances are deregistered from the load balancer. If there are
 // target groups attached to the Auto Scaling group, the instances are deregistered
-// from the target groups. For more information, see Detach EC2 instances from your
-// Auto Scaling group
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html)
+// from the target groups. For more information, see Detach EC2 instances from
+// your Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DetachInstances(ctx context.Context, params *DetachInstancesInput, optFns ...func(*Options)) (*DetachInstancesOutput, error) {
 	if params == nil {

@@ -35,8 +35,8 @@ type ListApplicationInstanceDependenciesInput struct {
 	// This member is required.
 	ApplicationInstanceId *string
 
-	// The maximum number of application instance dependencies to return in one page of
-	// results.
+	// The maximum number of application instance dependencies to return in one page
+	// of results.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
@@ -131,11 +131,11 @@ type ListApplicationInstanceDependenciesAPIClient interface {
 
 var _ ListApplicationInstanceDependenciesAPIClient = (*Client)(nil)
 
-// ListApplicationInstanceDependenciesPaginatorOptions is the paginator options for
-// ListApplicationInstanceDependencies
+// ListApplicationInstanceDependenciesPaginatorOptions is the paginator options
+// for ListApplicationInstanceDependencies
 type ListApplicationInstanceDependenciesPaginatorOptions struct {
-	// The maximum number of application instance dependencies to return in one page of
-	// results.
+	// The maximum number of application instance dependencies to return in one page
+	// of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

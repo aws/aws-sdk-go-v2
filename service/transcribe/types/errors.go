@@ -9,7 +9,7 @@ import (
 
 // Your request didn't pass one or more validation tests. This can occur when the
 // entity you're trying to delete doesn't exist or if it's in a non-terminal state
-// (such as IN PROGRESS). See the exception message field for more information.
+// (such as IN PROGRESS ). See the exception message field for more information.
 type BadRequestException struct {
 	Message *string
 
@@ -62,8 +62,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// There was an internal error. Check the error message, correct the issue, and try
-// your request again.
+// There was an internal error. Check the error message, correct the issue, and
+// try your request again.
 type InternalFailureException struct {
 	Message *string
 
@@ -89,8 +89,8 @@ func (e *InternalFailureException) ErrorCode() string {
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// You've either sent too many requests or your input file is too long. Wait before
-// retrying your request, or use a smaller file and try your request again.
+// You've either sent too many requests or your input file is too long. Wait
+// before retrying your request, or use a smaller file and try your request again.
 type LimitExceededException struct {
 	Message *string
 

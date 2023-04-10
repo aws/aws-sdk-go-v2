@@ -48,8 +48,8 @@ type ListDeviceEventsInput struct {
 	// This member is required.
 	ToTimeStamp *time.Time
 
-	// The maximum number of results to return per request. If not set, a default value
-	// of 100 is used.
+	// The maximum number of results to return per request. If not set, a default
+	// value of 100 is used.
 	MaxResults int32
 
 	// The token to retrieve the next set of results.

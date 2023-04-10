@@ -49,7 +49,7 @@ type ImportSourceCredentialsInput struct {
 	Token *string
 
 	// Set to false to prevent overwriting the repository source credentials. Set to
-	// true to overwrite the repository source credentials. The default value is true.
+	// true to overwrite the repository source credentials. The default value is true .
 	ShouldOverwrite *bool
 
 	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is not

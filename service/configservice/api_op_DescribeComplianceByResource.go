@@ -17,23 +17,18 @@ import (
 // the resource does not comply with. A resource is compliant if it complies with
 // all the Config rules that evaluate it. It is noncompliant if it does not comply
 // with one or more of these rules. If Config has no current evaluation results for
-// the resource, it returns INSUFFICIENT_DATA. This result might indicate one of
+// the resource, it returns INSUFFICIENT_DATA . This result might indicate one of
 // the following conditions about the rules that evaluate the resource:
-//
-// * Config
-// has never invoked an evaluation for the rule. To check whether it has, use the
-// DescribeConfigRuleEvaluationStatus action to get the
-// LastSuccessfulInvocationTime and LastFailedInvocationTime.
-//
-// * The rule's Lambda
-// function is failing to send evaluation results to Config. Verify that the role
-// that you assigned to your configuration recorder includes the
-// config:PutEvaluations permission. If the rule is a custom rule, verify that the
-// Lambda execution role includes the config:PutEvaluations permission.
-//
-// * The
-// rule's Lambda function has returned NOT_APPLICABLE for all evaluation results.
-// This can occur if the resources were deleted or removed from the rule's scope.
+//   - Config has never invoked an evaluation for the rule. To check whether it
+//     has, use the DescribeConfigRuleEvaluationStatus action to get the
+//     LastSuccessfulInvocationTime and LastFailedInvocationTime .
+//   - The rule's Lambda function is failing to send evaluation results to Config.
+//     Verify that the role that you assigned to your configuration recorder includes
+//     the config:PutEvaluations permission. If the rule is a custom rule, verify
+//     that the Lambda execution role includes the config:PutEvaluations permission.
+//   - The rule's Lambda function has returned NOT_APPLICABLE for all evaluation
+//     results. This can occur if the resources were deleted or removed from the rule's
+//     scope.
 func (c *Client) DescribeComplianceByResource(ctx context.Context, params *DescribeComplianceByResourceInput, optFns ...func(*Options)) (*DescribeComplianceByResourceOutput, error) {
 	if params == nil {
 		params = &DescribeComplianceByResourceInput{}
@@ -65,13 +60,13 @@ type DescribeComplianceByResourceInput struct {
 
 	// The ID of the Amazon Web Services resource for which you want compliance
 	// information. You can specify only one resource ID. If you specify a resource ID,
-	// you must also specify a type for ResourceType.
+	// you must also specify a type for ResourceType .
 	ResourceId *string
 
 	// The types of Amazon Web Services resources for which you want compliance
-	// information (for example, AWS::EC2::Instance). For this action, you can specify
+	// information (for example, AWS::EC2::Instance ). For this action, you can specify
 	// that the resource type is an Amazon Web Services account by specifying
-	// AWS::::Account.
+	// AWS::::Account .
 	ResourceType *string
 
 	noSmithyDocumentSerde

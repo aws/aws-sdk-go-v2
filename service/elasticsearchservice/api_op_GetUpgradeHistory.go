@@ -43,9 +43,9 @@ type GetUpgradeHistoryInput struct {
 	// Set this value to limit the number of results returned.
 	MaxResults int32
 
-	// Paginated APIs accepts NextToken input to returns next page results and provides
-	// a NextToken output in the response which can be used by the client to retrieve
-	// more results.
+	// Paginated APIs accepts NextToken input to returns next page results and
+	// provides a NextToken output in the response which can be used by the client to
+	// retrieve more results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,8 +54,8 @@ type GetUpgradeHistoryInput struct {
 // Container for response returned by GetUpgradeHistory operation.
 type GetUpgradeHistoryOutput struct {
 
-	// Pagination token that needs to be supplied to the next call to get the next page
-	// of results
+	// Pagination token that needs to be supplied to the next call to get the next
+	// page of results
 	NextToken *string
 
 	// A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade

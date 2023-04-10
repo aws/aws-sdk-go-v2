@@ -37,9 +37,9 @@ func (c *Client) PutResourceConfig(ctx context.Context, params *PutResourceConfi
 
 type PutResourceConfigInput struct {
 
-	// The configuration object of the resource in valid JSON format. It must match the
-	// schema registered with CloudFormation. The configuration JSON must not exceed 64
-	// KB.
+	// The configuration object of the resource in valid JSON format. It must match
+	// the schema registered with CloudFormation. The configuration JSON must not
+	// exceed 64 KB.
 	//
 	// This member is required.
 	Configuration *string

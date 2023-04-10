@@ -36,7 +36,7 @@ type DescribeRouterConfigurationInput struct {
 	VirtualInterfaceId *string
 
 	// Identifies the router by a combination of vendor, platform, and software
-	// version. For example, CiscoSystemsInc-2900SeriesRouters-IOS124.
+	// version. For example, CiscoSystemsInc-2900SeriesRouters-IOS124 .
 	RouterTypeIdentifier *string
 
 	noSmithyDocumentSerde

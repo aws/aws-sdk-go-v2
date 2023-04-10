@@ -15,12 +15,10 @@ import (
 // provided using an action group. The one supported action group that can be
 // removed is agentPermission which grants ConfigureAgent and PostAgent
 // permissions. For more information, see Resource-based policies in CodeGuru
-// Profiler
-// (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html)
-// in the Amazon CodeGuru Profiler User Guide, ConfigureAgent
-// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html),
-// and PostAgentProfile
-// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html).
+// Profiler (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html)
+// in the Amazon CodeGuru Profiler User Guide, ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
+// , and PostAgentProfile (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html)
+// .
 func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionInput, optFns ...func(*Options)) (*RemovePermissionOutput, error) {
 	if params == nil {
 		params = &RemovePermissionInput{}
@@ -36,12 +34,12 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 	return out, nil
 }
 
-// The structure representing the removePermissionRequest.
+// The structure representing the removePermissionRequest .
 type RemovePermissionInput struct {
 
 	// Specifies an action group that contains the permissions to remove from a
 	// profiling group's resource-based policy. One action group is supported,
-	// agentPermissions, which grants ConfigureAgent and PostAgentProfile permissions.
+	// agentPermissions , which grants ConfigureAgent and PostAgentProfile permissions.
 	//
 	// This member is required.
 	ActionGroup types.ActionGroup
@@ -60,7 +58,7 @@ type RemovePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The structure representing the removePermissionResponse.
+// The structure representing the removePermissionResponse .
 type RemovePermissionOutput struct {
 
 	// The JSON-formatted resource-based policy on the profiling group after the

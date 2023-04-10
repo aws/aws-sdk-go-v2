@@ -31,16 +31,14 @@ func (c *Client) ListProvisioningArtifactsForServiceAction(ctx context.Context, 
 
 type ListProvisioningArtifactsForServiceActionInput struct {
 
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	// The self-service action identifier. For example, act-fs7abcd89wxyz .
 	//
 	// This member is required.
 	ServiceActionId *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.

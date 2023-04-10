@@ -12,8 +12,8 @@ import (
 )
 
 // Creates an Amazon SageMaker Model Card. For information about how to use model
-// cards, see Amazon SageMaker Model Card
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html).
+// cards, see Amazon SageMaker Model Card (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html)
+// .
 func (c *Client) CreateModelCard(ctx context.Context, params *CreateModelCardInput, optFns ...func(*Options)) (*CreateModelCardOutput, error) {
 	if params == nil {
 		params = &CreateModelCardInput{}
@@ -31,8 +31,7 @@ func (c *Client) CreateModelCard(ctx context.Context, params *CreateModelCardInp
 
 type CreateModelCardInput struct {
 
-	// The content of the model card. Content must be in model card JSON schema
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html)
+	// The content of the model card. Content must be in model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html)
 	// and provided as a string.
 	//
 	// This member is required.
@@ -44,25 +43,18 @@ type CreateModelCardInput struct {
 	ModelCardName *string
 
 	// The approval status of the model card within your organization. Different
-	// organizations might have different criteria for model card review and
-	// approval.
-	//
-	// * Draft: The model card is a work in progress.
-	//
-	// * PendingReview: The
-	// model card is pending review.
-	//
-	// * Approved: The model card is approved.
-	//
-	// *
-	// Archived: The model card is archived. No more updates should be made to the
-	// model card, but it can still be exported.
+	// organizations might have different criteria for model card review and approval.
+	//   - Draft : The model card is a work in progress.
+	//   - PendingReview : The model card is pending review.
+	//   - Approved : The model card is approved.
+	//   - Archived : The model card is archived. No more updates should be made to the
+	//   model card, but it can still be exported.
 	//
 	// This member is required.
 	ModelCardStatus types.ModelCardStatus
 
-	// An optional Key Management Service key to encrypt, decrypt, and re-encrypt model
-	// card content for regulated workloads with highly sensitive data.
+	// An optional Key Management Service key to encrypt, decrypt, and re-encrypt
+	// model card content for regulated workloads with highly sensitive data.
 	SecurityConfig *types.ModelCardSecurityConfig
 
 	// Key-value pairs used to manage metadata for model cards.

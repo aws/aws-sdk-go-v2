@@ -136,16 +136,16 @@ func (c *Client) addOperationGetAggregateConfigRuleComplianceSummaryMiddlewares(
 	return nil
 }
 
-// GetAggregateConfigRuleComplianceSummaryAPIClient is a client that implements the
-// GetAggregateConfigRuleComplianceSummary operation.
+// GetAggregateConfigRuleComplianceSummaryAPIClient is a client that implements
+// the GetAggregateConfigRuleComplianceSummary operation.
 type GetAggregateConfigRuleComplianceSummaryAPIClient interface {
 	GetAggregateConfigRuleComplianceSummary(context.Context, *GetAggregateConfigRuleComplianceSummaryInput, ...func(*Options)) (*GetAggregateConfigRuleComplianceSummaryOutput, error)
 }
 
 var _ GetAggregateConfigRuleComplianceSummaryAPIClient = (*Client)(nil)
 
-// GetAggregateConfigRuleComplianceSummaryPaginatorOptions is the paginator options
-// for GetAggregateConfigRuleComplianceSummary
+// GetAggregateConfigRuleComplianceSummaryPaginatorOptions is the paginator
+// options for GetAggregateConfigRuleComplianceSummary
 type GetAggregateConfigRuleComplianceSummaryPaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. The default is
 	// 1000. You cannot specify a number greater than 1000. If you specify 0, Config

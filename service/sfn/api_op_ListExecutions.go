@@ -43,10 +43,9 @@ type ListExecutionsInput struct {
 	// The Amazon Resource Name (ARN) of the Map Run that started the child workflow
 	// executions. If the mapRunArn field is specified, a list of all of the child
 	// workflow executions started by a Map Run is returned. For more information, see
-	// Examining Map Run
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
+	// Examining Map Run (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
 	// in the Step Functions Developer Guide. You can specify either a mapRunArn or a
-	// stateMachineArn, but not both.
+	// stateMachineArn , but not both.
 	MapRunArn *string
 
 	// The maximum number of results that are returned per call. You can use nextToken
@@ -64,7 +63,7 @@ type ListExecutionsInput struct {
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) of the state machine whose executions is listed.
-	// You can specify either a mapRunArn or a stateMachineArn, but not both.
+	// You can specify either a mapRunArn or a stateMachineArn , but not both.
 	StateMachineArn *string
 
 	// If specified, only list the executions whose current execution status matches

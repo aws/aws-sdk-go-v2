@@ -60,7 +60,7 @@ func (e *ApiKeyLimitExceededException) ErrorCode() string {
 func (e *ApiKeyLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The API key expiration must be set to a value between 1 and 365 days from
-// creation (for CreateApiKey) or from update (for UpdateApiKey).
+// creation (for CreateApiKey ) or from update (for UpdateApiKey ).
 type ApiKeyValidityOutOfBoundsException struct {
 	Message *string
 
@@ -144,8 +144,8 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Another modification is in progress at this time and it must complete before you
-// can make your change.
+// Another modification is in progress at this time and it must complete before
+// you can make your change.
 type ConcurrentModificationException struct {
 	Message *string
 

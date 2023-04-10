@@ -27,9 +27,9 @@ const (
 	LockStateUnlocked      LockState = "unlocked"
 )
 
-// Values returns all known values for LockState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LockState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LockState) Values() []LockState {
 	return []LockState{
 		"locked",
@@ -63,9 +63,9 @@ const (
 	ResourceTypeEc2Image    ResourceType = "EC2_IMAGE"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"EBS_SNAPSHOT",

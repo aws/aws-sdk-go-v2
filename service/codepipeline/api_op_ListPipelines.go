@@ -36,8 +36,8 @@ type ListPipelinesInput struct {
 	// minimum value you can specify is 1. The maximum accepted value is 1000.
 	MaxResults *int32
 
-	// An identifier that was returned from the previous list pipelines call. It can be
-	// used to return the next set of pipelines in the list.
+	// An identifier that was returned from the previous list pipelines call. It can
+	// be used to return the next set of pipelines in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde

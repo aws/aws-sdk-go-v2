@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves information about an alarm model. If you don't specify a value for the
-// alarmModelVersion parameter, the latest version is returned.
+// Retrieves information about an alarm model. If you don't specify a value for
+// the alarmModelVersion parameter, the latest version is returned.
 func (c *Client) DescribeAlarmModel(ctx context.Context, params *DescribeAlarmModelInput, optFns ...func(*Options)) (*DescribeAlarmModelOutput, error) {
 	if params == nil {
 		params = &DescribeAlarmModelInput{}
@@ -51,9 +51,8 @@ type DescribeAlarmModelOutput struct {
 	AlarmEventActions *types.AlarmEventActions
 
 	// The ARN of the alarm model. For more information, see Amazon Resource Names
-	// (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
 	AlarmModelArn *string
 
 	// The description of the alarm model.
@@ -75,8 +74,7 @@ type DescribeAlarmModelOutput struct {
 	CreationTime *time.Time
 
 	// An input attribute used as a key to create an alarm. AWS IoT Events routes
-	// inputs
-	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html)
+	// inputs (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html)
 	// associated with this key to the alarm.
 	Key *string
 
@@ -84,29 +82,21 @@ type DescribeAlarmModelOutput struct {
 	LastUpdateTime *time.Time
 
 	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
-	// resources. For more information, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
 	RoleArn *string
 
 	// A non-negative integer that reflects the severity level of the alarm.
 	Severity *int32
 
 	// The status of the alarm model. The status can be one of the following values:
-	//
-	// *
-	// ACTIVE - The alarm model is active and it's ready to evaluate data.
-	//
-	// *
-	// ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm
-	// model can take up to a few minutes.
-	//
-	// * INACTIVE - The alarm model is inactive,
-	// so it isn't ready to evaluate data. Check your alarm model information and
-	// update the alarm model.
-	//
-	// * FAILED - You couldn't create or update the alarm
-	// model. Check your alarm model information and try again.
+	//   - ACTIVE - The alarm model is active and it's ready to evaluate data.
+	//   - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an
+	//   alarm model can take up to a few minutes.
+	//   - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data.
+	//   Check your alarm model information and update the alarm model.
+	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
+	//   model information and try again.
 	Status types.AlarmModelVersionStatus
 
 	// Contains information about the status of the alarm model.

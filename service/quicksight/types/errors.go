@@ -126,7 +126,7 @@ func (e *DomainNotWhitelistedException) ErrorCode() string {
 func (e *DomainNotWhitelistedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The identity type specified isn't supported. Supported identity types include
-// IAM and QUICKSIGHT.
+// IAM and QUICKSIGHT .
 type IdentityTypeNotSupportedException struct {
 	Message *string
 
@@ -326,7 +326,7 @@ func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return sm
 
 // The user with the provided name isn't found. This error can happen in any
 // operation that requires finding a user based on a provided user name, such as
-// DeleteUser, DescribeUser, and so on.
+// DeleteUser , DescribeUser , and so on.
 type QuickSightUserNotFoundException struct {
 	Message *string
 
@@ -505,8 +505,7 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // account. Before you can use embedding for anonymous users, a QuickSight
 // administrator needs to add capacity pricing to Amazon QuickSight. You can do
 // this on the Manage Amazon QuickSight page. After capacity pricing is added, you
-// can use the GetDashboardEmbedUrl
-// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html)
+// can use the GetDashboardEmbedUrl (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html)
 // API operation with the --identity-type ANONYMOUS option.
 type UnsupportedPricingPlanException struct {
 	Message *string

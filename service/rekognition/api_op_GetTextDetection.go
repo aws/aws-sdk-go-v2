@@ -13,25 +13,25 @@ import (
 )
 
 // Gets the text detection results of a Amazon Rekognition Video analysis started
-// by StartTextDetection. Text detection with Amazon Rekognition Video is an
+// by StartTextDetection . Text detection with Amazon Rekognition Video is an
 // asynchronous operation. You start text detection by calling StartTextDetection
-// which returns a job identifier (JobId) When the text detection operation
+// which returns a job identifier ( JobId ) When the text detection operation
 // finishes, Amazon Rekognition publishes a completion status to the Amazon Simple
-// Notification Service topic registered in the initial call to StartTextDetection.
-// To get the results of the text detection operation, first check that the status
-// value published to the Amazon SNS topic is SUCCEEDED. if so, call
-// GetTextDetection and pass the job identifier (JobId) from the initial call of
-// StartLabelDetection. GetTextDetection returns an array of detected text
-// (TextDetections) sorted by the time the text was detected, up to 50 words per
+// Notification Service topic registered in the initial call to StartTextDetection
+// . To get the results of the text detection operation, first check that the
+// status value published to the Amazon SNS topic is SUCCEEDED . if so, call
+// GetTextDetection and pass the job identifier ( JobId ) from the initial call of
+// StartLabelDetection . GetTextDetection returns an array of detected text (
+// TextDetections ) sorted by the time the text was detected, up to 50 words per
 // frame of video. Each element of the array includes the detected text, the
 // precentage confidence in the acuracy of the detected text, the time the text was
 // detected, bounding box information for where the text was located, and unique
 // identifiers for words and their lines. Use MaxResults parameter to limit the
 // number of text detections returned. If there are more results than specified in
-// MaxResults, the value of NextToken in the operation response contains a
+// MaxResults , the value of NextToken in the operation response contains a
 // pagination token for getting the next set of results. To get the next page of
-// results, call GetTextDetection and populate the NextToken request parameter with
-// the token value returned from the previous call to GetTextDetection.
+// results, call GetTextDetection and populate the NextToken request parameter
+// with the token value returned from the previous call to GetTextDetection .
 func (c *Client) GetTextDetection(ctx context.Context, params *GetTextDetectionInput, optFns ...func(*Options)) (*GetTextDetectionOutput, error) {
 	if params == nil {
 		params = &GetTextDetectionInput{}
@@ -50,7 +50,7 @@ func (c *Client) GetTextDetection(ctx context.Context, params *GetTextDetectionI
 type GetTextDetectionInput struct {
 
 	// Job identifier for the text detection operation for which you want results
-	// returned. You get the job identifer from an initial call to StartTextDetection.
+	// returned. You get the job identifer from an initial call to StartTextDetection .
 	//
 	// This member is required.
 	JobId *string
@@ -79,9 +79,9 @@ type GetTextDetectionOutput struct {
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
 
-	// An array of text detected in the video. Each element contains the detected text,
-	// the time in milliseconds from the start of the video that the text was detected,
-	// and where it was detected on the screen.
+	// An array of text detected in the video. Each element contains the detected
+	// text, the time in milliseconds from the start of the video that the text was
+	// detected, and where it was detected on the screen.
 	TextDetections []types.TextDetectionResult
 
 	// Version number of the text detection model that was used to detect text.

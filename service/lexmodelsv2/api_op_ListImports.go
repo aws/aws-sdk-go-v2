@@ -37,9 +37,9 @@ type ListImportsInput struct {
 	// The version of the bot to list imports for.
 	BotVersion *string
 
-	// Provides the specification of a filter used to limit the bots in the response to
-	// only those that match the filter specification. You can only specify one filter
-	// and one string to filter on.
+	// Provides the specification of a filter used to limit the bots in the response
+	// to only those that match the filter specification. You can only specify one
+	// filter and one string to filter on.
 	Filters []types.ImportFilter
 
 	// Specifies the locale that should be present in the list. If you don't specify a
@@ -54,9 +54,9 @@ type ListImportsInput struct {
 
 	// If the response from the ListImports operation contains more results than
 	// specified in the maxResults parameter, a token is returned in the response. Use
-	// the returned token in the nextToken parameter of a ListImports request to return
-	// the next page of results. For a complete set of results, call the ListImports
-	// operation until the nextToken returned in the response is null.
+	// the returned token in the nextToken parameter of a ListImports request to
+	// return the next page of results. For a complete set of results, call the
+	// ListImports operation until the nextToken returned in the response is null.
 	NextToken *string
 
 	// Determines the field that the list of imports is sorted by. You can sort by the
@@ -71,20 +71,20 @@ type ListImportsOutput struct {
 	// The unique identifier assigned by Amazon Lex to the bot.
 	BotId *string
 
-	// The version of the bot that was imported. It will always be DRAFT.
+	// The version of the bot that was imported. It will always be DRAFT .
 	BotVersion *string
 
 	// Summary information for the imports that meet the filter criteria specified in
-	// the request. The length of the list is specified in the maxResults parameter. If
-	// there are more imports available, the nextToken field contains a token to get
-	// the next page of results.
+	// the request. The length of the list is specified in the maxResults parameter.
+	// If there are more imports available, the nextToken field contains a token to
+	// get the next page of results.
 	ImportSummaries []types.ImportSummary
 
 	// The locale specified in the request.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListImports operation. If the nextToken field is present, you send the
+	// A token that indicates whether there are more results to return in a response
+	// to the ListImports operation. If the nextToken field is present, you send the
 	// contents as the nextToken parameter of a ListImports operation request to get
 	// the next page of results.
 	NextToken *string

@@ -40,8 +40,7 @@ func (c *Client) DeregisterContainerInstance(ctx context.Context, params *Deregi
 type DeregisterContainerInstanceInput struct {
 
 	// The container instance ID or full ARN of the container instance to deregister.
-	// For more information about the ARN format, see Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
+	// For more information about the ARN format, see Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
 	// in the Amazon ECS Developer Guide.
 	//
 	// This member is required.
@@ -53,9 +52,9 @@ type DeregisterContainerInstanceInput struct {
 	Cluster *string
 
 	// Forces the container instance to be deregistered. If you have tasks running on
-	// the container instance when you deregister it with the force option, these tasks
-	// remain running until you terminate the instance or the tasks stop through some
-	// other means, but they're orphaned (no longer monitored or accounted for by
+	// the container instance when you deregister it with the force option, these
+	// tasks remain running until you terminate the instance or the tasks stop through
+	// some other means, but they're orphaned (no longer monitored or accounted for by
 	// Amazon ECS). If an orphaned task on your container instance is part of an Amazon
 	// ECS service, then the service scheduler starts another copy of that task, on a
 	// different container instance if possible. Any containers in orphaned service

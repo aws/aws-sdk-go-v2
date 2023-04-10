@@ -20,7 +20,7 @@ import (
 // partner event bus that matches the partner event source can use that event bus
 // to receive events from the partner, and then process them using Amazon Web
 // Services Events rules and targets. Partner event source names follow this
-// format:  partner_name/event_namespace/event_name  partner_name is determined
+// format: partner_name/event_namespace/event_name  partner_name is determined
 // during partner registration and identifies the partner to Amazon Web Services
 // customers. event_namespace is determined by the partner and is a way for the
 // partner to categorize their events. event_name is determined by the partner, and
@@ -52,7 +52,7 @@ type CreatePartnerEventSourceInput struct {
 	Account *string
 
 	// The name of the partner event source. This name must be unique and must be in
-	// the format  partner_name/event_namespace/event_name . The Amazon Web Services
+	// the format partner_name/event_namespace/event_name . The Amazon Web Services
 	// account that wants to use this partner event source must create a partner event
 	// bus with a name that matches the name of the partner event source.
 	//

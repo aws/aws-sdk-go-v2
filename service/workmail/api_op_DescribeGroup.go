@@ -45,8 +45,8 @@ type DescribeGroupInput struct {
 
 type DescribeGroupOutput struct {
 
-	// The date and time when a user was deregistered from WorkMail, in UNIX epoch time
-	// format.
+	// The date and time when a user was deregistered from WorkMail, in UNIX epoch
+	// time format.
 	DisabledDate *time.Time
 
 	// The email of the described group.

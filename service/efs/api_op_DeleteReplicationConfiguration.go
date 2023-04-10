@@ -15,7 +15,7 @@ import (
 // which the destination file system is located. Deleting a replication
 // configuration ends the replication process. After a replication configuration is
 // deleted, the destination file system is no longer read-only. You can write to
-// the destination file system after its status becomes Writeable.
+// the destination file system after its status becomes Writeable .
 func (c *Client) DeleteReplicationConfiguration(ctx context.Context, params *DeleteReplicationConfigurationInput, optFns ...func(*Options)) (*DeleteReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteReplicationConfigurationInput{}

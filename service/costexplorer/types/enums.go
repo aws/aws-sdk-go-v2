@@ -10,9 +10,9 @@ const (
 	AccountScopeLinked AccountScope = "LINKED"
 )
 
-// Values returns all known values for AccountScope. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AccountScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AccountScope) Values() []AccountScope {
 	return []AccountScope{
 		"PAYER",
@@ -49,9 +49,10 @@ const (
 	AnomalySubscriptionFrequencyWeekly    AnomalySubscriptionFrequency = "WEEKLY"
 )
 
-// Values returns all known values for AnomalySubscriptionFrequency. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AnomalySubscriptionFrequency. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (AnomalySubscriptionFrequency) Values() []AnomalySubscriptionFrequency {
 	return []AnomalySubscriptionFrequency{
 		"DAILY",
@@ -106,8 +107,8 @@ const (
 	CostAllocationTagTypeUserDefined  CostAllocationTagType = "UserDefined"
 )
 
-// Values returns all known values for CostAllocationTagType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CostAllocationTagType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CostAllocationTagType) Values() []CostAllocationTagType {
 	return []CostAllocationTagType{
@@ -281,9 +282,9 @@ const (
 	DimensionAnomalyTotalImpactPercentage Dimension = "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
 )
 
-// Values returns all known values for Dimension. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Dimension. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Dimension) Values() []Dimension {
 	return []Dimension{
 		"AZ",
@@ -701,9 +702,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Set a verification state and provide a description of that verification state on
-// a violation (detect alarm).
+// Set a verification state and provide a description of that verification state
+// on a violation (detect alarm).
 func (c *Client) PutVerificationStateOnViolation(ctx context.Context, params *PutVerificationStateOnViolationInput, optFns ...func(*Options)) (*PutVerificationStateOnViolationOutput, error) {
 	if params == nil {
 		params = &PutVerificationStateOnViolationInput{}

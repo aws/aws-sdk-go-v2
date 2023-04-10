@@ -17,10 +17,9 @@ import (
 // part of a larger migration procedure for web ACLs from AWS WAF Classic to the
 // latest version of AWS WAF. For the full procedure, including caveats and manual
 // steps to complete the migration and switch over to the new web ACL, see
-// Migrating your AWS WAF Classic resources to AWS WAF
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-migrating-from-classic.html)
-// in the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// Migrating your AWS WAF Classic resources to AWS WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-migrating-from-classic.html)
+// in the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// .
 func (c *Client) CreateWebACLMigrationStack(ctx context.Context, params *CreateWebACLMigrationStackInput, optFns ...func(*Options)) (*CreateWebACLMigrationStackOutput, error) {
 	if params == nil {
 		params = &CreateWebACLMigrationStackInput{}
@@ -46,20 +45,15 @@ type CreateWebACLMigrationStackInput struct {
 	// This member is required.
 	IgnoreUnsupportedType *bool
 
-	// The name of the Amazon S3 bucket to store the CloudFormation template in. The S3
-	// bucket must be configured as follows for the migration:
-	//
-	// * The bucket name must
-	// start with aws-waf-migration-. For example, aws-waf-migration-my-web-acl.
-	//
-	// * The
-	// bucket must be in the Region where you are deploying the template. For example,
-	// for a web ACL in us-west-2, you must use an Amazon S3 bucket in us-west-2 and
-	// you must deploy the template stack to us-west-2.
-	//
-	// * The bucket policies must
-	// permit the migration process to write data. For listings of the bucket policies,
-	// see the Examples section.
+	// The name of the Amazon S3 bucket to store the CloudFormation template in. The
+	// S3 bucket must be configured as follows for the migration:
+	//   - The bucket name must start with aws-waf-migration- . For example,
+	//   aws-waf-migration-my-web-acl .
+	//   - The bucket must be in the Region where you are deploying the template. For
+	//   example, for a web ACL in us-west-2, you must use an Amazon S3 bucket in
+	//   us-west-2 and you must deploy the template stack to us-west-2.
+	//   - The bucket policies must permit the migration process to write data. For
+	//   listings of the bucket policies, see the Examples section.
 	//
 	// This member is required.
 	S3BucketName *string

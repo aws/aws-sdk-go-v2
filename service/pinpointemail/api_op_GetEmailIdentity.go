@@ -48,11 +48,11 @@ type GetEmailIdentityOutput struct {
 	// are required to complete the DKIM verification process.
 	DkimAttributes *types.DkimAttributes
 
-	// The feedback forwarding configuration for the identity. If the value is true,
+	// The feedback forwarding configuration for the identity. If the value is true ,
 	// Amazon Pinpoint sends you email notifications when bounce or complaint events
 	// occur. Amazon Pinpoint sends this notification to the address that you specified
 	// in the Return-Path header of the original email. When you set this value to
-	// false, Amazon Pinpoint sends notifications through other mechanisms, such as by
+	// false , Amazon Pinpoint sends notifications through other mechanisms, such as by
 	// notifying an Amazon SNS topic or another event destination. You're required to
 	// have a method of tracking bounces and complaints. If you haven't set up another
 	// mechanism for receiving bounce or complaint notifications, Amazon Pinpoint sends
@@ -63,8 +63,8 @@ type GetEmailIdentityOutput struct {
 	// The email identity type.
 	IdentityType types.IdentityType
 
-	// An object that contains information about the Mail-From attributes for the email
-	// identity.
+	// An object that contains information about the Mail-From attributes for the
+	// email identity.
 	MailFromAttributes *types.MailFromAttributes
 
 	// An array of objects that define the tags (keys and values) that are associated
@@ -73,8 +73,8 @@ type GetEmailIdentityOutput struct {
 
 	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you can
 	// only send email from verified email addresses or domains. For more information
-	// about verifying identities, see the Amazon Pinpoint User Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
+	// about verifying identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html)
+	// .
 	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.

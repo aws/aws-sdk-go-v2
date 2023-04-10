@@ -14,18 +14,14 @@ import (
 )
 
 // Gets the history of an asset property's values. For more information, see
-// Querying historical values
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values)
+// Querying historical values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values)
 // in the IoT SiteWise User Guide. To identify an asset property, you must specify
 // one of the following:
-//
-// * The assetId and propertyId of an asset property.
-//
-// * A
-// propertyAlias, which is a data stream alias (for example,
-// /company/windfarm/3/turbine/7/temperature). To define an asset property's alias,
-// see UpdateAssetProperty
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
+//   - The assetId and propertyId of an asset property.
+//   - A propertyAlias , which is a data stream alias (for example,
+//     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
+//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+//     .
 func (c *Client) GetAssetPropertyValueHistory(ctx context.Context, params *GetAssetPropertyValueHistoryInput, optFns ...func(*Options)) (*GetAssetPropertyValueHistoryOutput, error) {
 	if params == nil {
 		params = &GetAssetPropertyValueHistoryInput{}
@@ -46,8 +42,8 @@ type GetAssetPropertyValueHistoryInput struct {
 	// The ID of the asset.
 	AssetId *string
 
-	// The inclusive end of the range from which to query historical data, expressed in
-	// seconds in Unix epoch time.
+	// The inclusive end of the range from which to query historical data, expressed
+	// in seconds in Unix epoch time.
 	EndDate *time.Time
 
 	// The maximum number of results to return for each paginated request. Default: 100
@@ -57,9 +53,8 @@ type GetAssetPropertyValueHistoryInput struct {
 	NextToken *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
-	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping industrial data streams to asset properties
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
+	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
+	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 

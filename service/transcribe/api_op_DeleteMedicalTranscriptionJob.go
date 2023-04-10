@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a medical transcription job. To use this operation, specify the name of
-// the job you want to delete using MedicalTranscriptionJobName. Job names are case
-// sensitive.
+// the job you want to delete using MedicalTranscriptionJobName . Job names are
+// case sensitive.
 func (c *Client) DeleteMedicalTranscriptionJob(ctx context.Context, params *DeleteMedicalTranscriptionJobInput, optFns ...func(*Options)) (*DeleteMedicalTranscriptionJobOutput, error) {
 	if params == nil {
 		params = &DeleteMedicalTranscriptionJobInput{}
@@ -30,8 +30,8 @@ func (c *Client) DeleteMedicalTranscriptionJob(ctx context.Context, params *Dele
 
 type DeleteMedicalTranscriptionJobInput struct {
 
-	// The name of the medical transcription job you want to delete. Job names are case
-	// sensitive.
+	// The name of the medical transcription job you want to delete. Job names are
+	// case sensitive.
 	//
 	// This member is required.
 	MedicalTranscriptionJobName *string

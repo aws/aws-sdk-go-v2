@@ -18,9 +18,9 @@ import (
 	"time"
 )
 
-// Returns the description for the specified stack; if no stack name was specified,
-// then it returns the description for all the stacks created. If the stack doesn't
-// exist, an ValidationError is returned.
+// Returns the description for the specified stack; if no stack name was
+// specified, then it returns the description for all the stacks created. If the
+// stack doesn't exist, an ValidationError is returned.
 func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
 	if params == nil {
 		params = &DescribeStacksInput{}
@@ -44,13 +44,9 @@ type DescribeStacksInput struct {
 
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
-	//
-	// * Running stacks: You can specify either the stack's
-	// name or its unique stack ID.
-	//
-	// * Deleted stacks: You must specify the unique
-	// stack ID.
-	//
+	//   - Running stacks: You can specify either the stack's name or its unique stack
+	//   ID.
+	//   - Deleted stacks: You must specify the unique stack ID.
 	// Default: There is no default value.
 	StackName *string
 
@@ -225,9 +221,10 @@ type StackCreateCompleteWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StackCreateCompleteWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StackCreateCompleteWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -267,9 +264,9 @@ func NewStackCreateCompleteWaiter(client DescribeStacksAPIClient, optFns ...func
 	}
 }
 
-// Wait calls the waiter function for StackCreateComplete waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for StackCreateComplete waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *StackCreateCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackCreateCompleteWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -533,9 +530,10 @@ type StackDeleteCompleteWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StackDeleteCompleteWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StackDeleteCompleteWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -575,9 +573,9 @@ func NewStackDeleteCompleteWaiter(client DescribeStacksAPIClient, optFns ...func
 	}
 }
 
-// Wait calls the waiter function for StackDeleteComplete waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for StackDeleteComplete waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *StackDeleteCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackDeleteCompleteWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -888,9 +886,9 @@ type StackExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StackExistsWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StackExistsWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -1047,9 +1045,10 @@ type StackImportCompleteWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StackImportCompleteWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StackImportCompleteWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -1089,9 +1088,9 @@ func NewStackImportCompleteWaiter(client DescribeStacksAPIClient, optFns ...func
 	}
 }
 
-// Wait calls the waiter function for StackImportComplete waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for StackImportComplete waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *StackImportCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackImportCompleteWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -1355,9 +1354,10 @@ type StackRollbackCompleteWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StackRollbackCompleteWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StackRollbackCompleteWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -1615,9 +1615,10 @@ type StackUpdateCompleteWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StackUpdateCompleteWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StackUpdateCompleteWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -1657,9 +1658,9 @@ func NewStackUpdateCompleteWaiter(client DescribeStacksAPIClient, optFns ...func
 	}
 }
 
-// Wait calls the waiter function for StackUpdateComplete waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for StackUpdateComplete waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *StackUpdateCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackUpdateCompleteWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

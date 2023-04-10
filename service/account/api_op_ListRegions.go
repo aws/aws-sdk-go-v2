@@ -32,41 +32,35 @@ func (c *Client) ListRegions(ctx context.Context, params *ListRegionsInput, optF
 
 type ListRegionsInput struct {
 
-	// Specifies the 12-digit account ID number of the Amazon Web Services account that
-	// you want to access or modify with this operation. If you don't specify this
+	// Specifies the 12-digit account ID number of the Amazon Web Services account
+	// that you want to access or modify with this operation. If you don't specify this
 	// parameter, it defaults to the Amazon Web Services account of the identity used
 	// to call the operation. To use this parameter, the caller must be an identity in
-	// the organization's management account
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account)
+	// the organization's management account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account)
 	// or a delegated administrator account. The specified account ID must also be a
-	// member account in the same organization. The organization must have all features
-	// enabled
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html),
-	// and the organization must have trusted access
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
-	// enabled for the Account Management service, and optionally a delegated admin
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
-	// account assigned. The management account can't specify its own AccountId. It
+	// member account in the same organization. The organization must have all
+	// features enabled (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
+	// , and the organization must have trusted access (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
+	// enabled for the Account Management service, and optionally a delegated admin (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
+	// account assigned. The management account can't specify its own AccountId . It
 	// must call the operation in standalone context by not including the AccountId
 	// parameter. To call this operation on an account that is not a member of an
 	// organization, don't specify this parameter. Instead, call the operation using an
 	// identity belonging to the account whose contacts you wish to retrieve or modify.
 	AccountId *string
 
-	// The total number of items to return in the command’s output. If the total number
-	// of items available is more than the value specified, a NextToken is provided in
-	// the command’s output. To resume pagination, provide the NextToken value in the
-	// starting-token argument of a subsequent command. Do not use the NextToken
-	// response element directly outside of the Amazon Web Services CLI. For usage
-	// examples, see Pagination
-	// (http://docs.aws.amazon.com/cli/latest/userguide/pagination.html) in the Amazon
-	// Web Services Command Line Interface User Guide.
+	// The total number of items to return in the command’s output. If the total
+	// number of items available is more than the value specified, a NextToken is
+	// provided in the command’s output. To resume pagination, provide the NextToken
+	// value in the starting-token argument of a subsequent command. Do not use the
+	// NextToken response element directly outside of the Amazon Web Services CLI. For
+	// usage examples, see Pagination (http://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
+	// in the Amazon Web Services Command Line Interface User Guide.
 	MaxResults *int32
 
 	// A token used to specify where to start paginating. This is the NextToken from a
-	// previously truncated response. For usage examples, see Pagination
-	// (http://docs.aws.amazon.com/cli/latest/userguide/pagination.html) in the Amazon
-	// Web Services Command Line Interface User Guide.
+	// previously truncated response. For usage examples, see Pagination (http://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
+	// in the Amazon Web Services Command Line Interface User Guide.
 	NextToken *string
 
 	// A list of Region statuses (Enabling, Enabled, Disabling, Disabled,
@@ -81,7 +75,7 @@ type ListRegionsInput struct {
 type ListRegionsOutput struct {
 
 	// If there is more data to be returned, this will be populated. It should be
-	// passed into the next-token request parameter of list-regions.
+	// passed into the next-token request parameter of list-regions .
 	NextToken *string
 
 	// This is a list of Regions for a given account, or if the filtered parameter was
@@ -164,14 +158,13 @@ var _ ListRegionsAPIClient = (*Client)(nil)
 
 // ListRegionsPaginatorOptions is the paginator options for ListRegions
 type ListRegionsPaginatorOptions struct {
-	// The total number of items to return in the command’s output. If the total number
-	// of items available is more than the value specified, a NextToken is provided in
-	// the command’s output. To resume pagination, provide the NextToken value in the
-	// starting-token argument of a subsequent command. Do not use the NextToken
-	// response element directly outside of the Amazon Web Services CLI. For usage
-	// examples, see Pagination
-	// (http://docs.aws.amazon.com/cli/latest/userguide/pagination.html) in the Amazon
-	// Web Services Command Line Interface User Guide.
+	// The total number of items to return in the command’s output. If the total
+	// number of items available is more than the value specified, a NextToken is
+	// provided in the command’s output. To resume pagination, provide the NextToken
+	// value in the starting-token argument of a subsequent command. Do not use the
+	// NextToken response element directly outside of the Amazon Web Services CLI. For
+	// usage examples, see Pagination (http://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
+	// in the Amazon Web Services Command Line Interface User Guide.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

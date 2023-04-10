@@ -32,8 +32,8 @@ func (c *Client) CreateUserSettings(ctx context.Context, params *CreateUserSetti
 
 type CreateUserSettingsInput struct {
 
-	// Specifies whether the user can copy text from the streaming session to the local
-	// device.
+	// Specifies whether the user can copy text from the streaming session to the
+	// local device.
 	//
 	// This member is required.
 	CopyAllowed types.EnabledType
@@ -44,8 +44,8 @@ type CreateUserSettingsInput struct {
 	// This member is required.
 	DownloadAllowed types.EnabledType
 
-	// Specifies whether the user can paste text from the local device to the streaming
-	// session.
+	// Specifies whether the user can paste text from the local device to the
+	// streaming session.
 	//
 	// This member is required.
 	PasteAllowed types.EnabledType

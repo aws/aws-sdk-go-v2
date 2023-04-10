@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns status information for sources within an aggregator. The status includes
-// information about the last time Config verified authorization between the source
-// account and an aggregator account. In case of a failure, the status contains the
-// related error code or message.
+// Returns status information for sources within an aggregator. The status
+// includes information about the last time Config verified authorization between
+// the source account and an aggregator account. In case of a failure, the status
+// contains the related error code or message.
 func (c *Client) DescribeConfigurationAggregatorSourcesStatus(ctx context.Context, params *DescribeConfigurationAggregatorSourcesStatusInput, optFns ...func(*Options)) (*DescribeConfigurationAggregatorSourcesStatusOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationAggregatorSourcesStatusInput{}
@@ -47,14 +47,9 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 	NextToken *string
 
 	// Filters the status type.
-	//
-	// * Valid value FAILED indicates errors while moving
-	// data.
-	//
-	// * Valid value SUCCEEDED indicates the data was successfully moved.
-	//
-	// *
-	// Valid value OUTDATED indicates the data is not the most recent.
+	//   - Valid value FAILED indicates errors while moving data.
+	//   - Valid value SUCCEEDED indicates the data was successfully moved.
+	//   - Valid value OUTDATED indicates the data is not the most recent.
 	UpdateStatus []types.AggregatedSourceStatusType
 
 	noSmithyDocumentSerde

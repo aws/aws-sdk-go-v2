@@ -13,8 +13,7 @@ import (
 )
 
 // Creates a provisioning claim. Requires permission to access the
-// CreateProvisioningClaim
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// CreateProvisioningClaim (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateProvisioningClaim(ctx context.Context, params *CreateProvisioningClaimInput, optFns ...func(*Options)) (*CreateProvisioningClaimOutput, error) {
 	if params == nil {

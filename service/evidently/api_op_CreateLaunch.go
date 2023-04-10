@@ -11,14 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a launch of a given feature. Before you create a launch, you must create
-// the feature to use for the launch. You can use a launch to safely validate new
-// features by serving them to a specified percentage of your users while you roll
-// out the feature. You can monitor the performance of the new feature to help you
-// decide when to ramp up traffic to more users. This helps you reduce risk and
-// identify unintended consequences before you fully launch the feature. Don't use
-// this operation to update an existing launch. Instead, use UpdateLaunch
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html).
+// Creates a launch of a given feature. Before you create a launch, you must
+// create the feature to use for the launch. You can use a launch to safely
+// validate new features by serving them to a specified percentage of your users
+// while you roll out the feature. You can monitor the performance of the new
+// feature to help you decide when to ramp up traffic to more users. This helps you
+// reduce risk and identify unintended consequences before you fully launch the
+// feature. Don't use this operation to update an existing launch. Instead, use
+// UpdateLaunch (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html)
+// .
 func (c *Client) CreateLaunch(ctx context.Context, params *CreateLaunchInput, optFns ...func(*Options)) (*CreateLaunchOutput, error) {
 	if params == nil {
 		params = &CreateLaunchInput{}
@@ -61,8 +62,9 @@ type CreateLaunchInput struct {
 
 	// When Evidently assigns a particular user session to a launch, it must use a
 	// randomization ID to determine which variation the user session is served. This
-	// randomization ID is a combination of the entity ID and randomizationSalt. If you
-	// omit randomizationSalt, Evidently uses the launch name as the randomizationSalt.
+	// randomization ID is a combination of the entity ID and randomizationSalt . If
+	// you omit randomizationSalt , Evidently uses the launch name as the
+	// randomizationSalt .
 	RandomizationSalt *string
 
 	// An array of structures that define the traffic allocation percentages among the
@@ -75,8 +77,8 @@ type CreateLaunchInput struct {
 	// with certain tag values. Tags don't have any semantic meaning to Amazon Web
 	// Services and are interpreted strictly as strings of characters. You can
 	// associate as many as 50 tags with a launch. For more information, see Tagging
-	// Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags map[string]string
 
 	noSmithyDocumentSerde

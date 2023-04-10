@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the Savings Plans utilization for your account across date ranges with
-// daily or monthly granularity. Management account in an organization have access
-// to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine
-// the possible dimension values. You can't group by any dimension values for
-// GetSavingsPlansUtilization.
+// Retrieves the Savings Plans utilization for your account across date ranges
+// with daily or monthly granularity. Management account in an organization have
+// access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to
+// determine the possible dimension values. You can't group by any dimension values
+// for GetSavingsPlansUtilization .
 func (c *Client) GetSavingsPlansUtilization(ctx context.Context, params *GetSavingsPlansUtilizationInput, optFns ...func(*Options)) (*GetSavingsPlansUtilizationOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansUtilizationInput{}
@@ -42,24 +42,13 @@ type GetSavingsPlansUtilizationInput struct {
 
 	// Filters Savings Plans utilization coverage data for active Savings Plans
 	// dimensions. You can filter data with the following dimensions:
-	//
-	// *
-	// LINKED_ACCOUNT
-	//
-	// * SAVINGS_PLAN_ARN
-	//
-	// * SAVINGS_PLANS_TYPE
-	//
-	// * REGION
-	//
-	// *
-	// PAYMENT_OPTION
-	//
-	// * INSTANCE_TYPE_FAMILY
-	//
-	// GetSavingsPlansUtilization uses the same
-	// Expression
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	//   - LINKED_ACCOUNT
+	//   - SAVINGS_PLAN_ARN
+	//   - SAVINGS_PLANS_TYPE
+	//   - REGION
+	//   - PAYMENT_OPTION
+	//   - INSTANCE_TYPE_FAMILY
+	// GetSavingsPlansUtilization uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	Filter *types.Expression
 
@@ -69,21 +58,13 @@ type GetSavingsPlansUtilizationInput struct {
 	Granularity types.Granularity
 
 	// The value that you want to sort the data by. The following values are supported
-	// for Key:
-	//
-	// * UtilizationPercentage
-	//
-	// * TotalCommitment
-	//
-	// * UsedCommitment
-	//
-	// *
-	// UnusedCommitment
-	//
-	// * NetSavings
-	//
-	// The supported values for SortOrder are ASCENDING
-	// and DESCENDING.
+	// for Key :
+	//   - UtilizationPercentage
+	//   - TotalCommitment
+	//   - UsedCommitment
+	//   - UnusedCommitment
+	//   - NetSavings
+	// The supported values for SortOrder are ASCENDING and DESCENDING .
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde
@@ -91,8 +72,8 @@ type GetSavingsPlansUtilizationInput struct {
 
 type GetSavingsPlansUtilizationOutput struct {
 
-	// The total amount of cost/commitment that you used your Savings Plans, regardless
-	// of date ranges.
+	// The total amount of cost/commitment that you used your Savings Plans,
+	// regardless of date ranges.
 	//
 	// This member is required.
 	Total *types.SavingsPlansUtilizationAggregates

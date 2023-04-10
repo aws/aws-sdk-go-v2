@@ -28,9 +28,9 @@ const (
 	EventTypeCustom     EventType = "aws.evidently.custom"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"aws.evidently.evaluation",
@@ -103,9 +103,10 @@ const (
 	ExperimentResultResponseTypePValue                       ExperimentResultResponseType = "PValue"
 )
 
-// Values returns all known values for ExperimentResultResponseType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExperimentResultResponseType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ExperimentResultResponseType) Values() []ExperimentResultResponseType {
 	return []ExperimentResultResponseType{
 		"Mean",
@@ -221,9 +222,9 @@ const (
 	LaunchStatusCancelled LaunchStatus = "CANCELLED"
 )
 
-// Values returns all known values for LaunchStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LaunchStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchStatus) Values() []LaunchStatus {
 	return []LaunchStatus{
 		"CREATED",
@@ -294,9 +295,10 @@ const (
 	SegmentReferenceResourceTypeLaunch     SegmentReferenceResourceType = "LAUNCH"
 )
 
-// Values returns all known values for SegmentReferenceResourceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SegmentReferenceResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (SegmentReferenceResourceType) Values() []SegmentReferenceResourceType {
 	return []SegmentReferenceResourceType{
 		"EXPERIMENT",

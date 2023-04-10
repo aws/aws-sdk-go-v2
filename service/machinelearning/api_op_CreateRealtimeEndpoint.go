@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a real-time endpoint for the MLModel. The endpoint contains the URI of
-// the MLModel; that is, the location to send real-time prediction requests for the
-// specified MLModel.
+// Creates a real-time endpoint for the MLModel . The endpoint contains the URI of
+// the MLModel ; that is, the location to send real-time prediction requests for
+// the specified MLModel .
 func (c *Client) CreateRealtimeEndpoint(ctx context.Context, params *CreateRealtimeEndpointInput, optFns ...func(*Options)) (*CreateRealtimeEndpointOutput, error) {
 	if params == nil {
 		params = &CreateRealtimeEndpointInput{}
@@ -40,12 +40,12 @@ type CreateRealtimeEndpointInput struct {
 }
 
 // Represents the output of an CreateRealtimeEndpoint operation. The result
-// contains the MLModelId and the endpoint information for the MLModel. Note: The
-// endpoint information includes the URI of the MLModel; that is, the location to
-// send online prediction requests for the specified MLModel.
+// contains the MLModelId and the endpoint information for the MLModel . Note: The
+// endpoint information includes the URI of the MLModel ; that is, the location to
+// send online prediction requests for the specified MLModel .
 type CreateRealtimeEndpointOutput struct {
 
-	// A user-supplied ID that uniquely identifies the MLModel. This value should be
+	// A user-supplied ID that uniquely identifies the MLModel . This value should be
 	// identical to the value of the MLModelId in the request.
 	MLModelId *string
 

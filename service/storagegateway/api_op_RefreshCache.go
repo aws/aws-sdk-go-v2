@@ -18,8 +18,7 @@ import (
 // inventory of the objects in the S3 bucket. This operation is only supported in
 // the S3 File Gateway types. You can subscribe to be notified through an Amazon
 // CloudWatch event when your RefreshCache operation completes. For more
-// information, see Getting notified about file operations
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
+// information, see Getting notified about file operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
 // in the Storage Gateway User Guide. This operation is Only supported for S3 File
 // Gateways. When this API is called, it only initiates the refresh operation. When
 // the API call completes and returns a success code, it doesn't necessarily mean
@@ -30,25 +29,18 @@ import (
 // This API is asynchronous, so the gateway will accept no more than two refreshes
 // at any time. We recommend using the refresh-complete CloudWatch event
 // notification before issuing additional requests. For more information, see
-// Getting notified about file operations
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
+// Getting notified about file operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
 // in the Storage Gateway User Guide.
+//   - Wait at least 60 seconds between consecutive RefreshCache API requests.
+//   - RefreshCache does not evict cache entries if invoked consecutively within
+//     60 seconds of a previous RefreshCache request.
+//   - If you invoke the RefreshCache API when two requests are already being
+//     processed, any new request will cause an InvalidGatewayRequestException error
+//     because too many requests were sent to the server.
 //
-// * Wait at least 60 seconds between
-// consecutive RefreshCache API requests.
-//
-// * RefreshCache does not evict cache
-// entries if invoked consecutively within 60 seconds of a previous RefreshCache
-// request.
-//
-// * If you invoke the RefreshCache API when two requests are already
-// being processed, any new request will cause an InvalidGatewayRequestException
-// error because too many requests were sent to the server.
-//
-// The S3 bucket name
-// does not need to be included when entering the list of folders in the FolderList
-// parameter. For more information, see Getting notified about file operations
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
+// The S3 bucket name does not need to be included when entering the list of
+// folders in the FolderList parameter. For more information, see Getting notified
+// about file operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
 // in the Storage Gateway User Guide.
 func (c *Client) RefreshCache(ctx context.Context, params *RefreshCacheInput, optFns ...func(*Options)) (*RefreshCacheOutput, error) {
 	if params == nil {
@@ -74,18 +66,18 @@ type RefreshCacheInput struct {
 	FileShareARN *string
 
 	// A comma-separated list of the paths of folders to refresh in the cache. The
-	// default is ["/"]. The default refreshes objects and folders at the root of the
-	// Amazon S3 bucket. If Recursive is set to true, the entire S3 bucket that the
+	// default is [ "/" ]. The default refreshes objects and folders at the root of the
+	// Amazon S3 bucket. If Recursive is set to true , the entire S3 bucket that the
 	// file share has access to is refreshed.
 	FolderList []string
 
 	// A value that specifies whether to recursively refresh folders in the cache. The
 	// refresh includes folders that were in the cache the last time the gateway listed
-	// the folder's contents. If this value set to true, each folder that is listed in
+	// the folder's contents. If this value set to true , each folder that is listed in
 	// FolderList is recursively updated. Otherwise, subfolders listed in FolderList
 	// are not refreshed. Only objects that are in folders listed directly under
-	// FolderList are found and used for the update. The default is true. Valid Values:
-	// true | false
+	// FolderList are found and used for the update. The default is true . Valid
+	// Values: true | false
 	Recursive *bool
 
 	noSmithyDocumentSerde

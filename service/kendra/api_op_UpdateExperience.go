@@ -13,8 +13,8 @@ import (
 
 // Updates your Amazon Kendra experience such as a search application. For more
 // information on creating a search application experience, see Building a search
-// experience with no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// experience with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 func (c *Client) UpdateExperience(ctx context.Context, params *UpdateExperienceInput, optFns ...func(*Options)) (*UpdateExperienceOutput, error) {
 	if params == nil {
 		params = &UpdateExperienceInput{}
@@ -54,7 +54,7 @@ type UpdateExperienceInput struct {
 	// The Amazon Resource Name (ARN) of a role with permission to access Query API,
 	// QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that stores
 	// your user and group information. For more information, see IAM roles for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html) .
 	RoleArn *string
 
 	noSmithyDocumentSerde

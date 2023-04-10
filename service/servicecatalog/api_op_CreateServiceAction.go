@@ -32,27 +32,28 @@ type CreateServiceActionInput struct {
 
 	// The self-service action definition. Can be one of the following: Name The name
 	// of the Amazon Web Services Systems Manager document (SSM document). For example,
-	// AWS-RestartEC2Instance. If you are using a shared SSM document, you must provide
-	// the ARN instead of the name. Version The Amazon Web Services Systems Manager
-	// automation document version. For example, "Version": "1" AssumeRole The Amazon
-	// Resource Name (ARN) of the role that performs the self-service actions on your
-	// behalf. For example, "AssumeRole": "arn:aws:iam::12345678910:role/ActionRole".
-	// To reuse the provisioned product launch role, set to "AssumeRole":
-	// "LAUNCH_ROLE". Parameters The list of parameters in JSON format. For example:
+	// AWS-RestartEC2Instance . If you are using a shared SSM document, you must
+	// provide the ARN instead of the name. Version The Amazon Web Services Systems
+	// Manager automation document version. For example, "Version": "1" AssumeRole The
+	// Amazon Resource Name (ARN) of the role that performs the self-service actions on
+	// your behalf. For example, "AssumeRole":
+	// "arn:aws:iam::12345678910:role/ActionRole" . To reuse the provisioned product
+	// launch role, set to "AssumeRole": "LAUNCH_ROLE" . Parameters The list of
+	// parameters in JSON format. For example:
 	// [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or
-	// [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].
+	// [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}] .
 	//
 	// This member is required.
 	Definition map[string]string
 
-	// The service action definition type. For example, SSM_AUTOMATION.
+	// The service action definition type. For example, SSM_AUTOMATION .
 	//
 	// This member is required.
 	DefinitionType types.ServiceActionDefinitionType
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	//
 	// This member is required.
 	IdempotencyToken *string
@@ -63,10 +64,8 @@ type CreateServiceActionInput struct {
 	Name *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The self-service action description.

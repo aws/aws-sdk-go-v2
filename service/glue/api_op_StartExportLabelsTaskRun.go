@@ -17,7 +17,7 @@ import (
 // when you want to remove or change labels that were previously submitted as
 // truth. This API operation accepts the TransformId whose labels you want to
 // export and an Amazon Simple Storage Service (Amazon S3) path to export the
-// labels to. The operation returns a TaskRunId. You can check on the status of
+// labels to. The operation returns a TaskRunId . You can check on the status of
 // your task run by calling the GetMLTaskRun API.
 func (c *Client) StartExportLabelsTaskRun(ctx context.Context, params *StartExportLabelsTaskRunInput, optFns ...func(*Options)) (*StartExportLabelsTaskRunOutput, error) {
 	if params == nil {

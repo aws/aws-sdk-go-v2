@@ -40,7 +40,7 @@ type ListSchemaExtensionsInput struct {
 	Limit *int32
 
 	// The ListSchemaExtensions.NextToken value from a previous call to
-	// ListSchemaExtensions. Pass null if this is the first call.
+	// ListSchemaExtensions . Pass null if this is the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde

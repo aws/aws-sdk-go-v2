@@ -16,13 +16,10 @@ import (
 // specified, the list will contain only the descriptions of the specified DB
 // security group. EC2-Classic was retired on August 15, 2022. If you haven't
 // migrated from EC2-Classic to a VPC, we recommend that you migrate as soon as
-// possible. For more information, see Migrate from EC2-Classic to a VPC
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-// Amazon EC2 User Guide, the blog EC2-Classic Networking is Retiring – Here’s How
-// to Prepare
-// (http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/),
-// and Moving a DB instance not in a VPC into a VPC
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html)
+// possible. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
+// in the Amazon EC2 User Guide, the blog EC2-Classic Networking is Retiring –
+// Here’s How to Prepare (http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/)
+// , and Moving a DB instance not in a VPC into a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html)
 // in the Amazon RDS User Guide.
 func (c *Client) DescribeDBSecurityGroups(ctx context.Context, params *DescribeDBSecurityGroupsInput, optFns ...func(*Options)) (*DescribeDBSecurityGroupsOutput, error) {
 	if params == nil {
@@ -49,7 +46,7 @@ type DescribeDBSecurityGroupsInput struct {
 
 	// An optional pagination token provided by a previous DescribeDBSecurityGroups
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -70,7 +67,7 @@ type DescribeDBSecurityGroupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

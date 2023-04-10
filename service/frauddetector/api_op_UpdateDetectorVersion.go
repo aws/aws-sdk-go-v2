@@ -57,13 +57,13 @@ type UpdateDetectorVersionInput struct {
 	// The model versions to include in the detector version.
 	ModelVersions []types.ModelVersion
 
-	// The rule execution mode to add to the detector. If you specify FIRST_MATCHED,
+	// The rule execution mode to add to the detector. If you specify FIRST_MATCHED ,
 	// Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at
 	// the first matched rule. Amazon Fraud dectector then provides the outcomes for
-	// that single rule. If you specifiy ALL_MATCHED, Amazon Fraud Detector evaluates
+	// that single rule. If you specifiy ALL_MATCHED , Amazon Fraud Detector evaluates
 	// all rules and returns the outcomes for all matched rules. You can define and
 	// edit the rule mode at the detector version level, when it is in draft status.
-	// The default behavior is FIRST_MATCHED.
+	// The default behavior is FIRST_MATCHED .
 	RuleExecutionMode types.RuleExecutionMode
 
 	noSmithyDocumentSerde

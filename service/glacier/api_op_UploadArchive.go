@@ -22,13 +22,12 @@ import (
 // optional archive description field to specify how the archive is referred to in
 // an external index of archives, such as you might create in Amazon DynamoDB. You
 // can also get the vault inventory to obtain a list of archive IDs in a vault. For
-// more information, see InitiateJob. You must provide a SHA256 tree hash of the
+// more information, see InitiateJob . You must provide a SHA256 tree hash of the
 // data you are uploading. For information about computing a SHA256 tree hash, see
-// Computing Checksums
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html).
-// You can optionally specify an archive description of up to 1,024 printable ASCII
-// characters. You can get the archive description when you either retrieve the
-// archive or get the vault inventory. For more information, see InitiateJob.
+// Computing Checksums (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html)
+// . You can optionally specify an archive description of up to 1,024 printable
+// ASCII characters. You can get the archive description when you either retrieve
+// the archive or get the vault inventory. For more information, see InitiateJob .
 // Amazon Glacier does not interpret the description in any way. An archive
 // description does not need to be unique. You cannot use the description to
 // retrieve or sort the archive list. Archives are immutable. After you upload an
@@ -36,14 +35,11 @@ import (
 // permission to perform all operations (actions). However, AWS Identity and Access
 // Management (IAM) users don't have any permissions by default. You must grant
 // them explicit permission to perform specific actions. For more information, see
-// Access Control Using AWS Identity and Access Management (IAM)
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
-// For conceptual information and underlying REST API, see Uploading an Archive in
-// Amazon Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-an-archive.html)
-// and Upload Archive
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html) in
-// the Amazon Glacier Developer Guide.
+// Access Control Using AWS Identity and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
+// . For conceptual information and underlying REST API, see Uploading an Archive
+// in Amazon Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-an-archive.html)
+// and Upload Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html)
+// in the Amazon Glacier Developer Guide.
 func (c *Client) UploadArchive(ctx context.Context, params *UploadArchiveInput, optFns ...func(*Options)) (*UploadArchiveOutput, error) {
 	if params == nil {
 		params = &UploadArchiveInput{}
@@ -63,8 +59,8 @@ func (c *Client) UploadArchive(ctx context.Context, params *UploadArchiveInput, 
 type UploadArchiveInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
-	// which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// You can either specify an AWS account ID or optionally a single ' - ' (hyphen),
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -89,10 +85,9 @@ type UploadArchiveInput struct {
 }
 
 // Contains the Amazon S3 Glacier response to your request. For information about
-// the underlying REST API, see Upload Archive
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html).
-// For conceptual information, see Working with Archives in Amazon S3 Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
+// the underlying REST API, see Upload Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html)
+// . For conceptual information, see Working with Archives in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)
+// .
 type UploadArchiveOutput struct {
 
 	// The ID of the archive. This value is also included as part of the location.

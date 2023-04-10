@@ -185,8 +185,8 @@ type ApplicationComponentDetail struct {
 // Summary of the analysis status of the application component.
 type ApplicationComponentStatusSummary struct {
 
-	// The number of application components successfully analyzed, partially successful
-	// or failed analysis.
+	// The number of application components successfully analyzed, partially
+	// successful or failed analysis.
 	Count *int32
 
 	// The status of database analysis.
@@ -301,8 +301,8 @@ type AssessmentTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing details about applications as defined in Application Discovery
-// Service.
+// Object containing details about applications as defined in Application
+// Discovery Service.
 type AssociatedApplication struct {
 
 	// ID of the application as defined in Application Discovery Service.
@@ -428,8 +428,8 @@ type DatabaseMigrationPreferenceMemberHeterogeneous struct {
 
 func (*DatabaseMigrationPreferenceMemberHeterogeneous) isDatabaseMigrationPreference() {}
 
-// Indicates whether you are interested in moving to the same type of database into
-// AWS. For example, from SQL Server in your environment to SQL Server on AWS.
+// Indicates whether you are interested in moving to the same type of database
+// into AWS. For example, from SQL Server in your environment to SQL Server on AWS.
 type DatabaseMigrationPreferenceMemberHomogeneous struct {
 	Value Homogeneous
 
@@ -469,7 +469,7 @@ type DataCollectionDetails struct {
 	// The number of failed servers in the assessment.
 	Failed *int32
 
-	// The number of servers with the assessment status IN_PROGESS.
+	// The number of servers with the assessment status IN_PROGESS .
 	InProgress *int32
 
 	// The total number of servers in the assessment.
@@ -532,7 +532,7 @@ type ImportFileTaskInformation struct {
 	// The ID of the import file task.
 	Id *string
 
-	// The name of the import task given in StartImportFileTask.
+	// The name of the import task given in StartImportFileTask .
 	ImportName *string
 
 	// The S3 bucket where the import file is located.
@@ -942,7 +942,7 @@ type StrategyOption struct {
 	Strategy Strategy
 
 	// Destination information about where the application component can migrate to.
-	// For example, EC2, ECS, and so on.
+	// For example, EC2 , ECS , and so on.
 	TargetDestination TargetDestination
 
 	// The name of the tool that can be used to transform an application component
@@ -982,8 +982,8 @@ type SystemInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Information of the transformation tool that can be used to migrate and modernize
-// the application.
+// Information of the transformation tool that can be used to migrate and
+// modernize the application.
 type TransformationTool struct {
 
 	// Description of the tool.

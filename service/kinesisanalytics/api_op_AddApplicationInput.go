@@ -14,17 +14,14 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Adds a streaming source to your Amazon Kinesis
-// application. For conceptual information, see Configuring Application Input
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-// You can add a streaming source either when you create an application or you can
-// use this operation to add a streaming source after you create an application.
-// For more information, see CreateApplication
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_CreateApplication.html).
-// Any configuration update, including adding a streaming source using this
+// Analytics API V2 Documentation . Adds a streaming source to your Amazon Kinesis
+// application. For conceptual information, see Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html)
+// . You can add a streaming source either when you create an application or you
+// can use this operation to add a streaming source after you create an
+// application. For more information, see CreateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_CreateApplication.html)
+// . Any configuration update, including adding a streaming source using this
 // operation, results in a new version of the application. You can use the
-// DescribeApplication
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+// DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 // operation to find the current application version. This operation requires
 // permissions to perform the kinesisanalytics:AddApplicationInput action.
 func (c *Client) AddApplicationInput(ctx context.Context, params *AddApplicationInputInput, optFns ...func(*Options)) (*AddApplicationInputOutput, error) {
@@ -51,15 +48,14 @@ type AddApplicationInputInput struct {
 	ApplicationName *string
 
 	// Current version of your Amazon Kinesis Analytics application. You can use the
-	// DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to find the current application version.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
-	// The Input
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html) to add.
+	// The Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html)
+	// to add.
 	//
 	// This member is required.
 	Input *types.Input

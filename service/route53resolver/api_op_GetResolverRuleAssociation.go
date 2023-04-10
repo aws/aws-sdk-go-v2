@@ -12,8 +12,8 @@ import (
 )
 
 // Gets information about an association between a specified Resolver rule and a
-// VPC. You associate a Resolver rule and a VPC using AssociateResolverRule
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html).
+// VPC. You associate a Resolver rule and a VPC using AssociateResolverRule (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html)
+// .
 func (c *Client) GetResolverRuleAssociation(ctx context.Context, params *GetResolverRuleAssociationInput, optFns ...func(*Options)) (*GetResolverRuleAssociationOutput, error) {
 	if params == nil {
 		params = &GetResolverRuleAssociationInput{}

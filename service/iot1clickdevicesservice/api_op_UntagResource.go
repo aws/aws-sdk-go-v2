@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Using tag keys, deletes the tags (key/value pairs) associated with the specified
-// resource ARN.
+// Using tag keys, deletes the tags (key/value pairs) associated with the
+// specified resource ARN.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

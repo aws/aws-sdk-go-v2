@@ -14,32 +14,23 @@ import (
 
 // Creates an intent. To define the interaction between the user and your bot, you
 // define one or more intents. For example, for a pizza ordering bot you would
-// create an OrderPizza intent. When you create an intent, you must provide a name.
-// You can optionally provide the following:
-//
-// * Sample utterances. For example, "I
-// want to order a pizza" and "Can I order a pizza." You can't provide utterances
-// for built-in intents.
-//
-// * Information to be gathered. You specify slots for the
-// information that you bot requests from the user. You can specify standard slot
-// types, such as date and time, or custom slot types for your application.
-//
-// * How
-// the intent is fulfilled. You can provide a Lambda function or configure the
-// intent to return the intent information to your client application. If you use a
-// Lambda function, Amazon Lex invokes the function when all of the intent
-// information is available.
-//
-// * A confirmation prompt to send to the user to
-// confirm an intent. For example, "Shall I order your pizza?"
-//
-// * A conclusion
-// statement to send to the user after the intent is fulfilled. For example, "I
-// ordered your pizza."
-//
-// * A follow-up prompt that asks the user for additional
-// activity. For example, "Do you want a drink with your pizza?"
+// create an OrderPizza intent. When you create an intent, you must provide a
+// name. You can optionally provide the following:
+//   - Sample utterances. For example, "I want to order a pizza" and "Can I order
+//     a pizza." You can't provide utterances for built-in intents.
+//   - Information to be gathered. You specify slots for the information that you
+//     bot requests from the user. You can specify standard slot types, such as date
+//     and time, or custom slot types for your application.
+//   - How the intent is fulfilled. You can provide a Lambda function or configure
+//     the intent to return the intent information to your client application. If you
+//     use a Lambda function, Amazon Lex invokes the function when all of the intent
+//     information is available.
+//   - A confirmation prompt to send to the user to confirm an intent. For
+//     example, "Shall I order your pizza?"
+//   - A conclusion statement to send to the user after the intent is fulfilled.
+//     For example, "I ordered your pizza."
+//   - A follow-up prompt that asks the user for additional activity. For example,
+//     "Do you want a drink with your pizza?"
 func (c *Client) CreateIntent(ctx context.Context, params *CreateIntentInput, optFns ...func(*Options)) (*CreateIntentOutput, error) {
 	if params == nil {
 		params = &CreateIntentInput{}
@@ -75,8 +66,8 @@ type CreateIntentInput struct {
 
 	// The identifier of the language and locale where this intent is used. All of the
 	// bots, slot types, and slots used by the intent must have the same locale. For
-	// more information, see Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// more information, see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -85,13 +76,13 @@ type CreateIntentInput struct {
 	// lists.
 	Description *string
 
-	// Specifies that Amazon Lex invokes the alias Lambda function for each user input.
-	// You can invoke this Lambda function to personalize user interaction. For
+	// Specifies that Amazon Lex invokes the alias Lambda function for each user
+	// input. You can invoke this Lambda function to personalize user interaction. For
 	// example, suppose that your bot determines that the user's name is John. You
 	// Lambda function might retrieve John's information from a backend database and
 	// prepopulate some of the values. For example, if you find that John is gluten
 	// intolerant, you might set the corresponding intent slot, glutenIntolerant to
-	// true. You might find John's phone number and set the corresponding session
+	// true . You might find John's phone number and set the corresponding session
 	// attribute.
 	DialogCodeHook *types.DialogCodeHookSettings
 

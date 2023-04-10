@@ -41,12 +41,9 @@ type ListProfileTimesInput struct {
 	// The aggregation period. This specifies the period during which an aggregation
 	// profile collects posted agent profiles for a profiling group. There are 3 valid
 	// values.
-	//
-	// * P1D — 1 day
-	//
-	// * PT1H — 1 hour
-	//
-	// * PT5M — 5 minutes
+	//   - P1D — 1 day
+	//   - PT1H — 1 hour
+	//   - PT5M — 5 minutes
 	//
 	// This member is required.
 	Period types.AggregationPeriod
@@ -77,7 +74,7 @@ type ListProfileTimesInput struct {
 	NextToken *string
 
 	// The order (ascending or descending by start time of the profile) to use when
-	// listing profiles. Defaults to TIMESTAMP_DESCENDING.
+	// listing profiles. Defaults to TIMESTAMP_DESCENDING .
 	OrderBy types.OrderBy
 
 	noSmithyDocumentSerde
@@ -93,7 +90,7 @@ type ListProfileTimesOutput struct {
 	ProfileTimes []types.ProfileTime
 
 	// The nextToken value to include in a future ListProfileTimes request. When the
-	// results of a ListProfileTimes request exceed maxResults, this value can be used
+	// results of a ListProfileTimes request exceed maxResults , this value can be used
 	// to retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string

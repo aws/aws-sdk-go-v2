@@ -44,14 +44,14 @@ type ListContextsInput struct {
 	// 10.
 	MaxResults *int32
 
-	// If the previous call to ListContexts didn't return the full set of contexts, the
-	// call returns a token for getting the next set of contexts.
+	// If the previous call to ListContexts didn't return the full set of contexts,
+	// the call returns a token for getting the next set of contexts.
 	NextToken *string
 
-	// The property used to sort results. The default value is CreationTime.
+	// The property used to sort results. The default value is CreationTime .
 	SortBy types.SortContextsBy
 
-	// The sort order. The default value is Descending.
+	// The sort order. The default value is Descending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only contexts with the specified source URI.

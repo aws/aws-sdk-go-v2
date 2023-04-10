@@ -12,8 +12,8 @@ import (
 )
 
 // Updates an existing feature. You can't use this operation to update the tags of
-// an existing feature. Instead, use TagResource
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html).
+// an existing feature. Instead, use TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
+// .
 func (c *Client) UpdateFeature(ctx context.Context, params *UpdateFeatureInput, optFns ...func(*Options)) (*UpdateFeatureOutput, error) {
 	if params == nil {
 		params = &UpdateFeatureInput{}
@@ -48,9 +48,9 @@ type UpdateFeatureInput struct {
 	// new variation.
 	AddOrUpdateVariations []types.VariationConfig
 
-	// The name of the variation to use as the default variation. The default variation
-	// is served to users who are not allocated to any ongoing launches or experiments
-	// of this feature.
+	// The name of the variation to use as the default variation. The default
+	// variation is served to users who are not allocated to any ongoing launches or
+	// experiments of this feature.
 	DefaultVariation *string
 
 	// An optional description of the feature.

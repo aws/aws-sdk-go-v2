@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the options for a VPN tunnel in an Amazon Web Services Site-to-Site VPN
-// connection. You can modify multiple options for a tunnel in a single request,
-// but you can only modify one tunnel at a time. For more information, see
-// Site-to-Site VPN tunnel options for your Site-to-Site VPN connection
-// (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html) in the Amazon
-// Web Services Site-to-Site VPN User Guide.
+// Modifies the options for a VPN tunnel in an Amazon Web Services Site-to-Site
+// VPN connection. You can modify multiple options for a tunnel in a single
+// request, but you can only modify one tunnel at a time. For more information, see
+// Site-to-Site VPN tunnel options for your Site-to-Site VPN connection (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html)
+// in the Amazon Web Services Site-to-Site VPN User Guide.
 func (c *Client) ModifyVpnTunnelOptions(ctx context.Context, params *ModifyVpnTunnelOptionsInput, optFns ...func(*Options)) (*ModifyVpnTunnelOptionsOutput, error) {
 	if params == nil {
 		params = &ModifyVpnTunnelOptionsInput{}
@@ -51,8 +50,8 @@ type ModifyVpnTunnelOptionsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// Choose whether or not to trigger immediate tunnel replacement. Valid values:

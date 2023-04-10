@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies an existing DB subnet group. DB subnet groups must contain at least one
-// subnet in at least two AZs in the Amazon Region.
+// Modifies an existing DB subnet group. DB subnet groups must contain at least
+// one subnet in at least two AZs in the Amazon Region.
 func (c *Client) ModifyDBSubnetGroup(ctx context.Context, params *ModifyDBSubnetGroupInput, optFns ...func(*Options)) (*ModifyDBSubnetGroupOutput, error) {
 	if params == nil {
 		params = &ModifyDBSubnetGroupInput{}

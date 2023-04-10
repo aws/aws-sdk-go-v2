@@ -47,8 +47,8 @@ type DescribeApplicationVersionInput struct {
 
 type DescribeApplicationVersionOutput struct {
 
-	// Describes the application, including the application Amazon Resource Name (ARN),
-	// status, latest version, and input and output configurations.
+	// Describes the application, including the application Amazon Resource Name
+	// (ARN), status, latest version, and input and output configurations.
 	ApplicationVersionDetail *types.ApplicationDetail
 
 	// Metadata pertaining to the operation's result.

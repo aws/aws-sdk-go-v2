@@ -12,13 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified resource. For details, see Deleting a resource
-// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-delete.html)
+// Deletes the specified resource. For details, see Deleting a resource (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-delete.html)
 // in the Amazon Web Services Cloud Control API User Guide. After you have
 // initiated a resource deletion request, you can monitor the progress of your
-// request by calling GetResourceRequestStatus
-// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-// using the RequestToken of the ProgressEvent returned by DeleteResource.
+// request by calling GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
+// using the RequestToken of the ProgressEvent returned by DeleteResource .
 func (c *Client) DeleteResource(ctx context.Context, params *DeleteResourceInput, optFns ...func(*Options)) (*DeleteResourceOutput, error) {
 	if params == nil {
 		params = &DeleteResourceInput{}
@@ -43,8 +41,7 @@ type DeleteResourceInput struct {
 	// primary identifiers (that is, one that consists of multiple resource properties
 	// strung together), to specify the primary identifier as a string, list the
 	// property values in the order they are specified in the primary identifier
-	// definition, separated by |. For more information, see Identifying resources
-	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html)
+	// definition, separated by | . For more information, see Identifying resources (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	//
 	// This member is required.
@@ -55,30 +52,26 @@ type DeleteResourceInput struct {
 	// This member is required.
 	TypeName *string
 
-	// A unique identifier to ensure the idempotency of the resource request. As a best
-	// practice, specify this token to ensure idempotency, so that Amazon Web Services
-	// Cloud Control API can accurately distinguish between request retries and new
-	// resource requests. You might retry a resource request to ensure that it was
-	// successfully received. A client token is valid for 36 hours once used. After
+	// A unique identifier to ensure the idempotency of the resource request. As a
+	// best practice, specify this token to ensure idempotency, so that Amazon Web
+	// Services Cloud Control API can accurately distinguish between request retries
+	// and new resource requests. You might retry a resource request to ensure that it
+	// was successfully received. A client token is valid for 36 hours once used. After
 	// that, a resource request with the same client token is treated as a new request.
 	// If you do not specify a client token, one is generated for inclusion in the
 	// request. For more information, see Ensuring resource operation requests are
-	// unique
-	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
+	// unique (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// for Cloud Control API to use when performing this resource operation. The role
 	// specified must have the permissions required for this operation. The necessary
-	// permissions for each event handler are defined in the handlers
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
-	// section of the resource type definition schema
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html).
-	// If you do not specify a role, Cloud Control API uses a temporary session created
-	// using your Amazon Web Services user credentials. For more information, see
-	// Specifying credentials
-	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
+	// permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
+	// section of the resource type definition schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
+	// . If you do not specify a role, Cloud Control API uses a temporary session
+	// created using your Amazon Web Services user credentials. For more information,
+	// see Specifying credentials (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
@@ -94,9 +87,8 @@ type DeleteResourceOutput struct {
 
 	// Represents the current status of the resource deletion request. After you have
 	// initiated a resource deletion request, you can monitor the progress of your
-	// request by calling GetResourceRequestStatus
-	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-	// using the RequestToken of the ProgressEvent returned by DeleteResource.
+	// request by calling GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
+	// using the RequestToken of the ProgressEvent returned by DeleteResource .
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.

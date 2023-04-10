@@ -35,8 +35,9 @@ type DeleteSlotTypeVersionInput struct {
 	// This member is required.
 	Name *string
 
-	// The version of the slot type to delete. You cannot delete the $LATEST version of
-	// the slot type. To delete the $LATEST version, use the DeleteSlotType operation.
+	// The version of the slot type to delete. You cannot delete the $LATEST version
+	// of the slot type. To delete the $LATEST version, use the DeleteSlotType
+	// operation.
 	//
 	// This member is required.
 	Version *string

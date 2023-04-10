@@ -76,9 +76,9 @@ const (
 	EncodingTypeJson   EncodingType = "json"
 )
 
-// Values returns all known values for EncodingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EncodingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EncodingType) Values() []EncodingType {
 	return []EncodingType{
 		"binary",
@@ -94,8 +94,8 @@ const (
 	FunctionIsolationModeNoContainer         FunctionIsolationMode = "NoContainer"
 )
 
-// Values returns all known values for FunctionIsolationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FunctionIsolationMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FunctionIsolationMode) Values() []FunctionIsolationMode {
 	return []FunctionIsolationMode{
@@ -208,9 +208,9 @@ const (
 	TelemetryOff Telemetry = "Off"
 )
 
-// Values returns all known values for Telemetry. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Telemetry. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Telemetry) Values() []Telemetry {
 	return []Telemetry{
 		"On",
@@ -280,9 +280,10 @@ const (
 	UpdateTargetsOperatingSystemOpenwrt     UpdateTargetsOperatingSystem = "openwrt"
 )
 
-// Values returns all known values for UpdateTargetsOperatingSystem. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpdateTargetsOperatingSystem. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (UpdateTargetsOperatingSystem) Values() []UpdateTargetsOperatingSystem {
 	return []UpdateTargetsOperatingSystem{
 		"ubuntu",

@@ -39,12 +39,8 @@ type ListBuildsInput struct {
 	NextToken *string
 
 	// The order to list build IDs. Valid values include:
-	//
-	// * ASCENDING: List the build
-	// IDs in ascending order by build ID.
-	//
-	// * DESCENDING: List the build IDs in
-	// descending order by build ID.
+	//   - ASCENDING : List the build IDs in ascending order by build ID.
+	//   - DESCENDING : List the build IDs in descending order by build ID.
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde

@@ -16,13 +16,13 @@ import (
 // Amazon Web Services account, including their relationships to one another. Use
 // this operation to obtain a snapshot of the configuration of IAM permissions
 // (users, groups, roles, and policies) in your account. Policies returned by this
-// operation are URL-encoded compliant with RFC 3986
-// (https://tools.ietf.org/html/rfc3986). You can use a URL decoding method to
-// convert the policy back to plain JSON text. For example, if you use Java, you
-// can use the decode method of the java.net.URLDecoder utility class in the Java
-// SDK. Other languages and SDKs provide similar functionality. You can optionally
-// filter the results using the Filter parameter. You can paginate the results
-// using the MaxItems and Marker parameters.
+// operation are URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986)
+// . You can use a URL decoding method to convert the policy back to plain JSON
+// text. For example, if you use Java, you can use the decode method of the
+// java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
+// provide similar functionality. You can optionally filter the results using the
+// Filter parameter. You can paginate the results using the MaxItems and Marker
+// parameters.
 func (c *Client) GetAccountAuthorizationDetails(ctx context.Context, params *GetAccountAuthorizationDetailsInput, optFns ...func(*Options)) (*GetAccountAuthorizationDetailsOutput, error) {
 	if params == nil {
 		params = &GetAccountAuthorizationDetailsInput{}
@@ -55,10 +55,10 @@ type GetAccountAuthorizationDetailsInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
@@ -75,11 +75,11 @@ type GetAccountAuthorizationDetailsOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated is true, this element is present and contains the value to use
+	// When IsTruncated is true , this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
@@ -171,10 +171,10 @@ var _ GetAccountAuthorizationDetailsAPIClient = (*Client)(nil)
 type GetAccountAuthorizationDetailsPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated response element is true . If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 

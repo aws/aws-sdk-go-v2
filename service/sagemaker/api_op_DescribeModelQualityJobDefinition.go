@@ -51,8 +51,8 @@ type DescribeModelQualityJobDefinitionOutput struct {
 	// This member is required.
 	JobDefinitionArn *string
 
-	// The name of the quality job definition. The name must be unique within an Amazon
-	// Web Services Region in the Amazon Web Services account.
+	// The name of the quality job definition. The name must be unique within an
+	// Amazon Web Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
 	JobDefinitionName *string

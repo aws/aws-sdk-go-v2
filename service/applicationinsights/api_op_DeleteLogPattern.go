@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified log pattern from a LogPatternSet.
+// Removes the specified log pattern from a LogPatternSet .
 func (c *Client) DeleteLogPattern(ctx context.Context, params *DeleteLogPatternInput, optFns ...func(*Options)) (*DeleteLogPatternOutput, error) {
 	if params == nil {
 		params = &DeleteLogPatternInput{}

@@ -20,17 +20,11 @@ import (
 // made to this action replaces any existing policy that is associated with the
 // specified Multi-Region Access Point. This action will always be routed to the US
 // West (Oregon) Region. For more information about the restrictions around
-// managing Multi-Region Access Points, see Managing Multi-Region Access Points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// managing Multi-Region Access Points, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. The following actions are related to
-// PutMultiRegionAccessPointPolicy:
-//
-// * GetMultiRegionAccessPointPolicy
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html)
-//
-// *
-// GetMultiRegionAccessPointPolicyStatus
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html)
+// PutMultiRegionAccessPointPolicy :
+//   - GetMultiRegionAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html)
+//   - GetMultiRegionAccessPointPolicyStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html)
 func (c *Client) PutMultiRegionAccessPointPolicy(ctx context.Context, params *PutMultiRegionAccessPointPolicyInput, optFns ...func(*Options)) (*PutMultiRegionAccessPointPolicyOutput, error) {
 	if params == nil {
 		params = &PutMultiRegionAccessPointPolicyInput{}
@@ -72,8 +66,7 @@ type PutMultiRegionAccessPointPolicyInput struct {
 type PutMultiRegionAccessPointPolicyOutput struct {
 
 	// The request token associated with the request. You can use this token with
-	// DescribeMultiRegionAccessPointOperation
-	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
+	// DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
 	// to determine the status of asynchronous requests.
 	RequestTokenARN *string
 

@@ -44,14 +44,9 @@ type UpdateListInput struct {
 	Elements []string
 
 	// The update mode (type).
-	//
-	// * Use APPEND if you are adding elements to the list.
-	//
-	// *
-	// Use REPLACE if you replacing existing elements in the list.
-	//
-	// * Use REMOVE if you
-	// are removing elements from the list.
+	//   - Use APPEND if you are adding elements to the list.
+	//   - Use REPLACE if you replacing existing elements in the list.
+	//   - Use REMOVE if you are removing elements from the list.
 	UpdateMode types.ListUpdateMode
 
 	// The variable type you want to assign to the list. You cannot update a variable

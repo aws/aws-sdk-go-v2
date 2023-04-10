@@ -17,9 +17,8 @@ import (
 // toward that quota, and the quota's maximum value. When you establish an Amazon
 // Web Services account, the account has initial quotas on the maximum number of
 // configuration sets, opt-out lists, phone numbers, and pools that you can create
-// in a given Region. For more information see  Amazon Pinpoint quotas
-// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html) in the
-// Amazon Pinpoint Developer Guide.
+// in a given Region. For more information see Amazon Pinpoint quotas  (https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html)
+// in the Amazon Pinpoint Developer Guide.
 func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAccountLimitsInput, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountLimitsInput{}

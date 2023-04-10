@@ -54,7 +54,7 @@ type GetMobileDeviceAccessEffectInput struct {
 
 type GetMobileDeviceAccessEffectOutput struct {
 
-	// The effect of the simulated access, ALLOW or DENY, after evaluating mobile
+	// The effect of the simulated access, ALLOW or DENY , after evaluating mobile
 	// device access rules in the WorkMail organization for the simulated user
 	// parameters.
 	Effect types.MobileDeviceAccessRuleEffect

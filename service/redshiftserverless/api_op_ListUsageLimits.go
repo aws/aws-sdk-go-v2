@@ -34,7 +34,7 @@ type ListUsageLimitsInput struct {
 	// You can use nextToken to get the next page of results. The default is 100.
 	MaxResults *int32
 
-	// If your initial ListUsageLimits operation returns a nextToken, you can include
+	// If your initial ListUsageLimits operation returns a nextToken , you can include
 	// the returned nextToken in following ListUsageLimits operations, which returns
 	// results in the next page.
 	NextToken *string

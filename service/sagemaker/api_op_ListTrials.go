@@ -51,10 +51,10 @@ type ListTrialsInput struct {
 	// call returns a token for getting the next set of trials.
 	NextToken *string
 
-	// The property used to sort results. The default value is CreationTime.
+	// The property used to sort results. The default value is CreationTime .
 	SortBy types.SortTrialsBy
 
-	// The sort order. The default value is Descending.
+	// The sort order. The default value is Descending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only trials that are associated with the specified trial

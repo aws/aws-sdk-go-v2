@@ -31,8 +31,8 @@ func (c *Client) ListDomainNames(ctx context.Context, params *ListDomainNamesInp
 // Container for the parameters to the ListDomainNames operation.
 type ListDomainNamesInput struct {
 
-	// Optional parameter to filter the output by domain engine type. Acceptable values
-	// are 'Elasticsearch' and 'OpenSearch'.
+	// Optional parameter to filter the output by domain engine type. Acceptable
+	// values are 'Elasticsearch' and 'OpenSearch'.
 	EngineType types.EngineType
 
 	noSmithyDocumentSerde

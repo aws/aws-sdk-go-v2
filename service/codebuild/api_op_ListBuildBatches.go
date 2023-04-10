@@ -36,18 +36,16 @@ type ListBuildBatchesInput struct {
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous call to ListBuildBatches. This
+	// The nextToken value returned from a previous call to ListBuildBatches . This
 	// specifies the next item to return. To return the beginning of the list, exclude
 	// this parameter.
 	NextToken *string
 
 	// Specifies the sort order of the returned items. Valid values include:
-	//
-	// *
-	// ASCENDING: List the batch build identifiers in ascending order by identifier.
-	//
-	// *
-	// DESCENDING: List the batch build identifiers in descending order by identifier.
+	//   - ASCENDING : List the batch build identifiers in ascending order by
+	//   identifier.
+	//   - DESCENDING : List the batch build identifiers in descending order by
+	//   identifier.
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde

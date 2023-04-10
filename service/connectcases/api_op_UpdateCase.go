@@ -42,7 +42,7 @@ type UpdateCaseInput struct {
 	DomainId *string
 
 	// An array of objects with fieldId (matching ListFields/DescribeField) and value
-	// union data, structured identical to CreateCase.
+	// union data, structured identical to CreateCase .
 	//
 	// This member is required.
 	Fields []types.FieldValue

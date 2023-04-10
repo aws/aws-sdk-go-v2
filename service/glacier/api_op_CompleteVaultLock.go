@@ -14,16 +14,16 @@ import (
 // This operation completes the vault locking process by transitioning the vault
 // lock from the InProgress state to the Locked state, which causes the vault lock
 // policy to become unchangeable. A vault lock is put into the InProgress state by
-// calling InitiateVaultLock. You can obtain the state of the vault lock by calling
-// GetVaultLock. For more information about the vault locking process, Amazon
-// Glacier Vault Lock
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html). This
-// operation is idempotent. This request is always successful if the vault lock is
-// in the Locked state and the provided lock ID matches the lock ID originally used
-// to lock the vault. If an invalid lock ID is passed in the request when the vault
-// lock is in the Locked state, the operation returns an AccessDeniedException
-// error. If an invalid lock ID is passed in the request when the vault lock is in
-// the InProgress state, the operation throws an InvalidParameter error.
+// calling InitiateVaultLock . You can obtain the state of the vault lock by
+// calling GetVaultLock . For more information about the vault locking process,
+// Amazon Glacier Vault Lock (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html)
+// . This operation is idempotent. This request is always successful if the vault
+// lock is in the Locked state and the provided lock ID matches the lock ID
+// originally used to lock the vault. If an invalid lock ID is passed in the
+// request when the vault lock is in the Locked state, the operation returns an
+// AccessDeniedException error. If an invalid lock ID is passed in the request when
+// the vault lock is in the InProgress state, the operation throws an
+// InvalidParameter error.
 func (c *Client) CompleteVaultLock(ctx context.Context, params *CompleteVaultLockInput, optFns ...func(*Options)) (*CompleteVaultLockOutput, error) {
 	if params == nil {
 		params = &CompleteVaultLockInput{}
@@ -39,14 +39,14 @@ func (c *Client) CompleteVaultLock(ctx context.Context, params *CompleteVaultLoc
 	return out, nil
 }
 
-// The input values for CompleteVaultLock.
+// The input values for CompleteVaultLock .
 type CompleteVaultLockInput struct {
 
-	// The AccountId value is the AWS account ID. This value must match the AWS account
-	// ID associated with the credentials used to sign the request. You can either
-	// specify an AWS account ID or optionally a single '-' (hyphen), in which case
-	// Amazon Glacier uses the AWS account ID associated with the credentials used to
-	// sign the request. If you specify your account ID, do not include any hyphens
+	// The AccountId value is the AWS account ID. This value must match the AWS
+	// account ID associated with the credentials used to sign the request. You can
+	// either specify an AWS account ID or optionally a single ' - ' (hyphen), in which
+	// case Amazon Glacier uses the AWS account ID associated with the credentials used
+	// to sign the request. If you specify your account ID, do not include any hyphens
 	// ('-') in the ID.
 	//
 	// This member is required.

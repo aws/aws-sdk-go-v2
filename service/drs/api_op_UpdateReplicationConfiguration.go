@@ -42,8 +42,8 @@ type UpdateReplicationConfigurationInput struct {
 	// added disks.
 	AutoReplicateNewDisks *bool
 
-	// Configure bandwidth throttling for the outbound data transfer rate of the Source
-	// Server in Mbps.
+	// Configure bandwidth throttling for the outbound data transfer rate of the
+	// Source Server in Mbps.
 	BandwidthThrottling int64
 
 	// Whether to create a Public IP for the Recovery Instance by default.
@@ -99,8 +99,8 @@ type UpdateReplicationConfigurationOutput struct {
 	// added disks.
 	AutoReplicateNewDisks *bool
 
-	// Configure bandwidth throttling for the outbound data transfer rate of the Source
-	// Server in Mbps.
+	// Configure bandwidth throttling for the outbound data transfer rate of the
+	// Source Server in Mbps.
 	BandwidthThrottling int64
 
 	// Whether to create a Public IP for the Recovery Instance by default.

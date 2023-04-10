@@ -12,8 +12,8 @@ import (
 )
 
 // Starts analyzing the routing path between the specified source and destination.
-// For more information, see Route Analyzer
-// (https://docs.aws.amazon.com/vpc/latest/tgw/route-analyzer.html).
+// For more information, see Route Analyzer (https://docs.aws.amazon.com/vpc/latest/tgw/route-analyzer.html)
+// .
 func (c *Client) StartRouteAnalysis(ctx context.Context, params *StartRouteAnalysisInput, optFns ...func(*Options)) (*StartRouteAnalysisOutput, error) {
 	if params == nil {
 		params = &StartRouteAnalysisInput{}
@@ -46,11 +46,11 @@ type StartRouteAnalysisInput struct {
 	// This member is required.
 	Source *types.RouteAnalysisEndpointOptionsSpecification
 
-	// Indicates whether to analyze the return path. The default is false.
+	// Indicates whether to analyze the return path. The default is false .
 	IncludeReturnPath bool
 
 	// Indicates whether to include the location of middlebox appliances in the route
-	// analysis. The default is false.
+	// analysis. The default is false .
 	UseMiddleboxes bool
 
 	noSmithyDocumentSerde

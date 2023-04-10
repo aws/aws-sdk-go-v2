@@ -46,8 +46,8 @@ type DataSource struct {
 // run an Amazon Braket job.
 type DeviceConfig struct {
 
-	// The primary quantum processing unit (QPU) or simulator used to create and run an
-	// Amazon Braket job.
+	// The primary quantum processing unit (QPU) or simulator used to create and run
+	// an Amazon Braket job.
 	//
 	// This member is required.
 	Device *string
@@ -132,13 +132,13 @@ type InstanceConfig struct {
 type JobCheckpointConfig struct {
 
 	// Identifies the S3 path where you want Amazon Braket to store checkpoints. For
-	// example, s3://bucket-name/key-name-prefix.
+	// example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3Uri *string
 
 	// (Optional) The local directory where checkpoints are written. The default
-	// directory is /opt/braket/checkpoints/.
+	// directory is /opt/braket/checkpoints/ .
 	LocalPath *string
 
 	noSmithyDocumentSerde
@@ -165,7 +165,7 @@ type JobEventDetails struct {
 type JobOutputDataConfig struct {
 
 	// Identifies the S3 path where you want Amazon Braket to store the job training
-	// artifacts. For example, s3://bucket-name/key-name-prefix.
+	// artifacts. For example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3Path *string
@@ -278,7 +278,7 @@ type QuantumTaskSummary struct {
 // Information about the data stored in Amazon S3 used by the Amazon Braket job.
 type S3DataSource struct {
 
-	// Depending on the value specified for the S3DataType, identifies either a key
+	// Depending on the value specified for the S3DataType , identifies either a key
 	// name prefix or a manifest that locates the S3 data source.
 	//
 	// This member is required.
@@ -297,8 +297,8 @@ type ScriptModeConfig struct {
 	// This member is required.
 	EntryPoint *string
 
-	// The URI that specifies the S3 path to the Python script module that contains the
-	// training script used by an Amazon Braket job.
+	// The URI that specifies the S3 path to the Python script module that contains
+	// the training script used by an Amazon Braket job.
 	//
 	// This member is required.
 	S3Uri *string

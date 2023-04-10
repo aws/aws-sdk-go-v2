@@ -31,8 +31,8 @@ func (c *Client) CreateContactChannel(ctx context.Context, params *CreateContact
 
 type CreateContactChannelInput struct {
 
-	// The Amazon Resource Name (ARN) of the contact you are adding the contact channel
-	// to.
+	// The Amazon Resource Name (ARN) of the contact you are adding the contact
+	// channel to.
 	//
 	// This member is required.
 	ContactId *string
@@ -40,14 +40,9 @@ type CreateContactChannelInput struct {
 	// The details that Incident Manager uses when trying to engage the contact
 	// channel. The format is dependent on the type of the contact channel. The
 	// following are the expected formats:
-	//
-	// * SMS - '+' followed by the country code
-	// and phone number
-	//
-	// * VOICE - '+' followed by the country code and phone number
-	//
-	// *
-	// EMAIL - any standard email format
+	//   - SMS - '+' followed by the country code and phone number
+	//   - VOICE - '+' followed by the country code and phone number
+	//   - EMAIL - any standard email format
 	//
 	// This member is required.
 	DeliveryAddress *types.ContactChannelAddress
@@ -58,13 +53,9 @@ type CreateContactChannelInput struct {
 	Name *string
 
 	// Incident Manager supports three types of contact channels:
-	//
-	// * SMS
-	//
-	// * VOICE
-	//
-	// *
-	// EMAIL
+	//   - SMS
+	//   - VOICE
+	//   - EMAIL
 	//
 	// This member is required.
 	Type types.ChannelType

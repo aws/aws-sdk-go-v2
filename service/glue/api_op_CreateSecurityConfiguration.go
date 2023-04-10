@@ -16,8 +16,8 @@ import (
 // security properties that can be used by Glue. You can use a security
 // configuration to encrypt data at rest. For information about using security
 // configurations in Glue, see Encrypting Data Written by Crawlers, Jobs, and
-// Development Endpoints
-// (https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html).
+// Development Endpoints (https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html)
+// .
 func (c *Client) CreateSecurityConfiguration(ctx context.Context, params *CreateSecurityConfigurationInput, optFns ...func(*Options)) (*CreateSecurityConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateSecurityConfigurationInput{}

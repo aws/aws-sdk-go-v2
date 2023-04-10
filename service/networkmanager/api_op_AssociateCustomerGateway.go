@@ -18,9 +18,8 @@ import (
 // transit gateway or core network, customer gateways that are connected to the
 // transit gateway are automatically included in the global network. To list
 // customer gateways that are connected to a transit gateway, use the
-// DescribeVpnConnections
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html)
-// EC2 API and filter by transit-gateway-id. You cannot associate a customer
+// DescribeVpnConnections (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html)
+// EC2 API and filter by transit-gateway-id . You cannot associate a customer
 // gateway with more than one device and link.
 func (c *Client) AssociateCustomerGateway(ctx context.Context, params *AssociateCustomerGatewayInput, optFns ...func(*Options)) (*AssociateCustomerGatewayOutput, error) {
 	if params == nil {

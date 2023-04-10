@@ -57,7 +57,7 @@ type UpdateGraphqlApiInput struct {
 	// The new Amazon Cognito user pool configuration for the ~GraphqlApi object.
 	UserPoolConfig *types.UserPoolConfig
 
-	// A flag indicating whether to use X-Ray tracing for the GraphqlApi.
+	// A flag indicating whether to use X-Ray tracing for the GraphqlApi .
 	XrayEnabled bool
 
 	noSmithyDocumentSerde

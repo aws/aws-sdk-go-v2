@@ -22,8 +22,8 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
-// Value of a segment annotation. Has one of three value types: Number, Boolean, or
-// String.
+// Value of a segment annotation. Has one of three value types: Number, Boolean,
+// or String.
 //
 // The following types satisfy this interface:
 //
@@ -111,14 +111,15 @@ type Edge struct {
 	// Aliases for the edge.
 	Aliases []Alias
 
-	// Describes an asynchronous connection, with a value of link.
+	// Describes an asynchronous connection, with a value of link .
 	EdgeType *string
 
 	// The end time of the last segment on the edge.
 	EndTime *time.Time
 
-	// A histogram that maps the spread of event age when received by consumers. Age is
-	// calculated each time an event is received. Only populated when EdgeType is link.
+	// A histogram that maps the spread of event age when received by consumers. Age
+	// is calculated each time an event is received. Only populated when EdgeType is
+	// link .
 	ReceivedEventAgeHistogram []HistogramEntry
 
 	// Identifier of the edge. Unique within a service map.
@@ -164,12 +165,12 @@ type EncryptionConfig struct {
 	// The ID of the KMS key used for encryption, if applicable.
 	KeyId *string
 
-	// The encryption status. While the status is UPDATING, X-Ray may encrypt data with
-	// a combination of the new and old settings.
+	// The encryption status. While the status is UPDATING , X-Ray may encrypt data
+	// with a combination of the new and old settings.
 	Status EncryptionStatus
 
-	// The type of encryption. Set to KMS for encryption with KMS keys. Set to NONE for
-	// default encryption.
+	// The type of encryption. Set to KMS for encryption with KMS keys. Set to NONE
+	// for default encryption.
 	Type EncryptionType
 
 	noSmithyDocumentSerde
@@ -181,8 +182,8 @@ type ErrorRootCause struct {
 	// A flag that denotes that the root cause impacts the trace client.
 	ClientImpacting *bool
 
-	// A list of services corresponding to an error. A service identifies a segment and
-	// it contains a name, account ID, type, and inferred flag.
+	// A list of services corresponding to an error. A service identifies a segment
+	// and it contains a name, account ID, type, and inferred flag.
 	Services []ErrorRootCauseService
 
 	noSmithyDocumentSerde
@@ -249,8 +250,8 @@ type FaultRootCause struct {
 	// A flag that denotes that the root cause impacts the trace client.
 	ClientImpacting *bool
 
-	// A list of corresponding services. A service identifies a segment and it contains
-	// a name, account ID, type, and inferred flag.
+	// A list of corresponding services. A service identifies a segment and it
+	// contains a name, account ID, type, and inferred flag.
 	Services []FaultRootCauseService
 
 	noSmithyDocumentSerde
@@ -334,14 +335,10 @@ type Group struct {
 	GroupName *string
 
 	// The structure containing configurations related to insights.
-	//
-	// * The
-	// InsightsEnabled boolean can be set to true to enable insights for the group or
-	// false to disable insights for the group.
-	//
-	// * The NotificationsEnabled boolean can
-	// be set to true to enable insights notifications through Amazon EventBridge for
-	// the group.
+	//   - The InsightsEnabled boolean can be set to true to enable insights for the
+	//   group or false to disable insights for the group.
+	//   - The NotificationsEnabled boolean can be set to true to enable insights
+	//   notifications through Amazon EventBridge for the group.
 	InsightsConfiguration *InsightsConfiguration
 
 	noSmithyDocumentSerde
@@ -360,14 +357,11 @@ type GroupSummary struct {
 	GroupName *string
 
 	// The structure containing configurations related to insights.
-	//
-	// * The
-	// InsightsEnabled boolean can be set to true to enable insights for the group or
-	// false to disable insights for the group.
-	//
-	// * The NotificationsEnabled boolean can
-	// be set to true to enable insights notifications. Notifications can only be
-	// enabled on a group with InsightsEnabled set to true.
+	//   - The InsightsEnabled boolean can be set to true to enable insights for the
+	//   group or false to disable insights for the group.
+	//   - The NotificationsEnabled boolean can be set to true to enable insights
+	//   notifications. Notifications can only be enabled on a group with InsightsEnabled
+	//   set to true.
 	InsightsConfiguration *InsightsConfiguration
 
 	noSmithyDocumentSerde
@@ -507,23 +501,16 @@ type InsightImpactGraphService struct {
 	ReferenceId *int32
 
 	// Identifier for the service. Unique within the service map.
-	//
-	// * Amazon Web
-	// Services Resource - The type of an Amazon Web Services resource. For example,
-	// AWS::EC2::Instance for an application running on Amazon EC2 or
-	// AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.
-	//
-	// *
-	// Amazon Web Services Service - The type of an Amazon Web Services service. For
-	// example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't
-	// target a specific table.
-	//
-	// * Amazon Web Services Service - The type of an Amazon
-	// Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon
-	// DynamoDB that didn't target a specific table.
-	//
-	// * remote - A downstream service
-	// of indeterminate type.
+	//   - Amazon Web Services Resource - The type of an Amazon Web Services resource.
+	//   For example, AWS::EC2::Instance for an application running on Amazon EC2 or
+	//   AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.
+	//   - Amazon Web Services Service - The type of an Amazon Web Services service.
+	//   For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't
+	//   target a specific table.
+	//   - Amazon Web Services Service - The type of an Amazon Web Services service.
+	//   For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't
+	//   target a specific table.
+	//   - remote - A downstream service of indeterminate type.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -762,7 +749,7 @@ type SamplingRule struct {
 	// This member is required.
 	URLPath *string
 
-	// The version of the sampling rule format (1).
+	// The version of the sampling rule format ( 1 ).
 	//
 	// This member is required.
 	Version int32
@@ -781,9 +768,8 @@ type SamplingRule struct {
 	noSmithyDocumentSerde
 }
 
-// A SamplingRule
-// (https://docs.aws.amazon.com/xray/latest/api/API_SamplingRule.html) and its
-// metadata.
+// A SamplingRule (https://docs.aws.amazon.com/xray/latest/api/API_SamplingRule.html)
+// and its metadata.
 type SamplingRuleRecord struct {
 
 	// When the rule was created.
@@ -847,8 +833,8 @@ type SamplingRuleUpdate struct {
 
 // Request sampling results for a single rule from a service. Results are for the
 // last 10 seconds unless the service has been assigned a longer reporting interval
-// after a previous call to GetSamplingTargets
-// (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html).
+// after a previous call to GetSamplingTargets (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html)
+// .
 type SamplingStatisticsDocument struct {
 
 	// A unique identifier for the service in hexadecimal.
@@ -918,8 +904,8 @@ type SamplingStrategy struct {
 
 // Temporary changes to a sampling rule configuration. To meet the global sampling
 // target for a rule, X-Ray calculates a new reservoir for each service based on
-// the recent sampling results of all services that called GetSamplingTargets
-// (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html).
+// the recent sampling results of all services that called GetSamplingTargets (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html)
+// .
 type SamplingTargetDocument struct {
 
 	// The percentage of matching requests to instrument, after the reservoir is
@@ -943,12 +929,10 @@ type SamplingTargetDocument struct {
 }
 
 // A segment from a trace that has been ingested by the X-Ray service. The segment
-// can be compiled from documents uploaded with PutTraceSegments
-// (https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html), or an
-// inferred segment for a downstream service, generated from a subsegment sent by
-// the service that called it. For the full segment document schema, see Amazon Web
-// Services X-Ray Segment Documents
-// (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
+// can be compiled from documents uploaded with PutTraceSegments (https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html)
+// , or an inferred segment for a downstream service, generated from a subsegment
+// sent by the service that called it. For the full segment document schema, see
+// Amazon Web Services X-Ray Segment Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
 // in the Amazon Web Services X-Ray Developer Guide.
 type Segment struct {
 
@@ -1003,21 +987,14 @@ type Service struct {
 	SummaryStatistics *ServiceStatistics
 
 	// The type of service.
-	//
-	// * Amazon Web Services Resource - The type of an Amazon Web
-	// Services resource. For example, AWS::EC2::Instance for an application running on
-	// Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the
-	// application used.
-	//
-	// * Amazon Web Services Service - The type of an Amazon Web
-	// Services service. For example, AWS::DynamoDB for downstream calls to Amazon
-	// DynamoDB that didn't target a specific table.
-	//
-	// * client - Represents the clients
-	// that sent requests to a root service.
-	//
-	// * remote - A downstream service of
-	// indeterminate type.
+	//   - Amazon Web Services Resource - The type of an Amazon Web Services resource.
+	//   For example, AWS::EC2::Instance for an application running on Amazon EC2 or
+	//   AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.
+	//   - Amazon Web Services Service - The type of an Amazon Web Services service.
+	//   For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't
+	//   target a specific table.
+	//   - client - Represents the clients that sent requests to a root service.
+	//   - remote - A downstream service of indeterminate type.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -1063,28 +1040,23 @@ type ServiceStatistics struct {
 
 // A map that contains tag keys and tag values to attach to an Amazon Web Services
 // X-Ray group or sampling rule. For more information about ways to use tags, see
-// Tagging Amazon Web Services resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-// Web Services General Reference. The following restrictions apply to tags:
-//
-// *
-// Maximum number of user-applied tags per resource: 50
-//
-// * Tag keys and values are
-// case sensitive.
-//
-// * Don't use aws: as a prefix for keys; it's reserved for Amazon
-// Web Services use. You cannot edit or delete system tags.
+// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+// in the Amazon Web Services General Reference. The following restrictions apply
+// to tags:
+//   - Maximum number of user-applied tags per resource: 50
+//   - Tag keys and values are case sensitive.
+//   - Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services
+//     use. You cannot edit or delete system tags.
 type Tag struct {
 
-	// A tag key, such as Stage or Name. A tag key cannot be empty. The key can be a
+	// A tag key, such as Stage or Name . A tag key cannot be empty. The key can be a
 	// maximum of 128 characters, and can contain only Unicode letters, numbers, or
 	// separators, or the following special characters: + - = . _ : /
 	//
 	// This member is required.
 	Key *string
 
-	// An optional tag value, such as Production or test-only. The value can be a
+	// An optional tag value, such as Production or test-only . The value can be a
 	// maximum of 255 characters, and contain only Unicode letters, numbers, or
 	// separators, or the following special characters: + - = . _ : /
 	//
@@ -1143,8 +1115,8 @@ type TimeSeriesServiceStatistics struct {
 // A collection of segment documents with matching trace IDs.
 type Trace struct {
 
-	// The length of time in seconds between the start time of the root segment and the
-	// end time of the last segment that completed.
+	// The length of time in seconds between the start time of the root segment and
+	// the end time of the last segment that completed.
 	Duration *float64
 
 	// The unique identifier for the request that generated the trace's segments and
@@ -1153,8 +1125,8 @@ type Trace struct {
 
 	// LimitExceeded is set to true when the trace has exceeded the Trace document size
 	// limit. For more information about this limit and other X-Ray limits and quotas,
-	// see Amazon Web Services X-Ray endpoints and quotas
-	// (https://docs.aws.amazon.com/general/latest/gr/xray.html).
+	// see Amazon Web Services X-Ray endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/xray.html)
+	// .
 	LimitExceeded *bool
 
 	// Segment documents for the segments and subsegments that comprise the trace.
@@ -1172,8 +1144,8 @@ type TraceSummary struct {
 	// A list of Availability Zones for any zone corresponding to the trace segments.
 	AvailabilityZones []AvailabilityZoneDetail
 
-	// The length of time in seconds between the start time of the root segment and the
-	// end time of the last segment that completed.
+	// The length of time in seconds between the start time of the root segment and
+	// the end time of the last segment that completed.
 	Duration *float64
 
 	// The root of a trace.
@@ -1247,9 +1219,8 @@ type TraceUser struct {
 	noSmithyDocumentSerde
 }
 
-// Sampling statistics from a call to GetSamplingTargets
-// (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html) that
-// X-Ray could not process.
+// Sampling statistics from a call to GetSamplingTargets (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html)
+// that X-Ray could not process.
 type UnprocessedStatistics struct {
 
 	// The error code.

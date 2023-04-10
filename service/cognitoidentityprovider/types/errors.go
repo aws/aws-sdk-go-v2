@@ -981,8 +981,8 @@ func (e *UserLambdaValidationException) ErrorCode() string {
 }
 func (e *UserLambdaValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when Amazon Cognito encounters a user name that already
-// exists in the user pool.
+// This exception is thrown when Amazon Cognito encounters a user name that
+// already exists in the user pool.
 type UsernameExistsException struct {
 	Message *string
 

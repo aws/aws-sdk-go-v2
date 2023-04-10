@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the configuration that will be automatically set up for accounts added
-// to the organization after the organization has onboarded to Amazon Security
-// Lake. This API does not take input parameters.
+// Retrieves the configuration that will be automatically set up for accounts
+// added to the organization after the organization has onboarded to Amazon
+// Security Lake. This API does not take input parameters.
 func (c *Client) GetDatalakeAutoEnable(ctx context.Context, params *GetDatalakeAutoEnableInput, optFns ...func(*Options)) (*GetDatalakeAutoEnableOutput, error) {
 	if params == nil {
 		params = &GetDatalakeAutoEnableInput{}

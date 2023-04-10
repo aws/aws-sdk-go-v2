@@ -19,9 +19,9 @@ import (
 // The response from PutProjectPolicy is a revision ID for the project policy. You
 // can attach multiple project policies to a project. You can also update an
 // existing project policy by specifying the policy revision ID of the existing
-// policy. To remove a project policy from a project, call DeleteProjectPolicy. To
-// get a list of project policies attached to a project, call ListProjectPolicies.
-// You copy a model version by calling CopyProjectVersion.
+// policy. To remove a project policy from a project, call DeleteProjectPolicy . To
+// get a list of project policies attached to a project, call ListProjectPolicies .
+// You copy a model version by calling CopyProjectVersion .
 func (c *Client) PutProjectPolicy(ctx context.Context, params *PutProjectPolicyInput, optFns ...func(*Options)) (*PutProjectPolicyOutput, error) {
 	if params == nil {
 		params = &PutProjectPolicyInput{}
@@ -42,8 +42,8 @@ type PutProjectPolicyInput struct {
 	// A resource policy to add to the model. The policy is a JSON structure that
 	// contains one or more statements that define the policy. The policy must follow
 	// the IAM syntax. For more information about the contents of a JSON policy
-	// document, see IAM JSON policy reference
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html).
+	// document, see IAM JSON policy reference (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)
+	// .
 	//
 	// This member is required.
 	PolicyDocument *string

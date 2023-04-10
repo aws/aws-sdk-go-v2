@@ -22,10 +22,9 @@ import (
 // group, and then use that group to view and manage all of those canaries in a
 // single view. Groups are supported in all Regions except the Regions that are
 // disabled by default. For more information about these Regions, see Enabling a
-// Region
-// (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable).
-// Each group can contain as many as 10 canaries. You can have as many as 20 groups
-// in your account. Any single canary can be a member of up to 10 groups.
+// Region (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
+// . Each group can contain as many as 10 canaries. You can have as many as 20
+// groups in your account. Any single canary can be a member of up to 10 groups.
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {
 		params = &CreateGroupInput{}
@@ -43,14 +42,14 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 
 type CreateGroupInput struct {
 
-	// The name for the group. It can include any Unicode characters. The names for all
-	// groups in your account, across all Regions, must be unique.
+	// The name for the group. It can include any Unicode characters. The names for
+	// all groups in your account, across all Regions, must be unique.
 	//
 	// This member is required.
 	Name *string
 
-	// A list of key-value pairs to associate with the group. You can associate as many
-	// as 50 tags with a group. Tags can help you organize and categorize your
+	// A list of key-value pairs to associate with the group. You can associate as
+	// many as 50 tags with a group. Tags can help you organize and categorize your
 	// resources. You can also use them to scope user permissions, by granting a user
 	// permission to access or change only the resources that have certain tag values.
 	Tags map[string]string

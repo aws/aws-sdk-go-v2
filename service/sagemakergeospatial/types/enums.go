@@ -187,9 +187,10 @@ const (
 	EarthObservationJobErrorTypeServerError EarthObservationJobErrorType = "SERVER_ERROR"
 )
 
-// Values returns all known values for EarthObservationJobErrorType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EarthObservationJobErrorType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (EarthObservationJobErrorType) Values() []EarthObservationJobErrorType {
 	return []EarthObservationJobErrorType{
 		"CLIENT_ERROR",
@@ -395,9 +396,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -492,9 +493,10 @@ const (
 	VectorEnrichmentJobErrorTypeServerError VectorEnrichmentJobErrorType = "SERVER_ERROR"
 )
 
-// Values returns all known values for VectorEnrichmentJobErrorType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VectorEnrichmentJobErrorType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (VectorEnrichmentJobErrorType) Values() []VectorEnrichmentJobErrorType {
 	return []VectorEnrichmentJobErrorType{
 		"CLIENT_ERROR",

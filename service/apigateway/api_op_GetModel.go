@@ -39,9 +39,9 @@ type GetModelInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// A query parameter of a Boolean value to resolve (true) all external model
-	// references and returns a flattened model schema or not (false) The default is
-	// false.
+	// A query parameter of a Boolean value to resolve ( true ) all external model
+	// references and returns a flattened model schema or not ( false ) The default is
+	// false .
 	Flatten bool
 
 	noSmithyDocumentSerde

@@ -42,14 +42,14 @@ type UpdateQuerySuggestionsConfigInput struct {
 	// This member is required.
 	IndexId *string
 
-	// TRUE to include queries without user information (i.e. all queries, irrespective
-	// of the user), otherwise FALSE to only include queries with user information. If
-	// you pass user information to Amazon Kendra along with the queries, you can set
-	// this flag to FALSE and instruct Amazon Kendra to only consider queries with user
-	// information. If you set to FALSE, Amazon Kendra only considers queries searched
-	// at least MinimumQueryCount times across MinimumNumberOfQueryingUsers unique
-	// users for suggestions. If you set to TRUE, Amazon Kendra ignores all user
-	// information and learns from all queries.
+	// TRUE to include queries without user information (i.e. all queries,
+	// irrespective of the user), otherwise FALSE to only include queries with user
+	// information. If you pass user information to Amazon Kendra along with the
+	// queries, you can set this flag to FALSE and instruct Amazon Kendra to only
+	// consider queries with user information. If you set to FALSE , Amazon Kendra only
+	// considers queries searched at least MinimumQueryCount times across
+	// MinimumNumberOfQueryingUsers unique users for suggestions. If you set to TRUE ,
+	// Amazon Kendra ignores all user information and learns from all queries.
 	IncludeQueriesWithoutUserInformation *bool
 
 	// The minimum number of unique users who must search a query in order for the
@@ -59,18 +59,18 @@ type UpdateQuerySuggestionsConfigInput struct {
 	// depends on your specific needs.
 	MinimumNumberOfQueryingUsers *int32
 
-	// The the minimum number of times a query must be searched in order to be eligible
-	// to suggest to your users. Decreasing this number increases the number of
-	// suggestions. However, this affects the quality of suggestions as it sets a low
-	// bar for a query to be considered popular to suggest to users. How you tune this
-	// setting depends on your specific needs.
+	// The the minimum number of times a query must be searched in order to be
+	// eligible to suggest to your users. Decreasing this number increases the number
+	// of suggestions. However, this affects the quality of suggestions as it sets a
+	// low bar for a query to be considered popular to suggest to users. How you tune
+	// this setting depends on your specific needs.
 	MinimumQueryCount *int32
 
-	// Set the mode to ENABLED or LEARN_ONLY. By default, Amazon Kendra enables query
+	// Set the mode to ENABLED or LEARN_ONLY . By default, Amazon Kendra enables query
 	// suggestions. LEARN_ONLY mode allows you to turn off query suggestions. You can
-	// to update this at any time. In LEARN_ONLY mode, Amazon Kendra continues to learn
-	// from new queries to keep suggestions up to date for when you are ready to switch
-	// to ENABLED mode again.
+	// to update this at any time. In LEARN_ONLY mode, Amazon Kendra continues to
+	// learn from new queries to keep suggestions up to date for when you are ready to
+	// switch to ENABLED mode again.
 	Mode types.Mode
 
 	// How recent your queries are in your query log time window. The time window is

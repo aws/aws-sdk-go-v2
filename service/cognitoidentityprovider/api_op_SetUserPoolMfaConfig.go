@@ -15,18 +15,16 @@ import (
 // might generate an SMS text message. Starting June 1, 2021, US telecom carriers
 // require you to register an origination phone number before you can send SMS
 // messages to US phone numbers. If you use SMS text messages in Amazon Cognito,
-// you must register a phone number with Amazon Pinpoint
-// (https://console.aws.amazon.com/pinpoint/home/). Amazon Cognito uses the
-// registered number automatically. Otherwise, Amazon Cognito users who must
-// receive SMS messages might not be able to sign up, activate their accounts, or
-// sign in. If you have never used SMS text messages with Amazon Cognito or any
-// other Amazon Web Service, Amazon Simple Notification Service might place your
-// account in the SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you can send
-// messages only to verified phone numbers. After you test your app while in the
-// sandbox environment, you can move out of the sandbox and into production. For
-// more information, see  SMS message settings for Amazon Cognito user pools
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
+// . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
+// Cognito users who must receive SMS messages might not be able to sign up,
+// activate their accounts, or sign in. If you have never used SMS text messages
+// with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification
+// Service might place your account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// , you can send messages only to verified phone numbers. After you test your app
+// while in the sandbox environment, you can move out of the sandbox and into
+// production. For more information, see SMS message settings for Amazon Cognito
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) SetUserPoolMfaConfig(ctx context.Context, params *SetUserPoolMfaConfigInput, optFns ...func(*Options)) (*SetUserPoolMfaConfigOutput, error) {
 	if params == nil {
@@ -50,19 +48,14 @@ type SetUserPoolMfaConfigInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The MFA configuration. If you set the MfaConfiguration value to ‘ON’, only users
-	// who have set up an MFA factor can sign in. To learn more, see Adding
-	// Multi-Factor Authentication (MFA) to a user pool
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html).
-	// Valid values include:
-	//
-	// * OFF MFA won't be used for any users.
-	//
-	// * ON MFA is
-	// required for all users to sign in.
-	//
-	// * OPTIONAL MFA will be required only for
-	// individual users who have an MFA factor activated.
+	// The MFA configuration. If you set the MfaConfiguration value to ‘ON’, only
+	// users who have set up an MFA factor can sign in. To learn more, see Adding
+	// Multi-Factor Authentication (MFA) to a user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html)
+	// . Valid values include:
+	//   - OFF MFA won't be used for any users.
+	//   - ON MFA is required for all users to sign in.
+	//   - OPTIONAL MFA will be required only for individual users who have an MFA
+	//   factor activated.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message MFA configuration.
@@ -77,14 +70,10 @@ type SetUserPoolMfaConfigInput struct {
 type SetUserPoolMfaConfigOutput struct {
 
 	// The MFA configuration. Valid values include:
-	//
-	// * OFF MFA won't be used for any
-	// users.
-	//
-	// * ON MFA is required for all users to sign in.
-	//
-	// * OPTIONAL MFA will be
-	// required only for individual users who have an MFA factor enabled.
+	//   - OFF MFA won't be used for any users.
+	//   - ON MFA is required for all users to sign in.
+	//   - OPTIONAL MFA will be required only for individual users who have an MFA
+	//   factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message MFA configuration.

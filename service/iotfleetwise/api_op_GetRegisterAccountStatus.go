@@ -16,9 +16,8 @@ import (
 // account, IAM, and Amazon Timestream resources so that Amazon Web Services IoT
 // FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For
 // more information, including step-by-step procedures, see Setting up Amazon Web
-// Services IoT FleetWise
-// (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html).
-// This API operation doesn't require input parameters.
+// Services IoT FleetWise (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html)
+// . This API operation doesn't require input parameters.
 func (c *Client) GetRegisterAccountStatus(ctx context.Context, params *GetRegisterAccountStatusInput, optFns ...func(*Options)) (*GetRegisterAccountStatusOutput, error) {
 	if params == nil {
 		params = &GetRegisterAccountStatusInput{}
@@ -40,18 +39,14 @@ type GetRegisterAccountStatusInput struct {
 
 type GetRegisterAccountStatusOutput struct {
 
-	// The status of registering your account and resources. The status can be one
-	// of:
+	// The status of registering your account and resources. The status can be one of:
+	//   - REGISTRATION_SUCCESS - The Amazon Web Services resource is successfully
+	//   registered.
+	//   - REGISTRATION_PENDING - Amazon Web Services IoT FleetWise is processing the
+	//   registration request. This process takes approximately five minutes to complete.
 	//
-	// * REGISTRATION_SUCCESS - The Amazon Web Services resource is successfully
-	// registered.
-	//
-	// * REGISTRATION_PENDING - Amazon Web Services IoT FleetWise is
-	// processing the registration request. This process takes approximately five
-	// minutes to complete.
-	//
-	// * REGISTRATION_FAILURE - Amazon Web Services IoT FleetWise
-	// can't register the AWS resource. Try again later.
+	//   - REGISTRATION_FAILURE - Amazon Web Services IoT FleetWise can't register the
+	//   AWS resource. Try again later.
 	//
 	// This member is required.
 	AccountStatus types.RegistrationStatus

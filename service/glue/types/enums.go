@@ -122,8 +122,8 @@ const (
 	CatalogEncryptionModeSsekms   CatalogEncryptionMode = "SSE-KMS"
 )
 
-// Values returns all known values for CatalogEncryptionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CatalogEncryptionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CatalogEncryptionMode) Values() []CatalogEncryptionMode {
 	return []CatalogEncryptionMode{
@@ -140,9 +140,9 @@ const (
 	CloudWatchEncryptionModeSsekms   CloudWatchEncryptionMode = "SSE-KMS"
 )
 
-// Values returns all known values for CloudWatchEncryptionMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CloudWatchEncryptionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchEncryptionMode) Values() []CloudWatchEncryptionMode {
 	return []CloudWatchEncryptionMode{
 		"DISABLED",
@@ -286,8 +286,8 @@ const (
 	ConnectionPropertyKeyConnectorClassName                   ConnectionPropertyKey = "CONNECTOR_CLASS_NAME"
 )
 
-// Values returns all known values for ConnectionPropertyKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ConnectionPropertyKey. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 	return []ConnectionPropertyKey{
@@ -401,9 +401,9 @@ const (
 	CrawlerStateStopping CrawlerState = "STOPPING"
 )
 
-// Values returns all known values for CrawlerState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CrawlerState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CrawlerState) Values() []CrawlerState {
 	return []CrawlerState{
 		"READY",
@@ -544,9 +544,9 @@ const (
 	DQStopJobOnFailureTimingAfterDataLoad DQStopJobOnFailureTiming = "AfterDataLoad"
 )
 
-// Values returns all known values for DQStopJobOnFailureTiming. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DQStopJobOnFailureTiming. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DQStopJobOnFailureTiming) Values() []DQStopJobOnFailureTiming {
 	return []DQStopJobOnFailureTiming{
 		"Immediate",
@@ -663,9 +663,9 @@ const (
 	FieldNameDpuHour   FieldName = "DPU_HOUR"
 )
 
-// Values returns all known values for FieldName. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for FieldName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FieldName) Values() []FieldName {
 	return []FieldName{
 		"CRAWL_ID",
@@ -684,8 +684,8 @@ const (
 	FilterLogicalOperatorOr  FilterLogicalOperator = "OR"
 )
 
-// Values returns all known values for FilterLogicalOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FilterLogicalOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FilterLogicalOperator) Values() []FilterLogicalOperator {
 	return []FilterLogicalOperator{
@@ -891,9 +891,9 @@ const (
 	JDBCDataTypeVarchar               JDBCDataType = "VARCHAR"
 )
 
-// Values returns all known values for JDBCDataType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JDBCDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (JDBCDataType) Values() []JDBCDataType {
 	return []JDBCDataType{
 		"ARRAY",
@@ -1156,9 +1156,9 @@ const (
 	ParamTypeNull    ParamType = "null"
 )
 
-// Values returns all known values for ParamType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ParamType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ParamType) Values() []ParamType {
 	return []ParamType{
 		"str",
@@ -1319,9 +1319,9 @@ const (
 	QuoteCharDisabled    QuoteChar = "disabled"
 )
 
-// Values returns all known values for QuoteChar. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for QuoteChar. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (QuoteChar) Values() []QuoteChar {
 	return []QuoteChar{
 		"quote",
@@ -1398,9 +1398,9 @@ const (
 	ResourceTypeArchive ResourceType = "ARCHIVE"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"JAR",
@@ -1474,9 +1474,9 @@ const (
 	SchemaStatusDeleting  SchemaStatus = "DELETING"
 )
 
-// Values returns all known values for SchemaStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SchemaStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaStatus) Values() []SchemaStatus {
 	return []SchemaStatus{
 		"AVAILABLE",
@@ -1518,9 +1518,9 @@ const (
 	SeparatorTab       Separator = "tab"
 )
 
-// Values returns all known values for Separator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Separator. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Separator) Values() []Separator {
 	return []Separator{
 		"comma",
@@ -1619,8 +1619,8 @@ const (
 	SourceControlProviderAwsCodeCommit SourceControlProvider = "AWS_CODE_COMMIT"
 )
 
-// Values returns all known values for SourceControlProvider. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SourceControlProvider. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SourceControlProvider) Values() []SourceControlProvider {
 	return []SourceControlProvider{
@@ -1688,9 +1688,9 @@ const (
 	TargetFormatDelta   TargetFormat = "delta"
 )
 
-// Values returns all known values for TargetFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TargetFormat) Values() []TargetFormat {
 	return []TargetFormat{
 		"json",
@@ -1712,8 +1712,8 @@ const (
 	TaskRunSortColumnTypeStarted     TaskRunSortColumnType = "STARTED"
 )
 
-// Values returns all known values for TaskRunSortColumnType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TaskRunSortColumnType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TaskRunSortColumnType) Values() []TaskRunSortColumnType {
 	return []TaskRunSortColumnType{
@@ -1849,9 +1849,9 @@ const (
 	TriggerStateUpdating     TriggerState = "UPDATING"
 )
 
-// Values returns all known values for TriggerState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggerState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TriggerState) Values() []TriggerState {
 	return []TriggerState{
 		"CREATING",
@@ -1895,9 +1895,9 @@ const (
 	UnionTypeDistinct UnionType = "DISTINCT"
 )
 
-// Values returns all known values for UnionType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for UnionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (UnionType) Values() []UnionType {
 	return []UnionType{
 		"ALL",
@@ -1931,8 +1931,8 @@ const (
 	UpdateCatalogBehaviorLog              UpdateCatalogBehavior = "LOG"
 )
 
-// Values returns all known values for UpdateCatalogBehavior. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for UpdateCatalogBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateCatalogBehavior) Values() []UpdateCatalogBehavior {
 	return []UpdateCatalogBehavior{

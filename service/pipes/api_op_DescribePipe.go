@@ -13,9 +13,8 @@ import (
 )
 
 // Get the information about an existing pipe. For more information about pipes,
-// see Amazon EventBridge Pipes
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html) in the
-// Amazon EventBridge User Guide.
+// see Amazon EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
+// in the Amazon EventBridge User Guide.
 func (c *Client) DescribePipe(ctx context.Context, params *DescribePipeInput, optFns ...func(*Options)) (*DescribePipeOutput, error) {
 	if params == nil {
 		params = &DescribePipeInput{}
@@ -64,8 +63,8 @@ type DescribePipeOutput struct {
 	// The parameters required to set up enrichment on your pipe.
 	EnrichmentParameters *types.PipeEnrichmentParameters
 
-	// When the pipe was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.

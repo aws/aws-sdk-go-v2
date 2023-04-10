@@ -35,26 +35,22 @@ type GetTemplateInput struct {
 
 	// The name or Amazon Resource Name (ARN) of a change set for which CloudFormation
 	// returns the associated template. If you specify a name, you must also specify
-	// the StackName.
+	// the StackName .
 	ChangeSetName *string
 
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
-	//
-	// * Running stacks: You can specify either the stack's
-	// name or its unique stack ID.
-	//
-	// * Deleted stacks: You must specify the unique
-	// stack ID.
-	//
+	//   - Running stacks: You can specify either the stack's name or its unique stack
+	//   ID.
+	//   - Deleted stacks: You must specify the unique stack ID.
 	// Default: There is no default value.
 	StackName *string
 
 	// For templates that include transforms, the stage of the template that
-	// CloudFormation returns. To get the user-submitted template, specify Original. To
-	// get the template after CloudFormation has processed all transforms, specify
-	// Processed. If the template doesn't include transforms, Original and Processed
-	// return the same template. By default, CloudFormation specifies Processed.
+	// CloudFormation returns. To get the user-submitted template, specify Original .
+	// To get the template after CloudFormation has processed all transforms, specify
+	// Processed . If the template doesn't include transforms, Original and Processed
+	// return the same template. By default, CloudFormation specifies Processed .
 	TemplateStage types.TemplateStage
 
 	noSmithyDocumentSerde
@@ -64,14 +60,13 @@ type GetTemplateInput struct {
 type GetTemplateOutput struct {
 
 	// The stage of the template that you can retrieve. For stacks, the Original and
-	// Processed templates are always available. For change sets, the Original template
-	// is always available. After CloudFormation finishes creating the change set, the
-	// Processed template becomes available.
+	// Processed templates are always available. For change sets, the Original
+	// template is always available. After CloudFormation finishes creating the change
+	// set, the Processed template becomes available.
 	StagesAvailable []types.TemplateStage
 
 	// Structure containing the template body. (For more information, go to Template
-	// Anatomy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
+	// Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the CloudFormation User Guide.) CloudFormation returns the same template that
 	// was used when the stack was created.
 	TemplateBody *string

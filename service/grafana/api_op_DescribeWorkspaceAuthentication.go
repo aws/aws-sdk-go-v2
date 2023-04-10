@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays information about the authentication methods used in one Amazon Managed
-// Grafana workspace.
+// Displays information about the authentication methods used in one Amazon
+// Managed Grafana workspace.
 func (c *Client) DescribeWorkspaceAuthentication(ctx context.Context, params *DescribeWorkspaceAuthenticationInput, optFns ...func(*Options)) (*DescribeWorkspaceAuthenticationOutput, error) {
 	if params == nil {
 		params = &DescribeWorkspaceAuthenticationInput{}

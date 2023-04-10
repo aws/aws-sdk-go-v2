@@ -30,7 +30,7 @@ func (c *Client) GetLoggingConfiguration(ctx context.Context, params *GetLogging
 type GetLoggingConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL for which you want to get the
-	// LoggingConfiguration.
+	// LoggingConfiguration .
 	//
 	// This member is required.
 	ResourceArn *string

@@ -11,8 +11,8 @@ import (
 )
 
 // Updates the metadata document for an existing SAML provider resource object.
-// This operation requires Signature Version 4
-// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+// This operation requires Signature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// .
 func (c *Client) UpdateSAMLProvider(ctx context.Context, params *UpdateSAMLProviderInput, optFns ...func(*Options)) (*UpdateSAMLProviderOutput, error) {
 	if params == nil {
 		params = &UpdateSAMLProviderInput{}
@@ -40,9 +40,8 @@ type UpdateSAMLProviderInput struct {
 	SAMLMetadataDocument *string
 
 	// The Amazon Resource Name (ARN) of the SAML provider to update. For more
-	// information about ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	SAMLProviderArn *string

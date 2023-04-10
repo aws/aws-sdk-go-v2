@@ -54,9 +54,9 @@ const (
 	CannedAclForObjectsValueBucketOwnerFullControl CannedAclForObjectsValue = "bucket-owner-full-control"
 )
 
-// Values returns all known values for CannedAclForObjectsValue. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CannedAclForObjectsValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CannedAclForObjectsValue) Values() []CannedAclForObjectsValue {
 	return []CannedAclForObjectsValue{
 		"none",
@@ -260,9 +260,9 @@ const (
 	EndpointSettingTypeValueEnum    EndpointSettingTypeValue = "enum"
 )
 
-// Values returns all known values for EndpointSettingTypeValue. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndpointSettingTypeValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointSettingTypeValue) Values() []EndpointSettingTypeValue {
 	return []EndpointSettingTypeValue{
 		"string",
@@ -300,8 +300,8 @@ const (
 	KafkaSecurityProtocolSaslSsl           KafkaSecurityProtocol = "sasl-ssl"
 )
 
-// Values returns all known values for KafkaSecurityProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for KafkaSecurityProtocol. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (KafkaSecurityProtocol) Values() []KafkaSecurityProtocol {
 	return []KafkaSecurityProtocol{
@@ -491,9 +491,10 @@ const (
 	ReplicationEndpointTypeValueTarget ReplicationEndpointTypeValue = "target"
 )
 
-// Values returns all known values for ReplicationEndpointTypeValue. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReplicationEndpointTypeValue. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ReplicationEndpointTypeValue) Values() []ReplicationEndpointTypeValue {
 	return []ReplicationEndpointTypeValue{
 		"source",
@@ -545,9 +546,9 @@ const (
 	SslSecurityProtocolValueSslEncryption SslSecurityProtocolValue = "ssl-encryption"
 )
 
-// Values returns all known values for SslSecurityProtocolValue. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SslSecurityProtocolValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SslSecurityProtocolValue) Values() []SslSecurityProtocolValue {
 	return []SslSecurityProtocolValue{
 		"plaintext",
@@ -584,9 +585,9 @@ const (
 	TargetDbTypeMultipleDatabases TargetDbType = "multiple-databases"
 )
 
-// Values returns all known values for TargetDbType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetDbType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TargetDbType) Values() []TargetDbType {
 	return []TargetDbType{
 		"specific-database",

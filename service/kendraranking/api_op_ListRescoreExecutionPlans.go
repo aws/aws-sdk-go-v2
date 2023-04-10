@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your rescore execution plans. A rescore execution plan is an Amazon Kendra
-// Intelligent Ranking resource used for provisioning the Rescore API.
+// Lists your rescore execution plans. A rescore execution plan is an Amazon
+// Kendra Intelligent Ranking resource used for provisioning the Rescore API.
 func (c *Client) ListRescoreExecutionPlans(ctx context.Context, params *ListRescoreExecutionPlansInput, optFns ...func(*Options)) (*ListRescoreExecutionPlansOutput, error) {
 	if params == nil {
 		params = &ListRescoreExecutionPlansInput{}

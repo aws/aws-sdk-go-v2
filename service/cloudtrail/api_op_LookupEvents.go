@@ -13,46 +13,30 @@ import (
 	"time"
 )
 
-// Looks up management events
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events)
-// or CloudTrail Insights events
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events)
+// Looks up management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events)
+// or CloudTrail Insights events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events)
 // that are captured by CloudTrail. You can look up events that occurred in a
 // region within the last 90 days. Lookup supports the following attributes for
 // management events:
-//
-// * Amazon Web Services access key
-//
-// * Event ID
-//
-// * Event
-// name
-//
-// * Event source
-//
-// * Read only
-//
-// * Resource name
-//
-// * Resource type
-//
-// * User
-// name
+//   - Amazon Web Services access key
+//   - Event ID
+//   - Event name
+//   - Event source
+//   - Read only
+//   - Resource name
+//   - Resource type
+//   - User name
 //
 // Lookup supports the following attributes for Insights events:
+//   - Event ID
+//   - Event name
+//   - Event source
 //
-// * Event
-// ID
-//
-// * Event name
-//
-// * Event source
-//
-// All attributes are optional. The default
-// number of results returned is 50, with a maximum of 50 possible. The response
-// includes a token that you can use to get the next page of results. The rate of
-// lookup requests is limited to two per second, per account, per region. If this
-// limit is exceeded, a throttling error occurs.
+// All attributes are optional. The default number of results returned is 50, with
+// a maximum of 50 possible. The response includes a token that you can use to get
+// the next page of results. The rate of lookup requests is limited to two per
+// second, per account, per region. If this limit is exceeded, a throttling error
+// occurs.
 func (c *Client) LookupEvents(ctx context.Context, params *LookupEventsInput, optFns ...func(*Options)) (*LookupEventsOutput, error) {
 	if params == nil {
 		params = &LookupEventsInput{}
@@ -76,21 +60,21 @@ type LookupEventsInput struct {
 	// is returned.
 	EndTime *time.Time
 
-	// Specifies the event category. If you do not specify an event category, events of
-	// the category are not returned in the response. For example, if you do not
-	// specify insight as the value of EventCategory, no Insights events are returned.
+	// Specifies the event category. If you do not specify an event category, events
+	// of the category are not returned in the response. For example, if you do not
+	// specify insight as the value of EventCategory , no Insights events are returned.
 	EventCategory types.EventCategory
 
 	// Contains a list of lookup attributes. Currently the list can contain only one
 	// item.
 	LookupAttributes []types.LookupAttribute
 
-	// The number of events to return. Possible values are 1 through 50. The default is
-	// 50.
+	// The number of events to return. Possible values are 1 through 50. The default
+	// is 50.
 	MaxResults *int32
 
-	// The token to use to get the next page of results after a previous API call. This
-	// token must be passed in with the same parameters that were specified in the
+	// The token to use to get the next page of results after a previous API call.
+	// This token must be passed in with the same parameters that were specified in the
 	// original call. For example, if the original call specified an AttributeKey of
 	// 'Username' with a value of 'root', the call with NextToken should include those
 	// same parameters.
@@ -197,8 +181,8 @@ var _ LookupEventsAPIClient = (*Client)(nil)
 
 // LookupEventsPaginatorOptions is the paginator options for LookupEvents
 type LookupEventsPaginatorOptions struct {
-	// The number of events to return. Possible values are 1 through 50. The default is
-	// 50.
+	// The number of events to return. Possible values are 1 through 50. The default
+	// is 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,8 +11,7 @@ import (
 )
 
 // Gets information about the specified thing. Requires permission to access the
-// DescribeThing
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DescribeThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeThing(ctx context.Context, params *DescribeThingInput, optFns ...func(*Options)) (*DescribeThingOutput, error) {
 	if params == nil {
@@ -49,8 +48,8 @@ type DescribeThingOutput struct {
 	// The name of the billing group the thing belongs to.
 	BillingGroupName *string
 
-	// The default MQTT client ID. For a typical device, the thing name is also used as
-	// the default MQTT client ID. Although we don’t require a mapping between a
+	// The default MQTT client ID. For a typical device, the thing name is also used
+	// as the default MQTT client ID. Although we don’t require a mapping between a
 	// thing's registry name and its use of MQTT client IDs, certificates, or shadow
 	// state, we recommend that you choose a thing name and use it as the MQTT client
 	// ID for the registry and the Device Shadow service. This lets you better organize

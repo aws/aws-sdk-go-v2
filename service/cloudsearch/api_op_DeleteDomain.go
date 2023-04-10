@@ -13,8 +13,7 @@ import (
 
 // Permanently deletes a search domain and all of its data. Once a domain has been
 // deleted, it cannot be recovered. For more information, see Deleting a Search
-// Domain
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html)
+// Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {
 	if params == nil {

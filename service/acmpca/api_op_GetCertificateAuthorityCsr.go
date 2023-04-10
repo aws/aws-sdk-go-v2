@@ -17,13 +17,11 @@ import (
 )
 
 // Retrieves the certificate signing request (CSR) for your private certificate
-// authority (CA). The CSR is created when you call the CreateCertificateAuthority
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
+// authority (CA). The CSR is created when you call the CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 // action. Sign the CSR with your Amazon Web Services Private CA-hosted or
 // on-premises root or subordinate CA. Then import the signed certificate back into
 // Amazon Web Services Private CA by calling the
-// ImportCertificateAuthorityCertificate
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)
+// ImportCertificateAuthorityCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)
 // action. The CSR is returned as a base64 PEM-encoded string.
 func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCertificateAuthorityCsrInput, optFns ...func(*Options)) (*GetCertificateAuthorityCsrOutput, error) {
 	if params == nil {
@@ -43,8 +41,7 @@ func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCert
 type GetCertificateAuthorityCsrInput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called the
-	// CreateCertificateAuthority
-	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
+	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 	// action. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
@@ -152,10 +149,10 @@ type CertificateAuthorityCSRCreatedWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, CertificateAuthorityCSRCreatedWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, CertificateAuthorityCSRCreatedWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

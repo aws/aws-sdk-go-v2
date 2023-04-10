@@ -18,8 +18,8 @@ type Block struct {
 	noSmithyDocumentSerde
 }
 
-// A block of data in an Amazon Elastic Block Store snapshot that is different from
-// another snapshot of the same volume/snapshot lineage.
+// A block of data in an Amazon Elastic Block Store snapshot that is different
+// from another snapshot of the same volume/snapshot lineage.
 type ChangedBlock struct {
 
 	// The block index.

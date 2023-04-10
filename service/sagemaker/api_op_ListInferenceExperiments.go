@@ -60,11 +60,11 @@ type ListInferenceExperimentsInput struct {
 	SortOrder types.SortOrder
 
 	// Selects inference experiments which are in this status. For the possible
-	// statuses, see DescribeInferenceExperimentResponse$Status.
+	// statuses, see DescribeInferenceExperimentResponse$Status .
 	StatusEquals types.InferenceExperimentStatus
 
 	// Selects inference experiments of this type. For the possible types of inference
-	// experiments, see CreateInferenceExperimentRequest$Type.
+	// experiments, see CreateInferenceExperimentRequest$Type .
 	Type types.InferenceExperimentType
 
 	noSmithyDocumentSerde

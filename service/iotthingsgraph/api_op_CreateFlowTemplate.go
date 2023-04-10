@@ -35,7 +35,7 @@ func (c *Client) CreateFlowTemplate(ctx context.Context, params *CreateFlowTempl
 
 type CreateFlowTemplateInput struct {
 
-	// The workflow DefinitionDocument.
+	// The workflow DefinitionDocument .
 	//
 	// This member is required.
 	Definition *types.DefinitionDocument

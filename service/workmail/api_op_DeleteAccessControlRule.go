@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an access control rule for the specified WorkMail organization. Deleting
-// already deleted and non-existing rules does not produce an error. In those
-// cases, the service sends back an HTTP 200 response with an empty HTTP body.
+// Deletes an access control rule for the specified WorkMail organization.
+// Deleting already deleted and non-existing rules does not produce an error. In
+// those cases, the service sends back an HTTP 200 response with an empty HTTP
+// body.
 func (c *Client) DeleteAccessControlRule(ctx context.Context, params *DeleteAccessControlRuleInput, optFns ...func(*Options)) (*DeleteAccessControlRuleOutput, error) {
 	if params == nil {
 		params = &DeleteAccessControlRuleInput{}

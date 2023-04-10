@@ -13,17 +13,12 @@ import (
 )
 
 // Deletes a resource from the Resilience Hub application.
-//
-// * You can only delete a
-// manually added resource. To exclude non-manually added resources, use the
-// UpdateAppVersionResource API.
-//
-// * This action has no effect outside Resilience
-// Hub.
-//
-// * This API updates the Resilience Hub application draft version. To use
-// this resource for running resiliency assessments, you must publish the
-// Resilience Hub application using the PublishAppVersion API.
+//   - You can only delete a manually added resource. To exclude non-manually
+//     added resources, use the UpdateAppVersionResource API.
+//   - This action has no effect outside Resilience Hub.
+//   - This API updates the Resilience Hub application draft version. To use this
+//     resource for running resiliency assessments, you must publish the Resilience Hub
+//     application using the PublishAppVersion API.
 func (c *Client) DeleteAppVersionResource(ctx context.Context, params *DeleteAppVersionResourceInput, optFns ...func(*Options)) (*DeleteAppVersionResourceOutput, error) {
 	if params == nil {
 		params = &DeleteAppVersionResourceInput{}
@@ -41,11 +36,10 @@ func (c *Client) DeleteAppVersionResource(ctx context.Context, params *DeleteApp
 
 type DeleteAppVersionResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -56,9 +50,9 @@ type DeleteAppVersionResourceInput struct {
 	// The Amazon Web Services region that owns the physical resource.
 	AwsRegion *string
 
-	// Used for an idempotency token. A client token is a unique, case-sensitive string
-	// of up to 64 ASCII characters. You should not reuse the same client token for
-	// other API requests.
+	// Used for an idempotency token. A client token is a unique, case-sensitive
+	// string of up to 64 ASCII characters. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
 	// The logical identifier of the resource.
@@ -75,11 +69,10 @@ type DeleteAppVersionResourceInput struct {
 
 type DeleteAppVersionResourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string

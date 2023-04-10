@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the settings for a cluster. You can use this operation to change one or
-// more cluster configuration settings by specifying the settings and the new
+// Modifies the settings for a cluster. You can use this operation to change one
+// or more cluster configuration settings by specifying the settings and the new
 // values.
 func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, optFns ...func(*Options)) (*UpdateClusterOutput, error) {
 	if params == nil {
@@ -52,23 +52,14 @@ type UpdateClusterInput struct {
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
-	//
-	// * sun
-	//
-	// * mon
-	//
-	// * tue
-	//
-	// * wed
-	//
-	// * thu
-	//
-	// * fri
-	//
-	// * sat
-	//
-	// Example:
-	// sun:23:00-mon:01:30
+	//   - sun
+	//   - mon
+	//   - tue
+	//   - wed
+	//   - thu
+	//   - fri
+	//   - sat
+	// Example: sun:23:00-mon:01:30
 	MaintenanceWindow *string
 
 	// A valid node type that you want to scale this cluster up or down to.
@@ -86,9 +77,9 @@ type UpdateClusterInput struct {
 	// The number of shards in the cluster
 	ShardConfiguration *types.ShardConfigurationRequest
 
-	// The number of days for which MemoryDB retains automatic cluster snapshots before
-	// deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot
-	// that was taken today is retained for 5 days before being deleted.
+	// The number of days for which MemoryDB retains automatic cluster snapshots
+	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a
+	// snapshot that was taken today is retained for 5 days before being deleted.
 	SnapshotRetentionLimit *int32
 
 	// The daily time range (in UTC) during which MemoryDB begins taking a daily

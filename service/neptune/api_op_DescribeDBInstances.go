@@ -41,30 +41,23 @@ type DescribeDBInstancesInput struct {
 	// The user-supplied instance identifier. If this parameter is specified,
 	// information from only the specific DB instance is returned. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * If supplied, must match the identifier of an
-	// existing DBInstance.
+	//   - If supplied, must match the identifier of an existing DBInstance.
 	DBInstanceIdentifier *string
 
 	// A filter that specifies one or more DB instances to describe. Supported
 	// filters:
-	//
-	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	// Resource Names (ARNs). The results list will only include information about the
-	// DB instances associated with the DB clusters identified by these ARNs.
-	//
-	// * engine
-	// - Accepts an engine name (such as neptune), and restricts the results list to DB
-	// instances created by that engine.
-	//
-	// For example, to invoke this API from the
-	// Amazon CLI and filter so that only Neptune DB instances are returned, you could
-	// use the following command:
+	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	//   Resource Names (ARNs). The results list will only include information about the
+	//   DB instances associated with the DB clusters identified by these ARNs.
+	//   - engine - Accepts an engine name (such as neptune ), and restricts the
+	//   results list to DB instances created by that engine.
+	// For example, to invoke this API from the Amazon CLI and filter so that only
+	// Neptune DB instances are returned, you could use the following command:
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous DescribeDBInstances request.
-	// If this parameter is specified, the response includes only records beyond the
-	// marker, up to the value specified by MaxRecords.
+	// An optional pagination token provided by a previous DescribeDBInstances
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -155,8 +148,8 @@ func (c *Client) addOperationDescribeDBInstancesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeDBInstancesAPIClient is a client that implements the DescribeDBInstances
-// operation.
+// DescribeDBInstancesAPIClient is a client that implements the
+// DescribeDBInstances operation.
 type DescribeDBInstancesAPIClient interface {
 	DescribeDBInstances(context.Context, *DescribeDBInstancesInput, ...func(*Options)) (*DescribeDBInstancesOutput, error)
 }
@@ -263,9 +256,10 @@ type DBInstanceAvailableWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBInstanceAvailableWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBInstanceAvailableWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -305,9 +299,9 @@ func NewDBInstanceAvailableWaiter(client DescribeDBInstancesAPIClient, optFns ..
 	}
 }
 
-// Wait calls the waiter function for DBInstanceAvailable waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for DBInstanceAvailable waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *DBInstanceAvailableWaiter) Wait(ctx context.Context, params *DescribeDBInstancesInput, maxWaitDur time.Duration, optFns ...func(*DBInstanceAvailableWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -558,9 +552,9 @@ type DBInstanceDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBInstanceDeletedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBInstanceDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -608,10 +602,10 @@ func (w *DBInstanceDeletedWaiter) Wait(ctx context.Context, params *DescribeDBIn
 	return err
 }
 
-// WaitForOutput calls the waiter function for DBInstanceDeleted waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for DBInstanceDeleted waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *DBInstanceDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeDBInstancesInput, maxWaitDur time.Duration, optFns ...func(*DBInstanceDeletedWaiterOptions)) (*DescribeDBInstancesOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

@@ -31,7 +31,7 @@ func (c *Client) DescribePullRequestEvents(ctx context.Context, params *Describe
 type DescribePullRequestEventsInput struct {
 
 	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests.
+	// ListPullRequests .
 	//
 	// This member is required.
 	PullRequestId *string
@@ -46,8 +46,8 @@ type DescribePullRequestEventsInput struct {
 	// be returned in a result.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	// Optional. The pull request event type about which you want to return

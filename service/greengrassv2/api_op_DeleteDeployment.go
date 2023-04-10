@@ -11,9 +11,8 @@ import (
 )
 
 // Deletes a deployment. To delete an active deployment, you must first cancel it.
-// For more information, see CancelDeployment
-// (https://docs.aws.amazon.com/iot/latest/apireference/API_CancelDeployment.html).
-// Deleting a deployment doesn't affect core devices that run that deployment,
+// For more information, see CancelDeployment (https://docs.aws.amazon.com/iot/latest/apireference/API_CancelDeployment.html)
+// . Deleting a deployment doesn't affect core devices that run that deployment,
 // because core devices store the deployment's configuration on the device.
 // Additionally, core devices can roll back to a previous deployment that has been
 // deleted.

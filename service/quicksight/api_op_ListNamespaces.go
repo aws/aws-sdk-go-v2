@@ -41,8 +41,8 @@ type ListNamespacesInput struct {
 	MaxResults *int32
 
 	// A unique pagination token that can be used in a subsequent request. You will
-	// receive a pagination token in the response body of a previous ListNameSpaces API
-	// call if there is more data that can be returned. To receive the data, make
+	// receive a pagination token in the response body of a previous ListNameSpaces
+	// API call if there is more data that can be returned. To receive the data, make
 	// another ListNamespaces API call with the returned token to retrieve the next
 	// page of data. Each token is valid for 24 hours. If you try to make a
 	// ListNamespaces API call with an expired token, you will receive a HTTP 400

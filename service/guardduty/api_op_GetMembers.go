@@ -36,8 +36,8 @@ type GetMembersInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The unique ID of the detector of the GuardDuty account whose members you want to
-	// retrieve.
+	// The unique ID of the detector of the GuardDuty account whose members you want
+	// to retrieve.
 	//
 	// This member is required.
 	DetectorId *string

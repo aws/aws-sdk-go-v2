@@ -29,8 +29,8 @@ func (c *Client) GetAutoTerminationPolicy(ctx context.Context, params *GetAutoTe
 
 type GetAutoTerminationPolicyInput struct {
 
-	// Specifies the ID of the Amazon EMR cluster for which the auto-termination policy
-	// will be fetched.
+	// Specifies the ID of the Amazon EMR cluster for which the auto-termination
+	// policy will be fetched.
 	//
 	// This member is required.
 	ClusterId *string

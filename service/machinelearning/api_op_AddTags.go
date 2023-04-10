@@ -31,7 +31,7 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 
 type AddTagsInput struct {
 
-	// The ID of the ML object to tag. For example, exampleModelId.
+	// The ID of the ML object to tag. For example, exampleModelId .
 	//
 	// This member is required.
 	ResourceId *string

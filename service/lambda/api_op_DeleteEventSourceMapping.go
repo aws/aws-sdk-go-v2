@@ -12,11 +12,10 @@ import (
 	"time"
 )
 
-// Deletes an event source mapping
-// (https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html). You
-// can get the identifier of a mapping from the output of ListEventSourceMappings.
-// When you delete an event source mapping, it enters a Deleting state and might
-// not be completely deleted for several seconds.
+// Deletes an event source mapping (https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html)
+// . You can get the identifier of a mapping from the output of
+// ListEventSourceMappings . When you delete an event source mapping, it enters a
+// Deleting state and might not be completely deleted for several seconds.
 func (c *Client) DeleteEventSourceMapping(ctx context.Context, params *DeleteEventSourceMappingInput, optFns ...func(*Options)) (*DeleteEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &DeleteEventSourceMappingInput{}
@@ -43,11 +42,11 @@ type DeleteEventSourceMappingInput struct {
 }
 
 // A mapping between an Amazon Web Services resource and a Lambda function. For
-// details, see CreateEventSourceMapping.
+// details, see CreateEventSourceMapping .
 type DeleteEventSourceMappingOutput struct {
 
-	// Specific configuration settings for an Amazon Managed Streaming for Apache Kafka
-	// (Amazon MSK) event source.
+	// Specific configuration settings for an Amazon Managed Streaming for Apache
+	// Kafka (Amazon MSK) event source.
 	AmazonManagedKafkaEventSourceConfig *types.AmazonManagedKafkaEventSourceConfig
 
 	// The maximum number of records in each batch that Lambda pulls from your stream
@@ -74,8 +73,8 @@ type DeleteEventSourceMappingOutput struct {
 	EventSourceArn *string
 
 	// An object that defines the filter criteria that determine whether Lambda should
-	// process an event. For more information, see Lambda event filtering
-	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).
+	// process an event. For more information, see Lambda event filtering (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html)
+	// .
 	FilterCriteria *types.FilterCriteria
 
 	// The ARN of the Lambda function.
@@ -125,8 +124,8 @@ type DeleteEventSourceMappingOutput struct {
 	Queues []string
 
 	// (Amazon SQS only) The scaling configuration for the event source. For more
-	// information, see Configuring maximum concurrency for Amazon SQS event sources
-	// (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency).
+	// information, see Configuring maximum concurrency for Amazon SQS event sources (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency)
+	// .
 	ScalingConfig *types.ScalingConfig
 
 	// The self-managed Apache Kafka cluster for your event source.
@@ -144,11 +143,11 @@ type DeleteEventSourceMappingOutput struct {
 	// supported only for Amazon Kinesis streams and Amazon DocumentDB.
 	StartingPosition types.EventSourcePosition
 
-	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading.
+	// With StartingPosition set to AT_TIMESTAMP , the time from which to start reading.
 	StartingPositionTimestamp *time.Time
 
-	// The state of the event source mapping. It can be one of the following: Creating,
-	// Enabling, Enabled, Disabling, Disabled, Updating, or Deleting.
+	// The state of the event source mapping. It can be one of the following: Creating
+	// , Enabling , Enabled , Disabling , Disabled , Updating , or Deleting .
 	State *string
 
 	// Indicates whether a user or Lambda made the last change to the event source

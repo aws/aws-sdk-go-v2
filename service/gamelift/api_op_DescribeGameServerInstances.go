@@ -24,8 +24,7 @@ import (
 // called with every game server claim request; this practice can cause you to
 // exceed your API limit, which results in errors. Instead, as a best practice,
 // cache the results and refresh your cache no more than once every 10 seconds.
-// Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) DescribeGameServerInstances(ctx context.Context, params *DescribeGameServerInstancesInput, optFns ...func(*Options)) (*DescribeGameServerInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerInstancesInput{}
@@ -49,7 +48,7 @@ type DescribeGameServerInstancesInput struct {
 	GameServerGroupName *string
 
 	// The Amazon EC2 instance IDs that you want to retrieve status on. Amazon EC2
-	// instance IDs use a 17-character format, for example: i-1234567890abcdef0. To
+	// instance IDs use a 17-character format, for example: i-1234567890abcdef0 . To
 	// retrieve all instances in the game server group, leave this parameter empty.
 	InstanceIds []string
 
@@ -57,9 +56,9 @@ type DescribeGameServerInstancesInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	noSmithyDocumentSerde

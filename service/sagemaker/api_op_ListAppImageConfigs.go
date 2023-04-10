@@ -62,10 +62,10 @@ type ListAppImageConfigsInput struct {
 	// AppImageConfigs.
 	NextToken *string
 
-	// The property used to sort results. The default value is CreationTime.
+	// The property used to sort results. The default value is CreationTime .
 	SortBy types.AppImageConfigSortKey
 
-	// The sort order. The default value is Descending.
+	// The sort order. The default value is Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -145,8 +145,8 @@ func (c *Client) addOperationListAppImageConfigsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListAppImageConfigsAPIClient is a client that implements the ListAppImageConfigs
-// operation.
+// ListAppImageConfigsAPIClient is a client that implements the
+// ListAppImageConfigs operation.
 type ListAppImageConfigsAPIClient interface {
 	ListAppImageConfigs(context.Context, *ListAppImageConfigsInput, ...func(*Options)) (*ListAppImageConfigsOutput, error)
 }

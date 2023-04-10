@@ -114,8 +114,8 @@ func (c *Client) addOperationListAttributeGroupsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListAttributeGroupsAPIClient is a client that implements the ListAttributeGroups
-// operation.
+// ListAttributeGroupsAPIClient is a client that implements the
+// ListAttributeGroups operation.
 type ListAttributeGroupsAPIClient interface {
 	ListAttributeGroups(context.Context, *ListAttributeGroupsInput, ...func(*Options)) (*ListAttributeGroupsOutput, error)
 }

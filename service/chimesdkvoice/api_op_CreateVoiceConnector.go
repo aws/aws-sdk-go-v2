@@ -12,9 +12,8 @@ import (
 )
 
 // Creates an Amazon Chime SDK Voice Connector. For more information about Voice
-// Connectors, see Managing Amazon Chime SDK Voice Connector groups
-// (https://docs.aws.amazon.com/chime-sdk/latest/ag/voice-connector-groups.html) in
-// the Amazon Chime SDK Administrator Guide.
+// Connectors, see Managing Amazon Chime SDK Voice Connector groups (https://docs.aws.amazon.com/chime-sdk/latest/ag/voice-connector-groups.html)
+// in the Amazon Chime SDK Administrator Guide.
 func (c *Client) CreateVoiceConnector(ctx context.Context, params *CreateVoiceConnectorInput, optFns ...func(*Options)) (*CreateVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &CreateVoiceConnectorInput{}
@@ -42,8 +41,8 @@ type CreateVoiceConnectorInput struct {
 	// This member is required.
 	RequireEncryption *bool
 
-	// The AWS Region in which the Amazon Chime SDK Voice Connector is created. Default
-	// value: us-east-1 .
+	// The AWS Region in which the Amazon Chime SDK Voice Connector is created.
+	// Default value: us-east-1 .
 	AwsRegion types.VoiceConnectorAwsRegion
 
 	noSmithyDocumentSerde

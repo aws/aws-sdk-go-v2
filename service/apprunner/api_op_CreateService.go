@@ -13,9 +13,8 @@ import (
 
 // Create an App Runner service. After the service is created, the action also
 // automatically starts a deployment. This is an asynchronous operation. On a
-// successful call, you can use the returned OperationId and the ListOperations
-// (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html) call
-// to track the operation's progress.
+// successful call, you can use the returned OperationId and the ListOperations (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html)
+// call to track the operation's progress.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -61,8 +60,8 @@ type CreateServiceInput struct {
 	// Runner uses an Amazon Web Services managed key.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// The settings for the health check that App Runner performs to monitor the health
-	// of the App Runner service.
+	// The settings for the health check that App Runner performs to monitor the
+	// health of the App Runner service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
 	// The runtime configuration of instances (scaling units) of your service.
@@ -85,9 +84,8 @@ type CreateServiceInput struct {
 type CreateServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations
-	// (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html) call
-	// to track the operation's progress.
+	// use it combined with the ListOperations (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html)
+	// call to track the operation's progress.
 	//
 	// This member is required.
 	OperationId *string

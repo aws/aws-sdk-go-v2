@@ -34,9 +34,7 @@ func (c *Client) AddWorkingStorage(ctx context.Context, params *AddWorkingStorag
 }
 
 // A JSON object containing one or more of the following fields:
-//
-// *
-// AddWorkingStorageInput$DiskIds
+//   - AddWorkingStorageInput$DiskIds
 type AddWorkingStorageInput struct {
 
 	// An array of strings that identify disks that are to be configured as working
@@ -46,8 +44,8 @@ type AddWorkingStorageInput struct {
 	// This member is required.
 	DiskIds []string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -55,12 +53,12 @@ type AddWorkingStorageInput struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON object containing the Amazon Resource Name (ARN) of the gateway for which
-// working storage was configured.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway for
+// which working storage was configured.
 type AddWorkingStorageOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

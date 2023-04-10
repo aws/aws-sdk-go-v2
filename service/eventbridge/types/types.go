@@ -76,15 +76,15 @@ type Archive struct {
 // ECS tasks that use the awsvpc network mode.
 type AwsVpcConfiguration struct {
 
-	// Specifies the subnets associated with the task. These subnets must all be in the
-	// same VPC. You can specify as many as 16 subnets.
+	// Specifies the subnets associated with the task. These subnets must all be in
+	// the same VPC. You can specify as many as 16 subnets.
 	//
 	// This member is required.
 	Subnets []string
 
 	// Specifies whether the task's elastic network interface receives a public IP
-	// address. You can specify ENABLED only when LaunchType in EcsParameters is set to
-	// FARGATE.
+	// address. You can specify ENABLED only when LaunchType in EcsParameters is set
+	// to FARGATE .
 	AssignPublicIp AssignPublicIp
 
 	// Specifies the security groups associated with the task. These security groups
@@ -138,9 +138,9 @@ type BatchParameters struct {
 	noSmithyDocumentSerde
 }
 
-// The retry strategy to use for failed jobs, if the target is an Batch job. If you
-// specify a retry strategy here, it overrides the retry strategy defined in the
-// job definition.
+// The retry strategy to use for failed jobs, if the target is an Batch job. If
+// you specify a retry strategy here, it overrides the retry strategy defined in
+// the job definition.
 type BatchRetryStrategy struct {
 
 	// The number of times to attempt to retry, if the job fails. Valid values are
@@ -151,8 +151,7 @@ type BatchRetryStrategy struct {
 }
 
 // The details of a capacity provider strategy. To learn more, see
-// CapacityProviderStrategyItem
-// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html)
+// CapacityProviderStrategyItem (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html)
 // in the Amazon ECS API Reference.
 type CapacityProviderStrategyItem struct {
 
@@ -167,9 +166,9 @@ type CapacityProviderStrategyItem struct {
 	// used.
 	Base int32
 
-	// The weight value designates the relative percentage of the total number of tasks
-	// launched that should use the specified capacity provider. The weight value is
-	// taken into consideration after the base value, if defined, is satisfied.
+	// The weight value designates the relative percentage of the total number of
+	// tasks launched that should use the specified capacity provider. The weight value
+	// is taken into consideration after the base value, if defined, is satisfied.
 	Weight int32
 
 	noSmithyDocumentSerde
@@ -178,20 +177,20 @@ type CapacityProviderStrategyItem struct {
 // A JSON string which you can use to limit the event bus permissions you are
 // granting to only accounts that fulfill the condition. Currently, the only
 // supported condition is membership in a certain Amazon Web Services organization.
-// The string must contain Type, Key, and Value fields. The Value field specifies
-// the ID of the Amazon Web Services organization. Following is an example value
-// for Condition: '{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
-// "o-1234567890"}'
+// The string must contain Type , Key , and Value fields. The Value field
+// specifies the ID of the Amazon Web Services organization. Following is an
+// example value for Condition : '{"Type" : "StringEquals", "Key":
+// "aws:PrincipalOrgID", "Value": "o-1234567890"}'
 type Condition struct {
 
 	// Specifies the key for the condition. Currently the only supported key is
-	// aws:PrincipalOrgID.
+	// aws:PrincipalOrgID .
 	//
 	// This member is required.
 	Key *string
 
 	// Specifies the type of condition. Currently the only supported value is
-	// StringEquals.
+	// StringEquals .
 	//
 	// This member is required.
 	Type *string
@@ -236,8 +235,8 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the authorization parameters for the connection if API Key is specified
-// as the authorization type.
+// Contains the authorization parameters for the connection if API Key is
+// specified as the authorization type.
 type ConnectionApiKeyAuthResponseParameters struct {
 
 	// The name of the header to use for the APIKeyValue used for authorization.
@@ -339,8 +338,9 @@ type ConnectionOAuthResponseParameters struct {
 	// The URL to the HTTP endpoint that authorized the request.
 	AuthorizationEndpoint *string
 
-	// A ConnectionOAuthClientResponseParameters object that contains details about the
-	// client parameters returned when OAuth is specified as the authorization type.
+	// A ConnectionOAuthClientResponseParameters object that contains details about
+	// the client parameters returned when OAuth is specified as the authorization
+	// type.
 	ClientParameters *ConnectionOAuthClientResponseParameters
 
 	// The method used to connect to the HTTP endpoint.
@@ -398,8 +398,8 @@ type CreateConnectionAuthRequestParameters struct {
 
 	// A ConnectionHttpParameters object that contains the API key authorization
 	// parameters to use for the connection. Note that if you include additional
-	// parameters for the target of a rule via HttpParameters, including query strings,
-	// the parameters added for the connection take precedence.
+	// parameters for the target of a rule via HttpParameters , including query
+	// strings, the parameters added for the connection take precedence.
 	InvocationHttpParameters *ConnectionHttpParameters
 
 	// A CreateConnectionOAuthRequestParameters object that contains the OAuth
@@ -488,20 +488,19 @@ type EcsParameters struct {
 	TaskDefinitionArn *string
 
 	// The capacity provider strategy to use for the task. If a
-	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
-	// If no capacityProviderStrategy or launchType is specified, the
+	// capacityProviderStrategy is specified, the launchType parameter must be
+	// omitted. If no capacityProviderStrategy or launchType is specified, the
 	// defaultCapacityProviderStrategy for the cluster is used.
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
-	// information, see Tagging Your Amazon ECS Resources
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
-	// Whether or not to enable the execute command functionality for the containers in
-	// this task. If true, this enables execute command functionality on all containers
-	// in the task.
+	// Whether or not to enable the execute command functionality for the containers
+	// in this task. If true, this enables execute command functionality on all
+	// containers in the task.
 	EnableExecuteCommand bool
 
 	// Specifies an ECS task group for the task. The maximum length is 255 characters.
@@ -510,8 +509,7 @@ type EcsParameters struct {
 	// Specifies the launch type on which your task is running. The launch type that
 	// you specify here must match one of the launch type (compatibilities) of the
 	// target task. The FARGATE value is supported only in the Regions where Fargate
-	// with Amazon ECS is supported. For more information, see Fargate on Amazon ECS
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html)
+	// with Amazon ECS is supported. For more information, see Fargate on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType
 
@@ -523,27 +521,26 @@ type EcsParameters struct {
 	// awsvpc network mode, the task fails.
 	NetworkConfiguration *NetworkConfiguration
 
-	// An array of placement constraint objects to use for the task. You can specify up
-	// to 10 constraints per task (including constraints in the task definition and
+	// An array of placement constraint objects to use for the task. You can specify
+	// up to 10 constraints per task (including constraints in the task definition and
 	// those specified at runtime).
 	PlacementConstraints []PlacementConstraint
 
-	// The placement strategy objects to use for the task. You can specify a maximum of
-	// five strategy rules per task.
+	// The placement strategy objects to use for the task. You can specify a maximum
+	// of five strategy rules per task.
 	PlacementStrategy []PlacementStrategy
 
-	// Specifies the platform version for the task. Specify only the numeric portion of
-	// the platform version, such as 1.1.0. This structure is used only if LaunchType
-	// is FARGATE. For more information about valid platform versions, see Fargate
-	// Platform Versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// Specifies the platform version for the task. Specify only the numeric portion
+	// of the platform version, such as 1.1.0 . This structure is used only if
+	// LaunchType is FARGATE . For more information about valid platform versions, see
+	// Fargate Platform Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
-	// Specifies whether to propagate the tags from the task definition to the task. If
-	// no value is specified, the tags are not propagated. Tags can only be propagated
-	// to the task during task creation. To add tags to a task after task creation, use
-	// the TagResource API action.
+	// Specifies whether to propagate the tags from the task definition to the task.
+	// If no value is specified, the tags are not propagated. Tags can only be
+	// propagated to the task during task creation. To add tags to a task after task
+	// creation, use the TagResource API action.
 	PropagateTags PropagateTags
 
 	// The reference ID to use for the task.
@@ -551,21 +548,20 @@ type EcsParameters struct {
 
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
-	// define. To learn more, see RunTask
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags)
+	// define. To learn more, see RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags)
 	// in the Amazon ECS API Reference.
 	Tags []Tag
 
-	// The number of tasks to create based on TaskDefinition. The default is 1.
+	// The number of tasks to create based on TaskDefinition . The default is 1.
 	TaskCount *int32
 
 	noSmithyDocumentSerde
 }
 
 // A global endpoint used to improve your application's availability by making it
-// regional-fault tolerant. For more information about global endpoints, see Making
-// applications Regional-fault tolerant with global endpoints and event replication
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
+// regional-fault tolerant. For more information about global endpoints, see
+// Making applications Regional-fault tolerant with global endpoints and event
+// replication (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
 // in the Amazon EventBridge User Guide.
 type Endpoint struct {
 
@@ -580,7 +576,7 @@ type Endpoint struct {
 
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
 	// https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
-	// abcde.veo.
+	// abcde.veo .
 	EndpointId *string
 
 	// The URL of the endpoint.
@@ -595,9 +591,10 @@ type Endpoint struct {
 	// The name of the endpoint.
 	Name *string
 
-	// Whether event replication was enabled or disabled for this endpoint. The default
-	// state is ENABLED which means you must supply a RoleArn. If you don't have a
-	// RoleArn or you don't want event replication enabled, set the state to DISABLED.
+	// Whether event replication was enabled or disabled for this endpoint. The
+	// default state is ENABLED which means you must supply a RoleArn . If you don't
+	// have a RoleArn or you don't want event replication enabled, set the state to
+	// DISABLED .
 	ReplicationConfig *ReplicationConfig
 
 	// The ARN of the role used by event replication for the endpoint.
@@ -626,8 +623,8 @@ type EndpointEventBus struct {
 	noSmithyDocumentSerde
 }
 
-// An event bus receives events from a source, uses rules to evaluate them, applies
-// any configured input transformation, and routes them to the appropriate
+// An event bus receives events from a source, uses rules to evaluate them,
+// applies any configured input transformation, and routes them to the appropriate
 // target(s). Your account's default event bus receives events from Amazon Web
 // Services services. A custom event bus can receive events from your custom
 // applications and services. A partner event bus receives events from an event
@@ -679,8 +676,8 @@ type EventSource struct {
 	noSmithyDocumentSerde
 }
 
-// The failover configuration for an endpoint. This includes what triggers failover
-// and what happens when it's triggered.
+// The failover configuration for an endpoint. This includes what triggers
+// failover and what happens when it's triggered.
 type FailoverConfig struct {
 
 	// The main Region of the endpoint.
@@ -703,8 +700,8 @@ type FailoverConfig struct {
 // Connection taking precedence.
 type HttpParameters struct {
 
-	// The headers that need to be sent as part of request invoking the API Gateway API
-	// or EventBridge ApiDestination.
+	// The headers that need to be sent as part of request invoking the API Gateway
+	// API or EventBridge ApiDestination.
 	HeaderParameters map[string]string
 
 	// The path parameter values to be used to populate API Gateway API or EventBridge
@@ -718,49 +715,39 @@ type HttpParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the parameters needed for you to provide custom input to a target based
-// on one or more pieces of data extracted from the event.
+// Contains the parameters needed for you to provide custom input to a target
+// based on one or more pieces of data extracted from the event.
 type InputTransformer struct {
 
 	// Input template where you specify placeholders that will be filled with the
 	// values of the keys from InputPathsMap to customize the data sent to the target.
 	// Enclose each InputPathsMaps value in brackets: <value> If InputTemplate is a
 	// JSON object (surrounded by curly braces), the following restrictions apply:
-	//
-	// *
-	// The placeholder cannot be used as an object key.
-	//
-	// The following example shows
-	// the syntax for using InputPathsMap and InputTemplate.  "InputTransformer":
-	//
-	// {
+	//   - The placeholder cannot be used as an object key.
+	// The following example shows the syntax for using InputPathsMap and InputTemplate
+	// . "InputTransformer":
+	//     {
 	//
 	//     "InputPathsMap": {"instance": "$.detail.instance","status":
-	// "$.detail.status"},
+	//     "$.detail.status"},
 	//
 	//     "InputTemplate": " is in state "
-	//
-	// } To have the
-	// InputTemplate include quote marks within a JSON string, escape each quote marks
-	// with a slash, as in the following example:  "InputTransformer":
+	// } To have the InputTemplate include quote marks within a JSON string, escape
+	// each quote marks with a slash, as in the following example: "InputTransformer":
 	//     {
 	//
-	//
-	// "InputPathsMap": {"instance": "$.detail.instance","status":
-	// "$.detail.status"},
+	//     "InputPathsMap": {"instance": "$.detail.instance","status":
+	//     "$.detail.status"},
 	//
 	//     "InputTemplate": " is in state \"\""
-	//
-	// } The
-	// InputTemplate can also be valid JSON with varibles in quotes or out, as in the
-	// following example:  "InputTransformer":
+	// } The InputTemplate can also be valid JSON with varibles in quotes or out, as
+	// in the following example: "InputTransformer":
 	//     {
 	//
-	//     "InputPathsMap": {"instance":
-	// "$.detail.instance","status": "$.detail.status"},
+	//     "InputPathsMap": {"instance": "$.detail.instance","status":
+	//     "$.detail.status"},
 	//
-	//     "InputTemplate":
-	// '{"myInstance": ,"myStatus": " is in state \"\""}'
+	//     "InputTemplate": '{"myInstance": ,"myStatus": " is in state \"\""}'
 	//
 	//     }
 	//
@@ -778,15 +765,14 @@ type InputTransformer struct {
 	noSmithyDocumentSerde
 }
 
-// This object enables you to specify a JSON path to extract from the event and use
-// as the partition key for the Amazon Kinesis data stream, so that you can control
-// the shard to which the event goes. If you do not include this parameter, the
-// default is to use the eventId as the partition key.
+// This object enables you to specify a JSON path to extract from the event and
+// use as the partition key for the Amazon Kinesis data stream, so that you can
+// control the shard to which the event goes. If you do not include this parameter,
+// the default is to use the eventId as the partition key.
 type KinesisParameters struct {
 
 	// The JSON path to be extracted from the event and used as the partition key. For
-	// more information, see Amazon Kinesis Streams Key Concepts
-	// (https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key)
+	// more information, see Amazon Kinesis Streams Key Concepts (https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key)
 	// in the Amazon Kinesis Streams Developer Guide.
 	//
 	// This member is required.
@@ -844,15 +830,13 @@ type PartnerEventSourceAccount struct {
 }
 
 // An object representing a constraint on task placement. To learn more, see Task
-// Placement Constraints
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
+// Placement Constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type PlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. You cannot
-	// specify an expression if the constraint type is distinctInstance. To learn more,
-	// see Cluster Query Language
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+	// specify an expression if the constraint type is distinctInstance . To learn
+	// more, see Cluster Query Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Expression *string
 
@@ -865,8 +849,7 @@ type PlacementConstraint struct {
 }
 
 // The task placement strategy for a task or service. To learn more, see Task
-// Placement Strategies
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
+// Placement Strategies (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
 // in the Amazon Elastic Container Service Service Developer Guide.
 type PlacementStrategy struct {
 
@@ -918,7 +901,7 @@ type PutEventsRequestEntry struct {
 	// the default event bus is used. If you're using a global endpoint with a custom
 	// bus, you must enter the name, not the ARN, of the event bus in either the
 	// primary or secondary Region here and the corresponding event bus in the other
-	// Region will be determined based on the endpoint referenced by the EndpointId.
+	// Region will be determined based on the endpoint referenced by the EndpointId .
 	EventBusName *string
 
 	// Amazon Web Services resources, identified by Amazon Resource Name (ARN), which
@@ -928,17 +911,14 @@ type PutEventsRequestEntry struct {
 	// The source of the event.
 	Source *string
 
-	// The time stamp of the event, per RFC3339
-	// (https://www.rfc-editor.org/rfc/rfc3339.txt). If no time stamp is provided, the
-	// time stamp of the PutEvents
-	// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
+	// The time stamp of the event, per RFC3339 (https://www.rfc-editor.org/rfc/rfc3339.txt)
+	// . If no time stamp is provided, the time stamp of the PutEvents (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
 	// call is used.
 	Time *time.Time
 
 	// An X-Ray trace header, which is an http header (X-Amzn-Trace-Id) that contains
 	// the trace-id associated with the event. To learn more about X-Ray trace headers,
-	// see Tracing header
-	// (https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader)
+	// see Tracing header (https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader)
 	// in the X-Ray Developer Guide.
 	TraceHeader *string
 
@@ -946,8 +926,8 @@ type PutEventsRequestEntry struct {
 }
 
 // Represents an event that failed to be submitted. For information about the
-// errors that are common to all actions, see Common Errors
-// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html).
+// errors that are common to all actions, see Common Errors (https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html)
+// .
 type PutEventsResultEntry struct {
 
 	// The error code that indicates why the event submission failed.
@@ -969,8 +949,8 @@ type PutPartnerEventsRequestEntry struct {
 	// contain fields and nested subobjects.
 	Detail *string
 
-	// A free-form string, with a maximum of 128 characters, used to decide what fields
-	// to expect in the event detail.
+	// A free-form string, with a maximum of 128 characters, used to decide what
+	// fields to expect in the event detail.
 	DetailType *string
 
 	// Amazon Web Services resources, identified by Amazon Resource Name (ARN), which
@@ -1005,7 +985,7 @@ type PutPartnerEventsResultEntry struct {
 type PutTargetsResultEntry struct {
 
 	// The error code that indicates why the target addition failed. If the value is
-	// ConcurrentModificationException, too many requests were made at the same time.
+	// ConcurrentModificationException , too many requests were made at the same time.
 	ErrorCode *string
 
 	// The error message that explains why the target addition failed.
@@ -1038,12 +1018,12 @@ type RedshiftDataParameters struct {
 	// Serverless workgroup.
 	DbUser *string
 
-	// The name or ARN of the secret that enables access to the database. Required when
-	// authenticating using Amazon Web Services Secrets Manager.
+	// The name or ARN of the secret that enables access to the database. Required
+	// when authenticating using Amazon Web Services Secrets Manager.
 	SecretManagerArn *string
 
-	// The name of the SQL statement. You can name the SQL statement when you create it
-	// to identify the query.
+	// The name of the SQL statement. You can name the SQL statement when you create
+	// it to identify the query.
 	StatementName *string
 
 	// Indicates whether to send an event back to EventBridge after the SQL statement
@@ -1057,7 +1037,7 @@ type RedshiftDataParameters struct {
 type RemoveTargetsResultEntry struct {
 
 	// The error code that indicates why the target removal failed. If the value is
-	// ConcurrentModificationException, too many requests were made at the same time.
+	// ConcurrentModificationException , too many requests were made at the same time.
 	ErrorCode *string
 
 	// The error message that explains why the target removal failed.
@@ -1083,8 +1063,8 @@ type Replay struct {
 	EventSourceArn *string
 
 	// A time stamp for the time to start replaying events. This is determined by the
-	// time in the event as described in Time
-	// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEventsRequestEntry.html#eventbridge-Type-PutEventsRequestEntry-Time).
+	// time in the event as described in Time (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEventsRequestEntry.html#eventbridge-Type-PutEventsRequestEntry-Time)
+	// .
 	EventStartTime *time.Time
 
 	// A time stamp for the time that the replay completed.
@@ -1146,8 +1126,8 @@ type RetryPolicy struct {
 // The routing configuration of the endpoint.
 type RoutingConfig struct {
 
-	// The failover configuration for an endpoint. This includes what triggers failover
-	// and what happens when it's triggered.
+	// The failover configuration for an endpoint. This includes what triggers
+	// failover and what happens when it's triggered.
 	//
 	// This member is required.
 	FailoverConfig *FailoverConfig
@@ -1164,13 +1144,12 @@ type Rule struct {
 	// The description of the rule.
 	Description *string
 
-	// The name or ARN of the event bus associated with the rule. If you omit this, the
-	// default event bus is used.
+	// The name or ARN of the event bus associated with the rule. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	// The event pattern of the rule. For more information, see Events and Event
-	// Patterns
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
 	EventPattern *string
 
@@ -1189,10 +1168,10 @@ type Rule struct {
 	// Target structure, instead of here in this parameter.
 	RoleArn *string
 
-	// The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".
-	// For more information, see Creating an Amazon EventBridge rule that runs on a
-	// schedule
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html).
+	// The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5
+	// minutes)". For more information, see Creating an Amazon EventBridge rule that
+	// runs on a schedule (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html)
+	// .
 	ScheduleExpression *string
 
 	// The state of the rule.
@@ -1205,8 +1184,8 @@ type Rule struct {
 // specify which EC2 instances are to be sent the command.
 type RunCommandParameters struct {
 
-	// Currently, we support including only one RunCommandTarget block, which specifies
-	// either an array of InstanceIds or a tag.
+	// Currently, we support including only one RunCommandTarget block, which
+	// specifies either an array of InstanceIds or a tag.
 	//
 	// This member is required.
 	RunCommandTargets []RunCommandTarget
@@ -1219,12 +1198,12 @@ type RunCommandParameters struct {
 // this key may specify multiple values.
 type RunCommandTarget struct {
 
-	// Can be either tag: tag-key or InstanceIds.
+	// Can be either tag: tag-key or InstanceIds .
 	//
 	// This member is required.
 	Key *string
 
-	// If Key is tag: tag-key, Values is a list of tag values. If Key is InstanceIds,
+	// If Key is tag: tag-key, Values is a list of tag values. If Key is InstanceIds ,
 	// Values is a list of Amazon EC2 instance IDs.
 	//
 	// This member is required.
@@ -1250,8 +1229,8 @@ type SageMakerPipelineParameter struct {
 	noSmithyDocumentSerde
 }
 
-// These are custom parameters to use when the target is a SageMaker Model Building
-// Pipeline that starts based on EventBridge events.
+// These are custom parameters to use when the target is a SageMaker Model
+// Building Pipeline that starts based on EventBridge events.
 type SageMakerPipelineParameters struct {
 
 	// List of Parameter names and values for SageMaker Model Building Pipeline
@@ -1301,15 +1280,14 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// Targets are the resources to be invoked when a rule is triggered. For a complete
-// list of services and resources that can be set as a target, see PutTargets
-// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html).
-// If you are setting the event bus of another account as the target, and that
+// Targets are the resources to be invoked when a rule is triggered. For a
+// complete list of services and resources that can be set as a target, see
+// PutTargets (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html)
+// . If you are setting the event bus of another account as the target, and that
 // account granted permission to your account through an organization instead of
 // directly by the account ID, then you must specify a RoleArn with proper
 // permissions in the Target structure. For more information, see Sending and
-// Receiving Events Between Amazon Web Services Accounts
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
+// Receiving Events Between Amazon Web Services Accounts (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
 // in the Amazon EventBridge User Guide.
 type Target struct {
 
@@ -1324,10 +1302,9 @@ type Target struct {
 	// This member is required.
 	Id *string
 
-	// If the event target is an Batch job, this contains the job definition, job name,
-	// and other parameters. For more information, see Jobs
-	// (https://docs.aws.amazon.com/batch/latest/userguide/jobs.html) in the Batch User
-	// Guide.
+	// If the event target is an Batch job, this contains the job definition, job
+	// name, and other parameters. For more information, see Jobs (https://docs.aws.amazon.com/batch/latest/userguide/jobs.html)
+	// in the Batch User Guide.
 	BatchParameters *BatchParameters
 
 	// The DeadLetterConfig that defines the target queue to send dead-letter queue
@@ -1336,13 +1313,12 @@ type Target struct {
 
 	// Contains the Amazon ECS task definition and task count to be used, if the event
 	// target is an Amazon ECS task. For more information about Amazon ECS tasks, see
-	// Task Definitions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
+	// Task Definitions  (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
 	// in the Amazon EC2 Container Service Developer Guide.
 	EcsParameters *EcsParameters
 
-	// Contains the HTTP parameters to use when the target is a API Gateway endpoint or
-	// EventBridge ApiDestination. If you specify an API Gateway API or EventBridge
+	// Contains the HTTP parameters to use when the target is a API Gateway endpoint
+	// or EventBridge ApiDestination. If you specify an API Gateway API or EventBridge
 	// ApiDestination as a target, you can use this parameter to specify headers, path
 	// parameters, and query string keys/values as part of your target invoking
 	// request. If you're using ApiDestinations, the corresponding Connection can also
@@ -1352,14 +1328,14 @@ type Target struct {
 
 	// Valid JSON text passed to the target. In this case, nothing from the event
 	// itself is passed to the target. For more information, see The JavaScript Object
-	// Notation (JSON) Data Interchange Format
-	// (http://www.rfc-editor.org/rfc/rfc7159.txt).
+	// Notation (JSON) Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt)
+	// .
 	Input *string
 
 	// The value of the JSONPath that is used for extracting part of the matched event
 	// when passing it to the target. You may use JSON dot notation or bracket
-	// notation. For more information about JSON paths, see JSONPath
-	// (http://goessner.net/articles/JsonPath/).
+	// notation. For more information about JSON paths, see JSONPath (http://goessner.net/articles/JsonPath/)
+	// .
 	InputPath *string
 
 	// Settings to enable you to provide custom input to a target based on certain
@@ -1427,8 +1403,8 @@ type UpdateConnectionAuthRequestParameters struct {
 	// authorization parameters for Basic authorization.
 	BasicAuthParameters *UpdateConnectionBasicAuthRequestParameters
 
-	// A ConnectionHttpParameters object that contains the additional parameters to use
-	// for the connection.
+	// A ConnectionHttpParameters object that contains the additional parameters to
+	// use for the connection.
 	InvocationHttpParameters *ConnectionHttpParameters
 
 	// A UpdateConnectionOAuthRequestParameters object that contains the authorization

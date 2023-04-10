@@ -12,13 +12,11 @@ import (
 )
 
 // Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public
-// NAT gateway. For more information, see Work with NAT gateways
-// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
+// NAT gateway. For more information, see Work with NAT gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
 // in the Amazon Virtual Private Cloud User Guide. By default, you can associate up
 // to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by
 // requesting a quota adjustment. For more information, see Elastic IP address
-// quotas
-// (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips)
+// quotas (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips)
 // in the Amazon Virtual Private Cloud User Guide.
 func (c *Client) AssociateNatGatewayAddress(ctx context.Context, params *AssociateNatGatewayAddressInput, optFns ...func(*Options)) (*AssociateNatGatewayAddressOutput, error) {
 	if params == nil {
@@ -49,8 +47,8 @@ type AssociateNatGatewayAddressInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The private IPv4 addresses that you want to assign to the NAT gateway.

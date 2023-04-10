@@ -122,9 +122,9 @@ const (
 	LanguageCodeThTh LanguageCode = "th-TH"
 )
 
-// Values returns all known values for LanguageCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"en-US",
@@ -229,9 +229,9 @@ const (
 	SentimentNeutral  Sentiment = "NEUTRAL"
 )
 
-// Values returns all known values for Sentiment. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Sentiment. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Sentiment) Values() []Sentiment {
 	return []Sentiment{
 		"POSITIVE",
@@ -253,9 +253,9 @@ const (
 	SpecialtyUrology     Specialty = "UROLOGY"
 )
 
-// Values returns all known values for Specialty. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Specialty. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Specialty) Values() []Specialty {
 	return []Specialty{
 		"PRIMARYCARE",

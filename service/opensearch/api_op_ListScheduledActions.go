@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of configuration changes that are scheduled for a domain. These
-// changes can be service software updates
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
-// or blue/green Auto-Tune enhancements
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types).
+// Retrieves a list of configuration changes that are scheduled for a domain.
+// These changes can be service software updates (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
+// or blue/green Auto-Tune enhancements (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types)
+// .
 func (c *Client) ListScheduledActions(ctx context.Context, params *ListScheduledActionsInput, optFns ...func(*Options)) (*ListScheduledActionsOutput, error) {
 	if params == nil {
 		params = &ListScheduledActionsInput{}
@@ -43,7 +42,7 @@ type ListScheduledActionsInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial ListScheduledActions operation returns a nextToken, you can
+	// If your initial ListScheduledActions operation returns a nextToken , you can
 	// include the returned nextToken in subsequent ListScheduledActions operations,
 	// which returns results in the next page.
 	NextToken *string

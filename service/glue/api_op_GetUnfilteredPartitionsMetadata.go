@@ -14,7 +14,7 @@ import (
 
 // Retrieves partition metadata from the Data Catalog that contains unfiltered
 // metadata. For IAM authorization, the public IAM action associated with this API
-// is glue:GetPartitions.
+// is glue:GetPartitions .
 func (c *Client) GetUnfilteredPartitionsMetadata(ctx context.Context, params *GetUnfilteredPartitionsMetadataInput, optFns ...func(*Options)) (*GetUnfilteredPartitionsMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredPartitionsMetadataInput{}
@@ -75,27 +75,15 @@ type GetUnfilteredPartitionsMetadataInput struct {
 	// right operand; if yes, then the condition becomes true. Example: (a <= b) is
 	// true. AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL Logical operators. Supported
 	// Partition Key Types: The following are the supported partition keys.
-	//
-	// *
-	// string
-	//
-	// * date
-	//
-	// * timestamp
-	//
-	// * int
-	//
-	// * bigint
-	//
-	// * long
-	//
-	// * tinyint
-	//
-	// * smallint
-	//
-	// *
-	// decimal
-	//
+	//   - string
+	//   - date
+	//   - timestamp
+	//   - int
+	//   - bigint
+	//   - long
+	//   - tinyint
+	//   - smallint
+	//   - decimal
 	// If an type is encountered that is not valid, an exception is thrown.
 	Expression *string
 

@@ -54,8 +54,9 @@ type UpdateCellOutput struct {
 	// A list of cell ARNs.
 	Cells []string
 
-	// The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN)
-	// or a recovery group ARN. This is a list but currently can have only one element.
+	// The readiness scope for the cell, which can be a cell Amazon Resource Name
+	// (ARN) or a recovery group ARN. This is a list but currently can have only one
+	// element.
 	ParentReadinessScopes []string
 
 	// Tags on the resources.

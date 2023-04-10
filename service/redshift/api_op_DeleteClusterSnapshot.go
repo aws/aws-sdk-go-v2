@@ -35,9 +35,9 @@ func (c *Client) DeleteClusterSnapshot(ctx context.Context, params *DeleteCluste
 
 type DeleteClusterSnapshotInput struct {
 
-	// The unique identifier of the manual snapshot to be deleted. Constraints: Must be
-	// the name of an existing snapshot that is in the available, failed, or cancelled
-	// state.
+	// The unique identifier of the manual snapshot to be deleted. Constraints: Must
+	// be the name of an existing snapshot that is in the available , failed , or
+	// cancelled state.
 	//
 	// This member is required.
 	SnapshotIdentifier *string

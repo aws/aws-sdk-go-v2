@@ -50,9 +50,9 @@ const (
 	GameStateDeleting GameState = "DELETING"
 )
 
-// Values returns all known values for GameState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for GameState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (GameState) Values() []GameState {
 	return []GameState{
 		"ACTIVE",
@@ -70,8 +70,8 @@ const (
 	GeneratedCodeJobStatePending    GeneratedCodeJobState = "PENDING"
 )
 
-// Values returns all known values for GeneratedCodeJobState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for GeneratedCodeJobState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (GeneratedCodeJobState) Values() []GeneratedCodeJobState {
 	return []GeneratedCodeJobState{
@@ -91,9 +91,9 @@ const (
 	OperationReplace Operation = "REPLACE"
 )
 
-// Values returns all known values for Operation. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operation. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Operation) Values() []Operation {
 	return []Operation{
 		"ADD",

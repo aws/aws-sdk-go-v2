@@ -30,7 +30,7 @@ func (c *Client) ListVpcEndpoints(ctx context.Context, params *ListVpcEndpointsI
 
 type ListVpcEndpointsInput struct {
 
-	// If your initial ListVpcEndpoints operation returns a nextToken, you can include
+	// If your initial ListVpcEndpoints operation returns a nextToken , you can include
 	// the returned nextToken in subsequent ListVpcEndpoints operations, which returns
 	// results in the next page.
 	NextToken *string

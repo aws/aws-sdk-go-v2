@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to either upgrade your Amazon OpenSearch Service domain or perform an
-// upgrade eligibility check to a compatible version of OpenSearch or
+// Allows you to either upgrade your Amazon OpenSearch Service domain or perform
+// an upgrade eligibility check to a compatible version of OpenSearch or
 // Elasticsearch.
 func (c *Client) UpgradeDomain(ctx context.Context, params *UpgradeDomainInput, optFns ...func(*Options)) (*UpgradeDomainOutput, error) {
 	if params == nil {

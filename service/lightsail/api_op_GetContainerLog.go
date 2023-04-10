@@ -48,38 +48,24 @@ type GetContainerLogInput struct {
 	ServiceName *string
 
 	// The end of the time interval for which to get log data. Constraints:
-	//
-	// *
-	// Specified in Coordinated Universal Time (UTC).
-	//
-	// * Specified in the Unix time
-	// format. For example, if you wish to use an end time of October 1, 2018, at 9 PM
-	// UTC, specify 1538427600 as the end time.
-	//
-	// You can convert a human-friendly time
-	// to Unix time format using a converter like Epoch converter
-	// (https://www.epochconverter.com/).
+	//   - Specified in Coordinated Universal Time (UTC).
+	//   - Specified in the Unix time format. For example, if you wish to use an end
+	//   time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.
+	// You can convert a human-friendly time to Unix time format using a converter
+	// like Epoch converter (https://www.epochconverter.com/) .
 	EndTime *time.Time
 
 	// The pattern to use to filter the returned log events to a specific term. The
 	// following are a few examples of filter patterns that you can specify:
-	//
-	// * To
-	// return all log events, specify a filter pattern of "".
-	//
-	// * To exclude log events
-	// that contain the ERROR term, and return all other log events, specify a filter
-	// pattern of "-ERROR".
-	//
-	// * To return log events that contain the ERROR term,
-	// specify a filter pattern of "ERROR".
-	//
-	// * To return log events that contain both
-	// the ERROR and Exception terms, specify a filter pattern of "ERROR Exception".
-	//
-	// *
-	// To return log events that contain the ERROR or the Exception term, specify a
-	// filter pattern of "?ERROR ?Exception".
+	//   - To return all log events, specify a filter pattern of "" .
+	//   - To exclude log events that contain the ERROR term, and return all other log
+	//   events, specify a filter pattern of "-ERROR" .
+	//   - To return log events that contain the ERROR term, specify a filter pattern
+	//   of "ERROR" .
+	//   - To return log events that contain both the ERROR and Exception terms,
+	//   specify a filter pattern of "ERROR Exception" .
+	//   - To return log events that contain the ERROR or the Exception term, specify a
+	//   filter pattern of "?ERROR ?Exception" .
 	FilterPattern *string
 
 	// The token to advance to the next page of results from your request. To get a
@@ -89,17 +75,11 @@ type GetContainerLogInput struct {
 	PageToken *string
 
 	// The start of the time interval for which to get log data. Constraints:
-	//
-	// *
-	// Specified in Coordinated Universal Time (UTC).
-	//
-	// * Specified in the Unix time
-	// format. For example, if you wish to use a start time of October 1, 2018, at 8 PM
-	// UTC, specify 1538424000 as the start time.
-	//
-	// You can convert a human-friendly
-	// time to Unix time format using a converter like Epoch converter
-	// (https://www.epochconverter.com/).
+	//   - Specified in Coordinated Universal Time (UTC).
+	//   - Specified in the Unix time format. For example, if you wish to use a start
+	//   time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.
+	// You can convert a human-friendly time to Unix time format using a converter
+	// like Epoch converter (https://www.epochconverter.com/) .
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

@@ -38,8 +38,7 @@ type CreateDirectConnectGatewayAssociationInput struct {
 
 	// The Amazon VPC prefixes to advertise to the Direct Connect gateway This
 	// parameter is required when you create an association to a transit gateway. For
-	// information about how to set the prefixes, see Allowed Prefixes
-	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
+	// information about how to set the prefixes, see Allowed Prefixes (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
 	// in the Direct Connect User Guide.
 	AddAllowedPrefixesToDirectConnectGateway []types.RouteFilterPrefix
 

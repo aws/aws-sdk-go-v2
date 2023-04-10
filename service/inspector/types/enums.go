@@ -16,8 +16,8 @@ const (
 	AccessDeniedErrorCodeAccessDeniedToIamRole            AccessDeniedErrorCode = "ACCESS_DENIED_TO_IAM_ROLE"
 )
 
-// Values returns all known values for AccessDeniedErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AccessDeniedErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AccessDeniedErrorCode) Values() []AccessDeniedErrorCode {
 	return []AccessDeniedErrorCode{
@@ -88,9 +88,9 @@ const (
 	AssessmentRunNotificationSnsStatusCodeInternalError     AssessmentRunNotificationSnsStatusCode = "INTERNAL_ERROR"
 )
 
-// Values returns all known values for AssessmentRunNotificationSnsStatusCode. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for AssessmentRunNotificationSnsStatusCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AssessmentRunNotificationSnsStatusCode) Values() []AssessmentRunNotificationSnsStatusCode {
 	return []AssessmentRunNotificationSnsStatusCode{
@@ -148,9 +148,9 @@ const (
 	AssetTypeEc2Instance AssetType = "ec2-instance"
 )
 
-// Values returns all known values for AssetType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AssetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"ec2-instance",
@@ -286,8 +286,8 @@ const (
 	InvalidInputErrorCodeInvalidNumberOfSeverities                InvalidInputErrorCode = "INVALID_NUMBER_OF_SEVERITIES"
 )
 
-// Values returns all known values for InvalidInputErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InvalidInputErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InvalidInputErrorCode) Values() []InvalidInputErrorCode {
 	return []InvalidInputErrorCode{
@@ -402,8 +402,8 @@ const (
 	NoSuchEntityErrorCodeIamRoleDoesNotExist            NoSuchEntityErrorCode = "IAM_ROLE_DOES_NOT_EXIST"
 )
 
-// Values returns all known values for NoSuchEntityErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NoSuchEntityErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NoSuchEntityErrorCode) Values() []NoSuchEntityErrorCode {
 	return []NoSuchEntityErrorCode{
@@ -463,9 +463,9 @@ const (
 	ReportStatusCompleted      ReportStatus = "COMPLETED"
 )
 
-// Values returns all known values for ReportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ReportStatus) Values() []ReportStatus {
 	return []ReportStatus{
 		"WORK_IN_PROGRESS",
@@ -500,9 +500,9 @@ const (
 	ScopeTypeRulesPackageArn ScopeType = "RULES_PACKAGE_ARN"
 )
 
-// Values returns all known values for ScopeType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScopeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ScopeType) Values() []ScopeType {
 	return []ScopeType{
 		"INSTANCE_ID",

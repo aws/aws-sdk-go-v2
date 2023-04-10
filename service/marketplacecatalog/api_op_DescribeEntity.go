@@ -50,10 +50,10 @@ type DescribeEntityOutput struct {
 	// request.
 	EntityArn *string
 
-	// The identifier of the entity, in the format of EntityId@RevisionId.
+	// The identifier of the entity, in the format of EntityId@RevisionId .
 	EntityIdentifier *string
 
-	// The named type of the entity, in the format of EntityType@Version.
+	// The named type of the entity, in the format of EntityType@Version .
 	EntityType *string
 
 	// The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).

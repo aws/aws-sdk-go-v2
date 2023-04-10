@@ -14,8 +14,7 @@ import (
 )
 
 // Provides a list of batch load tasks, along with the name, status, when the task
-// is resumable until, and other details. See code sample
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-batch-load-tasks.html)
+// is resumable until, and other details. See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-batch-load-tasks.html)
 // for details.
 func (c *Client) ListBatchLoadTasks(ctx context.Context, params *ListBatchLoadTasksInput, optFns ...func(*Options)) (*ListBatchLoadTasksOutput, error) {
 	if params == nil {

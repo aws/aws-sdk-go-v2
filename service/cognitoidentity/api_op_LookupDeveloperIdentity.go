@@ -15,7 +15,7 @@ import (
 // identity. Either IdentityID or DeveloperUserIdentifier must not be null. If you
 // supply only one of these values, the other value will be searched in the
 // database and returned as a part of the response. If you supply both,
-// DeveloperUserIdentifier will be matched against IdentityID. If the values are
+// DeveloperUserIdentifier will be matched against IdentityID . If the values are
 // verified against the database, the response returns both values and is the same
 // as the request. Otherwise a ResourceConflictException is thrown.
 // LookupDeveloperIdentity is intended for low-throughput control plane operations:
@@ -60,10 +60,10 @@ type LookupDeveloperIdentityInput struct {
 
 	// A pagination token. The first call you make will have NextToken set to null.
 	// After that the service will return NextToken values as needed. For example,
-	// let's say you make a request with MaxResults set to 10, and there are 20 matches
-	// in the database. The service will return a pagination token as a part of the
-	// response. This token can be used to call the API again and get results starting
-	// from the 11th match.
+	// let's say you make a request with MaxResults set to 10, and there are 20
+	// matches in the database. The service will return a pagination token as a part of
+	// the response. This token can be used to call the API again and get results
+	// starting from the 11th match.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -82,10 +82,10 @@ type LookupDeveloperIdentityOutput struct {
 
 	// A pagination token. The first call you make will have NextToken set to null.
 	// After that the service will return NextToken values as needed. For example,
-	// let's say you make a request with MaxResults set to 10, and there are 20 matches
-	// in the database. The service will return a pagination token as a part of the
-	// response. This token can be used to call the API again and get results starting
-	// from the 11th match.
+	// let's say you make a request with MaxResults set to 10, and there are 20
+	// matches in the database. The service will return a pagination token as a part of
+	// the response. This token can be used to call the API again and get results
+	// starting from the 11th match.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

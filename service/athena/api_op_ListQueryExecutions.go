@@ -15,9 +15,8 @@ import (
 // specified workgroup. If a workgroup is not specified, returns a list of query
 // execution IDs for the primary workgroup. Requires you to have access to the
 // workgroup in which the queries ran. For code samples using the Amazon Web
-// Services SDK for Java, see Examples and Code Samples
-// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
-// Athena User Guide.
+// Services SDK for Java, see Examples and Code Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html)
+// in the Amazon Athena User Guide.
 func (c *Client) ListQueryExecutions(ctx context.Context, params *ListQueryExecutionsInput, optFns ...func(*Options)) (*ListQueryExecutionsOutput, error) {
 	if params == nil {
 		params = &ListQueryExecutionsInput{}
@@ -125,8 +124,8 @@ func (c *Client) addOperationListQueryExecutionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListQueryExecutionsAPIClient is a client that implements the ListQueryExecutions
-// operation.
+// ListQueryExecutionsAPIClient is a client that implements the
+// ListQueryExecutions operation.
 type ListQueryExecutionsAPIClient interface {
 	ListQueryExecutions(context.Context, *ListQueryExecutionsInput, ...func(*Options)) (*ListQueryExecutionsOutput, error)
 }

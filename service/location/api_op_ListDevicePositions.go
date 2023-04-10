@@ -39,8 +39,9 @@ type ListDevicePositionsInput struct {
 	// value: 100
 	MaxResults *int32
 
-	// The pagination token specifying which page of results to return in the response.
-	// If no token is provided, the default page is the first page. Default value: null
+	// The pagination token specifying which page of results to return in the
+	// response. If no token is provided, the default page is the first page. Default
+	// value: null
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,9 +49,9 @@ type ListDevicePositionsInput struct {
 
 type ListDevicePositionsOutput struct {
 
-	// Contains details about each device's last known position. These details includes
-	// the device ID, the time when the position was sampled on the device, the time
-	// that the service received the update, and the most recent coordinates.
+	// Contains details about each device's last known position. These details
+	// includes the device ID, the time when the position was sampled on the device,
+	// the time that the service received the update, and the most recent coordinates.
 	//
 	// This member is required.
 	Entries []types.ListDevicePositionsResponseEntry
@@ -158,8 +159,8 @@ func addEndpointPrefix_opListDevicePositionsMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opListDevicePositionsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// ListDevicePositionsAPIClient is a client that implements the ListDevicePositions
-// operation.
+// ListDevicePositionsAPIClient is a client that implements the
+// ListDevicePositions operation.
 type ListDevicePositionsAPIClient interface {
 	ListDevicePositions(context.Context, *ListDevicePositionsInput, ...func(*Options)) (*ListDevicePositionsOutput, error)
 }

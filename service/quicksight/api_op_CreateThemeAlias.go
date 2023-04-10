@@ -30,7 +30,7 @@ func (c *Client) CreateThemeAlias(ctx context.Context, params *CreateThemeAliasI
 type CreateThemeAliasInput struct {
 
 	// The name that you want to give to the theme alias that you are creating. The
-	// alias name can't begin with a $. Alias names that start with $ are reserved by
+	// alias name can't begin with a $ . Alias names that start with $ are reserved by
 	// Amazon QuickSight.
 	//
 	// This member is required.

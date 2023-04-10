@@ -12,8 +12,7 @@ import (
 )
 
 // Gets information about the instance refreshes for the specified Auto Scaling
-// group. This operation is part of the instance refresh feature
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
+// group. This operation is part of the instance refresh feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
 // Scaling group after you make configuration changes. To help you determine the
 // status of an instance refresh, Amazon EC2 Auto Scaling returns information about
@@ -49,7 +48,7 @@ type DescribeInstanceRefreshesInput struct {
 	InstanceRefreshIds []string
 
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a

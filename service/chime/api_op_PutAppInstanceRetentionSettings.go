@@ -31,7 +31,7 @@ func (c *Client) PutAppInstanceRetentionSettings(ctx context.Context, params *Pu
 
 type PutAppInstanceRetentionSettingsInput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string

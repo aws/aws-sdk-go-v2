@@ -16,12 +16,11 @@ import (
 // Lightsail assigns a new public IP address to the instance. To use the same IP
 // address after stopping and starting an instance, create a static IP address and
 // attach it to the instance. For more information, see the Amazon Lightsail
-// Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip).
-// The start instance operation supports tag-based access control via resource tags
-// applied to the resource identified by instance name. For more information, see
-// the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip)
+// . The start instance operation supports tag-based access control via resource
+// tags applied to the resource identified by instance name . For more information,
+// see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) StartInstance(ctx context.Context, params *StartInstanceInput, optFns ...func(*Options)) (*StartInstanceOutput, error) {
 	if params == nil {
 		params = &StartInstanceInput{}

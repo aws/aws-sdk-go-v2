@@ -3,8 +3,8 @@
 // Package fis provides the API client, operations, and parameter types for AWS
 // Fault Injection Simulator.
 //
-// Fault Injection Simulator is a managed service that enables you to perform fault
-// injection experiments on your Amazon Web Services workloads. For more
-// information, see the Fault Injection Simulator User Guide
-// (https://docs.aws.amazon.com/fis/latest/userguide/).
+// Fault Injection Simulator is a managed service that enables you to perform
+// fault injection experiments on your Amazon Web Services workloads. For more
+// information, see the Fault Injection Simulator User Guide (https://docs.aws.amazon.com/fis/latest/userguide/)
+// .
 package fis

@@ -18,9 +18,8 @@ import (
 // predicted values for the minimum capacity that is needed on an hourly basis,
 // based on the hourly load forecast. A minimum of 24 hours of data is required to
 // create the initial forecasts. However, having a full 14 days of historical data
-// results in more accurate forecasts. For more information, see Predictive scaling
-// for Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html)
+// results in more accurate forecasts. For more information, see Predictive
+// scaling for Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) GetPredictiveScalingForecast(ctx context.Context, params *GetPredictiveScalingForecastInput, optFns ...func(*Options)) (*GetPredictiveScalingForecastOutput, error) {
 	if params == nil {

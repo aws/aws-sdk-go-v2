@@ -12,25 +12,16 @@ import (
 	"time"
 )
 
-// Describes a dataset import job created using the CreateDatasetImportJob
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
+// Describes a dataset import job created using the CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
 // operation. In addition to listing the parameters provided in the
 // CreateDatasetImportJob request, this operation includes the following
 // properties:
-//
-// * CreationTime
-//
-// * LastModificationTime
-//
-// * DataSize
-//
-// *
-// FieldStatistics
-//
-// * Status
-//
-// * Message - If an error occurred, information about
-// the error.
+//   - CreationTime
+//   - LastModificationTime
+//   - DataSize
+//   - FieldStatistics
+//   - Status
+//   - Message - If an error occurred, information about the error.
 func (c *Client) DescribeDatasetImportJob(ctx context.Context, params *DescribeDatasetImportJobInput, optFns ...func(*Options)) (*DescribeDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetImportJobInput{}
@@ -88,8 +79,8 @@ type DescribeDatasetImportJobOutput struct {
 	// The format of the imported data, CSV or PARQUET.
 	Format *string
 
-	// The format of the geolocation attribute. Valid Values:"LAT_LONG" and
-	// "CC_POSTALCODE".
+	// The format of the geolocation attribute. Valid Values: "LAT_LONG" and
+	// "CC_POSTALCODE" .
 	GeolocationFormat *string
 
 	// The import mode of the dataset import job, FULL or INCREMENTAL.
@@ -97,35 +88,21 @@ type DescribeDatasetImportJobOutput struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	//   - CREATE_PENDING - The CreationTime .
+	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//   - CREATE_STOPPING - The current timestamp.
+	//   - CREATE_STOPPED - When the job stopped.
+	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the dataset import job. States include:
-	//
-	// * ACTIVE
-	//
-	// *
-	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * DELETE_PENDING,
-	// DELETE_IN_PROGRESS, DELETE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
+	//   - ACTIVE
+	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//   - CREATE_STOPPING , CREATE_STOPPED
 	Status *string
 
 	// The single time zone applied to every item in the dataset
@@ -134,12 +111,9 @@ type DescribeDatasetImportJobOutput struct {
 	// The format of timestamps in the dataset. The format that you specify depends on
 	// the DataFrequency specified when the dataset was created. The following formats
 	// are supported
-	//
-	// * "yyyy-MM-dd" For the following data frequencies: Y, M, W, and
-	// D
-	//
-	// * "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min, 15min,
-	// and 1min; and optionally, for: Y, M, W, and D
+	//   - "yyyy-MM-dd" For the following data frequencies: Y, M, W, and D
+	//   - "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min, 15min,
+	//   and 1min; and optionally, for: Y, M, W, and D
 	TimestampFormat *string
 
 	// Whether TimeZone is automatically derived from the geolocation attribute.

@@ -41,7 +41,7 @@ type DescribeRuleGroupInput struct {
 	// Indicates whether the rule group is stateless or stateful. If the rule group is
 	// stateless, it contains stateless rules. If it is stateful, it contains stateful
 	// rules. This setting is required for requests that do not include the
-	// RuleGroupARN.
+	// RuleGroupARN .
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
@@ -49,9 +49,9 @@ type DescribeRuleGroupInput struct {
 
 type DescribeRuleGroupOutput struct {
 
-	// The high-level properties of a rule group. This, along with the RuleGroup,
+	// The high-level properties of a rule group. This, along with the RuleGroup ,
 	// define the rule group. You can retrieve all objects for a rule group by calling
-	// DescribeRuleGroup.
+	// DescribeRuleGroup .
 	//
 	// This member is required.
 	RuleGroupResponse *types.RuleGroupResponse
@@ -61,7 +61,7 @@ type DescribeRuleGroupOutput struct {
 	// resource at the time of the request. To make changes to the rule group, you
 	// provide the token in your request. Network Firewall uses the token to ensure
 	// that the rule group hasn't changed since you last retrieved it. If it has
-	// changed, the operation fails with an InvalidTokenException. If this happens,
+	// changed, the operation fails with an InvalidTokenException . If this happens,
 	// retrieve the rule group again to get a current copy of it with a current token.
 	// Reapply your changes as needed, then try the operation again using the new
 	// token.
@@ -70,8 +70,8 @@ type DescribeRuleGroupOutput struct {
 	UpdateToken *string
 
 	// The object that defines the rules in a rule group. This, along with
-	// RuleGroupResponse, define the rule group. You can retrieve all objects for a
-	// rule group by calling DescribeRuleGroup. Network Firewall uses a rule group to
+	// RuleGroupResponse , define the rule group. You can retrieve all objects for a
+	// rule group by calling DescribeRuleGroup . Network Firewall uses a rule group to
 	// inspect and control network traffic. You define stateless rule groups to inspect
 	// individual packets and you define stateful rule groups to inspect packets in the
 	// context of their traffic flow. To use a rule group, you include it by reference

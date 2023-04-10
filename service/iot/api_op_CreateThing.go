@@ -15,11 +15,9 @@ import (
 // using the same thing name and configuration, the call will succeed. If this call
 // is made with the same thing name but different configuration a
 // ResourceAlreadyExistsException is thrown. This is a control plane operation. See
-// Authorization
-// (https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html)
+// Authorization (https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html)
 // for information about authorizing control plane actions. Requires permission to
-// access the CreateThing
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// access the CreateThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateThing(ctx context.Context, params *CreateThingInput, optFns ...func(*Options)) (*CreateThingOutput, error) {
 	if params == nil {

@@ -37,8 +37,8 @@ type GetMergeOptionsInput struct {
 	// This member is required.
 	DestinationCommitSpecifier *string
 
-	// The name of the repository that contains the commits about which you want to get
-	// merge options.
+	// The name of the repository that contains the commits about which you want to
+	// get merge options.
 	//
 	// This member is required.
 	RepositoryName *string

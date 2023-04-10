@@ -33,8 +33,8 @@ type ListMetricStreamsInput struct {
 	// The maximum number of results to return in one operation.
 	MaxResults *int32
 
-	// Include this value, if it was returned by the previous call, to get the next set
-	// of metric streams.
+	// Include this value, if it was returned by the previous call, to get the next
+	// set of metric streams.
 	NextToken *string
 
 	noSmithyDocumentSerde

@@ -43,16 +43,16 @@ func (c *Client) DescribeOrganizationConfigRules(ctx context.Context, params *De
 
 type DescribeOrganizationConfigRulesInput struct {
 
-	// The maximum number of organization Config rules returned on each page. If you do
-	// no specify a number, Config uses the default. The default is 100.
+	// The maximum number of organization Config rules returned on each page. If you
+	// do no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The names of organization Config rules for which you want details. If you do not
-	// specify any names, Config returns details for all your organization Config
+	// The names of organization Config rules for which you want details. If you do
+	// not specify any names, Config returns details for all your organization Config
 	// rules.
 	OrganizationConfigRuleNames []string
 
@@ -145,8 +145,8 @@ var _ DescribeOrganizationConfigRulesAPIClient = (*Client)(nil)
 // DescribeOrganizationConfigRulesPaginatorOptions is the paginator options for
 // DescribeOrganizationConfigRules
 type DescribeOrganizationConfigRulesPaginatorOptions struct {
-	// The maximum number of organization Config rules returned on each page. If you do
-	// no specify a number, Config uses the default. The default is 100.
+	// The maximum number of organization Config rules returned on each page. If you
+	// do no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

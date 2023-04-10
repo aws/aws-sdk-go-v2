@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists discovered resources associated with the given MigrationTask.
+// Lists discovered resources associated with the given MigrationTask .
 func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscoveredResourcesInput, optFns ...func(*Options)) (*ListDiscoveredResourcesOutput, error) {
 	if params == nil {
 		params = &ListDiscoveredResourcesInput{}
@@ -45,7 +45,7 @@ type ListDiscoveredResourcesInput struct {
 
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in NextToken.
+	// returned token in NextToken .
 	NextToken *string
 
 	noSmithyDocumentSerde

@@ -33,8 +33,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The tag keys of the tags to remove from the behavior graph. You can remove up to
-	// 50 tags at a time.
+	// The tag keys of the tags to remove from the behavior graph. You can remove up
+	// to 50 tags at a time.
 	//
 	// This member is required.
 	TagKeys []string

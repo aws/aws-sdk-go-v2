@@ -12,15 +12,13 @@ import (
 )
 
 // Deletes the assets in package versions and sets the package versions' status to
-// Disposed. A disposed package version cannot be restored in your repository
+// Disposed . A disposed package version cannot be restored in your repository
 // because its assets are deleted. To view all disposed package versions in a
-// repository, use ListPackageVersions
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
-// and set the status
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax)
-// parameter to Disposed. To view information about a disposed package version, use
-// DescribePackageVersion
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html).
+// repository, use ListPackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
+// and set the status (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax)
+// parameter to Disposed . To view information about a disposed package version,
+// use DescribePackageVersion (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html)
+// .
 func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePackageVersionsInput, optFns ...func(*Options)) (*DisposePackageVersionsOutput, error) {
 	if params == nil {
 		params = &DisposePackageVersionsInput{}
@@ -73,18 +71,11 @@ type DisposePackageVersionsInput struct {
 
 	// The namespace of the package versions to be disposed. The package version
 	// component that specifies its namespace depends on its type. For example:
-	//
-	// * The
-	// namespace of a Maven package version is its groupId.
-	//
-	// * The namespace of an npm
-	// package version is its scope.
-	//
-	// * Python and NuGet package versions do not
-	// contain a corresponding component, package versions of those formats do not have
-	// a namespace.
-	//
-	// * The namespace of a generic package is its namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The revisions of the package versions you want to dispose.
@@ -97,20 +88,12 @@ type DisposePackageVersionsOutput struct {
 
 	// A PackageVersionError object that contains a map of errors codes for the
 	// disposed package versions that failed. The possible error codes are:
-	//
-	// *
-	// ALREADY_EXISTS
-	//
-	// * MISMATCHED_REVISION
-	//
-	// * MISMATCHED_STATUS
-	//
-	// * NOT_ALLOWED
-	//
-	// *
-	// NOT_FOUND
-	//
-	// * SKIPPED
+	//   - ALREADY_EXISTS
+	//   - MISMATCHED_REVISION
+	//   - MISMATCHED_STATUS
+	//   - NOT_ALLOWED
+	//   - NOT_FOUND
+	//   - SKIPPED
 	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully disposed.

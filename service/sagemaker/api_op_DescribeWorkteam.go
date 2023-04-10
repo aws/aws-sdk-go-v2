@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specific work team. You can see information such as the
-// create date, the last updated date, membership information, and the work team's
-// Amazon Resource Name (ARN).
+// Gets information about a specific work team. You can see information such as
+// the create date, the last updated date, membership information, and the work
+// team's Amazon Resource Name (ARN).
 func (c *Client) DescribeWorkteam(ctx context.Context, params *DescribeWorkteamInput, optFns ...func(*Options)) (*DescribeWorkteamOutput, error) {
 	if params == nil {
 		params = &DescribeWorkteamInput{}

@@ -138,8 +138,8 @@ func (e *ResourceInUseException) ErrorCode() string {
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and
-// try again.
+// We can't find a resource with that Amazon Resource Name (ARN). Check the ARN
+// and try again.
 type ResourceNotFoundException struct {
 	Message *string
 

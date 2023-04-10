@@ -11,8 +11,7 @@ import (
 )
 
 // Retrieves the fleet ID that an alias is currently pointing to. Related actions
-// All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, optFns ...func(*Options)) (*ResolveAliasOutput, error) {
 	if params == nil {
 		params = &ResolveAliasInput{}
@@ -30,8 +29,8 @@ func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, op
 
 type ResolveAliasInput struct {
 
-	// The unique identifier of the alias that you want to retrieve a fleet ID for. You
-	// can use either the alias ID or ARN value.
+	// The unique identifier of the alias that you want to retrieve a fleet ID for.
+	// You can use either the alias ID or ARN value.
 	//
 	// This member is required.
 	AliasId *string
@@ -41,9 +40,8 @@ type ResolveAliasInput struct {
 
 type ResolveAliasOutput struct {
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) associated
-	// with the GameLift fleet resource that this alias points to.
+	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
+	// ) associated with the GameLift fleet resource that this alias points to.
 	FleetArn *string
 
 	// The fleet identifier that the alias is pointing to.

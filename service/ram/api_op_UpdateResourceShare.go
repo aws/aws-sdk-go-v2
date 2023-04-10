@@ -29,9 +29,8 @@ func (c *Client) UpdateResourceShare(ctx context.Context, params *UpdateResource
 
 type UpdateResourceShareInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resource share that you want to modify.
+	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource share that you want to modify.
 	//
 	// This member is required.
 	ResourceShareArn *string
@@ -44,9 +43,9 @@ type UpdateResourceShareInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value.
-	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
-	// this value, then Amazon Web Services generates a random one for you.
+	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
+	// . If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
 	ClientToken *string
 
 	// If specified, the new name that you want to attach to the resource share.

@@ -30,7 +30,7 @@ func (c *Client) DeleteBasePathMapping(ctx context.Context, params *DeleteBasePa
 type DeleteBasePathMappingInput struct {
 
 	// The base path name of the BasePathMapping resource to delete. To specify an
-	// empty base path, set this parameter to '(none)'.
+	// empty base path, set this parameter to '(none)' .
 	//
 	// This member is required.
 	BasePath *string

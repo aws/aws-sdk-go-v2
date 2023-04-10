@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified scaling plan. You cannot update a scaling plan if it is in
-// the process of being created, updated, or deleted.
+// Updates the specified scaling plan. You cannot update a scaling plan if it is
+// in the process of being created, updated, or deleted.
 func (c *Client) UpdateScalingPlan(ctx context.Context, params *UpdateScalingPlanInput, optFns ...func(*Options)) (*UpdateScalingPlanOutput, error) {
 	if params == nil {
 		params = &UpdateScalingPlanInput{}
@@ -35,20 +35,18 @@ type UpdateScalingPlanInput struct {
 	// This member is required.
 	ScalingPlanName *string
 
-	// The version number of the scaling plan. The only valid value is 1. Currently,
+	// The version number of the scaling plan. The only valid value is 1 . Currently,
 	// you cannot have multiple scaling plan versions.
 	//
 	// This member is required.
 	ScalingPlanVersion *int64
 
 	// A CloudFormation stack or set of tags. For more information, see
-	// ApplicationSource
-	// (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html)
+	// ApplicationSource (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html)
 	// in the AWS Auto Scaling API Reference.
 	ApplicationSource *types.ApplicationSource
 
-	// The scaling instructions. For more information, see ScalingInstruction
-	// (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html)
+	// The scaling instructions. For more information, see ScalingInstruction (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html)
 	// in the AWS Auto Scaling API Reference.
 	ScalingInstructions []types.ScalingInstruction
 

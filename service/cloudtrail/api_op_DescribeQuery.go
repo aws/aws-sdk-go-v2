@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns metadata about a query, including query run time in milliseconds, number
-// of events scanned and matched, and query status. You must specify an ARN for
-// EventDataStore, and a value for QueryID.
+// Returns metadata about a query, including query run time in milliseconds,
+// number of events scanned and matched, and query status. You must specify an ARN
+// for EventDataStore , and a value for QueryID .
 func (c *Client) DescribeQuery(ctx context.Context, params *DescribeQueryInput, optFns ...func(*Options)) (*DescribeQueryOutput, error) {
 	if params == nil {
 		params = &DescribeQueryInput{}
@@ -65,8 +65,8 @@ type DescribeQueryOutput struct {
 	// query's creation time.
 	QueryStatistics *types.QueryStatisticsForDescribeQuery
 
-	// The status of a query. Values for QueryStatus include QUEUED, RUNNING, FINISHED,
-	// FAILED, TIMED_OUT, or CANCELLED
+	// The status of a query. Values for QueryStatus include QUEUED , RUNNING ,
+	// FINISHED , FAILED , TIMED_OUT , or CANCELLED
 	QueryStatus types.QueryStatus
 
 	// The SQL code of a query.

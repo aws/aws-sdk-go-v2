@@ -40,8 +40,8 @@ type GetCommentReactionsInput struct {
 	// The default is the same as the allowed maximum, 1,000.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	// Optional. The Amazon Resource Name (ARN) of the user or identity for which you
@@ -131,8 +131,8 @@ func (c *Client) addOperationGetCommentReactionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetCommentReactionsAPIClient is a client that implements the GetCommentReactions
-// operation.
+// GetCommentReactionsAPIClient is a client that implements the
+// GetCommentReactions operation.
 type GetCommentReactionsAPIClient interface {
 	GetCommentReactions(context.Context, *GetCommentReactionsInput, ...func(*Options)) (*GetCommentReactionsOutput, error)
 }

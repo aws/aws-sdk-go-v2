@@ -89,8 +89,8 @@ func (e *IllegalArgumentException) ErrorCode() string {
 }
 func (e *IllegalArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Non-retryable exception. Indicates the KMS key usage is incorrect. See exception
-// message for details.
+// Non-retryable exception. Indicates the KMS key usage is incorrect. See
+// exception message for details.
 type KMSInvalidKeyUsageException struct {
 	Message *string
 

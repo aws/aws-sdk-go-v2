@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Deletes an Amazon Web Services Migration Hub Refactor Spaces environment. Before
-// you can delete an environment, you must first delete any applications and
+// Deletes an Amazon Web Services Migration Hub Refactor Spaces environment.
+// Before you can delete an environment, you must first delete any applications and
 // services within the environment.
 func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
 	if params == nil {

@@ -14,14 +14,8 @@ import (
 
 // Lists all endpoints associated with an Outpost that has been shared by Amazon
 // Web Services Resource Access Manager (RAM). Related actions include:
-//
-// *
-// CreateEndpoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html)
-//
-// *
-// DeleteEndpoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
+//   - CreateEndpoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html)
+//   - DeleteEndpoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
 func (c *Client) ListSharedEndpoints(ctx context.Context, params *ListSharedEndpointsInput, optFns ...func(*Options)) (*ListSharedEndpointsOutput, error) {
 	if params == nil {
 		params = &ListSharedEndpointsInput{}
@@ -61,7 +55,7 @@ type ListSharedEndpointsOutput struct {
 	Endpoints []types.Endpoint
 
 	// If the number of endpoints associated with the specified Outpost exceeds
-	// MaxResults, you can include this value in subsequent calls to this operation to
+	// MaxResults , you can include this value in subsequent calls to this operation to
 	// retrieve more results.
 	NextToken *string
 
@@ -134,8 +128,8 @@ func (c *Client) addOperationListSharedEndpointsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListSharedEndpointsAPIClient is a client that implements the ListSharedEndpoints
-// operation.
+// ListSharedEndpointsAPIClient is a client that implements the
+// ListSharedEndpoints operation.
 type ListSharedEndpointsAPIClient interface {
 	ListSharedEndpoints(context.Context, *ListSharedEndpointsInput, ...func(*Options)) (*ListSharedEndpointsOutput, error)
 }

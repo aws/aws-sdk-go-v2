@@ -12,8 +12,8 @@ import (
 )
 
 // Accept a VPC peering connection request. To accept a request, the VPC peering
-// connection must be in the pending-acceptance state, and you must be the owner of
-// the peer VPC. Use DescribeVpcPeeringConnections to view your outstanding VPC
+// connection must be in the pending-acceptance state, and you must be the owner
+// of the peer VPC. Use DescribeVpcPeeringConnections to view your outstanding VPC
 // peering connection requests. For an inter-Region VPC peering connection request,
 // you must accept the VPC peering connection in the Region of the accepter VPC.
 func (c *Client) AcceptVpcPeeringConnection(ctx context.Context, params *AcceptVpcPeeringConnectionInput, optFns ...func(*Options)) (*AcceptVpcPeeringConnectionOutput, error) {
@@ -41,8 +41,8 @@ type AcceptVpcPeeringConnectionInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

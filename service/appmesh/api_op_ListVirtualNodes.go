@@ -44,10 +44,11 @@ type ListVirtualNodesInput struct {
 	// value if applicable.
 	Limit *int32
 
-	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
-	// ID is not your own, then it's the ID of the account that shared the mesh with
-	// your account. For more information about mesh sharing, see Working with shared
-	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the
+	// account ID is not your own, then it's the ID of the account that shared the mesh
+	// with your account. For more information about mesh sharing, see Working with
+	// shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// .
 	MeshOwner *string
 
 	// The nextToken value returned from a previous paginated ListVirtualNodes request
@@ -67,7 +68,7 @@ type ListVirtualNodesOutput struct {
 	VirtualNodes []types.VirtualNodeRef
 
 	// The nextToken value to include in a future ListVirtualNodes request. When the
-	// results of a ListVirtualNodes request exceed limit, you can use this value to
+	// results of a ListVirtualNodes request exceed limit , you can use this value to
 	// retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string

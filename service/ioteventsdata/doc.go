@@ -6,7 +6,6 @@
 // IoT Events monitors your equipment or device fleets for failures or changes in
 // operation, and triggers actions when such events occur. You can use IoT Events
 // Data API commands to send inputs to detectors, list detectors, and view or
-// update a detector's status. For more information, see What is IoT Events?
-// (https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html)
+// update a detector's status. For more information, see What is IoT Events? (https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html)
 // in the IoT Events Developer Guide.
 package ioteventsdata

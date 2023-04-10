@@ -20,8 +20,7 @@ import (
 // EC2. However, customers who have used Amazon EI at least once during the past
 // 30-day period are considered current customers and will be able to continue
 // using the service. Alternatively, you can use RunTask to place tasks for you.
-// For more information, see Scheduling Tasks
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
+// For more information, see Scheduling Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) StartTask(ctx context.Context, params *StartTaskInput, optFns ...func(*Options)) (*StartTaskOutput, error) {
 	if params == nil {
@@ -40,14 +39,15 @@ func (c *Client) StartTask(ctx context.Context, params *StartTaskInput, optFns .
 
 type StartTaskInput struct {
 
-	// The container instance IDs or full ARN entries for the container instances where
-	// you would like to place your task. You can specify up to 10 container instances.
+	// The container instance IDs or full ARN entries for the container instances
+	// where you would like to place your task. You can specify up to 10 container
+	// instances.
 	//
 	// This member is required.
 	ContainerInstances []string
 
-	// The family and revision (family:revision) or full ARN of the task definition to
-	// start. If a revision isn't specified, the latest ACTIVE revision is used.
+	// The family and revision ( family:revision ) or full ARN of the task definition
+	// to start. If a revision isn't specified, the latest ACTIVE revision is used.
 	//
 	// This member is required.
 	TaskDefinition *string
@@ -57,21 +57,20 @@ type StartTaskInput struct {
 	Cluster *string
 
 	// Specifies whether to use Amazon ECS managed tags for the task. For more
-	// information, see Tagging Your Amazon ECS Resources
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
 	// Whether or not the execute command functionality is enabled for the task. If
-	// true, this enables execute command functionality on all containers in the task.
+	// true , this enables execute command functionality on all containers in the task.
 	EnableExecuteCommand bool
 
 	// The name of the task group to associate with the task. The default value is the
 	// family name of the task definition (for example, family:my-family-name).
 	Group *string
 
-	// The VPC subnet and security group configuration for tasks that receive their own
-	// elastic network interface by using the awsvpc networking mode.
+	// The VPC subnet and security group configuration for tasks that receive their
+	// own elastic network interface by using the awsvpc networking mode.
 	NetworkConfiguration *types.NetworkConfiguration
 
 	// A list of container overrides in JSON format that specify the name of a
@@ -104,31 +103,20 @@ type StartTaskInput struct {
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
-	//
-	// * Maximum number of
-	// tags per resource - 50
-	//
-	// * For each resource, each tag key must be unique, and
-	// each tag key can have only one value.
-	//
-	// * Maximum key length - 128 Unicode
-	// characters in UTF-8
-	//
-	// * Maximum value length - 256 Unicode characters in UTF-8
-	//
-	// *
-	// If your tagging schema is used across multiple services and resources, remember
-	// that other services may have restrictions on allowed characters. Generally
-	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
-	// the following characters: + - = . _ : / @.
-	//
-	// * Tag keys and values are
-	// case-sensitive.
-	//
-	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	//   - Maximum number of tags per resource - 50
+	//   - For each resource, each tag key must be unique, and each tag key can have
+	//   only one value.
+	//   - Maximum key length - 128 Unicode characters in UTF-8
+	//   - Maximum value length - 256 Unicode characters in UTF-8
+	//   - If your tagging schema is used across multiple services and resources,
+	//   remember that other services may have restrictions on allowed characters.
+	//   Generally allowed characters are: letters, numbers, and spaces representable in
+	//   UTF-8, and the following characters: + - = . _ : / @.
+	//   - Tag keys and values are case-sensitive.
+	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
+	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
+	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
+	//   prefix do not count against your tags per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -10,13 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from the specified Security Assertion Markup Language
-// (SAML) identity provider in IAM. For more information about these providers, see
-// About web identity federation
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html).
-// For more information about tagging, see Tagging IAM resources
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-// Guide.
+// Removes the specified tags from the specified Security Assertion Markup
+// Language (SAML) identity provider in IAM. For more information about these
+// providers, see About web identity federation (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html)
+// . For more information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+// in the IAM User Guide.
 func (c *Client) UntagSAMLProvider(ctx context.Context, params *UntagSAMLProviderInput, optFns ...func(*Options)) (*UntagSAMLProviderOutput, error) {
 	if params == nil {
 		params = &UntagSAMLProviderInput{}
@@ -34,11 +32,11 @@ func (c *Client) UntagSAMLProvider(ctx context.Context, params *UntagSAMLProvide
 
 type UntagSAMLProviderInput struct {
 
-	// The ARN of the SAML identity provider in IAM from which you want to remove tags.
-	// This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
-	// and lowercase alphanumeric characters with no spaces. You can also include any
-	// of the following characters: _+=,.@-
+	// The ARN of the SAML identity provider in IAM from which you want to remove
+	// tags. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
+	// ) a string of characters consisting of upper and lowercase alphanumeric
+	// characters with no spaces. You can also include any of the following characters:
+	// _+=,.@-
 	//
 	// This member is required.
 	SAMLProviderArn *string

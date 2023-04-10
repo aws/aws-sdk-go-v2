@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about all the recovery points of the type specified
-// by a resource Amazon Resource Name (ARN). For Amazon EFS and Amazon EC2, this
-// action only lists recovery points created by Backup.
+// Returns detailed information about all the recovery points of the type
+// specified by a resource Amazon Resource Name (ARN). For Amazon EFS and Amazon
+// EC2, this action only lists recovery points created by Backup.
 func (c *Client) ListRecoveryPointsByResource(ctx context.Context, params *ListRecoveryPointsByResourceInput, optFns ...func(*Options)) (*ListRecoveryPointsByResourceOutput, error) {
 	if params == nil {
 		params = &ListRecoveryPointsByResourceInput{}
@@ -32,8 +32,8 @@ func (c *Client) ListRecoveryPointsByResource(ctx context.Context, params *ListR
 
 type ListRecoveryPointsByResourceInput struct {
 
-	// An ARN that uniquely identifies a resource. The format of the ARN depends on the
-	// resource type.
+	// An ARN that uniquely identifies a resource. The format of the ARN depends on
+	// the resource type.
 	//
 	// This member is required.
 	ResourceArn *string

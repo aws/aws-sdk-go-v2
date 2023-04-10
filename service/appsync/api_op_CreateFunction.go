@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Function object. A function is a reusable entity. You can use multiple
-// functions to compose the resolver logic.
+// Creates a Function object. A function is a reusable entity. You can use
+// multiple functions to compose the resolver logic.
 func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput, optFns ...func(*Options)) (*CreateFunctionOutput, error) {
 	if params == nil {
 		params = &CreateFunctionInput{}
@@ -35,7 +35,7 @@ type CreateFunctionInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The FunctionDataSource name.
+	// The Function DataSource name.
 	//
 	// This member is required.
 	DataSourceName *string
@@ -45,8 +45,8 @@ type CreateFunctionInput struct {
 	// This member is required.
 	Name *string
 
-	// The function code that contains the request and response functions. When code is
-	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// The function code that contains the request and response functions. When code
+	// is used, the runtime is required. The runtime value must be APPSYNC_JS .
 	Code *string
 
 	// The Function description.

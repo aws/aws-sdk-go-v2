@@ -66,8 +66,8 @@ type CreateUserInput struct {
 	// A string containing the time zone of the user.
 	Timezone *string
 
-	// A string containing the title of the user. Possible values are left unspecified.
-	// The value can vary based on your specific use case.
+	// A string containing the title of the user. Possible values are left
+	// unspecified. The value can vary based on your specific use case.
 	Title *string
 
 	// A unique string used to identify the user. The length limit is 128 characters.

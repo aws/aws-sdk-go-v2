@@ -406,8 +406,8 @@ func (e *InvalidSubnetException) ErrorCode() string {
 }
 func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified target does not exist, is not in the same VPC as the target group,
-// or has an unsupported instance type.
+// The specified target does not exist, is not in the same VPC as the target
+// group, or has an unsupported instance type.
 type InvalidTargetException struct {
 	Message *string
 
@@ -934,9 +934,9 @@ func (e *TooManyTargetsException) ErrorCode() string {
 }
 func (e *TooManyTargetsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit on the number of unique target groups per load balancer
-// across all listeners. If a target group is used by multiple actions for a load
-// balancer, it is counted as only one use.
+// You've reached the limit on the number of unique target groups per load
+// balancer across all listeners. If a target group is used by multiple actions for
+// a load balancer, it is counted as only one use.
 type TooManyUniqueTargetGroupsPerLoadBalancerException struct {
 	Message *string
 

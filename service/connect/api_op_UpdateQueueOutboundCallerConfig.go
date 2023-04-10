@@ -17,13 +17,12 @@ import (
 // distribution group, and you are calling this API using an instance in the Amazon
 // Web Services Region where the traffic distribution group was created, you can
 // use either a full phone number ARN or UUID value for the
-// OutboundCallerIdNumberId value of the OutboundCallerConfig
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig)
+// OutboundCallerIdNumberId value of the OutboundCallerConfig (https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig)
 // request body parameter. However, if the number is claimed to a traffic
 // distribution group and you are calling this API using an instance in the
 // alternate Amazon Web Services Region associated with the traffic distribution
 // group, you must provide a full phone number ARN. If a UUID is provided in this
-// scenario, you will receive a ResourceNotFoundException.
+// scenario, you will receive a ResourceNotFoundException .
 func (c *Client) UpdateQueueOutboundCallerConfig(ctx context.Context, params *UpdateQueueOutboundCallerConfigInput, optFns ...func(*Options)) (*UpdateQueueOutboundCallerConfigOutput, error) {
 	if params == nil {
 		params = &UpdateQueueOutboundCallerConfigInput{}
@@ -41,8 +40,7 @@ func (c *Client) UpdateQueueOutboundCallerConfig(ctx context.Context, params *Up
 
 type UpdateQueueOutboundCallerConfigInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListQualificationRequests operation retrieves requests for Qualifications of
-// a particular Qualification type. The owner of the Qualification type calls this
-// operation to poll for pending requests, and accepts them using the
+// The ListQualificationRequests operation retrieves requests for Qualifications
+// of a particular Qualification type. The owner of the Qualification type calls
+// this operation to poll for pending requests, and accepts them using the
 // AcceptQualification operation.
 func (c *Client) ListQualificationRequests(ctx context.Context, params *ListQualificationRequestsInput, optFns ...func(*Options)) (*ListQualificationRequestsOutput, error) {
 	if params == nil {

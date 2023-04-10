@@ -8,7 +8,7 @@ import (
 )
 
 // Represents the event action configuration for an element of a Component or
-// ComponentChild. Use for the workflow feature in Amplify Studio that allows you
+// ComponentChild . Use for the workflow feature in Amplify Studio that allows you
 // to bind events and actions to components. ActionParameters defines the action
 // that is performed when an event occurs on the component.
 type ActionParameters struct {
@@ -17,13 +17,13 @@ type ActionParameters struct {
 	// navigation action.
 	Anchor *ComponentProperty
 
-	// A dictionary of key-value pairs mapping Amplify Studio properties to fields in a
-	// data model. Use when the action performs an operation on an Amplify DataStore
+	// A dictionary of key-value pairs mapping Amplify Studio properties to fields in
+	// a data model. Use when the action performs an operation on an Amplify DataStore
 	// model.
 	Fields map[string]ComponentProperty
 
-	// Specifies whether the user should be signed out globally. Specify this value for
-	// an auth sign out action.
+	// Specifies whether the user should be signed out globally. Specify this value
+	// for an auth sign out action.
 	Global *ComponentProperty
 
 	// The unique ID of the component that the ActionParameters apply to.
@@ -39,7 +39,7 @@ type ActionParameters struct {
 	// The element within the same component to modify when the action occurs.
 	Target *ComponentProperty
 
-	// The type of navigation action. Valid values are url and anchor. This value is
+	// The type of navigation action. Valid values are url and anchor . This value is
 	// required for a navigation action.
 	Type *ComponentProperty
 
@@ -51,8 +51,8 @@ type ActionParameters struct {
 
 // Contains the configuration settings for a user interface (UI) element for an
 // Amplify app. A component is configured as a primary, stand-alone UI element. Use
-// ComponentChild to configure an instance of a Component. A ComponentChild
-// instance inherits the configuration of the main Component.
+// ComponentChild to configure an instance of a Component . A ComponentChild
+// instance inherits the configuration of the main Component .
 type Component struct {
 
 	// The unique ID of the Amplify app associated with the component.
@@ -61,13 +61,13 @@ type Component struct {
 	AppId *string
 
 	// The information to connect a component's properties to data at runtime. You
-	// can't specify tags as a valid property for bindingProperties.
+	// can't specify tags as a valid property for bindingProperties .
 	//
 	// This member is required.
 	BindingProperties map[string]ComponentBindingPropertiesValue
 
-	// The type of the component. This can be an Amplify custom UI component or another
-	// custom component.
+	// The type of the component. This can be an Amplify custom UI component or
+	// another custom component.
 	//
 	// This member is required.
 	ComponentType *string
@@ -94,19 +94,19 @@ type Component struct {
 
 	// Describes the component's properties that can be overriden in a customized
 	// instance of the component. You can't specify tags as a valid property for
-	// overrides.
+	// overrides .
 	//
 	// This member is required.
 	Overrides map[string]map[string]string
 
-	// Describes the component's properties. You can't specify tags as a valid property
-	// for properties.
+	// Describes the component's properties. You can't specify tags as a valid
+	// property for properties .
 	//
 	// This member is required.
 	Properties map[string]ComponentProperty
 
-	// A list of the component's variants. A variant is a unique style configuration of
-	// a main component.
+	// A list of the component's variants. A variant is a unique style configuration
+	// of a main component.
 	//
 	// This member is required.
 	Variants []ComponentVariant
@@ -116,7 +116,7 @@ type Component struct {
 
 	// The data binding configuration for the component's properties. Use this for a
 	// collection component. You can't specify tags as a valid property for
-	// collectionProperties.
+	// collectionProperties .
 	CollectionProperties map[string]ComponentDataConfiguration
 
 	// Describes the events that can be raised on the component. Use for the workflow
@@ -190,7 +190,7 @@ type ComponentBindingPropertiesValueProperties struct {
 	noSmithyDocumentSerde
 }
 
-// A nested UI configuration within a parent Component.
+// A nested UI configuration within a parent Component .
 type ComponentChild struct {
 
 	// The type of the child component.
@@ -204,7 +204,7 @@ type ComponentChild struct {
 	Name *string
 
 	// Describes the properties of the child component. You can't specify tags as a
-	// valid property for properties.
+	// valid property for properties .
 	//
 	// This member is required.
 	Properties map[string]ComponentProperty
@@ -276,15 +276,15 @@ type ComponentDataConfiguration struct {
 }
 
 // Describes the configuration of an event. You can bind an event and a
-// corresponding action to a Component or a ComponentChild. A button click is an
+// corresponding action to a Component or a ComponentChild . A button click is an
 // example of an event.
 type ComponentEvent struct {
 
 	// The action to perform when a specific event is raised.
 	Action *string
 
-	// Binds an event to an action on a component. When you specify a bindingEvent, the
-	// event is called when the action is performed.
+	// Binds an event to an action on a component. When you specify a bindingEvent ,
+	// the event is called when the action is performed.
 	BindingEvent *string
 
 	// Describes information about the action.
@@ -367,7 +367,7 @@ type ComponentPropertyBindingProperties struct {
 }
 
 // Contains a summary of a component. This is a read-only data type that is
-// returned by ListComponents.
+// returned by ListComponents .
 type ComponentSummary struct {
 
 	// The unique ID of the Amplify app associated with the component.
@@ -403,11 +403,11 @@ type ComponentVariant struct {
 
 	// The properties of the component variant that can be overriden when customizing
 	// an instance of the component. You can't specify tags as a valid property for
-	// overrides.
+	// overrides .
 	Overrides map[string]map[string]string
 
 	// The combination of variants that comprise this variant. You can't specify tags
-	// as a valid property for variantValues.
+	// as a valid property for variantValues .
 	VariantValues map[string]string
 
 	noSmithyDocumentSerde
@@ -421,8 +421,8 @@ type CreateComponentData struct {
 	// This member is required.
 	BindingProperties map[string]ComponentBindingPropertiesValue
 
-	// The component type. This can be an Amplify custom UI component or another custom
-	// component.
+	// The component type. This can be an Amplify custom UI component or another
+	// custom component.
 	//
 	// This member is required.
 	ComponentType *string
@@ -499,8 +499,8 @@ type CreateFormData struct {
 	// This member is required.
 	SchemaVersion *string
 
-	// The configuration information for the visual helper elements for the form. These
-	// elements are not associated with any data.
+	// The configuration information for the visual helper elements for the form.
+	// These elements are not associated with any data.
 	//
 	// This member is required.
 	SectionalElements map[string]SectionalElement
@@ -710,17 +710,16 @@ type FileUploaderFieldConfig struct {
 	AcceptedFileTypes []string
 
 	// The access level to assign to the uploaded files in the Amazon S3 bucket where
-	// they are stored. The valid values for this property are private, protected, or
-	// public. For detailed information about the permissions associated with each
-	// access level, see File access levels
-	// (https://docs.amplify.aws/lib/storage/configureaccess/q/platform/js/) in the
-	// Amplify documentation.
+	// they are stored. The valid values for this property are private , protected , or
+	// public . For detailed information about the permissions associated with each
+	// access level, see File access levels (https://docs.amplify.aws/lib/storage/configureaccess/q/platform/js/)
+	// in the Amplify documentation.
 	//
 	// This member is required.
 	AccessLevel StorageAccessLevel
 
 	// Allows the file upload operation to be paused and resumed. The default value is
-	// false. When isResumable is set to true, the file uploader uses a multipart
+	// false . When isResumable is set to true , the file uploader uses a multipart
 	// upload to break the files into chunks before upload. The progress of the upload
 	// isn't continuous, because the file uploader uploads a chunk at a time.
 	IsResumable *bool
@@ -875,8 +874,8 @@ type FormDataTypeConfig struct {
 }
 
 // Represents the data binding configuration for a form's input fields at
-// runtime.You can use FormInputBindingPropertiesValue to add exposed properties to
-// a form to allow different values to be entered when a form is reused in
+// runtime.You can use FormInputBindingPropertiesValue to add exposed properties
+// to a form to allow different values to be entered when a form is reused in
 // different places in an app.
 type FormInputBindingPropertiesValue struct {
 
@@ -1013,8 +1012,8 @@ type FormSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the state configuration when an action modifies a property of another
-// element within the same component.
+// Represents the state configuration when an action modifies a property of
+// another element within the same component.
 type MutationActionSetStateParameter struct {
 
 	// The name of the component that is being modified.
@@ -1091,7 +1090,7 @@ type RefreshTokenRequestBody struct {
 // are static and not associated with any data.
 type SectionalElement struct {
 
-	// The type of sectional element. Valid values are Heading, Text, and Divider.
+	// The type of sectional element. Valid values are Heading , Text , and Divider .
 	//
 	// This member is required.
 	Type *string
@@ -1100,12 +1099,12 @@ type SectionalElement struct {
 	// model.
 	Excluded *bool
 
-	// Specifies the size of the font for a Heading sectional element. Valid values are
-	// 1 | 2 | 3 | 4 | 5 | 6.
+	// Specifies the size of the font for a Heading sectional element. Valid values
+	// are 1 | 2 | 3 | 4 | 5 | 6 .
 	Level *int32
 
 	// Specifies the orientation for a Divider sectional element. Valid values are
-	// horizontal or vertical.
+	// horizontal or vertical .
 	Orientation *string
 
 	// Specifies the position of the text in a field for a Text sectional element.
@@ -1239,12 +1238,12 @@ type UpdateComponentData struct {
 	// The components that are instances of the main component.
 	Children []ComponentChild
 
-	// The configuration for binding a component's properties to a data model. Use this
-	// for a collection component.
+	// The configuration for binding a component's properties to a data model. Use
+	// this for a collection component.
 	CollectionProperties map[string]ComponentDataConfiguration
 
-	// The type of the component. This can be an Amplify custom UI component or another
-	// custom component.
+	// The type of the component. This can be an Amplify custom UI component or
+	// another custom component.
 	ComponentType *string
 
 	// The event configuration for the component. Use for the workflow feature in
@@ -1299,8 +1298,8 @@ type UpdateFormData struct {
 	// The schema version of the form.
 	SchemaVersion *string
 
-	// The configuration information for the visual helper elements for the form. These
-	// elements are not associated with any data.
+	// The configuration information for the visual helper elements for the form.
+	// These elements are not associated with any data.
 	SectionalElements map[string]SectionalElement
 
 	// The configuration for the form's style.

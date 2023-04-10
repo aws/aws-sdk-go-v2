@@ -32,8 +32,7 @@ func (c *Client) DeleteQueryDefinition(ctx context.Context, params *DeleteQueryD
 type DeleteQueryDefinitionInput struct {
 
 	// The ID of the query definition that you want to delete. You can use
-	// DescribeQueryDefinitions
-	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html)
+	// DescribeQueryDefinitions (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html)
 	// to retrieve the IDs of your saved query definitions.
 	//
 	// This member is required.
@@ -44,8 +43,8 @@ type DeleteQueryDefinitionInput struct {
 
 type DeleteQueryDefinitionOutput struct {
 
-	// A value of TRUE indicates that the operation succeeded. FALSE indicates that the
-	// operation failed.
+	// A value of TRUE indicates that the operation succeeded. FALSE indicates that
+	// the operation failed.
 	Success bool
 
 	// Metadata pertaining to the operation's result.

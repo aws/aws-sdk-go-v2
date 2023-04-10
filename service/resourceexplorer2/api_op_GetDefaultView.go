@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the Amazon Resource Name (ARN) of the view that is the default for the
-// Amazon Web Services Region in which you call this operation. You can then call
-// GetView to retrieve the details of that view.
+// Retrieves the Amazon Resource Name (ARN) of the view that is the default for
+// the Amazon Web Services Region in which you call this operation. You can then
+// call GetView to retrieve the details of that view.
 func (c *Client) GetDefaultView(ctx context.Context, params *GetDefaultViewInput, optFns ...func(*Options)) (*GetDefaultViewOutput, error) {
 	if params == nil {
 		params = &GetDefaultViewInput{}
@@ -34,10 +34,9 @@ type GetDefaultViewInput struct {
 
 type GetDefaultViewOutput struct {
 
-	// The Amazon resource name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the view that is the current default for the Amazon Web Services Region in which
-	// you called this operation.
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the view that is the current default for the Amazon Web Services Region in
+	// which you called this operation.
 	ViewArn *string
 
 	// Metadata pertaining to the operation's result.

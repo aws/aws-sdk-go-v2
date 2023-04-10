@@ -11,20 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the current Elastic Load Balancing resource limits for your Amazon Web
-// Services account. For more information, see the following:
-//
-// * Quotas for your
-// Application Load Balancers
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
-//
-// *
-// Quotas for your Network Load Balancers
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html)
-//
-// *
-// Quotas for your Gateway Load Balancers
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html)
+// Describes the current Elastic Load Balancing resource limits for your Amazon
+// Web Services account. For more information, see the following:
+//   - Quotas for your Application Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
+//   - Quotas for your Network Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html)
+//   - Quotas for your Gateway Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html)
 func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAccountLimitsInput, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountLimitsInput{}
@@ -57,8 +48,8 @@ type DescribeAccountLimitsOutput struct {
 	// Information about the limits.
 	Limits []types.Limit
 
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
+	// If there are additional results, this is the marker for the next set of
+	// results. Otherwise, this is null.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.

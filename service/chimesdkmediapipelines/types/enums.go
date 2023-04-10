@@ -82,9 +82,9 @@ const (
 	AudioMuxTypeAudioWithCompositedVideo    AudioMuxType = "AudioWithCompositedVideo"
 )
 
-// Values returns all known values for AudioMuxType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AudioMuxType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AudioMuxType) Values() []AudioMuxType {
 	return []AudioMuxType{
 		"AudioOnly",
@@ -132,8 +132,8 @@ const (
 	ConcatenationSinkTypeS3Bucket ConcatenationSinkType = "S3Bucket"
 )
 
-// Values returns all known values for ConcatenationSinkType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ConcatenationSinkType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ConcatenationSinkType) Values() []ConcatenationSinkType {
 	return []ConcatenationSinkType{
@@ -200,9 +200,9 @@ const (
 	ContentShareLayoutOptionVertical      ContentShareLayoutOption = "Vertical"
 )
 
-// Values returns all known values for ContentShareLayoutOption. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContentShareLayoutOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentShareLayoutOption) Values() []ContentShareLayoutOption {
 	return []ContentShareLayoutOption{
 		"PresenterOnly",
@@ -240,9 +240,9 @@ const (
 	ErrorCodeThrottling            ErrorCode = "Throttling"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"BadRequest",
@@ -280,9 +280,9 @@ const (
 	LayoutOptionGridView LayoutOption = "GridView"
 )
 
-// Values returns all known values for LayoutOption. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LayoutOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LayoutOption) Values() []LayoutOption {
 	return []LayoutOption{
 		"GridView",
@@ -314,8 +314,8 @@ const (
 	LiveConnectorSinkTypeRtmp LiveConnectorSinkType = "RTMP"
 )
 
-// Values returns all known values for LiveConnectorSinkType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LiveConnectorSinkType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LiveConnectorSinkType) Values() []LiveConnectorSinkType {
 	return []LiveConnectorSinkType{
@@ -393,8 +393,8 @@ const (
 	MediaPipelineSinkTypeS3Bucket MediaPipelineSinkType = "S3Bucket"
 )
 
-// Values returns all known values for MediaPipelineSinkType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MediaPipelineSinkType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineSinkType) Values() []MediaPipelineSinkType {
 	return []MediaPipelineSinkType{
@@ -531,8 +531,8 @@ const (
 	RealTimeAlertRuleTypeIssueDetection RealTimeAlertRuleType = "IssueDetection"
 )
 
-// Values returns all known values for RealTimeAlertRuleType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RealTimeAlertRuleType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RealTimeAlertRuleType) Values() []RealTimeAlertRuleType {
 	return []RealTimeAlertRuleType{
@@ -601,9 +601,9 @@ const (
 	VideoMuxTypeVideoOnly VideoMuxType = "VideoOnly"
 )
 
-// Values returns all known values for VideoMuxType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VideoMuxType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VideoMuxType) Values() []VideoMuxType {
 	return []VideoMuxType{
 		"VideoOnly",
@@ -638,8 +638,8 @@ const (
 	VoiceAnalyticsConfigurationStatusDisabled VoiceAnalyticsConfigurationStatus = "Disabled"
 )
 
-// Values returns all known values for VoiceAnalyticsConfigurationStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for VoiceAnalyticsConfigurationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (VoiceAnalyticsConfigurationStatus) Values() []VoiceAnalyticsConfigurationStatus {

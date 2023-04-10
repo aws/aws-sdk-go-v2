@@ -40,8 +40,8 @@ type CreateSimulationJobInput struct {
 	IamRole *string
 
 	// The maximum simulation job duration in seconds (up to 14 days or 1,209,600
-	// seconds. When maxJobDurationInSeconds is reached, the simulation job will status
-	// will transition to Completed.
+	// seconds. When maxJobDurationInSeconds is reached, the simulation job will
+	// status will transition to Completed .
 	//
 	// This member is required.
 	MaxJobDurationInSeconds int64
@@ -54,7 +54,7 @@ type CreateSimulationJobInput struct {
 	Compute *types.Compute
 
 	// Specify data sources to mount read-only files from S3 into your simulation.
-	// These files are available under /opt/robomaker/datasources/data_source_name.
+	// These files are available under /opt/robomaker/datasources/data_source_name .
 	// There is a limit of 100 files and a combined size of 25GB for all
 	// DataSourceConfig objects.
 	DataSources []types.DataSourceConfig

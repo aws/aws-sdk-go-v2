@@ -36,8 +36,8 @@ type ListFindingsInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string
@@ -53,8 +53,8 @@ type ListFindingsOutput struct {
 	// Contains details on the findings in your environment.
 	Findings []types.Finding
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string

@@ -44,7 +44,7 @@ type GetExecutionHistoryInput struct {
 	ExecutionArn *string
 
 	// You can select whether execution data (input or output of a history event) is
-	// returned. The default is true.
+	// returned. The default is true .
 	IncludeExecutionData *bool
 
 	// The maximum number of results that are returned per call. You can use nextToken
@@ -61,7 +61,7 @@ type GetExecutionHistoryInput struct {
 	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string
 
-	// Lists events in descending order of their timeStamp.
+	// Lists events in descending order of their timeStamp .
 	ReverseOrder bool
 
 	noSmithyDocumentSerde
@@ -150,8 +150,8 @@ func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetExecutionHistoryAPIClient is a client that implements the GetExecutionHistory
-// operation.
+// GetExecutionHistoryAPIClient is a client that implements the
+// GetExecutionHistory operation.
 type GetExecutionHistoryAPIClient interface {
 	GetExecutionHistory(context.Context, *GetExecutionHistoryInput, ...func(*Options)) (*GetExecutionHistoryOutput, error)
 }

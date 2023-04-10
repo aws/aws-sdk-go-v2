@@ -16,13 +16,11 @@ import (
 // This action returns only the topic names of the retained messages. It doesn't
 // return any message payloads. Although this action doesn't return a message
 // payload, it can still incur messaging costs. To get the message payload of a
-// retained message, call GetRetainedMessage
-// (https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html)
+// retained message, call GetRetainedMessage (https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html)
 // with the topic name of the retained message. Requires permission to access the
-// ListRetainedMessages
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions)
+// ListRetainedMessages (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions)
 // action. For more information about messaging costs, see Amazon Web Services IoT
-// Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging).
+// Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging) .
 func (c *Client) ListRetainedMessages(ctx context.Context, params *ListRetainedMessagesInput, optFns ...func(*Options)) (*ListRetainedMessagesOutput, error) {
 	if params == nil {
 		params = &ListRetainedMessagesInput{}
@@ -56,8 +54,8 @@ type ListRetainedMessagesOutput struct {
 	// results.
 	NextToken *string
 
-	// A summary list the account's retained messages. The information returned doesn't
-	// include the message payloads of the retained messages.
+	// A summary list the account's retained messages. The information returned
+	// doesn't include the message payloads of the retained messages.
 	RetainedTopics []types.RetainedMessageSummary
 
 	// Metadata pertaining to the operation's result.

@@ -163,9 +163,9 @@ const (
 	DsnActionExpanded  DsnAction = "expanded"
 )
 
-// Values returns all known values for DsnAction. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for DsnAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DsnAction) Values() []DsnAction {
 	return []DsnAction{
 		"failed",
@@ -190,9 +190,9 @@ const (
 	EventTypeRenderingFailure EventType = "renderingFailure"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"send",
@@ -214,9 +214,9 @@ const (
 	IdentityTypeDomain       IdentityType = "Domain"
 )
 
-// Values returns all known values for IdentityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityType) Values() []IdentityType {
 	return []IdentityType{
 		"EmailAddress",
@@ -305,9 +305,9 @@ const (
 	StopScopeRuleSet StopScope = "RuleSet"
 )
 
-// Values returns all known values for StopScope. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for StopScope. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StopScope) Values() []StopScope {
 	return []StopScope{
 		"RuleSet",
@@ -322,9 +322,9 @@ const (
 	TlsPolicyOptional TlsPolicy = "Optional"
 )
 
-// Values returns all known values for TlsPolicy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TlsPolicy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TlsPolicy) Values() []TlsPolicy {
 	return []TlsPolicy{
 		"Require",

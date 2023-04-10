@@ -38,8 +38,8 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
-// A unique identifier for a user or group that is not the primary identifier. This
-// value can be an identifier from an external identity provider (IdP) that is
+// A unique identifier for a user or group that is not the primary identifier.
+// This value can be an identifier from an external identity provider (IdP) that is
 // associated with the user, the group, or a unique attribute.
 //
 // The following types satisfy this interface:
@@ -117,8 +117,8 @@ type ExternalId struct {
 	noSmithyDocumentSerde
 }
 
-// A query filter used by ListUsers and ListGroups. This filter object provides the
-// attribute name and attribute value to search users or groups.
+// A query filter used by ListUsers and ListGroups . This filter object provides
+// the attribute name and attribute value to search users or groups.
 type Filter struct {
 
 	// The attribute path that is used to specify which attribute name to search.
@@ -154,8 +154,8 @@ type Group struct {
 	// A string containing a description of the specified group.
 	Description *string
 
-	// The display name value for the group. The length limit is 1,024 characters. This
-	// value can consist of letters, accented characters, symbols, numbers,
+	// The display name value for the group. The length limit is 1,024 characters.
+	// This value can consist of letters, accented characters, symbols, numbers,
 	// punctuation, tab, new line, carriage return, space, and nonbreaking space in
 	// this attribute. This value is specified at the time the group is created and
 	// stored as an attribute of the group object in the identity store.
@@ -334,8 +334,8 @@ type User struct {
 	// A string containing the time zone of the user.
 	Timezone *string
 
-	// A string containing the title of the user. Possible values are left unspecified.
-	// The value can vary based on your specific use case.
+	// A string containing the title of the user. Possible values are left
+	// unspecified. The value can vary based on your specific use case.
 	Title *string
 
 	// A unique string used to identify the user. The length limit is 128 characters.

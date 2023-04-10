@@ -11,13 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of IPSetSummary objects in the response.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Returns an array of IPSetSummary objects in the response.
 func (c *Client) ListIPSets(ctx context.Context, params *ListIPSetsInput, optFns ...func(*Options)) (*ListIPSetsOutput, error) {
 	if params == nil {
 		params = &ListIPSetsInput{}
@@ -36,15 +34,15 @@ func (c *Client) ListIPSets(ctx context.Context, params *ListIPSetsInput, optFns
 type ListIPSetsInput struct {
 
 	// Specifies the number of IPSet objects that you want AWS WAF to return for this
-	// request. If you have more IPSet objects than the number you specify for Limit,
+	// request. If you have more IPSet objects than the number you specify for Limit ,
 	// the response includes a NextMarker value that you can use to get another batch
 	// of IPSet objects.
 	Limit int32
 
 	// AWS WAF returns a NextMarker value in the response that allows you to list
-	// another group of IPSets. For the second and subsequent ListIPSets requests,
+	// another group of IPSets . For the second and subsequent ListIPSets requests,
 	// specify the value of NextMarker from the previous response to get information
-	// about another batch of IPSets.
+	// about another batch of IPSets .
 	NextMarker *string
 
 	noSmithyDocumentSerde

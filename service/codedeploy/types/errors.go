@@ -440,8 +440,8 @@ func (e *DeploymentGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The named deployment group with the IAM user or Amazon Web Services account does
-// not exist.
+// The named deployment group with the IAM user or Amazon Web Services account
+// does not exist.
 type DeploymentGroupDoesNotExistException struct {
 	Message *string
 
@@ -856,8 +856,8 @@ func (e *IamArnRequiredException) ErrorCode() string {
 }
 func (e *IamArnRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request included an IAM session ARN that has already been used to register a
-// different instance.
+// The request included an IAM session ARN that has already been used to register
+// a different instance.
 type IamSessionArnAlreadyRegisteredException struct {
 	Message *string
 
@@ -1099,20 +1099,11 @@ func (e *InstanceNotRegisteredException) ErrorCode() string {
 func (e *InstanceNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The format of the alarm configuration is invalid. Possible causes include:
-//
-// *
-// The alarm list is null.
-//
-// * The alarm object is null.
-//
-// * The alarm name is empty
-// or null or exceeds the limit of 255 characters.
-//
-// * Two alarms with the same name
-// have been specified.
-//
-// * The alarm configuration is enabled, but the alarm list
-// is empty.
+//   - The alarm list is null.
+//   - The alarm object is null.
+//   - The alarm name is empty or null or exceeds the limit of 255 characters.
+//   - Two alarms with the same name have been specified.
+//   - The alarm configuration is enabled, but the alarm list is empty.
 type InvalidAlarmConfigException struct {
 	Message *string
 
@@ -1246,9 +1237,9 @@ func (e *InvalidAutoScalingGroupException) ErrorCode() string {
 }
 func (e *InvalidAutoScalingGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The configuration for the blue/green deployment group was provided in an invalid
-// format. For information about deployment configuration format, see
-// CreateDeploymentConfig.
+// The configuration for the blue/green deployment group was provided in an
+// invalid format. For information about deployment configuration format, see
+// CreateDeploymentConfig .
 type InvalidBlueGreenDeploymentConfigurationException struct {
 	Message *string
 
@@ -1302,8 +1293,8 @@ func (e *InvalidBucketNameFilterException) ErrorCode() string {
 }
 func (e *InvalidBucketNameFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The computePlatform is invalid. The computePlatform should be Lambda, Server, or
-// ECS.
+// The computePlatform is invalid. The computePlatform should be Lambda , Server ,
+// or ECS .
 type InvalidComputePlatformException struct {
 	Message *string
 
@@ -1929,9 +1920,9 @@ func (e *InvalidInstanceStatusException) ErrorCode() string {
 }
 func (e *InvalidInstanceStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An invalid instance type was specified for instances in a blue/green deployment.
-// Valid values include "Blue" for an original environment and "Green" for a
-// replacement environment.
+// An invalid instance type was specified for instances in a blue/green
+// deployment. Valid values include "Blue" for an original environment and "Green"
+// for a replacement environment.
 type InvalidInstanceTypeException struct {
 	Message *string
 
@@ -1983,8 +1974,8 @@ func (e *InvalidKeyPrefixFilterException) ErrorCode() string {
 }
 func (e *InvalidKeyPrefixFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A lifecycle event hook is invalid. Review the hooks section in your AppSpec file
-// to ensure the lifecycle events and hooks functions are valid.
+// A lifecycle event hook is invalid. Review the hooks section in your AppSpec
+// file to ensure the lifecycle events and hooks functions are valid.
 type InvalidLifecycleEventHookExecutionIdException struct {
 	Message *string
 
@@ -2013,7 +2004,7 @@ func (e *InvalidLifecycleEventHookExecutionIdException) ErrorFault() smithy.Erro
 }
 
 // The result of a Lambda validation function that verifies a lifecycle event is
-// invalid. It should return Succeeded or Failed.
+// invalid. It should return Succeeded or Failed .
 type InvalidLifecycleEventHookExecutionStatusException struct {
 	Message *string
 
@@ -2442,18 +2433,11 @@ func (e *InvalidTargetGroupPairException) ErrorCode() string {
 func (e *InvalidTargetGroupPairException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The target instance configuration is invalid. Possible causes include:
-//
-// *
-// Configuration data for target instances was entered for an in-place
-// deployment.
-//
-// * The limit of 10 tags for a tag type was exceeded.
-//
-// * The combined
-// length of the tag names exceeded the limit.
-//
-// * A specified tag is not currently
-// applied to any instances.
+//   - Configuration data for target instances was entered for an in-place
+//     deployment.
+//   - The limit of 10 tags for a tag type was exceeded.
+//   - The combined length of the tag names exceeded the limit.
+//   - A specified tag is not currently applied to any instances.
 type InvalidTargetInstancesException struct {
 	Message *string
 

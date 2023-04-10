@@ -31,7 +31,7 @@ func (c *Client) RemoveTagsFromStream(ctx context.Context, params *RemoveTagsFro
 	return out, nil
 }
 
-// Represents the input for RemoveTagsFromStream.
+// Represents the input for RemoveTagsFromStream .
 type RemoveTagsFromStreamInput struct {
 
 	// A list of tag keys. Each corresponding tag is removed from the stream.

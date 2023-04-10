@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A paginated call to get pricing plans for the given billing period. If you don't
-// provide a billing period, the current billing period is used.
+// A paginated call to get pricing plans for the given billing period. If you
+// don't provide a billing period, the current billing period is used.
 func (c *Client) ListPricingPlans(ctx context.Context, params *ListPricingPlansInput, optFns ...func(*Options)) (*ListPricingPlansOutput, error) {
 	if params == nil {
 		params = &ListPricingPlansInput{}

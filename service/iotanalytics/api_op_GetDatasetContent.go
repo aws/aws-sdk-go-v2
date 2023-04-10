@@ -36,9 +36,9 @@ type GetDatasetContentInput struct {
 	DatasetName *string
 
 	// The version of the dataset whose contents are retrieved. You can also use the
-	// strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of the latest
-	// or latest successfully completed dataset. If not specified, "$LATEST_SUCCEEDED"
-	// is the default.
+	// strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of the
+	// latest or latest successfully completed dataset. If not specified,
+	// "$LATEST_SUCCEEDED" is the default.
 	VersionId *string
 
 	noSmithyDocumentSerde

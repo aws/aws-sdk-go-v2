@@ -32,8 +32,8 @@ func (c *Client) StartDominantLanguageDetectionJob(ctx context.Context, params *
 type StartDominantLanguageDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
-	// read access to your input data. For more information, see Role-based permissions
-	// (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions).
+	// read access to your input data. For more information, see Role-based permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
+	// .
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -48,35 +48,32 @@ type StartDominantLanguageDetectionJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// A unique identifier for the request. If you do not set the client request token,
-	// Amazon Comprehend generates one.
+	// A unique identifier for the request. If you do not set the client request
+	// token, Amazon Comprehend generates one.
 	ClientRequestToken *string
 
 	// An identifier for the job.
 	JobName *string
 
-	// Tags to associate with the dominant language detection job. A tag is a key-value
-	// pair that adds metadata to a resource used by Amazon Comprehend. For example, a
-	// tag with "Sales" as the key might be added to a resource to indicate its use by
-	// the sales department.
+	// Tags to associate with the dominant language detection job. A tag is a
+	// key-value pair that adds metadata to a resource used by Amazon Comprehend. For
+	// example, a tag with "Sales" as the key might be added to a resource to indicate
+	// its use by the sales department.
 	Tags []types.Tag
 
 	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
 	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
 	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
 	// the following formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// *
-	// Amazon Resource Name (ARN) of a KMS Key:
-	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//   - Amazon Resource Name (ARN) of a KMS Key:
+	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
 	// containing the resources you are using for your dominant language detection job.
-	// For more information, see Amazon VPC
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	// For more information, see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
+	// .
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -97,17 +94,10 @@ type StartDominantLanguageDetectionJobOutput struct {
 	JobId *string
 
 	// The status of the job.
-	//
-	// * SUBMITTED - The job has been received and is queued
-	// for processing.
-	//
-	// * IN_PROGRESS - Amazon Comprehend is processing the job.
-	//
-	// *
-	// COMPLETED - The job was successfully completed and the output is available.
-	//
-	// *
-	// FAILED - The job did not complete. To get details, use the operation.
+	//   - SUBMITTED - The job has been received and is queued for processing.
+	//   - IN_PROGRESS - Amazon Comprehend is processing the job.
+	//   - COMPLETED - The job was successfully completed and the output is available.
+	//   - FAILED - The job did not complete. To get details, use the operation.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

@@ -43,8 +43,8 @@ type GetRetentionSettingsInput struct {
 
 type GetRetentionSettingsOutput struct {
 
-	// The timestamp representing the time at which the specified items are permanently
-	// deleted, in ISO 8601 format.
+	// The timestamp representing the time at which the specified items are
+	// permanently deleted, in ISO 8601 format.
 	InitiateDeletionTimestamp *time.Time
 
 	// The retention settings.

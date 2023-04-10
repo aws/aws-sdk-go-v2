@@ -52,8 +52,8 @@ type PutWebhookInput struct {
 
 type PutWebhookOutput struct {
 
-	// The detail returned from creating the webhook, such as the webhook name, webhook
-	// URL, and webhook ARN.
+	// The detail returned from creating the webhook, such as the webhook name,
+	// webhook URL, and webhook ARN.
 	Webhook *types.ListWebhookItem
 
 	// Metadata pertaining to the operation's result.

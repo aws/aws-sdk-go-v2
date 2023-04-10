@@ -9,6 +9,6 @@
 // operations that you can call programmatically and includes detailed information
 // on data types and errors. For information about Cloud Directory features, see
 // AWS Directory Service (https://aws.amazon.com/directoryservice/) and the Amazon
-// Cloud Directory Developer Guide
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/what_is_cloud_directory.html).
+// Cloud Directory Developer Guide (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/what_is_cloud_directory.html)
+// .
 package clouddirectory

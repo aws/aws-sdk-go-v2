@@ -12,8 +12,7 @@ import (
 )
 
 // Assigns one or more private IPv4 addresses to a private NAT gateway. For more
-// information, see Work with NAT gateways
-// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
+// information, see Work with NAT gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
 // in the Amazon Virtual Private Cloud User Guide.
 func (c *Client) AssignPrivateNatGatewayAddress(ctx context.Context, params *AssignPrivateNatGatewayAddressInput, optFns ...func(*Options)) (*AssignPrivateNatGatewayAddressOutput, error) {
 	if params == nil {
@@ -39,8 +38,8 @@ type AssignPrivateNatGatewayAddressInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The number of private IP addresses to assign to the NAT gateway. You can't

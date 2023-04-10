@@ -43,8 +43,8 @@ type SubscribeInput struct {
 	// This member is required.
 	Target *types.Target
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

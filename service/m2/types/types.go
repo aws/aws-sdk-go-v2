@@ -206,8 +206,8 @@ type BatchJobIdentifierMemberFileBatchJobIdentifier struct {
 
 func (*BatchJobIdentifierMemberFileBatchJobIdentifier) isBatchJobIdentifier() {}
 
-// A batch job identifier in which the batch job to run is identified by the script
-// name.
+// A batch job identifier in which the batch job to run is identified by the
+// script name.
 type BatchJobIdentifierMemberScriptBatchJobIdentifier struct {
 	Value ScriptBatchJobIdentifier
 
@@ -661,8 +661,8 @@ type FsxStorageConfiguration struct {
 // set is one of a collection of successive, historically related, catalogued data
 // sets that together are known as a generation data group (GDG). Use this
 // structure when you want to import a GDG. For more information on GDG, see
-// Generation data sets
-// (https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets).
+// Generation data sets (https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets)
+// .
 type GdgAttributes struct {
 
 	// The maximum number of generation data sets, up to 255, in a GDG.
@@ -678,8 +678,8 @@ type GdgAttributes struct {
 // set is one of a collection of successive, historically related, catalogued data
 // sets that together are known as a generation data group (GDG). Use this
 // structure when you want to import a GDG. For more information on GDG, see
-// Generation data sets
-// (https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets).
+// Generation data sets (https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets)
+// .
 type GdgDetailAttributes struct {
 
 	// The maximum number of generation data sets, up to 255, in a GDG.
@@ -792,8 +792,8 @@ type ScriptBatchJobDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// A batch job identifier in which the batch job to run is identified by the script
-// name.
+// A batch job identifier in which the batch job to run is identified by the
+// script name.
 type ScriptBatchJobIdentifier struct {
 
 	// The name of the script containing the batch job definition.
@@ -883,8 +883,8 @@ type VsamDetailAttributes struct {
 	// them as some applications will make use of them.
 	AlternateKeys []AlternateKey
 
-	// If set to True, enforces loading the data set into cache before it’s used by the
-	// application.
+	// If set to True, enforces loading the data set into cache before it’s used by
+	// the application.
 	CacheAtStartup *bool
 
 	// Indicates whether indexes for this dataset are stored as compressed values. If

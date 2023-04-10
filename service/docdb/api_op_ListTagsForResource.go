@@ -27,7 +27,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	return out, nil
 }
 
-// Represents the input to ListTagsForResource.
+// Represents the input to ListTagsForResource .
 type ListTagsForResourceInput struct {
 
 	// The Amazon DocumentDB resource with tags to be listed. This value is an Amazon
@@ -42,7 +42,7 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of ListTagsForResource.
+// Represents the output of ListTagsForResource .
 type ListTagsForResourceOutput struct {
 
 	// A list of one or more tags.

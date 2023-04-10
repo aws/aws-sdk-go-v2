@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about endpoints for an Amazon Aurora DB cluster. This action
-// only applies to Aurora DB clusters.
+// Returns information about endpoints for an Amazon Aurora DB cluster. This
+// action only applies to Aurora DB clusters.
 func (c *Client) DescribeDBClusterEndpoints(ctx context.Context, params *DescribeDBClusterEndpointsInput, optFns ...func(*Options)) (*DescribeDBClusterEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterEndpointsInput{}
@@ -41,18 +41,18 @@ type DescribeDBClusterEndpointsInput struct {
 
 	// A set of name-value pairs that define which endpoints to include in the output.
 	// The filters are specified as name-value pairs, in the format
-	// Name=endpoint_type,Values=endpoint_type1,endpoint_type2,.... Name can be one of:
-	// db-cluster-endpoint-type, db-cluster-endpoint-custom-type,
-	// db-cluster-endpoint-id, db-cluster-endpoint-status. Values for the
-	// db-cluster-endpoint-type filter can be one or more of: reader, writer, custom.
-	// Values for the db-cluster-endpoint-custom-type filter can be one or more of:
-	// reader, any. Values for the db-cluster-endpoint-status filter can be one or more
-	// of: available, creating, deleting, inactive, modifying.
+	// Name=endpoint_type,Values=endpoint_type1,endpoint_type2,... . Name can be one
+	// of: db-cluster-endpoint-type , db-cluster-endpoint-custom-type ,
+	// db-cluster-endpoint-id , db-cluster-endpoint-status . Values for the
+	// db-cluster-endpoint-type filter can be one or more of: reader , writer , custom
+	// . Values for the db-cluster-endpoint-custom-type filter can be one or more of:
+	// reader , any . Values for the db-cluster-endpoint-status filter can be one or
+	// more of: available , creating , deleting , inactive , modifying .
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -72,7 +72,7 @@ type DescribeDBClusterEndpointsOutput struct {
 
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

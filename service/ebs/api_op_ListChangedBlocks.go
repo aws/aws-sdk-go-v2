@@ -55,9 +55,9 @@ type ListChangedBlocksInput struct {
 	// StartingBlockIndex is ignored.
 	NextToken *string
 
-	// The block index from which the comparison should start. The list in the response
-	// will start from this block index or the next valid block index in the snapshots.
-	// If you specify NextToken, then StartingBlockIndex is ignored.
+	// The block index from which the comparison should start. The list in the
+	// response will start from this block index or the next valid block index in the
+	// snapshots. If you specify NextToken, then StartingBlockIndex is ignored.
 	StartingBlockIndex *int32
 
 	noSmithyDocumentSerde

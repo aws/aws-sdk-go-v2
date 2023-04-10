@@ -11,8 +11,7 @@ import (
 )
 
 // Deletes a provisioning template. Requires permission to access the
-// DeleteProvisioningTemplate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DeleteProvisioningTemplate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteProvisioningTemplate(ctx context.Context, params *DeleteProvisioningTemplateInput, optFns ...func(*Options)) (*DeleteProvisioningTemplateOutput, error) {
 	if params == nil {

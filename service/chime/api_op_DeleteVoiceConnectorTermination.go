@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the termination settings for the specified Amazon Chime Voice Connector.
-// If emergency calling is configured for the Amazon Chime Voice Connector, it must
-// be deleted prior to deleting the termination settings.
+// Deletes the termination settings for the specified Amazon Chime Voice
+// Connector. If emergency calling is configured for the Amazon Chime Voice
+// Connector, it must be deleted prior to deleting the termination settings.
 func (c *Client) DeleteVoiceConnectorTermination(ctx context.Context, params *DeleteVoiceConnectorTerminationInput, optFns ...func(*Options)) (*DeleteVoiceConnectorTerminationOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorTerminationInput{}

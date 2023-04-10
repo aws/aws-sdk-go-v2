@@ -49,8 +49,8 @@ type ListJourneysInput struct {
 
 type ListJourneysOutput struct {
 
-	// Provides information about the status, configuration, and other settings for all
-	// the journeys that are associated with an application.
+	// Provides information about the status, configuration, and other settings for
+	// all the journeys that are associated with an application.
 	//
 	// This member is required.
 	JourneysResponse *types.JourneysResponse

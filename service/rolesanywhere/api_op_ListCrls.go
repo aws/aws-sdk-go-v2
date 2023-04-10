@@ -13,7 +13,7 @@ import (
 )
 
 // Lists all Crls in the authenticated account and Amazon Web Services Region.
-// Required permissions: rolesanywhere:ListCrls.
+// Required permissions: rolesanywhere:ListCrls .
 func (c *Client) ListCrls(ctx context.Context, params *ListCrlsInput, optFns ...func(*Options)) (*ListCrlsOutput, error) {
 	if params == nil {
 		params = &ListCrlsInput{}

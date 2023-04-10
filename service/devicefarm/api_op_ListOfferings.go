@@ -16,8 +16,8 @@ import (
 // API. Each offering record indicates the recurring price per unit and the
 // frequency for that offering. The API returns a NotEligible error if the user is
 // not permitted to invoke the operation. If you must be able to invoke this
-// operation, contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com).
+// operation, contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// .
 func (c *Client) ListOfferings(ctx context.Context, params *ListOfferingsInput, optFns ...func(*Options)) (*ListOfferingsOutput, error) {
 	if params == nil {
 		params = &ListOfferingsInput{}

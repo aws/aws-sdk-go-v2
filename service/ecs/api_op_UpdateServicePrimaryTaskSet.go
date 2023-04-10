@@ -14,8 +14,7 @@ import (
 // Modifies which task set in a service is the primary task set. Any parameters
 // that are updated on the primary task set in a service will transition to the
 // service. This is used when a service uses the EXTERNAL deployment controller
-// type. For more information, see Amazon ECS Deployment Types
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// type. For more information, see Amazon ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) UpdateServicePrimaryTaskSet(ctx context.Context, params *UpdateServicePrimaryTaskSetInput, optFns ...func(*Options)) (*UpdateServicePrimaryTaskSetOutput, error) {
 	if params == nil {

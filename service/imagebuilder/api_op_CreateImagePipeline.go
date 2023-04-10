@@ -47,8 +47,8 @@ type CreateImagePipelineInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the container recipe that is used to configure
-	// images created by this container pipeline.
+	// The Amazon Resource Name (ARN) of the container recipe that is used to
+	// configure images created by this container pipeline.
 	ContainerRecipeArn *string
 
 	// The description of the image pipeline.

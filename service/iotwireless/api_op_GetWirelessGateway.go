@@ -34,7 +34,7 @@ type GetWirelessGatewayInput struct {
 	// This member is required.
 	Identifier *string
 
-	// The type of identifier used in identifier.
+	// The type of identifier used in identifier .
 	//
 	// This member is required.
 	IdentifierType types.WirelessGatewayIdType

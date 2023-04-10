@@ -44,7 +44,7 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more than the
@@ -58,8 +58,8 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	MultiAZ *bool
 
 	// The offering type filter value. Specify this parameter to show only the
-	// available offerings matching the specified offering type. Valid Values: "Partial
-	// Upfront" | "All Upfront" | "No Upfront"
+	// available offerings matching the specified offering type. Valid Values:
+	// "Partial Upfront" | "All Upfront" | "No Upfront"
 	OfferingType *string
 
 	// Product description filter value. Specify this parameter to show only the
@@ -81,7 +81,7 @@ type DescribeReservedDBInstancesOfferingsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// A list of reserved DB instance offerings.

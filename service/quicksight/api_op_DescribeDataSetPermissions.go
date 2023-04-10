@@ -12,7 +12,7 @@ import (
 )
 
 // Describes the permissions on a dataset. The permissions resource is
-// arn:aws:quicksight:region:aws-account-id:dataset/data-set-id.
+// arn:aws:quicksight:region:aws-account-id:dataset/data-set-id .
 func (c *Client) DescribeDataSetPermissions(ctx context.Context, params *DescribeDataSetPermissionsInput, optFns ...func(*Options)) (*DescribeDataSetPermissionsOutput, error) {
 	if params == nil {
 		params = &DescribeDataSetPermissionsInput{}
@@ -35,8 +35,8 @@ type DescribeDataSetPermissionsInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region for each Amazon Web Services account.
+	// The ID for the dataset that you want to create. This ID is unique per Amazon
+	// Web Services Region for each Amazon Web Services account.
 	//
 	// This member is required.
 	DataSetId *string
@@ -49,8 +49,8 @@ type DescribeDataSetPermissionsOutput struct {
 	// The Amazon Resource Name (ARN) of the dataset.
 	DataSetArn *string
 
-	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region for each Amazon Web Services account.
+	// The ID for the dataset that you want to create. This ID is unique per Amazon
+	// Web Services Region for each Amazon Web Services account.
 	DataSetId *string
 
 	// A list of resource permissions on the dataset.

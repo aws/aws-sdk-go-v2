@@ -15,24 +15,16 @@
 // standard or regulation. You can also customize frameworks and controls to
 // support internal audits with specific requirements. Use the following links to
 // get started with the Audit Manager API:
+//   - Actions (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html)
+//     : An alphabetical list of all Audit Manager API operations.
+//   - Data types (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html)
+//     : An alphabetical list of all Audit Manager data types.
+//   - Common parameters (https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html)
+//     : Parameters that all operations can use.
+//   - Common errors (https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html)
+//     : Client and server errors that all operations can return.
 //
-// * Actions
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html):
-// An alphabetical list of all Audit Manager API operations.
-//
-// * Data types
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html):
-// An alphabetical list of all Audit Manager data types.
-//
-// * Common parameters
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html):
-// Parameters that all operations can use.
-//
-// * Common errors
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html):
-// Client and server errors that all operations can return.
-//
-// If you're new to Audit
-// Manager, we recommend that you review the  Audit Manager User Guide
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html).
+// If you're new to Audit Manager, we recommend that you review the  Audit Manager
+// User Guide (https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html)
+// .
 package auditmanager

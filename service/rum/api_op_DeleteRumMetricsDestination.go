@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a destination for CloudWatch RUM extended metrics, so that the specified
-// app monitor stops sending extended metrics to that destination.
+// Deletes a destination for CloudWatch RUM extended metrics, so that the
+// specified app monitor stops sending extended metrics to that destination.
 func (c *Client) DeleteRumMetricsDestination(ctx context.Context, params *DeleteRumMetricsDestinationInput, optFns ...func(*Options)) (*DeleteRumMetricsDestinationOutput, error) {
 	if params == nil {
 		params = &DeleteRumMetricsDestinationInput{}
@@ -36,13 +36,13 @@ type DeleteRumMetricsDestinationInput struct {
 	// This member is required.
 	AppMonitorName *string
 
-	// The type of destination to delete. Valid values are CloudWatch and Evidently.
+	// The type of destination to delete. Valid values are CloudWatch and Evidently .
 	//
 	// This member is required.
 	Destination types.MetricDestination
 
-	// This parameter is required if Destination is Evidently. If Destination is
-	// CloudWatch, do not use this parameter. This parameter specifies the ARN of the
+	// This parameter is required if Destination is Evidently . If Destination is
+	// CloudWatch , do not use this parameter. This parameter specifies the ARN of the
 	// Evidently experiment that corresponds to the destination to delete.
 	DestinationArn *string
 

@@ -14,13 +14,11 @@ import (
 // Releases the specified address range that you provisioned to use with your
 // Amazon Web Services resources through bring your own IP addresses (BYOIP) and
 // deletes the corresponding address pool. Before you can release an address range,
-// you must stop advertising it by using WithdrawByoipCidr
-// (https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html)
+// you must stop advertising it by using WithdrawByoipCidr (https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html)
 // and you must not have any accelerators that are using static IP addresses
 // allocated from its address range. For more information, see Bring your own IP
-// addresses (BYOIP)
-// (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
-// the Global Accelerator Developer Guide.
+// addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+// in the Global Accelerator Developer Guide.
 func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionByoipCidrInput, optFns ...func(*Options)) (*DeprovisionByoipCidrOutput, error) {
 	if params == nil {
 		params = &DeprovisionByoipCidrInput{}
@@ -38,8 +36,8 @@ func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionBy
 
 type DeprovisionByoipCidrInput struct {
 
-	// The address range, in CIDR notation. The prefix must be the same prefix that you
-	// specified when you provisioned the address range.
+	// The address range, in CIDR notation. The prefix must be the same prefix that
+	// you specified when you provisioned the address range.
 	//
 	// This member is required.
 	Cidr *string

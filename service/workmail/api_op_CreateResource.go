@@ -40,7 +40,7 @@ type CreateResourceInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The type of the new resource. The available types are equipment and room.
+	// The type of the new resource. The available types are equipment and room .
 	//
 	// This member is required.
 	Type types.ResourceType

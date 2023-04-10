@@ -36,8 +36,8 @@ func (c *Client) DescribeAddon(ctx context.Context, params *DescribeAddonInput, 
 type DescribeAddonInput struct {
 
 	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html).
+	// ListAddons (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html)
+	// .
 	//
 	// This member is required.
 	AddonName *string
@@ -52,9 +52,8 @@ type DescribeAddonInput struct {
 
 type DescribeAddonOutput struct {
 
-	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons
-	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) in the
-	// Amazon EKS User Guide.
+	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
+	// in the Amazon EKS User Guide.
 	Addon *types.Addon
 
 	// Metadata pertaining to the operation's result.
@@ -146,9 +145,9 @@ type AddonActiveWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, AddonActiveWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, AddonActiveWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -339,9 +338,9 @@ type AddonDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, AddonDeletedWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, AddonDeletedWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

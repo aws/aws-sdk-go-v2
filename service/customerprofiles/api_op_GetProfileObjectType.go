@@ -56,10 +56,10 @@ type GetProfileObjectTypeOutput struct {
 	ObjectTypeName *string
 
 	// Indicates whether a profile should be created when data is received if one
-	// doesn’t exist for an object of this type. The default is FALSE. If the
-	// AllowProfileCreation flag is set to FALSE, then the service tries to fetch a
+	// doesn’t exist for an object of this type. The default is FALSE . If the
+	// AllowProfileCreation flag is set to FALSE , then the service tries to fetch a
 	// standard profile and associate this object with the profile. If it is set to
-	// TRUE, and if no match is found, then the service creates a new standard profile.
+	// TRUE , and if no match is found, then the service creates a new standard profile.
 	AllowProfileCreation bool
 
 	// The timestamp of when the domain was created.

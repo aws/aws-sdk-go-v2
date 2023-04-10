@@ -12,9 +12,8 @@ import (
 )
 
 // Reports progress of a resource handler to CloudFormation. Reserved for use by
-// the CloudFormation CLI
-// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-// Don't use this API in your code.
+// the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+// . Don't use this API in your code.
 func (c *Client) RecordHandlerProgress(ctx context.Context, params *RecordHandlerProgressInput, optFns ...func(*Options)) (*RecordHandlerProgressOutput, error) {
 	if params == nil {
 		params = &RecordHandlerProgressInput{}
@@ -32,36 +31,36 @@ func (c *Client) RecordHandlerProgress(ctx context.Context, params *RecordHandle
 
 type RecordHandlerProgressInput struct {
 
-	// Reserved for use by the CloudFormation CLI
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
+	// Reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+	// .
 	//
 	// This member is required.
 	BearerToken *string
 
-	// Reserved for use by the CloudFormation CLI
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
+	// Reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+	// .
 	//
 	// This member is required.
 	OperationStatus types.OperationStatus
 
-	// Reserved for use by the CloudFormation CLI
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
+	// Reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+	// .
 	ClientRequestToken *string
 
-	// Reserved for use by the CloudFormation CLI
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
+	// Reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+	// .
 	CurrentOperationStatus types.OperationStatus
 
-	// Reserved for use by the CloudFormation CLI
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
+	// Reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+	// .
 	ErrorCode types.HandlerErrorCode
 
-	// Reserved for use by the CloudFormation CLI
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
+	// Reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+	// .
 	ResourceModel *string
 
-	// Reserved for use by the CloudFormation CLI
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
+	// Reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+	// .
 	StatusMessage *string
 
 	noSmithyDocumentSerde

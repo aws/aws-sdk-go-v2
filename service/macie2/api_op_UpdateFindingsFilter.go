@@ -40,8 +40,8 @@ type UpdateFindingsFilterInput struct {
 	// the findings; and, NOOP, don't perform any action on the findings.
 	Action types.FindingsFilterAction
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
+	// A unique, case-sensitive token that you provide to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
 	// A custom description of the filter. The description can contain as many as 512

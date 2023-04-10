@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new analysis rule for a configured table. Currently, only one analysis
-// rule can be created for a given configured table.
+// Creates a new analysis rule for a configured table. Currently, only one
+// analysis rule can be created for a given configured table.
 func (c *Client) CreateConfiguredTableAnalysisRule(ctx context.Context, params *CreateConfiguredTableAnalysisRuleInput, optFns ...func(*Options)) (*CreateConfiguredTableAnalysisRuleOutput, error) {
 	if params == nil {
 		params = &CreateConfiguredTableAnalysisRuleInput{}

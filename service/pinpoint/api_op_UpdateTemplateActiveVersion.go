@@ -43,8 +43,8 @@ type UpdateTemplateActiveVersionInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// The type of channel that the message template is designed for. Valid values are:
-	// EMAIL, PUSH, SMS, and VOICE.
+	// The type of channel that the message template is designed for. Valid values
+	// are: EMAIL, PUSH, SMS, and VOICE.
 	//
 	// This member is required.
 	TemplateType *string

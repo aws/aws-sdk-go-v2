@@ -45,8 +45,8 @@ type ListMissionProfilesOutput struct {
 	// List of mission profiles.
 	MissionProfileList []types.MissionProfileListItem
 
-	// Next token returned in the response of a previous ListMissionProfiles call. Used
-	// to get the next page of results.
+	// Next token returned in the response of a previous ListMissionProfiles call.
+	// Used to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -115,8 +115,8 @@ func (c *Client) addOperationListMissionProfilesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListMissionProfilesAPIClient is a client that implements the ListMissionProfiles
-// operation.
+// ListMissionProfilesAPIClient is a client that implements the
+// ListMissionProfiles operation.
 type ListMissionProfilesAPIClient interface {
 	ListMissionProfiles(context.Context, *ListMissionProfilesInput, ...func(*Options)) (*ListMissionProfilesOutput, error)
 }

@@ -30,8 +30,7 @@ func (c *Client) ListTaskTemplates(ctx context.Context, params *ListTaskTemplate
 
 type ListTaskTemplatesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -50,9 +49,9 @@ type ListTaskTemplatesInput struct {
 	// is always null.
 	NextToken *string
 
-	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only
-	// be created from ACTIVE templates. If a template is marked as INACTIVE, then a
-	// task that refers to this template cannot be created.
+	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can
+	// only be created from ACTIVE templates. If a template is marked as INACTIVE ,
+	// then a task that refers to this template cannot be created.
 	Status types.TaskTemplateStatus
 
 	noSmithyDocumentSerde

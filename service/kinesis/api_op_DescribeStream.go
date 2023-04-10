@@ -30,8 +30,7 @@ import (
 // creating the shard. Every record ingested in the stream is identified by a
 // sequence number, which is assigned when the record is put into the stream. You
 // can limit the number of shards returned by each call. For more information, see
-// Retrieving Shards from a Stream
-// (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html)
+// Retrieving Shards from a Stream (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html)
 // in the Amazon Kinesis Data Streams Developer Guide. There are no guarantees
 // about the chronological order shards returned. To process shards in
 // chronological order, use the ID of the parent shard to track the lineage to the
@@ -52,14 +51,14 @@ func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput
 	return out, nil
 }
 
-// Represents the input for DescribeStream.
+// Represents the input for DescribeStream .
 type DescribeStreamInput struct {
 
-	// The shard ID of the shard to start with. Specify this parameter to indicate that
-	// you want to describe the stream starting with the shard whose ID immediately
-	// follows ExclusiveStartShardId. If you don't specify this parameter, the default
-	// behavior for DescribeStream is to describe the stream starting with the first
-	// shard in the stream.
+	// The shard ID of the shard to start with. Specify this parameter to indicate
+	// that you want to describe the stream starting with the shard whose ID
+	// immediately follows ExclusiveStartShardId . If you don't specify this parameter,
+	// the default behavior for DescribeStream is to describe the stream starting with
+	// the first shard in the stream.
 	ExclusiveStartShardId *string
 
 	// The maximum number of shards to return in a single call. The default value is
@@ -75,7 +74,7 @@ type DescribeStreamInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output for DescribeStream.
+// Represents the output for DescribeStream .
 type DescribeStreamOutput struct {
 
 	// The current status of the stream, the stream Amazon Resource Name (ARN), an
@@ -172,9 +171,9 @@ type StreamExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StreamExistsWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StreamExistsWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -331,9 +330,9 @@ type StreamNotExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StreamNotExistsWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StreamNotExistsWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -373,9 +372,9 @@ func NewStreamNotExistsWaiter(client DescribeStreamAPIClient, optFns ...func(*St
 	}
 }
 
-// Wait calls the waiter function for StreamNotExists waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for StreamNotExists waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *StreamNotExistsWaiter) Wait(ctx context.Context, params *DescribeStreamInput, maxWaitDur time.Duration, optFns ...func(*StreamNotExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

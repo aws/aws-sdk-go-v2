@@ -30,17 +30,11 @@ func (c *Client) ListReceivedLicenses(ctx context.Context, params *ListReceivedL
 type ListReceivedLicensesInput struct {
 
 	// Filters to scope the results. The following filters are supported:
-	//
-	// *
-	// ProductSKU
-	//
-	// * Status
-	//
-	// * Fingerprint
-	//
-	// * IssuerName
-	//
-	// * Beneficiary
+	//   - ProductSKU
+	//   - Status
+	//   - Fingerprint
+	//   - IssuerName
+	//   - Beneficiary
 	Filters []types.Filter
 
 	// Amazon Resource Names (ARNs) of the licenses.

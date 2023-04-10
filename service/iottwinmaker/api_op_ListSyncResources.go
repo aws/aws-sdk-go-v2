@@ -40,15 +40,11 @@ type ListSyncResourcesInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// A list of objects that filter the request. The following filter combinations are
-	// supported:
-	//
-	// * Filter with state
-	//
-	// * Filter with ResourceType and ResourceId
-	//
-	// *
-	// Filter with ResourceType and ExternalId
+	// A list of objects that filter the request. The following filter combinations
+	// are supported:
+	//   - Filter with state
+	//   - Filter with ResourceType and ResourceId
+	//   - Filter with ResourceType and ExternalId
 	Filters []types.SyncResourceFilter
 
 	// The maximum number of results to return at one time. The default is 50. Valid

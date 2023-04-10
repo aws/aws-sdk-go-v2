@@ -45,9 +45,7 @@ type StartContinuousExportOutput struct {
 	S3Bucket *string
 
 	// A dictionary which describes how the data is stored.
-	//
-	// * databaseName - the name
-	// of the Glue database used to store the schema.
+	//   - databaseName - the name of the Glue database used to store the schema.
 	SchemaStorageConfig map[string]string
 
 	// The timestamp representing when the continuous export was started.

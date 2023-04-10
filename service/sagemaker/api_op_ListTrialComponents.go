@@ -17,12 +17,9 @@ import (
 // component name or creation time. You can filter the list to show only components
 // that were created in a specific time range. You can also filter on one of the
 // following:
-//
-// * ExperimentName
-//
-// * SourceArn
-//
-// * TrialName
+//   - ExperimentName
+//   - SourceArn
+//   - TrialName
 func (c *Client) ListTrialComponents(ctx context.Context, params *ListTrialComponentsInput, optFns ...func(*Options)) (*ListTrialComponentsOutput, error) {
 	if params == nil {
 		params = &ListTrialComponentsInput{}
@@ -46,31 +43,32 @@ type ListTrialComponentsInput struct {
 	// A filter that returns only components created before the specified time.
 	CreatedBefore *time.Time
 
-	// A filter that returns only components that are part of the specified experiment.
-	// If you specify ExperimentName, you can't filter by SourceArn or TrialName.
+	// A filter that returns only components that are part of the specified
+	// experiment. If you specify ExperimentName , you can't filter by SourceArn or
+	// TrialName .
 	ExperimentName *string
 
-	// The maximum number of components to return in the response. The default value is
-	// 10.
+	// The maximum number of components to return in the response. The default value
+	// is 10.
 	MaxResults *int32
 
 	// If the previous call to ListTrialComponents didn't return the full set of
 	// components, the call returns a token for getting the next set of components.
 	NextToken *string
 
-	// The property used to sort results. The default value is CreationTime.
+	// The property used to sort results. The default value is CreationTime .
 	SortBy types.SortTrialComponentsBy
 
-	// The sort order. The default value is Descending.
+	// The sort order. The default value is Descending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only components that have the specified source Amazon
-	// Resource Name (ARN). If you specify SourceArn, you can't filter by
-	// ExperimentName or TrialName.
+	// Resource Name (ARN). If you specify SourceArn , you can't filter by
+	// ExperimentName or TrialName .
 	SourceArn *string
 
 	// A filter that returns only components that are part of the specified trial. If
-	// you specify TrialName, you can't filter by ExperimentName or SourceArn.
+	// you specify TrialName , you can't filter by ExperimentName or SourceArn .
 	TrialName *string
 
 	noSmithyDocumentSerde
@@ -150,8 +148,8 @@ func (c *Client) addOperationListTrialComponentsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTrialComponentsAPIClient is a client that implements the ListTrialComponents
-// operation.
+// ListTrialComponentsAPIClient is a client that implements the
+// ListTrialComponents operation.
 type ListTrialComponentsAPIClient interface {
 	ListTrialComponents(context.Context, *ListTrialComponentsInput, ...func(*Options)) (*ListTrialComponentsOutput, error)
 }
@@ -161,8 +159,8 @@ var _ ListTrialComponentsAPIClient = (*Client)(nil)
 // ListTrialComponentsPaginatorOptions is the paginator options for
 // ListTrialComponents
 type ListTrialComponentsPaginatorOptions struct {
-	// The maximum number of components to return in the response. The default value is
-	// 10.
+	// The maximum number of components to return in the response. The default value
+	// is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

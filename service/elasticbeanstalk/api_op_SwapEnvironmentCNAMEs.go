@@ -30,27 +30,27 @@ func (c *Client) SwapEnvironmentCNAMEs(ctx context.Context, params *SwapEnvironm
 type SwapEnvironmentCNAMEsInput struct {
 
 	// The ID of the destination environment. Condition: You must specify at least the
-	// DestinationEnvironmentID or the DestinationEnvironmentName. You may also specify
-	// both. You must specify the SourceEnvironmentId with the
-	// DestinationEnvironmentId.
+	// DestinationEnvironmentID or the DestinationEnvironmentName . You may also
+	// specify both. You must specify the SourceEnvironmentId with the
+	// DestinationEnvironmentId .
 	DestinationEnvironmentId *string
 
 	// The name of the destination environment. Condition: You must specify at least
-	// the DestinationEnvironmentID or the DestinationEnvironmentName. You may also
+	// the DestinationEnvironmentID or the DestinationEnvironmentName . You may also
 	// specify both. You must specify the SourceEnvironmentName with the
-	// DestinationEnvironmentName.
+	// DestinationEnvironmentName .
 	DestinationEnvironmentName *string
 
 	// The ID of the source environment. Condition: You must specify at least the
-	// SourceEnvironmentID or the SourceEnvironmentName. You may also specify both. If
-	// you specify the SourceEnvironmentId, you must specify the
-	// DestinationEnvironmentId.
+	// SourceEnvironmentID or the SourceEnvironmentName . You may also specify both. If
+	// you specify the SourceEnvironmentId , you must specify the
+	// DestinationEnvironmentId .
 	SourceEnvironmentId *string
 
 	// The name of the source environment. Condition: You must specify at least the
-	// SourceEnvironmentID or the SourceEnvironmentName. You may also specify both. If
-	// you specify the SourceEnvironmentName, you must specify the
-	// DestinationEnvironmentName.
+	// SourceEnvironmentID or the SourceEnvironmentName . You may also specify both. If
+	// you specify the SourceEnvironmentName , you must specify the
+	// DestinationEnvironmentName .
 	SourceEnvironmentName *string
 
 	noSmithyDocumentSerde

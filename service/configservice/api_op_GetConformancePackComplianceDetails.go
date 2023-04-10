@@ -141,8 +141,8 @@ type GetConformancePackComplianceDetailsAPIClient interface {
 
 var _ GetConformancePackComplianceDetailsAPIClient = (*Client)(nil)
 
-// GetConformancePackComplianceDetailsPaginatorOptions is the paginator options for
-// GetConformancePackComplianceDetails
+// GetConformancePackComplianceDetailsPaginatorOptions is the paginator options
+// for GetConformancePackComplianceDetails
 type GetConformancePackComplianceDetailsPaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. If you do no
 	// specify a number, Config uses the default. The default is 100.

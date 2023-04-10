@@ -33,8 +33,8 @@ type DeleteFieldLevelEncryptionConfigInput struct {
 	// This member is required.
 	Id *string
 
-	// The value of the ETag header that you received when retrieving the configuration
-	// identity to delete. For example: E2QWRUHAPOMQZL.
+	// The value of the ETag header that you received when retrieving the
+	// configuration identity to delete. For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde

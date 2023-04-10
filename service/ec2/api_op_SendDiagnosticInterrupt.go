@@ -21,10 +21,8 @@ import (
 // operating system is configured to perform the required diagnostic tasks. For
 // more information about configuring your operating system to generate a crash
 // dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt
-// (for advanced users)
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html)
-// (Linux instances) or Send a diagnostic interrupt (for advanced users)
-// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html)
+// (for advanced users) (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html)
+// (Linux instances) or Send a diagnostic interrupt (for advanced users) (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html)
 // (Windows instances).
 func (c *Client) SendDiagnosticInterrupt(ctx context.Context, params *SendDiagnosticInterruptInput, optFns ...func(*Options)) (*SendDiagnosticInterruptOutput, error) {
 	if params == nil {
@@ -50,8 +48,8 @@ type SendDiagnosticInterruptInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

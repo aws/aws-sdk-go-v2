@@ -10,9 +10,9 @@ const (
 	AttributeAll     Attribute = "ALL"
 )
 
-// Values returns all known values for Attribute. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Attribute. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Attribute) Values() []Attribute {
 	return []Attribute{
 		"DEFAULT",
@@ -133,9 +133,9 @@ const (
 	DatasetStatusMessageCodeClientError  DatasetStatusMessageCode = "CLIENT_ERROR"
 )
 
-// Values returns all known values for DatasetStatusMessageCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatasetStatusMessageCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetStatusMessageCode) Values() []DatasetStatusMessageCode {
 	return []DatasetStatusMessageCode{
 		"SUCCESS",
@@ -376,9 +376,9 @@ const (
 	LandmarkTypeUpperJawlineRight LandmarkType = "upperJawlineRight"
 )
 
-// Values returns all known values for LandmarkType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LandmarkType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LandmarkType) Values() []LandmarkType {
 	return []LandmarkType{
 		"eyeLeft",
@@ -424,8 +424,8 @@ const (
 	OrientationCorrectionRotate270 OrientationCorrection = "ROTATE_270"
 )
 
-// Values returns all known values for OrientationCorrection. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for OrientationCorrection. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (OrientationCorrection) Values() []OrientationCorrection {
 	return []OrientationCorrection{
@@ -633,8 +633,8 @@ const (
 	StreamProcessorStatusUpdating StreamProcessorStatus = "UPDATING"
 )
 
-// Values returns all known values for StreamProcessorStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StreamProcessorStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StreamProcessorStatus) Values() []StreamProcessorStatus {
 	return []StreamProcessorStatus{
@@ -683,9 +683,9 @@ const (
 	TextTypesWord TextTypes = "WORD"
 )
 
-// Values returns all known values for TextTypes. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TextTypes. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TextTypes) Values() []TextTypes {
 	return []TextTypes{
 		"LINE",

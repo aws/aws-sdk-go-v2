@@ -41,7 +41,7 @@ type GetStreamingDistributionConfigInput struct {
 // The returned result of the corresponding request.
 type GetStreamingDistributionConfigOutput struct {
 
-	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
+	// The current version of the configuration. For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// The streaming distribution's configuration information.

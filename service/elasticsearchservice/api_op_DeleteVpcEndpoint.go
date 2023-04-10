@@ -42,8 +42,8 @@ type DeleteVpcEndpointInput struct {
 // the summarized detail of the VPC Endpoint being deleted.
 type DeleteVpcEndpointOutput struct {
 
-	// Information about the deleted endpoint, including its current status (DELETING
-	// or DELETE_FAILED).
+	// Information about the deleted endpoint, including its current status ( DELETING
+	// or DELETE_FAILED ).
 	//
 	// This member is required.
 	VpcEndpointSummary *types.VpcEndpointSummary

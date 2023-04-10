@@ -39,8 +39,8 @@ type UpdateEphemerisInput struct {
 	// This member is required.
 	EphemerisId *string
 
-	// A name string associated with the ephemeris. Used as a human-readable identifier
-	// for the ephemeris.
+	// A name string associated with the ephemeris. Used as a human-readable
+	// identifier for the ephemeris.
 	Name *string
 
 	// Customer-provided priority score to establish the order in which overlapping

@@ -12,7 +12,7 @@ import (
 )
 
 // Lists the key-value tag pairs associated to the Amazon Managed Workflows for
-// Apache Airflow (MWAA) environment. For example, "Environment": "Staging".
+// Apache Airflow (MWAA) environment. For example, "Environment": "Staging" .
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -31,7 +31,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example,
-	// arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment.
+	// arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment .
 	//
 	// This member is required.
 	ResourceArn *string
@@ -42,8 +42,8 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// The key-value tag pairs associated to your environment. For more information,
-	// see Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

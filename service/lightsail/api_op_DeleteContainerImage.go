@@ -33,9 +33,9 @@ type DeleteContainerImageInput struct {
 	// GetContainerImages action to get the name of the container images that are
 	// registered to a container service. Container images sourced from your Lightsail
 	// container service, that are registered and stored on your service, start with a
-	// colon (:). For example, :container-service-1.mystaticwebsite.1. Container images
-	// sourced from a public registry like Docker Hub don't start with a colon. For
-	// example, nginx:latest or nginx.
+	// colon ( : ). For example, :container-service-1.mystaticwebsite.1 . Container
+	// images sourced from a public registry like Docker Hub don't start with a colon.
+	// For example, nginx:latest or nginx .
 	//
 	// This member is required.
 	Image *string

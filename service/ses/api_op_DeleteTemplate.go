@@ -28,8 +28,8 @@ func (c *Client) DeleteTemplate(ctx context.Context, params *DeleteTemplateInput
 }
 
 // Represents a request to delete an email template. For more information, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// .
 type DeleteTemplateInput struct {
 
 	// The name of the template to be deleted.

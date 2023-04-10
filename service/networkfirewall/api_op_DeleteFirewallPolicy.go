@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified FirewallPolicy.
+// Deletes the specified FirewallPolicy .
 func (c *Client) DeleteFirewallPolicy(ctx context.Context, params *DeleteFirewallPolicyInput, optFns ...func(*Options)) (*DeleteFirewallPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallPolicyInput{}

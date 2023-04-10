@@ -43,8 +43,8 @@ type ListPipelineExecutionsInput struct {
 	// start times. Default value is 100.
 	MaxResults *int32
 
-	// The token that was returned from the previous ListPipelineExecutions call, which
-	// can be used to return the next set of pipeline executions in the list.
+	// The token that was returned from the previous ListPipelineExecutions call,
+	// which can be used to return the next set of pipeline executions in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde

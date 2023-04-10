@@ -47,23 +47,23 @@ type UpdateFeaturedResultsSetInput struct {
 
 	// A list of document IDs for the documents you want to feature at the top of the
 	// search results page. For more information on the list of featured documents, see
-	// FeaturedResultsSet
-	// (https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html).
+	// FeaturedResultsSet (https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html)
+	// .
 	FeaturedDocuments []types.FeaturedDocument
 
 	// A new name for the set of featured results.
 	FeaturedResultsSetName *string
 
 	// A list of queries for featuring results. For more information on the list of
-	// queries, see FeaturedResultsSet
-	// (https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html).
+	// queries, see FeaturedResultsSet (https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html)
+	// .
 	QueryTexts []string
 
-	// You can set the status to ACTIVE or INACTIVE. When the value is ACTIVE, featured
-	// results are ready for use. You can still configure your settings before setting
-	// the status to ACTIVE. The queries you specify for featured results must be
-	// unique per featured results set for each index, whether the status is ACTIVE or
-	// INACTIVE.
+	// You can set the status to ACTIVE or INACTIVE . When the value is ACTIVE ,
+	// featured results are ready for use. You can still configure your settings before
+	// setting the status to ACTIVE . The queries you specify for featured results must
+	// be unique per featured results set for each index, whether the status is ACTIVE
+	// or INACTIVE .
 	Status types.FeaturedResultsSetStatus
 
 	noSmithyDocumentSerde

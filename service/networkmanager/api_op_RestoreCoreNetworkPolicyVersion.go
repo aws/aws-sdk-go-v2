@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Restores a previous policy version as a new, immutable version of a core network
-// policy. A subsequent change set is created showing the differences between the
-// LIVE policy and restored policy.
+// Restores a previous policy version as a new, immutable version of a core
+// network policy. A subsequent change set is created showing the differences
+// between the LIVE policy and restored policy.
 func (c *Client) RestoreCoreNetworkPolicyVersion(ctx context.Context, params *RestoreCoreNetworkPolicyVersionInput, optFns ...func(*Options)) (*RestoreCoreNetworkPolicyVersionOutput, error) {
 	if params == nil {
 		params = &RestoreCoreNetworkPolicyVersionInput{}

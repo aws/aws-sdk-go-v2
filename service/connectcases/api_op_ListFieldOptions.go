@@ -47,7 +47,7 @@ type ListFieldOptionsInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A list of FieldOption values to filter on for ListFieldOptions.
+	// A list of FieldOption values to filter on for ListFieldOptions .
 	Values []string
 
 	noSmithyDocumentSerde
@@ -60,8 +60,8 @@ type ListFieldOptionsOutput struct {
 	// This member is required.
 	Options []types.FieldOption
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

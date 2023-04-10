@@ -56,8 +56,8 @@ type CreateNamespaceInput struct {
 	// your data.
 	KmsKeyId *string
 
-	// The types of logs the namespace can export. Available export types are userlog,
-	// connectionlog, and useractivitylog.
+	// The types of logs the namespace can export. Available export types are userlog ,
+	// connectionlog , and useractivitylog .
 	LogExports []types.LogExport
 
 	// A list of tag instances.

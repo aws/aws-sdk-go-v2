@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes the streaming sessions for a specified stack and
-// fleet. If a UserId is provided for the stack and fleet, only streaming sessions
-// for that user are described. If an authentication type is not provided, the
-// default is to authenticate users using a streaming URL.
+// Retrieves a list that describes the streaming sessions for a specified stack
+// and fleet. If a UserId is provided for the stack and fleet, only streaming
+// sessions for that user are described. If an authentication type is not provided,
+// the default is to authenticate users using a streaming URL.
 func (c *Client) DescribeSessions(ctx context.Context, params *DescribeSessionsInput, optFns ...func(*Options)) (*DescribeSessionsOutput, error) {
 	if params == nil {
 		params = &DescribeSessionsInput{}

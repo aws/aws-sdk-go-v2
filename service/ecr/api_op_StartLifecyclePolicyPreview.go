@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a preview of a lifecycle policy for the specified repository. This allows
-// you to see the results before associating the lifecycle policy with the
+// Starts a preview of a lifecycle policy for the specified repository. This
+// allows you to see the results before associating the lifecycle policy with the
 // repository.
 func (c *Client) StartLifecyclePolicyPreview(ctx context.Context, params *StartLifecyclePolicyPreviewInput, optFns ...func(*Options)) (*StartLifecyclePolicyPreviewOutput, error) {
 	if params == nil {

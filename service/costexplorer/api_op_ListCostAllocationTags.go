@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a list of cost allocation tags. All inputs in the API are optional and serve
-// as filters. By default, all cost allocation tags are returned.
+// Get a list of cost allocation tags. All inputs in the API are optional and
+// serve as filters. By default, all cost allocation tags are returned.
 func (c *Client) ListCostAllocationTags(ctx context.Context, params *ListCostAllocationTagsInput, optFns ...func(*Options)) (*ListCostAllocationTagsOutput, error) {
 	if params == nil {
 		params = &ListCostAllocationTagsInput{}

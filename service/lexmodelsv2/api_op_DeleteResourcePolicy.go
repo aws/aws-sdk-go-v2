@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an existing policy from a bot or bot alias. If the resource doesn't have
-// a policy attached, Amazon Lex returns an exception.
+// Removes an existing policy from a bot or bot alias. If the resource doesn't
+// have a policy attached, Amazon Lex returns an exception.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a member to a chat room in an Amazon Chime Enterprise account. A member can
-// be either a user or a bot. The member role designates whether the member is a
-// chat room administrator or a general chat room member.
+// Adds a member to a chat room in an Amazon Chime Enterprise account. A member
+// can be either a user or a bot. The member role designates whether the member is
+// a chat room administrator or a general chat room member.
 func (c *Client) CreateRoomMembership(ctx context.Context, params *CreateRoomMembershipInput, optFns ...func(*Options)) (*CreateRoomMembershipOutput, error) {
 	if params == nil {
 		params = &CreateRoomMembershipInput{}

@@ -14,9 +14,8 @@ import (
 // Starts an instance refresh. During an instance refresh, Amazon EC2 Auto Scaling
 // performs a rolling update of instances in an Auto Scaling group. Instances are
 // terminated first and then replaced, which temporarily reduces the capacity
-// available within your Auto Scaling group. This operation is part of the instance
-// refresh feature
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
+// available within your Auto Scaling group. This operation is part of the
+// instance refresh feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
 // Scaling group. This feature is helpful, for example, when you have a new AMI or
 // a new user data script. You just need to create a new launch template that
@@ -31,12 +30,12 @@ import (
 // misconfigured health checks, or not ignoring or allowing the termination of
 // instances that are in Standby state or protected from scale in. You can monitor
 // for failed EC2 launches using the scaling activities. To find the scaling
-// activities, call the DescribeScalingActivities API. If you enable auto rollback,
-// your Auto Scaling group will be rolled back automatically when the instance
-// refresh fails. You can enable this feature before starting an instance refresh
-// by specifying the AutoRollback property in the instance refresh preferences.
-// Otherwise, to roll back an instance refresh before it finishes, use the
-// RollbackInstanceRefresh API.
+// activities, call the DescribeScalingActivities API. If you enable auto
+// rollback, your Auto Scaling group will be rolled back automatically when the
+// instance refresh fails. You can enable this feature before starting an instance
+// refresh by specifying the AutoRollback property in the instance refresh
+// preferences. Otherwise, to roll back an instance refresh before it finishes, use
+// the RollbackInstanceRefresh API.
 func (c *Client) StartInstanceRefresh(ctx context.Context, params *StartInstanceRefreshInput, optFns ...func(*Options)) (*StartInstanceRefreshOutput, error) {
 	if params == nil {
 		params = &StartInstanceRefreshInput{}
@@ -75,16 +74,12 @@ type StartInstanceRefreshInput struct {
 	// percentage, and the behaviors that you want Amazon EC2 Auto Scaling to use if
 	// instances that are in Standby state or protected from scale in are found. You
 	// can also choose to enable additional features, such as the following:
-	//
-	// * Auto
-	// rollback
-	//
-	// * Checkpoints
-	//
-	// * Skip matching
+	//   - Auto rollback
+	//   - Checkpoints
+	//   - Skip matching
 	Preferences *types.RefreshPreferences
 
-	// The strategy to use for the instance refresh. The only valid value is Rolling.
+	// The strategy to use for the instance refresh. The only valid value is Rolling .
 	Strategy types.RefreshStrategy
 
 	noSmithyDocumentSerde

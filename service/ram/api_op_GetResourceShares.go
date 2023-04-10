@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves details about the resource shares that you own or that are shared with
-// you.
+// Retrieves details about the resource shares that you own or that are shared
+// with you.
 func (c *Client) GetResourceShares(ctx context.Context, params *GetResourceSharesInput, optFns ...func(*Options)) (*GetResourceSharesOutput, error) {
 	if params == nil {
 		params = &GetResourceSharesInput{}
@@ -33,19 +33,15 @@ type GetResourceSharesInput struct {
 
 	// Specifies that you want to retrieve details of only those resource shares that
 	// match the following:
-	//
-	// * SELF – resource shares that your account shares with
-	// other accounts
-	//
-	// * OTHER-ACCOUNTS – resource shares that other accounts share
-	// with your account
+	//   - SELF – resource shares that your account shares with other accounts
+	//   - OTHER-ACCOUNTS – resource shares that other accounts share with your account
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
 
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service
@@ -65,13 +61,12 @@ type GetResourceSharesInput struct {
 	NextToken *string
 
 	// Specifies that you want to retrieve details of only those resource shares that
-	// use the RAM permission with this Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// use the RAM permission with this Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	PermissionArn *string
 
-	// Specifies the Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// individual resource shares that you want information about.
+	// Specifies the Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of individual resource shares that you want information about.
 	ResourceShareArns []string
 
 	// Specifies that you want to retrieve details of only those resource shares that
@@ -90,7 +85,7 @@ type GetResourceSharesOutput struct {
 	// If present, this value indicates that more output is available than is included
 	// in the current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null. This
+	// repeat this until the NextToken response element comes back as null . This
 	// indicates that this is the last page of results.
 	NextToken *string
 
@@ -176,9 +171,9 @@ var _ GetResourceSharesAPIClient = (*Client)(nil)
 
 // GetResourceSharesPaginatorOptions is the paginator options for GetResourceShares
 type GetResourceSharesPaginatorOptions struct {
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service

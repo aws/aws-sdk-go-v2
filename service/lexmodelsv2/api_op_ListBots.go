@@ -30,25 +30,25 @@ func (c *Client) ListBots(ctx context.Context, params *ListBotsInput, optFns ...
 
 type ListBotsInput struct {
 
-	// Provides the specification of a filter used to limit the bots in the response to
-	// only those that match the filter specification. You can only specify one filter
-	// and one string to filter on.
+	// Provides the specification of a filter used to limit the bots in the response
+	// to only those that match the filter specification. You can only specify one
+	// filter and one string to filter on.
 	Filters []types.BotFilter
 
-	// The maximum number of bots to return in each page of results. If there are fewer
-	// results than the maximum page size, only the actual number of results are
+	// The maximum number of bots to return in each page of results. If there are
+	// fewer results than the maximum page size, only the actual number of results are
 	// returned.
 	MaxResults *int32
 
-	// If the response from the ListBots operation contains more results than specified
-	// in the maxResults parameter, a token is returned in the response. Use the
-	// returned token in the nextToken parameter of a ListBots request to return the
-	// next page of results. For a complete set of results, call the ListBots operation
-	// until the nextToken returned in the response is null.
+	// If the response from the ListBots operation contains more results than
+	// specified in the maxResults parameter, a token is returned in the response. Use
+	// the returned token in the nextToken parameter of a ListBots request to return
+	// the next page of results. For a complete set of results, call the ListBots
+	// operation until the nextToken returned in the response is null.
 	NextToken *string
 
-	// Specifies sorting parameters for the list of bots. You can specify that the list
-	// be sorted by bot name in ascending or descending order.
+	// Specifies sorting parameters for the list of bots. You can specify that the
+	// list be sorted by bot name in ascending or descending order.
 	SortBy *types.BotSortBy
 
 	noSmithyDocumentSerde
@@ -62,10 +62,10 @@ type ListBotsOutput struct {
 	// to the next page of results.
 	BotSummaries []types.BotSummary
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBots operation. If the nextToken field is present, you send the contents
-	// as the nextToken parameter of a ListBots operation request to get the next page
-	// of results.
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBots operation. If the nextToken field is present, you send the
+	// contents as the nextToken parameter of a ListBots operation request to get the
+	// next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +146,8 @@ var _ ListBotsAPIClient = (*Client)(nil)
 
 // ListBotsPaginatorOptions is the paginator options for ListBots
 type ListBotsPaginatorOptions struct {
-	// The maximum number of bots to return in each page of results. If there are fewer
-	// results than the maximum page size, only the actual number of results are
+	// The maximum number of bots to return in each page of results. If there are
+	// fewer results than the maximum page size, only the actual number of results are
 	// returned.
 	Limit int32
 

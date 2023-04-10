@@ -114,8 +114,8 @@ const (
 	LoadBalancerStateEnumFailed         LoadBalancerStateEnum = "failed"
 )
 
-// Values returns all known values for LoadBalancerStateEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LoadBalancerStateEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LoadBalancerStateEnum) Values() []LoadBalancerStateEnum {
 	return []LoadBalancerStateEnum{
@@ -159,9 +159,9 @@ const (
 	ProtocolEnumGeneve ProtocolEnum = "GENEVE"
 )
 
-// Values returns all known values for ProtocolEnum. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProtocolEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ProtocolEnum) Values() []ProtocolEnum {
 	return []ProtocolEnum{
 		"HTTP",
@@ -182,9 +182,10 @@ const (
 	RedirectActionStatusCodeEnumHttp302 RedirectActionStatusCodeEnum = "HTTP_302"
 )
 
-// Values returns all known values for RedirectActionStatusCodeEnum. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RedirectActionStatusCodeEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (RedirectActionStatusCodeEnum) Values() []RedirectActionStatusCodeEnum {
 	return []RedirectActionStatusCodeEnum{
 		"HTTP_301",
@@ -200,9 +201,10 @@ const (
 	TargetGroupIpAddressTypeEnumIpv6 TargetGroupIpAddressTypeEnum = "ipv6"
 )
 
-// Values returns all known values for TargetGroupIpAddressTypeEnum. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetGroupIpAddressTypeEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (TargetGroupIpAddressTypeEnum) Values() []TargetGroupIpAddressTypeEnum {
 	return []TargetGroupIpAddressTypeEnum{
 		"ipv4",
@@ -260,8 +262,8 @@ const (
 	TargetHealthStateEnumUnavailable TargetHealthStateEnum = "unavailable"
 )
 
-// Values returns all known values for TargetHealthStateEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TargetHealthStateEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TargetHealthStateEnum) Values() []TargetHealthStateEnum {
 	return []TargetHealthStateEnum{

@@ -17,20 +17,12 @@ import (
 // to 4 concurrent restores (any type of restore) in a given account. You can call
 // RestoreTableFromBackup at a maximum rate of 10 times per second. You must
 // manually set up the following on the restored table:
-//
-// * Auto scaling policies
-//
-// *
-// IAM policies
-//
-// * Amazon CloudWatch metrics and alarms
-//
-// * Tags
-//
-// * Stream
-// settings
-//
-// * Time to Live (TTL) settings
+//   - Auto scaling policies
+//   - IAM policies
+//   - Amazon CloudWatch metrics and alarms
+//   - Tags
+//   - Stream settings
+//   - Time to Live (TTL) settings
 func (c *Client) RestoreTableFromBackup(ctx context.Context, params *RestoreTableFromBackupInput, optFns ...func(*Options)) (*RestoreTableFromBackupOutput, error) {
 	if params == nil {
 		params = &RestoreTableFromBackupInput{}

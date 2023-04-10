@@ -42,12 +42,12 @@ type GetVpnConnectionDeviceSampleConfigurationInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The IKE version to be used in the sample configuration file for your customer
-	// gateway device. You can specify one of the following versions: ikev1 or ikev2.
+	// gateway device. You can specify one of the following versions: ikev1 or ikev2 .
 	InternetKeyExchangeVersion *string
 
 	noSmithyDocumentSerde

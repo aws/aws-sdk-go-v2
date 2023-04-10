@@ -31,8 +31,8 @@ func (c *Client) EnableInsightRules(ctx context.Context, params *EnableInsightRu
 type EnableInsightRulesInput struct {
 
 	// An array of the rule names to enable. If you need to find out the names of your
-	// rules, use DescribeInsightRules
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html).
+	// rules, use DescribeInsightRules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html)
+	// .
 	//
 	// This member is required.
 	RuleNames []string

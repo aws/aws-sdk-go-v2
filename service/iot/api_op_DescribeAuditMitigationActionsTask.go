@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Gets information about an audit mitigation task that is used to apply mitigation
-// actions to a set of audit findings. Properties include the actions being
-// applied, the audit checks to which they're being applied, the task status, and
-// aggregated task statistics.
+// Gets information about an audit mitigation task that is used to apply
+// mitigation actions to a set of audit findings. Properties include the actions
+// being applied, the audit checks to which they're being applied, the task status,
+// and aggregated task statistics.
 func (c *Client) DescribeAuditMitigationActionsTask(ctx context.Context, params *DescribeAuditMitigationActionsTaskInput, optFns ...func(*Options)) (*DescribeAuditMitigationActionsTaskOutput, error) {
 	if params == nil {
 		params = &DescribeAuditMitigationActionsTaskInput{}
@@ -57,8 +57,8 @@ type DescribeAuditMitigationActionsTaskOutput struct {
 	// The date and time when the task was started.
 	StartTime *time.Time
 
-	// Identifies the findings to which the mitigation actions are applied. This can be
-	// by audit checks, by audit task, or a set of findings.
+	// Identifies the findings to which the mitigation actions are applied. This can
+	// be by audit checks, by audit task, or a set of findings.
 	Target *types.AuditMitigationActionsTaskTarget
 
 	// Aggregate counts of the results when the mitigation tasks were applied to the

@@ -30,20 +30,18 @@ func (c *Client) GetComponentVersionArtifact(ctx context.Context, params *GetCom
 
 type GetComponentVersionArtifactInput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the component version. Specify the ARN of a public or a Lambda component
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the component version. Specify the ARN of a public or a Lambda component
 	// version.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the artifact. You can use the GetComponent
-	// (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html)
+	// The name of the artifact. You can use the GetComponent (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html)
 	// operation to download the component recipe, which includes the URI of the
 	// artifact. The artifact name is the section of the URI after the scheme. For
-	// example, in the artifact URI greengrass:SomeArtifact.zip, the artifact name is
-	// SomeArtifact.zip.
+	// example, in the artifact URI greengrass:SomeArtifact.zip , the artifact name is
+	// SomeArtifact.zip .
 	//
 	// This member is required.
 	ArtifactName *string

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags that have been added to the specified resource. This operation is
-// supported in storage gateways of all types.
+// Lists the tags that have been added to the specified resource. This operation
+// is supported in storage gateways of all types.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -51,8 +51,8 @@ type ListTagsForResourceInput struct {
 // ListTagsForResourceOutput
 type ListTagsForResourceOutput struct {
 
-	// An opaque string that indicates the position at which to stop returning the list
-	// of tags.
+	// An opaque string that indicates the position at which to stop returning the
+	// list of tags.
 	Marker *string
 
 	// The Amazon Resource Name (ARN) of the resource for which you want to list tags.
@@ -130,8 +130,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }

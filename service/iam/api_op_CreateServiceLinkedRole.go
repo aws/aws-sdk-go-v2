@@ -17,8 +17,7 @@ import (
 // deleted role, which could put your Amazon Web Services resources into an unknown
 // state. Allowing the service to control the role helps improve service stability
 // and proper cleanup when a service and its role are no longer needed. For more
-// information, see Using service-linked roles
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
+// information, see Using service-linked roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
 // in the IAM User Guide. To attach a policy to this service-linked role, you must
 // make the request using the Amazon Web Services service that depends on this
 // role.
@@ -41,10 +40,9 @@ type CreateServiceLinkedRoleInput struct {
 
 	// The service principal for the Amazon Web Services service to which this role is
 	// attached. You use a string similar to a URL but without the http:// in front.
-	// For example: elasticbeanstalk.amazonaws.com. Service principals are unique and
+	// For example: elasticbeanstalk.amazonaws.com . Service principals are unique and
 	// case-sensitive. To find the exact service principal for your service-linked
-	// role, see Amazon Web Services services that work with IAM
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html)
+	// role, see Amazon Web Services services that work with IAM (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html)
 	// in the IAM User Guide. Look for the services that have Yes in the Service-Linked
 	// Role column. Choose the Yes link to view the service-linked role documentation
 	// for that service.
@@ -52,13 +50,13 @@ type CreateServiceLinkedRoleInput struct {
 	// This member is required.
 	AWSServiceName *string
 
-	// A string that you provide, which is combined with the service-provided prefix to
-	// form the complete role name. If you make multiple requests for the same service,
-	// then you must supply a different CustomSuffix for each request. Otherwise the
-	// request fails with a duplicate role name error. For example, you could add -1 or
-	// -debug to the suffix. Some services do not support the CustomSuffix parameter.
-	// If you provide an optional suffix and the operation fails, try the operation
-	// again without the suffix.
+	// A string that you provide, which is combined with the service-provided prefix
+	// to form the complete role name. If you make multiple requests for the same
+	// service, then you must supply a different CustomSuffix for each request.
+	// Otherwise the request fails with a duplicate role name error. For example, you
+	// could add -1 or -debug to the suffix. Some services do not support the
+	// CustomSuffix parameter. If you provide an optional suffix and the operation
+	// fails, try the operation again without the suffix.
 	CustomSuffix *string
 
 	// The description of the role.

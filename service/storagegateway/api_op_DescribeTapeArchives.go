@@ -34,8 +34,8 @@ func (c *Client) DescribeTapeArchives(ctx context.Context, params *DescribeTapeA
 // DescribeTapeArchivesInput
 type DescribeTapeArchivesInput struct {
 
-	// Specifies that the number of virtual tapes described be limited to the specified
-	// number.
+	// Specifies that the number of virtual tapes described be limited to the
+	// specified number.
 	Limit *int32
 
 	// An opaque string that indicates the position at which to begin describing
@@ -143,8 +143,8 @@ var _ DescribeTapeArchivesAPIClient = (*Client)(nil)
 // DescribeTapeArchivesPaginatorOptions is the paginator options for
 // DescribeTapeArchives
 type DescribeTapeArchivesPaginatorOptions struct {
-	// Specifies that the number of virtual tapes described be limited to the specified
-	// number.
+	// Specifies that the number of virtual tapes described be limited to the
+	// specified number.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

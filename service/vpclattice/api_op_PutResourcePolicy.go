@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a resource-based permission policy to a service or service network. The
-// policy must contain the same actions and condition statements as the Amazon Web
-// Services Resource Access Manager permission for sharing services and service
+// Attaches a resource-based permission policy to a service or service network.
+// The policy must contain the same actions and condition statements as the Amazon
+// Web Services Resource Access Manager permission for sharing services and service
 // networks.
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
@@ -37,8 +37,8 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service for which
-	// the policy is created.
+	// The ID or Amazon Resource Name (ARN) of the service network or service for
+	// which the policy is created.
 	//
 	// This member is required.
 	ResourceArn *string

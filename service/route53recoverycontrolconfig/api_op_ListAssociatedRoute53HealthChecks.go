@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of all Amazon Route 53 health checks associated with a specific
-// routing control.
+// Returns an array of all Amazon Route 53 health checks associated with a
+// specific routing control.
 func (c *Client) ListAssociatedRoute53HealthChecks(ctx context.Context, params *ListAssociatedRoute53HealthChecksInput, optFns ...func(*Options)) (*ListAssociatedRoute53HealthChecksOutput, error) {
 	if params == nil {
 		params = &ListAssociatedRoute53HealthChecksInput{}

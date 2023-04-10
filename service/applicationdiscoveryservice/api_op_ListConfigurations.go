@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves a list of configuration items as specified by the value passed to the
-// required parameter configurationType. Optional filtering may be applied to
+// required parameter configurationType . Optional filtering may be applied to
 // refine search results.
 func (c *Client) ListConfigurations(ctx context.Context, params *ListConfigurationsInput, optFns ...func(*Options)) (*ListConfigurationsOutput, error) {
 	if params == nil {
@@ -38,9 +38,8 @@ type ListConfigurationsInput struct {
 
 	// You can filter the request using various logical operators and a key-value
 	// format. For example: {"key": "serverType", "value": "webServer"} For a complete
-	// list of filter options and guidance about using them with this action, see Using
-	// the ListConfigurations Action
-	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// list of filter options and guidance about using them with this action, see
+	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
 	// in the Amazon Web Services Application Discovery Service User Guide.
 	Filters []types.Filter
 
@@ -55,8 +54,7 @@ type ListConfigurationsInput struct {
 
 	// Certain filter criteria return output that can be sorted in ascending or
 	// descending order. For a list of output characteristics for each filter, see
-	// Using the ListConfigurations Action
-	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
 	// in the Amazon Web Services Application Discovery Service User Guide.
 	OrderBy []types.OrderByElement
 

@@ -12,8 +12,7 @@ import (
 )
 
 // Lists all supported versions for Snow on-device services. Returns an array of
-// ServiceVersion object containing the supported versions for a particular
-// service.
+// ServiceVersion object containing the supported versions for a particular service.
 func (c *Client) ListServiceVersions(ctx context.Context, params *ListServiceVersionsInput, optFns ...func(*Options)) (*ListServiceVersionsOutput, error) {
 	if params == nil {
 		params = &ListServiceVersionsInput{}
@@ -65,8 +64,8 @@ type ListServiceVersionsOutput struct {
 	// system provided supported versions.
 	DependentServices []types.DependentService
 
-	// Because HTTP requests are stateless, this is the starting point of the next list
-	// of returned ListServiceVersionsResult results.
+	// Because HTTP requests are stateless, this is the starting point of the next
+	// list of returned ListServiceVersionsResult results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

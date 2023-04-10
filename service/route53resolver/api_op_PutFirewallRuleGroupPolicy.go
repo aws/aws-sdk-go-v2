@@ -35,8 +35,8 @@ type PutFirewallRuleGroupPolicyInput struct {
 	// This member is required.
 	Arn *string
 
-	// The Identity and Access Management (Amazon Web Services IAM) policy to attach to
-	// the rule group.
+	// The Identity and Access Management (Amazon Web Services IAM) policy to attach
+	// to the rule group.
 	//
 	// This member is required.
 	FirewallRuleGroupPolicy *string

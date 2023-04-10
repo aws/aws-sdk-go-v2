@@ -35,8 +35,8 @@ func (e *EngineNotSupportedException) ErrorCode() string {
 }
 func (e *EngineNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Polly can't find the specified lexicon. Verify that the lexicon's name is
-// spelled correctly, and then try again.
+// Amazon Polly can't find the specified lexicon. Verify that the lexicon's name
+// is spelled correctly, and then try again.
 type InvalidLexiconException struct {
 	Message *string
 
@@ -276,10 +276,10 @@ func (e *LanguageNotSupportedException) ErrorCode() string {
 }
 func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Polly can't find the specified lexicon. This could be caused by a lexicon
-// that is missing, its name is misspelled or specifying a lexicon that is in a
-// different region. Verify that the lexicon exists, is in the region (see
-// ListLexicons) and that you spelled its name is spelled correctly. Then try
+// Amazon Polly can't find the specified lexicon. This could be caused by a
+// lexicon that is missing, its name is misspelled or specifying a lexicon that is
+// in a different region. Verify that the lexicon exists, is in the region (see
+// ListLexicons ) and that you spelled its name is spelled correctly. Then try
 // again.
 type LexiconNotFoundException struct {
 	Message *string
@@ -527,7 +527,7 @@ func (e *TextLengthExceededException) ErrorCode() string {
 func (e *TextLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The alphabet specified by the lexicon is not a supported alphabet. Valid values
-// are x-sampa and ipa.
+// are x-sampa and ipa .
 type UnsupportedPlsAlphabetException struct {
 	Message *string
 
@@ -554,8 +554,8 @@ func (e *UnsupportedPlsAlphabetException) ErrorCode() string {
 func (e *UnsupportedPlsAlphabetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The language specified in the lexicon is unsupported. For a list of supported
-// languages, see Lexicon Attributes
-// (https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html).
+// languages, see Lexicon Attributes (https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html)
+// .
 type UnsupportedPlsLanguageException struct {
 	Message *string
 

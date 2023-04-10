@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Fleet Hub for AWS IoT Device Management web application. Fleet Hub for
-// AWS IoT Device Management is in public preview and is subject to change.
+// Deletes a Fleet Hub for AWS IoT Device Management web application. Fleet Hub
+// for AWS IoT Device Management is in public preview and is subject to change.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}

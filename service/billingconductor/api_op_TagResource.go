@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified tags to a resource with the specified resourceArn. If
+// Associates the specified tags to a resource with the specified resourceArn . If
 // existing tags on a resource are not specified in the request parameters, they
 // are not changed.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {

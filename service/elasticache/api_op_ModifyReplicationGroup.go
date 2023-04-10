@@ -12,15 +12,10 @@ import (
 )
 
 // Modifies the settings for a replication group.
-//
-// * Scaling for Amazon ElastiCache
-// for Redis (cluster mode enabled)
-// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html)
-// in the ElastiCache User Guide
-//
-// * ModifyReplicationGroupShardConfiguration
-// (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html)
-// in the ElastiCache API Reference
+//   - Scaling for Amazon ElastiCache for Redis (cluster mode enabled) (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html)
+//     in the ElastiCache User Guide
+//   - ModifyReplicationGroupShardConfiguration (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html)
+//     in the ElastiCache API Reference
 //
 // This operation is valid for Redis only.
 func (c *Client) ModifyReplicationGroup(ctx context.Context, params *ModifyReplicationGroupInput, optFns ...func(*Options)) (*ModifyReplicationGroupOutput, error) {
@@ -46,44 +41,32 @@ type ModifyReplicationGroupInput struct {
 	// This member is required.
 	ReplicationGroupId *string
 
-	// If true, this parameter causes the modifications in this request and any pending
-	// modifications to be applied, asynchronously and as soon as possible, regardless
-	// of the PreferredMaintenanceWindow setting for the replication group. If false,
-	// changes to the nodes in the replication group are applied on the next
+	// If true , this parameter causes the modifications in this request and any
+	// pending modifications to be applied, asynchronously and as soon as possible,
+	// regardless of the PreferredMaintenanceWindow setting for the replication group.
+	// If false , changes to the nodes in the replication group are applied on the next
 	// maintenance reboot, or the next failure reboot, whichever occurs first. Valid
 	// values: true | false Default: false
 	ApplyImmediately bool
 
 	// Reserved parameter. The password used to access a password protected server.
-	// This parameter must be specified with the auth-token-update-strategy  parameter.
-	// Password constraints:
-	//
-	// * Must be only printable ASCII characters
-	//
-	// * Must be at
-	// least 16 characters and no more than 128 characters in length
-	//
-	// * Cannot contain
-	// any of the following characters: '/', '"', or '@', '%'
-	//
-	// For more information,
-	// see AUTH password at AUTH (http://redis.io/commands/AUTH).
+	// This parameter must be specified with the auth-token-update-strategy
+	// parameter. Password constraints:
+	//   - Must be only printable ASCII characters
+	//   - Must be at least 16 characters and no more than 128 characters in length
+	//   - Cannot contain any of the following characters: '/', '"', or '@', '%'
+	// For more information, see AUTH password at AUTH (http://redis.io/commands/AUTH) .
 	AuthToken *string
 
 	// Specifies the strategy to use to update the AUTH token. This parameter must be
 	// specified with the auth-token parameter. Possible values:
-	//
-	// * Rotate
-	//
-	// * Set
-	//
-	// For
-	// more information, see Authenticating Users with Redis AUTH
-	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
+	//   - Rotate
+	//   - Set
+	// For more information, see Authenticating Users with Redis AUTH (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
-	// If you are running Redis engine version 6.0 or later, set this parameter to yes
-	// if you want to opt-in to the next auto minor version upgrade campaign. This
+	//  If you are running Redis engine version 6.0 or later, set this parameter to
+	// yes if you want to opt-in to the next auto minor version upgrade campaign. This
 	// parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
@@ -104,22 +87,21 @@ type ModifyReplicationGroupInput struct {
 	// replication group. This change is asynchronously applied as soon as possible.
 	// This parameter can be used only with replication group containing clusters
 	// running outside of an Amazon Virtual Private Cloud (Amazon VPC). Constraints:
-	// Must contain no more than 255 alphanumeric characters. Must not be Default.
+	// Must contain no more than 255 alphanumeric characters. Must not be Default .
 	CacheSecurityGroupNames []string
 
 	// The upgraded version of the cache engine to be run on the clusters in the
 	// replication group. Important: You can upgrade to a newer engine version (see
-	// Selecting a Cache Engine and Version
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
-	// but you cannot downgrade to an earlier engine version. If you want to use an
+	// Selecting a Cache Engine and Version (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)
+	// ), but you cannot downgrade to an earlier engine version. If you want to use an
 	// earlier engine version, you must delete the existing replication group and
 	// create it anew with the earlier engine version.
 	EngineVersion *string
 
-	// The network type you choose when modifying a cluster, either ipv4 | ipv6. IPv6
+	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
 	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the Nitro system
-	// (https://aws.amazon.com/ec2/nitro/).
+	// engine version 1.6.6 on all instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/)
+	// .
 	IpDiscovery types.IpDiscovery
 
 	// Specifies the destination, format and type of the logs.
@@ -139,7 +121,7 @@ type ModifyReplicationGroupInput struct {
 	NotificationTopicArn *string
 
 	// The status of the Amazon SNS notification topic for the replication group.
-	// Notifications are sent only if the status is active. Valid values: active |
+	// Notifications are sent only if the status is active . Valid values: active |
 	// inactive
 	NotificationTopicStatus *string
 
@@ -147,23 +129,14 @@ type ModifyReplicationGroupInput struct {
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
-	//
-	// * sun
-	//
-	// * mon
-	//
-	// * tue
-	//
-	// * wed
-	//
-	// * thu
-	//
-	// * fri
-	//
-	// * sat
-	//
-	// Example:
-	// sun:23:00-mon:01:30
+	//   - sun
+	//   - mon
+	//   - tue
+	//   - wed
+	//   - thu
+	//   - fri
+	//   - sat
+	// Example: sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
 	// For replication groups with a single primary, if this parameter is specified,
@@ -191,7 +164,7 @@ type ModifyReplicationGroupInput struct {
 	SnapshotRetentionLimit *int32
 
 	// The daily time range (in UTC) during which ElastiCache begins taking a daily
-	// snapshot of the node group (shard) specified by SnapshottingClusterId. Example:
+	// snapshot of the node group (shard) specified by SnapshottingClusterId . Example:
 	// 05:00-09:00 If you do not specify this parameter, ElastiCache automatically
 	// chooses an appropriate time range.
 	SnapshotWindow *string
@@ -203,25 +176,25 @@ type ModifyReplicationGroupInput struct {
 
 	// A flag that enables in-transit encryption when set to true. If you are enabling
 	// in-transit encryption for an existing cluster, you must also set
-	// TransitEncryptionMode to preferred.
+	// TransitEncryptionMode to preferred .
 	TransitEncryptionEnabled *bool
 
 	// A setting that allows you to migrate your clients to use in-transit encryption,
-	// with no downtime. You must set TransitEncryptionEnabled to true, for your
-	// existing cluster, and set TransitEncryptionMode to preferred in the same request
-	// to allow both encrypted and unencrypted connections at the same time. Once you
-	// migrate all your Redis clients to use encrypted connections you can set the
-	// value to required to allow encrypted connections only. Setting
+	// with no downtime. You must set TransitEncryptionEnabled to true , for your
+	// existing cluster, and set TransitEncryptionMode to preferred in the same
+	// request to allow both encrypted and unencrypted connections at the same time.
+	// Once you migrate all your Redis clients to use encrypted connections you can set
+	// the value to required to allow encrypted connections only. Setting
 	// TransitEncryptionMode to required is a two-step process that requires you to
 	// first set the TransitEncryptionMode to preferred first, after that you can set
-	// TransitEncryptionMode to required.
+	// TransitEncryptionMode to required .
 	TransitEncryptionMode types.TransitEncryptionMode
 
 	// The ID of the user group you are associating with the replication group.
 	UserGroupIdsToAdd []string
 
-	// The ID of the user group to disassociate from the replication group, meaning the
-	// users in the group no longer can access the replication group.
+	// The ID of the user group to disassociate from the replication group, meaning
+	// the users in the group no longer can access the replication group.
 	UserGroupIdsToRemove []string
 
 	noSmithyDocumentSerde

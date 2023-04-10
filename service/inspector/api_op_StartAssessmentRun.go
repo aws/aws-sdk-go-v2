@@ -35,8 +35,8 @@ type StartAssessmentRunInput struct {
 	// This member is required.
 	AssessmentTemplateArn *string
 
-	// You can specify the name for the assessment run. The name must be unique for the
-	// assessment template whose ARN is used to start the assessment run.
+	// You can specify the name for the assessment run. The name must be unique for
+	// the assessment template whose ARN is used to start the assessment run.
 	AssessmentRunName *string
 
 	noSmithyDocumentSerde

@@ -38,8 +38,8 @@ type DescribeGlobalClustersInput struct {
 	GlobalClusterIdentifier *string
 
 	// (Optional) A pagination token returned by a previous call to
-	// DescribeGlobalClusters. If this parameter is specified, the response will only
-	// include records beyond the marker, up to the number specified by MaxRecords.
+	// DescribeGlobalClusters . If this parameter is specified, the response will only
+	// include records beyond the marker, up to the number specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -58,7 +58,7 @@ type DescribeGlobalClustersOutput struct {
 
 	// A pagination token. If this parameter is returned in the response, more records
 	// are available, which can be retrieved by one or more additional calls to
-	// DescribeGlobalClusters.
+	// DescribeGlobalClusters .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

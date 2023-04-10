@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns metadata of your saved backup plan templates, including the template ID,
-// name, and the creation and deletion dates.
+// Returns metadata of your saved backup plan templates, including the template
+// ID, name, and the creation and deletion dates.
 func (c *Client) ListBackupPlanTemplates(ctx context.Context, params *ListBackupPlanTemplatesInput, optFns ...func(*Options)) (*ListBackupPlanTemplatesOutput, error) {
 	if params == nil {
 		params = &ListBackupPlanTemplatesInput{}

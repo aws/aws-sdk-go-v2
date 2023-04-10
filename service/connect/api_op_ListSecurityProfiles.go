@@ -14,8 +14,7 @@ import (
 
 // Provides summary information about the security profiles for the specified
 // Amazon Connect instance. For more information about security profiles, see
-// Security Profiles
-// (https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html)
+// Security Profiles (https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityProfilesInput, optFns ...func(*Options)) (*ListSecurityProfilesOutput, error) {
 	if params == nil {
@@ -34,8 +33,7 @@ func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityP
 
 type ListSecurityProfilesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

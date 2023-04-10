@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all rulesets available in the current account or rulesets associated with a
-// specific resource (dataset).
+// List all rulesets available in the current account or rulesets associated with
+// a specific resource (dataset).
 func (c *Client) ListRulesets(ctx context.Context, params *ListRulesetsInput, optFns ...func(*Options)) (*ListRulesetsOutput, error) {
 	if params == nil {
 		params = &ListRulesetsInput{}

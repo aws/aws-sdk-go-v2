@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the member account from the specified behavior graph. This operation can
-// only be called by an invited member account that has the ENABLED status.
+// Removes the member account from the specified behavior graph. This operation
+// can only be called by an invited member account that has the ENABLED status.
 // DisassociateMembership cannot be called by an organization account in the
 // organization behavior graph. For the organization behavior graph, the Detective
 // administrator account determines which organization accounts to enable or
@@ -34,7 +34,7 @@ func (c *Client) DisassociateMembership(ctx context.Context, params *Disassociat
 type DisassociateMembershipInput struct {
 
 	// The ARN of the behavior graph to remove the member account from. The member
-	// account's member status in the behavior graph must be ENABLED.
+	// account's member status in the behavior graph must be ENABLED .
 	//
 	// This member is required.
 	GraphArn *string

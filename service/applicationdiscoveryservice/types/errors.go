@@ -168,7 +168,7 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // StartImportTask action, but with different parameters. For example, you use the
 // same request token but have two different import URLs, you can encounter this
 // issue. If the import tasks are meant to be different, use a different
-// clientRequestToken, and try again.
+// clientRequestToken , and try again.
 type ResourceInUseException struct {
 	Message *string
 

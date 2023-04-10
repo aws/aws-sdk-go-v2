@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of available RAM permissions that you can use for the supported
-// resource types.
+// Retrieves a list of available RAM permissions that you can use for the
+// supported resource types.
 func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInput, optFns ...func(*Options)) (*ListPermissionsOutput, error) {
 	if params == nil {
 		params = &ListPermissionsInput{}
@@ -31,9 +31,9 @@ func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInp
 
 type ListPermissionsInput struct {
 
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service
@@ -50,7 +50,7 @@ type ListPermissionsInput struct {
 
 	// Specifies that you want to list permissions for only the specified resource
 	// type. For example, to list only permissions that apply to EC2 subnets, specify
-	// ec2:Subnet. You can use the ListResourceTypes operation to get the specific
+	// ec2:Subnet . You can use the ListResourceTypes operation to get the specific
 	// string required.
 	ResourceType *string
 
@@ -62,7 +62,7 @@ type ListPermissionsOutput struct {
 	// If present, this value indicates that more output is available than is included
 	// in the current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null. This
+	// repeat this until the NextToken response element comes back as null . This
 	// indicates that this is the last page of results.
 	NextToken *string
 
@@ -145,9 +145,9 @@ var _ ListPermissionsAPIClient = (*Client)(nil)
 
 // ListPermissionsPaginatorOptions is the paginator options for ListPermissions
 type ListPermissionsPaginatorOptions struct {
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service

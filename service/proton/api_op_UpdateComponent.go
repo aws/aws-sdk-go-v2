@@ -15,9 +15,9 @@ import (
 // Update a component. There are a few modes for updating a component. The
 // deploymentType field defines the mode. You can't update a component while its
 // deployment status, or the deployment status of a service instance attached to
-// it, is IN_PROGRESS. For more information about components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-// Proton User Guide.
+// it, is IN_PROGRESS . For more information about components, see Proton
+// components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+// in the Proton User Guide.
 func (c *Client) UpdateComponent(ctx context.Context, params *UpdateComponentInput, optFns ...func(*Options)) (*UpdateComponentOutput, error) {
 	if params == nil {
 		params = &UpdateComponentInput{}
@@ -39,7 +39,7 @@ type UpdateComponentInput struct {
 	// NONE In this mode, a deployment doesn't occur. Only the requested metadata
 	// parameters are updated. You can only specify description in this mode.
 	// CURRENT_VERSION In this mode, the component is deployed and updated with the new
-	// serviceSpec, templateSource, and/or type that you provide. Only requested
+	// serviceSpec , templateSource , and/or type that you provide. Only requested
 	// parameters are updated.
 	//
 	// This member is required.
@@ -76,8 +76,8 @@ type UpdateComponentInput struct {
 	// This value conforms to the media type: application/yaml
 	ServiceSpec *string
 
-	// A path to the Infrastructure as Code (IaC) file describing infrastructure that a
-	// custom component provisions. Components support a single IaC file, even if you
+	// A path to the Infrastructure as Code (IaC) file describing infrastructure that
+	// a custom component provisions. Components support a single IaC file, even if you
 	// use Terraform as your template language.
 	//
 	// This value conforms to the media type: application/yaml

@@ -124,8 +124,8 @@ func (c *Client) addOperationListCustomLineItemsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListCustomLineItemsAPIClient is a client that implements the ListCustomLineItems
-// operation.
+// ListCustomLineItemsAPIClient is a client that implements the
+// ListCustomLineItems operation.
 type ListCustomLineItemsAPIClient interface {
 	ListCustomLineItems(context.Context, *ListCustomLineItemsInput, ...func(*Options)) (*ListCustomLineItemsOutput, error)
 }

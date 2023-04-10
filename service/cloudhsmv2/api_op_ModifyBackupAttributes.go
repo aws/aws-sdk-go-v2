@@ -29,8 +29,8 @@ func (c *Client) ModifyBackupAttributes(ctx context.Context, params *ModifyBacku
 
 type ModifyBackupAttributesInput struct {
 
-	// The identifier (ID) of the backup to modify. To find the ID of a backup, use the
-	// DescribeBackups operation.
+	// The identifier (ID) of the backup to modify. To find the ID of a backup, use
+	// the DescribeBackups operation.
 	//
 	// This member is required.
 	BackupId *string
@@ -48,9 +48,9 @@ type ModifyBackupAttributesInput struct {
 type ModifyBackupAttributesOutput struct {
 
 	// Contains information about a backup of an AWS CloudHSM cluster. All backup
-	// objects contain the BackupId, BackupState, ClusterId, and CreateTimestamp
+	// objects contain the BackupId , BackupState , ClusterId , and CreateTimestamp
 	// parameters. Backups that were copied into a destination region additionally
-	// contain the CopyTimestamp, SourceBackup, SourceCluster, and SourceRegion
+	// contain the CopyTimestamp , SourceBackup , SourceCluster , and SourceRegion
 	// parameters. A backup that is pending deletion will include the DeleteTimestamp
 	// parameter.
 	Backup *types.Backup

@@ -32,9 +32,9 @@ const (
 	DistributionByLogStream Distribution = "ByLogStream"
 )
 
-// Values returns all known values for Distribution. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Distribution. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Distribution) Values() []Distribution {
 	return []Distribution{
 		"Random",
@@ -147,9 +147,9 @@ const (
 	StandardUnitNone            StandardUnit = "None"
 )
 
-// Values returns all known values for StandardUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StandardUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StandardUnit) Values() []StandardUnit {
 	return []StandardUnit{
 		"Seconds",

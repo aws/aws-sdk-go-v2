@@ -12,8 +12,7 @@ import (
 )
 
 // Sets the logging options. NOTE: use of this command is not recommended. Use
-// SetV2LoggingOptions instead. Requires permission to access the SetLoggingOptions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// SetV2LoggingOptions instead. Requires permission to access the SetLoggingOptions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) SetLoggingOptions(ctx context.Context, params *SetLoggingOptionsInput, optFns ...func(*Options)) (*SetLoggingOptionsOutput, error) {
 	if params == nil {

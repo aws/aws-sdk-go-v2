@@ -48,8 +48,8 @@ type UpdateAuthorizerInput struct {
 
 	// Specifies the format of the payload sent to an HTTP API Lambda authorizer.
 	// Required for HTTP API Lambda authorizers. Supported values are 1.0 and 2.0. To
-	// learn more, see Working with AWS Lambda authorizers for HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html).
+	// learn more, see Working with AWS Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// .
 	AuthorizerPayloadFormatVersion *string
 
 	// The time to live (TTL) for cached authorizer results, in seconds. If it equals
@@ -79,8 +79,7 @@ type UpdateAuthorizerInput struct {
 	// default, a Lambda authorizer must return an IAM policy. If enabled, the Lambda
 	// authorizer can return a boolean value instead of an IAM policy. Supported only
 	// for HTTP APIs. To learn more, see Working with AWS Lambda authorizers for HTTP
-	// APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
 	EnableSimpleResponses bool
 
 	// The identity source for which authorization is requested. For a REQUEST
@@ -98,11 +97,11 @@ type UpdateAuthorizerInput struct {
 	// Otherwise, it returns a 401 Unauthorized response without calling the Lambda
 	// function. For HTTP APIs, identity sources are also used as the cache key when
 	// caching is enabled. To learn more, see Working with AWS Lambda authorizers for
-	// HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html).
-	// For JWT, a single entry that specifies where to extract the JSON Web Token (JWT)
-	// from inbound requests. Currently only header-based and query parameter-based
-	// selections are supported, for example $request.header.Authorization.
+	// HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// . For JWT, a single entry that specifies where to extract the JSON Web Token
+	// (JWT) from inbound requests. Currently only header-based and query
+	// parameter-based selections are supported, for example
+	// $request.header.Authorization.
 	IdentitySource []string
 
 	// This parameter is not used.
@@ -131,8 +130,8 @@ type UpdateAuthorizerOutput struct {
 
 	// Specifies the format of the payload sent to an HTTP API Lambda authorizer.
 	// Required for HTTP API Lambda authorizers. Supported values are 1.0 and 2.0. To
-	// learn more, see Working with AWS Lambda authorizers for HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html).
+	// learn more, see Working with AWS Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// .
 	AuthorizerPayloadFormatVersion *string
 
 	// The time to live (TTL) for cached authorizer results, in seconds. If it equals
@@ -160,9 +159,8 @@ type UpdateAuthorizerOutput struct {
 
 	// Specifies whether a Lambda authorizer returns a response in a simple format. If
 	// enabled, the Lambda authorizer can return a boolean value instead of an IAM
-	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS Lambda
-	// authorizers for HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS
+	// Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
 	EnableSimpleResponses bool
 
 	// The identity source for which authorization is requested. For a REQUEST
@@ -180,11 +178,11 @@ type UpdateAuthorizerOutput struct {
 	// Otherwise, it returns a 401 Unauthorized response without calling the Lambda
 	// function. For HTTP APIs, identity sources are also used as the cache key when
 	// caching is enabled. To learn more, see Working with AWS Lambda authorizers for
-	// HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html).
-	// For JWT, a single entry that specifies where to extract the JSON Web Token (JWT)
-	// from inbound requests. Currently only header-based and query parameter-based
-	// selections are supported, for example $request.header.Authorization.
+	// HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// . For JWT, a single entry that specifies where to extract the JSON Web Token
+	// (JWT) from inbound requests. Currently only header-based and query
+	// parameter-based selections are supported, for example
+	// $request.header.Authorization.
 	IdentitySource []string
 
 	// The validation expression does not apply to the REQUEST authorizer.

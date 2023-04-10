@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a logging configuration for the specified Amazon Chime Voice Connector. The
-// logging configuration specifies whether SIP message logs are enabled for sending
-// to Amazon CloudWatch Logs.
+// Adds a logging configuration for the specified Amazon Chime Voice Connector.
+// The logging configuration specifies whether SIP message logs are enabled for
+// sending to Amazon CloudWatch Logs.
 func (c *Client) PutVoiceConnectorLoggingConfiguration(ctx context.Context, params *PutVoiceConnectorLoggingConfigurationInput, optFns ...func(*Options)) (*PutVoiceConnectorLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorLoggingConfigurationInput{}

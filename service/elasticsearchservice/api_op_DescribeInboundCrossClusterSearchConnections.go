@@ -34,27 +34,19 @@ type DescribeInboundCrossClusterSearchConnectionsInput struct {
 
 	// A list of filters used to match properties for inbound cross-cluster search
 	// connection. Available Filter names for this operation are:
-	//
-	// *
-	// cross-cluster-search-connection-id
-	//
-	// * source-domain-info.domain-name
-	//
-	// *
-	// source-domain-info.owner-id
-	//
-	// * source-domain-info.region
-	//
-	// *
-	// destination-domain-info.domain-name
+	//   - cross-cluster-search-connection-id
+	//   - source-domain-info.domain-name
+	//   - source-domain-info.owner-id
+	//   - source-domain-info.region
+	//   - destination-domain-info.domain-name
 	Filters []types.Filter
 
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
 	MaxResults int32
 
-	// NextToken is sent in case the earlier API call results contain the NextToken. It
-	// is used for pagination.
+	// NextToken is sent in case the earlier API call results contain the NextToken.
+	// It is used for pagination.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -68,8 +60,8 @@ type DescribeInboundCrossClusterSearchConnectionsOutput struct {
 	// filter criteria.
 	CrossClusterSearchConnections []types.InboundCrossClusterSearchConnection
 
-	// If more results are available and NextToken is present, make the next request to
-	// the same API with the received NextToken to paginate the remaining results.
+	// If more results are available and NextToken is present, make the next request
+	// to the same API with the received NextToken to paginate the remaining results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

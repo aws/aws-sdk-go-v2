@@ -12,16 +12,14 @@ import (
 )
 
 // Returns the indexing status for one or more documents submitted with the
-// BatchPutDocument
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html) API.
-// When you use the BatchPutDocument API, documents are indexed asynchronously. You
-// can use the BatchGetDocumentStatus API to get the current status of a list of
-// documents so that you can determine if they have been successfully indexed. You
-// can also use the BatchGetDocumentStatus API to check the status of the
-// BatchDeleteDocument
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html) API.
-// When a document is deleted from the index, Amazon Kendra returns NOT_FOUND as
-// the status.
+// BatchPutDocument (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html)
+// API. When you use the BatchPutDocument API, documents are indexed
+// asynchronously. You can use the BatchGetDocumentStatus API to get the current
+// status of a list of documents so that you can determine if they have been
+// successfully indexed. You can also use the BatchGetDocumentStatus API to check
+// the status of the BatchDeleteDocument (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html)
+// API. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND
+// as the status.
 func (c *Client) BatchGetDocumentStatus(ctx context.Context, params *BatchGetDocumentStatusInput, optFns ...func(*Options)) (*BatchGetDocumentStatusOutput, error) {
 	if params == nil {
 		params = &BatchGetDocumentStatusInput{}
@@ -45,8 +43,8 @@ type BatchGetDocumentStatusInput struct {
 	// This member is required.
 	DocumentInfoList []types.DocumentInfo
 
-	// The identifier of the index to add documents to. The index ID is returned by the
-	// CreateIndex  (https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html)
+	// The identifier of the index to add documents to. The index ID is returned by
+	// the CreateIndex  (https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html)
 	// API.
 	//
 	// This member is required.

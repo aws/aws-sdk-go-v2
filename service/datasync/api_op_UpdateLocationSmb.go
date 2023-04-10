@@ -13,8 +13,8 @@ import (
 
 // Updates some of the parameters of a previously created location for Server
 // Message Block (SMB) file system access. For information about creating an SMB
-// location, see Creating a location for SMB
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html).
+// location, see Creating a location for SMB (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html)
+// .
 func (c *Client) UpdateLocationSmb(ctx context.Context, params *UpdateLocationSmbInput, optFns ...func(*Options)) (*UpdateLocationSmbOutput, error) {
 	if params == nil {
 		params = &UpdateLocationSmbInput{}
@@ -57,25 +57,20 @@ type UpdateLocationSmbInput struct {
 	// path that's exported by the SMB server, or a subdirectory of that path. The path
 	// should be such that it can be mounted by other SMB clients in your network.
 	// Subdirectory must be specified with forward slashes. For example,
-	// /path/to/folder. To transfer all the data in the folder that you specified,
+	// /path/to/folder . To transfer all the data in the folder that you specified,
 	// DataSync must have permissions to mount the SMB share and to access all the data
 	// in that share. To ensure this, do either of the following:
-	//
-	// * Ensure that the
-	// user/password specified belongs to the user who can mount the share and who has
-	// the appropriate permissions for all of the files and directories that you want
-	// DataSync to access.
-	//
-	// * Use credentials of a member of the Backup Operators group
-	// to mount the share.
-	//
-	// Doing either of these options enables the agent to access
-	// the data. For the agent to access directories, you must also enable all execute
-	// access.
+	//   - Ensure that the user/password specified belongs to the user who can mount
+	//   the share and who has the appropriate permissions for all of the files and
+	//   directories that you want DataSync to access.
+	//   - Use credentials of a member of the Backup Operators group to mount the
+	//   share.
+	// Doing either of these options enables the agent to access the data. For the
+	// agent to access directories, you must also enable all execute access.
 	Subdirectory *string
 
-	// The user who can mount the share has the permissions to access files and folders
-	// in the SMB share.
+	// The user who can mount the share has the permissions to access files and
+	// folders in the SMB share.
 	User *string
 
 	noSmithyDocumentSerde

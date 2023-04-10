@@ -29,9 +29,10 @@ const (
 	DatasourcePackageIngestStateDisabled DatasourcePackageIngestState = "DISABLED"
 )
 
-// Values returns all known values for DatasourcePackageIngestState. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatasourcePackageIngestState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DatasourcePackageIngestState) Values() []DatasourcePackageIngestState {
 	return []DatasourcePackageIngestState{
 		"STARTED",
@@ -49,9 +50,9 @@ const (
 	ErrorCodeInternalError      ErrorCode = "INTERNAL_ERROR"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"INVALID_GRAPH_ARN",
@@ -107,9 +108,9 @@ const (
 	MemberStatusAcceptedButDisabled    MemberStatus = "ACCEPTED_BUT_DISABLED"
 )
 
-// Values returns all known values for MemberStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MemberStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MemberStatus) Values() []MemberStatus {
 	return []MemberStatus{
 		"INVITED",

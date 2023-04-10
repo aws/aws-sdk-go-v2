@@ -48,7 +48,7 @@ type CreateLiveSourceInput struct {
 	// The tags to assign to the live source. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -77,7 +77,7 @@ type CreateLiveSourceOutput struct {
 	// The tags to assign to the live source. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

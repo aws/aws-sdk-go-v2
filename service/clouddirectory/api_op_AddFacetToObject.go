@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a new Facet to an object. An object can have more than one facet applied on
-// it.
+// Adds a new Facet to an object. An object can have more than one facet applied
+// on it.
 func (c *Client) AddFacetToObject(ctx context.Context, params *AddFacetToObjectInput, optFns ...func(*Options)) (*AddFacetToObjectOutput, error) {
 	if params == nil {
 		params = &AddFacetToObjectInput{}
@@ -31,7 +31,7 @@ func (c *Client) AddFacetToObject(ctx context.Context, params *AddFacetToObjectI
 type AddFacetToObjectInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides. For more information, see arns.
+	// object resides. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -41,8 +41,8 @@ type AddFacetToObjectInput struct {
 	// This member is required.
 	ObjectReference *types.ObjectReference
 
-	// Identifiers for the facet that you are adding to the object. See SchemaFacet for
-	// details.
+	// Identifiers for the facet that you are adding to the object. See SchemaFacet
+	// for details.
 	//
 	// This member is required.
 	SchemaFacet *types.SchemaFacet

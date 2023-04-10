@@ -18,9 +18,8 @@ import (
 // SMS sandbox, you can use all of the features of Amazon SNS. However, you can
 // send SMS messages only to verified destination phone numbers. For more
 // information, including how to move out of the sandbox to send messages without
-// restrictions, see SMS sandbox
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in the Amazon
-// SNS Developer Guide.
+// restrictions, see SMS sandbox (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// in the Amazon SNS Developer Guide.
 func (c *Client) DeleteSMSSandboxPhoneNumber(ctx context.Context, params *DeleteSMSSandboxPhoneNumberInput, optFns ...func(*Options)) (*DeleteSMSSandboxPhoneNumberOutput, error) {
 	if params == nil {
 		params = &DeleteSMSSandboxPhoneNumberInput{}

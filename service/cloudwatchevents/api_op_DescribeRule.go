@@ -12,8 +12,8 @@ import (
 )
 
 // Describes the specified rule. DescribeRule does not list the targets of a rule.
-// To see the targets associated with a rule, use ListTargetsByRule
-// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html).
+// To see the targets associated with a rule, use ListTargetsByRule (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html)
+// .
 func (c *Client) DescribeRule(ctx context.Context, params *DescribeRuleInput, optFns ...func(*Options)) (*DescribeRuleOutput, error) {
 	if params == nil {
 		params = &DescribeRuleInput{}
@@ -36,8 +36,8 @@ type DescribeRuleInput struct {
 	// This member is required.
 	Name *string
 
-	// The name or ARN of the event bus associated with the rule. If you omit this, the
-	// default event bus is used.
+	// The name or ARN of the event bus associated with the rule. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	noSmithyDocumentSerde
@@ -61,8 +61,7 @@ type DescribeRuleOutput struct {
 	// The name of the event bus associated with the rule.
 	EventBusName *string
 
-	// The event pattern. For more information, see Events and Event Patterns
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// The event pattern. For more information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
 	EventPattern *string
 

@@ -42,7 +42,7 @@ type DeleteDocumentInput struct {
 
 	// Some SSM document types require that you specify a Force flag before you can
 	// delete the document. For example, you must specify a Force flag to delete a
-	// document of type ApplicationConfigurationSchema. You can restrict access to the
+	// document of type ApplicationConfigurationSchema . You can restrict access to the
 	// Force flag in an Identity and Access Management (IAM) policy.
 	Force bool
 

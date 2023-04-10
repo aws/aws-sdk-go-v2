@@ -48,9 +48,9 @@ type ListTablesInput struct {
 // Represents the output of a ListTables operation.
 type ListTablesOutput struct {
 
-	// The name of the last table in the current page of results. Use this value as the
-	// ExclusiveStartTableName in a new request to obtain the next page of results,
-	// until all the table names are returned. If you do not receive a
+	// The name of the last table in the current page of results. Use this value as
+	// the ExclusiveStartTableName in a new request to obtain the next page of
+	// results, until all the table names are returned. If you do not receive a
 	// LastEvaluatedTableName value in the response, this means that there are no more
 	// table names to be retrieved.
 	LastEvaluatedTableName *string

@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a package for use with Amazon OpenSearch Service domains. For more
-// information, see Custom packages for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// information, see Custom packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, optFns ...func(*Options)) (*CreatePackageOutput, error) {
 	if params == nil {
 		params = &CreatePackageInput{}

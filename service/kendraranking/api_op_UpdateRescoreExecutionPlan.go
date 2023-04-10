@@ -40,8 +40,9 @@ type UpdateRescoreExecutionPlanInput struct {
 	// You can set additional capacity units to meet the needs of your rescore
 	// execution plan. You are given a single capacity unit by default. If you want to
 	// use the default capacity, you don't set additional capacity units. For more
-	// information on the default capacity and additional capacity units, see Adjusting
-	// capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html).
+	// information on the default capacity and additional capacity units, see
+	// Adjusting capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html)
+	// .
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// A new description for the rescore execution plan.

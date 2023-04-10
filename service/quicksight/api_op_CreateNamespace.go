@@ -44,7 +44,7 @@ type CreateNamespaceInput struct {
 	AwsAccountId *string
 
 	// Specifies the type of your user identity directory. Currently, this supports
-	// users with an identity type of QUICKSIGHT.
+	// users with an identity type of QUICKSIGHT .
 	//
 	// This member is required.
 	IdentityStore types.IdentityStore
@@ -65,19 +65,19 @@ type CreateNamespaceOutput struct {
 	// The ARN of the Amazon QuickSight namespace you created.
 	Arn *string
 
-	// The Amazon Web Services Region; that you want to use for the free SPICE capacity
-	// for the new namespace. This is set to the region that you run CreateNamespace
-	// in.
+	// The Amazon Web Services Region; that you want to use for the free SPICE
+	// capacity for the new namespace. This is set to the region that you run
+	// CreateNamespace in.
 	CapacityRegion *string
 
 	// The status of the creation of the namespace. This is an asynchronous process. A
-	// status of CREATED means that your namespace is ready to use. If an error occurs,
-	// it indicates if the process is retryable or non-retryable. In the case of a
-	// non-retryable error, refer to the error message for follow-up tasks.
+	// status of CREATED means that your namespace is ready to use. If an error
+	// occurs, it indicates if the process is retryable or non-retryable . In the case
+	// of a non-retryable error, refer to the error message for follow-up tasks.
 	CreationStatus types.NamespaceStatus
 
 	// Specifies the type of your user identity directory. Currently, this supports
-	// users with an identity type of QUICKSIGHT.
+	// users with an identity type of QUICKSIGHT .
 	IdentityStore types.IdentityStore
 
 	// The name of the new namespace that you created.

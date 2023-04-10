@@ -37,7 +37,7 @@ type UpdateEnvironmentInput struct {
 	// window. The default is false. Currently, Amazon Web Services Mainframe
 	// Modernization accepts the engineVersion parameter only if
 	// applyDuringMaintenanceWindow is true. If any parameter other than engineVersion
-	// is provided in UpdateEnvironmentRequest, it will fail if
+	// is provided in UpdateEnvironmentRequest , it will fail if
 	// applyDuringMaintenanceWindow is set to true.
 	ApplyDuringMaintenanceWindow bool
 

@@ -40,7 +40,7 @@ type ListHumanTaskUisInput struct {
 	CreationTimeBefore *time.Time
 
 	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken will be provided
+	// more than the value specified in MaxResults , then a NextToken will be provided
 	// in the output that you can use to resume pagination.
 	MaxResults *int32
 
@@ -141,7 +141,7 @@ var _ ListHumanTaskUisAPIClient = (*Client)(nil)
 // ListHumanTaskUisPaginatorOptions is the paginator options for ListHumanTaskUis
 type ListHumanTaskUisPaginatorOptions struct {
 	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken will be provided
+	// more than the value specified in MaxResults , then a NextToken will be provided
 	// in the output that you can use to resume pagination.
 	Limit int32
 

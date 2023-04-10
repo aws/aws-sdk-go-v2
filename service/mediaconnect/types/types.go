@@ -228,8 +228,8 @@ type EncodingParametersRequest struct {
 // Information about the encryption of the flow.
 type Encryption struct {
 
-	// The ARN of the role that you created during setup (when you set up AWS Elemental
-	// MediaConnect as a trusted entity).
+	// The ARN of the role that you created during setup (when you set up AWS
+	// Elemental MediaConnect as a trusted entity).
 	//
 	// This member is required.
 	RoleArn *string
@@ -257,10 +257,10 @@ type Encryption struct {
 	// encryption.
 	Region *string
 
-	// An identifier for the content. The service sends this value to the key server to
-	// identify the current endpoint. The resource ID is also known as the content ID.
-	// This parameter is required for SPEKE encryption and is not valid for static key
-	// encryption.
+	// An identifier for the content. The service sends this value to the key server
+	// to identify the current endpoint. The resource ID is also known as the content
+	// ID. This parameter is required for SPEKE encryption and is not valid for static
+	// key encryption.
 	ResourceId *string
 
 	// The ARN of the secret that you created in AWS Secrets Manager to store the
@@ -315,16 +315,16 @@ type Entitlement struct {
 // The settings for source failover.
 type FailoverConfig struct {
 
-	// The type of failover you choose for this flow. MERGE combines the source streams
-	// into a single stream, allowing graceful recovery from any single-source loss.
-	// FAILOVER allows switching between different streams.
+	// The type of failover you choose for this flow. MERGE combines the source
+	// streams into a single stream, allowing graceful recovery from any single-source
+	// loss. FAILOVER allows switching between different streams.
 	FailoverMode FailoverMode
 
 	// Search window time to look for dash-7 packets
 	RecoveryWindow int32
 
-	// The priority you want to assign to a source. You can have a primary stream and a
-	// backup stream or two equally prioritized streams.
+	// The priority you want to assign to a source. You can have a primary stream and
+	// a backup stream or two equally prioritized streams.
 	SourcePriority *SourcePriority
 
 	State State
@@ -346,8 +346,8 @@ type Flow struct {
 	// This member is required.
 	Entitlements []Entitlement
 
-	// The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the
-	// flow.
+	// The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of
+	// the flow.
 	//
 	// This member is required.
 	FlowArn *string
@@ -372,8 +372,8 @@ type Flow struct {
 	// This member is required.
 	Status Status
 
-	// A description of the flow. This value is not used or seen outside of the current
-	// AWS Elemental MediaConnect account.
+	// A description of the flow. This value is not used or seen outside of the
+	// current AWS Elemental MediaConnect account.
 	Description *string
 
 	// The IP address from which video will be sent to output destinations.
@@ -382,8 +382,8 @@ type Flow struct {
 	// The maintenance setting of a flow
 	Maintenance *Maintenance
 
-	// The media streams that are associated with the flow. After you associate a media
-	// stream with a source, you can also associate it with outputs on the flow.
+	// The media streams that are associated with the flow. After you associate a
+	// media stream with a source, you can also associate it with outputs on the flow.
 	MediaStreams []MediaStream
 
 	// The settings for source failover.
@@ -633,10 +633,11 @@ type Maintenance struct {
 	noSmithyDocumentSerde
 }
 
-// A single track or stream of media that contains video, audio, or ancillary data.
-// After you add a media stream to a flow, you can associate it with sources and
-// outputs on that flow, as long as they use the CDI protocol or the ST 2110 JPEG
-// XS protocol. Each source or output can consist of one or many media streams.
+// A single track or stream of media that contains video, audio, or ancillary
+// data. After you add a media stream to a flow, you can associate it with sources
+// and outputs on that flow, as long as they use the CDI protocol or the ST 2110
+// JPEG XS protocol. Each source or output can consist of one or many media
+// streams.
 type MediaStream struct {
 
 	// The format type number (sometimes referred to as RTP payload type) of the media
@@ -703,14 +704,14 @@ type MediaStreamAttributesRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The media stream that is associated with the output, and the parameters for that
-// association.
+// The media stream that is associated with the output, and the parameters for
+// that association.
 type MediaStreamOutputConfiguration struct {
 
-	// The format that was used to encode the data. For ancillary data streams, set the
-	// encoding name to smpte291. For audio streams, set the encoding name to pcm. For
-	// video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams,
-	// set the encoding name to jxsv.
+	// The format that was used to encode the data. For ancillary data streams, set
+	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
+	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
+	// streams, set the encoding name to jxsv.
 	//
 	// This member is required.
 	EncodingName EncodingName
@@ -733,9 +734,9 @@ type MediaStreamOutputConfiguration struct {
 // for that association.
 type MediaStreamOutputConfigurationRequest struct {
 
-	// The format that will be used to encode the data. For ancillary data streams, set
-	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
-	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
+	// The format that will be used to encode the data. For ancillary data streams,
+	// set the encoding name to smpte291. For audio streams, set the encoding name to
+	// pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
 	// streams, set the encoding name to jxsv.
 	//
 	// This member is required.
@@ -756,14 +757,14 @@ type MediaStreamOutputConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The media stream that is associated with the source, and the parameters for that
-// association.
+// The media stream that is associated with the source, and the parameters for
+// that association.
 type MediaStreamSourceConfiguration struct {
 
-	// The format that was used to encode the data. For ancillary data streams, set the
-	// encoding name to smpte291. For audio streams, set the encoding name to pcm. For
-	// video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams,
-	// set the encoding name to jxsv.
+	// The format that was used to encode the data. For ancillary data streams, set
+	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
+	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
+	// streams, set the encoding name to jxsv.
 	//
 	// This member is required.
 	EncodingName EncodingName
@@ -900,8 +901,8 @@ type Output struct {
 	// applies only to outputs that use the Zixi pull or SRT listener protocol.
 	ListenerAddress *string
 
-	// The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant
-	// only for outputs that were added by creating a MediaLive input.
+	// The input ARN of the AWS Elemental MediaLive channel. This parameter is
+	// relevant only for outputs that were added by creating a MediaLive input.
 	MediaLiveInputArn *string
 
 	// The configuration for each media stream that is associated with the output.
@@ -919,12 +920,12 @@ type Output struct {
 	noSmithyDocumentSerde
 }
 
-// A pricing agreement for a discounted rate for a specific outbound bandwidth that
-// your MediaConnect account will use each month over a specific time period. The
-// discounted rate in the reservation applies to outbound bandwidth for all flows
-// from your account until your account reaches the amount of bandwidth in your
-// reservation. If you use more outbound bandwidth than the agreed upon amount in a
-// single month, the overage is charged at the on-demand rate.
+// A pricing agreement for a discounted rate for a specific outbound bandwidth
+// that your MediaConnect account will use each month over a specific time period.
+// The discounted rate in the reservation applies to outbound bandwidth for all
+// flows from your account until your account reaches the amount of bandwidth in
+// your reservation. If you use more outbound bandwidth than the agreed upon amount
+// in a single month, the overage is charged at the on-demand rate.
 type Reservation struct {
 
 	// The type of currency that is used for billing. The currencyCode used for your
@@ -974,8 +975,8 @@ type Reservation struct {
 	// This member is required.
 	PriceUnits PriceUnits
 
-	// The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation when
-	// you purchase an offering.
+	// The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation
+	// when you purchase an offering.
 	//
 	// This member is required.
 	ReservationArn *string
@@ -1154,8 +1155,8 @@ type Source struct {
 	noSmithyDocumentSerde
 }
 
-// The priority you want to assign to a source. You can have a primary stream and a
-// backup stream or two equally prioritized streams.
+// The priority you want to assign to a source. You can have a primary stream and
+// a backup stream or two equally prioritized streams.
 type SourcePriority struct {
 
 	// The name of the source you choose as the primary source for this flow.
@@ -1247,14 +1248,14 @@ type UpdateEncryption struct {
 	// encryption.
 	Region *string
 
-	// An identifier for the content. The service sends this value to the key server to
-	// identify the current endpoint. The resource ID is also known as the content ID.
-	// This parameter is required for SPEKE encryption and is not valid for static key
-	// encryption.
+	// An identifier for the content. The service sends this value to the key server
+	// to identify the current endpoint. The resource ID is also known as the content
+	// ID. This parameter is required for SPEKE encryption and is not valid for static
+	// key encryption.
 	ResourceId *string
 
-	// The ARN of the role that you created during setup (when you set up AWS Elemental
-	// MediaConnect as a trusted entity).
+	// The ARN of the role that you created during setup (when you set up AWS
+	// Elemental MediaConnect as a trusted entity).
 	RoleArn *string
 
 	// The ARN of the secret that you created in AWS Secrets Manager to store the
@@ -1273,16 +1274,16 @@ type UpdateEncryption struct {
 // The settings for source failover.
 type UpdateFailoverConfig struct {
 
-	// The type of failover you choose for this flow. MERGE combines the source streams
-	// into a single stream, allowing graceful recovery from any single-source loss.
-	// FAILOVER allows switching between different streams.
+	// The type of failover you choose for this flow. MERGE combines the source
+	// streams into a single stream, allowing graceful recovery from any single-source
+	// loss. FAILOVER allows switching between different streams.
 	FailoverMode FailoverMode
 
 	// Recovery window time to look for dash-7 packets
 	RecoveryWindow int32
 
-	// The priority you want to assign to a source. You can have a primary stream and a
-	// backup stream or two equally prioritized streams.
+	// The priority you want to assign to a source. You can have a primary stream and
+	// a backup stream or two equally prioritized streams.
 	SourcePriority *SourcePriority
 
 	State State

@@ -14,26 +14,16 @@ import (
 
 // Creates a service. This action defines the configuration for the following
 // entities:
+//   - For public and private DNS namespaces, one of the following combinations of
+//     DNS records in Amazon Route 53:
+//   - A
+//   - AAAA
+//   - A and AAAA
+//   - SRV
+//   - CNAME
+//   - Optionally, a health check
 //
-// * For public and private DNS namespaces, one of the following
-// combinations of DNS records in Amazon Route 53:
-//
-// * A
-//
-// * AAAA
-//
-// * A and AAAA
-//
-// *
-// SRV
-//
-// * CNAME
-//
-// * Optionally, a health check
-//
-// After you create the service, you
-// can submit a RegisterInstance
-// (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+// After you create the service, you can submit a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
 // request, and Cloud Map uses the values in the configuration to create the
 // specified entities. For the current quota on the number of instances that you
 // can register using the same namespace and using the same service, see Cloud Map
@@ -59,23 +49,18 @@ type CreateServiceInput struct {
 	// The name that you want to assign to the service. Do not include sensitive
 	// information in the name if the namespace is discoverable by public DNS queries.
 	// If you want Cloud Map to create an SRV record when you register an instance and
-	// you're using a system that requires a specific SRV format, such as HAProxy
-	// (http://www.haproxy.org/), specify the following for Name:
-	//
-	// * Start the name
-	// with an underscore (_), such as _exampleservice.
-	//
-	// * End the name with
-	// ._protocol, such as ._tcp.
-	//
-	// When you register an instance, Cloud Map creates an
-	// SRV record and assigns a name to the record by concatenating the service name
-	// and the namespace name (for example, _exampleservice._tcp.example.com). For
-	// services that are accessible by DNS queries, you can't create multiple services
-	// with names that differ only by case (such as EXAMPLE and example). Otherwise,
-	// these services have the same DNS name and can't be distinguished. However, if
-	// you use a namespace that's only accessible by API calls, then you can create
-	// services that with names that differ only by case.
+	// you're using a system that requires a specific SRV format, such as HAProxy (http://www.haproxy.org/)
+	// , specify the following for Name :
+	//   - Start the name with an underscore (_), such as _exampleservice .
+	//   - End the name with ._protocol, such as ._tcp .
+	// When you register an instance, Cloud Map creates an SRV record and assigns a
+	// name to the record by concatenating the service name and the namespace name (for
+	// example, _exampleservice._tcp.example.com ). For services that are accessible by
+	// DNS queries, you can't create multiple services with names that differ only by
+	// case (such as EXAMPLE and example). Otherwise, these services have the same DNS
+	// name and can't be distinguished. However, if you use a namespace that's only
+	// accessible by API calls, then you can create services that with names that
+	// differ only by case.
 	//
 	// This member is required.
 	Name *string
@@ -95,10 +80,10 @@ type CreateServiceInput struct {
 	// Public DNS and HTTP namespaces only. A complex type that contains settings for
 	// an optional Route 53 health check. If you specify settings for a health check,
 	// Cloud Map associates the health check with all the Route 53 DNS records that you
-	// specify in DnsConfig. If you specify a health check configuration, you can
+	// specify in DnsConfig . If you specify a health check configuration, you can
 	// specify either HealthCheckCustomConfig or HealthCheckConfig but not both. For
-	// information about the charges for health checks, see Cloud Map Pricing
-	// (http://aws.amazon.com/cloud-map/pricing/).
+	// information about the charges for health checks, see Cloud Map Pricing (http://aws.amazon.com/cloud-map/pricing/)
+	// .
 	HealthCheckConfig *types.HealthCheckConfig
 
 	// A complex type that contains information about an optional custom health check.
@@ -113,14 +98,14 @@ type CreateServiceInput struct {
 	// DnsConfig object.
 	NamespaceId *string
 
-	// The tags to add to the service. Each tag consists of a key and an optional value
-	// that you define. Tags keys can be up to 128 characters in length, and tag values
-	// can be up to 256 characters in length.
+	// The tags to add to the service. Each tag consists of a key and an optional
+	// value that you define. Tags keys can be up to 128 characters in length, and tag
+	// values can be up to 256 characters in length.
 	Tags []types.Tag
 
-	// If present, specifies that the service instances are only discoverable using the
-	// DiscoverInstances API operation. No DNS records is registered for the service
-	// instances. The only valid value is HTTP.
+	// If present, specifies that the service instances are only discoverable using
+	// the DiscoverInstances API operation. No DNS records is registered for the
+	// service instances. The only valid value is HTTP .
 	Type types.ServiceTypeOption
 
 	noSmithyDocumentSerde

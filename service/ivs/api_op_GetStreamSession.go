@@ -34,9 +34,9 @@ type GetStreamSessionInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// Unique identifier for a live or previously live stream in the specified channel.
-	// If no streamId is provided, this returns the most recent stream session for the
-	// channel, if it exists.
+	// Unique identifier for a live or previously live stream in the specified
+	// channel. If no streamId is provided, this returns the most recent stream
+	// session for the channel, if it exists.
 	StreamId *string
 
 	noSmithyDocumentSerde

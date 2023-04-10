@@ -24,20 +24,18 @@ import (
 // with an environment connection. You can update either the
 // environmentAccountConnectionId or protonServiceRoleArn parameter and value. You
 // can’t update both. If the environment was configured for Amazon Web
-// Services-managed provisioning, omit the provisioningRepository parameter. If the
-// environment was configured for self-managed provisioning, specify the
+// Services-managed provisioning, omit the provisioningRepository parameter. If
+// the environment was configured for self-managed provisioning, specify the
 // provisioningRepository parameter and omit the protonServiceRoleArn and
 // environmentAccountConnectionId parameters. For more information, see
-// Environments
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html) and
-// Provisioning methods
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html)
+// Environments (https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html)
+// and Provisioning methods (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html)
 // in the Proton User Guide. There are four modes for updating an environment. The
 // deploymentType field defines the mode. NONE In this mode, a deployment doesn't
 // occur. Only the requested metadata parameters are updated. CURRENT_VERSION In
 // this mode, the environment is deployed and updated with the new spec that you
 // provide. Only requested parameters are updated. Don’t include minor or major
-// version parameters when you use this deployment-type. MINOR_VERSION In this
+// version parameters when you use this deployment-type . MINOR_VERSION In this
 // mode, the environment is deployed and updated with the published, recommended
 // (latest) minor version of the current major version in use, by default. You can
 // also specify a different minor version of the current major version in use.
@@ -67,7 +65,7 @@ type UpdateEnvironmentInput struct {
 	// requested metadata parameters are updated. CURRENT_VERSION In this mode, the
 	// environment is deployed and updated with the new spec that you provide. Only
 	// requested parameters are updated. Don’t include major or minor version
-	// parameters when you use this deployment-type. MINOR_VERSION In this mode, the
+	// parameters when you use this deployment-type . MINOR_VERSION In this mode, the
 	// environment is deployed and updated with the published, recommended (latest)
 	// minor version of the current major version in use, by default. You can also
 	// specify a different minor version of the current major version in use.
@@ -93,9 +91,8 @@ type UpdateEnvironmentInput struct {
 	// scope of infrastructure that a component can provision. The environment must
 	// have a componentRoleArn to allow directly defined components to be associated
 	// with the environment. For more information about components, see Proton
-	// components
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-	// Proton User Guide.
+	// components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+	// in the Proton User Guide.
 	ComponentRoleArn *string
 
 	// A description of the environment update.
@@ -113,8 +110,8 @@ type UpdateEnvironmentInput struct {
 
 	// The linked repository that you use to host your rendered infrastructure
 	// templates for self-managed provisioning. A linked repository is a repository
-	// that has been registered with Proton. For more information, see
-	// CreateRepository.
+	// that has been registered with Proton. For more information, see CreateRepository
+	// .
 	ProvisioningRepository *types.RepositoryBranchInput
 
 	// The formatted specification that defines the update.

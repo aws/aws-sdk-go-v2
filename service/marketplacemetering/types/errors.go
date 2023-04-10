@@ -61,8 +61,8 @@ func (e *DisabledApiException) ErrorCode() string {
 func (e *DisabledApiException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A metering record has already been emitted by the same EC2 instance, ECS task,
-// or EKS pod for the given {usageDimension, timestamp} with a different
-// usageQuantity.
+// or EKS pod for the given { usageDimension , timestamp } with a different
+// usageQuantity .
 type DuplicateRequestException struct {
 	Message *string
 
@@ -256,7 +256,7 @@ func (e *InvalidPublicKeyVersionException) ErrorFault() smithy.ErrorFault { retu
 
 // RegisterUsage must be called in the same AWS Region the ECS task was launched
 // in. This prevents a container from hardcoding a Region (e.g.
-// withRegion(“us-east-1”) when calling RegisterUsage.
+// withRegion(“us-east-1”) when calling RegisterUsage .
 type InvalidRegionException struct {
 	Message *string
 
@@ -442,7 +442,7 @@ func (e *ThrottlingException) ErrorCode() string {
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The timestamp value passed in the UsageRecord is out of allowed range. For
-// BatchMeterUsage, if any of the records are outside of the allowed range, the
+// BatchMeterUsage , if any of the records are outside of the allowed range, the
 // entire batch is not processed. You must remove invalid records and try again.
 type TimestampOutOfBoundsException struct {
 	Message *string

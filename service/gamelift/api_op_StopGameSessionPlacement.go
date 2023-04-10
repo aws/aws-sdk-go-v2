@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a game session placement that is in PENDING status. To stop a placement,
-// provide the placement ID values. If successful, the placement is moved to
-// CANCELLED status.
+// Cancels a game session placement that is in PENDING status. To stop a
+// placement, provide the placement ID values. If successful, the placement is
+// moved to CANCELLED status.
 func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameSessionPlacementInput, optFns ...func(*Options)) (*StopGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StopGameSessionPlacementInput{}
@@ -41,8 +41,8 @@ type StopGameSessionPlacementInput struct {
 
 type StopGameSessionPlacementOutput struct {
 
-	// Object that describes the canceled game session placement, with CANCELLED status
-	// and an end time stamp.
+	// Object that describes the canceled game session placement, with CANCELLED
+	// status and an end time stamp.
 	GameSessionPlacement *types.GameSessionPlacement
 
 	// Metadata pertaining to the operation's result.

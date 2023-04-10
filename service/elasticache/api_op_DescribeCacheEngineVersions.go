@@ -31,20 +31,16 @@ func (c *Client) DescribeCacheEngineVersions(ctx context.Context, params *Descri
 // Represents the input of a DescribeCacheEngineVersions operation.
 type DescribeCacheEngineVersionsInput struct {
 
-	// The name of a specific cache parameter group family to return details for. Valid
-	// values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 |
-	// redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2 | redis7 Constraints:
-	//
-	// *
-	// Must be 1 to 255 alphanumeric characters
-	//
-	// * First character must be a letter
-	//
-	// *
-	// Cannot end with a hyphen or contain two consecutive hyphens
+	// The name of a specific cache parameter group family to return details for.
+	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
+	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2 | redis7
+	// Constraints:
+	//   - Must be 1 to 255 alphanumeric characters
+	//   - First character must be a letter
+	//   - Cannot end with a hyphen or contain two consecutive hyphens
 	CacheParameterGroupFamily *string
 
-	// If true, specifies that only the default version of the specified engine or
+	// If true , specifies that only the default version of the specified engine or
 	// engine and major version combination is to be returned.
 	DefaultOnly bool
 
@@ -54,10 +50,10 @@ type DescribeCacheEngineVersionsInput struct {
 	// The cache engine version to return. Example: 1.4.14
 	EngineVersion *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist

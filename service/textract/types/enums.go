@@ -22,9 +22,9 @@ const (
 	BlockTypeTableFooter      BlockType = "TABLE_FOOTER"
 )
 
-// Values returns all known values for BlockType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BlockType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BlockType) Values() []BlockType {
 	return []BlockType{
 		"KEY_VALUE_SET",
@@ -126,9 +126,9 @@ const (
 	JobStatusPartialSuccess JobStatus = "PARTIAL_SUCCESS"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"IN_PROGRESS",
@@ -213,9 +213,9 @@ const (
 	ValueTypeDate ValueType = "DATE"
 )
 
-// Values returns all known values for ValueType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ValueType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ValueType) Values() []ValueType {
 	return []ValueType{
 		"DATE",

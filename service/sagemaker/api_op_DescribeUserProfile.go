@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes a user profile. For more information, see CreateUserProfile.
+// Describes a user profile. For more information, see CreateUserProfile .
 func (c *Client) DescribeUserProfile(ctx context.Context, params *DescribeUserProfileInput, optFns ...func(*Options)) (*DescribeUserProfileOutput, error) {
 	if params == nil {
 		params = &DescribeUserProfileInput{}

@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates a warm pool for the specified Auto Scaling group. A warm pool
-// is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling
-// group. Whenever your application needs to scale out, the Auto Scaling group can
-// draw on the warm pool to meet its new desired capacity. For more information and
-// example configurations, see Warm pools for Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
+// Creates or updates a warm pool for the specified Auto Scaling group. A warm
+// pool is a pool of pre-initialized EC2 instances that sits alongside the Auto
+// Scaling group. Whenever your application needs to scale out, the Auto Scaling
+// group can draw on the warm pool to meet its new desired capacity. For more
+// information and example configurations, see Warm pools for Amazon EC2 Auto
+// Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
 // in the Amazon EC2 Auto Scaling User Guide. This operation must be called from
 // the Region in which the Auto Scaling group was created. This operation cannot be
 // called on an Auto Scaling group that has a mixed instances policy or a launch
@@ -57,12 +57,12 @@ type PutWarmPoolInput struct {
 	// desired capacity. If a value for MaxGroupPreparedCapacity is not specified,
 	// Amazon EC2 Auto Scaling launches and maintains the difference between the
 	// group's maximum capacity and its desired capacity. If you specify a value for
-	// MaxGroupPreparedCapacity, Amazon EC2 Auto Scaling uses the difference between
+	// MaxGroupPreparedCapacity , Amazon EC2 Auto Scaling uses the difference between
 	// the MaxGroupPreparedCapacity and the desired capacity instead. The size of the
 	// warm pool is dynamic. Only when MaxGroupPreparedCapacity and MinSize are set to
 	// the same value does the warm pool have an absolute size. If the desired capacity
-	// of the Auto Scaling group is higher than the MaxGroupPreparedCapacity, the
-	// capacity of the warm pool is 0, unless you specify a value for MinSize. To
+	// of the Auto Scaling group is higher than the MaxGroupPreparedCapacity , the
+	// capacity of the warm pool is 0, unless you specify a value for MinSize . To
 	// remove a value that you previously set, include the property but specify -1 for
 	// the value.
 	MaxGroupPreparedCapacity *int32
@@ -73,7 +73,7 @@ type PutWarmPoolInput struct {
 	MinSize *int32
 
 	// Sets the instance state to transition to after the lifecycle actions are
-	// complete. Default is Stopped.
+	// complete. Default is Stopped .
 	PoolState types.WarmPoolState
 
 	noSmithyDocumentSerde

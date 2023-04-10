@@ -41,7 +41,7 @@ type UpdateStreamingDistributionInput struct {
 	StreamingDistributionConfig *types.StreamingDistributionConfig
 
 	// The value of the ETag header that you received when retrieving the streaming
-	// distribution's configuration. For example: E2QWRUHAPOMQZL.
+	// distribution's configuration. For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde
@@ -50,7 +50,7 @@ type UpdateStreamingDistributionInput struct {
 // The returned result of the corresponding request.
 type UpdateStreamingDistributionOutput struct {
 
-	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
+	// The current version of the configuration. For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// The streaming distribution's information.

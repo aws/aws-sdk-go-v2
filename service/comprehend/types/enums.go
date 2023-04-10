@@ -29,9 +29,9 @@ const (
 	BlockTypeWord BlockType = "WORD"
 )
 
-// Values returns all known values for BlockType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BlockType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BlockType) Values() []BlockType {
 	return []BlockType{
 		"LINE",
@@ -103,9 +103,10 @@ const (
 	DocumentClassifierDataFormatAugmentedManifest DocumentClassifierDataFormat = "AUGMENTED_MANIFEST"
 )
 
-// Values returns all known values for DocumentClassifierDataFormat. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DocumentClassifierDataFormat. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DocumentClassifierDataFormat) Values() []DocumentClassifierDataFormat {
 	return []DocumentClassifierDataFormat{
 		"COMPREHEND_CSV",
@@ -157,9 +158,9 @@ const (
 	DocumentReadFeatureTypesForms  DocumentReadFeatureTypes = "FORMS"
 )
 
-// Values returns all known values for DocumentReadFeatureTypes. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DocumentReadFeatureTypes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentReadFeatureTypes) Values() []DocumentReadFeatureTypes {
 	return []DocumentReadFeatureTypes{
 		"TABLES",
@@ -198,9 +199,9 @@ const (
 	DocumentTypeTextractAnalyzeDocumentJson    DocumentType = "TEXTRACT_ANALYZE_DOCUMENT_JSON"
 )
 
-// Values returns all known values for DocumentType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DocumentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentType) Values() []DocumentType {
 	return []DocumentType{
 		"NATIVE_PDF",
@@ -405,9 +406,9 @@ const (
 	JobStatusStopped       JobStatus = "STOPPED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -437,9 +438,9 @@ const (
 	LanguageCodeZhTw LanguageCode = "zh-TW"
 )
 
-// Values returns all known values for LanguageCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"en",
@@ -495,9 +496,9 @@ const (
 	ModelTypeEntityRecognizer   ModelType = "ENTITY_RECOGNIZER"
 )
 
-// Values returns all known values for ModelType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ModelType) Values() []ModelType {
 	return []ModelType{
 		"DOCUMENT_CLASSIFIER",
@@ -587,9 +588,10 @@ const (
 	PiiEntitiesDetectionMaskModeReplaceWithPiiEntityType PiiEntitiesDetectionMaskMode = "REPLACE_WITH_PII_ENTITY_TYPE"
 )
 
-// Values returns all known values for PiiEntitiesDetectionMaskMode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PiiEntitiesDetectionMaskMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (PiiEntitiesDetectionMaskMode) Values() []PiiEntitiesDetectionMaskMode {
 	return []PiiEntitiesDetectionMaskMode{
 		"MASK",
@@ -605,9 +607,9 @@ const (
 	PiiEntitiesDetectionModeOnlyOffsets   PiiEntitiesDetectionMode = "ONLY_OFFSETS"
 )
 
-// Values returns all known values for PiiEntitiesDetectionMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PiiEntitiesDetectionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PiiEntitiesDetectionMode) Values() []PiiEntitiesDetectionMode {
 	return []PiiEntitiesDetectionMode{
 		"ONLY_REDACTION",
@@ -749,8 +751,8 @@ const (
 	SplitTest  Split = "TEST"
 )
 
-// Values returns all known values for Split. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Split. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Split) Values() []Split {
 	return []Split{

@@ -38,8 +38,8 @@ type DisassociateOriginationIdentityInput struct {
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbers find the values for
-	// PhoneNumberId and PhoneNumberArn, or use DescribeSenderIds to get the values for
-	// SenderId and SenderIdArn.
+	// PhoneNumberId and PhoneNumberArn, or use DescribeSenderIds to get the values
+	// for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string

@@ -48,16 +48,16 @@ type ListModelExplainabilityJobDefinitionsInput struct {
 	// Filter for model explainability jobs whose name contains a specified string.
 	NameContains *string
 
-	// The token returned if the response is truncated. To retrieve the next set of job
-	// executions, use it in the next request.
+	// The token returned if the response is truncated. To retrieve the next set of
+	// job executions, use it in the next request.
 	NextToken *string
 
 	// Whether to sort results by the Name or CreationTime field. The default is
-	// CreationTime.
+	// CreationTime .
 	SortBy types.MonitoringJobDefinitionSortKey
 
 	// Whether to sort the results in Ascending or Descending order. The default is
-	// Descending.
+	// Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde

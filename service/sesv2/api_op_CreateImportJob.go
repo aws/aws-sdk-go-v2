@@ -44,8 +44,8 @@ type CreateImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type CreateImportJobOutput struct {
 
 	// A string that represents the import job ID.

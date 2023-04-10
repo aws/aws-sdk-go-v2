@@ -11,10 +11,8 @@ import (
 )
 
 // Deletes the shadow for the specified thing. Requires permission to access the
-// DeleteThingShadow
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. For more information, see DeleteThingShadow
-// (http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html)
+// DeleteThingShadow (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action. For more information, see DeleteThingShadow (http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html)
 // in the IoT Developer Guide.
 func (c *Client) DeleteThingShadow(ctx context.Context, params *DeleteThingShadowInput, optFns ...func(*Options)) (*DeleteThingShadowOutput, error) {
 	if params == nil {

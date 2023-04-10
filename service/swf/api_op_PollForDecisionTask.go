@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used by deciders to get a DecisionTask from the specified decision taskList. A
+// Used by deciders to get a DecisionTask from the specified decision taskList . A
 // decision task may be returned for any open workflow execution that is using the
 // specified task list. The task includes a paginated view of the history of the
 // workflow execution. The decider should use the workflow type and the history to
@@ -27,27 +27,20 @@ import (
 // might be very large, the result returned might be split up across a number of
 // pages. To retrieve subsequent pages, make additional calls to
 // PollForDecisionTask using the nextPageToken returned by the initial call. Note
-// that you do not call GetWorkflowExecutionHistory with this nextPageToken.
-// Instead, call PollForDecisionTask again. Access Control You can use IAM policies
-// to control this action's access to Amazon SWF resources as follows:
+// that you do not call GetWorkflowExecutionHistory with this nextPageToken .
+// Instead, call PollForDecisionTask again. Access Control You can use IAM
+// policies to control this action's access to Amazon SWF resources as follows:
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - Constrain the taskList.name parameter by using a Condition element with the
+//     swf:taskList.name key to allow the action to access only certain task lists.
 //
-// * Use a
-// Resource element with the domain name to limit the action to only specified
-// domains.
-//
-// * Use an Action element to allow or deny permission to call this
-// action.
-//
-// * Constrain the taskList.name parameter by using a Condition element
-// with the swf:taskList.name key to allow the action to access only certain task
-// lists.
-//
-// If the caller doesn't have sufficient permissions to invoke the action,
-// or the parameter values fall outside the specified constraints, the action
-// fails. The associated event attribute's cause parameter is set to
-// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
-// Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
+// For details and example IAM policies, see Using IAM to Manage Access to Amazon
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 func (c *Client) PollForDecisionTask(ctx context.Context, params *PollForDecisionTaskInput, optFns ...func(*Options)) (*PollForDecisionTaskOutput, error) {
 	if params == nil {
@@ -73,8 +66,8 @@ type PollForDecisionTaskInput struct {
 
 	// Specifies the task list to poll for decision tasks. The specified string must
 	// not start or end with whitespace. It must not contain a : (colon), / (slash), |
-	// (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also,
-	// it must not be the literal string arn.
+	// (vertical bar), or any control characters ( \u0000-\u001f | \u007f-\u009f ).
+	// Also, it must not be the literal string arn .
 	//
 	// This member is required.
 	TaskList *types.TaskList
@@ -93,24 +86,24 @@ type PollForDecisionTaskInput struct {
 	// NextPageToken is a unique pagination token for each page. Make the call again
 	// using the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 60 seconds. Using an expired
-	// pagination token will return a 400 error: "Specified token has exceeded its
-	// maximum lifetime". The configured maximumPageSize determines how many results
+	// pagination token will return a 400 error: " Specified token has exceeded its
+	// maximum lifetime ". The configured maximumPageSize determines how many results
 	// can be returned in a single call. The nextPageToken returned by this action
 	// cannot be used with GetWorkflowExecutionHistory to get the next page. You must
-	// call PollForDecisionTask again (with the nextPageToken) to retrieve the next
+	// call PollForDecisionTask again (with the nextPageToken ) to retrieve the next
 	// page of history records. Calling PollForDecisionTask with a nextPageToken
 	// doesn't return a new decision task.
 	NextPageToken *string
 
-	// When set to true, returns the events in reverse order. By default the results
+	// When set to true , returns the events in reverse order. By default the results
 	// are returned in ascending order of the eventTimestamp of the events.
 	ReverseOrder bool
 
 	noSmithyDocumentSerde
 }
 
-// A structure that represents a decision task. Decision tasks are sent to deciders
-// in order for them to make decisions.
+// A structure that represents a decision task. Decision tasks are sent to
+// deciders in order for them to make decisions.
 type PollForDecisionTaskOutput struct {
 
 	// A paginated list of history events of the workflow execution. The decider uses
@@ -124,8 +117,9 @@ type PollForDecisionTaskOutput struct {
 	// This member is required.
 	StartedEventId int64
 
-	// The opaque string used as a handle on the task. This token is used by workers to
-	// communicate progress and response information back to the system about the task.
+	// The opaque string used as a handle on the task. This token is used by workers
+	// to communicate progress and response information back to the system about the
+	// task.
 	//
 	// This member is required.
 	TaskToken *string
@@ -142,7 +136,7 @@ type PollForDecisionTaskOutput struct {
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in nextPageToken. Keep all other arguments unchanged. The
+	// returned token in nextPageToken . Keep all other arguments unchanged. The
 	// configured maximumPageSize determines how many results can be returned in a
 	// single call.
 	NextPageToken *string
@@ -222,8 +216,8 @@ func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.St
 	return nil
 }
 
-// PollForDecisionTaskAPIClient is a client that implements the PollForDecisionTask
-// operation.
+// PollForDecisionTaskAPIClient is a client that implements the
+// PollForDecisionTask operation.
 type PollForDecisionTaskAPIClient interface {
 	PollForDecisionTask(context.Context, *PollForDecisionTaskInput, ...func(*Options)) (*PollForDecisionTaskOutput, error)
 }

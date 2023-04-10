@@ -14,8 +14,7 @@ import (
 // Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted
 // symmetric key from Key Management Service (KMS) to encrypt copied snapshots in a
 // destination region. For more information about managing snapshot copy grants, go
-// to Amazon Redshift Database Encryption
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
+// to Amazon Redshift Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) CreateSnapshotCopyGrant(ctx context.Context, params *CreateSnapshotCopyGrantInput, optFns ...func(*Options)) (*CreateSnapshotCopyGrantOutput, error) {
 	if params == nil {
@@ -37,20 +36,11 @@ type CreateSnapshotCopyGrantInput struct {
 
 	// The name of the snapshot copy grant. This name must be unique in the region for
 	// the Amazon Web Services account. Constraints:
-	//
-	// * Must contain from 1 to 63
-	// alphanumeric characters or hyphens.
-	//
-	// * Alphabetic characters must be
-	// lowercase.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
-	//
-	// * Must be unique for all clusters within an
-	// Amazon Web Services account.
+	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//   - Alphabetic characters must be lowercase.
+	//   - First character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//   - Must be unique for all clusters within an Amazon Web Services account.
 	//
 	// This member is required.
 	SnapshotCopyGrantName *string
@@ -67,11 +57,10 @@ type CreateSnapshotCopyGrantInput struct {
 
 type CreateSnapshotCopyGrantOutput struct {
 
-	// The snapshot copy grant that grants Amazon Redshift permission to encrypt copied
-	// snapshots with the specified encrypted symmetric key from Amazon Web Services
-	// KMS in the destination region. For more information about managing snapshot copy
-	// grants, go to Amazon Redshift Database Encryption
-	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
+	// The snapshot copy grant that grants Amazon Redshift permission to encrypt
+	// copied snapshots with the specified encrypted symmetric key from Amazon Web
+	// Services KMS in the destination region. For more information about managing
+	// snapshot copy grants, go to Amazon Redshift Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	SnapshotCopyGrant *types.SnapshotCopyGrant
 

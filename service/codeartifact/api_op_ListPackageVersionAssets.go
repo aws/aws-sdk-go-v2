@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of AssetSummary
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
+// Returns a list of AssetSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
 // objects for assets in a package version.
 func (c *Client) ListPackageVersionAssets(ctx context.Context, params *ListPackageVersionAssetsInput, optFns ...func(*Options)) (*ListPackageVersionAssetsOutput, error) {
 	if params == nil {
@@ -48,13 +47,13 @@ type ListPackageVersionAssetsInput struct {
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2).
+	// A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
 
-	// The name of the repository that contains the package that contains the requested
-	// package version assets.
+	// The name of the repository that contains the package that contains the
+	// requested package version assets.
 	//
 	// This member is required.
 	Repository *string
@@ -66,21 +65,14 @@ type ListPackageVersionAssetsInput struct {
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The namespace of the package version that contains the requested package version
-	// assets. The package version component that specifies its namespace depends on
-	// its type. For example:
-	//
-	// * The namespace of a Maven package version is its
-	// groupId.
-	//
-	// * The namespace of an npm package version is its scope.
-	//
-	// * Python and
-	// NuGet package versions do not contain a corresponding component, package
-	// versions of those formats do not have a namespace.
-	//
-	// * The namespace of a generic
-	// package is its namespace.
+	// The namespace of the package version that contains the requested package
+	// version assets. The package version component that specifies its namespace
+	// depends on its type. For example:
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -92,26 +84,20 @@ type ListPackageVersionAssetsInput struct {
 
 type ListPackageVersionAssetsOutput struct {
 
-	// The returned list of AssetSummary
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
+	// The returned list of AssetSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
 	// objects.
 	Assets []types.AssetSummary
 
 	// The format of the package that contains the requested package version assets.
 	Format types.PackageFormat
 
-	// The namespace of the package version that contains the requested package version
-	// assets. The package version component that specifies its namespace depends on
-	// its type. For example:
-	//
-	// * The namespace of a Maven package version is its
-	// groupId.
-	//
-	// * The namespace of an npm package version is its scope.
-	//
-	// * Python and
-	// NuGet package versions do not contain a corresponding component, package
-	// versions of those formats do not have a namespace.
+	// The namespace of the package version that contains the requested package
+	// version assets. The package version component that specifies its namespace
+	// depends on its type. For example:
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
 	Namespace *string
 
 	// If there are additional results, this is the token for the next set of results.

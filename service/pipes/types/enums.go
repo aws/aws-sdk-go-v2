@@ -47,9 +47,10 @@ const (
 	BatchResourceRequirementTypeVcpu   BatchResourceRequirementType = "VCPU"
 )
 
-// Values returns all known values for BatchResourceRequirementType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BatchResourceRequirementType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (BatchResourceRequirementType) Values() []BatchResourceRequirementType {
 	return []BatchResourceRequirementType{
 		"GPU",
@@ -202,9 +203,9 @@ const (
 	PipeStateStopFailed   PipeState = "STOP_FAILED"
 )
 
-// Values returns all known values for PipeState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for PipeState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PipeState) Values() []PipeState {
 	return []PipeState{
 		"RUNNING",
@@ -229,9 +230,9 @@ const (
 	PipeTargetInvocationTypeFireAndForget   PipeTargetInvocationType = "FIRE_AND_FORGET"
 )
 
-// Values returns all known values for PipeTargetInvocationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PipeTargetInvocationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipeTargetInvocationType) Values() []PipeTargetInvocationType {
 	return []PipeTargetInvocationType{
 		"REQUEST_RESPONSE",
@@ -266,8 +267,8 @@ const (
 	PlacementStrategyTypeBinpack PlacementStrategyType = "binpack"
 )
 
-// Values returns all known values for PlacementStrategyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PlacementStrategyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementStrategyType) Values() []PlacementStrategyType {
 	return []PlacementStrategyType{

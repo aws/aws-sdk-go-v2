@@ -39,9 +39,9 @@ type ListCidrLocationsInput struct {
 	// The maximum number of CIDR collection locations to return in the response.
 	MaxResults *int32
 
-	// An opaque pagination token to indicate where the service is to begin enumerating
-	// results. If no value is provided, the listing of results starts from the
-	// beginning.
+	// An opaque pagination token to indicate where the service is to begin
+	// enumerating results. If no value is provided, the listing of results starts from
+	// the beginning.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,9 +52,9 @@ type ListCidrLocationsOutput struct {
 	// A complex type that contains information about the list of CIDR locations.
 	CidrLocations []types.LocationSummary
 
-	// An opaque pagination token to indicate where the service is to begin enumerating
-	// results. If no value is provided, the listing of results starts from the
-	// beginning.
+	// An opaque pagination token to indicate where the service is to begin
+	// enumerating results. If no value is provided, the listing of results starts from
+	// the beginning.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

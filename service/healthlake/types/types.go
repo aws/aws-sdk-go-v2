@@ -36,8 +36,8 @@ type DatastoreProperties struct {
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint
-	// with Data Store ID in the endpoint URL.
+	// The AWS endpoint for the Data Store. Each Data Store will have it's own
+	// endpoint with Data Store ID in the endpoint URL.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
@@ -75,8 +75,8 @@ type DatastoreProperties struct {
 	noSmithyDocumentSerde
 }
 
-// The properties of a FHIR export job, including the ID, ARN, name, and the status
-// of the job.
+// The properties of a FHIR export job, including the ID, ARN, name, and the
+// status of the job.
 type ExportJobProperties struct {
 
 	// The AWS generated ID for the Data Store from which files are being exported for
@@ -151,8 +151,8 @@ type ImportJobProperties struct {
 	// This member is required.
 	SubmitTime *time.Time
 
-	// The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input
-	// data.
+	// The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your
+	// input data.
 	DataAccessRoleArn *string
 
 	// The time that the Import job was completed.
@@ -179,8 +179,8 @@ type InputDataConfig interface {
 	isInputDataConfig()
 }
 
-// The S3Uri is the user specified S3 location of the FHIR data to be imported into
-// Amazon HealthLake.
+// The S3Uri is the user specified S3 location of the FHIR data to be imported
+// into Amazon HealthLake.
 type InputDataConfigMemberS3Uri struct {
 	Value string
 
@@ -244,8 +244,8 @@ type S3Configuration struct {
 	// This member is required.
 	KmsKeyId *string
 
-	// The S3Uri is the user specified S3 location of the FHIR data to be imported into
-	// Amazon HealthLake.
+	// The S3Uri is the user specified S3 location of the FHIR data to be imported
+	// into Amazon HealthLake.
 	//
 	// This member is required.
 	S3Uri *string

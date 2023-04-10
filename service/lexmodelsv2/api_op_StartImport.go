@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Starts importing a bot, bot locale, or custom vocabulary from a zip archive that
-// you uploaded to an S3 bucket.
+// Starts importing a bot, bot locale, or custom vocabulary from a zip archive
+// that you uploaded to an S3 bucket.
 func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optFns ...func(*Options)) (*StartImportOutput, error) {
 	if params == nil {
 		params = &StartImportInput{}
@@ -32,8 +32,7 @@ func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optF
 type StartImportInput struct {
 
 	// The unique identifier for the import. It is included in the response from the
-	// CreateUploadUrl
-	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateUploadUrl.html)
+	// CreateUploadUrl (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateUploadUrl.html)
 	// operation.
 	//
 	// This member is required.

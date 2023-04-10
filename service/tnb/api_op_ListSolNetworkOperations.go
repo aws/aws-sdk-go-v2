@@ -43,8 +43,8 @@ type ListSolNetworkOperationsInput struct {
 
 type ListSolNetworkOperationsOutput struct {
 
-	// Lists network operation occurrences. Lifecycle management operations are deploy,
-	// update, or delete operations.
+	// Lists network operation occurrences. Lifecycle management operations are
+	// deploy, update, or delete operations.
 	NetworkOperations []types.ListSolNetworkOperationsInfo
 
 	// The token to use to retrieve the next page of results. This value is null when

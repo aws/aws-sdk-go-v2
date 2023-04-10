@@ -100,9 +100,9 @@ const (
 	FilterKeyHasAccessTo FilterKey = "hasAccessTo"
 )
 
-// Values returns all known values for FilterKey. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for FilterKey. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FilterKey) Values() []FilterKey {
 	return []FilterKey{
 		"hasAccessTo",
@@ -119,9 +119,9 @@ const (
 	InstanceTypeDevStandard1Xlarge InstanceType = "dev.standard1.xlarge"
 )
 
-// Values returns all known values for InstanceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InstanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceType) Values() []InstanceType {
 	return []InstanceType{
 		"dev.standard1.small",

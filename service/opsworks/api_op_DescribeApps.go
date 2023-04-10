@@ -19,8 +19,8 @@ import (
 // resource-identifying parameter. Required Permissions: To use this action, an IAM
 // user must have a Show, Deploy, or Manage permissions level for the stack, or an
 // attached policy that explicitly grants permissions. For more information about
-// user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeApps(ctx context.Context, params *DescribeAppsInput, optFns ...func(*Options)) (*DescribeAppsOutput, error) {
 	if params == nil {
 		params = &DescribeAppsInput{}
@@ -142,9 +142,9 @@ type AppExistsWaiterOptions struct {
 	// must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, AppExistsWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, AppExistsWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

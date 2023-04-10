@@ -11,20 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a message to an Amazon SNS topic, a text message (SMS message) directly to
-// a phone number, or a message to a mobile platform endpoint (when you specify the
-// TargetArn). If you send a message to a topic, Amazon SNS delivers the message to
-// each endpoint that is subscribed to the topic. The format of the message depends
-// on the notification protocol for each subscribed endpoint. When a messageId is
-// returned, the message is saved and Amazon SNS immediately delivers it to
-// subscribers. To use the Publish action for publishing a message to a mobile
-// endpoint, such as an app on a Kindle device or mobile phone, you must specify
-// the EndpointArn for the TargetArn parameter. The EndpointArn is returned when
-// making a call with the CreatePlatformEndpoint action. For more information about
-// formatting messages, see Send Custom Platform-Specific Payloads in Messages to
-// Mobile Devices
-// (https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html).
-// You can publish messages only to topics and endpoints in the same Amazon Web
+// Sends a message to an Amazon SNS topic, a text message (SMS message) directly
+// to a phone number, or a message to a mobile platform endpoint (when you specify
+// the TargetArn ). If you send a message to a topic, Amazon SNS delivers the
+// message to each endpoint that is subscribed to the topic. The format of the
+// message depends on the notification protocol for each subscribed endpoint. When
+// a messageId is returned, the message is saved and Amazon SNS immediately
+// delivers it to subscribers. To use the Publish action for publishing a message
+// to a mobile endpoint, such as an app on a Kindle device or mobile phone, you
+// must specify the EndpointArn for the TargetArn parameter. The EndpointArn is
+// returned when making a call with the CreatePlatformEndpoint action. For more
+// information about formatting messages, see Send Custom Platform-Specific
+// Payloads in Messages to Mobile Devices (https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html)
+// . You can publish messages only to topics and endpoints in the same Amazon Web
 // Services Region.
 func (c *Client) Publish(ctx context.Context, params *PublishInput, optFns ...func(*Options)) (*PublishOutput, error) {
 	if params == nil {
@@ -49,49 +48,30 @@ type PublishInput struct {
 	// message as a String value. If you want to send different messages for each
 	// transport protocol, set the value of the MessageStructure parameter to json and
 	// use a JSON object for the Message parameter. Constraints:
-	//
-	// * With the exception
-	// of SMS, messages must be UTF-8 encoded strings and at most 256 KB in size
-	// (262,144 bytes, not 262,144 characters).
-	//
-	// * For SMS, each message can contain up
-	// to 140 characters. This character limit depends on the encoding schema. For
-	// example, an SMS message can contain 160 GSM characters, 140 ASCII characters, or
-	// 70 UCS-2 characters. If you publish a message that exceeds this size limit,
-	// Amazon SNS sends the message as multiple messages, each fitting within the size
-	// limit. Messages aren't truncated mid-word but are cut off at whole-word
-	// boundaries. The total size limit for a single SMS Publish action is 1,600
-	// characters.
-	//
+	//   - With the exception of SMS, messages must be UTF-8 encoded strings and at
+	//   most 256 KB in size (262,144 bytes, not 262,144 characters).
+	//   - For SMS, each message can contain up to 140 characters. This character
+	//   limit depends on the encoding schema. For example, an SMS message can contain
+	//   160 GSM characters, 140 ASCII characters, or 70 UCS-2 characters. If you publish
+	//   a message that exceeds this size limit, Amazon SNS sends the message as multiple
+	//   messages, each fitting within the size limit. Messages aren't truncated mid-word
+	//   but are cut off at whole-word boundaries. The total size limit for a single SMS
+	//   Publish action is 1,600 characters.
 	// JSON-specific constraints:
-	//
-	// * Keys in the JSON object that
-	// correspond to supported transport protocols must have simple JSON string
-	// values.
-	//
-	// * The values will be parsed (unescaped) before they are used in
-	// outgoing messages.
-	//
-	// * Outbound notifications are JSON encoded (meaning that the
-	// characters will be reescaped for sending).
-	//
-	// * Values have a minimum length of 0
-	// (the empty string, "", is allowed).
-	//
-	// * Values have a maximum length bounded by
-	// the overall message size (so, including multiple protocols may limit message
-	// sizes).
-	//
-	// * Non-string values will cause the key to be ignored.
-	//
-	// * Keys that do
-	// not correspond to supported transport protocols are ignored.
-	//
-	// * Duplicate keys
-	// are not allowed.
-	//
-	// * Failure to parse or validate any key or value in the message
-	// will cause the Publish call to return an error (no partial delivery).
+	//   - Keys in the JSON object that correspond to supported transport protocols
+	//   must have simple JSON string values.
+	//   - The values will be parsed (unescaped) before they are used in outgoing
+	//   messages.
+	//   - Outbound notifications are JSON encoded (meaning that the characters will
+	//   be reescaped for sending).
+	//   - Values have a minimum length of 0 (the empty string, "", is allowed).
+	//   - Values have a maximum length bounded by the overall message size (so,
+	//   including multiple protocols may limit message sizes).
+	//   - Non-string values will cause the key to be ignored.
+	//   - Keys that do not correspond to supported transport protocols are ignored.
+	//   - Duplicate keys are not allowed.
+	//   - Failure to parse or validate any key or value in the message will cause the
+	//   Publish call to return an error (no partial delivery).
 	//
 	// This member is required.
 	Message *string
@@ -101,9 +81,9 @@ type PublishInput struct {
 
 	// This parameter applies only to FIFO (first-in-first-out) topics. The
 	// MessageDeduplicationId can contain up to 128 alphanumeric characters (a-z, A-Z,
-	// 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~). Every message must have
-	// a unique MessageDeduplicationId, which is a token used for deduplication of sent
-	// messages. If a message with a particular MessageDeduplicationId is sent
+	// 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) . Every message must
+	// have a unique MessageDeduplicationId , which is a token used for deduplication
+	// of sent messages. If a message with a particular MessageDeduplicationId is sent
 	// successfully, any message sent with the same MessageDeduplicationId during the
 	// 5-minute deduplication interval is treated as a duplicate. If the topic has
 	// ContentBasedDeduplication set, the system generates a MessageDeduplicationId
@@ -112,28 +92,23 @@ type PublishInput struct {
 	MessageDeduplicationId *string
 
 	// This parameter applies only to FIFO (first-in-first-out) topics. The
-	// MessageGroupId can contain up to 128 alphanumeric characters (a-z, A-Z, 0-9) and
-	// punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~). The MessageGroupId is a tag that
-	// specifies that a message belongs to a specific message group. Messages that
-	// belong to the same message group are processed in a FIFO manner (however,
+	// MessageGroupId can contain up to 128 alphanumeric characters (a-z, A-Z, 0-9)
+	// and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) . The MessageGroupId is a
+	// tag that specifies that a message belongs to a specific message group. Messages
+	// that belong to the same message group are processed in a FIFO manner (however,
 	// messages in different message groups might be processed out of order). Every
-	// message must include a MessageGroupId.
+	// message must include a MessageGroupId .
 	MessageGroupId *string
 
 	// Set MessageStructure to json if you want to send a different message for each
 	// protocol. For example, using one publish action, you can send a short message to
 	// your SMS subscribers and a longer message to your email subscribers. If you set
-	// MessageStructure to json, the value of the Message parameter must:
-	//
-	// * be a
-	// syntactically valid JSON object; and
-	//
-	// * contain at least a top-level JSON key of
-	// "default" with a value that is a string.
-	//
-	// You can define other top-level keys
-	// that define the message you want to send to a specific transport protocol (e.g.,
-	// "http"). Valid value: json
+	// MessageStructure to json , the value of the Message parameter must:
+	//   - be a syntactically valid JSON object; and
+	//   - contain at least a top-level JSON key of "default" with a value that is a
+	//   string.
+	// You can define other top-level keys that define the message you want to send to
+	// a specific transport protocol (e.g., "http"). Valid value: json
 	MessageStructure *string
 
 	// The phone number to which you want to deliver an SMS message. Use E.164 format.
@@ -169,8 +144,8 @@ type PublishOutput struct {
 
 	// This response element applies only to FIFO (first-in-first-out) topics. The
 	// sequence number is a large, non-consecutive number that Amazon SNS assigns to
-	// each message. The length of SequenceNumber is 128 bits. SequenceNumber continues
-	// to increase for each MessageGroupId.
+	// each message. The length of SequenceNumber is 128 bits. SequenceNumber
+	// continues to increase for each MessageGroupId .
 	SequenceNumber *string
 
 	// Metadata pertaining to the operation's result.

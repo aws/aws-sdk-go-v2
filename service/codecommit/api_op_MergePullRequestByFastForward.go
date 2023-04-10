@@ -33,7 +33,7 @@ func (c *Client) MergePullRequestByFastForward(ctx context.Context, params *Merg
 type MergePullRequestByFastForwardInput struct {
 
 	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests.
+	// ListPullRequests .
 	//
 	// This member is required.
 	PullRequestId *string

@@ -12,10 +12,9 @@ import (
 )
 
 // Reschedules a planned domain configuration change for a later time. This change
-// can be a scheduled service software update
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
-// or a blue/green Auto-Tune enhancement
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types).
+// can be a scheduled service software update (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
+// or a blue/green Auto-Tune enhancement (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types)
+// .
 func (c *Client) UpdateScheduledAction(ctx context.Context, params *UpdateScheduledActionInput, optFns ...func(*Options)) (*UpdateScheduledActionOutput, error) {
 	if params == nil {
 		params = &UpdateScheduledActionInput{}
@@ -34,17 +33,15 @@ func (c *Client) UpdateScheduledAction(ctx context.Context, params *UpdateSchedu
 type UpdateScheduledActionInput struct {
 
 	// The unique identifier of the action to reschedule. To retrieve this ID, send a
-	// ListScheduledActions
-	// (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html)
+	// ListScheduledActions (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html)
 	// request.
 	//
 	// This member is required.
 	ActionID *string
 
-	// The type of action to reschedule. Can be one of SERVICE_SOFTWARE_UPDATE,
-	// JVM_HEAP_SIZE_TUNING, or JVM_YOUNG_GEN_TUNING. To retrieve this value, send a
-	// ListScheduledActions
-	// (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html)
+	// The type of action to reschedule. Can be one of SERVICE_SOFTWARE_UPDATE ,
+	// JVM_HEAP_SIZE_TUNING , or JVM_YOUNG_GEN_TUNING . To retrieve this value, send a
+	// ListScheduledActions (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html)
 	// request.
 	//
 	// This member is required.
@@ -56,24 +53,20 @@ type UpdateScheduledActionInput struct {
 	DomainName *string
 
 	// When to schedule the action.
-	//
-	// * NOW - Immediately schedules the update to happen
-	// in the current hour if there's capacity available.
-	//
-	// * TIMESTAMP - Lets you
-	// specify a custom date and time to apply the update. If you specify this value,
-	// you must also provide a value for DesiredStartTime.
-	//
-	// * OFF_PEAK_WINDOW - Marks
-	// the action to be picked up during an upcoming off-peak window. There's no
-	// guarantee that the change will be implemented during the next immediate window.
-	// Depending on capacity, it might happen in subsequent days.
+	//   - NOW - Immediately schedules the update to happen in the current hour if
+	//   there's capacity available.
+	//   - TIMESTAMP - Lets you specify a custom date and time to apply the update. If
+	//   you specify this value, you must also provide a value for DesiredStartTime .
+	//   - OFF_PEAK_WINDOW - Marks the action to be picked up during an upcoming
+	//   off-peak window. There's no guarantee that the change will be implemented during
+	//   the next immediate window. Depending on capacity, it might happen in subsequent
+	//   days.
 	//
 	// This member is required.
 	ScheduleAt types.ScheduleAt
 
 	// The time to implement the change, in Coordinated Universal Time (UTC). Only
-	// specify this parameter if you set ScheduleAt to TIMESTAMP.
+	// specify this parameter if you set ScheduleAt to TIMESTAMP .
 	DesiredStartTime *int64
 
 	noSmithyDocumentSerde

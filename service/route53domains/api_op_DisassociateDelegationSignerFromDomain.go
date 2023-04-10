@@ -34,9 +34,10 @@ type DisassociateDelegationSignerFromDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// An internal identification number assigned to each DS record after it’s created.
-	// You can retrieve it as part of DNSSEC information returned by GetDomainDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetDomainDetail.html).
+	// An internal identification number assigned to each DS record after it’s
+	// created. You can retrieve it as part of DNSSEC information returned by
+	// GetDomainDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetDomainDetail.html)
+	// .
 	//
 	// This member is required.
 	Id *string
@@ -47,8 +48,8 @@ type DisassociateDelegationSignerFromDomainInput struct {
 type DisassociateDelegationSignerFromDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

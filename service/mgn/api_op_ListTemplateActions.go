@@ -125,8 +125,8 @@ func (c *Client) addOperationListTemplateActionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTemplateActionsAPIClient is a client that implements the ListTemplateActions
-// operation.
+// ListTemplateActionsAPIClient is a client that implements the
+// ListTemplateActions operation.
 type ListTemplateActionsAPIClient interface {
 	ListTemplateActions(context.Context, *ListTemplateActionsInput, ...func(*Options)) (*ListTemplateActionsOutput, error)
 }

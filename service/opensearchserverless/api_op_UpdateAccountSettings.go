@@ -13,8 +13,8 @@ import (
 
 // Update the OpenSearch Serverless settings for the current Amazon Web Services
 // account. For more information, see Managing capacity limits for Amazon
-// OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html).
+// OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html)
+// .
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}
@@ -35,8 +35,8 @@ type UpdateAccountSettingsInput struct {
 	// The maximum capacity limits for all OpenSearch Serverless collections, in
 	// OpenSearch Compute Units (OCUs). These limits are used to scale your collections
 	// based on the current workload. For more information, see Managing capacity
-	// limits for Amazon OpenSearch Serverless
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html).
+	// limits for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html)
+	// .
 	CapacityLimits *types.CapacityLimits
 
 	noSmithyDocumentSerde

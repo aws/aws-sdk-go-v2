@@ -44,9 +44,9 @@ type ListTableColumnsInput struct {
 	// This member is required.
 	WorkbookId *string
 
-	// This parameter is optional. If a nextToken is not specified, the API returns the
-	// first page of data. Pagination tokens expire after 1 hour. If you use a token
-	// that was returned more than an hour back, the API will throw
+	// This parameter is optional. If a nextToken is not specified, the API returns
+	// the first page of data. Pagination tokens expire after 1 hour. If you use a
+	// token that was returned more than an hour back, the API will throw
 	// ValidationException.
 	NextToken *string
 

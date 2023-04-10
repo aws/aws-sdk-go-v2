@@ -242,8 +242,8 @@ const (
 	DedicatedTenancySupportResultEnumDisabled DedicatedTenancySupportResultEnum = "DISABLED"
 )
 
-// Values returns all known values for DedicatedTenancySupportResultEnum. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for DedicatedTenancySupportResultEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DedicatedTenancySupportResultEnum) Values() []DedicatedTenancySupportResultEnum {
@@ -278,8 +278,8 @@ const (
 	DeletableSamlPropertySamlPropertiesRelayStateParameterName DeletableSamlProperty = "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
 )
 
-// Values returns all known values for DeletableSamlProperty. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DeletableSamlProperty. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DeletableSamlProperty) Values() []DeletableSamlProperty {
 	return []DeletableSamlProperty{
@@ -296,9 +296,9 @@ const (
 	ImageTypeShared ImageType = "SHARED"
 )
 
-// Values returns all known values for ImageType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ImageType) Values() []ImageType {
 	return []ImageType{
 		"OWNED",
@@ -333,9 +333,9 @@ const (
 	ModificationResourceEnumComputeType ModificationResourceEnum = "COMPUTE_TYPE"
 )
 
-// Values returns all known values for ModificationResourceEnum. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModificationResourceEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModificationResourceEnum) Values() []ModificationResourceEnum {
 	return []ModificationResourceEnum{
 		"ROOT_VOLUME",
@@ -352,8 +352,8 @@ const (
 	ModificationStateEnumUpdateInProgress ModificationStateEnum = "UPDATE_IN_PROGRESS"
 )
 
-// Values returns all known values for ModificationStateEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ModificationStateEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ModificationStateEnum) Values() []ModificationStateEnum {
 	return []ModificationStateEnum{

@@ -22,9 +22,8 @@ import (
 // data and test data into the flywheel's data lake. To use the flywheel with a new
 // model, you need to provide a dataset for training data (and optional test data)
 // when you create the flywheel. For more information about flywheels, see
-// Flywheel overview
-// (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html) in the
-// Amazon Comprehend Developer Guide.
+// Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
+// in the Amazon Comprehend Developer Guide.
 func (c *Client) CreateFlywheel(ctx context.Context, params *CreateFlywheelInput, optFns ...func(*Options)) (*CreateFlywheelOutput, error) {
 	if params == nil {
 		params = &CreateFlywheelInput{}
@@ -42,8 +41,8 @@ func (c *Client) CreateFlywheel(ctx context.Context, params *CreateFlywheelInput
 
 type CreateFlywheelInput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend the
-	// permissions required to access the flywheel data in the data lake.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// the permissions required to access the flywheel data in the data lake.
 	//
 	// This member is required.
 	DataAccessRoleArn *string

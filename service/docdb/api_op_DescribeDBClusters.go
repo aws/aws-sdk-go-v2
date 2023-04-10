@@ -33,28 +33,24 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusters.
+// Represents the input to DescribeDBClusters .
 type DescribeDBClustersInput struct {
 
 	// The user-provided cluster identifier. If this parameter is specified,
 	// information from only the specific cluster is returned. This parameter isn't
 	// case sensitive. Constraints:
-	//
-	// * If provided, must match an existing
-	// DBClusterIdentifier.
+	//   - If provided, must match an existing DBClusterIdentifier .
 	DBClusterIdentifier *string
 
 	// A filter that specifies one or more clusters to describe. Supported filters:
-	//
-	// *
-	// db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource Names
-	// (ARNs). The results list only includes information about the clusters identified
-	// by these ARNs.
+	//   - db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource
+	//   Names (ARNs). The results list only includes information about the clusters
+	//   identified by these ARNs.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -66,7 +62,7 @@ type DescribeDBClustersInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeDBClusters.
+// Represents the output of DescribeDBClusters .
 type DescribeDBClustersOutput struct {
 
 	// A list of clusters.
@@ -74,7 +70,7 @@ type DescribeDBClustersOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

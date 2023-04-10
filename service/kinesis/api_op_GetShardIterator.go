@@ -24,24 +24,23 @@ import (
 // exactly from the position denoted by a specific sequence number by using the
 // AT_SEQUENCE_NUMBER shard iterator type. Alternatively, the parameter can read
 // right after the sequence number by using the AFTER_SEQUENCE_NUMBER shard
-// iterator type, using sequence numbers returned by earlier calls to PutRecord,
-// PutRecords, GetRecords, or DescribeStream. In the request, you can specify the
-// shard iterator type AT_TIMESTAMP to read records from an arbitrary point in
+// iterator type, using sequence numbers returned by earlier calls to PutRecord ,
+// PutRecords , GetRecords , or DescribeStream . In the request, you can specify
+// the shard iterator type AT_TIMESTAMP to read records from an arbitrary point in
 // time, TRIM_HORIZON to cause ShardIterator to point to the last untrimmed record
 // in the shard in the system (the oldest data record in the shard), or LATEST so
 // that you always read the most recent data in the shard. When you read repeatedly
 // from a stream, use a GetShardIterator request to get the first shard iterator
 // for use in your first GetRecords request and for subsequent reads use the shard
-// iterator returned by the GetRecords request in NextShardIterator. A new shard
-// iterator is returned by every GetRecords request in NextShardIterator, which you
-// use in the ShardIterator parameter of the next GetRecords request. If a
+// iterator returned by the GetRecords request in NextShardIterator . A new shard
+// iterator is returned by every GetRecords request in NextShardIterator , which
+// you use in the ShardIterator parameter of the next GetRecords request. If a
 // GetShardIterator request is made too often, you receive a
-// ProvisionedThroughputExceededException. For more information about throughput
-// limits, see GetRecords, and Streams Limits
-// (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
+// ProvisionedThroughputExceededException . For more information about throughput
+// limits, see GetRecords , and Streams Limits (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide. If the shard is closed,
 // GetShardIterator returns a valid iterator for the last sequence number of the
-// shard. A shard can be closed as a result of using SplitShard or MergeShards.
+// shard. A shard can be closed as a result of using SplitShard or MergeShards .
 // GetShardIterator has a limit of five transactions per second per account per
 // open shard.
 func (c *Client) GetShardIterator(ctx context.Context, params *GetShardIteratorInput, optFns ...func(*Options)) (*GetShardIteratorOutput, error) {
@@ -59,7 +58,7 @@ func (c *Client) GetShardIterator(ctx context.Context, params *GetShardIteratorI
 	return out, nil
 }
 
-// Represents the input for GetShardIterator.
+// Represents the input for GetShardIterator .
 type GetShardIteratorInput struct {
 
 	// The shard ID of the Kinesis Data Streams shard to get the iterator for.
@@ -67,33 +66,25 @@ type GetShardIteratorInput struct {
 	// This member is required.
 	ShardId *string
 
-	// Determines how the shard iterator is used to start reading data records from the
-	// shard. The following are the valid Amazon Kinesis shard iterator types:
-	//
-	// *
-	// AT_SEQUENCE_NUMBER - Start reading from the position denoted by a specific
-	// sequence number, provided in the value StartingSequenceNumber.
-	//
-	// *
-	// AFTER_SEQUENCE_NUMBER - Start reading right after the position denoted by a
-	// specific sequence number, provided in the value StartingSequenceNumber.
-	//
-	// *
-	// AT_TIMESTAMP - Start reading from the position denoted by a specific time stamp,
-	// provided in the value Timestamp.
-	//
-	// * TRIM_HORIZON - Start reading at the last
-	// untrimmed record in the shard in the system, which is the oldest data record in
-	// the shard.
-	//
-	// * LATEST - Start reading just after the most recent record in the
-	// shard, so that you always read the most recent data in the shard.
+	// Determines how the shard iterator is used to start reading data records from
+	// the shard. The following are the valid Amazon Kinesis shard iterator types:
+	//   - AT_SEQUENCE_NUMBER - Start reading from the position denoted by a specific
+	//   sequence number, provided in the value StartingSequenceNumber .
+	//   - AFTER_SEQUENCE_NUMBER - Start reading right after the position denoted by a
+	//   specific sequence number, provided in the value StartingSequenceNumber .
+	//   - AT_TIMESTAMP - Start reading from the position denoted by a specific time
+	//   stamp, provided in the value Timestamp .
+	//   - TRIM_HORIZON - Start reading at the last untrimmed record in the shard in
+	//   the system, which is the oldest data record in the shard.
+	//   - LATEST - Start reading just after the most recent record in the shard, so
+	//   that you always read the most recent data in the shard.
 	//
 	// This member is required.
 	ShardIteratorType types.ShardIteratorType
 
-	// The sequence number of the data record in the shard from which to start reading.
-	// Used with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.
+	// The sequence number of the data record in the shard from which to start
+	// reading. Used with shard iterator type AT_SEQUENCE_NUMBER and
+	// AFTER_SEQUENCE_NUMBER.
 	StartingSequenceNumber *string
 
 	// The ARN of the stream.
@@ -104,7 +95,7 @@ type GetShardIteratorInput struct {
 
 	// The time stamp of the data record from which to start reading. Used with shard
 	// iterator type AT_TIMESTAMP. A time stamp is the Unix epoch date with precision
-	// in milliseconds. For example, 2016-04-04T19:58:46.480-00:00 or 1459799926.480.
+	// in milliseconds. For example, 2016-04-04T19:58:46.480-00:00 or 1459799926.480 .
 	// If a record with this exact time stamp does not exist, the iterator returned is
 	// for the next (later) record. If the time stamp is older than the current trim
 	// horizon, the iterator returned is for the oldest untrimmed data record
@@ -114,12 +105,12 @@ type GetShardIteratorInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output for GetShardIterator.
+// Represents the output for GetShardIterator .
 type GetShardIteratorOutput struct {
 
-	// The position in the shard from which to start reading data records sequentially.
-	// A shard iterator specifies this position using the sequence number of a data
-	// record in a shard.
+	// The position in the shard from which to start reading data records
+	// sequentially. A shard iterator specifies this position using the sequence number
+	// of a data record in a shard.
 	ShardIterator *string
 
 	// Metadata pertaining to the operation's result.

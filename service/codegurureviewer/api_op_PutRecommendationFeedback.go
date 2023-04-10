@@ -30,8 +30,7 @@ func (c *Client) PutRecommendationFeedback(ctx context.Context, params *PutRecom
 
 type PutRecommendationFeedbackInput struct {
 
-	// The Amazon Resource Name (ARN) of the CodeReview
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
 	// object.
 	//
 	// This member is required.
@@ -43,8 +42,8 @@ type PutRecommendationFeedbackInput struct {
 	// This member is required.
 	Reactions []types.Reaction
 
-	// The recommendation ID that can be used to track the provided recommendations and
-	// then to collect the feedback.
+	// The recommendation ID that can be used to track the provided recommendations
+	// and then to collect the feedback.
 	//
 	// This member is required.
 	RecommendationId *string

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the AppInstanceUserEndpoints created under a single AppInstanceUser.
+// Lists all the AppInstanceUserEndpoints created under a single AppInstanceUser .
 func (c *Client) ListAppInstanceUserEndpoints(ctx context.Context, params *ListAppInstanceUserEndpointsInput, optFns ...func(*Options)) (*ListAppInstanceUserEndpointsOutput, error) {
 	if params == nil {
 		params = &ListAppInstanceUserEndpointsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListAppInstanceUserEndpoints(ctx context.Context, params *ListA
 
 type ListAppInstanceUserEndpointsInput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	//
 	// This member is required.
 	AppInstanceUserArn *string
@@ -47,7 +47,7 @@ type ListAppInstanceUserEndpointsInput struct {
 
 type ListAppInstanceUserEndpointsOutput struct {
 
-	// The information for each requested AppInstanceUserEndpoint.
+	// The information for each requested AppInstanceUserEndpoint .
 	AppInstanceUserEndpoints []types.AppInstanceUserEndpointSummary
 
 	// The token passed by previous API calls until all requested endpoints are

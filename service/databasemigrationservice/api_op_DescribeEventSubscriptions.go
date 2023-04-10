@@ -13,9 +13,9 @@ import (
 )
 
 // Lists all the event subscriptions for a customer account. The description of a
-// subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType,
-// SourceID, CreationTime, and Status. If you specify SubscriptionName, this action
-// lists the description for that subscription.
+// subscription includes SubscriptionName , SNSTopicARN , CustomerID , SourceType ,
+// SourceID , CreationTime , and Status . If you specify SubscriptionName , this
+// action lists the description for that subscription.
 func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *DescribeEventSubscriptionsInput, optFns ...func(*Options)) (*DescribeEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeEventSubscriptionsInput{}
@@ -39,7 +39,7 @@ type DescribeEventSubscriptionsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -61,7 +61,7 @@ type DescribeEventSubscriptionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

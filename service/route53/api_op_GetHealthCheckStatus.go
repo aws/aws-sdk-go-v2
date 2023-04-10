@@ -48,8 +48,8 @@ type GetHealthCheckStatusInput struct {
 // A complex type that contains the response to a GetHealthCheck request.
 type GetHealthCheckStatusOutput struct {
 
-	// A list that contains one HealthCheckObservation element for each Amazon Route 53
-	// health checker that is reporting a status about the health check endpoint.
+	// A list that contains one HealthCheckObservation element for each Amazon Route
+	// 53 health checker that is reporting a status about the health check endpoint.
 	//
 	// This member is required.
 	HealthCheckObservations []types.HealthCheckObservation

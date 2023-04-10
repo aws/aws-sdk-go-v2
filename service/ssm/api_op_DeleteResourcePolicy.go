@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Systems Manager resource policy. A resource policy helps you to define
-// the IAM entity (for example, an Amazon Web Services account) that can manage
-// your Systems Manager resources. Currently, OpsItemGroup is the only resource
-// that supports Systems Manager resource policies. The resource policy for
-// OpsItemGroup enables Amazon Web Services accounts to view and interact with
+// Deletes a Systems Manager resource policy. A resource policy helps you to
+// define the IAM entity (for example, an Amazon Web Services account) that can
+// manage your Systems Manager resources. Currently, OpsItemGroup is the only
+// resource that supports Systems Manager resource policies. The resource policy
+// for OpsItemGroup enables Amazon Web Services accounts to view and interact with
 // OpsCenter operational work items (OpsItems).
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {

@@ -44,9 +44,9 @@ type ListFleetsInput struct {
 	// When this parameter is used, ListFleets only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListFleets request with the
-	// returned nextToken value. This value can be between 1 and 200. If this parameter
-	// is not used, then ListFleets returns up to 200 results and a nextToken value if
-	// applicable.
+	// returned nextToken value. This value can be between 1 and 200. If this
+	// parameter is not used, then ListFleets returns up to 200 results and a nextToken
+	// value if applicable.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -151,9 +151,9 @@ type ListFleetsPaginatorOptions struct {
 	// When this parameter is used, ListFleets only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListFleets request with the
-	// returned nextToken value. This value can be between 1 and 200. If this parameter
-	// is not used, then ListFleets returns up to 200 results and a nextToken value if
-	// applicable.
+	// returned nextToken value. This value can be between 1 and 200. If this
+	// parameter is not used, then ListFleets returns up to 200 results and a nextToken
+	// value if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

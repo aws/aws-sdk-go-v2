@@ -40,9 +40,9 @@ type ListTagsForResourceInput struct {
 	// output. When this parameter is used, ListTagsForResource returns only limit
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
-	// ListTagsForResource request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListTagsForResource returns
-	// up to 100 results and a nextToken value if applicable.
+	// ListTagsForResource request with the returned nextToken value. This value can
+	// be between 1 and 100. If you don't use this parameter, ListTagsForResource
+	// returns up to 100 results and a nextToken value if applicable.
 	Limit *int32
 
 	// The nextToken value returned from a previous paginated ListTagsForResource
@@ -61,10 +61,10 @@ type ListTagsForResourceOutput struct {
 	// This member is required.
 	Tags []types.TagRef
 
-	// The nextToken value to include in a future ListTagsForResource request. When the
-	// results of a ListTagsForResource request exceed limit, you can use this value to
-	// retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The nextToken value to include in a future ListTagsForResource request. When
+	// the results of a ListTagsForResource request exceed limit , you can use this
+	// value to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -136,8 +136,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -151,9 +151,9 @@ type ListTagsForResourcePaginatorOptions struct {
 	// output. When this parameter is used, ListTagsForResource returns only limit
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another
-	// ListTagsForResource request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListTagsForResource returns
-	// up to 100 results and a nextToken value if applicable.
+	// ListTagsForResource request with the returned nextToken value. This value can
+	// be between 1 and 100. If you don't use this parameter, ListTagsForResource
+	// returns up to 100 results and a nextToken value if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

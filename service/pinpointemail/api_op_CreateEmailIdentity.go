@@ -70,8 +70,8 @@ type CreateEmailIdentityOutput struct {
 
 	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you can
 	// only send email from verified email addresses or domains. For more information
-	// about verifying identities, see the Amazon Pinpoint User Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
+	// about verifying identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html)
+	// .
 	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.

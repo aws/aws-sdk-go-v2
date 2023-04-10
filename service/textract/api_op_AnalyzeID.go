@@ -12,7 +12,7 @@ import (
 )
 
 // Analyzes identity documents for relevant information. This information is
-// extracted and returned as IdentityDocumentFields, which records both the
+// extracted and returned as IdentityDocumentFields , which records both the
 // normalized field and value of the extracted text. Unlike other Amazon Textract
 // operations, AnalyzeID doesn't return any Geometry data.
 func (c *Client) AnalyzeID(ctx context.Context, params *AnalyzeIDInput, optFns ...func(*Options)) (*AnalyzeIDOutput, error) {

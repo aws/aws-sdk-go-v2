@@ -62,8 +62,8 @@ type UpdateWorkflowStepInput struct {
 	// The status of the step.
 	Status types.StepStatus
 
-	// The action type of the step. You must run and update the status of a manual step
-	// for the workflow to continue after the completion of the step.
+	// The action type of the step. You must run and update the status of a manual
+	// step for the workflow to continue after the completion of the step.
 	StepActionType types.StepActionType
 
 	// The servers on which a step will be run.

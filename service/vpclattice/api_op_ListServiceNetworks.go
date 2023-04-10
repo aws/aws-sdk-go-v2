@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the service networks owned by the caller account or shared with the caller
-// account. Also includes the account ID in the ARN to show which account owns the
-// service network.
+// Lists the service networks owned by the caller account or shared with the
+// caller account. Also includes the account ID in the ARN to show which account
+// owns the service network.
 func (c *Client) ListServiceNetworks(ctx context.Context, params *ListServiceNetworksInput, optFns ...func(*Options)) (*ListServiceNetworksOutput, error) {
 	if params == nil {
 		params = &ListServiceNetworksInput{}
@@ -118,8 +118,8 @@ func (c *Client) addOperationListServiceNetworksMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListServiceNetworksAPIClient is a client that implements the ListServiceNetworks
-// operation.
+// ListServiceNetworksAPIClient is a client that implements the
+// ListServiceNetworks operation.
 type ListServiceNetworksAPIClient interface {
 	ListServiceNetworks(context.Context, *ListServiceNetworksInput, ...func(*Options)) (*ListServiceNetworksOutput, error)
 }

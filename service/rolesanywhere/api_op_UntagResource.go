@@ -11,7 +11,7 @@ import (
 )
 
 // Removes tags from the resource. Required permissions:
-// rolesanywhere:UntagResource.
+// rolesanywhere:UntagResource .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

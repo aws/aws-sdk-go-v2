@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the anomalies that belong to an insight that you specify using
-// its ID.
+// Returns a list of the anomalies that belong to an insight that you specify
+// using its ID.
 func (c *Client) ListAnomaliesForInsight(ctx context.Context, params *ListAnomaliesForInsightInput, optFns ...func(*Options)) (*ListAnomaliesForInsightOutput, error) {
 	if params == nil {
 		params = &ListAnomaliesForInsightInput{}

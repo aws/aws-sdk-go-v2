@@ -51,8 +51,8 @@ type DescribeComponentConfigurationOutput struct {
 	// Indicates whether the application component is monitored.
 	Monitor *bool
 
-	// The tier of the application component. Supported tiers include DOT_NET_CORE,
-	// DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT
+	// The tier of the application component. Supported tiers include DOT_NET_CORE ,
+	// DOT_NET_WORKER , DOT_NET_WEB , SQL_SERVER , and DEFAULT
 	Tier types.Tier
 
 	// Metadata pertaining to the operation's result.

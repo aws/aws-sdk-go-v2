@@ -60,9 +60,9 @@ const (
 	ArchitectureI386  Architecture = "i386"
 )
 
-// Values returns all known values for Architecture. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Architecture. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Architecture) Values() []Architecture {
 	return []Architecture{
 		"x86_64",
@@ -341,8 +341,8 @@ const (
 	DeploymentCommandNameUndeploy              DeploymentCommandName = "undeploy"
 )
 
-// Values returns all known values for DeploymentCommandName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DeploymentCommandName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentCommandName) Values() []DeploymentCommandName {
 	return []DeploymentCommandName{
@@ -443,9 +443,9 @@ const (
 	LayerTypeCustom           LayerType = "custom"
 )
 
-// Values returns all known values for LayerType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LayerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LayerType) Values() []LayerType {
 	return []LayerType{
 		"aws-flow-ruby",

@@ -44,8 +44,8 @@ type EnableDomainTransferLockInput struct {
 // The EnableDomainTransferLock response includes the following elements.
 type EnableDomainTransferLockOutput struct {
 
-	// Identifier for tracking the progress of the request. To use this ID to query the
-	// operation status, use GetOperationDetail.
+	// Identifier for tracking the progress of the request. To use this ID to query
+	// the operation status, use GetOperationDetail.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,7 +12,7 @@ import (
 )
 
 // Lists the major version families of each published schema. If a major version
-// ARN is provided as SchemaArn, the minor version revisions in that family are
+// ARN is provided as SchemaArn , the minor version revisions in that family are
 // listed instead.
 func (c *Client) ListPublishedSchemaArns(ctx context.Context, params *ListPublishedSchemaArnsInput, optFns ...func(*Options)) (*ListPublishedSchemaArnsOutput, error) {
 	if params == nil {

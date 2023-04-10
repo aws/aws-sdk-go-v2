@@ -26,8 +26,7 @@ import (
 // you install and use the Lightsail Control (lightsailctl) plugin to push
 // container images to your Lightsail container service. For more information, see
 // Pushing and managing container images on your Amazon Lightsail container
-// services
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images)
+// services (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images)
 // in the Amazon Lightsail Developer Guide.
 func (c *Client) CreateContainerServiceRegistryLogin(ctx context.Context, params *CreateContainerServiceRegistryLoginInput, optFns ...func(*Options)) (*CreateContainerServiceRegistryLoginOutput, error) {
 	if params == nil {

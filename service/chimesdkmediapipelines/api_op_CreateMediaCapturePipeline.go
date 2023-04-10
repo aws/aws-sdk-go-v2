@@ -53,7 +53,7 @@ type CreateMediaCapturePipelineInput struct {
 	SourceType types.MediaPipelineSourceType
 
 	// The configuration for a specified media pipeline. SourceType must be
-	// ChimeSdkMeeting.
+	// ChimeSdkMeeting .
 	ChimeSdkMeetingConfiguration *types.ChimeSdkMeetingConfiguration
 
 	// The unique identifier for the client request. The token makes the API request

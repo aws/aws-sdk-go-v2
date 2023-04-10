@@ -31,12 +31,12 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 
 type SearchResourcesInput struct {
 
-	// The filter conditions that determine which S3 buckets to include or exclude from
-	// the query results.
+	// The filter conditions that determine which S3 buckets to include or exclude
+	// from the query results.
 	BucketCriteria *types.SearchResourcesBucketCriteria
 
-	// The maximum number of items to include in each page of the response. The default
-	// value is 50.
+	// The maximum number of items to include in each page of the response. The
+	// default value is 50.
 	MaxResults int32
 
 	// The nextToken string that specifies which page of results to return in a
@@ -135,8 +135,8 @@ var _ SearchResourcesAPIClient = (*Client)(nil)
 
 // SearchResourcesPaginatorOptions is the paginator options for SearchResources
 type SearchResourcesPaginatorOptions struct {
-	// The maximum number of items to include in each page of the response. The default
-	// value is 50.
+	// The maximum number of items to include in each page of the response. The
+	// default value is 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

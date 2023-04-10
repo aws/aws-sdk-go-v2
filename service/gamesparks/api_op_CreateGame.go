@@ -13,7 +13,7 @@ import (
 
 // Creates a new game with an empty configuration. After creating your game, you
 // can update the configuration using UpdateGameConfiguration or
-// ImportGameConfiguration.
+// ImportGameConfiguration .
 func (c *Client) CreateGame(ctx context.Context, params *CreateGameInput, optFns ...func(*Options)) (*CreateGameOutput, error) {
 	if params == nil {
 		params = &CreateGameInput{}

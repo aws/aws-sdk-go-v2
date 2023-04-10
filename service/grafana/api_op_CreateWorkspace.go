@@ -15,8 +15,8 @@ import (
 // Creates a workspace. In a workspace, you can create Grafana dashboards and
 // visualizations to analyze your metrics, logs, and traces. You don't have to
 // build, package, or deploy any hardware to run the Grafana server. Don't use
-// CreateWorkspace to modify an existing workspace. Instead, use UpdateWorkspace
-// (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html).
+// CreateWorkspace to modify an existing workspace. Instead, use UpdateWorkspace (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html)
+// .
 func (c *Client) CreateWorkspace(ctx context.Context, params *CreateWorkspaceInput, optFns ...func(*Options)) (*CreateWorkspaceOutput, error) {
 	if params == nil {
 		params = &CreateWorkspaceInput{}
@@ -34,10 +34,10 @@ func (c *Client) CreateWorkspace(ctx context.Context, params *CreateWorkspaceInp
 
 type CreateWorkspaceInput struct {
 
-	// Specifies whether the workspace can access Amazon Web Services resources in this
-	// Amazon Web Services account only, or whether it can also access Amazon Web
+	// Specifies whether the workspace can access Amazon Web Services resources in
+	// this Amazon Web Services account only, or whether it can also access Amazon Web
 	// Services resources in other accounts in the same organization. If you specify
-	// ORGANIZATION, you must specify which organizational units the workspace can
+	// ORGANIZATION , you must specify which organizational units the workspace can
 	// access in the workspaceOrganizationalUnits parameter.
 	//
 	// This member is required.
@@ -46,25 +46,25 @@ type CreateWorkspaceInput struct {
 	// Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor
 	// to Single Sign-On), or both to authenticate users for using the Grafana console
 	// within a workspace. For more information, see User authentication in Amazon
-	// Managed Grafana
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html).
+	// Managed Grafana (https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html)
+	// .
 	//
 	// This member is required.
 	AuthenticationProviders []types.AuthenticationProviderTypes
 
-	// When creating a workspace through the Amazon Web Services API, CLI or Amazon Web
-	// Services CloudFormation, you must manage IAM roles and provision the permissions
-	// that the workspace needs to use Amazon Web Services data sources and
+	// When creating a workspace through the Amazon Web Services API, CLI or Amazon
+	// Web Services CloudFormation, you must manage IAM roles and provision the
+	// permissions that the workspace needs to use Amazon Web Services data sources and
 	// notification channels. You must also specify a workspaceRoleArn for a role that
 	// you will manage for the workspace to use when accessing those datasources and
 	// notification channels. The ability for Amazon Managed Grafana to create and
 	// update IAM roles on behalf of the user is supported only in the Amazon Managed
-	// Grafana console, where this value may be set to SERVICE_MANAGED. Use only the
+	// Grafana console, where this value may be set to SERVICE_MANAGED . Use only the
 	// CUSTOMER_MANAGED permission type when creating a workspace with the API, CLI or
 	// Amazon Web Services CloudFormation. For more information, see Amazon Managed
 	// Grafana permissions and policies for Amazon Web Services data sources and
-	// notification channels
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html).
+	// notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
+	// .
 	//
 	// This member is required.
 	PermissionType types.PermissionType
@@ -73,10 +73,10 @@ type CreateWorkspaceInput struct {
 	// the request.
 	ClientToken *string
 
-	// The configuration string for the workspace that you create. For more information
-	// about the format and configuration options available, see Working in your
-	// Grafana workspace
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html).
+	// The configuration string for the workspace that you create. For more
+	// information about the format and configuration options available, see Working
+	// in your Grafana workspace (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html)
+	// .
 	//
 	// This value conforms to the media type: application/json
 	Configuration *string
@@ -94,15 +94,15 @@ type CreateWorkspaceInput struct {
 	// an organization.
 	OrganizationRoleName *string
 
-	// The name of the CloudFormation stack set to use to generate IAM roles to be used
-	// for this workspace.
+	// The name of the CloudFormation stack set to use to generate IAM roles to be
+	// used for this workspace.
 	StackSetName *string
 
 	// The list of tags associated with the workspace.
 	Tags map[string]string
 
-	// The configuration settings for an Amazon VPC that contains data sources for your
-	// Grafana workspace to connect to.
+	// The configuration settings for an Amazon VPC that contains data sources for
+	// your Grafana workspace to connect to.
 	VpcConfiguration *types.VpcConfiguration
 
 	// This parameter is for internal use only, and should not be used.

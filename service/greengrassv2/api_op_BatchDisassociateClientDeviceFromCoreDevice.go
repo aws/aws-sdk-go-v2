@@ -45,8 +45,8 @@ type BatchDisassociateClientDeviceFromCoreDeviceInput struct {
 
 type BatchDisassociateClientDeviceFromCoreDeviceOutput struct {
 
-	// The list of any errors for the entries in the request. Each error entry contains
-	// the name of the IoT thing that failed to disassociate.
+	// The list of any errors for the entries in the request. Each error entry
+	// contains the name of the IoT thing that failed to disassociate.
 	ErrorEntries []types.DisassociateClientDeviceFromCoreDeviceErrorEntry
 
 	// Metadata pertaining to the operation's result.

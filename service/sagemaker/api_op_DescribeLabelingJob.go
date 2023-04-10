@@ -63,9 +63,9 @@ type DescribeLabelingJobOutput struct {
 	// This member is required.
 	JobReferenceCode *string
 
-	// Provides a breakdown of the number of data objects labeled by humans, the number
-	// of objects labeled by machine, the number of objects than couldn't be labeled,
-	// and the total number of objects labeled.
+	// Provides a breakdown of the number of data objects labeled by humans, the
+	// number of objects labeled by machine, the number of objects than couldn't be
+	// labeled, and the total number of objects labeled.
 	//
 	// This member is required.
 	LabelCounters *types.LabelCounters
@@ -90,8 +90,8 @@ type DescribeLabelingJobOutput struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The location of the job's output data and the Amazon Web Services Key Management
-	// Service key ID for the key used to encrypt the output data, if any.
+	// The location of the job's output data and the Amazon Web Services Key
+	// Management Service key ID for the key used to encrypt the output data, if any.
 	//
 	// This member is required.
 	OutputConfig *types.LabelingJobOutputConfig
@@ -110,23 +110,16 @@ type DescribeLabelingJobOutput struct {
 
 	// The S3 location of the JSON file that defines the categories used to label data
 	// objects. Please note the following label-category limits:
-	//
-	// * Semantic
-	// segmentation labeling jobs using automated labeling: 20 labels
-	//
-	// * Box bounding
-	// labeling jobs (all): 10 labels
-	//
-	// The file is a JSON structure in the following
-	// format: {
+	//   - Semantic segmentation labeling jobs using automated labeling: 20 labels
+	//   - Box bounding labeling jobs (all): 10 labels
+	// The file is a JSON structure in the following format: {
 	//     "document-version": "2018-11-28"
 	//
 	//     "labels": [
 	//
 	//     {
 	//
-	//
-	// "label": "label 1"
+	//     "label": "label 1"
 	//
 	//     },
 	//
@@ -138,8 +131,7 @@ type DescribeLabelingJobOutput struct {
 	//
 	//     ...
 	//
-	//
-	// {
+	//     {
 	//
 	//     "label": "label n"
 	//
@@ -162,8 +154,8 @@ type DescribeLabelingJobOutput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

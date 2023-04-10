@@ -45,9 +45,9 @@ type GetReservedNodeExchangeConfigurationOptionsInput struct {
 	// An optional pagination token provided by a previous
 	// GetReservedNodeExchangeConfigurationOptions request. If this parameter is
 	// specified, the response includes only records beyond the marker, up to the value
-	// specified by the MaxRecords parameter. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
+	// specified by the MaxRecords parameter. You can retrieve the next set of
+	// response records by providing the returned marker value in the Marker parameter
+	// and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
@@ -143,8 +143,8 @@ func (c *Client) addOperationGetReservedNodeExchangeConfigurationOptionsMiddlewa
 	return nil
 }
 
-// GetReservedNodeExchangeConfigurationOptionsAPIClient is a client that implements
-// the GetReservedNodeExchangeConfigurationOptions operation.
+// GetReservedNodeExchangeConfigurationOptionsAPIClient is a client that
+// implements the GetReservedNodeExchangeConfigurationOptions operation.
 type GetReservedNodeExchangeConfigurationOptionsAPIClient interface {
 	GetReservedNodeExchangeConfigurationOptions(context.Context, *GetReservedNodeExchangeConfigurationOptionsInput, ...func(*Options)) (*GetReservedNodeExchangeConfigurationOptionsOutput, error)
 }

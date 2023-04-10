@@ -19,18 +19,14 @@ import (
 // interrupted or you terminate them manually. For instant fleets, EC2 Fleet must
 // terminate the instances when the fleet is deleted. A deleted instant fleet with
 // running instances is not supported. Restrictions
+//   - You can delete up to 25 instant fleets in a single request. If you exceed
+//     this number, no instant fleets are deleted and an error is returned. There is
+//     no restriction on the number of fleets of type maintain or request that can be
+//     deleted in a single request.
+//   - Up to 1000 instances can be terminated in a single request to delete instant
+//     fleets.
 //
-// * You can delete up to 25
-// instant fleets in a single request. If you exceed this number, no instant fleets
-// are deleted and an error is returned. There is no restriction on the number of
-// fleets of type maintain or request that can be deleted in a single request.
-//
-// *
-// Up to 1000 instances can be terminated in a single request to delete instant
-// fleets.
-//
-// For more information, see Delete an EC2 Fleet
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#delete-fleet)
+// For more information, see Delete an EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#delete-fleet)
 // in the Amazon EC2 User Guide.
 func (c *Client) DeleteFleets(ctx context.Context, params *DeleteFleetsInput, optFns ...func(*Options)) (*DeleteFleetsOutput, error) {
 	if params == nil {
@@ -56,9 +52,9 @@ type DeleteFleetsInput struct {
 
 	// Indicates whether to terminate the associated instances when the EC2 Fleet is
 	// deleted. The default is to terminate the instances. To let the instances
-	// continue to run after the EC2 Fleet is deleted, specify no-terminate-instances.
-	// Supported only for fleets of type maintain and request. For instant fleets, you
-	// cannot specify NoTerminateInstances. A deleted instant fleet with running
+	// continue to run after the EC2 Fleet is deleted, specify no-terminate-instances .
+	// Supported only for fleets of type maintain and request . For instant fleets,
+	// you cannot specify NoTerminateInstances . A deleted instant fleet with running
 	// instances is not supported.
 	//
 	// This member is required.
@@ -66,8 +62,8 @@ type DeleteFleetsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

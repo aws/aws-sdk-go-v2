@@ -219,8 +219,8 @@ type LcmOperationInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Lists information about a network function instance. A network function instance
-// is a function in a function package .
+// Lists information about a network function instance. A network function
+// instance is a function in a function package .
 type ListSolFunctionInstanceInfo struct {
 
 	// Network function instance ARN.
@@ -351,9 +351,9 @@ type ListSolFunctionPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Info about the specific network instance. A network instance is a single network
-// created in Amazon Web Services TNB that can be deployed and on which life-cycle
-// operations (like terminate, update, and delete) can be performed.
+// Info about the specific network instance. A network instance is a single
+// network created in Amazon Web Services TNB that can be deployed and on which
+// life-cycle operations (like terminate, update, and delete) can be performed.
 type ListSolNetworkInstanceInfo struct {
 
 	// Network instance ARN.
@@ -571,8 +571,8 @@ type ProblemDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Update metadata in a function package. A function package is a .zip file in CSAR
-// (Cloud Service Archive) format that contains a network function (an ETSI
+// Update metadata in a function package. A function package is a .zip file in
+// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
 // standard telecommunication application) and function package descriptor that
 // uses the TOSCA standard to describe how the network functions should run on your
 // network.
@@ -613,8 +613,8 @@ type ToscaOverride struct {
 // function. A network function instance is a function in a function package .
 type UpdateSolNetworkModify struct {
 
-	// Provides values for the configurable properties declared in the function package
-	// descriptor.
+	// Provides values for the configurable properties declared in the function
+	// package descriptor.
 	//
 	// This member is required.
 	VnfConfigurableProperties document.Interface

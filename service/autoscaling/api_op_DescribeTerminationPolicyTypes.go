@@ -11,8 +11,7 @@ import (
 )
 
 // Describes the termination policies supported by Amazon EC2 Auto Scaling. For
-// more information, see Work with Amazon EC2 Auto Scaling termination policies
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
+// more information, see Work with Amazon EC2 Auto Scaling termination policies (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeTerminationPolicyTypes(ctx context.Context, params *DescribeTerminationPolicyTypesInput, optFns ...func(*Options)) (*DescribeTerminationPolicyTypesOutput, error) {
 	if params == nil {
@@ -35,9 +34,9 @@ type DescribeTerminationPolicyTypesInput struct {
 
 type DescribeTerminationPolicyTypesOutput struct {
 
-	// The termination policies supported by Amazon EC2 Auto Scaling: OldestInstance,
-	// OldestLaunchConfiguration, NewestInstance, ClosestToNextInstanceHour, Default,
-	// OldestLaunchTemplate, and AllocationStrategy.
+	// The termination policies supported by Amazon EC2 Auto Scaling: OldestInstance ,
+	// OldestLaunchConfiguration , NewestInstance , ClosestToNextInstanceHour , Default
+	// , OldestLaunchTemplate , and AllocationStrategy .
 	TerminationPolicyTypes []string
 
 	// Metadata pertaining to the operation's result.

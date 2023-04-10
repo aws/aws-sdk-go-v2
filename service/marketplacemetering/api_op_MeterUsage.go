@@ -45,8 +45,8 @@ type MeterUsageInput struct {
 	ProductCode *string
 
 	// Timestamp, in UTC, for which the usage is being reported. Your application can
-	// meter usage for up to one hour in the past. Make sure the timestamp value is not
-	// before the start of the software usage.
+	// meter usage for up to one hour in the past. Make sure the timestamp value is
+	// not before the start of the software usage.
 	//
 	// This member is required.
 	Timestamp *time.Time
@@ -59,13 +59,13 @@ type MeterUsageInput struct {
 
 	// Checks whether you have the permissions required for the action, but does not
 	// make the request. If you have the permissions, the request returns
-	// DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to false
-	// if not specified.
+	// DryRunOperation ; otherwise, it returns UnauthorizedException . Defaults to
+	// false if not specified.
 	DryRun *bool
 
-	// The set of UsageAllocations to submit. The sum of all UsageAllocation quantities
-	// must equal the UsageQuantity of the MeterUsage request, and each UsageAllocation
-	// must have a unique set of tags (include no tags).
+	// The set of UsageAllocations to submit. The sum of all UsageAllocation
+	// quantities must equal the UsageQuantity of the MeterUsage request, and each
+	// UsageAllocation must have a unique set of tags (include no tags).
 	UsageAllocations []types.UsageAllocation
 
 	// Consumption value for the hour. Defaults to 0 if not specified.

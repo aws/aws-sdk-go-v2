@@ -14,9 +14,8 @@ import (
 // Creates a prefetch schedule for a playback configuration. A prefetch schedule
 // allows you to tell MediaTailor to fetch and prepare certain ads before an ad
 // break happens. For more information about ad prefetching, see Using ad
-// prefetching
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html) in the
-// MediaTailor User Guide.
+// prefetching (https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html)
+// in the MediaTailor User Guide.
 func (c *Client) CreatePrefetchSchedule(ctx context.Context, params *CreatePrefetchScheduleInput, optFns ...func(*Options)) (*CreatePrefetchScheduleOutput, error) {
 	if params == nil {
 		params = &CreatePrefetchScheduleInput{}
@@ -59,11 +58,11 @@ type CreatePrefetchScheduleInput struct {
 	// This member is required.
 	Retrieval *types.PrefetchRetrieval
 
-	// An optional stream identifier that MediaTailor uses to prefetch ads for multiple
-	// streams that use the same playback configuration. If StreamId is specified,
-	// MediaTailor returns all of the prefetch schedules with an exact match on
-	// StreamId. If not specified, MediaTailor returns all of the prefetch schedules
-	// for the playback configuration, regardless of StreamId.
+	// An optional stream identifier that MediaTailor uses to prefetch ads for
+	// multiple streams that use the same playback configuration. If StreamId is
+	// specified, MediaTailor returns all of the prefetch schedules with an exact match
+	// on StreamId . If not specified, MediaTailor returns all of the prefetch
+	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
 
 	noSmithyDocumentSerde
@@ -91,11 +90,11 @@ type CreatePrefetchScheduleOutput struct {
 	// consumed for each ad break.
 	Retrieval *types.PrefetchRetrieval
 
-	// An optional stream identifier that MediaTailor uses to prefetch ads for multiple
-	// streams that use the same playback configuration. If StreamId is specified,
-	// MediaTailor returns all of the prefetch schedules with an exact match on
-	// StreamId. If not specified, MediaTailor returns all of the prefetch schedules
-	// for the playback configuration, regardless of StreamId.
+	// An optional stream identifier that MediaTailor uses to prefetch ads for
+	// multiple streams that use the same playback configuration. If StreamId is
+	// specified, MediaTailor returns all of the prefetch schedules with an exact match
+	// on StreamId . If not specified, MediaTailor returns all of the prefetch
+	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
 
 	// Metadata pertaining to the operation's result.

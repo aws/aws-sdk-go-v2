@@ -30,8 +30,8 @@ func (c *Client) CreateLaunchProfile(ctx context.Context, params *CreateLaunchPr
 
 type CreateLaunchProfileInput struct {
 
-	// Specifies the IDs of the EC2 subnets where streaming sessions will be accessible
-	// from. These subnets must support the specified instance types.
+	// Specifies the IDs of the EC2 subnets where streaming sessions will be
+	// accessible from. These subnets must support the specified instance types.
 	//
 	// This member is required.
 	Ec2SubnetIds []string

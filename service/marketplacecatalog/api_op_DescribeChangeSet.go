@@ -64,10 +64,10 @@ type DescribeChangeSetOutput struct {
 	// state. Null if the request is not in a terminal state.
 	EndTime *string
 
-	// Returned if the change set is in FAILED status. Can be either CLIENT_ERROR,
-	// which means that there are issues with the request (see the ErrorDetailList), or
-	// SERVER_FAULT, which means that there is a problem in the system, and you should
-	// retry your request.
+	// Returned if the change set is in FAILED status. Can be either CLIENT_ERROR ,
+	// which means that there are issues with the request (see the ErrorDetailList ),
+	// or SERVER_FAULT , which means that there is a problem in the system, and you
+	// should retry your request.
 	FailureCode types.FailureCode
 
 	// Returned if there is a failure on the change set, but that failure is not

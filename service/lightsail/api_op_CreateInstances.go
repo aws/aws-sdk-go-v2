@@ -13,8 +13,8 @@ import (
 
 // Creates one or more Amazon Lightsail instances. The create instances operation
 // supports tag-based access control via request tags. For more information, see
-// the Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// the Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) CreateInstances(ctx context.Context, params *CreateInstancesInput, optFns ...func(*Options)) (*CreateInstancesOutput, error) {
 	if params == nil {
 		params = &CreateInstancesInput{}
@@ -33,9 +33,8 @@ func (c *Client) CreateInstances(ctx context.Context, params *CreateInstancesInp
 type CreateInstancesInput struct {
 
 	// The Availability Zone in which to create your instance. Use the following
-	// format: us-east-2a (case sensitive). You can get a list of Availability Zones by
-	// using the get regions
-	// (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
+	// format: us-east-2a (case sensitive). You can get a list of Availability Zones
+	// by using the get regions (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
 	// operation. Be sure to add the include Availability Zones parameter to your
 	// request.
 	//
@@ -43,7 +42,7 @@ type CreateInstancesInput struct {
 	AvailabilityZone *string
 
 	// The ID for a virtual private server image (e.g., app_wordpress_4_4 or
-	// app_lamp_7_0). Use the get blueprints operation to return a list of available
+	// app_lamp_7_0 ). Use the get blueprints operation to return a list of available
 	// images (or blueprints). Use active blueprints when creating new instances.
 	// Inactive blueprints are listed to support customers with existing instances and
 	// are not necessarily available to create new instances. Blueprints are marked
@@ -54,7 +53,7 @@ type CreateInstancesInput struct {
 	BlueprintId *string
 
 	// The bundle of specification information for your virtual private server (or
-	// instance), including the pricing plan (e.g., micro_1_0).
+	// instance), including the pricing plan (e.g., micro_1_0 ).
 	//
 	// This member is required.
 	BundleId *string
@@ -69,14 +68,14 @@ type CreateInstancesInput struct {
 	// An array of objects representing the add-ons to enable for the new instance.
 	AddOns []types.AddOnRequest
 
-	// (Deprecated) The name for your custom image. In releases prior to June 12, 2017,
-	// this parameter was ignored by the API. It is now deprecated.
+	// (Deprecated) The name for your custom image. In releases prior to June 12,
+	// 2017, this parameter was ignored by the API. It is now deprecated.
 	//
 	// Deprecated: This member has been deprecated.
 	CustomImageName *string
 
 	// The IP address type for the instance. The possible values are ipv4 for IPv4
-	// only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+	// only, and dualstack for IPv4 and IPv6. The default value is dualstack .
 	IpAddressType types.IpAddressType
 
 	// The name of your key pair.
@@ -87,11 +86,11 @@ type CreateInstancesInput struct {
 	Tags []types.Tag
 
 	// A launch script you can create that configures a server with additional user
-	// data. For example, you might want to run apt-get -y update. Depending on the
+	// data. For example, you might want to run apt-get -y update . Depending on the
 	// machine image you choose, the command to get software on your instance varies.
-	// Amazon Linux and CentOS use yum, Debian and Ubuntu use apt-get, and FreeBSD uses
-	// pkg. For a complete list, see the Amazon Lightsail Developer Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image).
+	// Amazon Linux and CentOS use yum , Debian and Ubuntu use apt-get , and FreeBSD
+	// uses pkg . For a complete list, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image)
+	// .
 	UserData *string
 
 	noSmithyDocumentSerde

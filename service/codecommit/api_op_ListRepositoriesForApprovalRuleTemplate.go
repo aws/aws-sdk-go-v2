@@ -38,8 +38,8 @@ type ListRepositoriesForApprovalRuleTemplateInput struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -124,16 +124,16 @@ func (c *Client) addOperationListRepositoriesForApprovalRuleTemplateMiddlewares(
 	return nil
 }
 
-// ListRepositoriesForApprovalRuleTemplateAPIClient is a client that implements the
-// ListRepositoriesForApprovalRuleTemplate operation.
+// ListRepositoriesForApprovalRuleTemplateAPIClient is a client that implements
+// the ListRepositoriesForApprovalRuleTemplate operation.
 type ListRepositoriesForApprovalRuleTemplateAPIClient interface {
 	ListRepositoriesForApprovalRuleTemplate(context.Context, *ListRepositoriesForApprovalRuleTemplateInput, ...func(*Options)) (*ListRepositoriesForApprovalRuleTemplateOutput, error)
 }
 
 var _ ListRepositoriesForApprovalRuleTemplateAPIClient = (*Client)(nil)
 
-// ListRepositoriesForApprovalRuleTemplatePaginatorOptions is the paginator options
-// for ListRepositoriesForApprovalRuleTemplate
+// ListRepositoriesForApprovalRuleTemplatePaginatorOptions is the paginator
+// options for ListRepositoriesForApprovalRuleTemplate
 type ListRepositoriesForApprovalRuleTemplatePaginatorOptions struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	Limit int32

@@ -16,9 +16,8 @@ import (
 // all your ElastiCache resources, with the exception of global replication group.
 // When you add or remove tags on replication groups, those actions will be
 // replicated to all nodes in the replication group. For more information, see
-// Resource-level permissions
-// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html).
-// If the cluster is not in the available state, ListTagsForResource returns an
+// Resource-level permissions (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html)
+// . If the cluster is not in the available state, ListTagsForResource returns an
 // error.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
@@ -40,10 +39,10 @@ type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource for which you want the list of
 	// tags, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster or
-	// arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot . For more
+	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web
+	// Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	//
 	// This member is required.
 	ResourceName *string
@@ -51,7 +50,7 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output from the AddTagsToResource, ListTagsForResource, and
+// Represents the output from the AddTagsToResource , ListTagsForResource , and
 // RemoveTagsFromResource operations.
 type ListTagsForResourceOutput struct {
 

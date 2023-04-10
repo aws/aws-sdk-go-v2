@@ -32,7 +32,7 @@ func (c *Client) DecreaseReplicaCount(ctx context.Context, params *DecreaseRepli
 
 type DecreaseReplicaCountInput struct {
 
-	// If True, the number of replica nodes is decreased immediately.
+	// If True , the number of replica nodes is decreased immediately.
 	// ApplyImmediately=False is not currently supported.
 	//
 	// This member is required.
@@ -49,22 +49,16 @@ type DecreaseReplicaCountInput struct {
 	// replication groups, this is the number of replica nodes in each of the
 	// replication group's node groups. The minimum number of replicas in a shard or
 	// replication group is:
-	//
-	// * Redis (cluster mode disabled)
-	//
-	// * If Multi-AZ is
-	// enabled: 1
-	//
-	// * If Multi-AZ is not enabled: 0
-	//
-	// * Redis (cluster mode enabled): 0
-	// (though you will not be able to failover to a replica if your primary node
-	// fails)
+	//   - Redis (cluster mode disabled)
+	//   - If Multi-AZ is enabled: 1
+	//   - If Multi-AZ is not enabled: 0
+	//   - Redis (cluster mode enabled): 0 (though you will not be able to failover to
+	//   a replica if your primary node fails)
 	NewReplicaCount *int32
 
 	// A list of ConfigureShard objects that can be used to configure each shard in a
 	// Redis (cluster mode enabled) replication group. The ConfigureShard has three
-	// members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
+	// members: NewReplicaCount , NodeGroupId , and PreferredAvailabilityZones .
 	ReplicaConfiguration []types.ConfigureShard
 
 	// A list of the node ids to remove from the replication group or node group

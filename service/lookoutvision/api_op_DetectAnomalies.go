@@ -16,9 +16,9 @@ import (
 // includes a boolean prediction that the image contains one or more anomalies and
 // a confidence value for the prediction. If the model is an image segmentation
 // model, the response also includes segmentation information for each type of
-// anomaly found in the image. Before calling DetectAnomalies, you must first start
-// your model with the StartModel operation. You are charged for the amount of
-// time, in minutes, that a model runs and for the number of anomaly detection
+// anomaly found in the image. Before calling DetectAnomalies , you must first
+// start your model with the StartModel operation. You are charged for the amount
+// of time, in minutes, that a model runs and for the number of anomaly detection
 // units that your model uses. If you are not using a model, use the StopModel
 // operation to stop your model. For more information, see Detecting anomalies in
 // an image in the Amazon Lookout for Vision developer guide. This operation
@@ -45,7 +45,7 @@ type DetectAnomaliesInput struct {
 	// This member is required.
 	Body io.Reader
 
-	// The type of the image passed in Body. Valid values are image/png (PNG format
+	// The type of the image passed in Body . Valid values are image/png (PNG format
 	// images) and image/jpeg (JPG format images).
 	//
 	// This member is required.

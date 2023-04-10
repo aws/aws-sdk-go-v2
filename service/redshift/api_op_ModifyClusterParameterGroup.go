@@ -13,8 +13,7 @@ import (
 
 // Modifies the parameters of a parameter group. For the parameters parameter, it
 // can't contain ASCII characters. For more information about parameters and
-// parameter groups, go to Amazon Redshift Parameter Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// parameter groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) ModifyClusterParameterGroup(ctx context.Context, params *ModifyClusterParameterGroupInput, optFns ...func(*Options)) (*ModifyClusterParameterGroupOutput, error) {
 	if params == nil {

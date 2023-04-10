@@ -18,8 +18,7 @@ import (
 // policies, and maximum/minimum group size, access the Auto Scaling group
 // directly. To get attributes for a game server group, provide a group name or ARN
 // value. If successful, a GameServerGroup object is returned. Learn more GameLift
-// FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGameServerGroupInput, optFns ...func(*Options)) (*DescribeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerGroupInput{}

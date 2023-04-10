@@ -14,8 +14,7 @@ import (
 // Returns a paginated list of DataIntegration associations in the account. You
 // cannot create a DataIntegration association for a DataIntegration that has been
 // previously associated. Use a different DataIntegration, or recreate the
-// DataIntegration using the CreateDataIntegration
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
+// DataIntegration using the CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
 // API.
 func (c *Client) ListDataIntegrationAssociations(ctx context.Context, params *ListDataIntegrationAssociationsInput, optFns ...func(*Options)) (*ListDataIntegrationAssociationsOutput, error) {
 	if params == nil {

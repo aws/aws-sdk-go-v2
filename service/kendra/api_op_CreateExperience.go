@@ -14,8 +14,8 @@ import (
 
 // Creates an Amazon Kendra experience such as a search application. For more
 // information on creating a search application experience, including using the
-// Python and Java SDKs, see Building a search experience with no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// Python and Java SDKs, see Building a search experience with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 func (c *Client) CreateExperience(ctx context.Context, params *CreateExperienceInput, optFns ...func(*Options)) (*CreateExperienceOutput, error) {
 	if params == nil {
 		params = &CreateExperienceInput{}
@@ -49,8 +49,8 @@ type CreateExperienceInput struct {
 	ClientToken *string
 
 	// Configuration information for your Amazon Kendra experience. This includes
-	// ContentSourceConfiguration, which specifies the data source IDs and/or FAQ IDs,
-	// and UserIdentityConfiguration, which specifies the user or group information to
+	// ContentSourceConfiguration , which specifies the data source IDs and/or FAQ IDs,
+	// and UserIdentityConfiguration , which specifies the user or group information to
 	// grant access to your Amazon Kendra experience.
 	Configuration *types.ExperienceConfiguration
 
@@ -61,8 +61,8 @@ type CreateExperienceInput struct {
 	// API, GetQuerySuggestions API, and other required APIs. The role also must
 	// include permission to access IAM Identity Center (successor to Single Sign-On)
 	// that stores your user and group information. For more information, see IAM
-	// access roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// access roles for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html)
+	// .
 	RoleArn *string
 
 	noSmithyDocumentSerde

@@ -12,17 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a
-// VPC. For more information, see Migrate from EC2-Classic to a VPC
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-// Amazon Elastic Compute Cloud User Guide. Describes the ClassicLink DNS support
-// status of one or more VPCs. If enabled, the DNS hostname of a linked EC2-Classic
-// instance resolves to its private IP address when addressed from an instance in
-// the VPC to which it's linked. Similarly, the DNS hostname of an instance in a
-// VPC resolves to its private IP address when addressed from a linked EC2-Classic
-// instance. For more information, see ClassicLink
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
+// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
+// in the Amazon Elastic Compute Cloud User Guide. Describes the ClassicLink DNS
+// support status of one or more VPCs. If enabled, the DNS hostname of a linked
+// EC2-Classic instance resolves to its private IP address when addressed from an
+// instance in the VPC to which it's linked. Similarly, the DNS hostname of an
+// instance in a VPC resolves to its private IP address when addressed from a
+// linked EC2-Classic instance. For more information, see ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeVpcClassicLinkDnsSupport(ctx context.Context, params *DescribeVpcClassicLinkDnsSupportInput, optFns ...func(*Options)) (*DescribeVpcClassicLinkDnsSupportOutput, error) {
 	if params == nil {
 		params = &DescribeVpcClassicLinkDnsSupportInput{}
@@ -42,8 +40,8 @@ type DescribeVpcClassicLinkDnsSupportInput struct {
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -144,8 +142,8 @@ var _ DescribeVpcClassicLinkDnsSupportAPIClient = (*Client)(nil)
 type DescribeVpcClassicLinkDnsSupportPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

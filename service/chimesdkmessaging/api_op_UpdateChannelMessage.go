@@ -57,8 +57,8 @@ type UpdateChannelMessageInput struct {
 	// The metadata of the message being updated.
 	Metadata *string
 
-	// The ID of the SubChannel in the request. Only required when updating messages in
-	// a SubChannel that the user belongs to.
+	// The ID of the SubChannel in the request. Only required when updating messages
+	// in a SubChannel that the user belongs to.
 	SubChannelId *string
 
 	noSmithyDocumentSerde

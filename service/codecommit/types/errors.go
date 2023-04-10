@@ -33,8 +33,8 @@ func (e *ActorDoesNotExistException) ErrorCode() string {
 }
 func (e *ActorDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The content for the approval rule is empty. You must provide some content for an
-// approval rule. The content cannot be null.
+// The content for the approval rule is empty. You must provide some content for
+// an approval rule. The content cannot be null.
 type ApprovalRuleContentRequiredException struct {
 	Message *string
 
@@ -478,7 +478,7 @@ func (e *BranchNameExistsException) ErrorFault() smithy.ErrorFault { return smit
 
 // The specified branch name is not valid because it is a tag name. Enter the name
 // of a branch in the repository. For a list of valid branch names, use
-// ListBranches.
+// ListBranches .
 type BranchNameIsTagNameException struct {
 	Message *string
 
@@ -530,8 +530,9 @@ func (e *BranchNameRequiredException) ErrorCode() string {
 }
 func (e *BranchNameRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The approval rule cannot be deleted from the pull request because it was created
-// by an approval rule template and applied to the pull request automatically.
+// The approval rule cannot be deleted from the pull request because it was
+// created by an approval rule template and applied to the pull request
+// automatically.
 type CannotDeleteApprovalRuleFromTemplateException struct {
 	Message *string
 
@@ -559,8 +560,9 @@ func (e *CannotDeleteApprovalRuleFromTemplateException) ErrorFault() smithy.Erro
 	return smithy.FaultClient
 }
 
-// The approval rule cannot be modified for the pull request because it was created
-// by an approval rule template and applied to the pull request automatically.
+// The approval rule cannot be modified for the pull request because it was
+// created by an approval rule template and applied to the pull request
+// automatically.
 type CannotModifyApprovalRuleFromTemplateException struct {
 	Message *string
 
@@ -1031,8 +1033,8 @@ func (e *DefaultBranchCannotBeDeletedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// A file cannot be added to the repository because the specified path name has the
-// same name as a file that already exists in this repository. Either provide a
+// A file cannot be added to the repository because the specified path name has
+// the same name as a file that already exists in this repository. Either provide a
 // different name for the file, or specify a different path for the file.
 type DirectoryNameConflictsWithFileNameException struct {
 	Message *string
@@ -1225,8 +1227,8 @@ func (e *FileContentAndSourceFileSpecifiedException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// The file cannot be added because it is empty. Empty files cannot be added to the
-// repository with this API.
+// The file cannot be added because it is empty. Empty files cannot be added to
+// the repository with this API.
 type FileContentRequiredException struct {
 	Message *string
 
@@ -1252,9 +1254,9 @@ func (e *FileContentRequiredException) ErrorCode() string {
 }
 func (e *FileContentRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The file cannot be added because it is too large. The maximum file size is 6 MB,
-// and the combined file content change size is 7 MB. Consider making these changes
-// using a Git client.
+// The file cannot be added because it is too large. The maximum file size is 6
+// MB, and the combined file content change size is 7 MB. Consider making these
+// changes using a Git client.
 type FileContentSizeLimitExceededException struct {
 	Message *string
 
@@ -1363,9 +1365,9 @@ func (e *FileModeRequiredException) ErrorCode() string {
 }
 func (e *FileModeRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A file cannot be added to the repository because the specified file name has the
-// same name as a directory in this repository. Either provide another name for the
-// file, or add the file in a directory that does not match the file name.
+// A file cannot be added to the repository because the specified file name has
+// the same name as a directory in this repository. Either provide another name for
+// the file, or add the file in a directory that does not match the file name.
 type FileNameConflictsWithDirectoryNameException struct {
 	Message *string
 
@@ -1424,8 +1426,8 @@ func (e *FilePathConflictsWithSubmodulePathException) ErrorFault() smithy.ErrorF
 }
 
 // The specified file exceeds the file size limit for AWS CodeCommit. For more
-// information about limits in AWS CodeCommit, see AWS CodeCommit User Guide
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html).
+// information about limits in AWS CodeCommit, see AWS CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// .
 type FileTooLargeException struct {
 	Message *string
 
@@ -1650,8 +1652,8 @@ func (e *InvalidApprovalRuleTemplateContentException) ErrorFault() smithy.ErrorF
 
 // The description for the approval rule template is not valid because it exceeds
 // the maximum characters allowed for a description. For more information about
-// limits in AWS CodeCommit, see AWS CodeCommit User Guide
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html).
+// limits in AWS CodeCommit, see AWS CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// .
 type InvalidApprovalRuleTemplateDescriptionException struct {
 	Message *string
 
@@ -1681,8 +1683,8 @@ func (e *InvalidApprovalRuleTemplateDescriptionException) ErrorFault() smithy.Er
 
 // The name of the approval rule template is not valid. Template names must be
 // between 1 and 100 valid characters in length. For more information about limits
-// in AWS CodeCommit, see AWS CodeCommit User Guide
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html).
+// in AWS CodeCommit, see AWS CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// .
 type InvalidApprovalRuleTemplateNameException struct {
 	Message *string
 
@@ -2171,7 +2173,7 @@ func (e *InvalidFileLocationException) ErrorCode() string {
 func (e *InvalidFileLocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified file mode permission is not valid. For a list of valid file mode
-// permissions, see PutFile.
+// permissions, see PutFile .
 type InvalidFileModeException struct {
 	Message *string
 
@@ -2381,9 +2383,9 @@ func (e *InvalidOverrideStatusException) ErrorCode() string {
 }
 func (e *InvalidOverrideStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The parent commit ID is not valid. The commit ID cannot be empty, and must match
-// the head commit ID for the branch of the repository where you want to add or
-// update a file.
+// The parent commit ID is not valid. The commit ID cannot be empty, and must
+// match the head commit ID for the branch of the repository where you want to add
+// or update a file.
 type InvalidParentCommitIdException struct {
 	Message *string
 
@@ -2490,7 +2492,7 @@ func (e *InvalidPullRequestIdException) ErrorCode() string {
 }
 func (e *InvalidPullRequestIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The pull request status is not valid. The only valid values are OPEN and CLOSED.
+// The pull request status is not valid. The only valid values are OPEN and CLOSED .
 type InvalidPullRequestStatusException struct {
 	Message *string
 
@@ -2517,7 +2519,7 @@ func (e *InvalidPullRequestStatusException) ErrorCode() string {
 func (e *InvalidPullRequestStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The pull request status update is not valid. The only valid update is from OPEN
-// to CLOSED.
+// to CLOSED .
 type InvalidPullRequestStatusUpdateException struct {
 	Message *string
 
@@ -2572,8 +2574,8 @@ func (e *InvalidReactionUserArnException) ErrorCode() string {
 func (e *InvalidReactionUserArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value of the reaction is not valid. For more information, see the AWS
-// CodeCommit User Guide
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html).
+// CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+// .
 type InvalidReactionValueException struct {
 	Message *string
 
@@ -2601,9 +2603,8 @@ func (e *InvalidReactionValueException) ErrorFault() smithy.ErrorFault { return 
 
 // The specified reference name format is not valid. Reference names must conform
 // to the Git references format (for example, refs/heads/master). For more
-// information, see Git Internals - Git References
-// (https://git-scm.com/book/en/v2/Git-Internals-Git-References) or consult your
-// Git documentation.
+// information, see Git Internals - Git References (https://git-scm.com/book/en/v2/Git-Internals-Git-References)
+// or consult your Git documentation.
 type InvalidReferenceNameException struct {
 	Message *string
 
@@ -2944,8 +2945,7 @@ func (e *InvalidRepositoryTriggerRegionException) ErrorFault() smithy.ErrorFault
 }
 
 // The value for the resource ARN is not valid. For more information about
-// resources in AWS CodeCommit, see CodeCommit Resources and Operations
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+// resources in AWS CodeCommit, see CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
 // in the AWS CodeCommit User Guide.
 type InvalidResourceArnException struct {
 	Message *string
@@ -3267,8 +3267,8 @@ func (e *InvalidTitleException) ErrorCode() string {
 }
 func (e *InvalidTitleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The pull request cannot be merged automatically into the destination branch. You
-// must manually merge the branches and resolve any conflicts.
+// The pull request cannot be merged automatically into the destination branch.
+// You must manually merge the branches and resolve any conflicts.
 type ManualMergeRequiredException struct {
 	Message *string
 
@@ -3464,9 +3464,9 @@ func (e *MaximumNumberOfApprovalsExceededException) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
-// You cannot create the pull request because the repository has too many open pull
-// requests. The maximum number of open pull requests for a repository is 1,000.
-// Close one or more open pull requests, and then try again.
+// You cannot create the pull request because the repository has too many open
+// pull requests. The maximum number of open pull requests for a repository is
+// 1,000. Close one or more open pull requests, and then try again.
 type MaximumOpenPullRequestsExceededException struct {
 	Message *string
 
@@ -3857,7 +3857,7 @@ func (e *ParentCommitDoesNotExistException) ErrorFault() smithy.ErrorFault { ret
 
 // The file could not be added because the provided parent commit ID is not the
 // current tip of the specified branch. To view the full commit ID of the current
-// head of the branch, use GetBranch.
+// head of the branch, use GetBranch .
 type ParentCommitIdOutdatedException struct {
 	Message *string
 
@@ -4155,8 +4155,8 @@ func (e *PutFileEntryConflictException) ErrorCode() string {
 }
 func (e *PutFileEntryConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of reactions has been exceeded. Reactions are limited to one reaction
-// per user for each individual comment ID.
+// The number of reactions has been exceeded. Reactions are limited to one
+// reaction per user for each individual comment ID.
 type ReactionLimitExceededException struct {
 	Message *string
 
@@ -4472,8 +4472,9 @@ func (e *RepositoryNamesRequiredException) ErrorCode() string {
 }
 func (e *RepositoryNamesRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The repository does not contain any pull requests with that pull request ID. Use
-// GetPullRequest to verify the correct repository name for the pull request ID.
+// The repository does not contain any pull requests with that pull request ID.
+// Use GetPullRequest to verify the correct repository name for the pull request
+// ID.
 type RepositoryNotAssociatedWithPullRequestException struct {
 	Message *string
 
@@ -4645,8 +4646,7 @@ func (e *RepositoryTriggersListRequiredException) ErrorFault() smithy.ErrorFault
 
 // A valid Amazon Resource Name (ARN) for an AWS CodeCommit resource is required.
 // For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and
-// Operations
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+// Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
 // in the AWS CodeCommit User Guide.
 type ResourceArnRequiredException struct {
 	Message *string
@@ -4753,8 +4753,8 @@ func (e *RevisionNotCurrentException) ErrorCode() string {
 }
 func (e *RevisionNotCurrentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The file was not added or updated because the content of the file is exactly the
-// same as the content of that file in the repository and branch that you
+// The file was not added or updated because the content of the file is exactly
+// the same as the content of that file in the repository and branch that you
 // specified.
 type SameFileContentException struct {
 	Message *string

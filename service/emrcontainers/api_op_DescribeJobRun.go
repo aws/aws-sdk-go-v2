@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays detailed information about a job run. A job run is a unit of work, such
-// as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR
-// on EKS.
+// Displays detailed information about a job run. A job run is a unit of work,
+// such as a Spark jar, PySpark script, or SparkSQL query, that you submit to
+// Amazon EMR on EKS.
 func (c *Client) DescribeJobRun(ctx context.Context, params *DescribeJobRunInput, optFns ...func(*Options)) (*DescribeJobRunOutput, error) {
 	if params == nil {
 		params = &DescribeJobRunInput{}

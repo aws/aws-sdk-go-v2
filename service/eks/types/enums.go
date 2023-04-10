@@ -179,9 +179,9 @@ const (
 	ConfigStatusActive   ConfigStatus = "ACTIVE"
 )
 
-// Values returns all known values for ConfigStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConfigStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigStatus) Values() []ConfigStatus {
 	return []ConfigStatus{
 		"CREATING",
@@ -245,9 +245,9 @@ const (
 	ErrorCodeK8sResourceNotFound          ErrorCode = "K8sResourceNotFound"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"SubnetNotFound",
@@ -526,9 +526,9 @@ const (
 	UpdateStatusSuccessful UpdateStatus = "Successful"
 )
 
-// Values returns all known values for UpdateStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateStatus) Values() []UpdateStatus {
 	return []UpdateStatus{
 		"InProgress",

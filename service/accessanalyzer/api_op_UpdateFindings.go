@@ -31,16 +31,15 @@ func (c *Client) UpdateFindings(ctx context.Context, params *UpdateFindingsInput
 // Updates findings with the new values provided in the request.
 type UpdateFindingsInput struct {
 
-	// The ARN of the analyzer
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
+	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
 	// that generated the findings to update.
 	//
 	// This member is required.
 	AnalyzerArn *string
 
 	// The state represents the action to take to update the finding Status. Use
-	// ARCHIVE to change an Active finding to an Archived finding. Use ACTIVE to change
-	// an Archived finding to an Active finding.
+	// ARCHIVE to change an Active finding to an Archived finding. Use ACTIVE to
+	// change an Archived finding to an Active finding.
 	//
 	// This member is required.
 	Status types.FindingStatusUpdate

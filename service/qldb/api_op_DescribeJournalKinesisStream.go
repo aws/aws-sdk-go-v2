@@ -15,8 +15,7 @@ import (
 // output includes the Amazon Resource Name (ARN), stream name, current status,
 // creation time, and the parameters of the original stream creation request. This
 // action does not return any expired journal streams. For more information, see
-// Expiration for terminal streams
-// (https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration)
+// Expiration for terminal streams (https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration)
 // in the Amazon QLDB Developer Guide.
 func (c *Client) DescribeJournalKinesisStream(ctx context.Context, params *DescribeJournalKinesisStreamInput, optFns ...func(*Options)) (*DescribeJournalKinesisStreamOutput, error) {
 	if params == nil {

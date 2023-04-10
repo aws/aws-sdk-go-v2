@@ -35,19 +35,19 @@ type ListWorkteamsInput struct {
 	// The maximum number of work teams to return in each page of the response.
 	MaxResults *int32
 
-	// A string in the work team's name. This filter returns only work teams whose name
-	// contains the specified string.
+	// A string in the work team's name. This filter returns only work teams whose
+	// name contains the specified string.
 	NameContains *string
 
 	// If the result of the previous ListWorkteams request was truncated, the response
-	// includes a NextToken. To retrieve the next set of labeling jobs, use the token
+	// includes a NextToken . To retrieve the next set of labeling jobs, use the token
 	// in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.ListWorkteamsSortByOptions
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde

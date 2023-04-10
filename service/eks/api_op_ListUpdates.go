@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the updates associated with an Amazon EKS cluster or managed node group in
-// your Amazon Web Services account, in the specified Region.
+// Lists the updates associated with an Amazon EKS cluster or managed node group
+// in your Amazon Web Services account, in the specified Region.
 func (c *Client) ListUpdates(ctx context.Context, params *ListUpdatesInput, optFns ...func(*Options)) (*ListUpdatesOutput, error) {
 	if params == nil {
 		params = &ListUpdatesInput{}
@@ -39,16 +39,16 @@ type ListUpdatesInput struct {
 	AddonName *string
 
 	// The maximum number of update results returned by ListUpdates in paginated
-	// output. When you use this parameter, ListUpdates returns only maxResults results
-	// in a single page along with a nextToken response element. You can see the
-	// remaining results of the initial request by sending another ListUpdates request
-	// with the returned nextToken value. This value can be between 1 and 100. If you
-	// don't use this parameter, ListUpdates returns up to 100 results and a nextToken
-	// value if applicable.
+	// output. When you use this parameter, ListUpdates returns only maxResults
+	// results in a single page along with a nextToken response element. You can see
+	// the remaining results of the initial request by sending another ListUpdates
+	// request with the returned nextToken value. This value can be between 1 and 100.
+	// If you don't use this parameter, ListUpdates returns up to 100 results and a
+	// nextToken value if applicable.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated ListUpdates request where
-	// maxResults was used and the results exceeded the value of that parameter.
+	// The nextToken value returned from a previous paginated ListUpdates request
+	// where maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value.
 	NextToken *string
@@ -61,10 +61,10 @@ type ListUpdatesInput struct {
 
 type ListUpdatesOutput struct {
 
-	// The nextToken value to include in a future ListUpdates request. When the results
-	// of a ListUpdates request exceed maxResults, you can use this value to retrieve
-	// the next page of results. This value is null when there are no more results to
-	// return.
+	// The nextToken value to include in a future ListUpdates request. When the
+	// results of a ListUpdates request exceed maxResults , you can use this value to
+	// retrieve the next page of results. This value is null when there are no more
+	// results to return.
 	NextToken *string
 
 	// A list of all the updates for the specified cluster and Region.
@@ -149,12 +149,12 @@ var _ ListUpdatesAPIClient = (*Client)(nil)
 // ListUpdatesPaginatorOptions is the paginator options for ListUpdates
 type ListUpdatesPaginatorOptions struct {
 	// The maximum number of update results returned by ListUpdates in paginated
-	// output. When you use this parameter, ListUpdates returns only maxResults results
-	// in a single page along with a nextToken response element. You can see the
-	// remaining results of the initial request by sending another ListUpdates request
-	// with the returned nextToken value. This value can be between 1 and 100. If you
-	// don't use this parameter, ListUpdates returns up to 100 results and a nextToken
-	// value if applicable.
+	// output. When you use this parameter, ListUpdates returns only maxResults
+	// results in a single page along with a nextToken response element. You can see
+	// the remaining results of the initial request by sending another ListUpdates
+	// request with the returned nextToken value. This value can be between 1 and 100.
+	// If you don't use this parameter, ListUpdates returns up to 100 results and a
+	// nextToken value if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

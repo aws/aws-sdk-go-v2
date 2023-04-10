@@ -30,7 +30,7 @@ func (c *Client) DeleteJobQueue(ctx context.Context, params *DeleteJobQueueInput
 	return out, nil
 }
 
-// Contains the parameters for DeleteJobQueue.
+// Contains the parameters for DeleteJobQueue .
 type DeleteJobQueueInput struct {
 
 	// The short name or full Amazon Resource Name (ARN) of the queue to delete.

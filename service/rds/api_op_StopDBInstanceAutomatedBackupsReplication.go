@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops automated backup replication for a DB instance. This command doesn't apply
-// to RDS Custom, Aurora MySQL, and Aurora PostgreSQL. For more information, see
-// Replicating Automated Backups to Another Amazon Web Services Region
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
+// Stops automated backup replication for a DB instance. This command doesn't
+// apply to RDS Custom, Aurora MySQL, and Aurora PostgreSQL. For more information,
+// see Replicating Automated Backups to Another Amazon Web Services Region (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
 // in the Amazon RDS User Guide.
 func (c *Client) StopDBInstanceAutomatedBackupsReplication(ctx context.Context, params *StopDBInstanceAutomatedBackupsReplicationInput, optFns ...func(*Options)) (*StopDBInstanceAutomatedBackupsReplicationOutput, error) {
 	if params == nil {
@@ -35,7 +34,7 @@ type StopDBInstanceAutomatedBackupsReplicationInput struct {
 
 	// The Amazon Resource Name (ARN) of the source DB instance for which to stop
 	// replicating automate backups, for example,
-	// arn:aws:rds:us-west-2:123456789012:db:mydatabase.
+	// arn:aws:rds:us-west-2:123456789012:db:mydatabase .
 	//
 	// This member is required.
 	SourceDBInstanceArn *string
@@ -45,9 +44,9 @@ type StopDBInstanceAutomatedBackupsReplicationInput struct {
 
 type StopDBInstanceAutomatedBackupsReplicationOutput struct {
 
-	// An automated backup of a DB instance. It consists of system backups, transaction
-	// logs, and the database instance properties that existed at the time you deleted
-	// the source instance.
+	// An automated backup of a DB instance. It consists of system backups,
+	// transaction logs, and the database instance properties that existed at the time
+	// you deleted the source instance.
 	DBInstanceAutomatedBackup *types.DBInstanceAutomatedBackup
 
 	// Metadata pertaining to the operation's result.

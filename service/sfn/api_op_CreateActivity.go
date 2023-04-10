@@ -20,11 +20,11 @@ import (
 // polling from the activity. This operation is eventually consistent. The results
 // are best effort and may not reflect very recent updates and changes.
 // CreateActivity is an idempotent API. Subsequent requests won’t create a
-// duplicate resource if it was already created. CreateActivity's idempotency check
-// is based on the activity name. If a following request has different tags values,
-// Step Functions will ignore these differences and treat it as an idempotent
-// request of the previous. In this case, tags will not be updated, even if they
-// are different.
+// duplicate resource if it was already created. CreateActivity 's idempotency
+// check is based on the activity name . If a following request has different tags
+// values, Step Functions will ignore these differences and treat it as an
+// idempotent request of the previous. In this case, tags will not be updated,
+// even if they are different.
 func (c *Client) CreateActivity(ctx context.Context, params *CreateActivityInput, optFns ...func(*Options)) (*CreateActivityOutput, error) {
 	if params == nil {
 		params = &CreateActivityInput{}
@@ -42,39 +42,27 @@ func (c *Client) CreateActivity(ctx context.Context, params *CreateActivityInput
 
 type CreateActivityInput struct {
 
-	// The name of the activity to create. This name must be unique for your Amazon Web
-	// Services account and region for 90 days. For more information, see  Limits
-	// Related to State Machine Executions
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
+	// The name of the activity to create. This name must be unique for your Amazon
+	// Web Services account and region for 90 days. For more information, see Limits
+	// Related to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the Step Functions Developer Guide. A name must not contain:
-	//
-	// * white
-	// space
-	//
-	// * brackets < > { } [ ]
-	//
-	// * wildcard characters ? *
-	//
-	// * special characters "
-	// # % \ ^ | ~ ` $ & , ; : /
-	//
-	// * control characters (U+0000-001F, U+007F-009F)
-	//
-	// To
-	// enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z,
-	// - and _.
+	//   - white space
+	//   - brackets < > { } [ ]
+	//   - wildcard characters ? *
+	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//   - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
+	// a-z, - and _.
 	//
 	// This member is required.
 	Name *string
 
 	// The list of tags to add to a resource. An array of key-value pairs. For more
-	// information, see Using Cost Allocation Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+	// information, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 	// in the Amazon Web Services Billing and Cost Management User Guide, and
-	// Controlling Access Using IAM Tags
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
-	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
-	// = + - @.
+	// Controlling Access Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html)
+	// . Tags may only contain Unicode letters, digits, white space, or these symbols:
+	// _ . : / = + - @ .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

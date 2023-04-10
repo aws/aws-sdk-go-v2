@@ -14,8 +14,7 @@ import (
 // Removes the ability of the specified Amazon Web Services account to restore the
 // specified snapshot. If the account is currently restoring the snapshot, the
 // restore will run to completion. For more information about working with
-// snapshots, go to Amazon Redshift Snapshots
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// snapshots, go to Amazon Redshift Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) RevokeSnapshotAccess(ctx context.Context, params *RevokeSnapshotAccessInput, optFns ...func(*Options)) (*RevokeSnapshotAccessOutput, error) {
 	if params == nil {
@@ -34,8 +33,8 @@ func (c *Client) RevokeSnapshotAccess(ctx context.Context, params *RevokeSnapsho
 
 type RevokeSnapshotAccessInput struct {
 
-	// The identifier of the Amazon Web Services account that can no longer restore the
-	// specified snapshot.
+	// The identifier of the Amazon Web Services account that can no longer restore
+	// the specified snapshot.
 	//
 	// This member is required.
 	AccountWithRestoreAccess *string

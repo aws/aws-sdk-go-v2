@@ -17,10 +17,9 @@ import (
 // maximum of two sets of service-specific credentials for each supported service
 // per user. You can create service-specific credentials for CodeCommit and Amazon
 // Keyspaces (for Apache Cassandra). You can reset the password to a new
-// service-generated value by calling ResetServiceSpecificCredential. For more
+// service-generated value by calling ResetServiceSpecificCredential . For more
 // information about service-specific credentials, see Using IAM with CodeCommit:
-// Git credentials, SSH keys, and Amazon Web Services access keys
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html)
+// Git credentials, SSH keys, and Amazon Web Services access keys (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html)
 // in the IAM User Guide.
 func (c *Client) CreateServiceSpecificCredential(ctx context.Context, params *CreateServiceSpecificCredentialInput, optFns ...func(*Options)) (*CreateServiceSpecificCredentialOutput, error) {
 	if params == nil {
@@ -49,8 +48,8 @@ type CreateServiceSpecificCredentialInput struct {
 	// The name of the IAM user that is to be associated with the credentials. The new
 	// service-specific credentials have the same permissions as the associated user
 	// except that they can be used only to access the specified service. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
-	// string of characters consisting of upper and lowercase alphanumeric characters
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
+	// a string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
@@ -64,7 +63,7 @@ type CreateServiceSpecificCredentialOutput struct {
 	// A structure that contains information about the newly created service-specific
 	// credential. This is the only time that the password for this credential set is
 	// available. It cannot be recovered later. Instead, you must reset the password
-	// with ResetServiceSpecificCredential.
+	// with ResetServiceSpecificCredential .
 	ServiceSpecificCredential *types.ServiceSpecificCredential
 
 	// Metadata pertaining to the operation's result.

@@ -15,8 +15,8 @@ import (
 // resource-identifying parameter. Required Permissions: To use this action, an IAM
 // user must have a Show, Deploy, or Manage permissions level for the stack, or an
 // attached policy that explicitly grants permissions. For more information about
-// user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInput, optFns ...func(*Options)) (*DescribeVolumesOutput, error) {
 	if params == nil {
 		params = &DescribeVolumesInput{}
@@ -34,8 +34,8 @@ func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInp
 
 type DescribeVolumesInput struct {
 
-	// The instance ID. If you use this parameter, DescribeVolumes returns descriptions
-	// of the volumes associated with the specified instance.
+	// The instance ID. If you use this parameter, DescribeVolumes returns
+	// descriptions of the volumes associated with the specified instance.
 	InstanceId *string
 
 	// The RAID array ID. If you use this parameter, DescribeVolumes returns

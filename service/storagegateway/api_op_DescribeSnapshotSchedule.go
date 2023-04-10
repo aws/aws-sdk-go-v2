@@ -56,9 +56,10 @@ type DescribeSnapshotScheduleOutput struct {
 	// gateway.
 	StartAt *int32
 
-	// A list of up to 50 tags assigned to the snapshot schedule, sorted alphabetically
-	// by key name. Each tag is a key-value pair. For a gateway with more than 10 tags
-	// assigned, you can view all tags using the ListTagsForResource API operation.
+	// A list of up to 50 tags assigned to the snapshot schedule, sorted
+	// alphabetically by key name. Each tag is a key-value pair. For a gateway with
+	// more than 10 tags assigned, you can view all tags using the ListTagsForResource
+	// API operation.
 	Tags []types.Tag
 
 	// A value that indicates the time zone of the gateway.

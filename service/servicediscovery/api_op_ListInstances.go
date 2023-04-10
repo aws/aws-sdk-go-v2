@@ -37,8 +37,8 @@ type ListInstancesInput struct {
 	ServiceId *string
 
 	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a ListInstances request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// response to a ListInstances request. If you don't specify a value for MaxResults
+	// , Cloud Map returns up to 100 instances.
 	MaxResults *int32
 
 	// For the first ListInstances request, omit this value. If more than MaxResults
@@ -140,8 +140,8 @@ var _ ListInstancesAPIClient = (*Client)(nil)
 // ListInstancesPaginatorOptions is the paginator options for ListInstances
 type ListInstancesPaginatorOptions struct {
 	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a ListInstances request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// response to a ListInstances request. If you don't specify a value for MaxResults
+	// , Cloud Map returns up to 100 instances.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

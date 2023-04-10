@@ -49,8 +49,8 @@ type DescribeRescoreExecutionPlanOutput struct {
 	// The capacity units set for the rescore execution plan. A capacity of zero
 	// indicates that the rescore execution plan is using the default capacity. For
 	// more information on the default capacity and additional capacity units, see
-	// Adjusting capacity
-	// (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html).
+	// Adjusting capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html)
+	// .
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// The Unix timestamp of when the rescore execution plan was created.
@@ -59,8 +59,8 @@ type DescribeRescoreExecutionPlanOutput struct {
 	// The description for the rescore execution plan.
 	Description *string
 
-	// When the Status field value is FAILED, the ErrorMessage field contains a message
-	// that explains why.
+	// When the Status field value is FAILED , the ErrorMessage field contains a
+	// message that explains why.
 	ErrorMessage *string
 
 	// The identifier of the rescore execution plan.
@@ -69,8 +69,8 @@ type DescribeRescoreExecutionPlanOutput struct {
 	// The name for the rescore execution plan.
 	Name *string
 
-	// The current status of the rescore execution plan. When the value is ACTIVE, the
-	// rescore execution plan is ready for use. If the Status field value is FAILED,
+	// The current status of the rescore execution plan. When the value is ACTIVE , the
+	// rescore execution plan is ready for use. If the Status field value is FAILED ,
 	// the ErrorMessage field contains a message that explains why.
 	Status types.RescoreExecutionPlanStatus
 

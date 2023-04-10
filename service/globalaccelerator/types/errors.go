@@ -299,8 +299,8 @@ func (e *EndpointNotFoundException) ErrorCode() string {
 }
 func (e *EndpointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The CIDR that you specified is not valid for this action. For example, the state
-// of the CIDR might be incorrect for this action.
+// The CIDR that you specified is not valid for this action. For example, the
+// state of the CIDR might be incorrect for this action.
 type IncorrectCidrStateException struct {
 	Message *string
 

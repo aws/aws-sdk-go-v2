@@ -9,9 +9,9 @@ const (
 	BackupPolicyDefault BackupPolicy = "DEFAULT"
 )
 
-// Values returns all known values for BackupPolicy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BackupPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BackupPolicy) Values() []BackupPolicy {
 	return []BackupPolicy{
 		"DEFAULT",
@@ -71,9 +71,9 @@ const (
 	ClusterStateDegraded             ClusterState = "DEGRADED"
 )
 
-// Values returns all known values for ClusterState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClusterState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterState) Values() []ClusterState {
 	return []ClusterState{
 		"CREATE_IN_PROGRESS",

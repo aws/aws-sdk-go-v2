@@ -75,8 +75,8 @@ type ListBotRecommendationsOutput struct {
 	// The identifier of the language and locale of the bot recommendation list.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBotRecommendations operation. If the nextToken field is present, you
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBotRecommendations operation. If the nextToken field is present, you
 	// send the contents as the nextToken parameter of a ListBotRecommendations
 	// operation request to get the next page of results.
 	NextToken *string

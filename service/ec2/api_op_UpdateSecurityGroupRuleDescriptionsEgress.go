@@ -34,8 +34,8 @@ type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The ID of the security group. You must specify either the security group ID or
@@ -51,8 +51,8 @@ type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
 	// permissions or the description.
 	IpPermissions []types.IpPermission
 
-	// The description for the egress security group rules. You must specify either the
-	// description or the IP permissions.
+	// The description for the egress security group rules. You must specify either
+	// the description or the IP permissions.
 	SecurityGroupRuleDescriptions []types.SecurityGroupRuleDescription
 
 	noSmithyDocumentSerde

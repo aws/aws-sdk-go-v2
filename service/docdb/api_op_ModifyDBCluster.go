@@ -29,14 +29,12 @@ func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInp
 	return out, nil
 }
 
-// Represents the input to ModifyDBCluster.
+// Represents the input to ModifyDBCluster .
 type ModifyDBClusterInput struct {
 
-	// The cluster identifier for the cluster that is being modified. This parameter is
-	// not case sensitive. Constraints:
-	//
-	// * Must match the identifier of an existing
-	// DBCluster.
+	// The cluster identifier for the cluster that is being modified. This parameter
+	// is not case sensitive. Constraints:
+	//   - Must match the identifier of an existing DBCluster .
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -44,18 +42,17 @@ type ModifyDBClusterInput struct {
 	// A value that specifies whether the changes in this request and any pending
 	// changes are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the cluster. If this parameter is set to
-	// false, changes to the cluster are applied during the next maintenance window.
+	// false , changes to the cluster are applied during the next maintenance window.
 	// The ApplyImmediately parameter affects only the NewDBClusterIdentifier and
-	// MasterUserPassword values. If you set this parameter value to false, the changes
-	// to the NewDBClusterIdentifier and MasterUserPassword values are applied during
-	// the next maintenance window. All other changes are applied immediately,
+	// MasterUserPassword values. If you set this parameter value to false , the
+	// changes to the NewDBClusterIdentifier and MasterUserPassword values are applied
+	// during the next maintenance window. All other changes are applied immediately,
 	// regardless of the value of the ApplyImmediately parameter. Default: false
 	ApplyImmediately bool
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
-	//
-	// * Must be a value from 1 to 35.
+	//   - Must be a value from 1 to 35.
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to Amazon
@@ -67,9 +64,10 @@ type ModifyDBClusterInput struct {
 	// The name of the cluster parameter group to use for the cluster.
 	DBClusterParameterGroupName *string
 
-	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
-	// the cluster cannot be deleted unless it is modified and DeletionProtection is
-	// disabled. DeletionProtection protects clusters from being accidentally deleted.
+	// Specifies whether this cluster can be deleted. If DeletionProtection is
+	// enabled, the cluster cannot be deleted unless it is modified and
+	// DeletionProtection is disabled. DeletionProtection protects clusters from being
+	// accidentally deleted.
 	DeletionProtection *bool
 
 	// The version number of the database engine to which you want to upgrade.
@@ -83,36 +81,24 @@ type ModifyDBClusterInput struct {
 
 	// The new cluster identifier for the cluster when renaming a cluster. This value
 	// is stored as a lowercase string. Constraints:
-	//
-	// * Must contain from 1 to 63
-	// letters, numbers, or hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// * Cannot
-	// end with a hyphen or contain two consecutive hyphens.
-	//
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster2
 	NewDBClusterIdentifier *string
 
-	// The port number on which the cluster accepts connections. Constraints: Must be a
-	// value from 1150 to 65535. Default: The same port as the original cluster.
+	// The port number on which the cluster accepts connections. Constraints: Must be
+	// a value from 1150 to 65535 . Default: The same port as the original cluster.
 	Port *int32
 
 	// The daily time range during which automated backups are created if automated
-	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each Amazon
-	// Web Services Region. Constraints:
-	//
-	// * Must be in the format hh24:mi-hh24:mi.
-	//
-	// *
-	// Must be in Universal Coordinated Time (UTC).
-	//
-	// * Must not conflict with the
-	// preferred maintenance window.
-	//
-	// * Must be at least 30 minutes.
+	// backups are enabled, using the BackupRetentionPeriod parameter. The default is
+	// a 30-minute window selected at random from an 8-hour block of time for each
+	// Amazon Web Services Region. Constraints:
+	//   - Must be in the format hh24:mi-hh24:mi .
+	//   - Must be in Universal Coordinated Time (UTC).
+	//   - Must not conflict with the preferred maintenance window.
+	//   - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

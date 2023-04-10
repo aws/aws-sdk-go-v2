@@ -12,7 +12,7 @@ import (
 
 // Deactivates the specified running pipeline. The pipeline is set to the
 // DEACTIVATING state until the deactivation process completes. To resume a
-// deactivated pipeline, use ActivatePipeline. By default, the pipeline resumes
+// deactivated pipeline, use ActivatePipeline . By default, the pipeline resumes
 // from the last completed execution. Optionally, you can specify the date and time
 // to resume the pipeline.
 func (c *Client) DeactivatePipeline(ctx context.Context, params *DeactivatePipelineInput, optFns ...func(*Options)) (*DeactivatePipelineOutput, error) {
@@ -38,8 +38,8 @@ type DeactivatePipelineInput struct {
 	// This member is required.
 	PipelineId *string
 
-	// Indicates whether to cancel any running objects. The default is true, which sets
-	// the state of any running objects to CANCELED. If this value is false, the
+	// Indicates whether to cancel any running objects. The default is true, which
+	// sets the state of any running objects to CANCELED . If this value is false, the
 	// pipeline is deactivated after all running objects finish.
 	CancelActive *bool
 

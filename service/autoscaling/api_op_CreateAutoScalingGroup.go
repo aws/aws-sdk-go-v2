@@ -16,21 +16,17 @@ import (
 // Auto Scaling group with the specified name and attributes. If you exceed your
 // maximum limit of Auto Scaling groups, the call fails. To query this limit, call
 // the DescribeAccountLimits API. For information about updating this limit, see
-// Quotas for Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html)
+// Quotas for Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html)
 // in the Amazon EC2 Auto Scaling User Guide. For introductory exercises for
-// creating an Auto Scaling group, see Getting started with Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html)
-// and Tutorial: Set up a scaled and load-balanced application
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html)
+// creating an Auto Scaling group, see Getting started with Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html)
+// and Tutorial: Set up a scaled and load-balanced application (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html)
 // in the Amazon EC2 Auto Scaling User Guide. For more information, see Auto
-// Scaling groups
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html) in
-// the Amazon EC2 Auto Scaling User Guide. Every Auto Scaling group has three size
-// properties (DesiredCapacity, MaxSize, and MinSize). Usually, you set these sizes
-// based on a specific number of instances. However, if you configure a mixed
-// instances policy that defines weights for the instance types, you must specify
-// these sizes with the same units that you use for weighting instances.
+// Scaling groups (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
+// in the Amazon EC2 Auto Scaling User Guide. Every Auto Scaling group has three
+// size properties ( DesiredCapacity , MaxSize , and MinSize ). Usually, you set
+// these sizes based on a specific number of instances. However, if you configure a
+// mixed instances policy that defines weights for the instance types, you must
+// specify these sizes with the same units that you use for weighting instances.
 func (c *Client) CreateAutoScalingGroup(ctx context.Context, params *CreateAutoScalingGroupInput, optFns ...func(*Options)) (*CreateAutoScalingGroupOutput, error) {
 	if params == nil {
 		params = &CreateAutoScalingGroupInput{}
@@ -59,8 +55,8 @@ type CreateAutoScalingGroupInput struct {
 	// The maximum size of the group. With a mixed instances policy that uses instance
 	// weighting, Amazon EC2 Auto Scaling may need to go above MaxSize to meet your
 	// capacity requirements. In this event, Amazon EC2 Auto Scaling will never go
-	// above MaxSize by more than your largest instance weight (weights that define how
-	// many units each instance contributes to the desired capacity of the group).
+	// above MaxSize by more than your largest instance weight (weights that define
+	// how many units each instance contributes to the desired capacity of the group).
 	//
 	// This member is required.
 	MaxSize *int32
@@ -82,8 +78,7 @@ type CreateAutoScalingGroupInput struct {
 	// Scaling attempts to launch a Spot Instance whenever Amazon EC2 notifies that a
 	// Spot Instance is at an elevated risk of interruption. After launching a new
 	// instance, it then terminates an old instance. For more information, see Use
-	// Capacity Rebalancing to handle Amazon EC2 Spot Interruptions
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)
+	// Capacity Rebalancing to handle Amazon EC2 Spot Interruptions (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)
 	// in the in the Amazon EC2 Auto Scaling User Guide.
 	CapacityRebalance *bool
 
@@ -93,9 +88,8 @@ type CreateAutoScalingGroupInput struct {
 	// Only needed if you use simple scaling policies. The amount of time, in seconds,
 	// between one scaling activity ending and another one starting due to simple
 	// scaling policies. For more information, see Scaling cooldowns for Amazon EC2
-	// Auto Scaling
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the
-	// Amazon EC2 Auto Scaling User Guide. Default: 300 seconds
+	// Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
+	// in the Amazon EC2 Auto Scaling User Guide. Default: 300 seconds
 	DefaultCooldown *int32
 
 	// The amount of time, in seconds, until a new instance is considered to have
@@ -106,8 +100,7 @@ type CreateAutoScalingGroupInput struct {
 	// period before aggregating the metrics for new instances with existing instances
 	// in the Amazon CloudWatch metrics that are used for scaling, resulting in more
 	// reliable usage data. For more information, see Set the default instance warmup
-	// for an Auto Scaling group
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html)
+	// for an Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html)
 	// in the Amazon EC2 Auto Scaling User Guide. To manage various warm-up settings at
 	// the group level, we recommend that you set the default instance warmup, even if
 	// it is set to 0 seconds. To remove a value that you previously set, include the
@@ -124,13 +117,12 @@ type CreateAutoScalingGroupInput struct {
 	// is the minimum size of the group.
 	DesiredCapacity *int32
 
-	// The unit of measurement for the value specified for desired capacity. Amazon EC2
-	// Auto Scaling supports DesiredCapacityType for attribute-based instance type
+	// The unit of measurement for the value specified for desired capacity. Amazon
+	// EC2 Auto Scaling supports DesiredCapacityType for attribute-based instance type
 	// selection only. For more information, see Creating an Auto Scaling group using
-	// attribute-based instance type selection
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html)
+	// attribute-based instance type selection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html)
 	// in the Amazon EC2 Auto Scaling User Guide. By default, Amazon EC2 Auto Scaling
-	// specifies units, which translates into number of instances. Valid values: units
+	// specifies units , which translates into number of instances. Valid values: units
 	// | vcpu | memory-mib
 	DesiredCapacityType *string
 
@@ -138,44 +130,40 @@ type CreateAutoScalingGroupInput struct {
 	// checking the health status of an EC2 instance that has come into service and
 	// marking it unhealthy due to a failed health check. This is useful if your
 	// instances do not immediately pass their health checks after they enter the
-	// InService state. For more information, see Set the health check grace period for
-	// an Auto Scaling group
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html)
+	// InService state. For more information, see Set the health check grace period
+	// for an Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Default: 0 seconds
 	HealthCheckGracePeriod *int32
 
 	// A comma-separated value string of one or more health check types. The valid
-	// values are EC2, ELB, and VPC_LATTICE. EC2 is the default health check and cannot
-	// be disabled. For more information, see Health checks for Auto Scaling instances
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the
-	// Amazon EC2 Auto Scaling User Guide. Only specify EC2 if you must clear a value
-	// that was previously set.
+	// values are EC2 , ELB , and VPC_LATTICE . EC2 is the default health check and
+	// cannot be disabled. For more information, see Health checks for Auto Scaling
+	// instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html)
+	// in the Amazon EC2 Auto Scaling User Guide. Only specify EC2 if you must clear a
+	// value that was previously set.
 	HealthCheckType *string
 
 	// The ID of the instance used to base the launch configuration on. If specified,
 	// Amazon EC2 Auto Scaling uses the configuration values from the specified
 	// instance to create a new launch configuration. To get the instance ID, use the
-	// Amazon EC2 DescribeInstances
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
-	// API operation. For more information, see Creating an Auto Scaling group using an
-	// EC2 instance
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html)
+	// Amazon EC2 DescribeInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
+	// API operation. For more information, see Creating an Auto Scaling group using
+	// an EC2 instance (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	InstanceId *string
 
 	// The name of the launch configuration to use to launch instances. Conditional:
-	// You must specify either a launch template (LaunchTemplate or
-	// MixedInstancesPolicy) or a launch configuration (LaunchConfigurationName or
-	// InstanceId).
+	// You must specify either a launch template ( LaunchTemplate or
+	// MixedInstancesPolicy ) or a launch configuration ( LaunchConfigurationName or
+	// InstanceId ).
 	LaunchConfigurationName *string
 
 	// Information used to specify the launch template and version to use to launch
-	// instances. Conditional: You must specify either a launch template
-	// (LaunchTemplate or MixedInstancesPolicy) or a launch configuration
-	// (LaunchConfigurationName or InstanceId). The launch template that is specified
+	// instances. Conditional: You must specify either a launch template (
+	// LaunchTemplate or MixedInstancesPolicy ) or a launch configuration (
+	// LaunchConfigurationName or InstanceId ). The launch template that is specified
 	// must be configured for use with an Auto Scaling group. For more information, see
-	// Creating a launch template for an Auto Scaling group
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
+	// Creating a launch template for an Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	LaunchTemplate *types.LaunchTemplateSpecification
 
@@ -190,29 +178,25 @@ type CreateAutoScalingGroupInput struct {
 
 	// The maximum amount of time, in seconds, that an instance can be in service. The
 	// default is null. If specified, the value must be either 0 or a number equal to
-	// or greater than 86,400 seconds (1 day). For more information, see Replacing Auto
-	// Scaling instances based on maximum instance lifetime
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html)
+	// or greater than 86,400 seconds (1 day). For more information, see Replacing
+	// Auto Scaling instances based on maximum instance lifetime (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MaxInstanceLifetime *int32
 
 	// The mixed instances policy. For more information, see Auto Scaling groups with
-	// multiple instance types and purchase options
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html)
+	// multiple instance types and purchase options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 
 	// Indicates whether newly launched instances are protected from termination by
 	// Amazon EC2 Auto Scaling when scaling in. For more information about preventing
-	// instances from terminating on scale in, see Using instance scale-in protection
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html)
+	// instances from terminating on scale in, see Using instance scale-in protection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	NewInstancesProtectedFromScaleIn *bool
 
 	// The name of the placement group into which to launch your instances. For more
-	// information, see Placement groups
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in
-	// the Amazon EC2 User Guide for Linux Instances. A cluster placement group is a
+	// information, see Placement groups (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
+	// in the Amazon EC2 User Guide for Linux Instances. A cluster placement group is a
 	// logical grouping of instances within a single Availability Zone. You cannot
 	// specify multiple Availability Zones and a cluster placement group.
 	PlacementGroup *string
@@ -220,9 +204,8 @@ type CreateAutoScalingGroupInput struct {
 	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
 	// group uses to call other Amazon Web Services service on your behalf. By default,
 	// Amazon EC2 Auto Scaling uses a service-linked role named
-	// AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more
-	// information, see Service-linked roles
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html)
+	// AWSServiceRoleForAutoScaling , which it creates if it does not exist. For more
+	// information, see Service-linked roles (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ServiceLinkedRoleARN *string
 
@@ -232,8 +215,7 @@ type CreateAutoScalingGroupInput struct {
 	// template but use caution. If the launch template specifies an instance tag with
 	// a key that is also specified for the Auto Scaling group, Amazon EC2 Auto Scaling
 	// overrides the value of that instance tag with the value specified by the Auto
-	// Scaling group. For more information, see Tag Auto Scaling groups and instances
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html)
+	// Scaling group. For more information, see Tag Auto Scaling groups and instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Tags []types.Tag
 
@@ -241,15 +223,13 @@ type CreateAutoScalingGroupInput struct {
 	// associate with the Auto Scaling group. Instances are registered as targets with
 	// the target groups. The target groups receive incoming traffic and route requests
 	// to one or more registered targets. For more information, see Use Elastic Load
-	// Balancing to distribute traffic across the instances in your Auto Scaling group
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
+	// Balancing to distribute traffic across the instances in your Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	TargetGroupARNs []string
 
 	// A policy or a list of policies that are used to select the instance to
 	// terminate. These policies are executed in the order that you list them. For more
-	// information, see Work with Amazon EC2 Auto Scaling termination policies
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
+	// information, see Work with Amazon EC2 Auto Scaling termination policies (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Valid values: Default |
 	// AllocationStrategy | ClosestToNextInstanceHour | NewestInstance | OldestInstance
 	// | OldestLaunchConfiguration | OldestLaunchTemplate |
@@ -264,7 +244,7 @@ type CreateAutoScalingGroupInput struct {
 
 	// A comma-separated list of subnet IDs for a virtual private cloud (VPC) where
 	// instances in the Auto Scaling group can be created. If you specify
-	// VPCZoneIdentifier with AvailabilityZones, the subnets that you specify must
+	// VPCZoneIdentifier with AvailabilityZones , the subnets that you specify must
 	// reside in those Availability Zones.
 	VPCZoneIdentifier *string
 

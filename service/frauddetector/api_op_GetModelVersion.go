@@ -57,7 +57,7 @@ type GetModelVersionOutput struct {
 	ExternalEventsDetail *types.ExternalEventsDetail
 
 	// The details of the ingested events data used for training the model version.
-	// This will be populated if the trainingDataSource is INGESTED_EVENTS.
+	// This will be populated if the trainingDataSource is INGESTED_EVENTS .
 	IngestedEventsDetail *types.IngestedEventsDetail
 
 	// The model ID.
@@ -70,26 +70,15 @@ type GetModelVersionOutput struct {
 	ModelVersionNumber *string
 
 	// The model version status. Possible values are:
-	//
-	// * TRAINING_IN_PROGRESS
-	//
-	// *
-	// TRAINING_COMPLETE
-	//
-	// * ACTIVATE_REQUESTED
-	//
-	// * ACTIVATE_IN_PROGRESS
-	//
-	// * ACTIVE
-	//
-	// *
-	// INACTIVATE_REQUESTED
-	//
-	// * INACTIVATE_IN_PROGRESS
-	//
-	// * INACTIVE
-	//
-	// * ERROR
+	//   - TRAINING_IN_PROGRESS
+	//   - TRAINING_COMPLETE
+	//   - ACTIVATE_REQUESTED
+	//   - ACTIVATE_IN_PROGRESS
+	//   - ACTIVE
+	//   - INACTIVATE_REQUESTED
+	//   - INACTIVATE_IN_PROGRESS
+	//   - INACTIVE
+	//   - ERROR
 	Status *string
 
 	// The training data schema.

@@ -29,8 +29,8 @@ func (c *Client) BatchGetCommits(ctx context.Context, params *BatchGetCommitsInp
 
 type BatchGetCommitsInput struct {
 
-	// The full commit IDs of the commits to get information about. You must supply the
-	// full SHA IDs of each commit. You cannot use shortened SHA IDs.
+	// The full commit IDs of the commits to get information about. You must supply
+	// the full SHA IDs of each commit. You cannot use shortened SHA IDs.
 	//
 	// This member is required.
 	CommitIds []string
@@ -45,13 +45,13 @@ type BatchGetCommitsInput struct {
 
 type BatchGetCommitsOutput struct {
 
-	// An array of commit data type objects, each of which contains information about a
-	// specified commit.
+	// An array of commit data type objects, each of which contains information about
+	// a specified commit.
 	Commits []types.Commit
 
-	// Returns any commit IDs for which information could not be found. For example, if
-	// one of the commit IDs was a shortened SHA ID or that commit was not found in the
-	// specified repository, the ID returns an error object with more information.
+	// Returns any commit IDs for which information could not be found. For example,
+	// if one of the commit IDs was a shortened SHA ID or that commit was not found in
+	// the specified repository, the ID returns an error object with more information.
 	Errors []types.BatchGetCommitsError
 
 	// Metadata pertaining to the operation's result.

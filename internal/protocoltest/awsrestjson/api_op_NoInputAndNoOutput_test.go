@@ -136,8 +136,8 @@ func TestClient_NoInputAndNoOutput_awsRestjson1Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *NoInputAndNoOutputOutput
 	}{
-		// When an operation does not define output, the service will respond with an empty
-		// payload, and may optionally include the content-type header.
+		// When an operation does not define output, the service will respond with an
+		// empty payload, and may optionally include the content-type header.
 		"RestJsonNoInputAndNoOutput": {
 			StatusCode:   200,
 			Body:         []byte(``),

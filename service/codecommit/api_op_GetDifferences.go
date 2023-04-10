@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the differences in a valid commit specifier (such as a
-// branch, tag, HEAD, commit ID, or other fully qualified reference). Results can
+// Returns information about the differences in a valid commit specifier (such as
+// a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can
 // be limited to a specified path.
 func (c *Client) GetDifferences(ctx context.Context, params *GetDifferencesInput, optFns ...func(*Options)) (*GetDifferencesOutput, error) {
 	if params == nil {
@@ -52,7 +52,7 @@ type GetDifferencesInput struct {
 	// commit (for example, the full commit ID). Optional. If not specified, all
 	// changes before the afterCommitSpecifier value are shown. If you do not use
 	// beforeCommitSpecifier in your request, consider limiting the results with
-	// maxResults.
+	// maxResults .
 	BeforeCommitSpecifier *string
 
 	// The file path in which to check for differences. Limits the results to this
@@ -63,8 +63,8 @@ type GetDifferencesInput struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde

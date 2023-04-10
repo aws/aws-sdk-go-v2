@@ -17,8 +17,7 @@ import (
 // flow. The SSH public key affected by this operation is used only for
 // authenticating the associated IAM user to an CodeCommit repository. For more
 // information about using SSH keys to authenticate to an CodeCommit repository,
-// see Set up CodeCommit for SSH connections
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// see Set up CodeCommit for SSH connections (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the CodeCommit User Guide.
 func (c *Client) UpdateSSHPublicKey(ctx context.Context, params *UpdateSSHPublicKeyInput, optFns ...func(*Options)) (*UpdateSSHPublicKeyOutput, error) {
 	if params == nil {
@@ -37,9 +36,9 @@ func (c *Client) UpdateSSHPublicKey(ctx context.Context, params *UpdateSSHPublic
 
 type UpdateSSHPublicKeyInput struct {
 
-	// The unique identifier for the SSH public key. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters that can
-	// consist of any upper or lowercased letter or digit.
+	// The unique identifier for the SSH public key. This parameter allows (through
+	// its regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
+	// that can consist of any upper or lowercased letter or digit.
 	//
 	// This member is required.
 	SSHPublicKeyId *string
@@ -52,8 +51,8 @@ type UpdateSSHPublicKeyInput struct {
 	Status types.StatusType
 
 	// The name of the IAM user associated with the SSH public key. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
+	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.

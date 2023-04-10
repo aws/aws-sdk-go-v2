@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes an Amazon OpenSearch Service package. For more information, see Custom
-// packages for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
 	if params == nil {
 		params = &DeletePackageInput{}

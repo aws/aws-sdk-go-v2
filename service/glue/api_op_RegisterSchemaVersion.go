@@ -38,20 +38,17 @@ func (c *Client) RegisterSchemaVersion(ctx context.Context, params *RegisterSche
 
 type RegisterSchemaVersionInput struct {
 
-	// The schema definition using the DataFormat setting for the SchemaName.
+	// The schema definition using the DataFormat setting for the SchemaName .
 	//
 	// This member is required.
 	SchemaDefinition *string
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
-	//
-	// * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
-	// Either SchemaArn or SchemaName and RegistryName has to be provided.
-	//
-	// *
-	// SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and
-	// RegistryName has to be provided.
+	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either
+	//   SchemaArn or SchemaName and RegistryName has to be provided.
+	//   - SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName
+	//   and RegistryName has to be provided.
 	//
 	// This member is required.
 	SchemaId *types.SchemaId

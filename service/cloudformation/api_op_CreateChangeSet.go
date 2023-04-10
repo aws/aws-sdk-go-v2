@@ -11,25 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a list of changes that will be applied to a stack so that you can review
-// the changes before executing them. You can create a change set for a stack that
-// doesn't exist or an existing stack. If you create a change set for a stack that
-// doesn't exist, the change set shows all of the resources that CloudFormation
-// will create. If you create a change set for an existing stack, CloudFormation
-// compares the stack's information with the information that you submit in the
-// change set and lists the differences. Use change sets to understand which
-// resources CloudFormation will create or change, and how it will change resources
-// in an existing stack, before you create or update a stack. To create a change
-// set for a stack that doesn't exist, for the ChangeSetType parameter, specify
-// CREATE. To create a change set for an existing stack, specify UPDATE for the
-// ChangeSetType parameter. To create a change set for an import operation, specify
-// IMPORT for the ChangeSetType parameter. After the CreateChangeSet call
-// successfully completes, CloudFormation starts creating the change set. To check
-// the status of the change set or to review it, use the DescribeChangeSet action.
-// When you are satisfied with the changes the change set will make, execute the
-// change set by using the ExecuteChangeSet action. CloudFormation doesn't make
-// changes until you execute the change set. To create a change set for the entire
-// stack hierarchy, set IncludeNestedStacks to True.
+// Creates a list of changes that will be applied to a stack so that you can
+// review the changes before executing them. You can create a change set for a
+// stack that doesn't exist or an existing stack. If you create a change set for a
+// stack that doesn't exist, the change set shows all of the resources that
+// CloudFormation will create. If you create a change set for an existing stack,
+// CloudFormation compares the stack's information with the information that you
+// submit in the change set and lists the differences. Use change sets to
+// understand which resources CloudFormation will create or change, and how it will
+// change resources in an existing stack, before you create or update a stack. To
+// create a change set for a stack that doesn't exist, for the ChangeSetType
+// parameter, specify CREATE . To create a change set for an existing stack,
+// specify UPDATE for the ChangeSetType parameter. To create a change set for an
+// import operation, specify IMPORT for the ChangeSetType parameter. After the
+// CreateChangeSet call successfully completes, CloudFormation starts creating the
+// change set. To check the status of the change set or to review it, use the
+// DescribeChangeSet action. When you are satisfied with the changes the change set
+// will make, execute the change set by using the ExecuteChangeSet action.
+// CloudFormation doesn't make changes until you execute the change set. To create
+// a change set for the entire stack hierarchy, set IncludeNestedStacks to True .
 func (c *Client) CreateChangeSet(ctx context.Context, params *CreateChangeSetInput, optFns ...func(*Options)) (*CreateChangeSetOutput, error) {
 	if params == nil {
 		params = &CreateChangeSetInput{}
@@ -64,94 +64,59 @@ type CreateChangeSetInput struct {
 	// This member is required.
 	StackName *string
 
-	// In some cases, you must explicitly acknowledge that your stack template contains
-	// certain capabilities in order for CloudFormation to create the stack.
-	//
-	// *
-	// CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include
-	// resources that can affect permissions in your Amazon Web Services account; for
-	// example, by creating new Identity and Access Management (IAM) users. For those
-	// stacks, you must explicitly acknowledge this by specifying one of these
-	// capabilities. The following IAM resources require you to specify either the
-	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
-	//
-	// * If you have IAM resources,
-	// you can specify either capability.
-	//
-	// * If you have IAM resources with custom
-	// names, you must specify CAPABILITY_NAMED_IAM.
-	//
-	// * If you don't specify either of
-	// these capabilities, CloudFormation returns an InsufficientCapabilities
-	// error.
-	//
-	// If your stack template contains these resources, we suggest that you
-	// review all permissions associated with them and edit their permissions if
-	// necessary.
-	//
-	// * AWS::IAM::AccessKey
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
-	//
-	// *
-	// AWS::IAM::Group
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
-	//
-	// *
-	// AWS::IAM::InstanceProfile
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
-	//
-	// *
-	// AWS::IAM::Policy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
-	//
-	// *
-	// AWS::IAM::Role
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
-	//
-	// *
-	// AWS::IAM::User
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
-	//
-	// *
-	// AWS::IAM::UserToGroupAddition
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
-	//
-	// For
-	// more information, see Acknowledging IAM resources in CloudFormation templates
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	//
-	// *
-	// CAPABILITY_AUTO_EXPAND Some template contain macros. Macros perform custom
-	// processing on templates; this can include simple actions like find-and-replace
-	// operations, all the way to extensive transformations of entire templates.
-	// Because of this, users typically create a change set from the processed
-	// template, so that they can review the changes resulting from the macros before
-	// actually creating the stack. If your stack template contains one or more macros,
-	// and you choose to create a stack directly from the processed template, without
-	// first reviewing the resulting changes in a change set, you must acknowledge this
-	// capability. This includes the AWS::Include
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
-	// and AWS::Serverless
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
-	// transforms, which are macros hosted by CloudFormation. This capacity doesn't
-	// apply to creating change sets, and specifying it when creating change sets has
-	// no effect. If you want to create a stack from a stack template that contains
-	// macros and nested stacks, you must create or update the stack directly from the
-	// template using the CreateStack or UpdateStack action, and specifying this
-	// capability. For more information about macros, see Using CloudFormation macros
-	// to perform custom processing on templates
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
+	// In some cases, you must explicitly acknowledge that your stack template
+	// contains certain capabilities in order for CloudFormation to create the stack.
+	//   - CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include
+	//   resources that can affect permissions in your Amazon Web Services account; for
+	//   example, by creating new Identity and Access Management (IAM) users. For those
+	//   stacks, you must explicitly acknowledge this by specifying one of these
+	//   capabilities. The following IAM resources require you to specify either the
+	//   CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
+	//   - If you have IAM resources, you can specify either capability.
+	//   - If you have IAM resources with custom names, you must specify
+	//   CAPABILITY_NAMED_IAM .
+	//   - If you don't specify either of these capabilities, CloudFormation returns
+	//   an InsufficientCapabilities error. If your stack template contains these
+	//   resources, we suggest that you review all permissions associated with them and
+	//   edit their permissions if necessary.
+	//   - AWS::IAM::AccessKey (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
+	//   - AWS::IAM::Group (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
+	//   - AWS::IAM::InstanceProfile (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
+	//   - AWS::IAM::Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
+	//   - AWS::IAM::Role (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
+	//   - AWS::IAM::User (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
+	//   - AWS::IAM::UserToGroupAddition (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
+	//   For more information, see Acknowledging IAM resources in CloudFormation
+	//   templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
+	//   .
+	//   - CAPABILITY_AUTO_EXPAND Some template contain macros. Macros perform custom
+	//   processing on templates; this can include simple actions like find-and-replace
+	//   operations, all the way to extensive transformations of entire templates.
+	//   Because of this, users typically create a change set from the processed
+	//   template, so that they can review the changes resulting from the macros before
+	//   actually creating the stack. If your stack template contains one or more macros,
+	//   and you choose to create a stack directly from the processed template, without
+	//   first reviewing the resulting changes in a change set, you must acknowledge this
+	//   capability. This includes the AWS::Include (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
+	//   and AWS::Serverless (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
+	//   transforms, which are macros hosted by CloudFormation. This capacity doesn't
+	//   apply to creating change sets, and specifying it when creating change sets has
+	//   no effect. If you want to create a stack from a stack template that contains
+	//   macros and nested stacks, you must create or update the stack directly from the
+	//   template using the CreateStack or UpdateStack action, and specifying this
+	//   capability. For more information about macros, see Using CloudFormation
+	//   macros to perform custom processing on templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html)
+	//   .
 	Capabilities []types.Capability
 
 	// The type of change set operation. To create a change set for a new stack,
-	// specify CREATE. To create a change set for an existing stack, specify UPDATE. To
-	// create a change set for an import operation, specify IMPORT. If you create a
+	// specify CREATE . To create a change set for an existing stack, specify UPDATE .
+	// To create a change set for an import operation, specify IMPORT . If you create a
 	// change set for a new stack, CloudFormation creates a stack with a unique stack
-	// ID, but no template or resources. The stack will be in the REVIEW_IN_PROGRESS
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995)
+	// ID, but no template or resources. The stack will be in the REVIEW_IN_PROGRESS (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995)
 	// state until you execute the change set. By default, CloudFormation specifies
-	// UPDATE. You can't use the UPDATE type to create a change set for a new stack or
-	// the CREATE type to create a change set for an existing stack.
+	// UPDATE . You can't use the UPDATE type to create a change set for a new stack
+	// or the CREATE type to create a change set for an existing stack.
 	ChangeSetType types.ChangeSetType
 
 	// A unique identifier for this CreateChangeSet request. Specify this token if you
@@ -164,8 +129,8 @@ type CreateChangeSetInput struct {
 	Description *string
 
 	// Creates a change set for the all nested stacks specified in the template. The
-	// default behavior of this action is set to False. To include nested sets in a
-	// change set, specify True.
+	// default behavior of this action is set to False . To include nested sets in a
+	// change set, specify True .
 	IncludeNestedStacks *bool
 
 	// The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon
@@ -173,19 +138,18 @@ type CreateChangeSetInput struct {
 	// associated notification topics, specify an empty list.
 	NotificationARNs []string
 
-	// A list of Parameter structures that specify input parameters for the change set.
-	// For more information, see the Parameter data type.
+	// A list of Parameter structures that specify input parameters for the change
+	// set. For more information, see the Parameter data type.
 	Parameters []types.Parameter
 
 	// The template resource types that you have permissions to work with if you
-	// execute this change set, such as AWS::EC2::Instance, AWS::EC2::*, or
-	// Custom::MyCustomInstance. If the list of resource types doesn't include a
+	// execute this change set, such as AWS::EC2::Instance , AWS::EC2::* , or
+	// Custom::MyCustomInstance . If the list of resource types doesn't include a
 	// resource type that you're updating, the stack update fails. By default,
 	// CloudFormation grants permissions to all resource types. Identity and Access
 	// Management (IAM) uses this parameter for condition keys in IAM policies for
 	// CloudFormation. For more information, see Controlling access with Identity and
-	// Access Management
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
+	// Access Management (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
 	// in the CloudFormation User Guide.
 	ResourceTypes []string
 
@@ -214,14 +178,14 @@ type CreateChangeSetInput struct {
 	// A structure that contains the body of the revised template, with a minimum
 	// length of 1 byte and a maximum length of 51,200 bytes. CloudFormation generates
 	// the change set by comparing this template with the template of the stack that
-	// you specified. Conditional: You must specify only TemplateBody or TemplateURL.
+	// you specified. Conditional: You must specify only TemplateBody or TemplateURL .
 	TemplateBody *string
 
 	// The location of the file that contains the revised template. The URL must point
 	// to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or
 	// a Systems Manager document. CloudFormation generates the change set by comparing
 	// this template with the stack that you specified. Conditional: You must specify
-	// only TemplateBody or TemplateURL.
+	// only TemplateBody or TemplateURL .
 	TemplateURL *string
 
 	// Whether to reuse the template that's associated with the stack to create the

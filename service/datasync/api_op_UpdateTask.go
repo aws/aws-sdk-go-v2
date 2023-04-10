@@ -35,18 +35,18 @@ type UpdateTaskInput struct {
 	// This member is required.
 	TaskArn *string
 
-	// The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch log
-	// group.
+	// The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch
+	// log group.
 	CloudWatchLogGroupArn *string
 
 	// Specifies a list of filter rules that exclude specific data during your
 	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
 	Excludes []types.FilterRule
 
 	// Specifies a list of filter rules that include specific data during your
 	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
 	Includes []types.FilterRule
 
 	// The name of the task to update.
@@ -63,8 +63,8 @@ type UpdateTaskInput struct {
 	// destination location. You can configure your task to execute hourly, daily,
 	// weekly or on specific days of the week. You control when in the day or hour you
 	// want the task to execute. The time you specify is UTC time. For more
-	// information, see Scheduling your task
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html).
+	// information, see Scheduling your task (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
+	// .
 	Schedule *types.TaskSchedule
 
 	noSmithyDocumentSerde

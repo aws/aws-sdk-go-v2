@@ -36,13 +36,13 @@ type ListConnectionsInput struct {
 	ConnectionName *string
 
 	// The maximum number of results to include in each response (result page). Used
-	// for a paginated request. If you don't specify MaxResults, the request retrieves
+	// for a paginated request. If you don't specify MaxResults , the request retrieves
 	// all available results in a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. Used for a paginated request. The request
 	// retrieves the next result page. All other parameter values must be identical to
-	// the ones specified in the initial request. If you don't specify NextToken, the
+	// the ones specified in the initial request. If you don't specify NextToken , the
 	// request retrieves the first result page.
 	NextToken *string
 
@@ -57,8 +57,8 @@ type ListConnectionsOutput struct {
 	// This member is required.
 	ConnectionSummaryList []types.ConnectionSummary
 
-	// The token that you can pass in a subsequent request to get the next result page.
-	// Returned in a paginated request.
+	// The token that you can pass in a subsequent request to get the next result
+	// page. Returned in a paginated request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -138,7 +138,7 @@ var _ ListConnectionsAPIClient = (*Client)(nil)
 // ListConnectionsPaginatorOptions is the paginator options for ListConnections
 type ListConnectionsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). Used
-	// for a paginated request. If you don't specify MaxResults, the request retrieves
+	// for a paginated request. If you don't specify MaxResults , the request retrieves
 	// all available results in a single response.
 	Limit int32
 

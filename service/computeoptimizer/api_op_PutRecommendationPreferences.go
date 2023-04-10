@@ -13,8 +13,7 @@ import (
 
 // Creates a new recommendation preference or updates an existing recommendation
 // preference, such as enhanced infrastructure metrics. For more information, see
-// Activating enhanced infrastructure metrics
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+// Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 // in the Compute Optimizer User Guide.
 func (c *Client) PutRecommendationPreferences(ctx context.Context, params *PutRecommendationPreferencesInput, optFns ...func(*Options)) (*PutRecommendationPreferencesOutput, error) {
 	if params == nil {
@@ -37,7 +36,7 @@ type PutRecommendationPreferencesInput struct {
 	// Ec2Instance option encompasses standalone instances and instances that are part
 	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
 	// that are part of an Auto Scaling group. The valid values for this parameter are
-	// Ec2Instance and AutoScalingGroup.
+	// Ec2Instance and AutoScalingGroup .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
@@ -45,34 +44,30 @@ type PutRecommendationPreferencesInput struct {
 	// The status of the enhanced infrastructure metrics recommendation preference to
 	// create or update. Specify the Active status to activate the preference, or
 	// specify Inactive to deactivate the preference. For more information, see
-	// Enhanced infrastructure metrics
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics types.EnhancedInfrastructureMetrics
 
 	// The provider of the external metrics recommendation preference to create or
-	// update. Specify a valid provider in the source field to activate the preference.
-	// To delete this preference, see the DeleteRecommendationPreferences action. This
-	// preference can only be set for the Ec2Instance resource type. For more
-	// information, see External metrics ingestion
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
+	// update. Specify a valid provider in the source field to activate the
+	// preference. To delete this preference, see the DeleteRecommendationPreferences
+	// action. This preference can only be set for the Ec2Instance resource type. For
+	// more information, see External metrics ingestion (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
 	// in the Compute Optimizer User Guide.
 	ExternalMetricsPreference *types.ExternalMetricsPreference
 
-	// The status of the inferred workload types recommendation preference to create or
-	// update. The inferred workload type feature is active by default. To deactivate
-	// it, create a recommendation preference. Specify the Inactive status to
-	// deactivate the feature, or specify Active to activate it. For more information,
-	// see Inferred workload types
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html)
+	// The status of the inferred workload types recommendation preference to create
+	// or update. The inferred workload type feature is active by default. To
+	// deactivate it, create a recommendation preference. Specify the Inactive status
+	// to deactivate the feature, or specify Active to activate it. For more
+	// information, see Inferred workload types (https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html)
 	// in the Compute Optimizer User Guide.
 	InferredWorkloadTypes types.InferredWorkloadTypesPreference
 
 	// An object that describes the scope of the recommendation preference to create.
 	// You can create recommendation preferences at the organization level (for
 	// management accounts of an organization only), account level, and resource level.
-	// For more information, see Activating enhanced infrastructure metrics
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// For more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide. You cannot create recommendation
 	// preferences for Auto Scaling groups at the organization and account levels. You
 	// can create recommendation preferences for Auto Scaling groups only at the

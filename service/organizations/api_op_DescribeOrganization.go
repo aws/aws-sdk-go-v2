@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the organization that the user's account belongs to.
-// This operation can be called from any account in the organization. Even if a
+// Retrieves information about the organization that the user's account belongs
+// to. This operation can be called from any account in the organization. Even if a
 // policy type is shown as available in the organization, you can disable it
-// separately at the root level with DisablePolicyType. Use ListRoots to see the
+// separately at the root level with DisablePolicyType . Use ListRoots to see the
 // status of policy types for a specified root.
 func (c *Client) DescribeOrganization(ctx context.Context, params *DescribeOrganizationInput, optFns ...func(*Options)) (*DescribeOrganizationOutput, error) {
 	if params == nil {

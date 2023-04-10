@@ -18,8 +18,8 @@ import (
 // a mapping to the target App Runner subdomain and one or more certificate
 // validation records. App Runner then performs DNS validation to verify that you
 // own or control the domain name that you associated. App Runner tracks domain
-// validity in a certificate stored in AWS Certificate Manager (ACM)
-// (https://docs.aws.amazon.com/acm/latest/userguide).
+// validity in a certificate stored in AWS Certificate Manager (ACM) (https://docs.aws.amazon.com/acm/latest/userguide)
+// .
 func (c *Client) AssociateCustomDomain(ctx context.Context, params *AssociateCustomDomainInput, optFns ...func(*Options)) (*AssociateCustomDomainOutput, error) {
 	if params == nil {
 		params = &AssociateCustomDomainInput{}
@@ -38,8 +38,8 @@ func (c *Client) AssociateCustomDomain(ctx context.Context, params *AssociateCus
 type AssociateCustomDomainInput struct {
 
 	// A custom domain endpoint to associate. Specify a root domain (for example,
-	// example.com), a subdomain (for example, login.example.com or
-	// admin.login.example.com), or a wildcard (for example, *.example.com).
+	// example.com ), a subdomain (for example, login.example.com or
+	// admin.login.example.com ), or a wildcard (for example, *.example.com ).
 	//
 	// This member is required.
 	DomainName *string

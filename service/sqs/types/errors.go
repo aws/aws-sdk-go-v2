@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Two or more batch entries in the request have the same Id.
+// Two or more batch entries in the request have the same Id .
 type BatchEntryIdsNotDistinct struct {
 	Message *string
 
@@ -325,8 +325,8 @@ func (e *QueueDoesNotExist) ErrorCode() string {
 }
 func (e *QueueDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A queue with this name already exists. Amazon SQS returns this error only if the
-// request includes attributes whose values differ from those of the existing
+// A queue with this name already exists. Amazon SQS returns this error only if
+// the request includes attributes whose values differ from those of the existing
 // queue.
 type QueueNameExists struct {
 	Message *string

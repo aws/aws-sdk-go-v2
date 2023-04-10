@@ -31,7 +31,7 @@ type CreateResourceServerInput struct {
 
 	// A unique resource server identifier for the resource server. This could be an
 	// HTTPS endpoint where the resource server is located, such as
-	// https://my-weather-api.example.com.
+	// https://my-weather-api.example.com .
 	//
 	// This member is required.
 	Identifier *string
@@ -47,7 +47,7 @@ type CreateResourceServerInput struct {
 	UserPoolId *string
 
 	// A list of scopes. Each scope is a key-value map with the keys name and
-	// description.
+	// description .
 	Scopes []types.ResourceServerScopeType
 
 	noSmithyDocumentSerde

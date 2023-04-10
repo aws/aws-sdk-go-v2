@@ -13,14 +13,13 @@ import (
 
 // Creates a Classic Load Balancer. You can add listeners, security groups,
 // subnets, and tags when you create your load balancer, or you can add them later
-// using CreateLoadBalancerListeners, ApplySecurityGroupsToLoadBalancer,
-// AttachLoadBalancerToSubnets, and AddTags. To describe your current load
-// balancers, see DescribeLoadBalancers. When you are finished with a load
-// balancer, you can delete it using DeleteLoadBalancer. You can create up to 20
+// using CreateLoadBalancerListeners , ApplySecurityGroupsToLoadBalancer ,
+// AttachLoadBalancerToSubnets , and AddTags . To describe your current load
+// balancers, see DescribeLoadBalancers . When you are finished with a load
+// balancer, you can delete it using DeleteLoadBalancer . You can create up to 20
 // load balancers per region per account. You can request an increase for the
 // number of load balancers for your account. For more information, see Limits for
-// Your Classic Load Balancer
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
+// Your Classic Load Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
 // in the Classic Load Balancers Guide.
 func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalancerInput, optFns ...func(*Options)) (*CreateLoadBalancerOutput, error) {
 	if params == nil {
@@ -41,8 +40,7 @@ func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalan
 type CreateLoadBalancerInput struct {
 
 	// The listeners. For more information, see Listeners for Your Classic Load
-	// Balancer
-	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
+	// Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
 	// in the Classic Load Balancers Guide.
 	//
 	// This member is required.
@@ -57,14 +55,13 @@ type CreateLoadBalancerInput struct {
 
 	// One or more Availability Zones from the same region as the load balancer. You
 	// must specify at least one Availability Zone. You can add more Availability Zones
-	// after you create the load balancer using EnableAvailabilityZonesForLoadBalancer.
+	// after you create the load balancer using EnableAvailabilityZonesForLoadBalancer .
 	AvailabilityZones []string
 
-	// The type of a load balancer. Valid only for load balancers in a VPC. By default,
-	// Elastic Load Balancing creates an Internet-facing load balancer with a DNS name
-	// that resolves to public IP addresses. For more information about Internet-facing
-	// and Internal load balancers, see Load Balancer Scheme
-	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme)
+	// The type of a load balancer. Valid only for load balancers in a VPC. By
+	// default, Elastic Load Balancing creates an Internet-facing load balancer with a
+	// DNS name that resolves to public IP addresses. For more information about
+	// Internet-facing and Internal load balancers, see Load Balancer Scheme (https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme)
 	// in the Elastic Load Balancing User Guide. Specify internal to create a load
 	// balancer with a DNS name that resolves to private IP addresses.
 	Scheme *string
@@ -73,12 +70,11 @@ type CreateLoadBalancerInput struct {
 	SecurityGroups []string
 
 	// The IDs of the subnets in your VPC to attach to the load balancer. Specify one
-	// subnet per Availability Zone specified in AvailabilityZones.
+	// subnet per Availability Zone specified in AvailabilityZones .
 	Subnets []string
 
 	// A list of tags to assign to the load balancer. For more information about
-	// tagging your load balancer, see Tag Your Classic Load Balancer
-	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html)
+	// tagging your load balancer, see Tag Your Classic Load Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html)
 	// in the Classic Load Balancers Guide.
 	Tags []types.Tag
 

@@ -13,9 +13,8 @@ import (
 
 // Starts a mailbox export job to export MIME-format email messages and calendar
 // items from the specified mailbox to the specified Amazon Simple Storage Service
-// (Amazon S3) bucket. For more information, see Exporting mailbox content
-// (https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html) in the
-// WorkMail Administrator Guide.
+// (Amazon S3) bucket. For more information, see Exporting mailbox content (https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html)
+// in the WorkMail Administrator Guide.
 func (c *Client) StartMailboxExportJob(ctx context.Context, params *StartMailboxExportJobInput, optFns ...func(*Options)) (*StartMailboxExportJobOutput, error) {
 	if params == nil {
 		params = &StartMailboxExportJobInput{}

@@ -61,8 +61,8 @@ type AssociateResourceResponseElement struct {
 	noSmithyDocumentSerde
 }
 
-// A summary report of actual Amazon Web Services charges and calculated Amazon Web
-// Services charges, based on the associated pricing plan of a billing group.
+// A summary report of actual Amazon Web Services charges and calculated Amazon
+// Web Services charges, based on the associated pricing plan of a billing group.
 type BillingGroupCostReportElement struct {
 
 	// The actual Amazon Web Services charges for the billing group.
@@ -177,7 +177,7 @@ type CustomLineItemBillingPeriodRange struct {
 }
 
 // The charge details of a custom line item. It should contain only one of Flat or
-// Percentage.
+// Percentage .
 type CustomLineItemChargeDetails struct {
 
 	// The type of the custom line item that indicates whether the charge is a fee or
@@ -335,8 +335,8 @@ type FreeTierConfig struct {
 }
 
 // The filter on the account ID of the linked account, or any of the following:
-// MONITORED: linked accounts that are associated to billing groups. UNMONITORED:
-// linked accounts that are not associated to billing groups. Billing Group Arn:
+// MONITORED : linked accounts that are associated to billing groups. UNMONITORED :
+// linked accounts that are not associated to billing groups. Billing Group Arn :
 // linked accounts that are associated to the provided Billing Group Arn.
 type ListAccountAssociationsFilter struct {
 
@@ -347,15 +347,15 @@ type ListAccountAssociationsFilter struct {
 	// for a given time range.
 	AccountIds []string
 
-	// MONITORED: linked accounts that are associated to billing groups. UNMONITORED:
-	// linked accounts that are not associated to billing groups. Billing Group Arn:
+	// MONITORED : linked accounts that are associated to billing groups. UNMONITORED :
+	// linked accounts that are not associated to billing groups. Billing Group Arn :
 	// linked accounts that are associated to the provided Billing Group Arn.
 	Association *string
 
 	noSmithyDocumentSerde
 }
 
-// The filter used to retrieve specific BillingGroupCostReportElements.
+// The filter used to retrieve specific BillingGroupCostReportElements .
 type ListBillingGroupCostReportsFilter struct {
 
 	// The list of Amazon Resource Names (ARNs) used to filter billing groups to
@@ -386,7 +386,7 @@ type ListBillingGroupsFilter struct {
 type ListCustomLineItemChargeDetails struct {
 
 	// The type of the custom line item that indicates whether the charge is a fee or
-	// credit.
+	// credit .
 	//
 	// This member is required.
 	Type CustomLineItemType
@@ -395,8 +395,8 @@ type ListCustomLineItemChargeDetails struct {
 	// flat custom line item.
 	Flat *ListCustomLineItemFlatChargeDetails
 
-	// A ListCustomLineItemPercentageChargeDetails that describes the charge details of
-	// a percentage custom line item.
+	// A ListCustomLineItemPercentageChargeDetails that describes the charge details
+	// of a percentage custom line item.
 	Percentage *ListCustomLineItemPercentageChargeDetails
 
 	noSmithyDocumentSerde
@@ -572,7 +572,7 @@ type PricingRuleListElement struct {
 
 	// Operation is the specific Amazon Web Services action covered by this line item.
 	// This describes the specific usage of the line item. If the Scope attribute is
-	// set to SKU, this attribute indicates which operation the PricingRule is
+	// set to SKU , this attribute indicates which operation the PricingRule is
 	// modifying. For example, a value of RunInstances:0202 indicates the operation of
 	// running an Amazon EC2 instance.
 	Operation *string
@@ -581,7 +581,7 @@ type PricingRuleListElement struct {
 	// is service-specific.
 	Scope PricingRuleScope
 
-	// If the Scope attribute is SERVICE, this attribute indicates which service the
+	// If the Scope attribute is SERVICE , this attribute indicates which service the
 	// PricingRule is applicable for.
 	Service *string
 
@@ -591,11 +591,11 @@ type PricingRuleListElement struct {
 	// The type of pricing rule.
 	Type PricingRuleType
 
-	// Usage type is the unit that each service uses to measure the usage of a specific
-	// type of resource. If the Scope attribute is set to SKU, this attribute indicates
-	// which usage type the PricingRule is modifying. For example,
-	// USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large instance
-	// in the US West (Oregon) Region.
+	// Usage type is the unit that each service uses to measure the usage of a
+	// specific type of resource. If the Scope attribute is set to SKU , this attribute
+	// indicates which usage type the PricingRule is modifying. For example,
+	// USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large
+	// instance in the US West (Oregon) Region.
 	UsageType *string
 
 	noSmithyDocumentSerde
@@ -613,7 +613,7 @@ type Tiering struct {
 }
 
 // A representation of the new charge details of a custom line item. This should
-// contain only one of Flat or Percentage.
+// contain only one of Flat or Percentage .
 type UpdateCustomLineItemChargeDetails struct {
 
 	// An UpdateCustomLineItemFlatChargeDetails that describes the new charge details
@@ -639,12 +639,12 @@ type UpdateCustomLineItemFlatChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A representation of the new charge details that are associated with a percentage
-// custom line item.
+// A representation of the new charge details that are associated with a
+// percentage custom line item.
 type UpdateCustomLineItemPercentageChargeDetails struct {
 
-	// The custom line item's new percentage value. This will be multiplied against the
-	// combined value of its associated resources to determine its charge value.
+	// The custom line item's new percentage value. This will be multiplied against
+	// the combined value of its associated resources to determine its charge value.
 	//
 	// This member is required.
 	PercentageValue *float64

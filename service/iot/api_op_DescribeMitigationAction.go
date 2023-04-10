@@ -13,8 +13,7 @@ import (
 )
 
 // Gets information about a mitigation action. Requires permission to access the
-// DescribeMitigationAction
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DescribeMitigationAction (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeMitigationAction(ctx context.Context, params *DescribeMitigationActionInput, optFns ...func(*Options)) (*DescribeMitigationActionOutput, error) {
 	if params == nil {

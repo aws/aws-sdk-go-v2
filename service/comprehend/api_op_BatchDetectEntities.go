@@ -12,9 +12,8 @@ import (
 )
 
 // Inspects the text of a batch of documents for named entities and returns
-// information about them. For more information about named entities, see Entities
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html) in the
-// Comprehend Developer Guide.
+// information about them. For more information about named entities, see Entities (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html)
+// in the Comprehend Developer Guide.
 func (c *Client) BatchDetectEntities(ctx context.Context, params *BatchDetectEntitiesInput, optFns ...func(*Options)) (*BatchDetectEntitiesOutput, error) {
 	if params == nil {
 		params = &BatchDetectEntitiesInput{}

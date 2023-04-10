@@ -35,7 +35,7 @@ type DeleteOriginAccessControlInput struct {
 	// This member is required.
 	Id *string
 
-	// The current version (ETag value) of the origin access control that you are
+	// The current version ( ETag value) of the origin access control that you are
 	// deleting.
 	IfMatch *string
 

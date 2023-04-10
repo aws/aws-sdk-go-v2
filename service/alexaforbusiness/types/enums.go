@@ -181,9 +181,9 @@ const (
 	DeviceStatusFailed       DeviceStatus = "FAILED"
 )
 
-// Values returns all known values for DeviceStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeviceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceStatus) Values() []DeviceStatus {
 	return []DeviceStatus{
 		"READY",
@@ -266,9 +266,9 @@ const (
 	DistanceUnitImperial DistanceUnit = "IMPERIAL"
 )
 
-// Values returns all known values for DistanceUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DistanceUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DistanceUnit) Values() []DistanceUnit {
 	return []DistanceUnit{
 		"METRIC",
@@ -322,9 +322,9 @@ const (
 	EndOfMeetingReminderTypeKnock                        EndOfMeetingReminderType = "KNOCK"
 )
 
-// Values returns all known values for EndOfMeetingReminderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndOfMeetingReminderType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndOfMeetingReminderType) Values() []EndOfMeetingReminderType {
 	return []EndOfMeetingReminderType{
 		"ANNOUNCEMENT_TIME_CHECK",
@@ -508,9 +508,9 @@ const (
 	SkillTypePrivate SkillType = "PRIVATE"
 )
 
-// Values returns all known values for SkillType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SkillType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SkillType) Values() []SkillType {
 	return []SkillType{
 		"PUBLIC",
@@ -546,9 +546,9 @@ const (
 	SortValueDesc SortValue = "DESC"
 )
 
-// Values returns all known values for SortValue. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortValue. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortValue) Values() []SortValue {
 	return []SortValue{
 		"ASC",

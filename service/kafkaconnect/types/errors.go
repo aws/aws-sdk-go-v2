@@ -195,8 +195,8 @@ func (e *TooManyRequestsException) ErrorCode() string {
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be
-// validated.
+// HTTP Status Code 401: Unauthorized request. The provided credentials couldn't
+// be validated.
 type UnauthorizedException struct {
 	Message *string
 

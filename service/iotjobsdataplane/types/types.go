@@ -9,8 +9,8 @@ import (
 // Contains data about a job execution.
 type JobExecution struct {
 
-	// The estimated number of seconds that remain before the job execution status will
-	// be changed to TIMED_OUT.
+	// The estimated number of seconds that remain before the job execution status
+	// will be changed to TIMED_OUT .
 	ApproximateSecondsBeforeTimedOut *int64
 
 	// A number that identifies a particular job execution on a particular device. It

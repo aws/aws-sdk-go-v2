@@ -14,8 +14,8 @@ import (
 // Describes the security policy that is attached to your file transfer
 // protocol-enabled server. The response contains a description of the security
 // policy's properties. For more information about security policies, see Working
-// with security policies
-// (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html).
+// with security policies (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
+// .
 func (c *Client) DescribeSecurityPolicy(ctx context.Context, params *DescribeSecurityPolicyInput, optFns ...func(*Options)) (*DescribeSecurityPolicyOutput, error) {
 	if params == nil {
 		params = &DescribeSecurityPolicyInput{}

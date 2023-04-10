@@ -45,9 +45,9 @@ type ListPublicKeysInput struct {
 	// Reserved for future use.
 	NextToken *string
 
-	// Optionally specifies, in UTC, the start of the time range to look up public keys
-	// for CloudTrail digest files. If not specified, the current time is used, and the
-	// current public key is returned.
+	// Optionally specifies, in UTC, the start of the time range to look up public
+	// keys for CloudTrail digest files. If not specified, the current time is used,
+	// and the current public key is returned.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

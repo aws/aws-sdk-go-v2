@@ -10,31 +10,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes the specified canary. If you specify DeleteLambda to true,
+// Permanently deletes the specified canary. If you specify DeleteLambda to true ,
 // CloudWatch Synthetics also deletes the Lambda functions and layers that are used
 // by the canary. Other resources used and created by the canary are not
 // automatically deleted. After you delete a canary that you do not intend to use
 // again, you should also delete the following:
+//   - The CloudWatch alarms created for this canary. These alarms have a name of
+//     Synthetics-SharpDrop-Alarm-MyCanaryName .
+//   - Amazon S3 objects and buckets, such as the canary's artifact location.
+//   - IAM roles created for the canary. If they were created in the console,
+//     these roles have the name
+//     role/service-role/CloudWatchSyntheticsRole-MyCanaryName .
+//   - CloudWatch Logs log groups created for the canary. These logs groups have
+//     the name /aws/lambda/cwsyn-MyCanaryName .
 //
-// * The CloudWatch alarms created
-// for this canary. These alarms have a name of
-// Synthetics-SharpDrop-Alarm-MyCanaryName .
-//
-// * Amazon S3 objects and buckets, such
-// as the canary's artifact location.
-//
-// * IAM roles created for the canary. If they
-// were created in the console, these roles have the name
-// role/service-role/CloudWatchSyntheticsRole-MyCanaryName .
-//
-// * CloudWatch Logs log
-// groups created for the canary. These logs groups have the name
-// /aws/lambda/cwsyn-MyCanaryName .
-//
-// Before you delete a canary, you might want to
-// use GetCanary to display the information about this canary. Make note of the
-// information returned by this operation so that you can delete these resources
-// after you delete the canary.
+// Before you delete a canary, you might want to use GetCanary to display the
+// information about this canary. Make note of the information returned by this
+// operation so that you can delete these resources after you delete the canary.
 func (c *Client) DeleteCanary(ctx context.Context, params *DeleteCanaryInput, optFns ...func(*Options)) (*DeleteCanaryOutput, error) {
 	if params == nil {
 		params = &DeleteCanaryInput{}
@@ -53,8 +45,8 @@ func (c *Client) DeleteCanary(ctx context.Context, params *DeleteCanaryInput, op
 type DeleteCanaryInput struct {
 
 	// The name of the canary that you want to delete. To find the names of your
-	// canaries, use DescribeCanaries
-	// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
+	// canaries, use DescribeCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html)
+	// .
 	//
 	// This member is required.
 	Name *string

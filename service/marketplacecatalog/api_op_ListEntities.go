@@ -41,7 +41,7 @@ type ListEntitiesInput struct {
 	EntityType *string
 
 	// An array of filter objects. Each filter object contains two attributes,
-	// filterName and filterValues.
+	// filterName and filterValues .
 	FilterList []types.Filter
 
 	// Specifies the upper limit of the elements on a single page. If a value isn't
@@ -51,7 +51,7 @@ type ListEntitiesInput struct {
 	// The value of the next token, if it exists. Null if there are no more results.
 	NextToken *string
 
-	// An object that contains two attributes, SortBy and SortOrder.
+	// An object that contains two attributes, SortBy and SortOrder .
 	Sort *types.Sort
 
 	noSmithyDocumentSerde

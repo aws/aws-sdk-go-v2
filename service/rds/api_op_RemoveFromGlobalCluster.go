@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detaches an Aurora secondary cluster from an Aurora global database cluster. The
-// cluster becomes a standalone cluster with read-write capability instead of being
-// read-only and receiving data from a primary cluster in a different Region. This
-// action only applies to Aurora DB clusters.
+// Detaches an Aurora secondary cluster from an Aurora global database cluster.
+// The cluster becomes a standalone cluster with read-write capability instead of
+// being read-only and receiving data from a primary cluster in a different Region.
+// This action only applies to Aurora DB clusters.
 func (c *Client) RemoveFromGlobalCluster(ctx context.Context, params *RemoveFromGlobalClusterInput, optFns ...func(*Options)) (*RemoveFromGlobalClusterOutput, error) {
 	if params == nil {
 		params = &RemoveFromGlobalClusterInput{}

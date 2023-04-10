@@ -13,8 +13,7 @@ import (
 )
 
 // Lists the budgets that are associated with an account. The Request Syntax
-// section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples)
+// section shows the BudgetLimit syntax. For PlannedBudgetLimits , see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples)
 // section.
 func (c *Client) DescribeBudgets(ctx context.Context, params *DescribeBudgetsInput, optFns ...func(*Options)) (*DescribeBudgetsOutput, error) {
 	if params == nil {

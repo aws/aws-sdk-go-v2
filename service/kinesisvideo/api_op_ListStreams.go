@@ -14,7 +14,7 @@ import (
 
 // Returns an array of StreamInfo objects. Each object describes a stream. To
 // retrieve only streams that satisfy a specific condition, you can specify a
-// StreamNameCondition.
+// StreamNameCondition .
 func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optFns ...func(*Options)) (*ListStreamsOutput, error) {
 	if params == nil {
 		params = &ListStreamsInput{}
@@ -40,8 +40,8 @@ type ListStreamsInput struct {
 	// of streams, provide this token in your next request.
 	NextToken *string
 
-	// Optional: Returns only streams that satisfy a specific condition. Currently, you
-	// can specify only the prefix of a stream name as a condition.
+	// Optional: Returns only streams that satisfy a specific condition. Currently,
+	// you can specify only the prefix of a stream name as a condition.
 	StreamNameCondition *types.StreamNameCondition
 
 	noSmithyDocumentSerde
@@ -49,8 +49,8 @@ type ListStreamsInput struct {
 
 type ListStreamsOutput struct {
 
-	// If the response is truncated, the call returns this element with a token. To get
-	// the next batch of streams, use this token in your next request.
+	// If the response is truncated, the call returns this element with a token. To
+	// get the next batch of streams, use this token in your next request.
 	NextToken *string
 
 	// An array of StreamInfo objects.

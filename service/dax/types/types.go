@@ -23,9 +23,7 @@ type Cluster struct {
 	ClusterDiscoveryEndpoint *Endpoint
 
 	// The type of encryption supported by the cluster's endpoint. Values are:
-	//
-	// * NONE
-	// for no encryption TLS for Transport Layer Security
+	//   - NONE for no encryption TLS for Transport Layer Security
 	ClusterEndpointEncryptionType ClusterEndpointEncryptionType
 
 	// The name of the DAX cluster.
@@ -58,7 +56,7 @@ type Cluster struct {
 	ParameterGroup *ParameterGroupStatus
 
 	// A range of time when maintenance of DAX cluster software will be performed. For
-	// example: sun:01:00-sun:09:00. Cluster maintenance normally takes less than 30
+	// example: sun:01:00-sun:09:00 . Cluster maintenance normally takes less than 30
 	// minutes, and is performed automatically within the maintenance window.
 	PreferredMaintenanceWindow *string
 
@@ -138,11 +136,11 @@ type Node struct {
 	// A system-generated identifier for the node.
 	NodeId *string
 
-	// The current status of the node. For example: available.
+	// The current status of the node. For example: available .
 	NodeStatus *string
 
 	// The status of the parameter group associated with this node. For example,
-	// in-sync.
+	// in-sync .
 	ParameterGroupStatus *string
 
 	noSmithyDocumentSerde
@@ -183,11 +181,11 @@ type Parameter struct {
 	AllowedValues *string
 
 	// The conditions under which changes to this parameter can be applied. For
-	// example, requires-reboot indicates that a new value for this parameter will only
-	// take effect if a node is rebooted.
+	// example, requires-reboot indicates that a new value for this parameter will
+	// only take effect if a node is rebooted.
 	ChangeType ChangeType
 
-	// The data type of the parameter. For example, integer:
+	// The data type of the parameter. For example, integer :
 	DataType *string
 
 	// A description of the parameter
@@ -202,8 +200,8 @@ type Parameter struct {
 	// The name of the parameter.
 	ParameterName *string
 
-	// Determines whether the parameter can be applied to any nodes, or only nodes of a
-	// particular type.
+	// Determines whether the parameter can be applied to any nodes, or only nodes of
+	// a particular type.
 	ParameterType ParameterType
 
 	// The value for the parameter.
@@ -272,17 +270,10 @@ type SecurityGroupMembership struct {
 type SSEDescription struct {
 
 	// The current state of server-side encryption:
-	//
-	// * ENABLING - Server-side
-	// encryption is being enabled.
-	//
-	// * ENABLED - Server-side encryption is enabled.
-	//
-	// *
-	// DISABLING - Server-side encryption is being disabled.
-	//
-	// * DISABLED - Server-side
-	// encryption is disabled.
+	//   - ENABLING - Server-side encryption is being enabled.
+	//   - ENABLED - Server-side encryption is enabled.
+	//   - DISABLING - Server-side encryption is being disabled.
+	//   - DISABLED - Server-side encryption is disabled.
 	Status SSEStatus
 
 	noSmithyDocumentSerde
@@ -314,11 +305,8 @@ type Subnet struct {
 }
 
 // Represents the output of one of the following actions:
-//
-// * CreateSubnetGroup
-//
-// *
-// ModifySubnetGroup
+//   - CreateSubnetGroup
+//   - ModifySubnetGroup
 type SubnetGroup struct {
 
 	// The description of the subnet group.
@@ -336,11 +324,11 @@ type SubnetGroup struct {
 	noSmithyDocumentSerde
 }
 
-// A description of a tag. Every tag is a key-value pair. You can add up to 50 tags
-// to a single DAX cluster. AWS-assigned tag names and values are automatically
-// assigned the aws: prefix, which the user cannot assign. AWS-assigned tag names
-// do not count towards the tag limit of 50. User-assigned tag names have the
-// prefix user:. You cannot backdate the application of a tag.
+// A description of a tag. Every tag is a key-value pair. You can add up to 50
+// tags to a single DAX cluster. AWS-assigned tag names and values are
+// automatically assigned the aws: prefix, which the user cannot assign.
+// AWS-assigned tag names do not count towards the tag limit of 50. User-assigned
+// tag names have the prefix user: . You cannot backdate the application of a tag.
 type Tag struct {
 
 	// The key for the tag. Tag keys are case sensitive. Every DAX cluster can only

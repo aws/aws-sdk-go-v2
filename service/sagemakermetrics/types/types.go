@@ -11,18 +11,12 @@ import (
 type BatchPutMetricsError struct {
 
 	// The error code of an error that occured when attempting to put metrics.
-	//
-	// *
-	// METRIC_LIMIT_EXCEEDED: The maximum amount of metrics per resource is
-	// exceeded.
-	//
-	// * INTERNAL_ERROR: An internal error occured.
-	//
-	// * VALIDATION_ERROR: The
-	// metric data failed validation.
-	//
-	// * CONFLICT_ERROR: Multiple requests attempted to
-	// modify the same data simultaneously.
+	//   - METRIC_LIMIT_EXCEEDED : The maximum amount of metrics per resource is
+	//   exceeded.
+	//   - INTERNAL_ERROR : An internal error occured.
+	//   - VALIDATION_ERROR : The metric data failed validation.
+	//   - CONFLICT_ERROR : Multiple requests attempted to modify the same data
+	//   simultaneously.
 	Code PutMetricsErrorCode
 
 	// An index that corresponds to the metric in the request.

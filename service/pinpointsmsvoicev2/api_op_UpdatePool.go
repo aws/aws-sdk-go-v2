@@ -13,7 +13,7 @@ import (
 )
 
 // Updates the configuration of an existing pool. You can update the opt-out list,
-// enable or disable two-way messaging, change the TwoWayChannelArn, enable or
+// enable or disable two-way messaging, change the TwoWayChannelArn , enable or
 // disable self-managed opt-outs, enable or disable deletion protection, and enable
 // or disable shared routes.
 func (c *Client) UpdatePool(ctx context.Context, params *UpdatePoolInput, optFns ...func(*Options)) (*UpdatePoolOutput, error) {
@@ -69,8 +69,8 @@ type UpdatePoolInput struct {
 
 type UpdatePoolOutput struct {
 
-	// The time when the pool was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	CreatedTimestamp *time.Time
 
 	// When set to true the pool can't be deleted.

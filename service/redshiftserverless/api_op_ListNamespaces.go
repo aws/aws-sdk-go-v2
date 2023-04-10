@@ -34,7 +34,7 @@ type ListNamespacesInput struct {
 	// You can use nextToken to display the next page of results.
 	MaxResults *int32
 
-	// If your initial ListNamespaces operation returns a nextToken, you can include
+	// If your initial ListNamespaces operation returns a nextToken , you can include
 	// the returned nextToken in following ListNamespaces operations, which returns
 	// results in the next page.
 	NextToken *string

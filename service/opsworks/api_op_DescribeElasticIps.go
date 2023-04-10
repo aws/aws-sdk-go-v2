@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes Elastic IP addresses
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
-// This call accepts only one resource-identifying parameter. Required Permissions:
-// To use this action, an IAM user must have a Show, Deploy, or Manage permissions
-// level for the stack, or an attached policy that explicitly grants permissions.
-// For more information about user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Describes Elastic IP addresses (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
+// . This call accepts only one resource-identifying parameter. Required
+// Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information about user permissions, see Managing User
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeElasticIps(ctx context.Context, params *DescribeElasticIpsInput, optFns ...func(*Options)) (*DescribeElasticIpsOutput, error) {
 	if params == nil {
 		params = &DescribeElasticIpsInput{}
@@ -39,9 +39,9 @@ type DescribeElasticIpsInput struct {
 	// description of the Elastic IP addresses associated with the specified instance.
 	InstanceId *string
 
-	// An array of Elastic IP addresses to be described. If you include this parameter,
-	// DescribeElasticIps returns a description of the specified Elastic IP addresses.
-	// Otherwise, it returns a description of every Elastic IP address.
+	// An array of Elastic IP addresses to be described. If you include this
+	// parameter, DescribeElasticIps returns a description of the specified Elastic IP
+	// addresses. Otherwise, it returns a description of every Elastic IP address.
 	Ips []string
 
 	// A stack ID. If you include this parameter, DescribeElasticIps returns a

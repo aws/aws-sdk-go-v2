@@ -13,7 +13,7 @@ import (
 
 // Modifies the parameters of a DB parameter group to the engine/system default
 // value. To reset specific parameters, provide a list of the following:
-// ParameterName and ApplyMethod. To reset the entire DB parameter group, specify
+// ParameterName and ApplyMethod . To reset the entire DB parameter group, specify
 // the DBParameterGroup name and ResetAllParameters parameters. When resetting the
 // entire group, dynamic parameters are updated immediately and static parameters
 // are set to pending-reboot to take effect on the next DB instance restart or
@@ -36,29 +36,27 @@ func (c *Client) ResetDBParameterGroup(ctx context.Context, params *ResetDBParam
 type ResetDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
-	//
-	// * Must match the name of an
-	// existing DBParameterGroup.
+	//   - Must match the name of an existing DBParameterGroup .
 	//
 	// This member is required.
 	DBParameterGroupName *string
 
 	// To reset the entire DB parameter group, specify the DBParameterGroup name and
 	// ResetAllParameters parameters. To reset specific parameters, provide a list of
-	// the following: ParameterName and ApplyMethod. A maximum of 20 parameters can be
-	// modified in a single request. MySQL Valid Values (for Apply method): immediate |
-	// pending-reboot You can use the immediate value with dynamic parameters only. You
-	// can use the pending-reboot value for both dynamic and static parameters, and
-	// changes are applied when DB instance reboots. MariaDB Valid Values (for Apply
-	// method): immediate | pending-reboot You can use the immediate value with dynamic
-	// parameters only. You can use the pending-reboot value for both dynamic and
-	// static parameters, and changes are applied when DB instance reboots. Oracle
+	// the following: ParameterName and ApplyMethod . A maximum of 20 parameters can be
+	// modified in a single request. MySQL Valid Values (for Apply method): immediate
+	// | pending-reboot You can use the immediate value with dynamic parameters only.
+	// You can use the pending-reboot value for both dynamic and static parameters,
+	// and changes are applied when DB instance reboots. MariaDB Valid Values (for
+	// Apply method): immediate | pending-reboot You can use the immediate value with
+	// dynamic parameters only. You can use the pending-reboot value for both dynamic
+	// and static parameters, and changes are applied when DB instance reboots. Oracle
 	// Valid Values (for Apply method): pending-reboot
 	Parameters []types.Parameter
 
-	// A value that indicates whether to reset all parameters in the DB parameter group
-	// to default values. By default, all parameters in the DB parameter group are
-	// reset to default values.
+	// A value that indicates whether to reset all parameters in the DB parameter
+	// group to default values. By default, all parameters in the DB parameter group
+	// are reset to default values.
 	ResetAllParameters bool
 
 	noSmithyDocumentSerde

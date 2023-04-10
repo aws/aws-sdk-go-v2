@@ -49,7 +49,7 @@ type CancelStepsInput struct {
 	StepIds []string
 
 	// The option to choose to cancel RUNNING steps. By default, the value is
-	// SEND_INTERRUPT.
+	// SEND_INTERRUPT .
 	StepCancellationOption types.StepCancellationOption
 
 	noSmithyDocumentSerde
@@ -58,7 +58,7 @@ type CancelStepsInput struct {
 // The output for the CancelSteps operation.
 type CancelStepsOutput struct {
 
-	// A list of CancelStepsInfo, which shows the status of specified cancel requests
+	// A list of CancelStepsInfo , which shows the status of specified cancel requests
 	// for each StepID specified.
 	CancelStepsInfoList []types.CancelStepsInfo
 

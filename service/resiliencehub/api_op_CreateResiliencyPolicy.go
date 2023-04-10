@@ -41,15 +41,15 @@ type CreateResiliencyPolicyInput struct {
 	// This member is required.
 	PolicyName *string
 
-	// The tier for this resiliency policy, ranging from the highest severity
-	// (MissionCritical) to lowest (NonCritical).
+	// The tier for this resiliency policy, ranging from the highest severity (
+	// MissionCritical ) to lowest ( NonCritical ).
 	//
 	// This member is required.
 	Tier types.ResiliencyPolicyTier
 
-	// Used for an idempotency token. A client token is a unique, case-sensitive string
-	// of up to 64 ASCII characters. You should not reuse the same client token for
-	// other API requests.
+	// Used for an idempotency token. A client token is a unique, case-sensitive
+	// string of up to 64 ASCII characters. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
 	// Specifies a high-level geographical location constraint for where your
@@ -59,8 +59,8 @@ type CreateResiliencyPolicyInput struct {
 	// The description for the policy.
 	PolicyDescription *string
 
-	// The tags assigned to the resource. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key/value pair.
+	// The tags assigned to the resource. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List service instances with summary data. This action lists service instances of
-// all services in the Amazon Web Services account.
+// List service instances with summary data. This action lists service instances
+// of all services in the Amazon Web Services account.
 func (c *Client) ListServiceInstances(ctx context.Context, params *ListServiceInstancesInput, optFns ...func(*Options)) (*ListServiceInstancesOutput, error) {
 	if params == nil {
 		params = &ListServiceInstancesInput{}
@@ -46,7 +46,7 @@ type ListServiceInstancesInput struct {
 	ServiceName *string
 
 	// The field that the result list is sorted by. When you choose to sort by
-	// serviceName, service instances within each service are sorted by service
+	// serviceName , service instances within each service are sorted by service
 	// instance name. Default: serviceName
 	SortBy types.ListServiceInstancesSortBy
 
@@ -63,8 +63,8 @@ type ListServiceInstancesOutput struct {
 	// This member is required.
 	ServiceInstances []types.ServiceInstanceSummary
 
-	// A token that indicates the location of the next service instance in the array of
-	// service instances, after the current requested list of service instances.
+	// A token that indicates the location of the next service instance in the array
+	// of service instances, after the current requested list of service instances.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

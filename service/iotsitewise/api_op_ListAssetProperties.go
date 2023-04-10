@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of properties associated with an asset. If you update
-// properties associated with the model before you finish listing all the
+// Retrieves a paginated list of properties associated with an asset. If you
+// update properties associated with the model before you finish listing all the
 // properties, you need to start all over again.
 func (c *Client) ListAssetProperties(ctx context.Context, params *ListAssetPropertiesInput, optFns ...func(*Options)) (*ListAssetPropertiesOutput, error) {
 	if params == nil {
@@ -39,13 +39,9 @@ type ListAssetPropertiesInput struct {
 
 	// Filters the requested list of asset properties. You can choose one of the
 	// following options:
-	//
-	// * ALL – The list includes all asset properties for a given
-	// asset model ID.
-	//
-	// * BASE – The list includes only base asset properties for a
-	// given asset model ID.
-	//
+	//   - ALL – The list includes all asset properties for a given asset model ID.
+	//   - BASE – The list includes only base asset properties for a given asset model
+	//   ID.
 	// Default: BASE
 	Filter types.ListAssetPropertiesFilter
 
@@ -169,8 +165,8 @@ func addEndpointPrefix_opListAssetPropertiesMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opListAssetPropertiesMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// ListAssetPropertiesAPIClient is a client that implements the ListAssetProperties
-// operation.
+// ListAssetPropertiesAPIClient is a client that implements the
+// ListAssetProperties operation.
 type ListAssetPropertiesAPIClient interface {
 	ListAssetProperties(context.Context, *ListAssetPropertiesInput, ...func(*Options)) (*ListAssetPropertiesOutput, error)
 }

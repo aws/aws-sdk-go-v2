@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Lists all the experiments in your account. The list can be filtered to show only
-// experiments that were created in a specific time range. The list can be sorted
-// by experiment name or creation time.
+// Lists all the experiments in your account. The list can be filtered to show
+// only experiments that were created in a specific time range. The list can be
+// sorted by experiment name or creation time.
 func (c *Client) ListExperiments(ctx context.Context, params *ListExperimentsInput, optFns ...func(*Options)) (*ListExperimentsOutput, error) {
 	if params == nil {
 		params = &ListExperimentsInput{}
@@ -47,10 +47,10 @@ type ListExperimentsInput struct {
 	// experiments, the call returns a token for getting the next set of experiments.
 	NextToken *string
 
-	// The property used to sort results. The default value is CreationTime.
+	// The property used to sort results. The default value is CreationTime .
 	SortBy types.SortExperimentsBy
 
-	// The sort order. The default value is Descending.
+	// The sort order. The default value is Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde

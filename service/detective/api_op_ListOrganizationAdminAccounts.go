@@ -47,8 +47,8 @@ type ListOrganizationAdminAccountsOutput struct {
 	// The list of Detective administrator accounts.
 	Administrators []types.Administrator
 
-	// If there are more accounts remaining in the results, then this is the pagination
-	// token to use to request the next page of accounts.
+	// If there are more accounts remaining in the results, then this is the
+	// pagination token to use to request the next page of accounts.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

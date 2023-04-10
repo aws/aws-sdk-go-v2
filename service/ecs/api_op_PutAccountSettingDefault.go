@@ -41,15 +41,14 @@ type PutAccountSettingDefaultInput struct {
 	// for CloudWatch Container Insights for your clusters is affected. Fargate is
 	// transitioning from task count-based quotas to vCPU-based quotas. You can set the
 	// name to fargateVCPULimit to opt in or opt out of the vCPU-based quotas. For
-	// information about the opt in timeline, see Fargate vCPU-based quotas timeline
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline)
+	// information about the opt in timeline, see Fargate vCPU-based quotas timeline (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline)
 	// in the Amazon ECS Developer Guide.
 	//
 	// This member is required.
 	Name types.SettingName
 
 	// The account setting value for the specified principal ARN. Accepted values are
-	// enabled and disabled.
+	// enabled and disabled .
 	//
 	// This member is required.
 	Value *string

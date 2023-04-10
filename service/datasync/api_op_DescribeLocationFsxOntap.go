@@ -14,7 +14,7 @@ import (
 
 // Provides details about how an DataSync location for an Amazon FSx for NetApp
 // ONTAP file system is configured. If your location uses SMB, the
-// DescribeLocationFsxOntap operation doesn't actually return a Password.
+// DescribeLocationFsxOntap operation doesn't actually return a Password .
 func (c *Client) DescribeLocationFsxOntap(ctx context.Context, params *DescribeLocationFsxOntapInput, optFns ...func(*Options)) (*DescribeLocationFsxOntapOutput, error) {
 	if params == nil {
 		params = &DescribeLocationFsxOntapInput{}

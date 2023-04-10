@@ -49,7 +49,7 @@ type DescribeEventsInput struct {
 	// request to get remaining items. To get remaining results, call DescribeEvents
 	// again, and assign the token from the previous results as the value of the
 	// nextToken parameter. If there are no more results, the response object's
-	// nextToken parameter value is null. Setting a nextToken value that was not
+	// nextToken parameter value is null . Setting a nextToken value that was not
 	// returned in your previous results causes an InvalidNextTokenException to occur.
 	NextToken *string
 
@@ -63,7 +63,7 @@ type DescribeEventsOutput struct {
 	// request to get remaining items. To get remaining results, call DescribeEvents
 	// again, and assign the token from the previous results as the value of the
 	// nextToken parameter. If there are no more results, the response object's
-	// nextToken parameter value is null. Setting a nextToken value that was not
+	// nextToken parameter value is null . Setting a nextToken value that was not
 	// returned in your previous results causes an InvalidNextTokenException to occur.
 	NextToken *string
 

@@ -48,8 +48,8 @@ type StopKeyPhrasesDetectionJobOutput struct {
 	// The identifier of the key phrases detection job to stop.
 	JobId *string
 
-	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
-	// previously stopped with the StopKeyPhrasesDetectionJob operation.
+	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job
+	// was previously stopped with the StopKeyPhrasesDetectionJob operation.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

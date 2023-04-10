@@ -12,15 +12,15 @@ import (
 // ECS tasks that use the awsvpc network mode.
 type AwsVpcConfiguration struct {
 
-	// Specifies the subnets associated with the task. These subnets must all be in the
-	// same VPC. You can specify as many as 16 subnets.
+	// Specifies the subnets associated with the task. These subnets must all be in
+	// the same VPC. You can specify as many as 16 subnets.
 	//
 	// This member is required.
 	Subnets []string
 
 	// Specifies whether the task's elastic network interface receives a public IP
-	// address. You can specify ENABLED only when LaunchType in EcsParameters is set to
-	// FARGATE.
+	// address. You can specify ENABLED only when LaunchType in EcsParameters is set
+	// to FARGATE .
 	AssignPublicIp AssignPublicIp
 
 	// Specifies the security groups associated with the task. These security groups
@@ -47,14 +47,14 @@ type BatchArrayProperties struct {
 // The overrides that are sent to a container.
 type BatchContainerOverrides struct {
 
-	// The command to send to the container that overrides the default command from the
-	// Docker image or the task definition.
+	// The command to send to the container that overrides the default command from
+	// the Docker image or the task definition.
 	Command []string
 
 	// The environment variables to send to the container. You can add new environment
 	// variables, which are added to the container at launch, or you can override the
 	// existing environment variables from the Docker image or the task definition.
-	// Environment variables cannot start with "Batch". This naming convention is
+	// Environment variables cannot start with " Batch ". This naming convention is
 	// reserved for variables that Batch sets.
 	Environment []BatchEnvironmentVariable
 
@@ -64,8 +64,8 @@ type BatchContainerOverrides struct {
 	InstanceType *string
 
 	// The type and amount of resources to assign to a container. This overrides the
-	// settings in the job definition. The supported resources include GPU, MEMORY, and
-	// VCPU.
+	// settings in the job definition. The supported resources include GPU , MEMORY ,
+	// and VCPU .
 	ResourceRequirements []BatchResourceRequirement
 
 	noSmithyDocumentSerde
@@ -74,7 +74,7 @@ type BatchContainerOverrides struct {
 // The environment variables to send to the container. You can add new environment
 // variables, which are added to the container at launch, or you can override the
 // existing environment variables from the Docker image or the task definition.
-// Environment variables cannot start with "Batch". This naming convention is
+// Environment variables cannot start with " Batch ". This naming convention is
 // reserved for variables that Batch sets.
 type BatchEnvironmentVariable struct {
 
@@ -82,8 +82,8 @@ type BatchEnvironmentVariable struct {
 	// the environment variable.
 	Name *string
 
-	// The value of the key-value pair. For environment variables, this is the value of
-	// the environment variable.
+	// The value of the key-value pair. For environment variables, this is the value
+	// of the environment variable.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -102,11 +102,11 @@ type BatchJobDependency struct {
 }
 
 // The type and amount of a resource to assign to a container. The supported
-// resources include GPU, MEMORY, and VCPU.
+// resources include GPU , MEMORY , and VCPU .
 type BatchResourceRequirement struct {
 
 	// The type of resource to assign to a container. The supported resources include
-	// GPU, MEMORY, and VCPU.
+	// GPU , MEMORY , and VCPU .
 	//
 	// This member is required.
 	Type BatchResourceRequirementType
@@ -122,51 +122,49 @@ type BatchResourceRequirement struct {
 	// container is terminated. This parameter maps to Memory in the  Create a
 	// container (https://docs.docker.com/engine/api/v1.23/#create-a-container) section
 	// of the Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
-	// --memory option to docker run (https://docs.docker.com/engine/reference/run/).
+	// --memory option to docker run (https://docs.docker.com/engine/reference/run/) .
 	// You must specify at least 4 MiB of memory for a job. This is required but can be
 	// specified in several places for multi-node parallel (MNP) jobs. It must be
 	// specified for each node at least once. This parameter maps to Memory in the
-	// Create a container
-	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
-	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --memory
-	// option to docker run (https://docs.docker.com/engine/reference/run/). If you're
-	// trying to maximize your resource utilization by providing your jobs as much
-	// memory as possible for a particular instance type, see Memory management
-	// (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html) in
-	// the Batch User Guide. For jobs that are running on Fargate resources, then value
-	// is the hard limit (in MiB), and must match one of the supported values and the
-	// VCPU values must be one of the values supported for that memory value. value =
-	// 512 VCPU = 0.25 value = 1024 VCPU = 0.25 or 0.5 value = 2048 VCPU = 0.25, 0.5,
-	// or 1 value = 3072 VCPU = 0.5, or 1 value = 4096 VCPU = 0.5, 1, or 2 value =
-	// 5120, 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, 4, or 8 value =
-	// 9216, 10240, 11264, 12288, 13312, 14336, or 15360 VCPU = 2 or 4 value = 16384
-	// VCPU = 2, 4, or 8 value = 17408, 18432, 19456, 21504, 22528, 23552, 25600,
-	// 26624, 27648, 29696, or 30720 VCPU = 4 value = 20480, 24576, or 28672 VCPU = 4
-	// or 8 value = 36864, 45056, 53248, or 61440 VCPU = 8 value = 32768, 40960, 49152,
-	// or 57344 VCPU = 8 or 16 value = 65536, 73728, 81920, 90112, 98304, 106496,
-	// 114688, or 122880 VCPU = 16 type="VCPU" The number of vCPUs reserved for the
-	// container. This parameter maps to CpuShares in the  Create a container
-	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
-	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
-	// --cpu-shares option to docker run
-	// (https://docs.docker.com/engine/reference/run/). Each vCPU is equivalent to
-	// 1,024 CPU shares. For EC2 resources, you must specify at least one vCPU. This is
-	// required but can be specified in several places; it must be specified for each
-	// node at least once. The default for the Fargate On-Demand vCPU resource count
-	// quota is 6 vCPUs. For more information about Fargate quotas, see Fargate quotas
-	// (https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate)
+	// Create a container (https://docs.docker.com/engine/api/v1.23/#create-a-container)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.23/)
+	// and the --memory option to docker run (https://docs.docker.com/engine/reference/run/)
+	// . If you're trying to maximize your resource utilization by providing your jobs
+	// as much memory as possible for a particular instance type, see Memory management (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html)
+	// in the Batch User Guide. For jobs that are running on Fargate resources, then
+	// value is the hard limit (in MiB), and must match one of the supported values and
+	// the VCPU values must be one of the values supported for that memory value.
+	// value = 512 VCPU = 0.25 value = 1024 VCPU = 0.25 or 0.5 value = 2048 VCPU =
+	// 0.25, 0.5, or 1 value = 3072 VCPU = 0.5, or 1 value = 4096 VCPU = 0.5, 1, or 2
+	// value = 5120, 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, 4, or 8
+	// value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360 VCPU = 2 or 4 value =
+	// 16384 VCPU = 2, 4, or 8 value = 17408, 18432, 19456, 21504, 22528, 23552,
+	// 25600, 26624, 27648, 29696, or 30720 VCPU = 4 value = 20480, 24576, or 28672
+	// VCPU = 4 or 8 value = 36864, 45056, 53248, or 61440 VCPU = 8 value = 32768,
+	// 40960, 49152, or 57344 VCPU = 8 or 16 value = 65536, 73728, 81920, 90112,
+	// 98304, 106496, 114688, or 122880 VCPU = 16 type="VCPU" The number of vCPUs
+	// reserved for the container. This parameter maps to CpuShares in the  Create a
+	// container (https://docs.docker.com/engine/api/v1.23/#create-a-container) section
+	// of the Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
+	// --cpu-shares option to docker run (https://docs.docker.com/engine/reference/run/)
+	// . Each vCPU is equivalent to 1,024 CPU shares. For EC2 resources, you must
+	// specify at least one vCPU. This is required but can be specified in several
+	// places; it must be specified for each node at least once. The default for the
+	// Fargate On-Demand vCPU resource count quota is 6 vCPUs. For more information
+	// about Fargate quotas, see Fargate quotas (https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate)
 	// in the Amazon Web Services General Reference. For jobs that are running on
 	// Fargate resources, then value must match one of the supported values and the
 	// MEMORY values must be one of the values supported for that VCPU value. The
 	// supported values are 0.25, 0.5, 1, 2, 4, 8, and 16 value = 0.25 MEMORY = 512,
 	// 1024, or 2048 value = 0.5 MEMORY = 1024, 2048, 3072, or 4096 value = 1 MEMORY =
-	// 2048, 3072, 4096, 5120, 6144, 7168, or 8192 value = 2 MEMORY = 4096, 5120, 6144,
-	// 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384 value = 4
-	// MEMORY = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408,
-	// 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672,
-	// 29696, or 30720 value = 8 MEMORY = 16384, 20480, 24576, 28672, 32768, 36864,
-	// 40960, 45056, 49152, 53248, 57344, or 61440 value = 16 MEMORY = 32768, 40960,
-	// 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880
+	// 2048, 3072, 4096, 5120, 6144, 7168, or 8192 value = 2 MEMORY = 4096, 5120,
+	// 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384 value
+	// = 4 MEMORY = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384,
+	// 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648,
+	// 28672, 29696, or 30720 value = 8 MEMORY = 16384, 20480, 24576, 28672, 32768,
+	// 36864, 40960, 45056, 49152, 53248, 57344, or 61440 value = 16 MEMORY = 32768,
+	// 40960, 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or
+	// 122880
 	//
 	// This member is required.
 	Value *string
@@ -175,9 +173,8 @@ type BatchResourceRequirement struct {
 }
 
 // The retry strategy that's associated with a job. For more information, see
-// Automated job retries
-// (https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html) in the
-// Batch User Guide.
+// Automated job retries (https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html)
+// in the Batch User Guide.
 type BatchRetryStrategy struct {
 
 	// The number of times to move a job to the RUNNABLE status. If the value of
@@ -189,8 +186,7 @@ type BatchRetryStrategy struct {
 }
 
 // The details of a capacity provider strategy. To learn more, see
-// CapacityProviderStrategyItem
-// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html)
+// CapacityProviderStrategyItem (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html)
 // in the Amazon ECS API Reference.
 type CapacityProviderStrategyItem struct {
 
@@ -205,9 +201,9 @@ type CapacityProviderStrategyItem struct {
 	// used.
 	Base int32
 
-	// The weight value designates the relative percentage of the total number of tasks
-	// launched that should use the specified capacity provider. The weight value is
-	// taken into consideration after the base value, if defined, is satisfied.
+	// The weight value designates the relative percentage of the total number of
+	// tasks launched that should use the specified capacity provider. The weight value
+	// is taken into consideration after the base value, if defined, is satisfied.
 	Weight int32
 
 	noSmithyDocumentSerde
@@ -225,17 +221,17 @@ type DeadLetterConfig struct {
 }
 
 // The overrides that are sent to a container. An empty container override can be
-// passed in. An example of an empty container override is {"containerOverrides": [
-// ] }. If a non-empty container override is specified, the name parameter must be
-// included.
+// passed in. An example of an empty container override is {"containerOverrides":
+// [ ] } . If a non-empty container override is specified, the name parameter must
+// be included.
 type EcsContainerOverride struct {
 
-	// The command to send to the container that overrides the default command from the
-	// Docker image or the task definition. You must also specify a container name.
+	// The command to send to the container that overrides the default command from
+	// the Docker image or the task definition. You must also specify a container name.
 	Command []string
 
-	// The number of cpu units reserved for the container, instead of the default value
-	// from the task definition. You must also specify a container name.
+	// The number of cpu units reserved for the container, instead of the default
+	// value from the task definition. You must also specify a container name.
 	Cpu *int32
 
 	// The environment variables to send to the container. You can add new environment
@@ -258,8 +254,8 @@ type EcsContainerOverride struct {
 	// default value from the task definition. You must also specify a container name.
 	MemoryReservation *int32
 
-	// The name of the container that receives the override. This parameter is required
-	// if any override is specified.
+	// The name of the container that receives the override. This parameter is
+	// required if any override is specified.
 	Name *string
 
 	// The type and amount of a resource to assign to a container, instead of the
@@ -269,30 +265,25 @@ type EcsContainerOverride struct {
 	noSmithyDocumentSerde
 }
 
-// A list of files containing the environment variables to pass to a container. You
-// can specify up to ten environment files. The file must have a .env file
+// A list of files containing the environment variables to pass to a container.
+// You can specify up to ten environment files. The file must have a .env file
 // extension. Each line in an environment file should contain an environment
 // variable in VARIABLE=VALUE format. Lines beginning with # are treated as
 // comments and are ignored. For more information about the environment variable
-// file syntax, see Declare default environment variables in file
-// (https://docs.docker.com/compose/env-file/). If there are environment variables
-// specified using the environment parameter in a container definition, they take
-// precedence over the variables contained within an environment file. If multiple
-// environment files are specified that contain the same variable, they're
-// processed from the top down. We recommend that you use unique variable names.
-// For more information, see Specifying environment variables
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
+// file syntax, see Declare default environment variables in file (https://docs.docker.com/compose/env-file/)
+// . If there are environment variables specified using the environment parameter
+// in a container definition, they take precedence over the variables contained
+// within an environment file. If multiple environment files are specified that
+// contain the same variable, they're processed from the top down. We recommend
+// that you use unique variable names. For more information, see Specifying
+// environment variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
 // in the Amazon Elastic Container Service Developer Guide. This parameter is only
 // supported for tasks hosted on Fargate using the following platform versions:
-//
-// *
-// Linux platform version 1.4.0 or later.
-//
-// * Windows platform version 1.0.0 or
-// later.
+//   - Linux platform version 1.4.0 or later.
+//   - Windows platform version 1.0.0 or later.
 type EcsEnvironmentFile struct {
 
-	// The file type to use. The only supported value is s3.
+	// The file type to use. The only supported value is s3 .
 	//
 	// This member is required.
 	Type EcsEnvironmentFileType
@@ -316,18 +307,17 @@ type EcsEnvironmentVariable struct {
 	// the environment variable.
 	Name *string
 
-	// The value of the key-value pair. For environment variables, this is the value of
-	// the environment variable.
+	// The value of the key-value pair. For environment variables, this is the value
+	// of the environment variable.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
-// The amount of ephemeral storage to allocate for the task. This parameter is used
-// to expand the total amount of ephemeral storage available, beyond the default
-// amount, for tasks hosted on Fargate. For more information, see Fargate task
-// storage
-// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
+// The amount of ephemeral storage to allocate for the task. This parameter is
+// used to expand the total amount of ephemeral storage available, beyond the
+// default amount, for tasks hosted on Fargate. For more information, see Fargate
+// task storage (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
 // in the Amazon ECS User Guide for Fargate. This parameter is only supported for
 // tasks hosted on Fargate using Linux platform version 1.4.0 or later. This
 // parameter is not supported for Windows containers on Fargate.
@@ -345,9 +335,8 @@ type EcsEphemeralStorage struct {
 // Details on an Elastic Inference accelerator task override. This parameter is
 // used to override the Elastic Inference accelerator specified in the task
 // definition. For more information, see Working with Amazon Elastic Inference on
-// Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs-inference.html) in
-// the Amazon Elastic Container Service Developer Guide.
+// Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs-inference.html)
+// in the Amazon Elastic Container Service Developer Guide.
 type EcsInferenceAcceleratorOverride struct {
 
 	// The Elastic Inference accelerator device name to override for the task. This
@@ -362,21 +351,19 @@ type EcsInferenceAcceleratorOverride struct {
 
 // The type and amount of a resource to assign to a container. The supported
 // resource types are GPUs and Elastic Inference accelerators. For more
-// information, see Working with GPUs on Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html) or
-// Working with Amazon Elastic Inference on Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
+// information, see Working with GPUs on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html)
+// or Working with Amazon Elastic Inference on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
 // in the Amazon Elastic Container Service Developer Guide
 type EcsResourceRequirement struct {
 
 	// The type of resource to assign to a container. The supported values are GPU or
-	// InferenceAccelerator.
+	// InferenceAccelerator .
 	//
 	// This member is required.
 	Type EcsResourceRequirementType
 
-	// The value for the specified resource type. If the GPU type is used, the value is
-	// the number of physical GPUs the Amazon ECS container agent reserves for the
+	// The value for the specified resource type. If the GPU type is used, the value
+	// is the number of physical GPUs the Amazon ECS container agent reserves for the
 	// container. The number of GPUs that's reserved for all containers in a task can't
 	// exceed the number of available GPUs on the container instance that the task is
 	// launched on. If the InferenceAccelerator type is used, the value matches the
@@ -398,18 +385,13 @@ type EcsTaskOverride struct {
 	Cpu *string
 
 	// The ephemeral storage setting override for the task. This parameter is only
-	// supported for tasks hosted on Fargate that use the following platform
-	// versions:
-	//
-	// * Linux platform version 1.4.0 or later.
-	//
-	// * Windows platform version
-	// 1.0.0 or later.
+	// supported for tasks hosted on Fargate that use the following platform versions:
+	//   - Linux platform version 1.4.0 or later.
+	//   - Windows platform version 1.0.0 or later.
 	EphemeralStorage *EcsEphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution IAM role override for the
-	// task. For more information, see Amazon ECS task execution IAM role
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
+	// task. For more information, see Amazon ECS task execution IAM role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string
 
@@ -421,17 +403,15 @@ type EcsTaskOverride struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that containers in this task can
 	// assume. All containers in this task are granted the permissions that are
-	// specified in this role. For more information, see IAM Role for Tasks
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
+	// specified in this role. For more information, see IAM Role for Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Filter events using an event pattern. For more information, see Events and Event
-// Patterns
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+// Filter events using an event pattern. For more information, see Events and
+// Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 // in the Amazon EventBridge User Guide.
 type Filter struct {
 
@@ -442,8 +422,7 @@ type Filter struct {
 }
 
 // The collection of event patterns used to filter events. For more information,
-// see Events and Event Patterns
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+// see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 // in the Amazon EventBridge User Guide.
 type FilterCriteria struct {
 
@@ -529,8 +508,8 @@ type Pipe struct {
 	// The ARN of the enrichment resource.
 	Enrichment *string
 
-	// When the pipe was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.
@@ -583,8 +562,8 @@ type PipeEnrichmentParameters struct {
 
 	// Valid JSON text passed to the enrichment. In this case, nothing from the event
 	// itself is passed to the enrichment. For more information, see The JavaScript
-	// Object Notation (JSON) Data Interchange Format
-	// (http://www.rfc-editor.org/rfc/rfc7159.txt).
+	// Object Notation (JSON) Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt)
+	// .
 	InputTemplate *string
 
 	noSmithyDocumentSerde
@@ -689,8 +668,8 @@ type PipeSourceKinesisStreamParameters struct {
 	// The default value is 1.
 	ParallelizationFactor *int32
 
-	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading,
-	// in Unix time seconds.
+	// With StartingPosition set to AT_TIMESTAMP , the time from which to start
+	// reading, in Unix time seconds.
 	StartingPositionTimestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -732,8 +711,7 @@ type PipeSourceParameters struct {
 	DynamoDBStreamParameters *PipeSourceDynamoDBStreamParameters
 
 	// The collection of event patterns used to filter events. For more information,
-	// see Events and Event Patterns
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
 	FilterCriteria *FilterCriteria
 
@@ -809,8 +787,8 @@ type PipeSourceSelfManagedKafkaParameters struct {
 	// (Streams only) The position in a stream from which to start reading.
 	StartingPosition SelfManagedKafkaStartPosition
 
-	// This structure specifies the VPC subnets and security groups for the stream, and
-	// whether a public IP address is to be used.
+	// This structure specifies the VPC subnets and security groups for the stream,
+	// and whether a public IP address is to be used.
 	Vpc *SelfManagedKafkaAccessConfigurationVpc
 
 	noSmithyDocumentSerde
@@ -831,9 +809,9 @@ type PipeSourceSqsQueueParameters struct {
 // The parameters for using an Batch job as a target.
 type PipeTargetBatchJobParameters struct {
 
-	// The job definition used by this job. This value can be one of name,
-	// name:revision, or the Amazon Resource Name (ARN) for the job definition. If name
-	// is specified without a revision then the latest active revision is used.
+	// The job definition used by this job. This value can be one of name ,
+	// name:revision , or the Amazon Resource Name (ARN) for the job definition. If
+	// name is specified without a revision then the latest active revision is used.
 	//
 	// This member is required.
 	JobDefinition *string
@@ -897,20 +875,19 @@ type PipeTargetEcsTaskParameters struct {
 	TaskDefinitionArn *string
 
 	// The capacity provider strategy to use for the task. If a
-	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
-	// If no capacityProviderStrategy or launchType is specified, the
+	// capacityProviderStrategy is specified, the launchType parameter must be
+	// omitted. If no capacityProviderStrategy or launchType is specified, the
 	// defaultCapacityProviderStrategy for the cluster is used.
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
-	// information, see Tagging Your Amazon ECS Resources
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
-	// Whether or not to enable the execute command functionality for the containers in
-	// this task. If true, this enables execute command functionality on all containers
-	// in the task.
+	// Whether or not to enable the execute command functionality for the containers
+	// in this task. If true, this enables execute command functionality on all
+	// containers in the task.
 	EnableExecuteCommand bool
 
 	// Specifies an Amazon ECS task group for the task. The maximum length is 255
@@ -920,8 +897,7 @@ type PipeTargetEcsTaskParameters struct {
 	// Specifies the launch type on which your task is running. The launch type that
 	// you specify here must match one of the launch type (compatibilities) of the
 	// target task. The FARGATE value is supported only in the Regions where Fargate
-	// with Amazon ECS is supported. For more information, see Fargate on Amazon ECS
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html)
+	// with Amazon ECS is supported. For more information, see Fargate on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType
 
@@ -936,27 +912,26 @@ type PipeTargetEcsTaskParameters struct {
 	// The overrides that are associated with a task.
 	Overrides *EcsTaskOverride
 
-	// An array of placement constraint objects to use for the task. You can specify up
-	// to 10 constraints per task (including constraints in the task definition and
+	// An array of placement constraint objects to use for the task. You can specify
+	// up to 10 constraints per task (including constraints in the task definition and
 	// those specified at runtime).
 	PlacementConstraints []PlacementConstraint
 
-	// The placement strategy objects to use for the task. You can specify a maximum of
-	// five strategy rules per task.
+	// The placement strategy objects to use for the task. You can specify a maximum
+	// of five strategy rules per task.
 	PlacementStrategy []PlacementStrategy
 
-	// Specifies the platform version for the task. Specify only the numeric portion of
-	// the platform version, such as 1.1.0. This structure is used only if LaunchType
-	// is FARGATE. For more information about valid platform versions, see Fargate
-	// Platform Versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// Specifies the platform version for the task. Specify only the numeric portion
+	// of the platform version, such as 1.1.0 . This structure is used only if
+	// LaunchType is FARGATE . For more information about valid platform versions, see
+	// Fargate Platform Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
-	// Specifies whether to propagate the tags from the task definition to the task. If
-	// no value is specified, the tags are not propagated. Tags can only be propagated
-	// to the task during task creation. To add tags to a task after task creation, use
-	// the TagResource API action.
+	// Specifies whether to propagate the tags from the task definition to the task.
+	// If no value is specified, the tags are not propagated. Tags can only be
+	// propagated to the task during task creation. To add tags to a task after task
+	// creation, use the TagResource API action.
 	PropagateTags PropagateTags
 
 	// The reference ID to use for the task.
@@ -964,12 +939,11 @@ type PipeTargetEcsTaskParameters struct {
 
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
-	// define. To learn more, see RunTask
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags)
+	// define. To learn more, see RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags)
 	// in the Amazon ECS API Reference.
 	Tags []Tag
 
-	// The number of tasks to create based on TaskDefinition. The default is 1.
+	// The number of tasks to create based on TaskDefinition . The default is 1.
 	TaskCount *int32
 
 	noSmithyDocumentSerde
@@ -978,13 +952,13 @@ type PipeTargetEcsTaskParameters struct {
 // The parameters for using an EventBridge event bus as a target.
 type PipeTargetEventBridgeEventBusParameters struct {
 
-	// A free-form string, with a maximum of 128 characters, used to decide what fields
-	// to expect in the event detail.
+	// A free-form string, with a maximum of 128 characters, used to decide what
+	// fields to expect in the event detail.
 	DetailType *string
 
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
 	// https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
-	// abcde.veo. When using Java, you must include auth-crt on the class path.
+	// abcde.veo . When using Java, you must include auth-crt on the class path.
 	EndpointId *string
 
 	// Amazon Web Services resources, identified by Amazon Resource Name (ARN), which
@@ -994,10 +968,8 @@ type PipeTargetEventBridgeEventBusParameters struct {
 	// The source of the event.
 	Source *string
 
-	// The time stamp of the event, per RFC3339
-	// (https://www.rfc-editor.org/rfc/rfc3339.txt). If no time stamp is provided, the
-	// time stamp of the PutEvents
-	// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
+	// The time stamp of the event, per RFC3339 (https://www.rfc-editor.org/rfc/rfc3339.txt)
+	// . If no time stamp is provided, the time stamp of the PutEvents (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
 	// call is used.
 	Time *string
 
@@ -1045,18 +1017,14 @@ type PipeTargetKinesisStreamParameters struct {
 type PipeTargetLambdaFunctionParameters struct {
 
 	// Choose from the following options.
-	//
-	// * RequestResponse (default) - Invoke the
-	// function synchronously. Keep the connection open until the function returns a
-	// response or times out. The API response includes the function response and
-	// additional data.
-	//
-	// * Event - Invoke the function asynchronously. Send events that
-	// fail multiple times to the function's dead-letter queue (if it's configured).
-	// The API response only includes a status code.
-	//
-	// * DryRun - Validate parameter
-	// values and verify that the user or role has permission to invoke the function.
+	//   - RequestResponse (default) - Invoke the function synchronously. Keep the
+	//   connection open until the function returns a response or times out. The API
+	//   response includes the function response and additional data.
+	//   - Event - Invoke the function asynchronously. Send events that fail multiple
+	//   times to the function's dead-letter queue (if it's configured). The API response
+	//   only includes a status code.
+	//   - DryRun - Validate parameter values and verify that the user or role has
+	//   permission to invoke the function.
 	InvocationType PipeTargetInvocationType
 
 	noSmithyDocumentSerde
@@ -1083,8 +1051,8 @@ type PipeTargetParameters struct {
 
 	// Valid JSON text passed to the target. In this case, nothing from the event
 	// itself is passed to the target. For more information, see The JavaScript Object
-	// Notation (JSON) Data Interchange Format
-	// (http://www.rfc-editor.org/rfc/rfc7159.txt).
+	// Notation (JSON) Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt)
+	// .
 	InputTemplate *string
 
 	// The parameters for using a Kinesis stream as a source.
@@ -1128,12 +1096,12 @@ type PipeTargetRedshiftDataParameters struct {
 	// credentials.
 	DbUser *string
 
-	// The name or ARN of the secret that enables access to the database. Required when
-	// authenticating using SageMaker.
+	// The name or ARN of the secret that enables access to the database. Required
+	// when authenticating using SageMaker.
 	SecretManagerArn *string
 
-	// The name of the SQL statement. You can name the SQL statement when you create it
-	// to identify the query.
+	// The name of the SQL statement. You can name the SQL statement when you create
+	// it to identify the query.
 	StatementName *string
 
 	// Indicates whether to send an event back to EventBridge after the SQL statement
@@ -1176,15 +1144,13 @@ type PipeTargetStateMachineParameters struct {
 }
 
 // An object representing a constraint on task placement. To learn more, see Task
-// Placement Constraints
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
+// Placement Constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type PlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. You cannot
-	// specify an expression if the constraint type is distinctInstance. To learn more,
-	// see Cluster Query Language
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+	// specify an expression if the constraint type is distinctInstance . To learn
+	// more, see Cluster Query Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Expression *string
 
@@ -1197,8 +1163,7 @@ type PlacementConstraint struct {
 }
 
 // The task placement strategy for a task or service. To learn more, see Task
-// Placement Strategies
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
+// Placement Strategies (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
 // in the Amazon Elastic Container Service Service Developer Guide.
 type PlacementStrategy struct {
 
@@ -1291,8 +1256,8 @@ type SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth struct
 func (*SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth) isSelfManagedKafkaAccessConfigurationCredentials() {
 }
 
-// This structure specifies the VPC subnets and security groups for the stream, and
-// whether a public IP address is to be used.
+// This structure specifies the VPC subnets and security groups for the stream,
+// and whether a public IP address is to be used.
 type SelfManagedKafkaAccessConfigurationVpc struct {
 
 	// Specifies the security groups associated with the stream. These security groups
@@ -1438,8 +1403,7 @@ type UpdatePipeSourceParameters struct {
 	DynamoDBStreamParameters *UpdatePipeSourceDynamoDBStreamParameters
 
 	// The collection of event patterns used to filter events. For more information,
-	// see Events and Event Patterns
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
 	FilterCriteria *FilterCriteria
 
@@ -1493,8 +1457,8 @@ type UpdatePipeSourceSelfManagedKafkaParameters struct {
 	// The ARN of the Secrets Manager secret used for certification.
 	ServerRootCaCertificate *string
 
-	// This structure specifies the VPC subnets and security groups for the stream, and
-	// whether a public IP address is to be used.
+	// This structure specifies the VPC subnets and security groups for the stream,
+	// and whether a public IP address is to be used.
 	Vpc *SelfManagedKafkaAccessConfigurationVpc
 
 	noSmithyDocumentSerde

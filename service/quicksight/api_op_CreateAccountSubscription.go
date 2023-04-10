@@ -17,25 +17,21 @@ import (
 // South America (Sao Paulo) Region, or Asia Pacific (Singapore) Region. Before you
 // use this operation, make sure that you can connect to an existing Amazon Web
 // Services account. If you don't have an Amazon Web Services account, see Sign up
-// for Amazon Web Services
-// (https://docs.aws.amazon.com/quicksight/latest/user/setting-up-aws-sign-up.html)
+// for Amazon Web Services (https://docs.aws.amazon.com/quicksight/latest/user/setting-up-aws-sign-up.html)
 // in the Amazon QuickSight User Guide. The person who signs up for Amazon
 // QuickSight needs to have the correct Identity and Access Management (IAM)
-// permissions. For more information, see IAM Policy Examples for Amazon QuickSight
-// (https://docs.aws.amazon.com/quicksight/latest/user/iam-policy-examples.html) in
-// the Amazon QuickSight User Guide. If your IAM policy includes both the Subscribe
-// and CreateAccountSubscription actions, make sure that both actions are set to
-// Allow. If either action is set to Deny, the Deny action prevails and your API
-// call fails. You can't pass an existing IAM role to access other Amazon Web
-// Services services using this API operation. To pass your existing IAM role to
-// Amazon QuickSight, see Passing IAM roles to Amazon QuickSight
-// (https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html#security-create-iam-role)
+// permissions. For more information, see IAM Policy Examples for Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/iam-policy-examples.html)
+// in the Amazon QuickSight User Guide. If your IAM policy includes both the
+// Subscribe and CreateAccountSubscription actions, make sure that both actions
+// are set to Allow . If either action is set to Deny , the Deny action prevails
+// and your API call fails. You can't pass an existing IAM role to access other
+// Amazon Web Services services using this API operation. To pass your existing IAM
+// role to Amazon QuickSight, see Passing IAM roles to Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html#security-create-iam-role)
 // in the Amazon QuickSight User Guide. You can't set default resource access on
 // the new account from the Amazon QuickSight API. Instead, add default resource
 // access from the Amazon QuickSight console. For more information about setting
 // default resource access to Amazon Web Services services, see Setting default
-// resource access to Amazon Web Services services
-// (https://docs.aws.amazon.com/quicksight/latest/user/scoping-policies-defaults.html)
+// resource access to Amazon Web Services services (https://docs.aws.amazon.com/quicksight/latest/user/scoping-policies-defaults.html)
 // in the Amazon QuickSight User Guide.
 func (c *Client) CreateAccountSubscription(ctx context.Context, params *CreateAccountSubscriptionInput, optFns ...func(*Options)) (*CreateAccountSubscriptionOutput, error) {
 	if params == nil {
@@ -62,8 +58,8 @@ type CreateAccountSubscriptionInput struct {
 	AccountName *string
 
 	// The method that you want to use to authenticate your Amazon QuickSight account.
-	// Currently, the valid values for this parameter are IAM_AND_QUICKSIGHT, IAM_ONLY,
-	// and ACTIVE_DIRECTORY. If you choose ACTIVE_DIRECTORY, provide an
+	// Currently, the valid values for this parameter are IAM_AND_QUICKSIGHT , IAM_ONLY
+	// , and ACTIVE_DIRECTORY . If you choose ACTIVE_DIRECTORY , provide an
 	// ActiveDirectoryName and an AdminGroup associated with your Active Directory.
 	//
 	// This member is required.
@@ -76,17 +72,12 @@ type CreateAccountSubscriptionInput struct {
 	AwsAccountId *string
 
 	// The edition of Amazon QuickSight that you want your account to have. Currently,
-	// you can choose from ENTERPRISE or ENTERPRISE_AND_Q. If you choose
-	// ENTERPRISE_AND_Q, the following parameters are required:
-	//
-	// * FirstName
-	//
-	// *
-	// LastName
-	//
-	// * EmailAddress
-	//
-	// * ContactNumber
+	// you can choose from ENTERPRISE or ENTERPRISE_AND_Q . If you choose
+	// ENTERPRISE_AND_Q , the following parameters are required:
+	//   - FirstName
+	//   - LastName
+	//   - EmailAddress
+	//   - ContactNumber
 	//
 	// This member is required.
 	Edition types.Edition
@@ -97,22 +88,20 @@ type CreateAccountSubscriptionInput struct {
 	// This member is required.
 	NotificationEmail *string
 
-	// The name of your Active Directory. This field is required if ACTIVE_DIRECTORY is
-	// the selected authentication method of the new Amazon QuickSight account.
+	// The name of your Active Directory. This field is required if ACTIVE_DIRECTORY
+	// is the selected authentication method of the new Amazon QuickSight account.
 	ActiveDirectoryName *string
 
-	// The admin group associated with your Active Directory. This field is required if
-	// ACTIVE_DIRECTORY is the selected authentication method of the new Amazon
+	// The admin group associated with your Active Directory. This field is required
+	// if ACTIVE_DIRECTORY is the selected authentication method of the new Amazon
 	// QuickSight account. For more information about using Active Directory in Amazon
-	// QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition
-	// (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
 	// in the Amazon QuickSight User Guide.
 	AdminGroup []string
 
 	// The author group associated with your Active Directory. For more information
 	// about using Active Directory in Amazon QuickSight, see Using Active Directory
-	// with Amazon QuickSight Enterprise Edition
-	// (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// with Amazon QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
 	// in the Amazon QuickSight User Guide.
 	AuthorGroup []string
 
@@ -142,13 +131,12 @@ type CreateAccountSubscriptionInput struct {
 
 	// The reader group associated with your Active Direcrtory. For more information
 	// about using Active Directory in Amazon QuickSight, see Using Active Directory
-	// with Amazon QuickSight Enterprise Edition
-	// (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// with Amazon QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
 	// in the Amazon QuickSight User Guide.
 	ReaderGroup []string
 
-	// The realm of the Active Directory that is associated with your Amazon QuickSight
-	// account. This field is required if ACTIVE_DIRECTORY is the selected
+	// The realm of the Active Directory that is associated with your Amazon
+	// QuickSight account. This field is required if ACTIVE_DIRECTORY is the selected
 	// authentication method of the new Amazon QuickSight account.
 	Realm *string
 

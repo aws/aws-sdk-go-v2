@@ -12,8 +12,7 @@ import (
 
 // Returns information about an AppConfig extension association. For more
 // information about extensions and associations, see Working with AppConfig
-// extensions
-// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) GetExtensionAssociation(ctx context.Context, params *GetExtensionAssociationInput, optFns ...func(*Options)) (*GetExtensionAssociationOutput, error) {
 	if params == nil {
@@ -57,8 +56,8 @@ type GetExtensionAssociationOutput struct {
 	// The parameter names and values defined in the association.
 	Parameters map[string]string
 
-	// The ARNs of applications, configuration profiles, or environments defined in the
-	// association.
+	// The ARNs of applications, configuration profiles, or environments defined in
+	// the association.
 	ResourceArn *string
 
 	// Metadata pertaining to the operation's result.

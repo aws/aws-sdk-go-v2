@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for entities of the specified type. You can search for entities in your
-// namespace and the public namespace that you're tracking.
+// Searches for entities of the specified type. You can search for entities in
+// your namespace and the public namespace that you're tracking.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) SearchEntities(ctx context.Context, params *SearchEntitiesInput, optFns ...func(*Options)) (*SearchEntitiesOutput, error) {
@@ -38,8 +38,8 @@ type SearchEntitiesInput struct {
 	// This member is required.
 	EntityTypes []types.EntityType
 
-	// Optional filter to apply to the search. Valid filters are NAMENAMESPACE,
-	// SEMANTIC_TYPE_PATH and REFERENCED_ENTITY_ID. REFERENCED_ENTITY_ID filters on
+	// Optional filter to apply to the search. Valid filters are NAME NAMESPACE ,
+	// SEMANTIC_TYPE_PATH and REFERENCED_ENTITY_ID . REFERENCED_ENTITY_ID filters on
 	// entities that are used by the entity in the result set. For example, you can
 	// filter on the ID of a property that is used in a state. Multiple filters
 	// function as OR criteria in the query. Multiple values passed inside the filter

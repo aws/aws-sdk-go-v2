@@ -91,11 +91,10 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached your account quota for this resource type. To perform the
-// requested action, delete some existing resources or request a quota increase
-// (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) from the
-// Service Quotas console. For a list of Audit Manager service quotas, see Quotas
-// and restrictions for Audit Manager
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html).
+// requested action, delete some existing resources or request a quota increase (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+// from the Service Quotas console. For a list of Audit Manager service quotas, see
+// Quotas and restrictions for Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html)
+// .
 type ServiceQuotaExceededException struct {
 	Message *string
 

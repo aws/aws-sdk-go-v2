@@ -18,14 +18,10 @@ import (
 // of the default parameter group for the CacheParameterGroupFamily. To customize
 // the newly created CacheParameterGroup you can change the values of specific
 // parameters. For more information, see:
-//
-// * ModifyCacheParameterGroup
-// (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
-// in the ElastiCache API Reference.
-//
-// * Parameters and Parameter Groups
-// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html)
-// in the ElastiCache User Guide.
+//   - ModifyCacheParameterGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
+//     in the ElastiCache API Reference.
+//   - Parameters and Parameter Groups (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html)
+//     in the ElastiCache User Guide.
 func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCacheParameterGroupInput, optFns ...func(*Options)) (*CreateCacheParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheParameterGroupInput{}

@@ -14,21 +14,13 @@ import (
 // Creates a new identity pool. The identity pool is a store of user identity
 // information that is specific to your AWS account. The keys for
 // SupportedLoginProviders are as follows:
+//   - Facebook: graph.facebook.com
+//   - Google: accounts.google.com
+//   - Amazon: www.amazon.com
+//   - Twitter: api.twitter.com
+//   - Digits: www.digits.com
 //
-// * Facebook: graph.facebook.com
-//
-// *
-// Google: accounts.google.com
-//
-// * Amazon: www.amazon.com
-//
-// * Twitter:
-// api.twitter.com
-//
-// * Digits: www.digits.com
-//
-// You must use AWS Developer
-// credentials to call this API.
+// You must use AWS Developer credentials to call this API.
 func (c *Client) CreateIdentityPool(ctx context.Context, params *CreateIdentityPoolInput, optFns ...func(*Options)) (*CreateIdentityPoolOutput, error) {
 	if params == nil {
 		params = &CreateIdentityPoolInput{}
@@ -58,8 +50,7 @@ type CreateIdentityPoolInput struct {
 	IdentityPoolName *string
 
 	// Enables or disables the Basic (Classic) authentication flow. For more
-	// information, see Identity Pools (Federated Identities) Authentication Flow
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
+	// information, see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
 	// in the Amazon Cognito Developer Guide.
 	AllowClassicFlow *bool
 
@@ -68,10 +59,10 @@ type CreateIdentityPoolInput struct {
 
 	// The "domain" by which Cognito will refer to your users. This name acts as a
 	// placeholder that allows your backend and the Cognito service to communicate
-	// about the developer provider. For the DeveloperProviderName, you can use letters
-	// as well as period (.), underscore (_), and dash (-). Once you have set a
-	// developer provider name, you cannot change it. Please take care in setting this
-	// parameter.
+	// about the developer provider. For the DeveloperProviderName , you can use
+	// letters as well as period ( . ), underscore ( _ ), and dash ( - ). Once you have
+	// set a developer provider name, you cannot change it. Please take care in setting
+	// this parameter.
 	DeveloperProviderName *string
 
 	// Tags to assign to the identity pool. A tag is a label that you can apply to
@@ -111,8 +102,7 @@ type CreateIdentityPoolOutput struct {
 	IdentityPoolName *string
 
 	// Enables or disables the Basic (Classic) authentication flow. For more
-	// information, see Identity Pools (Federated Identities) Authentication Flow
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
+	// information, see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
 	// in the Amazon Cognito Developer Guide.
 	AllowClassicFlow *bool
 

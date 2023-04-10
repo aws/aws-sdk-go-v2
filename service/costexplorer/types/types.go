@@ -64,7 +64,7 @@ type AnomalyDateInterval struct {
 }
 
 // This object continuously inspects your account's cost data for anomalies. It's
-// based on MonitorType and MonitorSpecification. The content consists of detailed
+// based on MonitorType and MonitorSpecification . The content consists of detailed
 // metadata and the current status of the monitor object.
 type AnomalyMonitor struct {
 
@@ -96,84 +96,57 @@ type AnomalyMonitor struct {
 	// The dimensions to evaluate.
 	MonitorDimension MonitorDimension
 
-	// Use Expression to filter in various Cost Explorer APIs. Not all Expression types
-	// are supported in each API. Refer to the documentation for each specific API to
-	// see what is supported. There are two patterns:
-	//
-	// * Simple dimension values.
-	//
-	// *
-	// There are three types of simple dimension values: CostCategories, Tags, and
-	// Dimensions.
-	//
-	// * Specify the CostCategories field to define a filter that acts on
-	// Cost Categories.
-	//
-	// * Specify the Tags field to define a filter that acts on Cost
-	// Allocation Tags.
-	//
-	// * Specify the Dimensions field to define a filter that acts on
-	// the DimensionValues
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html).
-	//
-	// *
-	// For each filter type, you can set the dimension name and values for the filters
-	// that you plan to use.
-	//
-	// * For example, you can filter for REGION==us-east-1 OR
-	// REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full name
-	// (for example, REGION==US East (N. Virginia).
-	//
-	// * The corresponding Expression for
-	// this example is as follows: { "Dimensions": { "Key": "REGION", "Values": [
-	// "us-east-1", “us-west-1” ] } }
-	//
-	// * As shown in the previous example, lists of
-	// dimension values are combined with OR when applying the filter.
-	//
-	// * You can also
-	// set different match options to further control how the filter behaves. Not all
-	// APIs support match options. Refer to the documentation for each specific API to
-	// see what is supported.
-	//
-	// * For example, you can filter for linked account names
-	// that start with “a”.
-	//
-	// * The corresponding Expression for this example is as
-	// follows: { "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [
-	// "STARTS_WITH" ], "Values": [ "a" ] } }
-	//
-	// * Compound Expression types with logical
-	// operations.
-	//
-	// * You can use multiple Expression types and the logical operators
-	// AND/OR/NOT to create a list of one or more Expression objects. By doing this,
-	// you can filter by more advanced options.
-	//
-	// * For example, you can filter by
-	// ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
-	// (USAGE_TYPE != DataTransfer).
-	//
-	// * The corresponding Expression for this example
-	// is as follows: { "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
-	// "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"]
-	// } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-	// }}} ] }
-	//
-	// Because each Expression can have only one operator, the service returns
-	// an error if more than one is specified. The following example shows an
-	// Expression object that creates an error:  { "And": [ ... ], "Dimensions": {
-	// "Key": "USAGE_TYPE", "Values": [ "DataTransfer" ] } }  The following is an
-	// example of the corresponding error message: "Expression has more than one roots.
-	// Only one root operator is allowed for each expression: And, Or, Not, Dimensions,
-	// Tags, CostCategories"
-	//
-	// For the GetRightsizingRecommendation action, a
-	// combination of OR and NOT isn't supported. OR isn't supported between different
-	// dimensions, or dimensions and tags. NOT operators aren't supported. Dimensions
-	// are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For the
+	// Use Expression to filter in various Cost Explorer APIs. Not all Expression
+	// types are supported in each API. Refer to the documentation for each specific
+	// API to see what is supported. There are two patterns:
+	//   - Simple dimension values.
+	//   - There are three types of simple dimension values: CostCategories , Tags ,
+	//   and Dimensions .
+	//   - Specify the CostCategories field to define a filter that acts on Cost
+	//   Categories.
+	//   - Specify the Tags field to define a filter that acts on Cost Allocation Tags.
+	//   - Specify the Dimensions field to define a filter that acts on the
+	//   DimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html)
+	//   .
+	//   - For each filter type, you can set the dimension name and values for the
+	//   filters that you plan to use.
+	//   - For example, you can filter for REGION==us-east-1 OR REGION==us-west-1 . For
+	//   GetRightsizingRecommendation , the Region is a full name (for example,
+	//   REGION==US East (N. Virginia) .
+	//   - The corresponding Expression for this example is as follows: {
+	//   "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
+	//   - As shown in the previous example, lists of dimension values are combined
+	//   with OR when applying the filter.
+	//   - You can also set different match options to further control how the filter
+	//   behaves. Not all APIs support match options. Refer to the documentation for each
+	//   specific API to see what is supported.
+	//   - For example, you can filter for linked account names that start with “a”.
+	//   - The corresponding Expression for this example is as follows: {
+	//   "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ],
+	//   "Values": [ "a" ] } }
+	//   - Compound Expression types with logical operations.
+	//   - You can use multiple Expression types and the logical operators AND/OR/NOT
+	//   to create a list of one or more Expression objects. By doing this, you can
+	//   filter by more advanced options.
+	//   - For example, you can filter by ((REGION == us-east-1 OR REGION ==
+	//   us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer) .
+	//   - The corresponding Expression for this example is as follows: { "And": [
+	//   {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1"
+	//   ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not":
+	//   {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
+	//   Because each Expression can have only one operator, the service returns an
+	//   error if more than one is specified. The following example shows an Expression
+	//   object that creates an error: { "And": [ ... ], "Dimensions": { "Key":
+	//   "USAGE_TYPE", "Values": [ "DataTransfer" ] } } The following is an example of
+	//   the corresponding error message: "Expression has more than one roots. Only
+	//   one root operator is allowed for each expression: And, Or, Not, Dimensions,
+	//   Tags, CostCategories"
+	// For the GetRightsizingRecommendation action, a combination of OR and NOT isn't
+	// supported. OR isn't supported between different dimensions, or dimensions and
+	// tags. NOT operators aren't supported. Dimensions are also limited to
+	// LINKED_ACCOUNT , REGION , or RIGHTSIZING_TYPE . For the
 	// GetReservationPurchaseRecommendation action, only NOT is supported. AND and OR
-	// aren't supported. Dimensions are limited to LINKED_ACCOUNT.
+	// aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 	MonitorSpecification *Expression
 
 	noSmithyDocumentSerde
@@ -187,7 +160,7 @@ type AnomalyScore struct {
 	// This member is required.
 	CurrentScore float64
 
-	// The maximum score that's observed during the AnomalyDateInterval.
+	// The maximum score that's observed during the AnomalyDateInterval .
 	//
 	// This member is required.
 	MaxScore float64
@@ -236,35 +209,30 @@ type AnomalySubscription struct {
 	// Deprecated: Threshold has been deprecated in favor of ThresholdExpression
 	Threshold *float64
 
-	// An Expression
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// An Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object used to specify the anomalies that you want to generate alerts for. This
 	// supports dimensions and nested expressions. The supported dimensions are
-	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE. The supported
-	// nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL
-	// is required. Values must be numbers between 0 and 10,000,000,000. One of
-	// Threshold or ThresholdExpression is required for this resource. The following
-	// are examples of valid ThresholdExpressions:
-	//
-	// * Absolute threshold: {
-	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
-	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }
-	//
-	// * Percentage threshold: {
-	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
-	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }
-	//
-	// * AND two thresholds
-	// together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
-	// "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, {
-	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
-	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }
-	//
-	// * OR two thresholds
-	// together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
-	// "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, {
-	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
-	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }
+	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE . The
+	// supported nested expression types are AND and OR . The match option
+	// GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and
+	// 10,000,000,000. One of Threshold or ThresholdExpression is required for this
+	// resource. The following are examples of valid ThresholdExpressions:
+	//   - Absolute threshold: { "Dimensions": { "Key":
+	//   "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
+	//   "Values": [ "100" ] } }
+	//   - Percentage threshold: { "Dimensions": { "Key":
+	//   "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
+	//   "Values": [ "100" ] } }
+	//   - AND two thresholds together: { "And": [ { "Dimensions": { "Key":
+	//   "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
+	//   "Values": [ "100" ] } }, { "Dimensions": { "Key":
+	//   "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
+	//   "Values": [ "100" ] } } ] }
+	//   - OR two thresholds together: { "Or": [ { "Dimensions": { "Key":
+	//   "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
+	//   "Values": [ "100" ] } }, { "Dimensions": { "Key":
+	//   "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
+	//   "Values": [ "100" ] } } ] }
 	ThresholdExpression *Expression
 
 	noSmithyDocumentSerde
@@ -312,8 +280,8 @@ type CostAllocationTagStatusEntry struct {
 	noSmithyDocumentSerde
 }
 
-// The structure of Cost Categories. This includes detailed metadata and the set of
-// rules for the CostCategory object.
+// The structure of Cost Categories. This includes detailed metadata and the set
+// of rules for the CostCategory object.
 type CostCategory struct {
 
 	// The unique identifier for your Cost Category.
@@ -349,8 +317,8 @@ type CostCategory struct {
 	// The effective end date of your Cost Category.
 	EffectiveEnd *string
 
-	// The list of processing statuses for Cost Management products for a specific cost
-	// category.
+	// The list of processing statuses for Cost Management products for a specific
+	// cost category.
 	ProcessingStatus []CostCategoryProcessingStatus
 
 	// The split charge rules that are used to allocate your charges between your Cost
@@ -361,28 +329,28 @@ type CostCategory struct {
 }
 
 // When you create or update a cost category, you can define the CostCategoryRule
-// rule type as INHERITED_VALUE. This rule type adds the flexibility to define a
+// rule type as INHERITED_VALUE . This rule type adds the flexibility to define a
 // rule that dynamically inherits the cost category value from the dimension value
-// that's defined by CostCategoryInheritedValueDimension. For example, suppose that
-// you want to dynamically group costs that are based on the value of a specific
-// tag key. First, choose an inherited value rule type, and then choose the tag
-// dimension and specify the tag key to use.
+// that's defined by CostCategoryInheritedValueDimension . For example, suppose
+// that you want to dynamically group costs that are based on the value of a
+// specific tag key. First, choose an inherited value rule type, and then choose
+// the tag dimension and specify the tag key to use.
 type CostCategoryInheritedValueDimension struct {
 
 	// The key to extract cost category values.
 	DimensionKey *string
 
 	// The name of the dimension that's used to group costs. If you specify
-	// LINKED_ACCOUNT_NAME, the cost category value is based on account name. If you
-	// specify TAG, the cost category value is based on the value of the specified tag
+	// LINKED_ACCOUNT_NAME , the cost category value is based on account name. If you
+	// specify TAG , the cost category value is based on the value of the specified tag
 	// key.
 	DimensionName CostCategoryInheritedValueDimensionName
 
 	noSmithyDocumentSerde
 }
 
-// The list of processing statuses for Cost Management products for a specific cost
-// category.
+// The list of processing statuses for Cost Management products for a specific
+// cost category.
 type CostCategoryProcessingStatus struct {
 
 	// The Cost Management product name of the applied status.
@@ -396,7 +364,7 @@ type CostCategoryProcessingStatus struct {
 
 // A reference to a Cost Category containing only enough information to identify
 // the Cost Category. You can use this information to retrieve the full Cost
-// Category information using DescribeCostCategory.
+// Category information using DescribeCostCategory .
 type CostCategoryReference struct {
 
 	// The unique identifier for your Cost Category.
@@ -417,8 +385,8 @@ type CostCategoryReference struct {
 	// The number of rules that are associated with a specific Cost Category.
 	NumberOfRules int32
 
-	// The list of processing statuses for Cost Management products for a specific cost
-	// category.
+	// The list of processing statuses for Cost Management products for a specific
+	// cost category.
 	ProcessingStatus []CostCategoryProcessingStatus
 
 	// A list of unique cost category values in a specific cost category.
@@ -436,24 +404,22 @@ type CostCategoryRule struct {
 	// dimension.
 	InheritedValue *CostCategoryInheritedValueDimension
 
-	// An Expression
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// An Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object used to categorize costs. This supports dimensions, tags, and nested
-	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT,
-	// SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME. Root level OR isn't
+	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT ,
+	// SERVICE_CODE , RECORD_TYPE , and LINKED_ACCOUNT_NAME . Root level OR isn't
 	// supported. We recommend that you create a separate rule instead. RECORD_TYPE is
 	// a dimension used for Cost Explorer APIs, and is also supported for Cost Category
 	// expressions. This dimension uses different terms, depending on whether you're
 	// using the console or API/JSON editor. For a detailed comparison, see Term
-	// Comparisons
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms)
+	// Comparisons (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms)
 	// in the Billing and Cost Management User Guide.
 	Rule *Expression
 
 	// You can define the CostCategoryRule rule type as either REGULAR or
-	// INHERITED_VALUE. The INHERITED_VALUE rule type adds the flexibility to define a
-	// rule that dynamically inherits the cost category value. This value is from the
-	// dimension value that's defined by CostCategoryInheritedValueDimension. For
+	// INHERITED_VALUE . The INHERITED_VALUE rule type adds the flexibility to define
+	// a rule that dynamically inherits the cost category value. This value is from the
+	// dimension value that's defined by CostCategoryInheritedValueDimension . For
 	// example, suppose that you want to costs to be dynamically grouped based on the
 	// value of a specific tag key. First, choose an inherited value rule type, and
 	// then choose the tag dimension and specify the tag key to use.
@@ -471,9 +437,9 @@ type CostCategorySplitChargeRule struct {
 
 	// The method that's used to define how to split your source costs across your
 	// targets. Proportional - Allocates charges across your targets based on the
-	// proportional weighted cost of each target. Fixed - Allocates charges across your
-	// targets based on your defined allocation percentage. >Even - Allocates costs
-	// evenly across all targets.
+	// proportional weighted cost of each target. Fixed - Allocates charges across
+	// your targets based on your defined allocation percentage. > Even - Allocates
+	// costs evenly across all targets.
 	//
 	// This member is required.
 	Method CostCategorySplitChargeMethod
@@ -485,8 +451,8 @@ type CostCategorySplitChargeRule struct {
 	// This member is required.
 	Source *string
 
-	// The Cost Category values that you want to split costs across. These values can't
-	// be used as a source in other split charge rules.
+	// The Cost Category values that you want to split costs across. These values
+	// can't be used as a source in other split charge rules.
 	//
 	// This member is required.
 	Targets []string
@@ -515,11 +481,11 @@ type CostCategorySplitChargeRuleParameter struct {
 }
 
 // The Cost Categories values used for filtering the costs. If Values and Key are
-// not specified, the ABSENTMatchOption is applied to all Cost Categories. That is,
-// it filters on resources that aren't mapped to any Cost Categories. If Values is
-// provided and Key isn't specified, the ABSENTMatchOption is applied to the Cost
-// Categories Key only. That is, it filters on resources without the given Cost
-// Categories key.
+// not specified, the ABSENT MatchOption is applied to all Cost Categories. That
+// is, it filters on resources that aren't mapped to any Cost Categories. If Values
+// is provided and Key isn't specified, the ABSENT MatchOption is applied to the
+// Cost Categories Key only. That is, it filters on resources without the given
+// Cost Categories key.
 type CostCategoryValues struct {
 
 	// The unique name of the Cost Category.
@@ -527,7 +493,7 @@ type CostCategoryValues struct {
 
 	// The match options that you can use to filter your results. MatchOptions is only
 	// applicable for actions related to cost category. The default values for
-	// MatchOptions is EQUALS and CASE_SENSITIVE.
+	// MatchOptions is EQUALS and CASE_SENSITIVE .
 	MatchOptions []MatchOption
 
 	// The specific value of the Cost Category.
@@ -601,9 +567,8 @@ type CoverageHours struct {
 // show only one instance-hour. When you use normalized units instead of
 // instance-hours, the xlarge instance used 8 normalized units, and the 2xlarge
 // instance used 16 normalized units. For more information, see Modifying Reserved
-// Instances
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html) in the
-// Amazon Elastic Compute Cloud User Guide for Linux Instances.
+// Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html)
+// in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
 type CoverageNormalizedUnits struct {
 
 	// The percentage of your used instance normalized units that a reservation covers.
@@ -667,14 +632,14 @@ type CurrentInstance struct {
 type DateInterval struct {
 
 	// The end of the time period. The end date is exclusive. For example, if end is
-	// 2017-05-01, Amazon Web Services retrieves cost and usage data from the start
-	// date up to, but not including, 2017-05-01.
+	// 2017-05-01 , Amazon Web Services retrieves cost and usage data from the start
+	// date up to, but not including, 2017-05-01 .
 	//
 	// This member is required.
 	End *string
 
 	// The beginning of the time period. The start date is inclusive. For example, if
-	// start is 2017-01-01, Amazon Web Services retrieves cost and usage data starting
+	// start is 2017-01-01 , Amazon Web Services retrieves cost and usage data starting
 	// at 2017-01-01 up to the end date. The start date must be equal to or no later
 	// than the current date to avoid a validation error.
 	//
@@ -692,17 +657,16 @@ type DimensionValues struct {
 	// results. For example, AZ returns a list of Availability Zones. Not all
 	// dimensions are supported in each API. Refer to the documentation for each
 	// specific API to see what is supported. LINK_ACCOUNT_NAME and SERVICE_CODE can
-	// only be used in CostCategoryRule
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
-	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE can only be
-	// used in AnomalySubscriptions
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html).
+	// only be used in CostCategoryRule (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html)
+	// . ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE can only be
+	// used in AnomalySubscriptions (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html)
+	// .
 	Key Dimension
 
 	// The match options that you can use to filter your results. MatchOptions is only
 	// applicable for actions related to Cost Category and Anomaly Subscriptions. Refer
 	// to the documentation for each specific API to see what is supported. The default
-	// values for MatchOptions are EQUALS and CASE_SENSITIVE.
+	// values for MatchOptions are EQUALS and CASE_SENSITIVE .
 	MatchOptions []MatchOption
 
 	// The metadata values that you can use to filter and group your results. You can
@@ -716,7 +680,7 @@ type DimensionValues struct {
 // results. You can use GetDimensionValues to find specific values.
 type DimensionValuesWithAttributes struct {
 
-	// The attribute that applies to a specific Dimension.
+	// The attribute that applies to a specific Dimension .
 	Attributes map[string]string
 
 	// The value of a dimension with a specific attribute.
@@ -916,84 +880,58 @@ type ESInstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Use Expression to filter in various Cost Explorer APIs. Not all Expression types
-// are supported in each API. Refer to the documentation for each specific API to
-// see what is supported. There are two patterns:
+// Use Expression to filter in various Cost Explorer APIs. Not all Expression
+// types are supported in each API. Refer to the documentation for each specific
+// API to see what is supported. There are two patterns:
+//   - Simple dimension values.
+//   - There are three types of simple dimension values: CostCategories , Tags ,
+//     and Dimensions .
+//   - Specify the CostCategories field to define a filter that acts on Cost
+//     Categories.
+//   - Specify the Tags field to define a filter that acts on Cost Allocation Tags.
+//   - Specify the Dimensions field to define a filter that acts on the
+//     DimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html)
+//     .
+//   - For each filter type, you can set the dimension name and values for the
+//     filters that you plan to use.
+//   - For example, you can filter for REGION==us-east-1 OR REGION==us-west-1 . For
+//     GetRightsizingRecommendation , the Region is a full name (for example,
+//     REGION==US East (N. Virginia) .
+//   - The corresponding Expression for this example is as follows: {
+//     "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
+//   - As shown in the previous example, lists of dimension values are combined
+//     with OR when applying the filter.
+//   - You can also set different match options to further control how the filter
+//     behaves. Not all APIs support match options. Refer to the documentation for each
+//     specific API to see what is supported.
+//   - For example, you can filter for linked account names that start with “a”.
+//   - The corresponding Expression for this example is as follows: {
+//     "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ],
+//     "Values": [ "a" ] } }
+//   - Compound Expression types with logical operations.
+//   - You can use multiple Expression types and the logical operators AND/OR/NOT
+//     to create a list of one or more Expression objects. By doing this, you can
+//     filter by more advanced options.
+//   - For example, you can filter by ((REGION == us-east-1 OR REGION ==
+//     us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer) .
+//   - The corresponding Expression for this example is as follows: { "And": [
+//     {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1"
+//     ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not":
+//     {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
+//     Because each Expression can have only one operator, the service returns an
+//     error if more than one is specified. The following example shows an Expression
+//     object that creates an error: { "And": [ ... ], "Dimensions": { "Key":
+//     "USAGE_TYPE", "Values": [ "DataTransfer" ] } } The following is an example of
+//     the corresponding error message: "Expression has more than one roots. Only
+//     one root operator is allowed for each expression: And, Or, Not, Dimensions,
+//     Tags, CostCategories"
 //
-// * Simple dimension values.
-//
-// *
-// There are three types of simple dimension values: CostCategories, Tags, and
-// Dimensions.
-//
-// * Specify the CostCategories field to define a filter that acts on
-// Cost Categories.
-//
-// * Specify the Tags field to define a filter that acts on Cost
-// Allocation Tags.
-//
-// * Specify the Dimensions field to define a filter that acts on
-// the DimensionValues
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html).
-//
-// *
-// For each filter type, you can set the dimension name and values for the filters
-// that you plan to use.
-//
-// * For example, you can filter for REGION==us-east-1 OR
-// REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full name
-// (for example, REGION==US East (N. Virginia).
-//
-// * The corresponding Expression for
-// this example is as follows: { "Dimensions": { "Key": "REGION", "Values": [
-// "us-east-1", “us-west-1” ] } }
-//
-// * As shown in the previous example, lists of
-// dimension values are combined with OR when applying the filter.
-//
-// * You can also
-// set different match options to further control how the filter behaves. Not all
-// APIs support match options. Refer to the documentation for each specific API to
-// see what is supported.
-//
-// * For example, you can filter for linked account names
-// that start with “a”.
-//
-// * The corresponding Expression for this example is as
-// follows: { "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [
-// "STARTS_WITH" ], "Values": [ "a" ] } }
-//
-// * Compound Expression types with logical
-// operations.
-//
-// * You can use multiple Expression types and the logical operators
-// AND/OR/NOT to create a list of one or more Expression objects. By doing this,
-// you can filter by more advanced options.
-//
-// * For example, you can filter by
-// ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
-// (USAGE_TYPE != DataTransfer).
-//
-// * The corresponding Expression for this example
-// is as follows: { "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
-// "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"]
-// } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-// }}} ] }
-//
-// Because each Expression can have only one operator, the service returns
-// an error if more than one is specified. The following example shows an
-// Expression object that creates an error:  { "And": [ ... ], "Dimensions": {
-// "Key": "USAGE_TYPE", "Values": [ "DataTransfer" ] } }  The following is an
-// example of the corresponding error message: "Expression has more than one roots.
-// Only one root operator is allowed for each expression: And, Or, Not, Dimensions,
-// Tags, CostCategories"
-//
-// For the GetRightsizingRecommendation action, a
-// combination of OR and NOT isn't supported. OR isn't supported between different
-// dimensions, or dimensions and tags. NOT operators aren't supported. Dimensions
-// are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For the
+// For the GetRightsizingRecommendation action, a combination of OR and NOT isn't
+// supported. OR isn't supported between different dimensions, or dimensions and
+// tags. NOT operators aren't supported. Dimensions are also limited to
+// LINKED_ACCOUNT , REGION , or RIGHTSIZING_TYPE . For the
 // GetReservationPurchaseRecommendation action, only NOT is supported. AND and OR
-// aren't supported. Dimensions are limited to LINKED_ACCOUNT.
+// aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 type Expression struct {
 
 	// Return results that match both Dimension objects.
@@ -1002,7 +940,7 @@ type Expression struct {
 	// The filter that's based on CostCategory values.
 	CostCategories *CostCategoryValues
 
-	// The specific Dimension to use for Expression.
+	// The specific Dimension to use for Expression .
 	Dimensions *DimensionValues
 
 	// Return results that don't match a Dimension object.
@@ -1011,7 +949,7 @@ type Expression struct {
 	// Return results that match either Dimension object.
 	Or []Expression
 
-	// The specific Tag to use for Expression.
+	// The specific Tag to use for Expression .
 	Tags *TagValues
 
 	noSmithyDocumentSerde
@@ -1100,11 +1038,11 @@ type Impact struct {
 	TotalExpectedSpend *float64
 
 	// The cumulative dollar difference between the total actual spend and total
-	// expected spend. It is calculated as TotalActualSpend - TotalExpectedSpend.
+	// expected spend. It is calculated as TotalActualSpend - TotalExpectedSpend .
 	TotalImpact float64
 
 	// The cumulative percentage difference between the total actual spend and total
-	// expected spend. It is calculated as (TotalImpact / TotalExpectedSpend) * 100.
+	// expected spend. It is calculated as (TotalImpact / TotalExpectedSpend) * 100 .
 	// When TotalExpectedSpend is zero, this field is omitted. Expected spend can be
 	// zero in situations such as when you start to use a service for the first time.
 	TotalImpactPercentage *float64
@@ -1119,8 +1057,8 @@ type InstanceDetails struct {
 	// The Amazon EC2 instances that Amazon Web Services recommends that you purchase.
 	EC2InstanceDetails *EC2InstanceDetails
 
-	// The Amazon OpenSearch Service instances that Amazon Web Services recommends that
-	// you purchase.
+	// The Amazon OpenSearch Service instances that Amazon Web Services recommends
+	// that you purchase.
 	ESInstanceDetails *ESInstanceDetails
 
 	// The ElastiCache instances that Amazon Web Services recommends that you purchase.
@@ -1247,7 +1185,7 @@ type ReservationAggregates struct {
 
 	// How much you saved due to purchasing and utilizing reservation. Amazon Web
 	// Services calculates this by subtracting TotalAmortizedFee from
-	// OnDemandCostOfRIHoursUsed.
+	// OnDemandCostOfRIHoursUsed .
 	NetRISavings *string
 
 	// How much your reservation costs if charged On-Demand rates.
@@ -1256,9 +1194,9 @@ type ReservationAggregates struct {
 	// How many reservation hours that you purchased.
 	PurchasedHours *string
 
-	// The number of Amazon EC2 reservation hours that you purchased. It's converted to
-	// normalized units. Normalized units are available only for Amazon EC2 usage after
-	// November 11, 2017.
+	// The number of Amazon EC2 reservation hours that you purchased. It's converted
+	// to normalized units. Normalized units are available only for Amazon EC2 usage
+	// after November 11, 2017.
 	PurchasedUnits *string
 
 	// The cost of unused hours for your reservation.
@@ -1327,7 +1265,7 @@ type ReservationPurchaseRecommendation struct {
 	// this recommendation.
 	LookbackPeriodInDays LookbackPeriodInDays
 
-	// The payment option for the reservation (for example, AllUpfront or NoUpfront).
+	// The payment option for the reservation (for example, AllUpfront or NoUpfront ).
 	PaymentOption PaymentOption
 
 	// Details about the recommended purchases.
@@ -1385,8 +1323,8 @@ type ReservationPurchaseRecommendationDetail struct {
 	// save you in a month, as a percentage of your overall costs.
 	EstimatedMonthlySavingsPercentage *string
 
-	// How much Amazon Web Services estimates that you might spend for all usage during
-	// the specified historical period if you had a reservation.
+	// How much Amazon Web Services estimates that you might spend for all usage
+	// during the specified historical period if you had a reservation.
 	EstimatedReservationCostForLookbackPeriod *string
 
 	// Details about the instances that Amazon Web Services recommends that you
@@ -1489,12 +1427,10 @@ type ResourceDetails struct {
 }
 
 // The tag structure that contains a tag key and value. Tagging is supported only
-// for the following Cost Explorer resource types: AnomalyMonitor
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html),
-// AnomalySubscription
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html),
-// CostCategory
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html).
+// for the following Cost Explorer resource types: AnomalyMonitor (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html)
+// , AnomalySubscription (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html)
+// , CostCategory (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html)
+// .
 type ResourceTag struct {
 
 	// The key that's associated with the tag.
@@ -1546,8 +1482,9 @@ type RightsizingRecommendation struct {
 	// Context regarding the current instance.
 	CurrentInstance *CurrentInstance
 
-	// The list of possible reasons why the recommendation is generated, such as under-
-	// or over-utilization of specific metrics (for example, CPU, Memory, Network).
+	// The list of possible reasons why the recommendation is generated, such as
+	// under- or over-utilization of specific metrics (for example, CPU, Memory,
+	// Network).
 	FindingReasonCodes []FindingReasonCode
 
 	// The details for the modification recommendations.
@@ -1571,14 +1508,14 @@ type RightsizingRecommendation struct {
 type RightsizingRecommendationConfiguration struct {
 
 	// The option to consider RI or Savings Plans discount benefits in your savings
-	// calculation. The default value is TRUE.
+	// calculation. The default value is TRUE .
 	//
 	// This member is required.
 	BenefitsConsidered bool
 
 	// The option to see recommendations within the same instance family or
 	// recommendations for instances across other families. The default value is
-	// SAME_INSTANCE_FAMILY.
+	// SAME_INSTANCE_FAMILY .
 	//
 	// This member is required.
 	RecommendationTarget RecommendationTarget
@@ -1652,11 +1589,11 @@ type RootCause struct {
 type SavingsPlansAmortizedCommitment struct {
 
 	// The amortized amount of your Savings Plans commitment that was purchased with
-	// either a Partial or a NoUpfront.
+	// either a Partial or a NoUpfront .
 	AmortizedRecurringCommitment *string
 
-	// The amortized amount of your Savings Plans commitment that was purchased with an
-	// Upfront or PartialUpfront Savings Plans.
+	// The amortized amount of your Savings Plans commitment that was purchased with
+	// an Upfront or PartialUpfront Savings Plans.
 	AmortizedUpfrontCommitment *string
 
 	// The total amortized amount of your Savings Plans commitment, regardless of your
@@ -1670,7 +1607,7 @@ type SavingsPlansAmortizedCommitment struct {
 // calculations consider the On-Demand equivalent of your Savings Plans usage.
 type SavingsPlansCoverage struct {
 
-	// The attribute that applies to a specific Dimension.
+	// The attribute that applies to a specific Dimension .
 	Attributes map[string]string
 
 	// The amount of Savings Plans eligible usage that the Savings Plans covered.
@@ -1725,7 +1662,7 @@ type SavingsPlansPurchaseRecommendation struct {
 
 	// The account scope that you want your recommendations for. Amazon Web Services
 	// calculates recommendations that include the management account and member
-	// accounts if the value is set to PAYER. If the value is LINKED, recommendations
+	// accounts if the value is set to PAYER . If the value is LINKED , recommendations
 	// are calculated for individual member accounts only.
 	AccountScope AccountScope
 
@@ -1784,13 +1721,13 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 	// Savings Plans, over the length of the lookback period.
 	EstimatedOnDemandCost *string
 
-	// The estimated On-Demand costs you expect with no additional commitment, based on
-	// your usage of the selected time period and the Savings Plans you own.
+	// The estimated On-Demand costs you expect with no additional commitment, based
+	// on your usage of the selected time period and the Savings Plans you own.
 	EstimatedOnDemandCostWithCurrentCommitment *string
 
-	// The estimated return on investment that's based on the recommended Savings Plans
-	// that you purchased. This is calculated as estimatedSavingsAmount/
-	// estimatedSPCost*100.
+	// The estimated return on investment that's based on the recommended Savings
+	// Plans that you purchased. This is calculated as estimatedSavingsAmount /
+	// estimatedSPCost *100.
 	EstimatedROI *string
 
 	// The cost of the recommended Savings Plans over the length of the lookback
@@ -1812,8 +1749,8 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 	// Details for your recommended Savings Plans.
 	SavingsPlansDetails *SavingsPlansDetails
 
-	// The upfront cost of the recommended Savings Plans, based on the selected payment
-	// option.
+	// The upfront cost of the recommended Savings Plans, based on the selected
+	// payment option.
 	UpfrontCost *string
 
 	noSmithyDocumentSerde
@@ -1856,8 +1793,8 @@ type SavingsPlansPurchaseRecommendationSummary struct {
 	// based on your usage of the selected time period and the Savings Plans you own.
 	EstimatedOnDemandCostWithCurrentCommitment *string
 
-	// The estimated return on investment that's based on the recommended Savings Plans
-	// and estimated savings.
+	// The estimated return on investment that's based on the recommended Savings
+	// Plans and estimated savings.
 	EstimatedROI *string
 
 	// The estimated total savings over the lookback period, based on the purchase of
@@ -1865,8 +1802,8 @@ type SavingsPlansPurchaseRecommendationSummary struct {
 	EstimatedSavingsAmount *string
 
 	// The estimated savings relative to the total cost of On-Demand usage, over the
-	// lookback period. This is calculated as estimatedSavingsAmount/
-	// CurrentOnDemandSpend*100.
+	// lookback period. This is calculated as estimatedSavingsAmount /
+	// CurrentOnDemandSpend *100.
 	EstimatedSavingsPercentage *string
 
 	// The estimated total cost of the usage after purchasing the recommended Savings
@@ -1902,16 +1839,16 @@ type SavingsPlansSavings struct {
 // The measurement of how well you're using your existing Savings Plans.
 type SavingsPlansUtilization struct {
 
-	// The total amount of Savings Plans commitment that's been purchased in an account
-	// (or set of accounts).
+	// The total amount of Savings Plans commitment that's been purchased in an
+	// account (or set of accounts).
 	TotalCommitment *string
 
 	// The amount of your Savings Plans commitment that wasn't consumed from Savings
 	// Plans eligible usage in a specific period.
 	UnusedCommitment *string
 
-	// The amount of your Savings Plans commitment that was consumed from Savings Plans
-	// eligible usage in a specific period.
+	// The amount of your Savings Plans commitment that was consumed from Savings
+	// Plans eligible usage in a specific period.
 	UsedCommitment *string
 
 	// The amount of UsedCommitment divided by the TotalCommitment for your Savings
@@ -1930,8 +1867,8 @@ type SavingsPlansUtilizationAggregates struct {
 	// This member is required.
 	Utilization *SavingsPlansUtilization
 
-	// The total amortized commitment for a Savings Plans. This includes the sum of the
-	// upfront and recurring Savings Plans fees.
+	// The total amortized commitment for a Savings Plans. This includes the sum of
+	// the upfront and recurring Savings Plans fees.
 	AmortizedCommitment *SavingsPlansAmortizedCommitment
 
 	// The amount that's saved by using existing Savings Plans. Savings returns both
@@ -1956,8 +1893,8 @@ type SavingsPlansUtilizationByTime struct {
 	// This member is required.
 	Utilization *SavingsPlansUtilization
 
-	// The total amortized commitment for a Savings Plans. This includes the sum of the
-	// upfront and recurring Savings Plans fees.
+	// The total amortized commitment for a Savings Plans. This includes the sum of
+	// the upfront and recurring Savings Plans fees.
 	AmortizedCommitment *SavingsPlansAmortizedCommitment
 
 	// The amount that's saved by using existing Savings Plans. Savings returns both
@@ -1977,7 +1914,7 @@ type SavingsPlansUtilizationDetail struct {
 	// upfront and recurring Savings Plans fees.
 	AmortizedCommitment *SavingsPlansAmortizedCommitment
 
-	// The attribute that applies to a specific Dimension.
+	// The attribute that applies to a specific Dimension .
 	Attributes map[string]string
 
 	// The amount saved by using existing Savings Plans. Savings returns both net
@@ -2022,7 +1959,7 @@ type SortDefinition struct {
 // The recipient of AnomalySubscription notifications.
 type Subscriber struct {
 
-	// The email address or SNS Amazon Resource Name (ARN). This depends on the Type.
+	// The email address or SNS Amazon Resource Name (ARN). This depends on the Type .
 	Address *string
 
 	// Indicates if the subscriber accepts the notifications.
@@ -2034,10 +1971,10 @@ type Subscriber struct {
 	noSmithyDocumentSerde
 }
 
-// The values that are available for a tag. If Values and Key aren't specified, the
-// ABSENTMatchOption is applied to all tags. That is, it's filtered on resources
-// with no tags. If Key is provided and Values isn't specified, the
-// ABSENTMatchOption is applied to the tag Key only. That is, it's filtered on
+// The values that are available for a tag. If Values and Key aren't specified,
+// the ABSENT MatchOption is applied to all tags. That is, it's filtered on
+// resources with no tags. If Key is provided and Values isn't specified, the
+// ABSENT MatchOption is applied to the tag Key only. That is, it's filtered on
 // resources without the given tag key.
 type TagValues struct {
 
@@ -2046,7 +1983,7 @@ type TagValues struct {
 
 	// The match options that you can use to filter your results. MatchOptions is only
 	// applicable for actions related to Cost Category. The default values for
-	// MatchOptions are EQUALS and CASE_SENSITIVE.
+	// MatchOptions are EQUALS and CASE_SENSITIVE .
 	MatchOptions []MatchOption
 
 	// The specific value of the tag.

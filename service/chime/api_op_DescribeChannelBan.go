@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of a channel ban. The x-amz-chime-bearer request header
-// is mandatory. Use the AppInstanceUserArn of the user that makes the API call as
-// the value in the header.
+// Returns the full details of a channel ban. The x-amz-chime-bearer request
+// header is mandatory. Use the AppInstanceUserArn of the user that makes the API
+// call as the value in the header.
 func (c *Client) DescribeChannelBan(ctx context.Context, params *DescribeChannelBanInput, optFns ...func(*Options)) (*DescribeChannelBanOutput, error) {
 	if params == nil {
 		params = &DescribeChannelBanInput{}

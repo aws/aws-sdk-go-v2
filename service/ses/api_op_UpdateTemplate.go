@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an email template. Email templates enable you to send personalized email
-// to one or more destinations in a single API operation. For more information, see
-// the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
-// You can execute this operation no more than once per second.
+// Updates an email template. Email templates enable you to send personalized
+// email to one or more destinations in a single API operation. For more
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput, optFns ...func(*Options)) (*UpdateTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateTemplateInput{}

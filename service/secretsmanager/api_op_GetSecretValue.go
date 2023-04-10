@@ -11,27 +11,23 @@ import (
 	"time"
 )
 
-// Retrieves the contents of the encrypted fields SecretString or SecretBinary from
-// the specified version of a secret, whichever contains content. We recommend that
-// you cache your secret values by using client-side caching. Caching secrets
+// Retrieves the contents of the encrypted fields SecretString or SecretBinary
+// from the specified version of a secret, whichever contains content. We recommend
+// that you cache your secret values by using client-side caching. Caching secrets
 // improves speed and reduces your costs. For more information, see Cache secrets
-// for your applications
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html).
-// To retrieve the previous version of a secret, use VersionStage and specify
+// for your applications (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html)
+// . To retrieve the previous version of a secret, use VersionStage and specify
 // AWSPREVIOUS. To revert to the previous version of a secret, call
-// UpdateSecretVersionStage
-// (https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/update-secret-version-stage.html).
-// Secrets Manager generates a CloudTrail log entry when you call this action. Do
+// UpdateSecretVersionStage (https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/update-secret-version-stage.html)
+// . Secrets Manager generates a CloudTrail log entry when you call this action. Do
 // not include sensitive information in request parameters because it might be
-// logged. For more information, see Logging Secrets Manager events with CloudTrail
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
-// Required permissions: secretsmanager:GetSecretValue. If the secret is encrypted
-// using a customer-managed key instead of the Amazon Web Services managed key
-// aws/secretsmanager, then you also need kms:Decrypt permissions for that key. For
-// more information, see  IAM policy actions for Secrets Manager
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
-// and Authentication and access control in Secrets Manager
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
+// logged. For more information, see Logging Secrets Manager events with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
+// . Required permissions: secretsmanager:GetSecretValue . If the secret is
+// encrypted using a customer-managed key instead of the Amazon Web Services
+// managed key aws/secretsmanager , then you also need kms:Decrypt permissions for
+// that key. For more information, see IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
+// and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
+// .
 func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput, optFns ...func(*Options)) (*GetSecretValueOutput, error) {
 	if params == nil {
 		params = &GetSecretValueInput{}
@@ -51,25 +47,25 @@ type GetSecretValueInput struct {
 
 	// The ARN or name of the secret to retrieve. For an ARN, we recommend that you
 	// specify a complete ARN rather than a partial ARN. See Finding a secret from a
-	// partial ARN
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+	// partial ARN (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen)
+	// .
 	//
 	// This member is required.
 	SecretId *string
 
 	// The unique identifier of the version of the secret to retrieve. If you include
-	// both this parameter and VersionStage, the two parameters must refer to the same
-	// secret version. If you don't specify either a VersionStage or VersionId, then
+	// both this parameter and VersionStage , the two parameters must refer to the same
+	// secret version. If you don't specify either a VersionStage or VersionId , then
 	// Secrets Manager returns the AWSCURRENT version. This value is typically a
 	// UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier) value with
 	// 32 hexadecimal digits.
 	VersionId *string
 
-	// The staging label of the version of the secret to retrieve. Secrets Manager uses
-	// staging labels to keep track of different versions during the rotation process.
-	// If you include both this parameter and VersionId, the two parameters must refer
-	// to the same secret version. If you don't specify either a VersionStage or
-	// VersionId, Secrets Manager returns the AWSCURRENT version.
+	// The staging label of the version of the secret to retrieve. Secrets Manager
+	// uses staging labels to keep track of different versions during the rotation
+	// process. If you include both this parameter and VersionId , the two parameters
+	// must refer to the same secret version. If you don't specify either a
+	// VersionStage or VersionId , Secrets Manager returns the AWSCURRENT version.
 	VersionStage *string
 
 	noSmithyDocumentSerde
@@ -81,7 +77,7 @@ type GetSecretValueOutput struct {
 	ARN *string
 
 	// The date and time that this version of the secret was created. If you don't
-	// specify which version in VersionId or VersionStage, then Secrets Manager uses
+	// specify which version in VersionId or VersionStage , then Secrets Manager uses
 	// the AWSCURRENT version.
 	CreatedDate *time.Time
 

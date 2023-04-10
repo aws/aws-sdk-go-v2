@@ -48,9 +48,8 @@ type DescribeAssetInput struct {
 
 type DescribeAssetOutput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the asset, which has the following format.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the asset, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}
 	//
 	// This member is required.
@@ -61,7 +60,7 @@ type DescribeAssetOutput struct {
 	// This member is required.
 	AssetCreationDate *time.Time
 
-	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
+	// A list of asset hierarchies that each contain a hierarchyId . A hierarchy
 	// specifies allowed parent/child asset relationships.
 	//
 	// This member is required.
@@ -224,9 +223,9 @@ type AssetActiveWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, AssetActiveWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, AssetActiveWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -400,9 +399,9 @@ type AssetNotExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, AssetNotExistsWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, AssetNotExistsWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

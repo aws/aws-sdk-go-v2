@@ -18,11 +18,10 @@ import (
 // and any values specified as template parameters. A stack is considered to have
 // drifted if one or more of its resources have drifted. For more information about
 // stack and resource drift, see Detecting Unregulated Configuration Changes to
-// Stacks and Resources
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
-// Use DetectStackDrift to initiate a stack drift detection operation.
+// Stacks and Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html)
+// . Use DetectStackDrift to initiate a stack drift detection operation.
 // DetectStackDrift returns a StackDriftDetectionId you can use to monitor the
-// progress of the operation using DescribeStackDriftDetectionStatus. Once the
+// progress of the operation using DescribeStackDriftDetectionStatus . Once the
 // drift detection operation has completed, use DescribeStackResourceDrifts to
 // return drift information about the stack and its resources.
 func (c *Client) DescribeStackDriftDetectionStatus(ctx context.Context, params *DescribeStackDriftDetectionStatusInput, optFns ...func(*Options)) (*DescribeStackDriftDetectionStatusOutput, error) {
@@ -56,21 +55,17 @@ type DescribeStackDriftDetectionStatusInput struct {
 type DescribeStackDriftDetectionStatusOutput struct {
 
 	// The status of the stack drift detection operation.
-	//
-	// * DETECTION_COMPLETE: The
-	// stack drift detection operation has successfully completed for all resources in
-	// the stack that support drift detection. (Resources that don't currently support
-	// stack detection remain unchecked.) If you specified logical resource IDs for
-	// CloudFormation to use as a filter for the stack drift detection operation, only
-	// the resources with those logical IDs are checked for drift.
-	//
-	// * DETECTION_FAILED:
-	// The stack drift detection operation has failed for at least one resource in the
-	// stack. Results will be available for resources on which CloudFormation
-	// successfully completed drift detection.
-	//
-	// * DETECTION_IN_PROGRESS: The stack
-	// drift detection operation is currently in progress.
+	//   - DETECTION_COMPLETE : The stack drift detection operation has successfully
+	//   completed for all resources in the stack that support drift detection.
+	//   (Resources that don't currently support stack detection remain unchecked.) If
+	//   you specified logical resource IDs for CloudFormation to use as a filter for the
+	//   stack drift detection operation, only the resources with those logical IDs are
+	//   checked for drift.
+	//   - DETECTION_FAILED : The stack drift detection operation has failed for at
+	//   least one resource in the stack. Results will be available for resources on
+	//   which CloudFormation successfully completed drift detection.
+	//   - DETECTION_IN_PROGRESS : The stack drift detection operation is currently in
+	//   progress.
 	//
 	// This member is required.
 	DetectionStatus types.StackDriftDetectionStatus
@@ -97,25 +92,20 @@ type DescribeStackDriftDetectionStatusOutput struct {
 	DetectionStatusReason *string
 
 	// Total number of stack resources that have drifted. This is NULL until the drift
-	// detection operation reaches a status of DETECTION_COMPLETE. This value will be 0
-	// for stacks whose drift status is IN_SYNC.
+	// detection operation reaches a status of DETECTION_COMPLETE . This value will be
+	// 0 for stacks whose drift status is IN_SYNC .
 	DriftedStackResourceCount *int32
 
 	// Status of the stack's actual configuration compared to its expected
 	// configuration.
-	//
-	// * DRIFTED: The stack differs from its expected template
-	// configuration. A stack is considered to have drifted if one or more of its
-	// resources have drifted.
-	//
-	// * NOT_CHECKED: CloudFormation hasn't checked if the
-	// stack differs from its expected template configuration.
-	//
-	// * IN_SYNC: The stack's
-	// actual configuration matches its expected template configuration.
-	//
-	// * UNKNOWN:
-	// This value is reserved for future use.
+	//   - DRIFTED : The stack differs from its expected template configuration. A
+	//   stack is considered to have drifted if one or more of its resources have
+	//   drifted.
+	//   - NOT_CHECKED : CloudFormation hasn't checked if the stack differs from its
+	//   expected template configuration.
+	//   - IN_SYNC : The stack's actual configuration matches its expected template
+	//   configuration.
+	//   - UNKNOWN : This value is reserved for future use.
 	StackDriftStatus types.StackDriftStatus
 
 	// Metadata pertaining to the operation's result.

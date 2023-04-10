@@ -45,8 +45,8 @@ type BatchGetSchemaInput struct {
 
 type BatchGetSchemaOutput struct {
 
-	// Error reasons for schemas that could not be retrieved. One error is returned for
-	// every schema that could not be retrieved.
+	// Error reasons for schemas that could not be retrieved. One error is returned
+	// for every schema that could not be retrieved.
 	//
 	// This member is required.
 	Errors []types.BatchGetSchemaError

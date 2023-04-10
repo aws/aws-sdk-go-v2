@@ -31,14 +31,12 @@ func (c *Client) GetResourceShareAssociations(ctx context.Context, params *GetRe
 
 type GetResourceShareAssociationsInput struct {
 
-	// Specifies whether you want to retrieve the associations that involve a specified
-	// resource or principal.
-	//
-	// * PRINCIPAL – list the principals that are associated
-	// with the specified resource share.
-	//
-	// * RESOURCE – list the resources that are
-	// associated with the specified resource share.
+	// Specifies whether you want to retrieve the associations that involve a
+	// specified resource or principal.
+	//   - PRINCIPAL – list the principals that are associated with the specified
+	//   resource share.
+	//   - RESOURCE – list the resources that are associated with the specified
+	//   resource share.
 	//
 	// This member is required.
 	AssociationType types.ResourceShareAssociationType
@@ -46,9 +44,9 @@ type GetResourceShareAssociationsInput struct {
 	// Specifies that you want to retrieve only associations with this status.
 	AssociationStatus types.ResourceShareAssociationStatus
 
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service
@@ -65,21 +63,18 @@ type GetResourceShareAssociationsInput struct {
 
 	// Specifies the ID of the principal whose resource shares you want to retrieve.
 	// This can be an Amazon Web Services account ID, an organization ID, an
-	// organizational unit ID, or the Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// an individual IAM user or role. You cannot specify this parameter if the
-	// association type is RESOURCE.
+	// organizational unit ID, or the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of an individual IAM user or role. You cannot specify this parameter if the
+	// association type is RESOURCE .
 	Principal *string
 
-	// Specifies the Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resource whose resource shares you want to retrieve. You cannot specify this
-	// parameter if the association type is PRINCIPAL.
+	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource whose resource shares you want to retrieve. You cannot specify
+	// this parameter if the association type is PRINCIPAL .
 	ResourceArn *string
 
-	// Specifies a list of Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resource share whose associations you want to retrieve.
+	// Specifies a list of Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource share whose associations you want to retrieve.
 	ResourceShareArns []string
 
 	noSmithyDocumentSerde
@@ -90,7 +85,7 @@ type GetResourceShareAssociationsOutput struct {
 	// If present, this value indicates that more output is available than is included
 	// in the current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null. This
+	// repeat this until the NextToken response element comes back as null . This
 	// indicates that this is the last page of results.
 	NextToken *string
 
@@ -177,9 +172,9 @@ var _ GetResourceShareAssociationsAPIClient = (*Client)(nil)
 // GetResourceShareAssociationsPaginatorOptions is the paginator options for
 // GetResourceShareAssociations
 type GetResourceShareAssociationsPaginatorOptions struct {
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
 	// Include the specified value as the NextToken request parameter in the next call
 	// to the operation to get the next part of the results. Note that the service

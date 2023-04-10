@@ -67,8 +67,8 @@ type StartTableDataImportJobInput struct {
 	// This member is required.
 	ImportOptions *types.ImportOptions
 
-	// The ID of the workbook where the rows are being imported. If a workbook with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook where the rows are being imported. If a workbook with
+	// the specified id could not be found, this API throws ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string

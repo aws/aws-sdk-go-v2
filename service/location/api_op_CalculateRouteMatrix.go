@@ -13,35 +13,30 @@ import (
 	"time"
 )
 
-// Calculates a route matrix
-// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html)
+//	Calculates a route matrix (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html)
+//
 // given the following required parameters: DeparturePositions and
-// DestinationPositions. CalculateRouteMatrix calculates routes and returns the
+// DestinationPositions . CalculateRouteMatrix calculates routes and returns the
 // travel time and travel distance from each departure position to each destination
 // position in the request. For example, given departure positions A and B, and
 // destination positions X and Y, CalculateRouteMatrix will return time and
 // distance for routes from A to X, A to Y, B to X, and B to Y (in that order). The
 // number of results returned (and routes calculated) will be the number of
-// DeparturePositions times the number of DestinationPositions. Your account is
+// DeparturePositions times the number of DestinationPositions . Your account is
 // charged for each route calculated, not the number of requests. Requires that you
-// first create a route calculator resource
-// (https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html).
-// By default, a request that doesn't specify a departure time uses the best time
+// first create a route calculator resource (https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html)
+// . By default, a request that doesn't specify a departure time uses the best time
 // of day to travel with the best traffic conditions when calculating routes.
 // Additional options include:
-//
-// * Specifying a departure time
-// (https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html)
-// using either DepartureTime or DepartNow. This calculates routes based on
-// predictive traffic data at the given time. You can't specify both DepartureTime
-// and DepartNow in a single request. Specifying both parameters returns a
-// validation error.
-//
-// * Specifying a travel mode
-// (https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html)
-// using TravelMode sets the transportation mode used to calculate the routes. This
-// also lets you specify additional route preferences in CarModeOptions if
-// traveling by Car, or TruckModeOptions if traveling by Truck.
+//   - Specifying a departure time (https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html)
+//     using either DepartureTime or DepartNow . This calculates routes based on
+//     predictive traffic data at the given time. You can't specify both
+//     DepartureTime and DepartNow in a single request. Specifying both parameters
+//     returns a validation error.
+//   - Specifying a travel mode (https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html)
+//     using TravelMode sets the transportation mode used to calculate the routes. This
+//     also lets you specify additional route preferences in CarModeOptions if
+//     traveling by Car , or TruckModeOptions if traveling by Truck .
 func (c *Client) CalculateRouteMatrix(ctx context.Context, params *CalculateRouteMatrixInput, optFns ...func(*Options)) (*CalculateRouteMatrixOutput, error) {
 	if params == nil {
 		params = &CalculateRouteMatrixInput{}
@@ -66,84 +61,70 @@ type CalculateRouteMatrixInput struct {
 	CalculatorName *string
 
 	// The list of departure (origin) positions for the route matrix. An array of
-	// points, each of which is itself a 2-value array defined in WGS 84
-	// (https://earth-info.nga.mil/GandG/wgs84/index.html) format: [longitude,
-	// latitude]. For example, [-123.115, 49.285]. Depending on the data provider
-	// selected in the route calculator resource there may be additional restrictions
-	// on the inputs you can choose. See  Position restrictions
-	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits)
+	// points, each of which is itself a 2-value array defined in WGS 84 (https://earth-info.nga.mil/GandG/wgs84/index.html)
+	// format: [longitude, latitude] . For example, [-123.115, 49.285] . Depending on
+	// the data provider selected in the route calculator resource there may be
+	// additional restrictions on the inputs you can choose. See Position restrictions (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits)
 	// in the Amazon Location Service Developer Guide. For route calculators that use
 	// Esri as the data provider, if you specify a departure that's not located on a
-	// road, Amazon Location  moves the position to the nearest road
-	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html).
-	// The snapped value is available in the result in SnappedDeparturePositions. Valid
-	// Values: [-180 to 180,-90 to 90]
+	// road, Amazon Location moves the position to the nearest road (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html)
+	// . The snapped value is available in the result in SnappedDeparturePositions .
+	// Valid Values: [-180 to 180,-90 to 90]
 	//
 	// This member is required.
 	DeparturePositions [][]float64
 
-	// The list of destination positions for the route matrix. An array of points, each
-	// of which is itself a 2-value array defined in WGS 84
-	// (https://earth-info.nga.mil/GandG/wgs84/index.html) format: [longitude,
-	// latitude]. For example, [-122.339, 47.615] Depending on the data provider
-	// selected in the route calculator resource there may be additional restrictions
-	// on the inputs you can choose. See  Position restrictions
-	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits)
+	// The list of destination positions for the route matrix. An array of points,
+	// each of which is itself a 2-value array defined in WGS 84 (https://earth-info.nga.mil/GandG/wgs84/index.html)
+	// format: [longitude, latitude] . For example, [-122.339, 47.615] Depending on
+	// the data provider selected in the route calculator resource there may be
+	// additional restrictions on the inputs you can choose. See Position restrictions (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits)
 	// in the Amazon Location Service Developer Guide. For route calculators that use
 	// Esri as the data provider, if you specify a destination that's not located on a
-	// road, Amazon Location  moves the position to the nearest road
-	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html).
-	// The snapped value is available in the result in SnappedDestinationPositions.
+	// road, Amazon Location moves the position to the nearest road (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html)
+	// . The snapped value is available in the result in SnappedDestinationPositions .
 	// Valid Values: [-180 to 180,-90 to 90]
 	//
 	// This member is required.
 	DestinationPositions [][]float64
 
-	// Specifies route preferences when traveling by Car, such as avoiding routes that
-	// use ferries or tolls. Requirements: TravelMode must be specified as Car.
+	// Specifies route preferences when traveling by Car , such as avoiding routes that
+	// use ferries or tolls. Requirements: TravelMode must be specified as Car .
 	CarModeOptions *types.CalculateRouteCarModeOptions
 
 	// Sets the time of departure as the current time. Uses the current time to
-	// calculate the route matrix. You can't set both DepartureTime and DepartNow. If
+	// calculate the route matrix. You can't set both DepartureTime and DepartNow . If
 	// neither is set, the best time of day to travel with the best traffic conditions
 	// is used to calculate the route matrix. Default Value: false Valid Values: false
 	// | true
 	DepartNow *bool
 
 	// Specifies the desired time of departure. Uses the given time to calculate the
-	// route matrix. You can't set both DepartureTime and DepartNow. If neither is set,
-	// the best time of day to travel with the best traffic conditions is used to
+	// route matrix. You can't set both DepartureTime and DepartNow . If neither is
+	// set, the best time of day to travel with the best traffic conditions is used to
 	// calculate the route matrix. Setting a departure time in the past returns a 400
 	// ValidationException error.
-	//
-	// * In ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00
+	//   - In ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html) format:
+	//   YYYY-MM-DDThh:mm:ss.sssZ . For example, 2020–07-2T12:15:20.000Z+01:00
 	DepartureTime *time.Time
 
 	// Set the unit system to specify the distance. Default Value: Kilometers
 	DistanceUnit types.DistanceUnit
 
-	// Specifies the mode of transport when calculating a route. Used in estimating the
-	// speed of travel and road compatibility. The TravelMode you specify also
+	// Specifies the mode of transport when calculating a route. Used in estimating
+	// the speed of travel and road compatibility. The TravelMode you specify also
 	// determines how you specify route preferences:
-	//
-	// * If traveling by Car use the
-	// CarModeOptions parameter.
-	//
-	// * If traveling by Truck use the TruckModeOptions
-	// parameter.
-	//
-	// Bicycle or Motorcycle are only valid when using Grab as a data
-	// provider, and only within Southeast Asia. Truck is not available for Grab. For
-	// more information about using Grab as a data provider, see GrabMaps
-	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html) in the
-	// Amazon Location Service Developer Guide. Default Value: Car
+	//   - If traveling by Car use the CarModeOptions parameter.
+	//   - If traveling by Truck use the TruckModeOptions parameter.
+	// Bicycle or Motorcycle are only valid when using Grab as a data provider, and
+	// only within Southeast Asia. Truck is not available for Grab. For more
+	// information about using Grab as a data provider, see GrabMaps (https://docs.aws.amazon.com/location/latest/developerguide/grab.html)
+	// in the Amazon Location Service Developer Guide. Default Value: Car
 	TravelMode types.TravelMode
 
-	// Specifies route preferences when traveling by Truck, such as avoiding routes
+	// Specifies route preferences when traveling by Truck , such as avoiding routes
 	// that use ferries or tolls, and truck specifications to consider when choosing an
-	// optimal road. Requirements: TravelMode must be specified as Truck.
+	// optimal road. Requirements: TravelMode must be specified as Truck .
 	TruckModeOptions *types.CalculateRouteTruckModeOptions
 
 	noSmithyDocumentSerde
@@ -153,15 +134,15 @@ type CalculateRouteMatrixInput struct {
 type CalculateRouteMatrixOutput struct {
 
 	// The calculated route matrix containing the results for all pairs of
-	// DeparturePositions to DestinationPositions. Each row corresponds to one entry in
-	// DeparturePositions. Each entry in the row corresponds to the route from that
-	// entry in DeparturePositions to an entry in DestinationPositions.
+	// DeparturePositions to DestinationPositions . Each row corresponds to one entry
+	// in DeparturePositions . Each entry in the row corresponds to the route from that
+	// entry in DeparturePositions to an entry in DestinationPositions .
 	//
 	// This member is required.
 	RouteMatrix [][]types.RouteMatrixEntry
 
-	// Contains information about the route matrix, DataSource, DistanceUnit,
-	// RouteCount and ErrorCount.
+	// Contains information about the route matrix, DataSource , DistanceUnit ,
+	// RouteCount and ErrorCount .
 	//
 	// This member is required.
 	Summary *types.CalculateRouteMatrixSummary
@@ -169,11 +150,11 @@ type CalculateRouteMatrixOutput struct {
 	// For routes calculated using an Esri route calculator resource, departure
 	// positions are snapped to the closest road. For Esri route calculator resources,
 	// this returns the list of departure/origin positions used for calculation of the
-	// RouteMatrix.
+	// RouteMatrix .
 	SnappedDeparturePositions [][]float64
 
 	// The list of destination positions for the route matrix used for calculation of
-	// the RouteMatrix.
+	// the RouteMatrix .
 	SnappedDestinationPositions [][]float64
 
 	// Metadata pertaining to the operation's result.

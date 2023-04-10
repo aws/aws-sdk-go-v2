@@ -13,7 +13,7 @@ import (
 // Accepts an invitation for the member account to contribute data to a behavior
 // graph. This operation can only be called by an invited member account. The
 // request provides the ARN of behavior graph. The member account status in the
-// graph must be INVITED.
+// graph must be INVITED .
 func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationInput, optFns ...func(*Options)) (*AcceptInvitationOutput, error) {
 	if params == nil {
 		params = &AcceptInvitationInput{}
@@ -32,7 +32,7 @@ func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationI
 type AcceptInvitationInput struct {
 
 	// The ARN of the behavior graph that the member account is accepting the
-	// invitation for. The member account status in the behavior graph must be INVITED.
+	// invitation for. The member account status in the behavior graph must be INVITED .
 	//
 	// This member is required.
 	GraphArn *string

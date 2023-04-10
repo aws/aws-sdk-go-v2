@@ -32,21 +32,21 @@ func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput
 
 type ListOperationsInput struct {
 
-	// The Amazon Resource Name (ARN) of the App Runner service that you want a list of
-	// operations for.
+	// The Amazon Resource Name (ARN) of the App Runner service that you want a list
+	// of operations for.
 	//
 	// This member is required.
 	ServiceArn *string
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
 	// identical to the ones specified in the initial request. If you don't specify
-	// NextToken, the request retrieves the first result page.
+	// NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,8 +54,8 @@ type ListOperationsInput struct {
 
 type ListOperationsOutput struct {
 
-	// The token that you can pass in a subsequent request to get the next result page.
-	// It's returned in a paginated request.
+	// The token that you can pass in a subsequent request to get the next result
+	// page. It's returned in a paginated request.
 	NextToken *string
 
 	// A list of operation summary information records. In a paginated request, the
@@ -142,7 +142,7 @@ var _ ListOperationsAPIClient = (*Client)(nil)
 // ListOperationsPaginatorOptions is the paginator options for ListOperations
 type ListOperationsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults, the request
+	// used for a paginated request. If you don't specify MaxResults , the request
 	// retrieves all available results in a single response.
 	Limit int32
 

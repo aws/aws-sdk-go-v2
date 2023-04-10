@@ -41,25 +41,19 @@ type DescribePlaceIndexInput struct {
 
 type DescribePlaceIndexOutput struct {
 
-	// The timestamp for when the place index resource was created in ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ.
+	// The timestamp for when the place index resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	//
 	// This member is required.
 	CreateTime *time.Time
 
 	// The data provider of geospatial data. Values can be one of the following:
-	//
-	// *
-	// Esri
-	//
-	// * Grab
-	//
-	// * Here
-	//
-	// For more information about data providers, see Amazon
-	// Location Service data providers
-	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
+	//   - Esri
+	//   - Grab
+	//   - Here
+	// For more information about data providers, see Amazon Location Service data
+	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
+	// .
 	//
 	// This member is required.
 	DataSource *string
@@ -76,9 +70,7 @@ type DescribePlaceIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a
 	// resource across Amazon Web Services.
-	//
-	// * Format example:
-	// arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex
+	//   - Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex
 	//
 	// This member is required.
 	IndexArn *string
@@ -88,14 +80,13 @@ type DescribePlaceIndexOutput struct {
 	// This member is required.
 	IndexName *string
 
-	// The timestamp for when the place index resource was last updated in ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ.
+	// The timestamp for when the place index resource was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
-	// No longer used. Always returns RequestBasedUsage.
+	// No longer used. Always returns RequestBasedUsage .
 	//
 	// Deprecated: Deprecated. Always returns RequestBasedUsage.
 	PricingPlan types.PricingPlan

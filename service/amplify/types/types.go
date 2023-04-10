@@ -56,10 +56,10 @@ type App struct {
 	// This member is required.
 	Name *string
 
-	// The platform for the Amplify app. For a static app, set the platform type to
-	// WEB. For a dynamic server-side rendered (SSR) app, set the platform type to
-	// WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only,
-	// set the platform type to WEB_DYNAMIC.
+	// The platform for the Amplify app. For a static app, set the platform type to WEB
+	// . For a dynamic server-side rendered (SSR) app, set the platform type to
+	// WEB_COMPUTE . For an app requiring Amplify Hosting's original SSR support only,
+	// set the platform type to WEB_DYNAMIC .
 	//
 	// This member is required.
 	Platform Platform
@@ -82,7 +82,7 @@ type App struct {
 
 	// The basic authorization credentials for branches for the Amplify app. You must
 	// base64-encode the authorization credentials and provide them in the format
-	// user:password.
+	// user:password .
 	BasicAuthCredentials *string
 
 	// Describes the content of the build specification (build spec) for the Amplify
@@ -109,9 +109,9 @@ type App struct {
 	// Describes the information about a production branch of the Amplify app.
 	ProductionBranch *ProductionBranch
 
-	// This is for internal use. The Amplify service uses this parameter to specify the
-	// authentication protocol to use to access the Git repository for an Amplify app.
-	// Amplify specifies TOKEN for a GitHub repository, SIGV4 for an Amazon Web
+	// This is for internal use. The Amplify service uses this parameter to specify
+	// the authentication protocol to use to access the Git repository for an Amplify
+	// app. Amplify specifies TOKEN for a GitHub repository, SIGV4 for an Amazon Web
 	// Services CodeCommit repository, and SSH for GitLab and Bitbucket repositories.
 	RepositoryCloneMethod RepositoryCloneMethod
 
@@ -142,7 +142,7 @@ type AutoBranchCreationConfig struct {
 
 	// The basic authorization credentials for the autocreated branch. You must
 	// base64-encode the authorization credentials and provide them in the format
-	// user:password.
+	// user:password .
 	BasicAuthCredentials *string
 
 	// The build specification (build spec) for the autocreated branch.
@@ -310,7 +310,7 @@ type Branch struct {
 
 	// The basic authorization credentials for a branch of an Amplify app. You must
 	// base64-encode the authorization credentials and provide them in the format
-	// user:password.
+	// user:password .
 	BasicAuthCredentials *string
 
 	// The build specification (build spec) content for the branch of an Amplify app.
@@ -356,11 +356,11 @@ type CustomRule struct {
 	// The condition for a URL rewrite or redirect rule, such as a country code.
 	Condition *string
 
-	// The status code for a URL rewrite or redirect rule. 200 Represents a 200 rewrite
-	// rule. 301 Represents a 301 (moved pemanently) redirect rule. This and all future
-	// requests should be directed to the target URL. 302 Represents a 302 temporary
-	// redirect rule. 404 Represents a 404 redirect rule. 404-200 Represents a 404
-	// rewrite rule.
+	// The status code for a URL rewrite or redirect rule. 200 Represents a 200
+	// rewrite rule. 301 Represents a 301 (moved pemanently) redirect rule. This and
+	// all future requests should be directed to the target URL. 302 Represents a 302
+	// temporary redirect rule. 404 Represents a 404 redirect rule. 404-200 Represents
+	// a 404 rewrite rule.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -457,9 +457,9 @@ type JobSummary struct {
 	// This member is required.
 	JobId *string
 
-	// The type for the job. If the value is RELEASE, the job was manually released
-	// from its source by using the StartJob API. If the value is RETRY, the job was
-	// manually retried using the StartJob API. If the value is WEB_HOOK, the job was
+	// The type for the job. If the value is RELEASE , the job was manually released
+	// from its source by using the StartJob API. If the value is RETRY , the job was
+	// manually retried using the StartJob API. If the value is WEB_HOOK , the job was
 	// automatically triggered by webhooks.
 	//
 	// This member is required.

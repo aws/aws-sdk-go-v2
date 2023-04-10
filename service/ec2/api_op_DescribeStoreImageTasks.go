@@ -15,16 +15,14 @@ import (
 // Describes the progress of the AMI store tasks. You can describe the store tasks
 // for specified AMIs. If you don't specify the AMIs, you get a paginated list of
 // store tasks from the last 31 days. For each AMI task, the response indicates if
-// the task is InProgress, Completed, or Failed. For tasks InProgress, the response
-// shows the estimated progress as a percentage. Tasks are listed in reverse
-// chronological order. Currently, only tasks from the past 31 days can be viewed.
-// To use this API, you must have the required permissions. For more information,
-// see Permissions for storing and restoring AMIs using Amazon S3
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions)
-// in the Amazon EC2 User Guide. For more information, see Store and restore an AMI
-// using Amazon S3
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html) in
-// the Amazon EC2 User Guide.
+// the task is InProgress , Completed , or Failed . For tasks InProgress , the
+// response shows the estimated progress as a percentage. Tasks are listed in
+// reverse chronological order. Currently, only tasks from the past 31 days can be
+// viewed. To use this API, you must have the required permissions. For more
+// information, see Permissions for storing and restoring AMIs using Amazon S3 (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions)
+// in the Amazon EC2 User Guide. For more information, see Store and restore an
+// AMI using Amazon S3 (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html)
+// in the Amazon EC2 User Guide.
 func (c *Client) DescribeStoreImageTasks(ctx context.Context, params *DescribeStoreImageTasksInput, optFns ...func(*Options)) (*DescribeStoreImageTasksOutput, error) {
 	if params == nil {
 		params = &DescribeStoreImageTasksInput{}
@@ -44,17 +42,15 @@ type DescribeStoreImageTasksInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The filters.
-	//
-	// * task-state - Returns tasks in a certain state (InProgress |
-	// Completed | Failed)
-	//
-	// * bucket - Returns task information for tasks that targeted
-	// a specific bucket. For the filter value, specify the bucket name.
+	//   - task-state - Returns tasks in a certain state ( InProgress | Completed |
+	//   Failed )
+	//   - bucket - Returns task information for tasks that targeted a specific bucket.
+	//   For the filter value, specify the bucket name.
 	Filters []types.Filter
 
 	// The AMI IDs for which to show progress. Up to 20 AMI IDs can be included in a
@@ -63,9 +59,8 @@ type DescribeStoreImageTasksInput struct {
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-	// You cannot specify this parameter and the ImageIDs parameter in the same call.
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// . You cannot specify this parameter and the ImageIDs parameter in the same call.
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -163,9 +158,8 @@ var _ DescribeStoreImageTasksAPIClient = (*Client)(nil)
 type DescribeStoreImageTasksPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-	// You cannot specify this parameter and the ImageIDs parameter in the same call.
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// . You cannot specify this parameter and the ImageIDs parameter in the same call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

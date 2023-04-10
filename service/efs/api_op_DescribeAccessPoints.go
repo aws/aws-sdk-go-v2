@@ -13,7 +13,7 @@ import (
 )
 
 // Returns the description of a specific Amazon EFS access point if the
-// AccessPointId is provided. If you provide an EFS FileSystemId, it returns
+// AccessPointId is provided. If you provide an EFS FileSystemId , it returns
 // descriptions of all access points for that file system. You can provide either
 // an AccessPointId or a FileSystemId in the request, but not both. This operation
 // requires permissions for the elasticfilesystem:DescribeAccessPoints action.
@@ -35,11 +35,11 @@ func (c *Client) DescribeAccessPoints(ctx context.Context, params *DescribeAcces
 type DescribeAccessPointsInput struct {
 
 	// (Optional) Specifies an EFS access point to describe in the response; mutually
-	// exclusive with FileSystemId.
+	// exclusive with FileSystemId .
 	AccessPointId *string
 
-	// (Optional) If you provide a FileSystemId, EFS returns all access points for that
-	// file system; mutually exclusive with AccessPointId.
+	// (Optional) If you provide a FileSystemId , EFS returns all access points for
+	// that file system; mutually exclusive with AccessPointId .
 	FileSystemId *string
 
 	// (Optional) When retrieving all access points for a file system, you can
@@ -47,8 +47,8 @@ type DescribeAccessPointsInput struct {
 	// returned in a response. The default value is 100.
 	MaxResults *int32
 
-	// NextToken is present if the response is paginated. You can use NextMarker in the
-	// subsequent request to fetch the next page of access point descriptions.
+	// NextToken is present if the response is paginated. You can use NextMarker in
+	// the subsequent request to fetch the next page of access point descriptions.
 	NextToken *string
 
 	noSmithyDocumentSerde

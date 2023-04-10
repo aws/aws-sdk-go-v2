@@ -17,8 +17,8 @@ import (
 // number of capacity units that you require for Amazon Kendra Intelligent Ranking
 // to rescore or re-rank a search service's results. For an example of using the
 // CreateRescoreExecutionPlan API, including using the Python and Java SDKs, see
-// Semantically ranking a search service's results
-// (https://docs.aws.amazon.com/kendra/latest/dg/search-service-rerank.html).
+// Semantically ranking a search service's results (https://docs.aws.amazon.com/kendra/latest/dg/search-service-rerank.html)
+// .
 func (c *Client) CreateRescoreExecutionPlan(ctx context.Context, params *CreateRescoreExecutionPlanInput, optFns ...func(*Options)) (*CreateRescoreExecutionPlanOutput, error) {
 	if params == nil {
 		params = &CreateRescoreExecutionPlanInput{}
@@ -44,8 +44,9 @@ type CreateRescoreExecutionPlanInput struct {
 	// You can set additional capacity units to meet the needs of your rescore
 	// execution plan. You are given a single capacity unit by default. If you want to
 	// use the default capacity, you don't set additional capacity units. For more
-	// information on the default capacity and additional capacity units, see Adjusting
-	// capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html).
+	// information on the default capacity and additional capacity units, see
+	// Adjusting capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html)
+	// .
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// A token that you provide to identify the request to create a rescore execution

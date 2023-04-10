@@ -38,8 +38,8 @@ type DescribeExportTasksInput struct {
 	// previous call.)
 	NextToken *string
 
-	// The status code of the export task. Specifying a status code filters the results
-	// to zero or more export tasks.
+	// The status code of the export task. Specifying a status code filters the
+	// results to zero or more export tasks.
 	StatusCode types.ExportTaskStatusCode
 
 	// The ID of the export task. Specifying a task ID filters the results to one or

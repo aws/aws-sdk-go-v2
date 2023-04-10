@@ -31,7 +31,7 @@ func (c *Client) ListPolicyAttachments(ctx context.Context, params *ListPolicyAt
 type ListPolicyAttachmentsInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// objects reside. For more information, see arns.
+	// objects reside. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string

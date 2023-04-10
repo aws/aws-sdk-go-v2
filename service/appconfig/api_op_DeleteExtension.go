@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AppConfig extension. You must delete all associations to an extension
-// before you delete the extension.
+// Deletes an AppConfig extension. You must delete all associations to an
+// extension before you delete the extension.
 func (c *Client) DeleteExtension(ctx context.Context, params *DeleteExtensionInput, optFns ...func(*Options)) (*DeleteExtensionOutput, error) {
 	if params == nil {
 		params = &DeleteExtensionInput{}
@@ -34,8 +34,8 @@ type DeleteExtensionInput struct {
 	// This member is required.
 	ExtensionIdentifier *string
 
-	// A specific version of an extension to delete. If omitted, the highest version is
-	// deleted.
+	// A specific version of an extension to delete. If omitted, the highest version
+	// is deleted.
 	VersionNumber *int32
 
 	noSmithyDocumentSerde

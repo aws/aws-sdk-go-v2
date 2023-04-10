@@ -50,8 +50,8 @@ type DetectPHIOutput struct {
 	// This member is required.
 	Entities []types.Entity
 
-	// The version of the model used to analyze the documents. The version number looks
-	// like X.X.X. You can use this information to track the model used for a
+	// The version of the model used to analyze the documents. The version number
+	// looks like X.X.X. You can use this information to track the model used for a
 	// particular batch of documents.
 	//
 	// This member is required.

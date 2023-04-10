@@ -39,7 +39,7 @@ type GetDomainNameInput struct {
 
 type GetDomainNameOutput struct {
 
-	// The configuration for the DomainName.
+	// The configuration for the DomainName .
 	DomainNameConfig *types.DomainNameConfig
 
 	// Metadata pertaining to the operation's result.

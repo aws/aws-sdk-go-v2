@@ -12,8 +12,7 @@ import (
 )
 
 // Describes a specific version of a solution. For more information on solutions,
-// see CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+// see CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
 func (c *Client) DescribeSolutionVersion(ctx context.Context, params *DescribeSolutionVersionInput, optFns ...func(*Options)) (*DescribeSolutionVersionOutput, error) {
 	if params == nil {
 		params = &DescribeSolutionVersionInput{}

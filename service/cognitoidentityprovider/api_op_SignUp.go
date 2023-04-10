@@ -10,22 +10,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers the user in the specified user pool and creates a user name, password,
-// and user attributes. This action might generate an SMS text message. Starting
-// June 1, 2021, US telecom carriers require you to register an origination phone
-// number before you can send SMS messages to US phone numbers. If you use SMS text
-// messages in Amazon Cognito, you must register a phone number with Amazon
-// Pinpoint (https://console.aws.amazon.com/pinpoint/home/). Amazon Cognito uses
-// the registered number automatically. Otherwise, Amazon Cognito users who must
-// receive SMS messages might not be able to sign up, activate their accounts, or
-// sign in. If you have never used SMS text messages with Amazon Cognito or any
-// other Amazon Web Service, Amazon Simple Notification Service might place your
-// account in the SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you can send
-// messages only to verified phone numbers. After you test your app while in the
-// sandbox environment, you can move out of the sandbox and into production. For
-// more information, see  SMS message settings for Amazon Cognito user pools
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// Registers the user in the specified user pool and creates a user name,
+// password, and user attributes. This action might generate an SMS text message.
+// Starting June 1, 2021, US telecom carriers require you to register an
+// origination phone number before you can send SMS messages to US phone numbers.
+// If you use SMS text messages in Amazon Cognito, you must register a phone number
+// with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/) . Amazon
+// Cognito uses the registered number automatically. Otherwise, Amazon Cognito
+// users who must receive SMS messages might not be able to sign up, activate their
+// accounts, or sign in. If you have never used SMS text messages with Amazon
+// Cognito or any other Amazon Web Service, Amazon Simple Notification Service
+// might place your account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// , you can send messages only to verified phone numbers. After you test your app
+// while in the sandbox environment, you can move out of the sandbox and into
+// production. For more information, see SMS message settings for Amazon Cognito
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) SignUp(ctx context.Context, params *SignUpInput, optFns ...func(*Options)) (*SignUpOutput, error) {
 	if params == nil {
@@ -74,21 +73,16 @@ type SignUpInput struct {
 	// which provides the data that you assigned to the ClientMetadata parameter in
 	// your SignUp request. In your function code in Lambda, you can process the
 	// clientMetadata value to enhance your workflow for your specific needs. For more
-	// information, see  Customizing user pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// information, see Customizing user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//
-	// * Store the
-	// ClientMetadata value. This data is available only to Lambda triggers that are
-	// assigned to a user pool to support custom workflows. If your user pool
-	// configuration doesn't include triggers, the ClientMetadata parameter serves no
-	// purpose.
-	//
-	// * Validate the ClientMetadata value.
-	//
-	// * Encrypt the ClientMetadata
-	// value. Don't use Amazon Cognito to provide sensitive information.
+	//   - Store the ClientMetadata value. This data is available only to Lambda
+	//   triggers that are assigned to a user pool to support custom workflows. If your
+	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
+	//   serves no purpose.
+	//   - Validate the ClientMetadata value.
+	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
+	//   sensitive information.
 	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
@@ -120,7 +114,7 @@ type SignUpOutput struct {
 	// This member is required.
 	UserConfirmed bool
 
-	// The UUID of the authenticated user. This isn't the same as username.
+	// The UUID of the authenticated user. This isn't the same as username .
 	//
 	// This member is required.
 	UserSub *string

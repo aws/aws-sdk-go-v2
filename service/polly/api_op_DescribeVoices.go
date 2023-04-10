@@ -14,15 +14,15 @@ import (
 // Returns the list of voices that are available for use when requesting speech
 // synthesis. Each voice speaks a specified language, is either male or female, and
 // is identified by an ID, which is the ASCII version of the voice name. When
-// synthesizing speech ( SynthesizeSpeech ), you provide the voice ID for the voice
-// you want from the list of voices returned by DescribeVoices. For example, you
-// want your news reader application to read news in a specific language, but
-// giving a user the option to choose the voice. Using the DescribeVoices operation
-// you can provide the user with a list of available voices to select from. You can
-// optionally specify a language code to filter the available voices. For example,
-// if you specify en-US, the operation returns a list of all available US English
-// voices. This operation requires permissions to perform the polly:DescribeVoices
-// action.
+// synthesizing speech ( SynthesizeSpeech ), you provide the voice ID for the
+// voice you want from the list of voices returned by DescribeVoices . For example,
+// you want your news reader application to read news in a specific language, but
+// giving a user the option to choose the voice. Using the DescribeVoices
+// operation you can provide the user with a list of available voices to select
+// from. You can optionally specify a language code to filter the available voices.
+// For example, if you specify en-US , the operation returns a list of all
+// available US English voices. This operation requires permissions to perform the
+// polly:DescribeVoices action.
 func (c *Client) DescribeVoices(ctx context.Context, params *DescribeVoicesInput, optFns ...func(*Options)) (*DescribeVoicesOutput, error) {
 	if params == nil {
 		params = &DescribeVoicesInput{}
@@ -40,7 +40,7 @@ func (c *Client) DescribeVoices(ctx context.Context, params *DescribeVoicesInput
 
 type DescribeVoicesInput struct {
 
-	// Specifies the engine (standard or neural) used by Amazon Polly when processing
+	// Specifies the engine ( standard or neural ) used by Amazon Polly when processing
 	// input text for speech synthesis.
 	Engine types.Engine
 
@@ -48,7 +48,7 @@ type DescribeVoicesInput struct {
 	// specified language as an additional language. For instance, if you request all
 	// languages that use US English (es-US), and there is an Italian voice that speaks
 	// both Italian (it-IT) and US English, that voice will be included if you specify
-	// yes but not if you specify no.
+	// yes but not if you specify no .
 	IncludeAdditionalLanguageCodes bool
 
 	// The language identification tag (ISO 639 code for the language name-ISO 3166

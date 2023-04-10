@@ -59,15 +59,15 @@ type DiscoveredResource struct {
 // Represents a migration task in a migration tool.
 type MigrationTask struct {
 
-	// Unique identifier that references the migration task. Do not store personal data
-	// in this field.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	MigrationTaskName *string
 
 	// A name that identifies the vendor of the migration tool being used.
 	ProgressUpdateStream *string
 
-	// Information about the resource that is being migrated. This data will be used to
-	// map the task to a resource in the Application Discovery Service repository.
+	// Information about the resource that is being migrated. This data will be used
+	// to map the task to a resource in the Application Discovery Service repository.
 	ResourceAttributeList []ResourceAttribute
 
 	// Task object encapsulating task information.
@@ -79,12 +79,12 @@ type MigrationTask struct {
 	noSmithyDocumentSerde
 }
 
-// MigrationTaskSummary includes MigrationTaskName, ProgressPercent,
-// ProgressUpdateStream, Status, and UpdateDateTime for each task.
+// MigrationTaskSummary includes MigrationTaskName , ProgressPercent ,
+// ProgressUpdateStream , Status , and UpdateDateTime for each task.
 type MigrationTaskSummary struct {
 
-	// Unique identifier that references the migration task. Do not store personal data
-	// in this field.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	MigrationTaskName *string
 
 	// Indication of the percentage completion of the task.
@@ -106,8 +106,8 @@ type MigrationTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of the AWS resource used for access control that is implicitly linked to
-// your AWS account.
+// Summary of the AWS resource used for access control that is implicitly linked
+// to your AWS account.
 type ProgressUpdateStreamSummary struct {
 
 	// The name of the ProgressUpdateStream. Do not store personal data in this field.
@@ -116,10 +116,10 @@ type ProgressUpdateStreamSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Attribute associated with a resource. Note the corresponding format required per
-// type listed below: IPV4 x.x.x.x where x is an integer in the range [0,255] IPV6
-// y : y : y : y : y : y : y : y where y is a hexadecimal between 0 and FFFF. [0,
-// FFFF] MAC_ADDRESS ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$ FQDN
+// Attribute associated with a resource. Note the corresponding format required
+// per type listed below: IPV4 x.x.x.x where x is an integer in the range [0,255]
+// IPV6 y : y : y : y : y : y : y : y where y is a hexadecimal between 0 and FFFF.
+// [0, FFFF] MAC_ADDRESS ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$ FQDN
 // ^[^<>{}\\/?,=\p{Cntrl}]{1,256}$
 type ResourceAttribute struct {
 

@@ -46,7 +46,7 @@ type UpdateThesaurusInput struct {
 	Name *string
 
 	// An IAM role that gives Amazon Kendra permissions to access thesaurus file
-	// specified in SourceS3Path.
+	// specified in SourceS3Path .
 	RoleArn *string
 
 	// Information required to find a specific file in an Amazon S3 bucket.

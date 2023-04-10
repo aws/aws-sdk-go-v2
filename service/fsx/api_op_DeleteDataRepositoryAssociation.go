@@ -58,7 +58,7 @@ type DeleteDataRepositoryAssociationOutput struct {
 	AssociationId *string
 
 	// Indicates whether data in the file system that corresponds to the data
-	// repository association is being deleted. Default is false.
+	// repository association is being deleted. Default is false .
 	DeleteDataInFileSystem *bool
 
 	// Describes the lifecycle state of the data repository association being deleted.

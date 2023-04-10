@@ -40,8 +40,8 @@ type BatchUpdateDetectorInput struct {
 
 type BatchUpdateDetectorOutput struct {
 
-	// A list of those detector updates that resulted in errors. (If an error is listed
-	// here, the specific update did not occur.)
+	// A list of those detector updates that resulted in errors. (If an error is
+	// listed here, the specific update did not occur.)
 	BatchUpdateDetectorErrorEntries []types.BatchUpdateDetectorErrorEntry
 
 	// Metadata pertaining to the operation's result.

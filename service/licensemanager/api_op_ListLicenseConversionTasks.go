@@ -29,7 +29,7 @@ func (c *Client) ListLicenseConversionTasks(ctx context.Context, params *ListLic
 
 type ListLicenseConversionTasksInput struct {
 
-	// Filters to scope the results. Valid filters are ResourceArns and Status.
+	// Filters to scope the results. Valid filters are ResourceArns and Status .
 	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.

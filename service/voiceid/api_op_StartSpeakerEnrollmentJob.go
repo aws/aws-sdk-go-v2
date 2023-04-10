@@ -32,8 +32,7 @@ type StartSpeakerEnrollmentJobInput struct {
 
 	// The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to
 	// access customer's buckets to read the input manifest file and write the job
-	// output file. Refer to Batch enrollment using audio data from prior calls
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-batch-enrollment.html)
+	// output file. Refer to Batch enrollment using audio data from prior calls (https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-batch-enrollment.html)
 	// for the permissions needed in this role.
 	//
 	// This member is required.
@@ -60,8 +59,8 @@ type StartSpeakerEnrollmentJobInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// The enrollment config that contains details such as the action to take when a

@@ -123,8 +123,8 @@ func (c *Client) addOperationListResourceServersMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListResourceServersAPIClient is a client that implements the ListResourceServers
-// operation.
+// ListResourceServersAPIClient is a client that implements the
+// ListResourceServers operation.
 type ListResourceServersAPIClient interface {
 	ListResourceServers(context.Context, *ListResourceServersInput, ...func(*Options)) (*ListResourceServersOutput, error)
 }

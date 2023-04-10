@@ -175,8 +175,8 @@ type DashPackage struct {
 	// Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is
 	// presented in each SegmentTemplate, with $Number$ media URLs. When set to
 	// TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with
-	// $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included
-	// in each SegmentTemplate, with $Number$ media URLs.
+	// $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is
+	// included in each SegmentTemplate, with $Number$ media URLs.
 	SegmentTemplateFormat SegmentTemplateFormat
 
 	noSmithyDocumentSerde
@@ -197,9 +197,10 @@ type EgressEndpoint struct {
 	// The ID of the PackagingConfiguration being applied to the Asset.
 	PackagingConfigurationId *string
 
-	// The current processing status of the asset used for the packaging configuration.
-	// The status can be either QUEUED, PROCESSING, PLAYABLE, or FAILED. Status
-	// information won't be available for most assets ingested before 2021-09-30.
+	// The current processing status of the asset used for the packaging
+	// configuration. The status can be either QUEUED, PROCESSING, PLAYABLE, or FAILED.
+	// Status information won't be available for most assets ingested before
+	// 2021-09-30.
 	Status *string
 
 	// The URL of the parent manifest for the repackaged Asset.
@@ -268,8 +269,8 @@ type HlsManifest struct {
 	// An optional string to include in the name of the manifest.
 	ManifestName *string
 
-	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
-	// manifests. Additionally, when an interval is specified ID3Timed Metadata
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted
+	// into manifests. Additionally, when an interval is specified ID3Timed Metadata
 	// messages will be generated every 5 seconds using the ingest time of the content.
 	// If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME
 	// tags will be inserted into manifests and no ID3Timed Metadata messages will be

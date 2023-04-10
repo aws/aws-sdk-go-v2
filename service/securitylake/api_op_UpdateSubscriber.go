@@ -38,8 +38,8 @@ type UpdateSubscriberInput struct {
 
 	// The supported Amazon Web Services from which logs and events are collected. For
 	// the list of supported Amazon Web Services, see the Amazon Security Lake User
-	// Guide
-	// (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html).
+	// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
+	// .
 	//
 	// This member is required.
 	SourceTypes []types.SourceType

@@ -63,8 +63,8 @@ type GetDocumentOutput struct {
 	// The date the SSM document was created.
 	CreatedDate *time.Time
 
-	// The friendly name of the SSM document. This value can differ for each version of
-	// the document. If you want to update this value, see UpdateDocument.
+	// The friendly name of the SSM document. This value can differ for each version
+	// of the document. If you want to update this value, see UpdateDocument .
 	DisplayName *string
 
 	// The document format, either JSON or YAML.
@@ -92,8 +92,8 @@ type GetDocumentOutput struct {
 	// in review, or PENDING, at a time.
 	ReviewStatus types.ReviewStatus
 
-	// The status of the SSM document, such as Creating, Active, Updating, Failed, and
-	// Deleting.
+	// The status of the SSM document, such as Creating , Active , Updating , Failed ,
+	// and Deleting .
 	Status types.DocumentStatus
 
 	// A message returned by Amazon Web Services Systems Manager that explains the

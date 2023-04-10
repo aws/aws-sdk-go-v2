@@ -12,8 +12,7 @@ import (
 
 // Deletes a traffic distribution group. This API can be called only in the Region
 // where the traffic distribution group is created. For more information about
-// deleting traffic distribution groups, see Delete traffic distribution groups
-// (https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html)
+// deleting traffic distribution groups, see Delete traffic distribution groups (https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) DeleteTrafficDistributionGroup(ctx context.Context, params *DeleteTrafficDistributionGroupInput, optFns ...func(*Options)) (*DeleteTrafficDistributionGroupOutput, error) {
 	if params == nil {

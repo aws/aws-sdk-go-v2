@@ -31,7 +31,7 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 type ListImportsInput struct {
 
 	// An optional string that, if supplied, must be copied from the output of a
-	// previous call to ListImports. When provided in this manner, the API fetches the
+	// previous call to ListImports . When provided in this manner, the API fetches the
 	// next page of results.
 	NextToken *string
 

@@ -30,40 +30,36 @@ func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optF
 
 type CreateFacetInput struct {
 
-	// The name of the Facet, which is unique for a given schema.
+	// The name of the Facet , which is unique for a given schema.
 	//
 	// This member is required.
 	Name *string
 
-	// The schema ARN in which the new Facet will be created. For more information, see
-	// arns.
+	// The schema ARN in which the new Facet will be created. For more information,
+	// see arns .
 	//
 	// This member is required.
 	SchemaArn *string
 
-	// The attributes that are associated with the Facet.
+	// The attributes that are associated with the Facet .
 	Attributes []types.FacetAttribute
 
 	// There are two different styles that you can define on any given facet, Static
-	// and Dynamic. For static facets, all attributes must be defined in the schema.
+	// and Dynamic . For static facets, all attributes must be defined in the schema.
 	// For dynamic facets, attributes can be defined during data plane operations.
 	FacetStyle types.FacetStyle
 
 	// Specifies whether a given object created from this facet is of type node, leaf
 	// node, policy or index.
+	//   - Node: Can have multiple children but one parent.
 	//
-	// * Node: Can have multiple children but one parent.
+	//   - Leaf node: Cannot have children but can have multiple parents.
 	//
-	// *
-	// Leaf node: Cannot have children but can have multiple parents.
+	//   - Policy: Allows you to store a policy document and policy type. For more
+	//   information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
+	//   .
 	//
-	// * Policy: Allows
-	// you to store a policy document and policy type. For more information, see
-	// Policies
-	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
-	//
-	// *
-	// Index: Can be created with the Index API.
+	//   - Index: Can be created with the Index API.
 	ObjectType types.ObjectType
 
 	noSmithyDocumentSerde

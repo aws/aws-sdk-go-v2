@@ -16,8 +16,8 @@ import (
 // operation, which means that each response might contain only a subset of all the
 // backups. When the response contains only a subset of backups, it includes a
 // NextToken value. Use this value in a subsequent DescribeBackups request to get
-// more backups. When you receive a response with no NextToken (or an empty or null
-// value), that means there are no more backups to get.
+// more backups. When you receive a response with no NextToken (or an empty or
+// null value), that means there are no more backups to get.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}
@@ -41,11 +41,11 @@ type DescribeBackupsInput struct {
 	// backups created from a source backup. The sourceBackupID of a source backup is
 	// returned by the CopyBackupToRegion operation. Use the clusterIds filter to
 	// return only the backups for the specified clusters. Specify clusters by their
-	// cluster identifier (ID). Use the states filter to return only backups that match
-	// the specified state. Use the neverExpires filter to return backups filtered by
-	// the value in the neverExpires parameter. True returns all backups exempt from
-	// the backup retention policy. False returns all backups with a backup retention
-	// policy defined at the cluster.
+	// cluster identifier (ID). Use the states filter to return only backups that
+	// match the specified state. Use the neverExpires filter to return backups
+	// filtered by the value in the neverExpires parameter. True returns all backups
+	// exempt from the backup retention policy. False returns all backups with a
+	// backup retention policy defined at the cluster.
 	Filters map[string][]string
 
 	// The maximum number of backups to return in the response. When there are more

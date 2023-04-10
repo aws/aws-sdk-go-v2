@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the specified segment. Specify the segment you want to
-// view by specifying its ARN.
+// Returns information about the specified segment. Specify the segment you want
+// to view by specifying its ARN.
 func (c *Client) GetSegment(ctx context.Context, params *GetSegmentInput, optFns ...func(*Options)) (*GetSegmentOutput, error) {
 	if params == nil {
 		params = &GetSegmentInput{}

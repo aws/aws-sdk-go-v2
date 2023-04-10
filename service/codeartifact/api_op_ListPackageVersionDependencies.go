@@ -12,12 +12,11 @@ import (
 )
 
 // Returns the direct dependencies for a package version. The dependencies are
-// returned as PackageDependency
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
+// returned as PackageDependency (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
 // objects. CodeArtifact extracts the dependencies for a package version from the
-// metadata file for the package format (for example, the package.json file for npm
-// packages and the pom.xml file for Maven). Any package version dependencies that
-// are not listed in the configuration file are not returned.
+// metadata file for the package format (for example, the package.json file for
+// npm packages and the pom.xml file for Maven). Any package version dependencies
+// that are not listed in the configuration file are not returned.
 func (c *Client) ListPackageVersionDependencies(ctx context.Context, params *ListPackageVersionDependenciesInput, optFns ...func(*Options)) (*ListPackageVersionDependenciesOutput, error) {
 	if params == nil {
 		params = &ListPackageVersionDependenciesInput{}
@@ -51,7 +50,7 @@ type ListPackageVersionDependenciesInput struct {
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2).
+	// A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
@@ -68,18 +67,11 @@ type ListPackageVersionDependenciesInput struct {
 	// The namespace of the package version with the requested dependencies. The
 	// package version component that specifies its namespace depends on its type. For
 	// example:
-	//
-	// * The namespace of a Maven package version is its groupId.
-	//
-	// * The
-	// namespace of an npm package version is its scope.
-	//
-	// * Python and NuGet package
-	// versions do not contain a corresponding component, package versions of those
-	// formats do not have a namespace.
-	//
-	// * The namespace of a generic package is its
-	// namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -91,8 +83,7 @@ type ListPackageVersionDependenciesInput struct {
 
 type ListPackageVersionDependenciesOutput struct {
 
-	// The returned list of PackageDependency
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
+	// The returned list of PackageDependency (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
 	// objects.
 	Dependencies []types.PackageDependency
 
@@ -103,15 +94,10 @@ type ListPackageVersionDependenciesOutput struct {
 	// The namespace of the package version that contains the returned dependencies.
 	// The package version component that specifies its namespace depends on its type.
 	// For example:
-	//
-	// * The namespace of a Maven package version is its groupId.
-	//
-	// * The
-	// namespace of an npm package version is its scope.
-	//
-	// * Python and NuGet package
-	// versions do not contain a corresponding component, package versions of those
-	// formats do not have a namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm package version is its scope .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous

@@ -19,16 +19,16 @@ import (
 // When retrieving all file system descriptions, you can optionally specify the
 // MaxItems parameter to limit the number of descriptions in a response. This
 // number is automatically set to 100. If more file system descriptions remain,
-// Amazon EFS returns a NextMarker, an opaque token, in the response. In this case,
-// you should send a subsequent request with the Marker request parameter set to
-// the value of NextMarker. To retrieve a list of your file system descriptions,
-// this operation is used in an iterative process, where DescribeFileSystems is
-// called first without the Marker and then the operation continues to call it with
-// the Marker parameter set to the value of the NextMarker from the previous
-// response until the response has no NextMarker. The order of file systems
-// returned in the response of one DescribeFileSystems call and the order of file
-// systems returned across the responses of a multi-call iteration is unspecified.
-// This operation requires permissions for the
+// Amazon EFS returns a NextMarker , an opaque token, in the response. In this
+// case, you should send a subsequent request with the Marker request parameter
+// set to the value of NextMarker . To retrieve a list of your file system
+// descriptions, this operation is used in an iterative process, where
+// DescribeFileSystems is called first without the Marker and then the operation
+// continues to call it with the Marker parameter set to the value of the
+// NextMarker from the previous response until the response has no NextMarker . The
+// order of file systems returned in the response of one DescribeFileSystems call
+// and the order of file systems returned across the responses of a multi-call
+// iteration is unspecified. This operation requires permissions for the
 // elasticfilesystem:DescribeFileSystems action.
 func (c *Client) DescribeFileSystems(ctx context.Context, params *DescribeFileSystemsInput, optFns ...func(*Options)) (*DescribeFileSystemsOutput, error) {
 	if params == nil {
@@ -147,8 +147,8 @@ func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeFileSystemsAPIClient is a client that implements the DescribeFileSystems
-// operation.
+// DescribeFileSystemsAPIClient is a client that implements the
+// DescribeFileSystems operation.
 type DescribeFileSystemsAPIClient interface {
 	DescribeFileSystems(context.Context, *DescribeFileSystemsInput, ...func(*Options)) (*DescribeFileSystemsOutput, error)
 }

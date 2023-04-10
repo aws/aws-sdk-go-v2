@@ -8,9 +8,9 @@ import (
 )
 
 // Contains information about a backup of an AWS CloudHSM cluster. All backup
-// objects contain the BackupId, BackupState, ClusterId, and CreateTimestamp
+// objects contain the BackupId , BackupState , ClusterId , and CreateTimestamp
 // parameters. Backups that were copied into a destination region additionally
-// contain the CopyTimestamp, SourceBackup, SourceCluster, and SourceRegion
+// contain the CopyTimestamp , SourceBackup , SourceCluster , and SourceRegion
 // parameters. A backup that is pending deletion will include the DeleteTimestamp
 // parameter.
 type Backup struct {
@@ -81,7 +81,7 @@ type Certificates struct {
 	ClusterCertificate *string
 
 	// The cluster's certificate signing request (CSR). The CSR exists only when the
-	// cluster's state is UNINITIALIZED.
+	// cluster's state is UNINITIALIZED .
 	ClusterCsr *string
 
 	// The HSM certificate issued (signed) by the HSM hardware.

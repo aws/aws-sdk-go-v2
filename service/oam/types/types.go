@@ -6,8 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// A structure that contains information about one link attached to this monitoring
-// account sink.
+// A structure that contains information about one link attached to this
+// monitoring account sink.
 type ListAttachedLinksItem struct {
 
 	// The label that was assigned to this link at creation, with the variables

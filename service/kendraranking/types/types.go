@@ -43,29 +43,29 @@ type Document struct {
 	// The body text of the search service's document.
 	Body *string
 
-	// The optional group identifier of the document from the search service. Documents
-	// with the same group identifier are grouped together and processed as one
-	// document within the service.
+	// The optional group identifier of the document from the search service.
+	// Documents with the same group identifier are grouped together and processed as
+	// one document within the service.
 	GroupId *string
 
 	// The title of the search service's document.
 	Title *string
 
 	// The body text of the search service's document represented as a list of tokens
-	// or words. You must choose to provide Body or TokenizedBody. You cannot provide
+	// or words. You must choose to provide Body or TokenizedBody . You cannot provide
 	// both.
 	TokenizedBody []string
 
 	// The title of the search service's document represented as a list of tokens or
-	// words. You must choose to provide Title or TokenizedTitle. You cannot provide
+	// words. You must choose to provide Title or TokenizedTitle . You cannot provide
 	// both.
 	TokenizedTitle []string
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for a rescore execution plan. A rescore execution plan is an
-// Amazon Kendra Intelligent Ranking resource used for provisioning the Rescore
+// Summary information for a rescore execution plan. A rescore execution plan is
+// an Amazon Kendra Intelligent Ranking resource used for provisioning the Rescore
 // API.
 type RescoreExecutionPlanSummary struct {
 
@@ -78,7 +78,7 @@ type RescoreExecutionPlanSummary struct {
 	// The name of the rescore execution plan.
 	Name *string
 
-	// The current status of the rescore execution plan. When the value is ACTIVE, the
+	// The current status of the rescore execution plan. When the value is ACTIVE , the
 	// rescore execution plan is ready for use.
 	Status RescoreExecutionPlanStatus
 
@@ -103,8 +103,8 @@ type RescoreResultItem struct {
 
 // A key-value pair that identifies or categorizes a rescore execution plan. A
 // rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for
-// provisioning the Rescore API. You can also use a tag to help control access to a
-// rescore execution plan. A tag key and value can consist of Unicode letters,
+// provisioning the Rescore API. You can also use a tag to help control access to
+// a rescore execution plan. A tag key and value can consist of Unicode letters,
 // digits, white space, and any of the following symbols: _ . : / = + - @.
 type Tag struct {
 
@@ -113,8 +113,8 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The value associated with the tag. The value can be an empty string but it can't
-	// be null.
+	// The value associated with the tag. The value can be an empty string but it
+	// can't be null.
 	//
 	// This member is required.
 	Value *string

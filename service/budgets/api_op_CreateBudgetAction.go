@@ -61,8 +61,8 @@ type CreateBudgetActionInput struct {
 	// This member is required.
 	Definition *types.Definition
 
-	// The role passed for action execution and reversion. Roles and actions must be in
-	// the same account.
+	// The role passed for action execution and reversion. Roles and actions must be
+	// in the same account.
 	//
 	// This member is required.
 	ExecutionRoleArn *string

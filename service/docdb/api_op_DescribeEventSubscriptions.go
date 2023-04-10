@@ -13,9 +13,9 @@ import (
 )
 
 // Lists all the subscription descriptions for a customer account. The description
-// for a subscription includes SubscriptionName, SNSTopicARN, CustomerID,
-// SourceType, SourceID, CreationTime, and Status. If you specify a
-// SubscriptionName, lists the description for that subscription.
+// for a subscription includes SubscriptionName , SNSTopicARN , CustomerID ,
+// SourceType , SourceID , CreationTime , and Status . If you specify a
+// SubscriptionName , lists the description for that subscription.
 func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *DescribeEventSubscriptionsInput, optFns ...func(*Options)) (*DescribeEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeEventSubscriptionsInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// Represents the input to DescribeEventSubscriptions.
+// Represents the input to DescribeEventSubscriptions .
 type DescribeEventSubscriptionsInput struct {
 
 	// This parameter is not currently supported.
@@ -39,7 +39,7 @@ type DescribeEventSubscriptionsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -55,7 +55,7 @@ type DescribeEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeEventSubscriptions.
+// Represents the output of DescribeEventSubscriptions .
 type DescribeEventSubscriptionsOutput struct {
 
 	// A list of event subscriptions.
@@ -63,7 +63,7 @@ type DescribeEventSubscriptionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

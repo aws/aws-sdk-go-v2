@@ -13,8 +13,7 @@ import (
 )
 
 // Gets aggregated values (for example, average, minimum, and maximum) for one or
-// more asset properties. For more information, see Querying aggregates
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
+// more asset properties. For more information, see Querying aggregates (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
 // in the IoT SiteWise User Guide.
 func (c *Client) BatchGetAssetPropertyAggregates(ctx context.Context, params *BatchGetAssetPropertyAggregatesInput, optFns ...func(*Options)) (*BatchGetAssetPropertyAggregatesOutput, error) {
 	if params == nil {
@@ -39,14 +38,11 @@ type BatchGetAssetPropertyAggregatesInput struct {
 	// This member is required.
 	Entries []types.BatchGetAssetPropertyAggregatesEntry
 
-	// The maximum number of results to return for each paginated request. A result set
-	// is returned in the two cases, whichever occurs first.
-	//
-	// * The size of the result
-	// set is less than 1 MB.
-	//
-	// * The number of data points in the result set is less
-	// than the value of maxResults. The maximum value of maxResults is 4000.
+	// The maximum number of results to return for each paginated request. A result
+	// set is returned in the two cases, whichever occurs first.
+	//   - The size of the result set is less than 1 MB.
+	//   - The number of data points in the result set is less than the value of
+	//   maxResults . The maximum value of maxResults is 4000.
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -191,14 +187,11 @@ var _ BatchGetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 // BatchGetAssetPropertyAggregatesPaginatorOptions is the paginator options for
 // BatchGetAssetPropertyAggregates
 type BatchGetAssetPropertyAggregatesPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. A result set
-	// is returned in the two cases, whichever occurs first.
-	//
-	// * The size of the result
-	// set is less than 1 MB.
-	//
-	// * The number of data points in the result set is less
-	// than the value of maxResults. The maximum value of maxResults is 4000.
+	// The maximum number of results to return for each paginated request. A result
+	// set is returned in the two cases, whichever occurs first.
+	//   - The size of the result set is less than 1 MB.
+	//   - The number of data points in the result set is less than the value of
+	//   maxResults . The maximum value of maxResults is 4000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

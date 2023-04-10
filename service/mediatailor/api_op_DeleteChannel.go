@@ -11,8 +11,7 @@ import (
 )
 
 // Deletes a channel. For information about MediaTailor channels, see Working with
-// channels
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
 // in the MediaTailor User Guide.
 func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, optFns ...func(*Options)) (*DeleteChannelOutput, error) {
 	if params == nil {

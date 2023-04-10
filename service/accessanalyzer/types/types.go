@@ -31,15 +31,10 @@ type AccessPreview struct {
 	Id *string
 
 	// The status of the access preview.
-	//
-	// * Creating - The access preview creation is
-	// in progress.
-	//
-	// * Completed - The access preview is complete. You can preview
-	// findings for external access to the resource.
-	//
-	// * Failed - The access preview
-	// creation has failed.
+	//   - Creating - The access preview creation is in progress.
+	//   - Completed - The access preview is complete. You can preview findings for
+	//   external access to the resource.
+	//   - Failed - The access preview creation has failed.
 	//
 	// This member is required.
 	Status AccessPreviewStatus
@@ -58,19 +53,14 @@ type AccessPreviewFinding struct {
 
 	// Provides context on how the access preview finding compares to existing access
 	// identified in IAM Access Analyzer.
-	//
-	// * New - The finding is for newly-introduced
-	// access.
-	//
-	// * Unchanged - The preview finding is an existing finding that would
-	// remain unchanged.
-	//
-	// * Changed - The preview finding is an existing finding with a
-	// change in status.
-	//
-	// For example, a Changed finding with preview status Resolved
-	// and existing status Active indicates the existing Active finding would become
-	// Resolved as a result of the proposed permissions change.
+	//   - New - The finding is for newly-introduced access.
+	//   - Unchanged - The preview finding is an existing finding that would remain
+	//   unchanged.
+	//   - Changed - The preview finding is an existing finding with a change in
+	//   status.
+	// For example, a Changed finding with preview status Resolved and existing status
+	// Active indicates the existing Active finding would become Resolved as a result
+	// of the proposed permissions change.
 	//
 	// This member is required.
 	ChangeType FindingChangeType
@@ -80,8 +70,8 @@ type AccessPreviewFinding struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ID of the access preview finding. This ID uniquely identifies the element in
-	// the list of access preview findings and is not related to the finding ID in
+	// The ID of the access preview finding. This ID uniquely identifies the element
+	// in the list of access preview findings and is not related to the finding ID in
 	// Access Analyzer.
 	//
 	// This member is required.
@@ -101,8 +91,8 @@ type AccessPreviewFinding struct {
 
 	// The preview status of the finding. This is what the status of the finding would
 	// be after permissions deployment. For example, a Changed finding with preview
-	// status Resolved and existing status Active indicates the existing Active finding
-	// would become Resolved as a result of the proposed permissions change.
+	// status Resolved and existing status Active indicates the existing Active
+	// finding would become Resolved as a result of the proposed permissions change.
 	//
 	// This member is required.
 	Status FindingStatus
@@ -175,15 +165,10 @@ type AccessPreviewSummary struct {
 	Id *string
 
 	// The status of the access preview.
-	//
-	// * Creating - The access preview creation is
-	// in progress.
-	//
-	// * Completed - The access preview is complete and previews the
-	// findings for external access to the resource.
-	//
-	// * Failed - The access preview
-	// creation has failed.
+	//   - Creating - The access preview creation is in progress.
+	//   - Completed - The access preview is complete and previews the findings for
+	//   external access to the resource.
+	//   - Failed - The access preview creation has failed.
 	//
 	// This member is required.
 	Status AccessPreviewStatus
@@ -198,8 +183,8 @@ type AccessPreviewSummary struct {
 }
 
 // You specify each grantee as a type-value pair using one of these types. You can
-// specify only one type of grantee. For more information, see PutBucketAcl
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html).
+// specify only one type of grantee. For more information, see PutBucketAcl (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html)
+// .
 //
 // The following types satisfy this interface:
 //
@@ -344,10 +329,10 @@ type AnalyzerSummary struct {
 	// The time at which the most recently analyzed resource was analyzed.
 	LastResourceAnalyzedAt *time.Time
 
-	// The statusReason provides more details about the current status of the analyzer.
-	// For example, if the creation for the analyzer fails, a Failed status is
-	// returned. For an analyzer with organization as the type, this failure can be due
-	// to an issue with creating the service-linked roles required in the member
+	// The statusReason provides more details about the current status of the
+	// analyzer. For example, if the creation for the analyzer fails, a Failed status
+	// is returned. For an analyzer with organization as the type, this failure can be
+	// due to an issue with creating the service-linked roles required in the member
 	// accounts of the Amazon Web Services organization.
 	StatusReason *StatusReason
 
@@ -560,8 +545,8 @@ type ConfigurationMemberSqsQueue struct {
 func (*ConfigurationMemberSqsQueue) isConfiguration() {}
 
 // The criteria to use in the filter that defines the archive rule. For more
-// information on available filter keys, see IAM Access Analyzer filter keys
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html).
+// information on available filter keys, see IAM Access Analyzer filter keys (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html)
+// .
 type Criterion struct {
 
 	// A "contains" operator to match for the filter used to create the rule.
@@ -579,55 +564,42 @@ type Criterion struct {
 	noSmithyDocumentSerde
 }
 
-// The proposed access control configuration for an Amazon EBS volume snapshot. You
-// can propose a configuration for a new Amazon EBS volume snapshot or an Amazon
-// EBS volume snapshot that you own by specifying the user IDs, groups, and
-// optional KMS encryption key. For more information, see ModifySnapshotAttribute
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySnapshotAttribute.html).
+// The proposed access control configuration for an Amazon EBS volume snapshot.
+// You can propose a configuration for a new Amazon EBS volume snapshot or an
+// Amazon EBS volume snapshot that you own by specifying the user IDs, groups, and
+// optional KMS encryption key. For more information, see ModifySnapshotAttribute (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySnapshotAttribute.html)
+// .
 type EbsSnapshotConfiguration struct {
 
 	// The groups that have access to the Amazon EBS volume snapshot. If the value all
 	// is specified, then the Amazon EBS volume snapshot is public.
-	//
-	// * If the
-	// configuration is for an existing Amazon EBS volume snapshot and you do not
-	// specify the groups, then the access preview uses the existing shared groups for
-	// the snapshot.
-	//
-	// * If the access preview is for a new resource and you do not
-	// specify the groups, then the access preview considers the snapshot without any
-	// groups.
-	//
-	// * To propose deletion of existing shared groups, you can specify an
-	// empty list for groups.
+	//   - If the configuration is for an existing Amazon EBS volume snapshot and you
+	//   do not specify the groups , then the access preview uses the existing shared
+	//   groups for the snapshot.
+	//   - If the access preview is for a new resource and you do not specify the
+	//   groups , then the access preview considers the snapshot without any groups .
+	//   - To propose deletion of existing shared groups , you can specify an empty
+	//   list for groups .
 	Groups []string
 
 	// The KMS key identifier for an encrypted Amazon EBS volume snapshot. The KMS key
 	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
-	//
-	// *
-	// If the configuration is for an existing Amazon EBS volume snapshot and you do
-	// not specify the kmsKeyId, or you specify an empty string, then the access
-	// preview uses the existing kmsKeyId of the snapshot.
-	//
-	// * If the access preview is
-	// for a new resource and you do not specify the kmsKeyId, the access preview
-	// considers the snapshot as unencrypted.
+	//   - If the configuration is for an existing Amazon EBS volume snapshot and you
+	//   do not specify the kmsKeyId , or you specify an empty string, then the access
+	//   preview uses the existing kmsKeyId of the snapshot.
+	//   - If the access preview is for a new resource and you do not specify the
+	//   kmsKeyId , the access preview considers the snapshot as unencrypted.
 	KmsKeyId *string
 
 	// The IDs of the Amazon Web Services accounts that have access to the Amazon EBS
 	// volume snapshot.
-	//
-	// * If the configuration is for an existing Amazon EBS volume
-	// snapshot and you do not specify the userIds, then the access preview uses the
-	// existing shared userIds for the snapshot.
-	//
-	// * If the access preview is for a new
-	// resource and you do not specify the userIds, then the access preview considers
-	// the snapshot without any userIds.
-	//
-	// * To propose deletion of existing shared
-	// accountIds, you can specify an empty list for userIds.
+	//   - If the configuration is for an existing Amazon EBS volume snapshot and you
+	//   do not specify the userIds , then the access preview uses the existing shared
+	//   userIds for the snapshot.
+	//   - If the access preview is for a new resource and you do not specify the
+	//   userIds , then the access preview considers the snapshot without any userIds .
+	//   - To propose deletion of existing shared accountIds , you can specify an empty
+	//   list for userIds .
 	UserIds []string
 
 	noSmithyDocumentSerde
@@ -636,54 +608,45 @@ type EbsSnapshotConfiguration struct {
 // The proposed access control configuration for an Amazon ECR repository. You can
 // propose a configuration for a new Amazon ECR repository or an existing Amazon
 // ECR repository that you own by specifying the Amazon ECR policy. For more
-// information, see Repository
-// (https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_Repository.html).
-//
-// *
-// If the configuration is for an existing Amazon ECR repository and you do not
-// specify the Amazon ECR policy, then the access preview uses the existing Amazon
-// ECR policy for the repository.
-//
-// * If the access preview is for a new resource
-// and you do not specify the policy, then the access preview assumes an Amazon ECR
-// repository without a policy.
-//
-// * To propose deletion of an existing Amazon ECR
-// repository policy, you can specify an empty string for the Amazon ECR policy.
+// information, see Repository (https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_Repository.html)
+// .
+//   - If the configuration is for an existing Amazon ECR repository and you do
+//     not specify the Amazon ECR policy, then the access preview uses the existing
+//     Amazon ECR policy for the repository.
+//   - If the access preview is for a new resource and you do not specify the
+//     policy, then the access preview assumes an Amazon ECR repository without a
+//     policy.
+//   - To propose deletion of an existing Amazon ECR repository policy, you can
+//     specify an empty string for the Amazon ECR policy.
 type EcrRepositoryConfiguration struct {
 
 	// The JSON repository policy text to apply to the Amazon ECR repository. For more
-	// information, see Private repository policy examples
-	// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html)
+	// information, see Private repository policy examples (https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html)
 	// in the Amazon ECR User Guide.
 	RepositoryPolicy *string
 
 	noSmithyDocumentSerde
 }
 
-// The proposed access control configuration for an Amazon EFS file system. You can
-// propose a configuration for a new Amazon EFS file system or an existing Amazon
-// EFS file system that you own by specifying the Amazon EFS policy. For more
-// information, see Using file systems in Amazon EFS
-// (https://docs.aws.amazon.com/efs/latest/ug/using-fs.html).
-//
-// * If the
-// configuration is for an existing Amazon EFS file system and you do not specify
-// the Amazon EFS policy, then the access preview uses the existing Amazon EFS
-// policy for the file system.
-//
-// * If the access preview is for a new resource and
-// you do not specify the policy, then the access preview assumes an Amazon EFS
-// file system without a policy.
-//
-// * To propose deletion of an existing Amazon EFS
-// file system policy, you can specify an empty string for the Amazon EFS policy.
+// The proposed access control configuration for an Amazon EFS file system. You
+// can propose a configuration for a new Amazon EFS file system or an existing
+// Amazon EFS file system that you own by specifying the Amazon EFS policy. For
+// more information, see Using file systems in Amazon EFS (https://docs.aws.amazon.com/efs/latest/ug/using-fs.html)
+// .
+//   - If the configuration is for an existing Amazon EFS file system and you do
+//     not specify the Amazon EFS policy, then the access preview uses the existing
+//     Amazon EFS policy for the file system.
+//   - If the access preview is for a new resource and you do not specify the
+//     policy, then the access preview assumes an Amazon EFS file system without a
+//     policy.
+//   - To propose deletion of an existing Amazon EFS file system policy, you can
+//     specify an empty string for the Amazon EFS policy.
 type EfsFileSystemConfiguration struct {
 
 	// The JSON policy definition to apply to the Amazon EFS file system. For more
 	// information on the elements that make up a file system policy, see Amazon EFS
-	// Resource-based policies
-	// (https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies).
+	// Resource-based policies (https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies)
+	// .
 	FileSystemPolicy *string
 
 	noSmithyDocumentSerde
@@ -858,8 +821,7 @@ type FindingSummary struct {
 type GeneratedPolicy struct {
 
 	// The text to use as the content for the new policy. The policy is created using
-	// the CreatePolicy
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html)
+	// the CreatePolicy (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html)
 	// action.
 	//
 	// This member is required.
@@ -897,8 +859,7 @@ type GeneratedPolicyResult struct {
 	Properties *GeneratedPolicyProperties
 
 	// The text to use as the content for the new policy. The policy is created using
-	// the CreatePolicy
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html)
+	// the CreatePolicy (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html)
 	// action.
 	GeneratedPolicies []GeneratedPolicy
 
@@ -912,8 +873,8 @@ type GeneratedPolicyResult struct {
 // that you own and you do not propose the trust policy, the access preview uses
 // the existing trust policy for the role. The proposed trust policy cannot be an
 // empty string. For more information about role trust policy limits, see IAM and
-// STS quotas
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html).
+// STS quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
+// .
 type IamRoleConfiguration struct {
 
 	// The proposed trust policy for the IAM role.
@@ -940,7 +901,7 @@ type InlineArchiveRule struct {
 }
 
 // This configuration sets the network origin for the Amazon S3 access point or
-// multi-region access point to Internet.
+// multi-region access point to Internet .
 type InternetConfiguration struct {
 	noSmithyDocumentSerde
 }
@@ -948,9 +909,9 @@ type InternetConfiguration struct {
 // Contains details about the policy generation request.
 type JobDetails struct {
 
-	// The JobId that is returned by the StartPolicyGeneration operation. The JobId can
-	// be used with GetGeneratedPolicy to retrieve the generated policies or used with
-	// CancelPolicyGeneration to cancel the policy generation request.
+	// The JobId that is returned by the StartPolicyGeneration operation. The JobId
+	// can be used with GetGeneratedPolicy to retrieve the generated policies or used
+	// with CancelPolicyGeneration to cancel the policy generation request.
 	//
 	// This member is required.
 	JobId *string
@@ -992,8 +953,8 @@ type JobError struct {
 }
 
 // A proposed grant configuration for a KMS key. For more information, see
-// CreateGrant
-// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html).
+// CreateGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html)
+// .
 type KmsGrantConfiguration struct {
 
 	// The principal that is given permission to perform the operations that the grant
@@ -1002,8 +963,9 @@ type KmsGrantConfiguration struct {
 	// This member is required.
 	GranteePrincipal *string
 
-	// The Amazon Web Services account under which the grant was issued. The account is
-	// used to propose KMS grants issued by accounts other than the owner of the key.
+	// The Amazon Web Services account under which the grant was issued. The account
+	// is used to propose KMS grants issued by accounts other than the owner of the
+	// key.
 	//
 	// This member is required.
 	IssuingAccount *string
@@ -1013,41 +975,35 @@ type KmsGrantConfiguration struct {
 	// This member is required.
 	Operations []KmsGrantOperation
 
-	// Use this structure to propose allowing cryptographic operations
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// Use this structure to propose allowing cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 	// in the grant only when the operation request includes the specified encryption
-	// context
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
+	// context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+	// .
 	Constraints *KmsGrantConstraints
 
-	// The principal that is given permission to retire the grant by using RetireGrant
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_RetireGrant.html)
+	// The principal that is given permission to retire the grant by using RetireGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_RetireGrant.html)
 	// operation.
 	RetiringPrincipal *string
 
 	noSmithyDocumentSerde
 }
 
-// Use this structure to propose allowing cryptographic operations
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+// Use this structure to propose allowing cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 // in the grant only when the operation request includes the specified encryption
-// context
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
-// You can specify only one type of encryption context. An empty map is treated as
-// not specified. For more information, see GrantConstraints
-// (https://docs.aws.amazon.com/kms/latest/APIReference/API_GrantConstraints.html).
+// context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+// . You can specify only one type of encryption context. An empty map is treated
+// as not specified. For more information, see GrantConstraints (https://docs.aws.amazon.com/kms/latest/APIReference/API_GrantConstraints.html)
+// .
 type KmsGrantConstraints struct {
 
 	// A list of key-value pairs that must match the encryption context in the
-	// cryptographic operation
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// cryptographic operation (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 	// request. The grant allows the operation only when the encryption context in the
 	// request is the same as the encryption context specified in this constraint.
 	EncryptionContextEquals map[string]string
 
-	// A list of key-value pairs that must be included in the encryption context of the
-	// cryptographic operation
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// A list of key-value pairs that must be included in the encryption context of
+	// the cryptographic operation (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 	// request. The grant allows the cryptographic operation only when the encryption
 	// context in the request includes the key-value pairs specified in this
 	// constraint, although it can include additional key-value pairs.
@@ -1063,10 +1019,9 @@ type KmsGrantConstraints struct {
 // uses the existing policy for the key. If the access preview is for a new
 // resource and you do not specify the key policy, then the access preview uses the
 // default key policy. The proposed key policy cannot be an empty string. For more
-// information, see Default key policy
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default).
-// For more information about key policy limits, see Resource quotas
-// (https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html).
+// information, see Default key policy (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default)
+// . For more information about key policy limits, see Resource quotas (https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html)
+// .
 type KmsKeyConfiguration struct {
 
 	// A list of proposed grant configurations for the KMS key. If the proposed grant
@@ -1075,9 +1030,9 @@ type KmsKeyConfiguration struct {
 	// preview uses the existing grants for the key.
 	Grants []KmsGrantConfiguration
 
-	// Resource policy configuration for the KMS key. The only valid value for the name
-	// of the key policy is default. For more information, see Default key policy
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default).
+	// Resource policy configuration for the KMS key. The only valid value for the
+	// name of the key policy is default . For more information, see Default key policy (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default)
+	// .
 	KeyPolicies map[string]string
 
 	noSmithyDocumentSerde
@@ -1100,13 +1055,13 @@ type Location struct {
 	noSmithyDocumentSerde
 }
 
-// The proposed InternetConfiguration or VpcConfiguration to apply to the Amazon S3
-// access point. VpcConfiguration does not apply to multi-region access points. You
-// can make the access point accessible from the internet, or you can specify that
-// all requests made through that access point must originate from a specific
+// The proposed InternetConfiguration or VpcConfiguration to apply to the Amazon
+// S3 access point. VpcConfiguration does not apply to multi-region access points.
+// You can make the access point accessible from the internet, or you can specify
+// that all requests made through that access point must originate from a specific
 // virtual private cloud (VPC). You can specify only one type of network
-// configuration. For more information, see Creating access points
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
+// configuration. For more information, see Creating access points (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html)
+// .
 //
 // The following types satisfy this interface:
 //
@@ -1128,8 +1083,8 @@ func (*NetworkOriginConfigurationMemberInternetConfiguration) isNetworkOriginCon
 
 // The proposed virtual private cloud (VPC) configuration for the Amazon S3 access
 // point. VPC configuration does not apply to multi-region access points. For more
-// information, see VpcConfiguration
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html).
+// information, see VpcConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html)
+// .
 type NetworkOriginConfigurationMemberVpcConfiguration struct {
 	Value VpcConfiguration
 
@@ -1189,9 +1144,9 @@ func (*PathElementMemberValue) isPathElement() {}
 // Contains details about the policy generation status and properties.
 type PolicyGeneration struct {
 
-	// The JobId that is returned by the StartPolicyGeneration operation. The JobId can
-	// be used with GetGeneratedPolicy to retrieve the generated policies or used with
-	// CancelPolicyGeneration to cancel the policy generation request.
+	// The JobId that is returned by the StartPolicyGeneration operation. The JobId
+	// can be used with GetGeneratedPolicy to retrieve the generated policies or used
+	// with CancelPolicyGeneration to cancel the policy generation request.
 	//
 	// This member is required.
 	JobId *string
@@ -1258,24 +1213,18 @@ type RdsDbClusterSnapshotAttributeValue interface {
 	isRdsDbClusterSnapshotAttributeValue()
 }
 
-// The Amazon Web Services account IDs that have access to the manual Amazon RDS DB
-// cluster snapshot. If the value all is specified, then the Amazon RDS DB cluster
-// snapshot is public and can be copied or restored by all Amazon Web Services
-// accounts.
-//
-// * If the configuration is for an existing Amazon RDS DB cluster
-// snapshot and you do not specify the accountIds in
-// RdsDbClusterSnapshotAttributeValue, then the access preview uses the existing
-// shared accountIds for the snapshot.
-//
-// * If the access preview is for a new
-// resource and you do not specify the specify the accountIds in
-// RdsDbClusterSnapshotAttributeValue, then the access preview considers the
-// snapshot without any attributes.
-//
-// * To propose deletion of existing shared
-// accountIds, you can specify an empty list for accountIds in the
-// RdsDbClusterSnapshotAttributeValue.
+// The Amazon Web Services account IDs that have access to the manual Amazon RDS
+// DB cluster snapshot. If the value all is specified, then the Amazon RDS DB
+// cluster snapshot is public and can be copied or restored by all Amazon Web
+// Services accounts.
+//   - If the configuration is for an existing Amazon RDS DB cluster snapshot and
+//     you do not specify the accountIds in RdsDbClusterSnapshotAttributeValue , then
+//     the access preview uses the existing shared accountIds for the snapshot.
+//   - If the access preview is for a new resource and you do not specify the
+//     specify the accountIds in RdsDbClusterSnapshotAttributeValue , then the access
+//     preview considers the snapshot without any attributes.
+//   - To propose deletion of existing shared accountIds , you can specify an empty
+//     list for accountIds in the RdsDbClusterSnapshotAttributeValue .
 type RdsDbClusterSnapshotAttributeValueMemberAccountIds struct {
 	Value []string
 
@@ -1284,31 +1233,29 @@ type RdsDbClusterSnapshotAttributeValueMemberAccountIds struct {
 
 func (*RdsDbClusterSnapshotAttributeValueMemberAccountIds) isRdsDbClusterSnapshotAttributeValue() {}
 
-// The proposed access control configuration for an Amazon RDS DB cluster snapshot.
-// You can propose a configuration for a new Amazon RDS DB cluster snapshot or an
-// Amazon RDS DB cluster snapshot that you own by specifying the
+// The proposed access control configuration for an Amazon RDS DB cluster
+// snapshot. You can propose a configuration for a new Amazon RDS DB cluster
+// snapshot or an Amazon RDS DB cluster snapshot that you own by specifying the
 // RdsDbClusterSnapshotAttributeValue and optional KMS encryption key. For more
-// information, see ModifyDBClusterSnapshotAttribute
-// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html).
+// information, see ModifyDBClusterSnapshotAttribute (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html)
+// .
 type RdsDbClusterSnapshotConfiguration struct {
 
-	// The names and values of manual DB cluster snapshot attributes. Manual DB cluster
-	// snapshot attributes are used to authorize other Amazon Web Services accounts to
-	// restore a manual DB cluster snapshot. The only valid value for AttributeName for
-	// the attribute map is restore
+	// The names and values of manual DB cluster snapshot attributes. Manual DB
+	// cluster snapshot attributes are used to authorize other Amazon Web Services
+	// accounts to restore a manual DB cluster snapshot. The only valid value for
+	// AttributeName for the attribute map is restore
 	Attributes map[string]RdsDbClusterSnapshotAttributeValue
 
 	// The KMS key identifier for an encrypted Amazon RDS DB cluster snapshot. The KMS
-	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS
-	// key.
+	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
 	//
-	// * If the configuration is for an existing Amazon RDS DB cluster snapshot
-	// and you do not specify the kmsKeyId, or you specify an empty string, then the
-	// access preview uses the existing kmsKeyId of the snapshot.
-	//
-	// * If the access
-	// preview is for a new resource and you do not specify the specify the kmsKeyId,
-	// then the access preview considers the snapshot as unencrypted.
+	//   - If the configuration is for an existing Amazon RDS DB cluster snapshot and
+	//   you do not specify the kmsKeyId , or you specify an empty string, then the
+	//   access preview uses the existing kmsKeyId of the snapshot.
+	//   - If the access preview is for a new resource and you do not specify the
+	//   specify the kmsKeyId , then the access preview considers the snapshot as
+	//   unencrypted.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -1325,22 +1272,17 @@ type RdsDbSnapshotAttributeValue interface {
 	isRdsDbSnapshotAttributeValue()
 }
 
-// The Amazon Web Services account IDs that have access to the manual Amazon RDS DB
-// snapshot. If the value all is specified, then the Amazon RDS DB snapshot is
+// The Amazon Web Services account IDs that have access to the manual Amazon RDS
+// DB snapshot. If the value all is specified, then the Amazon RDS DB snapshot is
 // public and can be copied or restored by all Amazon Web Services accounts.
-//
-// * If
-// the configuration is for an existing Amazon RDS DB snapshot and you do not
-// specify the accountIds in RdsDbSnapshotAttributeValue, then the access preview
-// uses the existing shared accountIds for the snapshot.
-//
-// * If the access preview
-// is for a new resource and you do not specify the specify the accountIds in
-// RdsDbSnapshotAttributeValue, then the access preview considers the snapshot
-// without any attributes.
-//
-// * To propose deletion of an existing shared accountIds,
-// you can specify an empty list for accountIds in the RdsDbSnapshotAttributeValue.
+//   - If the configuration is for an existing Amazon RDS DB snapshot and you do
+//     not specify the accountIds in RdsDbSnapshotAttributeValue , then the access
+//     preview uses the existing shared accountIds for the snapshot.
+//   - If the access preview is for a new resource and you do not specify the
+//     specify the accountIds in RdsDbSnapshotAttributeValue , then the access
+//     preview considers the snapshot without any attributes.
+//   - To propose deletion of an existing shared accountIds , you can specify an
+//     empty list for accountIds in the RdsDbSnapshotAttributeValue .
 type RdsDbSnapshotAttributeValueMemberAccountIds struct {
 	Value []string
 
@@ -1349,46 +1291,42 @@ type RdsDbSnapshotAttributeValueMemberAccountIds struct {
 
 func (*RdsDbSnapshotAttributeValueMemberAccountIds) isRdsDbSnapshotAttributeValue() {}
 
-// The proposed access control configuration for an Amazon RDS DB snapshot. You can
-// propose a configuration for a new Amazon RDS DB snapshot or an Amazon RDS DB
-// snapshot that you own by specifying the RdsDbSnapshotAttributeValue and optional
-// KMS encryption key. For more information, see ModifyDBSnapshotAttribute
-// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshotAttribute.html).
+// The proposed access control configuration for an Amazon RDS DB snapshot. You
+// can propose a configuration for a new Amazon RDS DB snapshot or an Amazon RDS DB
+// snapshot that you own by specifying the RdsDbSnapshotAttributeValue and
+// optional KMS encryption key. For more information, see ModifyDBSnapshotAttribute (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshotAttribute.html)
+// .
 type RdsDbSnapshotConfiguration struct {
 
 	// The names and values of manual DB snapshot attributes. Manual DB snapshot
 	// attributes are used to authorize other Amazon Web Services accounts to restore a
-	// manual DB snapshot. The only valid value for attributeName for the attribute map
-	// is restore.
+	// manual DB snapshot. The only valid value for attributeName for the attribute
+	// map is restore.
 	Attributes map[string]RdsDbSnapshotAttributeValue
 
 	// The KMS key identifier for an encrypted Amazon RDS DB snapshot. The KMS key
 	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
-	//
-	// *
-	// If the configuration is for an existing Amazon RDS DB snapshot and you do not
-	// specify the kmsKeyId, or you specify an empty string, then the access preview
-	// uses the existing kmsKeyId of the snapshot.
-	//
-	// * If the access preview is for a
-	// new resource and you do not specify the specify the kmsKeyId, then the access
-	// preview considers the snapshot as unencrypted.
+	//   - If the configuration is for an existing Amazon RDS DB snapshot and you do
+	//   not specify the kmsKeyId , or you specify an empty string, then the access
+	//   preview uses the existing kmsKeyId of the snapshot.
+	//   - If the access preview is for a new resource and you do not specify the
+	//   specify the kmsKeyId , then the access preview considers the snapshot as
+	//   unencrypted.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// The configuration for an Amazon S3 access point or multi-region access point for
-// the bucket. You can propose up to 10 access points or multi-region access points
-// per bucket. If the proposed Amazon S3 access point configuration is for an
-// existing bucket, the access preview uses the proposed access point configuration
-// in place of the existing access points. To propose an access point without a
-// policy, you can provide an empty string as the access point policy. For more
-// information, see Creating access points
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
-// For more information about access point policy limits, see Access points
-// restrictions and limitations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html).
+// The configuration for an Amazon S3 access point or multi-region access point
+// for the bucket. You can propose up to 10 access points or multi-region access
+// points per bucket. If the proposed Amazon S3 access point configuration is for
+// an existing bucket, the access preview uses the proposed access point
+// configuration in place of the existing access points. To propose an access point
+// without a policy, you can provide an empty string as the access point policy.
+// For more information, see Creating access points (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html)
+// . For more information about access point policy limits, see Access points
+// restrictions and limitations (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html)
+// .
 type S3AccessPointConfiguration struct {
 
 	// The access point or multi-region access point policy.
@@ -1402,16 +1340,16 @@ type S3AccessPointConfiguration struct {
 	// network origin.
 	NetworkOrigin NetworkOriginConfiguration
 
-	// The proposed S3PublicAccessBlock configuration to apply to this Amazon S3 access
-	// point or multi-region access point.
+	// The proposed S3PublicAccessBlock configuration to apply to this Amazon S3
+	// access point or multi-region access point.
 	PublicAccessBlock *S3PublicAccessBlockConfiguration
 
 	noSmithyDocumentSerde
 }
 
 // A proposed access control list grant configuration for an Amazon S3 bucket. For
-// more information, see How to Specify an ACL
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#setting-acls).
+// more information, see How to Specify an ACL (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#setting-acls)
+// .
 type S3BucketAclGrantConfiguration struct {
 
 	// The grantee to whom you’re assigning access rights.
@@ -1427,8 +1365,8 @@ type S3BucketAclGrantConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Proposed access control configuration for an Amazon S3 bucket. You can propose a
-// configuration for a new Amazon S3 bucket or an existing Amazon S3 bucket that
+// Proposed access control configuration for an Amazon S3 bucket. You can propose
+// a configuration for a new Amazon S3 bucket or an existing Amazon S3 bucket that
 // you own by specifying the Amazon S3 bucket policy, bucket ACLs, bucket BPA
 // settings, Amazon S3 access points, and multi-region access points attached to
 // the bucket. If the configuration is for an existing Amazon S3 bucket and you do
@@ -1437,8 +1375,8 @@ type S3BucketAclGrantConfiguration struct {
 // you do not specify the Amazon S3 bucket policy, the access preview assumes a
 // bucket without a policy. To propose deletion of an existing bucket policy, you
 // can specify an empty string. For more information about bucket policy limits,
-// see Bucket Policy Examples
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html).
+// see Bucket Policy Examples (https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html)
+// .
 type S3BucketConfiguration struct {
 
 	// The configuration of Amazon S3 access points or multi-region access points for
@@ -1465,11 +1403,11 @@ type S3BucketConfiguration struct {
 // proposed configuration is for an existing Amazon S3 bucket and the configuration
 // is not specified, the access preview uses the existing setting. If the proposed
 // configuration is for a new bucket and the configuration is not specified, the
-// access preview uses false. If the proposed configuration is for a new access
+// access preview uses false . If the proposed configuration is for a new access
 // point or multi-region access point and the access point BPA configuration is not
-// specified, the access preview uses true. For more information, see
-// PublicAccessBlockConfiguration
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html).
+// specified, the access preview uses true . For more information, see
+// PublicAccessBlockConfiguration (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html)
+// .
 type S3PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should ignore public ACLs for this bucket and
@@ -1488,21 +1426,20 @@ type S3PublicAccessBlockConfiguration struct {
 }
 
 // The configuration for a Secrets Manager secret. For more information, see
-// CreateSecret
-// (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html).
-// You can propose a configuration for a new secret or an existing secret that you
-// own by specifying the secret policy and optional KMS encryption key. If the
+// CreateSecret (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html)
+// . You can propose a configuration for a new secret or an existing secret that
+// you own by specifying the secret policy and optional KMS encryption key. If the
 // configuration is for an existing secret and you do not specify the secret
 // policy, the access preview uses the existing policy for the secret. If the
 // access preview is for a new resource and you do not specify the policy, the
 // access preview assumes a secret without a policy. To propose deletion of an
 // existing policy, you can specify an empty string. If the proposed configuration
 // is for a new secret and you do not specify the KMS key ID, the access preview
-// uses the Amazon Web Services managed key aws/secretsmanager. If you specify an
+// uses the Amazon Web Services managed key aws/secretsmanager . If you specify an
 // empty string for the KMS key ID, the access preview uses the Amazon Web Services
 // managed key of the Amazon Web Services account. For more information about
-// secret policy limits, see Quotas for Secrets Manager.
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html).
+// secret policy limits, see Quotas for Secrets Manager. (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html)
+// .
 type SecretsManagerSecretConfiguration struct {
 
 	// The proposed ARN, key ID, or alias of the KMS key.
@@ -1522,14 +1459,13 @@ type SecretsManagerSecretConfiguration struct {
 // preview is for a new resource and you do not specify the policy, then the access
 // preview assumes an Amazon SNS topic without a policy. To propose deletion of an
 // existing Amazon SNS topic policy, you can specify an empty string for the Amazon
-// SNS policy. For more information, see Topic
-// (https://docs.aws.amazon.com/sns/latest/api/API_Topic.html).
+// SNS policy. For more information, see Topic (https://docs.aws.amazon.com/sns/latest/api/API_Topic.html)
+// .
 type SnsTopicConfiguration struct {
 
 	// The JSON policy text that defines who can access an Amazon SNS topic. For more
-	// information, see Example cases for Amazon SNS access control
-	// (https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html) in
-	// the Amazon SNS Developer Guide.
+	// information, see Example cases for Amazon SNS access control (https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html)
+	// in the Amazon SNS Developer Guide.
 	TopicPolicy *string
 
 	noSmithyDocumentSerde
@@ -1573,8 +1509,8 @@ type Span struct {
 // access preview assumes an Amazon SQS queue without a policy. To propose deletion
 // of an existing Amazon SQS queue policy, you can specify an empty string for the
 // Amazon SQS policy. For more information about Amazon SQS policy limits, see
-// Quotas related to policies
-// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html).
+// Quotas related to policies (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html)
+// .
 type SqsQueueConfiguration struct {
 
 	// The proposed resource policy for the Amazon SQS queue.
@@ -1618,13 +1554,13 @@ type Substring struct {
 type Trail struct {
 
 	// Specifies the ARN of the trail. The format of a trail ARN is
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail.
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail .
 	//
 	// This member is required.
 	CloudTrailArn *string
 
-	// Possible values are true or false. If set to true, IAM Access Analyzer retrieves
-	// CloudTrail data from all regions to analyze and generate a policy.
+	// Possible values are true or false . If set to true , IAM Access Analyzer
+	// retrieves CloudTrail data from all regions to analyze and generate a policy.
 	AllRegions *bool
 
 	// A list of regions to get CloudTrail data from and analyze to generate a policy.
@@ -1637,13 +1573,13 @@ type Trail struct {
 type TrailProperties struct {
 
 	// Specifies the ARN of the trail. The format of a trail ARN is
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail.
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail .
 	//
 	// This member is required.
 	CloudTrailArn *string
 
-	// Possible values are true or false. If set to true, IAM Access Analyzer retrieves
-	// CloudTrail data from all regions to analyze and generate a policy.
+	// Possible values are true or false . If set to true , IAM Access Analyzer
+	// retrieves CloudTrail data from all regions to analyze and generate a policy.
 	AllRegions *bool
 
 	// A list of regions to get CloudTrail data from and analyze to generate a policy.
@@ -1708,8 +1644,8 @@ type ValidationExceptionField struct {
 
 // The proposed virtual private cloud (VPC) configuration for the Amazon S3 access
 // point. VPC configuration does not apply to multi-region access points. For more
-// information, see VpcConfiguration
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html).
+// information, see VpcConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html)
+// .
 type VpcConfiguration struct {
 
 	// If this field is specified, this access point will only allow connections from

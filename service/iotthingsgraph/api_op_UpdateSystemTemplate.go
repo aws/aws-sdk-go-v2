@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified system. You don't need to run this action after updating a
-// workflow. Any deployment that uses the system will see the changes in the system
-// when it is redeployed.
+// Updates the specified system. You don't need to run this action after updating
+// a workflow. Any deployment that uses the system will see the changes in the
+// system when it is redeployed.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) UpdateSystemTemplate(ctx context.Context, params *UpdateSystemTemplateInput, optFns ...func(*Options)) (*UpdateSystemTemplateOutput, error) {

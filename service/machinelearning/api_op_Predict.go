@@ -14,7 +14,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a prediction for the observation using the specified ML Model. Note:
+// Generates a prediction for the observation using the specified ML Model . Note:
 // Not all response parameters will be populated. Whether a response parameter is
 // populated depends on the type of model requested.
 func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...func(*Options)) (*PredictOutput, error) {
@@ -34,7 +34,7 @@ func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...fu
 
 type PredictInput struct {
 
-	// A unique identifier of the MLModel.
+	// A unique identifier of the MLModel .
 	//
 	// This member is required.
 	MLModelId *string
@@ -53,19 +53,13 @@ type PredictInput struct {
 type PredictOutput struct {
 
 	// The output from a Predict operation:
-	//
-	// * Details - Contains the following
-	// attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY |
-	// MULTICLASSDetailsAttributes.ALGORITHM - SGD
-	//
-	// * PredictedLabel - Present for
-	// either a BINARY or MULTICLASSMLModel request.
-	//
-	// * PredictedScores - Contains the
-	// raw classification score corresponding to each label.
-	//
-	// * PredictedValue -
-	// Present for a REGRESSIONMLModel request.
+	//   - Details - Contains the following attributes:
+	//   DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS
+	//   DetailsAttributes.ALGORITHM - SGD
+	//   - PredictedLabel - Present for either a BINARY or MULTICLASS MLModel request.
+	//   - PredictedScores - Contains the raw classification score corresponding to
+	//   each label.
+	//   - PredictedValue - Present for a REGRESSION MLModel request.
 	Prediction *types.Prediction
 
 	// Metadata pertaining to the operation's result.

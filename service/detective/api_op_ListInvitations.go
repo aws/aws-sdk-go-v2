@@ -40,9 +40,9 @@ type ListInvitationsInput struct {
 	// which is currently 200.
 	MaxResults *int32
 
-	// For requests to retrieve the next page of results, the pagination token that was
-	// returned with the previous page of results. The initial request does not include
-	// a pagination token.
+	// For requests to retrieve the next page of results, the pagination token that
+	// was returned with the previous page of results. The initial request does not
+	// include a pagination token.
 	NextToken *string
 
 	noSmithyDocumentSerde

@@ -61,8 +61,8 @@ type ListHubContentVersionsInput struct {
 	MinVersion *string
 
 	// If the response to a previous ListHubContentVersions request was truncated, the
-	// response includes a NextToken. To retrieve the next set of hub content versions,
-	// use the token in the next request.
+	// response includes a NextToken . To retrieve the next set of hub content
+	// versions, use the token in the next request.
 	NextToken *string
 
 	// Sort hub content versions by either name or creation time.
@@ -81,8 +81,8 @@ type ListHubContentVersionsOutput struct {
 	// This member is required.
 	HubContentSummaries []types.HubContentInfo
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of hub content versions, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of hub content versions, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

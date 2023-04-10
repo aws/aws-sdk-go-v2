@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove tags from the specified Amazon SNS topic. For an overview, see Amazon SNS
-// Tags (https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in the Amazon SNS
-// Developer Guide.
+// Remove tags from the specified Amazon SNS topic. For an overview, see Amazon
+// SNS Tags (https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in the Amazon
+// SNS Developer Guide.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

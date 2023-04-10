@@ -31,9 +31,7 @@ func (c *Client) BatchGetDevicePosition(ctx context.Context, params *BatchGetDev
 type BatchGetDevicePositionInput struct {
 
 	// Devices whose position you want to retrieve.
-	//
-	// * For example, for two devices:
-	// device-ids=DeviceId1&device-ids=DeviceId2
+	//   - For example, for two devices: device-ids=DeviceId1&device-ids=DeviceId2
 	//
 	// This member is required.
 	DeviceIds []string
@@ -48,8 +46,8 @@ type BatchGetDevicePositionInput struct {
 
 type BatchGetDevicePositionOutput struct {
 
-	// Contains device position details such as the device ID, position, and timestamps
-	// for when the position was received and sampled.
+	// Contains device position details such as the device ID, position, and
+	// timestamps for when the position was received and sampled.
 	//
 	// This member is required.
 	DevicePositions []types.DevicePosition

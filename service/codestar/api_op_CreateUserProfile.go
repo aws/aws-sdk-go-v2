@@ -11,10 +11,11 @@ import (
 	"time"
 )
 
-// Creates a profile for a user that includes user preferences, such as the display
-// name and email address assocciated with the user, in AWS CodeStar. The user
-// profile is not project-specific. Information in the user profile is displayed
-// wherever the user's information appears to other users in AWS CodeStar.
+// Creates a profile for a user that includes user preferences, such as the
+// display name and email address assocciated with the user, in AWS CodeStar. The
+// user profile is not project-specific. Information in the user profile is
+// displayed wherever the user's information appears to other users in AWS
+// CodeStar.
 func (c *Client) CreateUserProfile(ctx context.Context, params *CreateUserProfileInput, optFns ...func(*Options)) (*CreateUserProfileOutput, error) {
 	if params == nil {
 		params = &CreateUserProfileInput{}

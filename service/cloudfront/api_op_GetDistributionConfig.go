@@ -45,7 +45,7 @@ type GetDistributionConfigOutput struct {
 	// The distribution's configuration information.
 	DistributionConfig *types.DistributionConfig
 
-	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
+	// The current version of the configuration. For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Metadata pertaining to the operation's result.

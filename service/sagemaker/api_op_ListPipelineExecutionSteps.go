@@ -34,14 +34,14 @@ type ListPipelineExecutionStepsInput struct {
 	MaxResults *int32
 
 	// If the result of the previous ListPipelineExecutionSteps request was truncated,
-	// the response includes a NextToken. To retrieve the next set of pipeline
+	// the response includes a NextToken . To retrieve the next set of pipeline
 	// execution steps, use the token in the next request.
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.
 	PipelineExecutionArn *string
 
-	// The field by which to sort results. The default is CreatedTime.
+	// The field by which to sort results. The default is CreatedTime .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -50,7 +50,7 @@ type ListPipelineExecutionStepsInput struct {
 type ListPipelineExecutionStepsOutput struct {
 
 	// If the result of the previous ListPipelineExecutionSteps request was truncated,
-	// the response includes a NextToken. To retrieve the next set of pipeline
+	// the response includes a NextToken . To retrieve the next set of pipeline
 	// execution steps, use the token in the next request.
 	NextToken *string
 

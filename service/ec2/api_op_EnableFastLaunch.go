@@ -43,13 +43,13 @@ type EnableFastLaunchInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The launch template to use when launching Windows instances from pre-provisioned
-	// snapshots. Launch template parameters can include either the name or ID of the
-	// launch template, but not both.
+	// The launch template to use when launching Windows instances from
+	// pre-provisioned snapshots. Launch template parameters can include either the
+	// name or ID of the launch template, but not both.
 	LaunchTemplate *types.FastLaunchLaunchTemplateSpecificationRequest
 
 	// The maximum number of instances that Amazon EC2 can launch at the same time to
@@ -58,12 +58,12 @@ type EnableFastLaunchInput struct {
 	MaxParallelLaunches *int32
 
 	// The type of resource to use for pre-provisioning the Windows AMI for faster
-	// launching. Supported values include: snapshot, which is the default value.
+	// launching. Supported values include: snapshot , which is the default value.
 	ResourceType *string
 
-	// Configuration settings for creating and managing the snapshots that are used for
-	// pre-provisioning the Windows AMI for faster launching. The associated
-	// ResourceType must be snapshot.
+	// Configuration settings for creating and managing the snapshots that are used
+	// for pre-provisioning the Windows AMI for faster launching. The associated
+	// ResourceType must be snapshot .
 	SnapshotConfiguration *types.FastLaunchSnapshotConfigurationRequest
 
 	noSmithyDocumentSerde
@@ -90,9 +90,9 @@ type EnableFastLaunchOutput struct {
 	// faster launching.
 	ResourceType types.FastLaunchResourceType
 
-	// Settings to create and manage the pre-provisioned snapshots that Amazon EC2 uses
-	// for faster launches from the Windows AMI. This property is returned when the
-	// associated resourceType is snapshot.
+	// Settings to create and manage the pre-provisioned snapshots that Amazon EC2
+	// uses for faster launches from the Windows AMI. This property is returned when
+	// the associated resourceType is snapshot .
 	SnapshotConfiguration *types.FastLaunchSnapshotConfigurationResponse
 
 	// The current state of faster launching for the specified Windows AMI.

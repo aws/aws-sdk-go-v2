@@ -58,9 +58,9 @@ type GetMigrationsInput struct {
 
 type GetMigrationsOutput struct {
 
-	// An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To see
-	// details of the migration, use the migrationId from the summary in a call to the
-	// operation.
+	// An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To
+	// see details of the migration, use the migrationId from the summary in a call to
+	// the operation.
 	MigrationSummaries []types.MigrationSummary
 
 	// If the response is truncated, it includes a pagination token that you can

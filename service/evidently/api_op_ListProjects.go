@@ -47,8 +47,8 @@ type ListProjectsOutput struct {
 	// of results.
 	NextToken *string
 
-	// An array of structures that contain the configuration details of the projects in
-	// the Region.
+	// An array of structures that contain the configuration details of the projects
+	// in the Region.
 	Projects []types.ProjectSummary
 
 	// Metadata pertaining to the operation's result.

@@ -17,8 +17,8 @@ import (
 // account. The policy is enacted within a few minutes of a successful PUT
 // operation. The set policy operation does not affect retrieval jobs that were in
 // progress before the policy was enacted. For more information about data
-// retrieval policies, see Amazon Glacier Data Retrieval Policies
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
+// retrieval policies, see Amazon Glacier Data Retrieval Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html)
+// .
 func (c *Client) SetDataRetrievalPolicy(ctx context.Context, params *SetDataRetrievalPolicyInput, optFns ...func(*Options)) (*SetDataRetrievalPolicyOutput, error) {
 	if params == nil {
 		params = &SetDataRetrievalPolicyInput{}
@@ -37,11 +37,11 @@ func (c *Client) SetDataRetrievalPolicy(ctx context.Context, params *SetDataRetr
 // SetDataRetrievalPolicy input.
 type SetDataRetrievalPolicyInput struct {
 
-	// The AccountId value is the AWS account ID. This value must match the AWS account
-	// ID associated with the credentials used to sign the request. You can either
-	// specify an AWS account ID or optionally a single '-' (hyphen), in which case
-	// Amazon Glacier uses the AWS account ID associated with the credentials used to
-	// sign the request. If you specify your account ID, do not include any hyphens
+	// The AccountId value is the AWS account ID. This value must match the AWS
+	// account ID associated with the credentials used to sign the request. You can
+	// either specify an AWS account ID or optionally a single ' - ' (hyphen), in which
+	// case Amazon Glacier uses the AWS account ID associated with the credentials used
+	// to sign the request. If you specify your account ID, do not include any hyphens
 	// ('-') in the ID.
 	//
 	// This member is required.

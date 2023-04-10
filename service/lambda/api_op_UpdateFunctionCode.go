@@ -13,18 +13,15 @@ import (
 
 // Updates a Lambda function's code. If code signing is enabled for the function,
 // the code package must be signed by a trusted publisher. For more information,
-// see Configuring code signing for Lambda
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html).
-// If the function's package type is Image, then you must specify the code package
-// in ImageUri as the URI of a container image
-// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon
-// ECR registry. If the function's package type is Zip, then you must specify the
-// deployment package as a .zip file archive
-// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip).
-// Enter the Amazon S3 bucket and key of the code .zip file location. You can also
-// provide the function code inline using the ZipFile field. The code in the
+// see Configuring code signing for Lambda (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html)
+// . If the function's package type is Image , then you must specify the code
+// package in ImageUri as the URI of a container image (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)
+// in the Amazon ECR registry. If the function's package type is Zip , then you
+// must specify the deployment package as a .zip file archive (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)
+// . Enter the Amazon S3 bucket and key of the code .zip file location. You can
+// also provide the function code inline using the ZipFile field. The code in the
 // deployment package must be compatible with the target instruction set
-// architecture of the function (x86-64 or arm64). The function's code is locked
+// architecture of the function ( x86-64 or arm64 ). The function's code is locked
 // when you publish a version. You can't modify the code of a published version,
 // only the unpublished version. For a function defined as a container image,
 // Lambda resolves the image tag to an image digest. In Amazon ECR, if you update
@@ -47,25 +44,18 @@ func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionC
 type UpdateFunctionCodeInput struct {
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name – my-function.
-	//
-	// *
-	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	// *
-	// Partial ARN – 123456789012:function:my-function.
-	//
-	// The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//   - Function name – my-function .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//   - Partial ARN – 123456789012:function:my-function .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it is limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
 
 	// The instruction set architecture that the function supports. Enter a string
 	// array with one of the valid values (arm64 or x86_64). The default value is
-	// x86_64.
+	// x86_64 .
 	Architectures []types.Architecture
 
 	// Set to true to validate the request parameters and access permissions without
@@ -80,13 +70,13 @@ type UpdateFunctionCodeInput struct {
 	// This has the same effect as calling PublishVersion separately.
 	Publish bool
 
-	// Update the function only if the revision ID matches the ID that's specified. Use
-	// this option to avoid modifying a function that has changed since you last read
-	// it.
+	// Update the function only if the revision ID matches the ID that's specified.
+	// Use this option to avoid modifying a function that has changed since you last
+	// read it.
 	RevisionId *string
 
-	// An Amazon S3 bucket in the same Amazon Web Services Region as your function. The
-	// bucket can be in a different Amazon Web Services account. Use only with a
+	// An Amazon S3 bucket in the same Amazon Web Services Region as your function.
+	// The bucket can be in a different Amazon Web Services account. Use only with a
 	// function defined with a .zip file archive deployment package.
 	S3Bucket *string
 
@@ -110,7 +100,7 @@ type UpdateFunctionCodeOutput struct {
 
 	// The instruction set architecture that the function supports. Architecture is a
 	// string array with one of the valid values. The default architecture value is
-	// x86_64.
+	// x86_64 .
 	Architectures []types.Architecture
 
 	// The SHA256 hash of the function's deployment package.
@@ -125,17 +115,16 @@ type UpdateFunctionCodeOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
-	// Omitted from CloudTrail logs.
+	// The function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
+	// . Omitted from CloudTrail logs.
 	Environment *types.EnvironmentResponse
 
 	// The size of the function’s /tmp directory in MB. The default value is 512, but
 	// it can be any whole number between 512 and 10,240 MB.
 	EphemeralStorage *types.EphemeralStorage
 
-	// Connection settings for an Amazon EFS file system
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
+	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
+	// .
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -150,16 +139,14 @@ type UpdateFunctionCodeOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).
-	// When Lambda SnapStart
-	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is
-	// activated, this key is also used to encrypt the function's snapshot. This key is
-	// returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
+	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
+	// is activated, this key is also used to encrypt the function's snapshot. This key
+	// is returned only if you've configured a customer managed key.
 	KMSKeyArn *string
 
-	// The date and time that the function was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// The date and time that the function was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string
 
 	// The status of the last update that was performed on the function. This is first
@@ -172,8 +159,8 @@ type UpdateFunctionCodeOutput struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
 
-	// The function's layers
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
+	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// .
 	Layers []types.Layer
 
 	// For Lambda@Edge functions, the ARN of the main function.
@@ -182,8 +169,8 @@ type UpdateFunctionCodeOutput struct {
 	// The amount of memory available to the function at runtime.
 	MemorySize *int32
 
-	// The type of deployment package. Set to Image for container image and set Zip for
-	// .zip file archive.
+	// The type of deployment package. Set to Image for container image and set Zip
+	// for .zip file archive.
 	PackageType types.PackageType
 
 	// The latest updated revision of the function or alias.
@@ -206,19 +193,19 @@ type UpdateFunctionCodeOutput struct {
 
 	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Improving startup performance with Lambda SnapStart
-	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
+	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
+	// .
 	SnapStart *types.SnapStartResponse
 
-	// The current state of the function. When the state is Inactive, you can
+	// The current state of the function. When the state is Inactive , you can
 	// reactivate the function by invoking it.
 	State types.State
 
 	// The reason for the function's current state.
 	StateReason *string
 
-	// The reason code for the function's current state. When the code is Creating, you
-	// can't invoke or modify the function.
+	// The reason code for the function's current state. When the code is Creating ,
+	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
 
 	// The amount of time in seconds that Lambda allows a function to run before

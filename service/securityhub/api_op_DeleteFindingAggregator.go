@@ -32,7 +32,7 @@ func (c *Client) DeleteFindingAggregator(ctx context.Context, params *DeleteFind
 type DeleteFindingAggregatorInput struct {
 
 	// The ARN of the finding aggregator to delete. To obtain the ARN, use
-	// ListFindingAggregators.
+	// ListFindingAggregators .
 	//
 	// This member is required.
 	FindingAggregatorArn *string

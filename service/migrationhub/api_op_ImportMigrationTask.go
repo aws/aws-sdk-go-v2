@@ -31,8 +31,8 @@ func (c *Client) ImportMigrationTask(ctx context.Context, params *ImportMigratio
 
 type ImportMigrationTaskInput struct {
 
-	// Unique identifier that references the migration task. Do not store personal data
-	// in this field.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// This member is required.
 	MigrationTaskName *string

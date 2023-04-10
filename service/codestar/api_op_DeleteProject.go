@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a project, including project resources. Does not delete users associated
-// with the project, but does delete the IAM roles that allowed access to the
-// project.
+// Deletes a project, including project resources. Does not delete users
+// associated with the project, but does delete the IAM roles that allowed access
+// to the project.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}

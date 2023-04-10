@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Terminates the specified provisioned product. This operation does not delete any
-// records associated with the provisioned product. You can check the status of
-// this request using DescribeRecord.
+// Terminates the specified provisioned product. This operation does not delete
+// any records associated with the provisioned product. You can check the status of
+// this request using DescribeRecord .
 func (c *Client) TerminateProvisionedProduct(ctx context.Context, params *TerminateProvisionedProductInput, optFns ...func(*Options)) (*TerminateProvisionedProductOutput, error) {
 	if params == nil {
 		params = &TerminateProvisionedProductInput{}
@@ -41,22 +41,20 @@ type TerminateProvisionedProductInput struct {
 	TerminateToken *string
 
 	// The language code.
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	//   - jp - Japanese
+	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// If set to true, Service Catalog stops managing the specified provisioned product
-	// even if it cannot delete the underlying resources.
+	// If set to true, Service Catalog stops managing the specified provisioned
+	// product even if it cannot delete the underlying resources.
 	IgnoreErrors bool
 
 	// The identifier of the provisioned product. You cannot specify both
-	// ProvisionedProductName and ProvisionedProductId.
+	// ProvisionedProductName and ProvisionedProductId .
 	ProvisionedProductId *string
 
 	// The name of the provisioned product. You cannot specify both
-	// ProvisionedProductName and ProvisionedProductId.
+	// ProvisionedProductName and ProvisionedProductId .
 	ProvisionedProductName *string
 
 	// When this boolean parameter is set to true, the TerminateProvisionedProduct API

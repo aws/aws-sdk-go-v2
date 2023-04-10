@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the speaker enrollment jobs in the domain with the specified
-// JobStatus. If JobStatus is not provided, this lists all jobs with all possible
-// speaker enrollment job statuses.
+// Lists all the speaker enrollment jobs in the domain with the specified JobStatus
+// . If JobStatus is not provided, this lists all jobs with all possible speaker
+// enrollment job statuses.
 func (c *Client) ListSpeakerEnrollmentJobs(ctx context.Context, params *ListSpeakerEnrollmentJobsInput, optFns ...func(*Options)) (*ListSpeakerEnrollmentJobsOutput, error) {
 	if params == nil {
 		params = &ListSpeakerEnrollmentJobsInput{}

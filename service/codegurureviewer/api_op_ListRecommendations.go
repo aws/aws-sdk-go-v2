@@ -30,8 +30,7 @@ func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommenda
 
 type ListRecommendationsInput struct {
 
-	// The Amazon Resource Name (ARN) of the CodeReview
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
 	// object.
 	//
 	// This member is required.
@@ -123,8 +122,8 @@ func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRecommendationsAPIClient is a client that implements the ListRecommendations
-// operation.
+// ListRecommendationsAPIClient is a client that implements the
+// ListRecommendations operation.
 type ListRecommendationsAPIClient interface {
 	ListRecommendations(context.Context, *ListRecommendationsInput, ...func(*Options)) (*ListRecommendationsOutput, error)
 }

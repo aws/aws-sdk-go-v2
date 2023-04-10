@@ -32,7 +32,7 @@ func (c *Client) UpdateVolume(ctx context.Context, params *UpdateVolumeInput, op
 type UpdateVolumeInput struct {
 
 	// The ID of the volume that you want to update, in the format
-	// fsvol-0123456789abcdef0.
+	// fsvol-0123456789abcdef0 .
 	//
 	// This member is required.
 	VolumeId *string
@@ -42,8 +42,8 @@ type UpdateVolumeInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// The name of the OpenZFS volume. OpenZFS root volumes are automatically named
-	// FSX. Child volume names must be unique among their parent volume's children. The
+	// The name of the OpenZFS volume. OpenZFS root volumes are automatically named FSX
+	// . Child volume names must be unique among their parent volume's children. The
 	// name of the volume is part of the mount string for the OpenZFS volume.
 	Name *string
 

@@ -220,9 +220,9 @@ const (
 	OperatorTypeBetween OperatorType = "between"
 )
 
-// Values returns all known values for OperatorType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OperatorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OperatorType) Values() []OperatorType {
 	return []OperatorType{
 		"eq",
@@ -263,9 +263,9 @@ const (
 	PartnerIntegrationStatusConnectionFailure PartnerIntegrationStatus = "ConnectionFailure"
 )
 
-// Values returns all known values for PartnerIntegrationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PartnerIntegrationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PartnerIntegrationStatus) Values() []PartnerIntegrationStatus {
 	return []PartnerIntegrationStatus{
 		"Active",
@@ -329,9 +329,9 @@ const (
 	ReservedNodeOfferingTypeUpgradable ReservedNodeOfferingType = "Upgradable"
 )
 
-// Values returns all known values for ReservedNodeOfferingType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReservedNodeOfferingType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReservedNodeOfferingType) Values() []ReservedNodeOfferingType {
 	return []ReservedNodeOfferingType{
 		"Regular",
@@ -530,8 +530,8 @@ const (
 	UsageLimitFeatureTypeCrossRegionDatasharing UsageLimitFeatureType = "cross-region-datasharing"
 )
 
-// Values returns all known values for UsageLimitFeatureType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for UsageLimitFeatureType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (UsageLimitFeatureType) Values() []UsageLimitFeatureType {
 	return []UsageLimitFeatureType{

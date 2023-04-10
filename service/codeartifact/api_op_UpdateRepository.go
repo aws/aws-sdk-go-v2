@@ -49,8 +49,8 @@ type UpdateRepositoryInput struct {
 	// A list of upstream repositories to associate with the repository. The order of
 	// the upstream repositories in the list determines their priority order when
 	// CodeArtifact looks for a requested package version. For more information, see
-	// Working with upstream repositories
-	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
+	// Working with upstream repositories (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html)
+	// .
 	Upstreams []types.UpstreamRepository
 
 	noSmithyDocumentSerde

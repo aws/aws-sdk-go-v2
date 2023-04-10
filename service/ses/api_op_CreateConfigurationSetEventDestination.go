@@ -17,9 +17,8 @@ import (
 // Notification Service (Amazon SNS). An event destination is the AWS service to
 // which Amazon SES publishes the email sending events associated with a
 // configuration set. For information about using configuration sets, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// You can execute this operation no more than once per second.
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, params *CreateConfigurationSetEventDestinationInput, optFns ...func(*Options)) (*CreateConfigurationSetEventDestinationOutput, error) {
 	if params == nil {
 		params = &CreateConfigurationSetEventDestinationInput{}
@@ -39,8 +38,8 @@ func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, par
 // configuration set event destination, which can be either Amazon CloudWatch or
 // Amazon Kinesis Firehose, describes an AWS service in which Amazon SES publishes
 // the email sending events associated with a configuration set. For information
-// about using configuration sets, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// .
 type CreateConfigurationSetEventDestinationInput struct {
 
 	// The name of the configuration set that the event destination should be

@@ -47,8 +47,8 @@ type ListFeaturesInput struct {
 
 type ListFeaturesOutput struct {
 
-	// An array of structures that contain the configuration details of the features in
-	// the specified project.
+	// An array of structures that contain the configuration details of the features
+	// in the specified project.
 	Features []types.FeatureSummary
 
 	// The token to use in a subsequent ListFeatures operation to return the next set

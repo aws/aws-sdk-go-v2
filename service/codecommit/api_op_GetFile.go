@@ -67,10 +67,10 @@ type GetFileOutput struct {
 	// This member is required.
 	FileContent []byte
 
-	// The extrapolated file mode permissions of the blob. Valid values include strings
-	// such as EXECUTABLE and not numeric values. The file mode permissions returned by
-	// this API are not the standard file mode permission values, such as 100644, but
-	// rather extrapolated values. See the supported return values.
+	// The extrapolated file mode permissions of the blob. Valid values include
+	// strings such as EXECUTABLE and not numeric values. The file mode permissions
+	// returned by this API are not the standard file mode permission values, such as
+	// 100644, but rather extrapolated values. See the supported return values.
 	//
 	// This member is required.
 	FileMode types.FileModeTypeEnum

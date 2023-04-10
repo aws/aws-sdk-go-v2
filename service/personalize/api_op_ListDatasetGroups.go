@@ -14,8 +14,8 @@ import (
 
 // Returns a list of dataset groups. The response provides the properties for each
 // dataset group, including the Amazon Resource Name (ARN). For more information on
-// dataset groups, see CreateDatasetGroup
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html).
+// dataset groups, see CreateDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html)
+// .
 func (c *Client) ListDatasetGroups(ctx context.Context, params *ListDatasetGroupsInput, optFns ...func(*Options)) (*ListDatasetGroupsOutput, error) {
 	if params == nil {
 		params = &ListDatasetGroupsInput{}

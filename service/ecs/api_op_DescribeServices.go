@@ -35,8 +35,8 @@ func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesI
 
 type DescribeServicesInput struct {
 
-	// A list of services to describe. You may specify up to 10 services to describe in
-	// a single operation.
+	// A list of services to describe. You may specify up to 10 services to describe
+	// in a single operation.
 	//
 	// This member is required.
 	Services []string
@@ -47,9 +47,9 @@ type DescribeServicesInput struct {
 	// describing were launched in any cluster other than the default cluster.
 	Cluster *string
 
-	// Determines whether you want to see the resource tags for the service. If TAGS is
-	// specified, the tags are included in the response. If this field is omitted, tags
-	// aren't included in the response.
+	// Determines whether you want to see the resource tags for the service. If TAGS
+	// is specified, the tags are included in the response. If this field is omitted,
+	// tags aren't included in the response.
 	Include []types.ServiceField
 
 	noSmithyDocumentSerde
@@ -153,9 +153,9 @@ type ServicesInactiveWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServicesInactiveWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServicesInactiveWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -344,9 +344,9 @@ type ServicesStableWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServicesStableWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServicesStableWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

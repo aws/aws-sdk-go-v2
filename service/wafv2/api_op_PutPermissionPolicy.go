@@ -10,18 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an IAM policy to the specified resource. Use this to share a rule group
-// across accounts. You must be the owner of the rule group to perform this
+// Attaches an IAM policy to the specified resource. Use this to share a rule
+// group across accounts. You must be the owner of the rule group to perform this
 // operation. This action is subject to the following restrictions:
-//
-// * You can
-// attach only one policy with each PutPermissionPolicy request.
-//
-// * The ARN in the
-// request must be a valid WAF RuleGroup ARN and the rule group must exist in the
-// same Region.
-//
-// * The user making the request must be the owner of the rule group.
+//   - You can attach only one policy with each PutPermissionPolicy request.
+//   - The ARN in the request must be a valid WAF RuleGroup ARN and the rule group
+//     must exist in the same Region.
+//   - The user making the request must be the owner of the rule group.
 func (c *Client) PutPermissionPolicy(ctx context.Context, params *PutPermissionPolicyInput, optFns ...func(*Options)) (*PutPermissionPolicyOutput, error) {
 	if params == nil {
 		params = &PutPermissionPolicyInput{}
@@ -39,28 +34,19 @@ func (c *Client) PutPermissionPolicy(ctx context.Context, params *PutPermissionP
 
 type PutPermissionPolicyInput struct {
 
-	// The policy to attach to the specified rule group. The policy specifications must
-	// conform to the following:
-	//
-	// * The policy must be composed using IAM Policy
-	// version 2012-10-17 or version 2015-01-01.
-	//
-	// * The policy must include
-	// specifications for Effect, Action, and Principal.
-	//
-	// * Effect must specify
-	// Allow.
-	//
-	// * Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and
-	// wafv2:PutFirewallManagerRuleGroups and may optionally specify
-	// wafv2:GetRuleGroup. WAF rejects any extra actions or wildcard actions in the
-	// policy.
-	//
-	// * The policy must not include a Resource parameter.
-	//
-	// For more
-	// information, see IAM Policies
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html).
+	// The policy to attach to the specified rule group. The policy specifications
+	// must conform to the following:
+	//   - The policy must be composed using IAM Policy version 2012-10-17 or version
+	//   2015-01-01.
+	//   - The policy must include specifications for Effect , Action , and Principal .
+	//   - Effect must specify Allow .
+	//   - Action must specify wafv2:CreateWebACL , wafv2:UpdateWebACL , and
+	//   wafv2:PutFirewallManagerRuleGroups and may optionally specify
+	//   wafv2:GetRuleGroup . WAF rejects any extra actions or wildcard actions in the
+	//   policy.
+	//   - The policy must not include a Resource parameter.
+	// For more information, see IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
+	// .
 	//
 	// This member is required.
 	Policy *string

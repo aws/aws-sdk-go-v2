@@ -19,7 +19,7 @@ import (
 // $LATEST version of a slot type. You can't update the numbered versions that you
 // create with the CreateSlotTypeVersion operation. When you create a version of a
 // slot type, Amazon Lex sets the version to 1. Subsequent versions increment by 1.
-// For more information, see versioning-intro. This operation requires permissions
+// For more information, see versioning-intro . This operation requires permissions
 // for the lex:CreateSlotTypeVersion action.
 func (c *Client) CreateSlotTypeVersion(ctx context.Context, params *CreateSlotTypeVersionInput, optFns ...func(*Options)) (*CreateSlotTypeVersionOutput, error) {
 	if params == nil {
@@ -38,17 +38,17 @@ func (c *Client) CreateSlotTypeVersion(ctx context.Context, params *CreateSlotTy
 
 type CreateSlotTypeVersionInput struct {
 
-	// The name of the slot type that you want to create a new version for. The name is
-	// case sensitive.
+	// The name of the slot type that you want to create a new version for. The name
+	// is case sensitive.
 	//
 	// This member is required.
 	Name *string
 
 	// Checksum for the $LATEST version of the slot type that you want to publish. If
 	// you specify a checksum and the $LATEST version of the slot type has a different
-	// checksum, Amazon Lex returns a PreconditionFailedException exception and doesn't
-	// publish the new version. If you don't specify a checksum, Amazon Lex publishes
-	// the $LATEST version.
+	// checksum, Amazon Lex returns a PreconditionFailedException exception and
+	// doesn't publish the new version. If you don't specify a checksum, Amazon Lex
+	// publishes the $LATEST version.
 	Checksum *string
 
 	noSmithyDocumentSerde
@@ -83,7 +83,7 @@ type CreateSlotTypeVersionOutput struct {
 	SlotTypeConfigurations []types.SlotTypeConfiguration
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For more
-	// information, see PutSlotType.
+	// information, see PutSlotType .
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
 
 	// The version assigned to the new slot type version.

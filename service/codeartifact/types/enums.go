@@ -10,9 +10,9 @@ const (
 	AllowPublishBlock AllowPublish = "BLOCK"
 )
 
-// Values returns all known values for AllowPublish. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AllowPublish. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AllowPublish) Values() []AllowPublish {
 	return []AllowPublish{
 		"ALLOW",
@@ -46,9 +46,9 @@ const (
 	DomainStatusDeleted DomainStatus = "Deleted"
 )
 
-// Values returns all known values for DomainStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DomainStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"Active",
@@ -63,9 +63,9 @@ const (
 	ExternalConnectionStatusAvailable ExternalConnectionStatus = "Available"
 )
 
-// Values returns all known values for ExternalConnectionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExternalConnectionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExternalConnectionStatus) Values() []ExternalConnectionStatus {
 	return []ExternalConnectionStatus{
 		"Available",
@@ -153,9 +153,9 @@ const (
 	PackageVersionOriginTypeUnknown  PackageVersionOriginType = "UNKNOWN"
 )
 
-// Values returns all known values for PackageVersionOriginType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PackageVersionOriginType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageVersionOriginType) Values() []PackageVersionOriginType {
 	return []PackageVersionOriginType{
 		"INTERNAL",
@@ -217,9 +217,9 @@ const (
 	ResourceTypeAsset          ResourceType = "asset"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"domain",

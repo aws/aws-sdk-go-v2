@@ -124,8 +124,8 @@ func (c *Client) addOperationGetResourcePoliciesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetResourcePoliciesAPIClient is a client that implements the GetResourcePolicies
-// operation.
+// GetResourcePoliciesAPIClient is a client that implements the
+// GetResourcePolicies operation.
 type GetResourcePoliciesAPIClient interface {
 	GetResourcePolicies(context.Context, *GetResourcePoliciesInput, ...func(*Options)) (*GetResourcePoliciesOutput, error)
 }

@@ -15,15 +15,10 @@ import (
 
 // Lists the INFO, WARN, and ERROR events for periodic configuration updates
 // performed by Application Insights. Examples of events represented are:
-//
-// * INFO:
-// creating a new alarm or updating an alarm threshold.
-//
-// * WARN: alarm not created
-// due to insufficient data points used to predict thresholds.
-//
-// * ERROR: alarm not
-// created due to permission errors or exceeding quotas.
+//   - INFO: creating a new alarm or updating an alarm threshold.
+//   - WARN: alarm not created due to insufficient data points used to predict
+//     thresholds.
+//   - ERROR: alarm not created due to permission errors or exceeding quotas.
 func (c *Client) ListConfigurationHistory(ctx context.Context, params *ListConfigurationHistoryInput, optFns ...func(*Options)) (*ListConfigurationHistoryOutput, error) {
 	if params == nil {
 		params = &ListConfigurationHistoryInput{}
@@ -78,7 +73,7 @@ type ListConfigurationHistoryOutput struct {
 	EventList []types.ConfigurationEvent
 
 	// The NextToken value to include in a future ListConfigurationHistory request.
-	// When the results of a ListConfigurationHistory request exceed MaxResults, this
+	// When the results of a ListConfigurationHistory request exceed MaxResults , this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

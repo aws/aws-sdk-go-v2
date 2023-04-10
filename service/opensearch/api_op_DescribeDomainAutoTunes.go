@@ -14,8 +14,8 @@ import (
 
 // Returns the list of optimizations that Auto-Tune has made to an Amazon
 // OpenSearch Service domain. For more information, see Auto-Tune for Amazon
-// OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
+// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
+// .
 func (c *Client) DescribeDomainAutoTunes(ctx context.Context, params *DescribeDomainAutoTunesInput, optFns ...func(*Options)) (*DescribeDomainAutoTunesOutput, error) {
 	if params == nil {
 		params = &DescribeDomainAutoTunesInput{}
@@ -43,9 +43,9 @@ type DescribeDomainAutoTunesInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial DescribeDomainAutoTunes operation returns a nextToken, you can
-	// include the returned nextToken in subsequent DescribeDomainAutoTunes operations,
-	// which returns results in the next page.
+	// If your initial DescribeDomainAutoTunes operation returns a nextToken , you can
+	// include the returned nextToken in subsequent DescribeDomainAutoTunes
+	// operations, which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde

@@ -38,14 +38,11 @@ type DescribeMaintenanceWindowExecutionsInput struct {
 	WindowId *string
 
 	// Each entry in the array is a structure containing:
-	//
-	// * Key. A string between 1
-	// and 128 characters. Supported keys include ExecutedBefore and ExecutedAfter.
-	//
-	// *
-	// Values. An array of strings, each between 1 and 256 characters. Supported values
-	// are date/time strings in a valid ISO 8601 date/time format, such as
-	// 2021-11-04T05:00:00Z.
+	//   - Key. A string between 1 and 128 characters. Supported keys include
+	//   ExecutedBefore and ExecutedAfter .
+	//   - Values. An array of strings, each between 1 and 256 characters. Supported
+	//   values are date/time strings in a valid ISO 8601 date/time format, such as
+	//   2021-11-04T05:00:00Z .
 	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -145,8 +142,8 @@ type DescribeMaintenanceWindowExecutionsAPIClient interface {
 
 var _ DescribeMaintenanceWindowExecutionsAPIClient = (*Client)(nil)
 
-// DescribeMaintenanceWindowExecutionsPaginatorOptions is the paginator options for
-// DescribeMaintenanceWindowExecutions
+// DescribeMaintenanceWindowExecutionsPaginatorOptions is the paginator options
+// for DescribeMaintenanceWindowExecutions
 type DescribeMaintenanceWindowExecutionsPaginatorOptions struct {
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.

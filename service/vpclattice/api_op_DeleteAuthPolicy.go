@@ -12,7 +12,7 @@ import (
 
 // Deletes the specified auth policy. If an auth is set to AWS_IAM and the auth
 // policy is deleted, all requests will be denied by default. If you are trying to
-// remove the auth policy completely, you must set the auth_type to NONE. If auth
+// remove the auth policy completely, you must set the auth_type to NONE . If auth
 // is enabled on the resource, but no auth policy is set, all requests will be
 // denied.
 func (c *Client) DeleteAuthPolicy(ctx context.Context, params *DeleteAuthPolicyInput, optFns ...func(*Options)) (*DeleteAuthPolicyOutput, error) {

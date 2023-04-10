@@ -30,9 +30,8 @@ type Account struct {
 	AccountStatus AccountStatus
 
 	// The Amazon Chime account type. For more information about different account
-	// types, see Managing Your Amazon Chime Accounts
-	// (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html) in the
-	// Amazon Chime Administration Guide.
+	// types, see Managing Your Amazon Chime Accounts (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
+	// in the Amazon Chime Administration Guide.
 	AccountType AccountType
 
 	// The Amazon Chime account creation timestamp, in ISO 8601 format.
@@ -53,17 +52,16 @@ type Account struct {
 // Settings related to the Amazon Chime account. This includes settings that start
 // or stop remote control of shared screens, or start or stop the dial-out option
 // in the Amazon Chime web application. For more information about these settings,
-// see Use the Policies Page
-// (https://docs.aws.amazon.com/chime/latest/ag/policies.html) in the Amazon Chime
-// Administration Guide.
+// see Use the Policies Page (https://docs.aws.amazon.com/chime/latest/ag/policies.html)
+// in the Amazon Chime Administration Guide.
 type AccountSettings struct {
 
 	// Setting that stops or starts remote control of shared screens during meetings.
 	DisableRemoteControl *bool
 
-	// Setting that allows meeting participants to choose the Call me at a phone number
-	// option. For more information, see Join a Meeting without the Amazon Chime App
-	// (https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html).
+	// Setting that allows meeting participants to choose the Call me at a phone
+	// number option. For more information, see Join a Meeting without the Amazon
+	// Chime App (https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html) .
 	EnableDialOut *bool
 
 	noSmithyDocumentSerde
@@ -78,7 +76,7 @@ type Address struct {
 	// The country of an address.
 	Country *string
 
-	// An address suffix location, such as the S. Unit A in Central Park S. Unit A.
+	// An address suffix location, such as the S. Unit A in Central Park S. Unit A .
 	PostDirectional *string
 
 	// The postal code of an address.
@@ -87,19 +85,19 @@ type Address struct {
 	// The Zip + 4 or postal code + 4 of an address.
 	PostalCodePlus4 *string
 
-	// An address prefix location, such as the N in N. Third St..
+	// An address prefix location, such as the N in N. Third St. .
 	PreDirectional *string
 
 	// The state of an address.
 	State *string
 
-	// The address street, such as 8th Avenue.
+	// The address street, such as 8th Avenue .
 	StreetName *string
 
 	// The numeric portion of an address.
 	StreetNumber *string
 
-	// The address suffix, such as the N in 8th Avenue N.
+	// The address suffix, such as the N in 8th Avenue N .
 	StreetSuffix *string
 
 	noSmithyDocumentSerde
@@ -118,7 +116,7 @@ type AlexaForBusinessMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The details of an AppInstance, an instance of an Amazon Chime SDK messaging
+// The details of an AppInstance , an instance of an Amazon Chime SDK messaging
 // application.
 type AppInstance struct {
 
@@ -131,16 +129,16 @@ type AppInstance struct {
 	// The time an AppInstance was last updated. In epoch milliseconds.
 	LastUpdatedTimestamp *time.Time
 
-	// The metadata of an AppInstance.
+	// The metadata of an AppInstance .
 	Metadata *string
 
-	// The name of an AppInstance.
+	// The name of an AppInstance .
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// The details of an AppInstanceAdmin.
+// The details of an AppInstanceAdmin .
 type AppInstanceAdmin struct {
 
 	// The AppInstanceAdmin data.
@@ -155,16 +153,16 @@ type AppInstanceAdmin struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of the details of an AppInstanceAdmin.
+// Summary of the details of an AppInstanceAdmin .
 type AppInstanceAdminSummary struct {
 
-	// The details of the AppInstanceAdmin.
+	// The details of the AppInstanceAdmin .
 	Admin *Identity
 
 	noSmithyDocumentSerde
 }
 
-// The details of the data-retention settings for an AppInstance.
+// The details of the data-retention settings for an AppInstance .
 type AppInstanceRetentionSettings struct {
 
 	// The length of time in days to retain the messages in a channel.
@@ -173,7 +171,7 @@ type AppInstanceRetentionSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The details of the streaming configuration of an AppInstance.
+// The details of the streaming configuration of an AppInstance .
 type AppInstanceStreamingConfiguration struct {
 
 	// The type of data to be streamed.
@@ -189,25 +187,25 @@ type AppInstanceStreamingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of the data for an AppInstance.
+// Summary of the data for an AppInstance .
 type AppInstanceSummary struct {
 
 	// The AppInstance ARN.
 	AppInstanceArn *string
 
-	// The metadata of the AppInstance.
+	// The metadata of the AppInstance .
 	Metadata *string
 
-	// The name of the AppInstance.
+	// The name of the AppInstance .
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// The details of an AppInstanceUser.
+// The details of an AppInstanceUser .
 type AppInstanceUser struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
 	// The time at which the AppInstanceUser was created.
@@ -216,37 +214,37 @@ type AppInstanceUser struct {
 	// The time at which the AppInstanceUser was last updated.
 	LastUpdatedTimestamp *time.Time
 
-	// The metadata of the AppInstanceUser.
+	// The metadata of the AppInstanceUser .
 	Metadata *string
 
-	// The name of the AppInstanceUser.
+	// The name of the AppInstanceUser .
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// Summary of the membership details of an AppInstanceUser.
+// Summary of the membership details of an AppInstanceUser .
 type AppInstanceUserMembershipSummary struct {
 
 	// The time at which a message was last read.
 	ReadMarkerTimestamp *time.Time
 
-	// The type of ChannelMembership.
+	// The type of ChannelMembership .
 	Type ChannelMembershipType
 
 	noSmithyDocumentSerde
 }
 
-// Summary of the details of an AppInstanceUser.
+// Summary of the details of an AppInstanceUser .
 type AppInstanceUserSummary struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
-	// The metadata of the AppInstanceUser.
+	// The metadata of the AppInstanceUser .
 	Metadata *string
 
-	// The name of an AppInstanceUser.
+	// The name of an AppInstanceUser .
 	Name *string
 
 	noSmithyDocumentSerde
@@ -463,7 +461,7 @@ type ChannelBan struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of the details of a ChannelBan.
+// Summary of the details of a ChannelBan .
 type ChannelBanSummary struct {
 
 	// The member being banned from a channel.
@@ -496,19 +494,19 @@ type ChannelMembership struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of the channel membership details of an AppInstanceUser.
+// Summary of the channel membership details of an AppInstanceUser .
 type ChannelMembershipForAppInstanceUserSummary struct {
 
-	// Summary of the membership details of an AppInstanceUser.
+	// Summary of the membership details of an AppInstanceUser .
 	AppInstanceUserMembershipSummary *AppInstanceUserMembershipSummary
 
-	// Summary of the details of a Channel.
+	// Summary of the details of a Channel .
 	ChannelSummary *ChannelSummary
 
 	noSmithyDocumentSerde
 }
 
-// Summary of the details of a ChannelMembership.
+// Summary of the details of a ChannelMembership .
 type ChannelMembershipSummary struct {
 
 	// A member's summary data.
@@ -556,7 +554,7 @@ type ChannelMessage struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of the messages in a Channel.
+// Summary of the messages in a Channel .
 type ChannelMessageSummary struct {
 
 	// The content of the message.
@@ -592,7 +590,7 @@ type ChannelMessageSummary struct {
 // Summary of the details of a moderated channel.
 type ChannelModeratedByAppInstanceUserSummary struct {
 
-	// Summary of the details of a Channel.
+	// Summary of the details of a Channel .
 	ChannelSummary *ChannelSummary
 
 	noSmithyDocumentSerde
@@ -616,7 +614,7 @@ type ChannelModerator struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of the details of a ChannelModerator.
+// Summary of the details of a ChannelModerator .
 type ChannelModeratorSummary struct {
 
 	// The data for a moderator.
@@ -634,7 +632,7 @@ type ChannelRetentionSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of the details of a Channel.
+// Summary of the details of a Channel .
 type ChannelSummary struct {
 
 	// The ARN of the channel.
@@ -659,7 +657,7 @@ type ChannelSummary struct {
 }
 
 // The configuration object of the Amazon Chime SDK meeting for a specified media
-// capture pipeline. SourceType must be ChimeSdkMeeting.
+// capture pipeline. SourceType must be ChimeSdkMeeting .
 type ChimeSdkMeetingConfiguration struct {
 
 	// The configuration for the artifacts in an Amazon Chime SDK meeting.
@@ -737,8 +735,8 @@ type Credential struct {
 	// format.
 	Password *string
 
-	// The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII
-	// format.
+	// The RFC2617 compliant user name associated with the SIP credentials, in
+	// US-ASCII format.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -840,11 +838,11 @@ type EngineTranscribeSettings struct {
 	PartialResultsStability TranscribePartialResultsStability
 
 	// Lists the PII entity types you want to identify or redact. To specify entity
-	// types, you must enable ContentIdentificationType or ContentRedactionType.
+	// types, you must enable ContentIdentificationType or ContentRedactionType .
 	// PIIEntityTypes must be comma-separated. The available values are:
-	// BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV,
-	// CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.
-	// PiiEntityTypes is an optional parameter with a default value of ALL.
+	// BANK_ACCOUNT_NUMBER , BANK_ROUTING, CREDIT_DEBIT_NUMBER , CREDIT_DEBIT_CVV ,
+	// CREDIT_DEBIT_EXPIRY , PIN , EMAIL , ADDRESS , NAME , PHONE , SSN , and ALL .
+	// PiiEntityTypes is an optional parameter with a default value of ALL .
 	PiiEntityTypes *string
 
 	// The AWS Region passed to Amazon Transcribe. If you don't specify a Region,
@@ -863,8 +861,8 @@ type EngineTranscribeSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration that allows a bot to receive outgoing events. Can be either an
-// HTTPS endpoint or a Lambda function ARN.
+// The configuration that allows a bot to receive outgoing events. Can be either
+// an HTTPS endpoint or a Lambda function ARN.
 type EventsConfiguration struct {
 
 	// The bot ID.
@@ -945,7 +943,7 @@ type LoggingConfiguration struct {
 type MediaCapturePipeline struct {
 
 	// The configuration for a specified media capture pipeline. SourceType must be
-	// ChimeSdkMeeting.
+	// ChimeSdkMeeting .
 	ChimeSdkMeetingConfiguration *ChimeSdkMeetingConfiguration
 
 	// The time at which the capture pipeline was created, in ISO 8601 format.
@@ -964,7 +962,7 @@ type MediaCapturePipeline struct {
 	// ARN of the source from which the media artifacts will be saved.
 	SourceArn *string
 
-	// Source type from which media artifacts are saved. You must use ChimeMeeting.
+	// Source type from which media artifacts are saved. You must use ChimeMeeting .
 	SourceType MediaPipelineSourceType
 
 	// The status of the media capture pipeline.
@@ -1016,10 +1014,10 @@ type Meeting struct {
 	// The media placement for the meeting.
 	MediaPlacement *MediaPlacement
 
-	// The Region in which you create the meeting. Available values: af-south-1,
-	// ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-	// ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2,
-	// eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+	// The Region in which you create the meeting. Available values: af-south-1 ,
+	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
+	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
+	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
 	MediaRegion *string
 
 	// The Amazon Chime SDK meeting ID.
@@ -1030,7 +1028,7 @@ type Meeting struct {
 
 // The resource target configurations for receiving Amazon Chime SDK meeting and
 // attendee event notifications. The Amazon Chime SDK supports resource targets
-// located in the US East (N. Virginia) AWS Region (us-east-1).
+// located in the US East (N. Virginia) AWS Region ( us-east-1 ).
 type MeetingNotificationConfiguration struct {
 
 	// The SNS topic ARN.
@@ -1118,12 +1116,12 @@ type Origination struct {
 
 	// When origination settings are disabled, inbound calls are not enabled for your
 	// Amazon Chime Voice Connector. This parameter is not required, but you must
-	// specify this parameter or Routes.
+	// specify this parameter or Routes .
 	Disabled *bool
 
 	// The call distribution properties defined for your SIP hosts. Valid range:
 	// Minimum value of 1. Maximum value of 20. This parameter is not required, but you
-	// must specify this parameter or Disabled.
+	// must specify this parameter or Disabled .
 	Routes []OriginationRoute
 
 	noSmithyDocumentSerde
@@ -1141,8 +1139,8 @@ type OriginationRoute struct {
 	// The designated origination route port. Defaults to 5060.
 	Port *int32
 
-	// The priority associated with the host, with 1 being the highest priority. Higher
-	// priority hosts are attempted first.
+	// The priority associated with the host, with 1 being the highest priority.
+	// Higher priority hosts are attempted first.
 	Priority *int32
 
 	// The protocol to use for the origination route. Encryption-enabled Amazon Chime
@@ -1318,8 +1316,8 @@ type Proxy struct {
 	// The default number of minutes allowed for proxy sessions.
 	DefaultSessionExpiryMinutes *int32
 
-	// When true, stops proxy sessions from being created on the specified Amazon Chime
-	// Voice Connector.
+	// When true, stops proxy sessions from being created on the specified Amazon
+	// Chime Voice Connector.
 	Disabled *bool
 
 	// The phone number to route calls to after a proxy session expires.
@@ -1378,8 +1376,9 @@ type ProxySession struct {
 	noSmithyDocumentSerde
 }
 
-// The retention settings for an Amazon Chime Enterprise account that determine how
-// long to retain items such as chat-room messages and chat-conversation messages.
+// The retention settings for an Amazon Chime Enterprise account that determine
+// how long to retain items such as chat-room messages and chat-conversation
+// messages.
 type RetentionSettings struct {
 
 	// The chat conversation retention settings.
@@ -1540,17 +1539,17 @@ type SipRule struct {
 	// The SIP rule ID.
 	SipRuleId *string
 
-	// Target SIP media application and other details, such as priority and AWS Region,
-	// to be specified in the SIP rule. Only one SIP rule per AWS Region can be
+	// Target SIP media application and other details, such as priority and AWS
+	// Region, to be specified in the SIP rule. Only one SIP rule per AWS Region can be
 	// provided.
 	TargetApplications []SipRuleTargetApplication
 
-	// The type of trigger assigned to the SIP rule in TriggerValue, currently
-	// RequestUriHostname or ToPhoneNumber.
+	// The type of trigger assigned to the SIP rule in TriggerValue , currently
+	// RequestUriHostname or ToPhoneNumber .
 	TriggerType SipRuleTriggerType
 
-	// If TriggerType is RequestUriHostname, then the value can be the outbound host
-	// name of the Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber, then
+	// If TriggerType is RequestUriHostname , then the value can be the outbound host
+	// name of the Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber , then
 	// the value can be a customer-owned phone number in E164 format. SipRule is
 	// triggered when a SIP rule requests host name or ToPhoneNumber matches in the
 	// incoming SIP request.
@@ -1562,8 +1561,8 @@ type SipRule struct {
 	noSmithyDocumentSerde
 }
 
-// Target SIP media application and other details, such as priority and AWS Region,
-// to be specified in the SIP rule. Only one SIP rule per AWS Region can be
+// Target SIP media application and other details, such as priority and AWS
+// Region, to be specified in the SIP rule. Only one SIP rule per AWS Region can be
 // provided.
 type SipRuleTargetApplication struct {
 
@@ -1668,8 +1667,8 @@ type Termination struct {
 	// The IP addresses allowed to make calls, in CIDR format. Required.
 	CidrAllowedList []string
 
-	// The limit on calls per second. Max value based on account service quota. Default
-	// value of 1.
+	// The limit on calls per second. Max value based on account service quota.
+	// Default value of 1.
 	CpsLimit *int32
 
 	// The default caller ID phone number.
@@ -1681,8 +1680,8 @@ type Termination struct {
 	noSmithyDocumentSerde
 }
 
-// The termination health details, including the source IP address and timestamp of
-// the last successful SIP OPTIONS message from your SIP infrastructure.
+// The termination health details, including the source IP address and timestamp
+// of the last successful SIP OPTIONS message from your SIP infrastructure.
 type TerminationHealth struct {
 
 	// The source IP address.
@@ -1695,7 +1694,7 @@ type TerminationHealth struct {
 }
 
 // The configuration for the current transcription operation. Must contain
-// EngineTranscribeSettings or EngineTranscribeMedicalSettings.
+// EngineTranscribeSettings or EngineTranscribeMedicalSettings .
 type TranscriptionConfiguration struct {
 
 	// The transcription configuration settings passed to Amazon Transcribe Medical.
@@ -1794,8 +1793,8 @@ type User struct {
 }
 
 // The list of errors returned when errors are encountered during the
-// BatchSuspendUser, BatchUnsuspendUser, or BatchUpdateUser actions. This includes
-// user IDs, error codes, and error messages.
+// BatchSuspendUser , BatchUnsuspendUser , or BatchUpdateUser actions. This
+// includes user IDs, error codes, and error messages.
 type UserError struct {
 
 	// The error code.
@@ -1836,12 +1835,12 @@ type VideoArtifactsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Chime Voice Connector configuration, including outbound host name and
-// encryption settings.
+// The Amazon Chime Voice Connector configuration, including outbound host name
+// and encryption settings.
 type VoiceConnector struct {
 
 	// The AWS Region in which the Amazon Chime Voice Connector is created. Default:
-	// us-east-1.
+	// us-east-1 .
 	AwsRegion VoiceConnectorAwsRegion
 
 	// The Amazon Chime Voice Connector creation timestamp, in ISO 8601 format.

@@ -50,7 +50,7 @@ type ListVocabulariesInput struct {
 
 	// Returns only custom vocabularies with the specified state. Vocabularies are
 	// ordered by creation date, with the newest vocabulary first. If you don't include
-	// StateEquals, all custom medical vocabularies are returned.
+	// StateEquals , all custom medical vocabularies are returned.
 	StateEquals types.VocabularyState
 
 	noSmithyDocumentSerde

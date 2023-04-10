@@ -40,8 +40,8 @@ type CreateProcessingJobInput struct {
 	// This member is required.
 	ProcessingJobName *string
 
-	// Identifies the resources, ML compute instances, and ML storage volumes to deploy
-	// for a processing job. In distributed training, you specify more than one
+	// Identifies the resources, ML compute instances, and ML storage volumes to
+	// deploy for a processing job. In distributed training, you specify more than one
 	// instance.
 	//
 	// This member is required.
@@ -59,13 +59,9 @@ type CreateProcessingJobInput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//
-	// * CreateProcessingJob
-	//
-	// *
-	// CreateTrainingJob
-	//
-	// * CreateTransformJob
+	//   - CreateProcessingJob
+	//   - CreateTrainingJob
+	//   - CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// Networking options for a processing job, such as whether to allow inbound and
@@ -84,8 +80,7 @@ type CreateProcessingJobInput struct {
 	StoppingCondition *types.ProcessingStoppingCondition
 
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
+	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 

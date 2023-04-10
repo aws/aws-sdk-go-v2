@@ -192,8 +192,8 @@ func (e *AssociationVersionLimitExceeded) ErrorCode() string {
 }
 func (e *AssociationVersionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the Change Manager change template used in the change request was
-// rejected or is still in a pending state.
+// Indicates that the Change Manager change template used in the change request
+// was rejected or is still in a pending state.
 type AutomationDefinitionNotApprovedException struct {
 	Message *string
 
@@ -335,8 +335,8 @@ func (e *AutomationExecutionNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified step name and execution ID don't exist. Verify the information and
-// try again.
+// The specified step name and execution ID don't exist. Verify the information
+// and try again.
 type AutomationStepNotFoundException struct {
 	Message *string
 
@@ -503,8 +503,8 @@ func (e *DocumentPermissionLimit) ErrorCode() string {
 }
 func (e *DocumentPermissionLimit) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The document has too many versions. Delete one or more document versions and try
-// again.
+// The document has too many versions. Delete one or more document versions and
+// try again.
 type DocumentVersionLimitExceeded struct {
 	Message *string
 
@@ -532,9 +532,8 @@ func (e *DocumentVersionLimitExceeded) ErrorFault() smithy.ErrorFault { return s
 
 // Error returned when the ID specified for a resource, such as a maintenance
 // window or patch baseline, doesn't exist. For information about resource quotas
-// in Amazon Web Services Systems Manager, see Systems Manager service quotas
-// (https://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm) in the
-// Amazon Web Services General Reference.
+// in Amazon Web Services Systems Manager, see Systems Manager service quotas (https://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm)
+// in the Amazon Web Services General Reference.
 type DoesNotExistException struct {
 	Message *string
 
@@ -668,8 +667,7 @@ func (e *FeatureNotAvailableException) ErrorCode() string {
 func (e *FeatureNotAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A hierarchy can have a maximum of 15 levels. For more information, see
-// Requirements and constraints for parameter names
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html)
+// Requirements and constraints for parameter names (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html)
 // in the Amazon Web Services Systems Manager User Guide.
 type HierarchyLevelLimitExceededException struct {
 	Message *string
@@ -699,8 +697,8 @@ func (e *HierarchyLevelLimitExceededException) ErrorFault() smithy.ErrorFault {
 }
 
 // Parameter Store doesn't support changing a parameter type in a hierarchy. For
-// example, you can't change a parameter from a String type to a SecureString type.
-// You must create a new, unique parameter.
+// example, you can't change a parameter from a String type to a SecureString
+// type. You must create a new, unique parameter.
 type HierarchyTypeMismatchException struct {
 	Message *string
 
@@ -753,9 +751,9 @@ func (e *IdempotentParameterMismatch) ErrorCode() string {
 }
 func (e *IdempotentParameterMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// There is a conflict in the policies specified for this parameter. You can't, for
-// example, specify two Expiration policies for a parameter. Review your policies,
-// and try again.
+// There is a conflict in the policies specified for this parameter. You can't,
+// for example, specify two Expiration policies for a parameter. Review your
+// policies, and try again.
 type IncompatiblePolicyException struct {
 	Message *string
 
@@ -863,7 +861,7 @@ func (e *InvalidActivationId) ErrorFault() smithy.ErrorFault { return smithy.Fau
 
 // The specified aggregator isn't valid for inventory groups. Verify that the
 // aggregator uses a valid inventory type such as AWS:Application or
-// AWS:InstanceInformation.
+// AWS:InstanceInformation .
 type InvalidAggregatorException struct {
 	Message *string
 
@@ -1400,19 +1398,13 @@ func (e *InvalidFilterValue) ErrorCode() string {
 func (e *InvalidFilterValue) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The following problems can cause this exception:
-//
-// * You don't have permission to
-// access the managed node.
-//
-// * Amazon Web Services Systems Manager Agent(SSM Agent)
-// isn't running. Verify that SSM Agent is running.
-//
-// * SSM Agent isn't registered
-// with the SSM endpoint. Try reinstalling SSM Agent.
-//
-// * The managed node isn't in
-// valid state. Valid states are: Running, Pending, Stopped, and Stopping. Invalid
-// states are: Shutting-down and Terminated.
+//   - You don't have permission to access the managed node.
+//   - Amazon Web Services Systems Manager Agent(SSM Agent) isn't running. Verify
+//     that SSM Agent is running.
+//   - SSM Agent isn't registered with the SSM endpoint. Try reinstalling SSM
+//     Agent.
+//   - The managed node isn't in valid state. Valid states are: Running , Pending ,
+//     Stopped , and Stopping . Invalid states are: Shutting-down and Terminated .
 type InvalidInstanceId struct {
 	Message *string
 
@@ -1492,8 +1484,8 @@ func (e *InvalidInventoryGroupException) ErrorCode() string {
 }
 func (e *InvalidInventoryGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You specified invalid keys or values in the Context attribute for InventoryItem.
-// Verify the keys and values, and try again.
+// You specified invalid keys or values in the Context attribute for InventoryItem
+// . Verify the keys and values, and try again.
 type InvalidInventoryItemContextException struct {
 	Message *string
 
@@ -1627,8 +1619,9 @@ func (e *InvalidNextToken) ErrorCode() string {
 }
 func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One or more configuration items isn't valid. Verify that a valid Amazon Resource
-// Name (ARN) was provided for an Amazon Simple Notification Service topic.
+// One or more configuration items isn't valid. Verify that a valid Amazon
+// Resource Name (ARN) was provided for an Amazon Simple Notification Service
+// topic.
 type InvalidNotificationConfig struct {
 	Message *string
 
@@ -1950,8 +1943,7 @@ func (e *InvalidResultAttributeException) ErrorFault() smithy.ErrorFault { retur
 // The role name can't contain invalid characters. Also verify that you specified
 // an IAM role for notifications that includes the required trust policy. For
 // information about configuring the IAM role for Run Command notifications, see
-// Configuring Amazon SNS Notifications for Run Command
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html)
+// Configuring Amazon SNS Notifications for Run Command (https://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html)
 // in the Amazon Web Services Systems Manager User Guide.
 type InvalidRole struct {
 	Message *string
@@ -2244,9 +2236,9 @@ func (e *MaxDocumentSizeExceeded) ErrorCode() string {
 }
 func (e *MaxDocumentSizeExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You don't have permission to view OpsItems in the specified account. Verify that
-// your account is configured either as a Systems Manager delegated administrator
-// or that you are logged into the Organizations management account.
+// You don't have permission to view OpsItems in the specified account. Verify
+// that your account is configured either as a Systems Manager delegated
+// administrator or that you are logged into the Organizations management account.
 type OpsItemAccessDeniedException struct {
 	Message *string
 
@@ -2330,8 +2322,8 @@ func (e *OpsItemInvalidParameterException) ErrorCode() string {
 func (e *OpsItemInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request caused OpsItems to exceed one or more quotas. For information about
-// OpsItem quotas, see What are the resource limits for OpsCenter?
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits).
+// OpsItem quotas, see What are the resource limits for OpsCenter? (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits)
+// .
 type OpsItemLimitExceededException struct {
 	Message *string
 
@@ -2584,8 +2576,8 @@ func (e *OpsMetadataNotFoundException) ErrorCode() string {
 }
 func (e *OpsMetadataNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The system is processing too many concurrent updates. Wait a few moments and try
-// again.
+// The system is processing too many concurrent updates. Wait a few moments and
+// try again.
 type OpsMetadataTooManyUpdatesException struct {
 	Message *string
 
@@ -2639,8 +2631,8 @@ func (e *ParameterAlreadyExists) ErrorCode() string {
 }
 func (e *ParameterAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded the number of parameters for this Amazon Web Services account.
-// Delete one or more parameters and try again.
+// You have exceeded the number of parameters for this Amazon Web Services
+// account. Delete one or more parameters and try again.
 type ParameterLimitExceeded struct {
 	Message *string
 
@@ -2679,10 +2671,8 @@ func (e *ParameterLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.
 // versions with mission critical labels assigned to them from being deleted. To
 // continue creating new parameters, first move the label from the oldest version
 // of the parameter to a newer one for use in your operations. For information
-// about moving parameter labels, see Move a parameter label (console)
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move)
-// or Move a parameter label (CLI)
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move)
+// about moving parameter labels, see Move a parameter label (console) (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move)
+// or Move a parameter label (CLI) (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move)
 // in the Amazon Web Services Systems Manager User Guide.
 type ParameterMaxVersionLimitExceeded struct {
 	Message *string
@@ -3015,9 +3005,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // Error returned when the caller has exceeded the default resource quotas. For
 // example, too many maintenance windows or patch baselines have been created. For
 // information about resource quotas in Systems Manager, see Systems Manager
-// service quotas
-// (https://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm) in the
-// Amazon Web Services General Reference.
+// service quotas (https://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm)
+// in the Amazon Web Services General Reference.
 type ResourceLimitExceededException struct {
 	Message *string
 
@@ -3103,7 +3092,7 @@ func (e *ResourcePolicyInvalidParameterException) ErrorFault() smithy.ErrorFault
 }
 
 // The PutResourcePolicy API action enforces two limits. A policy can't be greater
-// than 1024 bytes in size. And only one policy can be attached to OpsItemGroup.
+// than 1024 bytes in size. And only one policy can be attached to OpsItemGroup .
 // Verify these limits and try again.
 type ResourcePolicyLimitExceededException struct {
 	Message *string
@@ -3243,10 +3232,9 @@ func (e *TargetInUseException) ErrorCode() string {
 }
 func (e *TargetInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified target managed node for the session isn't fully configured for use
-// with Session Manager. For more information, see Getting started with Session
-// Manager
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html)
+// The specified target managed node for the session isn't fully configured for
+// use with Session Manager. For more information, see Getting started with
+// Session Manager (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html)
 // in the Amazon Web Services Systems Manager User Guide. This error is also
 // returned if you attempt to start a session on a managed node that is located in
 // a different account or Region
@@ -3383,8 +3371,7 @@ func (e *UnsupportedCalendarException) ErrorFault() smithy.ErrorFault { return s
 // Patching for applications released by Microsoft is only available on EC2
 // instances and advanced instances. To patch applications released by Microsoft on
 // on-premises servers and VMs, you must enable advanced instances. For more
-// information, see Enabling the advanced-instances tier
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html)
+// information, see Enabling the advanced-instances tier (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html)
 // in the Amazon Web Services Systems Manager User Guide.
 type UnsupportedFeatureRequiredException struct {
 	Message *string
@@ -3413,9 +3400,9 @@ func (e *UnsupportedFeatureRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The Context attribute that you specified for the InventoryItem isn't allowed for
-// this inventory type. You can only use the Context attribute with inventory types
-// like AWS:ComplianceItem.
+// The Context attribute that you specified for the InventoryItem isn't allowed
+// for this inventory type. You can only use the Context attribute with inventory
+// types like AWS:ComplianceItem .
 type UnsupportedInventoryItemContextException struct {
 	Message *string
 

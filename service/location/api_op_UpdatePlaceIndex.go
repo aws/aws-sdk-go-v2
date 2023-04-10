@@ -42,7 +42,7 @@ type UpdatePlaceIndexInput struct {
 	// Updates the description for the place index resource.
 	Description *string
 
-	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	// No longer used. If included, the only allowed value is RequestBasedUsage .
 	//
 	// Deprecated: Deprecated. If included, the only allowed value is
 	// RequestBasedUsage.
@@ -55,9 +55,7 @@ type UpdatePlaceIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) of the upated place index resource. Used to
 	// specify a resource across Amazon Web Services.
-	//
-	// * Format example:
-	// arn:aws:geo:region:account-id:place- index/ExamplePlaceIndex
+	//   - Format example: arn:aws:geo:region:account-id:place- index/ExamplePlaceIndex
 	//
 	// This member is required.
 	IndexArn *string
@@ -67,9 +65,8 @@ type UpdatePlaceIndexOutput struct {
 	// This member is required.
 	IndexName *string
 
-	// The timestamp for when the place index resource was last updated in  ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ.
+	// The timestamp for when the place index resource was last updated in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	//
 	// This member is required.
 	UpdateTime *time.Time

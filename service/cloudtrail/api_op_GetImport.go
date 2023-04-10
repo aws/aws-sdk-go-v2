@@ -56,10 +56,10 @@ type GetImportOutput struct {
 	// The source S3 bucket.
 	ImportSource *types.ImportSource
 
-	// Provides statistics for the import. CloudTrail does not update import statistics
-	// in real-time. Returned values for parameters such as EventsCompleted may be
-	// lower than the actual value, because CloudTrail updates statistics incrementally
-	// over the course of the import.
+	// Provides statistics for the import. CloudTrail does not update import
+	// statistics in real-time. Returned values for parameters such as EventsCompleted
+	// may be lower than the actual value, because CloudTrail updates statistics
+	// incrementally over the course of the import.
 	ImportStatistics *types.ImportStatistics
 
 	// The status of the import.

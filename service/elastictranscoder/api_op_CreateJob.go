@@ -46,8 +46,8 @@ type CreateJobInput struct {
 	// being transcoded.
 	Input *types.JobInput
 
-	// A section of the request body that provides information about the files that are
-	// being transcoded.
+	// A section of the request body that provides information about the files that
+	// are being transcoded.
 	Inputs []types.JobInput
 
 	// A section of the request body that provides information about the transcoded
@@ -71,8 +71,8 @@ type CreateJobInput struct {
 	// of master playlists in a job is 30.
 	Playlists []types.CreateJobPlaylist
 
-	// User-defined metadata that you want to associate with an Elastic Transcoder job.
-	// You specify metadata in key/value pairs, and you can add up to 10 key/value
+	// User-defined metadata that you want to associate with an Elastic Transcoder
+	// job. You specify metadata in key/value pairs, and you can add up to 10 key/value
 	// pairs per job. Elastic Transcoder does not guarantee that key/value pairs are
 	// returned in the same order in which you specify them.
 	UserMetadata map[string]string

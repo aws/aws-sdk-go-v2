@@ -35,7 +35,7 @@ type StartImportFileTaskInput struct {
 	Name *string
 
 	// The S3 bucket where the import file is located. The bucket name is required to
-	// begin with migrationhub-strategy-.
+	// begin with migrationhub-strategy- .
 	//
 	// This member is required.
 	S3Bucket *string
@@ -50,8 +50,8 @@ type StartImportFileTaskInput struct {
 	// available in AWS Application Discovery Service.
 	DataSourceType types.DataSourceType
 
-	// Groups the resources in the import file together with a unique name. This ID can
-	// be as filter in ListApplicationComponents and ListServers.
+	// Groups the resources in the import file together with a unique name. This ID
+	// can be as filter in ListApplicationComponents and ListServers .
 	GroupId []types.Group
 
 	// The S3 bucket where Strategy Recommendations uploads import results. The bucket

@@ -48,9 +48,9 @@ const (
 	IsModifiableConditional IsModifiable = "CONDITIONAL"
 )
 
-// Values returns all known values for IsModifiable. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IsModifiable. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IsModifiable) Values() []IsModifiable {
 	return []IsModifiable{
 		"TRUE",
@@ -107,9 +107,9 @@ const (
 	SSEStatusDisabled  SSEStatus = "DISABLED"
 )
 
-// Values returns all known values for SSEStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SSEStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SSEStatus) Values() []SSEStatus {
 	return []SSEStatus{
 		"ENABLING",

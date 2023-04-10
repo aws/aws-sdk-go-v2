@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// One or more arguments to the StartStreamTranscription,
-// StartMedicalStreamTranscription, or StartCallAnalyticsStreamTranscription
+// One or more arguments to the StartStreamTranscription ,
+// StartMedicalStreamTranscription , or StartCallAnalyticsStreamTranscription
 // operation was not valid. For example, MediaEncoding or LanguageCode used not
 // valid values. Check the specified parameters and try your request again.
 type BadRequestException struct {

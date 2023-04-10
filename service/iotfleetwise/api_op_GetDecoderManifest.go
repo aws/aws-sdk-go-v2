@@ -69,9 +69,9 @@ type GetDecoderManifestOutput struct {
 	// manifest.
 	ModelManifestArn *string
 
-	// The state of the decoder manifest. If the status is ACTIVE, the decoder manifest
-	// can't be edited. If the status is marked DRAFT, you can edit the decoder
-	// manifest.
+	// The state of the decoder manifest. If the status is ACTIVE , the decoder
+	// manifest can't be edited. If the status is marked DRAFT , you can edit the
+	// decoder manifest.
 	Status types.ManifestStatus
 
 	// Metadata pertaining to the operation's result.

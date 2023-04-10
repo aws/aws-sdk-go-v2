@@ -13,7 +13,7 @@ import (
 
 // Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days
 // after the DeleteBackup request is made. For more information on restoring a
-// backup, see RestoreBackup.
+// backup, see RestoreBackup .
 func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, optFns ...func(*Options)) (*DeleteBackupOutput, error) {
 	if params == nil {
 		params = &DeleteBackupInput{}

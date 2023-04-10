@@ -14,8 +14,7 @@ import (
 )
 
 // Lists the Device Defender audits that have been performed during a given time
-// period. Requires permission to access the ListAuditTasks
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// period. Requires permission to access the ListAuditTasks (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListAuditTasks(ctx context.Context, params *ListAuditTasksInput, optFns ...func(*Options)) (*ListAuditTasksOutput, error) {
 	if params == nil {
@@ -52,8 +51,8 @@ type ListAuditTasksInput struct {
 	// The token for the next set of results.
 	NextToken *string
 
-	// A filter to limit the output to audits with the specified completion status: can
-	// be one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
+	// A filter to limit the output to audits with the specified completion status:
+	// can be one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
 	TaskStatus types.AuditTaskStatus
 
 	// A filter to limit the output to the specified type of audit: can be one of

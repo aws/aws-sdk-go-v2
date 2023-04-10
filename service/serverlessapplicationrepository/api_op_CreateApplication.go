@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an application, optionally including an AWS SAM file to create the first
-// application version in the same call.
+// Creates an application, optionally including an AWS SAM file to create the
+// first application version in the same call.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -77,8 +77,7 @@ type CreateApplicationInput struct {
 	// only one of readmeBody and readmeUrl; otherwise, an error results.
 	ReadmeUrl *string
 
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
+	// The semantic version of the application: https://semver.org/ (https://semver.org/)
 	SemanticVersion *string
 
 	// A link to the S3 object that contains the ZIP archive of the source code for
@@ -89,7 +88,7 @@ type CreateApplicationInput struct {
 	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string
 
-	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/).
+	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/) .
 	SpdxLicenseId *string
 
 	// The local raw packaged AWS SAM template file of your application. The file has
@@ -134,8 +133,8 @@ type CreateApplicationOutput struct {
 	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
-	// A link to a license file of the app that matches the spdxLicenseID value of your
-	// application.Maximum size 5 MB
+	// A link to a license file of the app that matches the spdxLicenseID value of
+	// your application.Maximum size 5 MB
 	LicenseUrl *string
 
 	// The name of the application.Minimum length=1. Maximum length=140Pattern:
@@ -149,8 +148,8 @@ type CreateApplicationOutput struct {
 	// A valid identifier from https://spdx.org/licenses/.
 	SpdxLicenseId *string
 
-	// The URL to the public profile of a verified author. This URL is submitted by the
-	// author.
+	// The URL to the public profile of a verified author. This URL is submitted by
+	// the author.
 	VerifiedAuthorUrl *string
 
 	// Version information about the application.

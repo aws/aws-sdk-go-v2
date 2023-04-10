@@ -12,8 +12,7 @@ import (
 )
 
 // Gets information about a warm pool and its instances. For more information, see
-// Warm pools for Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
+// Warm pools for Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeWarmPool(ctx context.Context, params *DescribeWarmPoolInput, optFns ...func(*Options)) (*DescribeWarmPoolOutput, error) {
 	if params == nil {
@@ -38,11 +37,11 @@ type DescribeWarmPoolInput struct {
 	AutoScalingGroupName *string
 
 	// The maximum number of instances to return with this call. The maximum value is
-	// 50.
+	// 50 .
 	MaxRecords *int32
 
-	// The token for the next set of instances to return. (You received this token from
-	// a previous call.)
+	// The token for the next set of instances to return. (You received this token
+	// from a previous call.)
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,10 +52,10 @@ type DescribeWarmPoolOutput struct {
 	// The instances that are currently in the warm pool.
 	Instances []types.Instance
 
-	// This string indicates that the response contains more items than can be returned
-	// in a single response. To receive additional items, specify this string for the
-	// NextToken value when requesting the next set of items. This value is null when
-	// there are no more items to return.
+	// This string indicates that the response contains more items than can be
+	// returned in a single response. To receive additional items, specify this string
+	// for the NextToken value when requesting the next set of items. This value is
+	// null when there are no more items to return.
 	NextToken *string
 
 	// The warm pool configuration details.

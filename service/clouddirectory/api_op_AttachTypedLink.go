@@ -12,8 +12,8 @@ import (
 )
 
 // Attaches a typed link to a specified source and target object. For more
-// information, see Typed Links
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+// .
 func (c *Client) AttachTypedLink(ctx context.Context, params *AttachTypedLinkInput, optFns ...func(*Options)) (*AttachTypedLinkOutput, error) {
 	if params == nil {
 		params = &AttachTypedLinkInput{}

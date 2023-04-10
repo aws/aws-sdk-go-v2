@@ -30,7 +30,7 @@ func (c *Client) GetDatabases(ctx context.Context, params *GetDatabasesInput, op
 
 type GetDatabasesInput struct {
 
-	// The ID of the Data Catalog from which to retrieve Databases. If none is
+	// The ID of the Data Catalog from which to retrieve Databases . If none is
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
@@ -41,17 +41,12 @@ type GetDatabasesInput struct {
 	NextToken *string
 
 	// Allows you to specify that you want to list the databases shared with your
-	// account. The allowable values are FEDERATED, FOREIGN or ALL.
-	//
-	// * If set to
-	// FEDERATED, will list the federated databases (referencing an external entity)
-	// shared with your account.
-	//
-	// * If set to FOREIGN, will list the databases shared
-	// with your account.
-	//
-	// * If set to ALL, will list the databases shared with your
-	// account, as well as the databases in yor local account.
+	// account. The allowable values are FEDERATED , FOREIGN or ALL .
+	//   - If set to FEDERATED , will list the federated databases (referencing an
+	//   external entity) shared with your account.
+	//   - If set to FOREIGN , will list the databases shared with your account.
+	//   - If set to ALL , will list the databases shared with your account, as well as
+	//   the databases in yor local account.
 	ResourceShareType types.ResourceShareType
 
 	noSmithyDocumentSerde
@@ -64,8 +59,8 @@ type GetDatabasesOutput struct {
 	// This member is required.
 	DatabaseList []types.Database
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -44,19 +44,16 @@ type CreateLocationFsxWindowsInput struct {
 	// Specifies the ARNs of the security groups that provide access to your file
 	// system's preferred subnet. If you choose a security group that doesn't allow
 	// connections from within itself, do one of the following:
-	//
-	// * Configure the
-	// security group to allow it to communicate within itself.
-	//
-	// * Choose a different
-	// security group that can communicate with the mount target's security group.
+	//   - Configure the security group to allow it to communicate within itself.
+	//   - Choose a different security group that can communicate with the mount
+	//   target's security group.
 	//
 	// This member is required.
 	SecurityGroupArns []string
 
 	// Specifies the user who has the permissions to access files and folders in the
 	// file system. For information about choosing a user name that ensures sufficient
-	// permissions to files, folders, and metadata, see user.
+	// permissions to files, folders, and metadata, see user .
 	//
 	// This member is required.
 	User *string
@@ -65,9 +62,9 @@ type CreateLocationFsxWindowsInput struct {
 	// belongs to.
 	Domain *string
 
-	// Specifies a mount path for your file system using forward slashes. This is where
-	// DataSync reads or writes data (depending on if this is a source or destination
-	// location).
+	// Specifies a mount path for your file system using forward slashes. This is
+	// where DataSync reads or writes data (depending on if this is a source or
+	// destination location).
 	Subdirectory *string
 
 	// Specifies labels that help you categorize, filter, and search for your Amazon

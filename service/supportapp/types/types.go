@@ -16,7 +16,7 @@ type SlackChannelConfiguration struct {
 	ChannelId *string
 
 	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
-	// T012ABCDEFG.
+	// T012ABCDEFG .
 	//
 	// This member is required.
 	TeamId *string
@@ -27,8 +27,7 @@ type SlackChannelConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
 	// operations on Amazon Web Services. For more information, see Managing access to
-	// the Amazon Web Services Support App
-	// (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
+	// the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
 	// in the Amazon Web Services Support User Guide.
 	ChannelRoleArn *string
 
@@ -47,12 +46,12 @@ type SlackChannelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for a Slack workspace that you added to an Amazon Web Services
-// account.
+// The configuration for a Slack workspace that you added to an Amazon Web
+// Services account.
 type SlackWorkspaceConfiguration struct {
 
 	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
-	// T012ABCDEFG.
+	// T012ABCDEFG .
 	//
 	// This member is required.
 	TeamId *string

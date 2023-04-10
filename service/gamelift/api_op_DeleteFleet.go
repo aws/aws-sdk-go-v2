@@ -14,14 +14,12 @@ import (
 // instances, including those in remote locations, are shut down. You don't need to
 // call DeleteFleetLocations separately. If the fleet being deleted has a VPC
 // peering connection, you first need to get a valid authorization (good for 24
-// hours) by calling CreateVpcPeeringAuthorization
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html).
-// You do not need to explicitly delete the VPC peering connection. To delete a
+// hours) by calling CreateVpcPeeringAuthorization (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html)
+// . You do not need to explicitly delete the VPC peering connection. To delete a
 // fleet, specify the fleet ID to be terminated. During the deletion process the
-// fleet status is changed to DELETING. When completed, the status switches to
+// fleet status is changed to DELETING . When completed, the status switches to
 // TERMINATED and the fleet event FLEET_DELETED is sent. Learn more Setting up
-// GameLift Fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optFns ...func(*Options)) (*DeleteFleetOutput, error) {
 	if params == nil {
 		params = &DeleteFleetInput{}
@@ -39,8 +37,8 @@ func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optF
 
 type DeleteFleetInput struct {
 
-	// A unique identifier for the fleet to be deleted. You can use either the fleet ID
-	// or ARN value.
+	// A unique identifier for the fleet to be deleted. You can use either the fleet
+	// ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string

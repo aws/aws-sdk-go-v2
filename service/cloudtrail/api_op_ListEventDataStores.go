@@ -115,8 +115,8 @@ func (c *Client) addOperationListEventDataStoresMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEventDataStoresAPIClient is a client that implements the ListEventDataStores
-// operation.
+// ListEventDataStoresAPIClient is a client that implements the
+// ListEventDataStores operation.
 type ListEventDataStoresAPIClient interface {
 	ListEventDataStores(context.Context, *ListEventDataStoresInput, ...func(*Options)) (*ListEventDataStoresOutput, error)
 }

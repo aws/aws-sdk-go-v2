@@ -13,28 +13,19 @@ import (
 )
 
 // Creates a knowledge base. When using this API, you cannot reuse Amazon
-// AppIntegrations
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html)
+// AppIntegrations (https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html)
 // DataIntegrations with external knowledge bases such as Salesforce and
-// ServiceNow. If you do, you'll get an InvalidRequestException error. For example,
-// you're programmatically managing your external knowledge base, and you want to
-// add or remove one of the fields that is being ingested from Salesforce. Do the
-// following:
-//
-// * Call DeleteKnowledgeBase
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html).
-//
-// *
-// Call DeleteDataIntegration
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html).
-//
-// *
-// Call CreateDataIntegration
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
-// to recreate the DataIntegration or a create different one.
-//
-// * Call
-// CreateKnowledgeBase.
+// ServiceNow. If you do, you'll get an InvalidRequestException error. For
+// example, you're programmatically managing your external knowledge base, and you
+// want to add or remove one of the fields that is being ingested from Salesforce.
+// Do the following:
+//   - Call DeleteKnowledgeBase (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html)
+//     .
+//   - Call DeleteDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html)
+//     .
+//   - Call CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
+//     to recreate the DataIntegration or a create different one.
+//   - Call CreateKnowledgeBase.
 func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledgeBaseInput, optFns ...func(*Options)) (*CreateKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &CreateKnowledgeBaseInput{}
@@ -52,8 +43,8 @@ func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledg
 
 type CreateKnowledgeBaseInput struct {
 
-	// The type of knowledge base. Only CUSTOM knowledge bases allow you to upload your
-	// own content. EXTERNAL knowledge bases support integrations with third-party
+	// The type of knowledge base. Only CUSTOM knowledge bases allow you to upload
+	// your own content. EXTERNAL knowledge bases support integrations with third-party
 	// systems whose content is synchronized automatically.
 	//
 	// This member is required.
@@ -67,8 +58,8 @@ type CreateKnowledgeBaseInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// The description.

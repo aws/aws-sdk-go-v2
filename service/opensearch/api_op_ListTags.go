@@ -12,8 +12,8 @@ import (
 )
 
 // Returns all resource tags for an Amazon OpenSearch Service domain. For more
-// information, see Tagging Amazon OpenSearch Service domains
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html).
+// information, see Tagging Amazon OpenSearch Service domains (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html)
+// .
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}

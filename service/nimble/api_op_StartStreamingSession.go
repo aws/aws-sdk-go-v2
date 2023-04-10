@@ -32,7 +32,7 @@ func (c *Client) StartStreamingSession(ctx context.Context, params *StartStreami
 
 type StartStreamingSessionInput struct {
 
-	// The streaming session ID for the StartStreamingSessionRequest.
+	// The streaming session ID for the StartStreamingSessionRequest .
 	//
 	// This member is required.
 	SessionId *string

@@ -234,9 +234,10 @@ const (
 	EvidenceFinderBackfillStatusCompleted  EvidenceFinderBackfillStatus = "COMPLETED"
 )
 
-// Values returns all known values for EvidenceFinderBackfillStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EvidenceFinderBackfillStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (EvidenceFinderBackfillStatus) Values() []EvidenceFinderBackfillStatus {
 	return []EvidenceFinderBackfillStatus{
 		"NOT_STARTED",

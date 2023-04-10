@@ -29,7 +29,7 @@ func (c *Client) UpdateMobileDeviceAccessRule(ctx context.Context, params *Updat
 
 type UpdateMobileDeviceAccessRuleInput struct {
 
-	// The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+	// The effect of the rule when it matches. Allowed values are ALLOW or DENY .
 	//
 	// This member is required.
 	Effect types.MobileDeviceAccessRuleEffect
@@ -64,8 +64,8 @@ type UpdateMobileDeviceAccessRuleInput struct {
 	// User agents that the updated rule will match.
 	DeviceUserAgents []string
 
-	// Device models that the updated rule will not match. All other device models will
-	// match.
+	// Device models that the updated rule will not match. All other device models
+	// will match.
 	NotDeviceModels []string
 
 	// Device operating systems that the updated rule will not match. All other device

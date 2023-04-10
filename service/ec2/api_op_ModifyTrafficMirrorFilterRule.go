@@ -46,16 +46,16 @@ type ModifyTrafficMirrorFilterRuleInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The protocol, for example TCP, to assign to the Traffic Mirror rule.
 	Protocol *int32
 
-	// The properties that you want to remove from the Traffic Mirror filter rule. When
-	// you remove a property from a Traffic Mirror filter rule, the property is set to
-	// the default.
+	// The properties that you want to remove from the Traffic Mirror filter rule.
+	// When you remove a property from a Traffic Mirror filter rule, the property is
+	// set to the default.
 	RemoveFields []types.TrafficMirrorFilterRuleField
 
 	// The action to assign to the rule.

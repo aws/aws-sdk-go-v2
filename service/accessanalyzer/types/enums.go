@@ -177,9 +177,9 @@ const (
 	JobErrorCodeServiceError              JobErrorCode = "SERVICE_ERROR"
 )
 
-// Values returns all known values for JobErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (JobErrorCode) Values() []JobErrorCode {
 	return []JobErrorCode{
 		"AUTHORIZATION_ERROR",
@@ -199,9 +199,9 @@ const (
 	JobStatusCanceled   JobStatus = "CANCELED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"IN_PROGRESS",
@@ -366,9 +366,9 @@ const (
 	ResourceTypeAwsSnsTopic             ResourceType = "AWS::SNS::Topic"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"AWS::S3::Bucket",

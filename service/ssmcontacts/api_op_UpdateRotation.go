@@ -51,10 +51,10 @@ type UpdateRotationInput struct {
 
 	// The time zone to base the updated rotation’s activity on, in Internet Assigned
 	// Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
-	// "Asia/Seoul". For more information, see the Time Zone Database
-	// (https://www.iana.org/time-zones) on the IANA website. Designators for time
-	// zones that don’t support Daylight Savings Time Rules, such as Pacific Standard
-	// Time (PST) and Pacific Daylight Time (PDT), aren't supported.
+	// "Asia/Seoul". For more information, see the Time Zone Database (https://www.iana.org/time-zones)
+	// on the IANA website. Designators for time zones that don’t support Daylight
+	// Savings Time Rules, such as Pacific Standard Time (PST) and Pacific Daylight
+	// Time (PDT), aren't supported.
 	TimeZoneId *string
 
 	noSmithyDocumentSerde

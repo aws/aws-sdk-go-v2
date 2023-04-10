@@ -15,11 +15,9 @@ import (
 // Web Services resources through bring your own IP addresses (BYOIP). It can take
 // a few minutes before traffic to the specified addresses starts routing to Amazon
 // Web Services because of propagation delays. To stop advertising the BYOIP
-// address range, use  WithdrawByoipCidr
-// (https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html).
-// For more information, see Bring your own IP addresses (BYOIP)
-// (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
-// the Global Accelerator Developer Guide.
+// address range, use WithdrawByoipCidr (https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html)
+// . For more information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+// in the Global Accelerator Developer Guide.
 func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipCidrInput, optFns ...func(*Options)) (*AdvertiseByoipCidrOutput, error) {
 	if params == nil {
 		params = &AdvertiseByoipCidrInput{}

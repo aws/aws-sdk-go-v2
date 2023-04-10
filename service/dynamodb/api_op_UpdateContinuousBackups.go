@@ -15,11 +15,11 @@ import (
 
 // UpdateContinuousBackups enables or disables point in time recovery for the
 // specified table. A successful UpdateContinuousBackups call returns the current
-// ContinuousBackupsDescription. Continuous backups are ENABLED on all tables at
+// ContinuousBackupsDescription . Continuous backups are ENABLED on all tables at
 // table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus
 // will be set to ENABLED. Once continuous backups and point in time recovery are
 // enabled, you can restore to any point in time within EarliestRestorableDateTime
-// and LatestRestorableDateTime. LatestRestorableDateTime is typically 5 minutes
+// and LatestRestorableDateTime . LatestRestorableDateTime is typically 5 minutes
 // before the current time. You can restore your table to any point in time during
 // the last 35 days.
 func (c *Client) UpdateContinuousBackups(ctx context.Context, params *UpdateContinuousBackupsInput, optFns ...func(*Options)) (*UpdateContinuousBackupsOutput, error) {

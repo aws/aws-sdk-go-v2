@@ -31,8 +31,8 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 
 type ListProjectsInput struct {
 
-	// The maximum number of results to return per request. If not set, a default value
-	// of 100 is used.
+	// The maximum number of results to return per request. If not set, a default
+	// value of 100 is used.
 	MaxResults *int32
 
 	// The token to retrieve the next set of results.
@@ -127,8 +127,8 @@ var _ ListProjectsAPIClient = (*Client)(nil)
 
 // ListProjectsPaginatorOptions is the paginator options for ListProjects
 type ListProjectsPaginatorOptions struct {
-	// The maximum number of results to return per request. If not set, a default value
-	// of 100 is used.
+	// The maximum number of results to return per request. If not set, a default
+	// value of 100 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -31,7 +31,7 @@ func (c *Client) DeleteCommentContent(ctx context.Context, params *DeleteComment
 type DeleteCommentContentInput struct {
 
 	// The unique, system-generated ID of the comment. To get this ID, use
-	// GetCommentsForComparedCommit or GetCommentsForPullRequest.
+	// GetCommentsForComparedCommit or GetCommentsForPullRequest .
 	//
 	// This member is required.
 	CommentId *string

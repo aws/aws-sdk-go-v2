@@ -71,9 +71,9 @@ const (
 	AlignmentRight  Alignment = "RIGHT"
 )
 
-// Values returns all known values for Alignment. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Alignment. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Alignment) Values() []Alignment {
 	return []Alignment{
 		"LEFT",
@@ -119,9 +119,9 @@ const (
 	ButtonActionClose    ButtonAction = "CLOSE"
 )
 
-// Values returns all known values for ButtonAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ButtonAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ButtonAction) Values() []ButtonAction {
 	return []ButtonAction{
 		"LINK",
@@ -211,9 +211,9 @@ const (
 	DayOfWeekSunday    DayOfWeek = "SUNDAY"
 )
 
-// Values returns all known values for DayOfWeek. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for DayOfWeek. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DayOfWeek) Values() []DayOfWeek {
 	return []DayOfWeek{
 		"MONDAY",
@@ -343,9 +343,9 @@ const (
 	FrequencyInAppEvent Frequency = "IN_APP_EVENT"
 )
 
-// Values returns all known values for Frequency. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Frequency. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Frequency) Values() []Frequency {
 	return []Frequency{
 		"ONCE",
@@ -393,9 +393,9 @@ const (
 	JobStatusFailed                     JobStatus = "FAILED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"CREATED",
@@ -558,8 +558,8 @@ const (
 	StatePaused    State = "PAUSED"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
@@ -583,9 +583,9 @@ const (
 	TemplateTypeInapp TemplateType = "INAPP"
 )
 
-// Values returns all known values for TemplateType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TemplateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateType) Values() []TemplateType {
 	return []TemplateType{
 		"EMAIL",

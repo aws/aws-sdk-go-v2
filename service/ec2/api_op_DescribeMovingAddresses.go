@@ -35,14 +35,13 @@ type DescribeMovingAddressesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * moving-status - The status of the Elastic IP address
-	// (MovingToVpc | RestoringToClassic).
+	//   - moving-status - The status of the Elastic IP address ( MovingToVpc |
+	//   RestoringToClassic ).
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The

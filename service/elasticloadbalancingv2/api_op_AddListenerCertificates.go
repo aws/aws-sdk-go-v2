@@ -14,10 +14,8 @@ import (
 // Adds the specified SSL server certificate to the certificate list for the
 // specified HTTPS or TLS listener. If the certificate in already in the
 // certificate list, the call is successful but the certificate is not added again.
-// For more information, see HTTPS listeners
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html)
-// in the Application Load Balancers Guide or TLS listeners
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html)
+// For more information, see HTTPS listeners (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html)
+// in the Application Load Balancers Guide or TLS listeners (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html)
 // in the Network Load Balancers Guide.
 func (c *Client) AddListenerCertificates(ctx context.Context, params *AddListenerCertificatesInput, optFns ...func(*Options)) (*AddListenerCertificatesOutput, error) {
 	if params == nil {
@@ -37,7 +35,7 @@ func (c *Client) AddListenerCertificates(ctx context.Context, params *AddListene
 type AddListenerCertificatesInput struct {
 
 	// The certificate to add. You can specify one certificate per call. Set
-	// CertificateArn to the certificate ARN but do not set IsDefault.
+	// CertificateArn to the certificate ARN but do not set IsDefault .
 	//
 	// This member is required.
 	Certificates []types.Certificate

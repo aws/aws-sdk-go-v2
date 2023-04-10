@@ -178,8 +178,8 @@ const (
 	DataReplicationInitiationStepNameStartDataTransfer               DataReplicationInitiationStepName = "START_DATA_TRANSFER"
 )
 
-// Values returns all known values for DataReplicationInitiationStepName. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for DataReplicationInitiationStepName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DataReplicationInitiationStepName) Values() []DataReplicationInitiationStepName {
@@ -271,9 +271,9 @@ const (
 	ExportStatusSucceeded ExportStatus = "SUCCEEDED"
 )
 
-// Values returns all known values for ExportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatus) Values() []ExportStatus {
 	return []ExportStatus{
 		"PENDING",
@@ -293,9 +293,9 @@ const (
 	FirstBootStopped   FirstBoot = "STOPPED"
 )
 
-// Values returns all known values for FirstBoot. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for FirstBoot. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FirstBoot) Values() []FirstBoot {
 	return []FirstBoot{
 		"WAITING",
@@ -333,9 +333,9 @@ const (
 	ImportStatusSucceeded ImportStatus = "SUCCEEDED"
 )
 
-// Values returns all known values for ImportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImportStatus) Values() []ImportStatus {
 	return []ImportStatus{
 		"PENDING",
@@ -422,9 +422,9 @@ const (
 	JobStatusCompleted JobStatus = "COMPLETED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"PENDING",
@@ -480,9 +480,9 @@ const (
 	LaunchStatusTerminated LaunchStatus = "TERMINATED"
 )
 
-// Values returns all known values for LaunchStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LaunchStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchStatus) Values() []LaunchStatus {
 	return []LaunchStatus{
 		"PENDING",

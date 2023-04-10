@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the status of the AWS account assignment deletion requests for a specified
-// IAM Identity Center instance.
+// Lists the status of the AWS account assignment deletion requests for a
+// specified IAM Identity Center instance.
 func (c *Client) ListAccountAssignmentDeletionStatus(ctx context.Context, params *ListAccountAssignmentDeletionStatusInput, optFns ...func(*Options)) (*ListAccountAssignmentDeletionStatusOutput, error) {
 	if params == nil {
 		params = &ListAccountAssignmentDeletionStatusInput{}
@@ -137,8 +137,8 @@ type ListAccountAssignmentDeletionStatusAPIClient interface {
 
 var _ ListAccountAssignmentDeletionStatusAPIClient = (*Client)(nil)
 
-// ListAccountAssignmentDeletionStatusPaginatorOptions is the paginator options for
-// ListAccountAssignmentDeletionStatus
+// ListAccountAssignmentDeletionStatusPaginatorOptions is the paginator options
+// for ListAccountAssignmentDeletionStatus
 type ListAccountAssignmentDeletionStatusPaginatorOptions struct {
 	// The maximum number of results to display for the assignment.
 	Limit int32

@@ -126,8 +126,8 @@ func (c *Client) addOperationListFacetAttributesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListFacetAttributesAPIClient is a client that implements the ListFacetAttributes
-// operation.
+// ListFacetAttributesAPIClient is a client that implements the
+// ListFacetAttributes operation.
 type ListFacetAttributesAPIClient interface {
 	ListFacetAttributes(context.Context, *ListFacetAttributesInput, ...func(*Options)) (*ListFacetAttributesOutput, error)
 }

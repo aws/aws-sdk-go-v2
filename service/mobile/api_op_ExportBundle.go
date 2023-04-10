@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates customized software development kit (SDK) and or tool packages used to
-// integrate mobile web or mobile app clients with backend AWS resources.
+// Generates customized software development kit (SDK) and or tool packages used
+// to integrate mobile web or mobile app clients with backend AWS resources.
 func (c *Client) ExportBundle(ctx context.Context, params *ExportBundleInput, optFns ...func(*Options)) (*ExportBundleOutput, error) {
 	if params == nil {
 		params = &ExportBundleInput{}

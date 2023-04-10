@@ -101,7 +101,7 @@ type CommentContent struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for related items of type Comment.
+// A filter for related items of type Comment .
 type CommentFilter struct {
 	noSmithyDocumentSerde
 }
@@ -120,7 +120,7 @@ type Contact struct {
 // An object that represents a content of an Amazon Connect contact object.
 type ContactContent struct {
 
-	// A list of channels to filter on for related items of type Contact.
+	// A list of channels to filter on for related items of type Contact .
 	//
 	// This member is required.
 	Channel *string
@@ -139,10 +139,10 @@ type ContactContent struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for related items of type Contact.
+// A filter for related items of type Contact .
 type ContactFilter struct {
 
-	// A list of channels to filter on for related items of type Contact.
+	// A list of channels to filter on for related items of type Contact .
 	Channel []string
 
 	// A unique identifier of a contact in Amazon Connect.
@@ -628,7 +628,7 @@ type RelatedItemTypeFilter interface {
 	isRelatedItemTypeFilter()
 }
 
-// A filter for related items of type Comment.
+// A filter for related items of type Comment .
 type RelatedItemTypeFilterMemberComment struct {
 	Value CommentFilter
 
@@ -637,7 +637,7 @@ type RelatedItemTypeFilterMemberComment struct {
 
 func (*RelatedItemTypeFilterMemberComment) isRelatedItemTypeFilter() {}
 
-// A filter for related items of type Contact.
+// A filter for related items of type Contact .
 type RelatedItemTypeFilterMemberContact struct {
 	Value ContactFilter
 

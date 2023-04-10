@@ -19,7 +19,7 @@ import (
 // Describes a file transfer protocol-enabled server that you specify by passing
 // the ServerId parameter. The response contains a description of a server's
 // properties. When you set EndpointType to VPC, the response will contain the
-// EndpointDetails.
+// EndpointDetails .
 func (c *Client) DescribeServer(ctx context.Context, params *DescribeServerInput, optFns ...func(*Options)) (*DescribeServerOutput, error) {
 	if params == nil {
 		params = &DescribeServerInput{}
@@ -142,8 +142,8 @@ type ServerOfflineWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServerOfflineWaiter will use default max delay of 120 seconds. Note
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServerOfflineWaiter will use default max delay of 120 seconds. Note
 	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -192,9 +192,10 @@ func (w *ServerOfflineWaiter) Wait(ctx context.Context, params *DescribeServerIn
 	return err
 }
 
-// WaitForOutput calls the waiter function for ServerOffline waiter and returns the
-// output of the successful operation. The maxWaitDur is the maximum wait duration
-// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+// WaitForOutput calls the waiter function for ServerOffline waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *ServerOfflineWaiter) WaitForOutput(ctx context.Context, params *DescribeServerInput, maxWaitDur time.Duration, optFns ...func(*ServerOfflineWaiterOptions)) (*DescribeServerOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -318,9 +319,9 @@ type ServerOnlineWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServerOnlineWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServerOnlineWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

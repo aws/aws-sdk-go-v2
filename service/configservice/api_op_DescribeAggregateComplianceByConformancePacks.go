@@ -17,7 +17,7 @@ import (
 // conformance pack. Also returns the total rule count which includes compliant
 // rules, noncompliant rules, and rules that cannot be evaluated due to
 // insufficient data. The results can return an empty result page, but if you have
-// a nextToken, the results are displayed on the next page.
+// a nextToken , the results are displayed on the next page.
 func (c *Client) DescribeAggregateComplianceByConformancePacks(ctx context.Context, params *DescribeAggregateComplianceByConformancePacksInput, optFns ...func(*Options)) (*DescribeAggregateComplianceByConformancePacksOutput, error) {
 	if params == nil {
 		params = &DescribeAggregateComplianceByConformancePacksInput{}

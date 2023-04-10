@@ -29,8 +29,7 @@ func (c *Client) BatchGetView(ctx context.Context, params *BatchGetViewInput, op
 
 type BatchGetViewInput struct {
 
-	// A list of Amazon resource names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// A list of Amazon resource names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// that identify the views you want details for.
 	ViewArns []string
 

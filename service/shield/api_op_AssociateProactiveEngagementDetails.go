@@ -15,7 +15,7 @@ import (
 // Response Team (SRT) to use. You must provide at least one phone number in the
 // emergency contact list. After you have initialized proactive engagement using
 // this call, to disable or enable proactive engagement, use the calls
-// DisableProactiveEngagement and EnableProactiveEngagement. This call defines the
+// DisableProactiveEngagement and EnableProactiveEngagement . This call defines the
 // list of email addresses and phone numbers that the SRT can use to contact you
 // for escalations to the SRT and to initiate proactive customer support. The
 // contacts that you provide in the request replace any contacts that were already

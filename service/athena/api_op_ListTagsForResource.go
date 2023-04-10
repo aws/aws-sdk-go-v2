@@ -35,8 +35,8 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// The maximum number of results to be returned per request that lists the tags for
-	// the resource.
+	// The maximum number of results to be returned per request that lists the tags
+	// for the resource.
 	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no additional
@@ -124,8 +124,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -135,8 +135,8 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
-	// The maximum number of results to be returned per request that lists the tags for
-	// the resource.
+	// The maximum number of results to be returned per request that lists the tags
+	// for the resource.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

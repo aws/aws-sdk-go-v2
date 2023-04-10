@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the rule. Requires permission to access the GetTopicRule
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Gets information about the rule. Requires permission to access the GetTopicRule (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) GetTopicRule(ctx context.Context, params *GetTopicRuleInput, optFns ...func(*Options)) (*GetTopicRuleOutput, error) {
 	if params == nil {

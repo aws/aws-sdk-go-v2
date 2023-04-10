@@ -51,23 +51,17 @@ type ModifyGlobalClusterInput struct {
 	// global database cannot be deleted when deletion protection is enabled.
 	DeletionProtection *bool
 
-	// The version number of the database engine to which you want to upgrade. Changing
-	// this parameter will result in an outage. The change is applied during the next
-	// maintenance window unless ApplyImmediately is enabled. To list all of the
-	// available Neptune engine versions, use the following command:
+	// The version number of the database engine to which you want to upgrade.
+	// Changing this parameter will result in an outage. The change is applied during
+	// the next maintenance window unless ApplyImmediately is enabled. To list all of
+	// the available Neptune engine versions, use the following command:
 	EngineVersion *string
 
 	// A new cluster identifier to assign to the global database. This value is stored
 	// as a lowercase string. Constraints:
-	//
-	// * Must contain from 1 to 63 letters,
-	// numbers, or hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// * Can't end with
-	// a hyphen or contain two consecutive hyphens
-	//
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens
 	// Example: my-cluster2
 	NewGlobalClusterIdentifier *string
 
@@ -77,8 +71,8 @@ type ModifyGlobalClusterInput struct {
 type ModifyGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database. This data type is
-	// used as a response element for the CreateGlobalCluster, DescribeGlobalClusters,
-	// ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and
+	// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
+	// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
 	// RemoveFromGlobalCluster actions.
 	GlobalCluster *types.GlobalCluster
 

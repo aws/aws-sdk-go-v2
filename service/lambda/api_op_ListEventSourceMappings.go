@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists event source mappings. Specify an EventSourceArn to show only event source
-// mappings for a single event source.
+// Lists event source mappings. Specify an EventSourceArn to show only event
+// source mappings for a single event source.
 func (c *Client) ListEventSourceMappings(ctx context.Context, params *ListEventSourceMappingsInput, optFns ...func(*Options)) (*ListEventSourceMappingsOutput, error) {
 	if params == nil {
 		params = &ListEventSourceMappingsInput{}
@@ -32,42 +32,22 @@ func (c *Client) ListEventSourceMappings(ctx context.Context, params *ListEventS
 type ListEventSourceMappingsInput struct {
 
 	// The Amazon Resource Name (ARN) of the event source.
-	//
-	// * Amazon Kinesis – The ARN
-	// of the data stream or a stream consumer.
-	//
-	// * Amazon DynamoDB Streams – The ARN of
-	// the stream.
-	//
-	// * Amazon Simple Queue Service – The ARN of the queue.
-	//
-	// * Amazon
-	// Managed Streaming for Apache Kafka – The ARN of the cluster.
-	//
-	// * Amazon MQ – The
-	// ARN of the broker.
-	//
-	// * Amazon DocumentDB – The ARN of the DocumentDB change
-	// stream.
+	//   - Amazon Kinesis – The ARN of the data stream or a stream consumer.
+	//   - Amazon DynamoDB Streams – The ARN of the stream.
+	//   - Amazon Simple Queue Service – The ARN of the queue.
+	//   - Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.
+	//   - Amazon MQ – The ARN of the broker.
+	//   - Amazon DocumentDB – The ARN of the DocumentDB change stream.
 	EventSourceArn *string
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name – MyFunction.
-	//
-	// *
-	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
-	//
-	// *
-	// Version or Alias ARN –
-	// arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.
-	//
-	// * Partial ARN –
-	// 123456789012:function:MyFunction.
-	//
-	// The length constraint applies only to the
-	// full ARN. If you specify only the function name, it's limited to 64 characters
-	// in length.
+	//   - Function name – MyFunction .
+	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//   - Version or Alias ARN –
+	//   arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD .
+	//   - Partial ARN – 123456789012:function:MyFunction .
+	// The length constraint applies only to the full ARN. If you specify only the
+	// function name, it's limited to 64 characters in length.
 	FunctionName *string
 
 	// A pagination token returned by a previous call.

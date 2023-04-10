@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dataset. This operation doesn't support datasets that include uploaded
-// files as a source.
+// Creates a dataset. This operation doesn't support datasets that include
+// uploaded files as a source.
 func (c *Client) CreateDataSet(ctx context.Context, params *CreateDataSetInput, optFns ...func(*Options)) (*CreateDataSetOutput, error) {
 	if params == nil {
 		params = &CreateDataSetInput{}
@@ -60,8 +60,8 @@ type CreateDataSetInput struct {
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []types.ColumnGroup
 
-	// A set of one or more definitions of a ColumnLevelPermissionRule
-	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html).
+	// A set of one or more definitions of a ColumnLevelPermissionRule (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html)
+	// .
 	ColumnLevelPermissionRules []types.ColumnLevelPermissionRule
 
 	// The usage configuration to apply to child datasets that reference this dataset
@@ -97,12 +97,12 @@ type CreateDataSetOutput struct {
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
 
-	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region for each Amazon Web Services account.
+	// The ID for the dataset that you want to create. This ID is unique per Amazon
+	// Web Services Region for each Amazon Web Services account.
 	DataSetId *string
 
-	// The ARN for the ingestion, which is triggered as a result of dataset creation if
-	// the import mode is SPICE.
+	// The ARN for the ingestion, which is triggered as a result of dataset creation
+	// if the import mode is SPICE.
 	IngestionArn *string
 
 	// The ID of the ingestion, which is triggered as a result of dataset creation if

@@ -27,7 +27,7 @@ func (c *Client) CreateSchedulingPolicy(ctx context.Context, params *CreateSched
 	return out, nil
 }
 
-// Contains the parameters for CreateSchedulingPolicy.
+// Contains the parameters for CreateSchedulingPolicy .
 type CreateSchedulingPolicyInput struct {
 
 	// The name of the scheduling policy. It can be up to 128 letters long. It can
@@ -42,13 +42,10 @@ type CreateSchedulingPolicyInput struct {
 
 	// The tags that you apply to the scheduling policy to help you categorize and
 	// organize your resources. Each tag consists of a key and an optional value. For
-	// more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in Amazon Web
-	// Services General Reference. These tags can be updated or removed using the
-	// TagResource
-	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html) and
-	// UntagResource
-	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html)
+	// more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in Amazon Web Services General Reference. These tags can be updated or removed
+	// using the TagResource (https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html)
+	// and UntagResource (https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html)
 	// API operations.
 	Tags map[string]string
 
@@ -59,7 +56,7 @@ type CreateSchedulingPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the scheduling policy. The format is
 	// aws:Partition:batch:Region:Account:scheduling-policy/Name . For example,
-	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy.
+	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
 	//
 	// This member is required.
 	Arn *string

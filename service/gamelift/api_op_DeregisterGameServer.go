@@ -16,8 +16,7 @@ import (
 // returned in a list of active game servers. To deregister a game server, specify
 // the game server group and game server ID. If successful, this operation emits a
 // CloudWatch event with termination timestamp and reason. Learn more GameLift
-// FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) DeregisterGameServer(ctx context.Context, params *DeregisterGameServerInput, optFns ...func(*Options)) (*DeregisterGameServerOutput, error) {
 	if params == nil {
 		params = &DeregisterGameServerInput{}

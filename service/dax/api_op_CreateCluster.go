@@ -32,14 +32,9 @@ type CreateClusterInput struct {
 
 	// The cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//
-	// * A name must contain from 1 to 20 alphanumeric characters or
-	// hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// * A name cannot end with a
-	// hyphen or contain two consecutive hyphens.
+	//   - A name must contain from 1 to 20 alphanumeric characters or hyphens.
+	//   - The first character must be a letter.
+	//   - A name cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	ClusterName *string
@@ -61,7 +56,7 @@ type CreateClusterInput struct {
 	// you can create a multiple node cluster with one or more read replicas. To do
 	// this, set ReplicationFactor to a number between 3 (one primary and two read
 	// replicas) and 10 (one primary and nine read replicas). If the AvailabilityZones
-	// parameter is provided, its length must equal the ReplicationFactor. AWS
+	// parameter is provided, its length must equal the ReplicationFactor . AWS
 	// recommends that you have at least two read replicas per cluster.
 	//
 	// This member is required.
@@ -74,11 +69,8 @@ type CreateClusterInput struct {
 	AvailabilityZones []string
 
 	// The type of encryption the cluster's endpoint should support. Values are:
-	//
-	// *
-	// NONE for no encryption
-	//
-	// * TLS for Transport Layer Security
+	//   - NONE for no encryption
+	//   - TLS for Transport Layer Security
 	ClusterEndpointEncryptionType types.ClusterEndpointEncryptionType
 
 	// A description of the cluster.
@@ -95,25 +87,16 @@ type CreateClusterInput struct {
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
-	//
-	// * sun
-	//
-	// * mon
-	//
-	// * tue
-	//
-	// * wed
-	//
-	// * thu
-	//
-	// * fri
-	//
-	// * sat
-	//
-	// Example:
-	// sun:05:00-sun:09:00 If you don't specify a preferred maintenance window when you
-	// create or modify a cache cluster, DAX assigns a 60-minute maintenance window on
-	// a randomly selected day of the week.
+	//   - sun
+	//   - mon
+	//   - tue
+	//   - wed
+	//   - thu
+	//   - fri
+	//   - sat
+	// Example: sun:05:00-sun:09:00 If you don't specify a preferred maintenance
+	// window when you create or modify a cache cluster, DAX assigns a 60-minute
+	// maintenance window on a randomly selected day of the week.
 	PreferredMaintenanceWindow *string
 
 	// Represents the settings used to enable server-side encryption on the cluster.

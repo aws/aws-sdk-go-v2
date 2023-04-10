@@ -36,7 +36,7 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// The list of tags to add to a domain. Tags may only contain unicode letters,
-	// digits, whitespace, or these symbols: _ . : / = + - @.
+	// digits, whitespace, or these symbols: _ . : / = + - @ .
 	//
 	// This member is required.
 	Tags []types.ResourceTag

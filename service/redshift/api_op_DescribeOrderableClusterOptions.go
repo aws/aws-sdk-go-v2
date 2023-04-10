@@ -12,16 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of orderable cluster options. Before you create a new cluster you
-// can use this operation to find what options are available, such as the EC2
+// Returns a list of orderable cluster options. Before you create a new cluster
+// you can use this operation to find what options are available, such as the EC2
 // Availability Zones (AZ) in the specific Amazon Web Services Region that you can
 // specify, and the node types you can request. The node types differ by available
 // storage, memory, CPU and price. With the cost involved you might want to obtain
 // a list of cluster options in the specific region and specify values when
 // creating a cluster. For more information about managing clusters, go to Amazon
-// Redshift Clusters
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html) in
-// the Amazon Redshift Cluster Management Guide.
+// Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DescribeOrderableClusterOptions(ctx context.Context, params *DescribeOrderableClusterOptionsInput, optFns ...func(*Options)) (*DescribeOrderableClusterOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeOrderableClusterOptionsInput{}
@@ -41,13 +40,13 @@ type DescribeOrderableClusterOptionsInput struct {
 
 	// The version filter value. Specify this parameter to show only the available
 	// offerings matching the specified version. Default: All versions. Constraints:
-	// Must be one of the version returned from DescribeClusterVersions.
+	// Must be one of the version returned from DescribeClusterVersions .
 	ClusterVersion *string
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeOrderableClusterOptions request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string

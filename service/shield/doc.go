@@ -7,6 +7,6 @@
 // developers who need detailed information about the Shield Advanced API actions,
 // data types, and errors. For detailed information about WAF and Shield Advanced
 // features and an overview of how to use the WAF and Shield Advanced APIs, see the
-// WAF and Shield Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/).
+// WAF and Shield Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
+// .
 package shield

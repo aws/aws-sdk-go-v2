@@ -14,9 +14,10 @@ import (
 // DeleteTable request is received, the specified table is in the DELETING state
 // until Amazon Keyspaces completes the deletion. If the table is in the ACTIVE
 // state, you can delete it. If a table is either in the CREATING or UPDATING
-// states, then Amazon Keyspaces returns a ResourceInUseException. If the specified
-// table does not exist, Amazon Keyspaces returns a ResourceNotFoundException. If
-// the table is already in the DELETING state, no error is returned.
+// states, then Amazon Keyspaces returns a ResourceInUseException . If the
+// specified table does not exist, Amazon Keyspaces returns a
+// ResourceNotFoundException . If the table is already in the DELETING state, no
+// error is returned.
 func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
 	if params == nil {
 		params = &DeleteTableInput{}

@@ -13,8 +13,7 @@ import (
 )
 
 // Gets the current value for one or more asset properties. For more information,
-// see Querying current values
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values)
+// see Querying current values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values)
 // in the IoT SiteWise User Guide.
 func (c *Client) BatchGetAssetPropertyValue(ctx context.Context, params *BatchGetAssetPropertyValueInput, optFns ...func(*Options)) (*BatchGetAssetPropertyValueOutput, error) {
 	if params == nil {

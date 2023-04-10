@@ -115,8 +115,8 @@ func (c *Client) addOperationListServiceProfilesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListServiceProfilesAPIClient is a client that implements the ListServiceProfiles
-// operation.
+// ListServiceProfilesAPIClient is a client that implements the
+// ListServiceProfiles operation.
 type ListServiceProfilesAPIClient interface {
 	ListServiceProfiles(context.Context, *ListServiceProfilesInput, ...func(*Options)) (*ListServiceProfilesOutput, error)
 }

@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a unique endpoint specific to the Amazon Web Services account making the
-// call. Requires permission to access the DescribeEndpoint
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Returns a unique endpoint specific to the Amazon Web Services account making
+// the call. Requires permission to access the DescribeEndpoint (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointInput, optFns ...func(*Options)) (*DescribeEndpointOutput, error) {
 	if params == nil {
@@ -33,21 +32,15 @@ func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointI
 type DescribeEndpointInput struct {
 
 	// The endpoint type. Valid endpoint types include:
+	//   - iot:Data - Returns a VeriSign signed data endpoint.
 	//
-	// * iot:Data - Returns a
-	// VeriSign signed data endpoint.
+	//   - iot:Data-ATS - Returns an ATS signed data endpoint.
 	//
-	// * iot:Data-ATS - Returns an ATS signed data
-	// endpoint.
+	//   - iot:CredentialProvider - Returns an IoT credentials provider API endpoint.
 	//
-	// * iot:CredentialProvider - Returns an IoT credentials provider API
-	// endpoint.
-	//
-	// * iot:Jobs - Returns an IoT device management Jobs API endpoint.
-	//
-	// We
-	// strongly recommend that customers use the newer iot:Data-ATS endpoint type to
-	// avoid issues related to the widespread distrust of Symantec certificate
+	//   - iot:Jobs - Returns an IoT device management Jobs API endpoint.
+	// We strongly recommend that customers use the newer iot:Data-ATS endpoint type
+	// to avoid issues related to the widespread distrust of Symantec certificate
 	// authorities.
 	EndpointType *string
 

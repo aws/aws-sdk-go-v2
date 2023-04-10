@@ -18,20 +18,11 @@ import (
 // and the rule set body in JSON format. Rule sets must be defined in the same
 // Region as the matchmaking configuration they are used with. Since matchmaking
 // rule sets cannot be edited, it is a good idea to check the rule set syntax using
-// ValidateMatchmakingRuleSet
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ValidateMatchmakingRuleSet.html)
+// ValidateMatchmakingRuleSet (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ValidateMatchmakingRuleSet.html)
 // before creating a new rule set. Learn more
-//
-// * Build a rule set
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
-//
-// *
-// Design a matchmaker
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
-//
-// *
-// Matchmaking with FlexMatch
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-intro.html)
+//   - Build a rule set (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
+//   - Design a matchmaker (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
+//   - Matchmaking with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-intro.html)
 func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMatchmakingRuleSetInput, optFns ...func(*Options)) (*CreateMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &CreateMatchmakingRuleSetInput{}
@@ -65,9 +56,8 @@ type CreateMatchmakingRuleSetInput struct {
 	// A list of labels to assign to the new matchmaking rule set resource. Tags are
 	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
 	// useful for resource management, access management and cost allocation. For more
-	// information, see  Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference.
+	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

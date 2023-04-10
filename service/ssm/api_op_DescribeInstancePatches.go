@@ -37,18 +37,11 @@ type DescribeInstancePatchesInput struct {
 	InstanceId *string
 
 	// Each element in the array is a structure containing a key-value pair. Supported
-	// keys for DescribeInstancePatchesinclude the following:
-	//
-	// * Classification Sample
-	// values: Security | SecurityUpdates
-	//
-	// * KBId Sample values: KB4480056 |
-	// java-1.7.0-openjdk.x86_64
-	//
-	// * Severity Sample values: Important | Medium | Low
-	//
-	// *
-	// State Sample values: Installed | InstalledOther | InstalledPendingReboot
+	// keys for DescribeInstancePatches include the following:
+	//   - Classification Sample values: Security | SecurityUpdates
+	//   - KBId Sample values: KB4480056 | java-1.7.0-openjdk.x86_64
+	//   - Severity Sample values: Important | Medium | Low
+	//   - State Sample values: Installed | InstalledOther | InstalledPendingReboot
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patches to return (per page).
@@ -68,22 +61,13 @@ type DescribeInstancePatchesOutput struct {
 	NextToken *string
 
 	// Each entry in the array is a structure containing:
-	//
-	// * Title (string)
-	//
-	// * KBId
-	// (string)
-	//
-	// * Classification (string)
-	//
-	// * Severity (string)
-	//
-	// * State (string, such
-	// as "INSTALLED" or "FAILED")
-	//
-	// * InstalledTime (DateTime)
-	//
-	// * InstalledBy (string)
+	//   - Title (string)
+	//   - KBId (string)
+	//   - Classification (string)
+	//   - Severity (string)
+	//   - State (string, such as "INSTALLED" or "FAILED")
+	//   - InstalledTime (DateTime)
+	//   - InstalledBy (string)
 	Patches []types.PatchComplianceData
 
 	// Metadata pertaining to the operation's result.

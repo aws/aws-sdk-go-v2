@@ -30,19 +30,20 @@ func (c *Client) ListAccountSettings(ctx context.Context, params *ListAccountSet
 
 type ListAccountSettingsInput struct {
 
-	// Determines whether to return the effective settings. If true, the account
+	// Determines whether to return the effective settings. If true , the account
 	// settings for the root user or the default setting for the principalArn are
-	// returned. If false, the account settings for the principalArn are returned if
+	// returned. If false , the account settings for the principalArn are returned if
 	// they're set. Otherwise, no account settings are returned.
 	EffectiveSettings bool
 
-	// The maximum number of account setting results returned by ListAccountSettings in
-	// paginated output. When this parameter is used, ListAccountSettings only returns
-	// maxResults results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListAccountSettings request with the returned nextToken value. This value can be
-	// between 1 and 10. If this parameter isn't used, then ListAccountSettings returns
-	// up to 10 results and a nextToken value if applicable.
+	// The maximum number of account setting results returned by ListAccountSettings
+	// in paginated output. When this parameter is used, ListAccountSettings only
+	// returns maxResults results in a single page along with a nextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListAccountSettings request with the returned nextToken value. This
+	// value can be between 1 and 10. If this parameter isn't used, then
+	// ListAccountSettings returns up to 10 results and a nextToken value if
+	// applicable.
 	MaxResults int32
 
 	// The name of the account setting you want to list the settings for.
@@ -51,9 +52,9 @@ type ListAccountSettingsInput struct {
 	// The nextToken value returned from a ListAccountSettings request indicating that
 	// more results are available to fulfill the request and further calls will be
 	// needed. If maxResults was provided, it's possible the number of results to be
-	// fewer than maxResults. This token should be treated as an opaque identifier that
-	// is only used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// fewer than maxResults . This token should be treated as an opaque identifier
+	// that is only used to retrieve the next items in a list and not for other
+	// programmatic purposes.
 	NextToken *string
 
 	// The ARN of the principal, which can be a user, role, or the root user. If this
@@ -71,10 +72,10 @@ type ListAccountSettingsInput struct {
 
 type ListAccountSettingsOutput struct {
 
-	// The nextToken value to include in a future ListAccountSettings request. When the
-	// results of a ListAccountSettings request exceed maxResults, this value can be
-	// used to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// The nextToken value to include in a future ListAccountSettings request. When
+	// the results of a ListAccountSettings request exceed maxResults , this value can
+	// be used to retrieve the next page of results. This value is null when there are
+	// no more results to return.
 	NextToken *string
 
 	// The account settings for the resource.
@@ -146,8 +147,8 @@ func (c *Client) addOperationListAccountSettingsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListAccountSettingsAPIClient is a client that implements the ListAccountSettings
-// operation.
+// ListAccountSettingsAPIClient is a client that implements the
+// ListAccountSettings operation.
 type ListAccountSettingsAPIClient interface {
 	ListAccountSettings(context.Context, *ListAccountSettingsInput, ...func(*Options)) (*ListAccountSettingsOutput, error)
 }
@@ -157,13 +158,14 @@ var _ ListAccountSettingsAPIClient = (*Client)(nil)
 // ListAccountSettingsPaginatorOptions is the paginator options for
 // ListAccountSettings
 type ListAccountSettingsPaginatorOptions struct {
-	// The maximum number of account setting results returned by ListAccountSettings in
-	// paginated output. When this parameter is used, ListAccountSettings only returns
-	// maxResults results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListAccountSettings request with the returned nextToken value. This value can be
-	// between 1 and 10. If this parameter isn't used, then ListAccountSettings returns
-	// up to 10 results and a nextToken value if applicable.
+	// The maximum number of account setting results returned by ListAccountSettings
+	// in paginated output. When this parameter is used, ListAccountSettings only
+	// returns maxResults results in a single page along with a nextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListAccountSettings request with the returned nextToken value. This
+	// value can be between 1 and 10. If this parameter isn't used, then
+	// ListAccountSettings returns up to 10 results and a nextToken value if
+	// applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

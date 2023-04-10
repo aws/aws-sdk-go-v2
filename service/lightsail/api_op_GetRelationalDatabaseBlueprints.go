@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of available database blueprints in Amazon Lightsail. A blueprint
-// describes the major engine version of a database. You can use a blueprint ID to
-// create a new database that runs a specific database engine.
+// Returns a list of available database blueprints in Amazon Lightsail. A
+// blueprint describes the major engine version of a database. You can use a
+// blueprint ID to create a new database that runs a specific database engine.
 func (c *Client) GetRelationalDatabaseBlueprints(ctx context.Context, params *GetRelationalDatabaseBlueprintsInput, optFns ...func(*Options)) (*GetRelationalDatabaseBlueprintsOutput, error) {
 	if params == nil {
 		params = &GetRelationalDatabaseBlueprintsInput{}

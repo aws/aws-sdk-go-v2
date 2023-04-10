@@ -13,17 +13,12 @@ import (
 
 // Creates a new custom language model. When creating a new custom language model,
 // you must specify:
-//
-// * If you want a Wideband (audio sample rates over 16,000 Hz)
-// or Narrowband (audio sample rates under 16,000 Hz) base model
-//
-// * The location of
-// your training and tuning files (this must be an Amazon S3 URI)
-//
-// * The language
-// of your model
-//
-// * A unique name for your model
+//   - If you want a Wideband (audio sample rates over 16,000 Hz) or Narrowband
+//     (audio sample rates under 16,000 Hz) base model
+//   - The location of your training and tuning files (this must be an Amazon S3
+//     URI)
+//   - The language of your model
+//   - A unique name for your model
 func (c *Client) CreateLanguageModel(ctx context.Context, params *CreateLanguageModelInput, optFns ...func(*Options)) (*CreateLanguageModelOutput, error) {
 	if params == nil {
 		params = &CreateLanguageModelInput{}
@@ -44,18 +39,18 @@ type CreateLanguageModelInput struct {
 	// The Amazon Transcribe standard language model, or base model, used to create
 	// your custom language model. Amazon Transcribe offers two options for base
 	// models: Wideband and Narrowband. If the audio you want to transcribe has a
-	// sample rate of 16,000 Hz or greater, choose WideBand. To transcribe audio with a
-	// sample rate less than 16,000 Hz, choose NarrowBand.
+	// sample rate of 16,000 Hz or greater, choose WideBand . To transcribe audio with
+	// a sample rate less than 16,000 Hz, choose NarrowBand .
 	//
 	// This member is required.
 	BaseModelName types.BaseModelName
 
-	// Contains the Amazon S3 location of the training data you want to use to create a
-	// new custom language model, and permissions to access this location. When using
-	// InputDataConfig, you must include these sub-parameters: S3Uri, which is the
-	// Amazon S3 location of your training data, and DataAccessRoleArn, which is the
+	// Contains the Amazon S3 location of the training data you want to use to create
+	// a new custom language model, and permissions to access this location. When using
+	// InputDataConfig , you must include these sub-parameters: S3Uri , which is the
+	// Amazon S3 location of your training data, and DataAccessRoleArn , which is the
 	// Amazon Resource Name (ARN) of the role that has permission to access your
-	// specified Amazon S3 location. You can optionally include TuningDataS3Uri, which
+	// specified Amazon S3 location. You can optionally include TuningDataS3Uri , which
 	// is the Amazon S3 location of your tuning data. If you specify different Amazon
 	// S3 locations for training and tuning data, the ARN you use must have permissions
 	// to access both locations.
@@ -67,12 +62,11 @@ type CreateLanguageModelInput struct {
 	// language model must contain terms in only one language, and the language you
 	// select for your custom language model must match the language of your training
 	// and tuning data. For a list of supported languages and their associated language
-	// codes, refer to the Supported languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// table. Note that US English (en-US) is the only language supported with Amazon
+	// codes, refer to the Supported languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table. Note that US English ( en-US ) is the only language supported with Amazon
 	// Transcribe Medical. A custom language model can only be used to transcribe files
 	// in the same language as the model. For example, if you create a custom language
-	// model using US English (en-US), you can only apply this model to files that
+	// model using US English ( en-US ), you can only apply this model to files that
 	// contain English audio.
 	//
 	// This member is required.
@@ -88,8 +82,8 @@ type CreateLanguageModelInput struct {
 
 	// Adds one or more custom tags, each in the form of a key:value pair, to a new
 	// custom language model at the time you create this new model. To learn more about
-	// using tags with Amazon Transcribe, refer to Tagging resources
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
+	// using tags with Amazon Transcribe, refer to Tagging resources (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html)
+	// .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -97,13 +91,13 @@ type CreateLanguageModelInput struct {
 
 type CreateLanguageModelOutput struct {
 
-	// The Amazon Transcribe standard language model, or base model, you specified when
-	// creating your custom language model.
+	// The Amazon Transcribe standard language model, or base model, you specified
+	// when creating your custom language model.
 	BaseModelName types.BaseModelName
 
 	// Lists your data access role ARN (Amazon Resource Name) and the Amazon S3
-	// locations you provided for your training (S3Uri) and tuning (TuningDataS3Uri)
-	// data.
+	// locations you provided for your training ( S3Uri ) and tuning ( TuningDataS3Uri
+	// ) data.
 	InputDataConfig *types.InputDataConfig
 
 	// The language code you selected for your custom language model.
@@ -112,8 +106,8 @@ type CreateLanguageModelOutput struct {
 	// The name of your custom language model.
 	ModelName *string
 
-	// The status of your custom language model. When the status displays as COMPLETED,
-	// your model is ready to use.
+	// The status of your custom language model. When the status displays as COMPLETED
+	// , your model is ready to use.
 	ModelStatus types.ModelStatus
 
 	// Metadata pertaining to the operation's result.

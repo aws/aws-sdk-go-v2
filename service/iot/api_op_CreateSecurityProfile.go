@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a Device Defender security profile. Requires permission to access the
-// CreateSecurityProfile
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// CreateSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecurityProfileInput, optFns ...func(*Options)) (*CreateSecurityProfileOutput, error) {
 	if params == nil {
@@ -39,7 +38,7 @@ type CreateSecurityProfileInput struct {
 
 	// Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
 	// list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors, but it is also retained for any
+	// for any metric used in the profile's behaviors , but it is also retained for any
 	// metric specified here. Can be used with custom metrics; cannot be used with
 	// dimensions.
 	//
@@ -47,7 +46,7 @@ type CreateSecurityProfileInput struct {
 	AdditionalMetricsToRetain []string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors, but it is also retained for any
+	// for any metric used in the profile's behaviors , but it is also retained for any
 	// metric specified here. Can be used with custom metrics; cannot be used with
 	// dimensions.
 	AdditionalMetricsToRetainV2 []types.MetricToRetain

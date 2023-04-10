@@ -17,8 +17,7 @@ import (
 // to collect and transfer data to the cloud. You create campaigns in the cloud.
 // After you or your team approve campaigns, Amazon Web Services IoT FleetWise
 // automatically deploys them to vehicles. For more information, see Collect and
-// transfer data with campaigns
-// (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/campaigns.html)
+// transfer data with campaigns (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/campaigns.html)
 // in the Amazon Web Services IoT FleetWise Developer Guide.
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {
 	if params == nil {
@@ -60,15 +59,15 @@ type CreateCampaignInput struct {
 	TargetArn *string
 
 	// (Optional) Whether to compress signals before transmitting data to Amazon Web
-	// Services IoT FleetWise. If you don't want to compress the signals, use OFF. If
+	// Services IoT FleetWise. If you don't want to compress the signals, use OFF . If
 	// it's not specified, SNAPPY is used. Default: SNAPPY
 	Compression types.Compression
 
-	// (Optional) A list of vehicle attributes to associate with a campaign. Enrich the
-	// data with specified vehicle attributes. For example, add make and model to the
-	// campaign, and Amazon Web Services IoT FleetWise will associate the data with
+	// (Optional) A list of vehicle attributes to associate with a campaign. Enrich
+	// the data with specified vehicle attributes. For example, add make and model to
+	// the campaign, and Amazon Web Services IoT FleetWise will associate the data with
 	// those attributes as dimensions in Amazon Timestream. You can then query the data
-	// against make and model. Default: An empty array
+	// against make and model . Default: An empty array
 	DataExtraDimensions []string
 
 	// An optional description of the campaign to help identify its purpose.
@@ -76,7 +75,7 @@ type CreateCampaignInput struct {
 
 	// (Optional) Option for a vehicle to send diagnostic trouble codes to Amazon Web
 	// Services IoT FleetWise. If you want to send diagnostic trouble codes, use
-	// SEND_ACTIVE_DTCS. If it's not specified, OFF is used. Default: OFF
+	// SEND_ACTIVE_DTCS . If it's not specified, OFF is used. Default: OFF
 	DiagnosticsMode types.DiagnosticsMode
 
 	// (Optional) The time the campaign expires, in seconds since epoch (January 1,
@@ -100,7 +99,7 @@ type CreateCampaignInput struct {
 	// (Optional) Whether to store collected data after a vehicle lost a connection
 	// with the cloud. After a connection is re-established, the data is automatically
 	// forwarded to Amazon Web Services IoT FleetWise. If you want to store collected
-	// data when a vehicle loses connection with the cloud, use TO_DISK. If it's not
+	// data when a vehicle loses connection with the cloud, use TO_DISK . If it's not
 	// specified, OFF is used. Default: OFF
 	SpoolingMode types.SpoolingMode
 

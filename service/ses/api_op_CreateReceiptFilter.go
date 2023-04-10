@@ -12,9 +12,8 @@ import (
 )
 
 // Creates a new IP address filter. For information about setting up IP address
-// filters, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html).
-// You can execute this operation no more than once per second.
+// filters, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) CreateReceiptFilter(ctx context.Context, params *CreateReceiptFilterInput, optFns ...func(*Options)) (*CreateReceiptFilterOutput, error) {
 	if params == nil {
 		params = &CreateReceiptFilterInput{}
@@ -32,8 +31,8 @@ func (c *Client) CreateReceiptFilter(ctx context.Context, params *CreateReceiptF
 
 // Represents a request to create a new IP address filter. You use IP address
 // filters when you receive email with Amazon SES. For more information, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type CreateReceiptFilterInput struct {
 
 	// A data structure that describes the IP address filter to create, which consists

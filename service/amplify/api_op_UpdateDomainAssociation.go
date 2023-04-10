@@ -59,8 +59,8 @@ type UpdateDomainAssociationInput struct {
 // The result structure for the update domain association request.
 type UpdateDomainAssociationOutput struct {
 
-	// Describes a domain association, which associates a custom domain with an Amplify
-	// app.
+	// Describes a domain association, which associates a custom domain with an
+	// Amplify app.
 	//
 	// This member is required.
 	DomainAssociation *types.DomainAssociation

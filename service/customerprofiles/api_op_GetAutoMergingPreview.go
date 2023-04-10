@@ -20,7 +20,7 @@ import (
 // are matched and would be merged. We strongly recommend you use this API to do a
 // dry run of the automerging process before running the Identity Resolution Job.
 // Include at least two matching attributes. If your matching list includes too few
-// attributes (such as only FirstName or only LastName), there may be a large
+// attributes (such as only FirstName or only LastName ), there may be a large
 // number of matches. This increases the chances of erroneous merges.
 func (c *Client) GetAutoMergingPreview(ctx context.Context, params *GetAutoMergingPreviewInput, optFns ...func(*Options)) (*GetAutoMergingPreviewOutput, error) {
 	if params == nil {
@@ -69,8 +69,8 @@ type GetAutoMergingPreviewOutput struct {
 	// This member is required.
 	DomainName *string
 
-	// The number of match groups in the domain that have been reviewed in this preview
-	// dry run.
+	// The number of match groups in the domain that have been reviewed in this
+	// preview dry run.
 	NumberOfMatchesInSample int64
 
 	// The number of profiles found in this preview dry run.

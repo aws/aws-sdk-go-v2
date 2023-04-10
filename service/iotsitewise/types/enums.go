@@ -77,8 +77,8 @@ const (
 	AssetRelationshipTypeHierarchy AssetRelationshipType = "HIERARCHY"
 )
 
-// Values returns all known values for AssetRelationshipType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AssetRelationshipType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AssetRelationshipType) Values() []AssetRelationshipType {
 	return []AssetRelationshipType{
@@ -395,9 +395,9 @@ const (
 	ErrorCodeInternalFailure ErrorCode = "INTERNAL_FAILURE"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"VALIDATION_ERROR",
@@ -413,8 +413,8 @@ const (
 	ForwardingConfigStateEnabled  ForwardingConfigState = "ENABLED"
 )
 
-// Values returns all known values for ForwardingConfigState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ForwardingConfigState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ForwardingConfigState) Values() []ForwardingConfigState {
 	return []ForwardingConfigState{
@@ -432,9 +432,9 @@ const (
 	IdentityTypeIam   IdentityType = "IAM"
 )
 
-// Values returns all known values for IdentityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityType) Values() []IdentityType {
 	return []IdentityType{
 		"USER",
@@ -471,9 +471,9 @@ const (
 	JobStatusCompletedWithFailures JobStatus = "COMPLETED_WITH_FAILURES"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"PENDING",
@@ -553,9 +553,9 @@ const (
 	ListBulkImportJobsFilterCompleted             ListBulkImportJobsFilter = "COMPLETED"
 )
 
-// Values returns all known values for ListBulkImportJobsFilter. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ListBulkImportJobsFilter. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListBulkImportJobsFilter) Values() []ListBulkImportJobsFilter {
 	return []ListBulkImportJobsFilter{
 		"ALL",
@@ -595,9 +595,9 @@ const (
 	LoggingLevelOff   LoggingLevel = "OFF"
 )
 
-// Values returns all known values for LoggingLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LoggingLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LoggingLevel) Values() []LoggingLevel {
 	return []LoggingLevel{
 		"ERROR",
@@ -738,9 +738,9 @@ const (
 	ResourceTypeProject ResourceType = "PROJECT"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"PORTAL",
@@ -774,9 +774,9 @@ const (
 	TimeOrderingDescending TimeOrdering = "DESCENDING"
 )
 
-// Values returns all known values for TimeOrdering. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TimeOrdering. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TimeOrdering) Values() []TimeOrdering {
 	return []TimeOrdering{
 		"ASCENDING",

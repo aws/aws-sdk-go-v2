@@ -18,9 +18,7 @@ import (
 // setting descriptions. One is the deployed configuration set, and the other is a
 // draft configuration of an environment that is either in the process of
 // deployment or that failed to deploy. Related Topics
-//
-// *
-// DeleteEnvironmentConfiguration
+//   - DeleteEnvironmentConfiguration
 func (c *Client) DescribeConfigurationSettings(ctx context.Context, params *DescribeConfigurationSettingsInput, optFns ...func(*Options)) (*DescribeConfigurationSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationSettingsInput{}
@@ -45,8 +43,8 @@ type DescribeConfigurationSettingsInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The name of the environment to describe. Condition: You must specify either this
-	// or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk
+	// The name of the environment to describe. Condition: You must specify either
+	// this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk
 	// returns an InvalidParameterCombination error. If you do not specify either, AWS
 	// Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
@@ -65,7 +63,7 @@ type DescribeConfigurationSettingsInput struct {
 // environment.
 type DescribeConfigurationSettingsOutput struct {
 
-	// A list of ConfigurationSettingsDescription.
+	// A list of ConfigurationSettingsDescription .
 	ConfigurationSettings []types.ConfigurationSettingsDescription
 
 	// Metadata pertaining to the operation's result.

@@ -43,8 +43,8 @@ type DisassociateDataShareConsumerInput struct {
 	// the existing and future namespaces in the specified Amazon Web Services Region.
 	ConsumerRegion *string
 
-	// A value that specifies whether association for the datashare is removed from the
-	// entire account.
+	// A value that specifies whether association for the datashare is removed from
+	// the entire account.
 	DisassociateEntireAccount *bool
 
 	noSmithyDocumentSerde

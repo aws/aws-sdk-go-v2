@@ -127,8 +127,8 @@ func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRecommendationsAPIClient is a client that implements the ListRecommendations
-// operation.
+// ListRecommendationsAPIClient is a client that implements the
+// ListRecommendations operation.
 type ListRecommendationsAPIClient interface {
 	ListRecommendations(context.Context, *ListRecommendationsInput, ...func(*Options)) (*ListRecommendationsOutput, error)
 }

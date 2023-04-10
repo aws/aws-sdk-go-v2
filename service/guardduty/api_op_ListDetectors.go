@@ -29,8 +29,8 @@ func (c *Client) ListDetectors(ctx context.Context, params *ListDetectorsInput, 
 
 type ListDetectorsInput struct {
 
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	MaxResults int32
 
 	// You can use this parameter when paginating results. Set the value of this
@@ -128,8 +128,8 @@ var _ ListDetectorsAPIClient = (*Client)(nil)
 
 // ListDetectorsPaginatorOptions is the paginator options for ListDetectors
 type ListDetectorsPaginatorOptions struct {
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -14,22 +14,13 @@ import (
 
 // Describes a monitor resource. In addition to listing the properties provided in
 // the CreateMonitor request, this operation lists the following properties:
-//
-// *
-// Baseline
-//
-// * CreationTime
-//
-// * LastEvaluationTime
-//
-// * LastEvaluationState
-//
-// *
-// LastModificationTime
-//
-// * Message
-//
-// * Status
+//   - Baseline
+//   - CreationTime
+//   - LastEvaluationTime
+//   - LastEvaluationState
+//   - LastModificationTime
+//   - Message
+//   - Status
 func (c *Client) DescribeMonitor(ctx context.Context, params *DescribeMonitorInput, optFns ...func(*Options)) (*DescribeMonitorOutput, error) {
 	if params == nil {
 		params = &DescribeMonitorInput{}

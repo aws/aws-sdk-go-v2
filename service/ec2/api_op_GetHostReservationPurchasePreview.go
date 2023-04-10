@@ -48,7 +48,7 @@ type GetHostReservationPurchasePreviewInput struct {
 type GetHostReservationPurchasePreviewOutput struct {
 
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts are
-	// specified. At this time, the only supported currency is USD.
+	// specified. At this time, the only supported currency is USD .
 	CurrencyCode types.CurrencyCodeValues
 
 	// The purchase information of the Dedicated Host reservation and the Dedicated

@@ -42,14 +42,9 @@ type ListZonalShiftsInput struct {
 
 	// A status for a zonal shift. The Status for a zonal shift can have one of the
 	// following values:
-	//
-	// * ACTIVE: The zonal shift is started and active.
-	//
-	// * EXPIRED:
-	// The zonal shift has expired (the expiry time was exceeded).
-	//
-	// * CANCELED: The
-	// zonal shift was canceled.
+	//   - ACTIVE: The zonal shift is started and active.
+	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
+	//   - CANCELED: The zonal shift was canceled.
 	Status types.ZonalShiftStatus
 
 	noSmithyDocumentSerde

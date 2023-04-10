@@ -70,31 +70,19 @@ type GetPartitionsInput struct {
 	// right operand; if yes, then the condition becomes true. Example: (a <= b) is
 	// true. AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL Logical operators. Supported
 	// Partition Key Types: The following are the supported partition keys.
-	//
-	// *
-	// string
-	//
-	// * date
-	//
-	// * timestamp
-	//
-	// * int
-	//
-	// * bigint
-	//
-	// * long
-	//
-	// * tinyint
-	//
-	// * smallint
-	//
-	// *
-	// decimal
-	//
-	// If an type is encountered that is not valid, an exception is thrown.
-	// The following list shows the valid operators on each type. When you define a
-	// crawler, the partitionKey type is created as a STRING, to be compatible with the
-	// catalog partitions. Sample API Call:
+	//   - string
+	//   - date
+	//   - timestamp
+	//   - int
+	//   - bigint
+	//   - long
+	//   - tinyint
+	//   - smallint
+	//   - decimal
+	// If an type is encountered that is not valid, an exception is thrown. The
+	// following list shows the valid operators on each type. When you define a
+	// crawler, the partitionKey type is created as a STRING , to be compatible with
+	// the catalog partitions. Sample API Call:
 	Expression *string
 
 	// The maximum number of partitions to return in a single response.
@@ -106,7 +94,7 @@ type GetPartitionsInput struct {
 
 	// The time as of when to read the partition contents. If not set, the most recent
 	// transaction commit time will be used. Cannot be specified along with
-	// TransactionId.
+	// TransactionId .
 	QueryAsOfTime *time.Time
 
 	// The segment of the table's partitions to scan in this request.

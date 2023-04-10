@@ -127,8 +127,8 @@ func (c *Client) addOperationListVehiclesInFleetMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListVehiclesInFleetAPIClient is a client that implements the ListVehiclesInFleet
-// operation.
+// ListVehiclesInFleetAPIClient is a client that implements the
+// ListVehiclesInFleet operation.
 type ListVehiclesInFleetAPIClient interface {
 	ListVehiclesInFleet(context.Context, *ListVehiclesInFleetInput, ...func(*Options)) (*ListVehiclesInFleetOutput, error)
 }

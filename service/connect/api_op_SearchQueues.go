@@ -31,8 +31,7 @@ func (c *Client) SearchQueues(ctx context.Context, params *SearchQueuesInput, op
 
 type SearchQueuesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -45,10 +44,10 @@ type SearchQueuesInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The search criteria to be used to return queues. The name and description fields
-	// support "contains" queries with a minimum of 2 characters and a maximum of 25
-	// characters. Any queries with character lengths outside of this range will throw
-	// invalid results.
+	// The search criteria to be used to return queues. The name and description
+	// fields support "contains" queries with a minimum of 2 characters and a maximum
+	// of 25 characters. Any queries with character lengths outside of this range will
+	// throw invalid results.
 	SearchCriteria *types.QueueSearchCriteria
 
 	// Filters to be applied to search results.

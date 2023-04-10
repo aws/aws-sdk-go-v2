@@ -13,8 +13,7 @@ import (
 
 // Creates an Amazon Lightsail container service. A Lightsail container service is
 // a compute resource to which you can deploy containers. For more information, see
-// Container services in Amazon Lightsail
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-services)
+// Container services in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-services)
 // in the Lightsail Dev Guide.
 func (c *Client) CreateContainerService(ctx context.Context, params *CreateContainerServiceInput, optFns ...func(*Options)) (*CreateContainerServiceOutput, error) {
 	if params == nil {
@@ -37,9 +36,9 @@ type CreateContainerServiceInput struct {
 	// amount of memory, vCPUs, and base monthly cost of each node of the container
 	// service. The power and scale of a container service makes up its configured
 	// capacity. To determine the monthly price of your container service, multiply the
-	// base price of the power with the scale (the number of nodes) of the service. Use
-	// the GetContainerServicePowers action to get a list of power options that you can
-	// specify using this parameter, and their base monthly cost.
+	// base price of the power with the scale (the number of nodes) of the service.
+	// Use the GetContainerServicePowers action to get a list of power options that
+	// you can specify using this parameter, and their base monthly cost.
 	//
 	// This member is required.
 	Power types.ContainerServicePowerName
@@ -53,26 +52,20 @@ type CreateContainerServiceInput struct {
 	// This member is required.
 	Scale *int32
 
-	// The name for the container service. The name that you specify for your container
-	// service will make up part of its default domain. The default domain of a
-	// container service is typically https://...cs.amazonlightsail.com. If the name of
-	// your container service is container-service-1, and it's located in the US East
-	// (Ohio) Amazon Web Services Region (us-east-2), then the domain for your
+	// The name for the container service. The name that you specify for your
+	// container service will make up part of its default domain. The default domain of
+	// a container service is typically https://...cs.amazonlightsail.com . If the name
+	// of your container service is container-service-1 , and it's located in the US
+	// East (Ohio) Amazon Web Services Region ( us-east-2 ), then the domain for your
 	// container service will be like the following example:
 	// https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com The
 	// following are the requirements for container service names:
-	//
-	// * Must be unique
-	// within each Amazon Web Services Region in your Lightsail account.
-	//
-	// * Must
-	// contain 1 to 63 characters.
-	//
-	// * Must contain only alphanumeric characters and
-	// hyphens.
-	//
-	// * A hyphen (-) can separate words but cannot be at the start or end of
-	// the name.
+	//   - Must be unique within each Amazon Web Services Region in your Lightsail
+	//   account.
+	//   - Must contain 1 to 63 characters.
+	//   - Must contain only alphanumeric characters and hyphens.
+	//   - A hyphen (-) can separate words but cannot be at the start or end of the
+	//   name.
 	//
 	// This member is required.
 	ServiceName *string
@@ -88,13 +81,12 @@ type CreateContainerServiceInput struct {
 	// An object to describe the configuration for the container service to access
 	// private container image repositories, such as Amazon Elastic Container Registry
 	// (Amazon ECR) private repositories. For more information, see Configuring access
-	// to an Amazon ECR private repository for an Amazon Lightsail container service
-	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access)
+	// to an Amazon ECR private repository for an Amazon Lightsail container service (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access)
 	// in the Amazon Lightsail Developer Guide.
 	PrivateRegistryAccess *types.PrivateRegistryAccessRequest
 
 	// The public domain names to use with the container service, such as example.com
-	// and www.example.com. You can specify up to four public domain names for a
+	// and www.example.com . You can specify up to four public domain names for a
 	// container service. The domain names that you specify are used when you create a
 	// deployment with a container configured as the public endpoint of your container
 	// service. If you don't specify public domain names, then you can use the default
@@ -107,8 +99,8 @@ type CreateContainerServiceInput struct {
 
 	// The tag keys and optional values to add to the container service during create.
 	// Use the TagResource action to tag a resource after it's created. For more
-	// information about tags in Lightsail, see the Amazon Lightsail Developer Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
+	// information about tags in Lightsail, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags)
+	// .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

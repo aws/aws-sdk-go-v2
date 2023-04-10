@@ -19,8 +19,7 @@ import (
 // purchase. You then use the unique offering ID in you call to
 // PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon
 // Redshift cluster. For more information about reserved node offerings, go to
-// Purchasing Reserved Nodes
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
+// Purchasing Reserved Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DescribeReservedNodeOfferings(ctx context.Context, params *DescribeReservedNodeOfferingsInput, optFns ...func(*Options)) (*DescribeReservedNodeOfferingsOutput, error) {
 	if params == nil {
@@ -41,8 +40,8 @@ type DescribeReservedNodeOfferingsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeReservedNodeOfferings request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string

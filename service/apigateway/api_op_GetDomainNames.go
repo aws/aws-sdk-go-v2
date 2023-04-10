@@ -31,8 +31,8 @@ func (c *Client) GetDomainNames(ctx context.Context, params *GetDomainNamesInput
 // Request to describe a collection of DomainName resources.
 type GetDomainNamesInput struct {
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// The current pagination position in the paged result set.
@@ -129,8 +129,8 @@ var _ GetDomainNamesAPIClient = (*Client)(nil)
 
 // GetDomainNamesPaginatorOptions is the paginator options for GetDomainNames
 type GetDomainNamesPaginatorOptions struct {
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

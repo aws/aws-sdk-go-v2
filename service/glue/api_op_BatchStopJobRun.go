@@ -44,7 +44,7 @@ type BatchStopJobRunInput struct {
 
 type BatchStopJobRunOutput struct {
 
-	// A list of the errors that were encountered in trying to stop JobRuns, including
+	// A list of the errors that were encountered in trying to stop JobRuns , including
 	// the JobRunId for which each error was encountered and details about the error.
 	Errors []types.BatchStopJobRunError
 

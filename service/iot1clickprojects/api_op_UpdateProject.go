@@ -14,7 +14,7 @@ import (
 // Updates a project associated with your AWS account and region. With the
 // exception of device template names, you can pass just the values that need to be
 // updated because the update request will change only the values that are
-// provided. To clear a value, pass the empty string (i.e., "").
+// provided. To clear a value, pass the empty string (i.e., "" ).
 func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, optFns ...func(*Options)) (*UpdateProjectOutput, error) {
 	if params == nil {
 		params = &UpdateProjectInput{}
@@ -42,7 +42,7 @@ type UpdateProjectInput struct {
 
 	// An object defining the project update. Once a project has been created, you
 	// cannot add device template names to the project. However, for a given
-	// placementTemplate, you can update the associated callbackOverrides for the
+	// placementTemplate , you can update the associated callbackOverrides for the
 	// device definition using this API.
 	PlacementTemplate *types.PlacementTemplate
 

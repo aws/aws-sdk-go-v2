@@ -16,8 +16,7 @@ import (
 // game server status, health check info, and the instance that the game server is
 // running on. To retrieve game server information, specify the game server ID. If
 // successful, the requested game server object is returned. Learn more GameLift
-// FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) DescribeGameServer(ctx context.Context, params *DescribeGameServerInput, optFns ...func(*Options)) (*DescribeGameServerOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerInput{}

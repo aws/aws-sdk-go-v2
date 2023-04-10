@@ -13,8 +13,7 @@ import (
 )
 
 // Starts a Device Defender ML Detect mitigation actions task. Requires permission
-// to access the StartDetectMitigationActionsTask
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// to access the StartDetectMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) StartDetectMitigationActionsTask(ctx context.Context, params *StartDetectMitigationActionsTaskInput, optFns ...func(*Options)) (*StartDetectMitigationActionsTaskOutput, error) {
 	if params == nil {

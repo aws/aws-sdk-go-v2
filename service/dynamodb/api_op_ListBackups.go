@@ -14,8 +14,8 @@ import (
 	"time"
 )
 
-// List backups associated with an Amazon Web Services account. To list backups for
-// a given table, specify TableName. ListBackups returns a paginated list of
+// List backups associated with an Amazon Web Services account. To list backups
+// for a given table, specify TableName . ListBackups returns a paginated list of
 // results with at most 1 MB worth of items in a page. You can also specify a
 // maximum number of entries to be returned in a page. In the request, start time
 // is inclusive, but end time is exclusive. Note that these boundaries are for the
@@ -40,14 +40,10 @@ type ListBackupsInput struct {
 
 	// The backups from the table specified by BackupType are listed. Where BackupType
 	// can be:
-	//
-	// * USER - On-demand backup created by you. (The default setting if no
-	// other backup types are specified.)
-	//
-	// * SYSTEM - On-demand backup automatically
-	// created by DynamoDB.
-	//
-	// * ALL - All types of on-demand backups (USER and SYSTEM).
+	//   - USER - On-demand backup created by you. (The default setting if no other
+	//   backup types are specified.)
+	//   - SYSTEM - On-demand backup automatically created by DynamoDB.
+	//   - ALL - All types of on-demand backups (USER and SYSTEM).
 	BackupType types.BackupTypeFilter
 
 	// LastEvaluatedBackupArn is the Amazon Resource Name (ARN) of the backup last
@@ -82,11 +78,11 @@ type ListBackupsOutput struct {
 	// The ARN of the backup last evaluated when the current page of results was
 	// returned, inclusive of the current page of results. This value may be specified
 	// as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch
-	// the next page of results. If LastEvaluatedBackupArn is empty, then the last page
-	// of results has been processed and there are no more results to be retrieved. If
-	// LastEvaluatedBackupArn is not empty, this may or may not indicate that there is
-	// more data to be returned. All results are guaranteed to have been returned if
-	// and only if no value for LastEvaluatedBackupArn is returned.
+	// the next page of results. If LastEvaluatedBackupArn is empty, then the last
+	// page of results has been processed and there are no more results to be
+	// retrieved. If LastEvaluatedBackupArn is not empty, this may or may not indicate
+	// that there is more data to be returned. All results are guaranteed to have been
+	// returned if and only if no value for LastEvaluatedBackupArn is returned.
 	LastEvaluatedBackupArn *string
 
 	// Metadata pertaining to the operation's result.

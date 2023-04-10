@@ -41,21 +41,19 @@ type DescribeDomainAutoTunesInput struct {
 	// defaults to 100.
 	MaxResults int32
 
-	// NextToken is sent in case the earlier API call results contain the NextToken. It
-	// is used for pagination.
+	// NextToken is sent in case the earlier API call results contain the NextToken.
+	// It is used for pagination.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The result of DescribeDomainAutoTunes request. See the Developer Guide
-// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+// The result of DescribeDomainAutoTunes request. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
 // for more information.
 type DescribeDomainAutoTunesOutput struct {
 
-	// Specifies the list of setting adjustments that Auto-Tune has made to the domain.
-	// See the Developer Guide
-	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// Specifies the list of setting adjustments that Auto-Tune has made to the
+	// domain. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
 	// for more information.
 	AutoTunes []types.AutoTune
 

@@ -31,9 +31,9 @@ func (c *Client) ListServers(ctx context.Context, params *ListServersInput, optF
 type ListServersInput struct {
 
 	// Specifies the filter value, which is based on the type of server criteria. For
-	// example, if serverCriteria is OS_NAME, and the filterValue is equal to
-	// WindowsServer, then ListServers returns all of the servers matching the OS name
-	// WindowsServer.
+	// example, if serverCriteria is OS_NAME , and the filterValue is equal to
+	// WindowsServer , then ListServers returns all of the servers matching the OS
+	// name WindowsServer .
 	FilterValue *string
 
 	// Specifies the group ID to filter on.
@@ -43,16 +43,16 @@ type ListServersInput struct {
 	// 100.
 	MaxResults *int32
 
-	// The token from a previous call that you use to retrieve the next set of results.
-	// For example, if a previous call to this action returned 100 items, but you set
-	// maxResults to 10. You'll receive a set of 10 results along with a token. You
-	// then use the returned token to retrieve the next set of 10.
+	// The token from a previous call that you use to retrieve the next set of
+	// results. For example, if a previous call to this action returned 100 items, but
+	// you set maxResults to 10. You'll receive a set of 10 results along with a
+	// token. You then use the returned token to retrieve the next set of 10.
 	NextToken *string
 
 	// Criteria for filtering servers.
 	ServerCriteria types.ServerCriteria
 
-	// Specifies whether to sort by ascending (ASC) or descending (DESC) order.
+	// Specifies whether to sort by ascending ( ASC ) or descending ( DESC ) order.
 	Sort types.SortOrder
 
 	noSmithyDocumentSerde

@@ -48,10 +48,10 @@ type DescribeBotRecommendationInput struct {
 	// This member is required.
 	BotVersion *string
 
-	// The identifier of the language and locale of the bot recommendation to describe.
-	// The string must match one of the supported locales. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// The identifier of the language and locale of the bot recommendation to
+	// describe. The string must match one of the supported locales. For more
+	// information, see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -67,8 +67,9 @@ type DescribeBotRecommendationOutput struct {
 	// The identifier of the bot recommendation being described.
 	BotRecommendationId *string
 
-	// The object representing the URL of the bot definition, the URL of the associated
-	// transcript and a statistical summary of the bot recommendation results.
+	// The object representing the URL of the bot definition, the URL of the
+	// associated transcript and a statistical summary of the bot recommendation
+	// results.
 	BotRecommendationResults *types.BotRecommendationResults
 
 	// The status of the bot recommendation. If the status is Failed, then the reasons
@@ -81,9 +82,9 @@ type DescribeBotRecommendationOutput struct {
 	// The date and time that the bot recommendation was created.
 	CreationDateTime *time.Time
 
-	// The object representing the passwords that were used to encrypt the data related
-	// to the bot recommendation results, as well as the KMS key ARN used to encrypt
-	// the associated metadata.
+	// The object representing the passwords that were used to encrypt the data
+	// related to the bot recommendation results, as well as the KMS key ARN used to
+	// encrypt the associated metadata.
 	EncryptionSetting *types.EncryptionSetting
 
 	// If botRecommendationStatus is Failed, Amazon Lex explains why.

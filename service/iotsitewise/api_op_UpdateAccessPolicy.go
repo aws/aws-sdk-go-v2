@@ -48,8 +48,8 @@ type UpdateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyPermission types.Permission
 
-	// The IoT SiteWise Monitor resource for this access policy. Choose either a portal
-	// or a project.
+	// The IoT SiteWise Monitor resource for this access policy. Choose either a
+	// portal or a project.
 	//
 	// This member is required.
 	AccessPolicyResource *types.Resource

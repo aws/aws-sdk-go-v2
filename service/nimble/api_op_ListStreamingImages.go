@@ -123,8 +123,8 @@ func (c *Client) addOperationListStreamingImagesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListStreamingImagesAPIClient is a client that implements the ListStreamingImages
-// operation.
+// ListStreamingImagesAPIClient is a client that implements the
+// ListStreamingImages operation.
 type ListStreamingImagesAPIClient interface {
 	ListStreamingImages(context.Context, *ListStreamingImagesInput, ...func(*Options)) (*ListStreamingImagesOutput, error)
 }

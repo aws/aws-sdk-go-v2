@@ -143,8 +143,8 @@ func (c *Client) addOperationGetInsightSummariesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetInsightSummariesAPIClient is a client that implements the GetInsightSummaries
-// operation.
+// GetInsightSummariesAPIClient is a client that implements the
+// GetInsightSummaries operation.
 type GetInsightSummariesAPIClient interface {
 	GetInsightSummaries(context.Context, *GetInsightSummariesInput, ...func(*Options)) (*GetInsightSummariesOutput, error)
 }

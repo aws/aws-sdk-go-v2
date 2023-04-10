@@ -12,9 +12,8 @@ import (
 )
 
 // Returns the details of the specified configuration set. For information about
-// using configuration sets, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// You can execute this operation no more than once per second.
+// using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) DescribeConfigurationSet(ctx context.Context, params *DescribeConfigurationSetInput, optFns ...func(*Options)) (*DescribeConfigurationSetOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationSetInput{}
@@ -30,10 +29,10 @@ func (c *Client) DescribeConfigurationSet(ctx context.Context, params *DescribeC
 	return out, nil
 }
 
-// Represents a request to return the details of a configuration set. Configuration
-// sets enable you to publish email sending events. For information about using
-// configuration sets, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// Represents a request to return the details of a configuration set.
+// Configuration sets enable you to publish email sending events. For information
+// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// .
 type DescribeConfigurationSetInput struct {
 
 	// The name of the configuration set to describe.
@@ -49,8 +48,8 @@ type DescribeConfigurationSetInput struct {
 
 // Represents the details of a configuration set. Configuration sets enable you to
 // publish email sending events. For information about using configuration sets,
-// see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// .
 type DescribeConfigurationSetOutput struct {
 
 	// The configuration set object associated with the specified configuration set.

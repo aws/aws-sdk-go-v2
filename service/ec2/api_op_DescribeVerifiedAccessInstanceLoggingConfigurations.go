@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the current logging configuration for the Amazon Web Services Verified
-// Access instances.
+// Describes the current logging configuration for the Amazon Web Services
+// Verified Access instances.
 func (c *Client) DescribeVerifiedAccessInstanceLoggingConfigurations(ctx context.Context, params *DescribeVerifiedAccessInstanceLoggingConfigurationsInput, optFns ...func(*Options)) (*DescribeVerifiedAccessInstanceLoggingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeVerifiedAccessInstanceLoggingConfigurationsInput{}
@@ -33,8 +33,8 @@ type DescribeVerifiedAccessInstanceLoggingConfigurationsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.

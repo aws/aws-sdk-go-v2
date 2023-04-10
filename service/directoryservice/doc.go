@@ -8,14 +8,12 @@
 // Amazon Web Services resources with an existing self-managed Microsoft Active
 // Directory. This guide provides detailed information about Directory Service
 // operations, data types, parameters, and errors. For information about Directory
-// Services features, see Directory Service
-// (https://aws.amazon.com/directoryservice/) and the Directory Service
-// Administration Guide
-// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html).
-// Amazon Web Services provides SDKs that consist of libraries and sample code for
-// various programming languages and platforms (Java, Ruby, .Net, iOS, Android,
+// Services features, see Directory Service (https://aws.amazon.com/directoryservice/)
+// and the Directory Service Administration Guide (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html)
+// . Amazon Web Services provides SDKs that consist of libraries and sample code
+// for various programming languages and platforms (Java, Ruby, .Net, iOS, Android,
 // etc.). The SDKs provide a convenient way to create programmatic access to
 // Directory Service and other Amazon Web Services services. For more information
 // about the Amazon Web Services SDKs, including how to download and install them,
-// see Tools for Amazon Web Services (http://aws.amazon.com/tools/).
+// see Tools for Amazon Web Services (http://aws.amazon.com/tools/) .
 package directoryservice

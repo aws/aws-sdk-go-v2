@@ -15,8 +15,7 @@ import (
 // value is optional) that you can define and assign to Amazon Web Services
 // resources. If you specify a tag that already exists, the tag value is replaced
 // with the value that you specify in the request. For more information, see Using
-// Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the Billing and Cost Management and Cost Management User Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -35,8 +34,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the signaling channel to which you want to add
-	// tags.
+	// The Amazon Resource Name (ARN) of the signaling channel to which you want to
+	// add tags.
 	//
 	// This member is required.
 	ResourceARN *string

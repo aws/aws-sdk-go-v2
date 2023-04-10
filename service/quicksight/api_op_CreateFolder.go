@@ -39,7 +39,7 @@ type CreateFolderInput struct {
 	// This member is required.
 	FolderId *string
 
-	// The type of folder. By default, folderType is SHARED.
+	// The type of folder. By default, folderType is SHARED .
 	FolderType types.FolderType
 
 	// The name of the folder.
@@ -50,7 +50,7 @@ type CreateFolderInput struct {
 	ParentFolderArn *string
 
 	// A structure that describes the principals and the resource-level permissions of
-	// a folder. To specify no permissions, omit Permissions.
+	// a folder. To specify no permissions, omit Permissions .
 	Permissions []types.ResourcePermission
 
 	// Tags for the folder.

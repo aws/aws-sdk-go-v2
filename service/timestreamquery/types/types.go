@@ -125,8 +125,8 @@ type ExecutionStats struct {
 	noSmithyDocumentSerde
 }
 
-// MixedMeasureMappings are mappings that can be used to ingest data into a mixture
-// of narrow and multi measures in the derived table.
+// MixedMeasureMappings are mappings that can be used to ingest data into a
+// mixture of narrow and multi measures in the derived table.
 type MixedMeasureMapping struct {
 
 	// Type of the value that is to be read from sourceColumn. If the mapping is for
@@ -179,8 +179,8 @@ type MultiMeasureAttributeMapping struct {
 // table.
 type MultiMeasureMappings struct {
 
-	// Required. Attribute mappings to be used for mapping query results to ingest data
-	// for multi-measure attributes.
+	// Required. Attribute mappings to be used for mapping query results to ingest
+	// data for multi-measure attributes.
 	//
 	// This member is required.
 	MultiMeasureAttributeMappings []MultiMeasureAttributeMapping
@@ -268,8 +268,8 @@ type S3Configuration struct {
 	// specified, Timestream will choose SSE_S3 as default.
 	EncryptionOption S3EncryptionOption
 
-	// Prefix for the error report key. Timestream by default adds the following prefix
-	// to the error report path.
+	// Prefix for the error report key. Timestream by default adds the following
+	// prefix to the error report path.
 	ObjectKeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -410,12 +410,12 @@ type ScheduledQueryRunSummary struct {
 	// Runtime statistics for a scheduled run.
 	ExecutionStats *ExecutionStats
 
-	// Error message for the scheduled query in case of failure. You might have to look
-	// at the error report to get more detailed error reasons.
+	// Error message for the scheduled query in case of failure. You might have to
+	// look at the error report to get more detailed error reasons.
 	FailureReason *string
 
-	// InvocationTime for this run. This is the time at which the query is scheduled to
-	// run. Parameter @scheduled_runtime can be used in the query to get the value.
+	// InvocationTime for this run. This is the time at which the query is scheduled
+	// to run. Parameter @scheduled_runtime can be used in the query to get the value.
 	InvocationTime *time.Time
 
 	// The status of a scheduled query run.
@@ -462,10 +462,10 @@ type SnsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A tag is a label that you assign to a Timestream database and/or table. Each tag
-// consists of a key and an optional value, both of which you define. Tags enable
-// you to categorize databases and/or tables, for example, by purpose, owner, or
-// environment.
+// A tag is a label that you assign to a Timestream database and/or table. Each
+// tag consists of a key and an optional value, both of which you define. Tags
+// enable you to categorize databases and/or tables, for example, by purpose,
+// owner, or environment.
 type Tag struct {
 
 	// The key of the tag. Tag keys are case sensitive.
@@ -531,8 +531,8 @@ type TimestreamConfiguration struct {
 	// This member is required.
 	DatabaseName *string
 
-	// This is to allow mapping column(s) from the query result to the dimension in the
-	// destination table.
+	// This is to allow mapping column(s) from the query result to the dimension in
+	// the destination table.
 	//
 	// This member is required.
 	DimensionMappings []DimensionMapping

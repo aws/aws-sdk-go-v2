@@ -31,8 +31,8 @@ func (c *Client) DisableStageTransition(ctx context.Context, params *DisableStag
 // Represents the input of a DisableStageTransition action.
 type DisableStageTransitionInput struct {
 
-	// The name of the pipeline in which you want to disable the flow of artifacts from
-	// one stage to another.
+	// The name of the pipeline in which you want to disable the flow of artifacts
+	// from one stage to another.
 	//
 	// This member is required.
 	PipelineName *string

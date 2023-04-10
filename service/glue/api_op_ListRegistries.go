@@ -44,8 +44,8 @@ type ListRegistriesInput struct {
 
 type ListRegistriesOutput struct {
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
 	// An array of RegistryDetailedListItem objects containing minimal details of each

@@ -34,7 +34,7 @@ type GetWirelessDeviceInput struct {
 	// This member is required.
 	Identifier *string
 
-	// The type of identifier used in identifier.
+	// The type of identifier used in identifier .
 	//
 	// This member is required.
 	IdentifierType types.WirelessDeviceIdType
@@ -72,8 +72,8 @@ type GetWirelessDeviceOutput struct {
 	// The ARN of the thing associated with the wireless device.
 	ThingArn *string
 
-	// The name of the thing associated with the wireless device. The value is empty if
-	// a thing isn't associated with the device.
+	// The name of the thing associated with the wireless device. The value is empty
+	// if a thing isn't associated with the device.
 	ThingName *string
 
 	// The wireless device type.

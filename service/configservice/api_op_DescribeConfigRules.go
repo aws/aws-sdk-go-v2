@@ -36,8 +36,7 @@ type DescribeConfigRulesInput struct {
 
 	// Returns a list of Detective or Proactive Config rules. By default, this API
 	// returns an unfiltered list. For more information on Detective or Proactive
-	// Config rules, see  Evaluation Mode
-	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html)
+	// Config rules, see Evaluation Mode  (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html)
 	// in the Config Developer Guide.
 	Filters *types.DescribeConfigRulesFilters
 
@@ -123,8 +122,8 @@ func (c *Client) addOperationDescribeConfigRulesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeConfigRulesAPIClient is a client that implements the DescribeConfigRules
-// operation.
+// DescribeConfigRulesAPIClient is a client that implements the
+// DescribeConfigRules operation.
 type DescribeConfigRulesAPIClient interface {
 	DescribeConfigRules(context.Context, *DescribeConfigRulesInput, ...func(*Options)) (*DescribeConfigRulesOutput, error)
 }

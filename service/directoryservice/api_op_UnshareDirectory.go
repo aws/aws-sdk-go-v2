@@ -47,7 +47,7 @@ type UnshareDirectoryInput struct {
 type UnshareDirectoryOutput struct {
 
 	// Identifier of the directory stored in the directory consumer account that is to
-	// be unshared from the specified directory (DirectoryId).
+	// be unshared from the specified directory ( DirectoryId ).
 	SharedDirectoryId *string
 
 	// Metadata pertaining to the operation's result.

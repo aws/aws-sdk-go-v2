@@ -53,14 +53,14 @@ type ListFacesInput struct {
 type ListFacesOutput struct {
 
 	// Version number of the face detection model associated with the input collection
-	// (CollectionId).
+	// ( CollectionId ).
 	FaceModelVersion *string
 
 	// An array of Face objects.
 	Faces []types.Face
 
-	// If the response is truncated, Amazon Rekognition returns this token that you can
-	// use in the subsequent request to retrieve the next set of faces.
+	// If the response is truncated, Amazon Rekognition returns this token that you
+	// can use in the subsequent request to retrieve the next set of faces.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change. Gets
-// basic information about the security profle.
+// This API is in preview release for Amazon Connect and is subject to change.
+// Gets basic information about the security profle.
 func (c *Client) DescribeSecurityProfile(ctx context.Context, params *DescribeSecurityProfileInput, optFns ...func(*Options)) (*DescribeSecurityProfileOutput, error) {
 	if params == nil {
 		params = &DescribeSecurityProfileInput{}
@@ -30,8 +30,7 @@ func (c *Client) DescribeSecurityProfile(ctx context.Context, params *DescribeSe
 
 type DescribeSecurityProfileInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

@@ -10,11 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from the Amazon Managed Blockchain resource. For more
-// information about tags, see Tagging Resources
-// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
-// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+// Removes the specified tags from the Amazon Managed Blockchain resource. For
+// more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
 // in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
@@ -34,9 +32,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ResourceArn *string

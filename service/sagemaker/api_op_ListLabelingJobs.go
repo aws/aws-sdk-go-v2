@@ -55,14 +55,14 @@ type ListLabelingJobsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListLabelingJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of labeling jobs, use
+	// response includes a NextToken . To retrieve the next set of labeling jobs, use
 	// the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.SortBy
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	// A filter that retrieves only labeling jobs with a specific status.
@@ -76,8 +76,8 @@ type ListLabelingJobsOutput struct {
 	// An array of LabelingJobSummary objects, each describing a labeling job.
 	LabelingJobSummaryList []types.LabelingJobSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of labeling jobs, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of labeling jobs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,8 +13,7 @@ import (
 )
 
 // Describes event configurations. Requires permission to access the
-// DescribeEventConfigurations
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DescribeEventConfigurations (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeEventConfigurations(ctx context.Context, params *DescribeEventConfigurationsInput, optFns ...func(*Options)) (*DescribeEventConfigurationsOutput, error) {
 	if params == nil {

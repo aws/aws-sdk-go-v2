@@ -30,8 +30,8 @@ func (c *Client) CreateSite(ctx context.Context, params *CreateSiteInput, optFns
 
 type CreateSiteInput struct {
 
-	// A valid ISO 3166-1 alpha-2 code for the country in which the site resides. e.g.,
-	// US.
+	// A valid ISO 3166-1 alpha-2 code for the country in which the site resides.
+	// e.g., US.
 	//
 	// This member is required.
 	CountryCode *string

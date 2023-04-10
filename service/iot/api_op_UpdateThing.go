@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the data for a thing. Requires permission to access the UpdateThing
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Updates the data for a thing. Requires permission to access the UpdateThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateThing(ctx context.Context, params *UpdateThingInput, optFns ...func(*Options)) (*UpdateThingOutput, error) {
 	if params == nil {
@@ -46,7 +45,7 @@ type UpdateThingInput struct {
 
 	// The expected version of the thing record in the registry. If the version of the
 	// record in the registry does not match the expected version specified in the
-	// request, the UpdateThing request is rejected with a VersionConflictException.
+	// request, the UpdateThing request is rejected with a VersionConflictException .
 	ExpectedVersion *int64
 
 	// Remove a thing type association. If true, the association is removed.

@@ -40,7 +40,7 @@ type CreateTableInput struct {
 	// This member is required.
 	TableInput *types.TableInput
 
-	// The ID of the Data Catalog in which to create the Table. If none is supplied,
+	// The ID of the Data Catalog in which to create the Table . If none is supplied,
 	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
 

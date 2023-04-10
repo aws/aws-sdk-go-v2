@@ -15,14 +15,13 @@ import (
 // Gets information about the scaling activities in the account and Region. When
 // scaling events occur, you see a record of the scaling activity in the scaling
 // activities. For more information, see Verifying a scaling activity for an Auto
-// Scaling group
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html)
+// Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html)
 // in the Amazon EC2 Auto Scaling User Guide. If the scaling event succeeds, the
-// value of the StatusCode element in the response is Successful. If an attempt to
+// value of the StatusCode element in the response is Successful . If an attempt to
 // launch instances failed, the StatusCode value is Failed or Cancelled and the
 // StatusMessage element in the response indicates the cause of the failure. For
-// help interpreting the StatusMessage, see Troubleshooting Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/CHAP_Troubleshooting.html)
+// help interpreting the StatusMessage , see Troubleshooting Amazon EC2 Auto
+// Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/CHAP_Troubleshooting.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeScalingActivities(ctx context.Context, params *DescribeScalingActivitiesInput, optFns ...func(*Options)) (*DescribeScalingActivitiesOutput, error) {
 	if params == nil {
@@ -54,7 +53,7 @@ type DescribeScalingActivitiesInput struct {
 	IncludeDeletedGroups *bool
 
 	// The maximum number of items to return with this call. The default value is 100
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -66,8 +65,8 @@ type DescribeScalingActivitiesInput struct {
 
 type DescribeScalingActivitiesOutput struct {
 
-	// The scaling activities. Activities are sorted by start time. Activities still in
-	// progress are described first.
+	// The scaling activities. Activities are sorted by start time. Activities still
+	// in progress are described first.
 	//
 	// This member is required.
 	Activities []types.Activity
@@ -156,7 +155,7 @@ var _ DescribeScalingActivitiesAPIClient = (*Client)(nil)
 // DescribeScalingActivities
 type DescribeScalingActivitiesPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 100
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

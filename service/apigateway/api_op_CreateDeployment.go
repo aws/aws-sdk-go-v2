@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Creates a Deployment resource, which makes a specified RestApi callable over the
-// internet.
+// Creates a Deployment resource, which makes a specified RestApi callable over
+// the internet.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -41,8 +41,8 @@ type CreateDeploymentInput struct {
 	CacheClusterEnabled *bool
 
 	// The stage's cache capacity in GB. For more information about choosing a cache
-	// size, see Enabling API caching to enhance responsiveness
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html).
+	// size, see Enabling API caching to enhance responsiveness (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html)
+	// .
 	CacheClusterSize types.CacheClusterSize
 
 	// The input configuration for the canary deployment when the deployment is a
@@ -61,9 +61,9 @@ type CreateDeploymentInput struct {
 	// Specifies whether active tracing with X-ray is enabled for the Stage.
 	TracingEnabled *bool
 
-	// A map that defines the stage variables for the Stage resource that is associated
-	// with the new deployment. Variable names can have alphanumeric and underscore
-	// characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
+	// A map that defines the stage variables for the Stage resource that is
+	// associated with the new deployment. Variable names can have alphanumeric and
+	// underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+ .
 	Variables map[string]string
 
 	noSmithyDocumentSerde

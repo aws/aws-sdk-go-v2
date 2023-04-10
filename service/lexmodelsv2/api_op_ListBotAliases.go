@@ -59,10 +59,10 @@ type ListBotAliasesOutput struct {
 	// The identifier of the bot associated with the aliases.
 	BotId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBotAliases operation. If the nextToken field is present, you send the
-	// contents as the nextToken parameter of a ListBotAliases operation request to get
-	// the next page of results.
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBotAliases operation. If the nextToken field is present, you send
+	// the contents as the nextToken parameter of a ListBotAliases operation request
+	// to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

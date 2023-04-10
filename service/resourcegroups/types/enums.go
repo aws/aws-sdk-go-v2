@@ -11,9 +11,9 @@ const (
 	GroupConfigurationStatusUpdateFailed   GroupConfigurationStatus = "UPDATE_FAILED"
 )
 
-// Values returns all known values for GroupConfigurationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for GroupConfigurationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupConfigurationStatus) Values() []GroupConfigurationStatus {
 	return []GroupConfigurationStatus{
 		"UPDATING",
@@ -48,8 +48,8 @@ const (
 	GroupLifecycleEventsDesiredStatusInactive GroupLifecycleEventsDesiredStatus = "INACTIVE"
 )
 
-// Values returns all known values for GroupLifecycleEventsDesiredStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for GroupLifecycleEventsDesiredStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (GroupLifecycleEventsDesiredStatus) Values() []GroupLifecycleEventsDesiredStatus {
@@ -109,9 +109,9 @@ const (
 	QueryTypeCloudformationStack10 QueryType = "CLOUDFORMATION_STACK_1_0"
 )
 
-// Values returns all known values for QueryType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for QueryType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (QueryType) Values() []QueryType {
 	return []QueryType{
 		"TAG_FILTERS_1_0",

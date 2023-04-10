@@ -34,8 +34,8 @@ type DescribeVolumesInput struct {
 	// Enter a filter Name and Values pair to view a select set of volumes.
 	Filters []types.VolumeFilter
 
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	MaxResults *int32
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
@@ -135,8 +135,8 @@ var _ DescribeVolumesAPIClient = (*Client)(nil)
 
 // DescribeVolumesPaginatorOptions is the paginator options for DescribeVolumes
 type DescribeVolumesPaginatorOptions struct {
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

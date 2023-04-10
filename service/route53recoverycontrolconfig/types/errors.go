@@ -85,8 +85,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// 404 response - MalformedQueryString. The query string contains a syntax error or
-// resource not found.
+// 404 response - MalformedQueryString. The query string contains a syntax error
+// or resource not found.
 type ResourceNotFoundException struct {
 	Message *string
 

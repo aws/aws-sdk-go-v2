@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a user's SSH information. Required Permissions: To use this action, an
-// IAM user must have self-management enabled or an attached policy that explicitly
-// grants permissions. For more information about user permissions, see Managing
-// User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Describes a user's SSH information. Required Permissions: To use this action,
+// an IAM user must have self-management enabled or an attached policy that
+// explicitly grants permissions. For more information about user permissions, see
+// Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeMyUserProfile(ctx context.Context, params *DescribeMyUserProfileInput, optFns ...func(*Options)) (*DescribeMyUserProfileOutput, error) {
 	if params == nil {
 		params = &DescribeMyUserProfileInput{}

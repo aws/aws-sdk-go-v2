@@ -37,7 +37,7 @@ func (c *Client) UpdateSigningCertificate(ctx context.Context, params *UpdateSig
 type UpdateSigningCertificateInput struct {
 
 	// The ID of the signing certificate you want to update. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
 	// characters that can consist of any upper or lowercased letter or digit.
 	//
 	// This member is required.
@@ -51,8 +51,8 @@ type UpdateSigningCertificateInput struct {
 	Status types.StatusType
 
 	// The name of the IAM user the signing certificate belongs to. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
+	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string
 

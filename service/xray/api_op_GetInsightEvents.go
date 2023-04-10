@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// X-Ray reevaluates insights periodically until they're resolved, and records each
-// intermediate state as an event. You can review an insight's events in the Impact
-// Timeline on the Inspect page in the X-Ray console.
+// X-Ray reevaluates insights periodically until they're resolved, and records
+// each intermediate state as an event. You can review an insight's events in the
+// Impact Timeline on the Inspect page in the X-Ray console.
 func (c *Client) GetInsightEvents(ctx context.Context, params *GetInsightEventsInput, optFns ...func(*Options)) (*GetInsightEventsOutput, error) {
 	if params == nil {
 		params = &GetInsightEventsInput{}
@@ -41,8 +41,8 @@ type GetInsightEventsInput struct {
 	// Used to retrieve at most the specified value of events.
 	MaxResults *int32
 
-	// Specify the pagination token returned by a previous request to retrieve the next
-	// page of events.
+	// Specify the pagination token returned by a previous request to retrieve the
+	// next page of events.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,9 +50,9 @@ type GetInsightEventsInput struct {
 
 type GetInsightEventsOutput struct {
 
-	// A detailed description of the event. This includes the time of the event, client
-	// and root cause impact statistics, and the top anomalous service at the time of
-	// the event.
+	// A detailed description of the event. This includes the time of the event,
+	// client and root cause impact statistics, and the top anomalous service at the
+	// time of the event.
 	InsightEvents []types.InsightEvent
 
 	// Use this token to retrieve the next page of insight events.

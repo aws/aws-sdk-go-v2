@@ -36,8 +36,8 @@ type UpdateRestApiInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -46,14 +46,14 @@ type UpdateRestApiInput struct {
 // Represents a REST API.
 type UpdateRestApiOutput struct {
 
-	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are: >HEADER to read the API key from the X-API-Key header of a request.
-	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
-	// authorizer.
+	// The source of the API key for metering requests according to a usage plan.
+	// Valid values are: > HEADER to read the API key from the X-API-Key header of a
+	// request. AUTHORIZER to read the API key from the UsageIdentifierKey from a
+	// custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi. By default, the RestApi
-	// supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the
+	// RestApi supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []string
 
 	// The timestamp when the API was created.
@@ -77,10 +77,10 @@ type UpdateRestApiOutput struct {
 	// Gateway.
 	Id *string
 
-	// A nullable integer that is used to enable compression (with non-negative between
-	// 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null
-	// value) on an API. When compression is enabled, compression or decompression is
-	// not applied on the payload if the payload size is smaller than this value.
+	// A nullable integer that is used to enable compression (with non-negative
+	// between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a
+	// null value) on an API. When compression is enabled, compression or decompression
+	// is not applied on the payload if the payload size is smaller than this value.
 	// Setting it to zero allows compression for any payload size.
 	MinimumCompressionSize *int32
 

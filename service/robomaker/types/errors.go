@@ -33,9 +33,9 @@ func (e *ConcurrentDeploymentException) ErrorCode() string {
 }
 func (e *ConcurrentDeploymentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request uses the same client token as a previous, but non-identical request.
-// Do not reuse a client token with different requests, unless the requests are
-// identical.
+// The request uses the same client token as a previous, but non-identical
+// request. Do not reuse a client token with different requests, unless the
+// requests are identical.
 type IdempotentParameterMismatchException struct {
 	Message *string
 

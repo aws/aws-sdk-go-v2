@@ -35,27 +35,24 @@ type UpdateDevEndpointInput struct {
 	EndpointName *string
 
 	// The map of arguments to add the map of arguments used to configure the
-	// DevEndpoint. Valid arguments are:
-	//
-	// * "--enable-glue-datacatalog": ""
-	//
-	// You can
-	// specify a version of Python support for development endpoints by using the
-	// Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no
-	// arguments are provided, the version defaults to Python 2.
+	// DevEndpoint . Valid arguments are:
+	//   - "--enable-glue-datacatalog": ""
+	// You can specify a version of Python support for development endpoints by using
+	// the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If
+	// no arguments are provided, the version defaults to Python 2.
 	AddArguments map[string]string
 
 	// The list of public keys for the DevEndpoint to use.
 	AddPublicKeys []string
 
-	// Custom Python or Java libraries to be loaded in the DevEndpoint.
+	// Custom Python or Java libraries to be loaded in the DevEndpoint .
 	CustomLibraries *types.DevEndpointCustomLibraries
 
 	// The list of argument keys to be deleted from the map of arguments used to
-	// configure the DevEndpoint.
+	// configure the DevEndpoint .
 	DeleteArguments []string
 
-	// The list of public keys to be deleted from the DevEndpoint.
+	// The list of public keys to be deleted from the DevEndpoint .
 	DeletePublicKeys []string
 
 	// The public key for the DevEndpoint to use.

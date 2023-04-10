@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of a channel moderated by the specified
-// AppInstanceUser. The x-amz-chime-bearer request header is mandatory. Use the
-// AppInstanceUserArn of the user that makes the API call as the value in the
-// header.
+// Returns the full details of a channel moderated by the specified AppInstanceUser
+// . The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
+// of the user that makes the API call as the value in the header.
 func (c *Client) DescribeChannelModeratedByAppInstanceUser(ctx context.Context, params *DescribeChannelModeratedByAppInstanceUserInput, optFns ...func(*Options)) (*DescribeChannelModeratedByAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &DescribeChannelModeratedByAppInstanceUserInput{}

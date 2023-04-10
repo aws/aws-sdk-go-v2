@@ -11,8 +11,7 @@ import (
 )
 
 // Deletes the warm pool for the specified Auto Scaling group. For more
-// information, see Warm pools for Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
+// information, see Warm pools for Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DeleteWarmPool(ctx context.Context, params *DeleteWarmPoolInput, optFns ...func(*Options)) (*DeleteWarmPoolOutput, error) {
 	if params == nil {

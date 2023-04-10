@@ -99,8 +99,8 @@ type AlertSummary struct {
 	// The time at which the alert was last modified.
 	LastModificationTime *time.Time
 
-	// The alert's tags
-	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html).
+	// The alert's tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
+	// .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -159,8 +159,8 @@ type AnomalyDetectorSummary struct {
 	// The status of detector.
 	Status AnomalyDetectorStatus
 
-	// The detector's tags
-	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html).
+	// The detector's tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
+	// .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -536,8 +536,8 @@ type DimensionFilter struct {
 	// The name of the dimension to filter on.
 	DimensionName *string
 
-	// The list of values for the dimension specified in DimensionName that you want to
-	// filter on.
+	// The list of values for the dimension specified in DimensionName that you want
+	// to filter on.
 	DimensionValueList []string
 
 	noSmithyDocumentSerde
@@ -612,23 +612,23 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// Aggregated details about the measures contributing to the anomaly group, and the
-// measures potentially impacted by the anomaly group.
+// Aggregated details about the measures contributing to the anomaly group, and
+// the measures potentially impacted by the anomaly group.
 type InterMetricImpactDetails struct {
 
 	// The ID of the anomaly group.
 	AnomalyGroupId *string
 
-	// For potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP), the percentage contribution
-	// the measure has in causing the anomalies.
+	// For potential causes ( CAUSE_OF_INPUT_ANOMALY_GROUP ), the percentage
+	// contribution the measure has in causing the anomalies.
 	ContributionPercentage *float64
 
 	// The name of the measure.
 	MetricName *string
 
-	// Whether a measure is a potential cause of the anomaly group
-	// (CAUSE_OF_INPUT_ANOMALY_GROUP), or whether the measure is impacted by the
-	// anomaly group (EFFECT_OF_INPUT_ANOMALY_GROUP).
+	// Whether a measure is a potential cause of the anomaly group (
+	// CAUSE_OF_INPUT_ANOMALY_GROUP ), or whether the measure is impacted by the
+	// anomaly group ( EFFECT_OF_INPUT_ANOMALY_GROUP ).
 	RelationshipType RelationshipType
 
 	noSmithyDocumentSerde
@@ -758,8 +758,8 @@ type MetricSetSummary struct {
 	// The name of the dataset.
 	MetricSetName *string
 
-	// The dataset's tags
-	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html).
+	// The dataset's tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
+	// .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -909,17 +909,12 @@ type SNSConfiguration struct {
 	SnsTopicArn *string
 
 	// The format of the SNS topic.
-	//
-	// * JSON – Send JSON alerts with an anomaly ID and a
-	// link to the anomaly detail page. This is the default.
-	//
-	// * LONG_TEXT – Send
-	// human-readable alerts with information about the impacted timeseries and a link
-	// to the anomaly detail page. We recommend this for email.
-	//
-	// * SHORT_TEXT – Send
-	// human-readable alerts with a link to the anomaly detail page. We recommend this
-	// for SMS.
+	//   - JSON – Send JSON alerts with an anomaly ID and a link to the anomaly detail
+	//   page. This is the default.
+	//   - LONG_TEXT – Send human-readable alerts with information about the impacted
+	//   timeseries and a link to the anomaly detail page. We recommend this for email.
+	//   - SHORT_TEXT – Send human-readable alerts with a link to the anomaly detail
+	//   page. We recommend this for SMS.
 	SnsFormat SnsFormat
 
 	noSmithyDocumentSerde
@@ -996,7 +991,7 @@ type VpcConfiguration struct {
 	SecurityGroupIdList []string
 
 	// An array of strings containing the Amazon VPC subnet IDs (e.g.,
-	// subnet-0bb1c79de3EXAMPLE.
+	// subnet-0bb1c79de3EXAMPLE .
 	//
 	// This member is required.
 	SubnetIdList []string

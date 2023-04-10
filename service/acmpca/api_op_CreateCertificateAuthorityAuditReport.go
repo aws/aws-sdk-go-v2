@@ -13,21 +13,17 @@ import (
 
 // Creates an audit report that lists every time that your CA private key is used.
 // The report is saved in the Amazon S3 bucket that you specify on input. The
-// IssueCertificate
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
-// and RevokeCertificate
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html)
+// IssueCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
+// and RevokeCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html)
 // actions use the private key. Both Amazon Web Services Private CA and the IAM
 // principal must have permission to write to the S3 bucket that you specify. If
 // the IAM principal making the call does not have permission to write to the
 // bucket, then an exception is thrown. For more information, see Access policies
-// for CRLs in Amazon S3
-// (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies).
-// Amazon Web Services Private CA assets that are stored in Amazon S3 can be
+// for CRLs in Amazon S3 (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies)
+// . Amazon Web Services Private CA assets that are stored in Amazon S3 can be
 // protected with encryption. For more information, see Encrypting Your Audit
-// Reports
-// (https://docs.aws.amazon.com/privateca/latest/userguide/PcaAuditReport.html#audit-report-encryption).
-// You can generate a maximum of one report every 30 minutes.
+// Reports (https://docs.aws.amazon.com/privateca/latest/userguide/PcaAuditReport.html#audit-report-encryption)
+// . You can generate a maximum of one report every 30 minutes.
 func (c *Client) CreateCertificateAuthorityAuditReport(ctx context.Context, params *CreateCertificateAuthorityAuditReportInput, optFns ...func(*Options)) (*CreateCertificateAuthorityAuditReportOutput, error) {
 	if params == nil {
 		params = &CreateCertificateAuthorityAuditReportInput{}

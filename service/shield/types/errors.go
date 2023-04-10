@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Exception that indicates the specified AttackId does not exist, or the requester
-// does not have the appropriate permissions to access the AttackId.
+// Exception that indicates the specified AttackId does not exist, or the
+// requester does not have the appropriate permissions to access the AttackId .
 type AccessDeniedException struct {
 	Message *string
 
@@ -38,8 +38,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // user submitting the request must have the iam:PassRole permission. This error
 // indicates the user did not have the appropriate permissions. For more
 // information, see Granting a User Permissions to Pass a Role to an Amazon Web
-// Services Service
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
+// Services Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
+// .
 type AccessDeniedForDependencyException struct {
 	Message *string
 
@@ -120,9 +120,9 @@ func (e *InvalidOperationException) ErrorCode() string {
 }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception that indicates that the NextToken specified in the request is invalid.
-// Submit the request using the NextToken value that was returned in the prior
-// response.
+// Exception that indicates that the NextToken specified in the request is
+// invalid. Submit the request using the NextToken value that was returned in the
+// prior response.
 type InvalidPaginationTokenException struct {
 	Message *string
 
@@ -178,8 +178,8 @@ func (e *InvalidParameterException) ErrorCode() string {
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception that indicates that the resource is invalid. You might not have access
-// to the resource, or the resource might not exist.
+// Exception that indicates that the resource is invalid. You might not have
+// access to the resource, or the resource might not exist.
 type InvalidResourceException struct {
 	Message *string
 

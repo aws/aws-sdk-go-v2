@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the configuration recorder. After the configuration recorder is deleted,
-// Config will not record resource configuration changes until you create a new
-// configuration recorder. This action does not delete the configuration
+// Deletes the configuration recorder. After the configuration recorder is
+// deleted, Config will not record resource configuration changes until you create
+// a new configuration recorder. This action does not delete the configuration
 // information that was previously recorded. You will be able to access the
 // previously recorded information by using the GetResourceConfigHistory action,
 // but you will not be able to access this information in the Config console until

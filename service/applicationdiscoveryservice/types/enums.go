@@ -59,8 +59,8 @@ const (
 	ConfigurationItemTypeApplication ConfigurationItemType = "APPLICATION"
 )
 
-// Values returns all known values for ConfigurationItemType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ConfigurationItemType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationItemType) Values() []ConfigurationItemType {
 	return []ConfigurationItemType{
@@ -142,9 +142,9 @@ const (
 	ExportStatusInProgress ExportStatus = "IN_PROGRESS"
 )
 
-// Values returns all known values for ExportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatus) Values() []ExportStatus {
 	return []ExportStatus{
 		"FAILED",
@@ -170,9 +170,9 @@ const (
 	ImportStatusInternalError                   ImportStatus = "INTERNAL_ERROR"
 )
 
-// Values returns all known values for ImportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImportStatus) Values() []ImportStatus {
 	return []ImportStatus{
 		"IMPORT_IN_PROGRESS",

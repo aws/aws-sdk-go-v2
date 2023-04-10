@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the state of the specified WorkSpace. To maintain a WorkSpace without being
-// interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this
-// state do not respond to requests to reboot, stop, start, rebuild, or restore. An
-// AutoStop WorkSpace in this state is not stopped. Users cannot log into a
-// WorkSpace in the ADMIN_MAINTENANCE state.
+// Sets the state of the specified WorkSpace. To maintain a WorkSpace without
+// being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE . WorkSpaces in
+// this state do not respond to requests to reboot, stop, start, rebuild, or
+// restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log
+// into a WorkSpace in the ADMIN_MAINTENANCE state.
 func (c *Client) ModifyWorkspaceState(ctx context.Context, params *ModifyWorkspaceStateInput, optFns ...func(*Options)) (*ModifyWorkspaceStateOutput, error) {
 	if params == nil {
 		params = &ModifyWorkspaceStateInput{}

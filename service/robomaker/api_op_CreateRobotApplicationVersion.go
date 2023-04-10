@@ -35,8 +35,8 @@ type CreateRobotApplicationVersionInput struct {
 	// This member is required.
 	Application *string
 
-	// The current revision id for the robot application. If you provide a value and it
-	// matches the latest revision ID, a new version will be created.
+	// The current revision id for the robot application. If you provide a value and
+	// it matches the latest revision ID, a new version will be created.
 	CurrentRevisionId *string
 
 	// A SHA256 identifier for the Docker image that you use for your robot

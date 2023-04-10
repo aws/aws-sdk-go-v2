@@ -24,27 +24,25 @@ type AmazonTranscribeCallAnalyticsProcessorConfiguration struct {
 	// Labels all personally identifiable information (PII) identified in your
 	// transcript. Content identification is performed at the segment level; PII
 	// specified in PiiEntityTypes is flagged upon complete transcription of an audio
-	// segment. You can’t set ContentIdentificationType and ContentRedactionType in the
-	// same request. If you do, your request returns a BadRequestException. For more
-	// information, see Redacting or identifying personally identifiable information
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html) in the
-	// Amazon Transcribe Developer Guide.
+	// segment. You can’t set ContentIdentificationType and ContentRedactionType in
+	// the same request. If you do, your request returns a BadRequestException . For
+	// more information, see Redacting or identifying personally identifiable
+	// information (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
+	// in the Amazon Transcribe Developer Guide.
 	ContentIdentificationType ContentType
 
 	// Redacts all personally identifiable information (PII) identified in your
 	// transcript. Content redaction is performed at the segment level; PII specified
 	// in PiiEntityTypes is redacted upon complete transcription of an audio segment.
 	// You can’t set ContentRedactionType and ContentIdentificationType in the same
-	// request. If you do, your request returns a BadRequestException. For more
-	// information, see Redacting or identifying personally identifiable information
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html) in the
-	// Amazon Transcribe Developer Guide.
+	// request. If you do, your request returns a BadRequestException . For more
+	// information, see Redacting or identifying personally identifiable information (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
+	// in the Amazon Transcribe Developer Guide.
 	ContentRedactionType ContentType
 
 	// Enables partial result stabilization for your transcription. Partial result
 	// stabilization can reduce latency in your output, but may impact accuracy. For
-	// more information, see Partial-result stabilization
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
+	// more information, see Partial-result stabilization (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
 	// in the Amazon Transcribe Developer Guide.
 	EnablePartialResultsStabilization bool
 
@@ -57,35 +55,33 @@ type AmazonTranscribeCallAnalyticsProcessorConfiguration struct {
 	// of the specified language model must match the language code specified in the
 	// transcription request. If the languages don't match, the custom language model
 	// isn't applied. Language mismatches don't generate errors or warnings. For more
-	// information, see Custom language models
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html)
+	// information, see Custom language models (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html)
 	// in the Amazon Transcribe Developer Guide.
 	LanguageModelName *string
 
 	// Specifies the level of stability to use when you enable partial results
-	// stabilization (EnablePartialResultsStabilization). Low stability provides the
+	// stabilization ( EnablePartialResultsStabilization ). Low stability provides the
 	// highest accuracy. High stability transcribes faster, but with slightly lower
-	// accuracy. For more information, see Partial-result stabilization
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
+	// accuracy. For more information, see Partial-result stabilization (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
 	// in the Amazon Transcribe Developer Guide.
 	PartialResultsStability PartialResultsStability
 
 	// Specifies the types of personally identifiable information (PII) to redact from
-	// a transcript. You can include as many types as you'd like, or you can select
-	// ALL. To include PiiEntityTypes in your Call Analytics request, you must also
-	// include ContentIdentificationType or ContentRedactionType, but you can't include
-	// both. Values must be comma-separated and can include: ADDRESS,
-	// BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY,
-	// CREDIT_DEBIT_NUMBER, EMAIL, NAME, PHONE, PIN, SSN, or ALL. Length Constraints:
-	// Minimum length of 1. Maximum length of 300.
+	// a transcript. You can include as many types as you'd like, or you can select ALL
+	// . To include PiiEntityTypes in your Call Analytics request, you must also
+	// include ContentIdentificationType or ContentRedactionType , but you can't
+	// include both. Values must be comma-separated and can include: ADDRESS ,
+	// BANK_ACCOUNT_NUMBER , BANK_ROUTING , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY ,
+	// CREDIT_DEBIT_NUMBER , EMAIL , NAME , PHONE , PIN , SSN , or ALL . Length
+	// Constraints: Minimum length of 1. Maximum length of 300.
 	PiiEntityTypes *string
 
 	// The settings for a post-call analysis task in an analytics configuration.
 	PostCallAnalyticsSettings *PostCallAnalyticsSettings
 
 	// Specifies how to apply a vocabulary filter to a transcript. To replace words
-	// with ***, choose mask. To delete words, choose remove. To flag words without
-	// changing them, choose tag.
+	// with ***, choose mask . To delete words, choose remove . To flag words without
+	// changing them, choose tag .
 	VocabularyFilterMethod VocabularyFilterMethod
 
 	// Specifies the name of the custom vocabulary filter to use when processing a
@@ -93,20 +89,18 @@ type AmazonTranscribeCallAnalyticsProcessorConfiguration struct {
 	// language of the specified custom vocabulary filter doesn't match the language
 	// identified in your media, the vocabulary filter is not applied to your
 	// transcription. For more information, see Using vocabulary filtering with
-	// unwanted words
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html) in
-	// the Amazon Transcribe Developer Guide. Length Constraints: Minimum length of 1.
-	// Maximum length of 200.
+	// unwanted words (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html)
+	// in the Amazon Transcribe Developer Guide. Length Constraints: Minimum length of
+	// 1. Maximum length of 200.
 	VocabularyFilterName *string
 
 	// Specifies the name of the custom vocabulary to use when processing a
 	// transcription. Note that vocabulary names are case sensitive. If the language of
 	// the specified custom vocabulary doesn't match the language identified in your
 	// media, the custom vocabulary is not applied to your transcription. For more
-	// information, see Custom vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html) in the
-	// Amazon Transcribe Developer Guide. Length Constraints: Minimum length of 1.
-	// Maximum length of 200.
+	// information, see Custom vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html)
+	// in the Amazon Transcribe Developer Guide. Length Constraints: Minimum length of
+	// 1. Maximum length of 200.
 	VocabularyName *string
 
 	noSmithyDocumentSerde
@@ -119,9 +113,8 @@ type AmazonTranscribeProcessorConfiguration struct {
 	// The language code that represents the language spoken in your audio. If you're
 	// unsure of the language spoken in your audio, consider using IdentifyLanguage to
 	// enable automatic language identification. For a list of languages that real-time
-	// Call Analytics supports, see the Supported languages table
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) in
-	// the Amazon Transcribe Developer Guide.
+	// Call Analytics supports, see the Supported languages table (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// in the Amazon Transcribe Developer Guide.
 	//
 	// This member is required.
 	LanguageCode CallAnalyticsLanguageCode
@@ -129,28 +122,25 @@ type AmazonTranscribeProcessorConfiguration struct {
 	// Labels all personally identifiable information (PII) identified in your
 	// transcript. Content identification is performed at the segment level; PII
 	// specified in PiiEntityTypes is flagged upon complete transcription of an audio
-	// segment. You can’t set ContentIdentificationType and ContentRedactionType in the
-	// same request. If you set both, your request returns a BadRequestException. For
-	// more information, see Redacting or identifying personally identifiable
-	// information
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html) in the
-	// Amazon Transcribe Developer Guide.
+	// segment. You can’t set ContentIdentificationType and ContentRedactionType in
+	// the same request. If you set both, your request returns a BadRequestException .
+	// For more information, see Redacting or identifying personally identifiable
+	// information (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
+	// in the Amazon Transcribe Developer Guide.
 	ContentIdentificationType ContentType
 
 	// Redacts all personally identifiable information (PII) identified in your
 	// transcript. Content redaction is performed at the segment level; PII specified
 	// in PiiEntityTypes is redacted upon complete transcription of an audio segment.
 	// You can’t set ContentRedactionType and ContentIdentificationType in the same
-	// request. If you set both, your request returns a BadRequestException. For more
-	// information, see Redacting or identifying personally identifiable information
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html) in the
-	// Amazon Transcribe Developer Guide.
+	// request. If you set both, your request returns a BadRequestException . For more
+	// information, see Redacting or identifying personally identifiable information (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
+	// in the Amazon Transcribe Developer Guide.
 	ContentRedactionType ContentType
 
 	// Enables partial result stabilization for your transcription. Partial result
 	// stabilization can reduce latency in your output, but may impact accuracy. For
-	// more information, see Partial-result stabilization
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
+	// more information, see Partial-result stabilization (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
 	// in the Amazon Transcribe Developer Guide.
 	EnablePartialResultsStabilization bool
 
@@ -163,34 +153,31 @@ type AmazonTranscribeProcessorConfiguration struct {
 	// of the specified language model must match the language code you specify in your
 	// transcription request. If the languages don't match, the custom language model
 	// isn't applied. There are no errors or warnings associated with a language
-	// mismatch. For more information, see Custom language models
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html)
+	// mismatch. For more information, see Custom language models (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html)
 	// in the Amazon Transcribe Developer Guide.
 	LanguageModelName *string
 
-	// The level of stability to use when you enable partial results stabilization
-	// (EnablePartialResultsStabilization). Low stability provides the highest
+	// The level of stability to use when you enable partial results stabilization (
+	// EnablePartialResultsStabilization ). Low stability provides the highest
 	// accuracy. High stability transcribes faster, but with slightly lower accuracy.
-	// For more information, see Partial-result stabilization
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
+	// For more information, see Partial-result stabilization (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
 	// in the Amazon Transcribe Developer Guide.
 	PartialResultsStability PartialResultsStability
 
 	// The types of personally identifiable information (PII) to redact from a
-	// transcript. You can include as many types as you'd like, or you can select ALL.
+	// transcript. You can include as many types as you'd like, or you can select ALL .
 	// To include PiiEntityTypes in your Call Analytics request, you must also include
-	// ContentIdentificationType or ContentRedactionType, but you can't include both.
-	// Values must be comma-separated and can include: ADDRESS, BANK_ACCOUNT_NUMBER,
-	// BANK_ROUTING, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, CREDIT_DEBIT_NUMBER, EMAIL,
-	// NAME, PHONE, PIN, SSN, or ALL. Length Constraints: Minimum length of 1. Maximum
-	// length of 300.
+	// ContentIdentificationType or ContentRedactionType , but you can't include both.
+	// Values must be comma-separated and can include: ADDRESS , BANK_ACCOUNT_NUMBER ,
+	// BANK_ROUTING , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY , CREDIT_DEBIT_NUMBER ,
+	// EMAIL , NAME , PHONE , PIN , SSN , or ALL . Length Constraints: Minimum length
+	// of 1. Maximum length of 300.
 	PiiEntityTypes *string
 
-	// Enables speaker partitioning (diarization) in your transcription output. Speaker
-	// partitioning labels the speech from individual speakers in your media file. For
-	// more information, see Partitioning speakers (diarization)
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html) in the
-	// Amazon Transcribe Developer Guide.
+	// Enables speaker partitioning (diarization) in your transcription output.
+	// Speaker partitioning labels the speech from individual speakers in your media
+	// file. For more information, see Partitioning speakers (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
+	// in the Amazon Transcribe Developer Guide.
 	ShowSpeakerLabel bool
 
 	// The vocabulary filtering method used in your Call Analytics transcription.
@@ -303,7 +290,7 @@ type ChannelDefinition struct {
 	// This member is required.
 	ChannelId int32
 
-	// Specifies whether the audio in a channel belongs to the AGENT or CUSTOMER.
+	// Specifies whether the audio in a channel belongs to the AGENT or CUSTOMER .
 	ParticipantRole ParticipantRole
 
 	noSmithyDocumentSerde
@@ -323,7 +310,7 @@ type ChimeSdkMeetingConcatenationConfiguration struct {
 }
 
 // The configuration object of the Amazon Chime SDK meeting for a specified media
-// pipeline. SourceType must be ChimeSdkMeeting.
+// pipeline. SourceType must be ChimeSdkMeeting .
 type ChimeSdkMeetingConfiguration struct {
 
 	// The configuration for the artifacts in an Amazon Chime SDK meeting.
@@ -376,7 +363,7 @@ type CompositedVideoArtifactsConfiguration struct {
 }
 
 // The composited video configuration object for a specified media pipeline.
-// SourceType must be ChimeSdkMeeting.
+// SourceType must be ChimeSdkMeeting .
 type CompositedVideoConcatenationConfiguration struct {
 
 	// Enables or disables the configuration object.
@@ -456,26 +443,20 @@ type DataChannelConcatenationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the timestamp range and timestamp origin of a range of fragments. Only
-// fragments with a start timestamp greater than or equal to the given start time
-// and less than or equal to the end time are returned. For example, say a stream
-// contains fragments with the following start timestamps:
+// Describes the timestamp range and timestamp origin of a range of fragments.
+// Only fragments with a start timestamp greater than or equal to the given start
+// time and less than or equal to the end time are returned. For example, say a
+// stream contains fragments with the following start timestamps:
+//   - 00:00:00
+//   - 00:00:02
+//   - 00:00:04
+//   - 00:00:06
 //
-// * 00:00:00
-//
-// *
-// 00:00:02
-//
-// * 00:00:04
-//
-// * 00:00:06
-//
-// A fragment selector range with a start time of
-// 00:00:01 and end time of 00:00:04 would return the fragments with start times of
-// 00:00:02 and 00:00:04.
+// A fragment selector range with a start time of 00:00:01 and end time of
+// 00:00:04 would return the fragments with start times of 00:00:02 and 00:00:04.
 type FragmentSelector struct {
 
-	// The origin of the timestamps to use, Server or Producer. For more information,
+	// The origin of the timestamps to use, Server or Producer . For more information,
 	// see StartSelectorType in the Amazon Kinesis Video Streams Developer Guide.
 	//
 	// This member is required.
@@ -528,9 +509,9 @@ type KeywordMatchConfiguration struct {
 	// This member is required.
 	RuleName *string
 
-	// Matches keywords or phrases on their presence or absence. If set to TRUE, the
+	// Matches keywords or phrases on their presence or absence. If set to TRUE , the
 	// rule matches when all the specified keywords or phrases are absent. Default:
-	// FALSE.
+	// FALSE .
 	Negate bool
 
 	noSmithyDocumentSerde
@@ -540,8 +521,8 @@ type KeywordMatchConfiguration struct {
 // sink.
 type KinesisDataStreamSinkConfiguration struct {
 
-	// The URL of the sink, https://aws.amazon.com/kinesis/data-streams/
-	// (https://aws.amazon.com/kinesis/data-streams/).
+	// The URL of the sink, https://aws.amazon.com/kinesis/data-streams/ (https://aws.amazon.com/kinesis/data-streams/)
+	// .
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
@@ -570,8 +551,7 @@ type KinesisVideoStreamSourceRuntimeConfiguration struct {
 
 	// Specifies the encoding of your input audio. Supported format: PCM (only signed
 	// 16-bit little-endian audio formats, which does not include WAV) For more
-	// information, see Media formats
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
+	// information, see Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
 	// in the Amazon Transcribe Developer Guide.
 	//
 	// This member is required.
@@ -598,8 +578,8 @@ type KinesisVideoStreamSourceRuntimeConfiguration struct {
 // function's data sink.
 type LambdaFunctionSinkConfiguration struct {
 
-	// The URL of the sink, https://aws.amazon.com/kinesis/data-streams/
-	// (https://aws.amazon.com/kinesis/data-streams/).
+	// The URL of the sink, https://aws.amazon.com/kinesis/data-streams/ (https://aws.amazon.com/kinesis/data-streams/)
+	// .
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
@@ -659,7 +639,7 @@ type LiveConnectorSourceConfiguration struct {
 type MediaCapturePipeline struct {
 
 	// The configuration for a specified media pipeline. SourceType must be
-	// ChimeSdkMeeting.
+	// ChimeSdkMeeting .
 	ChimeSdkMeetingConfiguration *ChimeSdkMeetingConfiguration
 
 	// The time at which the pipeline was created, in ISO 8601 format.
@@ -681,7 +661,7 @@ type MediaCapturePipeline struct {
 	// ARN of the source from which the media artifacts are saved.
 	SourceArn *string
 
-	// Source type from which media artifacts are saved. You must use ChimeMeeting.
+	// Source type from which media artifacts are saved. You must use ChimeMeeting .
 	SourceType MediaPipelineSourceType
 
 	// The status of the media pipeline.
@@ -902,8 +882,8 @@ type MediaLiveConnectorPipeline struct {
 	noSmithyDocumentSerde
 }
 
-// A pipeline consisting of a media capture, media concatenation, or live-streaming
-// pipeline.
+// A pipeline consisting of a media capture, media concatenation, or
+// live-streaming pipeline.
 type MediaPipeline struct {
 
 	// A pipeline that enables users to capture audio and video.
@@ -949,9 +929,8 @@ type PostCallAnalyticsSettings struct {
 
 	// The ARN of the role used by Amazon Web Services Transcribe to upload your post
 	// call analysis. For more information, see Post-call analytics with real-time
-	// transcriptions
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html) in the
-	// Amazon Transcribe Developer Guide.
+	// transcriptions (https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html)
+	// in the Amazon Transcribe Developer Guide.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -973,7 +952,7 @@ type PostCallAnalyticsSettings struct {
 // Defines the configuration for a presenter only video tile.
 type PresenterOnlyConfiguration struct {
 
-	// Defines the position of the presenter video tile. Default: TopRight.
+	// Defines the position of the presenter video tile. Default: TopRight .
 	PresenterPosition PresenterPosition
 
 	noSmithyDocumentSerde
@@ -1081,7 +1060,7 @@ type SentimentConfiguration struct {
 	// This member is required.
 	RuleName *string
 
-	// The type of sentiment, POSITIVE, NEGATIVE, or NEUTRAL.
+	// The type of sentiment, POSITIVE , NEGATIVE , or NEUTRAL .
 	//
 	// This member is required.
 	SentimentType SentimentType
@@ -1097,8 +1076,8 @@ type SentimentConfiguration struct {
 // The configuration settings for the SNS topic sink.
 type SnsTopicSinkConfiguration struct {
 
-	// The URL of the SNS sink, https://aws.amazon.com/kinesis/data-streams/
-	// (https://aws.amazon.com/kinesis/data-streams/).
+	// The URL of the SNS sink, https://aws.amazon.com/kinesis/data-streams/ (https://aws.amazon.com/kinesis/data-streams/)
+	// .
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
@@ -1117,8 +1096,8 @@ type SourceConfiguration struct {
 // The URL of the SQS sink.
 type SqsQueueSinkConfiguration struct {
 
-	// The URL of the SQS sink, https://aws.amazon.com/kinesis/data-streams/
-	// (https://aws.amazon.com/kinesis/data-streams/).
+	// The URL of the SQS sink, https://aws.amazon.com/kinesis/data-streams/ (https://aws.amazon.com/kinesis/data-streams/)
+	// .
 	InsightsTarget *string
 
 	noSmithyDocumentSerde

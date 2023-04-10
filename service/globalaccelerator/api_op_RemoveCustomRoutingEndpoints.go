@@ -33,8 +33,8 @@ type RemoveCustomRoutingEndpointsInput struct {
 	// This member is required.
 	EndpointGroupArn *string
 
-	// The IDs for the endpoints. For custom routing accelerators, endpoint IDs are the
-	// virtual private cloud (VPC) subnet IDs.
+	// The IDs for the endpoints. For custom routing accelerators, endpoint IDs are
+	// the virtual private cloud (VPC) subnet IDs.
 	//
 	// This member is required.
 	EndpointIds []string

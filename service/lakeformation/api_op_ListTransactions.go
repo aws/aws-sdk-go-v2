@@ -44,7 +44,7 @@ type ListTransactionsInput struct {
 	NextToken *string
 
 	// A filter indicating the status of transactions to return. Options are ALL |
-	// COMPLETED | COMMITTED | ABORTED | ACTIVE. The default is ALL.
+	// COMPLETED | COMMITTED | ABORTED | ACTIVE. The default is ALL .
 	StatusFilter types.TransactionStatusFilter
 
 	noSmithyDocumentSerde

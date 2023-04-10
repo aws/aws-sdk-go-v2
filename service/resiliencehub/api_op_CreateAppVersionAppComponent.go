@@ -33,11 +33,10 @@ func (c *Client) CreateAppVersionAppComponent(ctx context.Context, params *Creat
 
 type CreateAppVersionAppComponentInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -48,8 +47,8 @@ type CreateAppVersionAppComponentInput struct {
 	Name *string
 
 	// The type of Application Component. For more information about the types of
-	// Application Component, see Grouping resources in an AppComponent
-	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html).
+	// Application Component, see Grouping resources in an AppComponent (https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html)
+	// .
 	//
 	// This member is required.
 	Type *string
@@ -58,9 +57,9 @@ type CreateAppVersionAppComponentInput struct {
 	// Components.
 	AdditionalInfo map[string][]string
 
-	// Used for an idempotency token. A client token is a unique, case-sensitive string
-	// of up to 64 ASCII characters. You should not reuse the same client token for
-	// other API requests.
+	// Used for an idempotency token. A client token is a unique, case-sensitive
+	// string of up to 64 ASCII characters. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
 	// The identifier of the Application Component.
@@ -71,11 +70,10 @@ type CreateAppVersionAppComponentInput struct {
 
 type CreateAppVersionAppComponentOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
+	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
+	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string

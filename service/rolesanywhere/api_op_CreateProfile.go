@@ -14,7 +14,7 @@ import (
 // Creates a profile. A profile is configuration resource to list the roles that
 // RolesAnywhere service is trusted to assume. In addition, by applying a profile
 // you can intersect permissions with IAM managed policies. Required permissions:
-// rolesanywhere:CreateProfile.
+// rolesanywhere:CreateProfile .
 func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, optFns ...func(*Options)) (*CreateProfileOutput, error) {
 	if params == nil {
 		params = &CreateProfileInput{}
@@ -37,8 +37,7 @@ type CreateProfileInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of IAM roles that this profile can assume in a CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// A list of IAM roles that this profile can assume in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// operation.
 	//
 	// This member is required.
@@ -53,8 +52,7 @@ type CreateProfileInput struct {
 	// A list of managed policy ARNs that apply to the vended session credentials.
 	ManagedPolicyArns []string
 
-	// Specifies whether instance properties are required in CreateSession
-	// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// Specifies whether instance properties are required in CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
 	// requests with this profile.
 	RequireInstanceProperties *bool
 

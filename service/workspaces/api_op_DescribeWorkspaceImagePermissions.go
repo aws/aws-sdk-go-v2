@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the permissions that the owner of an image has granted to other Amazon
-// Web Services accounts for an image.
+// Describes the permissions that the owner of an image has granted to other
+// Amazon Web Services accounts for an image.
 func (c *Client) DescribeWorkspaceImagePermissions(ctx context.Context, params *DescribeWorkspaceImagePermissionsInput, optFns ...func(*Options)) (*DescribeWorkspaceImagePermissionsOutput, error) {
 	if params == nil {
 		params = &DescribeWorkspaceImagePermissionsInput{}

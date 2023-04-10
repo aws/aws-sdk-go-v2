@@ -49,18 +49,14 @@ type CreateCustomLogSourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// to be used by the Glue crawler. The recommended IAM policies are:
-	//
-	// * The managed
-	// policy AWSGlueServiceRole
-	//
-	// * A custom policy granting access to your Amazon S3
-	// Data Lake
+	//   - The managed policy AWSGlueServiceRole
+	//   - A custom policy granting access to your Amazon S3 Data Lake
 	//
 	// This member is required.
 	GlueInvocationRoleArn *string
 
-	// The Amazon Web Services account ID of the custom source that will write logs and
-	// events into the Amazon S3 Data Lake.
+	// The Amazon Web Services account ID of the custom source that will write logs
+	// and events into the Amazon S3 Data Lake.
 	//
 	// This member is required.
 	LogProviderAccountId *string
@@ -81,7 +77,7 @@ type CreateCustomLogSourceOutput struct {
 	GlueCrawlerName *string
 
 	// The Glue database where results are written, such as:
-	// arn:aws:daylight:us-east-1::database/sometable/*.
+	// arn:aws:daylight:us-east-1::database/sometable/* .
 	//
 	// This member is required.
 	GlueDatabaseName *string

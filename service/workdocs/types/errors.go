@@ -33,8 +33,8 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Another operation is in progress on the resource that conflicts with the current
-// operation.
+// Another operation is in progress on the resource that conflicts with the
+// current operation.
 type ConflictingOperationException struct {
 	Message *string
 
@@ -119,8 +119,8 @@ func (e *DeactivatingLastSystemUserException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the document is locked for comments and user tries
-// to create or delete a comment on that document.
+// This exception is thrown when the document is locked for comments and user
+// tries to create or delete a comment on that document.
 type DocumentLockedForCommentsException struct {
 	Message *string
 
@@ -440,8 +440,8 @@ func (e *ProhibitedStateException) ErrorCode() string {
 }
 func (e *ProhibitedStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The response is too large to return. The request must include a filter to reduce
-// the size of the response.
+// The response is too large to return. The request must include a filter to
+// reduce the size of the response.
 type RequestedEntityTooLargeException struct {
 	Message *string
 

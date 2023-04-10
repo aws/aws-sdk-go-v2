@@ -24,8 +24,8 @@ import (
 const ServiceID = "Pinpoint Email"
 const ServiceAPIVersion = "2018-07-26"
 
-// Client provides the API client to make operations call for Amazon Pinpoint Email
-// Service.
+// Client provides the API client to make operations call for Amazon Pinpoint
+// Email Service.
 type Client struct {
 	options Options
 }
@@ -115,7 +115,7 @@ type Options struct {
 	Retryer aws.Retryer
 
 	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
-	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
+	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig . You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment

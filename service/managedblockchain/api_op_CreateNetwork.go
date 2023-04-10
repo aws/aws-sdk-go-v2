@@ -72,13 +72,11 @@ type CreateNetworkInput struct {
 	// configuration.
 	FrameworkConfiguration *types.NetworkFrameworkConfiguration
 
-	// Tags to assign to the network. Each tag consists of a key and an optional value.
-	// You can specify multiple key-value pairs in a single request with an overall
-	// maximum of 50 tags allowed per resource. For more information about tags, see
-	// Tagging Resources
-	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
-	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// Tags to assign to the network. Each tag consists of a key and an optional
+	// value. You can specify multiple key-value pairs in a single request with an
+	// overall maximum of 50 tags allowed per resource. For more information about
+	// tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
 

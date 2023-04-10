@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a WebACL per the specifications provided. A web ACL defines a collection
-// of rules to use to inspect and control web requests. Each rule has an action
-// defined (allow, block, or count) for requests that match the statement of the
-// rule. In the web ACL, you assign a default action to take (allow, block) for any
-// request that does not match any of the rules. The rules in a web ACL can be a
-// combination of the types Rule, RuleGroup, and managed rule group. You can
+// Creates a WebACL per the specifications provided. A web ACL defines a
+// collection of rules to use to inspect and control web requests. Each rule has an
+// action defined (allow, block, or count) for requests that match the statement of
+// the rule. In the web ACL, you assign a default action to take (allow, block) for
+// any request that does not match any of the rules. The rules in a web ACL can be
+// a combination of the types Rule , RuleGroup , and managed rule group. You can
 // associate a web ACL with one or more Amazon Web Services resources to protect.
 // The resources can be an Amazon CloudFront distribution, an Amazon API Gateway
 // REST API, an Application Load Balancer, an AppSync GraphQL API, Amazon Cognito
@@ -54,12 +54,9 @@ type CreateWebACLInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
-	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
-	// and SDKs - For all calls, use the Region endpoint us-east-1.
+	//   - CLI - Specify the Region when you use the CloudFront scope:
+	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -71,27 +68,24 @@ type CreateWebACLInput struct {
 
 	// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
 	// their own CaptchaConfig settings. If you don't specify this, WAF uses its
-	// default settings for CaptchaConfig.
+	// default settings for CaptchaConfig .
 	CaptchaConfig *types.CaptchaConfig
 
 	// Specifies how WAF should handle challenge evaluations for rules that don't have
 	// their own ChallengeConfig settings. If you don't specify this, WAF uses its
-	// default settings for ChallengeConfig.
+	// default settings for ChallengeConfig .
 	ChallengeConfig *types.ChallengeConfig
 
 	// A map of custom response keys and content bodies. When you create a rule with a
 	// block action, you can send a custom response to the web request. You define
 	// these for the web ACL, and then use them in the rules and default actions that
 	// you define in the web ACL. For information about customizing web requests and
-	// responses, see Customizing web requests and responses in WAF
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). For
-	// information about the limits on count and size for custom request and response
-	// settings, see WAF quotas
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
-	// Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// responses, see Customizing web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+	// . For information about the limits on count and size for custom request and
+	// response settings, see WAF quotas (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html)
+	// in the WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+	// .
 	CustomResponseBodies map[string]types.CustomResponseBody
 
 	// A description of the web ACL that helps with identification.
@@ -121,10 +115,10 @@ type CreateWebACLInput struct {
 
 type CreateWebACLOutput struct {
 
-	// High-level information about a WebACL, returned by operations like create and
+	// High-level information about a WebACL , returned by operations like create and
 	// list. This provides information like the ID, that you can use to retrieve and
-	// manage a WebACL, and the ARN, that you provide to operations like
-	// AssociateWebACL.
+	// manage a WebACL , and the ARN, that you provide to operations like
+	// AssociateWebACL .
 	Summary *types.WebACLSummary
 
 	// Metadata pertaining to the operation's result.

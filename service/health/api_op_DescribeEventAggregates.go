@@ -33,7 +33,7 @@ func (c *Client) DescribeEventAggregates(ctx context.Context, params *DescribeEv
 
 type DescribeEventAggregatesInput struct {
 
-	// The only currently supported value is eventTypeCategory.
+	// The only currently supported value is eventTypeCategory .
 	//
 	// This member is required.
 	AggregateField types.EventAggregateField

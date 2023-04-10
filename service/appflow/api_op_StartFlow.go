@@ -42,8 +42,8 @@ type StartFlowInput struct {
 
 type StartFlowOutput struct {
 
-	// Returns the internal execution ID of an on-demand flow when the flow is started.
-	// For scheduled or event-triggered flows, this value is null.
+	// Returns the internal execution ID of an on-demand flow when the flow is
+	// started. For scheduled or event-triggered flows, this value is null.
 	ExecutionId *string
 
 	// The flow's Amazon Resource Name (ARN).

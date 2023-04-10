@@ -12,9 +12,8 @@ import (
 )
 
 // Returns information about the dataset that you specify. For more information
-// about datasets, see  Flywheel overview
-// (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html) in the
-// Amazon Comprehend Developer Guide.
+// about datasets, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
+// in the Amazon Comprehend Developer Guide.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}

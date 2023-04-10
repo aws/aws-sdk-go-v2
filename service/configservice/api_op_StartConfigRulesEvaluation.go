@@ -22,23 +22,13 @@ import (
 // evaluation starts. You don't need to call the StartConfigRulesEvaluation API to
 // run an evaluation for a new rule. When you create a rule, Config evaluates your
 // resources against the rule automatically. The StartConfigRulesEvaluation API is
-// useful if you want to run on-demand evaluations, such as the following
-// example:
-//
-// * You have a custom rule that evaluates your IAM resources every 24
-// hours.
-//
-// * You update your Lambda function to add additional conditions to your
-// rule.
-//
-// * Instead of waiting for the next periodic evaluation, you call the
-// StartConfigRulesEvaluation API.
-//
-// * Config invokes your Lambda function and
-// evaluates your IAM resources.
-//
-// * Your custom rule will still run periodic
-// evaluations every 24 hours.
+// useful if you want to run on-demand evaluations, such as the following example:
+//   - You have a custom rule that evaluates your IAM resources every 24 hours.
+//   - You update your Lambda function to add additional conditions to your rule.
+//   - Instead of waiting for the next periodic evaluation, you call the
+//     StartConfigRulesEvaluation API.
+//   - Config invokes your Lambda function and evaluates your IAM resources.
+//   - Your custom rule will still run periodic evaluations every 24 hours.
 func (c *Client) StartConfigRulesEvaluation(ctx context.Context, params *StartConfigRulesEvaluationInput, optFns ...func(*Options)) (*StartConfigRulesEvaluationOutput, error) {
 	if params == nil {
 		params = &StartConfigRulesEvaluationInput{}

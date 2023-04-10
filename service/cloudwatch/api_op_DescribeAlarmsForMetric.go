@@ -53,8 +53,8 @@ type DescribeAlarmsForMetricInput struct {
 	// The period, in seconds, over which the statistic is applied.
 	Period *int32
 
-	// The statistic for the metric, other than percentiles. For percentile statistics,
-	// use ExtendedStatistics.
+	// The statistic for the metric, other than percentiles. For percentile
+	// statistics, use ExtendedStatistics .
 	Statistic types.Statistic
 
 	// The unit for the metric.

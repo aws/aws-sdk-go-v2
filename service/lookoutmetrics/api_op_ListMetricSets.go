@@ -40,7 +40,7 @@ type ListMetricSetsInput struct {
 	MaxResults *int32
 
 	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
+	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
 

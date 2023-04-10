@@ -13,13 +13,13 @@ import (
 // terminology can be applied per TranslateText request.
 type AppliedTerminology struct {
 
-	// The name of the custom terminology applied to the input text by Amazon Translate
-	// for the translated text response.
+	// The name of the custom terminology applied to the input text by Amazon
+	// Translate for the translated text response.
 	Name *string
 
-	// The specific terms of the custom terminology applied to the input text by Amazon
-	// Translate for the translated text response. A maximum of 250 terms will be
-	// returned, and the specific terms applied will be the first 250 terms in the
+	// The specific terms of the custom terminology applied to the input text by
+	// Amazon Translate for the translated text response. A maximum of 250 terms will
+	// be returned, and the specific terms applied will be the first 250 terms in the
 	// source text.
 	Terms []Term
 
@@ -49,36 +49,24 @@ type InputDataConfig struct {
 	// Describes the format of the data that you submit to Amazon Translate as input.
 	// You can specify one of the following multipurpose internet mail extension (MIME)
 	// types:
-	//
-	// * text/html: The input data consists of one or more HTML files. Amazon
-	// Translate translates only the text that resides in the html element in each
-	// file.
-	//
-	// * text/plain: The input data consists of one or more unformatted text
-	// files. Amazon Translate translates every character in this type of input.
-	//
-	// *
-	// application/vnd.openxmlformats-officedocument.wordprocessingml.document: The
-	// input data consists of one or more Word documents (.docx).
-	//
-	// *
-	// application/vnd.openxmlformats-officedocument.presentationml.presentation: The
-	// input data consists of one or more PowerPoint Presentation files (.pptx).
-	//
-	// *
-	// application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: The input
-	// data consists of one or more Excel Workbook files (.xlsx).
-	//
-	// *
-	// application/x-xliff+xml: The input data consists of one or more XML Localization
-	// Interchange File Format (XLIFF) files (.xlf). Amazon Translate supports only
-	// XLIFF version 1.2.
-	//
-	// If you structure your input data as HTML, ensure that you
-	// set this parameter to text/html. By doing so, you cut costs by limiting the
-	// translation to the contents of the html element in each file. Otherwise, if you
-	// set this parameter to text/plain, your costs will cover the translation of every
-	// character.
+	//   - text/html : The input data consists of one or more HTML files. Amazon
+	//   Translate translates only the text that resides in the html element in each
+	//   file.
+	//   - text/plain : The input data consists of one or more unformatted text files.
+	//   Amazon Translate translates every character in this type of input.
+	//   - application/vnd.openxmlformats-officedocument.wordprocessingml.document :
+	//   The input data consists of one or more Word documents (.docx).
+	//   - application/vnd.openxmlformats-officedocument.presentationml.presentation :
+	//   The input data consists of one or more PowerPoint Presentation files (.pptx).
+	//   - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet : The
+	//   input data consists of one or more Excel Workbook files (.xlsx).
+	//   - application/x-xliff+xml : The input data consists of one or more XML
+	//   Localization Interchange File Format (XLIFF) files (.xlf). Amazon Translate
+	//   supports only XLIFF version 1.2.
+	// If you structure your input data as HTML, ensure that you set this parameter to
+	// text/html . By doing so, you cut costs by limiting the translation to the
+	// contents of the html element in each file. Otherwise, if you set this parameter
+	// to text/plain , your costs will cover the translation of every character.
 	//
 	// This member is required.
 	ContentType *string
@@ -161,14 +149,14 @@ type ParallelDataConfig struct {
 // imported into Amazon Translate.
 type ParallelDataDataLocation struct {
 
-	// The Amazon S3 location of the parallel data input file. The location is returned
-	// as a presigned URL to that has a 30-minute expiration. Amazon Translate doesn't
-	// scan all input files for the risk of CSV injection attacks. CSV injection occurs
-	// when a .csv or .tsv file is altered so that a record contains malicious code.
-	// The record begins with a special character, such as =, +, -, or @. When the file
-	// is opened in a spreadsheet program, the program might interpret the record as a
-	// formula and run the code within it. Before you download an input file from
-	// Amazon S3, ensure that you recognize the file and trust its creator.
+	// The Amazon S3 location of the parallel data input file. The location is
+	// returned as a presigned URL to that has a 30-minute expiration. Amazon Translate
+	// doesn't scan all input files for the risk of CSV injection attacks. CSV
+	// injection occurs when a .csv or .tsv file is altered so that a record contains
+	// malicious code. The record begins with a special character, such as =, +, -, or
+	// @. When the file is opened in a spreadsheet program, the program might interpret
+	// the record as a formula and run the code within it. Before you download an input
+	// file from Amazon S3, ensure that you recognize the file and trust its creator.
 	//
 	// This member is required.
 	Location *string
@@ -236,11 +224,11 @@ type ParallelDataProperties struct {
 	SourceLanguageCode *string
 
 	// The status of the parallel data resource. When the parallel data is ready for
-	// you to use, the status is ACTIVE.
+	// you to use, the status is ACTIVE .
 	Status ParallelDataStatus
 
-	// The language codes for the target languages available in the parallel data file.
-	// All possible target languages are returned as an array.
+	// The language codes for the target languages available in the parallel data
+	// file. All possible target languages are returned as an array.
 	TargetLanguageCodes []string
 
 	noSmithyDocumentSerde
@@ -277,8 +265,8 @@ type Term struct {
 }
 
 // The data associated with the custom terminology. For information about the
-// custom terminology file, see  Creating a Custom Terminology
-// (https://docs.aws.amazon.com/translate/latest/dg/creating-custom-terminology.html).
+// custom terminology file, see Creating a Custom Terminology (https://docs.aws.amazon.com/translate/latest/dg/creating-custom-terminology.html)
+// .
 type TerminologyData struct {
 
 	// The file containing the custom terminology data. Your version of the AWS SDK
@@ -312,8 +300,8 @@ type TerminologyData struct {
 // The location of the custom terminology data.
 type TerminologyDataLocation struct {
 
-	// The Amazon S3 location of the most recent custom terminology input file that was
-	// successfully imported into Amazon Translate. The location is returned as a
+	// The Amazon S3 location of the most recent custom terminology input file that
+	// was successfully imported into Amazon Translate. The location is returned as a
 	// presigned URL that has a 30-minute expiration . Amazon Translate doesn't scan
 	// all input files for the risk of CSV injection attacks. CSV injection occurs when
 	// a .csv or .tsv file is altered so that a record contains malicious code. The
@@ -390,7 +378,7 @@ type TerminologyProperties struct {
 }
 
 // Provides information for filtering a list of translation jobs. For more
-// information, see ListTextTranslationJobs.
+// information, see ListTextTranslationJobs .
 type TextTranslationJobFilter struct {
 
 	// Filters the list of jobs by name.
@@ -478,26 +466,23 @@ type TranslationSettings struct {
 
 	// You can optionally specify the desired level of formality for translations to
 	// supported target languages. The formality setting controls the level of formal
-	// language usage (also known as register
-	// (https://en.wikipedia.org/wiki/Register_(sociolinguistics))) in the translation
-	// output. You can set the value to informal or formal. If you don't specify a
-	// value for formality, or if the target language doesn't support formality, the
-	// translation will ignore the formality setting. If you specify multiple target
-	// languages for the job, translate ignores the formality setting for any
-	// unsupported target language. For a list of target languages that support
-	// formality, see Supported languages
-	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages)
+	// language usage (also known as register (https://en.wikipedia.org/wiki/Register_(sociolinguistics))
+	// ) in the translation output. You can set the value to informal or formal. If you
+	// don't specify a value for formality, or if the target language doesn't support
+	// formality, the translation will ignore the formality setting. If you specify
+	// multiple target languages for the job, translate ignores the formality setting
+	// for any unsupported target language. For a list of target languages that support
+	// formality, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages)
 	// in the Amazon Translate Developer Guide.
 	Formality Formality
 
 	// Enable the profanity setting if you want Amazon Translate to mask profane words
 	// and phrases in your translation output. To mask profane words and phrases,
-	// Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character
-	// sequence is used for each profane word or phrase, regardless of the length or
-	// number of words. Amazon Translate doesn't detect profanity in all of its
-	// supported languages. For languages that don't support profanity detection, see
-	// Unsupported languages
-	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages)
+	// Amazon Translate replaces them with the grawlix string “?$#@$“. This
+	// 5-character sequence is used for each profane word or phrase, regardless of the
+	// length or number of words. Amazon Translate doesn't detect profanity in all of
+	// its supported languages. For languages that don't support profanity detection,
+	// see Unsupported languages (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages)
 	// in the Amazon Translate Developer Guide. If you specify multiple target
 	// languages for the job, all the target languages must support profanity masking.
 	// If any of the target languages don't support profanity masking, the translation

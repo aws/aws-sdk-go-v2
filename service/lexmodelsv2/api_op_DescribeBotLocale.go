@@ -45,8 +45,8 @@ type DescribeBotLocaleInput struct {
 	BotVersion *string
 
 	// The unique identifier of the locale to describe. The string must match one of
-	// the supported locales. For more information, see Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// the supported locales. For more information, see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -63,7 +63,7 @@ type DescribeBotLocaleOutput struct {
 	// place for the locale.
 	BotLocaleHistoryEvents []types.BotLocaleHistoryEvent
 
-	// The status of the bot. If the status is Failed, the reasons for the failure are
+	// The status of the bot. If the status is Failed , the reasons for the failure are
 	// listed in the failureReasons field.
 	BotLocaleStatus types.BotLocaleStatus
 
@@ -76,7 +76,7 @@ type DescribeBotLocaleOutput struct {
 	// The description of the locale.
 	Description *string
 
-	// if botLocaleStatus is Failed, Amazon Lex explains why it failed to build the
+	// if botLocaleStatus is Failed , Amazon Lex explains why it failed to build the
 	// bot.
 	FailureReasons []string
 
@@ -199,9 +199,9 @@ type BotLocaleBuiltWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, BotLocaleBuiltWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, BotLocaleBuiltWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -410,9 +410,9 @@ type BotLocaleCreatedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, BotLocaleCreatedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, BotLocaleCreatedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -640,10 +640,10 @@ type BotLocaleExpressTestingAvailableWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, BotLocaleExpressTestingAvailableWaiter will use default max delay of
-	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
-	// the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, BotLocaleExpressTestingAvailableWaiter will use default max delay
+	// of 120 seconds. Note that MaxDelay must resolve to value greater than or equal
+	// to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

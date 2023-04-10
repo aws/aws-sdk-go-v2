@@ -46,9 +46,9 @@ type ListModelCardsInput struct {
 	// Only list model cards with names that contain the specified string.
 	NameContains *string
 
-	// If the response to a previous ListModelCards request was truncated, the response
-	// includes a NextToken. To retrieve the next set of model cards, use the token in
-	// the next request.
+	// If the response to a previous ListModelCards request was truncated, the
+	// response includes a NextToken . To retrieve the next set of model cards, use the
+	// token in the next request.
 	NextToken *string
 
 	// Sort model cards by either name or creation time. Sorts by creation time by
@@ -68,8 +68,8 @@ type ListModelCardsOutput struct {
 	// This member is required.
 	ModelCardSummaries []types.ModelCardSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of model cards, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of model cards, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

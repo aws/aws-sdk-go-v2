@@ -38,14 +38,11 @@ type ListNetworkSitesInput struct {
 
 	// The filters. Add filters to your request to return a more specific list of
 	// results. Use filters to match the status of the network sites.
-	//
-	// * STATUS - The
-	// status (AVAILABLE | CREATED | DELETED | DEPROVISIONING | PROVISIONING).
-	//
-	// Filter
-	// values are case sensitive. If you specify multiple values for a filter, the
-	// values are joined with an OR, and the request returns all results that match any
-	// of the specified values.
+	//   - STATUS - The status ( AVAILABLE | CREATED | DELETED | DEPROVISIONING |
+	//   PROVISIONING ).
+	// Filter values are case sensitive. If you specify multiple values for a filter,
+	// the values are joined with an OR , and the request returns all results that
+	// match any of the specified values.
 	Filters map[string][]string
 
 	// The maximum number of results to return.

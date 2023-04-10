@@ -13,12 +13,10 @@ import (
 
 // Retrieves the resource query associated with the specified resource group. For
 // more information about resource queries, see Create a tag-based group in
-// Resource Groups
-// (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag).
-// Minimum permissions To run this command, you must have the following
+// Resource Groups (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag)
+// . Minimum permissions To run this command, you must have the following
 // permissions:
-//
-// * resource-groups:GetGroupQuery
+//   - resource-groups:GetGroupQuery
 func (c *Client) GetGroupQuery(ctx context.Context, params *GetGroupQueryInput, optFns ...func(*Options)) (*GetGroupQueryOutput, error) {
 	if params == nil {
 		params = &GetGroupQueryInput{}
@@ -50,8 +48,8 @@ type GetGroupQueryInput struct {
 type GetGroupQueryOutput struct {
 
 	// The resource query associated with the specified group. For more information
-	// about resource queries, see Create a tag-based group in Resource Groups
-	// (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag).
+	// about resource queries, see Create a tag-based group in Resource Groups (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag)
+	// .
 	GroupQuery *types.GroupQuery
 
 	// Metadata pertaining to the operation's result.

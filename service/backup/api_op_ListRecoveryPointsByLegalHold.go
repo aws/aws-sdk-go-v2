@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action returns recovery point ARNs (Amazon Resource Names) of the specified
-// legal hold.
+// This action returns recovery point ARNs (Amazon Resource Names) of the
+// specified legal hold.
 func (c *Client) ListRecoveryPointsByLegalHold(ctx context.Context, params *ListRecoveryPointsByLegalHoldInput, optFns ...func(*Options)) (*ListRecoveryPointsByLegalHoldOutput, error) {
 	if params == nil {
 		params = &ListRecoveryPointsByLegalHoldInput{}
@@ -53,7 +53,7 @@ type ListRecoveryPointsByLegalHoldOutput struct {
 	// This return is the next item following a partial list of returned resources.
 	NextToken *string
 
-	// This is a list of the recovery points returned by ListRecoveryPointsByLegalHold.
+	// This is a list of the recovery points returned by ListRecoveryPointsByLegalHold .
 	RecoveryPoints []types.RecoveryPointMember
 
 	// Metadata pertaining to the operation's result.

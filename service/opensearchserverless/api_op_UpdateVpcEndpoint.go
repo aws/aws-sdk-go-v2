@@ -13,8 +13,8 @@ import (
 )
 
 // Updates an OpenSearch Serverless-managed interface endpoint. For more
-// information, see Access Amazon OpenSearch Serverless using an interface endpoint
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html).
+// information, see Access Amazon OpenSearch Serverless using an interface endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
+// .
 func (c *Client) UpdateVpcEndpoint(ctx context.Context, params *UpdateVpcEndpointInput, optFns ...func(*Options)) (*UpdateVpcEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateVpcEndpointInput{}

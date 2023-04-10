@@ -125,8 +125,8 @@ func (c *Client) addOperationDescribeOptOutListsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeOptOutListsAPIClient is a client that implements the DescribeOptOutLists
-// operation.
+// DescribeOptOutListsAPIClient is a client that implements the
+// DescribeOptOutLists operation.
 type DescribeOptOutListsAPIClient interface {
 	DescribeOptOutLists(context.Context, *DescribeOptOutListsInput, ...func(*Options)) (*DescribeOptOutListsOutput, error)
 }

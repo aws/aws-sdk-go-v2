@@ -15,9 +15,9 @@ import (
 // code and some configuration information about the function. The response
 // contains an Amazon Resource Name (ARN) that uniquely identifies the function.
 // When you create a function, it's in the DEVELOPMENT stage. In this stage, you
-// can test the function with TestFunction, and update it with UpdateFunction. When
-// you're ready to use your function with a CloudFront distribution, use
-// PublishFunction to copy the function from the DEVELOPMENT stage to LIVE. When
+// can test the function with TestFunction , and update it with UpdateFunction .
+// When you're ready to use your function with a CloudFront distribution, use
+// PublishFunction to copy the function from the DEVELOPMENT stage to LIVE . When
 // it's live, you can attach the function to a distribution's cache behavior, using
 // the function's ARN.
 func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput, optFns ...func(*Options)) (*CreateFunctionOutput, error) {
@@ -37,9 +37,8 @@ func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput
 
 type CreateFunctionInput struct {
 
-	// The function code. For more information about writing a CloudFront function, see
-	// Writing function code for CloudFront Functions
-	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html)
+	// The function code. For more information about writing a CloudFront function,
+	// see Writing function code for CloudFront Functions (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// This member is required.

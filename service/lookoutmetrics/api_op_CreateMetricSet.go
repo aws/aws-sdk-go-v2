@@ -66,9 +66,8 @@ type CreateMetricSetInput struct {
 	// datasources.
 	Offset *int32
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) to
-	// apply to the dataset.
+	// A list of tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
+	// to apply to the dataset.
 	Tags map[string]string
 
 	// Contains information about the column used for tracking time in your source

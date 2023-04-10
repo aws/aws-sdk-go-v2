@@ -12,8 +12,8 @@ import (
 )
 
 // Updates the specified lifecycle policy. For more information about updating a
-// policy, see Modify lifecycle policies
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify).
+// policy, see Modify lifecycle policies (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify)
+// .
 func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecyclePolicyInput, optFns ...func(*Options)) (*UpdateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateLifecyclePolicyInput{}

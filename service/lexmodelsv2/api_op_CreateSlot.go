@@ -51,14 +51,14 @@ type CreateSlotInput struct {
 	// The identifier of the language and locale that the slot will be used in. The
 	// string must match one of the supported locales. All of the bots, intents, slot
 	// types used by the slot must have the same locale. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
 
-	// The name of the slot. Slot names must be unique within the bot that contains the
-	// slot.
+	// The name of the slot. Slot names must be unique within the bot that contains
+	// the slot.
 	//
 	// This member is required.
 	SlotName *string
@@ -74,18 +74,18 @@ type CreateSlotInput struct {
 
 	// Indicates whether the slot returns multiple values in one response. Multi-value
 	// slots are only available in the en-US locale. If you set this value to true in
-	// any other locale, Amazon Lex throws a ValidationException. If the
-	// multipleValuesSetting is not set, the default value is false.
+	// any other locale, Amazon Lex throws a ValidationException . If the
+	// multipleValuesSetting is not set, the default value is false .
 	MultipleValuesSetting *types.MultipleValuesSetting
 
 	// Determines how slot values are used in Amazon CloudWatch logs. If the value of
-	// the obfuscationSetting parameter is DefaultObfuscation, slot values are
-	// obfuscated in the log output. If the value is None, the actual value is present
+	// the obfuscationSetting parameter is DefaultObfuscation , slot values are
+	// obfuscated in the log output. If the value is None , the actual value is present
 	// in the log output. The default is to obfuscate values in the CloudWatch logs.
 	ObfuscationSetting *types.ObfuscationSetting
 
-	// The unique identifier for the slot type associated with this slot. The slot type
-	// determines the values that can be entered into the slot.
+	// The unique identifier for the slot type associated with this slot. The slot
+	// type determines the values that can be entered into the slot.
 	SlotTypeId *string
 
 	// Specifications for the constituent sub slots and the expression for the

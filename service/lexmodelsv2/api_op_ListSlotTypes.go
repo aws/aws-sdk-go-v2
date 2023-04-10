@@ -42,7 +42,7 @@ type ListSlotTypesInput struct {
 
 	// The identifier of the language and locale of the slot types to list. The string
 	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
@@ -52,8 +52,8 @@ type ListSlotTypesInput struct {
 	// one filter and only one string to filter on.
 	Filters []types.SlotTypeFilter
 
-	// The maximum number of slot types to return in each page of results. If there are
-	// fewer results than the max page size, only the actual number of results are
+	// The maximum number of slot types to return in each page of results. If there
+	// are fewer results than the max page size, only the actual number of results are
 	// returned.
 	MaxResults *int32
 
@@ -62,8 +62,8 @@ type ListSlotTypesInput struct {
 	// that token in the nextToken parameter to return the next page of results.
 	NextToken *string
 
-	// Determines the sort order for the response from the ListSlotTypes operation. You
-	// can choose to sort by the slot type name or last updated date in either
+	// Determines the sort order for the response from the ListSlotTypes operation.
+	// You can choose to sort by the slot type name or last updated date in either
 	// ascending or descending order.
 	SortBy *types.SlotTypeSortBy
 
@@ -81,8 +81,8 @@ type ListSlotTypesOutput struct {
 	// The language and local of the slot types in the list.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListSlotTypes operation. If the nextToken field is present, you send the
+	// A token that indicates whether there are more results to return in a response
+	// to the ListSlotTypes operation. If the nextToken field is present, you send the
 	// contents as the nextToken parameter of a ListSlotTypes operation request to get
 	// the next page of results.
 	NextToken *string
@@ -171,8 +171,8 @@ var _ ListSlotTypesAPIClient = (*Client)(nil)
 
 // ListSlotTypesPaginatorOptions is the paginator options for ListSlotTypes
 type ListSlotTypesPaginatorOptions struct {
-	// The maximum number of slot types to return in each page of results. If there are
-	// fewer results than the max page size, only the actual number of results are
+	// The maximum number of slot types to return in each page of results. If there
+	// are fewer results than the max page size, only the actual number of results are
 	// returned.
 	Limit int32
 

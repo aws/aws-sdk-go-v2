@@ -41,7 +41,7 @@ type CreateDomainNameInput struct {
 	// This member is required.
 	DomainName *string
 
-	// A description of the DomainName.
+	// A description of the DomainName .
 	Description *string
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type CreateDomainNameInput struct {
 
 type CreateDomainNameOutput struct {
 
-	// The configuration for the DomainName.
+	// The configuration for the DomainName .
 	DomainNameConfig *types.DomainNameConfig
 
 	// Metadata pertaining to the operation's result.

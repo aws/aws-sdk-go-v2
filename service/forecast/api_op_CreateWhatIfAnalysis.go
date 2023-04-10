@@ -57,8 +57,7 @@ type CreateWhatIfAnalysisInput struct {
 	// This member is required.
 	WhatIfAnalysisName *string
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
 	// to apply to the what if forecast.
 	Tags []types.Tag
 
@@ -66,12 +65,9 @@ type CreateWhatIfAnalysisInput struct {
 	// TimeSeriesIdentifiers object. What-if analyses are performed only for the time
 	// series in this object. The TimeSeriesIdentifiers object needs the following
 	// information:
-	//
-	// * DataSource
-	//
-	// * Format
-	//
-	// * Schema
+	//   - DataSource
+	//   - Format
+	//   - Schema
 	TimeSeriesSelector *types.TimeSeriesSelector
 
 	noSmithyDocumentSerde

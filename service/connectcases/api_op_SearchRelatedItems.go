@@ -61,8 +61,8 @@ type SearchRelatedItemsOutput struct {
 	// This member is required.
 	RelatedItems []*types.SearchRelatedItemsResponseItem
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

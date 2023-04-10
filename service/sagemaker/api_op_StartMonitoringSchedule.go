@@ -12,7 +12,7 @@ import (
 
 // Starts a previously stopped monitoring schedule. By default, when you
 // successfully create a new schedule, the status of a monitoring schedule is
-// scheduled.
+// scheduled .
 func (c *Client) StartMonitoringSchedule(ctx context.Context, params *StartMonitoringScheduleInput, optFns ...func(*Options)) (*StartMonitoringScheduleOutput, error) {
 	if params == nil {
 		params = &StartMonitoringScheduleInput{}

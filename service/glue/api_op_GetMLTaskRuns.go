@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of runs for a machine learning transform. Machine learning task runs
-// are asynchronous tasks that Glue runs on your behalf as part of various machine
-// learning workflows. You can get a sortable, filterable list of machine learning
-// task runs by calling GetMLTaskRuns with their parent transform's TransformID and
-// other optional parameters as documented in this section. This operation returns
-// a list of historic runs and must be paginated.
+// Gets a list of runs for a machine learning transform. Machine learning task
+// runs are asynchronous tasks that Glue runs on your behalf as part of various
+// machine learning workflows. You can get a sortable, filterable list of machine
+// learning task runs by calling GetMLTaskRuns with their parent transform's
+// TransformID and other optional parameters as documented in this section. This
+// operation returns a list of historic runs and must be paginated.
 func (c *Client) GetMLTaskRuns(ctx context.Context, params *GetMLTaskRunsInput, optFns ...func(*Options)) (*GetMLTaskRunsOutput, error) {
 	if params == nil {
 		params = &GetMLTaskRunsInput{}

@@ -12,8 +12,8 @@ import (
 )
 
 // Updates the content of a message. The x-amz-chime-bearer request header is
-// mandatory. Use the AppInstanceUserArn of the user that makes the API call as the
-// value in the header.
+// mandatory. Use the AppInstanceUserArn of the user that makes the API call as
+// the value in the header.
 func (c *Client) UpdateChannelMessage(ctx context.Context, params *UpdateChannelMessageInput, optFns ...func(*Options)) (*UpdateChannelMessageOutput, error) {
 	if params == nil {
 		params = &UpdateChannelMessageInput{}

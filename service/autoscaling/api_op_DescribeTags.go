@@ -18,8 +18,7 @@ import (
 // specified values for it to be included in the results. You can also specify
 // multiple filters. The result includes information for a particular tag only if
 // it matches all the filters. If there's no match, no special message is returned.
-// For more information, see Tag Auto Scaling groups and instances
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html)
+// For more information, see Tag Auto Scaling groups and instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
@@ -39,11 +38,11 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 type DescribeTagsInput struct {
 
 	// One or more filters to scope the tags to return. The maximum number of filters
-	// per filter type (for example, auto-scaling-group) is 1000.
+	// per filter type (for example, auto-scaling-group ) is 1000.
 	Filters []types.Filter
 
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -140,7 +139,7 @@ var _ DescribeTagsAPIClient = (*Client)(nil)
 // DescribeTagsPaginatorOptions is the paginator options for DescribeTags
 type DescribeTagsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

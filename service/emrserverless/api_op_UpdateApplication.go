@@ -52,9 +52,9 @@ type UpdateApplicationInput struct {
 	// amount of time being idle.
 	AutoStopConfiguration *types.AutoStopConfig
 
-	// The image configuration to be used for all worker types. You can either set this
-	// parameter or imageConfiguration for each worker type in
-	// WorkerTypeSpecificationInput.
+	// The image configuration to be used for all worker types. You can either set
+	// this parameter or imageConfiguration for each worker type in
+	// WorkerTypeSpecificationInput .
 	ImageConfiguration *types.ImageConfigurationInput
 
 	// The capacity to initialize when the application is updated.
@@ -69,7 +69,7 @@ type UpdateApplicationInput struct {
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *types.NetworkConfiguration
 
-	// The key-value pairs that specify worker type to WorkerTypeSpecificationInput.
+	// The key-value pairs that specify worker type to WorkerTypeSpecificationInput .
 	// This parameter must contain all valid worker types for a Spark or Hive
 	// application. Valid worker types include Driver and Executor for Spark
 	// applications and HiveDriver and TezTask for Hive applications. You can either

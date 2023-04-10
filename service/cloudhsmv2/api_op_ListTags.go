@@ -16,8 +16,8 @@ import (
 // operation, which means that each response might contain only a subset of all the
 // tags. When the response contains only a subset of tags, it includes a NextToken
 // value. Use this value in a subsequent ListTags request to get more tags. When
-// you receive a response with no NextToken (or an empty or null value), that means
-// there are no more tags to get.
+// you receive a response with no NextToken (or an empty or null value), that
+// means there are no more tags to get.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -36,7 +36,7 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 type ListTagsInput struct {
 
 	// The cluster identifier (ID) for the cluster whose tags you are getting. To find
-	// the cluster ID, use DescribeClusters.
+	// the cluster ID, use DescribeClusters .
 	//
 	// This member is required.
 	ResourceId *string

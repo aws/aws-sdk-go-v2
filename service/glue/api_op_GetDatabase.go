@@ -29,8 +29,8 @@ func (c *Client) GetDatabase(ctx context.Context, params *GetDatabaseInput, optF
 
 type GetDatabaseInput struct {
 
-	// The name of the database to retrieve. For Hive compatibility, this should be all
-	// lowercase.
+	// The name of the database to retrieve. For Hive compatibility, this should be
+	// all lowercase.
 	//
 	// This member is required.
 	Name *string

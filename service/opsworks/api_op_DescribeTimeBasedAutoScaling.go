@@ -15,8 +15,8 @@ import (
 // must specify at least one of the parameters. Required Permissions: To use this
 // action, an IAM user must have a Show, Deploy, or Manage permissions level for
 // the stack, or an attached policy that explicitly grants permissions. For more
-// information about user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeTimeBasedAutoScaling(ctx context.Context, params *DescribeTimeBasedAutoScalingInput, optFns ...func(*Options)) (*DescribeTimeBasedAutoScalingOutput, error) {
 	if params == nil {
 		params = &DescribeTimeBasedAutoScalingInput{}

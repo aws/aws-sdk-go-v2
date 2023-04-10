@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the permissions boundary from a specified PermissionSet.
+// Deletes the permissions boundary from a specified PermissionSet .
 func (c *Client) DeletePermissionsBoundaryFromPermissionSet(ctx context.Context, params *DeletePermissionsBoundaryFromPermissionSetInput, optFns ...func(*Options)) (*DeletePermissionsBoundaryFromPermissionSetOutput, error) {
 	if params == nil {
 		params = &DeletePermissionsBoundaryFromPermissionSetInput{}
@@ -34,7 +34,7 @@ type DeletePermissionsBoundaryFromPermissionSetInput struct {
 	// This member is required.
 	InstanceArn *string
 
-	// The ARN of the PermissionSet.
+	// The ARN of the PermissionSet .
 	//
 	// This member is required.
 	PermissionSetArn *string

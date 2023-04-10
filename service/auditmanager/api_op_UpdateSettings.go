@@ -44,10 +44,8 @@ type UpdateSettingsInput struct {
 	// to enable or disable evidence finder. When you use this attribute to disable
 	// evidence finder, Audit Manager deletes the event data store that’s used to query
 	// your evidence data. As a result, you can’t re-enable evidence finder and use the
-	// feature again. Your only alternative is to deregister
-	// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html)
-	// and then re-register
-	// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html)
+	// feature again. Your only alternative is to deregister (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html)
+	// and then re-register (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html)
 	// Audit Manager.
 	EvidenceFinderEnabled *bool
 

@@ -13,8 +13,7 @@ import (
 // Deletes an Amazon Redshift security group. You cannot delete a security group
 // that is associated with any clusters. You cannot delete the default security
 // group. For information about managing security groups, go to Amazon Redshift
-// Cluster Security Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DeleteClusterSecurityGroup(ctx context.Context, params *DeleteClusterSecurityGroupInput, optFns ...func(*Options)) (*DeleteClusterSecurityGroupOutput, error) {
 	if params == nil {

@@ -63,8 +63,8 @@ type CreateSourceRepositoryBranchOutput struct {
 	HeadCommitId *string
 
 	// The time the branch was last updated, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	LastUpdatedTime *time.Time
 
 	// The name of the newly created branch.

@@ -15,24 +15,17 @@ import (
 
 // Modifies the provisioned throughput settings, global secondary indexes, or
 // DynamoDB Streams settings for a given table. This operation only applies to
-// Version 2019.11.21 (Current)
-// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
-// of global tables. You can only perform one of the following operations at
-// once:
+// Version 2019.11.21 (Current) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
+// of global tables. You can only perform one of the following operations at once:
+//   - Modify the provisioned throughput settings of the table.
+//   - Remove a global secondary index from the table.
+//   - Create a new global secondary index on the table. After the index begins
+//     backfilling, you can use UpdateTable to perform other operations.
 //
-// * Modify the provisioned throughput settings of the table.
-//
-// * Remove a
-// global secondary index from the table.
-//
-// * Create a new global secondary index on
-// the table. After the index begins backfilling, you can use UpdateTable to
-// perform other operations.
-//
-// UpdateTable is an asynchronous operation; while it is
-// executing, the table status changes from ACTIVE to UPDATING. While it is
-// UPDATING, you cannot issue another UpdateTable request. When the table returns
-// to the ACTIVE state, the UpdateTable operation is complete.
+// UpdateTable is an asynchronous operation; while it is executing, the table
+// status changes from ACTIVE to UPDATING . While it is UPDATING , you cannot issue
+// another UpdateTable request. When the table returns to the ACTIVE state, the
+// UpdateTable operation is complete.
 func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optFns ...func(*Options)) (*UpdateTableOutput, error) {
 	if params == nil {
 		params = &UpdateTableInput{}
@@ -66,16 +59,12 @@ type UpdateTableInput struct {
 	// provisioned capacity values must be set. The initial provisioned capacity values
 	// are estimated based on the consumed read and write capacity of your table and
 	// global secondary indexes over the past 30 minutes.
-	//
-	// * PROVISIONED - We recommend
-	// using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode
-	// to Provisioned Mode
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
-	//
-	// *
-	// PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
-	// workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
+	//   - PROVISIONED - We recommend using PROVISIONED for predictable workloads.
+	//   PROVISIONED sets the billing mode to Provisioned Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual)
+	//   .
+	//   - PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
+	//   workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand)
+	//   .
 	BillingMode types.BillingMode
 
 	// Indicates whether deletion protection is to be enabled (true) or disabled
@@ -84,29 +73,20 @@ type UpdateTableInput struct {
 
 	// An array of one or more global secondary indexes for the table. For each index
 	// in the array, you can request one action:
-	//
-	// * Create - add a new global secondary
-	// index to the table.
-	//
-	// * Update - modify the provisioned throughput settings of an
-	// existing global secondary index.
-	//
-	// * Delete - remove a global secondary index
-	// from the table.
-	//
-	// You can create or delete only one global secondary index per
-	// UpdateTable operation. For more information, see Managing Global Secondary
-	// Indexes
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
+	//   - Create - add a new global secondary index to the table.
+	//   - Update - modify the provisioned throughput settings of an existing global
+	//   secondary index.
+	//   - Delete - remove a global secondary index from the table.
+	// You can create or delete only one global secondary index per UpdateTable
+	// operation. For more information, see Managing Global Secondary Indexes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
 	// in the Amazon DynamoDB Developer Guide.
 	GlobalSecondaryIndexUpdates []types.GlobalSecondaryIndexUpdate
 
 	// The new provisioned throughput settings for the specified table or index.
 	ProvisionedThroughput *types.ProvisionedThroughput
 
-	// A list of replica update actions (create, delete, or update) for the table. This
-	// property only applies to Version 2019.11.21 (Current)
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
+	// A list of replica update actions (create, delete, or update) for the table.
+	// This property only applies to Version 2019.11.21 (Current) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
 	// of global tables.
 	ReplicaUpdates []types.ReplicationGroupUpdate
 
@@ -120,7 +100,7 @@ type UpdateTableInput struct {
 	StreamSpecification *types.StreamSpecification
 
 	// The table class of the table to be updated. Valid values are STANDARD and
-	// STANDARD_INFREQUENT_ACCESS.
+	// STANDARD_INFREQUENT_ACCESS .
 	TableClass types.TableClass
 
 	noSmithyDocumentSerde

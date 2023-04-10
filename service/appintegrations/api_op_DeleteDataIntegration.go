@@ -15,8 +15,7 @@ import (
 // deletes the underlying Amazon AppFlow flow and service linked role. You cannot
 // create a DataIntegration association for a DataIntegration that has been
 // previously associated. Use a different DataIntegration, or recreate the
-// DataIntegration using the CreateDataIntegration
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
+// DataIntegration using the CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
 // API.
 func (c *Client) DeleteDataIntegration(ctx context.Context, params *DeleteDataIntegrationInput, optFns ...func(*Options)) (*DeleteDataIntegrationOutput, error) {
 	if params == nil {
