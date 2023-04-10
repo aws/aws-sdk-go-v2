@@ -893,6 +893,7 @@ const (
 	SettingNameContainerInstanceLongArnFormat SettingName = "containerInstanceLongArnFormat"
 	SettingNameAwsvpcTrunking                 SettingName = "awsvpcTrunking"
 	SettingNameContainerInsights              SettingName = "containerInsights"
+	SettingNameFargateFipsMode                SettingName = "fargateFIPSMode"
 )
 
 // Values returns all known values for SettingName. Note that this can be expanded
@@ -905,6 +906,7 @@ func (SettingName) Values() []SettingName {
 		"containerInstanceLongArnFormat",
 		"awsvpcTrunking",
 		"containerInsights",
+		"fargateFIPSMode",
 	}
 }
 

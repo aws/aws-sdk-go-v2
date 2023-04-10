@@ -1,0 +1,8 @@
+{
+    "id": "82df1840-2f05-491c-b307-5bd17f534999",
+    "type": "feature",
+    "description": "This release adds support for enabling FIPS compliance on Amazon ECS Fargate tasks",
+    "modules": [
+        "service/ecs"
+    ]
+}

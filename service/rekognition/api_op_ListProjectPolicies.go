@@ -14,7 +14,8 @@ import (
 
 // Gets a list of the project policies attached to a project. To attach a project
 // policy to a project, call PutProjectPolicy . To remove a project policy from a
-// project, call DeleteProjectPolicy .
+// project, call DeleteProjectPolicy . This operation requires permissions to
+// perform the rekognition:ListProjectPolicies action.
 func (c *Client) ListProjectPolicies(ctx context.Context, params *ListProjectPoliciesInput, optFns ...func(*Options)) (*ListProjectPoliciesOutput, error) {
 	if params == nil {
 		params = &ListProjectPoliciesInput{}

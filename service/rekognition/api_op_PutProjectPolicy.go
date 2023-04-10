@@ -21,7 +21,8 @@ import (
 // existing project policy by specifying the policy revision ID of the existing
 // policy. To remove a project policy from a project, call DeleteProjectPolicy . To
 // get a list of project policies attached to a project, call ListProjectPolicies .
-// You copy a model version by calling CopyProjectVersion .
+// You copy a model version by calling CopyProjectVersion . This operation requires
+// permissions to perform the rekognition:PutProjectPolicy action.
 func (c *Client) PutProjectPolicy(ctx context.Context, params *PutProjectPolicyInput, optFns ...func(*Options)) (*PutProjectPolicyOutput, error) {
 	if params == nil {
 		params = &PutProjectPolicyInput{}

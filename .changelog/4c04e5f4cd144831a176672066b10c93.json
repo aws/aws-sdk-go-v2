@@ -1,0 +1,8 @@
+{
+    "id": "4c04e5f4-cd14-4831-a176-672066b10c93",
+    "type": "feature",
+    "description": "This release adds the ability to configure an agent's routing profile to receive contacts from multiple channels at the same time via extending the UpdateRoutingProfileConcurrency, CreateRoutingProfile and DescribeRoutingProfile APIs.",
+    "modules": [
+        "service/connect"
+    ]
+}

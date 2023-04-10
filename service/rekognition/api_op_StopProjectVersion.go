@@ -12,7 +12,8 @@ import (
 )
 
 // Stops a running model. The operation might take a while to complete. To check
-// the current status, call DescribeProjectVersions .
+// the current status, call DescribeProjectVersions . This operation requires
+// permissions to perform the rekognition:StopProjectVersion action.
 func (c *Client) StopProjectVersion(ctx context.Context, params *StopProjectVersionInput, optFns ...func(*Options)) (*StopProjectVersionOutput, error) {
 	if params == nil {
 		params = &StopProjectVersionInput{}

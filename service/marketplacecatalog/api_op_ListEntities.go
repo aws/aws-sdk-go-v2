@@ -51,6 +51,8 @@ type ListEntitiesInput struct {
 	// The value of the next token, if it exists. Null if there are no more results.
 	NextToken *string
 
+	OwnershipType types.OwnershipType
+
 	// An object that contains two attributes, SortBy and SortOrder .
 	Sort *types.Sort
 

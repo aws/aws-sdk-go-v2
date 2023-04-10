@@ -5626,6 +5626,40 @@ func awsRestjson1_deserializeDocument__listOfTeletextPageType(v *[]types.Teletex
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfWarningGroup(v *[]types.WarningGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.WarningGroup
+	if *v == nil {
+		cv = []types.WarningGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.WarningGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentWarningGroup(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15040,6 +15074,15 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.BillingTagsSource = types.BillingTagsSource(jtv)
 			}
 
+		case "clientRequestToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ClientRequestToken = ptr.String(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15221,6 +15264,11 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 
 		case "userMetadata":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.UserMetadata, value); err != nil {
+				return err
+			}
+
+		case "warnings":
+			if err := awsRestjson1_deserializeDocument__listOfWarningGroup(&sv.Warnings, value); err != nil {
 				return err
 			}
 
@@ -21928,6 +21976,63 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 					return fmt.Errorf("expected Vp9RateControlMode to be of type string, got %T instead", value)
 				}
 				sv.RateControlMode = types.Vp9RateControlMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWarningGroup(v **types.WarningGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WarningGroup
+	if *v == nil {
+		sv = &types.WarningGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Code = int32(i64)
+			}
+
+		case "count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = int32(i64)
 			}
 
 		default:

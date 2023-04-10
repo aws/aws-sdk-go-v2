@@ -196,12 +196,15 @@ type ChatMessage struct {
 	//   Maximum of 1024.
 	//   - For application/json , the Length Constraints are Minimum of 1, Maximum of
 	//   12000.
+	//   - For application/vnd.amazonaws.connect.message.interactive.response , the
+	//   Length Constraints are Minimum of 1, Maximum of 12288.
 	//
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text/plain , text/markdown , and
-	// application/json .
+	// The type of the content. Supported types are text/plain , text/markdown ,
+	// application/json , and
+	// application/vnd.amazonaws.connect.message.interactive.response .
 	//
 	// This member is required.
 	ContentType *string
@@ -501,6 +504,19 @@ type Credentials struct {
 
 	// Renews the expiration timer for a generated token.
 	RefreshTokenExpiration *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Defines the cross-channel routing behavior that allows an agent working on a
+// contact in one channel to be offered a contact from a different channel.
+type CrossChannelBehavior struct {
+
+	// Specifies the other channels that can be routed to an agent handling their
+	// current channel.
+	//
+	// This member is required.
+	BehaviorType BehaviorType
 
 	noSmithyDocumentSerde
 }
@@ -1273,6 +1289,12 @@ type MediaConcurrency struct {
 	//
 	// This member is required.
 	Concurrency int32
+
+	// Defines the cross-channel routing behavior for each channel that is enabled for
+	// this Routing Profile. For example, this allows you to offer an agent a different
+	// contact from another channel when they are currently working with a contact from
+	// a Voice channel.
+	CrossChannelBehavior *CrossChannelBehavior
 
 	noSmithyDocumentSerde
 }

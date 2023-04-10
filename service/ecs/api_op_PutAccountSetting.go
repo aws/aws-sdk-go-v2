@@ -12,9 +12,9 @@ import (
 )
 
 // Modifies an account setting. Account settings are set on a per-Region basis. If
-// you change the account setting for the root user, the default settings for all
-// of the users and roles that no individual account setting was specified are
-// reset for. For more information, see Account Settings (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html)
+// you change the root user account setting, the default settings are reset for
+// users and roles that do not have specified individual account settings. For more
+// information, see Account Settings (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html)
 // in the Amazon Elastic Container Service Developer Guide. When
 // serviceLongArnFormat , taskLongArnFormat , or containerInstanceLongArnFormat
 // are specified, the Amazon Resource Name (ARN) and resource ID format of the
@@ -25,15 +25,15 @@ import (
 // on this setting to use Amazon ECS features such as resource tagging. When
 // awsvpcTrunking is specified, the elastic network interface (ENI) limit for any
 // new container instances that support the feature is changed. If awsvpcTrunking
-// is enabled, any new container instances that support the feature are launched
+// is turned on, any new container instances that support the feature are launched
 // have the increased ENI limits available to them. For more information, see
 // Elastic Network Interface Trunking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html)
 // in the Amazon Elastic Container Service Developer Guide. When containerInsights
-// is specified, the default setting indicating whether CloudWatch Container
-// Insights is enabled for your clusters is changed. If containerInsights is
-// enabled, any new clusters that are created will have Container Insights enabled
-// unless you disable it during cluster creation. For more information, see
-// CloudWatch Container Insights (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html)
+// is specified, the default setting indicating whether Amazon Web Services
+// CloudWatch Container Insights is turned on for your clusters is changed. If
+// containerInsights is turned on, any new clusters that are created will have
+// Container Insights turned on unless you disable it during cluster creation. For
+// more information, see CloudWatch Container Insights (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) PutAccountSetting(ctx context.Context, params *PutAccountSettingInput, optFns ...func(*Options)) (*PutAccountSettingOutput, error) {
 	if params == nil {
@@ -59,8 +59,9 @@ type PutAccountSettingInput struct {
 	// the ARN and resource ID for your Amazon ECS container instances is affected. If
 	// awsvpcTrunking is specified, the elastic network interface (ENI) limit for your
 	// Amazon ECS container instances is affected. If containerInsights is specified,
-	// the default setting for CloudWatch Container Insights for your clusters is
-	// affected.
+	// the default setting for Amazon Web Services CloudWatch Container Insights for
+	// your clusters is affected. If fargateFIPSMode is specified, Fargate FIPS 140
+	// compliance is affected.
 	//
 	// This member is required.
 	Name types.SettingName

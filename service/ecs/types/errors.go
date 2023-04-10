@@ -558,7 +558,7 @@ func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 //   - Incorrect IAM permissions
 //   - The SSM agent is not installed or is not running
 //   - There is an interface Amazon VPC endpoint for Amazon ECS, but there is not
-//     one for for Systems Manager Session Manager
+//     one for Systems Manager Session Manager
 //
 // For information about how to troubleshoot the issues, see Troubleshooting
 // issues with ECS Exec (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html)

@@ -61,7 +61,7 @@ type StartTaskInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
-	// Whether or not the execute command functionality is enabled for the task. If
+	// Whether or not the execute command functionality is turned on for the task. If
 	// true , this enables execute command functionality on all containers in the task.
 	EnableExecuteCommand bool
 

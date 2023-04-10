@@ -18,19 +18,20 @@ import (
 // faces and detecting labels.
 //   - If you are creating a stream processor for detecting faces, you provide as
 //     input a Kinesis video stream ( Input ) and a Kinesis data stream ( Output )
-//     stream. You also specify the face recognition criteria in Settings . For
-//     example, the collection containing faces that you want to recognize. After you
-//     have finished analyzing a streaming video, use StopStreamProcessor to stop
-//     processing.
+//     stream for receiving the output. You must use the FaceSearch option in
+//     Settings , specifying the collection that contains the faces you want to
+//     recognize. After you have finished analyzing a streaming video, use
+//     StopStreamProcessor to stop processing.
 //   - If you are creating a stream processor to detect labels, you provide as
 //     input a Kinesis video stream ( Input ), Amazon S3 bucket information ( Output
 //     ), and an Amazon SNS topic ARN ( NotificationChannel ). You can also provide a
 //     KMS key ID to encrypt the data sent to your Amazon S3 bucket. You specify what
-//     you want to detect in ConnectedHomeSettings , such as people, packages and
-//     people, or pets, people, and packages. You can also specify where in the frame
-//     you want Amazon Rekognition to monitor with RegionsOfInterest . When you run
-//     the StartStreamProcessor operation on a label detection stream processor, you
-//     input start and stop information to determine the length of the processing time.
+//     you want to detect by using the ConnectedHome option in settings, and
+//     selecting one of the following: PERSON , PET , PACKAGE , ALL You can also
+//     specify where in the frame you want Amazon Rekognition to monitor with
+//     RegionsOfInterest . When you run the StartStreamProcessor operation on a label
+//     detection stream processor, you input start and stop information to determine
+//     the length of the processing time.
 //
 // Use Name to assign an identifier for the stream processor. You use Name to
 // manage the stream processor. For example, you can start processing the source

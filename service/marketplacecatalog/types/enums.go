@@ -44,6 +44,24 @@ func (FailureCode) Values() []FailureCode {
 	}
 }
 
+type OwnershipType string
+
+// Enum values for OwnershipType
+const (
+	OwnershipTypeSelf   OwnershipType = "SELF"
+	OwnershipTypeShared OwnershipType = "SHARED"
+)
+
+// Values returns all known values for OwnershipType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OwnershipType) Values() []OwnershipType {
+	return []OwnershipType{
+		"SELF",
+		"SHARED",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder

@@ -4397,7 +4397,7 @@ type HopDestination struct {
 	Queue *string
 
 	// Required for setting up a job to use queue hopping. Minimum wait time in
-	// minutes until the job can hop to the destination queue. Valid range is 1 to 1440
+	// minutes until the job can hop to the destination queue. Valid range is 1 to 4320
 	// minutes, inclusive.
 	WaitMinutes int32
 
@@ -4935,6 +4935,14 @@ type Job struct {
 	// Elemental MediaConvert costs on any billing report that you set up.
 	BillingTagsSource BillingTagsSource
 
+	// Prevent duplicate jobs from being created and ensure idempotency for your
+	// requests. A client request token can be any string that includes up to 64 ASCII
+	// characters. If you reuse a client request token within one minute of a
+	// successful request, the API returns the job details of the original request
+	// instead. For more information see
+	// https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.
+	ClientRequestToken *string
+
 	// The time, in Unix epoch format in seconds, when the job got created.
 	CreatedAt *time.Time
 
@@ -5013,6 +5021,11 @@ type Job struct {
 	// User-defined metadata that you want to associate with an MediaConvert job. You
 	// specify metadata in key/value pairs.
 	UserMetadata map[string]string
+
+	// Contains any warning messages for the job. Use to help identify potential
+	// issues with your input, output, or job. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html
+	Warnings []WarningGroup
 
 	noSmithyDocumentSerde
 }
@@ -8259,6 +8272,24 @@ type Vp9Settings struct {
 	// With the VP9 codec, you can use only the variable bitrate (VBR) rate control
 	// mode.
 	RateControlMode Vp9RateControlMode
+
+	noSmithyDocumentSerde
+}
+
+// Contains any warning codes and their count for the job.
+type WarningGroup struct {
+
+	// Warning code that identifies a specific warning in the job. For more
+	// information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html
+	//
+	// This member is required.
+	Code int32
+
+	// The number of times this warning occurred in the job.
+	//
+	// This member is required.
+	Count int32
 
 	noSmithyDocumentSerde
 }

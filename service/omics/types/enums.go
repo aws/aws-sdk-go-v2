@@ -641,7 +641,6 @@ const (
 	WorkflowStatusUpdating WorkflowStatus = "UPDATING"
 	WorkflowStatusDeleted  WorkflowStatus = "DELETED"
 	WorkflowStatusFailed   WorkflowStatus = "FAILED"
-	WorkflowStatusInactive WorkflowStatus = "INACTIVE"
 )
 
 // Values returns all known values for WorkflowStatus. Note that this can be
@@ -654,7 +653,6 @@ func (WorkflowStatus) Values() []WorkflowStatus {
 		"UPDATING",
 		"DELETED",
 		"FAILED",
-		"INACTIVE",
 	}
 }
 
@@ -663,7 +661,6 @@ type WorkflowType string
 // Enum values for WorkflowType
 const (
 	WorkflowTypePrivate WorkflowType = "PRIVATE"
-	WorkflowTypeService WorkflowType = "SERVICE"
 )
 
 // Values returns all known values for WorkflowType. Note that this can be
@@ -672,6 +669,5 @@ const (
 func (WorkflowType) Values() []WorkflowType {
 	return []WorkflowType{
 		"PRIVATE",
-		"SERVICE",
 	}
 }

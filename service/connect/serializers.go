@@ -14275,6 +14275,18 @@ func awsRestjson1_serializeDocumentControlPlaneTagFilter(v *types.ControlPlaneTa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCrossChannelBehavior(v *types.CrossChannelBehavior, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BehaviorType) > 0 {
+		ok := object.Key("BehaviorType")
+		ok.String(string(v.BehaviorType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCurrentMetric(v *types.CurrentMetric, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14830,6 +14842,13 @@ func awsRestjson1_serializeDocumentMediaConcurrency(v *types.MediaConcurrency, v
 	{
 		ok := object.Key("Concurrency")
 		ok.Integer(v.Concurrency)
+	}
+
+	if v.CrossChannelBehavior != nil {
+		ok := object.Key("CrossChannelBehavior")
+		if err := awsRestjson1_serializeDocumentCrossChannelBehavior(v.CrossChannelBehavior, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

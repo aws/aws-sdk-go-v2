@@ -90,6 +90,26 @@ func (m *validateOpCreateDataset) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFaceLivenessSession struct {
+}
+
+func (*validateOpCreateFaceLivenessSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFaceLivenessSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFaceLivenessSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFaceLivenessSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProject struct {
 }
 
@@ -585,6 +605,26 @@ func (m *validateOpGetFaceDetection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetFaceDetectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFaceLivenessSessionResults struct {
+}
+
+func (*validateOpGetFaceLivenessSessionResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFaceLivenessSessionResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFaceLivenessSessionResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFaceLivenessSessionResultsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1226,6 +1266,10 @@ func addOpCreateDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataset{}, middleware.After)
 }
 
+func addOpCreateFaceLivenessSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFaceLivenessSession{}, middleware.After)
+}
+
 func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProject{}, middleware.After)
 }
@@ -1324,6 +1368,10 @@ func addOpGetContentModerationValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetFaceDetectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFaceDetection{}, middleware.After)
+}
+
+func addOpGetFaceLivenessSessionResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFaceLivenessSessionResults{}, middleware.After)
 }
 
 func addOpGetFaceSearchValidationMiddleware(stack *middleware.Stack) error {
@@ -1465,6 +1513,23 @@ func validateConnectedHomeSettings(v *types.ConnectedHomeSettings) error {
 	}
 }
 
+func validateCreateFaceLivenessSessionRequestSettings(v *types.CreateFaceLivenessSessionRequestSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFaceLivenessSessionRequestSettings"}
+	if v.OutputConfig != nil {
+		if err := validateLivenessOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatasetChanges(v *types.DatasetChanges) error {
 	if v == nil {
 		return nil
@@ -1522,6 +1587,21 @@ func validateHumanLoopConfig(v *types.HumanLoopConfig) error {
 	}
 	if v.FlowDefinitionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowDefinitionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLivenessOutputConfig(v *types.LivenessOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LivenessOutputConfig"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1680,6 +1760,23 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 	}
 	if v.ProjectArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFaceLivenessSessionInput(v *CreateFaceLivenessSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFaceLivenessSessionInput"}
+	if v.Settings != nil {
+		if err := validateCreateFaceLivenessSessionRequestSettings(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2110,6 +2207,21 @@ func validateOpGetFaceDetectionInput(v *GetFaceDetectionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetFaceDetectionInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFaceLivenessSessionResultsInput(v *GetFaceLivenessSessionResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFaceLivenessSessionResultsInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

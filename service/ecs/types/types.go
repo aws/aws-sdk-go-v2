@@ -93,7 +93,7 @@ type AutoScalingGroupProvider struct {
 	// prevents the Amazon EC2 instances in an Auto Scaling group that contain tasks
 	// from being terminated during a scale-in action. The Auto Scaling group and each
 	// instance in the Auto Scaling group must have instance protection from scale-in
-	// actions enabled as well. For more information, see Instance Protection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
+	// actions on as well. For more information, see Instance Protection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
 	// in the Auto Scaling User Guide. When managed termination protection is off, your
 	// Amazon EC2 instances aren't protected from termination when the Auto Scaling
 	// group scales in.
@@ -425,8 +425,8 @@ type ClusterServiceConnectDefaultsRequest struct {
 	// you update the service with an empty string "" for the namespace name, the
 	// cluster configuration for Service Connect is removed. Note that the namespace
 	// will remain in Cloud Map and must be deleted separately. For more information
-	// about Cloud Map, see Working with Services (https://docs.aws.amazon.com/) in
-	// the Cloud Map Developer Guide.
+	// about Cloud Map, see Working with Services (https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html)
+	// in the Cloud Map Developer Guide.
 	//
 	// This member is required.
 	Namespace *string
@@ -438,14 +438,15 @@ type ClusterServiceConnectDefaultsRequest struct {
 // CloudWatch Container Insights for a cluster.
 type ClusterSetting struct {
 
-	// The name of the cluster setting. The only supported value is containerInsights .
+	// The name of the cluster setting. The value is containerInsights .
 	Name ClusterSettingName
 
 	// The value to set for the cluster setting. The supported values are enabled and
-	// disabled . If enabled is specified, CloudWatch Container Insights will be
-	// enabled for the cluster, otherwise it will be off unless the containerInsights
-	// account setting is turned on. If a cluster value is specified, it will override
-	// the containerInsights value set with PutAccountSetting (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html)
+	// disabled . If you set name to containerInsights and value to enabled ,
+	// CloudWatch Container Insights will be on for the cluster, otherwise it will be
+	// off unless the containerInsights account setting is turned on. If a cluster
+	// value is specified, it will override the containerInsights value set with
+	// PutAccountSetting (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html)
 	// or PutAccountSettingDefault (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html)
 	// .
 	Value *string
@@ -1333,9 +1334,9 @@ type Deployment struct {
 	// Balancer. The rollout state of the deployment. When a service deployment is
 	// started, it begins in an IN_PROGRESS state. When the service reaches a steady
 	// state, the deployment transitions to a COMPLETED state. If the service fails to
-	// reach a steady state and circuit breaker is enabled, the deployment transitions
-	// to a FAILED state. A deployment in FAILED state doesn't launch any new tasks.
-	// For more information, see DeploymentCircuitBreaker .
+	// reach a steady state and circuit breaker is turned on, the deployment
+	// transitions to a FAILED state. A deployment in FAILED state doesn't launch any
+	// new tasks. For more information, see DeploymentCircuitBreaker .
 	RolloutState DeploymentRolloutState
 
 	// A description of the rollout state of a deployment.
@@ -1411,10 +1412,10 @@ type DeploymentAlarms struct {
 // The deployment circuit breaker can only be used for services using the rolling
 // update ( ECS ) deployment type. The deployment circuit breaker determines
 // whether a service deployment will fail if the service can't reach a steady
-// state. If enabled, a service deployment will transition to a failed state and
-// stop launching new tasks. You can also configure Amazon ECS to roll back your
-// service to the last completed deployment after a failure. For more information,
-// see Rolling update (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
+// state. If it is turned on, a service deployment will transition to a failed
+// state and stop launching new tasks. You can also configure Amazon ECS to roll
+// back your service to the last completed deployment after a failure. For more
+// information, see Rolling update (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type DeploymentCircuitBreaker struct {
 
@@ -1606,17 +1607,17 @@ type EFSAuthorizationConfig struct {
 	// The Amazon EFS access point ID to use. If an access point is specified, the
 	// root directory value specified in the EFSVolumeConfiguration must either be
 	// omitted or set to / which will enforce the path set on the EFS access point. If
-	// an access point is used, transit encryption must be enabled in the
+	// an access point is used, transit encryption must be on in the
 	// EFSVolumeConfiguration . For more information, see Working with Amazon EFS
 	// access points (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html)
 	// in the Amazon Elastic File System User Guide.
 	AccessPointId *string
 
 	// Determines whether to use the Amazon ECS task role defined in a task definition
-	// when mounting the Amazon EFS file system. If enabled, transit encryption must be
-	// enabled in the EFSVolumeConfiguration . If this parameter is omitted, the
-	// default value of DISABLED is used. For more information, see Using Amazon EFS
-	// access points (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints)
+	// when mounting the Amazon EFS file system. If it is turned on, transit encryption
+	// must be turned on in the EFSVolumeConfiguration . If this parameter is omitted,
+	// the default value of DISABLED is used. For more information, see Using Amazon
+	// EFS access points (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Iam EFSAuthorizationConfigIAM
 
@@ -1645,9 +1646,10 @@ type EFSVolumeConfiguration struct {
 	RootDirectory *string
 
 	// Determines whether to use encryption for Amazon EFS data in transit between the
-	// Amazon ECS host and the Amazon EFS server. Transit encryption must be enabled if
-	// Amazon EFS IAM authorization is used. If this parameter is omitted, the default
-	// value of DISABLED is used. For more information, see Encrypting data in transit (https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html)
+	// Amazon ECS host and the Amazon EFS server. Transit encryption must be turned on
+	// if Amazon EFS IAM authorization is used. If this parameter is omitted, the
+	// default value of DISABLED is used. For more information, see Encrypting data in
+	// transit (https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html)
 	// in the Amazon Elastic File System User Guide.
 	TransitEncryption EFSTransitEncryption
 
@@ -1697,9 +1699,9 @@ type EnvironmentFile struct {
 // used to expand the total amount of ephemeral storage available, beyond the
 // default amount, for tasks hosted on Fargate. For more information, see Fargate
 // task storage (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
-// in the Amazon ECS User Guide for Fargate. This parameter is only supported for
-// tasks hosted on Fargate using Linux platform version 1.4.0 or later. This
-// parameter is not supported for Windows containers on Fargate.
+// in the Amazon ECS User Guide for Fargate. For tasks using the Fargate launch
+// type, the task requires the following platforms:
+//   - Linux platform version 1.4.0 or later.
 type EphemeralStorage struct {
 
 	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
@@ -2266,8 +2268,8 @@ type ManagedAgent struct {
 	// The last known status of the managed agent.
 	LastStatus *string
 
-	// The name of the managed agent. When the execute command feature is enabled, the
-	// managed agent name is ExecuteCommandAgent .
+	// The name of the managed agent. When the execute command feature is turned on,
+	// the managed agent name is ExecuteCommandAgent .
 	Name ManagedAgentName
 
 	// The reason for why the managed agent is in the state it is in.
@@ -2301,7 +2303,7 @@ type ManagedAgentStateChange struct {
 }
 
 // The managed scaling settings for the Auto Scaling group capacity provider. When
-// managed scaling is enabled, Amazon ECS manages the scale-in and scale-out
+// managed scaling is turned on, Amazon ECS manages the scale-in and scale-out
 // actions of the Auto Scaling group. Amazon ECS manages a target tracking scaling
 // policy using an Amazon ECS managed CloudWatch metric with the specified
 // targetCapacity value as the target value for the metric. For more information,
@@ -2587,8 +2589,8 @@ type PortMapping struct {
 	//   - For containers in a task with the awsvpc network mode, the hostPort is set
 	//   to the same value as the containerPort . This is a static mapping strategy.
 	//   - For containers in a task with the bridge network mode, the Amazon ECS agent
-	//   finds open ports on the host and automaticaly binds them to the container ports.
-	//   This is a dynamic mapping strategy.
+	//   finds open ports on the host and automatically binds them to the container
+	//   ports. This is a dynamic mapping strategy.
 	// If you use containers in a task with the awsvpc or host network mode, the
 	// hostPort can either be left blank or set to the same value as the containerPort
 	// . If you use containers in a task with the bridge network mode, you can specify
@@ -2738,7 +2740,7 @@ type Resource struct {
 // The type and amount of a resource to assign to a container. The supported
 // resource types are GPUs and Elastic Inference accelerators. For more
 // information, see Working with GPUs on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html)
-// or Working with Amazon Elastic Inference on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/url-ecs-dev;ecs-inference.html)
+// or Working with Amazon Elastic Inference on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
 // in the Amazon Elastic Container Service Developer Guide
 type ResourceRequirement struct {
 
@@ -2862,8 +2864,8 @@ type Service struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
-	// Determines whether the execute command functionality is enabled for the
-	// service. If true , the execute command functionality is enabled for all
+	// Determines whether the execute command functionality is turned on for the
+	// service. If true , the execute command functionality is turned on for all
 	// containers in tasks as part of the service.
 	EnableExecuteCommand bool
 
@@ -3075,8 +3077,8 @@ type ServiceConnectConfiguration struct {
 	// namespace for use with Service Connect. The namespace must be in the same Amazon
 	// Web Services Region as the Amazon ECS service and cluster. The type of namespace
 	// doesn't affect Service Connect. For more information about Cloud Map, see
-	// Working with Services (https://docs.aws.amazon.com/) in the Cloud Map Developer
-	// Guide.
+	// Working with Services (https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html)
+	// in the Cloud Map Developer Guide.
 	Namespace *string
 
 	// The list of Service Connect service objects. These are names and aliases (also
@@ -3367,9 +3369,8 @@ type Task struct {
 	// .
 	DesiredStatus *string
 
-	// Determines whether execute command functionality is enabled for this task. If
-	// true , execute command functionality is enabled on all the containers in the
-	// task.
+	// Determines whether execute command functionality is turned on for this task. If
+	// true , execute command functionality is turned on all the containers in the task.
 	EnableExecuteCommand bool
 
 	// The ephemeral storage settings for the task.
@@ -3744,8 +3745,8 @@ type TaskDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing a constraint on task placement in the task definition.
-// For more information, see Task placement constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
+// The constraint on task placement in the task definition. For more information,
+// see Task placement constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide. Task placement
 // constraints aren't supported for tasks run on Fargate.
 type TaskDefinitionPlacementConstraint struct {

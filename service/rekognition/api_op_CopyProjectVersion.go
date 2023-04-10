@@ -26,7 +26,8 @@ import (
 // already exist. Copying a model version takes a while to complete. To get the
 // current status, call DescribeProjectVersions and check the value of Status in
 // the ProjectVersionDescription object. The copy operation has finished when the
-// value of Status is COPYING_COMPLETED .
+// value of Status is COPYING_COMPLETED . This operation requires permissions to
+// perform the rekognition:CopyProjectVersion action.
 func (c *Client) CopyProjectVersion(ctx context.Context, params *CopyProjectVersionInput, optFns ...func(*Options)) (*CopyProjectVersionOutput, error) {
 	if params == nil {
 		params = &CopyProjectVersionInput{}

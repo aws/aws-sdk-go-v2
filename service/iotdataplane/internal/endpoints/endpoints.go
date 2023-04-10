@@ -330,7 +330,10 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
 				Region: "cn-north-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname:  "data.ats.iot.cn-north-1.amazonaws.com.cn",
+				Protocols: []string{"https"},
+			},
 			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
 			}: endpoints.Endpoint{},

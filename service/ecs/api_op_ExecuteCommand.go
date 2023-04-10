@@ -16,7 +16,7 @@ import (
 // example limit the actions to a specific cluster, you receive an
 // AccessDeniedException when there is a mismatch between the condition key value
 // and the corresponding parameter value. For information about required
-// permissions and considerations, see Using Amazon ECS Exec for debugging (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.htm)
+// permissions and considerations, see Using Amazon ECS Exec for debugging (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html)
 // in the Amazon ECS Developer Guide.
 func (c *Client) ExecuteCommand(ctx context.Context, params *ExecuteCommandInput, optFns ...func(*Options)) (*ExecuteCommandOutput, error) {
 	if params == nil {

@@ -93,8 +93,8 @@ type RegisterTaskDefinitionInput struct {
 	// used to expand the total amount of ephemeral storage available, beyond the
 	// default amount, for tasks hosted on Fargate. For more information, see Fargate
 	// task storage (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
-	// in the Amazon ECS User Guide for Fargate. This parameter is only supported for
-	// tasks hosted on Fargate using the following platform versions:
+	// in the Amazon ECS User Guide for Fargate. For tasks using the Fargate launch
+	// type, the task requires the following platforms:
 	//   - Linux platform version 1.4.0 or later.
 	EphemeralStorage *types.EphemeralStorage
 

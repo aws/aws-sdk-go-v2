@@ -33,7 +33,7 @@ import (
 // labels returned. The default is 55%. You can also add the MaxLabels parameter
 // to limit the number of labels returned. The default and upper limit is 1000
 // labels. Response Elements For each object, scene, and concept the API returns
-// one or more labels. The API returns the following types of information regarding
+// one or more labels. The API returns the following types of information about
 // labels:
 //   - Name - The name of the detected label.
 //   - Confidence - The level of confidence in the label assigned to a detected
@@ -82,8 +82,8 @@ import (
 // {Name: tulip,Confidence: 99.0562} In this example, the detection algorithm more
 // precisely identifies the flower as a tulip. If the object detected is a person,
 // the operation doesn't provide the same facial details that the DetectFaces
-// operation provides. This is a stateless API operation. That is, the operation
-// does not persist any data. This operation requires permissions to perform the
+// operation provides. This is a stateless API operation that doesn't return any
+// data. This operation requires permissions to perform the
 // rekognition:DetectLabels action.
 func (c *Client) DetectLabels(ctx context.Context, params *DetectLabelsInput, optFns ...func(*Options)) (*DetectLabelsOutput, error) {
 	if params == nil {
@@ -132,7 +132,8 @@ type DetectLabelsInput struct {
 	// properties. Specified filters can be inclusive, exclusive, or a combination of
 	// both. Filters can be used for individual labels or label categories. The exact
 	// label names or label categories must be supplied. For a full list of labels and
-	// label categories, see LINK HERE.
+	// label categories, see Detecting labels (https://docs.aws.amazon.com/rekognition/latest/dg/labels.html)
+	// .
 	Settings *types.DetectLabelsSettings
 
 	noSmithyDocumentSerde

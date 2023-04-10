@@ -151,7 +151,7 @@ type CreateServiceInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
-	// Determines whether the execute command functionality is enabled for the
+	// Determines whether the execute command functionality is turned on for the
 	// service. If true , this enables execute command functionality on all containers
 	// in the service tasks.
 	EnableExecuteCommand bool
@@ -334,7 +334,9 @@ type CreateServiceInput struct {
 	// The family and revision ( family:revision ) or full ARN of the task definition
 	// to run in your service. If a revision isn't specified, the latest ACTIVE
 	// revision is used. A task definition must be specified if the service uses either
-	// the ECS or CODE_DEPLOY deployment controllers.
+	// the ECS or CODE_DEPLOY deployment controllers. For more information about
+	// deployment types, see Amazon ECS deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+	// .
 	TaskDefinition *string
 
 	noSmithyDocumentSerde

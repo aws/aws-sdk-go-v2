@@ -16,7 +16,7 @@ import (
 // Autoscaling (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html)
 // or deployments (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // . Task-protection, by default, expires after 2 hours at which point Amazon ECS
-// unsets the protectionEnabled property making the task eligible for termination
+// clears the protectionEnabled property making the task eligible for termination
 // by a subsequent scale-in event. You can specify a custom expiration period for
 // task protection from 1 minute to up to 2,880 minutes (48 hours). To specify the
 // custom expiration period, set the expiresInMinutes property. The
@@ -84,7 +84,8 @@ type UpdateTaskProtectionOutput struct {
 	// A list of tasks with the following information.
 	//   - taskArn : The task ARN.
 	//   - protectionEnabled : The protection status of the task. If scale-in
-	//   protection is enabled for a task, the value is true . Otherwise, it is false .
+	//   protection is turned on for a task, the value is true . Otherwise, it is false
+	//   .
 	//   - expirationDate : The epoch time when protection for the task will expire.
 	ProtectedTasks []types.ProtectedTask
 

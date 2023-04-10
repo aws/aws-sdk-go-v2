@@ -11,13 +11,21 @@ type Change struct {
 
 	// Change types are single string values that describe your intention for the
 	// change. Each change type is unique for each EntityType provided in the change's
-	// scope.
+	// scope. For more information on change types available for single-AMI products,
+	// see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
+	// . Also, for more information on change types available for container-based
+	// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
+	// .
 	//
 	// This member is required.
 	ChangeType *string
 
 	// This object contains details specific to the change type of the requested
-	// change.
+	// change. For more information on change types available for single-AMI products,
+	// see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
+	// . Also, for more information on change types available for container-based
+	// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
+	// .
 	//
 	// This member is required.
 	Details *string

@@ -42,8 +42,8 @@ type GetMetricDataV2Input struct {
 
 	// The timestamp, in UNIX Epoch time format, at which to end the reporting
 	// interval for the retrieval of historical metrics data. The time must be later
-	// than the start time timestamp. The time range between the start and end time
-	// must be less than 24 hours.
+	// than the start time timestamp. It cannot be later than the current timestamp.
+	// The time range between the start and end time must be less than 24 hours.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -124,11 +124,15 @@ type GetMetricDataV2Input struct {
 	// Profile Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
 	// SUM_CONTACTS_ANSWERED_IN_X Unit: Count Valid groupings and filters: Queue,
-	// Channel, Routing Profile SUM_CONTACTS_ABANDONED_IN_X Unit: Count Valid groupings
-	// and filters: Queue, Channel, Routing Profile SUM_CONTACTS_DISCONNECTED Valid
-	// metric filter key: DISCONNECT_REASON Unit: Count Valid groupings and filters:
-	// Queue, Channel, Routing Profile SUM_RETRY_CALLBACK_ATTEMPTS Unit: Count Valid
-	// groupings and filters: Queue, Channel, Routing Profile
+	// Channel, Routing Profile Threshold: For ThresholdValue , enter any whole number
+	// from 1 to 604800 (inclusive), in seconds. For Comparison , you must enter LT
+	// (for "Less than"). SUM_CONTACTS_ABANDONED_IN_X Unit: Count Valid groupings and
+	// filters: Queue, Channel, Routing Profile Threshold: For ThresholdValue , enter
+	// any whole number from 1 to 604800 (inclusive), in seconds. For Comparison , you
+	// must enter LT (for "Less than"). SUM_CONTACTS_DISCONNECTED Valid metric filter
+	// key: DISCONNECT_REASON Unit: Count Valid groupings and filters: Queue, Channel,
+	// Routing Profile SUM_RETRY_CALLBACK_ATTEMPTS Unit: Count Valid groupings and
+	// filters: Queue, Channel, Routing Profile
 	//
 	// This member is required.
 	Metrics []types.MetricV2

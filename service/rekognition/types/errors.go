@@ -552,6 +552,35 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Occurs when a given sessionId is not found.
+type SessionNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code   *string
+	Logref *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SessionNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SessionNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SessionNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SessionNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SessionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Amazon Rekognition is temporarily unable to process the request. Try your call
 // again.
 type ThrottlingException struct {

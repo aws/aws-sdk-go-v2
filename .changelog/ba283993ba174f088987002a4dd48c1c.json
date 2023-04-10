@@ -1,0 +1,8 @@
+{
+    "id": "ba283993-ba17-4f08-8987-002a4dd48c1c",
+    "type": "feature",
+    "description": "Remove unexpected API changes.",
+    "modules": [
+        "service/omics"
+    ]
+}

@@ -4064,6 +4064,21 @@ func validateContactReferences(v map[string]types.Reference) error {
 	}
 }
 
+func validateCrossChannelBehavior(v *types.CrossChannelBehavior) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CrossChannelBehavior"}
+	if len(v.BehaviorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BehaviorType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDistribution(v *types.Distribution) error {
 	if v == nil {
 		return nil
@@ -4374,6 +4389,11 @@ func validateMediaConcurrency(v *types.MediaConcurrency) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MediaConcurrency"}
 	if len(v.Channel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if v.CrossChannelBehavior != nil {
+		if err := validateCrossChannelBehavior(v.CrossChannelBehavior); err != nil {
+			invalidParams.AddNested("CrossChannelBehavior", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

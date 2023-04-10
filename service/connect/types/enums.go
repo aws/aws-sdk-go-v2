@@ -62,6 +62,24 @@ func (AgentStatusType) Values() []AgentStatusType {
 	}
 }
 
+type BehaviorType string
+
+// Enum values for BehaviorType
+const (
+	BehaviorTypeRouteCurrentChannelOnly BehaviorType = "ROUTE_CURRENT_CHANNEL_ONLY"
+	BehaviorTypeRouteAnyChannel         BehaviorType = "ROUTE_ANY_CHANNEL"
+)
+
+// Values returns all known values for BehaviorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BehaviorType) Values() []BehaviorType {
+	return []BehaviorType{
+		"ROUTE_CURRENT_CHANNEL_ONLY",
+		"ROUTE_ANY_CHANNEL",
+	}
+}
+
 type Channel string
 
 // Enum values for Channel
