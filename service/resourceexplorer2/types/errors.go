@@ -27,16 +27,16 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You tried to create a new view or index when one already exists, and you either
-// didn't specify or specified a different idempotency token as the original
-// request.
+// The request failed because either you specified parameters that didn’t match the
+// original request, or you attempted to create a view with a name that already
+// exists in this Amazon Web Services Region.
 type ConflictException struct {
 	Message *string
 
@@ -55,7 +55,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerException"
 	}
 	return *e.ErrorCodeOverride
@@ -109,7 +109,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -138,7 +138,7 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceQuotaExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -166,7 +166,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -192,7 +192,7 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -221,7 +221,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

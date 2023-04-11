@@ -57,8 +57,17 @@ type PutTemplateActionInput struct {
 	// Template post migration custom action active status.
 	Active *bool
 
+	// Template post migration custom action category.
+	Category types.ActionCategory
+
+	// Template post migration custom action description.
+	Description *string
+
 	// Template post migration custom action document version.
 	DocumentVersion *string
+
+	// Template post migration custom action external parameters.
+	ExternalParameters map[string]types.SsmExternalParameter
 
 	// Template post migration custom action must succeed for cutover.
 	MustSucceedForCutover *bool
@@ -86,11 +95,20 @@ type PutTemplateActionOutput struct {
 	// Template post migration custom action active status.
 	Active *bool
 
+	// Template post migration custom action category.
+	Category types.ActionCategory
+
+	// Template post migration custom action description.
+	Description *string
+
 	// Template post migration custom action document identifier.
 	DocumentIdentifier *string
 
 	// Template post migration custom action document version.
 	DocumentVersion *string
+
+	// Template post migration custom action external parameters.
+	ExternalParameters map[string]types.SsmExternalParameter
 
 	// Template post migration custom action must succeed for cutover.
 	MustSucceedForCutover *bool

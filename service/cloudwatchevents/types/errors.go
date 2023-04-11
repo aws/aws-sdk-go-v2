@@ -26,7 +26,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *IllegalStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *InvalidEventPatternException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventPatternException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEventPatternException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *InvalidStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -158,7 +158,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -189,7 +189,7 @@ func (e *ManagedRuleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ManagedRuleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ManagedRuleException"
 	}
 	return *e.ErrorCodeOverride
@@ -215,7 +215,7 @@ func (e *OperationDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationDisabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationDisabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -241,7 +241,7 @@ func (e *PolicyLengthExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyLengthExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyLengthExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -267,7 +267,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -293,7 +293,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride

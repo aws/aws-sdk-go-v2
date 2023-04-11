@@ -39,7 +39,7 @@ type StartFraudsterRegistrationJobInput struct {
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The identifier of the domain containing the fraudster registration job and in
+	// The identifier of the domain that contains the fraudster registration job and in
 	// which the fraudsters are registered.
 	//
 	// This member is required.
@@ -57,8 +57,11 @@ type StartFraudsterRegistrationJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// The idempotency token for starting a new fraudster registration job. If not
-	// provided, Amazon Web Services SDK populates this field.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
 	ClientToken *string
 
 	// The name of the new fraudster registration job.

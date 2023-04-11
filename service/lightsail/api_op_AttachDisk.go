@@ -49,6 +49,11 @@ type AttachDiskInput struct {
 	// This member is required.
 	InstanceName *string
 
+	// A Boolean value used to determine the automatic mounting of a storage volume to
+	// a virtual computer. The default value is False. This value only applies to
+	// Lightsail for Research resources.
+	AutoMounting *bool
+
 	noSmithyDocumentSerde
 }
 

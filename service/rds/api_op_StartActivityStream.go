@@ -60,8 +60,8 @@ type StartActivityStreamInput struct {
 	ApplyImmediately *bool
 
 	// Specifies whether the database activity stream includes engine-native audit
-	// fields. This option only applies to an Oracle DB instance. By default, no
-	// engine-native audit fields are included.
+	// fields. This option applies to an Oracle or Microsoft SQL Server DB instance. By
+	// default, no engine-native audit fields are included.
 	EngineNativeAuditFieldsIncluded *bool
 
 	noSmithyDocumentSerde

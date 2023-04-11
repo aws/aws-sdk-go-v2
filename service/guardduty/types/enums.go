@@ -20,6 +20,26 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type AutoEnableMembers string
+
+// Enum values for AutoEnableMembers
+const (
+	AutoEnableMembersNew  AutoEnableMembers = "NEW"
+	AutoEnableMembersAll  AutoEnableMembers = "ALL"
+	AutoEnableMembersNone AutoEnableMembers = "NONE"
+)
+
+// Values returns all known values for AutoEnableMembers. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoEnableMembers) Values() []AutoEnableMembers {
+	return []AutoEnableMembers{
+		"NEW",
+		"ALL",
+		"NONE",
+	}
+}
+
 type CriterionKey string
 
 // Enum values for CriterionKey
@@ -106,6 +126,56 @@ func (DestinationType) Values() []DestinationType {
 	}
 }
 
+type DetectorFeature string
+
+// Enum values for DetectorFeature
+const (
+	DetectorFeatureS3DataEvents         DetectorFeature = "S3_DATA_EVENTS"
+	DetectorFeatureEksAuditLogs         DetectorFeature = "EKS_AUDIT_LOGS"
+	DetectorFeatureEbsMalwareProtection DetectorFeature = "EBS_MALWARE_PROTECTION"
+	DetectorFeatureRdsLoginEvents       DetectorFeature = "RDS_LOGIN_EVENTS"
+)
+
+// Values returns all known values for DetectorFeature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DetectorFeature) Values() []DetectorFeature {
+	return []DetectorFeature{
+		"S3_DATA_EVENTS",
+		"EKS_AUDIT_LOGS",
+		"EBS_MALWARE_PROTECTION",
+		"RDS_LOGIN_EVENTS",
+	}
+}
+
+type DetectorFeatureResult string
+
+// Enum values for DetectorFeatureResult
+const (
+	DetectorFeatureResultFlowLogs             DetectorFeatureResult = "FLOW_LOGS"
+	DetectorFeatureResultCloudTrail           DetectorFeatureResult = "CLOUD_TRAIL"
+	DetectorFeatureResultDnsLogs              DetectorFeatureResult = "DNS_LOGS"
+	DetectorFeatureResultS3DataEvents         DetectorFeatureResult = "S3_DATA_EVENTS"
+	DetectorFeatureResultEksAuditLogs         DetectorFeatureResult = "EKS_AUDIT_LOGS"
+	DetectorFeatureResultEbsMalwareProtection DetectorFeatureResult = "EBS_MALWARE_PROTECTION"
+	DetectorFeatureResultRdsLoginEvents       DetectorFeatureResult = "RDS_LOGIN_EVENTS"
+)
+
+// Values returns all known values for DetectorFeatureResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DetectorFeatureResult) Values() []DetectorFeatureResult {
+	return []DetectorFeatureResult{
+		"FLOW_LOGS",
+		"CLOUD_TRAIL",
+		"DNS_LOGS",
+		"S3_DATA_EVENTS",
+		"EKS_AUDIT_LOGS",
+		"EBS_MALWARE_PROTECTION",
+		"RDS_LOGIN_EVENTS",
+	}
+}
+
 type DetectorStatus string
 
 // Enum values for DetectorStatus
@@ -139,6 +209,24 @@ func (EbsSnapshotPreservation) Values() []EbsSnapshotPreservation {
 	return []EbsSnapshotPreservation{
 		"NO_RETENTION",
 		"RETENTION_WITH_FINDING",
+	}
+}
+
+type FeatureStatus string
+
+// Enum values for FeatureStatus
+const (
+	FeatureStatusEnabled  FeatureStatus = "ENABLED"
+	FeatureStatusDisabled FeatureStatus = "DISABLED"
+)
+
+// Values returns all known values for FeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureStatus) Values() []FeatureStatus {
+	return []FeatureStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -214,6 +302,34 @@ func (FindingStatisticType) Values() []FindingStatisticType {
 	}
 }
 
+type FreeTrialFeatureResult string
+
+// Enum values for FreeTrialFeatureResult
+const (
+	FreeTrialFeatureResultFlowLogs             FreeTrialFeatureResult = "FLOW_LOGS"
+	FreeTrialFeatureResultCloudTrail           FreeTrialFeatureResult = "CLOUD_TRAIL"
+	FreeTrialFeatureResultDnsLogs              FreeTrialFeatureResult = "DNS_LOGS"
+	FreeTrialFeatureResultS3DataEvents         FreeTrialFeatureResult = "S3_DATA_EVENTS"
+	FreeTrialFeatureResultEksAuditLogs         FreeTrialFeatureResult = "EKS_AUDIT_LOGS"
+	FreeTrialFeatureResultEbsMalwareProtection FreeTrialFeatureResult = "EBS_MALWARE_PROTECTION"
+	FreeTrialFeatureResultRdsLoginEvents       FreeTrialFeatureResult = "RDS_LOGIN_EVENTS"
+)
+
+// Values returns all known values for FreeTrialFeatureResult. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FreeTrialFeatureResult) Values() []FreeTrialFeatureResult {
+	return []FreeTrialFeatureResult{
+		"FLOW_LOGS",
+		"CLOUD_TRAIL",
+		"DNS_LOGS",
+		"S3_DATA_EVENTS",
+		"EKS_AUDIT_LOGS",
+		"EBS_MALWARE_PROTECTION",
+		"RDS_LOGIN_EVENTS",
+	}
+}
+
 type IpSetFormat string
 
 // Enum values for IpSetFormat
@@ -283,6 +399,46 @@ func (OrderBy) Values() []OrderBy {
 	return []OrderBy{
 		"ASC",
 		"DESC",
+	}
+}
+
+type OrgFeature string
+
+// Enum values for OrgFeature
+const (
+	OrgFeatureS3DataEvents         OrgFeature = "S3_DATA_EVENTS"
+	OrgFeatureEksAuditLogs         OrgFeature = "EKS_AUDIT_LOGS"
+	OrgFeatureEbsMalwareProtection OrgFeature = "EBS_MALWARE_PROTECTION"
+	OrgFeatureRdsLoginEvents       OrgFeature = "RDS_LOGIN_EVENTS"
+)
+
+// Values returns all known values for OrgFeature. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OrgFeature) Values() []OrgFeature {
+	return []OrgFeature{
+		"S3_DATA_EVENTS",
+		"EKS_AUDIT_LOGS",
+		"EBS_MALWARE_PROTECTION",
+		"RDS_LOGIN_EVENTS",
+	}
+}
+
+type OrgFeatureStatus string
+
+// Enum values for OrgFeatureStatus
+const (
+	OrgFeatureStatusNew  OrgFeatureStatus = "NEW"
+	OrgFeatureStatusNone OrgFeatureStatus = "NONE"
+)
+
+// Values returns all known values for OrgFeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OrgFeatureStatus) Values() []OrgFeatureStatus {
+	return []OrgFeatureStatus{
+		"NEW",
+		"NONE",
 	}
 }
 
@@ -416,6 +572,38 @@ func (ThreatIntelSetStatus) Values() []ThreatIntelSetStatus {
 	}
 }
 
+type UsageFeature string
+
+// Enum values for UsageFeature
+const (
+	UsageFeatureFlowLogs             UsageFeature = "FLOW_LOGS"
+	UsageFeatureCloudTrail           UsageFeature = "CLOUD_TRAIL"
+	UsageFeatureDnsLogs              UsageFeature = "DNS_LOGS"
+	UsageFeatureS3DataEvents         UsageFeature = "S3_DATA_EVENTS"
+	UsageFeatureEksAuditLogs         UsageFeature = "EKS_AUDIT_LOGS"
+	UsageFeatureEbsMalwareProtection UsageFeature = "EBS_MALWARE_PROTECTION"
+	UsageFeatureRdsLoginEvents       UsageFeature = "RDS_LOGIN_EVENTS"
+	UsageFeatureLambdaNetworkLogs    UsageFeature = "LAMBDA_NETWORK_LOGS"
+	UsageFeatureEksRuntimeMonitoring UsageFeature = "EKS_RUNTIME_MONITORING"
+)
+
+// Values returns all known values for UsageFeature. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UsageFeature) Values() []UsageFeature {
+	return []UsageFeature{
+		"FLOW_LOGS",
+		"CLOUD_TRAIL",
+		"DNS_LOGS",
+		"S3_DATA_EVENTS",
+		"EKS_AUDIT_LOGS",
+		"EBS_MALWARE_PROTECTION",
+		"RDS_LOGIN_EVENTS",
+		"LAMBDA_NETWORK_LOGS",
+		"EKS_RUNTIME_MONITORING",
+	}
+}
+
 type UsageStatisticType string
 
 // Enum values for UsageStatisticType
@@ -424,6 +612,7 @@ const (
 	UsageStatisticTypeSumByDataSource UsageStatisticType = "SUM_BY_DATA_SOURCE"
 	UsageStatisticTypeSumByResource   UsageStatisticType = "SUM_BY_RESOURCE"
 	UsageStatisticTypeTopResources    UsageStatisticType = "TOP_RESOURCES"
+	UsageStatisticTypeSumByFeatures   UsageStatisticType = "SUM_BY_FEATURES"
 )
 
 // Values returns all known values for UsageStatisticType. Note that this can be
@@ -435,5 +624,6 @@ func (UsageStatisticType) Values() []UsageStatisticType {
 		"SUM_BY_DATA_SOURCE",
 		"SUM_BY_RESOURCE",
 		"TOP_RESOURCES",
+		"SUM_BY_FEATURES",
 	}
 }

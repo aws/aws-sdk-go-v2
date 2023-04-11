@@ -117,14 +117,14 @@
                     "name": "iottwinmaker"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>IoT TwinMaker is a service that enables you to build operational digital twins of\n         physical systems. IoT TwinMaker overlays measurements and analysis from real-world sensors,\n         cameras, and enterprise applications so you can create data visualizations to monitor your\n         physical factory, building, or industrial plant. You can use this real-world data to\n         monitor operations and diagnose and repair errors.</p>",
+                "smithy.api#documentation": "<p>IoT TwinMaker is a service with which you\n         can\n         build operational digital twins of physical systems. IoT TwinMaker overlays measurements\n         and analysis from real-world sensors, cameras, and enterprise applications so you can\n         create data visualizations to monitor your physical factory, building, or industrial plant.\n         You can use this real-world data to monitor operations and diagnose and repair\n         errors.</p>",
                 "smithy.api#title": "AWS IoT TwinMaker",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -153,15 +153,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -170,7 +222,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -180,22 +232,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://iottwinmaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://iottwinmaker-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -208,134 +395,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://iottwinmaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://iottwinmaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -343,7 +448,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://iottwinmaker-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://iottwinmaker.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -352,74 +457,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://iottwinmaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://iottwinmaker.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -428,42 +472,29 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://iottwinmaker-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker.eu-central-1.api.aws"
+                                    "url": "https://iottwinmaker.ap-southeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -480,97 +511,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
                             "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -584,107 +524,29 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://iottwinmaker-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker.ap-southeast-1.amazonaws.com"
+                                    "url": "https://iottwinmaker.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "us-east-1"
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://iottwinmaker-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://iottwinmaker.ap-southeast-2.amazonaws.com"
+                                    "url": "https://iottwinmaker.us-west-2.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -727,20 +589,207 @@
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://iottwinmaker.us-east-1.amazonaws.com"
+                                    "url": "https://iottwinmaker-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker.cn-north-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iottwinmaker.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -750,6 +799,19 @@
                                 "UseFIPS": false,
                                 "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -775,6 +837,12 @@
                                 "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -815,7 +883,7 @@
                 "entry": {
                     "target": "com.amazonaws.iottwinmaker#PropertyValueEntry",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about errors returned by the <code>BatchPutProperty</code> action.</p>",
+                        "smithy.api#documentation": "<p>An object that contains information about errors returned by the\n            <code>BatchPutProperty</code> action.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -836,7 +904,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information about errors returned by the <code>BatchPutProperty</code> action.</p>"
+                "smithy.api#documentation": "<p>An object that contains information about errors returned by the\n            <code>BatchPutProperty</code> action.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#BatchPutPropertyValues": {
@@ -887,7 +955,7 @@
                 "entries": {
                     "target": "com.amazonaws.iottwinmaker#Entries",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the property value entries to set. Each string \n       in the mapping must be unique to this object.</p>",
+                        "smithy.api#documentation": "<p>An object that maps strings to the property value entries to set. Each string in the\n         mapping must be unique to this object.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -926,7 +994,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about pricing bundle.</p>"
+                "smithy.api#documentation": "<p>Information about the pricing bundle.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#BundleName": {
@@ -1013,7 +1081,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p>The component property group request.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#ComponentPropertyGroupRequests": {
@@ -1045,7 +1113,7 @@
                 "isInherited": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property group is inherited from a parent entity</p>",
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property group is inherited from a parent\n         entity</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1081,7 +1149,7 @@
                 "properties": {
                     "target": "com.amazonaws.iottwinmaker#PropertyRequests",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the properties to set in the component type. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the properties to set in the component type. Each string\n         in the mapping must be unique to this object.</p>"
                     }
                 },
                 "propertyGroups": {
@@ -1131,7 +1199,7 @@
                 "properties": {
                     "target": "com.amazonaws.iottwinmaker#PropertyResponses",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the properties to set in the component type. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the properties to set in the component type. Each string\n         in the mapping must be unique to this object.</p>"
                     }
                 },
                 "propertyGroups": {
@@ -1148,7 +1216,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that returns information about a component type create or update request.</p>"
+                "smithy.api#documentation": "<p>An object that returns information about a component type create or update\n         request.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#ComponentTypeId": {
@@ -1255,7 +1323,7 @@
                 "propertyUpdates": {
                     "target": "com.amazonaws.iottwinmaker#PropertyRequests",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the properties to set in the component type update. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the properties to set in the component type update. Each\n         string in the mapping must be unique to this object.</p>"
                     }
                 },
                 "propertyGroupUpdates": {
@@ -1437,7 +1505,7 @@
                 "propertyDefinitions": {
                     "target": "com.amazonaws.iottwinmaker#PropertyDefinitionsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the property definitions in the component type. Each string \n      in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the property definitions in the component type. Each\n         string in the mapping must be unique to this object.</p>"
                     }
                 },
                 "extendsFrom": {
@@ -1571,7 +1639,7 @@
                 "components": {
                     "target": "com.amazonaws.iottwinmaker#ComponentsMapRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the components in the entity. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the components in the entity. Each string in the mapping\n         must be unique to this object.</p>"
                     }
                 },
                 "parentEntityId": {
@@ -1703,6 +1771,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata that you can use to manage the scene.</p>"
                     }
+                },
+                "sceneMetadata": {
+                    "target": "com.amazonaws.iottwinmaker#SceneMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request metadata.</p>"
+                    }
                 }
             }
         },
@@ -1771,7 +1845,7 @@
                 "workspaceId": {
                     "target": "com.amazonaws.iottwinmaker#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workspace Id.</p>",
+                        "smithy.api#documentation": "<p>The workspace ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1779,7 +1853,7 @@
                 "syncSource": {
                     "target": "com.amazonaws.iottwinmaker#SyncSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sync source.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The sync source.</p>\n         <note>\n            <p>Currently the only supported syncSoource is <code>SITEWISE </code>.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1787,7 +1861,7 @@
                 "syncRole": {
                     "target": "com.amazonaws.iottwinmaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SyncJob IAM role. This IAM role is used by the sync job to read from the syncSource, and create, \n         update or delete the corresponding resources.</p>",
+                        "smithy.api#documentation": "<p>The SyncJob IAM role. This IAM role is used by the SyncJob to read from the syncSource,\n         and create, update, or delete the corresponding resources.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1885,7 +1959,7 @@
                 "s3Location": {
                     "target": "com.amazonaws.iottwinmaker#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are stored.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are\n         stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1935,7 +2009,7 @@
                 "isNative": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the data connector is native to IoT TwinMaker.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the data connector is native to IoT\n         TwinMaker.</p>"
                     }
                 }
             },
@@ -2326,7 +2400,7 @@
                 "workspaceId": {
                     "target": "com.amazonaws.iottwinmaker#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workspace Id.</p>",
+                        "smithy.api#documentation": "<p>The workspace ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2334,7 +2408,7 @@
                 "syncSource": {
                     "target": "com.amazonaws.iottwinmaker#SyncSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sync source.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The sync source.</p>\n         <note>\n            <p>Currently the only supported syncSource is <code>SITEWISE </code>.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2452,7 +2526,7 @@
                 "externalIdProperty": {
                     "target": "com.amazonaws.iottwinmaker#ExternalIdProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>A mapping of external IDs to property names. External IDs uniquely identify properties from external data stores.</p>"
+                        "smithy.api#documentation": "<p>A mapping of external IDs to property names. External IDs uniquely identify properties\n         from external data stores.</p>"
                     }
                 },
                 "entityId": {
@@ -2671,7 +2745,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Run queries to access information from your knowledge graph of entities within individual workspaces.</p>",
+                "smithy.api#documentation": "<p>Run queries to access information from your knowledge graph of entities within\n         individual workspaces.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "api."
                 },
@@ -2707,7 +2781,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#QueryServiceMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p> \n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
                     }
                 },
                 "nextToken": {
@@ -2842,6 +2916,21 @@
                 "target": "com.amazonaws.iottwinmaker#FunctionResponse"
             }
         },
+        "com.amazonaws.iottwinmaker#GeneratedSceneMetadataMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iottwinmaker#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.iottwinmaker#SceneMetadataValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.iottwinmaker#GetComponentType": {
             "type": "operation",
             "input": {
@@ -2913,7 +3002,7 @@
                 "isSingleton": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether an entity can have more than one component of this\n         type.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether an entity can have more than one component of\n         this type.</p>"
                     }
                 },
                 "componentTypeId": {
@@ -2932,7 +3021,7 @@
                 "propertyDefinitions": {
                     "target": "com.amazonaws.iottwinmaker#PropertyDefinitionsResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the property definitions in the component type. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the property definitions in the component type. Each\n         string in the mapping must be unique to this object.</p>"
                     }
                 },
                 "extendsFrom": {
@@ -2944,7 +3033,7 @@
                 "functions": {
                     "target": "com.amazonaws.iottwinmaker#FunctionsResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the functions in the component type. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the functions in the component type. Each string in the\n         mapping must be unique to this object.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -2977,7 +3066,7 @@
                 "isSchemaInitialized": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the component type has a schema initializer and that the \n      schema initializer has run.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the component type has a schema initializer and\n         that the schema initializer has run.</p>"
                     }
                 },
                 "status": {
@@ -2995,7 +3084,7 @@
                 "syncSource": {
                     "target": "com.amazonaws.iottwinmaker#SyncSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The syncSource of the sync job, if this entity was created by a sync job.</p>"
+                        "smithy.api#documentation": "<p>The syncSource of the SyncJob, if this entity was created by a SyncJob.</p>"
                     }
                 },
                 "componentTypeName": {
@@ -3111,7 +3200,7 @@
                 "components": {
                     "target": "com.amazonaws.iottwinmaker#ComponentsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the components in the entity. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the components in the entity. Each string in the mapping\n         must be unique to this object.</p>"
                     }
                 },
                 "parentEntityId": {
@@ -3239,7 +3328,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the property values for a component, component type, entity, or workspace.</p>\n         <p>You must specify a value for either <code>componentName</code>, <code>componentTypeId</code>, <code>entityId</code>, or <code>workspaceId</code>.</p>",
+                "smithy.api#documentation": "<p>Gets the property values for a component, component type, entity, or workspace.</p>\n         <p>You must specify a value for either <code>componentName</code>,\n            <code>componentTypeId</code>, <code>entityId</code>, or <code>workspaceId</code>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -3287,7 +3376,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the history of a time series property value for a component, component type, entity, or workspace.</p>\n         <p>You must specify a value for <code>workspaceId</code>. For entity-specific queries, specify values for <code>componentName</code> and \n        <code>entityId</code>. For cross-entity quries, specify a value for <code>componentTypeId</code>.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the history of a time series property value for a component,\n         component type, entity, or workspace.</p>\n         <p>You must specify a value for <code>workspaceId</code>. For entity-specific queries,\n         specify values for <code>componentName</code> and <code>entityId</code>. For cross-entity\n         quries, specify a value for <code>componentTypeId</code>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -3366,7 +3455,7 @@
                 "interpolation": {
                     "target": "com.amazonaws.iottwinmaker#InterpolationParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies the interpolation type and the interval over which to interpolate data.</p>"
+                        "smithy.api#documentation": "<p>An object that specifies the interpolation type and the interval over which to\n         interpolate data.</p>"
                     }
                 },
                 "nextToken": {
@@ -3378,7 +3467,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p> \n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
                     }
                 },
                 "orderByTime": {
@@ -3407,7 +3496,7 @@
                 "propertyValues": {
                     "target": "com.amazonaws.iottwinmaker#PropertyValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the property definitions in the component type. Each string \n       in the mapping must be unique to this object.</p>",
+                        "smithy.api#documentation": "<p>An object that maps strings to the property definitions in the component type. Each\n         string in the mapping must be unique to this object.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3487,7 +3576,7 @@
                 "propertyValues": {
                     "target": "com.amazonaws.iottwinmaker#PropertyLatestValueMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the properties and latest property values in the response. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the properties and latest property values in the\n         response. Each string in the mapping must be unique to this object.</p>"
                     }
                 },
                 "nextToken": {
@@ -3618,6 +3707,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of capabilities that the scene uses to render.</p>"
                     }
+                },
+                "sceneMetadata": {
+                    "target": "com.amazonaws.iottwinmaker#SceneMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response metadata.</p>"
+                    }
+                },
+                "generatedSceneMetadata": {
+                    "target": "com.amazonaws.iottwinmaker#GeneratedSceneMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated scene metadata.</p>"
+                    }
                 }
             }
         },
@@ -3668,7 +3769,7 @@
                 "syncSource": {
                     "target": "com.amazonaws.iottwinmaker#SyncSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sync soucre.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The sync source.</p>\n         <note>\n            <p>Currently the only supported syncSource is <code>SITEWISE </code>.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3676,7 +3777,7 @@
                 "workspaceId": {
                     "target": "com.amazonaws.iottwinmaker#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workspace Id.</p>",
+                        "smithy.api#documentation": "<p>The workspace ID.</p>",
                         "smithy.api#httpQuery": "workspace"
                     }
                 }
@@ -3702,7 +3803,7 @@
                 "syncSource": {
                     "target": "com.amazonaws.iottwinmaker#SyncSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sync soucre.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The sync soucre.</p>\n         <note>\n            <p>Currently the only supported syncSource is <code>SITEWISE </code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3812,7 +3913,7 @@
                 "s3Location": {
                     "target": "com.amazonaws.iottwinmaker#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are stored.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are\n         stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4002,7 +4103,7 @@
                 "isAbstract": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the component types in the list are abstract.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the component types in the list are\n         abstract.</p>"
                     }
                 }
             },
@@ -4042,7 +4143,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p> \n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
                     }
                 }
             }
@@ -4135,7 +4236,7 @@
                 "externalId": {
                     "target": "com.amazonaws.iottwinmaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The external-Id property of a component. The external-Id property is the primary key of an external storage system.</p>"
+                        "smithy.api#documentation": "<p>The external-Id property of a component. The external-Id property is the primary key of\n         an external storage system.</p>"
                     }
                 }
             },
@@ -4169,7 +4270,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p> \n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
                     }
                 },
                 "nextToken": {
@@ -4334,7 +4435,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 50.</p> \n         <p>Valid Range: Minimum value of 0. Maximum value of 200.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 50.</p>\n         <p>Valid Range: Minimum value of 0. Maximum value of 200.</p>"
                     }
                 },
                 "nextToken": {
@@ -4418,7 +4519,7 @@
                 "syncSource": {
                     "target": "com.amazonaws.iottwinmaker#SyncSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sync soucre.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The sync source.</p>\n         <note>\n            <p>Currently the only supported syncSource is <code>SITEWISE </code>.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4426,13 +4527,13 @@
                 "filters": {
                     "target": "com.amazonaws.iottwinmaker#SyncResourceFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of objects that filter the request.</p>"
+                        "smithy.api#documentation": "<p>A list of objects that filter the request.</p>\n         <p>The following filter combinations are supported:</p>\n         <ul>\n            <li>\n               <p>Filter with state</p>\n            </li>\n            <li>\n               <p>Filter with ResourceType and ResourceId</p>\n            </li>\n            <li>\n               <p>Filter with ResourceType and ExternalId</p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 50.</p> \n         <p>Valid Range: Minimum value of 0. Maximum value of 200.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 50.</p>\n         <p>Valid Range: Minimum value of 0. Maximum value of 200.</p>"
                     }
                 },
                 "nextToken": {
@@ -4501,7 +4602,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p> \n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
                     }
                 },
                 "nextToken": {
@@ -4574,7 +4675,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p> \n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
                     }
                 },
                 "nextToken": {
@@ -4667,7 +4768,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filter criteria that orders the return output. It can be sorted in ascending or descending order.</p>"
+                "smithy.api#documentation": "<p>Filter criteria that orders the return output. It can be sorted in ascending or\n         descending order.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#OrderByList": {
@@ -4813,7 +4914,7 @@
                 "updateReason": {
                     "target": "com.amazonaws.iottwinmaker#UpdateReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The update reason, for changing a pricing plan.</p>",
+                        "smithy.api#documentation": "<p>The update reason for changing a pricing plan.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4863,7 +4964,7 @@
                 "isExternalId": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property ID comes from an external data store.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property ID comes from an external data\n         store.</p>"
                     }
                 },
                 "isStoredExternally": {
@@ -4928,7 +5029,7 @@
                 "isExternalId": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property ID comes from an external data store.</p>",
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property ID comes from an external data\n         store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4942,7 +5043,7 @@
                 "isImported": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property definition is imported from an external data store.</p>",
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property definition is imported from an\n         external data store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4956,7 +5057,7 @@
                 "isInherited": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property definition is inherited from a parent entity.</p>",
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property definition is inherited from a\n         parent entity.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5089,7 +5190,7 @@
                 "isInherited": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property group is inherited from a parent entity</p>",
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the property group is inherited from a parent\n         entity</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5141,7 +5242,7 @@
                 "propertyReference": {
                     "target": "com.amazonaws.iottwinmaker#EntityPropertyReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies information about a property.&gt;</p>",
+                        "smithy.api#documentation": "<p>An object that specifies information about a property.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5288,7 +5389,7 @@
                 "time": {
                     "target": "com.amazonaws.iottwinmaker#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>ISO8601 DateTime of a value for a time series property.</p>\n         <p>The time for when the property value was recorded in ISO 8601 format: <i>YYYY-MM-DDThh:mm:ss[.SSSSSSSSS][Z/±HH:mm]</i>.</p> \n         <ul>\n            <li>\n               <p>\n                  <i>[YYYY]</i>: year</p>\n            </li>\n            <li>\n               <p>\n                  <i>[MM]</i>: month</p>\n            </li>\n            <li>\n               <p>\n                  <i>[DD]</i>: day</p>\n            </li>\n            <li>\n               <p>\n                  <i>[hh]</i>: hour</p>\n            </li>\n            <li>\n               <p>\n                  <i>[mm]</i>: minute</p>\n            </li>\n            <li>\n               <p>\n                  <i>[ss]</i>: seconds</p>\n            </li>\n            <li>\n               <p>\n                  <i>[.SSSSSSSSS]</i>: additional precision, where precedence is maintained. For\n               example: [.573123] is equal to 573123000 nanoseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Z</i>: default timezone UTC</p>\n            </li>\n            <li>\n               <p>\n                  <i>± HH:mm</i>: time zone offset in Hours and Minutes.</p>\n            </li>\n         </ul>\n         <p>\n            <i>Required sub-fields</i>: YYYY-MM-DDThh:mm:ss and [Z/±HH:mm]</p>"
+                        "smithy.api#documentation": "<p>ISO8601 DateTime of a value for a time series property.</p>\n         <p>The time for when the property value was recorded in ISO 8601 format:\n            <i>YYYY-MM-DDThh:mm:ss[.SSSSSSSSS][Z/±HH:mm]</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>[YYYY]</i>: year</p>\n            </li>\n            <li>\n               <p>\n                  <i>[MM]</i>: month</p>\n            </li>\n            <li>\n               <p>\n                  <i>[DD]</i>: day</p>\n            </li>\n            <li>\n               <p>\n                  <i>[hh]</i>: hour</p>\n            </li>\n            <li>\n               <p>\n                  <i>[mm]</i>: minute</p>\n            </li>\n            <li>\n               <p>\n                  <i>[ss]</i>: seconds</p>\n            </li>\n            <li>\n               <p>\n                  <i>[.SSSSSSSSS]</i>: additional precision, where precedence is\n               maintained. For example: [.573123] is equal to 573123000 nanoseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Z</i>: default timezone UTC</p>\n            </li>\n            <li>\n               <p>\n                  <i>± HH:mm</i>: time zone offset in Hours and Minutes.</p>\n            </li>\n         </ul>\n         <p>\n            <i>Required sub-fields</i>: YYYY-MM-DDThh:mm:ss and [Z/±HH:mm]</p>"
                     }
                 }
             },
@@ -5314,7 +5415,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that specifies information about time series property values. This object is used  and consumed by the <a href=\"https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_BatchPutPropertyValues.html\">BatchPutPropertyValues</a> action.</p>"
+                "smithy.api#documentation": "<p>An object that specifies information about time series property values. This object is\n         used and consumed by the <a href=\"https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_BatchPutPropertyValues.html\">BatchPutPropertyValues</a> action.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#PropertyValueHistory": {
@@ -5330,7 +5431,7 @@
                 "values": {
                     "target": "com.amazonaws.iottwinmaker#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of objects that contain information about the values in the history of a time series property.</p>"
+                        "smithy.api#documentation": "<p>A list of objects that contain information about the values in the history of a time\n         series property.</p>"
                     }
                 }
             },
@@ -5532,6 +5633,31 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.iottwinmaker#SceneMetadataMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iottwinmaker#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.iottwinmaker#SceneMetadataValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#SceneMetadataValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.iottwinmaker#SceneSummaries": {
             "type": "list",
             "member": {
@@ -5671,7 +5797,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the status of an entity, component, component type, or workspace.</p>"
+                "smithy.api#documentation": "<p>An object that represents the status of an entity, component, component type, or\n         workspace.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#String": {
@@ -5793,19 +5919,19 @@
                 "resourceType": {
                     "target": "com.amazonaws.iottwinmaker#SyncResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sync resource filter resoucre type</p>"
+                        "smithy.api#documentation": "<p>The sync resource filter resource type</p>"
                     }
                 },
                 "resourceId": {
                     "target": "com.amazonaws.iottwinmaker#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sync resource filter resource Id.</p>"
+                        "smithy.api#documentation": "<p>The sync resource filter resource ID.</p>"
                     }
                 },
                 "externalId": {
                     "target": "com.amazonaws.iottwinmaker#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The external Id.</p>"
+                        "smithy.api#documentation": "<p>The external ID.</p>"
                     }
                 }
             },
@@ -5884,13 +6010,13 @@
                 "externalId": {
                     "target": "com.amazonaws.iottwinmaker#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The external Id.</p>"
+                        "smithy.api#documentation": "<p>The external ID.</p>"
                     }
                 },
                 "resourceId": {
                     "target": "com.amazonaws.iottwinmaker#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource Id.</p>"
+                        "smithy.api#documentation": "<p>The resource ID.</p>"
                     }
                 },
                 "status": {
@@ -5937,13 +6063,13 @@
                 "orderBy": {
                     "target": "com.amazonaws.iottwinmaker#OrderByList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter criteria that orders the output. It can be sorted in ascending or descending order.</p>"
+                        "smithy.api#documentation": "<p>Filter criteria that orders the output. It can be sorted in ascending or descending\n         order.</p>"
                     }
                 },
                 "propertyFilters": {
                     "target": "com.amazonaws.iottwinmaker#PropertyFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can filter the request using various logical operators and a key-value format. For example:</p>   \n         <p>\n            <code>{\"key\": \"serverType\", \"value\": \"webServer\"}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>You can filter the request using various logical operators and a key-value format. For\n         example:</p>\n         <p>\n            <code>{\"key\": \"serverType\", \"value\": \"webServer\"}</code>\n         </p>"
                     }
                 }
             },
@@ -6197,7 +6323,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.iottwinmaker#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag key names to remove from the resource. You don't specify the value. Both the key and its associated value are removed.</p>",
+                        "smithy.api#documentation": "<p>A list of tag key names to remove from the resource. You don't specify the value. Both\n         the key and its associated value are removed.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -6262,7 +6388,7 @@
                 "isSingleton": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether an entity can have more than one component of this\n         type.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether an entity can have more than one component of\n         this type.</p>"
                     }
                 },
                 "componentTypeId": {
@@ -6282,7 +6408,7 @@
                 "propertyDefinitions": {
                     "target": "com.amazonaws.iottwinmaker#PropertyDefinitionsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the property definitions in the component type. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the property definitions in the component type. Each\n         string in the mapping must be unique to this object.</p>"
                     }
                 },
                 "extendsFrom": {
@@ -6294,13 +6420,13 @@
                 "functions": {
                     "target": "com.amazonaws.iottwinmaker#FunctionsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the functions in the component type. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the functions in the component type. Each string in the\n         mapping must be unique to this object.</p>"
                     }
                 },
                 "propertyGroups": {
                     "target": "com.amazonaws.iottwinmaker#PropertyGroupsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The property groups</p>"
+                        "smithy.api#documentation": "<p>The property groups.</p>"
                     }
                 },
                 "componentTypeName": {
@@ -6421,7 +6547,7 @@
                 "componentUpdates": {
                     "target": "com.amazonaws.iottwinmaker#ComponentUpdatesMapRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that maps strings to the component updates in the request. Each string \n       in the mapping must be unique to this object.</p>"
+                        "smithy.api#documentation": "<p>An object that maps strings to the component updates in the request. Each string in the\n         mapping must be unique to this object.</p>"
                     }
                 },
                 "parentEntityUpdate": {
@@ -6620,6 +6746,12 @@
                     "target": "com.amazonaws.iottwinmaker#SceneCapabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of capabilities that the scene uses to render.</p>"
+                    }
+                },
+                "sceneMetadata": {
+                    "target": "com.amazonaws.iottwinmaker#SceneMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scene metadata.</p>"
                     }
                 }
             }

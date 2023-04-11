@@ -32,7 +32,7 @@ import (
 // * There is a user error, such as an invalid data format.
 //
 // * The
-// aggregate size of the items in the transaction cannot exceed 4 MB.
+// aggregate size of the items in the transaction exceeded 4 MB.
 func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsInput, optFns ...func(*Options)) (*TransactGetItemsOutput, error) {
 	if params == nil {
 		params = &TransactGetItemsInput{}

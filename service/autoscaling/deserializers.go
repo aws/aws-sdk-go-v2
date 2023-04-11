@@ -5767,6 +5767,123 @@ func awsAwsquery_deserializeOpErrorResumeProcesses(response *smithyhttp.Response
 	}
 }
 
+type awsAwsquery_deserializeOpRollbackInstanceRefresh struct {
+}
+
+func (*awsAwsquery_deserializeOpRollbackInstanceRefresh) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpRollbackInstanceRefresh) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorRollbackInstanceRefresh(response, &metadata)
+	}
+	output := &RollbackInstanceRefreshOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("RollbackInstanceRefreshResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentRollbackInstanceRefreshOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorRollbackInstanceRefresh(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("ActiveInstanceRefreshNotFound", errorCode):
+		return awsAwsquery_deserializeErrorActiveInstanceRefreshNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("IrreversibleInstanceRefresh", errorCode):
+		return awsAwsquery_deserializeErrorIrreversibleInstanceRefreshFault(response, errorBody)
+
+	case strings.EqualFold("LimitExceeded", errorCode):
+		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
+
+	case strings.EqualFold("ResourceContention", errorCode):
+		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpSetDesiredCapacity struct {
 }
 
@@ -6571,6 +6688,50 @@ func awsAwsquery_deserializeErrorInvalidNextToken(response *smithyhttp.Response,
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentInvalidNextToken(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorIrreversibleInstanceRefreshFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.IrreversibleInstanceRefreshFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentIrreversibleInstanceRefreshFault(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -10419,6 +10580,12 @@ func awsAwsquery_deserializeDocumentInstanceRefresh(v **types.InstanceRefresh, d
 				return err
 			}
 
+		case strings.EqualFold("RollbackDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentRollbackDetails(&sv.RollbackDetails, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("StartTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -11261,6 +11428,55 @@ func awsAwsquery_deserializeDocumentInvalidNextToken(v **types.InvalidNextToken,
 	var sv *types.InvalidNextToken
 	if *v == nil {
 		sv = &types.InvalidNextToken{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentIrreversibleInstanceRefreshFault(v **types.IrreversibleInstanceRefreshFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.IrreversibleInstanceRefreshFault
+	if *v == nil {
+		sv = &types.IrreversibleInstanceRefreshFault{}
 	} else {
 		sv = *v
 	}
@@ -14811,6 +15027,22 @@ func awsAwsquery_deserializeDocumentRefreshPreferences(v **types.RefreshPreferen
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AutoRollback", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected AutoRollback to be of type *bool, got %T instead", val)
+				}
+				sv.AutoRollback = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("CheckpointDelay", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -14868,6 +15100,19 @@ func awsAwsquery_deserializeDocumentRefreshPreferences(v **types.RefreshPreferen
 				sv.MinHealthyPercentage = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("ScaleInProtectedInstances", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ScaleInProtectedInstances = types.ScaleInProtectedInstances(xtv)
+			}
+
 		case strings.EqualFold("SkipMatching", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -14882,6 +15127,19 @@ func awsAwsquery_deserializeDocumentRefreshPreferences(v **types.RefreshPreferen
 					return fmt.Errorf("expected SkipMatching to be of type *bool, got %T instead", val)
 				}
 				sv.SkipMatching = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("StandbyInstances", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StandbyInstances = types.StandbyInstances(xtv)
 			}
 
 		default:
@@ -14980,6 +15238,112 @@ func awsAwsquery_deserializeDocumentResourceInUseFault(v **types.ResourceInUseFa
 			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentRollbackDetails(v **types.RollbackDetails, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.RollbackDetails
+	if *v == nil {
+		sv = &types.RollbackDetails{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("InstancesToUpdateOnRollback", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.InstancesToUpdateOnRollback = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("PercentageCompleteOnRollback", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.PercentageCompleteOnRollback = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("ProgressDetailsOnRollback", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentInstanceRefreshProgressDetails(&sv.ProgressDetailsOnRollback, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("RollbackReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.RollbackReason = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("RollbackStartTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.RollbackStartTime = ptr.Time(t)
 			}
 
 		default:
@@ -19094,6 +19458,55 @@ func awsAwsquery_deserializeOpDocumentRecordLifecycleActionHeartbeatOutput(v **R
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentRollbackInstanceRefreshOutput(v **RollbackInstanceRefreshOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *RollbackInstanceRefreshOutput
+	if *v == nil {
+		sv = &RollbackInstanceRefreshOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("InstanceRefreshId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.InstanceRefreshId = ptr.String(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()

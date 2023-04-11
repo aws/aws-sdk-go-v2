@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Starts a read set export job.
+// Exports a read set to Amazon S3.
 func (c *Client) StartReadSetExportJob(ctx context.Context, params *StartReadSetExportJobInput, optFns ...func(*Options)) (*StartReadSetExportJobOutput, error) {
 	if params == nil {
 		params = &StartReadSetExportJobInput{}
@@ -46,7 +46,7 @@ type StartReadSetExportJobInput struct {
 	// This member is required.
 	SequenceStoreId *string
 
-	// Sources for the job.
+	// The job's source files.
 	//
 	// This member is required.
 	Sources []types.ExportReadSet

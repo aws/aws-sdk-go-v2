@@ -26,7 +26,7 @@ type AppInstanceUserMembershipSummary struct {
 // membership types.
 type BatchChannelMemberships struct {
 
-	// The ARN of the channel to which you're adding users.
+	// The ARN of the channel to which you're adding members.
 	ChannelArn *string
 
 	// The identifier of the member who invited another member.
@@ -38,7 +38,7 @@ type BatchChannelMemberships struct {
 	// The ID of the SubChannel.
 	SubChannelId *string
 
-	// The membership types set for the channel users.
+	// The membership types set for the channel members.
 	Type ChannelMembershipType
 
 	noSmithyDocumentSerde
@@ -77,6 +77,9 @@ type Channel struct {
 	// The attributes required to configure and create an elastic channel. An elastic
 	// channel can support a maximum of 1-million members.
 	ElasticChannelConfiguration *ElasticChannelConfiguration
+
+	// Settings that control when a channel expires.
+	ExpirationSettings *ExpirationSettings
 
 	// The time at which a member sent the last message in the channel.
 	LastMessageTimestamp *time.Time
@@ -249,6 +252,9 @@ type ChannelMessage struct {
 	// The message content.
 	Content *string
 
+	// The content type of the channel message.
+	ContentType *string
+
 	// The time at which the message was created.
 	CreatedTimestamp *time.Time
 
@@ -300,6 +306,9 @@ type ChannelMessageCallback struct {
 	// The message content.
 	Content *string
 
+	// The content type of the call-back message.
+	ContentType *string
+
 	// The attributes for the message, used for message filtering along with a
 	// FilterRule defined in the PushNotificationPreferences.
 	MessageAttributes map[string]MessageAttributeValue
@@ -333,6 +342,9 @@ type ChannelMessageSummary struct {
 
 	// The content of the message.
 	Content *string
+
+	// The content type of the channel messsage listed in the summary.
+	ContentType *string
 
 	// The time at which the message summary was created.
 	CreatedTimestamp *time.Time
@@ -453,7 +465,23 @@ type ElasticChannelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The details of a user.
+// Settings that control the interval after which a channel is deleted.
+type ExpirationSettings struct {
+
+	// The conditions that must be met for a channel to expire.
+	//
+	// This member is required.
+	ExpirationCriterion ExpirationCriterion
+
+	// The period in days after which the system automatically deletes a channel.
+	//
+	// This member is required.
+	ExpirationDays *int32
+
+	noSmithyDocumentSerde
+}
+
+// The details of a user or bot.
 type Identity struct {
 
 	// The ARN in an Identity.
@@ -604,6 +632,22 @@ type SearchField struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for connecting a messaging stream to Amazon Kinesis.
+type StreamingConfiguration struct {
+
+	// The data type of the configuration.
+	//
+	// This member is required.
+	DataType MessagingDataType
+
+	// The ARN of the resource in the configuration.
+	//
+	// This member is required.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }

@@ -26,7 +26,7 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *BadRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *NotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -158,7 +158,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRequestsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRequestsException"
 	}
 	return *e.ErrorCodeOverride

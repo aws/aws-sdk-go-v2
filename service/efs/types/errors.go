@@ -30,7 +30,7 @@ func (e *AccessPointAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessPointAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessPointAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -61,7 +61,7 @@ func (e *AccessPointLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessPointLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessPointLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -90,7 +90,7 @@ func (e *AccessPointNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessPointNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessPointNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -121,7 +121,7 @@ func (e *AvailabilityZonesMismatch) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AvailabilityZonesMismatch) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AvailabilityZonesMismatch"
 	}
 	return *e.ErrorCodeOverride
@@ -150,7 +150,7 @@ func (e *BadRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadRequest) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadRequest"
 	}
 	return *e.ErrorCodeOverride
@@ -179,7 +179,7 @@ func (e *DependencyTimeout) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DependencyTimeout) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DependencyTimeout"
 	}
 	return *e.ErrorCodeOverride
@@ -209,7 +209,7 @@ func (e *FileSystemAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileSystemAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileSystemAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -237,7 +237,7 @@ func (e *FileSystemInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileSystemInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileSystemInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +266,7 @@ func (e *FileSystemLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileSystemLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileSystemLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -295,7 +295,7 @@ func (e *FileSystemNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FileSystemNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FileSystemNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -323,7 +323,7 @@ func (e *IncorrectFileSystemLifeCycleState) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncorrectFileSystemLifeCycleState) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncorrectFileSystemLifeCycleState"
 	}
 	return *e.ErrorCodeOverride
@@ -351,7 +351,7 @@ func (e *IncorrectMountTargetState) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IncorrectMountTargetState) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IncorrectMountTargetState"
 	}
 	return *e.ErrorCodeOverride
@@ -383,7 +383,7 @@ func (e *InsufficientThroughputCapacity) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientThroughputCapacity) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientThroughputCapacity"
 	}
 	return *e.ErrorCodeOverride
@@ -411,7 +411,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -441,7 +441,7 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -470,7 +470,7 @@ func (e *IpAddressInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IpAddressInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IpAddressInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -499,7 +499,7 @@ func (e *MountTargetConflict) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MountTargetConflict) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MountTargetConflict"
 	}
 	return *e.ErrorCodeOverride
@@ -528,7 +528,7 @@ func (e *MountTargetNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MountTargetNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MountTargetNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -562,7 +562,7 @@ func (e *NetworkInterfaceLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NetworkInterfaceLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NetworkInterfaceLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -591,7 +591,7 @@ func (e *NoFreeAddressesInSubnet) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoFreeAddressesInSubnet) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoFreeAddressesInSubnet"
 	}
 	return *e.ErrorCodeOverride
@@ -620,7 +620,7 @@ func (e *PolicyNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -648,7 +648,7 @@ func (e *ReplicationNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReplicationNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -677,7 +677,7 @@ func (e *SecurityGroupLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SecurityGroupLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SecurityGroupLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -706,7 +706,7 @@ func (e *SecurityGroupNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SecurityGroupNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SecurityGroupNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -734,7 +734,7 @@ func (e *SubnetNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SubnetNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -764,7 +764,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -793,7 +793,7 @@ func (e *ThroughputLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThroughputLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThroughputLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -822,7 +822,7 @@ func (e *TooManyRequests) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRequests) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRequests"
 	}
 	return *e.ErrorCodeOverride
@@ -851,7 +851,7 @@ func (e *UnsupportedAvailabilityZone) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedAvailabilityZone) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedAvailabilityZone"
 	}
 	return *e.ErrorCodeOverride
@@ -880,7 +880,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

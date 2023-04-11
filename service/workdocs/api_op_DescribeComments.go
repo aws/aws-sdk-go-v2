@@ -4,6 +4,7 @@ package workdocs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
@@ -39,8 +40,8 @@ type DescribeCommentsInput struct {
 	// This member is required.
 	VersionId *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The maximum number of items to return.
@@ -129,6 +130,96 @@ func (c *Client) addOperationDescribeCommentsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeCommentsAPIClient is a client that implements the DescribeComments
+// operation.
+type DescribeCommentsAPIClient interface {
+	DescribeComments(context.Context, *DescribeCommentsInput, ...func(*Options)) (*DescribeCommentsOutput, error)
+}
+
+var _ DescribeCommentsAPIClient = (*Client)(nil)
+
+// DescribeCommentsPaginatorOptions is the paginator options for DescribeComments
+type DescribeCommentsPaginatorOptions struct {
+	// The maximum number of items to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeCommentsPaginator is a paginator for DescribeComments
+type DescribeCommentsPaginator struct {
+	options   DescribeCommentsPaginatorOptions
+	client    DescribeCommentsAPIClient
+	params    *DescribeCommentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeCommentsPaginator returns a new DescribeCommentsPaginator
+func NewDescribeCommentsPaginator(client DescribeCommentsAPIClient, params *DescribeCommentsInput, optFns ...func(*DescribeCommentsPaginatorOptions)) *DescribeCommentsPaginator {
+	if params == nil {
+		params = &DescribeCommentsInput{}
+	}
+
+	options := DescribeCommentsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeCommentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeCommentsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeComments page.
+func (p *DescribeCommentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeCommentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeComments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeComments(region string) *awsmiddleware.RegisterServiceMetadata {

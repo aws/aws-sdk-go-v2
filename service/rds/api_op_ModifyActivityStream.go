@@ -18,8 +18,8 @@ import (
 // activity stream isn't required. For more information, see  Modifying a database
 // activity stream
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html)
-// in the Amazon RDS User Guide. This operation is supported for RDS for Oracle
-// only.
+// in the Amazon RDS User Guide. This operation is supported for RDS for Oracle and
+// Microsoft SQL Server.
 func (c *Client) ModifyActivityStream(ctx context.Context, params *ModifyActivityStreamInput, optFns ...func(*Options)) (*ModifyActivityStreamOutput, error) {
 	if params == nil {
 		params = &ModifyActivityStreamInput{}
@@ -42,8 +42,8 @@ type ModifyActivityStreamInput struct {
 	// stream is unlocked or stopped.
 	AuditPolicyState types.AuditPolicyState
 
-	// The Amazon Resource Name (ARN) of the RDS for Oracle DB instance, for example,
-	// arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db.
+	// The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB
+	// instance. For example, arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db.
 	ResourceArn *string
 
 	noSmithyDocumentSerde

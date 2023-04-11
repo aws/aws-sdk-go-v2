@@ -13,8 +13,8 @@ import (
 )
 
 // Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource
-// discovery is an IPAM component that enables IPAM Service to manage and monitor
-// resources that belong to the owning account.
+// discovery is an IPAM component that enables IPAM to manage and monitor resources
+// that belong to the owning account.
 func (c *Client) AssociateIpamResourceDiscovery(ctx context.Context, params *AssociateIpamResourceDiscoveryInput, optFns ...func(*Options)) (*AssociateIpamResourceDiscoveryOutput, error) {
 	if params == nil {
 		params = &AssociateIpamResourceDiscoveryInput{}

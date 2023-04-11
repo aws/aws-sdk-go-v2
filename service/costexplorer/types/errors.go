@@ -26,7 +26,7 @@ func (e *BillExpirationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BillExpirationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BillExpirationException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *DataUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DataUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DataUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *GenerationExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GenerationExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GenerationExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -130,7 +130,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -157,7 +157,7 @@ func (e *RequestChangedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestChangedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestChangedException"
 	}
 	return *e.ErrorCodeOverride
@@ -185,7 +185,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -212,7 +212,7 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceQuotaExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -241,7 +241,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride
@@ -267,7 +267,7 @@ func (e *UnknownMonitorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnknownMonitorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnknownMonitorException"
 	}
 	return *e.ErrorCodeOverride
@@ -293,7 +293,7 @@ func (e *UnknownSubscriptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnknownSubscriptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnknownSubscriptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -321,7 +321,7 @@ func (e *UnresolvableUsageUnitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnresolvableUsageUnitException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnresolvableUsageUnitException"
 	}
 	return *e.ErrorCodeOverride

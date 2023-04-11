@@ -27,15 +27,15 @@ func (e *AccountHasOngoingImportException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountHasOngoingImportException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountHasOngoingImportException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *AccountHasOngoingImportException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when when the specified account is not found or not
-// part of an organization.
+// This exception is thrown when the specified account is not found or not part of
+// an organization.
 type AccountNotFoundException struct {
 	Message *string
 
@@ -54,7 +54,7 @@ func (e *AccountNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *AccountNotRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountNotRegisteredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountNotRegisteredException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *AccountRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountRegisteredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountRegisteredException"
 	}
 	return *e.ErrorCodeOverride
@@ -135,7 +135,7 @@ func (e *CannotDelegateManagementAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotDelegateManagementAccountException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CannotDelegateManagementAccountException"
 	}
 	return *e.ErrorCodeOverride
@@ -143,6 +143,32 @@ func (e *CannotDelegateManagementAccountException) ErrorCode() string {
 func (e *CannotDelegateManagementAccountException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// This exception is thrown when the provided channel already exists.
+type ChannelAlreadyExistsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ChannelAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ChannelAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ChannelAlreadyExistsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ChannelAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ChannelAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified value of ChannelARN is not valid.
 type ChannelARNInvalidException struct {
@@ -163,14 +189,67 @@ func (e *ChannelARNInvalidException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ChannelARNInvalidException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ChannelARNInvalidException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *ChannelARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified channel was not found.
+// This exception is thrown when the specified event data store cannot yet be
+// deleted because it is in use by a channel.
+type ChannelExistsForEDSException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ChannelExistsForEDSException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ChannelExistsForEDSException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ChannelExistsForEDSException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ChannelExistsForEDSException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ChannelExistsForEDSException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the maximum number of channels limit is exceeded.
+type ChannelMaxLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ChannelMaxLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ChannelMaxLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ChannelMaxLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ChannelMaxLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ChannelMaxLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when CloudTrail cannot find the specified channel.
 type ChannelNotFoundException struct {
 	Message *string
 
@@ -189,7 +268,7 @@ func (e *ChannelNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ChannelNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ChannelNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -220,7 +299,7 @@ func (e *CloudTrailAccessNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudTrailAccessNotEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CloudTrailAccessNotEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -231,7 +310,13 @@ func (e *CloudTrailAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 
 // This exception is thrown when an operation is called with a trail ARN that is
 // not valid. The following is the format of a trail ARN.
-// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail This exception is also
+// thrown when you call AddTags or RemoveTags on a trail, event data store, or
+// channel with a resource ARN that is not valid. The following is the format of an
+// event data store ARN:
+// arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+// The following is the format of a channel ARN:
+// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 type CloudTrailARNInvalidException struct {
 	Message *string
 
@@ -250,7 +335,7 @@ func (e *CloudTrailARNInvalidException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudTrailARNInvalidException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CloudTrailARNInvalidException"
 	}
 	return *e.ErrorCodeOverride
@@ -279,7 +364,7 @@ func (e *CloudTrailInvalidClientTokenIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudTrailInvalidClientTokenIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CloudTrailInvalidClientTokenIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -307,7 +392,7 @@ func (e *CloudWatchLogsDeliveryUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudWatchLogsDeliveryUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CloudWatchLogsDeliveryUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -318,8 +403,9 @@ func (e *CloudWatchLogsDeliveryUnavailableException) ErrorFault() smithy.ErrorFa
 
 // This exception is thrown when the specified resource is not ready for an
 // operation. This can occur when you try to run an operation on a resource before
-// CloudTrail has time to fully load the resource. If this exception occurs, wait a
-// few minutes, and then try the operation again.
+// CloudTrail has time to fully load the resource, or because another operation is
+// modifying the resource. If this exception occurs, wait a few minutes, and then
+// try the operation again.
 type ConflictException struct {
 	Message *string
 
@@ -338,7 +424,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -365,7 +451,7 @@ func (e *DelegatedAdminAccountLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DelegatedAdminAccountLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DelegatedAdminAccountLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -393,7 +479,7 @@ func (e *EventDataStoreAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventDataStoreAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -422,7 +508,7 @@ func (e *EventDataStoreARNInvalidException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreARNInvalidException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventDataStoreARNInvalidException"
 	}
 	return *e.ErrorCodeOverride
@@ -449,7 +535,7 @@ func (e *EventDataStoreHasOngoingImportException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreHasOngoingImportException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventDataStoreHasOngoingImportException"
 	}
 	return *e.ErrorCodeOverride
@@ -477,7 +563,7 @@ func (e *EventDataStoreMaxLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreMaxLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventDataStoreMaxLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -505,7 +591,7 @@ func (e *EventDataStoreNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventDataStoreNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -532,7 +618,7 @@ func (e *EventDataStoreTerminationProtectedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreTerminationProtectedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventDataStoreTerminationProtectedException"
 	}
 	return *e.ErrorCodeOverride
@@ -560,7 +646,7 @@ func (e *ImportNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ImportNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ImportNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -586,7 +672,7 @@ func (e *InactiveEventDataStoreException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InactiveEventDataStoreException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InactiveEventDataStoreException"
 	}
 	return *e.ErrorCodeOverride
@@ -613,7 +699,7 @@ func (e *InactiveQueryException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InactiveQueryException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InactiveQueryException"
 	}
 	return *e.ErrorCodeOverride
@@ -640,7 +726,7 @@ func (e *InsightNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsightNotEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsightNotEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -668,7 +754,7 @@ func (e *InsufficientDependencyServiceAccessPermissionException) ErrorMessage() 
 	return *e.Message
 }
 func (e *InsufficientDependencyServiceAccessPermissionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientDependencyServiceAccessPermissionException"
 	}
 	return *e.ErrorCodeOverride
@@ -697,7 +783,7 @@ func (e *InsufficientEncryptionPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientEncryptionPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientEncryptionPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -725,7 +811,7 @@ func (e *InsufficientS3BucketPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientS3BucketPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientS3BucketPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -754,7 +840,7 @@ func (e *InsufficientSnsTopicPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientSnsTopicPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientSnsTopicPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -783,7 +869,7 @@ func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCloudWatchLogsLogGroupArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -811,7 +897,7 @@ func (e *InvalidCloudWatchLogsRoleArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCloudWatchLogsRoleArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCloudWatchLogsRoleArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -843,7 +929,7 @@ func (e *InvalidDateRangeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDateRangeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDateRangeException"
 	}
 	return *e.ErrorCodeOverride
@@ -870,7 +956,7 @@ func (e *InvalidEventCategoryException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventCategoryException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEventCategoryException"
 	}
 	return *e.ErrorCodeOverride
@@ -897,7 +983,7 @@ func (e *InvalidEventDataStoreCategoryException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventDataStoreCategoryException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEventDataStoreCategoryException"
 	}
 	return *e.ErrorCodeOverride
@@ -925,7 +1011,7 @@ func (e *InvalidEventDataStoreStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventDataStoreStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEventDataStoreStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -976,7 +1062,7 @@ func (e *InvalidEventSelectorsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventSelectorsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEventSelectorsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1003,7 +1089,7 @@ func (e *InvalidHomeRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidHomeRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidHomeRegionException"
 	}
 	return *e.ErrorCodeOverride
@@ -1030,7 +1116,7 @@ func (e *InvalidImportSourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidImportSourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidImportSourceException"
 	}
 	return *e.ErrorCodeOverride
@@ -1059,7 +1145,7 @@ func (e *InvalidInsightSelectorsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInsightSelectorsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInsightSelectorsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1085,7 +1171,7 @@ func (e *InvalidKmsKeyIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidKmsKeyIdException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidKmsKeyIdException"
 	}
 	return *e.ErrorCodeOverride
@@ -1111,7 +1197,7 @@ func (e *InvalidLookupAttributesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLookupAttributesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLookupAttributesException"
 	}
 	return *e.ErrorCodeOverride
@@ -1137,7 +1223,7 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMaxResultsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMaxResultsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1164,7 +1250,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -1191,7 +1277,7 @@ func (e *InvalidParameterCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterCombinationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterCombinationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1219,7 +1305,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -1249,7 +1335,7 @@ func (e *InvalidQueryStatementException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidQueryStatementException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidQueryStatementException"
 	}
 	return *e.ErrorCodeOverride
@@ -1275,7 +1361,7 @@ func (e *InvalidQueryStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidQueryStatusException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidQueryStatusException"
 	}
 	return *e.ErrorCodeOverride
@@ -1301,7 +1387,7 @@ func (e *InvalidS3BucketNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3BucketNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3BucketNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -1327,7 +1413,7 @@ func (e *InvalidS3PrefixException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3PrefixException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3PrefixException"
 	}
 	return *e.ErrorCodeOverride
@@ -1353,12 +1439,38 @@ func (e *InvalidSnsTopicNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSnsTopicNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSnsTopicNameException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSnsTopicNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the specified value of Source is not valid.
+type InvalidSourceException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidSourceException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidSourceException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidSourceException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidSourceException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidSourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified tag key or values are not valid. It
 // can also occur if there are duplicate tags or too many tags on the resource.
@@ -1380,7 +1492,7 @@ func (e *InvalidTagParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -1407,7 +1519,7 @@ func (e *InvalidTimeRangeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTimeRangeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTimeRangeException"
 	}
 	return *e.ErrorCodeOverride
@@ -1433,7 +1545,7 @@ func (e *InvalidTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -1475,7 +1587,7 @@ func (e *InvalidTrailNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTrailNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTrailNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -1502,7 +1614,7 @@ func (e *KmsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KmsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KmsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1528,7 +1640,7 @@ func (e *KmsKeyDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KmsKeyDisabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KmsKeyDisabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -1556,7 +1668,7 @@ func (e *KmsKeyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KmsKeyNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KmsKeyNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1583,7 +1695,7 @@ func (e *MaxConcurrentQueriesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxConcurrentQueriesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxConcurrentQueriesException"
 	}
 	return *e.ErrorCodeOverride
@@ -1609,7 +1721,7 @@ func (e *MaximumNumberOfTrailsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumNumberOfTrailsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaximumNumberOfTrailsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -1638,7 +1750,7 @@ func (e *NoManagementAccountSLRExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoManagementAccountSLRExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoManagementAccountSLRExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1667,7 +1779,7 @@ func (e *NotOrganizationManagementAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotOrganizationManagementAccountException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotOrganizationManagementAccountException"
 	}
 	return *e.ErrorCodeOverride
@@ -1701,7 +1813,7 @@ func (e *NotOrganizationMasterAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotOrganizationMasterAccountException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotOrganizationMasterAccountException"
 	}
 	return *e.ErrorCodeOverride
@@ -1729,7 +1841,7 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotPermittedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotPermittedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1757,7 +1869,7 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationNotInAllFeaturesModeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationNotInAllFeaturesModeException"
 	}
 	return *e.ErrorCodeOverride
@@ -1787,7 +1899,7 @@ func (e *OrganizationsNotInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationsNotInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationsNotInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -1813,12 +1925,40 @@ func (e *QueryIdNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueryIdNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "QueryIdNotFoundException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *QueryIdNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the provided resource does not exist, or the ARN
+// format of the resource is not valid. The following is the valid format for a
+// resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel.
+type ResourceARNNotValidException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceARNNotValidException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceARNNotValidException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceARNNotValidException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceARNNotValidException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceARNNotValidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified resource is not found.
 type ResourceNotFoundException struct {
@@ -1839,12 +1979,75 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the specified resource policy is not found.
+type ResourcePolicyNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourcePolicyNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the resouce-based policy has syntax errors, or
+// contains a principal that is not valid. The following are requirements for the
+// resource policy:
+//
+// * Contains only one action: cloudtrail-data:PutAuditEvents
+//
+// *
+// Contains at least one statement. The policy can have a maximum of 20
+// statements.
+//
+// * Each statement contains at least one principal. A statement can
+// have a maximum of 50 principals.
+type ResourcePolicyNotValidException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyNotValidException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyNotValidException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyNotValidException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourcePolicyNotValidException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourcePolicyNotValidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified resource type is not supported by
 // CloudTrail.
@@ -1866,7 +2069,7 @@ func (e *ResourceTypeNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceTypeNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceTypeNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1892,15 +2095,15 @@ func (e *S3BucketDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *S3BucketDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "S3BucketDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *S3BucketDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of tags per trail has exceeded the permitted amount. Currently, the
-// limit is 50.
+// The number of tags per trail, event data store, or channel has exceeded the
+// permitted amount. Currently, the limit is 50.
 type TagsLimitExceededException struct {
 	Message *string
 
@@ -1919,7 +2122,7 @@ func (e *TagsLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagsLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagsLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -1945,7 +2148,7 @@ func (e *TrailAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrailAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrailAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1971,7 +2174,7 @@ func (e *TrailNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrailNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrailNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1997,7 +2200,7 @@ func (e *TrailNotProvidedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrailNotProvidedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrailNotProvidedException"
 	}
 	return *e.ErrorCodeOverride
@@ -2023,7 +2226,7 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedOperationException"
 	}
 	return *e.ErrorCodeOverride

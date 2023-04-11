@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists route calculator resources in your AWS account.
+// Lists route calculator resources in your Amazon Web Services account.
 func (c *Client) ListRouteCalculators(ctx context.Context, params *ListRouteCalculatorsInput, optFns ...func(*Options)) (*ListRouteCalculatorsOutput, error) {
 	if params == nil {
 		params = &ListRouteCalculatorsInput{}
@@ -43,7 +43,8 @@ type ListRouteCalculatorsInput struct {
 
 type ListRouteCalculatorsOutput struct {
 
-	// Lists the route calculator resources that exist in your AWS account
+	// Lists the route calculator resources that exist in your Amazon Web Services
+	// account
 	//
 	// This member is required.
 	Entries []types.ListRouteCalculatorsResponseEntry

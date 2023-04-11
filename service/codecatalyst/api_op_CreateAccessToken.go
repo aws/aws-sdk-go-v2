@@ -49,19 +49,28 @@ type CreateAccessTokenInput struct {
 
 type CreateAccessTokenOutput struct {
 
-	// The secret value of the personal access token.
+	// The system-generated unique ID of the access token.
 	//
 	// This member is required.
-	Secret *string
+	AccessTokenId *string
 
 	// The date and time the personal access token expires, in coordinated universal
 	// time (UTC) timestamp format as specified in RFC 3339
 	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6). If not specified, the
 	// default is one year from creation.
+	//
+	// This member is required.
 	ExpiresTime *time.Time
 
 	// The friendly name of the personal access token.
+	//
+	// This member is required.
 	Name *string
+
+	// The secret value of the personal access token.
+	//
+	// This member is required.
+	Secret *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

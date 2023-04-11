@@ -27,7 +27,7 @@ func (e *WAFAssociatedItemException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFAssociatedItemException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFAssociatedItemException"
 	}
 	return *e.ErrorCodeOverride
@@ -61,7 +61,7 @@ func (e *WAFConfigurationWarningException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFConfigurationWarningException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFConfigurationWarningException"
 	}
 	return *e.ErrorCodeOverride
@@ -88,7 +88,7 @@ func (e *WAFDuplicateItemException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFDuplicateItemException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFDuplicateItemException"
 	}
 	return *e.ErrorCodeOverride
@@ -116,7 +116,7 @@ func (e *WAFExpiredManagedRuleGroupVersionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFExpiredManagedRuleGroupVersionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFExpiredManagedRuleGroupVersionException"
 	}
 	return *e.ErrorCodeOverride
@@ -145,7 +145,7 @@ func (e *WAFInternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInternalErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFInternalErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -171,7 +171,7 @@ func (e *WAFInvalidOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFInvalidOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -215,7 +215,7 @@ func (e *WAFInvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFInvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -262,7 +262,7 @@ func (e *WAFInvalidPermissionPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidPermissionPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFInvalidPermissionPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -291,7 +291,7 @@ func (e *WAFInvalidResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidResourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFInvalidResourceException"
 	}
 	return *e.ErrorCodeOverride
@@ -321,7 +321,7 @@ func (e *WAFLimitsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFLimitsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFLimitsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -350,7 +350,7 @@ func (e *WAFLogDestinationPermissionIssueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFLogDestinationPermissionIssueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFLogDestinationPermissionIssueException"
 	}
 	return *e.ErrorCodeOverride
@@ -381,7 +381,7 @@ func (e *WAFNonexistentItemException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFNonexistentItemException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFNonexistentItemException"
 	}
 	return *e.ErrorCodeOverride
@@ -409,7 +409,7 @@ func (e *WAFOptimisticLockException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFOptimisticLockException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFOptimisticLockException"
 	}
 	return *e.ErrorCodeOverride
@@ -442,7 +442,7 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFServiceLinkedRoleErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFServiceLinkedRoleErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -471,7 +471,7 @@ func (e *WAFSubscriptionNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFSubscriptionNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFSubscriptionNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -497,7 +497,7 @@ func (e *WAFTagOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFTagOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFTagOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -524,7 +524,7 @@ func (e *WAFTagOperationInternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFTagOperationInternalErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFTagOperationInternalErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -556,7 +556,7 @@ func (e *WAFUnavailableEntityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFUnavailableEntityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WAFUnavailableEntityException"
 	}
 	return *e.ErrorCodeOverride

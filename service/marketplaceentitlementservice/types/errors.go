@@ -27,7 +27,7 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride

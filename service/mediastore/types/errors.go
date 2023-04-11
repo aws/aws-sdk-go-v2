@@ -27,7 +27,7 @@ func (e *ContainerInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ContainerInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ContainerInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *ContainerNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ContainerNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ContainerNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *CorsPolicyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CorsPolicyNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CorsPolicyNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -157,7 +157,7 @@ func (e *PolicyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyNotFoundException"
 	}
 	return *e.ErrorCodeOverride

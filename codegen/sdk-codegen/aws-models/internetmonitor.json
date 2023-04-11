@@ -1,0 +1,2170 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.internetmonitor#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have sufficient permission to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.internetmonitor#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*"
+            }
+        },
+        "com.amazonaws.internetmonitor#AvailabilityMeasurement": {
+            "type": "structure",
+            "members": {
+                "ExperienceScore": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Experience scores, or health scores are calculated for different geographic and network provider combinations (that is, different granularities) and\n\t\t\talso summed into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor\n\t\t\tprovides global health scores.</p>\n         <p>The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and\n\t\t\tavailability scores, and when it creates and resolves health events. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Amazon Web Services calculates performance and\n\t\t\t\tavailability scores</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                    }
+                },
+                "PercentOfTotalTrafficImpacted": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of impact caused by a health event for total traffic globally.</p>\n         <p>For information about how Internet Monitor calculates impact, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html\"> Inside Internet Monitor</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User\n\t\t\tGuide.</p>"
+                    }
+                },
+                "PercentOfClientLocationImpacted": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of impact caused by a health event for client location traffic globally.</p>\n         <p>For information about how Internet Monitor calculates impact, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html\"> Inside Internet Monitor</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User\n\t\t\tGuide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Measurements about the availability for your application on the internet, calculated by Amazon CloudWatch Internet Monitor. Amazon Web Services has substantial historical data about internet\n\t\t\tperformance and availability between Amazon Web Services services and different network providers and geographies. By applying statistical analysis to the data, Internet Monitor\n\t\t\tcan detect when the performance and availability for your application has dropped, compared to an estimated baseline that's already calculated. To make it\n\t\t\teasier to see those drops, we report that information to you in the form of health scores: a performance score and an availability score.</p>\n         <p>Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99%\n\t\t\tfor an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#BadRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A bad request was received.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.internetmonitor#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource is in use.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.internetmonitor#CreateMonitor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#CreateMonitorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#CreateMonitorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Virtual Private Clouds (VPCs),\n\t\t\tAmazon CloudFront distributions, and WorkSpaces directories. </p>\n         <p>After you create a monitor, you can view the internet performance for your application, scoped to a location, as well as any health events that are\n\t\t\timpairing traffic. Internet Monitor can also diagnose whether the impairment is on the Amazon Web Services network or is an issue with an internet service provider (ISP).</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#CreateMonitorInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resources": {
+                    "target": "com.amazonaws.internetmonitor#SetOfARNs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources to include in a monitor, which you provide as a set of Amazon Resource Names (ARNs).</p>\n         <p>You can add a combination of Amazon Virtual Private Clouds (VPCs) and Amazon CloudFront distributions, or you can add Amazon WorkSpaces directories. You can't add all three types of\n\t\t\tresources.</p>\n         <note>\n            <p>If you add only VPC resources, at least one VPC must have an Internet Gateway attached to it, to make sure that it has internet connectivity.</p>\n         </note>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive string of up to 64 ASCII characters that you specify to make an idempotent API request. Don't reuse the same client token for\n\t\t\tother API requests.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.internetmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for a monitor. You can add a maximum of 50 tags in Internet Monitor.</p>"
+                    }
+                },
+                "MaxCityNetworksToMonitor": {
+                    "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored \n\t\t\tfor your resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#CreateMonitorOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.internetmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#MonitorConfigState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#DeleteMonitor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#DeleteMonitorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#DeleteMonitorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a monitor in Amazon CloudWatch Internet Monitor. </p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#DeleteMonitorInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#DeleteMonitorOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.internetmonitor#GetHealthEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#GetHealthEventInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#GetHealthEventOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information the Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations,\n\t\t\tand all of the information related to the event by location.</p>\n         <p>The information returned includes the performance, availability, and round-trip time impact, information about the network providers, the event type,\n\t\t\tand so on.</p>\n         <p>Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}/HealthEvents/{EventId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetHealthEventInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventId": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internally generated identifier of a health event. Because <code>EventID</code> contains the forward slash (“/”) character, you must \n\t\t\tURL-encode the <code>EventID</code> field in the request URL.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#GetHealthEventOutput": {
+            "type": "structure",
+            "members": {
+                "EventArn": {
+                    "target": "com.amazonaws.internetmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventId": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internally generated identifier of a health event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a health event started.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "EndedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a health event was resolved. If the health event is still active, the end time is not set.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a health event was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a health event was last updated or recalculated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "ImpactedLocations": {
+                    "target": "com.amazonaws.internetmonitor#ImpactedLocationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locations affected by a health event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a health event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PercentOfTotalTrafficImpacted": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impact on total traffic that a health event has.</p>"
+                    }
+                },
+                "ImpactType": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventImpactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of impairment of a specific health event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#GetMonitor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#GetMonitorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#GetMonitorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a monitor in Amazon CloudWatch Internet Monitor based on a monitor name. The information returned includes the Amazon Resource Name (ARN), create time,\n\t\t\tmodified time, resources included in the monitor, and status information.</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetMonitorInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#GetMonitorOutput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MonitorArn": {
+                    "target": "com.amazonaws.internetmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resources": {
+                    "target": "com.amazonaws.internetmonitor#SetOfARNs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources that have been added for the monitor. Resources are listed by their Amazon Resource Names (ARNs).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#MonitorConfigState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the monitor was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "ModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the monitor was modified.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "ProcessingStatus": {
+                    "target": "com.amazonaws.internetmonitor#MonitorProcessingStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health of the data processing for the monitor.</p>"
+                    }
+                },
+                "ProcessingStatusInfo": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the health of the data processing for the monitor.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.internetmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that have been added to monitor.</p>"
+                    }
+                },
+                "MaxCityNetworksToMonitor": {
+                    "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored \n\t\t\tfor your resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#HealthEvent": {
+            "type": "structure",
+            "members": {
+                "EventArn": {
+                    "target": "com.amazonaws.internetmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventId": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internally generated identifier of a specific network traffic impairment health event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When a health event started.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "EndedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a health event ended. If the health event is still active, then the end time is not set.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the health event was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the health event was last updated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "ImpactedLocations": {
+                    "target": "com.amazonaws.internetmonitor#ImpactedLocationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locations impacted by the health event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Health event list member.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PercentOfTotalTrafficImpacted": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impact on global traffic monitored by this monitor for this health event.</p>"
+                    }
+                },
+                "ImpactType": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventImpactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of impairment for a health event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a health event created in a monitor in Amazon CloudWatch Internet Monitor.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#HealthEventImpactType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AVAILABILITY",
+                        "name": "AVAILABILITY"
+                    },
+                    {
+                        "value": "PERFORMANCE",
+                        "name": "PERFORMANCE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#HealthEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#HealthEvent"
+            }
+        },
+        "com.amazonaws.internetmonitor#HealthEventName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9/_.-]+$"
+            }
+        },
+        "com.amazonaws.internetmonitor#HealthEventResource": {
+            "type": "resource",
+            "identifiers": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName"
+                },
+                "EventId": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventName"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.internetmonitor#GetHealthEvent"
+            },
+            "list": {
+                "target": "com.amazonaws.internetmonitor#ListHealthEvents"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "monitor/{MonitorName}/health-event/{EventId}"
+                },
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#HealthEventStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "RESOLVED",
+                        "name": "RESOLVED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#ImpactedLocation": {
+            "type": "structure",
+            "members": {
+                "ASName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network at an impacted location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ASNumber": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Autonomous System Number (ASN) of the network at an impacted location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Country": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the country where the health event is located.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdivision": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdivision location where the health event is located. The subdivision usually maps to \n\t\t\t\tstates in most countries (including the United States). For United Kingdom, it maps to a country (England, \n\t\t\t\tScotland, Wales) or province (Northern Ireland).</p>"
+                    }
+                },
+                "Metro": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metro area where the health event is located.</p>\n         <p>Metro indicates a metropolitan region in the United States, such as the region around New York City.\n   \t\tIn non-US countries, this is a second-level subdivision. For example, in the United Kingdom, it could be\n   \t\ta county, a London borough, a unitary authority, council area, and so on.</p>"
+                    }
+                },
+                "City": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the city where the health event is located.</p>"
+                    }
+                },
+                "Latitude": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latitude where the health event is located.</p>"
+                    }
+                },
+                "Longitude": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The longitude where the health event is located.</p>"
+                    }
+                },
+                "CountryCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code where the health event is located. The ISO 3166-2 codes for the\n   \t\tcountry is provided, when available. </p>"
+                    }
+                },
+                "SubdivisionCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdivision code where the health event is located. The ISO 3166-2 codes for \n\t\t\tcountry subdivisions is provided, when available. </p>"
+                    }
+                },
+                "ServiceLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service location where the health event is located.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the health event at an impacted location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CausedBy": {
+                    "target": "com.amazonaws.internetmonitor#NetworkImpairment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cause of the impairment. There are two types of network impairments: Amazon Web Services network issues\n      \tor internet issues. Internet issues are typically a problem with a network provider, like an internet service provider (ISP).</p>"
+                    }
+                },
+                "InternetHealth": {
+                    "target": "com.amazonaws.internetmonitor#InternetHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calculated health at a specific location.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a location impacted by a health event in Amazon CloudWatch Internet Monitor.</p>\n         <p>Geographic regions are hierarchically categorized into country, subdivision, \n   \t\tmetro and city geographic granularities. The geographic region is identified based \n   \t\ton the IP address used at the client locations.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#ImpactedLocationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#ImpactedLocation"
+            }
+        },
+        "com.amazonaws.internetmonitor#InternalServerErrorException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was an internal server error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal error occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetHealth": {
+            "type": "structure",
+            "members": {
+                "Availability": {
+                    "target": "com.amazonaws.internetmonitor#AvailabilityMeasurement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99%\n\t\t\tfor an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.</p>"
+                    }
+                },
+                "Performance": {
+                    "target": "com.amazonaws.internetmonitor#PerformanceMeasurement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for\n\t\t\tan end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Internet health includes measurements calculated by Amazon CloudWatch Internet Monitor about the performance and availability for your application on the internet. Amazon Web Services has\n\t\t\tsubstantial historical data about internet performance and availability between Amazon Web Services services and different network providers and geographies. By\n\t\t\tapplying statistical analysis to the data, Internet Monitor can detect when the performance and availability for your application has dropped, compared to an\n\t\t\testimated baseline that's already calculated. To make it easier to see those drops, we report that information to you in the form of health scores: a\n\t\t\tperformance score and an availability score.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetMonitor20210603": {
+            "type": "service",
+            "version": "2021-06-03",
+            "operations": [
+                {
+                    "target": "com.amazonaws.internetmonitor#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.internetmonitor#MonitorResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "InternetMonitor",
+                    "arnNamespace": "internetmonitor",
+                    "cloudFormationName": "InternetMonitor",
+                    "cloudTrailEventSource": "internetmonitor.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "internetmonitor"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the tag key-value pairs attached to the resource",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the tag key-value pairs in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by the tag keys in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    }
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type",
+                        "X-Amz-Requested-Operation"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Amazon CloudWatch Internet Monitor provides visibility into how internet issues impact the performance and availability between your applications hosted on Amazon Web Services and your end\n\t\t\tusers, reducing the time it takes for you to diagnose these issues, from days to minutes. You can explore internet measurements for different time frames\n\t\t\tand at different geographic granularities, and quickly visualize the impact of issues, and then take action to improve your end users' experience, for\n\t\t\texample, by switching to other Amazon Web Services services or rerouting traffic to your workload through differentAmazon Web Services Regions.</p>\n         <p> If the issue is caused by the Amazon Web Services network, you'll automatically receive an Amazon Web Services Health Dashboard notification with the steps that Amazon Web Services is taking\n\t\t\tto mitigate the problem. To support integrating health information for geographies and networks specific to your application, Internet Monitor delivers measurements\n\t\t\tto CloudWatch Logs and CloudWatch Metrics. Internet Monitor also sends health events to Amazon EventBridge, so you can set up notifications. Internet Monitor monitors internet connectivity\n\t\t\tfor your application through Amazon Virtual Private Clouds (VPCs), Amazon CloudFront distributions, and Amazon WorkSpaces directories.</p>\n         <p>To use Internet Monitor, you create a <i>monitor</i> and add resources to it, Virtual Private Clouds (VPCs), Amazon CloudFront distributions, or WorkSpaces\n\t\t\tdirectories that show where your application's internet traffic is. Internet Monitor then provides internet measurements from Amazon Web Services that are specific to the locations\n\t\t\tand networks that communicate with your application. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html\"> Using Amazon CloudWatch Internet Monitor</a> in the Amazon CloudWatch User Guide.</p>",
+                "smithy.api#title": "Amazon CloudWatch Internet Monitor",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "UseFIPS"
+                                                                                },
+                                                                                true
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "booleanEquals",
+                                                                                    "argv": [
+                                                                                        true,
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "PartitionResult"
+                                                                                                },
+                                                                                                "supportsFIPS"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "type": "tree",
+                                                                            "rules": [
+                                                                                {
+                                                                                    "conditions": [],
+                                                                                    "endpoint": {
+                                                                                        "url": "https://internetmonitor-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                        "properties": {},
+                                                                                        "headers": {}
+                                                                                    },
+                                                                                    "type": "endpoint"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                                            "type": "error"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://internetmonitor.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "UseFIPS"
+                                                                                },
+                                                                                true
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "booleanEquals",
+                                                                                    "argv": [
+                                                                                        true,
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "PartitionResult"
+                                                                                                },
+                                                                                                "supportsFIPS"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "type": "tree",
+                                                                            "rules": [
+                                                                                {
+                                                                                    "conditions": [],
+                                                                                    "type": "tree",
+                                                                                    "rules": [
+                                                                                        {
+                                                                                            "conditions": [],
+                                                                                            "endpoint": {
+                                                                                                "url": "https://internetmonitor-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                                "properties": {},
+                                                                                                "headers": {}
+                                                                                            },
+                                                                                            "type": "endpoint"
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                                            "type": "error"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://internetmonitor.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://internetmonitor-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://internetmonitor.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://internetmonitor-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://internetmonitor.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://internetmonitor-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://internetmonitor.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeded a service quota.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.internetmonitor#ListHealthEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#ListHealthEventsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#ListHealthEventsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns all information for health events including the client location information the network\n\t\t\tcause and status, event start and end time, percentage of total traffic impacted, and status.</p>\n         <note>\n            <p>Health events that have start times during the time frame that is requested are not included in the list of health events.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}/HealthEvents",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "HealthEvents"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#ListHealthEventsInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a health event started.</p>",
+                        "smithy.api#httpQuery": "StartTime",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a health event ended. If the health event is still ongoing, then the end time is not set.</p>",
+                        "smithy.api#httpQuery": "EndTime",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.internetmonitor#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of health event objects that you want to return with this call. </p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "EventStatus": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a health event.</p>",
+                        "smithy.api#httpQuery": "EventStatus"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#ListHealthEventsOutput": {
+            "type": "structure",
+            "members": {
+                "HealthEvents": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of health events.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#ListMonitors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#ListMonitorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#ListMonitorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of your monitors for Amazon CloudWatch Internet Monitor and their statuses, along with the Amazon Resource Name (ARN) and name of each monitor.</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Monitors"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#ListMonitorsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.internetmonitor#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of monitor objects that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "MonitorStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a monitor. This includes the status of the data processing for the monitor and the status of the monitor itself.</p>\n         <p>For information about the statuses for a monitor, see <a href=\"https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html\">\n\t\t\t\tMonitor</a>.</p>",
+                        "smithy.api#httpQuery": "MonitorStatus"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#ListMonitorsOutput": {
+            "type": "structure",
+            "members": {
+                "Monitors": {
+                    "target": "com.amazonaws.internetmonitor#MonitorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of monitors.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags for a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.internetmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.internetmonitor#MonitorResource",
+                        "ids": {
+                            "MonitorName": "ResourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.internetmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags for a resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500000
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#Monitor": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MonitorArn": {
+                    "target": "com.amazonaws.internetmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#MonitorConfigState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcessingStatus": {
+                    "target": "com.amazonaws.internetmonitor#MonitorProcessingStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health of data processing for the monitor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The description of and information about a monitor in Amazon CloudWatch Internet Monitor. </p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#MonitorArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:.*"
+            }
+        },
+        "com.amazonaws.internetmonitor#MonitorConfigState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#MonitorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#Monitor"
+            }
+        },
+        "com.amazonaws.internetmonitor#MonitorProcessingStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OK",
+                        "name": "OK"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    },
+                    {
+                        "value": "COLLECTING_DATA",
+                        "name": "COLLECTING_DATA"
+                    },
+                    {
+                        "value": "INSUFFICIENT_DATA",
+                        "name": "INSUFFICIENT_DATA"
+                    },
+                    {
+                        "value": "FAULT_SERVICE",
+                        "name": "FAULT_SERVICE"
+                    },
+                    {
+                        "value": "FAULT_ACCESS_CLOUDWATCH",
+                        "name": "FAULT_ACCESS_CLOUDWATCH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#MonitorResource": {
+            "type": "resource",
+            "identifiers": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.internetmonitor#CreateMonitor"
+            },
+            "read": {
+                "target": "com.amazonaws.internetmonitor#GetMonitor"
+            },
+            "update": {
+                "target": "com.amazonaws.internetmonitor#UpdateMonitor"
+            },
+            "delete": {
+                "target": "com.amazonaws.internetmonitor#DeleteMonitor"
+            },
+            "list": {
+                "target": "com.amazonaws.internetmonitor#ListMonitors"
+            },
+            "resources": [
+                {
+                    "target": "com.amazonaws.internetmonitor#HealthEventResource"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "monitor/{MonitorName}"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "Monitor"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#Network": {
+            "type": "structure",
+            "members": {
+                "ASName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internet provider name or network name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ASNumber": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Autonomous System Number (ASN) of the internet provider or network.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internet service provider (ISP) or network in Amazon CloudWatch Internet Monitor.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#NetworkImpairment": {
+            "type": "structure",
+            "members": {
+                "Networks": {
+                    "target": "com.amazonaws.internetmonitor#NetworkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The networks that could be impacted by a network impairment event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AsPath": {
+                    "target": "com.amazonaws.internetmonitor#NetworkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The combination of the Autonomous System Number (ASN) of the network and the name of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkEventType": {
+                    "target": "com.amazonaws.internetmonitor#TriangulationEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of network impairment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the network impairment for a specific network measured by Amazon CloudWatch Internet Monitor.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#NetworkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#Network"
+            }
+        },
+        "com.amazonaws.internetmonitor#NotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request specifies something that doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.internetmonitor#PerformanceMeasurement": {
+            "type": "structure",
+            "members": {
+                "ExperienceScore": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Experience scores, or health scores, are calculated for different geographic and network provider combinations (that is, different granularities) and\n\t\t\talso totaled into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor\n\t\t\tprovides global health scores.</p>\n         <p>The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and\n\t\t\tavailability scores, and when it creates and resolves health events. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Amazon Web Services calculates performance and\n\t\t\t\tavailability scores</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                    }
+                },
+                "PercentOfTotalTrafficImpacted": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How much performance impact was caused by a health event for total traffic globally. For performance, this is the percentage of how much latency\n\t\t\tincreased during the event compared to typical performance for your application traffic globally. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\"> When Amazon Web Services creates and resolves health\n\t\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                    }
+                },
+                "PercentOfClientLocationImpacted": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How much performance impact was caused by a health event at a client location. For performance, this is the percentage of how much latency increased\n\t\t\tduring the event compared to typical performance for traffic, from this client location to an Amazon Web Services location, using a specific client network. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\"> When Amazon Web Services creates and resolves health\n\t\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                    }
+                },
+                "RoundTripTime": {
+                    "target": "com.amazonaws.internetmonitor#RoundTripTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the percentage of how much round-trip time increased during the event compared to typical round-trip time for your application for traffic. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop\"> When Amazon Web Services creates and resolves health\n\t\t\t\tevents</a> in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Measurements about the performance for your application on the internet calculated by Amazon CloudWatch Internet Monitor. Amazon Web Services has substantial historical data about internet\n\t\t\tperformance and availability between Amazon Web Services services and different network providers and geographies. By applying statistical analysis to the data, Internet Monitor\n\t\t\tcan detect when the performance and availability for your application has dropped, compared to an estimated baseline that's already calculated. To make it\n\t\t\teasier to see those drops, we report that information to you in the form of health scores: a performance score and an availability score.</p>\n         <p>Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for\n\t\t\tan end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\"> How Internet Monitor calculates performance and availability\n\t\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#ResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+            }
+        },
+        "com.amazonaws.internetmonitor#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request specifies a resource that doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.internetmonitor#RoundTripTime": {
+            "type": "structure",
+            "members": {
+                "P50": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>RTT at the 50th percentile (p50).</p>"
+                    }
+                },
+                "P90": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>RTT at the 90th percentile (p90). </p>"
+                    }
+                },
+                "P95": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>RTT at the 95th percentile (p95). </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Round-trip time (RTT) is how long it takes for a request from the user to return a response to the user. Amazon CloudWatch Internet Monitor calculates RTT at different\n\t\t\tpercentiles: p50, p90, and p95.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#SetOfARNs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#Arn"
+            }
+        },
+        "com.amazonaws.internetmonitor#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.internetmonitor#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.internetmonitor#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Adds a tag to a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor. You can add a maximum of 50 tags in Internet Monitor.</p>\n         <p>A minimum of one tag is required for this call. It returns an error if you use the <code>TagResource</code> request with 0 tags.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.internetmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a tag that you add to a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.internetmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that you add to a resource. You can add a maximum of 50 tags in Internet Monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.internetmonitor#MonitorResource",
+                        "ids": {
+                            "MonitorName": "ResourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#TagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.internetmonitor#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There were too many requests.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#TriangulationEventType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS",
+                        "name": "AWS"
+                    },
+                    {
+                        "value": "Internet",
+                        "name": "INTERNET"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Removes a tag from a resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.internetmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a tag you remove a resource from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.internetmonitor#TagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tag keys that you remove from a resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.internetmonitor#MonitorResource",
+                        "ids": {
+                            "MonitorName": "ResourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#UntagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.internetmonitor#UpdateMonitor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#UpdateMonitorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#UpdateMonitorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a monitor. You can update a monitor to add or remove resources, or to change the status of the monitor. You can't change the name of a\n\t\t\tmonitor.</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}",
+                    "method": "PATCH"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#UpdateMonitorInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourcesToAdd": {
+                    "target": "com.amazonaws.internetmonitor#SetOfARNs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources to include in a monitor, which you provide as a set of Amazon Resource Names (ARNs).</p>\n         <p>You can add a combination of Amazon Virtual Private Clouds (VPCs) and Amazon CloudFront distributions, or you can add Amazon WorkSpaces directories. You can't add all three types of\n\t\t\tresources.</p>\n         <note>\n            <p>If you add only VPC resources, at least one VPC must have an Internet Gateway attached to it, to make sure that it has internet\n\t\t\tconnectivity.</p>\n         </note>"
+                    }
+                },
+                "ResourcesToRemove": {
+                    "target": "com.amazonaws.internetmonitor#SetOfARNs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources to remove from a monitor, which you provide as a set of Amazon Resource Names (ARNs).</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#MonitorConfigState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status for a monitor. The accepted values for <code>Status</code> with the <code>UpdateMonitor</code> API call are the following: <code>ACTIVE</code> and\n\t\t\t<code>INACTIVE</code>. The following values are <i>not</i> accepted: <code>PENDING</code>, and <code>ERROR</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive string of up to 64 ASCII characters that you specify to make an idempotent API request. You should not reuse the same client\n\t\t\ttoken for other API requests.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "MaxCityNetworksToMonitor": {
+                    "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored \n\t\t\tfor your resources.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#UpdateMonitorOutput": {
+            "type": "structure",
+            "members": {
+                "MonitorArn": {
+                    "target": "com.amazonaws.internetmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#MonitorConfigState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Invalid request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

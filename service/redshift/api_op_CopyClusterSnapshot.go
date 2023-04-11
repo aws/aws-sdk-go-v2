@@ -71,9 +71,9 @@ type CopyClusterSnapshotInput struct {
 	ManualSnapshotRetentionPeriod *int32
 
 	// The identifier of the cluster the source snapshot was created from. This
-	// parameter is required if your IAM user has a policy containing a snapshot
-	// resource element that specifies anything other than * for the cluster name.
-	// Constraints:
+	// parameter is required if your IAM user or role has a policy containing a
+	// snapshot resource element that specifies anything other than * for the cluster
+	// name. Constraints:
 	//
 	// * Must be the identifier for a valid cluster.
 	SourceSnapshotClusterIdentifier *string

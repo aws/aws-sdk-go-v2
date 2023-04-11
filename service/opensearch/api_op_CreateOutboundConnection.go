@@ -48,6 +48,9 @@ type CreateOutboundConnectionInput struct {
 	// This member is required.
 	RemoteDomainInfo *types.DomainInformationContainer
 
+	// The connection mode.
+	ConnectionMode types.ConnectionMode
+
 	noSmithyDocumentSerde
 }
 
@@ -61,6 +64,12 @@ type CreateOutboundConnectionOutput struct {
 	// The unique identifier for the created outbound connection, which is used for
 	// subsequent operations on the connection.
 	ConnectionId *string
+
+	// The connection mode.
+	ConnectionMode types.ConnectionMode
+
+	// The ConnectionProperties for the newly created connection.
+	ConnectionProperties *types.ConnectionProperties
 
 	// The status of the connection.
 	ConnectionStatus *types.OutboundConnectionStatus

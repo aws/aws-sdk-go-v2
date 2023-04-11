@@ -1136,7 +1136,7 @@ type Schema struct {
 	// This member is required.
 	Name *string
 
-	// The partition keys for the data set underlying this schema.
+	// The partition keys for the dataset underlying this schema.
 	//
 	// This member is required.
 	PartitionKeys []Column
@@ -1208,7 +1208,7 @@ type SchemaSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A pointer to the data set that underlies this table. Currently, this can only be
+// A pointer to the dataset that underlies this table. Currently, this can only be
 // an AWS Glue table.
 //
 // The following types satisfy this interface:

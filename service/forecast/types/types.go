@@ -378,9 +378,9 @@ type DataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The destination for an export job. Provide an S3 path, an AWS Identity and
-// Access Management (IAM) role that allows Amazon Forecast to access the location,
-// and an AWS Key Management Service (KMS) key (optional).
+// The destination for an export job. Provide an S3 path, an Identity and Access
+// Management (IAM) role that allows Amazon Forecast to access the location, and an
+// Key Management Service (KMS) key (optional).
 type DataDestination struct {
 
 	// The path to an Amazon Simple Storage Service (Amazon S3) bucket along with the
@@ -430,10 +430,10 @@ type DatasetImportJobSummary struct {
 	// When the dataset import job was created.
 	CreationTime *time.Time
 
-	// The location of the training data to import and an AWS Identity and Access
+	// The location of the training data to import and an Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the data. The
 	// training data must be stored in an Amazon S3 bucket. If encryption is used,
-	// DataSource includes an AWS Key Management Service (KMS) key.
+	// DataSource includes an Key Management Service (KMS) key.
 	DataSource *DataSource
 
 	// The Amazon Resource Name (ARN) of the dataset import job.
@@ -441,6 +441,9 @@ type DatasetImportJobSummary struct {
 
 	// The name of the dataset import job.
 	DatasetImportJobName *string
+
+	// The import mode of the dataset import job, FULL or INCREMENTAL.
+	ImportMode ImportMode
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
@@ -511,8 +514,8 @@ type DatasetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The source of your data, an AWS Identity and Access Management (IAM) role that
-// allows Amazon Forecast to access the data and, optionally, an AWS Key Management
+// The source of your data, an Identity and Access Management (IAM) role that
+// allows Amazon Forecast to access the data and, optionally, an Key Management
 // Service (KMS) key.
 type DataSource struct {
 
@@ -525,9 +528,9 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
-// An AWS Key Management Service (KMS) key and an AWS Identity and Access
-// Management (IAM) role that Amazon Forecast can assume to access the key. You can
-// specify this optional object in the CreateDataset and CreatePredictor requests.
+// An Key Management Service (KMS) key and an Identity and Access Management (IAM)
+// role that Amazon Forecast can assume to access the key. You can specify this
+// optional object in the CreateDataset and CreatePredictor requests.
 type EncryptionConfig struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key.
@@ -535,9 +538,9 @@ type EncryptionConfig struct {
 	// This member is required.
 	KMSKeyArn *string
 
-	// The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS
-	// key. Passing a role across AWS accounts is not allowed. If you pass a role that
-	// isn't in your account, you get an InvalidInputException error.
+	// The ARN of the IAM role that Amazon Forecast can assume to access the KMS key.
+	// Passing a role across Amazon Web Services accounts is not allowed. If you pass a
+	// role that isn't in your account, you get an InvalidInputException error.
 	//
 	// This member is required.
 	RoleArn *string
@@ -641,9 +644,9 @@ type ExplainabilityExportSummary struct {
 	// When the Explainability was created.
 	CreationTime *time.Time
 
-	// The destination for an export job. Provide an S3 path, an AWS Identity and
-	// Access Management (IAM) role that allows Amazon Forecast to access the location,
-	// and an AWS Key Management Service (KMS) key (optional).
+	// The destination for an export job. Provide an S3 path, an Identity and Access
+	// Management (IAM) role that allows Amazon Forecast to access the location, and an
+	// Key Management Service (KMS) key (optional).
 	Destination *DataDestination
 
 	// The Amazon Resource Name (ARN) of the Explainability export.
@@ -818,13 +821,32 @@ type Featurization struct {
 // operation twice by specifying different featurization configurations.
 type FeaturizationConfig struct {
 
-	// The frequency of predictions in a forecast. Valid intervals are Y (Year), M
-	// (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes),
-	// 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y"
-	// indicates every year and "5min" indicates every five minutes. The frequency must
-	// be greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a
+	// The frequency of predictions in a forecast. Valid intervals are an integer
+	// followed by Y (Year), M (Month), W (Week), D (Day), H (Hour), and min (Minute).
+	// For example, "1D" indicates every day and "15min" indicates every 15 minutes.
+	// You cannot specify a value that would overlap with the next larger frequency.
+	// That means, for example, you cannot specify a frequency of 60 minutes, because
+	// that is equivalent to 1 hour. The valid values for each frequency are the
+	// following:
+	//
+	// * Minute - 1-59
+	//
+	// * Hour - 1-23
+	//
+	// * Day - 1-6
+	//
+	// * Week - 1-4
+	//
+	// * Month -
+	// 1-11
+	//
+	// * Year - 1
+	//
+	// Thus, if you want every other week forecasts, specify "2W".
+	// Or, if you want quarterly forecasts, you specify "3M". The frequency must be
+	// greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a
 	// RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
-	// RELATED_TIME_SERIES dataset frequency.
+	// TARGET_TIME_SERIES dataset frequency.
 	//
 	// This member is required.
 	ForecastFrequency *string
@@ -1291,9 +1313,9 @@ type PredictorBacktestExportJobSummary struct {
 	// When the predictor backtest export job was created.
 	CreationTime *time.Time
 
-	// The destination for an export job. Provide an S3 path, an AWS Identity and
-	// Access Management (IAM) role that allows Amazon Forecast to access the location,
-	// and an AWS Key Management Service (KMS) key (optional).
+	// The destination for an export job. Provide an S3 path, an Identity and Access
+	// Management (IAM) role that allows Amazon Forecast to access the location, and an
+	// Key Management Service (KMS) key (optional).
 	Destination *DataDestination
 
 	// The last time the resource was modified. The timestamp depends on the status of
@@ -1516,9 +1538,9 @@ type ReferencePredictorSummary struct {
 }
 
 // The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
-// and an AWS Identity and Access Management (IAM) role that Amazon Forecast can
-// assume to access the file(s). Optionally, includes an AWS Key Management Service
-// (KMS) key. This object is part of the DataSource object that is submitted in the
+// and an Identity and Access Management (IAM) role that Amazon Forecast can assume
+// to access the file(s). Optionally, includes an Key Management Service (KMS) key.
+// This object is part of the DataSource object that is submitted in the
 // CreateDatasetImportJob request, and part of the DataDestination object.
 type S3Config struct {
 
@@ -1528,16 +1550,16 @@ type S3Config struct {
 	// This member is required.
 	Path *string
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
-	// Forecast can assume to access the Amazon S3 bucket or files. If you provide a
-	// value for the KMSKeyArn key, the role must allow access to the key. Passing a
-	// role across AWS accounts is not allowed. If you pass a role that isn't in your
-	// account, you get an InvalidInputException error.
+	// The ARN of the Identity and Access Management (IAM) role that Amazon Forecast
+	// can assume to access the Amazon S3 bucket or files. If you provide a value for
+	// the KMSKeyArn key, the role must allow access to the key. Passing a role across
+	// Amazon Web Services accounts is not allowed. If you pass a role that isn't in
+	// your account, you get an InvalidInputException error.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.
+	// The Amazon Resource Name (ARN) of an Key Management Service (KMS) key.
 	KMSKeyArn *string
 
 	noSmithyDocumentSerde
@@ -1828,11 +1850,11 @@ type SupplementaryFeature struct {
 // case sensitive.
 //
 // * Do not use aws:, AWS:, or any upper or lowercase combination
-// of such as a prefix for keys as it is reserved for AWS use. You cannot edit or
-// delete tag keys with this prefix. Values can have this prefix. If a tag value
-// has aws as its prefix but the key does not, then Forecast considers it to be a
-// user tag and will count against the limit of 50 tags. Tags with only the key
-// prefix of aws do not count against your tags per resource limit.
+// of such as a prefix for keys as it is reserved for Amazon Web Services use. You
+// cannot edit or delete tag keys with this prefix. Values can have this prefix. If
+// a tag value has aws as its prefix but the key does not, then Forecast considers
+// it to be a user tag and will count against the limit of 50 tags. Tags with only
+// the key prefix of aws do not count against your tags per resource limit.
 type Tag struct {
 
 	// One part of a key-value pair that makes up a tag. A key is a general label that
@@ -1936,8 +1958,8 @@ type TimeSeriesCondition struct {
 // to create forecasts.
 type TimeSeriesIdentifiers struct {
 
-	// The source of your data, an AWS Identity and Access Management (IAM) role that
-	// allows Amazon Forecast to access the data and, optionally, an AWS Key Management
+	// The source of your data, an Identity and Access Management (IAM) role that
+	// allows Amazon Forecast to access the data and, optionally, an Key Management
 	// Service (KMS) key.
 	DataSource *DataSource
 
@@ -1959,9 +1981,9 @@ type TimeSeriesIdentifiers struct {
 type TimeSeriesReplacementsDataSource struct {
 
 	// The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
-	// and an AWS Identity and Access Management (IAM) role that Amazon Forecast can
-	// assume to access the file(s). Optionally, includes an AWS Key Management Service
-	// (KMS) key. This object is part of the DataSource object that is submitted in the
+	// and an Identity and Access Management (IAM) role that Amazon Forecast can assume
+	// to access the file(s). Optionally, includes an Key Management Service (KMS) key.
+	// This object is part of the DataSource object that is submitted in the
 	// CreateDatasetImportJob request, and part of the DataDestination object.
 	//
 	// This member is required.

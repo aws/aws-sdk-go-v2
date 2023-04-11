@@ -12,8 +12,8 @@ import (
 )
 
 // Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery
-// is an IPAM component that enables IPAM Service to manage and monitor resources
-// that belong to the owning account.
+// is an IPAM component that enables IPAM to manage and monitor resources that
+// belong to the owning account.
 func (c *Client) DisassociateIpamResourceDiscovery(ctx context.Context, params *DisassociateIpamResourceDiscoveryInput, optFns ...func(*Options)) (*DisassociateIpamResourceDiscoveryOutput, error) {
 	if params == nil {
 		params = &DisassociateIpamResourceDiscoveryInput{}

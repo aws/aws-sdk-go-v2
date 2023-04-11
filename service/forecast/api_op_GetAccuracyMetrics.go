@@ -54,8 +54,8 @@ type GetAccuracyMetricsInput struct {
 type GetAccuracyMetricsOutput struct {
 
 	// The LatencyOptimized AutoML override strategy is only available in private beta.
-	// Contact AWS Support or your account manager to learn more about access
-	// privileges. The AutoML strategy used to train the predictor. Unless
+	// Contact Amazon Web Services Support or your account manager to learn more about
+	// access privileges. The AutoML strategy used to train the predictor. Unless
 	// LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy.
 	// This parameter is only valid for predictors trained using AutoML.
 	AutoMLOverrideStrategy types.AutoMLOverrideStrategy

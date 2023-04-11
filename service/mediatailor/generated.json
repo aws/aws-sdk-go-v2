@@ -8,6 +8,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_ConfigureLogsForChannel.go",
         "api_op_ConfigureLogsForPlaybackConfiguration.go",
         "api_op_CreateChannel.go",
         "api_op_CreateLiveSource.go",
@@ -48,6 +49,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateChannel.go",
         "api_op_UpdateLiveSource.go",
+        "api_op_UpdateProgram.go",
         "api_op_UpdateSourceLocation.go",
         "api_op_UpdateVodSource.go",
         "deserializers.go",

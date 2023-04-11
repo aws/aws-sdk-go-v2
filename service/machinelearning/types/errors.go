@@ -30,7 +30,7 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotentParameterMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -60,7 +60,7 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerException"
 	}
 	return *e.ErrorCodeOverride
@@ -88,7 +88,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -113,7 +113,7 @@ func (e *InvalidTagException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagException"
 	}
 	return *e.ErrorCodeOverride
@@ -142,7 +142,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -168,7 +168,7 @@ func (e *PredictorNotMountedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PredictorNotMountedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PredictorNotMountedException"
 	}
 	return *e.ErrorCodeOverride
@@ -196,7 +196,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -221,7 +221,7 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagLimitExceededException"
 	}
 	return *e.ErrorCodeOverride

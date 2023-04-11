@@ -1,3 +1,60 @@
+# v1.72.1 (2023-03-27)
+
+* **Documentation**: Fixed some improperly rendered links in SDK documentation.
+
+# v1.72.0 (2023-03-23)
+
+* **Feature**: Amazon SageMaker Autopilot adds two new APIs - CreateAutoMLJobV2 and DescribeAutoMLJobV2. Amazon SageMaker Notebook Instances now supports the ml.geospatial.interactive instance type.
+
+# v1.71.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.71.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.71.0 (2023-03-09)
+
+* **Feature**: Amazon SageMaker Inference now allows SSM access to customer's model container by setting the "EnableSSMAccess" parameter for a ProductionVariant in CreateEndpointConfig API.
+
+# v1.70.0 (2023-03-08)
+
+* **Feature**: There needs to be a user identity to specify the SageMaker user who perform each action regarding the entity. However, these is a not a unified concept of user identity across SageMaker service that could be used today.
+
+# v1.69.0 (2023-03-02)
+
+* **Feature**: Add a new field "EndpointMetrics" in SageMaker Inference Recommender "ListInferenceRecommendationsJobSteps" API response.
+
+# v1.68.3 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.68.2 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.68.1 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.68.0 (2023-02-10)
+
+* **Feature**: Amazon SageMaker Autopilot adds support for selecting algorithms in CreateAutoMLJob API.
+
+# v1.67.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.67.0 (2023-01-31)
+
+* **Feature**: Amazon SageMaker Automatic Model Tuning now supports more completion criteria for Hyperparameter Optimization.
+
+# v1.66.0 (2023-01-27)
+
+* **Feature**: This release supports running SageMaker Training jobs with container images that are in a private Docker registry.
+
 # v1.65.0 (2023-01-25)
 
 * **Feature**: SageMaker Inference Recommender now decouples from Model Registry and could accept Model Name to invoke inference recommendations job; Inference Recommender now provides CPU/Memory Utilization metrics data in recommendation output.

@@ -152,6 +152,9 @@
                     "target": "com.amazonaws.proton#GetRepositorySyncStatus"
                 },
                 {
+                    "target": "com.amazonaws.proton#GetResourcesSummary"
+                },
+                {
                     "target": "com.amazonaws.proton#GetTemplateSyncStatus"
                 },
                 {
@@ -244,14 +247,14 @@
                     "name": "proton"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>This is the Proton Service API Reference. It provides descriptions, syntax and usage examples for each of the <a href=\"https://docs.aws.amazon.com/proton/latest/APIReference/API_Operations.html\">actions</a> and <a href=\"https://docs.aws.amazon.com/proton/latest/APIReference/API_Types.html\">data types</a> for the Proton service.</p>\n         <p>The documentation for each action shows the Query API request parameters and the XML response.</p>\n         <p>Alternatively, you can use the Amazon Web Services CLI to access an API. For more information, see the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html\">Amazon Web Services Command Line Interface User Guide</a>.</p>\n         <p>The Proton service is a two-pronged automation framework. Administrators create service templates to provide standardized infrastructure\n   and deployment tooling for serverless and container based applications. Developers, in turn, select from the available service templates to\n   automate their application or service deployments.</p>\n         <p>Because administrators define the infrastructure and tooling that Proton deploys and manages, they need permissions to use all of the\n   listed API operations.</p>\n         <p>When developers select a specific infrastructure and tooling set, Proton deploys their applications. To monitor their applications that are\n   running on Proton, developers need permissions to the service <i>create</i>, <i>list</i>,\n    <i>update</i> and <i>delete</i> API operations and the service instance <i>list</i> and\n    <i>update</i> API operations.</p>\n         <p>To learn more about Proton, see the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/Welcome.html\">Proton User Guide</a>.</p>\n         <p>\n            <b>Ensuring Idempotency</b>\n         </p>\n         <p>When you make a mutating API request, the request typically returns a result before the asynchronous workflows of the operation are complete.\n   Operations might also time out or encounter other server issues before they're complete, even if the request already returned a result. This might\n   make it difficult to determine whether the request succeeded. Moreover, you might need to retry the request multiple times to ensure that the\n   operation completes successfully. However, if the original request and the subsequent retries are successful, the operation occurs multiple times.\n   This means that you might create more resources than you intended.</p>\n         <p>\n            <i>Idempotency</i> ensures that an API request action completes no more than one time. With an idempotent request, if the\n   original request action completes successfully, any subsequent retries complete successfully without performing any further actions. However, the\n   result might contain updated information, such as the current creation status.</p>\n         <p>The following lists of APIs are grouped according to methods that ensure idempotency.</p>\n         <p>\n            <b>Idempotent create APIs with a client token</b>\n         </p>\n         <p>The API actions in this list support idempotency with the use of a <i>client token</i>. The corresponding Amazon Web Services CLI commands\n   also support idempotency using a client token. A client token is a unique, case-sensitive string of up to 64 ASCII characters. To make an\n   idempotent API request using one of these actions, specify a client token in the request. We recommend that you <i>don't</i> reuse\n   the same client token for other API requests. If you don’t provide a client token for these APIs, a default client token is automatically provided\n   by SDKs.</p>\n         <p>Given a request action that has succeeded:</p>\n         <p>If you retry the request using the same client token and the same parameters, the retry succeeds without performing any further actions other\n   than returning the original resource detail data in the response.</p>\n         <p>If you retry the request using the same client token, but one or more of the parameters are different, the retry throws a\n    <code>ValidationException</code> with an <code>IdempotentParameterMismatch</code> error.</p>\n         <p>Client tokens expire eight hours after a request is made. If you retry the request with the expired token, a new resource is created.</p>\n         <p>If the original resource is deleted and you retry the request, a new resource is created.</p>\n         <p>Idempotent create APIs with a client token:</p>\n         <ul>\n            <li>\n               <p>CreateEnvironmentTemplateVersion</p>\n            </li>\n            <li>\n               <p>CreateServiceTemplateVersion</p>\n            </li>\n            <li>\n               <p>CreateEnvironmentAccountConnection</p>\n            </li>\n         </ul>\n         <p>\n            <b>Idempotent create APIs</b>\n         </p>\n         <p>Given a request action that has succeeded:</p>\n         <p>If you retry the request with an API from this group, and the original resource <i>hasn't</i> been modified, the retry succeeds\n   without performing any further actions other than returning the original resource detail data in the response.</p>\n         <p>If the original resource has been modified, the retry throws a <code>ConflictException</code>.</p>\n         <p>If you retry with different input parameters, the retry throws a <code>ValidationException</code> with an\n    <code>IdempotentParameterMismatch</code> error.</p>\n         <p>Idempotent create APIs:</p>\n         <ul>\n            <li>\n               <p>CreateEnvironmentTemplate</p>\n            </li>\n            <li>\n               <p>CreateServiceTemplate</p>\n            </li>\n            <li>\n               <p>CreateEnvironment</p>\n            </li>\n            <li>\n               <p>CreateService</p>\n            </li>\n         </ul>\n         <p>\n            <b>Idempotent delete APIs</b>\n         </p>\n         <p>Given a request action that has succeeded:</p>\n         <p>When you retry the request with an API from this group and the resource was deleted, its metadata is returned in the response.</p>\n         <p>If you retry and the resource doesn't exist, the response is empty.</p>\n         <p>In both cases, the retry succeeds.</p>\n         <p>Idempotent delete APIs:</p>\n         <ul>\n            <li>\n               <p>DeleteEnvironmentTemplate</p>\n            </li>\n            <li>\n               <p>DeleteEnvironmentTemplateVersion</p>\n            </li>\n            <li>\n               <p>DeleteServiceTemplate</p>\n            </li>\n            <li>\n               <p>DeleteServiceTemplateVersion</p>\n            </li>\n            <li>\n               <p>DeleteEnvironmentAccountConnection</p>\n            </li>\n         </ul>\n         <p>\n            <b>Asynchronous idempotent delete APIs</b>\n         </p>\n         <p>Given a request action that has succeeded:</p>\n         <p>If you retry the request with an API from this group, if the original request delete operation status is <code>DELETE_IN_PROGRESS</code>, the\n   retry returns the resource detail data in the response without performing any further actions.</p>\n         <p>If the original request delete operation is complete, a retry returns an empty response.</p>\n         <p>Asynchronous idempotent delete APIs:</p>\n         <ul>\n            <li>\n               <p>DeleteEnvironment</p>\n            </li>\n            <li>\n               <p>DeleteService</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This is the Proton Service API Reference. It provides descriptions, syntax and usage examples for each of the\n    <a href=\"https://docs.aws.amazon.com/proton/latest/APIReference/API_Operations.html\">actions</a> and <a href=\"https://docs.aws.amazon.com/proton/latest/APIReference/API_Types.html\">data types</a> for the Proton\n   service.</p>\n         <p>The documentation for each action shows the Query API request parameters and the XML response.</p>\n         <p>Alternatively, you can use the Amazon Web Services CLI to access an API. For more information, see the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html\">Amazon Web Services Command Line Interface User\n    Guide</a>.</p>\n         <p>The Proton service is a two-pronged automation framework. Administrators create service templates to provide\n   standardized infrastructure and deployment tooling for serverless and container based applications. Developers, in\n   turn, select from the available service templates to automate their application or service deployments.</p>\n         <p>Because administrators define the infrastructure and tooling that Proton deploys and manages, they need\n   permissions to use all of the listed API operations.</p>\n         <p>When developers select a specific infrastructure and tooling set, Proton deploys their applications. To\n   monitor their applications that are running on Proton, developers need permissions to the service\n    <i>create</i>, <i>list</i>, <i>update</i> and <i>delete</i>\n   API operations and the service instance <i>list</i> and <i>update</i> API\n   operations.</p>\n         <p>To learn more about Proton, see the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/Welcome.html\">Proton User Guide</a>.</p>\n         <p>\n            <b>Ensuring Idempotency</b>\n         </p>\n         <p>When you make a mutating API request, the request typically returns a result before the asynchronous workflows\n   of the operation are complete. Operations might also time out or encounter other server issues before they're\n   complete, even if the request already returned a result. This might make it difficult to determine whether the\n   request succeeded. Moreover, you might need to retry the request multiple times to ensure that the operation\n   completes successfully. However, if the original request and the subsequent retries are successful, the operation\n   occurs multiple times. This means that you might create more resources than you intended.</p>\n         <p>\n            <i>Idempotency</i> ensures that an API request action completes no more than one time. With an\n   idempotent request, if the original request action completes successfully, any subsequent retries complete\n   successfully without performing any further actions. However, the result might contain updated information, such as\n   the current creation status.</p>\n         <p>The following lists of APIs are grouped according to methods that ensure idempotency.</p>\n         <p>\n            <b>Idempotent create APIs with a client token</b>\n         </p>\n         <p>The API actions in this list support idempotency with the use of a <i>client token</i>. The\n   corresponding Amazon Web Services CLI commands also support idempotency using a client token. A client token is a unique,\n   case-sensitive string of up to 64 ASCII characters. To make an idempotent API request using one of these actions,\n   specify a client token in the request. We recommend that you <i>don't</i> reuse the same client token\n   for other API requests. If you don’t provide a client token for these APIs, a default client token is automatically\n   provided by SDKs.</p>\n         <p>Given a request action that has succeeded:</p>\n         <p>If you retry the request using the same client token and the same parameters, the retry succeeds without\n   performing any further actions other than returning the original resource detail data in the response.</p>\n         <p>If you retry the request using the same client token, but one or more of the parameters are different, the retry\n   throws a <code>ValidationException</code> with an <code>IdempotentParameterMismatch</code> error.</p>\n         <p>Client tokens expire eight hours after a request is made. If you retry the request with the expired token, a new\n   resource is created.</p>\n         <p>If the original resource is deleted and you retry the request, a new resource is created.</p>\n         <p>Idempotent create APIs with a client token:</p>\n         <ul>\n            <li>\n               <p>CreateEnvironmentTemplateVersion</p>\n            </li>\n            <li>\n               <p>CreateServiceTemplateVersion</p>\n            </li>\n            <li>\n               <p>CreateEnvironmentAccountConnection</p>\n            </li>\n         </ul>\n         <p>\n            <b>Idempotent create APIs</b>\n         </p>\n         <p>Given a request action that has succeeded:</p>\n         <p>If you retry the request with an API from this group, and the original resource <i>hasn't</i> been\n   modified, the retry succeeds without performing any further actions other than returning the original resource detail\n   data in the response.</p>\n         <p>If the original resource has been modified, the retry throws a <code>ConflictException</code>.</p>\n         <p>If you retry with different input parameters, the retry throws a <code>ValidationException</code> with an\n    <code>IdempotentParameterMismatch</code> error.</p>\n         <p>Idempotent create APIs:</p>\n         <ul>\n            <li>\n               <p>CreateEnvironmentTemplate</p>\n            </li>\n            <li>\n               <p>CreateServiceTemplate</p>\n            </li>\n            <li>\n               <p>CreateEnvironment</p>\n            </li>\n            <li>\n               <p>CreateService</p>\n            </li>\n         </ul>\n         <p>\n            <b>Idempotent delete APIs</b>\n         </p>\n         <p>Given a request action that has succeeded:</p>\n         <p>When you retry the request with an API from this group and the resource was deleted, its metadata is returned in\n   the response.</p>\n         <p>If you retry and the resource doesn't exist, the response is empty.</p>\n         <p>In both cases, the retry succeeds.</p>\n         <p>Idempotent delete APIs:</p>\n         <ul>\n            <li>\n               <p>DeleteEnvironmentTemplate</p>\n            </li>\n            <li>\n               <p>DeleteEnvironmentTemplateVersion</p>\n            </li>\n            <li>\n               <p>DeleteServiceTemplate</p>\n            </li>\n            <li>\n               <p>DeleteServiceTemplateVersion</p>\n            </li>\n            <li>\n               <p>DeleteEnvironmentAccountConnection</p>\n            </li>\n         </ul>\n         <p>\n            <b>Asynchronous idempotent delete APIs</b>\n         </p>\n         <p>Given a request action that has succeeded:</p>\n         <p>If you retry the request with an API from this group, if the original request delete operation status is\n    <code>DELETE_IN_PROGRESS</code>, the retry returns the resource detail data in the response without performing any\n   further actions.</p>\n         <p>If the original request delete operation is complete, a retry returns an empty response.</p>\n         <p>Asynchronous idempotent delete APIs:</p>\n         <ul>\n            <li>\n               <p>DeleteEnvironment</p>\n            </li>\n            <li>\n               <p>DeleteService</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Proton",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -280,13 +283,12 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
                             "type": "tree",
@@ -294,23 +296,20 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "booleanEquals",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
-                                                }
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
                                     "type": "tree",
                                     "rules": [
                                         {
@@ -319,19 +318,201 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
+                                                            "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
                                             "type": "error"
                                         },
                                         {
                                             "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://proton-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://proton-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -344,134 +525,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://proton.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://proton-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -479,7 +578,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://proton-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://proton.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -488,74 +587,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://proton.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://proton.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -564,249 +602,15 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://proton-fips.ca-central-1.api.aws"
+                                    "url": "https://proton.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "Region": "ca-central-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "Region": "ca-central-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ca-central-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "ca-central-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "eu-central-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "eu-central-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "eu-central-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "eu-central-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-west-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "us-west-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-west-2",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "us-west-2",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "eu-west-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "eu-west-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "eu-west-2",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "eu-west-2",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "eu-west-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "eu-west-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "eu-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -818,255 +622,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-west-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.us-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-east-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "us-east-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.us-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1078,47 +635,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-east-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-2",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://proton.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-east-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1130,13 +648,235 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-2",
+                                "UseDualStack": false,
                                 "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://proton.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -1144,7 +884,6 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1155,8 +894,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -1167,8 +906,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1793,6 +1532,56 @@
                 "smithy.api#documentation": "<p>The request <i>couldn't</i> be made due to a conflicting operation or resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.proton#CountsSummary": {
+            "type": "structure",
+            "members": {
+                "components": {
+                    "target": "com.amazonaws.proton#ResourceCountsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of components in the Amazon Web Services account.</p>\n         <p>The semantics of the <code>components</code> field are different from the semantics of results for other\n   infrastructure-provisioning resources. That's because at this time components don't have associated templates,\n   therefore they don't have the concept of staleness. The <code>components</code> object will only contain\n    <code>total</code> and <code>failed</code> members.</p>"
+                    }
+                },
+                "environments": {
+                    "target": "com.amazonaws.proton#ResourceCountsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The staleness counts for Proton environments in the Amazon Web Services account. The <code>environments</code> object will only\n   contain <code>total</code> members.</p>"
+                    }
+                },
+                "environmentTemplates": {
+                    "target": "com.amazonaws.proton#ResourceCountsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of environment templates in the Amazon Web Services account.</p>"
+                    }
+                },
+                "serviceInstances": {
+                    "target": "com.amazonaws.proton#ResourceCountsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The staleness counts for Proton service instances in the Amazon Web Services account.</p>"
+                    }
+                },
+                "services": {
+                    "target": "com.amazonaws.proton#ResourceCountsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The staleness counts for Proton services in the Amazon Web Services account.</p>"
+                    }
+                },
+                "serviceTemplates": {
+                    "target": "com.amazonaws.proton#ResourceCountsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of service templates in the Amazon Web Services account. The <code>serviceTemplates</code> object will only\n   contain <code>total</code> members.</p>"
+                    }
+                },
+                "pipelines": {
+                    "target": "com.amazonaws.proton#ResourceCountsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The staleness counts for Proton pipelines in the Amazon Web Services account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary counts of each Proton resource type.</p>"
             }
         },
         "com.amazonaws.proton#CreateComponent": {
@@ -2729,7 +2518,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Set up a template to create new template versions automatically by tracking a linked repository. A linked repository is a repository that has been\n      registered with Proton. For more information, see <a>CreateRepository</a>.</p>\n         <p>When a commit is pushed to your linked repository, Proton checks for changes to your repository template bundles. If it detects a template bundle\n      change, a new major or minor version of its template is created, if the version doesn’t already exist. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html\">Template sync configurations</a> in the <i>Proton User\n        Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Set up a template to create new template versions automatically by tracking a linked repository. A linked\n   repository is a repository that has been registered with Proton. For more information, see <a>CreateRepository</a>.</p>\n         <p>When a commit is pushed to your linked repository, Proton checks for changes to your repository template\n   bundles. If it detects a template bundle change, a new major or minor version of its template is created, if the\n   version doesn’t already exist. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html\">Template sync configurations</a> in the\n    <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2774,7 +2563,7 @@
                 "subdirectory": {
                     "target": "com.amazonaws.proton#Subdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A repository subdirectory path to your template bundle directory. When included, Proton limits the template bundle search to this repository\n      directory.</p>"
+                        "smithy.api#documentation": "<p>A repository subdirectory path to your template bundle directory. When included, Proton limits the template\n   bundle search to this repository directory.</p>"
                     }
                 }
             }
@@ -5157,6 +4946,49 @@
                 }
             }
         },
+        "com.amazonaws.proton#GetResourcesSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#GetResourcesSummaryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#GetResourcesSummaryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get counts of Proton resources.</p>\n         <p>For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action\n   returns staleness counts. A resource is stale when it's behind the recommended version of the Proton template that it\n   uses and it needs an update to become current.</p>\n         <p>The action returns staleness counts (counts of resources that are up-to-date, behind a template major version,\n   or behind a template minor version), the total number of resources, and the number of resources that are in a failed\n   state, grouped by resource type. Components, environments, and service templates are exceptions—see the\n    <code>components</code>, <code>environments</code>, and <code>serviceTemplates</code> field descriptions.</p>\n         <p>For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html\">Proton dashboard</a> in the <i>Proton User Guide</i>.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.proton#GetResourcesSummaryInput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.proton#GetResourcesSummaryOutput": {
+            "type": "structure",
+            "members": {
+                "counts": {
+                    "target": "com.amazonaws.proton#CountsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary counts of each Proton resource type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.proton#GetService": {
             "type": "operation",
             "input": {
@@ -6830,7 +6662,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List service instances with summary data. This action lists service instances of all services in the Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>List service instances with summary data. This action lists service instances of all services in the\n   Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6940,7 +6772,7 @@
                 "filters": {
                     "target": "com.amazonaws.proton#ListServiceInstancesFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of filtering criteria that scope down the result list. By default, all service instances in the Amazon Web Services account are returned.</p>"
+                        "smithy.api#documentation": "<p>An array of filtering criteria that scope down the result list. By default, all service instances in the\n   Amazon Web Services account are returned.</p>"
                     }
                 },
                 "sortBy": {
@@ -7398,7 +7230,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List tags for a resource. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and\n        tagging</a> in the <i>Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>List tags for a resource. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the <i>Proton User\n    Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7422,7 +7254,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates the location of the next resource tag in the array of resource tags, after the list of resource tags that was previously\n      requested.</p>",
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next resource tag in the array of resource tags, after the list of\n   resource tags that was previously requested.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7448,7 +7280,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates the location of the next resource tag in the array of resource tags, after the current requested list of resource tags.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next resource tag in the array of resource tags, after the current\n   requested list of resource tags.</p>"
                     }
                 }
             }
@@ -7500,7 +7332,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Notify Proton of status changes to a provisioned resource when you use self-managed provisioning.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self\">Self-managed provisioning</a> in the <i>Proton User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Notify Proton of status changes to a provisioned resource when you use self-managed provisioning.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self\">Self-managed\n    provisioning</a> in the <i>Proton User Guide</i>.</p>"
             }
         },
         "com.amazonaws.proton#NotifyResourceDeploymentStatusChangeInput": {
@@ -8096,6 +7928,45 @@
                         "documentation": "    The repository sync attempt didn't execute and was queued.\n"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.proton#ResourceCountsSummary": {
+            "type": "structure",
+            "members": {
+                "total": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of resources of this type in the Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources of this type in the Amazon Web Services account that failed to deploy.</p>"
+                    }
+                },
+                "upToDate": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources of this type in the Amazon Web Services account that are up-to-date with their template.</p>"
+                    }
+                },
+                "behindMajor": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources of this type in the Amazon Web Services account that need a major template version update.</p>"
+                    }
+                },
+                "behindMinor": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources of this type in the Amazon Web Services account that need a minor template version update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary counts of each Proton resource types.</p>"
             }
         },
         "com.amazonaws.proton#ResourceDeploymentStatus": {
@@ -9587,7 +9458,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tag a resource. A tag is a key-value pair of metadata that you associate with an Proton resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Tag a resource. A tag is a key-value pair of metadata that you associate with an Proton resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton\n    resources and tagging</a> in the <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -9831,7 +9702,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove a customer tag from a resource. A tag is a key-value pair of metadata associated with an Proton resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Remove a customer tag from a resource. A tag is a key-value pair of metadata associated with an Proton\n   resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton\n    resources and tagging</a> in the <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -9894,25 +9765,25 @@
                 "pipelineServiceRoleArn": {
                     "target": "com.amazonaws.proton#RoleArnOrEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines. Assumed by Proton for Amazon Web Services-managed provisioning, and by\n      customer-owned automation for self-managed provisioning.</p>\n         <p>To remove a previously configured ARN, specify an empty string.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines. Assumed by Proton\n   for Amazon Web Services-managed provisioning, and by customer-owned automation for self-managed provisioning.</p>\n         <p>To remove a previously configured ARN, specify an empty string.</p>"
                     }
                 },
                 "pipelineProvisioningRepository": {
                     "target": "com.amazonaws.proton#RepositoryBranchInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>A linked repository for pipeline provisioning. Specify it if you have environments configured for self-managed provisioning with services that include\n      pipelines. A linked repository is a repository that has been registered with Proton. For more information, see <a>CreateRepository</a>.</p>\n         <p>To remove a previously configured repository, set <code>deletePipelineProvisioningRepository</code> to <code>true</code>, and don't set\n      <code>pipelineProvisioningRepository</code>.</p>"
+                        "smithy.api#documentation": "<p>A linked repository for pipeline provisioning. Specify it if you have environments configured for self-managed\n   provisioning with services that include pipelines. A linked repository is a repository that has been registered with\n   Proton. For more information, see <a>CreateRepository</a>.</p>\n         <p>To remove a previously configured repository, set <code>deletePipelineProvisioningRepository</code> to\n    <code>true</code>, and don't set <code>pipelineProvisioningRepository</code>.</p>"
                     }
                 },
                 "deletePipelineProvisioningRepository": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to remove a configured pipeline repository from the account settings. Don't set this field if you are updating the configured\n      pipeline repository.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to remove a configured pipeline repository from the account settings. Don't set this\n   field if you are updating the configured pipeline repository.</p>"
                     }
                 },
                 "pipelineCodebuildRoleArn": {
                     "target": "com.amazonaws.proton#RoleArnOrEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines. Proton assumes this role for CodeBuild-based\n      provisioning.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines. Proton assumes\n   this role for CodeBuild-based provisioning.</p>"
                     }
                 }
             }
@@ -10872,7 +10743,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update template sync configuration parameters, except for the <code>templateName</code> and <code>templateType</code>. Repository details (branch,\n      name, and provider) should be of a linked repository. A linked repository is a repository that has been registered with Proton. For more information,\n      see <a>CreateRepository</a>.</p>"
+                "smithy.api#documentation": "<p>Update template sync configuration parameters, except for the <code>templateName</code> and\n    <code>templateType</code>. Repository details (branch, name, and provider) should be of a linked repository. A\n   linked repository is a repository that has been registered with Proton. For more information, see <a>CreateRepository</a>.</p>"
             }
         },
         "com.amazonaws.proton#UpdateTemplateSyncConfigInput": {
@@ -10916,7 +10787,7 @@
                 "subdirectory": {
                     "target": "com.amazonaws.proton#Subdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A subdirectory path to your template bundle version. When included, limits the template bundle search to this repository directory.</p>"
+                        "smithy.api#documentation": "<p>A subdirectory path to your template bundle version. When included, limits the template bundle search to this\n   repository directory.</p>"
                     }
                 }
             }

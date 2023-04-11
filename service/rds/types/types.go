@@ -2612,77 +2612,90 @@ type EventSubscription struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of a snapshot export to Amazon S3. This data type is used
-// as a response element in the DescribeExportTasks action.
+// Contains the details of a snapshot or cluster export to Amazon S3. This data
+// type is used as a response element in the DescribeExportTasks action.
 type ExportTask struct {
 
-	// The data exported from the snapshot. Valid values are the following:
+	// The data exported from the snapshot or cluster. Valid values are the
+	// following:
 	//
-	// * database
-	// - Export all the data from a specified database.
+	// * database - Export all the data from a specified database.
 	//
-	// * database.table table-name -
-	// Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS
-	// for MariaDB, and Aurora MySQL.
+	// *
+	// database.table table-name - Export a table of the snapshot or cluster. This
+	// format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
 	//
-	// * database.schema schema-name - Export a
-	// database schema of the snapshot. This format is valid only for RDS for
-	// PostgreSQL and Aurora PostgreSQL.
+	// *
+	// database.schema schema-name - Export a database schema of the snapshot or
+	// cluster. This format is valid only for RDS for PostgreSQL and Aurora
+	// PostgreSQL.
 	//
-	// * database.schema.table table-name - Export a
-	// table of the database schema. This format is valid only for RDS for PostgreSQL
-	// and Aurora PostgreSQL.
+	// * database.schema.table table-name - Export a table of the database
+	// schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	ExportOnly []string
 
-	// A unique identifier for the snapshot export task. This ID isn't an identifier
-	// for the Amazon S3 bucket where the snapshot is exported to.
+	// A unique identifier for the snapshot or cluster export task. This ID isn't an
+	// identifier for the Amazon S3 bucket where the data is exported.
 	ExportTaskIdentifier *string
 
 	// The reason the export failed, if it failed.
 	FailureCause *string
 
 	// The name of the IAM role that is used to write to Amazon S3 when exporting a
-	// snapshot.
+	// snapshot or cluster.
 	IamRoleArn *string
 
 	// The key identifier of the Amazon Web Services KMS key that is used to encrypt
-	// the snapshot when it's exported to Amazon S3. The KMS key identifier is its key
-	// ARN, key ID, alias ARN, or alias name. The IAM role used for the snapshot export
-	// must have encryption and decryption permissions to use this KMS key.
+	// the data when it's exported to Amazon S3. The KMS key identifier is its key ARN,
+	// key ID, alias ARN, or alias name. The IAM role used for the export must have
+	// encryption and decryption permissions to use this KMS key.
 	KmsKeyId *string
 
-	// The progress of the snapshot export task as a percentage.
+	// The progress of the snapshot or cluster export task as a percentage.
 	PercentProgress int32
 
-	// The Amazon S3 bucket that the snapshot is exported to.
+	// The Amazon S3 bucket that the snapshot or cluster is exported to.
 	S3Bucket *string
 
-	// The Amazon S3 bucket prefix that is the file name and path of the exported
-	// snapshot.
+	// The Amazon S3 bucket prefix that is the file name and path of the exported data.
 	S3Prefix *string
 
 	// The time that the snapshot was created.
 	SnapshotTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
+	// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon S3.
 	SourceArn *string
 
 	// The type of source for the export.
 	SourceType ExportSourceType
 
-	// The progress status of the export task.
+	// The progress status of the export task. The status can be one of the
+	// following:
+	//
+	// * CANCELED
+	//
+	// * CANCELING
+	//
+	// * COMPLETE
+	//
+	// * FAILED
+	//
+	// * IN_PROGRESS
+	//
+	// *
+	// STARTING
 	Status *string
 
-	// The time that the snapshot export task completed.
+	// The time that the snapshot or cluster export task ended.
 	TaskEndTime *time.Time
 
-	// The time that the snapshot export task started.
+	// The time that the snapshot or cluster export task started.
 	TaskStartTime *time.Time
 
 	// The total amount of data exported, in gigabytes.
 	TotalExtractedDataInGB int32
 
-	// A warning about the snapshot export task.
+	// A warning about the snapshot or cluster export task.
 	WarningMessage *string
 
 	noSmithyDocumentSerde
@@ -2783,8 +2796,7 @@ type GlobalCluster struct {
 	// the unique key that identifies a global database cluster.
 	GlobalClusterIdentifier *string
 
-	// The list of cluster IDs for secondary clusters within the global database
-	// cluster. Currently limited to 1 item.
+	// The list of primary and secondary clusters within the global database cluster.
 	GlobalClusterMembers []GlobalClusterMember
 
 	// The Amazon Web Services Region-unique, immutable identifier for the global
@@ -3858,7 +3870,7 @@ type Subnet struct {
 // Contains the details about a blue/green deployment. For more information, see
 // Using Amazon RDS Blue/Green Deployments for database updates
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
+// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
 // database updates
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 // in the Amazon Aurora User Guide.
@@ -3870,19 +3882,24 @@ type SwitchoverDetail struct {
 	// The switchover status of a resource in a blue/green deployment. Values:
 	//
 	// *
-	// preparing-for-switchover - The resource is being prepared to switch over.
+	// PROVISIONING - The resource is being prepared to switch over.
+	//
+	// * AVAILABLE - The
+	// resource is ready to switch over.
+	//
+	// * SWITCHOVER_IN_PROGRESS - The resource is
+	// being switched over.
+	//
+	// * SWITCHOVER_COMPLETED - The resource has been switched
+	// over.
+	//
+	// * SWITCHOVER_FAILED - The resource attempted to switch over but
+	// failed.
+	//
+	// * MISSING_SOURCE - The source resource has been deleted.
 	//
 	// *
-	// ready-for-switchover - The resource is ready to switch over.
-	//
-	// *
-	// switchover-in-progress - The resource is being switched over.
-	//
-	// *
-	// switchover-completed - The resource has been switched over.
-	//
-	// * switchover-failed
-	// - The resource attempted to switch over but failed.
+	// MISSING_TARGET - The target resource has been deleted.
 	Status *string
 
 	// The Amazon Resource Name (ARN) of a resource in the green environment.

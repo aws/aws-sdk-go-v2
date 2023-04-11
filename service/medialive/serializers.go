@@ -7754,6 +7754,11 @@ func awsRestjson1_serializeDocumentHlsId3SegmentTaggingScheduleActionSettings(v 
 	object := value.Object()
 	defer object.Close()
 
+	if v.Id3 != nil {
+		ok := object.Key("id3")
+		ok.String(*v.Id3)
+	}
+
 	if v.Tag != nil {
 		ok := object.Key("tag")
 		ok.String(*v.Tag)
@@ -9450,6 +9455,11 @@ func awsRestjson1_serializeDocumentNielsenNaesIiNw(v *types.NielsenNaesIiNw, val
 			ok.Double(v.Sid)
 
 		}
+	}
+
+	if len(v.Timezone) > 0 {
+		ok := object.Key("timezone")
+		ok.String(string(v.Timezone))
 	}
 
 	return nil

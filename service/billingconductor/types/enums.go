@@ -129,6 +129,7 @@ const (
 	PricingRuleScopeGlobal        PricingRuleScope = "GLOBAL"
 	PricingRuleScopeService       PricingRuleScope = "SERVICE"
 	PricingRuleScopeBillingEntity PricingRuleScope = "BILLING_ENTITY"
+	PricingRuleScopeSku           PricingRuleScope = "SKU"
 )
 
 // Values returns all known values for PricingRuleScope. Note that this can be
@@ -139,6 +140,7 @@ func (PricingRuleScope) Values() []PricingRuleScope {
 		"GLOBAL",
 		"SERVICE",
 		"BILLING_ENTITY",
+		"SKU",
 	}
 }
 
@@ -219,6 +221,10 @@ const (
 	ValidationExceptionReasonIllegalType                       ValidationExceptionReason = "ILLEGAL_TYPE"
 	ValidationExceptionReasonIllegalEndedBillinggroup          ValidationExceptionReason = "ILLEGAL_ENDED_BILLINGGROUP"
 	ValidationExceptionReasonIllegalTieringInput               ValidationExceptionReason = "ILLEGAL_TIERING_INPUT"
+	ValidationExceptionReasonIllegalOperation                  ValidationExceptionReason = "ILLEGAL_OPERATION"
+	ValidationExceptionReasonIllegalUsageType                  ValidationExceptionReason = "ILLEGAL_USAGE_TYPE"
+	ValidationExceptionReasonInvalidSkuCombo                   ValidationExceptionReason = "INVALID_SKU_COMBO"
+	ValidationExceptionReasonInvalidFilter                     ValidationExceptionReason = "INVALID_FILTER"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -279,5 +285,9 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"ILLEGAL_TYPE",
 		"ILLEGAL_ENDED_BILLINGGROUP",
 		"ILLEGAL_TIERING_INPUT",
+		"ILLEGAL_OPERATION",
+		"ILLEGAL_USAGE_TYPE",
+		"INVALID_SKU_COMBO",
+		"INVALID_FILTER",
 	}
 }

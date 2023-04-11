@@ -48,7 +48,7 @@ type CreateGeofenceCollectionInput struct {
 	// An optional description for the geofence collection.
 	Description *string
 
-	// A key identifier for an AWS KMS customer managed key
+	// A key identifier for an Amazon Web Services KMS customer managed key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html). Enter
 	// a key ID, key ARN, alias name, or alias ARN.
 	KmsKeyId *string
@@ -91,9 +91,10 @@ type CreateGeofenceCollectionInput struct {
 type CreateGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
-	// you need to specify a resource across all AWS.
+	// you need to specify a resource across all Amazon Web Services.
 	//
-	// * Format example:
+	// * Format
+	// example:
 	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
 	// This member is required.

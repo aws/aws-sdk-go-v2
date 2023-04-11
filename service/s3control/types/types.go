@@ -17,6 +17,18 @@ type AbortIncompleteMultipartUpload struct {
 	noSmithyDocumentSerde
 }
 
+// A container for information about access control for replicas. This is not
+// supported by Amazon S3 on Outposts buckets.
+type AccessControlTranslation struct {
+
+	// Specifies the replica ownership.
+	//
+	// This member is required.
+	Owner OwnerOverride
+
+	noSmithyDocumentSerde
+}
+
 // An access point used to access a bucket.
 type AccessPoint struct {
 
@@ -318,6 +330,25 @@ type CreateMultiRegionAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies whether S3 on Outposts replicates delete markers. If you specify a
+// Filter element in your replication configuration, you must also include a
+// DeleteMarkerReplication element. If your Filter includes a Tag element, the
+// DeleteMarkerReplication element's Status child element must be set to Disabled,
+// because S3 on Outposts does not support replicating delete markers for tag-based
+// rules. For more information about delete marker replication, see How delete
+// operations affect replication
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated)
+// in the Amazon S3 User Guide.
+type DeleteMarkerReplication struct {
+
+	// Indicates whether to replicate delete markers.
+	//
+	// This member is required.
+	Status DeleteMarkerReplicationStatus
+
+	noSmithyDocumentSerde
+}
+
 // A container for the information associated with a DeleteMultiRegionAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
 // request.
@@ -327,6 +358,50 @@ type DeleteMultiRegionAccessPointInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies information about the replication destination bucket and its settings
+// for an S3 on Outposts replication configuration.
+type Destination struct {
+
+	// The Amazon Resource Name (ARN) of the access point for the destination bucket
+	// where you want S3 on Outposts to store the replication results.
+	//
+	// This member is required.
+	Bucket *string
+
+	// Specify this property only in a cross-account scenario (where the source and
+	// destination bucket owners are not the same), and you want to change replica
+	// ownership to the Amazon Web Services account that owns the destination bucket.
+	// If this property is not specified in the replication configuration, the replicas
+	// are owned by same Amazon Web Services account that owns the source object. This
+	// is not supported by Amazon S3 on Outposts buckets.
+	AccessControlTranslation *AccessControlTranslation
+
+	// The destination bucket owner's account ID.
+	Account *string
+
+	// A container that provides information about encryption. If
+	// SourceSelectionCriteria is specified, you must specify this element. This is not
+	// supported by Amazon S3 on Outposts buckets.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// A container that specifies replication metrics-related settings.
+	Metrics *Metrics
+
+	// A container that specifies S3 Replication Time Control (S3 RTC) settings,
+	// including whether S3 RTC is enabled and the time when all objects and operations
+	// on objects must be replicated. Must be specified together with a Metrics block.
+	// This is not supported by Amazon S3 on Outposts buckets.
+	ReplicationTime *ReplicationTime
+
+	// The storage class to use when replicating objects. All objects stored on S3 on
+	// Outposts are stored in the OUTPOSTS storage class. S3 on Outposts uses the
+	// OUTPOSTS storage class to create the object replicas. Values other than OUTPOSTS
+	// are not supported by Amazon S3 on Outposts.
+	StorageClass ReplicationStorageClass
 
 	noSmithyDocumentSerde
 }
@@ -345,6 +420,23 @@ type DetailedStatusCodesMetrics struct {
 
 	// A container that indicates whether detailed status code metrics are enabled.
 	IsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies encryption-related information for an Amazon S3 bucket that is a
+// destination for replicated objects. This is not supported by Amazon S3 on
+// Outposts buckets.
+type EncryptionConfiguration struct {
+
+	// Specifies the ID of the customer managed KMS key that's stored in Key Management
+	// Service (KMS) for the destination bucket. This ID is either the Amazon Resource
+	// Name (ARN) for the KMS key or the alias ARN for the KMS key. Amazon S3 uses this
+	// KMS key to encrypt replica objects. Amazon S3 supports only symmetric encryption
+	// KMS keys. For more information, see Symmetric encryption KMS keys
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks)
+	// in the Amazon Web Services Key Management Service Developer Guide.
+	ReplicaKmsKeyID *string
 
 	noSmithyDocumentSerde
 }
@@ -370,6 +462,18 @@ type Exclude struct {
 
 	// A container for the S3 Storage Lens Region excludes.
 	Regions []string
+
+	noSmithyDocumentSerde
+}
+
+// An optional configuration to replicate existing source bucket objects. This is
+// not supported by Amazon S3 on Outposts buckets.
+type ExistingObjectReplication struct {
+
+	// Specifies whether Amazon S3 replicates existing source bucket objects.
+	//
+	// This member is required.
+	Status ExistingObjectReplicationStatus
 
 	noSmithyDocumentSerde
 }
@@ -588,11 +692,12 @@ type JobManifestLocation struct {
 	// This member is required.
 	ETag *string
 
-	// The Amazon Resource Name (ARN) for a manifest object. Replacement must be made
-	// for object keys containing special characters (such as carriage returns) when
-	// using XML requests. For more information, see  XML related object key
-	// constraints
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
+	// The Amazon Resource Name (ARN) for a manifest object. When you're using XML
+	// requests, you must replace special characters (such as carriage returns) in
+	// object keys with their equivalent XML entity codes. For more information, see
+	// XML-related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints)
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	ObjectArn *string
@@ -646,17 +751,17 @@ type JobOperation struct {
 	S3PutObjectCopy *S3CopyObjectOperation
 
 	// Contains the configuration for an S3 Object Lock legal hold operation that an S3
-	// Batch Operations job passes every object to the underlying PutObjectLegalHold
-	// API. For more information, see Using S3 Object Lock legal hold with S3 Batch
-	// Operations
+	// Batch Operations job passes to every object to the underlying PutObjectLegalHold
+	// API operation. For more information, see Using S3 Object Lock legal hold with S3
+	// Batch Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html) in
 	// the Amazon S3 User Guide.
 	S3PutObjectLegalHold *S3SetObjectLegalHoldOperation
 
 	// Contains the configuration parameters for the Object Lock retention action for
 	// an S3 Batch Operations job. Batch Operations passes every object to the
-	// underlying PutObjectRetention API. For more information, see Using S3 Object
-	// Lock retention with S3 Batch Operations
+	// underlying PutObjectRetention API operation. For more information, see Using S3
+	// Object Lock retention with S3 Batch Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
 	// in the Amazon S3 User Guide.
 	S3PutObjectRetention *S3SetObjectRetentionOperation
@@ -778,7 +883,7 @@ type LifecycleRule struct {
 	// Specifies the days since the initiation of an incomplete multipart upload that
 	// Amazon S3 waits before permanently removing all parts of the upload. For more
 	// information, see  Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
-	// Policy
+	// Configuration
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
 	// in the Amazon S3 User Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload
@@ -842,11 +947,12 @@ type LifecycleRuleFilter struct {
 	// Maximum object size to which the rule applies.
 	ObjectSizeLessThan *int64
 
-	// Prefix identifying one or more objects to which the rule applies. Replacement
-	// must be made for object keys containing special characters (such as carriage
-	// returns) when using XML requests. For more information, see  XML related object
-	// key constraints
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
+	// Prefix identifying one or more objects to which the rule applies. When you're
+	// using XML requests, you must replace special characters (such as carriage
+	// returns) in object keys with their equivalent XML entity codes. For more
+	// information, see  XML-related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints)
+	// in the Amazon S3 User Guide.
 	Prefix *string
 
 	// A container for a key-value name pair.
@@ -879,6 +985,22 @@ type ListStorageLensConfigurationEntry struct {
 	// A container for whether the S3 Storage Lens configuration is enabled. This
 	// property is required.
 	IsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// A container that specifies replication metrics-related settings.
+type Metrics struct {
+
+	// Specifies whether replication metrics are enabled.
+	//
+	// This member is required.
+	Status MetricsStatus
+
+	// A container that specifies the time threshold for emitting the
+	// s3:Replication:OperationMissedThreshold event. This is not supported by Amazon
+	// S3 on Outposts buckets.
+	EventThreshold *ReplicationTimeValue
 
 	noSmithyDocumentSerde
 }
@@ -1045,8 +1167,28 @@ type ObjectLambdaAccessPoint struct {
 	// This member is required.
 	Name *string
 
+	// The alias of the Object Lambda Access Point.
+	Alias *ObjectLambdaAccessPointAlias
+
 	// Specifies the ARN for the Object Lambda Access Point.
 	ObjectLambdaAccessPointArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The alias of an Object Lambda Access Point. For more information, see How to use
+// a bucket-style alias for your S3 bucket Object Lambda Access Point
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-use.html#ol-access-points-alias).
+type ObjectLambdaAccessPointAlias struct {
+
+	// The status of the Object Lambda Access Point alias. If the status is
+	// PROVISIONING, the Object Lambda Access Point is provisioning the alias and the
+	// alias is not ready for use yet. If the status is READY, the Object Lambda Access
+	// Point alias is successfully provisioned and ready for use.
+	Status ObjectLambdaAccessPointAliasStatus
+
+	// The alias value of the Object Lambda Access Point.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1239,6 +1381,10 @@ type Region struct {
 	// This member is required.
 	Bucket *string
 
+	// The Amazon Web Services account ID that owns the Amazon S3 bucket that's
+	// associated with this Multi-Region Access Point.
+	BucketAccountId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1275,8 +1421,212 @@ type RegionReport struct {
 	// The name of the bucket.
 	Bucket *string
 
+	// The Amazon Web Services account ID that owns the Amazon S3 bucket that's
+	// associated with this Multi-Region Access Point.
+	BucketAccountId *string
+
 	// The name of the Region.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter that you can use to specify whether replica modification sync is
+// enabled. S3 on Outposts replica modification sync can help you keep object
+// metadata synchronized between replicas and source objects. By default, S3 on
+// Outposts replicates metadata from the source objects to the replicas only. When
+// replica modification sync is enabled, S3 on Outposts replicates metadata changes
+// made to the replica copies back to the source object, making the replication
+// bidirectional. To replicate object metadata modifications on replicas, you can
+// specify this element and set the Status of this element to Enabled. You must
+// enable replica modification sync on the source and destination buckets to
+// replicate replica metadata changes between the source and the replicas.
+type ReplicaModifications struct {
+
+	// Specifies whether S3 on Outposts replicates modifications to object metadata on
+	// replicas.
+	//
+	// This member is required.
+	Status ReplicaModificationsStatus
+
+	noSmithyDocumentSerde
+}
+
+// A container for one or more replication rules. A replication configuration must
+// have at least one rule and you can add up to 100 rules. The maximum size of a
+// replication configuration is 128 KB.
+type ReplicationConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// that S3 on Outposts assumes when replicating objects. For information about S3
+	// replication on Outposts configuration, see Setting up replication
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-how-setup.html)
+	// in the Amazon S3 User Guide.
+	//
+	// This member is required.
+	Role *string
+
+	// A container for one or more replication rules. A replication configuration must
+	// have at least one rule and can contain an array of 100 rules at the most.
+	//
+	// This member is required.
+	Rules []ReplicationRule
+
+	noSmithyDocumentSerde
+}
+
+// Specifies which S3 on Outposts objects to replicate and where to store the
+// replicas.
+type ReplicationRule struct {
+
+	// The Amazon Resource Name (ARN) of the access point for the source Outposts
+	// bucket that you want S3 on Outposts to replicate the objects from.
+	//
+	// This member is required.
+	Bucket *string
+
+	// A container for information about the replication destination and its
+	// configurations.
+	//
+	// This member is required.
+	Destination *Destination
+
+	// Specifies whether the rule is enabled.
+	//
+	// This member is required.
+	Status ReplicationRuleStatus
+
+	// Specifies whether S3 on Outposts replicates delete markers. If you specify a
+	// Filter element in your replication configuration, you must also include a
+	// DeleteMarkerReplication element. If your Filter includes a Tag element, the
+	// DeleteMarkerReplication element's Status child element must be set to Disabled,
+	// because S3 on Outposts doesn't support replicating delete markers for tag-based
+	// rules. For more information about delete marker replication, see How delete
+	// operations affect replication
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated)
+	// in the Amazon S3 User Guide.
+	DeleteMarkerReplication *DeleteMarkerReplication
+
+	// An optional configuration to replicate existing source bucket objects. This is
+	// not supported by Amazon S3 on Outposts buckets.
+	ExistingObjectReplication *ExistingObjectReplication
+
+	// A filter that identifies the subset of objects to which the replication rule
+	// applies. A Filter element must specify exactly one Prefix, Tag, or And child
+	// element.
+	Filter *ReplicationRuleFilter
+
+	// A unique identifier for the rule. The maximum value is 255 characters.
+	ID *string
+
+	// An object key name prefix that identifies the object or objects to which the
+	// rule applies. The maximum prefix length is 1,024 characters. To include all
+	// objects in an Outposts bucket, specify an empty string. When you're using XML
+	// requests, you must replace special characters (such as carriage returns) in
+	// object keys with their equivalent XML entity codes. For more information, see
+	// XML-related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints)
+	// in the Amazon S3 User Guide.
+	//
+	// Deprecated: Prefix has been deprecated
+	Prefix *string
+
+	// The priority indicates which rule has precedence whenever two or more
+	// replication rules conflict. S3 on Outposts attempts to replicate objects
+	// according to all replication rules. However, if there are two or more rules with
+	// the same destination Outposts bucket, then objects will be replicated according
+	// to the rule with the highest priority. The higher the number, the higher the
+	// priority. For more information, see Creating replication rules on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-between-outposts.html)
+	// in the Amazon S3 User Guide.
+	Priority *int32
+
+	// A container that describes additional filters for identifying the source
+	// Outposts objects that you want to replicate. You can choose to enable or disable
+	// the replication of these objects.
+	SourceSelectionCriteria *SourceSelectionCriteria
+
+	noSmithyDocumentSerde
+}
+
+// A container for specifying rule filters. The filters determine the subset of
+// objects to which the rule applies. This element is required only if you specify
+// more than one filter. For example:
+//
+// * If you specify both a Prefix and a Tag
+// filter, wrap these filters in an And element.
+//
+// * If you specify a filter based
+// on multiple tags, wrap the Tag elements in an And element.
+type ReplicationRuleAndOperator struct {
+
+	// An object key name prefix that identifies the subset of objects that the rule
+	// applies to.
+	Prefix *string
+
+	// An array of tags that contain key and value pairs.
+	Tags []S3Tag
+
+	noSmithyDocumentSerde
+}
+
+// A filter that identifies the subset of objects to which the replication rule
+// applies. A Filter element must specify exactly one Prefix, Tag, or And child
+// element.
+type ReplicationRuleFilter struct {
+
+	// A container for specifying rule filters. The filters determine the subset of
+	// objects that the rule applies to. This element is required only if you specify
+	// more than one filter. For example:
+	//
+	// * If you specify both a Prefix and a Tag
+	// filter, wrap these filters in an And element.
+	//
+	// * If you specify a filter based
+	// on multiple tags, wrap the Tag elements in an And element.
+	And *ReplicationRuleAndOperator
+
+	// An object key name prefix that identifies the subset of objects that the rule
+	// applies to. When you're using XML requests, you must replace special characters
+	// (such as carriage returns) in object keys with their equivalent XML entity
+	// codes. For more information, see  XML-related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints)
+	// in the Amazon S3 User Guide.
+	Prefix *string
+
+	// A container for a key-value name pair.
+	Tag *S3Tag
+
+	noSmithyDocumentSerde
+}
+
+// A container that specifies S3 Replication Time Control (S3 RTC) related
+// information, including whether S3 RTC is enabled and the time when all objects
+// and operations on objects must be replicated. This is not supported by Amazon S3
+// on Outposts buckets.
+type ReplicationTime struct {
+
+	// Specifies whether S3 Replication Time Control (S3 RTC) is enabled.
+	//
+	// This member is required.
+	Status ReplicationTimeStatus
+
+	// A container that specifies the time by which replication should be complete for
+	// all objects and operations on objects.
+	//
+	// This member is required.
+	Time *ReplicationTimeValue
+
+	noSmithyDocumentSerde
+}
+
+// A container that specifies the time value for S3 Replication Time Control (S3
+// RTC). This value is also used for the replication metrics EventThreshold
+// element. This is not supported by Amazon S3 on Outposts buckets.
+type ReplicationTimeValue struct {
+
+	// Contains an integer that specifies the time period in minutes. Valid value: 15
+	Minutes *int32
 
 	noSmithyDocumentSerde
 }
@@ -1341,8 +1691,8 @@ type S3BucketDestination struct {
 }
 
 // Contains the configuration parameters for a PUT Copy object operation. S3 Batch
-// Operations passes every object to the underlying PUT Copy object API. For more
-// information about the parameters for this operation, see PUT Object - Copy
+// Operations passes every object to the underlying CopyObject API operation. For
+// more information about the parameters for this operation, see CopyObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html).
 type S3CopyObjectOperation struct {
 
@@ -1359,8 +1709,8 @@ type S3CopyObjectOperation struct {
 	//
 	CannedAccessControlList S3CannedAccessControlList
 
-	// Indicates the algorithm you want Amazon S3 to use to create the checksum. For
-	// more information see  Checking object integrity
+	// Indicates the algorithm that you want Amazon S3 to use to create the checksum.
+	// For more information, see  Checking object integrity
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml)
 	// in the Amazon S3 User Guide.
 	ChecksumAlgorithm S3ChecksumAlgorithm
@@ -1403,14 +1753,14 @@ type S3CopyObjectOperation struct {
 	//
 	StorageClass S3StorageClass
 
-	// Specifies the folder prefix into which you would like the objects to be copied.
-	// For example, to copy objects into a folder named Folder1 in the destination
-	// bucket, set the TargetKeyPrefix to Folder1.
+	// Specifies the folder prefix that you want the objects to be copied into. For
+	// example, to copy objects into a folder named Folder1 in the destination bucket,
+	// set the TargetKeyPrefix property to Folder1.
 	TargetKeyPrefix *string
 
-	// Specifies the destination bucket ARN for the batch copy operation. For example,
-	// to copy objects to a bucket named destinationBucket, set the TargetResource
-	// property to arn:aws:s3:::destinationBucket.
+	// Specifies the destination bucket Amazon Resource Name (ARN) for the batch copy
+	// operation. For example, to copy objects to a bucket named destinationBucket, set
+	// the TargetResource property to arn:aws:s3:::destinationBucket.
 	TargetResource *string
 
 	//
@@ -1419,9 +1769,9 @@ type S3CopyObjectOperation struct {
 	noSmithyDocumentSerde
 }
 
-// Contains no configuration parameters because the DELETE Object tagging API only
-// accepts the bucket name and key name as parameters, which are defined in the
-// job's manifest.
+// Contains no configuration parameters because the DELETE Object tagging
+// (DeleteObjectTagging) API operation accepts only the bucket name and key name as
+// parameters, which are defined in the job's manifest.
 type S3DeleteObjectTaggingOperation struct {
 	noSmithyDocumentSerde
 }
@@ -1465,8 +1815,8 @@ type S3Grantee struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the configuration parameters for an S3 Initiate Restore Object job. S3
-// Batch Operations passes every object to the underlying POST Object restore API.
+// Contains the configuration parameters for a POST Object restore job. S3 Batch
+// Operations passes every object to the underlying RestoreObject API operation.
 // For more information about the parameters for this operation, see RestoreObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request).
 type S3InitiateRestoreObjectOperation struct {
@@ -1634,9 +1984,9 @@ type S3Retention struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the configuration parameters for a Set Object ACL operation. S3 Batch
-// Operations passes every object to the underlying PutObjectAcl API. For more
-// information about the parameters for this operation, see PutObjectAcl
+// Contains the configuration parameters for a PUT Object ACL operation. S3 Batch
+// Operations passes every object to the underlying PutObjectAcl API operation. For
+// more information about the parameters for this operation, see PutObjectAcl
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html).
 type S3SetObjectAclOperation struct {
 
@@ -1647,9 +1997,9 @@ type S3SetObjectAclOperation struct {
 }
 
 // Contains the configuration for an S3 Object Lock legal hold operation that an S3
-// Batch Operations job passes every object to the underlying PutObjectLegalHold
-// API. For more information, see Using S3 Object Lock legal hold with S3 Batch
-// Operations
+// Batch Operations job passes to every object to the underlying PutObjectLegalHold
+// API operation. For more information, see Using S3 Object Lock legal hold with S3
+// Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html) in
 // the Amazon S3 User Guide.
 type S3SetObjectLegalHoldOperation struct {
@@ -1665,8 +2015,8 @@ type S3SetObjectLegalHoldOperation struct {
 
 // Contains the configuration parameters for the Object Lock retention action for
 // an S3 Batch Operations job. Batch Operations passes every object to the
-// underlying PutObjectRetention API. For more information, see Using S3 Object
-// Lock retention with S3 Batch Operations
+// underlying PutObjectRetention API operation. For more information, see Using S3
+// Object Lock retention with S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
 // in the Amazon S3 User Guide.
 type S3SetObjectRetentionOperation struct {
@@ -1687,10 +2037,10 @@ type S3SetObjectRetentionOperation struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the configuration parameters for a Set Object Tagging operation. S3
-// Batch Operations passes every object to the underlying PUT Object tagging API.
-// For more information about the parameters for this operation, see PUT Object
-// tagging
+// Contains the configuration parameters for a PUT Object Tagging operation. S3
+// Batch Operations passes every object to the underlying PutObjectTagging API
+// operation. For more information about the parameters for this operation, see
+// PutObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html).
 type S3SetObjectTaggingOperation struct {
 
@@ -1731,6 +2081,32 @@ type SelectionCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// A container that describes additional filters for identifying the source objects
+// that you want to replicate. You can choose to enable or disable the replication
+// of these objects.
+type SourceSelectionCriteria struct {
+
+	// A filter that you can use to specify whether replica modification sync is
+	// enabled. S3 on Outposts replica modification sync can help you keep object
+	// metadata synchronized between replicas and source objects. By default, S3 on
+	// Outposts replicates metadata from the source objects to the replicas only. When
+	// replica modification sync is enabled, S3 on Outposts replicates metadata changes
+	// made to the replica copies back to the source object, making the replication
+	// bidirectional. To replicate object metadata modifications on replicas, you can
+	// specify this element and set the Status of this element to Enabled. You must
+	// enable replica modification sync on the source and destination buckets to
+	// replicate replica metadata changes between the source and the replicas.
+	ReplicaModifications *ReplicaModifications
+
+	// A filter that you can use to select Amazon S3 objects that are encrypted with
+	// server-side encryption by using Key Management Service (KMS) keys. If you
+	// include SourceSelectionCriteria in the replication configuration, this element
+	// is required. This is not supported by Amazon S3 on Outposts buckets.
+	SseKmsEncryptedObjects *SseKmsEncryptedObjects
+
+	noSmithyDocumentSerde
+}
+
 type SSEKMS struct {
 
 	// A container for the ARN of the SSE-KMS encryption. This property is read-only
@@ -1739,6 +2115,20 @@ type SSEKMS struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// A container for filter information that you can use to select S3 objects that
+// are encrypted with Key Management Service (KMS). This is not supported by Amazon
+// S3 on Outposts buckets.
+type SseKmsEncryptedObjects struct {
+
+	// Specifies whether Amazon S3 replicates objects that are created with server-side
+	// encryption by using an KMS key stored in Key Management Service.
+	//
+	// This member is required.
+	Status SseKmsEncryptedObjectsStatus
 
 	noSmithyDocumentSerde
 }

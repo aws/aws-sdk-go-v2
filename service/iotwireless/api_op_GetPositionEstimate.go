@@ -47,7 +47,7 @@ type GetPositionEstimateInput struct {
 	Ip *types.Ip
 
 	// Optional information that specifies the time when the position information will
-	// be resolved. It uses the UNIX timestamp format. If not specified, the time at
+	// be resolved. It uses the Unix timestamp format. If not specified, the time at
 	// which the request was received will be used.
 	Timestamp *time.Time
 

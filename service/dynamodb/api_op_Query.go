@@ -327,10 +327,12 @@ type QueryInput struct {
 	// ALL_ATTRIBUTES.
 	//
 	// * COUNT - Returns the number of matching items, rather than the
-	// matching items themselves.
+	// matching items themselves. Note that this uses the same quantity of read
+	// capacity units as getting the items, and is subject to the same item size
+	// calculations.
 	//
-	// * SPECIFIC_ATTRIBUTES - Returns only the attributes
-	// listed in ProjectionExpression. This return value is equivalent to specifying
+	// * SPECIFIC_ATTRIBUTES - Returns only the attributes listed in
+	// ProjectionExpression. This return value is equivalent to specifying
 	// ProjectionExpression without specifying any value for Select. If you query or
 	// scan a local secondary index and request only attributes that are projected into
 	// that index, the operation will read only the index and not the table. If any of

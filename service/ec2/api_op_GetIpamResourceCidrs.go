@@ -15,8 +15,8 @@ import (
 // Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is
 // associated with more than one resource discovery, the resource CIDRs across all
 // of the resource discoveries is returned. A resource discovery is an IPAM
-// component that enables IPAM Service to manage and monitor resources that belong
-// to the owning account.
+// component that enables IPAM to manage and monitor resources that belong to the
+// owning account.
 func (c *Client) GetIpamResourceCidrs(ctx context.Context, params *GetIpamResourceCidrsInput, optFns ...func(*Options)) (*GetIpamResourceCidrsOutput, error) {
 	if params == nil {
 		params = &GetIpamResourceCidrsInput{}

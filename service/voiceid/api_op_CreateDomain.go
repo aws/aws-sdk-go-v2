@@ -13,7 +13,8 @@ import (
 )
 
 // Creates a domain that contains all Amazon Connect Voice ID data, such as
-// speakers, fraudsters, customer audio, and voiceprints.
+// speakers, fraudsters, customer audio, and voiceprints. Every domain is created
+// with a default watchlist that fraudsters can be a part of.
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}
@@ -45,11 +46,14 @@ type CreateDomainInput struct {
 	// This member is required.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
-	// The idempotency token for creating a new domain. If not provided, Amazon Web
-	// Services SDK populates this field.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
 	ClientToken *string
 
-	// A brief description of the domain.
+	// A brief description of this domain.
 	Description *string
 
 	// A list of tags you want added to the domain.

@@ -7,7 +7,128 @@ import (
 	"time"
 )
 
-// A top level container for a table. Databases and tables are the fundamental
+// Details about the progress of a batch load task.
+type BatchLoadProgressReport struct {
+
+	//
+	BytesMetered int64
+
+	//
+	FileFailures int64
+
+	//
+	ParseFailures int64
+
+	//
+	RecordIngestionFailures int64
+
+	//
+	RecordsIngested int64
+
+	//
+	RecordsProcessed int64
+
+	noSmithyDocumentSerde
+}
+
+// Details about a batch load task.
+type BatchLoadTask struct {
+
+	// The time when the Timestream batch load task was created.
+	CreationTime *time.Time
+
+	// Database name for the database into which a batch load task loads data.
+	DatabaseName *string
+
+	// The time when the Timestream batch load task was last updated.
+	LastUpdatedTime *time.Time
+
+	//
+	ResumableUntil *time.Time
+
+	// Table name for the table into which a batch load task loads data.
+	TableName *string
+
+	// The ID of the batch load task.
+	TaskId *string
+
+	// Status of the batch load task.
+	TaskStatus BatchLoadStatus
+
+	noSmithyDocumentSerde
+}
+
+// Details about a batch load task.
+type BatchLoadTaskDescription struct {
+
+	// The time when the Timestream batch load task was created.
+	CreationTime *time.Time
+
+	// Data model configuration for a batch load task. This contains details about
+	// where a data model for a batch load task is stored.
+	DataModelConfiguration *DataModelConfiguration
+
+	// Configuration details about the data source for a batch load task.
+	DataSourceConfiguration *DataSourceConfiguration
+
+	//
+	ErrorMessage *string
+
+	// The time when the Timestream batch load task was last updated.
+	LastUpdatedTime *time.Time
+
+	//
+	ProgressReport *BatchLoadProgressReport
+
+	//
+	RecordVersion int64
+
+	// Report configuration for a batch load task. This contains details about where
+	// error reports are stored.
+	ReportConfiguration *ReportConfiguration
+
+	//
+	ResumableUntil *time.Time
+
+	//
+	TargetDatabaseName *string
+
+	//
+	TargetTableName *string
+
+	// The ID of the batch load task.
+	TaskId *string
+
+	// Status of the batch load task.
+	TaskStatus BatchLoadStatus
+
+	noSmithyDocumentSerde
+}
+
+// A delimited data format where the column separator can be a comma and the record
+// separator is a newline character.
+type CsvConfiguration struct {
+
+	// Column separator can be one of comma (','), pipe ('|), semicolon (';'),
+	// tab('/t'), or blank space (' ').
+	ColumnSeparator *string
+
+	// Escape character can be one of
+	EscapeChar *string
+
+	// Can be blank space (' ').
+	NullValue *string
+
+	// Can be single quote (') or double quote (").
+	QuoteChar *string
+
+	// Specifies to trim leading and trailing white space.
+	TrimWhiteSpace *bool
+
+	noSmithyDocumentSerde
+}
+
+// A top-level container for a table. Databases and tables are the fundamental
 // management concepts in Amazon Timestream. All tables in a database are encrypted
 // with the same KMS key.
 type Database struct {
@@ -33,14 +154,97 @@ type Database struct {
 	noSmithyDocumentSerde
 }
 
-// Dimension represents the meta data attributes of the time series. For example,
-// the name and availability zone of an EC2 instance or the name of the
-// manufacturer of a wind turbine are dimensions.
+// Data model for a batch load task.
+type DataModel struct {
+
+	// Source to target mappings for dimensions.
+	//
+	// This member is required.
+	DimensionMappings []DimensionMapping
+
+	//
+	MeasureNameColumn *string
+
+	// Source to target mappings for measures.
+	MixedMeasureMappings []MixedMeasureMapping
+
+	// Source to target mappings for multi-measure records.
+	MultiMeasureMappings *MultiMeasureMappings
+
+	// Source column to be mapped to time.
+	TimeColumn *string
+
+	// The granularity of the timestamp unit. It indicates if the time value is in
+	// seconds, milliseconds, nanoseconds, or other supported values. Default is
+	// MILLISECONDS.
+	TimeUnit TimeUnit
+
+	noSmithyDocumentSerde
+}
+
+type DataModelConfiguration struct {
+
+	//
+	DataModel *DataModel
+
+	//
+	DataModelS3Configuration *DataModelS3Configuration
+
+	noSmithyDocumentSerde
+}
+
+type DataModelS3Configuration struct {
+
+	//
+	BucketName *string
+
+	//
+	ObjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines configuration details about the data source.
+type DataSourceConfiguration struct {
+
+	// This is currently CSV.
+	//
+	// This member is required.
+	DataFormat BatchLoadDataFormat
+
+	// Configuration of an S3 location for a file which contains data to load.
+	//
+	// This member is required.
+	DataSourceS3Configuration *DataSourceS3Configuration
+
+	// A delimited data format where the column separator can be a comma and the record
+	// separator is a newline character.
+	CsvConfiguration *CsvConfiguration
+
+	noSmithyDocumentSerde
+}
+
+type DataSourceS3Configuration struct {
+
+	// The bucket name of the customer S3 bucket.
+	//
+	// This member is required.
+	BucketName *string
+
+	//
+	ObjectKeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the metadata attributes of the time series. For example, the name and
+// Availability Zone of an EC2 instance or the name of the manufacturer of a wind
+// turbine are dimensions.
 type Dimension struct {
 
-	// Dimension represents the meta data attributes of the time series. For example,
-	// the name and availability zone of an EC2 instance or the name of the
-	// manufacturer of a wind turbine are dimensions. For constraints on Dimension
+	// Dimension represents the metadata attributes of the time series. For example,
+	// the name and Availability Zone of an EC2 instance or the name of the
+	// manufacturer of a wind turbine are dimensions. For constraints on dimension
 	// names, see Naming Constraints
 	// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming).
 	//
@@ -52,13 +256,24 @@ type Dimension struct {
 	// This member is required.
 	Value *string
 
-	// The data type of the dimension for the time series data point.
+	// The data type of the dimension for the time-series data point.
 	DimensionValueType DimensionValueType
 
 	noSmithyDocumentSerde
 }
 
-// Represents an available endpoint against which to make API calls agaisnt, as
+type DimensionMapping struct {
+
+	//
+	DestinationColumn *string
+
+	//
+	SourceColumn *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an available endpoint against which to make API calls against, as
 // well as the TTL for that endpoint.
 type Endpoint struct {
 
@@ -101,27 +316,27 @@ type MagneticStoreWriteProperties struct {
 	noSmithyDocumentSerde
 }
 
-// MeasureValue represents the data attribute of the time series. For example, the
-// CPU utilization of an EC2 instance or the RPM of a wind turbine are measures.
+// Represents the data attribute of the time series. For example, the CPU
+// utilization of an EC2 instance or the RPM of a wind turbine are measures.
 // MeasureValue has both name and value. MeasureValue is only allowed for type
 // MULTI. Using MULTI type, you can pass multiple data attributes associated with
 // the same time series in a single record
 type MeasureValue struct {
 
-	// Name of the MeasureValue. For constraints on MeasureValue names, refer to
-	// Naming Constraints
+	// The name of the MeasureValue. For constraints on MeasureValue names, see  Naming
+	// Constraints
 	// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming)
-	// in the Timestream developer guide.
+	// in the Amazon Timestream Developer Guide.
 	//
 	// This member is required.
 	Name *string
 
-	// Contains the data type of the MeasureValue for the time series data point.
+	// Contains the data type of the MeasureValue for the time-series data point.
 	//
 	// This member is required.
 	Type MeasureValueType
 
-	// Value for the MeasureValue.
+	// The value for the MeasureValue.
 	//
 	// This member is required.
 	Value *string
@@ -129,39 +344,90 @@ type MeasureValue struct {
 	noSmithyDocumentSerde
 }
 
-// Record represents a time series data point being written into Timestream. Each
-// record contains an array of dimensions. Dimensions represent the meta data
-// attributes of a time series data point such as the instance name or availability
-// zone of an EC2 instance. A record also contains the measure name which is the
-// name of the measure being collected for example the CPU utilization of an EC2
-// instance. A record also contains the measure value and the value type which is
-// the data type of the measure value. In addition, the record contains the
-// timestamp when the measure was collected that the timestamp unit which
-// represents the granularity of the timestamp. Records have a Version field, which
-// is a 64-bit long that you can use for updating data points. Writes of a
-// duplicate record with the same dimension, timestamp, and measure name but
-// different measure value will only succeed if the Version attribute of the record
-// in the write request is higher than that of the existing record. Timestream
-// defaults to a Version of 1 for records without the Version field.
+type MixedMeasureMapping struct {
+
+	//
+	//
+	// This member is required.
+	MeasureValueType MeasureValueType
+
+	//
+	MeasureName *string
+
+	//
+	MultiMeasureAttributeMappings []MultiMeasureAttributeMapping
+
+	//
+	SourceColumn *string
+
+	//
+	TargetMeasureName *string
+
+	noSmithyDocumentSerde
+}
+
+type MultiMeasureAttributeMapping struct {
+
+	//
+	//
+	// This member is required.
+	SourceColumn *string
+
+	//
+	MeasureValueType ScalarMeasureValueType
+
+	//
+	TargetMultiMeasureAttributeName *string
+
+	noSmithyDocumentSerde
+}
+
+type MultiMeasureMappings struct {
+
+	//
+	//
+	// This member is required.
+	MultiMeasureAttributeMappings []MultiMeasureAttributeMapping
+
+	//
+	TargetMultiMeasureName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a time-series data point being written into Timestream. Each record
+// contains an array of dimensions. Dimensions represent the metadata attributes of
+// a time-series data point, such as the instance name or Availability Zone of an
+// EC2 instance. A record also contains the measure name, which is the name of the
+// measure being collected (for example, the CPU utilization of an EC2 instance).
+// Additionally, a record contains the measure value and the value type, which is
+// the data type of the measure value. Also, the record contains the timestamp of
+// when the measure was collected and the timestamp unit, which represents the
+// granularity of the timestamp. Records have a Version field, which is a 64-bit
+// long that you can use for updating data points. Writes of a duplicate record
+// with the same dimension, timestamp, and measure name but different measure value
+// will only succeed if the Version attribute of the record in the write request is
+// higher than that of the existing record. Timestream defaults to a Version of 1
+// for records without the Version field.
 type Record struct {
 
-	// Contains the list of dimensions for time series data points.
+	// Contains the list of dimensions for time-series data points.
 	Dimensions []Dimension
 
 	// Measure represents the data attribute of the time series. For example, the CPU
 	// utilization of an EC2 instance or the RPM of a wind turbine are measures.
 	MeasureName *string
 
-	// Contains the measure value for the time series data point.
+	// Contains the measure value for the time-series data point.
 	MeasureValue *string
 
-	// Contains the data type of the measure value for the time series data point.
+	// Contains the data type of the measure value for the time-series data point.
 	// Default type is DOUBLE.
 	MeasureValueType MeasureValueType
 
-	// Contains the list of MeasureValue for time series data points. This is only
+	// Contains the list of MeasureValue for time-series data points. This is only
 	// allowed for type MULTI. For scalar values, use MeasureValue attribute of the
-	// Record directly.
+	// record directly.
 	MeasureValues []MeasureValue
 
 	// Contains the time at which the measure value for the data point was collected.
@@ -171,13 +437,13 @@ type Record struct {
 	Time *string
 
 	// The granularity of the timestamp unit. It indicates if the time value is in
-	// seconds, milliseconds, nanoseconds or other supported values. Default is
+	// seconds, milliseconds, nanoseconds, or other supported values. Default is
 	// MILLISECONDS.
 	TimeUnit TimeUnit
 
 	// 64-bit attribute used for record updates. Write requests for duplicate data with
 	// a higher version number will update the existing measure value and version. In
-	// cases where the measure value is the same, Version will still be updated .
+	// cases where the measure value is the same, Version will still be updated.
 	// Default value is 1. Version must be 1 or greater, or you will receive a
 	// ValidationException error.
 	Version *int64
@@ -200,8 +466,8 @@ type RecordsIngested struct {
 	noSmithyDocumentSerde
 }
 
-// Records that were not successfully inserted into Timestream due to data
-// validation issues that must be resolved prior to reinserting time series data
+// Represents records that were not successfully inserted into Timestream due to
+// data validation issues that must be resolved before reinserting time-series data
 // into the system.
 type RejectedRecord struct {
 
@@ -219,7 +485,7 @@ type RejectedRecord struct {
 	// *
 	// Measure values are different
 	//
-	// * Version is not present in the request or the
+	// * Version is not present in the request, or the
 	// value of version in the new record is equal to or lower than the existing
 	// value
 	//
@@ -229,7 +495,7 @@ type RejectedRecord struct {
 	// a value greater than the ExistingVersion.
 	//
 	// * Records with timestamps that lie
-	// outside the retention duration of the memory store When the retention window is
+	// outside the retention duration of the memory store. When the retention window is
 	// updated, you will receive a RejectedRecords exception if you immediately try to
 	// ingest data within the new window. To avoid a RejectedRecords exception, wait
 	// until the duration of the new window to ingest new data. For further
@@ -254,7 +520,37 @@ type RejectedRecord struct {
 	noSmithyDocumentSerde
 }
 
-// Retention properties contain the duration for which your time series data must
+// Report configuration for a batch load task. This contains details about where
+// error reports are stored.
+type ReportConfiguration struct {
+
+	// Configuration of an S3 location to write error reports and events for a batch
+	// load.
+	ReportS3Configuration *ReportS3Configuration
+
+	noSmithyDocumentSerde
+}
+
+type ReportS3Configuration struct {
+
+	//
+	//
+	// This member is required.
+	BucketName *string
+
+	//
+	EncryptionOption S3EncryptionOption
+
+	//
+	KmsKeyId *string
+
+	//
+	ObjectKeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Retention properties contain the duration for which your time-series data must
 // be stored in the magnetic store and the memory store.
 type RetentionProperties struct {
 
@@ -271,28 +567,29 @@ type RetentionProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration specifing an S3 location.
+// The configuration that specifies an S3 location.
 type S3Configuration struct {
 
-	// >Bucket name of the customer S3 bucket.
+	// The bucket name of the customer S3 bucket.
 	BucketName *string
 
-	// Encryption option for the customer s3 location. Options are S3 server side
-	// encryption with an S3-managed key or KMS managed key.
+	// The encryption option for the customer S3 location. Options are S3 server-side
+	// encryption with an S3 managed key or Amazon Web Services managed key.
 	EncryptionOption S3EncryptionOption
 
-	// KMS key id for the customer s3 location when encrypting with a KMS managed key.
+	// The KMS key ID for the customer S3 location when encrypting with an Amazon Web
+	// Services managed key.
 	KmsKeyId *string
 
-	// Object key preview for the customer S3 location.
+	// The object key preview for the customer S3 location.
 	ObjectKeyPrefix *string
 
 	noSmithyDocumentSerde
 }
 
-// Table represents a database table in Timestream. Tables contain one or more
-// related time series. You can modify the retention duration of the memory store
-// and the magnetic store for a table.
+// Represents a database table in Timestream. Tables contain one or more related
+// time series. You can modify the retention duration of the memory store and the
+// magnetic store for a table.
 type Table struct {
 
 	// The Amazon Resource Name that uniquely identifies this table.
@@ -328,8 +625,8 @@ type Table struct {
 }
 
 // A tag is a label that you assign to a Timestream database and/or table. Each tag
-// consists of a key and an optional value, both of which you define. Tags enable
-// you to categorize databases and/or tables, for example, by purpose, owner, or
+// consists of a key and an optional value, both of which you define. With tags,
+// you can categorize databases and/or tables, for example, by purpose, owner, or
 // environment.
 type Tag struct {
 

@@ -4576,6 +4576,11 @@ func awsAwsjson11_serializeOpDocumentCreateDatasetImportJobInput(v *CreateDatase
 		ok.String(*v.GeolocationFormat)
 	}
 
+	if len(v.ImportMode) > 0 {
+		ok := object.Key("ImportMode")
+		ok.String(string(v.ImportMode))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {

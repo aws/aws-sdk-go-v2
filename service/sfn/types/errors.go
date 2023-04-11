@@ -26,7 +26,7 @@ func (e *ActivityDoesNotExist) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActivityDoesNotExist) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActivityDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *ActivityLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActivityLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActivityLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *ActivityWorkerLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActivityWorkerLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActivityWorkerLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -107,7 +107,7 @@ func (e *ExecutionAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExecutionAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExecutionAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *ExecutionDoesNotExist) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExecutionDoesNotExist) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExecutionDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -160,7 +160,7 @@ func (e *ExecutionLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExecutionLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExecutionLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -186,7 +186,7 @@ func (e *InvalidArn) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArn) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArn"
 	}
 	return *e.ErrorCodeOverride
@@ -212,7 +212,7 @@ func (e *InvalidDefinition) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDefinition) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDefinition"
 	}
 	return *e.ErrorCodeOverride
@@ -238,7 +238,7 @@ func (e *InvalidExecutionInput) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidExecutionInput) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidExecutionInput"
 	}
 	return *e.ErrorCodeOverride
@@ -263,7 +263,7 @@ func (e *InvalidLoggingConfiguration) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLoggingConfiguration) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLoggingConfiguration"
 	}
 	return *e.ErrorCodeOverride
@@ -289,7 +289,7 @@ func (e *InvalidName) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidName) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidName"
 	}
 	return *e.ErrorCodeOverride
@@ -315,7 +315,7 @@ func (e *InvalidOutput) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOutput) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOutput"
 	}
 	return *e.ErrorCodeOverride
@@ -341,7 +341,7 @@ func (e *InvalidToken) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidToken) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidToken"
 	}
 	return *e.ErrorCodeOverride
@@ -368,7 +368,7 @@ func (e *InvalidTracingConfiguration) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTracingConfiguration) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTracingConfiguration"
 	}
 	return *e.ErrorCodeOverride
@@ -395,7 +395,7 @@ func (e *MissingRequiredParameter) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRequiredParameter) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingRequiredParameter"
 	}
 	return *e.ErrorCodeOverride
@@ -424,7 +424,7 @@ func (e *ResourceNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -451,7 +451,7 @@ func (e *StateMachineAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StateMachineAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StateMachineAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -477,7 +477,7 @@ func (e *StateMachineDeleting) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StateMachineDeleting) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StateMachineDeleting"
 	}
 	return *e.ErrorCodeOverride
@@ -503,7 +503,7 @@ func (e *StateMachineDoesNotExist) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StateMachineDoesNotExist) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StateMachineDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -530,7 +530,7 @@ func (e *StateMachineLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StateMachineLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StateMachineLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -555,7 +555,7 @@ func (e *StateMachineTypeNotSupported) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StateMachineTypeNotSupported) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StateMachineTypeNotSupported"
 	}
 	return *e.ErrorCodeOverride
@@ -580,7 +580,7 @@ func (e *TaskDoesNotExist) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TaskDoesNotExist) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TaskDoesNotExist"
 	}
 	return *e.ErrorCodeOverride
@@ -605,7 +605,7 @@ func (e *TaskTimedOut) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TaskTimedOut) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TaskTimedOut"
 	}
 	return *e.ErrorCodeOverride
@@ -635,7 +635,7 @@ func (e *TooManyTags) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTags) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTags"
 	}
 	return *e.ErrorCodeOverride
@@ -664,7 +664,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

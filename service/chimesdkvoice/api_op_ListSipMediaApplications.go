@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the SIP media applications under the administrator's AWS account.
 func (c *Client) ListSipMediaApplications(ctx context.Context, params *ListSipMediaApplicationsInput, optFns ...func(*Options)) (*ListSipMediaApplicationsOutput, error) {
 	if params == nil {
 		params = &ListSipMediaApplicationsInput{}
@@ -28,16 +29,22 @@ func (c *Client) ListSipMediaApplications(ctx context.Context, params *ListSipMe
 }
 
 type ListSipMediaApplicationsInput struct {
+
+	// The maximum number of results to return in a single call. Defaults to 100.
 	MaxResults *int32
 
+	// The token used to return the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
 type ListSipMediaApplicationsOutput struct {
+
+	// The token used to return the next page of results.
 	NextToken *string
 
+	// The list of SIP media applications and application details.
 	SipMediaApplications []types.SipMediaApplication
 
 	// Metadata pertaining to the operation's result.
@@ -117,6 +124,7 @@ var _ ListSipMediaApplicationsAPIClient = (*Client)(nil)
 // ListSipMediaApplicationsPaginatorOptions is the paginator options for
 // ListSipMediaApplications
 type ListSipMediaApplicationsPaginatorOptions struct {
+	// The maximum number of results to return in a single call. Defaults to 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

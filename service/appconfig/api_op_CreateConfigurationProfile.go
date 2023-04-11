@@ -13,24 +13,40 @@ import (
 
 // Creates a configuration profile, which is information that enables AppConfig to
 // access the configuration source. Valid configuration sources include the
-// AppConfig hosted configuration store, Amazon Web Services Systems Manager (SSM)
-// documents, SSM Parameter Store parameters, Amazon S3 objects, or any integration
-// source action
-// (http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html#integrations-source)
-// supported by CodePipeline. A configuration profile includes the following
-// information:
+// following:
 //
-// * The URI location of the configuration data.
+// * Configuration data in YAML, JSON, and other formats stored in the
+// AppConfig hosted configuration store
 //
-// * The Identity and
-// Access Management (IAM) role that provides access to the configuration data.
+// * Configuration data stored as objects in
+// an Amazon Simple Storage Service (Amazon S3) bucket
+//
+// * Pipelines stored in
+// CodePipeline
+//
+// * Secrets stored in Secrets Manager
+//
+// * Standard and secure string
+// parameters stored in Amazon Web Services Systems Manager Parameter Store
 //
 // *
-// A validator for the configuration data. Available validators include either a
-// JSON Schema or an Amazon Web Services Lambda function.
+// Configuration data in SSM documents stored in the Systems Manager document
+// store
 //
-// For more information,
-// see Create a Configuration and a Configuration Profile
+// A configuration profile includes the following information:
+//
+// * The URI
+// location of the configuration data.
+//
+// * The Identity and Access Management (IAM)
+// role that provides access to the configuration data.
+//
+// * A validator for the
+// configuration data. Available validators include either a JSON Schema or an
+// Amazon Web Services Lambda function.
+//
+// For more information, see Create a
+// Configuration and a Configuration Profile
 // (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html)
 // in the AppConfig User Guide.
 func (c *Client) CreateConfigurationProfile(ctx context.Context, params *CreateConfigurationProfileInput, optFns ...func(*Options)) (*CreateConfigurationProfileOutput, error) {
@@ -55,14 +71,26 @@ type CreateConfigurationProfileInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// A URI to locate the configuration. You can specify the AppConfig hosted
-	// configuration store, Systems Manager (SSM) document, an SSM Parameter Store
-	// parameter, or an Amazon S3 object. For the hosted configuration store and for
-	// feature flags, specify hosted. For an SSM document, specify either the document
-	// name in the format ssm-document:// or the Amazon Resource Name (ARN). For a
-	// parameter, specify either the parameter name in the format ssm-parameter:// or
-	// the ARN. For an Amazon S3 object, specify the URI in the following format:
-	// s3:/// . Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json
+	// A URI to locate the configuration. You can specify the following:
+	//
+	// * For the
+	// AppConfig hosted configuration store and for feature flags, specify hosted.
+	//
+	// *
+	// For an Amazon Web Services Systems Manager Parameter Store parameter, specify
+	// either the parameter name in the format ssm-parameter:// or the ARN.
+	//
+	// * For an
+	// Secrets Manager secret, specify the URI in the following format:
+	// secrets-manager://.
+	//
+	// * For an Amazon S3 object, specify the URI in the following
+	// format: s3:/// . Here is an example:
+	// s3://my-bucket/my-app/us-east-1/my-config.json
+	//
+	// * For an SSM document, specify
+	// either the document name in the format ssm-document:// or the Amazon Resource
+	// Name (ARN).
 	//
 	// This member is required.
 	LocationUri *string

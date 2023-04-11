@@ -30,7 +30,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -61,7 +61,7 @@ func (e *AccessDeniedForDependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedForDependencyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedForDependencyException"
 	}
 	return *e.ErrorCodeOverride
@@ -89,7 +89,7 @@ func (e *AccountAlreadyClosedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountAlreadyClosedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountAlreadyClosedException"
 	}
 	return *e.ErrorCodeOverride
@@ -116,7 +116,7 @@ func (e *AccountAlreadyRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountAlreadyRegisteredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountAlreadyRegisteredException"
 	}
 	return *e.ErrorCodeOverride
@@ -144,7 +144,7 @@ func (e *AccountNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -171,7 +171,7 @@ func (e *AccountNotRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountNotRegisteredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountNotRegisteredException"
 	}
 	return *e.ErrorCodeOverride
@@ -201,7 +201,7 @@ func (e *AccountOwnerNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountOwnerNotVerifiedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountOwnerNotVerifiedException"
 	}
 	return *e.ErrorCodeOverride
@@ -228,7 +228,7 @@ func (e *AlreadyInOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyInOrganizationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyInOrganizationException"
 	}
 	return *e.ErrorCodeOverride
@@ -255,7 +255,7 @@ func (e *AWSOrganizationsNotInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AWSOrganizationsNotInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWSOrganizationsNotInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -282,7 +282,7 @@ func (e *ChildNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ChildNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ChildNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -309,7 +309,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -336,7 +336,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -368,17 +368,21 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // attempted to exceed the number of accounts that you can create in one day.
 //
 // *
-// ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number
-// of accounts in an organization. If you need more accounts, contact Amazon Web
-// Services Support (https://docs.aws.amazon.com/support/home#/) to request an
-// increase in your limit. Or the number of invitations that you tried to send
-// would cause you to exceed the limit of accounts in your organization. Send fewer
-// invitations or contact Amazon Web Services Support to request an increase in the
-// number of accounts. Deleted and closed accounts still count toward your limit.
-// If you get this exception when running a command immediately after creating the
-// organization, wait one hour and try again. After an hour, if the command
-// continues to fail with this error, contact Amazon Web Services Support
-// (https://docs.aws.amazon.com/support/home#/).
+// ACCOUNT_CREATION_NOT_COMPLETE: Your account setup isn't complete or your account
+// isn't fully active. You must complete the account setup before you create an
+// organization.
+//
+// * ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the
+// limit on the number of accounts in an organization. If you need more accounts,
+// contact Amazon Web Services Support (https://docs.aws.amazon.com/support/home#/)
+// to request an increase in your limit. Or the number of invitations that you
+// tried to send would cause you to exceed the limit of accounts in your
+// organization. Send fewer invitations or contact Amazon Web Services Support to
+// request an increase in the number of accounts. Deleted and closed accounts still
+// count toward your limit. If you get this exception when running a command
+// immediately after creating the organization, wait one hour and try again. After
+// an hour, if the command continues to fail with this error, contact Amazon Web
+// Services Support (https://docs.aws.amazon.com/support/home#/).
 //
 // *
 // CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register the
@@ -537,7 +541,7 @@ func (e *ConstraintViolationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConstraintViolationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConstraintViolationException"
 	}
 	return *e.ErrorCodeOverride
@@ -564,7 +568,7 @@ func (e *CreateAccountStatusNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CreateAccountStatusNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CreateAccountStatusNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -593,7 +597,7 @@ func (e *DestinationParentNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DestinationParentNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DestinationParentNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -621,7 +625,7 @@ func (e *DuplicateAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateAccountException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateAccountException"
 	}
 	return *e.ErrorCodeOverride
@@ -651,7 +655,7 @@ func (e *DuplicateHandshakeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateHandshakeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateHandshakeException"
 	}
 	return *e.ErrorCodeOverride
@@ -677,7 +681,7 @@ func (e *DuplicateOrganizationalUnitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateOrganizationalUnitException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateOrganizationalUnitException"
 	}
 	return *e.ErrorCodeOverride
@@ -705,7 +709,7 @@ func (e *DuplicatePolicyAttachmentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicatePolicyAttachmentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicatePolicyAttachmentException"
 	}
 	return *e.ErrorCodeOverride
@@ -733,7 +737,7 @@ func (e *DuplicatePolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicatePolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicatePolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -762,7 +766,7 @@ func (e *EffectivePolicyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EffectivePolicyNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EffectivePolicyNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -791,7 +795,7 @@ func (e *FinalizingOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FinalizingOrganizationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "FinalizingOrganizationException"
 	}
 	return *e.ErrorCodeOverride
@@ -818,7 +822,7 @@ func (e *HandshakeAlreadyInStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HandshakeAlreadyInStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HandshakeAlreadyInStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -891,7 +895,7 @@ func (e *HandshakeConstraintViolationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HandshakeConstraintViolationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HandshakeConstraintViolationException"
 	}
 	return *e.ErrorCodeOverride
@@ -919,7 +923,7 @@ func (e *HandshakeNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HandshakeNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HandshakeNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -947,7 +951,7 @@ func (e *InvalidHandshakeTransitionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidHandshakeTransitionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidHandshakeTransitionException"
 	}
 	return *e.ErrorCodeOverride
@@ -1060,7 +1064,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -1090,7 +1094,7 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedPolicyDocumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -1118,7 +1122,7 @@ func (e *MasterCannotLeaveOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MasterCannotLeaveOrganizationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MasterCannotLeaveOrganizationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1147,7 +1151,7 @@ func (e *OrganizationalUnitNotEmptyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationalUnitNotEmptyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationalUnitNotEmptyException"
 	}
 	return *e.ErrorCodeOverride
@@ -1175,7 +1179,7 @@ func (e *OrganizationalUnitNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationalUnitNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationalUnitNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1205,7 +1209,7 @@ func (e *OrganizationNotEmptyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationNotEmptyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationNotEmptyException"
 	}
 	return *e.ErrorCodeOverride
@@ -1231,7 +1235,7 @@ func (e *ParentNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ParentNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ParentNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1258,7 +1262,7 @@ func (e *PolicyChangesInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyChangesInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyChangesInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -1285,7 +1289,7 @@ func (e *PolicyInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -1311,7 +1315,7 @@ func (e *PolicyNotAttachedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyNotAttachedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyNotAttachedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1337,7 +1341,7 @@ func (e *PolicyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1363,7 +1367,7 @@ func (e *PolicyTypeAlreadyEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyTypeAlreadyEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyTypeAlreadyEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -1394,7 +1398,7 @@ func (e *PolicyTypeNotAvailableForOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyTypeNotAvailableForOrganizationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyTypeNotAvailableForOrganizationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1427,7 +1431,7 @@ func (e *PolicyTypeNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyTypeNotEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyTypeNotEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -1453,7 +1457,7 @@ func (e *ResourcePolicyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourcePolicyNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourcePolicyNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1479,7 +1483,7 @@ func (e *RootNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RootNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RootNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1506,7 +1510,7 @@ func (e *ServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -1532,7 +1536,7 @@ func (e *SourceParentNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SourceParentNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SourceParentNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1559,7 +1563,7 @@ func (e *TargetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TargetNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1591,7 +1595,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRequestsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRequestsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1617,7 +1621,7 @@ func (e *UnsupportedAPIEndpointException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedAPIEndpointException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedAPIEndpointException"
 	}
 	return *e.ErrorCodeOverride

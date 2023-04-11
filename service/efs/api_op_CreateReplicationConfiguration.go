@@ -56,23 +56,23 @@ import (
 // used. The performance mode cannot be changed.
 //
 // * Throughput mode - The
-// destination file system uses the Bursting Throughput mode by default. After the
-// file system is created, you can modify the throughput mode.
+// destination file system's throughput mode matches that of the source file
+// system. After the file system is created, you can modify the throughput
+// mode.
 //
-// The following
-// properties are turned off by default:
+// The following properties are turned off by default:
 //
-// * Lifecycle management - EFS lifecycle
-// management and EFS Intelligent-Tiering are not enabled on the destination file
-// system. After the destination file system is created, you can enable EFS
-// lifecycle management and EFS Intelligent-Tiering.
+// * Lifecycle
+// management - EFS lifecycle management and EFS Intelligent-Tiering are not
+// enabled on the destination file system. After the destination file system is
+// created, you can enable EFS lifecycle management and EFS Intelligent-Tiering.
 //
-// * Automatic backups -
-// Automatic daily backups not enabled on the destination file system. After the
-// file system is created, you can change this setting.
+// *
+// Automatic backups - Automatic daily backups not enabled on the destination file
+// system. After the file system is created, you can change this setting.
 //
-// For more information, see
-// Amazon EFS replication
+// For more
+// information, see Amazon EFS replication
 // (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html) in the Amazon
 // EFS User Guide.
 func (c *Client) CreateReplicationConfiguration(ctx context.Context, params *CreateReplicationConfigurationInput, optFns ...func(*Options)) (*CreateReplicationConfigurationOutput, error) {

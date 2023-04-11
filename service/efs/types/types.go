@@ -28,7 +28,7 @@ type AccessPointDescription struct {
 	// The name of the access point. This is the value of the Name tag.
 	Name *string
 
-	// Identified the Amazon Web Services account that owns the access point resource.
+	// Identifies the Amazon Web Services account that owns the access point resource.
 	OwnerId *string
 
 	// The full POSIX identity, including the user ID, group ID, and secondary group
@@ -201,9 +201,7 @@ type FileSystemDescription struct {
 	// This member is required.
 	NumberOfMountTargets int32
 
-	// The Amazon Web Services account that created the file system. If the file system
-	// was created by an IAM user, the parent account to which the user belongs is the
-	// owner.
+	// The Amazon Web Services account that created the file system.
 	//
 	// This member is required.
 	OwnerId *string

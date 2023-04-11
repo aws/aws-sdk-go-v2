@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *AWSServiceAccessNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AWSServiceAccessNotEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AWSServiceAccessNotEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *DependencyAccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DependencyAccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DependencyAccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -107,7 +107,7 @@ func (e *IllegalArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IllegalArgumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IllegalArgumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *InvalidPaginationTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPaginationTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -159,7 +159,7 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -185,7 +185,7 @@ func (e *NoAvailableOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableOrganizationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAvailableOrganizationException"
 	}
 	return *e.ErrorCodeOverride
@@ -211,7 +211,7 @@ func (e *NoSuchResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchResourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchResourceException"
 	}
 	return *e.ErrorCodeOverride
@@ -237,7 +237,7 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationNotInAllFeaturesModeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationNotInAllFeaturesModeException"
 	}
 	return *e.ErrorCodeOverride
@@ -267,7 +267,7 @@ func (e *QuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QuotaExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "QuotaExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -293,7 +293,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -319,7 +319,7 @@ func (e *ServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -345,7 +345,7 @@ func (e *ServiceQuotaTemplateNotInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceQuotaTemplateNotInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceQuotaTemplateNotInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -373,7 +373,7 @@ func (e *TagPolicyViolationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagPolicyViolationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagPolicyViolationException"
 	}
 	return *e.ErrorCodeOverride
@@ -399,7 +399,7 @@ func (e *TemplatesNotAvailableInRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TemplatesNotAvailableInRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TemplatesNotAvailableInRegionException"
 	}
 	return *e.ErrorCodeOverride
@@ -428,7 +428,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRequestsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRequestsException"
 	}
 	return *e.ErrorCodeOverride
@@ -457,7 +457,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride

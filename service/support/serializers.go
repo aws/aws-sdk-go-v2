@@ -847,13 +847,17 @@ func awsAwsjson11_serializeDocumentServiceCodeList(v []string, value smithyjson.
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentStringList(v []*string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		av.String(v[i])
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
 	}
 	return nil
 }

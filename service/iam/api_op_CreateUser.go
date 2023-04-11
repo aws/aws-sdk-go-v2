@@ -51,7 +51,16 @@ type CreateUserInput struct {
 	// digits, and upper and lowercased letters.
 	Path *string
 
-	// The ARN of the policy that is used to set the permissions boundary for the user.
+	// The ARN of the managed policy that is used to set the permissions boundary for
+	// the user. A permissions boundary policy defines the maximum permissions that
+	// identity-based policies can grant to an entity, but does not grant permissions.
+	// Permissions boundaries do not define the maximum permissions that a
+	// resource-based policy can grant to an entity. To learn more, see Permissions
+	// boundaries for IAM entities
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide. For more information about policy types, see Policy types
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
+	// in the IAM User Guide.
 	PermissionsBoundary *string
 
 	// A list of tags that you want to attach to the new user. Each tag consists of a

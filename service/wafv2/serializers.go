@@ -2709,6 +2709,32 @@ func awsAwsjson11_serializeDocumentAndStatement(v *types.AndStatement, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAWSManagedRulesATPRuleSet(v *types.AWSManagedRulesATPRuleSet, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LoginPath != nil {
+		ok := object.Key("LoginPath")
+		ok.String(*v.LoginPath)
+	}
+
+	if v.RequestInspection != nil {
+		ok := object.Key("RequestInspection")
+		if err := awsAwsjson11_serializeDocumentRequestInspection(v.RequestInspection, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResponseInspection != nil {
+		ok := object.Key("ResponseInspection")
+		if err := awsAwsjson11_serializeDocumentResponseInspection(v.ResponseInspection, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAWSManagedRulesBotControlRuleSet(v *types.AWSManagedRulesBotControlRuleSet, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3567,6 +3593,13 @@ func awsAwsjson11_serializeDocumentManagedRuleGroupConfig(v *types.ManagedRuleGr
 	object := value.Object()
 	defer object.Close()
 
+	if v.AWSManagedRulesATPRuleSet != nil {
+		ok := object.Key("AWSManagedRulesATPRuleSet")
+		if err := awsAwsjson11_serializeDocumentAWSManagedRulesATPRuleSet(v.AWSManagedRulesATPRuleSet, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AWSManagedRulesBotControlRuleSet != nil {
 		ok := object.Key("AWSManagedRulesBotControlRuleSet")
 		if err := awsAwsjson11_serializeDocumentAWSManagedRulesBotControlRuleSet(v.AWSManagedRulesBotControlRuleSet, ok); err != nil {
@@ -3863,6 +3896,249 @@ func awsAwsjson11_serializeDocumentRegularExpressionList(v []types.Regex, value 
 		if err := awsAwsjson11_serializeDocumentRegex(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRequestInspection(v *types.RequestInspection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PasswordField != nil {
+		ok := object.Key("PasswordField")
+		if err := awsAwsjson11_serializeDocumentPasswordField(v.PasswordField, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PayloadType) > 0 {
+		ok := object.Key("PayloadType")
+		ok.String(string(v.PayloadType))
+	}
+
+	if v.UsernameField != nil {
+		ok := object.Key("UsernameField")
+		if err := awsAwsjson11_serializeDocumentUsernameField(v.UsernameField, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspection(v *types.ResponseInspection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BodyContains != nil {
+		ok := object.Key("BodyContains")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionBodyContains(v.BodyContains, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Header != nil {
+		ok := object.Key("Header")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionHeader(v.Header, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Json != nil {
+		ok := object.Key("Json")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionJson(v.Json, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatusCode != nil {
+		ok := object.Key("StatusCode")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionStatusCode(v.StatusCode, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionBodyContains(v *types.ResponseInspectionBodyContains, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureStrings != nil {
+		ok := object.Key("FailureStrings")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionBodyContainsFailureStrings(v.FailureStrings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SuccessStrings != nil {
+		ok := object.Key("SuccessStrings")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionBodyContainsSuccessStrings(v.SuccessStrings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionBodyContainsFailureStrings(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionBodyContainsSuccessStrings(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionHeader(v *types.ResponseInspectionHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureValues != nil {
+		ok := object.Key("FailureValues")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionHeaderFailureValues(v.FailureValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.SuccessValues != nil {
+		ok := object.Key("SuccessValues")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionHeaderSuccessValues(v.SuccessValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionHeaderFailureValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionHeaderSuccessValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionJson(v *types.ResponseInspectionJson, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureValues != nil {
+		ok := object.Key("FailureValues")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionJsonFailureValues(v.FailureValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
+	}
+
+	if v.SuccessValues != nil {
+		ok := object.Key("SuccessValues")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionJsonSuccessValues(v.SuccessValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionJsonFailureValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionJsonSuccessValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionStatusCode(v *types.ResponseInspectionStatusCode, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureCodes != nil {
+		ok := object.Key("FailureCodes")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionStatusCodeFailureCodes(v.FailureCodes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SuccessCodes != nil {
+		ok := object.Key("SuccessCodes")
+		if err := awsAwsjson11_serializeDocumentResponseInspectionStatusCodeSuccessCodes(v.SuccessCodes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionStatusCodeFailureCodes(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResponseInspectionStatusCodeSuccessCodes(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
 	}
 	return nil
 }

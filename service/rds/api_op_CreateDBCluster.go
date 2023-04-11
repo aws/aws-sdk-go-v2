@@ -13,13 +13,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster. You can use the
-// ReplicationSourceIdentifier parameter to create an Amazon Aurora DB cluster as a
-// read replica of another DB cluster or Amazon RDS MySQL or PostgreSQL DB
-// instance. For more information on Amazon Aurora, see  What is Amazon Aurora?
+// Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster. If you create an
+// Aurora DB cluster, the request creates an empty cluster. You must explicitly
+// create the writer instance for your DB cluster using the CreateDBInstance
+// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
+// operation. If you create a Multi-AZ DB cluster, the request creates a writer and
+// two reader DB instances for you, each in a different Availability Zone. You can
+// use the ReplicationSourceIdentifier parameter to create an Amazon Aurora DB
+// cluster as a read replica of another DB cluster or Amazon RDS MySQL or
+// PostgreSQL DB instance. For more information about Amazon Aurora, see What is
+// Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see  Multi-AZ deployments with two readable standby DB instances
+// in the Amazon Aurora User Guide. You can also use the
+// ReplicationSourceIdentifier parameter to create a Multi-AZ DB cluster read
+// replica with an RDS for PostgreSQL DB instance as the source. For more
+// information about Multi-AZ DB clusters, see Multi-AZ DB cluster deployments
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide.
 func (c *Client) CreateDBCluster(ctx context.Context, params *CreateDBClusterInput, optFns ...func(*Options)) (*CreateDBClusterOutput, error) {
@@ -59,19 +67,16 @@ type CreateDBClusterInput struct {
 	// The name of the database engine to be used for this DB cluster. Valid Values:
 	//
 	// *
-	// aurora (for MySQL 5.6-compatible Aurora)
-	//
-	// * aurora-mysql (for MySQL
-	// 5.7-compatible and MySQL 8.0-compatible Aurora)
+	// aurora-mysql
 	//
 	// * aurora-postgresql
 	//
 	// * mysql
 	//
-	// *
-	// postgres
+	// * postgres
 	//
-	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
+	// Valid for: Aurora DB
+	// clusters and Multi-AZ DB clusters
 	//
 	// This member is required.
 	Engine *string
@@ -222,20 +227,13 @@ type CreateDBClusterInput struct {
 	// in the Amazon RDS User Guide. Valid for: Multi-AZ DB clusters only
 	EnablePerformanceInsights *bool
 
-	// The DB engine mode of the DB cluster, either provisioned, serverless,
-	// parallelquery, global, or multimaster. The parallelquery engine mode isn't
-	// required for Aurora MySQL version 1.23 and higher 1.x versions, and version 2.09
-	// and higher 2.x versions. The global engine mode isn't required for Aurora MySQL
-	// version 1.22 and higher 1.x versions, and global engine mode isn't required for
-	// any 2.x versions. The multimaster engine mode only applies for DB clusters
-	// created with Aurora MySQL version 5.6.10a. The serverless engine mode only
-	// applies for Aurora Serverless v1 DB clusters. For Aurora PostgreSQL, the global
-	// engine mode isn't required, and both the parallelquery and the multimaster
-	// engine modes currently aren't supported. Limitations and requirements apply to
-	// some DB engine modes. For more information, see the following sections in the
-	// Amazon Aurora User Guide:
+	// The DB engine mode of the DB cluster, either provisioned or serverless. The
+	// serverless engine mode only applies for Aurora Serverless v1 DB clusters.
+	// Limitations and requirements apply to some DB engine modes. For more
+	// information, see the following sections in the Amazon Aurora User Guide:
 	//
-	// * Limitations of Aurora Serverless v1
+	// *
+	// Limitations of Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations)
 	//
 	// *
@@ -243,29 +241,24 @@ type CreateDBClusterInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html)
 	//
 	// *
-	// Limitations of Parallel Query
+	// Limitations of parallel query
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations)
 	//
 	// *
-	// Limitations of Aurora Global Databases
+	// Limitations of Aurora global databases
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations)
-	//
-	// *
-	// Limitations of Multi-Master Clusters
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations)
 	//
 	// Valid
 	// for: Aurora DB clusters only
 	EngineMode *string
 
 	// The version number of the database engine to use. To list all of the available
-	// engine versions for MySQL 5.6-compatible Aurora, use the following command: aws
-	// rds describe-db-engine-versions --engine aurora --query
-	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following
-	// command: aws rds describe-db-engine-versions --engine aurora-mysql --query
-	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for Aurora PostgreSQL, use the following command: aws rds
+	// engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (MySQL
+	// 8.0-compatible), use the following command: aws rds describe-db-engine-versions
+	// --engine aurora-mysql --query "DBEngineVersions[].EngineVersion" You can supply
+	// either 5.7 or 8.0 to use the default engine version for Aurora MySQL version 2
+	// or version 3, respectively. To list all of the available engine versions for
+	// Aurora PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine aurora-postgresql --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
 	// for RDS for MySQL, use the following command: aws rds
@@ -273,17 +266,16 @@ type CreateDBClusterInput struct {
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
 	// for RDS for PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine postgres --query
-	// "DBEngineVersions[].EngineVersion" Aurora MySQL For information, see MySQL on
-	// Amazon RDS Versions
+	// "DBEngineVersions[].EngineVersion" Aurora MySQL For information, see Database
+	// engine updates for Amazon Aurora MySQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html)
 	// in the Amazon Aurora User Guide. Aurora PostgreSQL For information, see Amazon
 	// Aurora PostgreSQL releases and engine versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)
-	// in the Amazon Aurora User Guide. MySQL For information, see MySQL on Amazon RDS
-	// Versions
+	// in the Amazon Aurora User Guide. MySQL For information, see Amazon RDS for MySQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
 	// in the Amazon RDS User Guide. PostgreSQL For information, see Amazon RDS for
-	// PostgreSQL versions and extensions
+	// PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts)
 	// in the Amazon RDS User Guide. Valid for: Aurora DB clusters and Multi-AZ DB
 	// clusters
@@ -295,7 +287,7 @@ type CreateDBClusterInput struct {
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
 	// initially allocated for each DB instance in the Multi-AZ DB cluster. For
-	// information about valid IOPS values, see Amazon RDS Provisioned IOPS storage
+	// information about valid IOPS values, see Provisioned IOPS storage
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
 	// in the Amazon RDS User Guide. This setting is required to create a Multi-AZ DB
 	// cluster. Constraints: Must be a multiple between .5 and 50 of the storage amount
@@ -564,7 +556,8 @@ type CreateDBClusterInput struct {
 	PubliclyAccessible *bool
 
 	// The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this
-	// DB cluster is created as a read replica. Valid for: Aurora DB clusters only
+	// DB cluster is created as a read replica. Valid for: Aurora DB clusters and RDS
+	// for PostgreSQL Multi-AZ DB clusters
 	ReplicationSourceIdentifier *string
 
 	// For DB clusters in serverless DB engine mode, the scaling properties of the DB

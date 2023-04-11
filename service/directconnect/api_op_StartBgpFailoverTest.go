@@ -46,7 +46,7 @@ type StartBgpFailoverTestInput struct {
 	BgpPeers []string
 
 	// The time in minutes that the virtual interface failover test will last. Maximum
-	// value: 180 minutes (3 hours). Default: 180 minutes (3 hours).
+	// value: 4,320 minutes (72 hours). Default: 180 minutes (3 hours).
 	TestDurationInMinutes *int32
 
 	noSmithyDocumentSerde

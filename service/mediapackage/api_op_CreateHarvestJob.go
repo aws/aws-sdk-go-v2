@@ -69,7 +69,7 @@ type CreateHarvestJobOutput struct {
 	// The ID of the Channel that the HarvestJob will harvest from.
 	ChannelId *string
 
-	// The time the HarvestJob was submitted
+	// The date and time the HarvestJob was submitted.
 	CreatedAt *string
 
 	// The end of the time-window which will be harvested.

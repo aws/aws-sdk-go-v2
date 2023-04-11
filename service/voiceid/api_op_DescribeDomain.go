@@ -29,7 +29,7 @@ func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput
 
 type DescribeDomainInput struct {
 
-	// The identifier of the domain you are describing.
+	// The identifier of the domain that you are describing.
 	//
 	// This member is required.
 	DomainId *string

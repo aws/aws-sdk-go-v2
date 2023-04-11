@@ -29,7 +29,7 @@ func (c *Client) DescribeFraudster(ctx context.Context, params *DescribeFraudste
 
 type DescribeFraudsterInput struct {
 
-	// The identifier of the domain containing the fraudster.
+	// The identifier of the domain that contains the fraudster.
 	//
 	// This member is required.
 	DomainId *string

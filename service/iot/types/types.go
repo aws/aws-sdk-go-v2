@@ -1118,6 +1118,10 @@ type CloudwatchLogsAction struct {
 	// This member is required.
 	RoleArn *string
 
+	// Indicates whether batches of log records will be extracted and uploaded into
+	// CloudWatch. Values include true or false (default).
+	BatchMode *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1955,6 +1959,9 @@ type Job struct {
 	// If the job was updated, provides the reason code for the update.
 	ReasonCode *string
 
+	// Displays the next seven maintenance window occurrences and their start times.
+	ScheduledJobRollouts []ScheduledJobRollout
+
 	// The configuration that allows you to schedule a job for a future date and time
 	// in addition to specifying the end behavior for each job execution.
 	SchedulingConfig *SchedulingConfig
@@ -2391,6 +2398,24 @@ type MachineLearningDetectionConfig struct {
 	//
 	// This member is required.
 	ConfidenceLevel ConfidenceLevel
+
+	noSmithyDocumentSerde
+}
+
+// An optional configuration within the SchedulingConfig to setup a recurring
+// maintenance window with a predetermined start time and duration for the rollout
+// of a job document to all devices in a target group for a job.
+type MaintenanceWindow struct {
+
+	// Displays the duration of the next maintenance window.
+	//
+	// This member is required.
+	DurationInMinutes *int32
+
+	// Displays the start time of the next maintenance window.
+	//
+	// This member is required.
+	StartTime *string
 
 	noSmithyDocumentSerde
 }
@@ -3246,6 +3271,15 @@ type ScheduledAuditMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Displays the next seven maintenance window occurrences and their start times.
+type ScheduledJobRollout struct {
+
+	// Displays the start times of the next seven maintenance window occurrences.
+	StartTime *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the date and time that a job will begin the rollout of the job
 // document to all devices in the target group. Additionally, you can specify the
 // end behavior for each job execution when it reaches the scheduled end time.
@@ -3260,12 +3294,20 @@ type SchedulingConfig struct {
 	// target group for a job. The endTime must take place no later than two years from
 	// the current time and be scheduled a minimum of thirty minutes from the current
 	// time. The minimum duration between startTime and endTime is thirty minutes. The
-	// maximum duration between startTime and endTime is two years.
+	// maximum duration between startTime and endTime is two years. The date and time
+	// format for the endTime is YYYY-MM-DD for the date and HH:MM for the time.
 	EndTime *string
+
+	// An optional configuration within the SchedulingConfig to setup a recurring
+	// maintenance window with a predetermined start time and duration for the rollout
+	// of a job document to all devices in a target group for a job.
+	MaintenanceWindows []MaintenanceWindow
 
 	// The time a job will begin rollout of the job document to all devices in the
 	// target group for a job. The startTime can be scheduled up to a year in advance
-	// and must be scheduled a minimum of thirty minutes from the current time.
+	// and must be scheduled a minimum of thirty minutes from the current time. The
+	// date and time format for the startTime is YYYY-MM-DD for the date and HH:MM for
+	// the time.
 	StartTime *string
 
 	noSmithyDocumentSerde

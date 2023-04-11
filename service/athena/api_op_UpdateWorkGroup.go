@@ -12,10 +12,7 @@ import (
 )
 
 // Updates the workgroup with the specified name. The workgroup's name cannot be
-// changed. Only one of ConfigurationsUpdates or ConfigurationUpdates can be
-// specified; ConfigurationsUpdates for a workgroup with multi engine support (for
-// example, an Apache Spark enabled workgroup) or ConfigurationUpdates for an
-// Athena SQL workgroup.
+// changed. Only ConfigurationUpdates can be specified.
 func (c *Client) UpdateWorkGroup(ctx context.Context, params *UpdateWorkGroupInput, optFns ...func(*Options)) (*UpdateWorkGroupOutput, error) {
 	if params == nil {
 		params = &UpdateWorkGroupInput{}

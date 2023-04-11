@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the resources that are not currently supported in AWS Resilience Hub. An
+// Lists the resources that are not currently supported in Resilience Hub. An
 // unsupported resource is a resource that exists in the object that was used to
 // create an app, but is not supported by Resilience Hub.
 func (c *Client) ListUnsupportedAppVersionResources(ctx context.Context, params *ListUnsupportedAppVersionResourcesInput, optFns ...func(*Options)) (*ListUnsupportedAppVersionResourcesOutput, error) {
@@ -32,11 +32,11 @@ func (c *Client) ListUnsupportedAppVersionResources(ctx context.Context, params 
 
 type ListUnsupportedAppVersionResourcesInput struct {
 
-	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
+	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string

@@ -163,6 +163,13 @@ func awsRestjson1_serializeOpDocumentCreateWorkspaceInput(v *CreateWorkspaceInpu
 		ok.String(*v.Configuration)
 	}
 
+	if v.NetworkAccessControl != nil {
+		ok := object.Key("networkAccessControl")
+		if err := awsRestjson1_serializeDocumentNetworkAccessConfiguration(v.NetworkAccessControl, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OrganizationRoleName != nil {
 		ok := object.Key("organizationRoleName")
 		ok.String(*v.OrganizationRoleName)
@@ -1189,6 +1196,13 @@ func awsRestjson1_serializeOpDocumentUpdateWorkspaceInput(v *UpdateWorkspaceInpu
 		ok.String(string(v.AccountAccessType))
 	}
 
+	if v.NetworkAccessControl != nil {
+		ok := object.Key("networkAccessControl")
+		if err := awsRestjson1_serializeDocumentNetworkAccessConfiguration(v.NetworkAccessControl, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OrganizationRoleName != nil {
 		ok := object.Key("organizationRoleName")
 		ok.String(*v.OrganizationRoleName)
@@ -1197,6 +1211,11 @@ func awsRestjson1_serializeOpDocumentUpdateWorkspaceInput(v *UpdateWorkspaceInpu
 	if len(v.PermissionType) > 0 {
 		ok := object.Key("permissionType")
 		ok.String(string(v.PermissionType))
+	}
+
+	if v.RemoveNetworkAccessConfiguration != nil {
+		ok := object.Key("removeNetworkAccessConfiguration")
+		ok.Boolean(*v.RemoveNetworkAccessConfiguration)
 	}
 
 	if v.RemoveVpcConfiguration != nil {
@@ -1516,6 +1535,27 @@ func awsRestjson1_serializeDocumentIdpMetadata(v types.IdpMetadata, value smithy
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNetworkAccessConfiguration(v *types.NetworkAccessConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PrefixListIds != nil {
+		ok := object.Key("prefixListIds")
+		if err := awsRestjson1_serializeDocumentPrefixListIds(v.PrefixListIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpceIds != nil {
+		ok := object.Key("vpceIds")
+		if err := awsRestjson1_serializeDocumentVpceIds(v.VpceIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNotificationDestinationsList(v []types.NotificationDestinationType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1528,6 +1568,17 @@ func awsRestjson1_serializeDocumentNotificationDestinationsList(v []types.Notifi
 }
 
 func awsRestjson1_serializeDocumentOrganizationalUnitList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrefixListIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -1728,5 +1779,16 @@ func awsRestjson1_serializeDocumentVpcConfiguration(v *types.VpcConfiguration, v
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpceIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// An auto-complete API for the search functionality in the Amazon SageMaker
-// console. It returns suggestions of possible matches for the property name to use
-// in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
+// An auto-complete API for the search functionality in the SageMaker console. It
+// returns suggestions of possible matches for the property name to use in Search
+// queries. Provides suggestions for HyperParameters, Tags, and Metrics.
 func (c *Client) GetSearchSuggestions(ctx context.Context, params *GetSearchSuggestionsInput, optFns ...func(*Options)) (*GetSearchSuggestionsOutput, error) {
 	if params == nil {
 		params = &GetSearchSuggestionsInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetSearchSuggestions(ctx context.Context, params *GetSearchSugg
 
 type GetSearchSuggestionsInput struct {
 
-	// The name of the Amazon SageMaker resource to search for.
+	// The name of the SageMaker resource to search for.
 	//
 	// This member is required.
 	Resource types.ResourceType

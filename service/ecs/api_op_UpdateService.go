@@ -105,7 +105,7 @@ import (
 // for this service.
 //
 // You must have a service-linked role when you update any of
-// the following service properties. If you specified a custom IAM role when you
+// the following service properties. If you specified a custom role when you
 // created the service, Amazon ECS automatically replaces the roleARN
 // (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn)
 // associated with the service with the ARN of your service-linked role. For more

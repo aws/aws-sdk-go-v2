@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves an Amazon GuardDuty detector specified by the detectorId.
+// Retrieves an Amazon GuardDuty detector specified by the detectorId. There might
+// be regional differences because some data sources might not be available in all
+// the Amazon Web Services Regions where GuardDuty is presently supported. For more
+// information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) GetDetector(ctx context.Context, params *GetDetectorInput, optFns ...func(*Options)) (*GetDetectorOutput, error) {
 	if params == nil {
 		params = &GetDetectorInput{}
@@ -53,7 +57,12 @@ type GetDetectorOutput struct {
 	CreatedAt *string
 
 	// Describes which data sources are enabled for the detector.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.DataSourceConfigurationsResult
+
+	// Describes the features that have been enabled for the detector.
+	Features []types.DetectorFeatureConfigurationResult
 
 	// The publishing frequency of the finding.
 	FindingPublishingFrequency types.FindingPublishingFrequency

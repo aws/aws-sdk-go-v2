@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies an account setting for all IAM users on an account for whom no
-// individual account setting has been specified. Account settings are set on a
-// per-Region basis.
+// Modifies an account setting for all users on an account for whom no individual
+// account setting has been specified. Account settings are set on a per-Region
+// basis.
 func (c *Client) PutAccountSettingDefault(ctx context.Context, params *PutAccountSettingDefaultInput, optFns ...func(*Options)) (*PutAccountSettingDefaultOutput, error) {
 	if params == nil {
 		params = &PutAccountSettingDefaultInput{}

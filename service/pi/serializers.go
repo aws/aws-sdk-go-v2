@@ -631,6 +631,11 @@ func awsAwsjson11_serializeOpDocumentGetResourceMetricsInput(v *GetResourceMetri
 		ok.String(*v.NextToken)
 	}
 
+	if len(v.PeriodAlignment) > 0 {
+		ok := object.Key("PeriodAlignment")
+		ok.String(string(v.PeriodAlignment))
+	}
+
 	if v.PeriodInSeconds != nil {
 		ok := object.Key("PeriodInSeconds")
 		ok.Integer(*v.PeriodInSeconds)

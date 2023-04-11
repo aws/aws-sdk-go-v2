@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the details of the specified SIP media application.
 func (c *Client) UpdateSipMediaApplication(ctx context.Context, params *UpdateSipMediaApplicationInput, optFns ...func(*Options)) (*UpdateSipMediaApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateSipMediaApplicationInput{}
@@ -28,17 +29,23 @@ func (c *Client) UpdateSipMediaApplication(ctx context.Context, params *UpdateSi
 
 type UpdateSipMediaApplicationInput struct {
 
+	// The SIP media application ID.
+	//
 	// This member is required.
 	SipMediaApplicationId *string
 
+	// The new set of endpoints for the specified SIP media application.
 	Endpoints []types.SipMediaApplicationEndpoint
 
+	// The new name for the specified SIP media application.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
 type UpdateSipMediaApplicationOutput struct {
+
+	// The updated SIP media application’s details.
 	SipMediaApplication *types.SipMediaApplication
 
 	// Metadata pertaining to the operation's result.

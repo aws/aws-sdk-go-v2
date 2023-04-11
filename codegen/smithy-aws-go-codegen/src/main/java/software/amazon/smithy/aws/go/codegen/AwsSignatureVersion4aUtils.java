@@ -51,15 +51,15 @@ public final class AwsSignatureVersion4aUtils {
                          if o.$fieldName:L == nil {
                              return
                          }
-                         
+
                          if _, ok := o.$fieldName:L.($credType:T); ok {
                              return
                          }
-                         
+
                          if $isProvider:T(o.$fieldName:L, ($anonType:P)(nil)) {
                             return
                          }
-                         
+
                          o.$fieldName:L = &$adapType:T{SymmetricProvider: o.$fieldName:L}
                      }
                      """);
@@ -165,7 +165,7 @@ public final class AwsSignatureVersion4aUtils {
                              V4aSigner: o.$v4aSigner:L,
                              LogSigning: o.$logMode:L.IsSigning(),
                          })
-                         
+
                          return $registerMiddleware:T(stack, mw)
                      }
                      """);

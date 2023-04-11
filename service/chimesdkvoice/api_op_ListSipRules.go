@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the SIP rules under the administrator's AWS account.
 func (c *Client) ListSipRules(ctx context.Context, params *ListSipRulesInput, optFns ...func(*Options)) (*ListSipRulesOutput, error) {
 	if params == nil {
 		params = &ListSipRulesInput{}
@@ -28,18 +29,25 @@ func (c *Client) ListSipRules(ctx context.Context, params *ListSipRulesInput, op
 }
 
 type ListSipRulesInput struct {
+
+	// The maximum number of results to return in a single call. Defaults to 100.
 	MaxResults *int32
 
+	// The token used to return the next page of results.
 	NextToken *string
 
+	// The SIP media application ID.
 	SipMediaApplicationId *string
 
 	noSmithyDocumentSerde
 }
 
 type ListSipRulesOutput struct {
+
+	// The token used to return the next page of results.
 	NextToken *string
 
+	// The list of SIP rules and details.
 	SipRules []types.SipRule
 
 	// Metadata pertaining to the operation's result.
@@ -117,6 +125,7 @@ var _ ListSipRulesAPIClient = (*Client)(nil)
 
 // ListSipRulesPaginatorOptions is the paginator options for ListSipRules
 type ListSipRulesPaginatorOptions struct {
+	// The maximum number of results to return in a single call. Defaults to 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

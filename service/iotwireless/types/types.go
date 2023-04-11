@@ -145,7 +145,7 @@ type CdmaObj struct {
 	// CDMA base station latitude in degrees.
 	BaseLat *float32
 
-	// CDMA base station longtitude in degrees.
+	// CDMA base station longitude in degrees.
 	BaseLng *float32
 
 	// CDMA local identification (local ID) parameters.
@@ -221,6 +221,31 @@ type ConnectionStatusResourceTypeEventConfiguration struct {
 	// Connection status resource type event configuration object for enabling or
 	// disabling LoRaWAN related event topics.
 	LoRaWAN *LoRaWANConnectionStatusResourceTypeEventConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The device attestation key (DAK) information.
+type DakCertificateMetadata struct {
+
+	// The certificate ID for the DAK.
+	//
+	// This member is required.
+	CertificateId *string
+
+	// The advertised product ID (APID) that's used for pre-production and production
+	// applications.
+	ApId *string
+
+	// The device type ID that's used for prototyping applications.
+	DeviceTypeId *string
+
+	// Whether factory support has been enabled.
+	FactorySupport *bool
+
+	// The maximum number of signatures that the DAK can sign. A value of -1 indicates
+	// that there's no device limit.
+	MaxAllowedSignature *int32
 
 	noSmithyDocumentSerde
 }
@@ -435,7 +460,7 @@ type Gnss struct {
 	AssistAltitude *float32
 
 	// Optional assistance position information, specified using latitude and longitude
-	// values in degrees. The co-ordinates are inside the WGS84 reference frame.
+	// values in degrees. The coordinates are inside the WGS84 reference frame.
 	AssistPosition []float32
 
 	// Optional parameter that gives an estimate of the time when the GNSS scan
@@ -531,6 +556,34 @@ type GsmObj struct {
 	// Rx level, which is the received signal power, measured in dBm
 	// (decibel-milliwatts).
 	RxLevel *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about a Sidewalk device that has been added to an import task.
+type ImportedSidewalkDevice struct {
+
+	// The time at which the status information was last updated.
+	LastUpdateTime *time.Time
+
+	// The onboarding status of the Sidewalk device in the import task.
+	OnboardingStatus OnboardStatus
+
+	// The reason for the onboarding status information for the Sidewalk device.
+	OnboardingStatusReason *string
+
+	// The Sidewalk manufacturing serial number (SMSN) of the Sidewalk device.
+	SidewalkManufacturingSn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a wireless device that has been added to an import task.
+type ImportedWirelessDevice struct {
+
+	// The Sidewalk-related information about a device that has been added to an import
+	// task.
+	Sidewalk *ImportedSidewalkDevice
 
 	noSmithyDocumentSerde
 }
@@ -1430,20 +1483,46 @@ type SidewalkAccountInfoWithFingerprint struct {
 	noSmithyDocumentSerde
 }
 
+// Sidewalk object for creating a device profile.
+type SidewalkCreateDeviceProfile struct {
+	noSmithyDocumentSerde
+}
+
+// Sidewalk object for creating a wireless device.
+type SidewalkCreateWirelessDevice struct {
+
+	// The ID of the Sidewalk device profile.
+	DeviceProfileId *string
+
+	noSmithyDocumentSerde
+}
+
 // Sidewalk device object.
 type SidewalkDevice struct {
 
 	// The Sidewalk Amazon ID.
 	AmazonId *string
 
+	// The ID of the Sidewalk device profile.
+	CertificateId *string
+
 	// The sidewalk device certificates for Ed25519 and P256r1.
 	DeviceCertificates []CertificateList
+
+	// The ID of the Sidewalk device profile.
+	DeviceProfileId *string
+
+	// The Sidewalk device private keys that will be used for onboarding the device.
+	PrivateKeys []CertificateList
 
 	// The sidewalk device identification.
 	SidewalkId *string
 
 	// The Sidewalk manufacturing series number.
 	SidewalkManufacturingSn *string
+
+	// The Sidewalk device status, such as provisioned or registered.
+	Status WirelessDeviceSidewalkStatus
 
 	noSmithyDocumentSerde
 }
@@ -1476,6 +1555,35 @@ type SidewalkEventNotificationConfigurations struct {
 	noSmithyDocumentSerde
 }
 
+// Gets information about a Sidewalk device profile.
+type SidewalkGetDeviceProfile struct {
+
+	// The Sidewalk application server public key.
+	ApplicationServerPublicKey *string
+
+	// The DAK certificate information of the Sidewalk device profile.
+	DakCertificateMetadata []DakCertificateMetadata
+
+	// Gets information about the certification status of a Sidewalk device profile.
+	QualificationStatus *bool
+
+	noSmithyDocumentSerde
+}
+
+// Sidewalk-related information for devices in an import task that are being
+// onboarded.
+type SidewalkGetStartImportInfo struct {
+
+	// List of Sidewalk devices that are added to the import task.
+	DeviceCreationFileList []string
+
+	// The IAM role that allows AWS IoT Wireless to access the CSV file in the S3
+	// bucket.
+	Role *string
+
+	noSmithyDocumentSerde
+}
+
 // Sidewalk object used by list functions.
 type SidewalkListDevice struct {
 
@@ -1485,11 +1593,17 @@ type SidewalkListDevice struct {
 	// The sidewalk device certificates for Ed25519 and P256r1.
 	DeviceCertificates []CertificateList
 
+	// Sidewalk object used by list functions.
+	DeviceProfileId *string
+
 	// The sidewalk device identification.
 	SidewalkId *string
 
 	// The Sidewalk manufacturing series number.
 	SidewalkManufacturingSn *string
+
+	// The status of the Sidewalk devices, such as provisioned or registered.
+	Status WirelessDeviceSidewalkStatus
 
 	noSmithyDocumentSerde
 }
@@ -1519,11 +1633,45 @@ type SidewalkSendDataToDevice struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an import task created for an individual Sidewalk device.
+type SidewalkSingleStartImportInfo struct {
+
+	// The Sidewalk manufacturing serial number (SMSN) of the device added to the
+	// import task.
+	SidewalkManufacturingSn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an import task created for bulk provisioning.
+type SidewalkStartImportInfo struct {
+
+	// The CSV file contained in an S3 bucket that's used for adding devices to an
+	// import task.
+	DeviceCreationFile *string
+
+	// The IAM role that allows AWS IoT Wireless to access the CSV file in the S3
+	// bucket.
+	Role *string
+
+	noSmithyDocumentSerde
+}
+
 // Sidewalk update.
 type SidewalkUpdateAccount struct {
 
 	// The new Sidewalk application server private key.
 	AppServerPrivateKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Sidewalk object information for updating an import task.
+type SidewalkUpdateImportInfo struct {
+
+	// The CSV file contained in an S3 bucket that's used for appending devices to an
+	// existing import task.
+	DeviceCreationFile *string
 
 	noSmithyDocumentSerde
 }
@@ -1795,7 +1943,7 @@ type WiFiAccessPoint struct {
 	// This member is required.
 	MacAddress *string
 
-	// Recived signal strength of the WLAN measurement data.
+	// Received signal strength (dBm) of the WLAN measurement data.
 	//
 	// This member is required.
 	Rss *int32
@@ -1821,6 +1969,51 @@ type WirelessDeviceEventLogOption struct {
 	//
 	// This member is required.
 	LogLevel LogLevel
+
+	noSmithyDocumentSerde
+}
+
+// Information about an import task for wireless devices.
+type WirelessDeviceImportTask struct {
+
+	// The ARN (Amazon Resource Name) of the wireless device import task.
+	Arn *string
+
+	// The time at which the import task was created.
+	CreationTime *time.Time
+
+	// The name of the Sidewalk destination that that describes the IoT rule to route
+	// messages from the device in the import task that will be onboarded to AWS IoT
+	// Wireless
+	DestinationName *string
+
+	// The summary information of count of wireless devices in an import task that
+	// failed to onboarded to the import task.
+	FailedImportedDeviceCount *int64
+
+	// The ID of the wireless device import task.
+	Id *string
+
+	// The summary information of count of wireless devices that are waiting for the
+	// control log to be added to an import task.
+	InitializedImportedDeviceCount *int64
+
+	// The summary information of count of wireless devices in an import task that have
+	// been onboarded to the import task.
+	OnboardedImportedDeviceCount *int64
+
+	// The summary information of count of wireless devices in an import task that are
+	// waiting in the queue to be onboarded.
+	PendingImportedDeviceCount *int64
+
+	// The Sidewalk-related information of the wireless device import task.
+	Sidewalk *SidewalkGetStartImportInfo
+
+	// The status information of the wireless device import task.
+	Status ImportTaskStatus
+
+	// The reason that provides additional information about the import task status.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }

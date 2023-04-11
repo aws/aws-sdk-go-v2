@@ -85,4 +85,35 @@ type ContactInformation struct {
 	noSmithyDocumentSerde
 }
 
+// This is a structure that expresses the Region for a given account, consisting of
+// a name and opt-in status.
+type Region struct {
+
+	// The Region code of a given Region (for example, us-east-1).
+	RegionName *string
+
+	// One of potential statuses a Region can undergo (Enabled, Enabling, Disabled,
+	// Disabling, Enabled_By_Default).
+	RegionOptStatus RegionOptStatus
+
+	noSmithyDocumentSerde
+}
+
+// The input failed to meet the constraints specified by the Amazon Web Services
+// service in a specified field.
+type ValidationExceptionField struct {
+
+	// A message about the validation exception.
+	//
+	// This member is required.
+	Message *string
+
+	// The field name where the invalid entry was detected.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

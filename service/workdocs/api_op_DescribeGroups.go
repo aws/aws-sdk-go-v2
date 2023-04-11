@@ -4,6 +4,7 @@ package workdocs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
@@ -35,8 +36,8 @@ type DescribeGroupsInput struct {
 	// This member is required.
 	SearchQuery *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The maximum number of items to return with this call.
@@ -128,6 +129,96 @@ func (c *Client) addOperationDescribeGroupsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// DescribeGroupsAPIClient is a client that implements the DescribeGroups
+// operation.
+type DescribeGroupsAPIClient interface {
+	DescribeGroups(context.Context, *DescribeGroupsInput, ...func(*Options)) (*DescribeGroupsOutput, error)
+}
+
+var _ DescribeGroupsAPIClient = (*Client)(nil)
+
+// DescribeGroupsPaginatorOptions is the paginator options for DescribeGroups
+type DescribeGroupsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeGroupsPaginator is a paginator for DescribeGroups
+type DescribeGroupsPaginator struct {
+	options   DescribeGroupsPaginatorOptions
+	client    DescribeGroupsAPIClient
+	params    *DescribeGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeGroupsPaginator returns a new DescribeGroupsPaginator
+func NewDescribeGroupsPaginator(client DescribeGroupsAPIClient, params *DescribeGroupsInput, optFns ...func(*DescribeGroupsPaginatorOptions)) *DescribeGroupsPaginator {
+	if params == nil {
+		params = &DescribeGroupsInput{}
+	}
+
+	options := DescribeGroupsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeGroups page.
+func (p *DescribeGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeGroups(region string) *awsmiddleware.RegisterServiceMetadata {

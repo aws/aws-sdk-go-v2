@@ -1015,8 +1015,9 @@ type TaskDefinitionStatus string
 
 // Enum values for TaskDefinitionStatus
 const (
-	TaskDefinitionStatusActive   TaskDefinitionStatus = "ACTIVE"
-	TaskDefinitionStatusInactive TaskDefinitionStatus = "INACTIVE"
+	TaskDefinitionStatusActive           TaskDefinitionStatus = "ACTIVE"
+	TaskDefinitionStatusInactive         TaskDefinitionStatus = "INACTIVE"
+	TaskDefinitionStatusDeleteInProgress TaskDefinitionStatus = "DELETE_IN_PROGRESS"
 )
 
 // Values returns all known values for TaskDefinitionStatus. Note that this can be
@@ -1026,6 +1027,7 @@ func (TaskDefinitionStatus) Values() []TaskDefinitionStatus {
 	return []TaskDefinitionStatus{
 		"ACTIVE",
 		"INACTIVE",
+		"DELETE_IN_PROGRESS",
 	}
 }
 

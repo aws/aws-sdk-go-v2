@@ -1110,6 +1110,69 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketPolicyInput(v *DeleteBucketPo
 	return nil
 }
 
+type awsRestxml_serializeOpDeleteBucketReplication struct {
+}
+
+func (*awsRestxml_serializeOpDeleteBucketReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpDeleteBucketReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteBucketReplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/bucket/{Bucket}/replication")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsDeleteBucketReplicationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsDeleteBucketReplicationInput(v *DeleteBucketReplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpDeleteBucketTagging struct {
 }
 
@@ -2252,6 +2315,69 @@ func (m *awsRestxml_serializeOpGetBucketPolicy) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestxml_serializeOpHttpBindingsGetBucketPolicyInput(v *GetBucketPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpGetBucketReplication struct {
+}
+
+func (*awsRestxml_serializeOpGetBucketReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetBucketReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetBucketReplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/bucket/{Bucket}/replication")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetBucketReplicationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetBucketReplicationInput(v *GetBucketReplicationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3759,6 +3885,93 @@ func awsRestxml_serializeOpDocumentPutBucketPolicyInput(v *PutBucketPolicyInput,
 	return nil
 }
 
+type awsRestxml_serializeOpPutBucketReplication struct {
+}
+
+func (*awsRestxml_serializeOpPutBucketReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpPutBucketReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutBucketReplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/bucket/{Bucket}/replication")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsPutBucketReplicationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.ReplicationConfiguration != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ReplicationConfiguration",
+			},
+			Attr: payloadRootAttr,
+		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
+		if err := awsRestxml_serializeDocumentReplicationConfiguration(input.ReplicationConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsPutBucketReplicationInput(v *PutBucketReplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpPutBucketTagging struct {
 }
 
@@ -4680,6 +4893,22 @@ func awsRestxml_serializeDocumentAbortIncompleteMultipartUpload(v *types.AbortIn
 	return nil
 }
 
+func awsRestxml_serializeDocumentAccessControlTranslation(v *types.AccessControlTranslation, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.Owner) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Owner",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Owner))
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentAccountLevel(v *types.AccountLevel, value smithyxml.Value) error {
 	defer value.Close()
 	if v.ActivityMetrics != nil {
@@ -4989,6 +5218,22 @@ func awsRestxml_serializeDocumentCreateMultiRegionAccessPointInput(v *types.Crea
 	return nil
 }
 
+func awsRestxml_serializeDocumentDeleteMarkerReplication(v *types.DeleteMarkerReplication, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentDeleteMultiRegionAccessPointInput(v *types.DeleteMultiRegionAccessPointInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Name != nil {
@@ -5005,6 +5250,96 @@ func awsRestxml_serializeDocumentDeleteMultiRegionAccessPointInput(v *types.Dele
 	return nil
 }
 
+func awsRestxml_serializeDocumentDestination(v *types.Destination, value smithyxml.Value) error {
+	defer value.Close()
+	if v.AccessControlTranslation != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AccessControlTranslation",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentAccessControlTranslation(v.AccessControlTranslation, el); err != nil {
+			return err
+		}
+	}
+	if v.Account != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Account",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Account)
+	}
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	if v.EncryptionConfiguration != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EncryptionConfiguration",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, el); err != nil {
+			return err
+		}
+	}
+	if v.Metrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Metrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentMetrics(v.Metrics, el); err != nil {
+			return err
+		}
+	}
+	if v.ReplicationTime != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ReplicationTime",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentReplicationTime(v.ReplicationTime, el); err != nil {
+			return err
+		}
+	}
+	if len(v.StorageClass) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "StorageClass",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.StorageClass))
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentDetailedStatusCodesMetrics(v *types.DetailedStatusCodesMetrics, value smithyxml.Value) error {
 	defer value.Close()
 	if v.IsEnabled {
@@ -5017,6 +5352,22 @@ func awsRestxml_serializeDocumentDetailedStatusCodesMetrics(v *types.DetailedSta
 		}
 		el := value.MemberElement(root)
 		el.Boolean(v.IsEnabled)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentEncryptionConfiguration(v *types.EncryptionConfiguration, value smithyxml.Value) error {
+	defer value.Close()
+	if v.ReplicaKmsKeyID != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ReplicaKmsKeyID",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ReplicaKmsKeyID)
 	}
 	return nil
 }
@@ -5048,6 +5399,22 @@ func awsRestxml_serializeDocumentExclude(v *types.Exclude, value smithyxml.Value
 		if err := awsRestxml_serializeDocumentRegions(v.Regions, el); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentExistingObjectReplication(v *types.ExistingObjectReplication, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
 	}
 	return nil
 }
@@ -5795,6 +6162,35 @@ func awsRestxml_serializeDocumentLifecycleRules(v []types.LifecycleRule, value s
 	return nil
 }
 
+func awsRestxml_serializeDocumentMetrics(v *types.Metrics, value smithyxml.Value) error {
+	defer value.Close()
+	if v.EventThreshold != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EventThreshold",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentReplicationTimeValue(v.EventThreshold, el); err != nil {
+			return err
+		}
+	}
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentMultiRegionAccessPointRoute(v *types.MultiRegionAccessPointRoute, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Bucket != nil {
@@ -6214,6 +6610,17 @@ func awsRestxml_serializeDocumentRegion(v *types.Region, value smithyxml.Value) 
 		el := value.MemberElement(root)
 		el.String(*v.Bucket)
 	}
+	if v.BucketAccountId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "BucketAccountId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.BucketAccountId)
+	}
 	return nil
 }
 
@@ -6259,6 +6666,269 @@ func awsRestxml_serializeDocumentRegions(v []string, value smithyxml.Value) erro
 	return nil
 }
 
+func awsRestxml_serializeDocumentReplicaModifications(v *types.ReplicaModifications, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentReplicationConfiguration(v *types.ReplicationConfiguration, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Role != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Role",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Role)
+	}
+	if v.Rules != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Rules",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentReplicationRules(v.Rules, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentReplicationRule(v *types.ReplicationRule, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	if v.DeleteMarkerReplication != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DeleteMarkerReplication",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentDeleteMarkerReplication(v.DeleteMarkerReplication, el); err != nil {
+			return err
+		}
+	}
+	if v.Destination != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Destination",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentDestination(v.Destination, el); err != nil {
+			return err
+		}
+	}
+	if v.ExistingObjectReplication != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ExistingObjectReplication",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentExistingObjectReplication(v.ExistingObjectReplication, el); err != nil {
+			return err
+		}
+	}
+	if v.Filter != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Filter",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentReplicationRuleFilter(v.Filter, el); err != nil {
+			return err
+		}
+	}
+	if v.ID != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ID",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ID)
+	}
+	if v.Prefix != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Prefix",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Prefix)
+	}
+	if v.Priority != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Priority",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.Priority)
+	}
+	if v.SourceSelectionCriteria != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SourceSelectionCriteria",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentSourceSelectionCriteria(v.SourceSelectionCriteria, el); err != nil {
+			return err
+		}
+	}
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentReplicationRuleAndOperator(v *types.ReplicationRuleAndOperator, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Prefix != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Prefix",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Prefix)
+	}
+	if v.Tags != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Tags",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3TagSet(v.Tags, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentReplicationRuleFilter(v *types.ReplicationRuleFilter, value smithyxml.Value) error {
+	defer value.Close()
+	if v.And != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "And",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentReplicationRuleAndOperator(v.And, el); err != nil {
+			return err
+		}
+	}
+	if v.Prefix != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Prefix",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Prefix)
+	}
+	if v.Tag != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Tag",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3Tag(v.Tag, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentReplicationRules(v []types.ReplicationRule, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "Rule",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentReplicationRule(&v[i], am); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentReplicationStatusFilterList(v []types.ReplicationStatus, value smithyxml.Value) error {
 	var array *smithyxml.Array
 	if !value.IsFlattened() {
@@ -6268,6 +6938,51 @@ func awsRestxml_serializeDocumentReplicationStatusFilterList(v []types.Replicati
 	for i := range v {
 		am := array.Member()
 		am.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentReplicationTime(v *types.ReplicationTime, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
+	}
+	if v.Time != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Time",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentReplicationTimeValue(v.Time, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentReplicationTimeValue(v *types.ReplicationTimeValue, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Minutes != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Minutes",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.Minutes)
 	}
 	return nil
 }
@@ -7283,6 +7998,37 @@ func awsRestxml_serializeDocumentSelectionCriteria(v *types.SelectionCriteria, v
 	return nil
 }
 
+func awsRestxml_serializeDocumentSourceSelectionCriteria(v *types.SourceSelectionCriteria, value smithyxml.Value) error {
+	defer value.Close()
+	if v.ReplicaModifications != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ReplicaModifications",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentReplicaModifications(v.ReplicaModifications, el); err != nil {
+			return err
+		}
+	}
+	if v.SseKmsEncryptedObjects != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SseKmsEncryptedObjects",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentSseKmsEncryptedObjects(v.SseKmsEncryptedObjects, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentSSEKMS(v *types.SSEKMS, value smithyxml.Value) error {
 	defer value.Close()
 	if v.KeyId != nil {
@@ -7295,6 +8041,22 @@ func awsRestxml_serializeDocumentSSEKMS(v *types.SSEKMS, value smithyxml.Value) 
 		}
 		el := value.MemberElement(root)
 		el.String(*v.KeyId)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentSseKmsEncryptedObjects(v *types.SseKmsEncryptedObjects, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
 	}
 	return nil
 }

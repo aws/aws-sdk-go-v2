@@ -13,7 +13,7 @@ import (
 
 // This API is in preview release for Amazon Connect and is subject to change.
 // Allows the specified Amazon Connect instance to access the specified Amazon Lex
-// bot.
+// V1 bot. This API only supports the association of Amazon Lex V1 bots.
 func (c *Client) AssociateLexBot(ctx context.Context, params *AssociateLexBotInput, optFns ...func(*Options)) (*AssociateLexBotOutput, error) {
 	if params == nil {
 		params = &AssociateLexBotInput{}
@@ -31,8 +31,9 @@ func (c *Client) AssociateLexBot(ctx context.Context, params *AssociateLexBotInp
 
 type AssociateLexBotInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string

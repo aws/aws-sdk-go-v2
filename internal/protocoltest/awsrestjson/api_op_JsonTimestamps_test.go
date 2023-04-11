@@ -77,6 +77,25 @@ func TestClient_JsonTimestamps_awsRestjson1Serialize(t *testing.T) {
 			}`))
 			},
 		},
+		// Ensures that the timestampFormat of date-time on the target shape works like
+		// normal timestamps
+		"RestJsonJsonTimestampsWithDateTimeOnTargetFormat": {
+			Params: &JsonTimestampsInput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "dateTimeOnTarget": "2014-04-29T18:30:38Z"
+			}`))
+			},
+		},
 		// Ensures that the timestampFormat of epoch-seconds works
 		"RestJsonJsonTimestampsWithEpochSecondsFormat": {
 			Params: &JsonTimestampsInput{
@@ -95,6 +114,24 @@ func TestClient_JsonTimestamps_awsRestjson1Serialize(t *testing.T) {
 			}`))
 			},
 		},
+		// Ensures that the timestampFormat of epoch-seconds on the target shape works
+		"RestJsonJsonTimestampsWithEpochSecondsOnTargetFormat": {
+			Params: &JsonTimestampsInput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "epochSecondsOnTarget": 1398796238
+			}`))
+			},
+		},
 		// Ensures that the timestampFormat of http-date works
 		"RestJsonJsonTimestampsWithHttpDateFormat": {
 			Params: &JsonTimestampsInput{
@@ -110,6 +147,24 @@ func TestClient_JsonTimestamps_awsRestjson1Serialize(t *testing.T) {
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
 			    "httpDate": "Tue, 29 Apr 2014 18:30:38 GMT"
+			}`))
+			},
+		},
+		// Ensures that the timestampFormat of http-date on the target shape works
+		"RestJsonJsonTimestampsWithHttpDateOnTargetFormat": {
+			Params: &JsonTimestampsInput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonTimestamps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "httpDateOnTarget": "Tue, 29 Apr 2014 18:30:38 GMT"
 			}`))
 			},
 		},
@@ -227,6 +282,21 @@ func TestClient_JsonTimestamps_awsRestjson1Deserialize(t *testing.T) {
 				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
+		// Ensures that the timestampFormat of date-time on the target shape works like
+		// normal timestamps
+		"RestJsonJsonTimestampsWithDateTimeOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "dateTimeOnTarget": "2014-04-29T18:30:38Z"
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
 		// Ensures that the timestampFormat of epoch-seconds works
 		"RestJsonJsonTimestampsWithEpochSecondsFormat": {
 			StatusCode: 200,
@@ -241,6 +311,20 @@ func TestClient_JsonTimestamps_awsRestjson1Deserialize(t *testing.T) {
 				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
+		// Ensures that the timestampFormat of epoch-seconds on the target shape works
+		"RestJsonJsonTimestampsWithEpochSecondsOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "epochSecondsOnTarget": 1398796238
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
 		// Ensures that the timestampFormat of http-date works
 		"RestJsonJsonTimestampsWithHttpDateFormat": {
 			StatusCode: 200,
@@ -253,6 +337,20 @@ func TestClient_JsonTimestamps_awsRestjson1Deserialize(t *testing.T) {
 			}`),
 			ExpectResult: &JsonTimestampsOutput{
 				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		// Ensures that the timestampFormat of http-date on the target shape works
+		"RestJsonJsonTimestampsWithHttpDateOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "httpDateOnTarget": "Tue, 29 Apr 2014 18:30:38 GMT"
+			}`),
+			ExpectResult: &JsonTimestampsOutput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
 	}

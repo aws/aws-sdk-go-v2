@@ -14,8 +14,8 @@ import (
 
 // Creates a channel to which you can add users and send messages. Restriction: You
 // can't change a channel's privacy. The x-amz-chime-bearer request header is
-// mandatory. Use the AppInstanceUserArn of the user that makes the API call as the
-// value in the header.
+// mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the
+// API call as the value in the header.
 func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, optFns ...func(*Options)) (*CreateChannelOutput, error) {
 	if params == nil {
 		params = &CreateChannelInput{}
@@ -38,7 +38,7 @@ type CreateChannelInput struct {
 	// This member is required.
 	AppInstanceArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -59,6 +59,10 @@ type CreateChannelInput struct {
 	// The attributes required to configure and create an elastic channel. An elastic
 	// channel can support a maximum of 1-million users, excluding moderators.
 	ElasticChannelConfiguration *types.ElasticChannelConfiguration
+
+	// Settings that control the interval after which the channel is automatically
+	// deleted.
+	ExpirationSettings *types.ExpirationSettings
 
 	// The ARNs of the channel members in the request.
 	MemberArns []string

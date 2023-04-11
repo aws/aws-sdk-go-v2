@@ -1087,12 +1087,9 @@ type TargetGroupAttribute struct {
 	//
 	// *
 	// target_group_health.unhealthy_state_routing.minimum_healthy_targets.count - The
-	// minimum number of targets that must be healthy.
-	//
-	// If the number of healthy
-	// targets is below this value, send traffic to all targets, including unhealthy
-	// targets. The possible values are 1 to the maximum number of targets. The default
-	// is 1.
+	// minimum number of targets that must be healthy. If the number of healthy targets
+	// is below this value, send traffic to all targets, including unhealthy targets.
+	// The possible values are 1 to the maximum number of targets. The default is 1.
 	//
 	// *
 	// target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage -

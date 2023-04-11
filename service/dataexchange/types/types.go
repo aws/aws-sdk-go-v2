@@ -954,6 +954,21 @@ type JobError struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the shared S3
+// objects.
+type KmsKeyToGrant struct {
+
+	// The AWS KMS CMK (Key Management System Customer Managed Key) used to encrypt S3
+	// objects in the shared S3 Bucket. AWS Data exchange will create a KMS grant for
+	// each subscriber to allow them to access and decrypt their entitled data that is
+	// encrypted using this KMS key specified.
+	//
+	// This member is required.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The AWS Lake Formation data permission asset.
 type LakeFormationDataPermissionAsset struct {
 
@@ -1244,6 +1259,11 @@ type S3DataAccessAsset struct {
 	// S3 keys made available using this asset.
 	Keys []string
 
+	// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used
+	// to encrypt S3 objects being shared in this S3 Data Access asset. Providers must
+	// include all AWS KMS keys used to encrypt these shared S3 objects.
+	KmsKeysToGrant []KmsKeyToGrant
+
 	// The automatically-generated bucket-style alias for your Amazon S3 Access Point.
 	// Customers can access their entitled data using the S3 Access Point alias.
 	S3AccessPointAlias *string
@@ -1268,6 +1288,10 @@ type S3DataAccessAssetSourceEntry struct {
 
 	// The keys used to create the Amazon S3 data access.
 	Keys []string
+
+	// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used
+	// to encrypt S3 objects being shared in this S3 Data Access asset.
+	KmsKeysToGrant []KmsKeyToGrant
 
 	noSmithyDocumentSerde
 }

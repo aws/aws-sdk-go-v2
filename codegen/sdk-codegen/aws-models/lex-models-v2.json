@@ -354,7 +354,7 @@
                 "s3Bucket": {
                     "target": "com.amazonaws.lexmodelsv2#S3BucketLogDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the audio log files are stored. The IAM\n         role specified in the <code>roleArn</code> parameter of the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation must have permission to write to this\n         bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the audio log files are stored. The IAM\n         role specified in the <code>roleArn</code> parameter of the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html\">CreateBot</a> operation must have permission to write to this\n         bucket.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -456,7 +456,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Batch create custom vocabulary item for the specified locale in the \n         specified bot.</p>",
+                "smithy.api#documentation": "<p>Create a batch of custom vocabulary items for a given bot locale's \n         custom vocabulary.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchcreate",
@@ -470,7 +470,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to batch create the custom\n         vocabulary item for.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the bot associated with this custom vocabulary.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -478,7 +478,7 @@
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#BotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bot version of the bot to batch create the custom\n         vocabulary item for.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the version of the bot associated with this \n         custom vocabulary.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -486,7 +486,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique locale identifier of the bot to batch create the custom\n         vocabulary item for.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this custom vocabulary \n         is used. The string must match one of the supported locales. For more \n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\"> Supported Languages </a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -494,7 +494,7 @@
                 "customVocabularyItemList": {
                     "target": "com.amazonaws.lexmodelsv2#CreateCustomVocabularyItemsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom vocabulary item list of the bot to batch create the custom\n         vocabulary item for.</p>",
+                        "smithy.api#documentation": "<p>A list of new custom vocabulary items. Each entry must contain a phrase and\n         can optionally contain a displayAs and/or a weight.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -506,31 +506,31 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to batch create response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the bot associated with this custom vocabulary.</p>"
                     }
                 },
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#BotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bot version of the bot to batch create the custom\n         vocabulary item response for.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the version of the bot associated with this \n         custom vocabulary.</p>"
                     }
                 },
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique locale identifier of the bot to batch create the custom\n         vocabulary item response for.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this custom vocabulary is used. \n         The string must match one of the supported locales. \n         For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\"> Supported Languages </a>.</p>"
                     }
                 },
                 "errors": {
                     "target": "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The errors of the action to batch create the custom\n         vocabulary item response for a bot.</p>"
+                        "smithy.api#documentation": "<p>A list of custom vocabulary items that failed to create during the operation.\n         The reason for the error is contained within each error object.</p>"
                     }
                 },
                 "resources": {
                     "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resources of the action to batch create the custom\n         vocabulary item response for a bot.</p>"
+                        "smithy.api#documentation": "<p>A list of custom vocabulary items that were \n         successfully created during the operation.</p>"
                     }
                 }
             }
@@ -561,7 +561,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Batch delete custom vocabulary item for the specified locale in the \n         specified bot.</p>",
+                "smithy.api#documentation": "<p>Delete a batch of custom vocabulary items for a given bot locale's \n         custom vocabulary.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchdelete",
@@ -575,7 +575,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to batch delete request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the bot associated with this custom vocabulary.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -583,7 +583,7 @@
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#BotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the bot to batch delete request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the version of the bot associated with this custom \n         vocabulary.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -591,7 +591,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The locale identifier of the bot to batch delete request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this custom vocabulary is \n         used. The string must match one of the supported locales. \n         For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\"> Supported Languages </a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -599,7 +599,7 @@
                 "customVocabularyItemList": {
                     "target": "com.amazonaws.lexmodelsv2#DeleteCustomVocabularyItemsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom vocabulary list to batch delete request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#documentation": "<p>A list of custom vocabulary items requested to be deleted.\n         Each entry must contain the unique custom vocabulary entry identifier.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -611,31 +611,31 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to batch delete response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the bot associated with this custom vocabulary.</p>"
                     }
                 },
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#BotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the bot to batch delete response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the version of the bot associated with this custom \n         vocabulary.</p>"
                     }
                 },
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The locale identifier of the bot to batch delete response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this custom vocabulary is \n         used. The string must match one of the supported locales. \n         For more information, see Supported \n         languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).</p>"
                     }
                 },
                 "errors": {
                     "target": "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The errors of the action to batch delete response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>A list of custom vocabulary items that failed to delete during the operation.\n         The reason for the error is contained within each error object.</p>"
                     }
                 },
                 "resources": {
                     "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resources of the action to batch delete response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>A list of custom vocabulary items that were \n         successfully deleted during the operation.</p>"
                     }
                 }
             }
@@ -666,7 +666,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Batch update custom vocabulary item for the specified locale in the \n         specified bot.</p>",
+                "smithy.api#documentation": "<p>Update a batch of custom vocabulary items for a given bot locale's custom \n         vocabulary.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchupdate",
@@ -680,7 +680,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to the batch update request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the bot associated with this custom vocabulary</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -688,7 +688,7 @@
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#BotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bot version of the bot to the batch update request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the version of the bot associated with this custom \n         vocabulary.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -696,7 +696,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The locale identifier of the bot to the batch update request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this custom vocabulary \n         is used. The string must match one of the supported locales. For more \n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\"> Supported Languages </a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -704,7 +704,7 @@
                 "customVocabularyItemList": {
                     "target": "com.amazonaws.lexmodelsv2#UpdateCustomVocabularyItemsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom vocabulary item list of the bot to the batch update request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#documentation": "<p>A list of custom vocabulary items with updated fields. Each entry must contain a phrase\n         and can optionally contain a displayAs and/or a weight.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -716,31 +716,31 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to the batch update response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the bot associated with this custom vocabulary.</p>"
                     }
                 },
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#BotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bot version of the bot to the batch update response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the version of the bot associated with this custom \n         vocabulary.</p>"
                     }
                 },
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The locale identifier of the bot to the batch update response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this custom vocabulary \n         is used. The string must match one of the supported locales. For more \n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\"> Supported Languages </a>.</p>"
                     }
                 },
                 "errors": {
                     "target": "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The errors of the action to batch update response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>A list of custom vocabulary items that failed to update during the operation.\n         The reason for the error is contained within each error object.</p>"
                     }
                 },
                 "resources": {
                     "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resources of the action to batch update response for the custom\n         vocabulary item.</p>"
+                        "smithy.api#documentation": "<p>A list of custom vocabulary items that were \n         successfully updated during the operation.</p>"
                     }
                 }
             }
@@ -829,6 +829,16 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#BotAliasName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^(\\bAmazonLexTestAlias\\b|[0-9a-zA-Z][_-]?)+$"
+            }
+        },
         "com.amazonaws.lexmodelsv2#BotAliasStatus": {
             "type": "enum",
             "members": {
@@ -864,7 +874,7 @@
                 "botAliasId": {
                     "target": "com.amazonaws.lexmodelsv2#BotAliasId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot alias. You can use this ID\n         to get detailed information about the alias using the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBotAlias.html\">DescribeBotAlias</a> operation.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot alias. You can use this ID\n         to get detailed information about the alias using the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBotAlias.html\">DescribeBotAlias</a> operation.</p>"
                     }
                 },
                 "botAliasName": {
@@ -905,7 +915,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about bot aliases returned from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotAliases.html\">ListBotAliases</a> operation.</p>"
+                "smithy.api#documentation": "<p>Summary information about bot aliases returned from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotAliases.html\">ListBotAliases</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotAliasSummaryList": {
@@ -973,6 +983,12 @@
                     "traits": {
                         "smithy.api#enumValue": "BotName"
                     }
+                },
+                "BotType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotType"
+                    }
                 }
             }
         },
@@ -990,6 +1006,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EQ"
                     }
+                },
+                "NotEquals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NE"
+                    }
                 }
             }
         },
@@ -1001,7 +1023,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1
+                    "max": 2
                 }
             }
         },
@@ -1351,13 +1373,68 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about bot locales returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotLocales.html\">ListBotLocales</a> operation.</p>"
+                "smithy.api#documentation": "<p>Summary information about bot locales returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotLocales.html\">ListBotLocales</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleSummaryList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lexmodelsv2#BotLocaleSummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotMember": {
+            "type": "structure",
+            "members": {
+                "botMemberId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of a bot that is a member of this network of bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botMemberName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a bot that is a member of this network of bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botMemberAliasId": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias ID of a bot that is a member of this network of bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botMemberAliasName": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias name of a bot that is a member of this network of bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botMemberVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of a bot that is a member of this network of bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A bot that is a member of a network of bots.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotMembers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotMember"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotRecommendationResultStatistics": {
@@ -1582,6 +1659,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Importing"
                     }
+                },
+                "Updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updating"
+                    }
                 }
             }
         },
@@ -1591,7 +1674,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot. Use this ID to get\n         detailed information about the bot with the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBot.html\">DescribeBot</a> operation.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot. Use this ID to get\n         detailed information about the bot with the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBot.html\">DescribeBot</a> operation.</p>"
                     }
                 },
                 "botName": {
@@ -1623,16 +1706,39 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the bot was last updated.</p>"
                     }
+                },
+                "botType": {
+                    "target": "com.amazonaws.lexmodelsv2#BotType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the bot.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about a bot returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBots.html\">ListBots</a> operation.</p>"
+                "smithy.api#documentation": "<p>Summary information about a bot returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBots.html\">ListBots</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotSummaryList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lexmodelsv2#BotSummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotType": {
+            "type": "enum",
+            "members": {
+                "Bot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bot"
+                    }
+                },
+                "BotNetwork": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotNetwork"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotVersion": {
@@ -1742,7 +1848,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about a bot version returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotVersions.html\">ListBotVersions</a> operation.</p>"
+                "smithy.api#documentation": "<p>Summary information about a bot version returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotVersions.html\">ListBotVersions</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotVersionSummaryList": {
@@ -1783,7 +1889,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Builds a bot, its intents, and its slot types into a specific\n         locale. A bot can be built into multiple locales. At runtime the locale\n         is used to choose a specific build of the bot.</p>",
+                "smithy.api#documentation": "<p>Builds a bot, its intents, and its slot types into a specific \n         locale. A bot can be built into multiple locales. At runtime the locale\n         is used to choose a specific build of the bot.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}",
@@ -1797,7 +1903,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the bot to build. The identifier is returned in\n         the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the bot to build. The identifier is returned in\n         the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html\">CreateBot</a> operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1905,7 +2011,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides summary information about a built-in intent for the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInIntents.html\"> ListBuiltInIntents </a> operation.</p>"
+                "smithy.api#documentation": "<p>Provides summary information about a built-in intent for the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInIntents.html\"> ListBuiltInIntents </a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BuiltInIntentSummaryList": {
@@ -1974,7 +2080,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides summary information about a built-in slot type for the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInSlotTypes.html\"> ListBuiltInSlotTypes </a>\n         operation.</p>"
+                "smithy.api#documentation": "<p>Provides summary information about a built-in slot type for the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInSlotTypes.html\"> ListBuiltInSlotTypes </a>\n         operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BuiltInSlotTypeSummaryList": {
@@ -2428,7 +2534,7 @@
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#NumericalBotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the bot that this alias points to. You can use the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_UpdateBotAlias.html\">UpdateBotAlias</a> operation to change the\n         bot version associated with the alias.</p>"
+                        "smithy.api#documentation": "<p>The version of the bot that this alias points to. You can use the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_UpdateBotAlias.html\">UpdateBotAlias</a> operation to change the\n         bot version associated with the alias.</p>"
                     }
                 },
                 "botAliasLocaleSettings": {
@@ -2721,6 +2827,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags to add to the test alias for a bot. You can only add\n         tags when you create a bot. You can't use the <code>UpdateAlias</code>\n         operation to update tags. To update tags on the test alias, use the\n            <code>TagResource</code> operation.</p>"
                     }
+                },
+                "botType": {
+                    "target": "com.amazonaws.lexmodelsv2#BotType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of a bot to create.</p>"
+                    }
+                },
+                "botMembers": {
+                    "target": "com.amazonaws.lexmodelsv2#BotMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of bot members in a network to be created.</p>"
+                    }
                 }
             }
         },
@@ -2766,7 +2884,7 @@
                 "botStatus": {
                     "target": "com.amazonaws.lexmodelsv2#BotStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the current status of the bot. The bot is first in the\n            <code>Creating</code> status. Once the bot is read for use, it\n         changes to the <code>Available</code> status. After the bot is created,\n         you can use the <code>Draft</code> version of the bot.</p>"
+                        "smithy.api#documentation": "<p>Shows the current status of the bot. The bot is first in the\n            <code>Creating</code> status. Once the bot is read for use, it\n         changes to the <code>Available</code> status. After the bot is created,\n         you can use the <code>DRAFT</code> version of the bot.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -2785,6 +2903,18 @@
                     "target": "com.amazonaws.lexmodelsv2#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags associated with the test alias for the bot.</p>"
+                    }
+                },
+                "botType": {
+                    "target": "com.amazonaws.lexmodelsv2#BotType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of a bot that was created.</p>"
+                    }
+                },
+                "botMembers": {
+                    "target": "com.amazonaws.lexmodelsv2#BotMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of bots in a network that was created.</p>"
                     }
                 }
             }
@@ -2991,7 +3121,7 @@
                 "exportStatus": {
                     "target": "com.amazonaws.lexmodelsv2#ExportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>,\n         you can use the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation to get the\n         pre-signed S3 URL link to your exported bot or bot locale.</p>"
+                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>,\n         you can use the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html\">DescribeExport</a> operation to get the\n         pre-signed S3 URL link to your exported bot or bot locale.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -3864,7 +3994,7 @@
                 "importId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for a unique import job. Use it when you call the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_StartImport.html\">StartImport</a> operation.</p>"
+                        "smithy.api#documentation": "<p>An identifier for a unique import job. Use it when you call the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_StartImport.html\">StartImport</a> operation.</p>"
                     }
                 },
                 "uploadUrl": {
@@ -3998,7 +4128,7 @@
                 "displayAs": {
                     "target": "com.amazonaws.lexmodelsv2#Phrase",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display as value for the custom vocabulary item \n         from the custom vocabulary list.</p>"
+                        "smithy.api#documentation": "<p>The DisplayAs value for the custom vocabulary item \n         from the custom vocabulary list.</p>"
                     }
                 }
             },
@@ -4241,7 +4371,7 @@
                     "target": "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When this parameter is true, Amazon Lex doesn't check to see if any other\n         resource is using the alias before it is deleted.</p>",
+                        "smithy.api#documentation": "<p>By default, Amazon Lex checks if any other resource, such as a bot network, \n         is using the bot alias before it is deleted and throws a \n         <code>ResourceInUseException</code> exception if the alias is \n         being used by another resource. Set this parameter to <code>true</code>\n         to skip this check and remove the alias even if it is being used by \n         another resource.</p>",
                         "smithy.api#httpQuery": "skipResourceInUseCheck"
                     }
                 }
@@ -4380,7 +4510,7 @@
                     "target": "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When <code>true</code>, Amazon Lex doesn't check to see if another\n         resource, such as an alias, is using the bot before it is\n         deleted.</p>",
+                        "smithy.api#documentation": "<p>By default, Amazon Lex checks if any other resource, such as an alias or \n         bot network, is using the bot version before it is deleted and throws a \n         <code>ResourceInUseException</code> exception if the bot is \n         being used by another resource. Set this parameter to <code>true</code>\n         to skip this check and remove the bot even if it is being used by \n         another resource.</p>",
                         "smithy.api#httpQuery": "skipResourceInUseCheck"
                     }
                 }
@@ -4432,7 +4562,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specific version of a bot. To delete all version of a bot,\n         use the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DeleteBot.html\">DeleteBot</a> operation.</p>",
+                "smithy.api#documentation": "<p>Deletes a specific version of a bot. To delete all versions of a bot,\n         use the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DeleteBot.html\">DeleteBot</a> operation.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/bots/{botId}/botversions/{botVersion}",
@@ -4463,7 +4593,7 @@
                     "target": "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default, the <code>DeleteBotVersion</code> operations throws a\n            <code>ResourceInUseException</code> exception if you try to delete a\n         bot version that has an alias pointing at it. Set the\n            <code>skipResourceInUseCheck</code> parameter to <code>true</code>\n         to skip this check and remove the version even if an alias points to\n         it.</p>",
+                        "smithy.api#documentation": "<p>By default, Amazon Lex checks if any other resource, such as an alias or bot network, \n         is using the bot version before it is deleted and throws a \n         <code>ResourceInUseException</code> exception if the version is \n         being used by another resource. Set this parameter to <code>true</code>\n         to skip this check and remove the version even if it is being used by \n         another resource.</p>",
                         "smithy.api#httpQuery": "skipResourceInUseCheck"
                     }
                 }
@@ -4658,7 +4788,7 @@
                 "exportStatus": {
                     "target": "com.amazonaws.lexmodelsv2#ExportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the export will no longer be returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html\">ListExports</a> operation and calls to the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html\">\n            DescribeExport</a> operation with the export identifier will\n         fail.</p>"
+                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the export will no longer be returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html\">ListExports</a> operation and calls to the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html\">\n            DescribeExport</a> operation with the export identifier will\n         fail.</p>"
                     }
                 }
             }
@@ -4722,7 +4852,7 @@
                 "importStatus": {
                     "target": "com.amazonaws.lexmodelsv2#ImportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the import will no longer be returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html\">ListImports</a> operation and calls to the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeImport.html\">DescribeImport</a> operation with the import identifier will\n         fail.</p>"
+                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the import will no longer be returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html\">ListImports</a> operation and calls to the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeImport.html\">DescribeImport</a> operation with the import identifier will\n         fail.</p>"
                     }
                 }
             }
@@ -5129,7 +5259,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes stored utterances.</p>\n         <p>Amazon Lex stores the utterances that users send to your bot. Utterances\n         are stored for 15 days for use with the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListAggregatedUtterances.html\">ListAggregatedUtterances</a> operation, and\n         then stored indefinitely for use in improving the ability of your bot\n         to respond to user input..</p>\n         <p>Use the <code>DeleteUtterances</code> operation to manually delete\n         utterances for a specific session. When you use the\n            <code>DeleteUtterances</code> operation, utterances stored for\n         improving your bot's ability to respond to user input are deleted\n         immediately. Utterances stored for use with the\n            <code>ListAggregatedUtterances</code> operation are deleted after 15\n         days.</p>",
+                "smithy.api#documentation": "<p>Deletes stored utterances.</p>\n         <p>Amazon Lex stores the utterances that users send to your bot. Utterances\n         are stored for 15 days for use with the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html\">ListAggregatedUtterances</a> operation, and\n         then stored indefinitely for use in improving the ability of your bot\n         to respond to user input..</p>\n         <p>Use the <code>DeleteUtterances</code> operation to manually delete\n         utterances for a specific session. When you use the\n            <code>DeleteUtterances</code> operation, utterances stored for\n         improving your bot's ability to respond to user input are deleted\n         immediately. Utterances stored for use with the\n            <code>ListAggregatedUtterances</code> operation are deleted after 15\n         days.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/bots/{botId}/utterances",
@@ -5158,7 +5288,7 @@
                 "sessionId": {
                     "target": "com.amazonaws.lexmodelsv2#SessionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the session with the user. The ID is\n         returned in the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html\">RecognizeText</a> and <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html\">RecognizeUtterance</a> operations.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the session with the user. The ID is\n         returned in the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeText.html\">RecognizeText</a> and <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeUtterance.html\">RecognizeUtterance</a> operations.</p>",
                         "smithy.api#httpQuery": "sessionId"
                     }
                 }
@@ -5413,6 +5543,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the alias was last\n         updated.</p>"
+                    }
+                },
+                "parentBotNetworks": {
+                    "target": "com.amazonaws.lexmodelsv2#ParentBotNetworks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the networks to which the bot alias you described belongs.</p>"
                     }
                 }
             }
@@ -5949,6 +6085,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the bot was last\n         updated.</p>"
                     }
+                },
+                "botType": {
+                    "target": "com.amazonaws.lexmodelsv2#BotType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the bot that was described.</p>"
+                    }
+                },
+                "botMembers": {
+                    "target": "com.amazonaws.lexmodelsv2#BotMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of bots in the network that was described.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the <code>botStatus</code> is <code>Failed</code>, this contains\n         a list of reasons that the bot couldn't be built.</p>"
+                    }
                 }
             }
         },
@@ -6069,7 +6223,7 @@
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#NumericalBotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the bot to describe.</p>"
+                        "smithy.api#documentation": "<p>The version of the bot that was described.</p>"
                     }
                 },
                 "description": {
@@ -6112,6 +6266,24 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the bot version was\n         created.</p>"
+                    }
+                },
+                "parentBotNetworks": {
+                    "target": "com.amazonaws.lexmodelsv2#ParentBotNetworks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the networks to which the bot version you described belongs.</p>"
+                    }
+                },
+                "botType": {
+                    "target": "com.amazonaws.lexmodelsv2#BotType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the bot in the version that was described.</p>"
+                    }
+                },
+                "botMembers": {
+                    "target": "com.amazonaws.lexmodelsv2#BotMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The members of bot network in the version that was described.</p>"
                     }
                 }
             }
@@ -7370,7 +7542,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filters the response form the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html\">ListExports</a> operation</p>"
+                "smithy.api#documentation": "<p>Filters the response form the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html\">ListExports</a> operation</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ExportFilterName": {
@@ -7929,7 +8101,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filters the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html\">ListImports</a> operation.</p>"
+                "smithy.api#documentation": "<p>Filters the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html\">ListImports</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ImportFilterName": {
@@ -8852,7 +9024,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -8901,15 +9073,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -9173,8 +9336,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -9186,8 +9349,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -9199,8 +9362,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -9212,8 +9375,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -9225,8 +9388,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -9238,8 +9401,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -9251,8 +9414,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -9264,8 +9427,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -9277,8 +9440,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -9290,8 +9453,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -9303,8 +9466,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -9316,8 +9479,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -9329,8 +9492,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -9342,8 +9505,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -9355,8 +9518,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -9368,8 +9531,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -9381,8 +9544,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -9394,8 +9557,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -9407,8 +9570,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -9420,8 +9583,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -9433,8 +9596,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -9446,8 +9609,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -9459,8 +9622,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -9472,8 +9635,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -9485,8 +9648,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -9498,8 +9661,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -9511,8 +9674,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -9524,8 +9687,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -9537,8 +9700,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -9550,8 +9713,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -9563,8 +9726,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -9576,8 +9739,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -9589,8 +9752,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -9602,8 +9765,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -9615,8 +9778,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -9628,8 +9791,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -9641,8 +9804,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -9654,8 +9817,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -9667,8 +9830,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -9680,8 +9843,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -9693,8 +9856,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -9706,8 +9869,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -9719,8 +9882,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -9732,8 +9895,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -9745,8 +9908,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -9757,8 +9920,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -9769,8 +9932,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -10458,7 +10621,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of built-in intents provided by Amazon Lex that you can use\n         in your bot. </p>\n         <p>To use a built-in intent as a the base for your own intent, include\n         the built-in intent signature in the <code>parentIntentSignature</code>\n         parameter when you call the <code>CreateIntent</code> operation. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateIntent.html\">CreateIntent</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a list of built-in intents provided by Amazon Lex that you can use\n         in your bot. </p>\n         <p>To use a built-in intent as a the base for your own intent, include\n         the built-in intent signature in the <code>parentIntentSignature</code>\n         parameter when you call the <code>CreateIntent</code> operation. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html\">CreateIntent</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/builtins/locales/{localeId}/intents",
@@ -10641,7 +10804,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List custom vocabulary items for the specified locale in the \n         specified bot.</p>",
+                "smithy.api#documentation": "<p>Paginated list of custom vocabulary items for a given bot locale's \n         custom vocabulary.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/list",
@@ -10660,7 +10823,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to the list custom vocabulary \n         request.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the version of the bot associated with this custom \n         vocabulary.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10676,7 +10839,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The locale identifier of the bot to the list custom vocabulary \n         request.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this custom vocabulary \n         is used. The string must match one of the supported locales. For more \n         information, see Supported \n         languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10684,7 +10847,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.lexmodelsv2#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum results to the list custom vocabulary \n         request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items returned by the list operation.</p>"
                     }
                 },
                 "nextToken": {
@@ -10701,19 +10864,19 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to the list custom vocabulary \n         response.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the bot associated with this custom vocabulary.</p>"
                     }
                 },
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#BotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bot version of the bot to the list custom vocabulary \n         response.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the version of the bot associated with this custom \n         vocabulary.</p>"
                     }
                 },
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The locale identifier of the bot to the list custom vocabulary \n         response.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this custom vocabulary \n         is used. The string must match one of the supported locales. For more \n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\"> Supported Languages </a>.</p>"
                     }
                 },
                 "customVocabularyItems": {
@@ -11872,6 +12035,40 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ParentBotNetwork": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the network of bots assigned by Amazon Lex.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the network of bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A network of bots.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ParentBotNetworks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#ParentBotNetwork"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
                 }
             }
         },
@@ -13472,7 +13669,7 @@
                 "resolutionStrategy": {
                     "target": "com.amazonaws.lexmodelsv2#SlotValueResolutionStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines the slot resolution strategy that Amazon Lex uses to\n         return slot type values. The field can be set to one of the following\n         values:</p>\n\n         <ul>\n            <li>\n               <p>OriginalValue - Returns the value entered by the user, if the\n               user value is similar to the slot value.</p>\n            </li>\n            <li>\n               <p>TopResolution - If there is a resolution list for the slot,\n               return the first value in the resolution list as the slot type\n               value. If there is no resolution list, null is returned.</p>\n            </li>\n         </ul>\n\n         <p>If you don't specify the valueSelectionStrategy, the default is\n         OriginalValue. </p>",
+                        "smithy.api#documentation": "<p>Determines the slot resolution strategy that Amazon Lex uses to\n         return slot type values. The field can be set to one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>OriginalValue - Returns the value entered by the user, if the\n               user value is similar to the slot value.</p>\n            </li>\n            <li>\n               <p>TopResolution - If there is a resolution list for the slot,\n               return the first value in the resolution list as the slot type\n               value. If there is no resolution list, null is returned.</p>\n            </li>\n         </ul>\n         <p>If you don't specify the valueSelectionStrategy, the default is\n         OriginalValue. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13716,7 +13913,7 @@
                 "importId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the import. It is included in the response\n         from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html\">CreateUploadUrl</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the import. It is included in the response\n         from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateUploadUrl.html\">CreateUploadUrl</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14242,6 +14439,7 @@
                     "target": "com.amazonaws.lexmodelsv2#RetryAfterSeconds",
                     "traits": {
                         "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of seconds after which the user can invoke the API again.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 },
@@ -14912,7 +15110,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to update. This identifier is\n         returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to update. This identifier is\n         returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html\">CreateBot</a> operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -14949,6 +15147,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time, in seconds, that Amazon Lex should keep information about a\n         user's conversation with the bot.</p>\n         <p>A user interaction remains active for the amount of time specified.\n         If no conversation occurs during this time, the session expires and\n         Amazon Lex deletes any data provided before the timeout.</p>\n         <p>You can specify between 60 (1 minute) and 86,400 (24 hours)\n         seconds.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "botType": {
+                    "target": "com.amazonaws.lexmodelsv2#BotType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the bot to be updated.</p>"
+                    }
+                },
+                "botMembers": {
+                    "target": "com.amazonaws.lexmodelsv2#BotMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of bot members in the network associated \n         with the update action.</p>"
                     }
                 }
             }
@@ -15009,6 +15219,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the bot was last\n         updated.</p>"
                     }
+                },
+                "botType": {
+                    "target": "com.amazonaws.lexmodelsv2#BotType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the bot that was updated.</p>"
+                    }
+                },
+                "botMembers": {
+                    "target": "com.amazonaws.lexmodelsv2#BotMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of bot members in the network that was updated.</p>"
+                    }
                 }
             }
         },
@@ -15053,7 +15275,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the password used to protect an export zip archive.</p>\n         <p>The password is not required. If you don't supply a password, Amazon Lex\n         generates a zip file that is not protected by a password. This is the\n         archive that is available at the pre-signed S3 URL provided by the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation.</p>",
+                "smithy.api#documentation": "<p>Updates the password used to protect an export zip archive.</p>\n         <p>The password is not required. If you don't supply a password, Amazon Lex\n         generates a zip file that is not protected by a password. This is the\n         archive that is available at the pre-signed S3 URL provided by the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html\">DescribeExport</a> operation.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/exports/{exportId}",

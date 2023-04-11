@@ -28,7 +28,7 @@ func (e *ExpiredIteratorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExpiredIteratorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExpiredIteratorException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -89,7 +89,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -116,7 +116,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -153,7 +153,7 @@ func (e *TrimmedDataAccessException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrimmedDataAccessException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TrimmedDataAccessException"
 	}
 	return *e.ErrorCodeOverride

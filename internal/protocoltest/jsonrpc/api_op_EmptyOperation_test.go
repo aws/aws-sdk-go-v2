@@ -44,6 +44,10 @@ func TestClient_EmptyOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.EmptyOperation"},
+			},
 		},
 		// Includes X-Amz-Target header and Content-Type
 		"includes_x_amz_target_and_content_type": {
@@ -67,6 +71,7 @@ func TestClient_EmptyOperation_awsAwsjson11Serialize(t *testing.T) {
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"X-Amz-Target": []string{"JsonProtocol.EmptyOperation"},
 			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {

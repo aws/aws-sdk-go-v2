@@ -4553,9 +4553,6 @@ func awsAwsquery_serializeDocumentAddHeaderAction(v *types.AddHeaderAction, valu
 }
 
 func awsAwsquery_serializeDocumentAddressList(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -4648,9 +4645,6 @@ func awsAwsquery_serializeDocumentBouncedRecipientInfo(v *types.BouncedRecipient
 }
 
 func awsAwsquery_serializeDocumentBouncedRecipientInfoList(v []types.BouncedRecipientInfo, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -4689,9 +4683,6 @@ func awsAwsquery_serializeDocumentBulkEmailDestination(v *types.BulkEmailDestina
 }
 
 func awsAwsquery_serializeDocumentBulkEmailDestinationList(v []types.BulkEmailDestination, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -4740,9 +4731,6 @@ func awsAwsquery_serializeDocumentCloudWatchDimensionConfiguration(v *types.Clou
 }
 
 func awsAwsquery_serializeDocumentCloudWatchDimensionConfigurations(v []types.CloudWatchDimensionConfiguration, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -4767,9 +4755,6 @@ func awsAwsquery_serializeDocumentConfigurationSet(v *types.ConfigurationSet, va
 }
 
 func awsAwsquery_serializeDocumentConfigurationSetAttributeList(v []types.ConfigurationSetAttribute, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -4882,9 +4867,6 @@ func awsAwsquery_serializeDocumentEventDestination(v *types.EventDestination, va
 }
 
 func awsAwsquery_serializeDocumentEventTypes(v []types.EventType, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -4912,9 +4894,6 @@ func awsAwsquery_serializeDocumentExtensionField(v *types.ExtensionField, value 
 }
 
 func awsAwsquery_serializeDocumentExtensionFieldList(v []types.ExtensionField, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -4927,9 +4906,6 @@ func awsAwsquery_serializeDocumentExtensionFieldList(v []types.ExtensionField, v
 }
 
 func awsAwsquery_serializeDocumentIdentityList(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -5041,9 +5017,6 @@ func awsAwsquery_serializeDocumentMessageTag(v *types.MessageTag, value query.Va
 }
 
 func awsAwsquery_serializeDocumentMessageTagList(v []types.MessageTag, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -5056,9 +5029,6 @@ func awsAwsquery_serializeDocumentMessageTagList(v []types.MessageTag, value que
 }
 
 func awsAwsquery_serializeDocumentPolicyNameList(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -5137,9 +5107,6 @@ func awsAwsquery_serializeDocumentReceiptAction(v *types.ReceiptAction, value qu
 }
 
 func awsAwsquery_serializeDocumentReceiptActionsList(v []types.ReceiptAction, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -5229,9 +5196,6 @@ func awsAwsquery_serializeDocumentReceiptRule(v *types.ReceiptRule, value query.
 }
 
 func awsAwsquery_serializeDocumentReceiptRuleNamesList(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {
@@ -5286,9 +5250,6 @@ func awsAwsquery_serializeDocumentRecipientDsnFields(v *types.RecipientDsnFields
 }
 
 func awsAwsquery_serializeDocumentRecipientsList(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("member")
 
 	for i := range v {

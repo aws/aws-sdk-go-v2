@@ -28,7 +28,7 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -57,7 +57,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride

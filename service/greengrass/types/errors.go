@@ -28,7 +28,7 @@ func (e *BadRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerErrorException"
 	}
 	return *e.ErrorCodeOverride

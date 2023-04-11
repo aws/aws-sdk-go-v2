@@ -29,7 +29,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -57,7 +57,7 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -87,7 +87,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -118,7 +118,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride

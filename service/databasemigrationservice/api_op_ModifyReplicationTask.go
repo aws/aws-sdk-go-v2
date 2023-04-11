@@ -63,7 +63,7 @@ type ModifyReplicationTaskInput struct {
 	// Indicates when you want a change data capture (CDC) operation to stop. The value
 	// can be either server time or commit time. Server time example:
 	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
-	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
+	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
 	CdcStopPosition *string
 
 	// The migration type. Valid values: full-load | cdc | full-load-and-cdc

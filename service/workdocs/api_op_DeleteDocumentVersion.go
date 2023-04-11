@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a version of an Amazon WorkDocs document. Use the DeletePriorVersions
-// parameter to delete prior versions.
+// Deletes a specific version of a document.
 func (c *Client) DeleteDocumentVersion(ctx context.Context, params *DeleteDocumentVersionInput, optFns ...func(*Options)) (*DeleteDocumentVersionOutput, error) {
 	if params == nil {
 		params = &DeleteDocumentVersionInput{}
@@ -29,24 +28,23 @@ func (c *Client) DeleteDocumentVersion(ctx context.Context, params *DeleteDocume
 
 type DeleteDocumentVersionInput struct {
 
-	// When set to TRUE, deletes the specified version and all prior versions of a
-	// document.
+	// Deletes all versions of a document prior to the current version.
 	//
 	// This member is required.
 	DeletePriorVersions bool
 
-	// The ID of a document.
+	// The ID of the document associated with the version being deleted.
 	//
 	// This member is required.
 	DocumentId *string
 
-	// The version ID of a document.
+	// The ID of the version being deleted.
 	//
 	// This member is required.
 	VersionId *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	noSmithyDocumentSerde

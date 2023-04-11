@@ -12,9 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows ChimeBearer to search channels by channel members. AppInstanceUsers can
-// search across the channels that they belong to. AppInstanceAdmins can search
-// across all channels.
+// Allows the ChimeBearer to search channels by channel members. Users or bots can
+// search across the channels that they belong to. Users in the AppInstanceAdmin
+// role can search across all channels. The x-amz-chime-bearer request header is
+// mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the
+// API call as the value in the header.
 func (c *Client) SearchChannels(ctx context.Context, params *SearchChannelsInput, optFns ...func(*Options)) (*SearchChannelsOutput, error) {
 	if params == nil {
 		params = &SearchChannelsInput{}

@@ -174,6 +174,57 @@ type AdminAccount struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an enabled security standard in which a security control is
+// enabled.
+type AssociatedStandard struct {
+
+	// The unique identifier of a standard in which a control is enabled. This field
+	// consists of the resource portion of the Amazon Resource Name (ARN) returned for
+	// a standard in the DescribeStandards
+	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html)
+	// API response.
+	StandardsId *string
+
+	noSmithyDocumentSerde
+}
+
+// The associations between a route table and one or more subnets or a gateway.
+type AssociationSetDetails struct {
+
+	// The state of the association between a route table and a subnet or gateway.
+	AssociationState *AssociationStateDetails
+
+	// The ID of the internet gateway or virtual private gateway.
+	GatewayId *string
+
+	// Indicates whether this is the main route table.
+	Main bool
+
+	// The ID of the association.
+	RouteTableAssociationId *string
+
+	// The ID of the route table.
+	RouteTableId *string
+
+	// The ID of the subnet. A subnet ID is not returned for an implicit association.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the state of an association between a route table and a subnet or
+// gateway.
+type AssociationStateDetails struct {
+
+	// The state of the association.
+	State *string
+
+	// The status message, if applicable.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Availability Zone.
 type AvailabilityZone struct {
 
@@ -205,11 +256,17 @@ type AwsApiCallAction struct {
 	DomainDetails *AwsApiCallActionDomainDetails
 
 	// An ISO8601-formatted timestamp that indicates when the API call was first
-	// observed.
+	// observed. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value
+	// cannot contain spaces, and date and time should be separated by T. For more
+	// information, see RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	FirstSeen *string
 
 	// An ISO8601-formatted timestamp that indicates when the API call was most
-	// recently observed.
+	// recently observed. A correctly formatted example is 2020-05-21T20:16:34.724Z.
+	// The value cannot contain spaces, and date and time should be separated by T. For
+	// more information, see RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	LastSeen *string
 
 	// Provided if CallerType is remoteIp. Provides information about the remote IP
@@ -348,7 +405,8 @@ type AwsApiGatewayRestApiDetails struct {
 	// Indicates when the API was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedDate *string
 
 	// A description of the REST API.
@@ -397,7 +455,8 @@ type AwsApiGatewayStageDetails struct {
 	// Indicates when the stage was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedDate *string
 
 	// The identifier of the deployment that the stage points to.
@@ -412,7 +471,8 @@ type AwsApiGatewayStageDetails struct {
 	// Indicates when the stage was most recently updated. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastUpdatedDate *string
 
 	// Defines the method settings for the stage.
@@ -463,7 +523,8 @@ type AwsApiGatewayV2ApiDetails struct {
 	// Indicates when the API was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedDate *string
 
 	// A description of the API.
@@ -532,7 +593,8 @@ type AwsApiGatewayV2StageDetails struct {
 	// Indicates when the stage was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedDate *string
 
 	// Default route settings for the stage.
@@ -551,7 +613,8 @@ type AwsApiGatewayV2StageDetails struct {
 	// Indicates when the stage was most recently updated. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastUpdatedDate *string
 
 	// The route settings for the stage.
@@ -596,7 +659,8 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	// Indicates when the auto scaling group was created. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedTime *string
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it
@@ -832,7 +896,8 @@ type AwsAutoScalingLaunchConfigurationDetails struct {
 	// The creation date and time for the launch configuration. Uses the date-time
 	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedTime *string
 
 	// Whether the launch configuration is optimized for Amazon EBS I/O.
@@ -1101,8 +1166,8 @@ type AwsBackupBackupVaultNotificationsDetails struct {
 	// * S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED
 	BackupVaultEvents []string
 
-	// An ARN that uniquely identifies the Amazon SNS topic for a backup vault’s
-	// events.
+	// The Amazon Resource Name (ARN) that uniquely identifies the Amazon SNS topic for
+	// a backup vault's events.
 	SnsTopicArn *string
 
 	noSmithyDocumentSerde
@@ -1270,7 +1335,8 @@ type AwsCertificateManagerCertificateDetails struct {
 	// Indicates when the certificate was requested. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedAt *string
 
 	// The fully qualified domain name (FQDN), such as www.example.com, that is secured
@@ -1298,7 +1364,8 @@ type AwsCertificateManagerCertificateDetails struct {
 	// Indicates when the certificate was imported. Provided if the certificate type is
 	// IMPORTED. Uses the date-time format specified in RFC 3339 section 5.6, Internet
 	// Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value
-	// cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	// cannot contain spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	ImportedAt *string
 
 	// The list of ARNs for the Amazon Web Services resources that use the certificate.
@@ -1307,7 +1374,8 @@ type AwsCertificateManagerCertificateDetails struct {
 	// Indicates when the certificate was issued. Provided if the certificate type is
 	// AMAZON_ISSUED. Uses the date-time format specified in RFC 3339 section 5.6,
 	// Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The
-	// value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	// value cannot contain spaces, and date and time should be separated by T. For
+	// example, 2020-03-22T13:22:13.933Z.
 	IssuedAt *string
 
 	// The name of the certificate authority that issued and signed the certificate.
@@ -1324,13 +1392,15 @@ type AwsCertificateManagerCertificateDetails struct {
 	// The time after which the certificate becomes invalid. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	NotAfter *string
 
 	// The time before which the certificate is not valid. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	NotBefore *string
 
 	// Provides a value that specifies whether to add the certificate to a transparency
@@ -1465,7 +1535,8 @@ type AwsCertificateManagerCertificateRenewalSummary struct {
 	// Indicates when the renewal summary was last updated. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	UpdatedAt *string
 
 	noSmithyDocumentSerde
@@ -1644,7 +1715,8 @@ type AwsCloudFrontDistributionDetails struct {
 	// Indicates when that the distribution was last modified. Uses the date-time
 	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastModifiedTime *string
 
 	// A complex type that controls whether access logs are written for the
@@ -2349,7 +2421,8 @@ type AwsDynamoDbTableBillingModeSummary struct {
 	// If the billing mode is PAY_PER_REQUEST, indicates when the billing mode was set
 	// to that value. Uses the date-time format specified in RFC 3339 section 5.6,
 	// Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The
-	// value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	// value cannot contain spaces, and date and time should be separated by T. For
+	// example, 2020-03-22T13:22:13.933Z.
 	LastUpdateToPayPerRequestDateTime *string
 
 	noSmithyDocumentSerde
@@ -2367,7 +2440,8 @@ type AwsDynamoDbTableDetails struct {
 	// Indicates when the table was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreationDateTime *string
 
 	// List of global secondary indexes for the table.
@@ -2540,13 +2614,15 @@ type AwsDynamoDbTableProvisionedThroughput struct {
 	// Indicates when the provisioned throughput was last decreased. Uses the date-time
 	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastDecreaseDateTime *string
 
 	// Indicates when the provisioned throughput was last increased. Uses the date-time
 	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastIncreaseDateTime *string
 
 	// The number of times during the current UTC calendar day that the provisioned
@@ -2627,7 +2703,8 @@ type AwsDynamoDbTableRestoreSummary struct {
 	// Indicates the point in time that the table was restored to. Uses the date-time
 	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	RestoreDateTime *string
 
 	// Whether a restore is currently in progress.
@@ -2649,7 +2726,8 @@ type AwsDynamoDbTableSseDescription struct {
 	// key was inaccessible. Uses the date-time format specified in RFC 3339 section
 	// 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	InaccessibleEncryptionDateTime *string
 
 	// The ARN of the KMS key that is used for the KMS encryption.
@@ -2737,11 +2815,15 @@ type AwsEc2InstanceDetails struct {
 	// Indicates when the instance was launched. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LaunchedAt *string
 
 	// Details about the metadata options for the Amazon EC2 instance.
 	MetadataOptions *AwsEc2InstanceMetadataOptions
+
+	// Describes the type of monitoring that’s turned on for an instance.
+	Monitoring *AwsEc2InstanceMonitoringDetails
 
 	// The identifiers of the network interfaces for the EC2 instance. The details for
 	// each network interface are in a corresponding AwsEc2NetworkInterfacesDetails
@@ -2782,6 +2864,16 @@ type AwsEc2InstanceMetadataOptions struct {
 
 	// Specifies whether to allow access to instance tags from the instance metadata.
 	InstanceMetadataTags *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of monitoring that’s turned on for an Amazon EC2 instance.
+type AwsEc2InstanceMonitoringDetails struct {
+
+	// Indicates whether detailed monitoring is turned on. Otherwise, basic monitoring
+	// is turned on.
+	State *string
 
 	noSmithyDocumentSerde
 }
@@ -3230,7 +3322,7 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsDetails struct {
 	NetworkInterfaceCount *AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails
 
 	// The price protection threshold for On-Demand Instances. This is the maximum
-	// you’ll pay for an On-Demand Instance, expressed as a percentage above the least
+	// you'll pay for an On-Demand Instance, expressed as a percentage above the least
 	// expensive current generation M, C, or R instance type with your specified
 	// attributes. When Amazon EC2 selects instance types with your attributes, it
 	// excludes instance types priced above your threshold. The parameter accepts an
@@ -3242,7 +3334,7 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsDetails struct {
 	// Instances.
 	RequireHibernateSupport bool
 
-	// The price protection threshold for Spot Instances. This is the maximum you’ll
+	// The price protection threshold for Spot Instances. This is the maximum you'll
 	// pay for a Spot Instance, expressed as a percentage above the least expensive
 	// current generation M, C, or R instance type with your specified attributes. When
 	// Amazon EC2 selects instance types with your attributes, it excludes instance
@@ -3346,7 +3438,7 @@ type AwsEc2LaunchTemplateDataMaintenanceOptionsDetails struct {
 type AwsEc2LaunchTemplateDataMetadataOptionsDetails struct {
 
 	// Enables or disables the HTTP metadata endpoint on your instances. If the
-	// parameter is not specified, the default state is enabled, and you won’t be able
+	// parameter is not specified, the default state is enabled, and you won't be able
 	// to access your instance metadata.
 	HttpEndpoint *string
 
@@ -3659,7 +3751,8 @@ type AwsEc2NetworkInterfaceAttachment struct {
 	// Indicates when the attachment initiated. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	AttachTime *string
 
 	// The identifier of the network interface attachment
@@ -3745,6 +3838,30 @@ type AwsEc2NetworkInterfaceSecurityGroup struct {
 
 	// The name of the security group.
 	GroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about a route table for the specified VPC.
+type AwsEc2RouteTableDetails struct {
+
+	// The associations between a route table and one or more subnets or a gateway.
+	AssociationSet []AssociationSetDetails
+
+	// The ID of the Amazon Web Services account that owns the route table.
+	OwnerId *string
+
+	// Describes a virtual private gateway propagating route.
+	PropagatingVgwSet []PropagatingVgwSetDetails
+
+	// The routes in the route table.
+	RouteSet []RouteSetDetails
+
+	// The ID of the route table.
+	RouteTableId *string
+
+	// The ID of the virtual private cloud (VPC).
+	VpcId *string
 
 	noSmithyDocumentSerde
 }
@@ -4000,7 +4117,8 @@ type AwsEc2VolumeDetails struct {
 	// Indicates when the volume was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreateTime *string
 
 	// The device name for the volume that is attached to the instance.
@@ -4342,7 +4460,8 @@ type AwsEc2VpnConnectionVgwTelemetryDetails struct {
 	// The date and time of the last change in status. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastStatusChange *string
 
 	// The Internet-routable IP address of the virtual private gateway's outside
@@ -4377,7 +4496,8 @@ type AwsEcrContainerImageDetails struct {
 	// The date and time when the image was pushed to the repository. Uses the
 	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	ImagePublishedAt *string
 
 	// The list of tags that are associated with the image.
@@ -5881,6 +6001,11 @@ type AwsEksClusterLoggingDetails struct {
 // Information about the VPC configuration used by the cluster control plane.
 type AwsEksClusterResourcesVpcConfigDetails struct {
 
+	// Indicates whether the Amazon EKS public API server endpoint is turned on. If the
+	// Amazon EKS public API server endpoint is turned off, your cluster's Kubernetes
+	// API server can only receive requests that originate from within the cluster VPC.
+	EndpointPublicAccess bool
+
 	// The security groups that are associated with the cross-account elastic network
 	// interfaces that are used to allow communication between your nodes and the
 	// Amazon EKS control plane.
@@ -6397,7 +6522,8 @@ type AwsElbLoadBalancerDetails struct {
 	// Indicates when the load balancer was created. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedTime *string
 
 	// The DNS name of the load balancer.
@@ -6572,7 +6698,8 @@ type AwsElbv2LoadBalancerDetails struct {
 	// Indicates when the load balancer was created. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedTime *string
 
 	// The public DNS name of the load balancer.
@@ -6616,7 +6743,8 @@ type AwsIamAccessKeyDetails struct {
 	// Indicates when the IAM access key was created. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedAt *string
 
 	// The ID of the principal associated with an access key.
@@ -6662,7 +6790,8 @@ type AwsIamAccessKeySessionContextAttributes struct {
 	// Indicates when the session was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreationDate *string
 
 	// Indicates whether the session used multi-factor authentication (MFA).
@@ -6714,7 +6843,8 @@ type AwsIamGroupDetails struct {
 	// Indicates when the IAM group was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreateDate *string
 
 	// The identifier of the IAM group.
@@ -6750,7 +6880,8 @@ type AwsIamInstanceProfile struct {
 	// Indicates when the instance profile was created. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreateDate *string
 
 	// The identifier of the instance profile.
@@ -6780,7 +6911,8 @@ type AwsIamInstanceProfileRole struct {
 	// Indicates when the role was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreateDate *string
 
 	// The path to the role.
@@ -6817,7 +6949,8 @@ type AwsIamPolicyDetails struct {
 	// When the policy was created. Uses the date-time format specified in RFC 3339
 	// section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreateDate *string
 
 	// The identifier of the default version of the policy.
@@ -6848,7 +6981,8 @@ type AwsIamPolicyDetails struct {
 	// When the policy was most recently updated. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	UpdateDate *string
 
 	noSmithyDocumentSerde
@@ -6860,7 +6994,8 @@ type AwsIamPolicyVersion struct {
 	// Indicates when the version was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreateDate *string
 
 	// Whether the version is the default version.
@@ -6884,7 +7019,8 @@ type AwsIamRoleDetails struct {
 	// Indicates when the role was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreateDate *string
 
 	// The list of instance profiles that contain this role.
@@ -6931,7 +7067,8 @@ type AwsIamUserDetails struct {
 	// Indicates when the user was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreateDate *string
 
 	// A list of IAM groups that the user belongs to.
@@ -7012,7 +7149,8 @@ type AwsKmsKeyDetails struct {
 	// Indicates when the KMS key was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreationDate float64
 
 	// A description of the KMS key.
@@ -7115,7 +7253,8 @@ type AwsLambdaFunctionDetails struct {
 	// Indicates when the function was last updated. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastModified *string
 
 	// The function's layers.
@@ -7226,7 +7365,8 @@ type AwsLambdaLayerVersionDetails struct {
 	// Indicates when the version was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedDate *string
 
 	// The version number.
@@ -7668,7 +7808,8 @@ type AwsRdsDbClusterDetails struct {
 	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
 	// Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot
-	// contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	// contain spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	ClusterCreateTime *string
 
 	// Whether tags are copied from the DB cluster to snapshots of the DB cluster.
@@ -7839,7 +7980,8 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
 	// Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot
-	// contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	// contain spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	ClusterCreateTime *string
 
 	// The DB cluster identifier.
@@ -7876,7 +8018,8 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	// Indicates when the snapshot was taken. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	SnapshotCreateTime *string
 
 	// The type of DB cluster snapshot.
@@ -8046,7 +8189,8 @@ type AwsRdsDbInstanceDetails struct {
 	// Indicates when the DB instance was created. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	InstanceCreateTime *string
 
 	// Specifies the provisioned IOPS (I/O operations per second) for this DB instance.
@@ -8059,7 +8203,8 @@ type AwsRdsDbInstanceDetails struct {
 	// Specifies the latest time to which a database can be restored with point-in-time
 	// restore. Uses the date-time format specified in RFC 3339 section 5.6, Internet
 	// Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value
-	// cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	// cannot contain spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LatestRestorableTime *string
 
 	// License model information for this DB instance.
@@ -8569,7 +8714,8 @@ type AwsRdsEventSubscriptionDetails struct {
 	// The datetime when the event notification subscription was created. Uses the
 	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	SubscriptionCreationTime *string
 
 	noSmithyDocumentSerde
@@ -8648,15 +8794,17 @@ type AwsRedshiftClusterClusterSecurityGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a cross-Region snapshot copy.
+// You can configure Amazon Redshift to copy snapshots for a cluster to another
+// Amazon Web Services Region. This parameter provides information about a
+// cross-Region snapshot copy.
 type AwsRedshiftClusterClusterSnapshotCopyStatus struct {
 
 	// The destination Region that snapshots are automatically copied to when
 	// cross-Region snapshot copy is enabled.
 	DestinationRegion *string
 
-	// The number of days that manual snapshots are retained in the destination region
-	// after they are copied from a source region. If the value is -1, then the manual
+	// The number of days that manual snapshots are retained in the destination Region
+	// after they are copied from a source Region. If the value is -1, then the manual
 	// snapshot is retained indefinitely. Valid values: Either -1 or an integer between
 	// 1 and 3,653
 	ManualSnapshotRetentionPeriod int32
@@ -8678,7 +8826,8 @@ type AwsRedshiftClusterDeferredMaintenanceWindow struct {
 	// The end of the time window for which maintenance was deferred. Uses the
 	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	DeferMaintenanceEndTime *string
 
 	// The identifier of the maintenance window.
@@ -8687,7 +8836,8 @@ type AwsRedshiftClusterDeferredMaintenanceWindow struct {
 	// The start of the time window for which maintenance was deferred. Uses the
 	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	DeferMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -8727,7 +8877,8 @@ type AwsRedshiftClusterDetails struct {
 	// Indicates when the cluster was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	ClusterCreateTime *string
 
 	// The unique identifier of the cluster.
@@ -8795,7 +8946,8 @@ type AwsRedshiftClusterDetails struct {
 	// a valid snapshot schedule and have backups enabled. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	ExpectedNextSnapshotScheduleTime *string
 
 	// The status of the next expected snapshot. Valid values: OnTrack | Pending
@@ -8833,7 +8985,8 @@ type AwsRedshiftClusterDetails struct {
 	// Indicates the start of the next maintenance window. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	NextMaintenanceWindowStartTime *string
 
 	// The node type for the nodes in the cluster.
@@ -8951,13 +9104,15 @@ type AwsRedshiftClusterLoggingStatus struct {
 	// The last time when logs failed to be delivered. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastFailureTime *string
 
 	// The last time that logs were delivered successfully. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastSuccessfulDeliveryTime *string
 
 	// Indicates whether logging is enabled.
@@ -9120,7 +9275,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesDetails struct {
 	// The date when objects are moved or deleted. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	ExpirationDate *string
 
 	// The length in days of the lifetime for objects that are subject to the rule.
@@ -9250,7 +9406,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 	// provide Date, you cannot provide Days. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	Date *string
 
 	// The number of days after which to transition the object to the specified storage
@@ -9312,8 +9469,13 @@ type AwsS3BucketDetails struct {
 	// Indicates when the S3 bucket was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	CreatedAt *string
+
+	// Specifies which rule Amazon S3 applies by default to every new object placed in
+	// the specified bucket.
+	ObjectLockConfiguration *AwsS3BucketObjectLockConfiguration
 
 	// The Amazon Web Services account identifier of the account that owns the S3
 	// bucket.
@@ -9412,6 +9574,49 @@ type AwsS3BucketNotificationConfigurationS3KeyFilterRule struct {
 
 	// The filter value.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The container element for S3 Object Lock configuration parameters. In Amazon S3,
+// Object Lock can help prevent objects from being deleted or overwritten for a
+// fixed amount of time or indefinitely.
+type AwsS3BucketObjectLockConfiguration struct {
+
+	// Indicates whether the bucket has an Object Lock configuration enabled.
+	ObjectLockEnabled *string
+
+	// Specifies the Object Lock rule for the specified object.
+	Rule *AwsS3BucketObjectLockConfigurationRuleDetails
+
+	noSmithyDocumentSerde
+}
+
+// The default S3 Object Lock retention mode and period that you want to apply to
+// new objects placed in the specified Amazon S3 bucket.
+type AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails struct {
+
+	// The number of days that you want to specify for the default retention period.
+	Days int32
+
+	// The default Object Lock retention mode you want to apply to new objects placed
+	// in the specified bucket.
+	Mode *string
+
+	// The number of years that you want to specify for the default retention period.
+	Years int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the S3 Object Lock rule for the specified object. In Amazon S3, Object
+// Lock can help prevent objects from being deleted or overwritten for a fixed
+// amount of time or indefinitely.
+type AwsS3BucketObjectLockConfigurationRuleDetails struct {
+
+	// The default Object Lock retention mode and period that you want to apply to new
+	// objects placed in the specified bucket.
+	DefaultRetention *AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails
 
 	noSmithyDocumentSerde
 }
@@ -9542,7 +9747,8 @@ type AwsS3ObjectDetails struct {
 	// Indicates when the object was last modified. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastModified *string
 
 	// The identifier of the KMS symmetric customer managed key that was used for the
@@ -9569,7 +9775,7 @@ type AwsSageMakerNotebookInstanceDetails struct {
 
 	// An array of up to three Git repositories associated with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your
-	// account, or the URL of Git repositories in AWS CodeCommit
+	// account, or the URL of Git repositories in CodeCommit
 	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 	// other Git repository. These repositories are cloned at the same level as the
 	// default repository of your notebook instance. For more information, see
@@ -9580,7 +9786,7 @@ type AwsSageMakerNotebookInstanceDetails struct {
 
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
-	// in your account, or the URL of a Git repository in AWS CodeCommit
+	// in your account, or the URL of a Git repository in CodeCommit
 	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 	// other Git repository. When you open a notebook instance, it opens in the
 	// directory that contains this repository. For more information, see Associating
@@ -9721,7 +9927,8 @@ type AwsSecurityFinding struct {
 	// issue that a finding captured. Uses the date-time format specified in RFC 3339
 	// section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	//
 	// This member is required.
 	CreatedAt *string
@@ -9769,7 +9976,8 @@ type AwsSecurityFinding struct {
 	// Indicates when the security-findings provider last updated the finding record.
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
 	// Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot
-	// contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	// contain spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	//
 	// This member is required.
 	UpdatedAt *string
@@ -9810,14 +10018,16 @@ type AwsSecurityFinding struct {
 	// security issue that a finding captured. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	FirstObservedAt *string
 
 	// Indicates when the security-findings provider most recently observed the
 	// potential security issue that a finding captured. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastObservedAt *string
 
 	// A list of malware related to a finding.
@@ -9925,6 +10135,17 @@ type AwsSecurityFindingFilters struct {
 	// that generates findings.
 	CompanyName []StringFilter
 
+	// The unique identifier of a standard in which a control is enabled. This field
+	// consists of the resource portion of the Amazon Resource Name (ARN) returned for
+	// a standard in the DescribeStandards
+	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html)
+	// API response.
+	ComplianceAssociatedStandardsId []StringFilter
+
+	// The unique identifier of a control across standards. Values for this field
+	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
+	ComplianceSecurityControlId []StringFilter
+
 	// Exclusive to findings that are generated as the result of a check run against a
 	// specific rule in a supported standard, such as CIS Amazon Web Services
 	// Foundations. Contains security standard-related finding details.
@@ -9937,7 +10158,11 @@ type AwsSecurityFindingFilters struct {
 	Confidence []NumberFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider captured the potential security issue that a finding captured.
+	// provider captured the potential security issue that a finding captured. A
+	// correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot
+	// contain spaces, and date and time should be separated by T. For more
+	// information, see RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	CreatedAt []DateFilter
 
 	// The level of importance assigned to the resources associated with the finding. A
@@ -9982,7 +10207,11 @@ type AwsSecurityFindingFilters struct {
 	FindingProviderFieldsTypes []StringFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider first observed the potential security issue that a finding captured.
+	// provider first observed the potential security issue that a finding captured. A
+	// correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot
+	// contain spaces, and date and time should be separated by T. For more
+	// information, see RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	FirstObservedAt []DateFilter
 
 	// The identifier for the solution-specific component (a discrete unit of logic)
@@ -10000,7 +10229,10 @@ type AwsSecurityFindingFilters struct {
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
 	// provider most recently observed the potential security issue that a finding
-	// captured.
+	// captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value
+	// cannot contain spaces, and date and time should be separated by T. For more
+	// information, see RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	LastObservedAt []DateFilter
 
 	// The name of the malware that was observed.
@@ -10058,13 +10290,18 @@ type AwsSecurityFindingFilters struct {
 	// The principal that created a note.
 	NoteUpdatedBy []StringFilter
 
-	// The date/time that the process was launched.
+	// A timestamp that identifies when the process was launched. A correctly formatted
+	// example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date
+	// and time should be separated by T. For more information, see RFC 3339 section
+	// 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	ProcessLaunchedAt []DateFilter
 
 	// The name of the process.
 	ProcessName []StringFilter
 
-	// The parent process ID.
+	// The parent process ID. This field accepts positive integers between O and
+	// 2147483647.
 	ProcessParentPid []NumberFilter
 
 	// The path to the process executable.
@@ -10073,7 +10310,11 @@ type AwsSecurityFindingFilters struct {
 	// The process ID.
 	ProcessPid []NumberFilter
 
-	// The date/time that the process was terminated.
+	// A timestamp that identifies when the process was terminated. A correctly
+	// formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces,
+	// and date and time should be separated by T. For more information, see RFC 3339
+	// section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	ProcessTerminatedAt []DateFilter
 
 	// The ARN generated by Security Hub that uniquely identifies a third-party company
@@ -10161,7 +10402,11 @@ type AwsSecurityFindingFilters struct {
 	// The name of the image related to a finding.
 	ResourceContainerImageName []StringFilter
 
-	// The date/time that the container was started.
+	// A timestamp that identifies when the container was started. A correctly
+	// formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces,
+	// and date and time should be separated by T. For more information, see RFC 3339
+	// section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	ResourceContainerLaunchedAt []DateFilter
 
 	// The name of the container related to a finding.
@@ -10214,7 +10459,8 @@ type AwsSecurityFindingFilters struct {
 	// The category of a threat intelligence indicator.
 	ThreatIntelIndicatorCategory []StringFilter
 
-	// The date/time of the last observation of a threat intelligence indicator.
+	// A timestamp that identifies the last observation of a threat intelligence
+	// indicator.
 	ThreatIntelIndicatorLastObservedAt []DateFilter
 
 	// The source of the threat intelligence.
@@ -10237,7 +10483,10 @@ type AwsSecurityFindingFilters struct {
 	Type []StringFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider last updated the finding record.
+	// provider last updated the finding record. A correctly formatted example is
+	// 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time
+	// should be separated by T. For more information, see RFC 3339 section 5.6,
+	// Internet Date/Time Format (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	UpdatedAt []DateFilter
 
 	// A list of name/value string pairs associated with the finding. These are custom,
@@ -11046,8 +11295,8 @@ type AwsWafv2RulesActionDetails struct {
 
 // Provides details about rules in a rule group. A rule identifies web requests
 // that you want to allow, block, or count. Each rule includes one top-level
-// Statement that AWS WAF uses to identify matching web requests, and parameters
-// that govern how AWS WAF handles them.
+// Statement that WAF uses to identify matching web requests, and parameters that
+// govern how WAF handles them.
 type AwsWafv2RulesDetails struct {
 
 	// The action that WAF should take on a web request when it matches the rule
@@ -11410,10 +11659,17 @@ type ClassificationStatus struct {
 // returned for findings generated from controls.
 type Compliance struct {
 
+	// The enabled security standards in which a security control is currently enabled.
+	AssociatedStandards []AssociatedStandard
+
 	// For a control, the industry or regulatory framework requirements that are
 	// related to the control. The check for that control is aligned with these
 	// requirements.
 	RelatedRequirements []string
+
+	// The unique identifier of a control across standards. Values for this field
+	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
+	SecurityControlId *string
 
 	// The result of a standards check. The valid values for Status are as follows.
 	//
@@ -11458,7 +11714,8 @@ type ContainerDetails struct {
 	// Indicates when the container started. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LaunchedAt *string
 
 	// The name of the container related to a finding.
@@ -11556,10 +11813,18 @@ type DateFilter struct {
 	// A date range for the date filter.
 	DateRange *DateRange
 
-	// An end date for the date filter.
+	// A timestamp that provides the end date for the date filter. A correctly
+	// formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces,
+	// and date and time should be separated by T. For more information, see RFC 3339
+	// section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	End *string
 
-	// A start date for the date filter.
+	// A timestamp that provides the start date for the date filter. A correctly
+	// formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces,
+	// and date and time should be separated by T. For more information, see RFC 3339
+	// section 5.6, Internet Date/Time Format
+	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 	Start *string
 
 	noSmithyDocumentSerde
@@ -12017,29 +12282,29 @@ type Member struct {
 	// The status of the relationship between the member account and its administrator
 	// account. The status can have one of the following values:
 	//
-	// * CREATED - Indicates
+	// * Created - Indicates
 	// that the administrator account added the member account, but has not yet invited
 	// the member account.
 	//
-	// * INVITED - Indicates that the administrator account
+	// * Invited - Indicates that the administrator account
 	// invited the member account. The member account has not yet responded to the
 	// invitation.
 	//
-	// * ENABLED - Indicates that the member account is currently active.
+	// * Enabled - Indicates that the member account is currently active.
 	// For manually invited member accounts, indicates that the member account accepted
 	// the invitation.
 	//
-	// * REMOVED - Indicates that the administrator account
+	// * Removed - Indicates that the administrator account
 	// disassociated the member account.
 	//
-	// * RESIGNED - Indicates that the member
+	// * Resigned - Indicates that the member
 	// account disassociated themselves from the administrator account.
 	//
-	// * DELETED -
+	// * Deleted -
 	// Indicates that the administrator account deleted the member account.
 	//
 	// *
-	// ACCOUNT_SUSPENDED - Indicates that an organization account was suspended from
+	// AccountSuspended - Indicates that an organization account was suspended from
 	// Amazon Web Services at the same time that the administrator account tried to
 	// enable the organization account as a member account.
 	MemberStatus *string
@@ -12178,7 +12443,8 @@ type Note struct {
 	// The timestamp of when the note was updated. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	//
 	// This member is required.
 	UpdatedAt *string
@@ -12306,13 +12572,15 @@ type PatchSummary struct {
 	// Indicates when the operation completed. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	OperationEndTime *string
 
 	// Indicates when the operation started. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	OperationStartTime *string
 
 	// The reboot option specified for the instance.
@@ -12381,13 +12649,15 @@ type ProcessDetails struct {
 	// Indicates when the process was launched. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LaunchedAt *string
 
 	// The name of the process.
 	Name *string
 
-	// The parent process ID.
+	// The parent process ID. This field accepts positive integers between O and
+	// 2147483647.
 	ParentPid int32
 
 	// The path to the process executable.
@@ -12399,7 +12669,8 @@ type ProcessDetails struct {
 	// Indicates when the process was terminated. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	TerminatedAt *string
 
 	noSmithyDocumentSerde
@@ -12451,6 +12722,15 @@ type Product struct {
 
 	// The resource policy associated with the product.
 	ProductSubscriptionResourcePolicy *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a virtual private gateway propagating route.
+type PropagatingVgwSetDetails struct {
+
+	// The ID of the virtual private gateway.
+	GatewayId *string
 
 	noSmithyDocumentSerde
 }
@@ -12643,6 +12923,11 @@ type ResourceDetails struct {
 
 	// Details for an EC2 network interface.
 	AwsEc2NetworkInterface *AwsEc2NetworkInterfaceDetails
+
+	// Provides details about a route table. A route table contains a set of rules,
+	// called routes, that determine where to direct network traffic from your subnet
+	// or gateway.
+	AwsEc2RouteTable *AwsEc2RouteTableDetails
 
 	// Details for an EC2 security group.
 	AwsEc2SecurityGroup *AwsEc2SecurityGroupDetails
@@ -12859,6 +13144,60 @@ type Result struct {
 
 	// The reason that the account was not processed.
 	ProcessingResult *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the routes in the route table.
+type RouteSetDetails struct {
+
+	// The ID of the carrier gateway.
+	CarrierGatewayId *string
+
+	// The Amazon Resource Name (ARN) of the core network.
+	CoreNetworkArn *string
+
+	// The IPv4 CIDR block used for the destination match.
+	DestinationCidrBlock *string
+
+	// The IPv6 CIDR block used for the destination match.
+	DestinationIpv6CidrBlock *string
+
+	// The prefix of the destination Amazon Web Service.
+	DestinationPrefixListId *string
+
+	// The ID of the egress-only internet gateway.
+	EgressOnlyInternetGatewayId *string
+
+	// The ID of a gateway attached to your VPC.
+	GatewayId *string
+
+	// The ID of a NAT instance in your VPC.
+	InstanceId *string
+
+	// The ID of the Amazon Web Services account that owns the instance.
+	InstanceOwnerId *string
+
+	// The ID of the local gateway.
+	LocalGatewayId *string
+
+	// The ID of a NAT gateway.
+	NatGatewayId *string
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string
+
+	// Describes how the route was created.
+	Origin *string
+
+	// The state of the route.
+	State *string
+
+	// The ID of a transit gateway.
+	TransitGatewayId *string
+
+	// The ID of a VPC peering connection.
+	VpcPeeringConnectionId *string
 
 	noSmithyDocumentSerde
 }
@@ -13141,6 +13480,114 @@ type RuleGroupVariablesPortSetsDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A security control in Security Hub describes a security best practice related to
+// a specific resource.
+type SecurityControl struct {
+
+	// The description of a security control across standards. This typically
+	// summarizes how Security Hub evaluates the control and the conditions under which
+	// it produces a failed finding. This parameter doesn't reference a specific
+	// standard.
+	//
+	// This member is required.
+	Description *string
+
+	// A link to Security Hub documentation that explains how to remediate a failed
+	// finding for a security control.
+	//
+	// This member is required.
+	RemediationUrl *string
+
+	// The Amazon Resource Name (ARN) for a security control across standards, such as
+	// arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1. This
+	// parameter doesn't mention a specific standard.
+	//
+	// This member is required.
+	SecurityControlArn *string
+
+	// The unique identifier of a security control across standards. Values for this
+	// field typically consist of an Amazon Web Service name and a number, such as
+	// APIGateway.3.
+	//
+	// This member is required.
+	SecurityControlId *string
+
+	// The status of a security control based on the compliance status of its findings.
+	// For more information about how control status is determined, see Determining the
+	// overall status of a control from its findings
+	// (https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html)
+	// in the Security Hub User Guide.
+	//
+	// This member is required.
+	SecurityControlStatus ControlStatus
+
+	// The severity of a security control. For more information about how Security Hub
+	// determines control severity, see Assigning severity to control findings
+	// (https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity)
+	// in the Security Hub User Guide.
+	//
+	// This member is required.
+	SeverityRating SeverityRating
+
+	// The title of a security control.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides metadata for a security control, including its unique standard-agnostic
+// identifier, title, description, severity, availability in Amazon Web Services
+// Regions, and a link to remediation steps.
+type SecurityControlDefinition struct {
+
+	// Specifies whether a security control is available in the current Amazon Web
+	// Services Region.
+	//
+	// This member is required.
+	CurrentRegionAvailability RegionAvailabilityStatus
+
+	// The description of a security control across standards. This typically
+	// summarizes how Security Hub evaluates the control and the conditions under which
+	// it produces a failed finding. This parameter doesn't reference a specific
+	// standard.
+	//
+	// This member is required.
+	Description *string
+
+	// A link to Security Hub documentation that explains how to remediate a failed
+	// finding for a security control.
+	//
+	// This member is required.
+	RemediationUrl *string
+
+	// The unique identifier of a security control across standards. Values for this
+	// field typically consist of an Amazon Web Service name and a number (for example,
+	// APIGateway.3). This parameter differs from SecurityControlArn, which is a unique
+	// Amazon Resource Name (ARN) assigned to a control. The ARN references the
+	// security control ID (for example,
+	// arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3).
+	//
+	// This member is required.
+	SecurityControlId *string
+
+	// The severity of a security control. For more information about how Security Hub
+	// determines control severity, see Assigning severity to control findings
+	// (https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity)
+	// in the Security Hub User Guide.
+	//
+	// This member is required.
+	SeverityRating SeverityRating
+
+	// The title of a security control.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
 // The list of detected instances of sensitive data.
 type SensitiveDataDetections struct {
 
@@ -13176,7 +13623,7 @@ type SensitiveDataResult struct {
 }
 
 // The severity of the finding. The finding provider can provide the initial
-// severity. The finding provider can only update the severity if it has not been
+// severity. The finding provider can only update the severity if it hasn't been
 // updated using BatchUpdateFindings. The finding must have either Label or
 // Normalized populated. If only one of these attributes is populated, then
 // Security Hub automatically populates the other one. If neither attribute is
@@ -13407,6 +13854,162 @@ type StandardsControl struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about a control's enablement status in a specified standard.
+type StandardsControlAssociationDetail struct {
+
+	// Specifies whether a control is enabled or disabled in a specified standard.
+	//
+	// This member is required.
+	AssociationStatus AssociationStatus
+
+	// The ARN of a security control across standards, such as
+	// arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1. This
+	// parameter doesn't mention a specific standard.
+	//
+	// This member is required.
+	SecurityControlArn *string
+
+	// The unique identifier of a security control across standards. Values for this
+	// field typically consist of an Amazon Web Service name and a number, such as
+	// APIGateway.3.
+	//
+	// This member is required.
+	SecurityControlId *string
+
+	// The Amazon Resource Name (ARN) of a security standard.
+	//
+	// This member is required.
+	StandardsArn *string
+
+	// The requirement that underlies a control in the compliance framework related to
+	// the standard.
+	RelatedRequirements []string
+
+	// Provides the input parameter that Security Hub uses to call the
+	// UpdateStandardsControl
+	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html)
+	// API. This API can be used to enable or disable a control in a specified
+	// standard.
+	StandardsControlArns []string
+
+	// The description of a control. This typically summarizes how Security Hub
+	// evaluates the control and the conditions under which it produces a failed
+	// finding. This parameter may reference a specific standard.
+	StandardsControlDescription *string
+
+	// The title of a control. This field may reference a specific standard.
+	StandardsControlTitle *string
+
+	// The time at which the enablement status of the control in the specified standard
+	// was last updated.
+	UpdatedAt *time.Time
+
+	// The reason for updating the enablement status of a control in a specified
+	// standard.
+	UpdatedReason *string
+
+	noSmithyDocumentSerde
+}
+
+// An array with one or more objects that includes a security control (identified
+// with SecurityControlId, SecurityControlArn, or a mix of both parameters) and the
+// Amazon Resource Name (ARN) of a standard. The security control ID or ARN is the
+// same across standards.
+type StandardsControlAssociationId struct {
+
+	// The unique identifier (identified with SecurityControlId, SecurityControlArn, or
+	// a mix of both parameters) of a security control across standards.
+	//
+	// This member is required.
+	SecurityControlId *string
+
+	// The ARN of a standard.
+	//
+	// This member is required.
+	StandardsArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An array that provides the enablement status and other details for each control
+// that applies to each enabled standard.
+type StandardsControlAssociationSummary struct {
+
+	// The enablement status of a control in a specific standard.
+	//
+	// This member is required.
+	AssociationStatus AssociationStatus
+
+	// The ARN of a control, such as
+	// arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1. This
+	// parameter doesn't mention a specific standard.
+	//
+	// This member is required.
+	SecurityControlArn *string
+
+	// A unique standard-agnostic identifier for a control. Values for this field
+	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
+	// This field doesn't reference a specific standard.
+	//
+	// This member is required.
+	SecurityControlId *string
+
+	// The Amazon Resource Name (ARN) of a standard.
+	//
+	// This member is required.
+	StandardsArn *string
+
+	// The requirement that underlies this control in the compliance framework related
+	// to the standard.
+	RelatedRequirements []string
+
+	// The description of a control. This typically summarizes how Security Hub
+	// evaluates the control and the conditions under which it produces a failed
+	// finding. The parameter may reference a specific standard.
+	StandardsControlDescription *string
+
+	// The title of a control.
+	StandardsControlTitle *string
+
+	// The last time that a control's enablement status in a specified standard was
+	// updated.
+	UpdatedAt *time.Time
+
+	// The reason for updating the control's enablement status in a specified standard.
+	UpdatedReason *string
+
+	noSmithyDocumentSerde
+}
+
+// An array of requested updates to the enablement status of controls in specified
+// standards. The objects in the array include a security control ID, the Amazon
+// Resource Name (ARN) of the standard, the requested enablement status, and the
+// reason for updating the enablement status.
+type StandardsControlAssociationUpdate struct {
+
+	// The desired enablement status of the control in the standard.
+	//
+	// This member is required.
+	AssociationStatus AssociationStatus
+
+	// The unique identifier for the security control whose enablement status you want
+	// to update.
+	//
+	// This member is required.
+	SecurityControlId *string
+
+	// The Amazon Resource Name (ARN) of the standard in which you want to update the
+	// control's enablement status.
+	//
+	// This member is required.
+	StandardsArn *string
+
+	// The reason for updating the control's enablement status in the standard.
+	UpdatedReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides details about the management of a security standard.
 type StandardsManagedBy struct {
 
@@ -13630,7 +14233,8 @@ type ThreatIntelIndicator struct {
 	// Indicates when the most recent instance of a threat intelligence indicator was
 	// observed. Uses the date-time format specified in RFC 3339 section 5.6, Internet
 	// Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value
-	// cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	// cannot contain spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	LastObservedAt *string
 
 	// The source of the threat intelligence indicator.
@@ -13645,6 +14249,80 @@ type ThreatIntelIndicator struct {
 
 	// The value of a threat intelligence indicator.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about a security control for which a response couldn't be
+// returned.
+type UnprocessedSecurityControl struct {
+
+	// The error code for the unprocessed security control.
+	//
+	// This member is required.
+	ErrorCode UnprocessedErrorCode
+
+	// The control (identified with SecurityControlId, SecurityControlArn, or a mix of
+	// both parameters) for which a response couldn't be returned.
+	//
+	// This member is required.
+	SecurityControlId *string
+
+	// The reason why the security control was unprocessed.
+	ErrorReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about which control's enablement status couldn't be retrieved
+// in a specified standard when calling BatchUpdateStandardsControlAssociations
+// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html).
+// This parameter also provides details about why the request was unprocessed.
+type UnprocessedStandardsControlAssociation struct {
+
+	// The error code for the unprocessed standard and control association.
+	//
+	// This member is required.
+	ErrorCode UnprocessedErrorCode
+
+	// An array with one or more objects that includes a security control (identified
+	// with SecurityControlId, SecurityControlArn, or a mix of both parameters) and the
+	// Amazon Resource Name (ARN) of a standard. This parameter shows the specific
+	// controls for which the enablement status couldn't be retrieved in specified
+	// standards when calling BatchUpdateStandardsControlAssociations
+	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html).
+	//
+	// This member is required.
+	StandardsControlAssociationId *StandardsControlAssociationId
+
+	// The reason why the standard and control association was unprocessed.
+	ErrorReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about which control's enablement status could not be updated in
+// a specified standard when calling the BatchUpdateStandardsControlAssociations
+// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html)
+// API. This parameter also provides details about why the request was unprocessed.
+type UnprocessedStandardsControlAssociationUpdate struct {
+
+	// The error code for the unprocessed update of the control's enablement status in
+	// the specified standard.
+	//
+	// This member is required.
+	ErrorCode UnprocessedErrorCode
+
+	// An array of control and standard associations for which an update failed when
+	// calling BatchUpdateStandardsControlAssociations
+	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html).
+	//
+	// This member is required.
+	StandardsControlAssociationUpdate *StandardsControlAssociationUpdate
+
+	// The reason why a control's enablement status in the specified standard couldn't
+	// be updated.
+	ErrorReason *string
 
 	noSmithyDocumentSerde
 }
@@ -13753,7 +14431,8 @@ type VulnerabilityVendor struct {
 	// Indicates when the vulnerability advisory was created. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	VendorCreatedAt *string
 
 	// The severity that the vendor assigned to the vulnerability.
@@ -13762,7 +14441,8 @@ type VulnerabilityVendor struct {
 	// Indicates when the vulnerability advisory was last updated. Uses the date-time
 	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
-	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	// spaces, and date and time should be separated by T. For example,
+	// 2020-03-22T13:22:13.933Z.
 	VendorUpdatedAt *string
 
 	noSmithyDocumentSerde

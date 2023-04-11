@@ -29,7 +29,7 @@ func (e *ClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientException"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *ServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServerException"
 	}
 	return *e.ErrorCodeOverride

@@ -42,7 +42,7 @@ type GetClassificationScopeOutput struct {
 	// The unique identifier for the classification scope.
 	Id *string
 
-	// The name of the classification scope.
+	// The name of the classification scope: automated-sensitive-data-discovery.
 	Name *string
 
 	// The S3 buckets that are excluded from automated sensitive data discovery.

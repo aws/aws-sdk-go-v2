@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -119,11 +119,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#AddFacetToObjectResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#AmazonCloudDirectory_20170111": {
             "type": "service",
@@ -341,7 +347,776 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>Amazon Cloud Directory</fullname>\n         <p>Amazon Cloud Directory is a component of the AWS Directory Service that simplifies the\n      development and management of cloud-scale web, mobile, and IoT applications. This guide\n      describes the Cloud Directory operations that you can call programmatically and includes\n      detailed information on data types and errors. For information about Cloud Directory features, see <a href=\"https://aws.amazon.com/directoryservice/\">AWS Directory\n        Service</a> and the <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/what_is_cloud_directory.html\">Amazon Cloud Directory Developer Guide</a>.</p>",
-                "smithy.api#title": "Amazon CloudDirectory"
+                "smithy.api#title": "Amazon CloudDirectory",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://clouddirectory-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "stringEquals",
+                                                                                    "argv": [
+                                                                                        "aws-us-gov",
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "PartitionResult"
+                                                                                                },
+                                                                                                "name"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "endpoint": {
+                                                                                "url": "https://clouddirectory.{Region}.amazonaws.com",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://clouddirectory-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://clouddirectory.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://clouddirectory.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://clouddirectory.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.clouddirectory#ApplySchema": {
@@ -408,6 +1183,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ApplySchemaResponse": {
@@ -425,6 +1203,9 @@
                         "smithy.api#documentation": "<p>The ARN that is associated with the <a>Directory</a>. For more information,\n      see <a>arns</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#Arn": {
@@ -520,6 +1301,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#AttachObjectResponse": {
@@ -531,6 +1315,9 @@
                         "smithy.api#documentation": "<p>The attached <code>ObjectIdentifier</code>, which is the child\n        <code>ObjectIdentifier</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#AttachPolicy": {
@@ -604,11 +1391,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#AttachPolicyResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#AttachToIndex": {
             "type": "operation",
@@ -690,6 +1483,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#AttachToIndexResponse": {
@@ -701,6 +1497,9 @@
                         "smithy.api#documentation": "<p>The <code>ObjectIdentifier</code> of the object that was attached to the index.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#AttachTypedLink": {
@@ -791,6 +1590,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#AttachTypedLinkResponse": {
@@ -802,6 +1604,9 @@
                         "smithy.api#documentation": "<p>Returns a typed link specifier as output.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#AttributeKey": {
@@ -1118,6 +1923,7 @@
                 "IsUnique": {
                     "target": "com.amazonaws.clouddirectory#Bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the attribute that is being indexed has unique values or\n       not.</p>",
                         "smithy.api#required": {}
                     }
@@ -2031,7 +2837,10 @@
             }
         },
         "com.amazonaws.clouddirectory#BatchOperationIndex": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.clouddirectory#BatchRead": {
             "type": "operation",
@@ -2094,62 +2903,86 @@
             }
         },
         "com.amazonaws.clouddirectory#BatchReadExceptionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ValidationException",
-                        "name": "ValidationException"
-                    },
-                    {
-                        "value": "InvalidArnException",
-                        "name": "InvalidArnException"
-                    },
-                    {
-                        "value": "ResourceNotFoundException",
-                        "name": "ResourceNotFoundException"
-                    },
-                    {
-                        "value": "InvalidNextTokenException",
-                        "name": "InvalidNextTokenException"
-                    },
-                    {
-                        "value": "AccessDeniedException",
-                        "name": "AccessDeniedException"
-                    },
-                    {
-                        "value": "NotNodeException",
-                        "name": "NotNodeException"
-                    },
-                    {
-                        "value": "FacetValidationException",
-                        "name": "FacetValidationException"
-                    },
-                    {
-                        "value": "CannotListParentOfRootException",
-                        "name": "CannotListParentOfRootException"
-                    },
-                    {
-                        "value": "NotIndexException",
-                        "name": "NotIndexException"
-                    },
-                    {
-                        "value": "NotPolicyException",
-                        "name": "NotPolicyException"
-                    },
-                    {
-                        "value": "DirectoryNotEnabledException",
-                        "name": "DirectoryNotEnabledException"
-                    },
-                    {
-                        "value": "LimitExceededException",
-                        "name": "LimitExceededException"
-                    },
-                    {
-                        "value": "InternalServiceException",
-                        "name": "InternalServiceException"
+            "type": "enum",
+            "members": {
+                "ValidationException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationException"
                     }
-                ]
+                },
+                "InvalidArnException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidArnException"
+                    }
+                },
+                "ResourceNotFoundException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFoundException"
+                    }
+                },
+                "InvalidNextTokenException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidNextTokenException"
+                    }
+                },
+                "AccessDeniedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDeniedException"
+                    }
+                },
+                "NotNodeException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotNodeException"
+                    }
+                },
+                "FacetValidationException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FacetValidationException"
+                    }
+                },
+                "CannotListParentOfRootException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CannotListParentOfRootException"
+                    }
+                },
+                "NotIndexException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotIndexException"
+                    }
+                },
+                "NotPolicyException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotPolicyException"
+                    }
+                },
+                "DirectoryNotEnabledException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DirectoryNotEnabledException"
+                    }
+                },
+                "LimitExceededException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LimitExceededException"
+                    }
+                },
+                "InternalServiceException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalServiceException"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#BatchReadOperation": {
@@ -2301,6 +3134,9 @@
                         "smithy.api#httpHeader": "x-amz-consistency-level"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#BatchReadResponse": {
@@ -2312,6 +3148,9 @@
                         "smithy.api#documentation": "<p>A list of all the responses for each batch read.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#BatchReadSuccessfulResponse": {
@@ -2550,7 +3389,10 @@
             "type": "structure",
             "members": {
                 "Index": {
-                    "target": "com.amazonaws.clouddirectory#BatchOperationIndex"
+                    "target": "com.amazonaws.clouddirectory#BatchOperationIndex",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "Type": {
                     "target": "com.amazonaws.clouddirectory#BatchWriteExceptionType"
@@ -2565,82 +3407,116 @@
             }
         },
         "com.amazonaws.clouddirectory#BatchWriteExceptionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InternalServiceException",
-                        "name": "InternalServiceException"
-                    },
-                    {
-                        "value": "ValidationException",
-                        "name": "ValidationException"
-                    },
-                    {
-                        "value": "InvalidArnException",
-                        "name": "InvalidArnException"
-                    },
-                    {
-                        "value": "LinkNameAlreadyInUseException",
-                        "name": "LinkNameAlreadyInUseException"
-                    },
-                    {
-                        "value": "StillContainsLinksException",
-                        "name": "StillContainsLinksException"
-                    },
-                    {
-                        "value": "FacetValidationException",
-                        "name": "FacetValidationException"
-                    },
-                    {
-                        "value": "ObjectNotDetachedException",
-                        "name": "ObjectNotDetachedException"
-                    },
-                    {
-                        "value": "ResourceNotFoundException",
-                        "name": "ResourceNotFoundException"
-                    },
-                    {
-                        "value": "AccessDeniedException",
-                        "name": "AccessDeniedException"
-                    },
-                    {
-                        "value": "InvalidAttachmentException",
-                        "name": "InvalidAttachmentException"
-                    },
-                    {
-                        "value": "NotIndexException",
-                        "name": "NotIndexException"
-                    },
-                    {
-                        "value": "NotNodeException",
-                        "name": "NotNodeException"
-                    },
-                    {
-                        "value": "IndexedAttributeMissingException",
-                        "name": "IndexedAttributeMissingException"
-                    },
-                    {
-                        "value": "ObjectAlreadyDetachedException",
-                        "name": "ObjectAlreadyDetachedException"
-                    },
-                    {
-                        "value": "NotPolicyException",
-                        "name": "NotPolicyException"
-                    },
-                    {
-                        "value": "DirectoryNotEnabledException",
-                        "name": "DirectoryNotEnabledException"
-                    },
-                    {
-                        "value": "LimitExceededException",
-                        "name": "LimitExceededException"
-                    },
-                    {
-                        "value": "UnsupportedIndexTypeException",
-                        "name": "UnsupportedIndexTypeException"
+            "type": "enum",
+            "members": {
+                "InternalServiceException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalServiceException"
                     }
-                ]
+                },
+                "ValidationException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationException"
+                    }
+                },
+                "InvalidArnException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidArnException"
+                    }
+                },
+                "LinkNameAlreadyInUseException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LinkNameAlreadyInUseException"
+                    }
+                },
+                "StillContainsLinksException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StillContainsLinksException"
+                    }
+                },
+                "FacetValidationException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FacetValidationException"
+                    }
+                },
+                "ObjectNotDetachedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ObjectNotDetachedException"
+                    }
+                },
+                "ResourceNotFoundException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFoundException"
+                    }
+                },
+                "AccessDeniedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDeniedException"
+                    }
+                },
+                "InvalidAttachmentException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidAttachmentException"
+                    }
+                },
+                "NotIndexException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotIndexException"
+                    }
+                },
+                "NotNodeException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotNodeException"
+                    }
+                },
+                "IndexedAttributeMissingException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IndexedAttributeMissingException"
+                    }
+                },
+                "ObjectAlreadyDetachedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ObjectAlreadyDetachedException"
+                    }
+                },
+                "NotPolicyException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotPolicyException"
+                    }
+                },
+                "DirectoryNotEnabledException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DirectoryNotEnabledException"
+                    }
+                },
+                "LimitExceededException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LimitExceededException"
+                    }
+                },
+                "UnsupportedIndexTypeException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnsupportedIndexTypeException"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#BatchWriteOperation": {
@@ -2869,6 +3745,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#BatchWriteResponse": {
@@ -2880,19 +3759,22 @@
                         "smithy.api#documentation": "<p>A list of all the responses for each batch write.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#BinaryAttributeValue": {
             "type": "blob"
         },
         "com.amazonaws.clouddirectory#Bool": {
-            "type": "boolean"
-        },
-        "com.amazonaws.clouddirectory#BooleanAttributeValue": {
             "type": "boolean",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": false
             }
+        },
+        "com.amazonaws.clouddirectory#BooleanAttributeValue": {
+            "type": "boolean"
         },
         "com.amazonaws.clouddirectory#CannotListParentOfRootException": {
             "type": "structure",
@@ -2908,18 +3790,20 @@
             }
         },
         "com.amazonaws.clouddirectory#ConsistencyLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SERIALIZABLE",
-                        "name": "SERIALIZABLE"
-                    },
-                    {
-                        "value": "EVENTUAL",
-                        "name": "EVENTUAL"
+            "type": "enum",
+            "members": {
+                "SERIALIZABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERIALIZABLE"
                     }
-                ]
+                },
+                "EVENTUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENTUAL"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#CreateDirectory": {
@@ -2983,6 +3867,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateDirectoryResponse": {
@@ -3016,6 +3903,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateFacet": {
@@ -3103,11 +3993,17 @@
                         "smithy.api#documentation": "<p>There are two different styles that you can define on any given facet, <code>Static</code> and <code>Dynamic</code>. For static facets, all attributes must be defined in the schema. For dynamic facets, attributes can be defined during data plane operations.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateFacetResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#CreateIndex": {
             "type": "operation",
@@ -3182,6 +4078,7 @@
                 "IsUnique": {
                     "target": "com.amazonaws.clouddirectory#Bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the attribute that is being indexed has unique values or\n      not.</p>",
                         "smithy.api#required": {}
                     }
@@ -3198,6 +4095,9 @@
                         "smithy.api#documentation": "<p>The name of the link between the parent object and the index object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateIndexResponse": {
@@ -3209,6 +4109,9 @@
                         "smithy.api#documentation": "<p>The <code>ObjectIdentifier</code> of the index created by this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateObject": {
@@ -3299,6 +4202,9 @@
                         "smithy.api#documentation": "<p>The name of link that is used to attach this object to a parent.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateObjectResponse": {
@@ -3310,6 +4216,9 @@
                         "smithy.api#documentation": "<p>The identifier that is associated with the object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateSchema": {
@@ -3362,6 +4271,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateSchemaResponse": {
@@ -3373,6 +4285,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that is associated with the schema. For more\n      information, see <a>arns</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateTypedLinkFacet": {
@@ -3442,11 +4357,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#CreateTypedLinkFacetResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#Date": {
             "type": "timestamp"
@@ -3511,6 +4432,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DeleteDirectoryResponse": {
@@ -3523,6 +4447,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#DeleteFacet": {
@@ -3589,11 +4516,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DeleteFacetResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#DeleteObject": {
             "type": "operation",
@@ -3659,11 +4592,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DeleteObjectResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#DeleteSchema": {
             "type": "operation",
@@ -3719,6 +4658,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DeleteSchemaResponse": {
@@ -3730,6 +4672,9 @@
                         "smithy.api#documentation": "<p>The input ARN that is returned as part of the response. For more information, see\n        <a>arns</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#DeleteTypedLinkFacet": {
@@ -3793,11 +4738,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DeleteTypedLinkFacetResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#DetachFromIndex": {
             "type": "operation",
@@ -3873,6 +4824,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DetachFromIndexResponse": {
@@ -3884,6 +4838,9 @@
                         "smithy.api#documentation": "<p>The <code>ObjectIdentifier</code> of the object that was detached from the index.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#DetachObject": {
@@ -3957,6 +4914,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DetachObjectResponse": {
@@ -3968,6 +4928,9 @@
                         "smithy.api#documentation": "<p>The <code>ObjectIdentifier</code> that was detached from the object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#DetachPolicy": {
@@ -4041,16 +5004,25 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DetachPolicyResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#DetachTypedLink": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.clouddirectory#DetachTypedLinkRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4108,6 +5080,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#Directory": {
@@ -4214,22 +5189,26 @@
             }
         },
         "com.amazonaws.clouddirectory#DirectoryState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#DisableDirectory": {
@@ -4286,6 +5265,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#DisableDirectoryResponse": {
@@ -4298,6 +5280,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#EnableDirectory": {
@@ -4354,6 +5339,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#EnableDirectoryResponse": {
@@ -4366,6 +5354,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ExceptionMessage": {
@@ -4462,6 +5453,7 @@
                 "IsImmutable": {
                     "target": "com.amazonaws.clouddirectory#Bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the attribute is mutable or not.</p>"
                     }
                 },
@@ -4505,34 +5497,44 @@
             }
         },
         "com.amazonaws.clouddirectory#FacetAttributeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "BINARY",
-                        "name": "BINARY"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "NUMBER",
-                        "name": "NUMBER"
-                    },
-                    {
-                        "value": "DATETIME",
-                        "name": "DATETIME"
-                    },
-                    {
-                        "value": "VARIANT",
-                        "name": "VARIANT"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
                     }
-                ]
+                },
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BINARY"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER"
+                    }
+                },
+                "DATETIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATETIME"
+                    }
+                },
+                "VARIANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARIANT"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#FacetAttributeUpdate": {
@@ -4604,18 +5606,20 @@
             }
         },
         "com.amazonaws.clouddirectory#FacetStyle": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STATIC",
-                        "name": "STATIC"
-                    },
-                    {
-                        "value": "DYNAMIC",
-                        "name": "DYNAMIC"
+            "type": "enum",
+            "members": {
+                "STATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATIC"
                     }
-                ]
+                },
+                "DYNAMIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DYNAMIC"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#FacetValidationException": {
@@ -4681,6 +5685,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#GetAppliedSchemaVersionResponse": {
@@ -4692,6 +5699,9 @@
                         "smithy.api#documentation": "<p>Current applied schema ARN, including the minor version in use if one was provided.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#GetDirectory": {
@@ -4742,6 +5752,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#GetDirectoryResponse": {
@@ -4754,6 +5767,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#GetFacet": {
@@ -4817,6 +5833,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#GetFacetResponse": {
@@ -4828,6 +5847,9 @@
                         "smithy.api#documentation": "<p>The <a>Facet</a> structure that is associated with the facet.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#GetLinkAttributes": {
@@ -4907,6 +5929,9 @@
                         "smithy.api#documentation": "<p>The consistency level at which to retrieve the attributes on a typed link.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#GetLinkAttributesResponse": {
@@ -4918,6 +5943,9 @@
                         "smithy.api#documentation": "<p>The attributes that are associated with the typed link.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#GetObjectAttributes": {
@@ -5005,6 +6033,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#GetObjectAttributesResponse": {
@@ -5016,6 +6047,9 @@
                         "smithy.api#documentation": "<p>The attributes that are associated with the object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#GetObjectInformation": {
@@ -5086,6 +6120,9 @@
                         "smithy.api#httpHeader": "x-amz-consistency-level"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#GetObjectInformationResponse": {
@@ -5103,6 +6140,9 @@
                         "smithy.api#documentation": "<p>The <code>ObjectIdentifier</code> of the specified object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#GetSchemaAsJson": {
@@ -5156,6 +6196,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#GetSchemaAsJsonResponse": {
@@ -5173,6 +6216,9 @@
                         "smithy.api#documentation": "<p>The JSON representation of the schema document.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#GetTypedLinkFacetInformation": {
@@ -5239,6 +6285,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#GetTypedLinkFacetInformationResponse": {
@@ -5250,6 +6299,9 @@
                         "smithy.api#documentation": "<p>The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed\n      links considers the order that the attributes are defined on the typed link facet. When\n      providing ranges to typed link selection, any inexact ranges must be specified at the end. Any\n      attributes that do not have a range specified are presumed to match the entire range. Filters\n      are interpreted in the order of the attributes on the typed link facet, not the order in which\n      they are supplied to any API calls. For more information about identity attributes, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink\">Typed Links</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#IncompatibleSchemaException": {
@@ -5575,6 +6627,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListAppliedSchemaArnsResponse": {
@@ -5592,6 +6647,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListAttachedIndices": {
@@ -5679,6 +6737,9 @@
                         "smithy.api#httpHeader": "x-amz-consistency-level"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListAttachedIndicesResponse": {
@@ -5696,6 +6757,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListDevelopmentSchemaArns": {
@@ -5761,6 +6825,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListDevelopmentSchemaArnsResponse": {
@@ -5778,6 +6845,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListDirectories": {
@@ -5846,6 +6916,9 @@
                         "smithy.api#documentation": "<p>The state of the directories in the list. Can be either Enabled, Disabled, or\n      Deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListDirectoriesResponse": {
@@ -5864,6 +6937,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListFacetAttributes": {
@@ -5947,6 +7023,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListFacetAttributesResponse": {
@@ -5964,6 +7043,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListFacetNames": {
@@ -6037,6 +7119,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListFacetNamesResponse": {
@@ -6054,6 +7139,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListIncomingTypedLinks": {
@@ -6153,6 +7241,9 @@
                         "smithy.api#documentation": "<p>The consistency level to execute the request at.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListIncomingTypedLinksResponse": {
@@ -6170,6 +7261,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListIndex": {
@@ -6272,6 +7366,9 @@
                         "smithy.api#httpHeader": "x-amz-consistency-level"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListIndexResponse": {
@@ -6289,6 +7386,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListManagedSchemaArns": {
@@ -6354,6 +7454,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListManagedSchemaArnsResponse": {
@@ -6371,6 +7474,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectAttributes": {
@@ -6470,6 +7576,9 @@
                         "smithy.api#documentation": "<p>Used to filter the list of object attributes that are associated with a certain\n      facet.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectAttributesResponse": {
@@ -6487,6 +7596,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectChildren": {
@@ -6580,6 +7692,9 @@
                         "smithy.api#httpHeader": "x-amz-consistency-level"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectChildrenResponse": {
@@ -6597,6 +7712,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectParentPaths": {
@@ -6680,6 +7798,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to be retrieved in a single call. This is an approximate\n      number.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectParentPathsResponse": {
@@ -6697,6 +7818,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectParents": {
@@ -6793,9 +7917,13 @@
                 "IncludeAllLinksToEachParent": {
                     "target": "com.amazonaws.clouddirectory#Bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to True, returns all <a>ListObjectParentsResponse$ParentLinks</a>. There could be multiple links between a parent-child pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectParentsResponse": {
@@ -6819,6 +7947,9 @@
                         "smithy.api#documentation": "<p>Returns a list of parent reference and LinkName Tuples.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectPolicies": {
@@ -6909,6 +8040,9 @@
                         "smithy.api#httpHeader": "x-amz-consistency-level"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListObjectPoliciesResponse": {
@@ -6926,6 +8060,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListOutgoingTypedLinks": {
@@ -7025,6 +8162,9 @@
                         "smithy.api#documentation": "<p>The consistency level to execute the request at.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListOutgoingTypedLinksResponse": {
@@ -7042,6 +8182,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListPolicyAttachments": {
@@ -7135,6 +8278,9 @@
                         "smithy.api#httpHeader": "x-amz-consistency-level"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListPolicyAttachmentsResponse": {
@@ -7152,6 +8298,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListPublishedSchemaArns": {
@@ -7223,6 +8372,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListPublishedSchemaArnsResponse": {
@@ -7240,6 +8392,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListTagsForResource": {
@@ -7312,6 +8467,9 @@
                         "smithy.api#documentation": "<p>The <code>MaxResults</code> parameter sets the maximum number of results returned in a\n      single page. This is for future use and is not supported currently.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListTagsForResourceResponse": {
@@ -7329,6 +8487,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListTypedLinkFacetAttributes": {
@@ -7412,6 +8573,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListTypedLinkFacetAttributesResponse": {
@@ -7429,6 +8593,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ListTypedLinkFacetNames": {
@@ -7502,6 +8669,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#ListTypedLinkFacetNamesResponse": {
@@ -7519,6 +8689,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#LookupPolicy": {
@@ -7602,6 +8775,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to be retrieved in a single call. This is an approximate\n      number.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#LookupPolicyResponse": {
@@ -7619,6 +8795,9 @@
                         "smithy.api#documentation": "<p>The pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#NextToken": {
@@ -7669,7 +8848,6 @@
         "com.amazonaws.clouddirectory#NumberResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -7832,26 +9010,32 @@
             }
         },
         "com.amazonaws.clouddirectory#ObjectType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NODE",
-                        "name": "NODE"
-                    },
-                    {
-                        "value": "LEAF_NODE",
-                        "name": "LEAF_NODE"
-                    },
-                    {
-                        "value": "POLICY",
-                        "name": "POLICY"
-                    },
-                    {
-                        "value": "INDEX",
-                        "name": "INDEX"
+            "type": "enum",
+            "members": {
+                "NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NODE"
                     }
-                ]
+                },
+                "LEAF_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEAF_NODE"
+                    }
+                },
+                "POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY"
+                    }
+                },
+                "INDEX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDEX"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#PathString": {
@@ -8017,6 +9201,9 @@
                         "smithy.api#documentation": "<p>The new name under which the schema will be published. If this is not provided, the\n      development schema is considered.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#PublishSchemaResponse": {
@@ -8028,6 +9215,9 @@
                         "smithy.api#documentation": "<p>The ARN that is associated with the published schema. For more information, see <a>arns</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#PutSchemaFromJson": {
@@ -8091,6 +9281,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#PutSchemaFromJsonResponse": {
@@ -8102,33 +9295,44 @@
                         "smithy.api#documentation": "<p>The ARN of the schema to update.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#RangeMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FIRST",
-                        "name": "FIRST"
-                    },
-                    {
-                        "value": "LAST",
-                        "name": "LAST"
-                    },
-                    {
-                        "value": "LAST_BEFORE_MISSING_VALUES",
-                        "name": "LAST_BEFORE_MISSING_VALUES"
-                    },
-                    {
-                        "value": "INCLUSIVE",
-                        "name": "INCLUSIVE"
-                    },
-                    {
-                        "value": "EXCLUSIVE",
-                        "name": "EXCLUSIVE"
+            "type": "enum",
+            "members": {
+                "FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRST"
                     }
-                ]
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST"
+                    }
+                },
+                "LAST_BEFORE_MISSING_VALUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST_BEFORE_MISSING_VALUES"
+                    }
+                },
+                "INCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUSIVE"
+                    }
+                },
+                "EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#RemoveFacetFromObject": {
@@ -8202,25 +9406,33 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#RemoveFacetFromObjectResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#RequiredAttributeBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REQUIRED_ALWAYS",
-                        "name": "REQUIRED_ALWAYS"
-                    },
-                    {
-                        "value": "NOT_REQUIRED",
-                        "name": "NOT_REQUIRED"
+            "type": "enum",
+            "members": {
+                "REQUIRED_ALWAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED_ALWAYS"
                     }
-                ]
+                },
+                "NOT_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_REQUIRED"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#ResourceNotFoundException": {
@@ -8304,26 +9516,32 @@
             "type": "string"
         },
         "com.amazonaws.clouddirectory#RuleType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BINARY_LENGTH",
-                        "name": "BINARY_LENGTH"
-                    },
-                    {
-                        "value": "NUMBER_COMPARISON",
-                        "name": "NUMBER_COMPARISON"
-                    },
-                    {
-                        "value": "STRING_FROM_SET",
-                        "name": "STRING_FROM_SET"
-                    },
-                    {
-                        "value": "STRING_LENGTH",
-                        "name": "STRING_LENGTH"
+            "type": "enum",
+            "members": {
+                "BINARY_LENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BINARY_LENGTH"
                     }
-                ]
+                },
+                "NUMBER_COMPARISON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_COMPARISON"
+                    }
+                },
+                "STRING_FROM_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_FROM_SET"
+                    }
+                },
+                "STRING_LENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_LENGTH"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#SchemaAlreadyExistsException": {
@@ -8505,11 +9723,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#TagValue": {
             "type": "string"
@@ -8517,7 +9741,6 @@
         "com.amazonaws.clouddirectory#TagsNumberResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 50
                 }
@@ -8621,6 +9844,7 @@
                 "IsImmutable": {
                     "target": "com.amazonaws.clouddirectory#Bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the attribute is mutable or not.</p>"
                     }
                 },
@@ -8881,25 +10105,33 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#UpdateActionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATE_OR_UPDATE",
-                        "name": "CREATE_OR_UPDATE"
-                    },
-                    {
-                        "value": "DELETE",
-                        "name": "DELETE"
+            "type": "enum",
+            "members": {
+                "CREATE_OR_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_OR_UPDATE"
                     }
-                ]
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                }
             }
         },
         "com.amazonaws.clouddirectory#UpdateFacet": {
@@ -8984,11 +10216,17 @@
                         "smithy.api#documentation": "<p>The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#UpdateFacetResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#UpdateLinkAttributes": {
             "type": "operation",
@@ -9061,11 +10299,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#UpdateLinkAttributesResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#UpdateObjectAttributes": {
             "type": "operation",
@@ -9141,6 +10385,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#UpdateObjectAttributesResponse": {
@@ -9152,6 +10399,9 @@
                         "smithy.api#documentation": "<p>The <code>ObjectIdentifier</code> of the updated object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#UpdateSchema": {
@@ -9212,6 +10462,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#UpdateSchemaResponse": {
@@ -9223,6 +10476,9 @@
                         "smithy.api#documentation": "<p>The ARN that is associated with the updated schema. For more information, see <a>arns</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#UpdateTypedLinkFacet": {
@@ -9309,11 +10565,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#UpdateTypedLinkFacetResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.clouddirectory#UpgradeAppliedSchema": {
             "type": "operation",
@@ -9381,9 +10643,13 @@
                 "DryRun": {
                     "target": "com.amazonaws.clouddirectory#Bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Used for testing whether the major version schemas are backward compatible or not. If schema compatibility fails, an exception would be thrown else the call would succeed but no changes will be saved. This parameter is optional.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#UpgradeAppliedSchemaResponse": {
@@ -9401,6 +10667,9 @@
                         "smithy.api#documentation": "<p>The ARN of the directory that is returned as part of the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#UpgradePublishedSchema": {
@@ -9476,9 +10745,13 @@
                 "DryRun": {
                     "target": "com.amazonaws.clouddirectory#Bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.clouddirectory#UpgradePublishedSchemaResponse": {
@@ -9490,6 +10763,9 @@
                         "smithy.api#documentation": "<p>The ARN of the upgraded schema that is returned as part of the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.clouddirectory#ValidationException": {

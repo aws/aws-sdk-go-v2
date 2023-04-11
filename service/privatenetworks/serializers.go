@@ -1533,6 +1533,91 @@ func awsRestjson1_serializeOpHttpBindingsPingInput(v *PingInput, encoder *httpbi
 	return nil
 }
 
+type awsRestjson1_serializeOpStartNetworkResourceUpdate struct {
+}
+
+func (*awsRestjson1_serializeOpStartNetworkResourceUpdate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartNetworkResourceUpdate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartNetworkResourceUpdateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/network-resources/update")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartNetworkResourceUpdateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartNetworkResourceUpdateInput(v *StartNetworkResourceUpdateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartNetworkResourceUpdateInput(v *StartNetworkResourceUpdateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NetworkResourceArn != nil {
+		ok := object.Key("networkResourceArn")
+		ok.String(*v.NetworkResourceArn)
+	}
+
+	if v.ReturnReason != nil {
+		ok := object.Key("returnReason")
+		ok.String(*v.ReturnReason)
+	}
+
+	if v.ShippingAddress != nil {
+		ok := object.Key("shippingAddress")
+		if err := awsRestjson1_serializeDocumentAddress(v.ShippingAddress, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.UpdateType) > 0 {
+		ok := object.Key("updateType")
+		ok.String(string(v.UpdateType))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 

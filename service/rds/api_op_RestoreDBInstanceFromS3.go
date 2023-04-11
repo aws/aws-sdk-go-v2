@@ -92,8 +92,8 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
 	// Follow the allocation rules specified in CreateDBInstance. Be sure to allocate
-	// enough memory for your new DB instance so that the restore operation can
-	// succeed. You can also allocate additional memory for future growth.
+	// enough storage for your new DB instance so that the restore operation can
+	// succeed. You can also allocate additional storage for future growth.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor engine upgrades are applied automatically

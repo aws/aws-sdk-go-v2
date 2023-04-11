@@ -287,10 +287,11 @@ type Ide struct {
 // (IDE) for a Dev Environment.
 type IdeConfiguration struct {
 
-	// The name of the IDE.
+	// The name of the IDE. Valid values include Cloud9, IntelliJ, PyCharm, GoLand, and
+	// VSCode.
 	Name *string
 
-	// A link to the IDE runtime image.
+	// A link to the IDE runtime image. This parameter is not required for VSCode.
 	Runtime *string
 
 	noSmithyDocumentSerde
@@ -443,8 +444,7 @@ type RepositoryInput struct {
 // Information about an space.
 type SpaceSummary struct {
 
-	// We need to know what this is and the basic usage information so that third-party
-	// developers know how to use this data type.
+	// The name of the space.
 	//
 	// This member is required.
 	Name *string

@@ -93,6 +93,38 @@ func (AudioMuxType) Values() []AudioMuxType {
 	}
 }
 
+type CallAnalyticsLanguageCode string
+
+// Enum values for CallAnalyticsLanguageCode
+const (
+	CallAnalyticsLanguageCodeEnUs CallAnalyticsLanguageCode = "en-US"
+	CallAnalyticsLanguageCodeEnGb CallAnalyticsLanguageCode = "en-GB"
+	CallAnalyticsLanguageCodeEsUs CallAnalyticsLanguageCode = "es-US"
+	CallAnalyticsLanguageCodeFrCa CallAnalyticsLanguageCode = "fr-CA"
+	CallAnalyticsLanguageCodeFrFr CallAnalyticsLanguageCode = "fr-FR"
+	CallAnalyticsLanguageCodeEnAu CallAnalyticsLanguageCode = "en-AU"
+	CallAnalyticsLanguageCodeItIt CallAnalyticsLanguageCode = "it-IT"
+	CallAnalyticsLanguageCodeDeDe CallAnalyticsLanguageCode = "de-DE"
+	CallAnalyticsLanguageCodePtBr CallAnalyticsLanguageCode = "pt-BR"
+)
+
+// Values returns all known values for CallAnalyticsLanguageCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CallAnalyticsLanguageCode) Values() []CallAnalyticsLanguageCode {
+	return []CallAnalyticsLanguageCode{
+		"en-US",
+		"en-GB",
+		"es-US",
+		"fr-CA",
+		"fr-FR",
+		"en-AU",
+		"it-IT",
+		"de-DE",
+		"pt-BR",
+	}
+}
+
 type ConcatenationSinkType string
 
 // Enum values for ConcatenationSinkType
@@ -141,6 +173,24 @@ func (ContentMuxType) Values() []ContentMuxType {
 	}
 }
 
+type ContentRedactionOutput string
+
+// Enum values for ContentRedactionOutput
+const (
+	ContentRedactionOutputRedacted              ContentRedactionOutput = "redacted"
+	ContentRedactionOutputRedactedAndUnredacted ContentRedactionOutput = "redacted_and_unredacted"
+)
+
+// Values returns all known values for ContentRedactionOutput. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentRedactionOutput) Values() []ContentRedactionOutput {
+	return []ContentRedactionOutput{
+		"redacted",
+		"redacted_and_unredacted",
+	}
+}
+
 type ContentShareLayoutOption string
 
 // Enum values for ContentShareLayoutOption
@@ -158,6 +208,22 @@ func (ContentShareLayoutOption) Values() []ContentShareLayoutOption {
 		"PresenterOnly",
 		"Horizontal",
 		"Vertical",
+	}
+}
+
+type ContentType string
+
+// Enum values for ContentType
+const (
+	ContentTypePii ContentType = "PII"
+)
+
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ContentType) Values() []ContentType {
+	return []ContentType{
+		"PII",
 	}
 }
 
@@ -186,6 +252,24 @@ func (ErrorCode) Values() []ErrorCode {
 		"ServiceFailure",
 		"ServiceUnavailable",
 		"Throttling",
+	}
+}
+
+type FragmentSelectorType string
+
+// Enum values for FragmentSelectorType
+const (
+	FragmentSelectorTypeProducerTimestamp FragmentSelectorType = "ProducerTimestamp"
+	FragmentSelectorTypeServerTimestamp   FragmentSelectorType = "ServerTimestamp"
+)
+
+// Values returns all known values for FragmentSelectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FragmentSelectorType) Values() []FragmentSelectorType {
+	return []FragmentSelectorType{
+		"ProducerTimestamp",
+		"ServerTimestamp",
 	}
 }
 
@@ -255,6 +339,53 @@ func (LiveConnectorSourceType) Values() []LiveConnectorSourceType {
 	}
 }
 
+type MediaEncoding string
+
+// Enum values for MediaEncoding
+const (
+	MediaEncodingPcm MediaEncoding = "pcm"
+)
+
+// Values returns all known values for MediaEncoding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MediaEncoding) Values() []MediaEncoding {
+	return []MediaEncoding{
+		"pcm",
+	}
+}
+
+type MediaInsightsPipelineConfigurationElementType string
+
+// Enum values for MediaInsightsPipelineConfigurationElementType
+const (
+	MediaInsightsPipelineConfigurationElementTypeAmazonTranscribeCallAnalyticsProcessor MediaInsightsPipelineConfigurationElementType = "AmazonTranscribeCallAnalyticsProcessor"
+	MediaInsightsPipelineConfigurationElementTypeVoiceAnalyticsProcessor                MediaInsightsPipelineConfigurationElementType = "VoiceAnalyticsProcessor"
+	MediaInsightsPipelineConfigurationElementTypeAmazonTranscribeProcessor              MediaInsightsPipelineConfigurationElementType = "AmazonTranscribeProcessor"
+	MediaInsightsPipelineConfigurationElementTypeKinesisDataStreamSink                  MediaInsightsPipelineConfigurationElementType = "KinesisDataStreamSink"
+	MediaInsightsPipelineConfigurationElementTypeLambdaFunctionSink                     MediaInsightsPipelineConfigurationElementType = "LambdaFunctionSink"
+	MediaInsightsPipelineConfigurationElementTypeSqsQueueSink                           MediaInsightsPipelineConfigurationElementType = "SqsQueueSink"
+	MediaInsightsPipelineConfigurationElementTypeSnsTopicSink                           MediaInsightsPipelineConfigurationElementType = "SnsTopicSink"
+	MediaInsightsPipelineConfigurationElementTypeS3RecordingSink                        MediaInsightsPipelineConfigurationElementType = "S3RecordingSink"
+)
+
+// Values returns all known values for
+// MediaInsightsPipelineConfigurationElementType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (MediaInsightsPipelineConfigurationElementType) Values() []MediaInsightsPipelineConfigurationElementType {
+	return []MediaInsightsPipelineConfigurationElementType{
+		"AmazonTranscribeCallAnalyticsProcessor",
+		"VoiceAnalyticsProcessor",
+		"AmazonTranscribeProcessor",
+		"KinesisDataStreamSink",
+		"LambdaFunctionSink",
+		"SqsQueueSink",
+		"SnsTopicSink",
+		"S3RecordingSink",
+	}
+}
+
 type MediaPipelineSinkType string
 
 // Enum values for MediaPipelineSinkType
@@ -296,6 +427,7 @@ const (
 	MediaPipelineStatusFailed       MediaPipelineStatus = "Failed"
 	MediaPipelineStatusStopping     MediaPipelineStatus = "Stopping"
 	MediaPipelineStatusStopped      MediaPipelineStatus = "Stopped"
+	MediaPipelineStatusPaused       MediaPipelineStatus = "Paused"
 )
 
 // Values returns all known values for MediaPipelineStatus. Note that this can be
@@ -308,6 +440,63 @@ func (MediaPipelineStatus) Values() []MediaPipelineStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+		"Paused",
+	}
+}
+
+type MediaPipelineStatusUpdate string
+
+// Enum values for MediaPipelineStatusUpdate
+const (
+	MediaPipelineStatusUpdatePause  MediaPipelineStatusUpdate = "Pause"
+	MediaPipelineStatusUpdateResume MediaPipelineStatusUpdate = "Resume"
+)
+
+// Values returns all known values for MediaPipelineStatusUpdate. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaPipelineStatusUpdate) Values() []MediaPipelineStatusUpdate {
+	return []MediaPipelineStatusUpdate{
+		"Pause",
+		"Resume",
+	}
+}
+
+type PartialResultsStability string
+
+// Enum values for PartialResultsStability
+const (
+	PartialResultsStabilityHigh   PartialResultsStability = "high"
+	PartialResultsStabilityMedium PartialResultsStability = "medium"
+	PartialResultsStabilityLow    PartialResultsStability = "low"
+)
+
+// Values returns all known values for PartialResultsStability. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PartialResultsStability) Values() []PartialResultsStability {
+	return []PartialResultsStability{
+		"high",
+		"medium",
+		"low",
+	}
+}
+
+type ParticipantRole string
+
+// Enum values for ParticipantRole
+const (
+	ParticipantRoleAgent    ParticipantRole = "AGENT"
+	ParticipantRoleCustomer ParticipantRole = "CUSTOMER"
+)
+
+// Values returns all known values for ParticipantRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantRole) Values() []ParticipantRole {
+	return []ParticipantRole{
+		"AGENT",
+		"CUSTOMER",
 	}
 }
 
@@ -333,6 +522,44 @@ func (PresenterPosition) Values() []PresenterPosition {
 	}
 }
 
+type RealTimeAlertRuleType string
+
+// Enum values for RealTimeAlertRuleType
+const (
+	RealTimeAlertRuleTypeKeywordMatch   RealTimeAlertRuleType = "KeywordMatch"
+	RealTimeAlertRuleTypeSentiment      RealTimeAlertRuleType = "Sentiment"
+	RealTimeAlertRuleTypeIssueDetection RealTimeAlertRuleType = "IssueDetection"
+)
+
+// Values returns all known values for RealTimeAlertRuleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RealTimeAlertRuleType) Values() []RealTimeAlertRuleType {
+	return []RealTimeAlertRuleType{
+		"KeywordMatch",
+		"Sentiment",
+		"IssueDetection",
+	}
+}
+
+type RecordingFileFormat string
+
+// Enum values for RecordingFileFormat
+const (
+	RecordingFileFormatWav  RecordingFileFormat = "Wav"
+	RecordingFileFormatOpus RecordingFileFormat = "Opus"
+)
+
+// Values returns all known values for RecordingFileFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecordingFileFormat) Values() []RecordingFileFormat {
+	return []RecordingFileFormat{
+		"Wav",
+		"Opus",
+	}
+}
+
 type ResolutionOption string
 
 // Enum values for ResolutionOption
@@ -351,6 +578,22 @@ func (ResolutionOption) Values() []ResolutionOption {
 	}
 }
 
+type SentimentType string
+
+// Enum values for SentimentType
+const (
+	SentimentTypeNegative SentimentType = "NEGATIVE"
+)
+
+// Values returns all known values for SentimentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SentimentType) Values() []SentimentType {
+	return []SentimentType{
+		"NEGATIVE",
+	}
+}
+
 type VideoMuxType string
 
 // Enum values for VideoMuxType
@@ -364,5 +607,44 @@ const (
 func (VideoMuxType) Values() []VideoMuxType {
 	return []VideoMuxType{
 		"VideoOnly",
+	}
+}
+
+type VocabularyFilterMethod string
+
+// Enum values for VocabularyFilterMethod
+const (
+	VocabularyFilterMethodRemove VocabularyFilterMethod = "remove"
+	VocabularyFilterMethodMask   VocabularyFilterMethod = "mask"
+	VocabularyFilterMethodTag    VocabularyFilterMethod = "tag"
+)
+
+// Values returns all known values for VocabularyFilterMethod. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VocabularyFilterMethod) Values() []VocabularyFilterMethod {
+	return []VocabularyFilterMethod{
+		"remove",
+		"mask",
+		"tag",
+	}
+}
+
+type VoiceAnalyticsConfigurationStatus string
+
+// Enum values for VoiceAnalyticsConfigurationStatus
+const (
+	VoiceAnalyticsConfigurationStatusEnabled  VoiceAnalyticsConfigurationStatus = "Enabled"
+	VoiceAnalyticsConfigurationStatusDisabled VoiceAnalyticsConfigurationStatus = "Disabled"
+)
+
+// Values returns all known values for VoiceAnalyticsConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VoiceAnalyticsConfigurationStatus) Values() []VoiceAnalyticsConfigurationStatus {
+	return []VoiceAnalyticsConfigurationStatus{
+		"Enabled",
+		"Disabled",
 	}
 }

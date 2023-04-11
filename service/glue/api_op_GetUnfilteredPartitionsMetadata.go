@@ -12,6 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves partition metadata from the Data Catalog that contains unfiltered
+// metadata. For IAM authorization, the public IAM action associated with this API
+// is glue:GetPartitions.
 func (c *Client) GetUnfilteredPartitionsMetadata(ctx context.Context, params *GetUnfilteredPartitionsMetadataInput, optFns ...func(*Options)) (*GetUnfilteredPartitionsMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredPartitionsMetadataInput{}
@@ -29,37 +32,93 @@ func (c *Client) GetUnfilteredPartitionsMetadata(ctx context.Context, params *Ge
 
 type GetUnfilteredPartitionsMetadataInput struct {
 
+	// The ID of the Data Catalog where the partitions in question reside. If none is
+	// provided, the AWS account ID is used by default.
+	//
 	// This member is required.
 	CatalogId *string
 
+	// The name of the catalog database where the partitions reside.
+	//
 	// This member is required.
 	DatabaseName *string
 
+	// A list of supported permission types.
+	//
 	// This member is required.
 	SupportedPermissionTypes []types.PermissionType
 
+	// The name of the table that contains the partition.
+	//
 	// This member is required.
 	TableName *string
 
-	// A structure containing information for audit.
+	// A structure containing Lake Formation audit context information.
 	AuditContext *types.AuditContext
 
+	// An expression that filters the partitions to be returned. The expression uses
+	// SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser
+	// JSQLParser (http://jsqlparser.sourceforge.net/home.php) parses the expression.
+	// Operators: The following are the operators that you can use in the Expression
+	// API call: = Checks whether the values of the two operands are equal; if yes,
+	// then the condition becomes true. Example: Assume 'variable a' holds 10 and
+	// 'variable b' holds 20. (a = b) is not true. < > Checks whether the values of two
+	// operands are equal; if the values are not equal, then the condition becomes
+	// true. Example: (a < > b) is true. > Checks whether the value of the left operand
+	// is greater than the value of the right operand; if yes, then the condition
+	// becomes true. Example: (a > b) is not true. < Checks whether the value of the
+	// left operand is less than the value of the right operand; if yes, then the
+	// condition becomes true. Example: (a < b) is true. >= Checks whether the value of
+	// the left operand is greater than or equal to the value of the right operand; if
+	// yes, then the condition becomes true. Example: (a >= b) is not true. <= Checks
+	// whether the value of the left operand is less than or equal to the value of the
+	// right operand; if yes, then the condition becomes true. Example: (a <= b) is
+	// true. AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL Logical operators. Supported
+	// Partition Key Types: The following are the supported partition keys.
+	//
+	// *
+	// string
+	//
+	// * date
+	//
+	// * timestamp
+	//
+	// * int
+	//
+	// * bigint
+	//
+	// * long
+	//
+	// * tinyint
+	//
+	// * smallint
+	//
+	// *
+	// decimal
+	//
+	// If an type is encountered that is not valid, an exception is thrown.
 	Expression *string
 
+	// The maximum number of partitions to return in a single response.
 	MaxResults *int32
 
+	// A continuation token, if this is not the first call to retrieve these
+	// partitions.
 	NextToken *string
 
-	// Defines a non-overlapping region of a table's partitions, allowing multiple
-	// requests to be run in parallel.
+	// The segment of the table's partitions to scan in this request.
 	Segment *types.Segment
 
 	noSmithyDocumentSerde
 }
 
 type GetUnfilteredPartitionsMetadataOutput struct {
+
+	// A continuation token, if the returned list of partitions does not include the
+	// last one.
 	NextToken *string
 
+	// A list of requested partitions.
 	UnfilteredPartitions []types.UnfilteredPartition
 
 	// Metadata pertaining to the operation's result.
@@ -142,6 +201,7 @@ var _ GetUnfilteredPartitionsMetadataAPIClient = (*Client)(nil)
 // GetUnfilteredPartitionsMetadataPaginatorOptions is the paginator options for
 // GetUnfilteredPartitionsMetadata
 type GetUnfilteredPartitionsMetadataPaginatorOptions struct {
+	// The maximum number of partitions to return in a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

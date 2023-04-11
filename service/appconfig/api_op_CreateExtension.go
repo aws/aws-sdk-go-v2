@@ -14,8 +14,8 @@ import (
 // Creates an AppConfig extension. An extension augments your ability to inject
 // logic or behavior at different points during the AppConfig workflow of creating
 // or deploying a configuration. You can create your own extensions or use the
-// Amazon Web Services-authored extensions provided by AppConfig. For most
-// use-cases, to create your own extension, you must create an Lambda function to
+// Amazon Web Services authored extensions provided by AppConfig. For most use
+// cases, to create your own extension, you must create an Lambda function to
 // perform any computation and processing defined in the extension. For more
 // information about extensions, see Working with AppConfig extensions
 // (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)

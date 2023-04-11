@@ -202,6 +202,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointAsyncInput(v *InvokeEndpo
 		encoder.SetHeader(locationName).String(*v.InputLocation)
 	}
 
+	if v.InvocationTimeoutSeconds != nil {
+		locationName := "X-Amzn-Sagemaker-Invocationtimeoutseconds"
+		encoder.SetHeader(locationName).Integer(*v.InvocationTimeoutSeconds)
+	}
+
 	if v.RequestTTLSeconds != nil {
 		locationName := "X-Amzn-Sagemaker-Requestttlseconds"
 		encoder.SetHeader(locationName).Integer(*v.RequestTTLSeconds)

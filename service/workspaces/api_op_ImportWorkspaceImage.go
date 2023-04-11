@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports the specified Windows 10 Bring Your Own License (BYOL) or Windows Server
-// 2016 BYOL image into Amazon WorkSpaces. The image must be an already licensed
-// Amazon EC2 image that is in your Amazon Web Services account, and you must own
-// the image. For more information about creating BYOL images, see  Bring Your Own
-// Windows Desktop Licenses
+// Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon
+// WorkSpaces. The image must be an already licensed Amazon EC2 image that is in
+// your Amazon Web Services account, and you must own the image. For more
+// information about creating BYOL images, see  Bring Your Own Windows Desktop
+// Licenses
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 func (c *Client) ImportWorkspaceImage(ctx context.Context, params *ImportWorkspaceImageInput, optFns ...func(*Options)) (*ImportWorkspaceImageOutput, error) {
 	if params == nil {

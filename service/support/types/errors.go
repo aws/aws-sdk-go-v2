@@ -26,7 +26,7 @@ func (e *AttachmentIdNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentIdNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AttachmentIdNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *AttachmentLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AttachmentLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *AttachmentSetExpired) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentSetExpired) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AttachmentSetExpired"
 	}
 	return *e.ErrorCodeOverride
@@ -106,7 +106,7 @@ func (e *AttachmentSetIdNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentSetIdNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AttachmentSetIdNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *AttachmentSetSizeLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentSetSizeLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AttachmentSetSizeLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -159,7 +159,7 @@ func (e *CaseCreationLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CaseCreationLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CaseCreationLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -185,7 +185,7 @@ func (e *CaseIdNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CaseIdNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CaseIdNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -212,7 +212,7 @@ func (e *DescribeAttachmentLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DescribeAttachmentLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DescribeAttachmentLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -238,7 +238,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride

@@ -24,9 +24,11 @@ type EndpointStatus string
 
 // Enum values for EndpointStatus
 const (
-	EndpointStatusPending   EndpointStatus = "Pending"
-	EndpointStatusAvailable EndpointStatus = "Available"
-	EndpointStatusDeleting  EndpointStatus = "Deleting"
+	EndpointStatusPending      EndpointStatus = "Pending"
+	EndpointStatusAvailable    EndpointStatus = "Available"
+	EndpointStatusDeleting     EndpointStatus = "Deleting"
+	EndpointStatusCreateFailed EndpointStatus = "Create_Failed"
+	EndpointStatusDeleteFailed EndpointStatus = "Delete_Failed"
 )
 
 // Values returns all known values for EndpointStatus. Note that this can be
@@ -37,5 +39,7 @@ func (EndpointStatus) Values() []EndpointStatus {
 		"Pending",
 		"Available",
 		"Deleting",
+		"Create_Failed",
+		"Delete_Failed",
 	}
 }

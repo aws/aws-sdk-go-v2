@@ -26,7 +26,7 @@ func (e *DirectConnectClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectConnectClientException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectConnectClientException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *DirectConnectServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectConnectServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectConnectServerException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateTagKeysException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateTagKeysException"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride

@@ -4,6 +4,7 @@ package guardduty
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
@@ -12,7 +13,10 @@ import (
 )
 
 // Returns information about the account selected as the delegated administrator
-// for GuardDuty.
+// for GuardDuty. There might be regional differences because some data sources
+// might not be available in all the Amazon Web Services Regions where GuardDuty is
+// presently supported. For more information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -36,16 +40,20 @@ type DescribeOrganizationConfigurationInput struct {
 	// This member is required.
 	DetectorId *string
 
+	// You can use this parameter to indicate the maximum number of items that you want
+	// in the response.
+	MaxResults int32
+
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls to
+	// the action, fill nextToken in the request with the value of NextToken from the
+	// previous response to continue listing data.
+	NextToken *string
+
 	noSmithyDocumentSerde
 }
 
 type DescribeOrganizationConfigurationOutput struct {
-
-	// Indicates whether GuardDuty is automatically enabled for accounts added to the
-	// organization.
-	//
-	// This member is required.
-	AutoEnable bool
 
 	// Indicates whether the maximum number of allowed member accounts are already
 	// associated with the delegated administrator account for your organization.
@@ -53,8 +61,38 @@ type DescribeOrganizationConfigurationOutput struct {
 	// This member is required.
 	MemberAccountLimitReached bool
 
+	// Indicates whether GuardDuty is automatically enabled for accounts added to the
+	// organization.
+	//
+	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
+	AutoEnable bool
+
+	// Indicates the auto-enablement configuration of GuardDuty for the member accounts
+	// in the organization.
+	//
+	// * NEW: Indicates that new accounts joining the
+	// organization are configured to have GuardDuty enabled automatically.
+	//
+	// * ALL:
+	// Indicates that all accounts (new and existing members) in the organization are
+	// configured to have GuardDuty enabled automatically.
+	//
+	// * NONE: Indicates that no
+	// account in the organization will be configured to have GuardDuty enabled
+	// automatically.
+	AutoEnableOrganizationMembers types.AutoEnableMembers
+
 	// Describes which data sources are enabled automatically for member accounts.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.OrganizationDataSourceConfigurationsResult
+
+	// A list of features that are configured for this organization.
+	Features []types.OrganizationFeatureConfigurationResult
+
+	// The pagination parameter to be used on the next list operation to retrieve more
+	// items.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -123,6 +161,96 @@ func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack 
 		return err
 	}
 	return nil
+}
+
+// DescribeOrganizationConfigurationAPIClient is a client that implements the
+// DescribeOrganizationConfiguration operation.
+type DescribeOrganizationConfigurationAPIClient interface {
+	DescribeOrganizationConfiguration(context.Context, *DescribeOrganizationConfigurationInput, ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error)
+}
+
+var _ DescribeOrganizationConfigurationAPIClient = (*Client)(nil)
+
+// DescribeOrganizationConfigurationPaginatorOptions is the paginator options for
+// DescribeOrganizationConfiguration
+type DescribeOrganizationConfigurationPaginatorOptions struct {
+	// You can use this parameter to indicate the maximum number of items that you want
+	// in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeOrganizationConfigurationPaginator is a paginator for
+// DescribeOrganizationConfiguration
+type DescribeOrganizationConfigurationPaginator struct {
+	options   DescribeOrganizationConfigurationPaginatorOptions
+	client    DescribeOrganizationConfigurationAPIClient
+	params    *DescribeOrganizationConfigurationInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeOrganizationConfigurationPaginator returns a new
+// DescribeOrganizationConfigurationPaginator
+func NewDescribeOrganizationConfigurationPaginator(client DescribeOrganizationConfigurationAPIClient, params *DescribeOrganizationConfigurationInput, optFns ...func(*DescribeOrganizationConfigurationPaginatorOptions)) *DescribeOrganizationConfigurationPaginator {
+	if params == nil {
+		params = &DescribeOrganizationConfigurationInput{}
+	}
+
+	options := DescribeOrganizationConfigurationPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeOrganizationConfigurationPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeOrganizationConfigurationPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeOrganizationConfiguration page.
+func (p *DescribeOrganizationConfigurationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeOrganizationConfiguration(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeOrganizationConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {

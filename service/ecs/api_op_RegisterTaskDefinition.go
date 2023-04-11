@@ -16,12 +16,12 @@ import (
 // with the volumes parameter. For more information about task definition
 // parameters and defaults, see Amazon ECS Task Definitions
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
-// in the Amazon Elastic Container Service Developer Guide. You can specify an IAM
-// role for your task with the taskRoleArn parameter. When you specify an IAM role
-// for a task, its containers can then use the latest versions of the CLI or SDKs
-// to make API requests to the Amazon Web Services services that are specified in
-// the IAM policy that's associated with the role. For more information, see IAM
-// Roles for Tasks
+// in the Amazon Elastic Container Service Developer Guide. You can specify a role
+// for your task with the taskRoleArn parameter. When you specify a role for a
+// task, its containers can then use the latest versions of the CLI or SDKs to make
+// API requests to the Amazon Web Services services that are specified in the
+// policy that's associated with the role. For more information, see IAM Roles for
+// Tasks
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
 // in the Amazon Elastic Container Service Developer Guide. You can specify a
 // Docker networking mode for the containers in your task definition with the

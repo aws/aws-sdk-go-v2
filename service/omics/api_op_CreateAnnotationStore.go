@@ -79,7 +79,8 @@ type CreateAnnotationStoreOutput struct {
 	// This member is required.
 	Status types.StoreStatus
 
-	// The store's genome reference.
+	// The store's genome reference. Required for all stores except TSV format with
+	// generic annotations.
 	Reference types.ReferenceItem
 
 	// The annotation file format of the store.

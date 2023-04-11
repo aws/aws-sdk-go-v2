@@ -304,7 +304,7 @@ type TrustedAdvisorCheckDescription struct {
 	// shows just summary data.
 	//
 	// This member is required.
-	Metadata []string
+	Metadata []*string
 
 	// The display name for the Trusted Advisor check.
 	//
@@ -458,7 +458,7 @@ type TrustedAdvisorResourceDetail struct {
 	// just summary data.
 	//
 	// This member is required.
-	Metadata []string
+	Metadata []*string
 
 	// The unique identifier for the identified resource.
 	//

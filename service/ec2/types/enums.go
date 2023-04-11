@@ -606,8 +606,9 @@ type BootModeValues string
 
 // Enum values for BootModeValues
 const (
-	BootModeValuesLegacyBios BootModeValues = "legacy-bios"
-	BootModeValuesUefi       BootModeValues = "uefi"
+	BootModeValuesLegacyBios    BootModeValues = "legacy-bios"
+	BootModeValuesUefi          BootModeValues = "uefi"
+	BootModeValuesUefiPreferred BootModeValues = "uefi-preferred"
 )
 
 // Values returns all known values for BootModeValues. Note that this can be
@@ -617,6 +618,7 @@ func (BootModeValues) Values() []BootModeValues {
 	return []BootModeValues{
 		"legacy-bios",
 		"uefi",
+		"uefi-preferred",
 	}
 }
 
@@ -2150,6 +2152,24 @@ func (GatewayType) Values() []GatewayType {
 	}
 }
 
+type HostMaintenance string
+
+// Enum values for HostMaintenance
+const (
+	HostMaintenanceOn  HostMaintenance = "on"
+	HostMaintenanceOff HostMaintenance = "off"
+)
+
+// Values returns all known values for HostMaintenance. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HostMaintenance) Values() []HostMaintenance {
+	return []HostMaintenance{
+		"on",
+		"off",
+	}
+}
+
 type HostnameType string
 
 // Enum values for HostnameType
@@ -2444,6 +2464,24 @@ func (InstanceAutoRecoveryState) Values() []InstanceAutoRecoveryState {
 	return []InstanceAutoRecoveryState{
 		"disabled",
 		"default",
+	}
+}
+
+type InstanceBootModeValues string
+
+// Enum values for InstanceBootModeValues
+const (
+	InstanceBootModeValuesLegacyBios InstanceBootModeValues = "legacy-bios"
+	InstanceBootModeValuesUefi       InstanceBootModeValues = "uefi"
+)
+
+// Values returns all known values for InstanceBootModeValues. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceBootModeValues) Values() []InstanceBootModeValues {
+	return []InstanceBootModeValues{
+		"legacy-bios",
+		"uefi",
 	}
 }
 
@@ -3321,6 +3359,25 @@ const (
 	InstanceTypeR6idn16xlarge   InstanceType = "r6idn.16xlarge"
 	InstanceTypeR6idn24xlarge   InstanceType = "r6idn.24xlarge"
 	InstanceTypeR6idn32xlarge   InstanceType = "r6idn.32xlarge"
+	InstanceTypeC7gMetal        InstanceType = "c7g.metal"
+	InstanceTypeM7gMedium       InstanceType = "m7g.medium"
+	InstanceTypeM7gLarge        InstanceType = "m7g.large"
+	InstanceTypeM7gXlarge       InstanceType = "m7g.xlarge"
+	InstanceTypeM7g2xlarge      InstanceType = "m7g.2xlarge"
+	InstanceTypeM7g4xlarge      InstanceType = "m7g.4xlarge"
+	InstanceTypeM7g8xlarge      InstanceType = "m7g.8xlarge"
+	InstanceTypeM7g12xlarge     InstanceType = "m7g.12xlarge"
+	InstanceTypeM7g16xlarge     InstanceType = "m7g.16xlarge"
+	InstanceTypeM7gMetal        InstanceType = "m7g.metal"
+	InstanceTypeR7gMedium       InstanceType = "r7g.medium"
+	InstanceTypeR7gLarge        InstanceType = "r7g.large"
+	InstanceTypeR7gXlarge       InstanceType = "r7g.xlarge"
+	InstanceTypeR7g2xlarge      InstanceType = "r7g.2xlarge"
+	InstanceTypeR7g4xlarge      InstanceType = "r7g.4xlarge"
+	InstanceTypeR7g8xlarge      InstanceType = "r7g.8xlarge"
+	InstanceTypeR7g12xlarge     InstanceType = "r7g.12xlarge"
+	InstanceTypeR7g16xlarge     InstanceType = "r7g.16xlarge"
+	InstanceTypeR7gMetal        InstanceType = "r7g.metal"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -3947,6 +4004,25 @@ func (InstanceType) Values() []InstanceType {
 		"r6idn.16xlarge",
 		"r6idn.24xlarge",
 		"r6idn.32xlarge",
+		"c7g.metal",
+		"m7g.medium",
+		"m7g.large",
+		"m7g.xlarge",
+		"m7g.2xlarge",
+		"m7g.4xlarge",
+		"m7g.8xlarge",
+		"m7g.12xlarge",
+		"m7g.16xlarge",
+		"m7g.metal",
+		"r7g.medium",
+		"r7g.large",
+		"r7g.xlarge",
+		"r7g.2xlarge",
+		"r7g.4xlarge",
+		"r7g.8xlarge",
+		"r7g.12xlarge",
+		"r7g.16xlarge",
+		"r7g.metal",
 	}
 }
 
@@ -4985,6 +5061,32 @@ func (MulticastSupportValue) Values() []MulticastSupportValue {
 	}
 }
 
+type NatGatewayAddressStatus string
+
+// Enum values for NatGatewayAddressStatus
+const (
+	NatGatewayAddressStatusAssigning      NatGatewayAddressStatus = "assigning"
+	NatGatewayAddressStatusUnassigning    NatGatewayAddressStatus = "unassigning"
+	NatGatewayAddressStatusAssociating    NatGatewayAddressStatus = "associating"
+	NatGatewayAddressStatusDisassociating NatGatewayAddressStatus = "disassociating"
+	NatGatewayAddressStatusSucceeded      NatGatewayAddressStatus = "succeeded"
+	NatGatewayAddressStatusFailed         NatGatewayAddressStatus = "failed"
+)
+
+// Values returns all known values for NatGatewayAddressStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NatGatewayAddressStatus) Values() []NatGatewayAddressStatus {
+	return []NatGatewayAddressStatus{
+		"assigning",
+		"unassigning",
+		"associating",
+		"disassociating",
+		"succeeded",
+		"failed",
+	}
+}
+
 type NatGatewayState string
 
 // Enum values for NatGatewayState
@@ -5895,6 +5997,14 @@ func (ResourceType) Values() []ResourceType {
 }
 
 type RIProductDescription string
+
+// Enum values for RIProductDescription
+const (
+	RIProductDescriptionLinuxUnix          RIProductDescription = "Linux/UNIX"
+	RIProductDescriptionLinuxUnixAmazonVpc RIProductDescription = "Linux/UNIX (Amazon VPC)"
+	RIProductDescriptionWindows            RIProductDescription = "Windows"
+	RIProductDescriptionWindowsAmazonVpc   RIProductDescription = "Windows (Amazon VPC)"
+)
 
 // Values returns all known values for RIProductDescription. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

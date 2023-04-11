@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a route calculator resource from your AWS account. This operation
-// deletes the resource permanently.
+// Deletes a route calculator resource from your Amazon Web Services account. This
+// operation deletes the resource permanently.
 func (c *Client) DeleteRouteCalculator(ctx context.Context, params *DeleteRouteCalculatorInput, optFns ...func(*Options)) (*DeleteRouteCalculatorOutput, error) {
 	if params == nil {
 		params = &DeleteRouteCalculatorInput{}

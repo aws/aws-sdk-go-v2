@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a filter using the specified finding criteria.
+// Creates a filter using the specified finding criteria. The maximum number of
+// saved filters per Amazon Web Services account per Region is 100. For more
+// information, see Quotas for GuardDuty
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html).
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}
@@ -44,9 +47,7 @@ type CreateFilterInput struct {
 	// * region
 	//
 	// *
-	// confidence
-	//
-	// * id
+	// id
 	//
 	// * resource.accessKeyDetails.accessKeyId
 	//
@@ -186,11 +187,6 @@ type CreateFilterInput struct {
 	// * resource.s3BucketDetails.type
 	//
 	// *
-	// service.archived When this attribute is set to TRUE, only archived findings are
-	// listed. When it's set to FALSE, only unarchived findings are listed. When this
-	// attribute is not set, all existing findings are listed.
-	//
-	// *
 	// service.resourceRole
 	//
 	// * severity
@@ -218,9 +214,10 @@ type CreateFilterInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string
 
-	// The description of the filter. Valid special characters include period (.),
-	// underscore (_), dash (-), and whitespace. The new line character is considered
-	// to be an invalid input for description.
+	// The description of the filter. Valid characters include alphanumeric characters,
+	// and special characters such as hyphen, period, colon, underscore, parentheses ({
+	// }, [ ], and ( )), forward slash, horizontal tab, vertical tab, newline, form
+	// feed, return, and whitespace.
 	Description *string
 
 	// Specifies the position of the filter in the list of current filters. Also

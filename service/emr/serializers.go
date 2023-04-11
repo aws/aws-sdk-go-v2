@@ -3381,6 +3381,13 @@ func awsAwsjson11_serializeDocumentInstanceFleetConfig(v *types.InstanceFleetCon
 		ok.String(*v.Name)
 	}
 
+	if v.ResizeSpecifications != nil {
+		ok := object.Key("ResizeSpecifications")
+		if err := awsAwsjson11_serializeDocumentInstanceFleetResizingSpecifications(v.ResizeSpecifications, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetOnDemandCapacity != nil {
 		ok := object.Key("TargetOnDemandCapacity")
 		ok.Integer(*v.TargetOnDemandCapacity)
@@ -3416,6 +3423,13 @@ func awsAwsjson11_serializeDocumentInstanceFleetModifyConfig(v *types.InstanceFl
 		ok.String(*v.InstanceFleetId)
 	}
 
+	if v.ResizeSpecifications != nil {
+		ok := object.Key("ResizeSpecifications")
+		if err := awsAwsjson11_serializeDocumentInstanceFleetResizingSpecifications(v.ResizeSpecifications, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetOnDemandCapacity != nil {
 		ok := object.Key("TargetOnDemandCapacity")
 		ok.Integer(*v.TargetOnDemandCapacity)
@@ -3443,6 +3457,27 @@ func awsAwsjson11_serializeDocumentInstanceFleetProvisioningSpecifications(v *ty
 	if v.SpotSpecification != nil {
 		ok := object.Key("SpotSpecification")
 		if err := awsAwsjson11_serializeDocumentSpotProvisioningSpecification(v.SpotSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInstanceFleetResizingSpecifications(v *types.InstanceFleetResizingSpecifications, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OnDemandResizeSpecification != nil {
+		ok := object.Key("OnDemandResizeSpecification")
+		if err := awsAwsjson11_serializeDocumentOnDemandResizingSpecification(v.OnDemandResizeSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpotResizeSpecification != nil {
+		ok := object.Key("SpotResizeSpecification")
+		if err := awsAwsjson11_serializeDocumentSpotResizingSpecification(v.SpotResizeSpecification, ok); err != nil {
 			return err
 		}
 	}
@@ -3977,6 +4012,18 @@ func awsAwsjson11_serializeDocumentOnDemandProvisioningSpecification(v *types.On
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOnDemandResizingSpecification(v *types.OnDemandResizingSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TimeoutDurationMinutes != nil {
+		ok := object.Key("TimeoutDurationMinutes")
+		ok.Integer(*v.TimeoutDurationMinutes)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPlacementGroupConfig(v *types.PlacementGroupConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4256,6 +4303,18 @@ func awsAwsjson11_serializeDocumentSpotProvisioningSpecification(v *types.SpotPr
 		ok := object.Key("TimeoutAction")
 		ok.String(string(v.TimeoutAction))
 	}
+
+	if v.TimeoutDurationMinutes != nil {
+		ok := object.Key("TimeoutDurationMinutes")
+		ok.Integer(*v.TimeoutDurationMinutes)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSpotResizingSpecification(v *types.SpotResizingSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if v.TimeoutDurationMinutes != nil {
 		ok := object.Key("TimeoutDurationMinutes")

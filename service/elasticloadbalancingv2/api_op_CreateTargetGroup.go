@@ -96,7 +96,7 @@ type CreateTargetGroupInput struct {
 	// The number of consecutive health check successes required before considering a
 	// target healthy. The range is 2-10. If the target group protocol is TCP, TCP_UDP,
 	// UDP, TLS, HTTP or HTTPS, the default is 5. For target groups with a protocol of
-	// GENEVE, the default is 3. If the target type is lambda, the default is 5.
+	// GENEVE, the default is 5. If the target type is lambda, the default is 5.
 	HealthyThresholdCount *int32
 
 	// The type of IP address used for this target group. The possible values are ipv4
@@ -155,7 +155,7 @@ type CreateTargetGroupInput struct {
 	// The number of consecutive health check failures required before considering a
 	// target unhealthy. The range is 2-10. If the target group protocol is TCP,
 	// TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 2. For target groups with a
-	// protocol of GENEVE, the default is 3. If the target type is lambda, the default
+	// protocol of GENEVE, the default is 2. If the target type is lambda, the default
 	// is 5.
 	UnhealthyThresholdCount *int32
 

@@ -13,7 +13,7 @@ import (
 )
 
 // Returns the supported DPU sizes for the supported application runtimes (for
-// example, Jupyter 1.0).
+// example, Athena notebook version 1).
 func (c *Client) ListApplicationDPUSizes(ctx context.Context, params *ListApplicationDPUSizesInput, optFns ...func(*Options)) (*ListApplicationDPUSizesOutput, error) {
 	if params == nil {
 		params = &ListApplicationDPUSizesInput{}

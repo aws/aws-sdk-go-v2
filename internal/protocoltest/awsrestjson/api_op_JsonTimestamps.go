@@ -30,9 +30,15 @@ func (c *Client) JsonTimestamps(ctx context.Context, params *JsonTimestampsInput
 type JsonTimestampsInput struct {
 	DateTime *time.Time
 
+	DateTimeOnTarget *time.Time
+
 	EpochSeconds *time.Time
 
+	EpochSecondsOnTarget *time.Time
+
 	HttpDate *time.Time
+
+	HttpDateOnTarget *time.Time
 
 	Normal *time.Time
 
@@ -42,9 +48,15 @@ type JsonTimestampsInput struct {
 type JsonTimestampsOutput struct {
 	DateTime *time.Time
 
+	DateTimeOnTarget *time.Time
+
 	EpochSeconds *time.Time
 
+	EpochSecondsOnTarget *time.Time
+
 	HttpDate *time.Time
+
+	HttpDateOnTarget *time.Time
 
 	Normal *time.Time
 

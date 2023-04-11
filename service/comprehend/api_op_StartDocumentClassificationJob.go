@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous document classification job. Use the operation to track
-// the progress of the job.
+// Starts an asynchronous document classification job. Use the
+// DescribeDocumentClassificationJob operation to track the progress of the job.
 func (c *Client) StartDocumentClassificationJob(ctx context.Context, params *StartDocumentClassificationJobInput, optFns ...func(*Options)) (*StartDocumentClassificationJobOutput, error) {
 	if params == nil {
 		params = &StartDocumentClassificationJobInput{}
@@ -31,17 +31,11 @@ func (c *Client) StartDocumentClassificationJob(ctx context.Context, params *Sta
 
 type StartDocumentClassificationJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
-
-	// The Amazon Resource Name (ARN) of the document classifier to use to process the
-	// job.
-	//
-	// This member is required.
-	DocumentClassifierArn *string
 
 	// Specifies the format and location of the input data for the job.
 	//
@@ -57,24 +51,32 @@ type StartDocumentClassificationJobInput struct {
 	// Amazon Comprehend generates one.
 	ClientRequestToken *string
 
+	// The Amazon Resource Name (ARN) of the document classifier to use to process the
+	// job.
+	DocumentClassifierArn *string
+
+	// The Amazon Resource Number (ARN) of the flywheel associated with the model to
+	// use.
+	FlywheelArn *string
+
 	// The identifier of the job.
 	JobName *string
 
-	// Tags to be associated with the document classification job. A tag is a key-value
+	// Tags to associate with the document classification job. A tag is a key-value
 	// pair that adds metadata to a resource used by Amazon Comprehend. For example, a
 	// tag with "Sales" as the key might be added to a resource to indicate its use by
 	// the sales department.
 	Tags []types.Tag
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -89,16 +91,19 @@ type StartDocumentClassificationJobInput struct {
 
 type StartDocumentClassificationJobOutput struct {
 
+	// The ARN of the custom classification model.
+	DocumentClassifierArn *string
+
 	// The Amazon Resource Name (ARN) of the document classification job. It is a
-	// unique, fully qualified identifier for the job. It includes the AWS account,
-	// Region, and the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::document-classification-job/ The following is an example job
-	// ARN:
+	// unique, fully qualified identifier for the job. It includes the Amazon Web
+	// Services account, Amazon Web Services Region, and the job ID. The format of the
+	// ARN is as follows: arn::comprehend:::document-classification-job/ The following
+	// is an example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
 	// The identifier generated for the job. To get the status of the job, use this
-	// identifier with the operation.
+	// identifier with the DescribeDocumentClassificationJob operation.
 	JobId *string
 
 	// The status of the job:
@@ -112,14 +117,14 @@ type StartDocumentClassificationJobOutput struct {
 	// COMPLETED - The job was successfully completed and the output is available.
 	//
 	// *
-	// FAILED - The job did not complete. For details, use the operation.
+	// FAILED - The job did not complete. For details, use the
+	// DescribeDocumentClassificationJob operation.
 	//
-	// *
-	// STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and
-	// is processing the request.
+	// * STOP_REQUESTED - Amazon
+	// Comprehend has received a stop request for the job and is processing the
+	// request.
 	//
-	// * STOPPED - The job was successfully stopped without
-	// completing.
+	// * STOPPED - The job was successfully stopped without completing.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

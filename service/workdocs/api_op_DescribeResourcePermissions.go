@@ -4,6 +4,7 @@ package workdocs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
@@ -34,8 +35,8 @@ type DescribeResourcePermissionsInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The maximum number of items to return with this call.
@@ -127,6 +128,99 @@ func (c *Client) addOperationDescribeResourcePermissionsMiddlewares(stack *middl
 		return err
 	}
 	return nil
+}
+
+// DescribeResourcePermissionsAPIClient is a client that implements the
+// DescribeResourcePermissions operation.
+type DescribeResourcePermissionsAPIClient interface {
+	DescribeResourcePermissions(context.Context, *DescribeResourcePermissionsInput, ...func(*Options)) (*DescribeResourcePermissionsOutput, error)
+}
+
+var _ DescribeResourcePermissionsAPIClient = (*Client)(nil)
+
+// DescribeResourcePermissionsPaginatorOptions is the paginator options for
+// DescribeResourcePermissions
+type DescribeResourcePermissionsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeResourcePermissionsPaginator is a paginator for
+// DescribeResourcePermissions
+type DescribeResourcePermissionsPaginator struct {
+	options   DescribeResourcePermissionsPaginatorOptions
+	client    DescribeResourcePermissionsAPIClient
+	params    *DescribeResourcePermissionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeResourcePermissionsPaginator returns a new
+// DescribeResourcePermissionsPaginator
+func NewDescribeResourcePermissionsPaginator(client DescribeResourcePermissionsAPIClient, params *DescribeResourcePermissionsInput, optFns ...func(*DescribeResourcePermissionsPaginatorOptions)) *DescribeResourcePermissionsPaginator {
+	if params == nil {
+		params = &DescribeResourcePermissionsInput{}
+	}
+
+	options := DescribeResourcePermissionsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeResourcePermissionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeResourcePermissionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeResourcePermissions page.
+func (p *DescribeResourcePermissionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeResourcePermissionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeResourcePermissions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeResourcePermissions(region string) *awsmiddleware.RegisterServiceMetadata {

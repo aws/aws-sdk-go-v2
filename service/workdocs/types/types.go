@@ -97,11 +97,26 @@ type CommentMetadata struct {
 	// The user who made the comment.
 	Contributor *User
 
+	// The ID of the user who made the comment.
+	ContributorId *string
+
 	// The timestamp that the comment was created.
 	CreatedTimestamp *time.Time
 
 	// The ID of the user being replied to.
 	RecipientId *string
+
+	noSmithyDocumentSerde
+}
+
+// Filters results based on timestamp range (in epochs).
+type DateRangeType struct {
+
+	// Timestamp range end value (in epochs).
+	EndValue *time.Time
+
+	// Timestamp range start value (in epochs)
+	StartValue *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -181,6 +196,42 @@ type DocumentVersionMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Filters results based on entity metadata.
+type Filters struct {
+
+	// Filter based on resource’s path.
+	AncestorIds []string
+
+	// Filters by content category.
+	ContentCategories []ContentCategoryType
+
+	// Filter based on resource’s creation timestamp.
+	CreatedRange *DateRangeType
+
+	// Filter by labels using exact match.
+	Labels []string
+
+	// Filter based on resource’s modified timestamp.
+	ModifiedRange *DateRangeType
+
+	// Filter based on UserIds or GroupIds.
+	Principals []SearchPrincipalType
+
+	// Filters based on entity type.
+	ResourceTypes []SearchResourceType
+
+	// Filter based on file groupings.
+	SearchCollectionTypes []SearchCollectionType
+
+	// Filter based on size (in bytes).
+	SizeRange *LongRangeType
+
+	// Filters by the locale of the content or comment.
+	TextLocales []LanguageCodeType
+
+	noSmithyDocumentSerde
+}
+
 // Describes a folder.
 type FolderMetadata struct {
 
@@ -232,6 +283,18 @@ type GroupMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Filter based on size (in bytes).
+type LongRangeType struct {
+
+	// The size end range (in bytes).
+	EndValue *int64
+
+	// The size start range (in bytes).
+	StartValue *int64
+
+	noSmithyDocumentSerde
+}
+
 // Set of options which defines notification preferences of given action.
 type NotificationOptions struct {
 
@@ -239,7 +302,7 @@ type NotificationOptions struct {
 	EmailMessage *string
 
 	// Boolean value to indicate an email notification should be sent to the
-	// receipients.
+	// recipients.
 	SendEmail bool
 
 	noSmithyDocumentSerde
@@ -329,6 +392,56 @@ type ResourcePathComponent struct {
 
 	// The name of the resource path.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// List of Documents, Folders, Comments, and Document Versions matching the query.
+type ResponseItem struct {
+
+	// The comment that matches the query.
+	CommentMetadata *CommentMetadata
+
+	// The document that matches the query.
+	DocumentMetadata *DocumentMetadata
+
+	// The document version that matches the metadata.
+	DocumentVersionMetadata *DocumentVersionMetadata
+
+	// The folder that matches the query.
+	FolderMetadata *FolderMetadata
+
+	// The type of item being returned.
+	ResourceType ResponseItemType
+
+	// The webUrl of the item being returned.
+	WebUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter based on UserIds or GroupIds.
+type SearchPrincipalType struct {
+
+	// UserIds or GroupIds.
+	//
+	// This member is required.
+	Id *string
+
+	// The Role of a User or Group.
+	Roles []PrincipalRoleType
+
+	noSmithyDocumentSerde
+}
+
+// The result of the sort operation.
+type SearchSortResult struct {
+
+	// Sort search results based on this field name.
+	Field OrderByFieldType
+
+	// Sort direction.
+	Order SortOrder
 
 	noSmithyDocumentSerde
 }

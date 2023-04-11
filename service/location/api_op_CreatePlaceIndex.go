@@ -13,14 +13,15 @@ import (
 	"time"
 )
 
-// Creates a place index resource in your AWS account. Use a place index resource
-// to geocode addresses and other text queries by using the SearchPlaceIndexForText
-// operation, and reverse geocode coordinates by using the
+// Creates a place index resource in your Amazon Web Services account. Use a place
+// index resource to geocode addresses and other text queries by using the
+// SearchPlaceIndexForText operation, and reverse geocode coordinates by using the
 // SearchPlaceIndexForPosition operation, and enable autosuggestions by using the
 // SearchPlaceIndexForSuggestions operation. If your application is tracking or
 // routing assets you use in your business, such as delivery vehicles or employees,
-// you must not use Esri as your geolocation provider. See section 82 of the AWS
-// service terms (http://aws.amazon.com/service-terms) for more details.
+// you must not use Esri as your geolocation provider. See section 82 of the Amazon
+// Web Services service terms (http://aws.amazon.com/service-terms) for more
+// details.
 func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexInput, optFns ...func(*Options)) (*CreatePlaceIndexOutput, error) {
 	if params == nil {
 		params = &CreatePlaceIndexInput{}
@@ -63,11 +64,11 @@ type CreatePlaceIndexInput struct {
 	// If you specify HERE Technologies (Here) as the data provider, you may not store
 	// results
 	// (https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html)
-	// for locations in Japan. For more information, see the AWS Service Terms
-	// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
+	// for locations in Japan. For more information, see the Amazon Web Services
+	// Service Terms (http://aws.amazon.com/service-terms/) for Amazon Location
+	// Service.
 	//
-	// For
-	// additional information , see Data providers
+	// For additional information , see Data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
 	// on the Amazon Location Service Developer Guide.
 	//
@@ -135,7 +136,7 @@ type CreatePlaceIndexOutput struct {
 	CreateTime *time.Time
 
 	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a
-	// resource across AWS.
+	// resource across Amazon Web Services.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex

@@ -455,6 +455,13 @@ func awsRestjson1_serializeOpDocumentCreateBotInput(v *CreateBotInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.BotMembers != nil {
+		ok := object.Key("botMembers")
+		if err := awsRestjson1_serializeDocumentBotMembers(v.BotMembers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BotName != nil {
 		ok := object.Key("botName")
 		ok.String(*v.BotName)
@@ -465,6 +472,11 @@ func awsRestjson1_serializeOpDocumentCreateBotInput(v *CreateBotInput, value smi
 		if err := awsRestjson1_serializeDocumentTagMap(v.BotTags, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.BotType) > 0 {
+		ok := object.Key("botType")
+		ok.String(string(v.BotType))
 	}
 
 	if v.DataPrivacy != nil {
@@ -5656,9 +5668,21 @@ func awsRestjson1_serializeOpDocumentUpdateBotInput(v *UpdateBotInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.BotMembers != nil {
+		ok := object.Key("botMembers")
+		if err := awsRestjson1_serializeDocumentBotMembers(v.BotMembers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BotName != nil {
 		ok := object.Key("botName")
 		ok.String(*v.BotName)
+	}
+
+	if len(v.BotType) > 0 {
+		ok := object.Key("botType")
+		ok.String(string(v.BotType))
 	}
 
 	if v.DataPrivacy != nil {
@@ -7150,6 +7174,51 @@ func awsRestjson1_serializeDocumentBotLocaleSortBy(v *types.BotLocaleSortBy, val
 		ok.String(string(v.Order))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBotMember(v *types.BotMember, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BotMemberAliasId != nil {
+		ok := object.Key("botMemberAliasId")
+		ok.String(*v.BotMemberAliasId)
+	}
+
+	if v.BotMemberAliasName != nil {
+		ok := object.Key("botMemberAliasName")
+		ok.String(*v.BotMemberAliasName)
+	}
+
+	if v.BotMemberId != nil {
+		ok := object.Key("botMemberId")
+		ok.String(*v.BotMemberId)
+	}
+
+	if v.BotMemberName != nil {
+		ok := object.Key("botMemberName")
+		ok.String(*v.BotMemberName)
+	}
+
+	if v.BotMemberVersion != nil {
+		ok := object.Key("botMemberVersion")
+		ok.String(*v.BotMemberVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBotMembers(v []types.BotMember, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBotMember(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -30,8 +30,8 @@ func (c *Client) DescribeKeyPhrasesDetectionJob(ctx context.Context, params *Des
 
 type DescribeKeyPhrasesDetectionJobInput struct {
 
-	// The identifier that Amazon Comprehend generated for the job. The operation
-	// returns this identifier in its response.
+	// The identifier that Amazon Comprehend generated for the job. The
+	// StartKeyPhrasesDetectionJob operation returns this identifier in its response.
 	//
 	// This member is required.
 	JobId *string

@@ -13,8 +13,8 @@ import (
 )
 
 // Creates an IPAM resource discovery. A resource discovery is an IPAM component
-// that enables IPAM Service to manage and monitor resources that belong to the
-// owning account.
+// that enables IPAM to manage and monitor resources that belong to the owning
+// account.
 func (c *Client) CreateIpamResourceDiscovery(ctx context.Context, params *CreateIpamResourceDiscoveryInput, optFns ...func(*Options)) (*CreateIpamResourceDiscoveryOutput, error) {
 	if params == nil {
 		params = &CreateIpamResourceDiscoveryInput{}

@@ -418,6 +418,24 @@ func addOpUpdateWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkspace{}, middleware.After)
 }
 
+func validateNetworkAccessConfiguration(v *types.NetworkAccessConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkAccessConfiguration"}
+	if v.PrefixListIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrefixListIds"))
+	}
+	if v.VpceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpceIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSamlConfiguration(v *types.SamlConfiguration) error {
 	if v == nil {
 		return nil
@@ -587,6 +605,11 @@ func validateOpCreateWorkspaceInput(v *CreateWorkspaceInput) error {
 	if v.VpcConfiguration != nil {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkAccessControl != nil {
+		if err := validateNetworkAccessConfiguration(v.NetworkAccessControl); err != nil {
+			invalidParams.AddNested("NetworkAccessControl", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -832,6 +855,11 @@ func validateOpUpdateWorkspaceInput(v *UpdateWorkspaceInput) error {
 	if v.VpcConfiguration != nil {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkAccessControl != nil {
+		if err := validateNetworkAccessConfiguration(v.NetworkAccessControl); err != nil {
+			invalidParams.AddNested("NetworkAccessControl", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

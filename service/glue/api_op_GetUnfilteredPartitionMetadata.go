@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves partition metadata from the Data Catalog that contains unfiltered
+// metadata. For IAM authorization, the public IAM action associated with this API
+// is glue:GetPartition.
 func (c *Client) GetUnfilteredPartitionMetadata(ctx context.Context, params *GetUnfilteredPartitionMetadataInput, optFns ...func(*Options)) (*GetUnfilteredPartitionMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredPartitionMetadataInput{}
@@ -28,33 +31,47 @@ func (c *Client) GetUnfilteredPartitionMetadata(ctx context.Context, params *Get
 
 type GetUnfilteredPartitionMetadataInput struct {
 
+	// The catalog ID where the partition resides.
+	//
 	// This member is required.
 	CatalogId *string
 
+	// (Required) Specifies the name of a database that contains the partition.
+	//
 	// This member is required.
 	DatabaseName *string
 
+	// (Required) A list of partition key values.
+	//
 	// This member is required.
 	PartitionValues []string
 
+	// (Required) A list of supported permission types.
+	//
 	// This member is required.
 	SupportedPermissionTypes []types.PermissionType
 
+	// (Required) Specifies the name of a table that contains the partition.
+	//
 	// This member is required.
 	TableName *string
 
-	// A structure containing information for audit.
+	// A structure containing Lake Formation audit context information.
 	AuditContext *types.AuditContext
 
 	noSmithyDocumentSerde
 }
 
 type GetUnfilteredPartitionMetadataOutput struct {
+
+	// A list of column names that the user has been granted access to.
 	AuthorizedColumns []string
 
+	// A Boolean value that indicates whether the partition location is registered with
+	// Lake Formation.
 	IsRegisteredWithLakeFormation bool
 
-	// Represents a slice of table data.
+	// A Partition object containing the partition metadata.
 	Partition *types.Partition
 
 	// Metadata pertaining to the operation's result.

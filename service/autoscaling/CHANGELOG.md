@@ -1,3 +1,28 @@
+# v1.27.4 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.3 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.2 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.27.1 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.0 (2023-02-10)
+
+* **Feature**: You can now either terminate/replace, ignore, or wait for EC2 Auto Scaling instances on standby or protected from scale in. Also, you can also roll back changes from a failed instance refresh.
+
+# v1.26.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
 # v1.26.1 (2023-01-23)
 
 * No change notes available for this release.

@@ -105,7 +105,7 @@ type GetRunOutput struct {
 	// The run's stop time.
 	StopTime *time.Time
 
-	// The run's storage capacity.
+	// The run's storage capacity in gigabytes.
 	StorageCapacity *int32
 
 	// The run's tags.

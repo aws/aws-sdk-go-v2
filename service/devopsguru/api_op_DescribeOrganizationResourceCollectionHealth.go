@@ -83,7 +83,7 @@ type DescribeOrganizationResourceCollectionHealthOutput struct {
 	// For example, you can assign the same tag to an Amazon DynamoDB table resource
 	// that you assign to an Lambda function. For more information about using tags,
 	// see the Tagging best practices
-	// (https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf)
+	// (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 	// whitepaper. Each Amazon Web Services tag has two parts.
 	//
 	// * A tag key (for

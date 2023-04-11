@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns information about contributor insights, for a given table or global
+// Returns information about contributor insights for a given table or global
 // secondary index.
 func (c *Client) DescribeContributorInsights(ctx context.Context, params *DescribeContributorInsightsInput, optFns ...func(*Options)) (*DescribeContributorInsightsOutput, error) {
 	if params == nil {

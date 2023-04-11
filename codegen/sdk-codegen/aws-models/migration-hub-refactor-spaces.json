@@ -609,7 +609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all\n      Refactor Spaces applications, services, and routes created within the environment. They are referred\n      to as the <i>environment owner</i>. The environment owner has cross-account\n      visibility and control of Refactor Spaces resources that are added to the environment by other\n      accounts that the environment is shared with. When creating an environment, Refactor Spaces\n      provisions a transit gateway in your account.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all\n      Refactor Spaces applications, services, and routes created within the environment. They are referred\n      to as the <i>environment owner</i>. The environment owner has cross-account\n      visibility and control of Refactor Spaces resources that are added to the environment by other\n      accounts that the environment is shared with.</p>\n         <p>When creating an environment with \n      a network fabric type of <code>TRANSIT_GATEWAY</code>, \n      Refactor Spaces provisions a transit gateway in your account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/environments",
@@ -3298,6 +3298,10 @@
                     {
                         "value": "TRANSIT_GATEWAY",
                         "name": "TRANSIT_GATEWAY"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }
@@ -3551,7 +3555,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -3600,15 +3604,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -3865,9 +3860,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3877,9 +3872,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3889,9 +3884,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }

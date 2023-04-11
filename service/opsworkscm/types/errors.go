@@ -26,7 +26,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *InvalidStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -157,7 +157,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

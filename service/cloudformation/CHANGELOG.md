@@ -1,3 +1,32 @@
+# v1.26.6 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.5 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.4 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.26.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
+# v1.26.1 (2023-01-31)
+
+* No change notes available for this release.
+
+# v1.26.0 (2023-01-30)
+
+* **Feature**: This feature provides a method of obtaining which regions a stackset has stack instances deployed in.
+
 # v1.25.1 (2023-01-23)
 
 * No change notes available for this release.

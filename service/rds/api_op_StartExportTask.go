@@ -12,8 +12,18 @@ import (
 	"time"
 )
 
-// Starts an export of a snapshot to Amazon S3. The provided IAM role must have
-// access to the S3 bucket. This command doesn't apply to RDS Custom.
+// Starts an export of DB snapshot or DB cluster data to Amazon S3. The provided
+// IAM role must have access to the S3 bucket. You can't export snapshot data from
+// RDS Custom DB instances. You can't export cluster data from Multi-AZ DB
+// clusters. For more information on exporting DB snapshot data, see Exporting DB
+// snapshot data to Amazon S3
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html)
+// in the Amazon RDS User Guide or Exporting DB cluster snapshot data to Amazon S3
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-export-snapshot.html)
+// in the Amazon Aurora User Guide. For more information on exporting DB cluster
+// data, see Exporting DB cluster data to Amazon S3
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html)
+// in the Amazon Aurora User Guide.
 func (c *Client) StartExportTask(ctx context.Context, params *StartExportTaskInput, optFns ...func(*Options)) (*StartExportTaskOutput, error) {
 	if params == nil {
 		params = &StartExportTaskInput{}
@@ -31,155 +41,191 @@ func (c *Client) StartExportTask(ctx context.Context, params *StartExportTaskInp
 
 type StartExportTaskInput struct {
 
-	// A unique identifier for the snapshot export task. This ID isn't an identifier
-	// for the Amazon S3 bucket where the snapshot is to be exported to.
+	// A unique identifier for the export task. This ID isn't an identifier for the
+	// Amazon S3 bucket where the data is to be exported.
 	//
 	// This member is required.
 	ExportTaskIdentifier *string
 
 	// The name of the IAM role to use for writing to the Amazon S3 bucket when
-	// exporting a snapshot.
+	// exporting a snapshot or cluster. In the IAM policy attached to your IAM role,
+	// include the following required actions to allow the transfer of files from
+	// Amazon RDS or Amazon Aurora to an S3 bucket:
+	//
+	// * s3:PutObject*
+	//
+	// *
+	// s3:GetObject*
+	//
+	// * s3:ListBucket
+	//
+	// * s3:DeleteObject*
+	//
+	// * s3:GetBucketLocation
+	//
+	// In
+	// the policy, include the resources to identify the S3 bucket and objects in the
+	// bucket. The following list of resources shows the Amazon Resource Name (ARN)
+	// format for accessing S3:
+	//
+	// * arn:aws:s3:::your-s3-bucket
+	//
+	// *
+	// arn:aws:s3:::your-s3-bucket/*
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The ID of the Amazon Web Services KMS key to use to encrypt the snapshot
-	// exported to Amazon S3. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the KMS key. The caller of this
-	// operation must be authorized to run the following operations. These can be set
-	// in the Amazon Web Services KMS key policy:
+	// The ID of the Amazon Web Services KMS key to use to encrypt the data exported to
+	// Amazon S3. The Amazon Web Services KMS key identifier is the key ARN, key ID,
+	// alias ARN, or alias name for the KMS key. The caller of this operation must be
+	// authorized to run the following operations. These can be set in the Amazon Web
+	// Services KMS key policy:
 	//
 	// * kms:Encrypt
 	//
 	// * kms:Decrypt
 	//
-	// *
-	// kms:GenerateDataKey
-	//
-	// * kms:GenerateDataKeyWithoutPlaintext
+	// * kms:GenerateDataKey
 	//
 	// *
-	// kms:ReEncryptFrom
+	// kms:GenerateDataKeyWithoutPlaintext
+	//
+	// * kms:ReEncryptFrom
 	//
 	// * kms:ReEncryptTo
 	//
-	// * kms:CreateGrant
+	// *
+	// kms:CreateGrant
 	//
 	// * kms:DescribeKey
 	//
-	// *
-	// kms:RetireGrant
+	// * kms:RetireGrant
 	//
 	// This member is required.
 	KmsKeyId *string
 
-	// The name of the Amazon S3 bucket to export the snapshot to.
+	// The name of the Amazon S3 bucket to export the snapshot or cluster data to.
 	//
 	// This member is required.
 	S3BucketName *string
 
-	// The Amazon Resource Name (ARN) of the snapshot to export to Amazon S3.
+	// The Amazon Resource Name (ARN) of the snapshot or cluster to export to Amazon
+	// S3.
 	//
 	// This member is required.
 	SourceArn *string
 
-	// The data to be exported from the snapshot. If this parameter is not provided,
-	// all the snapshot data is exported. Valid values are the following:
+	// The data to be exported from the snapshot or cluster. If this parameter is not
+	// provided, all of the data is exported. Valid values are the following:
 	//
-	// * database -
-	// Export all the data from a specified database.
+	// *
+	// database - Export all the data from a specified database.
 	//
-	// * database.table table-name -
-	// Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS
-	// for MariaDB, and Aurora MySQL.
+	// * database.table
+	// table-name - Export a table of the snapshot or cluster. This format is valid
+	// only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
 	//
-	// * database.schema schema-name - Export a
-	// database schema of the snapshot. This format is valid only for RDS for
-	// PostgreSQL and Aurora PostgreSQL.
+	// * database.schema
+	// schema-name - Export a database schema of the snapshot or cluster. This format
+	// is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	//
-	// * database.schema.table table-name - Export a
-	// table of the database schema. This format is valid only for RDS for PostgreSQL
-	// and Aurora PostgreSQL.
+	// *
+	// database.schema.table table-name - Export a table of the database schema. This
+	// format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	ExportOnly []string
 
 	// The Amazon S3 bucket prefix to use as the file name and path of the exported
-	// snapshot.
+	// data.
 	S3Prefix *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the details of a snapshot export to Amazon S3. This data type is used
-// as a response element in the DescribeExportTasks action.
+// Contains the details of a snapshot or cluster export to Amazon S3. This data
+// type is used as a response element in the DescribeExportTasks action.
 type StartExportTaskOutput struct {
 
-	// The data exported from the snapshot. Valid values are the following:
+	// The data exported from the snapshot or cluster. Valid values are the
+	// following:
 	//
-	// * database
-	// - Export all the data from a specified database.
+	// * database - Export all the data from a specified database.
 	//
-	// * database.table table-name -
-	// Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS
-	// for MariaDB, and Aurora MySQL.
+	// *
+	// database.table table-name - Export a table of the snapshot or cluster. This
+	// format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
 	//
-	// * database.schema schema-name - Export a
-	// database schema of the snapshot. This format is valid only for RDS for
-	// PostgreSQL and Aurora PostgreSQL.
+	// *
+	// database.schema schema-name - Export a database schema of the snapshot or
+	// cluster. This format is valid only for RDS for PostgreSQL and Aurora
+	// PostgreSQL.
 	//
-	// * database.schema.table table-name - Export a
-	// table of the database schema. This format is valid only for RDS for PostgreSQL
-	// and Aurora PostgreSQL.
+	// * database.schema.table table-name - Export a table of the database
+	// schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	ExportOnly []string
 
-	// A unique identifier for the snapshot export task. This ID isn't an identifier
-	// for the Amazon S3 bucket where the snapshot is exported to.
+	// A unique identifier for the snapshot or cluster export task. This ID isn't an
+	// identifier for the Amazon S3 bucket where the data is exported.
 	ExportTaskIdentifier *string
 
 	// The reason the export failed, if it failed.
 	FailureCause *string
 
 	// The name of the IAM role that is used to write to Amazon S3 when exporting a
-	// snapshot.
+	// snapshot or cluster.
 	IamRoleArn *string
 
 	// The key identifier of the Amazon Web Services KMS key that is used to encrypt
-	// the snapshot when it's exported to Amazon S3. The KMS key identifier is its key
-	// ARN, key ID, alias ARN, or alias name. The IAM role used for the snapshot export
-	// must have encryption and decryption permissions to use this KMS key.
+	// the data when it's exported to Amazon S3. The KMS key identifier is its key ARN,
+	// key ID, alias ARN, or alias name. The IAM role used for the export must have
+	// encryption and decryption permissions to use this KMS key.
 	KmsKeyId *string
 
-	// The progress of the snapshot export task as a percentage.
+	// The progress of the snapshot or cluster export task as a percentage.
 	PercentProgress int32
 
-	// The Amazon S3 bucket that the snapshot is exported to.
+	// The Amazon S3 bucket that the snapshot or cluster is exported to.
 	S3Bucket *string
 
-	// The Amazon S3 bucket prefix that is the file name and path of the exported
-	// snapshot.
+	// The Amazon S3 bucket prefix that is the file name and path of the exported data.
 	S3Prefix *string
 
 	// The time that the snapshot was created.
 	SnapshotTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
+	// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon S3.
 	SourceArn *string
 
 	// The type of source for the export.
 	SourceType types.ExportSourceType
 
-	// The progress status of the export task.
+	// The progress status of the export task. The status can be one of the
+	// following:
+	//
+	// * CANCELED
+	//
+	// * CANCELING
+	//
+	// * COMPLETE
+	//
+	// * FAILED
+	//
+	// * IN_PROGRESS
+	//
+	// *
+	// STARTING
 	Status *string
 
-	// The time that the snapshot export task completed.
+	// The time that the snapshot or cluster export task ended.
 	TaskEndTime *time.Time
 
-	// The time that the snapshot export task started.
+	// The time that the snapshot or cluster export task started.
 	TaskStartTime *time.Time
 
 	// The total amount of data exported, in gigabytes.
 	TotalExtractedDataInGB int32
 
-	// A warning about the snapshot export task.
+	// A warning about the snapshot or cluster export task.
 	WarningMessage *string
 
 	// Metadata pertaining to the operation's result.

@@ -30,7 +30,9 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 
 type ListDomainsInput struct {
 
-	// The maximum number of domains to list per API call.
+	// The maximum number of results that are returned per call. You can use NextToken
+	// to obtain more pages of results. The default is 100; the maximum allowed page
+	// size is also 100.
 	MaxResults *int32
 
 	// If NextToken is returned, there are more results available. The value of
@@ -128,7 +130,9 @@ var _ ListDomainsAPIClient = (*Client)(nil)
 
 // ListDomainsPaginatorOptions is the paginator options for ListDomains
 type ListDomainsPaginatorOptions struct {
-	// The maximum number of domains to list per API call.
+	// The maximum number of results that are returned per call. You can use NextToken
+	// to obtain more pages of results. The default is 100; the maximum allowed page
+	// size is also 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

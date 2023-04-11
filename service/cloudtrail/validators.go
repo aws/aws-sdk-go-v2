@@ -50,6 +50,26 @@ func (m *validateOpCancelQuery) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateChannel struct {
+}
+
+func (*validateOpCreateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventDataStore struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpCreateTrail) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteChannel struct {
+}
+
+func (*validateOpDeleteChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEventDataStore struct {
 }
 
@@ -105,6 +145,26 @@ func (m *validateOpDeleteEventDataStore) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEventDataStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteResourcePolicy struct {
+}
+
+func (*validateOpDeleteResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +350,26 @@ func (m *validateOpGetQueryResults) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourcePolicy struct {
+}
+
+func (*validateOpGetResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTrail struct {
 }
 
@@ -445,6 +525,26 @@ func (m *validateOpPutInsightSelectors) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutInsightSelectorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutResourcePolicy struct {
+}
+
+func (*validateOpPutResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourcePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +710,26 @@ func (m *validateOpStopLogging) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateChannel struct {
+}
+
+func (*validateOpUpdateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEventDataStore struct {
 }
 
@@ -658,6 +778,10 @@ func addOpCancelQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelQuery{}, middleware.After)
 }
 
+func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
+}
+
 func addOpCreateEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEventDataStore{}, middleware.After)
 }
@@ -666,8 +790,16 @@ func addOpCreateTrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrail{}, middleware.After)
 }
 
+func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
+}
+
 func addOpDeleteEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventDataStore{}, middleware.After)
+}
+
+func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
 }
 
 func addOpDeleteTrailValidationMiddleware(stack *middleware.Stack) error {
@@ -706,6 +838,10 @@ func addOpGetQueryResultsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetQueryResults{}, middleware.After)
 }
 
+func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
 func addOpGetTrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrail{}, middleware.After)
 }
@@ -738,6 +874,10 @@ func addOpPutInsightSelectorsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpPutInsightSelectors{}, middleware.After)
 }
 
+func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
+}
+
 func addOpRegisterOrganizationDelegatedAdminValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterOrganizationDelegatedAdmin{}, middleware.After)
 }
@@ -768,6 +908,10 @@ func addOpStopImportValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopLoggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopLogging{}, middleware.After)
+}
+
+func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
 }
 
 func addOpUpdateEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
@@ -836,6 +980,41 @@ func validateAdvancedFieldSelectors(v []types.AdvancedFieldSelector) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AdvancedFieldSelectors"}
 	for i := range v {
 		if err := validateAdvancedFieldSelector(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestination(v *types.Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Destination"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinations(v []types.Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Destinations"}
+	for i := range v {
+		if err := validateDestination(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -990,6 +1169,36 @@ func validateOpCancelQueryInput(v *CancelQueryInput) error {
 	}
 }
 
+func validateOpCreateChannelInput(v *CreateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	} else if v.Destinations != nil {
+		if err := validateDestinations(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagsList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEventDataStoreInput(v *CreateEventDataStoreInput) error {
 	if v == nil {
 		return nil
@@ -1038,6 +1247,21 @@ func validateOpCreateTrailInput(v *CreateTrailInput) error {
 	}
 }
 
+func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelInput"}
+	if v.Channel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEventDataStoreInput(v *DeleteEventDataStoreInput) error {
 	if v == nil {
 		return nil
@@ -1045,6 +1269,21 @@ func validateOpDeleteEventDataStoreInput(v *DeleteEventDataStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventDataStoreInput"}
 	if v.EventDataStore == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1188,6 +1427,21 @@ func validateOpGetQueryResultsInput(v *GetQueryResultsInput) error {
 	}
 }
 
+func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTrailInput(v *GetTrailInput) error {
 	if v == nil {
 		return nil
@@ -1318,6 +1572,24 @@ func validateOpPutInsightSelectorsInput(v *PutInsightSelectorsInput) error {
 	}
 }
 
+func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.ResourcePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRegisterOrganizationDelegatedAdminInput(v *RegisterOrganizationDelegatedAdminInput) error {
 	if v == nil {
 		return nil
@@ -1439,6 +1711,26 @@ func validateOpStopLoggingInput(v *StopLoggingInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopLoggingInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.Channel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if v.Destinations != nil {
+		if err := validateDestinations(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

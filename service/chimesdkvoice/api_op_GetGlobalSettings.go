@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the global settings for the Amazon Chime SDK Voice Connectors in an
+// AWS account.
 func (c *Client) GetGlobalSettings(ctx context.Context, params *GetGlobalSettingsInput, optFns ...func(*Options)) (*GetGlobalSettingsOutput, error) {
 	if params == nil {
 		params = &GetGlobalSettingsInput{}
@@ -31,6 +33,8 @@ type GetGlobalSettingsInput struct {
 }
 
 type GetGlobalSettingsOutput struct {
+
+	// The Voice Connector settings.
 	VoiceConnector *types.VoiceConnectorSettings
 
 	// Metadata pertaining to the operation's result.

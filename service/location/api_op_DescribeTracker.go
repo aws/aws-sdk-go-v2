@@ -54,7 +54,7 @@ type DescribeTrackerOutput struct {
 	Description *string
 
 	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to
-	// specify a resource across all AWS.
+	// specify a resource across all Amazon Web Services.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:tracker/ExampleTracker
@@ -74,7 +74,7 @@ type DescribeTrackerOutput struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// A key identifier for an AWS KMS customer managed key
+	// A key identifier for an Amazon Web Services KMS customer managed key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
 	// assigned to the Amazon Location resource.
 	KmsKeyId *string

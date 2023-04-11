@@ -84,11 +84,11 @@
 // your responsibility to sign the requests. You generate a signature using valid
 // Amazon Web Services credentials that have permission to perform the requested
 // action. For example, you must sign PutMetadata requests with a signature
-// generated from an IAM user account that has the ivs:PutMetadata permission. For
-// more information:
+// generated from a user account that has the ivs:PutMetadata permission. For more
+// information:
 //
-// * Authentication and generating signatures — See
-// Authenticating Requests (Amazon Web Services Signature Version 4)
+// * Authentication and generating signatures — See Authenticating
+// Requests (Amazon Web Services Signature Version 4)
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // in the Amazon Web Services General Reference.
 //

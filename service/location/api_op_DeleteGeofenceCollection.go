@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a geofence collection from your AWS account. This operation deletes the
-// resource permanently. If the geofence collection is the target of a tracker
-// resource, the devices will no longer be monitored.
+// Deletes a geofence collection from your Amazon Web Services account. This
+// operation deletes the resource permanently. If the geofence collection is the
+// target of a tracker resource, the devices will no longer be monitored.
 func (c *Client) DeleteGeofenceCollection(ctx context.Context, params *DeleteGeofenceCollectionInput, optFns ...func(*Options)) (*DeleteGeofenceCollectionOutput, error) {
 	if params == nil {
 		params = &DeleteGeofenceCollectionInput{}

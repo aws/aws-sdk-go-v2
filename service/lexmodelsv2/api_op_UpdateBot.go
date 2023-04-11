@@ -31,7 +31,8 @@ func (c *Client) UpdateBot(ctx context.Context, params *UpdateBotInput, optFns .
 type UpdateBotInput struct {
 
 	// The unique identifier of the bot to update. This identifier is returned by the
-	// CreateBot (https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html)
+	// CreateBot
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
 	// operation.
 	//
 	// This member is required.
@@ -64,6 +65,12 @@ type UpdateBotInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The list of bot members in the network associated with the update action.
+	BotMembers []types.BotMember
+
+	// The type of the bot to be updated.
+	BotType types.BotType
+
 	// A description of the bot.
 	Description *string
 
@@ -75,6 +82,9 @@ type UpdateBotOutput struct {
 	// The unique identifier of the bot that was updated.
 	BotId *string
 
+	// The list of bot members in the network that was updated.
+	BotMembers []types.BotMember
+
 	// The name of the bot after the update.
 	BotName *string
 
@@ -82,6 +92,9 @@ type UpdateBotOutput struct {
 	// Once the bot is read for use, it changes to the Available status. After the bot
 	// is created, you can use the DRAFT version of the bot.
 	BotStatus types.BotStatus
+
+	// The type of the bot that was updated.
+	BotType types.BotType
 
 	// A timestamp of the date and time that the bot was created.
 	CreationDateTime *time.Time

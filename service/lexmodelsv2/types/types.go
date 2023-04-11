@@ -162,8 +162,8 @@ type AudioLogDestination struct {
 
 	// The Amazon S3 bucket where the audio log files are stored. The IAM role
 	// specified in the roleArn parameter of the CreateBot
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html) operation must
-	// have permission to write to this bucket.
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
+	// operation must have permission to write to this bucket.
 	//
 	// This member is required.
 	S3Bucket *S3BucketLogDestination
@@ -241,12 +241,13 @@ type BotAliasLocaleSettings struct {
 }
 
 // Summary information about bot aliases returned from the ListBotAliases
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotAliases.html) operation.
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotAliases.html)
+// operation.
 type BotAliasSummary struct {
 
 	// The unique identifier assigned to the bot alias. You can use this ID to get
 	// detailed information about the alias using the DescribeBotAlias
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBotAlias.html)
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBotAlias.html)
 	// operation.
 	BotAliasId *string
 
@@ -477,7 +478,8 @@ type BotLocaleSortBy struct {
 }
 
 // Summary information about bot locales returned by the ListBotLocales
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotLocales.html) operation.
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotLocales.html)
+// operation.
 type BotLocaleSummary struct {
 
 	// The current status of the bot locale. When the status is Built the locale is
@@ -498,6 +500,37 @@ type BotLocaleSummary struct {
 
 	// The name of the bot locale.
 	LocaleName *string
+
+	noSmithyDocumentSerde
+}
+
+// A bot that is a member of a network of bots.
+type BotMember struct {
+
+	// The alias ID of a bot that is a member of this network of bots.
+	//
+	// This member is required.
+	BotMemberAliasId *string
+
+	// The alias name of a bot that is a member of this network of bots.
+	//
+	// This member is required.
+	BotMemberAliasName *string
+
+	// The unique ID of a bot that is a member of this network of bots.
+	//
+	// This member is required.
+	BotMemberId *string
+
+	// The unique name of a bot that is a member of this network of bots.
+	//
+	// This member is required.
+	BotMemberName *string
+
+	// The version of a bot that is a member of this network of bots.
+	//
+	// This member is required.
+	BotMemberVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -572,12 +605,14 @@ type BotSortBy struct {
 }
 
 // Summary information about a bot returned by the ListBots
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBots.html) operation.
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBots.html)
+// operation.
 type BotSummary struct {
 
 	// The unique identifier assigned to the bot. Use this ID to get detailed
 	// information about the bot with the DescribeBot
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBot.html) operation.
+	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBot.html)
+	// operation.
 	BotId *string
 
 	// The name of the bot.
@@ -586,6 +621,9 @@ type BotSummary struct {
 	// The current status of the bot. When the status is Available the bot is ready for
 	// use.
 	BotStatus BotStatus
+
+	// The type of the bot.
+	BotType BotType
 
 	// The description of the bot.
 	Description *string
@@ -627,7 +665,7 @@ type BotVersionSortBy struct {
 }
 
 // Summary information about a bot version returned by the ListBotVersions
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotVersions.html)
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotVersions.html)
 // operation.
 type BotVersionSummary struct {
 
@@ -668,7 +706,7 @@ type BuiltInIntentSortBy struct {
 }
 
 // Provides summary information about a built-in intent for the  ListBuiltInIntents
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInIntents.html)
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInIntents.html)
 // operation.
 type BuiltInIntentSummary struct {
 
@@ -700,7 +738,7 @@ type BuiltInSlotTypeSortBy struct {
 
 // Provides summary information about a built-in slot type for the
 // ListBuiltInSlotTypes
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInSlotTypes.html)
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInSlotTypes.html)
 // operation.
 type BuiltInSlotTypeSummary struct {
 
@@ -935,7 +973,7 @@ type CustomVocabularyItem struct {
 	// This member is required.
 	Phrase *string
 
-	// The display as value for the custom vocabulary item from the custom vocabulary
+	// The DisplayAs value for the custom vocabulary item from the custom vocabulary
 	// list.
 	DisplayAs *string
 
@@ -1149,7 +1187,8 @@ type EncryptionSetting struct {
 }
 
 // Filters the response form the ListExports
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html) operation
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html)
+// operation
 type ExportFilter struct {
 
 	// The name of the field to use for filtering.
@@ -1416,7 +1455,8 @@ type ImageResponseCard struct {
 }
 
 // Filters the response from the ListImports
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html) operation.
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html)
+// operation.
 type ImportFilter struct {
 
 	// The name of the field to use for filtering.
@@ -1883,6 +1923,22 @@ type OutputContext struct {
 	//
 	// This member is required.
 	TurnsToLive *int32
+
+	noSmithyDocumentSerde
+}
+
+// A network of bots.
+type ParentBotNetwork struct {
+
+	// The identifier of the network of bots assigned by Amazon Lex.
+	//
+	// This member is required.
+	BotId *string
+
+	// The version of the network of bots.
+	//
+	// This member is required.
+	BotVersion *string
 
 	noSmithyDocumentSerde
 }

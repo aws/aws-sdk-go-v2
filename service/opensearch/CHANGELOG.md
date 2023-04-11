@@ -1,3 +1,33 @@
+# v1.15.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.15.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.15.0 (2023-02-22)
+
+* **Feature**: This release lets customers configure Off-peak window and software update related properties for a new/existing domain. It enhances the capabilities of StartServiceSoftwareUpdate API; adds 2 new APIs - ListScheduledActions & UpdateScheduledAction; and allows Auto-tune to make use of Off-peak window.
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.14.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.2 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.14.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.0 (2023-01-31)
+
+* **Feature**: Amazon OpenSearch Service adds the option for a VPC endpoint connection between two domains when the local domain uses OpenSearch version 1.3 or 2.3. You can now use remote reindex to copy indices from one VPC domain to another without a reverse proxy.
+
 # v1.13.1 (2023-01-23)
 
 * No change notes available for this release.

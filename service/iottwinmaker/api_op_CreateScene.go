@@ -51,6 +51,9 @@ type CreateSceneInput struct {
 	// The description for this scene.
 	Description *string
 
+	// The request metadata.
+	SceneMetadata map[string]string
+
 	// Metadata that you can use to manage the scene.
 	Tags map[string]string
 

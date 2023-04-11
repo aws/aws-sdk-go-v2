@@ -361,6 +361,9 @@ type Contact struct {
 	// flow.
 	ScheduledTimestamp *time.Time
 
+	// Information about Amazon Connect Wisdom.
+	WisdomInfo *WisdomInfo
+
 	noSmithyDocumentSerde
 }
 
@@ -591,8 +594,9 @@ type DateReference struct {
 // Contains information about a default vocabulary.
 type DefaultVocabulary struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -669,7 +673,9 @@ type EncryptionConfig struct {
 	EncryptionType EncryptionType
 
 	// The full ARN of the encryption key. Be sure to provide the full ARN of the
-	// encryption key, not just the ID.
+	// encryption key, not just the ID. Amazon Connect supports only KMS keys with the
+	// default key spec of SYMMETRIC_DEFAULT
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-symmetric-default).
 	//
 	// This member is required.
 	KeyId *string
@@ -701,6 +707,24 @@ type Filters struct {
 
 	// A list of up to 100 routing profile IDs or ARNs.
 	RoutingProfiles []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the filter to apply when retrieving metrics with the GetMetricDataV2
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricDataV2.html)
+// API.
+type FilterV2 struct {
+
+	// The key to use for filtering data. For example, QUEUE, ROUTING_PROFILE, AGENT,
+	// CHANNEL, AGENT_HIERARCHY_LEVEL_ONE, AGENT_HIERARCHY_LEVEL_TWO,
+	// AGENT_HIERARCHY_LEVEL_THREE, AGENT_HIERARCHY_LEVEL_FOUR,
+	// AGENT_HIERARCHY_LEVEL_FIVE. There must be at least 1 key and a maximum 5 keys.
+	FilterKey *string
+
+	// The identifiers to use for filtering data. For example, if you have a filter key
+	// of QUEUE, you would add queue IDs or ARNs in FilterValues.
+	FilterValues []string
 
 	noSmithyDocumentSerde
 }
@@ -1013,8 +1037,9 @@ type Instance struct {
 	// When the instance was created.
 	CreatedTime *time.Time
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	Id *string
 
 	// The identity management type.
@@ -1113,8 +1138,9 @@ type InstanceSummary struct {
 // Contains summary information about the associated AppIntegrations.
 type IntegrationAssociationSummary struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	InstanceId *string
 
 	// The Amazon Resource Name (ARN) for the AppIntegration.
@@ -1199,9 +1225,13 @@ type KinesisVideoStreamConfig struct {
 type LexBot struct {
 
 	// The Amazon Web Services Region where the Amazon Lex bot was created.
+	//
+	// This member is required.
 	LexRegion *string
 
 	// The name of the Amazon Lex bot.
+	//
+	// This member is required.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -1271,6 +1301,64 @@ type MediaConcurrency struct {
 	//
 	// This member is required.
 	Concurrency int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains the name, thresholds, and metric filters.
+type MetricDataV2 struct {
+
+	// The metric name, thresholds, and metric filters of the returned metric.
+	Metric *MetricV2
+
+	// The corresponding value of the metric returned in the response.
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the filter used when retrieving metrics.
+// MetricFiltersV2 can be used on the following metrics: AVG_AGENT_CONNECTING_TIME,
+// CONTACTS_CREATED, CONTACTS_HANDLED, SUM_CONTACTS_DISCONNECTED.
+type MetricFilterV2 struct {
+
+	// The key to use for filtering data. Valid metric filter keys: INITIATION_METHOD,
+	// DISCONNECT_REASON
+	MetricFilterKey *string
+
+	// The values to use for filtering data. Valid metric filter values for
+	// INITIATION_METHOD: INBOUND | OUTBOUND | TRANSFER | QUEUE_TRANSFER | CALLBACK |
+	// API Valid metric filter values for DISCONNECT_REASON: CUSTOMER_DISCONNECT |
+	// AGENT_DISCONNECT | THIRD_PARTY_DISCONNECT | TELECOM_PROBLEM | BARGED |
+	// CONTACT_FLOW_DISCONNECT | OTHER | EXPIRED | API
+	MetricFilterValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the metric results.
+type MetricResultV2 struct {
+
+	// The set of metrics.
+	Collections []MetricDataV2
+
+	// The dimension for the metrics.
+	Dimensions map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the metric.
+type MetricV2 struct {
+
+	// Contains the filters to be used when returning data.
+	MetricFilters []MetricFilterV2
+
+	// The name of the metric.
+	Name *string
+
+	// Contains information about the threshold for service level metrics.
+	Threshold []ThresholdV2
 
 	noSmithyDocumentSerde
 }
@@ -1849,8 +1937,9 @@ type RoutingProfile struct {
 	// The description of the routing profile.
 	Description *string
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	InstanceId *string
 
 	// The channels agents can handle in the Contact Control Panel (CCP) for this
@@ -2539,6 +2628,18 @@ type Threshold struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the threshold for service level metrics.
+type ThresholdV2 struct {
+
+	// The type of comparison. Only "less than" (LT) comparisons are supported.
+	Comparison *string
+
+	// The threshold value to compare.
+	ThresholdValue *float64
+
+	noSmithyDocumentSerde
+}
+
 // Information about a traffic distribution group.
 type TrafficDistributionGroup struct {
 
@@ -3073,6 +3174,15 @@ type VoiceRecordingConfiguration struct {
 
 	// Identifies which track is being recorded.
 	VoiceRecordingTrack VoiceRecordingTrack
+
+	noSmithyDocumentSerde
+}
+
+// Information about Amazon Connect Wisdom.
+type WisdomInfo struct {
+
+	// The Amazon Resource Name (ARN) of the Wisdom session.
+	SessionArn *string
 
 	noSmithyDocumentSerde
 }

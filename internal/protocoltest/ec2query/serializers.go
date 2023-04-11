@@ -17,6 +17,66 @@ import (
 	"path"
 )
 
+type awsEc2query_serializeOpDatetimeOffsets struct {
+}
+
+func (*awsEc2query_serializeOpDatetimeOffsets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDatetimeOffsets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DatetimeOffsetsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DatetimeOffsets")
+	body.Key("Version").String("2020-01-08")
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpEmptyInputAndEmptyOutput struct {
 }
 
@@ -1121,6 +1181,66 @@ func (m *awsEc2query_serializeOpXmlEnums) HandleSerialize(ctx context.Context, i
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpXmlIntEnums struct {
+}
+
+func (*awsEc2query_serializeOpXmlIntEnums) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpXmlIntEnums) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*XmlIntEnumsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("XmlIntEnums")
+	body.Key("Version").String("2020-01-08")
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpXmlLists struct {
 }
 
@@ -1301,9 +1421,6 @@ func (m *awsEc2query_serializeOpXmlTimestamps) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 func awsEc2query_serializeDocumentListWithXmlName(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("Item")
 
 	for i := range v {
@@ -1352,9 +1469,6 @@ func awsEc2query_serializeDocumentStructArg(v *types.StructArg, value query.Valu
 }
 
 func awsEc2query_serializeDocumentGreetingList(v []types.GreetingStruct, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("Member")
 
 	for i := range v {
@@ -1379,9 +1493,6 @@ func awsEc2query_serializeDocumentGreetingStruct(v *types.GreetingStruct, value 
 }
 
 func awsEc2query_serializeDocumentStringList(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
 	array := value.Array("Member")
 
 	for i := range v {

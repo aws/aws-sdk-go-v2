@@ -1,3 +1,40 @@
+# v1.18.0 (2023-03-23)
+
+* **Feature**: Repository CreationTime is added to the CreateRepository and ListRepositories API responses.
+
+# v1.17.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.0 (2023-03-09)
+
+* **Feature**: This release introduces the generic package format, a mechanism for storing arbitrary binary assets. It also adds a new API, PublishPackageVersion, to allow for publishing generic packages.
+
+# v1.16.4 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.16.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.2 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.16.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.0 (2023-01-31)
+
+* **Feature**: This release introduces a new DeletePackage API, which enables deletion of a package and all of its versions from a repository.
+
 # v1.15.0 (2023-01-19)
 
 * **Feature**: Documentation updates for CodeArtifact

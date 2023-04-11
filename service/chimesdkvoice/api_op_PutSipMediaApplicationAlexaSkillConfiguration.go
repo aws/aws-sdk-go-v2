@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the Alexa Skill configuration for the SIP media application.
 func (c *Client) PutSipMediaApplicationAlexaSkillConfiguration(ctx context.Context, params *PutSipMediaApplicationAlexaSkillConfigurationInput, optFns ...func(*Options)) (*PutSipMediaApplicationAlexaSkillConfigurationOutput, error) {
 	if params == nil {
 		params = &PutSipMediaApplicationAlexaSkillConfigurationInput{}
@@ -28,15 +29,20 @@ func (c *Client) PutSipMediaApplicationAlexaSkillConfiguration(ctx context.Conte
 
 type PutSipMediaApplicationAlexaSkillConfigurationInput struct {
 
+	// The SIP media application ID.
+	//
 	// This member is required.
 	SipMediaApplicationId *string
 
+	// The Alexa Skill configuration.
 	SipMediaApplicationAlexaSkillConfiguration *types.SipMediaApplicationAlexaSkillConfiguration
 
 	noSmithyDocumentSerde
 }
 
 type PutSipMediaApplicationAlexaSkillConfigurationOutput struct {
+
+	// Returns the Alexa Skill configuration.
 	SipMediaApplicationAlexaSkillConfiguration *types.SipMediaApplicationAlexaSkillConfiguration
 
 	// Metadata pertaining to the operation's result.

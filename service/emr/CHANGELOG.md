@@ -1,3 +1,32 @@
+# v1.23.4 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.3 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.2 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.23.1 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.0 (2023-02-16)
+
+* **Feature**: This release provides customers the ability to define a timeout period for procuring capacity during a resize operation for Instance Fleet clusters. Customers can specify this timeout using the ResizeSpecifications parameter supported by RunJobFlow, ModifyInstanceFleet and AddInstanceFleet APIs.
+
+# v1.22.3 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.22.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.1 (2023-01-23)
 
 * No change notes available for this release.

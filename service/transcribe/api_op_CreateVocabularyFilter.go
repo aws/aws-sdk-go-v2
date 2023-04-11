@@ -60,6 +60,16 @@ type CreateVocabularyFilterInput struct {
 	// This member is required.
 	VocabularyFilterName *string
 
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
+	// Amazon S3 bucket that contains your input files (in this case, your custom
+	// vocabulary filter). If the role that you specify doesn’t have the appropriate
+	// permissions to access the specified Amazon S3 location, your request fails. IAM
+	// role ARNs have the format arn:partition:iam::account:role/role-name-with-path.
+	// For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM
+	// ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
+	DataAccessRoleArn *string
+
 	// Adds one or more custom tags, each in the form of a key:value pair, to a new
 	// custom vocabulary filter at the time you create this new vocabulary filter. To
 	// learn more about using tags with Amazon Transcribe, refer to Tagging resources

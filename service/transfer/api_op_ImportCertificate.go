@@ -31,7 +31,12 @@ func (c *Client) ImportCertificate(ctx context.Context, params *ImportCertificat
 
 type ImportCertificateInput struct {
 
-	// The file that contains the certificate to import.
+	// * For the CLI, provide a file path for a certificate in URI format. For example,
+	// --certificate file://encryption-cert.pem. Alternatively, you can provide the raw
+	// content.
+	//
+	// * For the SDK, specify the raw content of a certificate file. For
+	// example, --certificate "`cat encryption-cert.pem`".
 	//
 	// This member is required.
 	Certificate *string
@@ -54,8 +59,12 @@ type ImportCertificateInput struct {
 	// An optional date that specifies when the certificate becomes inactive.
 	InactiveDate *time.Time
 
-	// The file that contains the private key for the certificate that's being
-	// imported.
+	// * For the CLI, provide a file path for a private key in URI format.For example,
+	// --private-key file://encryption-key.pem. Alternatively, you can provide the raw
+	// content of the private key file.
+	//
+	// * For the SDK, specify the raw content of a
+	// private key file. For example, --private-key "`cat encryption-key.pem`"
 	PrivateKey *string
 
 	// Key-value pairs that can be used to group and search for certificates.

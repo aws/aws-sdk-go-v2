@@ -29,7 +29,7 @@ func (e *BadRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -83,7 +83,7 @@ func (e *InternalFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -111,7 +111,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -137,7 +137,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailableException"
 	}
 	return *e.ErrorCodeOverride

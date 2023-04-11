@@ -28,7 +28,7 @@ func (e *DependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DependencyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DependencyException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -84,7 +84,7 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ARN of the media pipeline that you want to tag. Consists of he pipeline's
+// The ARN of the media pipeline that you want to tag. Consists of the pipeline's
 // endpoint region, resource ID, and pipeline ID.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

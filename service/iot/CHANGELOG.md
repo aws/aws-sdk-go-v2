@@ -1,3 +1,36 @@
+# v1.35.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.35.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.35.0 (2023-03-02)
+
+* **Feature**: A recurring maintenance window is an optional configuration used for rolling out the job document to all devices in the target group observing a predetermined start time, duration, and frequency that the maintenance window occurs.
+
+# v1.34.4 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.34.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.2 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.34.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.0 (2023-01-31)
+
+* **Feature**: Added support for IoT Rules Engine Cloudwatch Logs action batch mode.
+
 # v1.33.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

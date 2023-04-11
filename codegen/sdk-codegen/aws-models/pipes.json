@@ -8,7 +8,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
             }
         },
         "com.amazonaws.pipes#ArnOrJsonPath": {
@@ -18,7 +18,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
             }
         },
         "com.amazonaws.pipes#ArnOrUrl": {
@@ -28,7 +28,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
+                "smithy.api#pattern": "^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
             }
         },
         "com.amazonaws.pipes#AssignPublicIp": {
@@ -225,7 +225,7 @@
                 "Value": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quantity of the specified resource to reserve for the container. The values vary based on the\n         <code>type</code> specified.</p>\n         <dl>\n            <dt>type=\"GPU\"</dt>\n            <dd>\n               <p>The number of physical GPUs to reserve for the container. Make sure that the number of GPUs reserved for all\n                  containers in a job doesn't exceed the number of available GPUs on the compute resource that the job is launched\n                  on.</p>\n               <note>\n                  <p>GPUs aren't available for jobs that are running on Fargate resources.</p>\n               </note>\n            </dd>\n            <dt>type=\"MEMORY\"</dt>\n            <dd>\n               <p>The memory hard limit (in MiB) present to the container. This parameter is supported for jobs that are\n                  running on EC2 resources. If your container attempts to exceed the memory specified, the container is terminated.\n                  This parameter maps to <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">\n                     Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> \n                  and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.\n                  You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for\n                  multi-node parallel (MNP) jobs. It must be specified for each node at least once. This parameter maps to\n                  <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">\n                     Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the\n                  <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>\n               <note>\n                  <p>If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for\n                     a particular instance type, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html\">Memory\n                        management</a> in the <i>Batch User Guide</i>.</p>\n               </note>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> is the hard limit (in MiB), and\n                  must match one of the supported values and the <code>VCPU</code> values must be one of the values supported for\n                  that memory value.</p>\n               <dl>\n                  <dt>value = 512</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 0.25</p>\n                     </dd>\n                  <dt>value = 1024</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 0.25 or 0.5</p>\n                     </dd>\n                  <dt>value = 2048</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 0.25, 0.5, or 1</p>\n                     </dd>\n                  <dt>value = 3072</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 0.5, or 1</p>\n                     </dd>\n                  <dt>value = 4096</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 0.5, 1, or 2</p>\n                     </dd>\n                  <dt>value = 5120, 6144, or 7168</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 1 or 2</p>\n                     </dd>\n                  <dt>value = 8192</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 1, 2, 4, or 8</p>\n                     </dd>\n                  <dt>value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 2 or 4</p>\n                     </dd>\n                  <dt>value = 16384</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 2, 4, or 8</p>\n                     </dd>\n                  <dt>value = 17408, 18432, 19456, 21504, 22528, 23552, 25600, 26624, 27648, 29696, or 30720</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 4</p>\n                     </dd>\n                  <dt>value = 20480, 24576, or 28672</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 4 or 8</p>\n                     </dd>\n                  <dt>value = 36864, 45056, 53248, or 61440</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 8</p>\n                     </dd>\n                  <dt>value = 32768, 40960, 49152, or 57344</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 8 or 16</p>\n                     </dd>\n                  <dt>value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880</dt>\n                  <dd>\n                        <p>\n                        <code>VCPU</code> = 16</p>\n                     </dd>\n               </dl>\n            </dd>\n            <dt>type=\"VCPU\"</dt>\n            <dd>\n               <p>The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the\n                  <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">\n                     Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> \n                  and the <code>--cpu-shares</code> option to\n                  <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. For EC2\n                  resources, you must specify at least one vCPU. This is required but can be specified in several places; it must be\n                  specified for each node at least once.</p>\n               <p>The default for the Fargate On-Demand vCPU resource count quota is 6 vCPUs. For more information about\n                  Fargate quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate\">Fargate quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> must match one of the supported\n                  values and the <code>MEMORY</code> values must be one of the values supported for that <code>VCPU</code> value.\n                  The supported values are 0.25, 0.5, 1, 2, 4, 8, and 16</p>\n               <dl>\n                  <dt>value = 0.25</dt>\n                  <dd>\n                        <p>\n                        <code>MEMORY</code> = 512, 1024, or 2048</p>\n                     </dd>\n                  <dt>value = 0.5</dt>\n                  <dd>\n                        <p>\n                        <code>MEMORY</code> = 1024, 2048, 3072, or 4096</p>\n                     </dd>\n                  <dt>value = 1</dt>\n                  <dd>\n                        <p>\n                        <code>MEMORY</code> = 2048, 3072, 4096, 5120, 6144, 7168, or 8192</p>\n                     </dd>\n                  <dt>value = 2</dt>\n                  <dd>\n                        <p>\n                        <code>MEMORY</code> = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</p>\n                     </dd>\n                  <dt>value = 4</dt>\n                  <dd>\n                        <p>\n                        <code>MEMORY</code> = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456,\n                           20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</p>\n                     </dd>\n                  <dt>value = 8</dt>\n                  <dd>\n                        <p>\n                        <code>MEMORY</code> = 16384, 20480, 24576, 28672, 32768, 36864, 40960, 45056, 49152, 53248, 57344, or 61440\n                        </p>\n                     </dd>\n                  <dt>value = 16</dt>\n                  <dd>\n                        <p>\n                        <code>MEMORY</code> = 32768, 40960, 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880\n                        </p>\n                     </dd>\n               </dl>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The quantity of the specified resource to reserve for the container. The values vary based on the\n         <code>type</code> specified.</p>\n         <dl>\n            <dt>type=\"GPU\"</dt>\n            <dd>\n               <p>The number of physical GPUs to reserve for the container. Make sure that the number of GPUs reserved for all\n                  containers in a job doesn't exceed the number of available GPUs on the compute resource that the job is launched\n                  on.</p>\n               <note>\n                  <p>GPUs aren't available for jobs that are running on Fargate resources.</p>\n               </note>\n            </dd>\n            <dt>type=\"MEMORY\"</dt>\n            <dd>\n               <p>The memory hard limit (in MiB) present to the container. This parameter is supported for jobs that are\n                  running on EC2 resources. If your container attempts to exceed the memory specified, the container is terminated.\n                  This parameter maps to <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">\n                     Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> \n                  and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.\n                  You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for\n                  multi-node parallel (MNP) jobs. It must be specified for each node at least once. This parameter maps to\n                  <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">\n                     Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the\n                  <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>\n               <note>\n                  <p>If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for\n                     a particular instance type, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html\">Memory\n                        management</a> in the <i>Batch User Guide</i>.</p>\n               </note>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> is the hard limit (in MiB), and\n                  must match one of the supported values and the <code>VCPU</code> values must be one of the values supported for\n                  that memory value.</p>\n               <dl>\n                  <dt>value = 512</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25</p>\n                  </dd>\n                  <dt>value = 1024</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25 or 0.5</p>\n                  </dd>\n                  <dt>value = 2048</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25, 0.5, or 1</p>\n                  </dd>\n                  <dt>value = 3072</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.5, or 1</p>\n                  </dd>\n                  <dt>value = 4096</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.5, 1, or 2</p>\n                  </dd>\n                  <dt>value = 5120, 6144, or 7168</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 1 or 2</p>\n                  </dd>\n                  <dt>value = 8192</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 1, 2, 4, or 8</p>\n                  </dd>\n                  <dt>value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 2 or 4</p>\n                  </dd>\n                  <dt>value = 16384</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 2, 4, or 8</p>\n                  </dd>\n                  <dt>value = 17408, 18432, 19456, 21504, 22528, 23552, 25600, 26624, 27648, 29696, or 30720</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 4</p>\n                  </dd>\n                  <dt>value = 20480, 24576, or 28672</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 4 or 8</p>\n                  </dd>\n                  <dt>value = 36864, 45056, 53248, or 61440</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 8</p>\n                  </dd>\n                  <dt>value = 32768, 40960, 49152, or 57344</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 8 or 16</p>\n                  </dd>\n                  <dt>value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 16</p>\n                  </dd>\n               </dl>\n            </dd>\n            <dt>type=\"VCPU\"</dt>\n            <dd>\n               <p>The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the\n                  <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">\n                     Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> \n                  and the <code>--cpu-shares</code> option to\n                  <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. For EC2\n                  resources, you must specify at least one vCPU. This is required but can be specified in several places; it must be\n                  specified for each node at least once.</p>\n               <p>The default for the Fargate On-Demand vCPU resource count quota is 6 vCPUs. For more information about\n                  Fargate quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate\">Fargate quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> must match one of the supported\n                  values and the <code>MEMORY</code> values must be one of the values supported for that <code>VCPU</code> value.\n                  The supported values are 0.25, 0.5, 1, 2, 4, 8, and 16</p>\n               <dl>\n                  <dt>value = 0.25</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 512, 1024, or 2048</p>\n                  </dd>\n                  <dt>value = 0.5</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 1024, 2048, 3072, or 4096</p>\n                  </dd>\n                  <dt>value = 1</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 2048, 3072, 4096, 5120, 6144, 7168, or 8192</p>\n                  </dd>\n                  <dt>value = 2</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</p>\n                  </dd>\n                  <dt>value = 4</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456,\n                           20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</p>\n                  </dd>\n                  <dt>value = 8</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 16384, 20480, 24576, 28672, 32768, 36864, 40960, 45056, 49152, 53248, 57344, or 61440\n                        </p>\n                  </dd>\n                  <dt>value = 16</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 32768, 40960, 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880\n                        </p>\n                  </dd>\n               </dl>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1174,7 +1174,7 @@
                     "min": 1,
                     "max": 50
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+                "smithy.api#pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1197,7 +1197,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "(?=[/\\.\\-_A-Za-z0-9]+)((?!aws\\.).*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)",
+                "smithy.api#pattern": "(?=[/\\.\\-_A-Za-z0-9]+)((?!aws\\.).*)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1258,7 +1258,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "^[!#$%&'*+-.^_`|~0-9a-zA-Z]+|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"
+                "smithy.api#pattern": "^[!#$%&'*+-.^_`|~0-9a-zA-Z]+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
             }
         },
         "com.amazonaws.pipes#HeaderParametersMap": {
@@ -1277,7 +1277,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+                "smithy.api#pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1321,7 +1321,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"
+                "smithy.api#pattern": "^\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*$"
             }
         },
         "com.amazonaws.pipes#KafkaBootstrapServers": {
@@ -1410,15 +1410,6 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
-                }
-            }
-        },
-        "com.amazonaws.pipes#LimitMax1000": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 1000
                 }
             }
         },
@@ -1789,13 +1780,13 @@
                     "min": 0,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
+                "smithy.api#pattern": "^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
             }
         },
         "com.amazonaws.pipes#PathParameter": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?!\\s*$).+|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+                "smithy.api#pattern": "^(?!\\s*$).+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1887,7 +1878,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:aws([a-z]|\\-)*:([a-zA-Z0-9\\-]+):([a-z]|\\d|\\-)*:([0-9]{12})?:(.*)$"
+                "smithy.api#pattern": "^arn:aws([a-z]|\\-)*:([a-zA-Z0-9\\-]+):([a-z]|\\d|\\-)*:([0-9]{12})?:(.+)$"
             }
         },
         "com.amazonaws.pipes#PipeDescription": {
@@ -2048,7 +2039,7 @@
             "type": "structure",
             "members": {
                 "BatchSize": {
-                    "target": "com.amazonaws.pipes#LimitMax1000",
+                    "target": "com.amazonaws.pipes#LimitMax10000",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of records to include in each batch.</p>"
                     }
@@ -2994,7 +2985,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -3023,13 +3014,12 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
                             "type": "tree",
@@ -3037,23 +3027,20 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "booleanEquals",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
-                                                }
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
                                     "type": "tree",
                                     "rules": [
                                         {
@@ -3062,19 +3049,201 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
+                                                            "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
                                             "type": "error"
                                         },
                                         {
                                             "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://pipes-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://pipes-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -3087,212 +3256,75 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://pipes.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://pipes-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
+                                                    "type": "tree",
+                                                    "rules": [
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://pipes.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
                                                         }
                                                     ]
                                                 }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://pipes-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://pipes.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://pipes.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -3308,9 +3340,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3321,9 +3353,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3334,9 +3366,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3347,9 +3379,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3360,9 +3392,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3373,9 +3405,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3386,9 +3418,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3399,9 +3431,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3410,9 +3442,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3423,9 +3455,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3434,9 +3466,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3447,9 +3479,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3460,9 +3492,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3473,9 +3505,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3486,9 +3518,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3499,9 +3531,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3510,9 +3542,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3523,9 +3555,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3534,9 +3566,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3547,9 +3579,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3560,9 +3592,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3572,9 +3604,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3584,9 +3616,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3731,7 +3763,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F]+|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F]+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
             }
         },
         "com.amazonaws.pipes#QueryStringParametersMap": {
@@ -3750,7 +3782,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+                "smithy.api#pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3858,7 +3890,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3880,7 +3912,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"
             }
         },
         "com.amazonaws.pipes#SecretManagerArnOrJsonPath": {
@@ -3891,7 +3923,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
             }
         },
         "com.amazonaws.pipes#SecurityGroup": {
@@ -3901,7 +3933,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^sg-[0-9a-zA-Z]*|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+                "smithy.api#pattern": "^sg-[0-9a-zA-Z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -4302,7 +4334,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^subnet-[0-9a-z]*|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+                "smithy.api#pattern": "^subnet-[0-9a-z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -4634,7 +4666,7 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Update an existing pipe. When you call <code>UpdatePipe</code>, only the fields that are included in the request are changed, the rest are unchanged. \n         The exception to this is if you modify any Amazon Web Services-service specific fields in the <code>SourceParameters</code>, <code>EnrichmentParameters</code>, or \n         <code>TargetParameters</code> objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that \n         if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update.</p>\n      \n         <p>For more information about pipes, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html\">\n         Amazon EventBridge Pipes</a> in the Amazon EventBridge User Guide.</p>",
+                "smithy.api#documentation": "<p>Update an existing pipe. When you call <code>UpdatePipe</code>, only the fields that are included in the request are changed, the rest are unchanged. \n         The exception to this is if you modify any Amazon Web Services-service specific fields in the <code>SourceParameters</code>, <code>EnrichmentParameters</code>, or \n         <code>TargetParameters</code> objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that \n         if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update.</p>\n         <p>For more information about pipes, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html\">\n         Amazon EventBridge Pipes</a> in the Amazon EventBridge User Guide.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/pipes/{Name}",
@@ -4784,7 +4816,7 @@
             "type": "structure",
             "members": {
                 "BatchSize": {
-                    "target": "com.amazonaws.pipes#LimitMax1000",
+                    "target": "com.amazonaws.pipes#LimitMax10000",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of records to include in each batch.</p>"
                     }

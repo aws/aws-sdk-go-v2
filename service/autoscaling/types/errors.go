@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The request failed because an active instance refresh for the specified Auto
-// Scaling group was not found.
+// The request failed because an active instance refresh or rollback for the
+// specified Auto Scaling group was not found.
 type ActiveInstanceRefreshNotFoundFault struct {
 	Message *string
 
@@ -27,7 +27,7 @@ func (e *ActiveInstanceRefreshNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActiveInstanceRefreshNotFoundFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActiveInstanceRefreshNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -55,15 +55,15 @@ func (e *AlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AlreadyExists"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *AlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request failed because an active instance refresh operation already exists
-// for the specified Auto Scaling group.
+// The request failed because an active instance refresh already exists for the
+// specified Auto Scaling group.
 type InstanceRefreshInProgressFault struct {
 	Message *string
 
@@ -82,7 +82,7 @@ func (e *InstanceRefreshInProgressFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InstanceRefreshInProgressFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InstanceRefreshInProgress"
 	}
 	return *e.ErrorCodeOverride
@@ -108,12 +108,41 @@ func (e *InvalidNextToken) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextToken) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextToken"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request failed because a desired configuration was not found or an
+// incompatible launch template (uses a Systems Manager parameter instead of an AMI
+// ID) or launch template version ($Latest or $Default) is present on the Auto
+// Scaling group.
+type IrreversibleInstanceRefreshFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IrreversibleInstanceRefreshFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IrreversibleInstanceRefreshFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IrreversibleInstanceRefreshFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IrreversibleInstanceRefresh"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IrreversibleInstanceRefreshFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have already reached a limit for your Amazon EC2 Auto Scaling resources (for
 // example, Auto Scaling groups, launch configurations, or lifecycle hooks). For
@@ -138,7 +167,7 @@ func (e *LimitExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -165,7 +194,7 @@ func (e *ResourceContentionFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceContentionFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceContention"
 	}
 	return *e.ErrorCodeOverride
@@ -191,7 +220,7 @@ func (e *ResourceInUseFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -218,7 +247,7 @@ func (e *ScalingActivityInProgressFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ScalingActivityInProgressFault) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ScalingActivityInProgress"
 	}
 	return *e.ErrorCodeOverride
@@ -244,7 +273,7 @@ func (e *ServiceLinkedRoleFailure) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceLinkedRoleFailure) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceLinkedRoleFailure"
 	}
 	return *e.ErrorCodeOverride

@@ -292,7 +292,7 @@ type AnalysisError struct {
 	// The type of the analysis error.
 	Type AnalysisErrorType
 
-	//
+	// Lists the violated entities that caused the analysis error
 	ViolatedEntities []Entity
 
 	noSmithyDocumentSerde
@@ -1282,14 +1282,16 @@ type CategoryFilter struct {
 	// This member is required.
 	Column *ColumnIdentifier
 
+	// The configuration for a CategoryFilter.
+	//
+	// This member is required.
+	Configuration *CategoryFilterConfiguration
+
 	// An identifier that uniquely identifies a filter within a dashboard, analysis, or
 	// template.
 	//
 	// This member is required.
 	FilterId *string
-
-	// The configuration for a CategoryFilter.
-	Configuration *CategoryFilterConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2259,7 +2261,7 @@ type DashboardError struct {
 	// Type.
 	Type DashboardErrorType
 
-	//
+	// Lists the violated entities that caused the dashboard error.
 	ViolatedEntities []Entity
 
 	noSmithyDocumentSerde
@@ -2271,13 +2273,37 @@ type DashboardPublishOptions struct {
 	// Ad hoc (one-time) filtering option.
 	AdHocFilteringOption *AdHocFilteringOption
 
+	// The drill-down options of data points in a dashboard.
+	DataPointDrillUpDownOption *DataPointDrillUpDownOption
+
+	// The data point menu label options of a dashboard.
+	DataPointMenuLabelOption *DataPointMenuLabelOption
+
+	// The data point tool tip options of a dashboard.
+	DataPointTooltipOption *DataPointTooltipOption
+
 	// Export to .csv option.
 	ExportToCSVOption *ExportToCSVOption
+
+	// Determines if hidden fields are exported with a dashboard.
+	ExportWithHiddenFieldsOption *ExportWithHiddenFieldsOption
 
 	// Sheet controls option.
 	SheetControlsOption *SheetControlsOption
 
+	// The sheet layout maximization options of a dashbaord.
+	SheetLayoutElementMaximizationOption *SheetLayoutElementMaximizationOption
+
+	// The axis sort options of a dashboard.
+	VisualAxisSortOption *VisualAxisSortOption
+
+	// The menu options of a visual in a dashboard.
+	VisualMenuOption *VisualMenuOption
+
+	// The visual publish options of a visual in a dashboard.
 	//
+	// Deprecated: VisualPublishOptions property will reach its end of standard support
+	// in a future release. To perform this action, use ExportWithHiddenFields.
 	VisualPublishOptions *DashboardVisualPublishOptions
 
 	noSmithyDocumentSerde
@@ -2537,9 +2563,10 @@ type DashboardVisualId struct {
 	noSmithyDocumentSerde
 }
 
+// The visual publish options of a visual in a dashboard
 type DashboardVisualPublishOptions struct {
 
-	//
+	// Determines if hidden fields are included in an exported dashboard.
 	ExportHiddenFieldsOption *ExportHiddenFieldsOption
 
 	noSmithyDocumentSerde
@@ -2753,6 +2780,33 @@ type DataPathValue struct {
 	//
 	// This member is required.
 	FieldValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The drill down options for data points in a dashbaord.
+type DataPointDrillUpDownOption struct {
+
+	// The status of the drill down options of data points.
+	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// The data point menu options of a dashboard.
+type DataPointMenuLabelOption struct {
+
+	// The status of the data point menu options.
+	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// The data point tooltip options.
+type DataPointTooltipOption struct {
+
+	// The status of the data point tool tip options.
+	AvailabilityStatus DashboardBehavior
 
 	noSmithyDocumentSerde
 }
@@ -3968,9 +4022,10 @@ type ExplicitHierarchy struct {
 	noSmithyDocumentSerde
 }
 
+// Determines if hidden fields are included in an exported dashboard.
 type ExportHiddenFieldsOption struct {
 
-	//
+	// The status of the export hidden fields options of a dashbaord.
 	AvailabilityStatus DashboardBehavior
 
 	noSmithyDocumentSerde
@@ -3980,6 +4035,15 @@ type ExportHiddenFieldsOption struct {
 type ExportToCSVOption struct {
 
 	// Availability status.
+	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// Determines whether or not hidden fields are visible on exported dashbaords.
+type ExportWithHiddenFieldsOption struct {
+
+	// The status of the export with hidden fields options.
 	AvailabilityStatus DashboardBehavior
 
 	noSmithyDocumentSerde
@@ -8097,6 +8161,11 @@ type PivotTableOptions struct {
 	// The table cell style of cells.
 	CellStyle *TableCellStyle
 
+	// The visibility setting of a pivot table's collapsed row dimension fields. If the
+	// value of this structure is HIDDEN, all collapsed columns in a pivot table are
+	// automatically hidden. The default value is VISIBLE.
+	CollapsedRowDimensionsVisibility Visibility
+
 	// The table cell style of the column header.
 	ColumnHeaderStyle *TableCellStyle
 
@@ -8337,6 +8406,142 @@ type QueueInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The aggregated field well configuration of a RadarChartVisual.
+type RadarChartAggregatedFieldWells struct {
+
+	// The aggregated field well categories of a radar chart.
+	Category []DimensionField
+
+	// The color that are assigned to the aggregated field wells of a radar chart.
+	Color []DimensionField
+
+	// The values that are assigned to the aggregated field wells of a radar chart.
+	Values []MeasureField
+
+	noSmithyDocumentSerde
+}
+
+// The configured style settings of a radar chart.
+type RadarChartAreaStyleSettings struct {
+
+	// The visibility settings of a radar chart.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of a RadarChartVisual.
+type RadarChartConfiguration struct {
+
+	// Determines the visibility of the colors of alternatign bands in a radar chart.
+	AlternateBandColorsVisibility Visibility
+
+	// The color of the even-numbered alternate bands of a radar chart.
+	AlternateBandEvenColor *string
+
+	// The color of the odd-numbered alternate bands of a radar chart.
+	AlternateBandOddColor *string
+
+	// The base sreies settings of a radar chart.
+	BaseSeriesSettings *RadarChartSeriesSettings
+
+	// The category axis of a radar chart.
+	CategoryAxis *AxisDisplayOptions
+
+	// The category label options of a radar chart.
+	CategoryLabelOptions *ChartAxisLabelOptions
+
+	// The color axis of a radar chart.
+	ColorAxis *AxisDisplayOptions
+
+	// The color label options of a radar chart.
+	ColorLabelOptions *ChartAxisLabelOptions
+
+	// The field well configuration of a RadarChartVisual.
+	FieldWells *RadarChartFieldWells
+
+	// The legend display setup of the visual.
+	Legend *LegendOptions
+
+	// The shape of the radar chart.
+	Shape RadarChartShape
+
+	// The sort configuration of a RadarChartVisual.
+	SortConfiguration *RadarChartSortConfiguration
+
+	// The start angle of a radar chart's axis.
+	StartAngle *float64
+
+	// The palette (chart color) display setup of the visual.
+	VisualPalette *VisualPalette
+
+	noSmithyDocumentSerde
+}
+
+// The field wells of a radar chart visual.
+type RadarChartFieldWells struct {
+
+	// The aggregated field wells of a radar chart visual.
+	RadarChartAggregatedFieldWells *RadarChartAggregatedFieldWells
+
+	noSmithyDocumentSerde
+}
+
+// The series settings of a radar chart.
+type RadarChartSeriesSettings struct {
+
+	// The area style settings of a radar chart.
+	AreaStyleSettings *RadarChartAreaStyleSettings
+
+	noSmithyDocumentSerde
+}
+
+// The sort configuration of a RadarChartVisual.
+type RadarChartSortConfiguration struct {
+
+	// The category items limit for a radar chart.
+	CategoryItemsLimit *ItemsLimitConfiguration
+
+	// The category sort options of a radar chart.
+	CategorySort []FieldSortOptions
+
+	// The color items limit of a radar chart.
+	ColorItemsLimit *ItemsLimitConfiguration
+
+	// The color sort configuration of a radar chart.
+	ColorSort []FieldSortOptions
+
+	noSmithyDocumentSerde
+}
+
+// A radar chart visual.
+type RadarChartVisual struct {
+
+	// The unique identifier of a visual. This identifier must be unique within the
+	// context of a dashboard, template, or analysis. Two dashboards, analyses, or
+	// templates can have visuals with the same identifiers.
+	//
+	// This member is required.
+	VisualId *string
+
+	// The list of custom actions that are configured for a visual.
+	Actions []VisualCustomAction
+
+	// The configuration settings of the visual.
+	ChartConfiguration *RadarChartConfiguration
+
+	// The column hierarchy that is used during drill-downs and drill-ups.
+	ColumnHierarchies []ColumnHierarchy
+
+	// The subtitle that is displayed on the visual.
+	Subtitle *VisualSubtitleLabelOptions
+
+	// The title that is displayed on the visual.
+	Title *VisualTitleLabelOptions
+
+	noSmithyDocumentSerde
+}
+
 // The range ends label type of a data path label.
 type RangeEndsLabelType struct {
 
@@ -8544,6 +8749,15 @@ type ReferenceLineValueLabelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The feature configurations of an embedded Amazon QuickSight console.
+type RegisteredUserConsoleFeatureConfigurations struct {
+
+	// The state persistence configurations of an embedded Amazon QuickSight console.
+	StatePersistence *StatePersistenceConfigurations
+
+	noSmithyDocumentSerde
+}
+
 // Information about the dashboard you want to embed.
 type RegisteredUserDashboardEmbeddingConfiguration struct {
 
@@ -8555,6 +8769,18 @@ type RegisteredUserDashboardEmbeddingConfiguration struct {
 	//
 	// This member is required.
 	InitialDashboardId *string
+
+	// The feature configurations of an embbedded Amazon QuickSight dashboard.
+	FeatureConfigurations *RegisteredUserDashboardFeatureConfigurations
+
+	noSmithyDocumentSerde
+}
+
+// The feature configuration for an embedded dashboard.
+type RegisteredUserDashboardFeatureConfigurations struct {
+
+	// The state persistence settings of an embedded dashboard.
+	StatePersistence *StatePersistenceConfigurations
 
 	noSmithyDocumentSerde
 }
@@ -8647,6 +8873,9 @@ type RegisteredUserQSearchBarEmbeddingConfiguration struct {
 
 // Information about the Amazon QuickSight console that you want to embed.
 type RegisteredUserQuickSightConsoleEmbeddingConfiguration struct {
+
+	// The embedding configuration of an embedded Amazon QuickSight console.
+	FeatureConfigurations *RegisteredUserConsoleFeatureConfigurations
 
 	// The initial URL path for the Amazon QuickSight console. InitialPath is required.
 	// The entry point URL is constrained to the following paths:
@@ -8949,6 +9178,14 @@ type S3Parameters struct {
 	//
 	// This member is required.
 	ManifestFileLocation *ManifestFileLocation
+
+	// Use the RoleArn structure to override an account-wide role for a specific S3
+	// data source. For example, say an account administrator has turned off all S3
+	// access with an account-wide role. The administrator can then use RoleArn to
+	// bypass the account-wide role and allow S3 access for the single S3 data source
+	// that is specified in the structure, even if the account-wide role forbidding S3
+	// access is still active.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -9536,6 +9773,15 @@ type SheetElementRenderingRule struct {
 	noSmithyDocumentSerde
 }
 
+// The sheet layout maximization options of a dashbaord.
+type SheetLayoutElementMaximizationOption struct {
+
+	// The status of the sheet layout maximization options of a dashbaord.
+	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
 // The theme display options for sheets.
 type SheetStyle struct {
 
@@ -9741,6 +9987,18 @@ type SslProperties struct {
 
 	// A Boolean option to control whether SSL should be disabled.
 	DisableSsl bool
+
+	noSmithyDocumentSerde
+}
+
+// The state perssitence configuration of an embedded dashboard.
+type StatePersistenceConfigurations struct {
+
+	// Determines if a Amazon QuickSight dashboard's state persistence settings are
+	// turned on or off.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -11468,7 +11726,7 @@ type UploadSettings struct {
 // A registered user of Amazon QuickSight.
 type User struct {
 
-	// The active status of user. When you create an Amazon QuickSight user that’s not
+	// The active status of user. When you create an Amazon QuickSight user that's not
 	// an IAM user or an Active Directory user, that user is inactive until they sign
 	// in and provide a password.
 	Active bool
@@ -11625,6 +11883,11 @@ type Visual struct {
 	// Amazon QuickSight User Guide.
 	PivotTableVisual *PivotTableVisual
 
+	// A radar chart visual. For more information, see Using radar charts
+	// (https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html) in the
+	// Amazon QuickSight User Guide.
+	RadarChartVisual *RadarChartVisual
+
 	// A sankey diagram. For more information, see Using Sankey diagrams
 	// (https://docs.aws.amazon.com/quicksight/latest/user/sankey-diagram.html) in the
 	// Amazon QuickSight User Guide.
@@ -11654,6 +11917,15 @@ type Visual struct {
 	// (https://docs.aws.amazon.com/quicksight/latest/user/word-cloud.html) in the
 	// Amazon QuickSight User Guide.
 	WordCloudVisual *WordCloudVisual
+
+	noSmithyDocumentSerde
+}
+
+// The axis sort options for a visual.
+type VisualAxisSortOption struct {
+
+	// The availaiblity status of a visual's axis sort options.
+	AvailabilityStatus DashboardBehavior
 
 	noSmithyDocumentSerde
 }
@@ -11713,6 +11985,15 @@ type VisualCustomActionOperation struct {
 
 	// The URL operation that opens a link to another webpage.
 	URLOperation *CustomActionURLOperation
+
+	noSmithyDocumentSerde
+}
+
+// The menu options for a visual.
+type VisualMenuOption struct {
+
+	// The availaiblity status of a visual's menu options.
+	AvailabilityStatus DashboardBehavior
 
 	noSmithyDocumentSerde
 }

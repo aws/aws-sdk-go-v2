@@ -26,7 +26,7 @@ func (e *InternalServiceError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceError"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *PipelineDeletedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PipelineDeletedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PipelineDeletedException"
 	}
 	return *e.ErrorCodeOverride
@@ -107,7 +107,7 @@ func (e *PipelineNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PipelineNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PipelineNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *TaskNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TaskNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TaskNotFoundException"
 	}
 	return *e.ErrorCodeOverride

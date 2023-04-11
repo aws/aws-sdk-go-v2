@@ -15340,6 +15340,12 @@ func awsAwsquery_deserializeDocumentStackSet(v **types.StackSet, decoder smithyx
 				sv.PermissionModel = types.PermissionModels(xtv)
 			}
 
+		case strings.EqualFold("Regions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentRegionList(&sv.Regions, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("StackSetARN", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

@@ -2116,6 +2116,50 @@ func validateBotLocaleSortBy(v *types.BotLocaleSortBy) error {
 	}
 }
 
+func validateBotMember(v *types.BotMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BotMember"}
+	if v.BotMemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotMemberId"))
+	}
+	if v.BotMemberName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotMemberName"))
+	}
+	if v.BotMemberAliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotMemberAliasId"))
+	}
+	if v.BotMemberAliasName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotMemberAliasName"))
+	}
+	if v.BotMemberVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotMemberVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBotMembers(v []types.BotMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BotMembers"}
+	for i := range v {
+		if err := validateBotMember(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBotSortBy(v *types.BotSortBy) error {
 	if v == nil {
 		return nil
@@ -4698,6 +4742,11 @@ func validateOpCreateBotInput(v *CreateBotInput) error {
 	if v.IdleSessionTTLInSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdleSessionTTLInSeconds"))
 	}
+	if v.BotMembers != nil {
+		if err := validateBotMembers(v.BotMembers); err != nil {
+			invalidParams.AddNested("BotMembers", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6047,6 +6096,11 @@ func validateOpUpdateBotInput(v *UpdateBotInput) error {
 	}
 	if v.IdleSessionTTLInSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdleSessionTTLInSeconds"))
+	}
+	if v.BotMembers != nil {
+		if err := validateBotMembers(v.BotMembers); err != nil {
+			invalidParams.AddNested("BotMembers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

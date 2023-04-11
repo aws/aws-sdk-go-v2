@@ -1,3 +1,37 @@
+# v1.26.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.0 (2023-02-23)
+
+* **Feature**: You can now associate an AWS WAF v2 web ACL with an AWS App Runner service.
+
+# v1.25.3 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.25.2 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.1 (2023-02-16)
+
+* **Documentation**: Added a notice for account takeover prevention (ATP). The interface incorrectly lets you to configure ATP response inspection in regional web ACLs in Region US East (N. Virginia), without returning an error. ATP response inspection is only available in web ACLs that protect CloudFront distributions.
+
+# v1.25.0 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Feature**: For protected CloudFront distributions, you can now use the AWS WAF Fraud Control account takeover prevention (ATP) managed rule group to block new login attempts from clients that have recently submitted too many failed login attempts.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.24.3 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.2 (2023-01-18)
 
 * **Documentation**: Improved the visibility of the guidance for updating AWS WAF resources, such as web ACLs and rule groups.

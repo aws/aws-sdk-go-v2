@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AWS Resilience Hub application assessment. This is a destructive
-// action that can't be undone.
+// Deletes an Resilience Hub application assessment. This is a destructive action
+// that can't be undone.
 func (c *Client) DeleteAppAssessment(ctx context.Context, params *DeleteAppAssessmentInput, optFns ...func(*Options)) (*DeleteAppAssessmentOutput, error) {
 	if params == nil {
 		params = &DeleteAppAssessmentInput{}
@@ -35,7 +35,7 @@ type DeleteAppAssessmentInput struct {
 	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -54,7 +54,7 @@ type DeleteAppAssessmentOutput struct {
 	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string

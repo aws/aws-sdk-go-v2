@@ -60,37 +60,39 @@ type GetTopicAttributesOutput struct {
 	// * Policy – The JSON serialization of the topic's access control
 	// policy.
 	//
-	// * SignatureVersion – The version of the Amazon SNS signature used for
+	// * SignatureVersion – The signature version corresponds to the hashing
+	// algorithm used while creating the signature of the notifications, subscription
+	// confirmations, or unsubscribe confirmation messages sent by Amazon SNS.
+	//
+	// * By
+	// default, SignatureVersion is set to 1. The signature is a Base64-encoded
+	// SHA1withRSA signature.
+	//
+	// * When you set SignatureVersion to 2. Amazon SNS uses a
+	// Base64-encoded SHA256withRSA signature. If the API response does not include the
+	// SignatureVersion attribute, it means that the SignatureVersion for the topic has
+	// value 1.
+	//
+	// * SubscriptionsConfirmed – The number of confirmed subscriptions for
 	// the topic.
 	//
-	// * By default, SignatureVersion is set to 1. The signature is a
-	// Base64-encoded SHA1withRSA signature.
+	// * SubscriptionsDeleted – The number of deleted subscriptions for the
+	// topic.
 	//
-	// * When you set SignatureVersion to 2.
-	// Amazon SNS uses a Base64-encoded SHA256withRSA signature. If the API response
-	// does not include the SignatureVersion attribute, it means that the
-	// SignatureVersion for the topic has value 1.
+	// * SubscriptionsPending – The number of subscriptions pending
+	// confirmation for the topic.
 	//
-	// * SubscriptionsConfirmed – The
-	// number of confirmed subscriptions for the topic.
+	// * TopicArn – The topic's ARN.
 	//
-	// * SubscriptionsDeleted – The
-	// number of deleted subscriptions for the topic.
+	// * TracingConfig –
+	// Tracing mode of an Amazon SNS topic. By default TracingConfig is set to
+	// PassThrough, and the topic passes through the tracing header it receives from an
+	// Amazon SNS publisher to its subscriptions. If set to Active, Amazon SNS will
+	// vend X-Ray segment data to topic owner account if the sampled flag in the
+	// tracing header is true. This is only supported on standard topics.
 	//
-	// * SubscriptionsPending – The
-	// number of subscriptions pending confirmation for the topic.
-	//
-	// * TopicArn – The
-	// topic's ARN.
-	//
-	// * TracingConfig – Tracing mode of an Amazon SNS topic. By default
-	// TracingConfig is set to PassThrough, and the topic passes through the tracing
-	// header it receives from an Amazon SNS publisher to its subscriptions. If set to
-	// Active, Amazon SNS will vend X-Ray segment data to topic owner account if the
-	// sampled flag in the tracing header is true. This is only supported on standard
-	// topics.
-	//
-	// The following attribute applies only to server-side-encryption
+	// The
+	// following attribute applies only to server-side-encryption
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 	//
 	// *

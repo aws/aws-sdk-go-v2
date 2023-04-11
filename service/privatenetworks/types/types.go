@@ -171,6 +171,9 @@ type NetworkResource struct {
 	// The position of the network resource.
 	Position *Position
 
+	// Information about a request to return the network resource.
+	ReturnInformation *ReturnInformation
+
 	// The serial number of the network resource.
 	SerialNumber *string
 
@@ -299,6 +302,28 @@ type Position struct {
 
 	// The longitude of the position.
 	Longitude *float64
+
+	noSmithyDocumentSerde
+}
+
+// Information about a request to return a network resource.
+type ReturnInformation struct {
+
+	// The Amazon Resource Name (ARN) of the replacement order.
+	ReplacementOrderArn *string
+
+	// The reason for the return. If the return request did not include a reason for
+	// the return, this value is null.
+	ReturnReason *string
+
+	// The shipping address.
+	ShippingAddress *Address
+
+	// The URL of the shipping label. The shipping label is available for download only
+	// if the status of the network resource is PENDING_RETURN. For more information,
+	// see Return a radio unit
+	// (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit).
+	ShippingLabel *string
 
 	noSmithyDocumentSerde
 }

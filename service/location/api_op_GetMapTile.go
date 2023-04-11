@@ -54,6 +54,11 @@ type GetMapTileInput struct {
 	// This member is required.
 	Z *string
 
+	// The optional API key
+	// (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+	// to authorize the request.
+	Key *string
+
 	noSmithyDocumentSerde
 }
 
@@ -61,6 +66,9 @@ type GetMapTileOutput struct {
 
 	// Contains Mapbox Vector Tile (MVT) data.
 	Blob []byte
+
+	// The HTTP Cache-Control directive for the value.
+	CacheControl *string
 
 	// The map tile's content type. For example, application/vnd.mapbox-vector-tile.
 	ContentType *string

@@ -42,6 +42,9 @@ type DescribeChannelOutput struct {
 	// The Amazon Resource Name (ARN) assigned to the Channel.
 	Arn *string
 
+	// The date and time the Channel was created.
+	CreatedAt *string
+
 	// A short text description of the Channel.
 	Description *string
 

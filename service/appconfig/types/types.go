@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// An action defines the tasks the extension performs during the AppConfig
+// An action defines the tasks that the extension performs during the AppConfig
 // workflow. Each action includes an action point such as
 // ON_CREATE_HOSTED_CONFIGURATION, PRE_DEPLOYMENT, or ON_DEPLOYMENT. Each action
 // also includes a name, a URI to an Lambda function, and an Amazon Resource Name
@@ -342,6 +342,9 @@ type HostedConfigurationVersionSummary struct {
 
 	// A description of the configuration.
 	Description *string
+
+	// A user-defined label for an AppConfig hosted configuration version.
+	VersionLabel *string
 
 	// The configuration version.
 	VersionNumber int32

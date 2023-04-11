@@ -30,7 +30,7 @@ func (e *AliasExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AliasExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AliasExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *CodeDeliveryFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CodeDeliveryFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CodeDeliveryFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -83,7 +83,7 @@ func (e *CodeMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CodeMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CodeMismatchException"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -137,7 +137,7 @@ func (e *DuplicateProviderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateProviderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateProviderException"
 	}
 	return *e.ErrorCodeOverride
@@ -164,7 +164,7 @@ func (e *EnableSoftwareTokenMFAException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EnableSoftwareTokenMFAException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EnableSoftwareTokenMFAException"
 	}
 	return *e.ErrorCodeOverride
@@ -190,7 +190,7 @@ func (e *ExpiredCodeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExpiredCodeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExpiredCodeException"
 	}
 	return *e.ErrorCodeOverride
@@ -217,7 +217,7 @@ func (e *ForbiddenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ForbiddenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ForbiddenException"
 	}
 	return *e.ErrorCodeOverride
@@ -244,7 +244,7 @@ func (e *GroupExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GroupExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "GroupExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -270,7 +270,7 @@ func (e *InternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -297,7 +297,7 @@ func (e *InvalidEmailRoleAccessPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEmailRoleAccessPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEmailRoleAccessPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -326,7 +326,7 @@ func (e *InvalidLambdaResponseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLambdaResponseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLambdaResponseException"
 	}
 	return *e.ErrorCodeOverride
@@ -352,7 +352,7 @@ func (e *InvalidOAuthFlowException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidOAuthFlowException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidOAuthFlowException"
 	}
 	return *e.ErrorCodeOverride
@@ -379,7 +379,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -405,7 +405,7 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPasswordException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPasswordException"
 	}
 	return *e.ErrorCodeOverride
@@ -432,7 +432,7 @@ func (e *InvalidSmsRoleAccessPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSmsRoleAccessPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSmsRoleAccessPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -463,7 +463,7 @@ func (e *InvalidSmsRoleTrustRelationshipException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSmsRoleTrustRelationshipException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSmsRoleTrustRelationshipException"
 	}
 	return *e.ErrorCodeOverride
@@ -491,7 +491,7 @@ func (e *InvalidUserPoolConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidUserPoolConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidUserPoolConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -520,7 +520,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -547,7 +547,7 @@ func (e *MFAMethodNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MFAMethodNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MFAMethodNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -573,7 +573,7 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotAuthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotAuthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -599,7 +599,7 @@ func (e *PasswordResetRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PasswordResetRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PasswordResetRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -625,7 +625,7 @@ func (e *PreconditionNotMetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PreconditionNotMetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PreconditionNotMetException"
 	}
 	return *e.ErrorCodeOverride
@@ -652,7 +652,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -678,7 +678,7 @@ func (e *ScopeDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ScopeDoesNotExistException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ScopeDoesNotExistException"
 	}
 	return *e.ErrorCodeOverride
@@ -705,7 +705,7 @@ func (e *SoftwareTokenMFANotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SoftwareTokenMFANotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SoftwareTokenMFANotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -732,7 +732,7 @@ func (e *TooManyFailedAttemptsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyFailedAttemptsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyFailedAttemptsException"
 	}
 	return *e.ErrorCodeOverride
@@ -759,7 +759,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRequestsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRequestsException"
 	}
 	return *e.ErrorCodeOverride
@@ -786,7 +786,7 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -813,7 +813,7 @@ func (e *UnexpectedLambdaException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnexpectedLambdaException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnexpectedLambdaException"
 	}
 	return *e.ErrorCodeOverride
@@ -839,7 +839,7 @@ func (e *UnsupportedIdentityProviderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedIdentityProviderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedIdentityProviderException"
 	}
 	return *e.ErrorCodeOverride
@@ -868,7 +868,7 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedOperationException"
 	}
 	return *e.ErrorCodeOverride
@@ -894,7 +894,7 @@ func (e *UnsupportedTokenTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedTokenTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedTokenTypeException"
 	}
 	return *e.ErrorCodeOverride
@@ -920,7 +920,7 @@ func (e *UnsupportedUserStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedUserStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedUserStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -947,7 +947,7 @@ func (e *UserImportInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserImportInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserImportInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -974,7 +974,7 @@ func (e *UserLambdaValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserLambdaValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserLambdaValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1001,7 +1001,7 @@ func (e *UsernameExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UsernameExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UsernameExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -1027,7 +1027,7 @@ func (e *UserNotConfirmedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserNotConfirmedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserNotConfirmedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1053,7 +1053,7 @@ func (e *UserNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1079,7 +1079,7 @@ func (e *UserPoolAddOnNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserPoolAddOnNotEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserPoolAddOnNotEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -1105,7 +1105,7 @@ func (e *UserPoolTaggingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UserPoolTaggingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UserPoolTaggingException"
 	}
 	return *e.ErrorCodeOverride

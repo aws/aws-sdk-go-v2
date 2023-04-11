@@ -28,7 +28,7 @@ func (e *DocumentServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DocumentServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DocumentServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *SearchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SearchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SearchException"
 	}
 	return *e.ErrorCodeOverride

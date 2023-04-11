@@ -16,7 +16,7 @@ import (
 // bot. To use a built-in intent as a the base for your own intent, include the
 // built-in intent signature in the parentIntentSignature parameter when you call
 // the CreateIntent operation. For more information, see CreateIntent
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateIntent.html).
+// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html).
 func (c *Client) ListBuiltInIntents(ctx context.Context, params *ListBuiltInIntentsInput, optFns ...func(*Options)) (*ListBuiltInIntentsOutput, error) {
 	if params == nil {
 		params = &ListBuiltInIntentsInput{}

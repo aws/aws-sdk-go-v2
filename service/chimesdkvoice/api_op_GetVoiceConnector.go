@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves details for the specified Amazon Chime SDK Voice Connector, such as
+// timestamps,name, outbound host, and encryption requirements.
 func (c *Client) GetVoiceConnector(ctx context.Context, params *GetVoiceConnectorInput, optFns ...func(*Options)) (*GetVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorInput{}
@@ -28,6 +30,8 @@ func (c *Client) GetVoiceConnector(ctx context.Context, params *GetVoiceConnecto
 
 type GetVoiceConnectorInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -35,6 +39,8 @@ type GetVoiceConnectorInput struct {
 }
 
 type GetVoiceConnectorOutput struct {
+
+	// The Voice Connector details.
 	VoiceConnector *types.VoiceConnector
 
 	// Metadata pertaining to the operation's result.

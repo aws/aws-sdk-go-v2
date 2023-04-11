@@ -81,6 +81,12 @@ type GetSceneOutput struct {
 	// The description of the scene.
 	Description *string
 
+	// The generated scene metadata.
+	GeneratedSceneMetadata map[string]string
+
+	// The response metadata.
+	SceneMetadata map[string]string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

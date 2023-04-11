@@ -34,14 +34,16 @@ type ConflictType string
 
 // Enum values for ConflictType
 const (
-	ConflictTypeAnotherActiveStream                ConflictType = "ANOTHER_ACTIVE_STREAM"
-	ConflictTypeDomainNotActive                    ConflictType = "DOMAIN_NOT_ACTIVE"
-	ConflictTypeCannotChangeSpeakerAfterEnrollment ConflictType = "CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT"
-	ConflictTypeEnrollmentAlreadyExists            ConflictType = "ENROLLMENT_ALREADY_EXISTS"
-	ConflictTypeSpeakerNotSet                      ConflictType = "SPEAKER_NOT_SET"
-	ConflictTypeSpeakerOptedOut                    ConflictType = "SPEAKER_OPTED_OUT"
-	ConflictTypeConcurrentChanges                  ConflictType = "CONCURRENT_CHANGES"
-	ConflictTypeDomainLockedFromEncryptionUpdates  ConflictType = "DOMAIN_LOCKED_FROM_ENCRYPTION_UPDATES"
+	ConflictTypeAnotherActiveStream                      ConflictType = "ANOTHER_ACTIVE_STREAM"
+	ConflictTypeDomainNotActive                          ConflictType = "DOMAIN_NOT_ACTIVE"
+	ConflictTypeCannotChangeSpeakerAfterEnrollment       ConflictType = "CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT"
+	ConflictTypeEnrollmentAlreadyExists                  ConflictType = "ENROLLMENT_ALREADY_EXISTS"
+	ConflictTypeSpeakerNotSet                            ConflictType = "SPEAKER_NOT_SET"
+	ConflictTypeSpeakerOptedOut                          ConflictType = "SPEAKER_OPTED_OUT"
+	ConflictTypeConcurrentChanges                        ConflictType = "CONCURRENT_CHANGES"
+	ConflictTypeDomainLockedFromEncryptionUpdates        ConflictType = "DOMAIN_LOCKED_FROM_ENCRYPTION_UPDATES"
+	ConflictTypeCannotDeleteNonEmptyWatchlist            ConflictType = "CANNOT_DELETE_NON_EMPTY_WATCHLIST"
+	ConflictTypeFraudsterMustBelongToAtLeastOneWatchlist ConflictType = "FRAUDSTER_MUST_BELONG_TO_AT_LEAST_ONE_WATCHLIST"
 )
 
 // Values returns all known values for ConflictType. Note that this can be expanded
@@ -57,6 +59,8 @@ func (ConflictType) Values() []ConflictType {
 		"SPEAKER_OPTED_OUT",
 		"CONCURRENT_CHANGES",
 		"DOMAIN_LOCKED_FROM_ENCRYPTION_UPDATES",
+		"CANNOT_DELETE_NON_EMPTY_WATCHLIST",
+		"FRAUDSTER_MUST_BELONG_TO_AT_LEAST_ONE_WATCHLIST",
 	}
 }
 
@@ -207,6 +211,7 @@ const (
 	ResourceTypeFraudster         ResourceType = "FRAUDSTER"
 	ResourceTypeSession           ResourceType = "SESSION"
 	ResourceTypeSpeaker           ResourceType = "SPEAKER"
+	ResourceTypeWatchlist         ResourceType = "WATCHLIST"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -220,6 +225,7 @@ func (ResourceType) Values() []ResourceType {
 		"FRAUDSTER",
 		"SESSION",
 		"SPEAKER",
+		"WATCHLIST",
 	}
 }
 

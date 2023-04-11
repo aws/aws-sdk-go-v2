@@ -290,6 +290,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The next daily time an automatic snapshot will be created.</p>\n         <p>The time shown is in <code>HH:00</code> format, and in Coordinated Universal Time\n      (UTC).</p>\n         <p>The snapshot is automatically created between the time shown and up to 45 minutes\n      after.</p>"
                     }
+                },
+                "threshold": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trigger threshold of the action.</p>\n         <important>\n            <p>This add-on only applies to Lightsail for Research resources.</p>\n         </important>"
+                    }
+                },
+                "duration": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of idle time in minutes after which your virtual computer will automatically stop.</p>\n         <important>\n            <p>This add-on only applies to Lightsail for Research resources.</p>\n         </important>"
+                    }
                 }
             },
             "traits": {
@@ -317,6 +329,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that represents additional parameters when enabling or modifying the automatic\n      snapshot add-on.</p>"
                     }
+                },
+                "stopInstanceOnIdleRequest": {
+                    "target": "com.amazonaws.lightsail#StopInstanceOnIdleRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents additional parameters when enabling or modifying the\n        <code>StopInstanceOnIdle</code> add-on.</p>\n         <important>\n            <p>This object only applies to Lightsail for Research resources.</p>\n         </important>"
+                    }
                 }
             },
             "traits": {
@@ -336,6 +354,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AutoSnapshot"
+                    }
+                },
+                "StopInstanceOnIdle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StopInstanceOnIdle"
                     }
                 }
             }
@@ -548,6 +572,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#AllocateStaticIpResult": {
@@ -559,6 +586,23 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lightsail#AppCategory": {
+            "type": "enum",
+            "members": {
+                "LfR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LfR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#AppCategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#AppCategory"
             }
         },
         "com.amazonaws.lightsail#AttachCertificateToDistribution": {
@@ -615,6 +659,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#AttachCertificateToDistributionResult": {
@@ -691,7 +738,16 @@
                         "smithy.api#documentation": "<p>The disk path to expose to the instance (e.g., <code>/dev/xvdf</code>).</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "autoMounting": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value used to determine the automatic mounting of a storage volume to a virtual\n      computer. The default value is <code>False</code>.</p>\n         <important>\n            <p>This value only applies to Lightsail for Research resources.</p>\n         </important>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#AttachDiskResult": {
@@ -762,6 +818,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#AttachInstancesToLoadBalancerResult": {
@@ -832,6 +891,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#AttachLoadBalancerTlsCertificateResult": {
@@ -902,6 +964,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#AttachStaticIpResult": {
@@ -948,6 +1013,35 @@
             },
             "value": {
                 "target": "com.amazonaws.lightsail#DiskMapList"
+            }
+        },
+        "com.amazonaws.lightsail#AutoMountStatus": {
+            "type": "enum",
+            "members": {
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "Mounted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Mounted"
+                    }
+                },
+                "NotMounted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotMounted"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#AutoSnapshotAddOnRequest": {
@@ -1054,7 +1148,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an Availability Zone.</p>"
+                "smithy.api#documentation": "<p>Describes an Availability Zone. This is returned only as part of a <code>GetRegions</code>\n      request.</p>"
             }
         },
         "com.amazonaws.lightsail#AvailabilityZoneList": {
@@ -1185,6 +1279,12 @@
                     "target": "com.amazonaws.lightsail#InstancePlatform",
                     "traits": {
                         "smithy.api#documentation": "<p>The operating system platform (either Linux/Unix-based or Windows Server-based) of the\n      blueprint.</p>"
+                    }
+                },
+                "appCategory": {
+                    "target": "com.amazonaws.lightsail#AppCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Virtual computer blueprints that are supported by Lightsail for Research.</p>\n         <important>\n            <p>This parameter only applies to Lightsail for Research resources.</p>\n         </important>"
                     }
                 }
             },
@@ -1526,6 +1626,12 @@
                     "target": "com.amazonaws.lightsail#InstancePlatformList",
                     "traits": {
                         "smithy.api#documentation": "<p>The operating system platform (Linux/Unix-based or Windows Server-based) that the bundle\n      supports. You can only launch a <code>WINDOWS</code> bundle on a blueprint that supports the\n        <code>WINDOWS</code> platform. <code>LINUX_UNIX</code> blueprints require a\n        <code>LINUX_UNIX</code> bundle.</p>"
+                    }
+                },
+                "supportedAppCategories": {
+                    "target": "com.amazonaws.lightsail#AppCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Virtual computer blueprints that are supported by a Lightsail for Research bundle.</p>\n         <important>\n            <p>This parameter only applies to Lightsail for Research resources.</p>\n         </important>"
                     }
                 }
             },
@@ -1950,6 +2056,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CloseInstancePublicPortsResult": {
@@ -2861,7 +2970,7 @@
                 "expiresAt": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the container image registry username and password expire.</p>\n         <p>The log in credentials expire 12 hours after they are created, at which point you will\n      need to create a new set of log in credentials using the\n        <code>CreateContainerServiceRegistryLogin</code> action.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the container image registry sign-in credentials expire.</p>\n         <p>The log in credentials expire 12 hours after they are created, at which point you will\n      need to create a new set of log in credentials using the\n        <code>CreateContainerServiceRegistryLogin</code> action.</p>"
                     }
                 },
                 "registry": {
@@ -2872,7 +2981,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the login information for the container image registry of an Amazon Lightsail\n      account.</p>"
+                "smithy.api#documentation": "<p>Describes the sign-in credentials for the container image registry of an Amazon Lightsail\n      account.</p>"
             }
         },
         "com.amazonaws.lightsail#ContainerServiceScale": {
@@ -3122,6 +3231,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CopySnapshotResult": {
@@ -3133,6 +3245,32 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lightsail#CostEstimate": {
+            "type": "structure",
+            "members": {
+                "usageType": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of usage that are included in the estimate, such as costs, usage, or data\n      transfer.</p>"
+                    }
+                },
+                "resultsByTime": {
+                    "target": "com.amazonaws.lightsail#EstimatesByTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost estimate result that's associated with a time period.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the estimated cost for resources in your Lightsail for Research account.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#CostEstimates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#CostEstimate"
             }
         },
         "com.amazonaws.lightsail#CreateBucket": {
@@ -3210,6 +3348,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateBucketAccessKeyResult": {
@@ -3258,6 +3399,9 @@
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether to enable versioning of objects in the\n      bucket.</p>\n         <p>For more information about versioning, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning\">Enabling and suspending object versioning in a bucket in Amazon Lightsail</a> in the\n        <i>Amazon Lightsail Developer Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateBucketResult": {
@@ -3340,6 +3484,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the certificate during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateCertificateResult": {
@@ -3409,6 +3556,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateCloudFormationStackResult": {
@@ -3476,6 +3626,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateContactMethodResult": {
@@ -3580,6 +3733,9 @@
                         "smithy.api#documentation": "<p>An object that describes the settings of the public endpoint for the container\n      service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateContainerServiceDeploymentResult": {
@@ -3629,7 +3785,10 @@
         },
         "com.amazonaws.lightsail#CreateContainerServiceRegistryLoginRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lightsail#CreateContainerServiceRegistryLoginResult": {
             "type": "structure",
@@ -3690,6 +3849,9 @@
                         "smithy.api#documentation": "<p>An object to describe the configuration for the container service to access private\n      container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private\n      repositories.</p>\n         <p>For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateContainerServiceResult": {
@@ -3843,6 +4005,9 @@
                         "smithy.api#documentation": "<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>This parameter cannot be defined together with the <code>restore date</code>\n          parameter. The <code>use latest restorable auto snapshot</code> and <code>restore\n            date</code> parameters are mutually exclusive.</p>\n            </li>\n            <li>\n               <p>Define this parameter only when creating a new disk from an automatic snapshot. For\n          more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateDiskFromSnapshotResult": {
@@ -3892,6 +4057,9 @@
                         "smithy.api#documentation": "<p>An array of objects that represent the add-ons to enable for the new disk.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateDiskResult": {
@@ -3973,6 +4141,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateDiskSnapshotResult": {
@@ -4078,6 +4249,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the distribution during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateDistributionResult": {
@@ -4194,6 +4368,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateDomainEntryResult": {
@@ -4223,6 +4400,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateDomainResult": {
@@ -4232,6 +4412,90 @@
                     "target": "com.amazonaws.lightsail#Operation",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#CreateGUISessionAccessDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#CreateGUISessionAccessDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#CreateGUISessionAccessDetailsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates two URLs that are used to access a virtual computer’s graphical user interface (GUI)\n      session. The primary URL initiates a web-based NICE DCV session to the virtual computer's application. The secondary URL initiates a web-based NICE DCV session to the virtual computer's operating session. </p>\n         <p>Use <code>StartGUISession</code> to open the session.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/create-gui-session-access-details",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#CreateGUISessionAccessDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "resourceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#CreateGUISessionAccessDetailsResult": {
+            "type": "structure",
+            "members": {
+                "resourceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource name.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.lightsail#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the operation.</p>"
+                    }
+                },
+                "percentageComplete": {
+                    "target": "com.amazonaws.lightsail#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of completion for the operation.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the operation failed.</p>"
+                    }
+                },
+                "sessions": {
+                    "target": "com.amazonaws.lightsail#Sessions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the specified NICE DCV GUI session.</p>"
                     }
                 }
             }
@@ -4299,6 +4563,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateInstanceSnapshotResult": {
@@ -4476,6 +4743,9 @@
                         "smithy.api#documentation": "<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>This parameter cannot be defined together with the <code>restore date</code>\n          parameter. The <code>use latest restorable auto snapshot</code> and <code>restore\n            date</code> parameters are mutually exclusive.</p>\n            </li>\n            <li>\n               <p>Define this parameter only when creating a new instance from an automatic snapshot.\n          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateInstancesFromSnapshotResult": {
@@ -4557,6 +4827,9 @@
                         "smithy.api#documentation": "<p>The IP address type for the instance.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>\n         <p>The default value is <code>dualstack</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateInstancesResult": {
@@ -4626,6 +4899,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateKeyPairResult": {
@@ -4757,6 +5033,9 @@
                         "smithy.api#documentation": "<p>The name of the TLS policy to apply to the load balancer.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html\">GetLoadBalancerTlsPolicies</a> action to get a list of TLS policy names that you can\n      specify.</p>\n         <p>For more information about load balancer TLS policies, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy\">Configuring TLS security policies on your Amazon Lightsail load\n        balancers</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateLoadBalancerResult": {
@@ -4846,6 +5125,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateLoadBalancerTlsCertificateResult": {
@@ -4997,6 +5279,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateRelationalDatabaseFromSnapshotResult": {
@@ -5084,6 +5369,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateRelationalDatabaseResult": {
@@ -5160,6 +5448,9 @@
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#CreateRelationalDatabaseSnapshotResult": {
@@ -5169,6 +5460,17 @@
                     "target": "com.amazonaws.lightsail#OperationList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#Currency": {
+            "type": "enum",
+            "members": {
+                "USD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USD"
                     }
                 }
             }
@@ -5220,6 +5522,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteAlarmResult": {
@@ -5287,6 +5592,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteAutoSnapshotResult": {
@@ -5385,6 +5693,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteBucketAccessKeyResult": {
@@ -5414,6 +5725,9 @@
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether to force delete the bucket.</p>\n         <p>You must force delete the bucket if it has one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>The bucket is the origin of a distribution.</p>\n            </li>\n            <li>\n               <p>The bucket has instances that were granted access to it using the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html\">SetResourceAccessForBucket</a> action.</p>\n            </li>\n            <li>\n               <p>The bucket has objects.</p>\n            </li>\n            <li>\n               <p>The bucket has access keys.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Force deleting a bucket might impact other resources that rely on the bucket, such as\n        instances, distributions, or software that use the issued access keys.</p>\n         </important>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteBucketResult": {
@@ -5471,6 +5785,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteCertificateResult": {
@@ -5531,6 +5848,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteContactMethodResult": {
@@ -5597,6 +5917,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteContainerImageResult": {
@@ -5648,6 +5971,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteContainerServiceResult": {
@@ -5710,6 +6036,9 @@
                         "smithy.api#documentation": "<p>A Boolean value to indicate whether to delete all add-ons for the disk.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDiskResult": {
@@ -5773,6 +6102,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDiskSnapshotResult": {
@@ -5832,6 +6164,9 @@
                         "smithy.api#documentation": "<p>The name of the distribution to delete.</p>\n         <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you\n      can specify.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDistributionResult": {
@@ -5942,6 +6277,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDomainEntryResult": {
@@ -5965,6 +6303,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDomainResult": {
@@ -6034,6 +6375,9 @@
                         "smithy.api#documentation": "<p>A Boolean value to indicate whether to delete all add-ons for the instance.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteInstanceResult": {
@@ -6097,6 +6441,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteInstanceSnapshotResult": {
@@ -6166,6 +6513,9 @@
                         "smithy.api#documentation": "<p>The RSA fingerprint of the Lightsail default key pair to delete.</p>\n         <note>\n            <p>The <code>expectedFingerprint</code> parameter is required only when specifying to\n        delete a Lightsail default key pair.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteKeyPairResult": {
@@ -6229,6 +6579,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteKnownHostKeysResult": {
@@ -6292,6 +6645,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteLoadBalancerResult": {
@@ -6368,6 +6724,9 @@
                         "smithy.api#documentation": "<p>When <code>true</code>, forces the deletion of an SSL/TLS certificate.</p>\n         <p>There can be two certificates associated with a Lightsail load balancer: the primary and\n      the backup. The <code>force</code> parameter is required when the primary SSL/TLS certificate\n      is in use by an instance attached to the load balancer.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteLoadBalancerTlsCertificateResult": {
@@ -6443,6 +6802,9 @@
                         "smithy.api#documentation": "<p>The name of the database snapshot created if <code>skip final snapshot</code> is\n        <code>false</code>, which is the default value for that parameter.</p>\n         <note>\n            <p>Specifying this parameter and also specifying the <code>skip final snapshot</code>\n        parameter to <code>true</code> results in an error.</p>\n         </note>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first and last character must be a letter or number.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteRelationalDatabaseResult": {
@@ -6506,6 +6868,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DeleteRelationalDatabaseSnapshotResult": {
@@ -6586,6 +6951,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DetachCertificateFromDistributionResult": {
@@ -6649,6 +7017,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DetachDiskResult": {
@@ -6719,6 +7090,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DetachInstancesFromLoadBalancerResult": {
@@ -6782,6 +7156,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DetachStaticIpResult": {
@@ -6849,6 +7226,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#DisableAddOnResult": {
@@ -6967,6 +7347,12 @@
                     "traits": {
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>(Deprecated) The number of GB in use by the disk.</p>\n         <note>\n            <p>In releases prior to November 14, 2017, this parameter was not included in the API\n        response. It is now deprecated.</p>\n         </note>"
+                    }
+                },
+                "autoMountStatus": {
+                    "target": "com.amazonaws.lightsail#AutoMountStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of automatically mounting a storage disk to a virtual computer.</p>\n         <important>\n            <p>This parameter only applies to Lightsail for Research resources.</p>\n         </important>"
                     }
                 }
             },
@@ -7446,7 +7832,7 @@
                 "isAlias": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>true</code>, specifies whether the domain entry is an alias used by the\n      Lightsail load balancer. You can include an alias (A type) record in your request, which\n      points to a load balancer DNS name and routes traffic to your load balancer.</p>"
+                        "smithy.api#documentation": "<p>When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer, Lightsail container service, Lightsail content delivery network (CDN) distribution, or another Amazon Web Services\n      resource. You can include an alias (A type) record in your request, which points to the DNS\n      name of a load balancer, container service, CDN distribution, or other Amazon Web Services\n      resource and routes traffic to that resource.</p>"
                     }
                 },
                 "type": {
@@ -7583,7 +7969,10 @@
         },
         "com.amazonaws.lightsail#DownloadDefaultKeyPairRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lightsail#DownloadDefaultKeyPairResult": {
             "type": "structure",
@@ -7665,6 +8054,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#EnableAddOnResult": {
@@ -7713,6 +8105,50 @@
             },
             "value": {
                 "target": "com.amazonaws.lightsail#string"
+            }
+        },
+        "com.amazonaws.lightsail#EstimateByTime": {
+            "type": "structure",
+            "members": {
+                "usageCost": {
+                    "target": "com.amazonaws.lightsail#double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of cost or usage that's measured for the cost estimate.</p>"
+                    }
+                },
+                "pricingUnit": {
+                    "target": "com.amazonaws.lightsail#PricingUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measurement that's used for the cost estimate.</p>"
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.lightsail#double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of pricing units used to calculate the total number of hours. For example, 1\n      unit equals 1 hour.</p>"
+                    }
+                },
+                "currency": {
+                    "target": "com.amazonaws.lightsail#Currency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency of the estimate in USD.</p>"
+                    }
+                },
+                "timePeriod": {
+                    "target": "com.amazonaws.lightsail#TimePeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of time, in days, that an estimate covers. The period has a start date and an end date. The start date must come before the end date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An estimate that's associated with a time period. </p>"
+            }
+        },
+        "com.amazonaws.lightsail#EstimatesByTime": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#EstimateByTime"
             }
         },
         "com.amazonaws.lightsail#ExportSnapshot": {
@@ -7900,6 +8336,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#ExportSnapshotResult": {
@@ -7985,6 +8424,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetActiveNames</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetActiveNamesResult": {
@@ -8062,6 +8504,9 @@
                         "smithy.api#documentation": "<p>The name of the Lightsail resource being monitored by the alarm.</p>\n         <p>Specify a monitored resource name to return information about all alarms for a specific\n      resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetAlarmsResult": {
@@ -8128,6 +8573,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetAutoSnapshotsResult": {
@@ -8207,7 +8655,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetBlueprints</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
+                },
+                "appCategory": {
+                    "target": "com.amazonaws.lightsail#AppCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of blueprints that are specific to Lightsail for Research.</p>\n         <important>\n            <p>You must use this parameter to view Lightsail for Research blueprints.</p>\n         </important>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetBlueprintsResult": {
@@ -8271,6 +8728,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetBucketAccessKeysResult": {
@@ -8324,6 +8784,9 @@
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether to include inactive (unavailable) bundles in the\n      response of your request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetBucketBundlesResult": {
@@ -8424,6 +8887,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetBucketMetricDataResult": {
@@ -8498,6 +8964,9 @@
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether to include Lightsail instances that were given\n      access to the bucket using the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html\">SetResourceAccessForBucket</a>\n      action.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetBucketsResult": {
@@ -8577,7 +9046,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetBundles</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
                     }
+                },
+                "appCategory": {
+                    "target": "com.amazonaws.lightsail#AppCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of bundles that are specific to Lightsail for Research.</p>\n         <important>\n            <p>You must use this parameter to view Lightsail for Research bundles.</p>\n         </important>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetBundlesResult": {
@@ -8653,6 +9131,9 @@
                         "smithy.api#documentation": "<p>The name for the certificate for which to return information.</p>\n         <p>When omitted, the response includes all of your certificates in the Amazon Web Services\n      Region where the request is made.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetCertificatesResult": {
@@ -8715,6 +9196,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetClouFormationStackRecords</code> request.\n      If your results are paginated, the response will return a next page token that you can specify\n      as the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetCloudFormationStackRecordsResult": {
@@ -8780,6 +9264,9 @@
                         "smithy.api#documentation": "<p>The protocols used to send notifications, such as <code>Email</code>, or <code>SMS</code>\n      (text messaging).</p>\n         <p>Specify a protocol in your request to return information about a specific contact method\n      protocol.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetContactMethodsResult": {
@@ -8823,7 +9310,10 @@
         },
         "com.amazonaws.lightsail#GetContainerAPIMetadataRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lightsail#GetContainerAPIMetadataResult": {
             "type": "structure",
@@ -8881,6 +9371,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerImagesResult": {
@@ -8975,6 +9468,9 @@
                         "smithy.api#httpQuery": "pageToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerLogResult": {
@@ -9039,6 +9535,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerServiceDeploymentsResult": {
@@ -9138,6 +9637,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerServiceMetricDataResult": {
@@ -9193,7 +9695,10 @@
         },
         "com.amazonaws.lightsail#GetContainerServicePowersRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lightsail#GetContainerServicePowersResult": {
             "type": "structure",
@@ -9250,6 +9755,83 @@
                         "smithy.api#httpQuery": "serviceName"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#GetCostEstimate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#GetCostEstimateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#GetCostEstimateResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about the cost estimate for a specified resource. A cost estimate will not generate for a resource that has been deleted.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/budgettracker/getCostEstimate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#GetCostEstimateRequest": {
+            "type": "structure",
+            "members": {
+                "resourceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost estimate start time.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Specified in Coordinated Universal Time (UTC).</p>\n            </li>\n            <li>\n               <p>Specified in the Unix time format.</p>\n               <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify\n            <code>1538424000</code> as the start time.</p>\n            </li>\n         </ul>\n         <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost estimate end time.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Specified in Coordinated Universal Time (UTC).</p>\n            </li>\n            <li>\n               <p>Specified in the Unix time format.</p>\n               <p>For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify\n            <code>1538427600</code> as the end time.</p>\n            </li>\n         </ul>\n         <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#GetCostEstimateResult": {
+            "type": "structure",
+            "members": {
+                "resourcesBudgetEstimate": {
+                    "target": "com.amazonaws.lightsail#ResourcesBudgetEstimate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the estimate's forecasted cost or usage.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#GetDisk": {
@@ -9302,6 +9884,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDiskResult": {
@@ -9365,6 +9950,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDiskSnapshotResult": {
@@ -9427,6 +10015,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetDiskSnapshots</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDiskSnapshotsResult": {
@@ -9495,6 +10086,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetDisks</code> request. If your results are\n      paginated, the response will return a next page token that you can specify as the page token\n      in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDisksResult": {
@@ -9553,7 +10147,10 @@
         },
         "com.amazonaws.lightsail#GetDistributionBundlesRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lightsail#GetDistributionBundlesResult": {
             "type": "structure",
@@ -9612,6 +10209,9 @@
                         "smithy.api#documentation": "<p>The name of the distribution for which to return the timestamp of the last cache\n      reset.</p>\n         <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you\n      can specify.</p>\n         <p>When omitted, the response includes the latest cache reset timestamp of all your\n      distributions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDistributionLatestCacheResetResult": {
@@ -9721,6 +10321,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDistributionMetricDataResult": {
@@ -9792,6 +10395,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetDistributions</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDistributionsResult": {
@@ -9861,6 +10467,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDomainResult": {
@@ -9923,6 +10532,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetDomains</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetDomainsResult": {
@@ -9991,6 +10603,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetExportSnapshotRecords</code> request. If\n      your results are paginated, the response will return a next page token that you can specify as\n      the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetExportSnapshotRecordsResult": {
@@ -10106,6 +10721,9 @@
                         "smithy.api#documentation": "<p>The protocol to use to connect to your instance. Defaults to <code>ssh</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceAccessDetailsResult": {
@@ -10212,6 +10830,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceMetricDataResult": {
@@ -10281,6 +10902,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetInstancePortStatesResult": {
@@ -10304,6 +10928,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceResult": {
@@ -10367,6 +10994,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceSnapshotResult": {
@@ -10429,6 +11059,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetInstanceSnapshots</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceSnapshotsResult": {
@@ -10498,6 +11131,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceStateResult": {
@@ -10560,6 +11196,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetInstances</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetInstancesResult": {
@@ -10629,6 +11268,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetKeyPairResult": {
@@ -10697,6 +11339,9 @@
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether to include the default key pair in the response of\n      your request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetKeyPairsResult": {
@@ -10849,6 +11494,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancerMetricDataResult": {
@@ -10878,6 +11526,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancerResult": {
@@ -10941,6 +11592,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancerTlsCertificatesResult": {
@@ -10997,6 +11651,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetLoadBalancerTlsPolicies</code> request.\n      If your results are paginated, the response will return a next page token that you can specify\n      as the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancerTlsPoliciesResult": {
@@ -11065,6 +11722,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetLoadBalancers</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancersResult": {
@@ -11134,6 +11794,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetOperationResult": {
@@ -11243,6 +11906,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetOperationsForResource</code> request. If\n      your results are paginated, the response will return a next page token that you can specify as\n      the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetOperationsForResourceResult": {
@@ -11278,6 +11944,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetOperations</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetOperationsResult": {
@@ -11352,6 +12021,9 @@
                         "smithy.api#documentation": "<p>A Boolean value indicating whether to also include Availability Zones for databases in\n      your get regions request. Availability Zones are indicated with a letter (e.g.,\n        <code>us-east-2a</code>).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRegionsResult": {
@@ -11454,6 +12126,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetRelationalDatabaseBlueprints</code>\n      request. If your results are paginated, the response will return a next page token that you\n      can specify as the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseBlueprintsResult": {
@@ -11528,6 +12203,9 @@
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether to include inactive (unavailable) bundles in the\n      response of your request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseBundlesResult": {
@@ -11609,6 +12287,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetRelationalDatabaseEvents</code> request.\n      If your results are paginated, the response will return a next page token that you can specify\n      as the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseEventsResult": {
@@ -11709,6 +12390,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next or previous page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetRelationalDatabaseLogEvents</code>\n      request. If your results are paginated, the response will return a next forward token and/or\n      next backward token that you can specify as the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseLogEventsResult": {
@@ -11784,6 +12468,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseLogStreamsResult": {
@@ -11853,6 +12540,9 @@
                         "smithy.api#documentation": "<p>The password version to return.</p>\n         <p>Specifying <code>CURRENT</code> or <code>PREVIOUS</code> returns the current or previous\n      passwords respectively. Specifying <code>PENDING</code> returns the newest version of the\n      password that will rotate to <code>CURRENT</code>. After the <code>PENDING</code> password\n      rotates to <code>CURRENT</code>, the <code>PENDING</code> password is no longer\n      available.</p>\n         <p>Default: <code>CURRENT</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseMasterUserPasswordResult": {
@@ -11965,6 +12655,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseMetricDataResult": {
@@ -12040,6 +12733,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetRelationalDatabaseParameters</code>\n      request. If your results are paginated, the response will return a next page token that you\n      can specify as the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseParametersResult": {
@@ -12069,6 +12765,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseResult": {
@@ -12132,6 +12831,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseSnapshotResult": {
@@ -12194,6 +12896,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetRelationalDatabaseSnapshots</code>\n      request. If your results are paginated, the response will return a next page token that you\n      can specify as the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseSnapshotsResult": {
@@ -12262,6 +12967,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetRelationalDatabases</code> request. If\n      your results are paginated, the response will return a next page token that you can specify as\n      the page token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabasesResult": {
@@ -12331,6 +13039,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetStaticIpResult": {
@@ -12393,6 +13104,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetStaticIps</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#GetStaticIpsResult": {
@@ -12708,6 +13422,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#ImportKeyPairResult": {
@@ -13777,7 +14494,10 @@
         },
         "com.amazonaws.lightsail#IsVpcPeeredRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lightsail#IsVpcPeeredResult": {
             "type": "structure",
@@ -14060,6 +14780,9 @@
                     "target": "com.amazonaws.lightsail#CreateDomainEntry"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#CreateGUISessionAccessDetails"
+                },
+                {
                     "target": "com.amazonaws.lightsail#CreateInstances"
                 },
                 {
@@ -14229,6 +14952,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#GetContainerServices"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#GetCostEstimate"
                 },
                 {
                     "target": "com.amazonaws.lightsail#GetDisk"
@@ -14405,10 +15131,16 @@
                     "target": "com.amazonaws.lightsail#SetResourceAccessForBucket"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#StartGUISession"
+                },
+                {
                     "target": "com.amazonaws.lightsail#StartInstance"
                 },
                 {
                     "target": "com.amazonaws.lightsail#StartRelationalDatabase"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#StopGUISession"
                 },
                 {
                     "target": "com.amazonaws.lightsail#StopInstance"
@@ -14478,7 +15210,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -14507,15 +15239,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -14524,7 +15308,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -14534,22 +15318,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lightsail-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lightsail-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -14562,134 +15481,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lightsail.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://lightsail-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -14697,7 +15534,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://lightsail-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://lightsail.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -14706,74 +15543,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://lightsail.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://lightsail.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -14782,458 +15558,16 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lightsail-fips.ap-south-1.api.aws"
+                                    "url": "https://lightsail.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-south-1",
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -15244,100 +15578,22 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lightsail-fips.ap-southeast-1.api.aws"
+                                    "url": "https://lightsail.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -15348,48 +15604,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -15400,8 +15617,125 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -15413,8 +15747,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -15426,8 +15760,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -15439,78 +15773,183 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://lightsail.us-east-1.amazonaws.com"
+                                    "url": "https://lightsail-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lightsail.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://lightsail.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -15518,7 +15957,6 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -15529,8 +15967,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -15541,8 +15979,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -17095,6 +17533,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#OpenInstancePublicPortsResult": {
@@ -17733,6 +18174,18 @@
                     "traits": {
                         "smithy.api#enumValue": "UpdateInstanceMetadataOptions"
                     }
+                },
+                "StartGUISession": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StartGUISession"
+                    }
+                },
+                "StopGUISession": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StopGUISession"
+                    }
                 }
             }
         },
@@ -17859,7 +18312,10 @@
         },
         "com.amazonaws.lightsail#PeerVpcRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lightsail#PeerVpcResult": {
             "type": "structure",
@@ -18070,6 +18526,41 @@
                 }
             }
         },
+        "com.amazonaws.lightsail#PricingUnit": {
+            "type": "enum",
+            "members": {
+                "GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GB"
+                    }
+                },
+                "Hrs": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hrs"
+                    }
+                },
+                "GBMo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GB-Mo"
+                    }
+                },
+                "Bundles": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bundles"
+                    }
+                },
+                "Queries": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Queries"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lightsail#PrivateRegistryAccess": {
             "type": "structure",
             "members": {
@@ -18210,6 +18701,9 @@
                         "smithy.api#documentation": "<p>Indicates whether the alarm is enabled.</p>\n         <p>Notifications are enabled by default if you don't specify this parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#PutAlarmResult": {
@@ -18280,6 +18774,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#PutInstancePublicPortsResult": {
@@ -18412,6 +18909,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#RebootInstanceResult": {
@@ -18475,6 +18975,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#RebootRelationalDatabaseResult": {
@@ -18715,6 +19218,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#RegisterContainerImageResult": {
@@ -18738,7 +19244,10 @@
                     }
                 },
                 "r53HostedZoneDeletionState": {
-                    "target": "com.amazonaws.lightsail#R53HostedZoneDeletionState"
+                    "target": "com.amazonaws.lightsail#R53HostedZoneDeletionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the deletion state of an Amazon Route 53 hosted zone for a domain that is\n      being automatically delegated to an Amazon Lightsail DNS zone.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19408,6 +19917,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#ReleaseStaticIpResult": {
@@ -19534,6 +20046,9 @@
                         "smithy.api#documentation": "<p>The name of the distribution for which to reset cache.</p>\n         <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you\n      can specify.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#ResetDistributionCacheResult": {
@@ -19580,6 +20095,44 @@
                         "smithy.api#enumValue": "deny"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lightsail#ResourceBudgetEstimate": {
+            "type": "structure",
+            "members": {
+                "resourceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource name.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.lightsail#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource the budget will track.</p>"
+                    }
+                },
+                "costEstimates": {
+                    "target": "com.amazonaws.lightsail#CostEstimates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost estimate for the specified budget.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimate start time.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimate end time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the estimated cost or usage that a budget tracks.</p>"
             }
         },
         "com.amazonaws.lightsail#ResourceLocation": {
@@ -19785,6 +20338,12 @@
                 }
             }
         },
+        "com.amazonaws.lightsail#ResourcesBudgetEstimate": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#ResourceBudgetEstimate"
+            }
+        },
         "com.amazonaws.lightsail#RevocationReason": {
             "type": "string"
         },
@@ -19835,6 +20394,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#SendContactMethodVerificationResult": {
@@ -19846,6 +20408,13 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lightsail#SensitiveNonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.lightsail#SensitiveString": {
@@ -19877,6 +20446,38 @@
                 "smithy.api#documentation": "<p>A general service exception.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.lightsail#Session": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session name.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.lightsail#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session URL.</p>"
+                    }
+                },
+                "isPrimary": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, this Boolean value indicates the primary session for the specified\n      resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a web-based, remote graphical user interface (GUI), NICE DCV session. The session is used to access a virtual\n      computer’s operating system or application.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#Sessions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#Session"
             }
         },
         "com.amazonaws.lightsail#SetIpAddressType": {
@@ -19943,6 +20544,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#SetIpAddressTypeResult": {
@@ -20014,6 +20618,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#SetResourceAccessForBucketResult": {
@@ -20023,6 +20630,66 @@
                     "target": "com.amazonaws.lightsail#OperationList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#StartGUISession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#StartGUISessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#StartGUISessionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates a graphical user interface (GUI) session that’s used to access a virtual\n      computer’s operating system and application. The session will be active for 1 hour. Use this action to resume the session after it expires. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/start-gui-session",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#StartGUISessionRequest": {
+            "type": "structure",
+            "members": {
+                "resourceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#StartGUISessionResult": {
+            "type": "structure",
+            "members": {
+                "operations": {
+                    "target": "com.amazonaws.lightsail#OperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The available API operations.</p>"
                     }
                 }
             }
@@ -20077,6 +20744,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#StartInstanceResult": {
@@ -20140,6 +20810,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#StartRelationalDatabaseResult": {
@@ -20221,6 +20894,71 @@
                 "target": "com.amazonaws.lightsail#StaticIp"
             }
         },
+        "com.amazonaws.lightsail#Status": {
+            "type": "enum",
+            "members": {
+                "StartExpired": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "startExpired"
+                    }
+                },
+                "NotStarted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "notStarted"
+                    }
+                },
+                "Started": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "started"
+                    }
+                },
+                "Starting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "starting"
+                    }
+                },
+                "Stopped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stopped"
+                    }
+                },
+                "Stopping": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stopping"
+                    }
+                },
+                "SettingUpInstance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "settingUpInstance"
+                    }
+                },
+                "FailedInstanceCreation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failedInstanceCreation"
+                    }
+                },
+                "FailedStartingGUISession": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failedStartingGUISession"
+                    }
+                },
+                "FailedStoppingGUISession": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failedStoppingGUISession"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lightsail#StatusType": {
             "type": "enum",
             "members": {
@@ -20234,6 +20972,66 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Inactive"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#StopGUISession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#StopGUISessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#StopGUISessionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Terminates a web-based NICE DCV session that’s used to access a virtual computer’s\n      operating system or application. The session will close and any unsaved data will be lost.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/stop-gui-session",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#StopGUISessionRequest": {
+            "type": "structure",
+            "members": {
+                "resourceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#StopGUISessionResult": {
+            "type": "structure",
+            "members": {
+                "operations": {
+                    "target": "com.amazonaws.lightsail#OperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The available API operations.</p>"
                     }
                 }
             }
@@ -20278,6 +21076,26 @@
                 }
             }
         },
+        "com.amazonaws.lightsail#StopInstanceOnIdleRequest": {
+            "type": "structure",
+            "members": {
+                "threshold": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to compare with the duration.</p>"
+                    }
+                },
+                "duration": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of idle time in minutes after which your virtual computer will automatically stop.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a request to create or edit the <code>StopInstanceOnIdle</code> add-on.</p>\n         <important>\n            <p>This add-on only applies to Lightsail for Research resources.</p>\n         </important>"
+            }
+        },
         "com.amazonaws.lightsail#StopInstanceRequest": {
             "type": "structure",
             "members": {
@@ -20294,6 +21112,9 @@
                         "smithy.api#documentation": "<p>When set to <code>True</code>, forces a Lightsail instance that is stuck in a\n        <code>stopping</code> state to stop.</p>\n         <important>\n            <p>Only use the <code>force</code> parameter if your instance is stuck in the\n          <code>stopping</code> state. In any other state, your instance should stop normally\n        without adding this parameter to your API request.</p>\n         </important>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#StopInstanceResult": {
@@ -20363,6 +21184,9 @@
                         "smithy.api#documentation": "<p>The name of your new database snapshot to be created before stopping your database.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#StopRelationalDatabaseResult": {
@@ -20495,6 +21319,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#TagResourceResult": {
@@ -20565,6 +21392,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#TestAlarmResult": {
@@ -20582,6 +21412,26 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+            }
+        },
+        "com.amazonaws.lightsail#TimePeriod": {
+            "type": "structure",
+            "members": {
+                "start": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning of the time period. The start date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, Lightsail for Research retrieves cost and usage data starting at <code>2017-01-01</code> up to the end date. The start date must be equal to or no later than the current date to avoid a validation error.</p>"
+                    }
+                },
+                "end": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time period. The end date is exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, Lightsail for Research retrieves cost and usage data from the start date up to, but not including, <code>2017-05-01</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the start date and end date for retrieving a cost estimate. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.</p>"
             }
         },
         "com.amazonaws.lightsail#TreatMissingData": {
@@ -20677,7 +21527,10 @@
         },
         "com.amazonaws.lightsail#UnpeerVpcRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.lightsail#UnpeerVpcResult": {
             "type": "structure",
@@ -20753,6 +21606,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UntagResourceResult": {
@@ -20851,6 +21707,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateBucketBundleResult": {
@@ -20898,6 +21757,9 @@
                         "smithy.api#documentation": "<p>An object that describes the access log configuration for the bucket.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateBucketResult": {
@@ -20992,6 +21854,9 @@
                         "smithy.api#documentation": "<p>An object to describe the configuration for the container service to access private\n      container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private\n      repositories.</p>\n         <p>For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateContainerServiceResult": {
@@ -21094,6 +21959,9 @@
                         "smithy.api#documentation": "<p>The bundle ID of the new bundle to apply to your distribution.</p>\n         <p>Use the <code>GetDistributionBundles</code> action to get a list of distribution bundle\n      IDs that you can specify.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateDistributionBundleResult": {
@@ -21147,6 +22015,9 @@
                         "smithy.api#documentation": "<p>Indicates whether to enable the distribution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateDistributionResult": {
@@ -21217,6 +22088,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateDomainEntryResult": {
@@ -21304,13 +22178,19 @@
                         "smithy.api#documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service. This setting\n      applies only when the HTTP metadata endpoint is enabled.</p>\n         <note>\n            <p>This parameter is available only for instances in the Europe (Stockholm) Amazon Web Services Region (<code>eu-north-1</code>).</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateInstanceMetadataOptionsResult": {
             "type": "structure",
             "members": {
                 "operation": {
-                    "target": "com.amazonaws.lightsail#Operation"
+                    "target": "com.amazonaws.lightsail#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
+                    }
                 }
             }
         },
@@ -21378,6 +22258,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateLoadBalancerAttributeResult": {
@@ -21488,6 +22371,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateRelationalDatabaseParametersResult": {
@@ -21565,6 +22451,9 @@
                         "smithy.api#documentation": "<p>Indicates the certificate that needs to be associated with the database.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lightsail#UpdateRelationalDatabaseResult": {

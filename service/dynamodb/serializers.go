@@ -4995,6 +4995,11 @@ func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 		ok.String(string(v.BillingMode))
 	}
 
+	if v.DeletionProtectionEnabled != nil {
+		ok := object.Key("DeletionProtectionEnabled")
+		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
 	if v.GlobalSecondaryIndexes != nil {
 		ok := object.Key("GlobalSecondaryIndexes")
 		if err := awsAwsjson10_serializeDocumentGlobalSecondaryIndexList(v.GlobalSecondaryIndexes, ok); err != nil {
@@ -6357,6 +6362,11 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 	if len(v.BillingMode) > 0 {
 		ok := object.Key("BillingMode")
 		ok.String(string(v.BillingMode))
+	}
+
+	if v.DeletionProtectionEnabled != nil {
+		ok := object.Key("DeletionProtectionEnabled")
+		ok.Boolean(*v.DeletionProtectionEnabled)
 	}
 
 	if v.GlobalSecondaryIndexUpdates != nil {

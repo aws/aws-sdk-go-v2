@@ -443,6 +443,33 @@ type BooleanColumnStatisticsData struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+type CatalogDeltaSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the Delta Lake data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options.
+	AdditionalDeltaOptions map[string]string
+
+	// Specifies the data schema for the Delta Lake source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a table definition in the Glue Data Catalog.
 type CatalogEntry struct {
 
@@ -682,6 +709,9 @@ type CodeGenConfigurationNode struct {
 	// Specifies a connector to an Amazon Athena data source.
 	AthenaConnectorSource *AthenaConnectorSource
 
+	// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+	CatalogDeltaSource *CatalogDeltaSource
+
 	// Specifies a Hudi data source that is registered in the Glue Data Catalog.
 	CatalogHudiSource *CatalogHudiSource
 
@@ -700,6 +730,9 @@ type CodeGenConfigurationNode struct {
 	// Specifies a transform that uses custom code you provide to perform the data
 	// transformation. The output is a collection of DynamicFrames.
 	CustomCode *CustomCode
+
+	// Specifies the direct JDBC source connection.
+	DirectJDBCSource *DirectJDBCSource
 
 	// Specifies an Apache Kafka data store.
 	DirectKafkaSource *DirectKafkaSource
@@ -722,7 +755,7 @@ type CodeGenConfigurationNode struct {
 	// Specifies a custom visual transform created by a user.
 	DynamicTransform *DynamicTransform
 
-	// Specifies a DynamoDB data source in the Glue Data Catalog.
+	// Specifies a DynamoDBC Catalog data store in the Glue Data Catalog.
 	DynamoDBCatalogSource *DynamoDBCatalogSource
 
 	// Specifies your data quality evaluation criteria.
@@ -794,14 +827,18 @@ type CodeGenConfigurationNode struct {
 	// Specifies a target that uses Amazon Redshift.
 	RedshiftTarget *RedshiftTarget
 
-	// Specifies a Relational database data source in the Glue Data Catalog.
+	// Specifies a relational catalog data store in the Glue Data Catalog.
 	RelationalCatalogSource *RelationalCatalogSource
 
 	// Specifies a transform that renames a single data property key.
 	RenameField *RenameField
 
+	// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+	// The data source must be stored in Amazon S3.
+	S3CatalogDeltaSource *S3CatalogDeltaSource
+
 	// Specifies a Hudi data source that is registered in the Glue Data Catalog. The
-	// Hudi data source must be stored in Amazon S3.
+	// data source must be stored in Amazon S3.
 	S3CatalogHudiSource *S3CatalogHudiSource
 
 	// Specifies an Amazon S3 data store in the Glue Data Catalog.
@@ -812,6 +849,16 @@ type CodeGenConfigurationNode struct {
 
 	// Specifies a command-separated value (CSV) data store stored in Amazon S3.
 	S3CsvSource *S3CsvSource
+
+	// Specifies a target that writes to a Delta Lake data source in the Glue Data
+	// Catalog.
+	S3DeltaCatalogTarget *S3DeltaCatalogTarget
+
+	// Specifies a target that writes to a Delta Lake data source in Amazon S3.
+	S3DeltaDirectTarget *S3DeltaDirectTarget
+
+	// Specifies a Delta Lake data source stored in Amazon S3.
+	S3DeltaSource *S3DeltaSource
 
 	// Specifies a data target that writes to Amazon S3.
 	S3DirectTarget *S3DirectTarget
@@ -975,9 +1022,13 @@ type ColumnImportance struct {
 	noSmithyDocumentSerde
 }
 
+// A filter that uses both column-level and row-level filtering.
 type ColumnRowFilter struct {
+
+	// A string containing the name of the column.
 	ColumnName *string
 
+	// A string containing the row-level filter expression.
 	RowFilterExpression *string
 
 	noSmithyDocumentSerde
@@ -1221,8 +1272,8 @@ type Connection struct {
 	// encrypted version of the Kafka client key password (if the user has the Glue
 	// encrypt passwords setting selected).
 	//
-	// * KAFKA_SASL_MECHANISM - "SCRAM-SHA-512"
-	// or "GSSAPI". These are the two supported SASL Mechanisms
+	// * KAFKA_SASL_MECHANISM - "SCRAM-SHA-512",
+	// "GSSAPI", or "AWS_MSK_IAM". These are the supported SASL Mechanisms
 	// (https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml).
 	//
 	// *
@@ -1298,33 +1349,90 @@ type ConnectionInput struct {
 	// The type of the connection. Currently, these types are supported:
 	//
 	// * JDBC -
-	// Designates a connection to a database through Java Database Connectivity
-	// (JDBC).
+	// Designates a connection to a database through Java Database Connectivity (JDBC).
+	// JDBC Connections use the following ConnectionParameters.
 	//
-	// * KAFKA - Designates a connection to an Apache Kafka streaming
-	// platform.
+	// * Required: All of
+	// (HOST, PORT, JDBC_ENGINE) or JDBC_CONNECTION_URL.
 	//
-	// * MONGODB - Designates a connection to a MongoDB document
-	// database.
+	// * Required: All of (USERNAME,
+	// PASSWORD) or SECRET_ID.
 	//
-	// * NETWORK - Designates a network connection to a data source within
-	// an Amazon Virtual Private Cloud environment (Amazon VPC).
+	// * Optional: JDBC_ENFORCE_SSL, CUSTOM_JDBC_CERT,
+	// CUSTOM_JDBC_CERT_STRING, SKIP_CUSTOM_JDBC_CERT_VALIDATION. These parameters are
+	// used to configure SSL with JDBC.
 	//
-	// * MARKETPLACE - Uses
-	// configuration settings contained in a connector purchased from Amazon Web
-	// Services Marketplace to read from and write to data stores that are not natively
-	// supported by Glue.
+	// * KAFKA - Designates a connection to an Apache
+	// Kafka streaming platform. KAFKA Connections use the following
+	// ConnectionParameters.
 	//
-	// * CUSTOM - Uses configuration settings contained in a custom
-	// connector to read from and write to data stores that are not natively supported
-	// by Glue.
+	// * Required: KAFKA_BOOTSTRAP_SERVERS.
 	//
-	// SFTP is not supported.
+	// * Optional:
+	// KAFKA_SSL_ENABLED, KAFKA_CUSTOM_CERT, KAFKA_SKIP_CUSTOM_CERT_VALIDATION. These
+	// parameters are used to configure SSL with KAFKA.
+	//
+	// * Optional:
+	// KAFKA_CLIENT_KEYSTORE, KAFKA_CLIENT_KEYSTORE_PASSWORD,
+	// KAFKA_CLIENT_KEY_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD,
+	// ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD. These parameters are used to configure TLS
+	// client configuration with SSL in KAFKA.
+	//
+	// * Optional: KAFKA_SASL_MECHANISM. Can
+	// be specified as SCRAM-SHA-512, GSSAPI, or AWS_MSK_IAM.
+	//
+	// * Optional:
+	// KAFKA_SASL_SCRAM_USERNAME, KAFKA_SASL_SCRAM_PASSWORD,
+	// ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD. These parameters are used to configure
+	// SASL/SCRAM-SHA-512 authentication with KAFKA.
+	//
+	// * Optional:
+	// KAFKA_SASL_GSSAPI_KEYTAB, KAFKA_SASL_GSSAPI_KRB5_CONF,
+	// KAFKA_SASL_GSSAPI_SERVICE, KAFKA_SASL_GSSAPI_PRINCIPAL. These parameters are
+	// used to configure SASL/GSSAPI authentication with KAFKA.
+	//
+	// * MONGODB - Designates
+	// a connection to a MongoDB document database. MONGODB Connections use the
+	// following ConnectionParameters.
+	//
+	// * Required: CONNECTION_URL.
+	//
+	// * Required: All of
+	// (USERNAME, PASSWORD) or SECRET_ID.
+	//
+	// * NETWORK - Designates a network connection
+	// to a data source within an Amazon Virtual Private Cloud environment (Amazon
+	// VPC). NETWORK Connections do not require ConnectionParameters. Instead, provide
+	// a PhysicalConnectionRequirements.
+	//
+	// * MARKETPLACE - Uses configuration settings
+	// contained in a connector purchased from Amazon Web Services Marketplace to read
+	// from and write to data stores that are not natively supported by Glue.
+	// MARKETPLACE Connections use the following ConnectionParameters.
+	//
+	// * Required:
+	// CONNECTOR_TYPE, CONNECTOR_URL, CONNECTOR_CLASS_NAME, CONNECTION_URL.
+	//
+	// * Required
+	// for JDBCCONNECTOR_TYPE connections: All of (USERNAME, PASSWORD) or SECRET_ID.
+	//
+	// *
+	// CUSTOM - Uses configuration settings contained in a custom connector to read
+	// from and write to data stores that are not natively supported by Glue.
+	//
+	// SFTP is
+	// not supported. For more information about how optional ConnectionProperties are
+	// used to configure features in Glue, consult Glue connection properties
+	// (https://docs.aws.amazon.com/glue/latest/dg/connection-defining.html). For more
+	// information about how optional ConnectionProperties are used to configure
+	// features in Glue Studio, consult Using connectors and connections
+	// (https://docs.aws.amazon.com/glue/latest/ug/connectors-chapter.html).
 	//
 	// This member is required.
 	ConnectionType ConnectionType
 
-	// The name of the connection.
+	// The name of the connection. Connection will not function as expected without a
+	// name.
 	//
 	// This member is required.
 	Name *string
@@ -1842,7 +1950,8 @@ type Database struct {
 	// The ID of the Data Catalog in which the database resides.
 	CatalogId *string
 
-	// Creates a set of default permissions on the table for principals.
+	// Creates a set of default permissions on the table for principals. Used by Lake
+	// Formation. Not used in the normal course of Glue operations.
 	CreateTableDefaultPermissions []PrincipalPermissions
 
 	// The time at which the metadata database was created in the catalog.
@@ -1885,7 +1994,8 @@ type DatabaseInput struct {
 	// This member is required.
 	Name *string
 
-	// Creates a set of default permissions on the table for principals.
+	// Creates a set of default permissions on the table for principals. Used by Lake
+	// Formation. Not used in the normal course of Glue operations.
 	CreateTableDefaultPermissions []PrincipalPermissions
 
 	// A description of the database.
@@ -2441,6 +2551,40 @@ type DevEndpointCustomLibraries struct {
 	// pandas (http://pandas.pydata.org/) Python data analysis library, are not
 	// currently supported.
 	ExtraPythonLibsS3Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the direct JDBC source connection.
+type DirectJDBCSource struct {
+
+	// The connection name of the JDBC source.
+	//
+	// This member is required.
+	ConnectionName *string
+
+	// The connection type of the JDBC source.
+	//
+	// This member is required.
+	ConnectionType JDBCConnectionType
+
+	// The database of the JDBC source connection.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the JDBC source connection.
+	//
+	// This member is required.
+	Name *string
+
+	// The table of the JDBC source connection.
+	//
+	// This member is required.
+	Table *string
+
+	// The temp directory of the JDBC Redshift source.
+	RedshiftTmpDir *string
 
 	noSmithyDocumentSerde
 }
@@ -3981,6 +4125,12 @@ type JsonClassifier struct {
 // Additional options for streaming.
 type KafkaStreamingSourceOptions struct {
 
+	// When this option is set to 'true', the data output will contain an additional
+	// column named "__src_timestamp" that indicates the time when the corresponding
+	// record received by the topic. The default value is 'false'. This option is
+	// supported in Glue version 4.0 or later.
+	AddRecordTimestamp *string
+
 	// The specific TopicPartitions to consume. You must specify at least one of
 	// "topicName", "assign" or "subscribePattern".
 	Assign *string
@@ -3999,9 +4149,22 @@ type KafkaStreamingSourceOptions struct {
 	// Specifies the delimiter character.
 	Delimiter *string
 
+	// When this option is set to 'true', for each batch, it will emit the metrics for
+	// the duration between the oldest record received by the topic and the time it
+	// arrives in Glue to CloudWatch. The metric's name is
+	// "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This
+	// option is supported in Glue version 4.0 or later.
+	EmitConsumerLagMetrics *string
+
 	// The end point when a batch query is ended. Possible values are either "latest"
 	// or a JSON string that specifies an ending offset for each TopicPartition.
 	EndingOffsets *string
+
+	// Whether to include the Kafka headers. When the option is set to "true", the data
+	// output will contain an additional column named "glue_streaming_kafka_headers"
+	// with type Array[Struct(key: String, value: String)]. The default value is
+	// "false". This option is available in Glue version 3.0 or later only.
+	IncludeHeaders *bool
 
 	// The rate limit on the maximum number of offsets that are processed per trigger
 	// interval. The specified total number of offsets is proportionally split across
@@ -4069,6 +4232,12 @@ type KinesisStreamingSourceOptions struct {
 	// above.
 	AddIdleTimeBetweenReads *bool
 
+	// When this option is set to 'true', the data output will contain an additional
+	// column named "__src_timestamp" that indicates the time when the corresponding
+	// record received by the stream. The default value is 'false'. This option is
+	// supported in Glue version 4.0 or later.
+	AddRecordTimestamp *string
+
 	// Avoids creating an empty microbatch job by checking for unread data in the
 	// Kinesis data stream before the batch is started. The default value is "False".
 	AvoidEmptyBatches *bool
@@ -4082,6 +4251,13 @@ type KinesisStreamingSourceOptions struct {
 	// The minimum time interval between two ListShards API calls for your script to
 	// consider resharding. The default value is 1s.
 	DescribeShardInterval *int64
+
+	// When this option is set to 'true', for each batch, it will emit the metrics for
+	// the duration between the oldest record received by the stream and the time it
+	// arrives in Glue to CloudWatch. The metric's name is
+	// "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This
+	// option is supported in Glue version 4.0 or later.
+	EmitConsumerLagMetrics *string
 
 	// The URL of the Kinesis endpoint.
 	EndpointUrl *string
@@ -5284,6 +5460,34 @@ type ResourceUri struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+// The data source must be stored in Amazon S3.
+type S3CatalogDeltaSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the Delta Lake data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options.
+	AdditionalDeltaOptions map[string]string
+
+	// Specifies the data schema for the Delta Lake source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a Hudi data source that is registered in the Glue Data Catalog. The
 // Hudi data source must be stored in Amazon S3.
 type S3CatalogHudiSource struct {
@@ -5470,6 +5674,108 @@ type S3CsvSource struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a target that writes to a Delta Lake data source in the Glue Data
+// Catalog.
+type S3DeltaCatalogTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options for the connector.
+	AdditionalOptions map[string]string
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]string
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *CatalogSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that writes to a Delta Lake data source in Amazon S3.
+type S3DeltaDirectTarget struct {
+
+	// Specifies how the data is compressed. This is generally not necessary if the
+	// data has a standard file extension. Possible values are "gzip" and "bzip").
+	//
+	// This member is required.
+	Compression DeltaTargetCompressionType
+
+	// Specifies the data output format for the target.
+	//
+	// This member is required.
+	Format TargetFormat
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon S3 path of your Delta Lake data source to write to.
+	//
+	// This member is required.
+	Path *string
+
+	// Specifies additional connection options for the connector.
+	AdditionalOptions map[string]string
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]string
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *DirectSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a Delta Lake data source stored in Amazon S3.
+type S3DeltaSource struct {
+
+	// The name of the Delta Lake source.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of the Amazon S3 paths to read from.
+	//
+	// This member is required.
+	Paths []string
+
+	// Specifies additional connection options.
+	AdditionalDeltaOptions map[string]string
+
+	// Specifies additional options for the connector.
+	AdditionalOptions *S3DirectSourceAdditionalOptions
+
+	// Specifies the data schema for the Delta Lake source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // Specifies additional connection options for the Amazon S3 data store.
 type S3DirectSourceAdditionalOptions struct {
 
@@ -5610,6 +5916,8 @@ type S3HudiCatalogTarget struct {
 // Specifies a target that writes to a Hudi data source in Amazon S3.
 type S3HudiDirectTarget struct {
 
+	// Specifies additional connection options for the connector.
+	//
 	// This member is required.
 	AdditionalOptions map[string]string
 
@@ -5664,7 +5972,7 @@ type S3HudiSource struct {
 	// Specifies additional connection options.
 	AdditionalHudiOptions map[string]string
 
-	// Specifies additional connection options for the Amazon S3 data store.
+	// Specifies additional options for the connector.
 	AdditionalOptions *S3DirectSourceAdditionalOptions
 
 	// Specifies the data schema for the Hudi source.
@@ -6598,7 +6906,11 @@ type Table struct {
 	// table.
 	StorageDescriptor *StorageDescriptor
 
-	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
+	// The type of this table. Glue will create tables with the EXTERNAL_TABLE type.
+	// Other services, such as Athena, may create tables with additional table types.
+	// Glue related table types: EXTERNAL_TABLE Hive compatible attribute - indicates a
+	// non-Hive managed table. GOVERNED Used by Lake Formation. The Glue Data Catalog
+	// understands GOVERNED.
 	TableType *string
 
 	// A TableIdentifier structure that describes a target table for resource linking.
@@ -6610,10 +6922,13 @@ type Table struct {
 	// The ID of the table version.
 	VersionId *string
 
-	// If the table is a view, the expanded text of the view; otherwise null.
+	// Included for Apache Hive compatibility. Not used in the normal course of Glue
+	// operations.
 	ViewExpandedText *string
 
-	// If the table is a view, the original text of the view; otherwise null.
+	// Included for Apache Hive compatibility. Not used in the normal course of Glue
+	// operations. If the table is a VIRTUAL_VIEW, certain Athena configuration encoded
+	// in base64.
 	ViewOriginalText *string
 
 	noSmithyDocumentSerde
@@ -6664,7 +6979,8 @@ type TableInput struct {
 	// The last time that column statistics were computed for this table.
 	LastAnalyzedTime *time.Time
 
-	// The table owner.
+	// The table owner. Included for Apache Hive compatibility. Not used in the normal
+	// course of Glue operations.
 	Owner *string
 
 	// These key-value pairs define properties associated with the table.
@@ -6683,16 +6999,23 @@ type TableInput struct {
 	// table.
 	StorageDescriptor *StorageDescriptor
 
-	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
+	// The type of this table. Glue will create tables with the EXTERNAL_TABLE type.
+	// Other services, such as Athena, may create tables with additional table types.
+	// Glue related table types: EXTERNAL_TABLE Hive compatible attribute - indicates a
+	// non-Hive managed table. GOVERNED Used by Lake Formation. The Glue Data Catalog
+	// understands GOVERNED.
 	TableType *string
 
 	// A TableIdentifier structure that describes a target table for resource linking.
 	TargetTable *TableIdentifier
 
-	// If the table is a view, the expanded text of the view; otherwise null.
+	// Included for Apache Hive compatibility. Not used in the normal course of Glue
+	// operations.
 	ViewExpandedText *string
 
-	// If the table is a view, the original text of the view; otherwise null.
+	// Included for Apache Hive compatibility. Not used in the normal course of Glue
+	// operations. If the table is a VIRTUAL_VIEW, certain Athena configuration encoded
+	// in base64.
 	ViewOriginalText *string
 
 	noSmithyDocumentSerde
@@ -7031,12 +7354,17 @@ type TriggerUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// A partition that contains unfiltered metadata.
 type UnfilteredPartition struct {
+
+	// The list of columns the user has permissions to access.
 	AuthorizedColumns []string
 
+	// A Boolean value indicating that the partition location is registered with Lake
+	// Formation.
 	IsRegisteredWithLakeFormation bool
 
-	// Represents a slice of table data.
+	// The partition object.
 	Partition *Partition
 
 	noSmithyDocumentSerde

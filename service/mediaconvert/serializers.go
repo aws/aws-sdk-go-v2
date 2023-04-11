@@ -3325,6 +3325,23 @@ func awsRestjson1_serializeDocumentAvcIntraUhdSettings(v *types.AvcIntraUhdSetti
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBandwidthReductionFilter(v *types.BandwidthReductionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Sharpening) > 0 {
+		ok := object.Key("sharpening")
+		ok.String(string(v.Sharpening))
+	}
+
+	if len(v.Strength) > 0 {
+		ok := object.Key("strength")
+		ok.String(string(v.Strength))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBurninDestinationSettings(v *types.BurninDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4099,6 +4116,11 @@ func awsRestjson1_serializeDocumentColorCorrector(v *types.ColorCorrector, value
 		if err := awsRestjson1_serializeDocumentHdr10Metadata(v.Hdr10Metadata, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.HdrToSdrToneMapper) > 0 {
+		ok := object.Key("hdrToSdrToneMapper")
+		ok.String(string(v.HdrToSdrToneMapper))
 	}
 
 	if v.Hue != 0 {
@@ -5280,6 +5302,13 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 	if len(v.AdaptiveQuantization) > 0 {
 		ok := object.Key("adaptiveQuantization")
 		ok.String(string(v.AdaptiveQuantization))
+	}
+
+	if v.BandwidthReductionFilter != nil {
+		ok := object.Key("bandwidthReductionFilter")
+		if err := awsRestjson1_serializeDocumentBandwidthReductionFilter(v.BandwidthReductionFilter, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Bitrate != 0 {

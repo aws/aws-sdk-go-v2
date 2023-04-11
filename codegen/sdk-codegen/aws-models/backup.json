@@ -238,6 +238,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This is a boolean value indicating this is \n         a parent (composite) backup job.</p>"
                     }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1036,11 +1042,17 @@
                         "smithy.api#httpQuery": "retainRecordInDays"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#CancelLegalHoldOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.backup#ComplianceResourceIdList": {
             "type": "list",
@@ -1389,6 +1401,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This returns the statistics of the included \n         child (nested) copy jobs.</p>"
                     }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1502,6 +1520,9 @@
                         "smithy.api#documentation": "<p>Identifies the request and allows failed requests to be retried without the risk of\n         running the operation twice. If the request includes a <code>CreatorRequestId</code> that\n         matches an existing backup plan, that plan is returned. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#CreateBackupPlanOutput": {
@@ -1537,6 +1558,9 @@
                         "smithy.api#documentation": "<p>A list of <code>BackupOptions</code> settings for a resource type. This option is only\n         available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#CreateBackupSelection": {
@@ -1598,6 +1622,9 @@
                         "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#CreateBackupSelectionOutput": {
@@ -1621,6 +1648,9 @@
                         "smithy.api#documentation": "<p>The date and time a backup selection is created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#CreateBackupVault": {
@@ -1687,6 +1717,9 @@
                         "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice. This parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#CreateBackupVaultOutput": {
@@ -1710,6 +1743,9 @@
                         "smithy.api#documentation": "<p>The date and time a backup vault is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#CreateFramework": {
@@ -1783,6 +1819,9 @@
                         "smithy.api#documentation": "<p>Metadata that you can assign to help organize the frameworks that you create. Each tag\n         is a key-value pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#CreateFrameworkOutput": {
@@ -1800,6 +1839,9 @@
                         "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#CreateLegalHold": {
@@ -1869,6 +1911,9 @@
                         "smithy.api#documentation": "<p>Optional tags to include. A tag is a key-value pair you can use to manage, \n         filter, and search for your resources. Allowed characters include UTF-8 letters, \n         numbers, spaces, and the following characters: + - = . _ : /. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#CreateLegalHoldOutput": {
@@ -1916,6 +1961,9 @@
                         "smithy.api#documentation": "<p>This specifies criteria to assign \n         a set of resources, such as resource types or backup vaults.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#CreateReportPlan": {
@@ -1996,6 +2044,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#CreateReportPlanOutput": {
@@ -2019,6 +2070,9 @@
                         "smithy.api#documentation": "<p>The date and time a backup vault is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#CronExpression": {
@@ -2264,7 +2318,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -2293,13 +2347,12 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
                             "type": "tree",
@@ -2307,23 +2360,20 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "booleanEquals",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
-                                                }
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
                                     "type": "tree",
                                     "rules": [
                                         {
@@ -2332,19 +2382,201 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
+                                                            "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
                                             "type": "error"
                                         },
                                         {
                                             "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://backup-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://backup-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -2357,134 +2589,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://backup.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://backup-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -2492,7 +2642,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://backup-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://backup.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -2501,74 +2651,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://backup.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://backup.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -2576,461 +2665,6 @@
                 },
                 "smithy.rules#endpointTests": {
                     "testCases": [
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.me-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-central-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.me-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-central-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.me-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.me-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ca-central-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ca-central-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ca-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ca-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-central-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-central-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "af-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "af-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "af-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
                         {
                             "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
@@ -3040,515 +2674,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-3",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-3",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-3",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-3",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-2",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-2",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-3",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-3",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-3",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-3",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "sa-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "sa-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "sa-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "sa-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3560,151 +2687,60 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://backup.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup-fips.cn-north-1.amazonaws.com.cn"
+                                    "url": "https://backup.ap-northeast-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://backup.ap-northeast-3.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup.cn-north-1.amazonaws.com.cn"
+                                    "url": "https://backup.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3716,47 +2752,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3768,95 +2765,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-southeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-3",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.ap-southeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-3",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.ap-southeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-3",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3868,47 +2778,125 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup-fips.us-east-1.api.aws"
+                                    "url": "https://backup.ca-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup-fips.us-east-1.amazonaws.com"
+                                    "url": "https://backup.eu-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup.us-east-1.api.aws"
+                                    "url": "https://backup.eu-north-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3920,47 +2908,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-2",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-2",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://backup.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-2",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3972,47 +2921,86 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://backup.us-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup-fips.cn-northwest-1.amazonaws.com.cn"
+                                    "url": "https://backup.us-west-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://backup.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://backup-fips.us-east-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4024,19 +3012,138 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                                "endpoint": {
+                                    "url": "https://backup-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://backup.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4048,19 +3155,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4072,12 +3168,12 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -4085,8 +3181,21 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4097,8 +3206,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4109,8 +3218,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -4186,6 +3295,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DeleteBackupPlanOutput": {
@@ -4215,6 +3327,9 @@
                         "smithy.api#documentation": "<p>Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes\n         long. Version IDs cannot be edited.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DeleteBackupSelection": {
@@ -4267,6 +3382,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DeleteBackupVault": {
@@ -4346,6 +3464,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DeleteBackupVaultInput": {
@@ -4359,6 +3480,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DeleteBackupVaultLockConfiguration": {
@@ -4407,6 +3531,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DeleteBackupVaultNotifications": {
@@ -4452,6 +3579,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DeleteFramework": {
@@ -4499,6 +3629,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DeleteRecoveryPoint": {
@@ -4558,6 +3691,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DeleteReportPlan": {
@@ -4606,6 +3742,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DependencyFailureException": {
@@ -4681,6 +3820,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeBackupJobOutput": {
@@ -4830,7 +3972,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This returns the statistics of the included child (nested) backup jobs.</p>"
                     }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeBackupVault": {
@@ -4876,6 +4027,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeBackupVaultOutput": {
@@ -4942,6 +4096,9 @@
                         "smithy.api#documentation": "<p>The date and time when Backup Vault Lock configuration cannot be changed or\n         deleted.</p>\n         <p>If you applied Vault Lock to your vault without specifying a lock date, you can change\n         any of your Vault Lock settings, or delete Vault Lock from the vault entirely, at any\n         time.</p>\n         <p>This value is in Unix format, Coordinated Universal Time (UTC), and accurate to\n         milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018\n         12:11:30.087 AM.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeCopyJob": {
@@ -4987,6 +4144,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeCopyJobOutput": {
@@ -4998,6 +4158,9 @@
                         "smithy.api#documentation": "<p>Contains detailed information about a copy job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeFramework": {
@@ -5042,6 +4205,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeFrameworkOutput": {
@@ -5095,6 +4261,9 @@
                         "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>DescribeFrameworkOutput</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeGlobalSettings": {
@@ -5124,7 +4293,10 @@
         },
         "com.amazonaws.backup#DescribeGlobalSettingsInput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.backup#DescribeGlobalSettingsOutput": {
             "type": "structure",
@@ -5141,6 +4313,9 @@
                         "smithy.api#documentation": "<p>The date and time that the flag <code>isCrossAccountBackupEnabled</code> was last\n         updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of\n            <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value\n         1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeProtectedResource": {
@@ -5186,6 +4361,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeProtectedResourceOutput": {
@@ -5208,7 +4386,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that a resource was last backed up, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>LastBackupTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeRecoveryPoint": {
@@ -5262,6 +4449,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeRecoveryPointOutput": {
@@ -5400,7 +4590,16 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This returns the boolean value that a recovery point is a parent (composite) job.</p>"
                     }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeRegionSettings": {
@@ -5427,7 +4626,10 @@
         },
         "com.amazonaws.backup#DescribeRegionSettingsInput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.backup#DescribeRegionSettingsOutput": {
             "type": "structure",
@@ -5444,6 +4646,9 @@
                         "smithy.api#documentation": "<p>Returns whether Backup fully manages the backups for a resource type.</p>\n         <p>For the benefits of full Backup management, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#full-management\"> Full Backup management</a>.</p>\n         <p>For a list of resource types and whether each supports full Backup\n         management, see the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource\"> Feature\n            availability by resource</a> table.</p>\n         <p>If <code>\"DynamoDB\":false</code>, you can enable full Backup management for\n         DynamoDB backup by enabling <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli\">\n            Backup's advanced DynamoDB backup features</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeReportJob": {
@@ -5485,6 +4690,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeReportJobOutput": {
@@ -5496,6 +4704,9 @@
                         "smithy.api#documentation": "<p>A list of information about a report job, including its completion and creation times,\n         report destination, unique report job ID, Amazon Resource Name (ARN), report template,\n         status, and status message.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeReportPlan": {
@@ -5540,6 +4751,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeReportPlanOutput": {
@@ -5551,6 +4765,9 @@
                         "smithy.api#documentation": "<p>Returns details about the report plan that is specified by its name. These details\n         include the report plan's Amazon Resource Name (ARN), description, settings, delivery\n         channel, deployment status, creation time, and last attempted and successful run\n         times.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DescribeRestoreJob": {
@@ -5599,6 +4816,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DescribeRestoreJobOutput": {
@@ -5682,6 +4902,9 @@
                         "smithy.api#documentation": "<p>Returns metadata associated with a restore job listed by resource type.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DisassociateRecoveryPoint": {
@@ -5774,6 +4997,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#DisassociateRecoveryPointInput": {
@@ -5795,6 +5021,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ExportBackupPlanTemplate": {
@@ -5839,6 +5068,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ExportBackupPlanTemplateOutput": {
@@ -5850,6 +5082,9 @@
                         "smithy.api#documentation": "<p>The body of a backup plan template in JSON format.</p>\n         <note>\n            <p>This is a signed JSON document that cannot be modified before being passed to\n               <code>GetBackupPlanFromJSON.</code>\n            </p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#FormatList": {
@@ -6038,6 +5273,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#GetBackupPlanFromJSONOutput": {
@@ -6049,6 +5287,9 @@
                         "smithy.api#documentation": "<p>Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or\n         more sets of <code>Rules</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GetBackupPlanFromTemplate": {
@@ -6093,6 +5334,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#GetBackupPlanFromTemplateOutput": {
@@ -6104,6 +5348,9 @@
                         "smithy.api#documentation": "<p>Returns the body of a backup plan based on the target template, including the name,\n         rules, and backup vault of the plan.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GetBackupPlanInput": {
@@ -6124,6 +5371,9 @@
                         "smithy.api#httpQuery": "versionId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#GetBackupPlanOutput": {
@@ -6183,6 +5433,9 @@
                         "smithy.api#documentation": "<p>Contains a list of <code>BackupOptions</code> for each resource type. The list is\n         populated only if the advanced option is set for the backup plan.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GetBackupSelection": {
@@ -6236,6 +5489,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#GetBackupSelectionOutput": {
@@ -6271,6 +5527,9 @@
                         "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GetBackupVaultAccessPolicy": {
@@ -6316,6 +5575,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#GetBackupVaultAccessPolicyOutput": {
@@ -6339,6 +5601,9 @@
                         "smithy.api#documentation": "<p>The backup vault access policy document in JSON format.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GetBackupVaultNotifications": {
@@ -6384,6 +5649,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#GetBackupVaultNotificationsOutput": {
@@ -6413,6 +5681,9 @@
                         "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup\n         vault.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GetLegalHold": {
@@ -6458,6 +5729,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#GetLegalHoldOutput": {
@@ -6523,6 +5797,9 @@
                         "smithy.api#documentation": "<p>This specifies criteria to assign \n         a set of resources, such as resource types or backup vaults.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GetRecoveryPointRestoreMetadata": {
@@ -6576,6 +5853,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#GetRecoveryPointRestoreMetadataOutput": {
@@ -6599,6 +5879,9 @@
                         "smithy.api#documentation": "<p>The set of metadata key-value pairs that describe the original configuration of the\n         backed-up resource. These values vary depending on the service that is being\n         restored.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GetSupportedResourceTypes": {
@@ -6632,6 +5915,9 @@
                         "smithy.api#documentation": "<p>Contains a string with the supported Amazon Web Services resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>FSX</code> for Amazon FSx</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for Storage Gateway</p>\n            </li>\n            <li>\n               <p>\n                  <code>DocDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p>\n            </li>\n            <li>\n               <p>\n                  <code>Neptune</code> for Amazon Neptune</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#GlobalSettings": {
@@ -6993,6 +6279,9 @@
                         "smithy.api#httpQuery": "parentJobId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListBackupJobsOutput": {
@@ -7010,6 +6299,9 @@
                         "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListBackupPlanTemplates": {
@@ -7066,6 +6358,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListBackupPlanTemplatesOutput": {
@@ -7083,6 +6378,9 @@
                         "smithy.api#documentation": "<p>An array of template list items containing metadata about your saved templates.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListBackupPlanVersions": {
@@ -7148,6 +6446,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListBackupPlanVersionsOutput": {
@@ -7165,6 +6466,9 @@
                         "smithy.api#documentation": "<p>An array of version list items containing metadata about your backup plans.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListBackupPlans": {
@@ -7229,6 +6533,9 @@
                         "smithy.api#httpQuery": "includeDeleted"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListBackupPlansOutput": {
@@ -7246,6 +6553,9 @@
                         "smithy.api#documentation": "<p>An array of backup plan list items containing metadata about your saved backup\n         plans.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListBackupSelections": {
@@ -7311,6 +6621,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListBackupSelectionsOutput": {
@@ -7328,6 +6641,9 @@
                         "smithy.api#documentation": "<p>An array of backup selection list items containing metadata about each resource in the\n         list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListBackupVaults": {
@@ -7385,6 +6701,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListBackupVaultsOutput": {
@@ -7402,6 +6721,9 @@
                         "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListCopyJobs": {
@@ -7522,6 +6844,9 @@
                         "smithy.api#httpQuery": "parentJobId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListCopyJobsOutput": {
@@ -7539,6 +6864,9 @@
                         "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return maxResults number of items, NextToken allows you to return more items in\n         your list starting at the location pointed to by the next token. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListFrameworks": {
@@ -7588,6 +6916,9 @@
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListFrameworksOutput": {
@@ -7605,6 +6936,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListLegalHolds": {
@@ -7656,6 +6990,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListLegalHoldsOutput": {
@@ -7673,6 +7010,9 @@
                         "smithy.api#documentation": "<p>This is an array of returned legal holds, both active and previous.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListOfTags": {
@@ -7730,6 +7070,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListProtectedResourcesOutput": {
@@ -7747,6 +7090,9 @@
                         "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListRecoveryPointsByBackupVault": {
@@ -7854,6 +7200,9 @@
                         "smithy.api#httpQuery": "parentRecoveryPointArn"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListRecoveryPointsByBackupVaultOutput": {
@@ -7871,6 +7220,9 @@
                         "smithy.api#documentation": "<p>An array of objects that contain detailed information about recovery points saved in a\n         backup vault.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListRecoveryPointsByLegalHold": {
@@ -7933,6 +7285,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListRecoveryPointsByLegalHoldOutput": {
@@ -7950,6 +7305,9 @@
                         "smithy.api#documentation": "<p>This return is the next item following a partial list of returned resources.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListRecoveryPointsByResource": {
@@ -8015,6 +7373,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListRecoveryPointsByResourceOutput": {
@@ -8032,6 +7393,9 @@
                         "smithy.api#documentation": "<p>An array of objects that contain detailed information about recovery points of the\n         specified resource type.</p>\n         <note>\n            <p>Only Amazon EFS and Amazon EC2 recovery points return\n            BackupVaultName.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListReportJobs": {
@@ -8112,6 +7476,9 @@
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListReportJobsOutput": {
@@ -8129,6 +7496,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListReportPlans": {
@@ -8178,6 +7548,9 @@
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListReportPlansOutput": {
@@ -8195,6 +7568,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListRestoreJobs": {
@@ -8294,6 +7670,9 @@
                         "smithy.api#httpQuery": "completeAfter"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListRestoreJobsOutput": {
@@ -8311,6 +7690,9 @@
                         "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#ListTags": {
@@ -8375,6 +7757,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#ListTagsOutput": {
@@ -8392,6 +7777,9 @@
                         "smithy.api#documentation": "<p>To help organize your resources, you can assign your own metadata to the resources you\n         create. Each tag is a key-value pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#Long": {
@@ -8492,6 +7880,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time a resource was last backed up, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>LastBackupTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8553,6 +7947,9 @@
                         "smithy.api#documentation": "<p>The backup vault access policy document in JSON format.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#PutBackupVaultLockConfiguration": {
@@ -8581,7 +7978,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies Backup Vault Lock to a backup vault, preventing attempts to delete\n         any recovery point stored in or created in a backup vault. Vault Lock also prevents\n         attempts to update the lifecycle policy that controls the retention period of any recovery\n         point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and\n         maximum retention period for future backup and copy jobs that target a backup vault.</p>\n         <note>\n            <p>Backup Vault Lock has yet to receive a third-party assessment for SEC\n            17a-4(f) and CFTC.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Applies Backup Vault Lock to a backup vault, preventing attempts to delete\n         any recovery point stored in or created in a backup vault. Vault Lock also prevents\n         attempts to update the lifecycle policy that controls the retention period of any recovery\n         point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and\n         maximum retention period for future backup and copy jobs that target a backup vault.</p>\n         <note>\n            <p>Backup Vault Lock has been assessed by Cohasset Associates for use in environments \n            that are subject to SEC 17a-4, CFTC, and FINRA regulations. For more information about \n            how Backup Vault Lock relates to these regulations, see the \n            <a href=\"samples/cohassetreport.zip\">Cohasset Associates \n               Compliance Assessment.</a>\n            </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/backup-vaults/{BackupVaultName}/vault-lock",
@@ -8619,6 +8016,9 @@
                         "smithy.api#documentation": "<p>The Backup Vault Lock configuration that specifies the number of days before\n         the lock date. For example, setting <code>ChangeableForDays</code> to 30 on Jan. 1, 2022 at\n         8pm UTC will set the lock date to Jan. 31, 2022 at 8pm UTC.</p>\n         <p>Backup enforces a 72-hour cooling-off period before Vault Lock takes effect\n         and becomes immutable. Therefore, you must set <code>ChangeableForDays</code> to 3 or\n         greater.</p>\n         <p>Before the lock date, you can delete Vault Lock from the vault using\n            <code>DeleteBackupVaultLockConfiguration</code> or change the Vault Lock configuration\n         using <code>PutBackupVaultLockConfiguration</code>. On and after the lock date, the Vault\n         Lock becomes immutable and cannot be changed or deleted.</p>\n         <p>If this parameter is not specified, you can delete Vault Lock from the vault using\n            <code>DeleteBackupVaultLockConfiguration</code> or change the Vault Lock configuration\n         using <code>PutBackupVaultLockConfiguration</code> at any time.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#PutBackupVaultNotifications": {
@@ -8678,6 +8078,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#RecoveryPointByBackupVault": {
@@ -8810,6 +8213,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This is a boolean value indicating this is \n         a parent (composite) recovery point.</p>"
                     }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8878,6 +8287,12 @@
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>This is the Amazon Resource Name (ARN) of the parent (composite) \n         recovery point.</p>"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
                     }
                 }
             },
@@ -9571,6 +8986,9 @@
                         "smithy.api#documentation": "<p>Specifies the backup option for a selected resource. This option is only available for\n         Windows Volume Shadow Copy Service (VSS) backup jobs.</p>\n         <p>Valid values: Set to <code>\"WindowsVSS\":\"enabled\"</code> to enable the\n         <code>WindowsVSS</code> backup option and create a Windows VSS backup. Set to\n         <code>\"WindowsVSS\"\"disabled\"</code> to create a regular backup. The\n         <code>WindowsVSS</code> option is not enabled by default.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#StartBackupJobOutput": {
@@ -9585,7 +9003,7 @@
                 "RecoveryPointArn": {
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a recovery point; for example,\n            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Note: This field is only returned for Amazon EFS and Advanced DynamoDB \n         resources.</i>\n         </p>\n         <p>An ARN that uniquely identifies a recovery point; for example,\n            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>"
                     }
                 },
                 "CreationDate": {
@@ -9601,6 +9019,9 @@
                         "smithy.api#documentation": "<p>This is a returned boolean value indicating this is a parent (composite) \n         backup job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#StartCopyJob": {
@@ -9681,6 +9102,9 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#StartCopyJobOutput": {
@@ -9705,6 +9129,9 @@
                         "smithy.api#documentation": "<p>This is a returned boolean value indicating this is a parent (composite) \n         copy job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#StartReportJob": {
@@ -9757,6 +9184,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#StartReportJobOutput": {
@@ -9768,6 +9198,9 @@
                         "smithy.api#documentation": "<p>The identifier of the report job. A unique, randomly generated, Unicode, UTF-8 encoded\n         string that is at most 1,024 bytes long. The report job ID cannot be edited.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#StartRestoreJob": {
@@ -9837,6 +9270,9 @@
                         "smithy.api#documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>DocumentDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p>\n            </li>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>FSx</code> for Amazon FSx</p>\n            </li>\n            <li>\n               <p>\n                  <code>Neptune</code> for Amazon Neptune</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for Storage Gateway</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon S3</p>\n            </li>\n            <li>\n               <p>\n                  <code>VirtualMachine</code> for virtual machines</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#StartRestoreJobOutput": {
@@ -9848,6 +9284,9 @@
                         "smithy.api#documentation": "<p>Uniquely identifies the job that restores a recovery point.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#StopBackupJob": {
@@ -9895,6 +9334,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#StorageClass": {
@@ -9985,6 +9427,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#TagValue": {
@@ -10052,6 +9497,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#UpdateBackupPlan": {
@@ -10104,6 +9552,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#UpdateBackupPlanOutput": {
@@ -10139,6 +9590,9 @@
                         "smithy.api#documentation": "<p>Contains a list of <code>BackupOptions</code> for each resource type.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#UpdateFramework": {
@@ -10212,6 +9666,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#UpdateFrameworkOutput": {
@@ -10235,6 +9692,9 @@
                         "smithy.api#documentation": "<p>The date and time that a framework is created, in ISO 8601 representation. The value of <code>CreationTime</code> is accurate to milliseconds. For example,\n         2020-07-10T15:00:00.000-08:00 represents the 10th of July 2020 at 3:00 PM 8 hours behind\n         UTC.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#UpdateGlobalSettings": {
@@ -10277,6 +9737,9 @@
                         "smithy.api#documentation": "<p>A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example:\n            <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false\n            --region us-west-2</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#UpdateRecoveryPointLifecycle": {
@@ -10339,6 +9802,9 @@
                         "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup transitions and expires backups automatically according to\n         the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “retention” setting must be 90 days greater than the “transition to\n         cold after days” setting. The “transition to cold after days” setting cannot be changed\n         after a backup has been transitioned to cold. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#UpdateRecoveryPointLifecycleOutput": {
@@ -10368,6 +9834,9 @@
                         "smithy.api#documentation": "<p>A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and\n            <code>MoveToColdStorageAt</code> timestamps.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#UpdateRegionSettings": {
@@ -10413,6 +9882,9 @@
                         "smithy.api#documentation": "<p>Enables or disables full Backup management of backups for a resource type.\n         To enable full Backup management for DynamoDB along with <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html\">\n            Backup's advanced DynamoDB backup features</a>, follow the\n         procedure to <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli\"> enable advanced DynamoDB backup programmatically</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#UpdateReportPlan": {
@@ -10486,6 +9958,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.backup#UpdateReportPlanOutput": {
@@ -10509,6 +9984,9 @@
                         "smithy.api#documentation": "<p>The date and time that a report plan is created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#VaultNames": {

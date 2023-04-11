@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified user account. You can find the instance ID in the
-// console (it’s the final part of the ARN). The console does not display the user
-// IDs. Instead, list the users and note the IDs provided in the output.
+// Describes the specified user account. You can find the instance ID in the Amazon
+// Connect console
+// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+// (it’s the final part of the ARN). The console does not display the user IDs.
+// Instead, list the users and note the IDs provided in the output.
 func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, optFns ...func(*Options)) (*DescribeUserOutput, error) {
 	if params == nil {
 		params = &DescribeUserInput{}
@@ -31,8 +33,9 @@ func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, op
 
 type DescribeUserInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string

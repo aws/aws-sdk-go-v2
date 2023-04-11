@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates a Voice Connector's emergency calling configuration.
 func (c *Client) PutVoiceConnectorEmergencyCallingConfiguration(ctx context.Context, params *PutVoiceConnectorEmergencyCallingConfigurationInput, optFns ...func(*Options)) (*PutVoiceConnectorEmergencyCallingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorEmergencyCallingConfigurationInput{}
@@ -28,9 +29,13 @@ func (c *Client) PutVoiceConnectorEmergencyCallingConfiguration(ctx context.Cont
 
 type PutVoiceConnectorEmergencyCallingConfigurationInput struct {
 
+	// The configuration being updated.
+	//
 	// This member is required.
 	EmergencyCallingConfiguration *types.EmergencyCallingConfiguration
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -38,6 +43,8 @@ type PutVoiceConnectorEmergencyCallingConfigurationInput struct {
 }
 
 type PutVoiceConnectorEmergencyCallingConfigurationOutput struct {
+
+	// The updated configuration.
 	EmergencyCallingConfiguration *types.EmergencyCallingConfiguration
 
 	// Metadata pertaining to the operation's result.

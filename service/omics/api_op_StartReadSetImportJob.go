@@ -41,7 +41,7 @@ type StartReadSetImportJobInput struct {
 	// This member is required.
 	SequenceStoreId *string
 
-	// Source files to import.
+	// The job's source files.
 	//
 	// This member is required.
 	Sources []types.StartReadSetImportJobSourceItem

@@ -79,8 +79,8 @@ type InviteAccountToOrganizationInput struct {
 	// the policy at that time. Tag policy compliance is not checked again when the
 	// invitation is accepted and the tags are actually attached to the account. That
 	// means that if the tag policy changes between the invitation and the acceptance,
-	// then that tags could potentially be non-compliant. If any one of the tags is
-	// invalid or if you exceed the allowed number of tags for an account, then the
+	// then that tags could potentially be non-compliant. If any one of the tags is not
+	// valid or if you exceed the allowed number of tags for an account, then the
 	// entire request fails and invitations are not sent.
 	Tags []types.Tag
 

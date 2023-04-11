@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates a Voice Connector's logging configuration.
 func (c *Client) PutVoiceConnectorLoggingConfiguration(ctx context.Context, params *PutVoiceConnectorLoggingConfigurationInput, optFns ...func(*Options)) (*PutVoiceConnectorLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorLoggingConfigurationInput{}
@@ -28,9 +29,13 @@ func (c *Client) PutVoiceConnectorLoggingConfiguration(ctx context.Context, para
 
 type PutVoiceConnectorLoggingConfigurationInput struct {
 
+	// The logging configuration being updated.
+	//
 	// This member is required.
 	LoggingConfiguration *types.LoggingConfiguration
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -38,6 +43,8 @@ type PutVoiceConnectorLoggingConfigurationInput struct {
 }
 
 type PutVoiceConnectorLoggingConfigurationOutput struct {
+
+	// The updated logging configuration.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

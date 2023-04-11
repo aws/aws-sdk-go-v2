@@ -41,12 +41,35 @@ type DescribeNetworkInsightsPathsInput struct {
 	// * destination - The ID of
 	// the resource.
 	//
-	// * destination-port - The destination port.
+	// * filter-at-source.source-address - The source IPv4 address at
+	// the source.
 	//
-	// * protocol - The
-	// protocol.
+	// * filter-at-source.source-port-range - The source port range at the
+	// source.
 	//
-	// * source - The ID of the resource.
+	// * filter-at-source.destination-address - The destination IPv4 address
+	// at the source.
+	//
+	// * filter-at-source.destination-port-range - The destination port
+	// range at the source.
+	//
+	// * filter-at-destination.source-address - The source IPv4
+	// address at the destination.
+	//
+	// * filter-at-destination.source-port-range - The
+	// source port range at the destination.
+	//
+	// *
+	// filter-at-destination.destination-address - The destination IPv4 address at the
+	// destination.
+	//
+	// * filter-at-destination.destination-port-range - The destination
+	// port range at the destination.
+	//
+	// * protocol - The protocol.
+	//
+	// * source - The ID of
+	// the resource.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

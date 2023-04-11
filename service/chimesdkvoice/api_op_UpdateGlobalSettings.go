@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates global settings for the Amazon Chime SDK Voice Connectors in an AWS
+// account.
 func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalSettingsInput, optFns ...func(*Options)) (*UpdateGlobalSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateGlobalSettingsInput{}
@@ -27,6 +29,8 @@ func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalS
 }
 
 type UpdateGlobalSettingsInput struct {
+
+	// The Voice Connector settings.
 	VoiceConnector *types.VoiceConnectorSettings
 
 	noSmithyDocumentSerde

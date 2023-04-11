@@ -29,7 +29,7 @@ func (c *Client) DescribeSpeakerEnrollmentJob(ctx context.Context, params *Descr
 
 type DescribeSpeakerEnrollmentJobInput struct {
 
-	// The identifier of the domain containing the speaker enrollment job.
+	// The identifier of the domain that contains the speaker enrollment job.
 	//
 	// This member is required.
 	DomainId *string

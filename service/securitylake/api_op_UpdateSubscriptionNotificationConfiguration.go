@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new subscription notification or adds the existing subscription
-// notification setting for the specified subscription ID.
+// Updates an existing notification method for the subscription (SQS or HTTPs
+// endpoint) or switches the notification subscription endpoint for a subscriber.
 func (c *Client) UpdateSubscriptionNotificationConfiguration(ctx context.Context, params *UpdateSubscriptionNotificationConfigurationInput, optFns ...func(*Options)) (*UpdateSubscriptionNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateSubscriptionNotificationConfigurationInput{}
@@ -48,7 +48,13 @@ type UpdateSubscriptionNotificationConfigurationInput struct {
 	// The HTTPS method used for the subscription notification.
 	HttpsMethod types.HttpsMethod
 
-	// The Amazon Resource Name (ARN) specifying the role of the subscriber.
+	// The Amazon Resource Name (ARN) specifying the role of the subscriber. For more
+	// information about ARNs and how to use them in policies, see, see the Managing
+	// data access
+	// (https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html)
+	// and Amazon Web Services Managed Policies
+	// (https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html)in
+	// the Amazon Security Lake User Guide.
 	RoleArn *string
 
 	// The subscription endpoint in Security Lake.

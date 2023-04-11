@@ -489,18 +489,18 @@ type ConfigExportDeliveryInfo struct {
 // resources. A rule can run when Config detects a configuration change to an
 // Amazon Web Services resource or at a periodic frequency that you choose (for
 // example, every 24 hours). There are two types of rules: Config Managed Rules and
-// Config Custom Rules. Managed rules are predefined, customizable rules created by
-// Config. For a list of managed rules, see List of Config Managed Rules
+// Config Custom Rules. Config Managed Rules are predefined, customizable rules
+// created by Config. For a list of managed rules, see List of Config Managed Rules
 // (https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).
-// Custom rules are rules that you can create using either Guard or Lambda
-// functions. Guard (Guard GitHub Repository
-// (https://github.com/aws-cloudformation/cloudformation-guard)) is a
-// policy-as-code language that allows you to write policies that are enforced by
-// Config Custom Policy rules. Lambda uses custom code that you upload to evaluate
-// a custom rule. It is invoked by events that are published to it by an event
-// source, which Config invokes when the custom rule is initiated. For more
-// information about developing and using Config rules, see Evaluating Amazon Web
-// Services resource Configurations with Config
+// Config Custom Rules are rules that you create from scratch. There are two ways
+// to create Config custom rules: with Lambda functions ( Lambda Developer Guide
+// (https://docs.aws.amazon.com/config/latest/developerguide/gettingstarted-concepts.html#gettingstarted-concepts-function))
+// and with Guard (Guard GitHub Repository
+// (https://github.com/aws-cloudformation/cloudformation-guard)), a policy-as-code
+// language. Config custom rules created with Lambda are called Config Custom
+// Lambda Rules and Config custom rules created with Guard are called Config Custom
+// Policy Rules. For more information about developing and using Config rules, see
+// Evaluating Resource with Config Rules
 // (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)
 // in the Config Developer Guide. You can use the Amazon Web Services CLI and
 // Amazon Web Services SDKs if you want to create a rule that triggers evaluations
@@ -889,22 +889,25 @@ type ConfigurationRecorder struct {
 	noSmithyDocumentSerde
 }
 
-// The current status of the configuration recorder.
+// The current status of the configuration recorder. For a detailed status of
+// recording events over time, add your Config events to CloudWatch metrics and use
+// CloudWatch metrics.
 type ConfigurationRecorderStatus struct {
 
-	// The error code indicating that the recording failed.
+	// The latest error code from when the recorder last failed.
 	LastErrorCode *string
 
-	// The message indicating that the recording failed due to an error.
+	// The latest error message from when the recorder last failed.
 	LastErrorMessage *string
 
 	// The time the recorder was last started.
 	LastStartTime *time.Time
 
-	// The last (previous) status of the recorder.
+	// The status of the latest recording event processed by the recorder.
 	LastStatus RecorderStatus
 
-	// The time when the status was last changed.
+	// The time of the latest change in status of an recording event processed by the
+	// recorder.
 	LastStatusChangeTime *time.Time
 
 	// The time the recorder was last stopped.
@@ -970,8 +973,7 @@ type ConformancePackComplianceScoresFilters struct {
 // Summary includes the name and status of the conformance pack.
 type ConformancePackComplianceSummary struct {
 
-	// The status of the conformance pack. The allowed values are COMPLIANT,
-	// NON_COMPLIANT and INSUFFICIENT_DATA.
+	// The status of the conformance pack.
 	//
 	// This member is required.
 	ConformancePackComplianceStatus ConformancePackComplianceType
@@ -1103,8 +1105,7 @@ type ConformancePackInputParameter struct {
 // You can filter using Config rule names and compliance types.
 type ConformancePackRuleCompliance struct {
 
-	// Compliance of the Config rule. The allowed values are COMPLIANT, NON_COMPLIANT,
-	// and INSUFFICIENT_DATA.
+	// Compliance of the Config rule.
 	ComplianceType ConformancePackComplianceType
 
 	// Name of the Config rule.
@@ -1266,7 +1267,10 @@ type DeliveryChannelStatus struct {
 }
 
 // Returns a filtered list of Detective or Proactive Config rules. By default, if
-// the filter is not defined, this API returns an unfiltered list.
+// the filter is not defined, this API returns an unfiltered list. For more
+// information on Detective or Proactive Config rules, see  Evaluation Mode
+// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html)
+// in the Config Developer Guide.
 type DescribeConfigRulesFilters struct {
 
 	// The mode of an evaluation. The valid values are Detective or Proactive.
@@ -2246,11 +2250,12 @@ type RecordingGroup struct {
 	// A comma-separated list that specifies the types of Amazon Web Services resources
 	// for which Config records configuration changes (for example, AWS::EC2::Instance
 	// or AWS::CloudTrail::Trail). To record all configuration changes, you must set
-	// the allSupported option to true. If you set this option to false, when Config
-	// adds support for a new type of resource, it will not record resources of that
-	// type unless you manually add that type to your recording group. For a list of
-	// valid resourceTypes values, see the resourceType Value column in Supported
-	// Amazon Web Services resource Types
+	// the allSupported option to true. If you set the AllSupported option to false and
+	// populate the ResourceTypes option with values, when Config adds support for a
+	// new type of resource, it will not record resources of that type unless you
+	// manually add that type to your recording group. For a list of valid
+	// resourceTypes values, see the resourceType Value column in Supported Amazon Web
+	// Services resource Types
 	// (https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources).
 	ResourceTypes []ResourceType
 
@@ -2478,7 +2483,17 @@ type ResourceDetails struct {
 	// This member is required.
 	ResourceType *string
 
-	// The schema type of the resource configuration.
+	// The schema type of the resource configuration. You can find the Resource type
+	// schema
+	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html),
+	// or CFN_RESOURCE_SCHEMA, in "Amazon Web Services public extensions" within the
+	// CloudFormation registry or with the following CLI commmand: aws cloudformation
+	// describe-type --type-name "AWS::S3::Bucket" --type RESOURCE. For more
+	// information, see Managing extensions through the CloudFormation registry
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view)
+	// and Amazon Web Services resource and property types reference
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// in the CloudFormation User Guide.
 	ResourceConfigurationSchemaType ResourceConfigurationSchemaType
 
 	noSmithyDocumentSerde

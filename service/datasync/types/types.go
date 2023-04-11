@@ -6,19 +6,20 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// Represents a single entry in a list of agents. AgentListEntry returns an array
-// that contains a list of agents when the ListAgents
+// Represents a single entry in a list (or array) of DataSync agents when you call
+// the ListAgents
 // (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html)
-// operation is called.
+// operation.
 type AgentListEntry struct {
 
-	// The Amazon Resource Name (ARN) of the agent.
+	// The Amazon Resource Name (ARN) of a DataSync agent.
 	AgentArn *string
 
-	// The name of the agent.
+	// The name of an agent.
 	Name *string
 
-	// The status of the agent.
+	// The status of an agent. For more information, see DataSync agent statuses
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/understand-agent-statuses.html).
 	Status AgentStatus
 
 	noSmithyDocumentSerde
@@ -141,7 +142,8 @@ type FsxProtocolSmb struct {
 	// Directory that your storage virtual machine (SVM) belongs to.
 	Domain *string
 
-	// Specifies how DataSync can access a location using the SMB protocol.
+	// Specifies the version of the Server Message Block (SMB) protocol that DataSync
+	// uses to access an SMB file server.
 	MountOptions *SmbMountOptions
 
 	noSmithyDocumentSerde
@@ -341,7 +343,10 @@ type Options struct {
 	// working with Amazon S3 storage classes in DataSync
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
 	// Default value: PRESERVEPRESERVE: Ignore such destination files (recommended).
-	// REMOVE: Delete destination files that aren’t present in the source.
+	// REMOVE: Delete destination files that aren’t present in the source. If you set
+	// this parameter to REMOVE, you can't set TransferMode to ALL. When you transfer
+	// all data, DataSync doesn't scan your destination location and doesn't know what
+	// to delete.
 	PreserveDeletedFiles PreserveDeletedFiles
 
 	// Specifies whether DataSync should preserve the metadata of block and character
@@ -492,12 +497,35 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies how DataSync can access a location using the SMB protocol.
+// Specifies the version of the Server Message Block (SMB) protocol that DataSync
+// uses to access an SMB file server.
 type SmbMountOptions struct {
 
-	// Specifies the SMB version that you want DataSync to use when mounting your SMB
-	// share. If you don't specify a version, DataSync defaults to AUTOMATIC and
-	// chooses a version based on negotiation with the SMB server.
+	// By default, DataSync automatically chooses an SMB protocol version based on
+	// negotiation with your SMB file server. You also can configure DataSync to use a
+	// specific SMB version, but we recommend doing this only if DataSync has trouble
+	// negotiating with the SMB file server automatically. These are the following
+	// options for configuring the SMB version:
+	//
+	// * AUTOMATIC (default): DataSync and
+	// the SMB file server negotiate a protocol version that they mutually support.
+	// (DataSync supports SMB versions 1.0 and later.) This is the recommended option.
+	// If you instead choose a specific version that your file server doesn't support,
+	// you may get an Operation Not Supported error.
+	//
+	// * SMB3: Restricts the protocol
+	// negotiation to only SMB version 3.0.2.
+	//
+	// * SMB2: Restricts the protocol
+	// negotiation to only SMB version 2.1.
+	//
+	// * SMB2_0: Restricts the protocol
+	// negotiation to only SMB version 2.0.
+	//
+	// * SMB1: Restricts the protocol negotiation
+	// to only SMB version 1.0. The SMB1 option isn't available when creating an Amazon
+	// FSx for NetApp ONTAP location
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationFsxOntap.html).
 	Version SmbVersion
 
 	noSmithyDocumentSerde

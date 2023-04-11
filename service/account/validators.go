@@ -30,6 +30,46 @@ func (m *validateOpDeleteAlternateContact) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableRegion struct {
+}
+
+func (*validateOpDisableRegion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableRegion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableRegionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableRegionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableRegion struct {
+}
+
+func (*validateOpEnableRegion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableRegion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableRegionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableRegionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAlternateContact struct {
 }
 
@@ -45,6 +85,26 @@ func (m *validateOpGetAlternateContact) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAlternateContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRegionOptStatus struct {
+}
+
+func (*validateOpGetRegionOptStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRegionOptStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRegionOptStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRegionOptStatusInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -94,8 +154,20 @@ func addOpDeleteAlternateContactValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteAlternateContact{}, middleware.After)
 }
 
+func addOpDisableRegionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableRegion{}, middleware.After)
+}
+
+func addOpEnableRegionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableRegion{}, middleware.After)
+}
+
 func addOpGetAlternateContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAlternateContact{}, middleware.After)
+}
+
+func addOpGetRegionOptStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRegionOptStatus{}, middleware.After)
 }
 
 func addOpPutAlternateContactValidationMiddleware(stack *middleware.Stack) error {
@@ -151,6 +223,36 @@ func validateOpDeleteAlternateContactInput(v *DeleteAlternateContactInput) error
 	}
 }
 
+func validateOpDisableRegionInput(v *DisableRegionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableRegionInput"}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableRegionInput(v *EnableRegionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableRegionInput"}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAlternateContactInput(v *GetAlternateContactInput) error {
 	if v == nil {
 		return nil
@@ -158,6 +260,21 @@ func validateOpGetAlternateContactInput(v *GetAlternateContactInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAlternateContactInput"}
 	if len(v.AlternateContactType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AlternateContactType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRegionOptStatusInput(v *GetRegionOptStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRegionOptStatusInput"}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

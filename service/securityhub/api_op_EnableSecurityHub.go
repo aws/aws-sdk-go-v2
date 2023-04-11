@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,19 +15,20 @@ import (
 // specify in the request. When you enable Security Hub, you grant to Security Hub
 // the permissions necessary to gather findings from other services that are
 // integrated with Security Hub. When you use the EnableSecurityHub operation to
-// enable Security Hub, you also automatically enable the following standards.
+// enable Security Hub, you also automatically enable the following standards:
 //
 // *
-// CIS Amazon Web Services Foundations
+// Center for Internet Security (CIS) Amazon Web Services Foundations Benchmark
+// v1.2.0
 //
-// * Amazon Web Services Foundational Security
-// Best Practices
+// * Amazon Web Services Foundational Security Best Practices
 //
-// You do not enable the Payment Card Industry Data Security
-// Standard (PCI DSS) standard. To not enable the automatically enabled standards,
-// set EnableDefaultStandards to false. After you enable Security Hub, to enable a
-// standard, use the BatchEnableStandards operation. To disable a standard, use the
-// BatchDisableStandards operation. To learn more, see the setup information
+// Other
+// standards are not automatically enabled. To opt out of automatically enabled
+// standards, set EnableDefaultStandards to false. After you enable Security Hub,
+// to enable a standard, use the BatchEnableStandards operation. To disable a
+// standard, use the BatchDisableStandards operation. To learn more, see the setup
+// information
 // (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html)
 // in the Security Hub User Guide.
 func (c *Client) EnableSecurityHub(ctx context.Context, params *EnableSecurityHubInput, optFns ...func(*Options)) (*EnableSecurityHubOutput, error) {
@@ -45,6 +47,18 @@ func (c *Client) EnableSecurityHub(ctx context.Context, params *EnableSecurityHu
 }
 
 type EnableSecurityHubInput struct {
+
+	// This field, used when enabling Security Hub, specifies whether the calling
+	// account has consolidated control findings turned on. If the value for this field
+	// is set to SECURITY_CONTROL, Security Hub generates a single finding for a
+	// control check even when the check applies to multiple enabled standards. If the
+	// value for this field is set to STANDARD_CONTROL, Security Hub generates separate
+	// findings for a control check when the check applies to multiple enabled
+	// standards. The value for this field in a member account matches the value in the
+	// administrator account. For accounts that aren't part of an organization, the
+	// default value of this field is SECURITY_CONTROL if you enabled Security Hub on
+	// or after February 23, 2023.
+	ControlFindingGenerator types.ControlFindingGenerator
 
 	// Whether to enable the security standards that Security Hub has designated as
 	// automatically enabled. If you do not provide a value for EnableDefaultStandards,

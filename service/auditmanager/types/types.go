@@ -457,7 +457,17 @@ type AWSAccount struct {
 	noSmithyDocumentSerde
 }
 
-// An Amazon Web Service such as Amazon S3 or CloudTrail.
+// An Amazon Web Service such as Amazon S3 or CloudTrail. For an example of how to
+// find an Amazon Web Service name and how to define it in your assessment scope,
+// see the following:
+//
+// * Finding an Amazon Web Service name to use in your
+// assessment scope
+// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2)
+//
+// *
+// Defining an Amazon Web Service name in your assessment scope
+// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3)
 type AWSService struct {
 
 	// The name of the Amazon Web Service.
@@ -524,7 +534,7 @@ type ChangeLog struct {
 	// The time when the action was performed and the changelog record was created.
 	CreatedAt *time.Time
 
-	// The IAM user or role that performed the action.
+	// The user or role that performed the action.
 	CreatedBy *string
 
 	// The name of the object that changed. This could be the name of an assessment,
@@ -559,7 +569,7 @@ type Control struct {
 	// The time when the control was created.
 	CreatedAt *time.Time
 
-	// The IAM user or role that created the control.
+	// The user or role that created the control.
 	CreatedBy *string
 
 	// The description of the control.
@@ -571,7 +581,7 @@ type Control struct {
 	// The time when the control was most recently updated.
 	LastUpdatedAt *time.Time
 
-	// The IAM user or role that most recently updated the control.
+	// The user or role that most recently updated the control.
 	LastUpdatedBy *string
 
 	// The name of the control.
@@ -882,7 +892,7 @@ type Delegation struct {
 	// The identifier for the control set that's associated with the delegation.
 	ControlSetId *string
 
-	// The IAM user or role that created the delegation.
+	// The user or role that created the delegation.
 	CreatedBy *string
 
 	// Specifies when the delegation was created.
@@ -1025,8 +1035,7 @@ type Evidence struct {
 	// The identifier for the folder that the evidence is stored in.
 	EvidenceFolderId *string
 
-	// The unique identifier for the IAM user or role that's associated with the
-	// evidence.
+	// The unique identifier for the user or role that's associated with the evidence.
 	IamId *string
 
 	// The identifier for the evidence.
@@ -1140,7 +1149,7 @@ type Framework struct {
 	// The time when the framework was created.
 	CreatedAt *time.Time
 
-	// The IAM user or role that created the framework.
+	// The user or role that created the framework.
 	CreatedBy *string
 
 	// The description of the framework.
@@ -1152,7 +1161,7 @@ type Framework struct {
 	// The time when the framework was most recently updated.
 	LastUpdatedAt *time.Time
 
-	// The IAM user or role that most recently updated the framework.
+	// The user or role that most recently updated the framework.
 	LastUpdatedBy *string
 
 	// The logo that's associated with the framework.

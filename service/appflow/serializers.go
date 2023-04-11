@@ -3593,6 +3593,11 @@ func awsRestjson1_serializeDocumentSalesforceConnectorProfileProperties(v *types
 		ok.Boolean(v.IsSandboxEnvironment)
 	}
 
+	if v.UsePrivateLinkForMetadataAndAuthorization {
+		ok := object.Key("usePrivateLinkForMetadataAndAuthorization")
+		ok.Boolean(v.UsePrivateLinkForMetadataAndAuthorization)
+	}
+
 	return nil
 }
 

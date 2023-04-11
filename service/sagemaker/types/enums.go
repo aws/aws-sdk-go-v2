@@ -94,63 +94,64 @@ type AppInstanceType string
 
 // Enum values for AppInstanceType
 const (
-	AppInstanceTypeSystem         AppInstanceType = "system"
-	AppInstanceTypeMlT3Micro      AppInstanceType = "ml.t3.micro"
-	AppInstanceTypeMlT3Small      AppInstanceType = "ml.t3.small"
-	AppInstanceTypeMlT3Medium     AppInstanceType = "ml.t3.medium"
-	AppInstanceTypeMlT3Large      AppInstanceType = "ml.t3.large"
-	AppInstanceTypeMlT3Xlarge     AppInstanceType = "ml.t3.xlarge"
-	AppInstanceTypeMlT32xlarge    AppInstanceType = "ml.t3.2xlarge"
-	AppInstanceTypeMlM5Large      AppInstanceType = "ml.m5.large"
-	AppInstanceTypeMlM5Xlarge     AppInstanceType = "ml.m5.xlarge"
-	AppInstanceTypeMlM52xlarge    AppInstanceType = "ml.m5.2xlarge"
-	AppInstanceTypeMlM54xlarge    AppInstanceType = "ml.m5.4xlarge"
-	AppInstanceTypeMlM58xlarge    AppInstanceType = "ml.m5.8xlarge"
-	AppInstanceTypeMlM512xlarge   AppInstanceType = "ml.m5.12xlarge"
-	AppInstanceTypeMlM516xlarge   AppInstanceType = "ml.m5.16xlarge"
-	AppInstanceTypeMlM524xlarge   AppInstanceType = "ml.m5.24xlarge"
-	AppInstanceTypeMlM5dLarge     AppInstanceType = "ml.m5d.large"
-	AppInstanceTypeMlM5dXlarge    AppInstanceType = "ml.m5d.xlarge"
-	AppInstanceTypeMlM5d2xlarge   AppInstanceType = "ml.m5d.2xlarge"
-	AppInstanceTypeMlM5d4xlarge   AppInstanceType = "ml.m5d.4xlarge"
-	AppInstanceTypeMlM5d8xlarge   AppInstanceType = "ml.m5d.8xlarge"
-	AppInstanceTypeMlM5d12xlarge  AppInstanceType = "ml.m5d.12xlarge"
-	AppInstanceTypeMlM5d16xlarge  AppInstanceType = "ml.m5d.16xlarge"
-	AppInstanceTypeMlM5d24xlarge  AppInstanceType = "ml.m5d.24xlarge"
-	AppInstanceTypeMlC5Large      AppInstanceType = "ml.c5.large"
-	AppInstanceTypeMlC5Xlarge     AppInstanceType = "ml.c5.xlarge"
-	AppInstanceTypeMlC52xlarge    AppInstanceType = "ml.c5.2xlarge"
-	AppInstanceTypeMlC54xlarge    AppInstanceType = "ml.c5.4xlarge"
-	AppInstanceTypeMlC59xlarge    AppInstanceType = "ml.c5.9xlarge"
-	AppInstanceTypeMlC512xlarge   AppInstanceType = "ml.c5.12xlarge"
-	AppInstanceTypeMlC518xlarge   AppInstanceType = "ml.c5.18xlarge"
-	AppInstanceTypeMlC524xlarge   AppInstanceType = "ml.c5.24xlarge"
-	AppInstanceTypeMlP32xlarge    AppInstanceType = "ml.p3.2xlarge"
-	AppInstanceTypeMlP38xlarge    AppInstanceType = "ml.p3.8xlarge"
-	AppInstanceTypeMlP316xlarge   AppInstanceType = "ml.p3.16xlarge"
-	AppInstanceTypeMlP3dn24xlarge AppInstanceType = "ml.p3dn.24xlarge"
-	AppInstanceTypeMlG4dnXlarge   AppInstanceType = "ml.g4dn.xlarge"
-	AppInstanceTypeMlG4dn2xlarge  AppInstanceType = "ml.g4dn.2xlarge"
-	AppInstanceTypeMlG4dn4xlarge  AppInstanceType = "ml.g4dn.4xlarge"
-	AppInstanceTypeMlG4dn8xlarge  AppInstanceType = "ml.g4dn.8xlarge"
-	AppInstanceTypeMlG4dn12xlarge AppInstanceType = "ml.g4dn.12xlarge"
-	AppInstanceTypeMlG4dn16xlarge AppInstanceType = "ml.g4dn.16xlarge"
-	AppInstanceTypeMlR5Large      AppInstanceType = "ml.r5.large"
-	AppInstanceTypeMlR5Xlarge     AppInstanceType = "ml.r5.xlarge"
-	AppInstanceTypeMlR52xlarge    AppInstanceType = "ml.r5.2xlarge"
-	AppInstanceTypeMlR54xlarge    AppInstanceType = "ml.r5.4xlarge"
-	AppInstanceTypeMlR58xlarge    AppInstanceType = "ml.r5.8xlarge"
-	AppInstanceTypeMlR512xlarge   AppInstanceType = "ml.r5.12xlarge"
-	AppInstanceTypeMlR516xlarge   AppInstanceType = "ml.r5.16xlarge"
-	AppInstanceTypeMlR524xlarge   AppInstanceType = "ml.r5.24xlarge"
-	AppInstanceTypeMlG5Xlarge     AppInstanceType = "ml.g5.xlarge"
-	AppInstanceTypeMlG52xlarge    AppInstanceType = "ml.g5.2xlarge"
-	AppInstanceTypeMlG54xlarge    AppInstanceType = "ml.g5.4xlarge"
-	AppInstanceTypeMlG58xlarge    AppInstanceType = "ml.g5.8xlarge"
-	AppInstanceTypeMlG516xlarge   AppInstanceType = "ml.g5.16xlarge"
-	AppInstanceTypeMlG512xlarge   AppInstanceType = "ml.g5.12xlarge"
-	AppInstanceTypeMlG524xlarge   AppInstanceType = "ml.g5.24xlarge"
-	AppInstanceTypeMlG548xlarge   AppInstanceType = "ml.g5.48xlarge"
+	AppInstanceTypeSystem                  AppInstanceType = "system"
+	AppInstanceTypeMlT3Micro               AppInstanceType = "ml.t3.micro"
+	AppInstanceTypeMlT3Small               AppInstanceType = "ml.t3.small"
+	AppInstanceTypeMlT3Medium              AppInstanceType = "ml.t3.medium"
+	AppInstanceTypeMlT3Large               AppInstanceType = "ml.t3.large"
+	AppInstanceTypeMlT3Xlarge              AppInstanceType = "ml.t3.xlarge"
+	AppInstanceTypeMlT32xlarge             AppInstanceType = "ml.t3.2xlarge"
+	AppInstanceTypeMlM5Large               AppInstanceType = "ml.m5.large"
+	AppInstanceTypeMlM5Xlarge              AppInstanceType = "ml.m5.xlarge"
+	AppInstanceTypeMlM52xlarge             AppInstanceType = "ml.m5.2xlarge"
+	AppInstanceTypeMlM54xlarge             AppInstanceType = "ml.m5.4xlarge"
+	AppInstanceTypeMlM58xlarge             AppInstanceType = "ml.m5.8xlarge"
+	AppInstanceTypeMlM512xlarge            AppInstanceType = "ml.m5.12xlarge"
+	AppInstanceTypeMlM516xlarge            AppInstanceType = "ml.m5.16xlarge"
+	AppInstanceTypeMlM524xlarge            AppInstanceType = "ml.m5.24xlarge"
+	AppInstanceTypeMlM5dLarge              AppInstanceType = "ml.m5d.large"
+	AppInstanceTypeMlM5dXlarge             AppInstanceType = "ml.m5d.xlarge"
+	AppInstanceTypeMlM5d2xlarge            AppInstanceType = "ml.m5d.2xlarge"
+	AppInstanceTypeMlM5d4xlarge            AppInstanceType = "ml.m5d.4xlarge"
+	AppInstanceTypeMlM5d8xlarge            AppInstanceType = "ml.m5d.8xlarge"
+	AppInstanceTypeMlM5d12xlarge           AppInstanceType = "ml.m5d.12xlarge"
+	AppInstanceTypeMlM5d16xlarge           AppInstanceType = "ml.m5d.16xlarge"
+	AppInstanceTypeMlM5d24xlarge           AppInstanceType = "ml.m5d.24xlarge"
+	AppInstanceTypeMlC5Large               AppInstanceType = "ml.c5.large"
+	AppInstanceTypeMlC5Xlarge              AppInstanceType = "ml.c5.xlarge"
+	AppInstanceTypeMlC52xlarge             AppInstanceType = "ml.c5.2xlarge"
+	AppInstanceTypeMlC54xlarge             AppInstanceType = "ml.c5.4xlarge"
+	AppInstanceTypeMlC59xlarge             AppInstanceType = "ml.c5.9xlarge"
+	AppInstanceTypeMlC512xlarge            AppInstanceType = "ml.c5.12xlarge"
+	AppInstanceTypeMlC518xlarge            AppInstanceType = "ml.c5.18xlarge"
+	AppInstanceTypeMlC524xlarge            AppInstanceType = "ml.c5.24xlarge"
+	AppInstanceTypeMlP32xlarge             AppInstanceType = "ml.p3.2xlarge"
+	AppInstanceTypeMlP38xlarge             AppInstanceType = "ml.p3.8xlarge"
+	AppInstanceTypeMlP316xlarge            AppInstanceType = "ml.p3.16xlarge"
+	AppInstanceTypeMlP3dn24xlarge          AppInstanceType = "ml.p3dn.24xlarge"
+	AppInstanceTypeMlG4dnXlarge            AppInstanceType = "ml.g4dn.xlarge"
+	AppInstanceTypeMlG4dn2xlarge           AppInstanceType = "ml.g4dn.2xlarge"
+	AppInstanceTypeMlG4dn4xlarge           AppInstanceType = "ml.g4dn.4xlarge"
+	AppInstanceTypeMlG4dn8xlarge           AppInstanceType = "ml.g4dn.8xlarge"
+	AppInstanceTypeMlG4dn12xlarge          AppInstanceType = "ml.g4dn.12xlarge"
+	AppInstanceTypeMlG4dn16xlarge          AppInstanceType = "ml.g4dn.16xlarge"
+	AppInstanceTypeMlR5Large               AppInstanceType = "ml.r5.large"
+	AppInstanceTypeMlR5Xlarge              AppInstanceType = "ml.r5.xlarge"
+	AppInstanceTypeMlR52xlarge             AppInstanceType = "ml.r5.2xlarge"
+	AppInstanceTypeMlR54xlarge             AppInstanceType = "ml.r5.4xlarge"
+	AppInstanceTypeMlR58xlarge             AppInstanceType = "ml.r5.8xlarge"
+	AppInstanceTypeMlR512xlarge            AppInstanceType = "ml.r5.12xlarge"
+	AppInstanceTypeMlR516xlarge            AppInstanceType = "ml.r5.16xlarge"
+	AppInstanceTypeMlR524xlarge            AppInstanceType = "ml.r5.24xlarge"
+	AppInstanceTypeMlG5Xlarge              AppInstanceType = "ml.g5.xlarge"
+	AppInstanceTypeMlG52xlarge             AppInstanceType = "ml.g5.2xlarge"
+	AppInstanceTypeMlG54xlarge             AppInstanceType = "ml.g5.4xlarge"
+	AppInstanceTypeMlG58xlarge             AppInstanceType = "ml.g5.8xlarge"
+	AppInstanceTypeMlG516xlarge            AppInstanceType = "ml.g5.16xlarge"
+	AppInstanceTypeMlG512xlarge            AppInstanceType = "ml.g5.12xlarge"
+	AppInstanceTypeMlG524xlarge            AppInstanceType = "ml.g5.24xlarge"
+	AppInstanceTypeMlG548xlarge            AppInstanceType = "ml.g5.48xlarge"
+	AppInstanceTypeMlGeospatialInteractive AppInstanceType = "ml.geospatial.interactive"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -215,6 +216,7 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.g5.12xlarge",
 		"ml.g5.24xlarge",
 		"ml.g5.48xlarge",
+		"ml.geospatial.interactive",
 	}
 }
 
@@ -442,6 +444,38 @@ func (AuthMode) Values() []AuthMode {
 	}
 }
 
+type AutoMLAlgorithm string
+
+// Enum values for AutoMLAlgorithm
+const (
+	AutoMLAlgorithmXgboost       AutoMLAlgorithm = "xgboost"
+	AutoMLAlgorithmLinearLearner AutoMLAlgorithm = "linear-learner"
+	AutoMLAlgorithmMlp           AutoMLAlgorithm = "mlp"
+	AutoMLAlgorithmLightgbm      AutoMLAlgorithm = "lightgbm"
+	AutoMLAlgorithmCatboost      AutoMLAlgorithm = "catboost"
+	AutoMLAlgorithmRandomforest  AutoMLAlgorithm = "randomforest"
+	AutoMLAlgorithmExtraTrees    AutoMLAlgorithm = "extra-trees"
+	AutoMLAlgorithmNnTorch       AutoMLAlgorithm = "nn-torch"
+	AutoMLAlgorithmFastai        AutoMLAlgorithm = "fastai"
+)
+
+// Values returns all known values for AutoMLAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMLAlgorithm) Values() []AutoMLAlgorithm {
+	return []AutoMLAlgorithm{
+		"xgboost",
+		"linear-learner",
+		"mlp",
+		"lightgbm",
+		"catboost",
+		"randomforest",
+		"extra-trees",
+		"nn-torch",
+		"fastai",
+	}
+}
+
 type AutoMLChannelType string
 
 // Enum values for AutoMLChannelType
@@ -499,6 +533,7 @@ const (
 	AutoMLJobSecondaryStatusModelDeploymentError           AutoMLJobSecondaryStatus = "ModelDeploymentError"
 	AutoMLJobSecondaryStatusGeneratingModelInsightsReport  AutoMLJobSecondaryStatus = "GeneratingModelInsightsReport"
 	AutoMLJobSecondaryStatusModelInsightsError             AutoMLJobSecondaryStatus = "ModelInsightsError"
+	AutoMLJobSecondaryStatusTrainingModels                 AutoMLJobSecondaryStatus = "TrainingModels"
 )
 
 // Values returns all known values for AutoMLJobSecondaryStatus. Note that this can
@@ -523,6 +558,7 @@ func (AutoMLJobSecondaryStatus) Values() []AutoMLJobSecondaryStatus {
 		"ModelDeploymentError",
 		"GeneratingModelInsightsReport",
 		"ModelInsightsError",
+		"TrainingModels",
 	}
 }
 
@@ -654,12 +690,31 @@ func (AutoMLMode) Values() []AutoMLMode {
 	}
 }
 
+type AutoMLProcessingUnit string
+
+// Enum values for AutoMLProcessingUnit
+const (
+	AutoMLProcessingUnitCpu AutoMLProcessingUnit = "CPU"
+	AutoMLProcessingUnitGpu AutoMLProcessingUnit = "GPU"
+)
+
+// Values returns all known values for AutoMLProcessingUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMLProcessingUnit) Values() []AutoMLProcessingUnit {
+	return []AutoMLProcessingUnit{
+		"CPU",
+		"GPU",
+	}
+}
+
 type AutoMLS3DataType string
 
 // Enum values for AutoMLS3DataType
 const (
-	AutoMLS3DataTypeManifestFile AutoMLS3DataType = "ManifestFile"
-	AutoMLS3DataTypeS3Prefix     AutoMLS3DataType = "S3Prefix"
+	AutoMLS3DataTypeManifestFile          AutoMLS3DataType = "ManifestFile"
+	AutoMLS3DataTypeS3Prefix              AutoMLS3DataType = "S3Prefix"
+	AutoMLS3DataTypeAugmentedManifestFile AutoMLS3DataType = "AugmentedManifestFile"
 )
 
 // Values returns all known values for AutoMLS3DataType. Note that this can be
@@ -669,6 +724,7 @@ func (AutoMLS3DataType) Values() []AutoMLS3DataType {
 	return []AutoMLS3DataType{
 		"ManifestFile",
 		"S3Prefix",
+		"AugmentedManifestFile",
 	}
 }
 
@@ -1118,6 +1174,24 @@ func (CompilationJobStatus) Values() []CompilationJobStatus {
 		"STARTING",
 		"STOPPING",
 		"STOPPED",
+	}
+}
+
+type CompleteOnConvergence string
+
+// Enum values for CompleteOnConvergence
+const (
+	CompleteOnConvergenceDisabled CompleteOnConvergence = "Disabled"
+	CompleteOnConvergenceEnabled  CompleteOnConvergence = "Enabled"
+)
+
+// Values returns all known values for CompleteOnConvergence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CompleteOnConvergence) Values() []CompleteOnConvergence {
+	return []CompleteOnConvergence{
+		"Disabled",
+		"Enabled",
 	}
 }
 
@@ -5424,6 +5498,24 @@ func (TrainingJobStatus) Values() []TrainingJobStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type TrainingRepositoryAccessMode string
+
+// Enum values for TrainingRepositoryAccessMode
+const (
+	TrainingRepositoryAccessModePlatform TrainingRepositoryAccessMode = "Platform"
+	TrainingRepositoryAccessModeVpc      TrainingRepositoryAccessMode = "Vpc"
+)
+
+// Values returns all known values for TrainingRepositoryAccessMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingRepositoryAccessMode) Values() []TrainingRepositoryAccessMode {
+	return []TrainingRepositoryAccessMode{
+		"Platform",
+		"Vpc",
 	}
 }
 

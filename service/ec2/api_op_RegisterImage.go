@@ -109,9 +109,11 @@ type RegisterImageInput struct {
 	// in the Amazon EC2 User Guide.
 	BlockDeviceMappings []types.BlockDeviceMapping
 
-	// The boot mode of the AMI. For more information, see Boot modes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
-	// Amazon EC2 User Guide.
+	// The boot mode of the AMI. A value of uefi-preferred indicates that the AMI
+	// supports both UEFI and Legacy BIOS. The operating system contained in the AMI
+	// must be configured to support the specified boot mode. For more information, see
+	// Boot modes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html)
+	// in the Amazon EC2 User Guide.
 	BootMode types.BootModeValues
 
 	// A description for your AMI.

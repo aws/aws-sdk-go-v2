@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the Amazon Chime SDK Voice Connectors in the administrators AWS account.
 func (c *Client) ListVoiceConnectors(ctx context.Context, params *ListVoiceConnectorsInput, optFns ...func(*Options)) (*ListVoiceConnectorsOutput, error) {
 	if params == nil {
 		params = &ListVoiceConnectorsInput{}
@@ -28,16 +29,22 @@ func (c *Client) ListVoiceConnectors(ctx context.Context, params *ListVoiceConne
 }
 
 type ListVoiceConnectorsInput struct {
+
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
+	// The token used to return the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
 type ListVoiceConnectorsOutput struct {
+
+	// The token used to return the next page of results.
 	NextToken *string
 
+	// The details of the Voice Connectors.
 	VoiceConnectors []types.VoiceConnector
 
 	// Metadata pertaining to the operation's result.
@@ -117,6 +124,7 @@ var _ ListVoiceConnectorsAPIClient = (*Client)(nil)
 // ListVoiceConnectorsPaginatorOptions is the paginator options for
 // ListVoiceConnectors
 type ListVoiceConnectorsPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

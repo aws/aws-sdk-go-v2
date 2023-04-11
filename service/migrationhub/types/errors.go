@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *DryRunOperation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DryRunOperation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DryRunOperation"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *HomeRegionNotSetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HomeRegionNotSetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "HomeRegionNotSetException"
 	}
 	return *e.ErrorCodeOverride
@@ -106,7 +106,7 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerError"
 	}
 	return *e.ErrorCodeOverride
@@ -133,7 +133,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -161,7 +161,7 @@ func (e *PolicyErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -190,7 +190,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -217,7 +217,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -245,7 +245,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -272,7 +272,7 @@ func (e *UnauthorizedOperation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedOperation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnauthorizedOperation"
 	}
 	return *e.ErrorCodeOverride

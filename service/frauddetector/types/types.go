@@ -71,6 +71,32 @@ type AggregatedVariablesImportanceMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// The metadata of a list.
+type AllowDenyList struct {
+
+	// The name of the list.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the list.
+	Arn *string
+
+	// The time the list was created.
+	CreatedTime *string
+
+	// The description of the list.
+	Description *string
+
+	// The time the list was last updated.
+	UpdatedTime *string
+
+	// The variable type of the list.
+	VariableType *string
+
+	noSmithyDocumentSerde
+}
+
 // The Account Takeover Insights (ATI) model performance metrics data points.
 type ATIMetricDataPoint struct {
 
@@ -731,6 +757,25 @@ type LabelSchema struct {
 	LabelMapper map[string][]string
 
 	// The action to take for unlabeled events.
+	//
+	// * Use IGNORE if you want the unlabeled
+	// events to be ignored. This is recommended when the majority of the events in the
+	// dataset are labeled.
+	//
+	// * Use FRAUD if you want to categorize all unlabeled events
+	// as “Fraud”. This is recommended when most of the events in your dataset are
+	// fraudulent.
+	//
+	// * Use LEGIT f you want to categorize all unlabeled events as
+	// “Legit”. This is recommended when most of the events in your dataset are
+	// legitimate.
+	//
+	// * Use AUTO if you want Amazon Fraud Detector to decide how to use
+	// the unlabeled data. This is recommended when there is significant unlabeled
+	// events in the dataset.
+	//
+	// By default, Amazon Fraud Detector ignores the unlabeled
+	// data.
 	UnlabeledEventsTreatment UnlabeledEventsTreatment
 
 	noSmithyDocumentSerde
@@ -999,6 +1044,10 @@ type OFIModelPerformance struct {
 	// and false positive rate (FPR) across all possible model score thresholds.
 	Auc *float32
 
+	// Indicates the range of area under curve (auc) expected from the OFI model. A
+	// range greater than 0.1 indicates higher model uncertainity.
+	UncertaintyRange *UncertaintyRange
+
 	noSmithyDocumentSerde
 }
 
@@ -1184,6 +1233,10 @@ type TFIModelPerformance struct {
 	// and false positive rate (FPR) across all possible model score thresholds.
 	Auc *float32
 
+	// Indicates the range of area under curve (auc) expected from the TFI model. A
+	// range greater than 0.1 indicates higher model uncertainity.
+	UncertaintyRange *UncertaintyRange
+
 	noSmithyDocumentSerde
 }
 
@@ -1276,6 +1329,24 @@ type TrainingResultV2 struct {
 
 	// The variable importance metrics details.
 	VariableImportanceMetrics *VariableImportanceMetrics
+
+	noSmithyDocumentSerde
+}
+
+// Range of area under curve (auc) expected from the model. A range greater than
+// 0.1 indicates higher model uncertainity. A range is the difference between upper
+// and lower bound of auc.
+type UncertaintyRange struct {
+
+	// The lower bound value of the area under curve (auc).
+	//
+	// This member is required.
+	LowerBoundValue *float32
+
+	// The lower bound value of the area under curve (auc).
+	//
+	// This member is required.
+	UpperBoundValue *float32
 
 	noSmithyDocumentSerde
 }

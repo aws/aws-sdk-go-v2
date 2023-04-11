@@ -20,15 +20,14 @@ import (
 // includes the Name parameter. Before calling this API action, we recommend that
 // you call the DescribeAssociation API operation and make a note of all optional
 // parameters required for your UpdateAssociation call. In order to call this API
-// operation, your Identity and Access Management (IAM) user account, group, or
-// role must be configured with permission to call the DescribeAssociation API
-// operation. If you don't have permission to call DescribeAssociation, then you
-// receive the following error: An error occurred (AccessDeniedException) when
-// calling the UpdateAssociation operation: User: isn't authorized to perform:
-// ssm:DescribeAssociation on resource:  When you update an association, the
-// association immediately runs against the specified targets. You can add the
-// ApplyOnlyAtCronInterval parameter to run the association during the next
-// schedule run.
+// operation, a user, group, or role must be granted permission to call the
+// DescribeAssociation API operation. If you don't have permission to call
+// DescribeAssociation, then you receive the following error: An error occurred
+// (AccessDeniedException) when calling the UpdateAssociation operation: User:
+// isn't authorized to perform: ssm:DescribeAssociation on resource:  When you
+// update an association, the association immediately runs against the specified
+// targets. You can add the ApplyOnlyAtCronInterval parameter to run the
+// association during the next schedule run.
 func (c *Client) UpdateAssociation(ctx context.Context, params *UpdateAssociationInput, optFns ...func(*Options)) (*UpdateAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateAssociationInput{}

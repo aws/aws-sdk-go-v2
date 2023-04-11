@@ -1,3 +1,33 @@
+# v1.23.4 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.3 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.2 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.23.1 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.0 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Feature**: This release introduces Lists feature which allows customers to reference a set of values in Fraud Detector's rules. With Lists, customers can dynamically manage these attributes in real time. Lists can be created/deleted and its contents can be modified using the Fraud Detector API.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.22.0 (2023-02-06)
+
+* **Feature**: My AWS Service (Amazon Fraud Detector) - This release introduces Cold Start Model Training which optimizes training for small datasets and adds intelligent methods for treating unlabeled data. You can now train Online Fraud Insights or Transaction Fraud Insights models with minimal historical-data.
+
+# v1.21.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

@@ -1189,6 +1189,31 @@ func validateAndStatement(v *types.AndStatement) error {
 	}
 }
 
+func validateAWSManagedRulesATPRuleSet(v *types.AWSManagedRulesATPRuleSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AWSManagedRulesATPRuleSet"}
+	if v.LoginPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoginPath"))
+	}
+	if v.RequestInspection != nil {
+		if err := validateRequestInspection(v.RequestInspection); err != nil {
+			invalidParams.AddNested("RequestInspection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResponseInspection != nil {
+		if err := validateResponseInspection(v.ResponseInspection); err != nil {
+			invalidParams.AddNested("ResponseInspection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAWSManagedRulesBotControlRuleSet(v *types.AWSManagedRulesBotControlRuleSet) error {
 	if v == nil {
 		return nil
@@ -1906,6 +1931,11 @@ func validateManagedRuleGroupConfig(v *types.ManagedRuleGroupConfig) error {
 			invalidParams.AddNested("AWSManagedRulesBotControlRuleSet", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AWSManagedRulesATPRuleSet != nil {
+		if err := validateAWSManagedRulesATPRuleSet(v.AWSManagedRulesATPRuleSet); err != nil {
+			invalidParams.AddNested("AWSManagedRulesATPRuleSet", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2130,6 +2160,145 @@ func validateRegexPatternSetReferenceStatement(v *types.RegexPatternSetReference
 		if err := validateTextTransformations(v.TextTransformations); err != nil {
 			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestInspection(v *types.RequestInspection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestInspection"}
+	if len(v.PayloadType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PayloadType"))
+	}
+	if v.UsernameField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UsernameField"))
+	} else if v.UsernameField != nil {
+		if err := validateUsernameField(v.UsernameField); err != nil {
+			invalidParams.AddNested("UsernameField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PasswordField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PasswordField"))
+	} else if v.PasswordField != nil {
+		if err := validatePasswordField(v.PasswordField); err != nil {
+			invalidParams.AddNested("PasswordField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseInspection(v *types.ResponseInspection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseInspection"}
+	if v.StatusCode != nil {
+		if err := validateResponseInspectionStatusCode(v.StatusCode); err != nil {
+			invalidParams.AddNested("StatusCode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Header != nil {
+		if err := validateResponseInspectionHeader(v.Header); err != nil {
+			invalidParams.AddNested("Header", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BodyContains != nil {
+		if err := validateResponseInspectionBodyContains(v.BodyContains); err != nil {
+			invalidParams.AddNested("BodyContains", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Json != nil {
+		if err := validateResponseInspectionJson(v.Json); err != nil {
+			invalidParams.AddNested("Json", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseInspectionBodyContains(v *types.ResponseInspectionBodyContains) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseInspectionBodyContains"}
+	if v.SuccessStrings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuccessStrings"))
+	}
+	if v.FailureStrings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FailureStrings"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseInspectionHeader(v *types.ResponseInspectionHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseInspectionHeader"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SuccessValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuccessValues"))
+	}
+	if v.FailureValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FailureValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseInspectionJson(v *types.ResponseInspectionJson) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseInspectionJson"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.SuccessValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuccessValues"))
+	}
+	if v.FailureValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FailureValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseInspectionStatusCode(v *types.ResponseInspectionStatusCode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseInspectionStatusCode"}
+	if v.SuccessCodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuccessCodes"))
+	}
+	if v.FailureCodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FailureCodes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -406,6 +406,24 @@ func (ResourceImportStatusType) Values() []ResourceImportStatusType {
 	}
 }
 
+type ResourceImportStrategyType string
+
+// Enum values for ResourceImportStrategyType
+const (
+	ResourceImportStrategyTypeAddOnly    ResourceImportStrategyType = "AddOnly"
+	ResourceImportStrategyTypeReplaceAll ResourceImportStrategyType = "ReplaceAll"
+)
+
+// Values returns all known values for ResourceImportStrategyType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceImportStrategyType) Values() []ResourceImportStrategyType {
+	return []ResourceImportStrategyType{
+		"AddOnly",
+		"ReplaceAll",
+	}
+}
+
 type ResourceMappingType string
 
 // Enum values for ResourceMappingType
@@ -415,6 +433,7 @@ const (
 	ResourceMappingTypeAppRegistryApp ResourceMappingType = "AppRegistryApp"
 	ResourceMappingTypeResourceGroup  ResourceMappingType = "ResourceGroup"
 	ResourceMappingTypeTerraform      ResourceMappingType = "Terraform"
+	ResourceMappingTypeEks            ResourceMappingType = "EKS"
 )
 
 // Values returns all known values for ResourceMappingType. Note that this can be
@@ -427,6 +446,7 @@ func (ResourceMappingType) Values() []ResourceMappingType {
 		"AppRegistryApp",
 		"ResourceGroup",
 		"Terraform",
+		"EKS",
 	}
 }
 

@@ -88,17 +88,17 @@ type AutoScalingGroupProvider struct {
 
 	// The managed termination protection setting to use for the Auto Scaling group
 	// capacity provider. This determines whether the Auto Scaling group has managed
-	// termination protection. The default is disabled. When using managed termination
+	// termination protection. The default is off. When using managed termination
 	// protection, managed scaling must also be used otherwise managed termination
-	// protection doesn't work. When managed termination protection is enabled, Amazon
-	// ECS prevents the Amazon EC2 instances in an Auto Scaling group that contain
-	// tasks from being terminated during a scale-in action. The Auto Scaling group and
-	// each instance in the Auto Scaling group must have instance protection from
-	// scale-in actions enabled as well. For more information, see Instance Protection
+	// protection doesn't work. When managed termination protection is on, Amazon ECS
+	// prevents the Amazon EC2 instances in an Auto Scaling group that contain tasks
+	// from being terminated during a scale-in action. The Auto Scaling group and each
+	// instance in the Auto Scaling group must have instance protection from scale-in
+	// actions enabled as well. For more information, see Instance Protection
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
-	// in the Auto Scaling User Guide. When managed termination protection is disabled,
-	// your Amazon EC2 instances aren't protected from termination when the Auto
-	// Scaling group scales in.
+	// in the Auto Scaling User Guide. When managed termination protection is off, your
+	// Amazon EC2 instances aren't protected from termination when the Auto Scaling
+	// group scales in.
 	ManagedTerminationProtection ManagedTerminationProtection
 
 	noSmithyDocumentSerde
@@ -114,15 +114,15 @@ type AutoScalingGroupProviderUpdate struct {
 	// capacity provider. This determines whether the Auto Scaling group has managed
 	// termination protection. When using managed termination protection, managed
 	// scaling must also be used otherwise managed termination protection doesn't work.
-	// When managed termination protection is enabled, Amazon ECS prevents the Amazon
-	// EC2 instances in an Auto Scaling group that contain tasks from being terminated
+	// When managed termination protection is on, Amazon ECS prevents the Amazon EC2
+	// instances in an Auto Scaling group that contain tasks from being terminated
 	// during a scale-in action. The Auto Scaling group and each instance in the Auto
-	// Scaling group must have instance protection from scale-in actions enabled. For
-	// more information, see Instance Protection
+	// Scaling group must have instance protection from scale-in actions on. For more
+	// information, see Instance Protection
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
-	// in the Auto Scaling User Guide. When managed termination protection is disabled,
-	// your Amazon EC2 instances aren't protected from termination when the Auto
-	// Scaling group scales in.
+	// in the Auto Scaling User Guide. When managed termination protection is off, your
+	// Amazon EC2 instances aren't protected from termination when the Auto Scaling
+	// group scales in.
 	ManagedTerminationProtection ManagedTerminationProtection
 
 	noSmithyDocumentSerde
@@ -327,7 +327,7 @@ type Cluster struct {
 	ServiceConnectDefaults *ClusterServiceConnectDefaults
 
 	// The settings for the cluster. This parameter indicates whether CloudWatch
-	// Container Insights is enabled or disabled for a cluster.
+	// Container Insights is on or off for a cluster.
 	Settings []ClusterSetting
 
 	// Additional information about your clusters that are separated by launch type.
@@ -481,10 +481,12 @@ type ClusterSetting struct {
 
 	// The value to set for the cluster setting. The supported values are enabled and
 	// disabled. If enabled is specified, CloudWatch Container Insights will be enabled
-	// for the cluster, otherwise it will be disabled unless the containerInsights
-	// account setting is enabled. If a cluster value is specified, it will override
-	// the containerInsights value set with PutAccountSetting or
-	// PutAccountSettingDefault.
+	// for the cluster, otherwise it will be off unless the containerInsights account
+	// setting is turned on. If a cluster value is specified, it will override the
+	// containerInsights value set with PutAccountSetting
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html)
+	// or PutAccountSettingDefault
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html).
 	Value *string
 
 	noSmithyDocumentSerde
@@ -637,7 +639,7 @@ type ContainerDefinition struct {
 	// later.
 	DependsOn []ContainerDependency
 
-	// When this parameter is true, networking is disabled within the container. This
+	// When this parameter is true, networking is off within the container. This
 	// parameter maps to NetworkDisabled in the Create a container
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/). This
@@ -1103,12 +1105,12 @@ type ContainerDefinition struct {
 	// Fargate use the default resource limit values set by the operating system with
 	// the exception of the nofile resource limit parameter which Fargate overrides.
 	// The nofile resource limit sets a restriction on the number of open files that a
-	// container can use. The default nofile soft limit is 1024 and hard limit is 4096.
-	// This parameter requires version 1.18 of the Docker Remote API or greater on your
-	// container instance. To check the Docker Remote API version on your container
-	// instance, log in to your container instance and run the following command: sudo
-	// docker version --format '{{.Server.APIVersion}}' This parameter is not supported
-	// for Windows containers.
+	// container can use. The default nofile soft limit is 1024 and the default hard
+	// limit is 4096. This parameter requires version 1.18 of the Docker Remote API or
+	// greater on your container instance. To check the Docker Remote API version on
+	// your container instance, log in to your container instance and run the following
+	// command: sudo docker version --format '{{.Server.APIVersion}}' This parameter is
+	// not supported for Windows containers.
 	Ulimits []Ulimit
 
 	// The user to use inside the container. This parameter maps to User in the Create
@@ -1569,12 +1571,12 @@ type DeploymentAlarms struct {
 }
 
 // The deployment circuit breaker can only be used for services using the rolling
-// update (ECS) deployment type that aren't behind a Classic Load Balancer. The
-// deployment circuit breaker determines whether a service deployment will fail if
-// the service can't reach a steady state. If enabled, a service deployment will
-// transition to a failed state and stop launching new tasks. You can also
-// configure Amazon ECS to roll back your service to the last completed deployment
-// after a failure. For more information, see Rolling update
+// update (ECS) deployment type. The deployment circuit breaker determines whether
+// a service deployment will fail if the service can't reach a steady state. If
+// enabled, a service deployment will transition to a failed state and stop
+// launching new tasks. You can also configure Amazon ECS to roll back your service
+// to the last completed deployment after a failure. For more information, see
+// Rolling update
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type DeploymentCircuitBreaker struct {
@@ -1603,11 +1605,13 @@ type DeploymentConfiguration struct {
 
 	// The deployment circuit breaker can only be used for services using the rolling
 	// update (ECS) deployment type. The deployment circuit breaker determines whether
-	// a service deployment will fail if the service can't reach a steady state. If
-	// deployment circuit breaker is enabled, a service deployment will transition to a
-	// failed state and stop launching new tasks. If rollback is enabled, when a
-	// service deployment fails, the service is rolled back to the last deployment that
-	// completed successfully.
+	// a service deployment will fail if the service can't reach a steady state. If you
+	// use the deployment circuit breaker, a service deployment will transition to a
+	// failed state and stop launching new tasks. If you use the rollback option, when
+	// a service deployment fails, the service is rolled back to the last deployment
+	// that completed successfully. For more information, see Rolling update
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
+	// in the Amazon Elastic Container Service Developer Guide
 	DeploymentCircuitBreaker *DeploymentCircuitBreaker
 
 	// If a service is using the rolling update (ECS) deployment type, the
@@ -1785,11 +1789,11 @@ type EFSAuthorizationConfig struct {
 	// Amazon Elastic File System User Guide.
 	AccessPointId *string
 
-	// Determines whether to use the Amazon ECS task IAM role defined in a task
-	// definition when mounting the Amazon EFS file system. If enabled, transit
-	// encryption must be enabled in the EFSVolumeConfiguration. If this parameter is
-	// omitted, the default value of DISABLED is used. For more information, see Using
-	// Amazon EFS access points
+	// Determines whether to use the Amazon ECS task role defined in a task definition
+	// when mounting the Amazon EFS file system. If enabled, transit encryption must be
+	// enabled in the EFSVolumeConfiguration. If this parameter is omitted, the default
+	// value of DISABLED is used. For more information, see Using Amazon EFS access
+	// points
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Iam EFSAuthorizationConfigIAM
@@ -1929,7 +1933,7 @@ type ExecuteCommandConfiguration struct {
 type ExecuteCommandLogConfiguration struct {
 
 	// Determines whether to use encryption on the CloudWatch logs. If not specified,
-	// encryption will be disabled.
+	// encryption will be off.
 	CloudWatchEncryptionEnabled bool
 
 	// The name of the CloudWatch log group to send logs to. The CloudWatch log group
@@ -2116,12 +2120,12 @@ type HealthCheck struct {
 	// it is healthy. The string array must start with CMD to run the command arguments
 	// directly, or CMD-SHELL to run the command with the container's default shell.
 	// When you use the Amazon Web Services Management Console JSON panel, the Command
-	// Line Interface, or the APIs, enclose the list of commands in brackets. [
-	// "CMD-SHELL", "curl -f http://localhost/ || exit 1" ] You don't need to include
-	// the brackets when you use the Amazon Web Services Management Console.
-	// "CMD-SHELL", "curl -f http://localhost/ || exit 1"  An exit code of 0 indicates
-	// success, and non-zero exit code indicates failure. For more information, see
-	// HealthCheck in the Create a container
+	// Line Interface, or the APIs, enclose the list of commands in double quotes and
+	// brackets. [ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ] You don't
+	// include the double quotes and brackets when you use the Amazon Web Services
+	// Management Console.  CMD-SHELL, curl -f http://localhost/ || exit 1 An exit code
+	// of 0 indicates success, and non-zero exit code indicates failure. For more
+	// information, see HealthCheck in the Create a container
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/).
 	//
@@ -2139,9 +2143,9 @@ type HealthCheck struct {
 
 	// The optional grace period to provide containers time to bootstrap before failed
 	// health checks count towards the maximum number of retries. You can specify
-	// between 0 and 300 seconds. By default, the startPeriod is disabled. If a health
-	// check succeeds within the startPeriod, then the container is considered healthy
-	// and any subsequent failures count toward the maximum number of retries.
+	// between 0 and 300 seconds. By default, the startPeriod is off. If a health check
+	// succeeds within the startPeriod, then the container is considered healthy and
+	// any subsequent failures count toward the maximum number of retries.
 	StartPeriod *int32
 
 	// The time period in seconds to wait for a health check to succeed before it is
@@ -2550,7 +2554,7 @@ type ManagedAgentStateChange struct {
 // see Using managed scaling
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling)
 // in the Amazon Elastic Container Service Developer Guide. If managed scaling is
-// disabled, the user must manage the scaling of the Auto Scaling group.
+// off, the user must manage the scaling of the Auto Scaling group.
 type ManagedScaling struct {
 
 	// The period of time, in seconds, after a newly launched Amazon EC2 instance can
@@ -2685,7 +2689,7 @@ type NetworkBinding struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing the network configuration for a task or service.
+// The network configuration for a task or service.
 type NetworkConfiguration struct {
 
 	// The VPC subnets and security groups that are associated with a task. All
@@ -2935,8 +2939,8 @@ type ProtectedTask struct {
 	// The epoch time when protection for the task will expire.
 	ExpirationDate *time.Time
 
-	// The protection status of the task. If scale-in protection is enabled for a task,
-	// the value is true. Otherwise, it is false.
+	// The protection status of the task. If scale-in protection is on for a task, the
+	// value is true. Otherwise, it is false.
 	ProtectionEnabled bool
 
 	// The task ARN.
@@ -3588,12 +3592,11 @@ type Setting struct {
 	// The Amazon ECS resource name.
 	Name SettingName
 
-	// The ARN of the principal. It can be an IAM user, IAM role, or the root user. If
-	// this field is omitted, the authenticated user is assumed.
+	// The ARN of the principal. It can be a user, role, or the root user. If this
+	// field is omitted, the authenticated user is assumed.
 	PrincipalArn *string
 
-	// Determines whether the account setting is enabled or disabled for the specified
-	// resource.
+	// Determines whether the account setting is on or off for the specified resource.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -4227,8 +4230,8 @@ type TaskOverride struct {
 	// 1.0.0 or later.
 	EphemeralStorage *EphemeralStorage
 
-	// The Amazon Resource Name (ARN) of the task execution IAM role override for the
-	// task. For more information, see Amazon ECS task execution IAM role
+	// The Amazon Resource Name (ARN) of the task execution role override for the task.
+	// For more information, see Amazon ECS task execution IAM role
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string
@@ -4239,7 +4242,7 @@ type TaskOverride struct {
 	// The memory override for the task.
 	Memory *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that containers in this task can
+	// The Amazon Resource Name (ARN) of the role that containers in this task can
 	// assume. All containers in this task are granted the permissions that are
 	// specified in this role. For more information, see IAM Role for Tasks
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
@@ -4432,7 +4435,9 @@ type Tmpfs struct {
 // use the default resource limit values set by the operating system with the
 // exception of the nofile resource limit parameter which Fargate overrides. The
 // nofile resource limit sets a restriction on the number of open files that a
-// container can use. The default nofile soft limit is 1024 and hard limit is 4096.
+// container can use. The default nofile soft limit is 1024 and the default hard
+// limit is 4096. You can specify the ulimit settings for a container in a task
+// definition.
 type Ulimit struct {
 
 	// The hard limit for the ulimit type.

@@ -346,6 +346,9 @@ type DataSource struct {
 	// Amazon OpenSearch Service settings.
 	ElasticsearchConfig *ElasticsearchDataSourceConfig
 
+	// Amazon EventBridge settings.
+	EventBridgeConfig *EventBridgeDataSourceConfig
+
 	// HTTP endpoint settings.
 	HttpConfig *HttpDataSourceConfig
 
@@ -380,15 +383,18 @@ type DataSource struct {
 	// AMAZON_OPENSEARCH_SERVICE: The data source is an Amazon OpenSearch Service
 	// domain.
 	//
-	// * NONE: There is no data source. Use this type when you want to invoke
-	// a GraphQL operation without connecting to a data source, such as when you're
-	// performing data transformation with resolvers or invoking a subscription from a
-	// mutation.
+	// * AMAZON_EVENTBRIDGE: The data source is an Amazon EventBridge
+	// configuration.
+	//
+	// * NONE: There is no data source. Use this type when you want to
+	// invoke a GraphQL operation without connecting to a data source, such as when
+	// you're performing data transformation with resolvers or invoking a subscription
+	// from a mutation.
 	//
 	// * HTTP: The data source is an HTTP endpoint.
 	//
-	// * RELATIONAL_DATABASE:
-	// The data source is a relational database.
+	// *
+	// RELATIONAL_DATABASE: The data source is a relational database.
 	Type DataSourceType
 
 	noSmithyDocumentSerde
@@ -495,6 +501,19 @@ type EvaluateCodeErrorDetail struct {
 
 	// The error payload.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Amazon EventBridge bus data source configuration.
+type EventBridgeDataSourceConfig struct {
+
+	// The ARN of the event bus. For more information about event buses, see Amazon
+	// EventBridge event buses
+	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html).
+	//
+	// This member is required.
+	EventBusArn *string
 
 	noSmithyDocumentSerde
 }

@@ -1,3 +1,28 @@
+# v1.19.7 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.6 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.5 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.19.4 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.3 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
+# v1.19.2 (2023-02-02)
+
+* **Documentation**: The GWLB Flex Health Check project updates the default values of healthy-threshold-count from 3 to 5 and unhealthy-threshold-count from 3 to 2
+
 # v1.19.1 (2023-01-23)
 
 * No change notes available for this release.

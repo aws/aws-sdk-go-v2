@@ -714,6 +714,11 @@ func awsRestjson1_serializeOpHttpBindingsCreateHostedConfigurationVersionInput(v
 		encoder.SetHeader(locationName).Integer(*v.LatestVersionNumber)
 	}
 
+	if v.VersionLabel != nil && len(*v.VersionLabel) > 0 {
+		locationName := "Versionlabel"
+		encoder.SetHeader(locationName).String(*v.VersionLabel)
+	}
+
 	return nil
 }
 
@@ -2290,6 +2295,10 @@ func awsRestjson1_serializeOpHttpBindingsListHostedConfigurationVersionsInput(v 
 		encoder.SetQuery("next_token").String(*v.NextToken)
 	}
 
+	if v.VersionLabel != nil {
+		encoder.SetQuery("version_label").String(*v.VersionLabel)
+	}
+
 	return nil
 }
 
@@ -2451,6 +2460,11 @@ func awsRestjson1_serializeOpDocumentStartDeploymentInput(v *StartDeploymentInpu
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
 	}
 
 	if v.Tags != nil {

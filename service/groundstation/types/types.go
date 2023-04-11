@@ -7,6 +7,51 @@ import (
 	"time"
 )
 
+// Detailed information about the agent.
+type AgentDetails struct {
+
+	// Current agent version.
+	//
+	// This member is required.
+	AgentVersion *string
+
+	// List of versions being used by agent components.
+	//
+	// This member is required.
+	ComponentVersions []ComponentVersion
+
+	// ID of EC2 instance agent is running on.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// Type of EC2 instance agent is running on.
+	//
+	// This member is required.
+	InstanceType *string
+
+	// Number of Cpu cores reserved for agent.
+	//
+	// This member is required.
+	ReservedCpuCores []int32
+
+	noSmithyDocumentSerde
+}
+
+// Aggregate status of Agent components.
+type AggregateStatus struct {
+
+	// Aggregate status.
+	//
+	// This member is required.
+	Status AgentStatus
+
+	// Sparse map of failure signatures.
+	SignatureMap map[string]bool
+
+	noSmithyDocumentSerde
+}
+
 // Details about an antenna demod decode Config used in a contact.
 type AntennaDemodDecodeDetails struct {
 
@@ -65,6 +110,85 @@ type AntennaUplinkConfig struct {
 
 	// Whether or not uplink transmit is disabled.
 	TransmitDisabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Information about AwsGroundStationAgentEndpoint.
+type AwsGroundStationAgentEndpoint struct {
+
+	// The egress address of AgentEndpoint.
+	//
+	// This member is required.
+	EgressAddress *ConnectionDetails
+
+	// The ingress address of AgentEndpoint.
+	//
+	// This member is required.
+	IngressAddress *RangedConnectionDetails
+
+	// Name string associated with AgentEndpoint. Used as a human-readable identifier
+	// for AgentEndpoint.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of AgentEndpoint.
+	AgentStatus AgentStatus
+
+	// The results of the audit.
+	AuditResults AuditResults
+
+	noSmithyDocumentSerde
+}
+
+// Data on the status of agent components.
+type ComponentStatusData struct {
+
+	// Capability ARN of the component.
+	//
+	// This member is required.
+	CapabilityArn *string
+
+	// The Component type.
+	//
+	// This member is required.
+	ComponentType ComponentType
+
+	// Dataflow UUID associated with the component.
+	//
+	// This member is required.
+	DataflowId *string
+
+	// Component status.
+	//
+	// This member is required.
+	Status AgentStatus
+
+	// Bytes received by the component.
+	BytesReceived *int64
+
+	// Bytes sent by the component.
+	BytesSent *int64
+
+	// Packets dropped by component.
+	PacketsDropped *int64
+
+	noSmithyDocumentSerde
+}
+
+// Version information for agent components.
+type ComponentVersion struct {
+
+	// Component type.
+	//
+	// This member is required.
+	ComponentType ComponentType
+
+	// List of versions.
+	//
+	// This member is required.
+	Versions []string
 
 	noSmithyDocumentSerde
 }
@@ -209,6 +333,20 @@ type ConfigTypeDataMemberUplinkEchoConfig struct {
 }
 
 func (*ConfigTypeDataMemberUplinkEchoConfig) isConfigTypeData() {}
+
+// Egress address of AgentEndpoint with an optional mtu.
+type ConnectionDetails struct {
+
+	// A socket address.
+	//
+	// This member is required.
+	SocketAddress *SocketAddress
+
+	// Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+	Mtu *int32
+
+	noSmithyDocumentSerde
+}
 
 // Data describing a contact.
 type ContactData struct {
@@ -357,6 +495,27 @@ type Destination struct {
 	noSmithyDocumentSerde
 }
 
+// Data for agent discovery.
+type DiscoveryData struct {
+
+	// List of capabilities to associate with agent.
+	//
+	// This member is required.
+	CapabilityArns []string
+
+	// List of private IP addresses to associate with agent.
+	//
+	// This member is required.
+	PrivateIpAddresses []string
+
+	// List of public IP addresses to associate with agent.
+	//
+	// This member is required.
+	PublicIpAddresses []string
+
+	noSmithyDocumentSerde
+}
+
 // Object that represents EIRP.
 type Eirp struct {
 
@@ -391,6 +550,9 @@ type Elevation struct {
 
 // Information about the endpoint details.
 type EndpointDetails struct {
+
+	// An agent endpoint.
+	AwsGroundStationAgentEndpoint *AwsGroundStationAgentEndpoint
 
 	// A dataflow endpoint.
 	Endpoint *DataflowEndpoint
@@ -580,6 +742,50 @@ type GroundStationData struct {
 	noSmithyDocumentSerde
 }
 
+// An integer range that has a minimum and maximum value.
+type IntegerRange struct {
+
+	// A maximum value.
+	//
+	// This member is required.
+	Maximum *int32
+
+	// A minimum value.
+	//
+	// This member is required.
+	Minimum *int32
+
+	noSmithyDocumentSerde
+}
+
+// AWS Key Management Service (KMS) Key.
+//
+// The following types satisfy this interface:
+//
+//	KmsKeyMemberKmsAliasArn
+//	KmsKeyMemberKmsKeyArn
+type KmsKey interface {
+	isKmsKey()
+}
+
+// KMS Alias Arn.
+type KmsKeyMemberKmsAliasArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*KmsKeyMemberKmsAliasArn) isKmsKey() {}
+
+// KMS Key Arn.
+type KmsKeyMemberKmsKeyArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*KmsKeyMemberKmsKeyArn) isKmsKey() {}
+
 // Item in a list of mission profiles.
 type MissionProfileListItem struct {
 
@@ -607,6 +813,36 @@ type OEMEphemeris struct {
 
 	// Identifies the S3 object to be used as the ephemeris.
 	S3Object *S3Object
+
+	noSmithyDocumentSerde
+}
+
+// Ingress address of AgentEndpoint with a port range and an optional mtu.
+type RangedConnectionDetails struct {
+
+	// A ranged socket address.
+	//
+	// This member is required.
+	SocketAddress *RangedSocketAddress
+
+	// Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+	Mtu *int32
+
+	noSmithyDocumentSerde
+}
+
+// A socket address with a port range.
+type RangedSocketAddress struct {
+
+	// IPv4 socket address.
+	//
+	// This member is required.
+	Name *string
+
+	// Port range of a socket address.
+	//
+	// This member is required.
+	PortRange *IntegerRange
 
 	noSmithyDocumentSerde
 }
@@ -877,3 +1113,4 @@ func (*UnknownUnionMember) isConfigDetails()            {}
 func (*UnknownUnionMember) isConfigTypeData()           {}
 func (*UnknownUnionMember) isEphemerisData()            {}
 func (*UnknownUnionMember) isEphemerisTypeDescription() {}
+func (*UnknownUnionMember) isKmsKey()                   {}

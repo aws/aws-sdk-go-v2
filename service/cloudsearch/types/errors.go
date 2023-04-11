@@ -28,7 +28,7 @@ func (e *BaseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BaseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BaseException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *DisabledOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DisabledOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DisabledAction"
 	}
 	return *e.ErrorCodeOverride
@@ -86,7 +86,7 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalException"
 	}
 	return *e.ErrorCodeOverride
@@ -114,7 +114,7 @@ func (e *InvalidTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidType"
 	}
 	return *e.ErrorCodeOverride
@@ -142,7 +142,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -171,7 +171,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -200,7 +200,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -228,7 +228,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

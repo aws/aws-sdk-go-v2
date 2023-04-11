@@ -2,6 +2,72 @@
 
 package types
 
+type ActionSeverity string
+
+// Enum values for ActionSeverity
+const (
+	ActionSeverityHigh   ActionSeverity = "HIGH"
+	ActionSeverityMedium ActionSeverity = "MEDIUM"
+	ActionSeverityLow    ActionSeverity = "LOW"
+)
+
+// Values returns all known values for ActionSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActionSeverity) Values() []ActionSeverity {
+	return []ActionSeverity{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
+type ActionStatus string
+
+// Enum values for ActionStatus
+const (
+	ActionStatusPendingUpdate ActionStatus = "PENDING_UPDATE"
+	ActionStatusInProgress    ActionStatus = "IN_PROGRESS"
+	ActionStatusFailed        ActionStatus = "FAILED"
+	ActionStatusCompleted     ActionStatus = "COMPLETED"
+	ActionStatusNotEligible   ActionStatus = "NOT_ELIGIBLE"
+	ActionStatusEligible      ActionStatus = "ELIGIBLE"
+)
+
+// Values returns all known values for ActionStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionStatus) Values() []ActionStatus {
+	return []ActionStatus{
+		"PENDING_UPDATE",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+		"NOT_ELIGIBLE",
+		"ELIGIBLE",
+	}
+}
+
+type ActionType string
+
+// Enum values for ActionType
+const (
+	ActionTypeServiceSoftwareUpdate ActionType = "SERVICE_SOFTWARE_UPDATE"
+	ActionTypeJvmHeapSizeTuning     ActionType = "JVM_HEAP_SIZE_TUNING"
+	ActionTypeJvmYoungGenTuning     ActionType = "JVM_YOUNG_GEN_TUNING"
+)
+
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"SERVICE_SOFTWARE_UPDATE",
+		"JVM_HEAP_SIZE_TUNING",
+		"JVM_YOUNG_GEN_TUNING",
+	}
+}
+
 type AutoTuneDesiredState string
 
 // Enum values for AutoTuneDesiredState
@@ -65,6 +131,24 @@ const (
 func (AutoTuneType) Values() []AutoTuneType {
 	return []AutoTuneType{
 		"SCHEDULED_ACTION",
+	}
+}
+
+type ConnectionMode string
+
+// Enum values for ConnectionMode
+const (
+	ConnectionModeDirect      ConnectionMode = "DIRECT"
+	ConnectionModeVpcEndpoint ConnectionMode = "VPC_ENDPOINT"
+)
+
+// Values returns all known values for ConnectionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionMode) Values() []ConnectionMode {
+	return []ConnectionMode{
+		"DIRECT",
+		"VPC_ENDPOINT",
 	}
 }
 
@@ -629,6 +713,26 @@ func (RollbackOnDisable) Values() []RollbackOnDisable {
 	}
 }
 
+type ScheduleAt string
+
+// Enum values for ScheduleAt
+const (
+	ScheduleAtNow           ScheduleAt = "NOW"
+	ScheduleAtTimestamp     ScheduleAt = "TIMESTAMP"
+	ScheduleAtOffPeakWindow ScheduleAt = "OFF_PEAK_WINDOW"
+)
+
+// Values returns all known values for ScheduleAt. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ScheduleAt) Values() []ScheduleAt {
+	return []ScheduleAt{
+		"NOW",
+		"TIMESTAMP",
+		"OFF_PEAK_WINDOW",
+	}
+}
+
 type ScheduledAutoTuneActionType string
 
 // Enum values for ScheduledAutoTuneActionType
@@ -665,6 +769,24 @@ func (ScheduledAutoTuneSeverityType) Values() []ScheduledAutoTuneSeverityType {
 		"LOW",
 		"MEDIUM",
 		"HIGH",
+	}
+}
+
+type ScheduledBy string
+
+// Enum values for ScheduledBy
+const (
+	ScheduledByCustomer ScheduledBy = "CUSTOMER"
+	ScheduledBySystem   ScheduledBy = "SYSTEM"
+)
+
+// Values returns all known values for ScheduledBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ScheduledBy) Values() []ScheduledBy {
+	return []ScheduledBy{
+		"CUSTOMER",
+		"SYSTEM",
 	}
 }
 

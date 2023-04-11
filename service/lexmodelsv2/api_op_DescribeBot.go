@@ -47,12 +47,18 @@ type DescribeBotOutput struct {
 	// The unique identifier of the bot.
 	BotId *string
 
+	// The list of bots in the network that was described.
+	BotMembers []types.BotMember
+
 	// The name of the bot.
 	BotName *string
 
 	// The current status of the bot. When the status is Available the bot is ready to
 	// be used in conversations with users.
 	BotStatus types.BotStatus
+
+	// The type of the bot that was described.
+	BotType types.BotType
 
 	// A timestamp of the date and time that the bot was created.
 	CreationDateTime *time.Time
@@ -62,6 +68,10 @@ type DescribeBotOutput struct {
 
 	// The description of the bot.
 	Description *string
+
+	// If the botStatus is Failed, this contains a list of reasons that the bot
+	// couldn't be built.
+	FailureReasons []string
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
 	// conversation.

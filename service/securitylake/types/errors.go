@@ -18,6 +18,8 @@ type AccessDeniedException struct {
 
 	ErrorCodeOverride *string
 
+	ErrorCode_ *string
+
 	noSmithyDocumentSerde
 }
 
@@ -31,7 +33,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -59,7 +61,7 @@ func (e *AccountNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -86,7 +88,7 @@ func (e *BucketNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BucketNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BucketNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -112,7 +114,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -144,7 +146,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -170,7 +172,7 @@ func (e *ConflictSourceNamesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictSourceNamesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictSourceNamesException"
 	}
 	return *e.ErrorCodeOverride
@@ -196,7 +198,7 @@ func (e *ConflictSubscriptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictSubscriptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictSubscriptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -222,7 +224,7 @@ func (e *EventBridgeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventBridgeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EventBridgeException"
 	}
 	return *e.ErrorCodeOverride
@@ -251,7 +253,7 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerException"
 	}
 	return *e.ErrorCodeOverride
@@ -278,7 +280,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInputException"
 	}
 	return *e.ErrorCodeOverride
@@ -307,7 +309,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -337,7 +339,7 @@ func (e *S3Exception) ErrorMessage() string {
 	return *e.Message
 }
 func (e *S3Exception) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "S3Exception"
 	}
 	return *e.ErrorCodeOverride
@@ -370,7 +372,7 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceQuotaExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -400,7 +402,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -429,7 +431,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

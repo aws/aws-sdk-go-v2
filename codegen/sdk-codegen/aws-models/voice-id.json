@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.voiceid#AccessDeniedException": {
             "type": "structure",
@@ -28,6 +28,75 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:voiceid.+:[0-9]{12}:domain/[a-zA-Z0-9]{22}$"
+            }
+        },
+        "com.amazonaws.voiceid#AssociateFraudster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.voiceid#AssociateFraudsterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.voiceid#AssociateFraudsterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.voiceid#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the fraudsters with the watchlist specified in the same domain. </p>"
+            }
+        },
+        "com.amazonaws.voiceid#AssociateFraudsterRequest": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist you want to associate with the fraudster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FraudsterId": {
+                    "target": "com.amazonaws.voiceid#FraudsterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the fraudster to be associated with the watchlist.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#AssociateFraudsterResponse": {
+            "type": "structure",
+            "members": {
+                "Fraudster": {
+                    "target": "com.amazonaws.voiceid#Fraudster"
+                }
             }
         },
         "com.amazonaws.voiceid#AuthenticationConfiguration": {
@@ -92,13 +161,13 @@
                 "AudioAggregationStartedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation started for this authentication\n            result.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when audio aggregation started for this authentication\n            result.</p>"
                     }
                 },
                 "AudioAggregationEndedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation ended for this authentication\n            result.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when audio aggregation ended for this authentication\n            result.</p>"
                     }
                 },
                 "CustomerSpeakerId": {
@@ -136,6 +205,12 @@
                 "smithy.api#documentation": "<p>The authentication result produced by Voice ID, processed against the current session\n            state and streamed audio of the speaker.</p>"
             }
         },
+        "com.amazonaws.voiceid#Boolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.voiceid#ClientTokenString": {
             "type": "string",
             "traits": {
@@ -155,7 +230,7 @@
                 "ConflictType": {
                     "target": "com.amazonaws.voiceid#ConflictType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of conflict which caused a ConflictException. Possible types and the\n            corresponding error messages are as follows:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DOMAIN_NOT_ACTIVE</code>: The domain is not active.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT</code>: You cannot change the\n                    speaker ID after an enrollment has been requested.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ENROLLMENT_ALREADY_EXISTS</code>: There is already an enrollment for\n                    this session.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SPEAKER_NOT_SET</code>: You must set the speaker ID before requesting an\n                    enrollment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SPEAKER_OPTED_OUT</code>: You cannot request an enrollment for an opted\n                    out speaker.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CONCURRENT_CHANGES</code>: The request could not be processed as the\n                    resource was modified by another request during execution.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of conflict which caused a ConflictException. Possible types and the\n            corresponding error messages are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DOMAIN_NOT_ACTIVE</code>: The domain is not active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT</code>: You cannot change the\n                    speaker ID after an enrollment has been requested.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENROLLMENT_ALREADY_EXISTS</code>: There is already an enrollment for\n                    this session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SPEAKER_NOT_SET</code>: You must set the speaker ID before requesting an\n                    enrollment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SPEAKER_OPTED_OUT</code>: You cannot request an enrollment for an opted\n                    out speaker.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONCURRENT_CHANGES</code>: The request could not be processed as the\n                    resource was modified by another request during execution.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -200,6 +275,14 @@
                     {
                         "value": "DOMAIN_LOCKED_FROM_ENCRYPTION_UPDATES",
                         "name": "DOMAIN_LOCKED_FROM_ENCRYPTION_UPDATES"
+                    },
+                    {
+                        "value": "CANNOT_DELETE_NON_EMPTY_WATCHLIST",
+                        "name": "CANNOT_DELETE_NON_EMPTY_WATCHLIST"
+                    },
+                    {
+                        "value": "FRAUDSTER_MUST_BELONG_TO_AT_LEAST_ONE_WATCHLIST",
+                        "name": "FRAUDSTER_MUST_BELONG_TO_AT_LEAST_ONE_WATCHLIST"
                     }
                 ]
             }
@@ -236,7 +319,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters,\n            customer audio, and voiceprints. </p>",
+                "smithy.api#documentation": "<p>Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters,\n            customer audio, and voiceprints.  Every domain is created with a default watchlist that fraudsters can be a part of.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -253,7 +336,7 @@
                 "Description": {
                     "target": "com.amazonaws.voiceid#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of the domain.</p>"
+                        "smithy.api#documentation": "<p>A brief description of this domain.</p>"
                     }
                 },
                 "ServerSideEncryptionConfiguration": {
@@ -267,7 +350,7 @@
                     "target": "com.amazonaws.voiceid#ClientTokenString",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The idempotency token for creating a new domain. If not provided, Amazon Web Services\n            SDK populates this field.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#suppress": [
                             "UnstableTrait"
@@ -293,6 +376,85 @@
                     "target": "com.amazonaws.voiceid#Domain",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the newly created domain.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#CreateWatchlist": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.voiceid#CreateWatchlistRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.voiceid#CreateWatchlistResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.voiceid#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a watchlist that fraudsters can be a part of.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.voiceid#CreateWatchlistRequest": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.voiceid#WatchlistName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the watchlist.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.voiceid#WatchlistDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of this watchlist.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.voiceid#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#CreateWatchlistResponse": {
+            "type": "structure",
+            "members": {
+                "Watchlist": {
+                    "target": "com.amazonaws.voiceid#Watchlist",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the newly created watchlist.</p>"
                     }
                 }
             }
@@ -382,7 +544,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified fraudster from Voice ID.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified fraudster from Voice ID. This action disassociates the fraudster from any watchlists it is a part of.</p>"
             }
         },
         "com.amazonaws.voiceid#DeleteFraudsterRequest": {
@@ -391,7 +553,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -442,7 +604,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the speaker.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the speaker.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -450,6 +612,57 @@
                     "target": "com.amazonaws.voiceid#SpeakerId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the speaker you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#DeleteWatchlist": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.voiceid#DeleteWatchlistRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.voiceid#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified watchlist from Voice ID. This API throws an exception when\n            there are fraudsters in the watchlist that you are trying to delete. You must delete the\n            fraudsters, and then delete the watchlist. Every domain has a default watchlist which cannot be deleted. </p>"
+            }
+        },
+        "com.amazonaws.voiceid#DeleteWatchlistRequest": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist to be deleted.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -491,7 +704,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain you are describing.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that you are describing.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -576,14 +789,14 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the domain containing the fraudster registration job.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster registration job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "JobId": {
                     "target": "com.amazonaws.voiceid#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the fraudster registration job you are describing.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the fraudster registration job you are describing.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -606,7 +819,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -694,7 +907,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the speaker enrollment job.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the speaker enrollment job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -748,6 +961,65 @@
                 }
             }
         },
+        "com.amazonaws.voiceid#DescribeWatchlist": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.voiceid#DescribeWatchlistRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.voiceid#DescribeWatchlistResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.voiceid#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the specified watchlist.</p>"
+            }
+        },
+        "com.amazonaws.voiceid#DescribeWatchlistRequest": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist that you are describing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#DescribeWatchlistResponse": {
+            "type": "structure",
+            "members": {
+                "Watchlist": {
+                    "target": "com.amazonaws.voiceid#Watchlist",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the specified watchlist.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.voiceid#Description": {
             "type": "string",
             "traits": {
@@ -759,13 +1031,79 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.voiceid#DisassociateFraudster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.voiceid#DisassociateFraudsterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.voiceid#DisassociateFraudsterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.voiceid#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates the fraudsters from the watchlist specified. Voice ID always expects a\n            fraudster to be a part of at least one watchlist. If\n            you try to disassociate a fraudster from its only watchlist, a <code>ValidationException</code> is thrown.\n            </p>"
+            }
+        },
+        "com.amazonaws.voiceid#DisassociateFraudsterRequest": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist that you want to disassociate from the fraudster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FraudsterId": {
+                    "target": "com.amazonaws.voiceid#FraudsterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the fraudster to be disassociated from the watchlist.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#DisassociateFraudsterResponse": {
+            "type": "structure",
+            "members": {
+                "Fraudster": {
+                    "target": "com.amazonaws.voiceid#Fraudster"
+                }
+            }
+        },
         "com.amazonaws.voiceid#Domain": {
             "type": "structure",
             "members": {
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service-generated identifier for the domain.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the domain.</p>"
                     }
                 },
                 "Arn": {
@@ -777,13 +1115,13 @@
                 "Name": {
                     "target": "com.amazonaws.voiceid#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client-provided name for the domain.</p>"
+                        "smithy.api#documentation": "<p>The name for the domain.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.voiceid#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client-provided description of the domain.</p>"
+                        "smithy.api#documentation": "<p>The description of the domain.</p>"
                     }
                 },
                 "DomainStatus": {
@@ -801,19 +1139,25 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp at which the domain is created.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp showing the domain's last update.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was last update.</p>"
                     }
                 },
                 "ServerSideEncryptionUpdateDetails": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionUpdateDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the most recent server-side encryption configuration update. When the\n            server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is\n            complete, the domain's data can only be accessed using the new KMS key.</p>"
+                    }
+                },
+                "WatchlistDetails": {
+                    "target": "com.amazonaws.voiceid#WatchlistDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The watchlist details of a domain. Contains the default watchlist ID of the domain.</p>"
                     }
                 }
             },
@@ -904,7 +1248,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service-generated identifier for the domain.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the domain.</p>"
                     }
                 },
                 "Arn": {
@@ -922,7 +1266,7 @@
                 "Description": {
                     "target": "com.amazonaws.voiceid#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client-provided description of the domain.</p>"
+                        "smithy.api#documentation": "<p>The description of the domain.</p>"
                     }
                 },
                 "DomainStatus": {
@@ -940,19 +1284,25 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp showing when the domain is created.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp showing the domain's last update.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was last updated.</p>"
                     }
                 },
                 "ServerSideEncryptionUpdateDetails": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionUpdateDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the most recent server-side encryption configuration update. When the\n            server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is\n            complete, the domain's data can only be accessed using the new KMS key.</p>"
+                    }
+                },
+                "WatchlistDetails": {
+                    "target": "com.amazonaws.voiceid#WatchlistDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about <code>watchlistDetails</code> and <code>DefaultWatchlistID</code>. </p>"
                     }
                 }
             },
@@ -1009,10 +1359,28 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Threshold value for determining whether the speaker is a high risk to be fraudulent.\n            If the detected risk score calculated by Voice ID is greater than or equal to the\n            threshold, the speaker is considered a fraudster.</p>"
                     }
+                },
+                "WatchlistIds": {
+                    "target": "com.amazonaws.voiceid#EnrollmentJobFraudDetectionConfigWatchlistIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of watchlists against which fraud detection is performed.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration defining the action to take when a speaker is flagged by the fraud\n            detection system during a batch speaker enrollment job, and the risk threshold to use\n            for identification.</p>"
+                "smithy.api#documentation": "<p>The fraud detection configuration to be used during the batch speaker enrollment job.</p>"
+            }
+        },
+        "com.amazonaws.voiceid#EnrollmentJobFraudDetectionConfigWatchlistIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.voiceid#WatchlistId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.voiceid#EvaluateSession": {
@@ -1072,7 +1440,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the session.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the session.</p>"
                     }
                 },
                 "SessionId": {
@@ -1163,8 +1531,13 @@
                 "RiskThreshold": {
                     "target": "com.amazonaws.voiceid#Score",
                     "traits": {
-                        "smithy.api#documentation": "<p>Threshold value for determining whether the speaker is a fraudster. If the detected\n            risk score calculated by Voice ID is higher than the threshold, the speaker is\n            considered a fraudster.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Threshold value for determining whether the speaker is a fraudster. If the detected\n            risk score calculated by Voice ID is higher than the threshold, the speaker is\n            considered a fraudster.</p>"
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist against which fraud detection is performed.\n        </p>"
                     }
                 }
             },
@@ -1230,13 +1603,13 @@
                 "AudioAggregationStartedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation started for this fraud detection\n            result.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when audio aggregation started for this fraud detection\n            result.</p>"
                     }
                 },
                 "AudioAggregationEndedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation ended for this fraud detection\n            result.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when audio aggregation ended for this fraud detection\n            result.</p>"
                     }
                 },
                 "Configuration": {
@@ -1296,7 +1669,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the domain containing the fraudster.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster.</p>"
                     }
                 },
                 "GeneratedFraudsterId": {
@@ -1308,7 +1681,13 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when Voice ID identified the fraudster.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when Voice ID identified the fraudster.</p>"
+                    }
+                },
+                "WatchlistIds": {
+                    "target": "com.amazonaws.voiceid#ResponseWatchlistIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlists the fraudster is a part of.</p>"
                     }
                 }
             },
@@ -1351,7 +1730,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster registration job.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster registration job.</p>"
                     }
                 },
                 "DataAccessRoleArn": {
@@ -1381,13 +1760,13 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing the creation time of the fraudster registration job.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when the fraudster registration job was created.</p>"
                     }
                 },
                 "EndedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing when the fraudster registration job ended.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when the fraudster registration job ended.</p>"
                     }
                 },
                 "FailureDetails": {
@@ -1464,19 +1843,19 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster registration job.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster registration job.</p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing when the fraudster registration job is created. </p>"
+                        "smithy.api#documentation": "<p>A timestamp of when the fraudster registration job was created. </p>"
                     }
                 },
                 "EndedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing when the fraudster registration job ended.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when the fraudster registration job ended.</p>"
                     }
                 },
                 "FailureDetails": {
@@ -1494,6 +1873,44 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains a summary of information about a fraudster registration job.</p>"
+            }
+        },
+        "com.amazonaws.voiceid#FraudsterSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.voiceid#FraudsterSummary"
+            }
+        },
+        "com.amazonaws.voiceid#FraudsterSummary": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster summary.</p>"
+                    }
+                },
+                "GeneratedFraudsterId": {
+                    "target": "com.amazonaws.voiceid#GeneratedFraudsterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service-generated identifier for the fraudster.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.voiceid#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the fraudster summary was created.</p>"
+                    }
+                },
+                "WatchlistIds": {
+                    "target": "com.amazonaws.voiceid#ResponseWatchlistIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlists the fraudster is a part of.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of information about a fraudster.\n        </p>"
             }
         },
         "com.amazonaws.voiceid#GeneratedFraudsterId": {
@@ -1542,10 +1959,7 @@
             }
         },
         "com.amazonaws.voiceid#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.voiceid#InternalServerException": {
             "type": "structure",
@@ -1664,13 +2078,13 @@
                 "MaxResults": {
                     "target": "com.amazonaws.voiceid#MaxResultsForListDomainFe",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of domains to list per API call.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n            <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.</p>"
                     }
                 }
             }
@@ -1687,7 +2101,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.</p>"
                     }
                 }
             }
@@ -1733,7 +2147,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster registration Jobs.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster registration Jobs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1746,13 +2160,13 @@
                 "MaxResults": {
                     "target": "com.amazonaws.voiceid#MaxResultsForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>NextToken</code> to obtain further pages of results. The default is 100; the\n            maximum allowed page size is also 100. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n            <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.</p>"
                     }
                 }
             }
@@ -1769,7 +2183,89 @@
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#ListFraudsters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.voiceid#ListFraudstersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.voiceid#ListFraudstersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.voiceid#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all fraudsters in a specified watchlist or domain.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "FraudsterSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.voiceid#ListFraudstersRequest": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist. If provided, all fraudsters in the watchlist are listed. If not provided, all fraudsters in the domain are listed.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.voiceid#MaxResultsForList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n            <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100.    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.voiceid#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#ListFraudstersResponse": {
+            "type": "structure",
+            "members": {
+                "FraudsterSummaries": {
+                    "target": "com.amazonaws.voiceid#FraudsterSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that contains details about each fraudster in the Amazon Web Services account.\n        </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.voiceid#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.\n        </p>"
                     }
                 }
             }
@@ -1815,7 +2311,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the speaker enrollment jobs.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the speaker enrollment jobs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1828,13 +2324,13 @@
                 "MaxResults": {
                     "target": "com.amazonaws.voiceid#MaxResultsForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>NextToken</code> to obtain further pages of results. The default is 100; the\n            maximum allowed page size is also 100. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n            <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.</p>"
                     }
                 }
             }
@@ -1851,7 +2347,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1904,13 +2400,13 @@
                 "MaxResults": {
                     "target": "com.amazonaws.voiceid#MaxResultsForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>NextToken</code> to obtain further pages of results. The default is 100; the\n            maximum allowed page size is also 100. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n            <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.</p>"
                     }
                 }
             }
@@ -1927,7 +2423,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1984,10 +2480,85 @@
                 }
             }
         },
+        "com.amazonaws.voiceid#ListWatchlists": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.voiceid#ListWatchlistsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.voiceid#ListWatchlistsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.voiceid#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all watchlists in a specified domain.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "WatchlistSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.voiceid#ListWatchlistsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.voiceid#MaxResultsForList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n            <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100.\n        </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.voiceid#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#ListWatchlistsResponse": {
+            "type": "structure",
+            "members": {
+                "WatchlistSummaries": {
+                    "target": "com.amazonaws.voiceid#WatchlistSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that contains details about each watchlist in the Amazon Web Services account.\n        </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.voiceid#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n            <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours.\n        </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.voiceid#MaxResultsForList": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1997,7 +2568,6 @@
         "com.amazonaws.voiceid#MaxResultsForListDomainFe": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -2055,7 +2625,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the speaker.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the speaker.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2114,10 +2684,28 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum similarity score between the new and old fraudsters in order to consider\n            the new fraudster a duplicate.</p>"
                     }
+                },
+                "WatchlistIds": {
+                    "target": "com.amazonaws.voiceid#RegistrationConfigWatchlistIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of watchlists that a fraudster is registered to. If a watchlist isn't provided, the fraudsters are registered to the default watchlist.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration defining the action to take when a duplicate fraudster is detected,\n            and the similarity threshold to use for detecting a duplicate fraudster during a batch\n            fraudster registration job.</p>"
+                "smithy.api#documentation": "<p>The registration configuration to be used during the batch fraudster registration job.</p>"
+            }
+        },
+        "com.amazonaws.voiceid#RegistrationConfigWatchlistIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.voiceid#WatchlistId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.voiceid#ResourceNotFoundException": {
@@ -2166,8 +2754,18 @@
                     {
                         "value": "SPEAKER",
                         "name": "SPEAKER"
+                    },
+                    {
+                        "value": "WATCHLIST",
+                        "name": "WATCHLIST"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.voiceid#ResponseWatchlistIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.voiceid#WatchlistId"
             }
         },
         "com.amazonaws.voiceid#S3Uri": {
@@ -2183,7 +2781,6 @@
         "com.amazonaws.voiceid#Score": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -2323,19 +2920,19 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing when the speaker is created. </p>"
+                        "smithy.api#documentation": "<p>A timestamp of when the speaker was created. </p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing the speaker's last update.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of the speaker's last update.</p>"
                     }
                 },
                 "LastAccessedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the speaker was last accessed for enrollment, re-enrollment or a\n            successful authentication. This timestamp is accurate to one hour.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the speaker was last accessed for enrollment, re-enrollment or a\n            successful authentication. This timestamp is accurate to one hour.</p>"
                     }
                 }
             },
@@ -2397,13 +2994,13 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing the creation of the speaker enrollment job.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when the speaker enrollment job was created.</p>"
                     }
                 },
                 "EndedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing when the speaker enrollment job ended. </p>"
+                        "smithy.api#documentation": "<p>A timestamp of when the speaker enrollment job ended. </p>"
                     }
                 },
                 "FailureDetails": {
@@ -2486,13 +3083,13 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing the creation time of the speaker enrollment job.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when of the speaker enrollment job was created.</p>"
                     }
                 },
                 "EndedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp showing when the speaker enrollment job ended.</p>"
+                        "smithy.api#documentation": "<p>A timestamp of when the speaker enrollment job ended.</p>"
                     }
                 },
                 "FailureDetails": {
@@ -2644,7 +3241,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.voiceid#ClientTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token for starting a new fraudster registration job. If not provided,\n                Amazon Web Services SDK populates this field.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2657,7 +3254,7 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster registration job and in which\n            the fraudsters are registered.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the fraudster registration job and in which\n            the fraudsters are registered.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2743,7 +3340,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.voiceid#ClientTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token for starting a new speaker enrollment Job. If not provided,\n                Amazon Web Services SDK populates this field.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2846,7 +3443,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, {\n            \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
             }
         },
         "com.amazonaws.voiceid#TagKey": {
@@ -3083,7 +3680,7 @@
                 "Description": {
                     "target": "com.amazonaws.voiceid#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of the domain.</p>"
+                        "smithy.api#documentation": "<p>A brief description about this domain.</p>"
                     }
                 },
                 "ServerSideEncryptionConfiguration": {
@@ -3106,6 +3703,80 @@
                 }
             }
         },
+        "com.amazonaws.voiceid#UpdateWatchlist": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.voiceid#UpdateWatchlistRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.voiceid#UpdateWatchlistResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.voiceid#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified watchlist. Every domain has a default watchlist which cannot be updated.\n        </p>"
+            }
+        },
+        "com.amazonaws.voiceid#UpdateWatchlistRequest": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.voiceid#WatchlistName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the watchlist.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.voiceid#WatchlistDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description about this watchlist.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.voiceid#UpdateWatchlistResponse": {
+            "type": "structure",
+            "members": {
+                "Watchlist": {
+                    "target": "com.amazonaws.voiceid#Watchlist",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the updated watchlist.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.voiceid#ValidationException": {
             "type": "structure",
             "members": {
@@ -3121,28 +3792,22 @@
         },
         "com.amazonaws.voiceid#VoiceID": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Voice ID",
-                    "arnNamespace": "voiceid",
-                    "cloudFormationName": "VoiceID",
-                    "cloudTrailEventSource": "voiceid.amazonaws.com",
-                    "endpointPrefix": "voiceid"
-                },
-                "aws.auth#sigv4": {
-                    "name": "voiceid"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Connect Voice ID provides real-time caller authentication and fraud screening. This guide\n            describes the APIs used for this service. </p>",
-                "smithy.api#title": "Amazon Voice ID"
-            },
             "version": "2021-09-27",
             "operations": [
+                {
+                    "target": "com.amazonaws.voiceid#AssociateFraudster"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#CreateWatchlist"
+                },
                 {
                     "target": "com.amazonaws.voiceid#DeleteFraudster"
                 },
                 {
                     "target": "com.amazonaws.voiceid#DeleteSpeaker"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#DeleteWatchlist"
                 },
                 {
                     "target": "com.amazonaws.voiceid#DescribeFraudster"
@@ -3157,10 +3822,19 @@
                     "target": "com.amazonaws.voiceid#DescribeSpeakerEnrollmentJob"
                 },
                 {
+                    "target": "com.amazonaws.voiceid#DescribeWatchlist"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#DisassociateFraudster"
+                },
+                {
                     "target": "com.amazonaws.voiceid#EvaluateSession"
                 },
                 {
                     "target": "com.amazonaws.voiceid#ListFraudsterRegistrationJobs"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ListFraudsters"
                 },
                 {
                     "target": "com.amazonaws.voiceid#ListSpeakerEnrollmentJobs"
@@ -3170,6 +3844,9 @@
                 },
                 {
                     "target": "com.amazonaws.voiceid#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#ListWatchlists"
                 },
                 {
                     "target": "com.amazonaws.voiceid#OptOutSpeaker"
@@ -3185,13 +3862,773 @@
                 },
                 {
                     "target": "com.amazonaws.voiceid#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.voiceid#UpdateWatchlist"
                 }
             ],
             "resources": [
                 {
                     "target": "com.amazonaws.voiceid#DomainResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Voice ID",
+                    "arnNamespace": "voiceid",
+                    "cloudFormationName": "VoiceID",
+                    "cloudTrailEventSource": "voiceid.amazonaws.com",
+                    "endpointPrefix": "voiceid"
+                },
+                "aws.auth#sigv4": {
+                    "name": "voiceid"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon Connect Voice ID provides real-time caller authentication and fraud risk detection, which\n            make voice interactions in contact centers more secure and efficient.</p>",
+                "smithy.api#title": "Amazon Voice ID",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://voiceid-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://voiceid-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://voiceid.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://voiceid.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://voiceid.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.voiceid#VoiceSpoofingRisk": {
             "type": "structure",
@@ -3206,6 +4643,161 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details resulting from 'Voice Spoofing Risk' analysis of the speaker.</p>"
+            }
+        },
+        "com.amazonaws.voiceid#Watchlist": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>"
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.voiceid#WatchlistName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the watchlist.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.voiceid#WatchlistDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the watchlist.</p>"
+                    }
+                },
+                "DefaultWatchlist": {
+                    "target": "com.amazonaws.voiceid#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the specified watchlist is the default watchlist of a domain.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.voiceid#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the watchlist was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.voiceid#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the watchlist was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains all the information about a watchlist.</p>"
+            }
+        },
+        "com.amazonaws.voiceid#WatchlistDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.voiceid#WatchlistDetails": {
+            "type": "structure",
+            "members": {
+                "DefaultWatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the default watchlist.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the watchlists in a domain.</p>"
+            }
+        },
+        "com.amazonaws.voiceid#WatchlistId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 22,
+                    "max": 22
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{22}$"
+            }
+        },
+        "com.amazonaws.voiceid#WatchlistName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.voiceid#WatchlistSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.voiceid#WatchlistSummary"
+            }
+        },
+        "com.amazonaws.voiceid#WatchlistSummary": {
+            "type": "structure",
+            "members": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>"
+                    }
+                },
+                "WatchlistId": {
+                    "target": "com.amazonaws.voiceid#WatchlistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the watchlist.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.voiceid#WatchlistName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the watchlist.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.voiceid#WatchlistDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the watchlist.</p>"
+                    }
+                },
+                "DefaultWatchlist": {
+                    "target": "com.amazonaws.voiceid#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the specified watchlist is the default watchlist of a domain.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.voiceid#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the watchlist was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.voiceid#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the watchlist was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of information about a watchlist.</p>"
             }
         }
     }

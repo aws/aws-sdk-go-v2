@@ -226,11 +226,14 @@
                 "externalConnection": {
                     "target": "com.amazonaws.codeartifact#ExternalConnectionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of the external connection to add to the repository. The following values are supported:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>public:npmjs</code> - for the npm public repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:nuget-org</code> - for the NuGet Gallery.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:pypi</code> - for the Python Package Index.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-central</code> - for Maven Central.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-googleandroid</code> - for the Google Android repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-gradleplugins</code> - for the Gradle plugins repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-commonsware</code> - for the CommonsWare Android repository.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      The name of the external connection to add to the repository. The following values are supported:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>public:npmjs</code> - for the npm public repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:nuget-org</code> - for the NuGet Gallery.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:pypi</code> - for the Python Package Index.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-central</code> - for Maven Central.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-googleandroid</code> - for the Google Android repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-gradleplugins</code> - for the Gradle plugins repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-commonsware</code> - for the CommonsWare Android repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-clojars</code> - for the Clojars repository. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "external-connection",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#AssociateExternalConnectionResult": {
@@ -277,6 +280,9 @@
                 },
                 {
                     "target": "com.amazonaws.codeartifact#DeleteDomainPermissionsPolicy"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#DeletePackage"
                 },
                 {
                     "target": "com.amazonaws.codeartifact#DeletePackageVersions"
@@ -348,6 +354,9 @@
                     "target": "com.amazonaws.codeartifact#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.codeartifact#PublishPackageVersion"
+                },
+                {
                     "target": "com.amazonaws.codeartifact#PutDomainPermissionsPolicy"
                 },
                 {
@@ -381,14 +390,14 @@
                     "name": "codeartifact"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p> CodeArtifact is a fully managed artifact repository compatible with language-native\n      package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to\n      share packages with development teams and pull packages. Packages can be pulled from both\n      public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact\n      repository and another repository, which effectively merges their contents from the point of\n      view of a package manager client. </p>\n         <p>\n            <b>CodeArtifact Components</b>\n         </p>\n         <p>Use the information in this guide to help you work with the following CodeArtifact components:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Repository</b>: A CodeArtifact repository contains a set of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version\">package\n            versions</a>, each of which maps to a set of assets, or files. Repositories are\n          polyglot, so a single repository can contain packages of any supported type. Each\n          repository exposes endpoints for fetching and publishing packages using tools like the\n            <b>\n                     <code>npm</code>\n                  </b> CLI, the Maven CLI (<b>\n                     <code>mvn</code>\n                  </b>), Python CLIs (<b>\n                     <code>pip</code>\n                  </b> and <code>twine</code>), and NuGet CLIs (<code>nuget</code> and <code>dotnet</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Domain</b>: Repositories are aggregated into a higher-level entity known as a\n            <i>domain</i>. All package assets and metadata are stored in the domain,\n            but are consumed through repositories. A given package asset, such as a Maven JAR file, is\n            stored once per domain, no matter how many repositories it's present in. All of the assets\n            and metadata in a domain are encrypted with the same customer master key (CMK) stored in\n            Key Management Service (KMS).</p>\n               <p>Each repository is a member of a single domain and can't be moved to a\n            different domain.</p>\n               <p>The domain allows organizational policy to be applied across multiple\n            repositories, such as which accounts can access repositories in the domain, and\n            which public repositories can be used as sources of packages.</p>\n               <p>Although an organization can have multiple domains, we recommend a single production\n            domain that contains all published artifacts so that teams can find and share packages\n            across their organization.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to\n          resolve dependencies and install the software. CodeArtifact supports <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html\">npm</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html\">PyPI</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven\">Maven</a>, and <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-nuget\">NuGet</a> package formats.</p>\n               <p>In CodeArtifact, a package consists of:</p>\n               <ul>\n                  <li>\n                     <p>A <i>name</i> (for example, <code>webpack</code> is the name of a\n              popular npm package)</p>\n                  </li>\n                  <li>\n                     <p>An optional namespace (for example, <code>@types</code> in <code>@types/node</code>)</p>\n                  </li>\n                  <li>\n                     <p>A set of versions (for example, <code>1.0.0</code>, <code>1.0.1</code>,\n                <code>1.0.2</code>, etc.)</p>\n                  </li>\n                  <li>\n                     <p> Package-level metadata (for example, npm tags)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Package version</b>: A version of a package, such as <code>@types/node 12.6.9</code>. The version number\n          format and semantics vary for different package formats. For example, npm package versions\n          must conform to the <a href=\"https://semver.org/\">Semantic Versioning\n            specification</a>. In CodeArtifact, a package version consists of the version identifier,\n          metadata at the package version level, and a set of assets.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Upstream repository</b>: One repository is <i>upstream</i> of another when the package versions in\n          it can be accessed from the repository endpoint of the downstream repository, effectively\n          merging the contents of the two repositories from the point of view of a client. CodeArtifact\n          allows creating an upstream relationship between two repositories.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Asset</b>: An individual file stored in CodeArtifact associated with a package version, such as an npm\n            <code>.tgz</code> file or Maven POM and JAR files.</p>\n            </li>\n         </ul>\n         <p>CodeArtifact supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AssociateExternalConnection</code>: Adds an existing external \n          connection to a repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyPackageVersions</code>: Copies package versions from one \n          repository to another repository in the same domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateDomain</code>: Creates a domain</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateRepository</code>: Creates a CodeArtifact repository in a domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomain</code>: Deletes a domain. You cannot delete a domain that contains\n          repositories. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackageVersions</code>: Deletes versions of a package. After a package has\n          been deleted, it can be republished, but its assets and metadata cannot be restored\n          because they have been permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepository</code>: Deletes a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepositoryPermissionsPolicy</code>: Deletes the resource policy that is set on a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDomain</code>: Returns a <code>DomainDescription</code> object that\n          contains information about the requested domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackage</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html\">PackageDescription</a>\n          object that contains details about a package. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackageVersion</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">PackageVersionDescription</a>\n          object that contains details about a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeRepository</code>: Returns a <code>RepositoryDescription</code> object\n          that contains detailed information about the requested repository. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DisposePackageVersions</code>: Disposes versions of a package. A package version\n          with the status <code>Disposed</code> cannot be restored because they have been\n          permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetAuthorizationToken</code>: Generates a temporary authorization token for accessing repositories in the domain. The token expires the authorization period has passed. \n          The default authorization period is 12 hours and can be customized to any length with a maximum of 12 hours.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetDomainPermissionsPolicy</code>: Returns the policy of a resource\n          that is attached to the specified domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionAsset</code>: Returns the contents of an asset that is in a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionReadme</code>: Gets the readme file or descriptive text for a package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryEndpoint</code>: Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n          package format:\n        </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>maven</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>npm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>nuget</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>pypi</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryPermissionsPolicy</code>: Returns the resource policy that is set on a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each\n          returned <code>DomainSummary</code> object contains information about a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackages</code>: Lists the packages in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionAssets</code>: Lists the assets for a given package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionDependencies</code>: Returns a list of the direct dependencies for a\n          package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersions</code>: Returns a list of package versions for a specified\n          package in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositoriesInDomain</code>: Returns a list of the repositories in a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutPackageOriginConfiguration</code>: Sets the package origin configuration for a package, which determine \n        how new versions of the package can be added to a specific repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository\n          that specifies permissions to access it. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePackageVersionsStatus</code>: Updates the status of one or more versions of a package.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateRepository</code>: Updates the properties of a repository.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p> CodeArtifact is a fully managed artifact repository compatible with language-native\n      package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to\n      share packages with development teams and pull packages. Packages can be pulled from both\n      public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact\n      repository and another repository, which effectively merges their contents from the point of\n      view of a package manager client. </p>\n         <p>\n            <b>CodeArtifact Components</b>\n         </p>\n         <p>Use the information in this guide to help you work with the following CodeArtifact components:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Repository</b>: A CodeArtifact repository contains a set of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version\">package\n            versions</a>, each of which maps to a set of assets, or files. Repositories are\n          polyglot, so a single repository can contain packages of any supported type. Each\n          repository exposes endpoints for fetching and publishing packages using tools like the\n            <b>\n                     <code>npm</code>\n                  </b> CLI, the Maven CLI (<b>\n                     <code>mvn</code>\n                  </b>), Python CLIs (<b>\n                     <code>pip</code>\n                  </b> and <code>twine</code>), and NuGet CLIs (<code>nuget</code> and <code>dotnet</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Domain</b>: Repositories are aggregated into a higher-level entity known as a\n            <i>domain</i>. All package assets and metadata are stored in the domain,\n            but are consumed through repositories. A given package asset, such as a Maven JAR file, is\n            stored once per domain, no matter how many repositories it's present in. All of the assets\n            and metadata in a domain are encrypted with the same customer master key (CMK) stored in\n            Key Management Service (KMS).</p>\n               <p>Each repository is a member of a single domain and can't be moved to a\n            different domain.</p>\n               <p>The domain allows organizational policy to be applied across multiple\n            repositories, such as which accounts can access repositories in the domain, and\n            which public repositories can be used as sources of packages.</p>\n               <p>Although an organization can have multiple domains, we recommend a single production\n            domain that contains all published artifacts so that teams can find and share packages\n            across their organization.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to\n          resolve dependencies and install the software. CodeArtifact supports <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html\">npm</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html\">PyPI</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven\">Maven</a>, and <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-nuget\">NuGet</a> package formats.</p>\n               <p>In CodeArtifact, a package consists of:</p>\n               <ul>\n                  <li>\n                     <p>A <i>name</i> (for example, <code>webpack</code> is the name of a\n              popular npm package)</p>\n                  </li>\n                  <li>\n                     <p>An optional namespace (for example, <code>@types</code> in <code>@types/node</code>)</p>\n                  </li>\n                  <li>\n                     <p>A set of versions (for example, <code>1.0.0</code>, <code>1.0.1</code>,\n                <code>1.0.2</code>, etc.)</p>\n                  </li>\n                  <li>\n                     <p> Package-level metadata (for example, npm tags)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Package version</b>: A version of a package, such as <code>@types/node 12.6.9</code>. The version number\n          format and semantics vary for different package formats. For example, npm package versions\n          must conform to the <a href=\"https://semver.org/\">Semantic Versioning\n            specification</a>. In CodeArtifact, a package version consists of the version identifier,\n          metadata at the package version level, and a set of assets.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Upstream repository</b>: One repository is <i>upstream</i> of another when the package versions in\n          it can be accessed from the repository endpoint of the downstream repository, effectively\n          merging the contents of the two repositories from the point of view of a client. CodeArtifact\n          allows creating an upstream relationship between two repositories.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Asset</b>: An individual file stored in CodeArtifact associated with a package version, such as an npm\n            <code>.tgz</code> file or Maven POM and JAR files.</p>\n            </li>\n         </ul>\n         <p>CodeArtifact supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AssociateExternalConnection</code>: Adds an existing external \n          connection to a repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyPackageVersions</code>: Copies package versions from one \n          repository to another repository in the same domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateDomain</code>: Creates a domain</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateRepository</code>: Creates a CodeArtifact repository in a domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomain</code>: Deletes a domain. You cannot delete a domain that contains\n          repositories. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackage</code>: Deletes a package and all associated package versions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackageVersions</code>: Deletes versions of a package. After a package has\n          been deleted, it can be republished, but its assets and metadata cannot be restored\n          because they have been permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepository</code>: Deletes a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepositoryPermissionsPolicy</code>: Deletes the resource policy that is set on a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDomain</code>: Returns a <code>DomainDescription</code> object that\n          contains information about the requested domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackage</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html\">PackageDescription</a>\n          object that contains details about a package. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackageVersion</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">PackageVersionDescription</a>\n          object that contains details about a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeRepository</code>: Returns a <code>RepositoryDescription</code> object\n          that contains detailed information about the requested repository. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DisposePackageVersions</code>: Disposes versions of a package. A package version\n          with the status <code>Disposed</code> cannot be restored because they have been\n          permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetAuthorizationToken</code>: Generates a temporary authorization token for accessing repositories in the domain. The token expires the authorization period has passed. \n          The default authorization period is 12 hours and can be customized to any length with a maximum of 12 hours.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetDomainPermissionsPolicy</code>: Returns the policy of a resource\n          that is attached to the specified domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionAsset</code>: Returns the contents of an asset that is in a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionReadme</code>: Gets the readme file or descriptive text for a package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryEndpoint</code>: Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n          package format:\n        </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>maven</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>npm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>nuget</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>pypi</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryPermissionsPolicy</code>: Returns the resource policy that is set on a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each\n          returned <code>DomainSummary</code> object contains information about a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackages</code>: Lists the packages in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionAssets</code>: Lists the assets for a given package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionDependencies</code>: Returns a list of the direct dependencies for a\n          package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersions</code>: Returns a list of package versions for a specified\n          package in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositoriesInDomain</code>: Returns a list of the repositories in a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PublishPackageVersion</code>: Creates a new package version containing one or more assets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutPackageOriginConfiguration</code>: Sets the package origin configuration for a package, which determine \n        how new versions of the package can be added to a specific repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository\n          that specifies permissions to access it. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePackageVersionsStatus</code>: Updates the status of one or more versions of a package.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateRepository</code>: Updates the properties of a repository.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "CodeArtifact",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -417,15 +426,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -434,7 +495,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -444,22 +505,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://codeartifact-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://codeartifact-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -472,134 +668,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://codeartifact.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://codeartifact-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -607,7 +721,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://codeartifact-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://codeartifact.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -616,74 +730,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://codeartifact.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://codeartifact.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -692,42 +745,16 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://codeartifact-fips.ap-south-1.api.aws"
+                                    "url": "https://codeartifact.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -738,464 +765,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1206,48 +778,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1258,9 +791,126 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1271,8 +921,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -1284,8 +934,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -1297,87 +947,235 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://codeartifact.us-east-1.amazonaws.com"
+                                    "url": "https://codeartifact-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://codeartifact.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://codeartifact.us-east-2.amazonaws.com"
+                                    "url": "https://codeartifact-fips.cn-north-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeartifact.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1387,8 +1185,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -1399,10 +1197,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1523,7 +1327,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be copied. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when copying Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be copied. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when copying Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -1559,6 +1363,9 @@
                         "smithy.api#documentation": "<p> Set to true to copy packages from repositories that are upstream from the source\n      repository to the destination repository. The default setting is false. For more information,\n      see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html\">Working with\n        upstream repositories</a>. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#CopyPackageVersionsResult": {
@@ -1641,6 +1448,9 @@
                         "smithy.api#documentation": "<p>One or more tag key-value pairs for the domain.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#CreateDomainResult": {
@@ -1738,6 +1548,9 @@
                         "smithy.api#documentation": "<p>One or more tag key-value pairs for the repository.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#CreateRepositoryResult": {
@@ -1847,6 +1660,9 @@
                         "smithy.api#httpQuery": "policy-revision"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DeleteDomainPermissionsPolicyResult": {
@@ -1878,6 +1694,9 @@
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DeleteDomainResult": {
@@ -1888,6 +1707,105 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n        Contains information about the deleted domain after processing the request.\n       </p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#DeletePackage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#DeletePackageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#DeletePackageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a package and all associated package versions. A deleted package cannot be restored. To delete one or more package versions, use the\n     <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html\">DeletePackageVersions</a> API.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/package",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#DeletePackageRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain that contains the package to delete.</p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "repository": {
+                    "target": "com.amazonaws.codeartifact#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository that contains the package to delete.</p>",
+                        "smithy.api#httpQuery": "repository",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.codeartifact#PackageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the requested package to delete.</p>",
+                        "smithy.api#httpQuery": "format",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.codeartifact#PackageNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of an npm package is its <code>scope</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                },
+                "package": {
+                    "target": "com.amazonaws.codeartifact#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the package to delete.</p>",
+                        "smithy.api#httpQuery": "package",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#DeletePackageResult": {
+            "type": "structure",
+            "members": {
+                "deletedPackage": {
+                    "target": "com.amazonaws.codeartifact#PackageSummary"
                 }
             }
         },
@@ -1965,7 +1883,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be deleted. The package version component that specifies its \n        namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n            The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n          </p>\n            </li>\n            <li>\n               <p>\n            The namespace of an npm package version is its <code>scope</code>.\n          </p>\n            </li>\n            <li>\n               <p>\n            Python and NuGet package versions do not contain a corresponding component, package versions \n            of those formats do not have a namespace.\n          </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be deleted. The package version component that specifies its \n        namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n            The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n          </p>\n            </li>\n            <li>\n               <p>\n            The namespace of an npm package version is its <code>scope</code>.\n          </p>\n            </li>\n            <li>\n               <p>\n            Python and NuGet package versions do not contain a corresponding component, package versions \n            of those formats do not have a namespace.\n          </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -1990,6 +1908,9 @@
                         "smithy.api#documentation": "<p>\n        The expected status of the package version to delete.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DeletePackageVersionsResult": {
@@ -2116,6 +2037,9 @@
                         "smithy.api#httpQuery": "policy-revision"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DeleteRepositoryPermissionsPolicyResult": {
@@ -2155,6 +2079,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DeleteRepositoryResult": {
@@ -2220,6 +2147,9 @@
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DescribeDomainResult": {
@@ -2301,7 +2231,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the requested package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when requesting Maven packages.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the requested package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when requesting Maven packages.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2313,6 +2243,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DescribePackageResult": {
@@ -2401,7 +2334,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the requested package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the requested package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2421,6 +2354,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DescribePackageVersionResult": {
@@ -2495,6 +2431,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DescribeRepositoryResult": {
@@ -2592,6 +2531,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DisassociateExternalConnectionResult": {
@@ -2679,7 +2621,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be disposed. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be disposed. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2710,6 +2652,9 @@
                         "smithy.api#documentation": "<p>\n      The expected status of the package version to dispose.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#DisposePackageVersionsResult": {
@@ -2973,6 +2918,9 @@
                         "smithy.api#httpQuery": "duration"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#GetAuthorizationTokenResult": {
@@ -3044,6 +2992,9 @@
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#GetDomainPermissionsPolicyResult": {
@@ -3131,7 +3082,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested asset file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested asset file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3166,6 +3117,9 @@
                         "smithy.api#httpQuery": "revision"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#GetPackageVersionAssetResult": {
@@ -3265,7 +3219,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package version with the requested readme file.\n    </p>\n         <note>\n            <p>Although <code>maven</code> is \n      listed as a valid value, CodeArtifact does not support displaying readme files for Maven packages.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package version with the requested readme file.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -3273,7 +3227,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested readme file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested readme file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p> The namespace of an npm package version is its <code>scope</code>. </p>\n            </li>\n            <li>\n               <p> Python and NuGet package versions do not contain a corresponding component, package\n          versions of those formats do not have a namespace. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3293,6 +3247,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#GetPackageVersionReadmeResult": {
@@ -3404,6 +3361,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#GetRepositoryEndpointResult": {
@@ -3477,6 +3437,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#GetRepositoryPermissionsPolicyResult": {
@@ -3638,6 +3601,9 @@
                         "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#ListDomainsResult": {
@@ -3743,7 +3709,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version that contains the requested package version assets. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version that contains the requested package version assets. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3777,6 +3743,9 @@
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#ListPackageVersionAssetsResult": {
@@ -3897,7 +3866,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested dependencies. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested dependencies. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3924,6 +3893,9 @@
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#ListPackageVersionDependenciesResult": {
@@ -3999,7 +3971,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n        Returns a list of \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html\">PackageVersionSummary</a> \n        objects for package versions in a repository that match the request parameters.\n      </p>",
+                "smithy.api#documentation": "<p>\n        Returns a list of \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html\">PackageVersionSummary</a> \n        objects for package versions in a repository that match the request parameters. Package versions of all statuses will be returned by default when calling <code>list-package-versions</code> with no  <code>--status</code> parameter.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/package/versions",
@@ -4051,7 +4023,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the returned package versions.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The format of the package versions you want to list.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -4059,7 +4031,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package that contains the requested package versions. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package that contains the requested package versions. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -4106,6 +4078,9 @@
                         "smithy.api#httpQuery": "originType"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#ListPackageVersionsResult": {
@@ -4234,7 +4209,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called <code>--namespace</code> and not <code>--namespace-prefix</code>, it has prefix-matching behavior.</p>\n         <p>Each package format uses namespace as follows:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called <code>--namespace</code> and not <code>--namespace-prefix</code>, it has prefix-matching behavior.</p>\n         <p>Each package format uses namespace as follows:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -4273,6 +4248,9 @@
                         "smithy.api#httpQuery": "upstream"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#ListPackagesResult": {
@@ -4424,6 +4402,9 @@
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#ListRepositoriesInDomainResult": {
@@ -4476,6 +4457,9 @@
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#ListRepositoriesResult": {
@@ -4537,6 +4521,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#ListTagsForResourceResult": {
@@ -4609,7 +4596,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "name": {
@@ -4654,6 +4641,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "nuget"
+                    }
+                },
+                "GENERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "generic"
                     }
                 }
             }
@@ -4726,7 +4719,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "package": {
@@ -4743,7 +4736,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Details about a package, including its format, namespace, and name. The \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html\">ListPackages</a> \n      operation returns a list of <code>PackageSummary</code> objects.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Details about a package, including its format, namespace, and name.\n    </p>"
             }
         },
         "com.amazonaws.codeartifact#PackageSummaryList": {
@@ -4774,7 +4767,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "packageName": {
@@ -5114,6 +5107,186 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.codeartifact#PublishPackageVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#PublishPackageVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#PublishPackageVersionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new package version containing one or more assets (or files).</p>\n         <p>The <code>unfinished</code> flag can be used to keep the package version in the\n        <code>Unfinished</code> state until all of its assets have been uploaded (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status\">Package version status</a> in the <i>CodeArtifact user guide</i>). To set\n      the package version’s status to <code>Published</code>, omit the <code>unfinished</code> flag\n      when uploading the final asset, or set the status using <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html\">UpdatePackageVersionStatus</a>. Once a package version’s status is set to\n        <code>Published</code>, it cannot change back to <code>Unfinished</code>.</p>\n         <note>\n            <p>Only generic packages can be published using this API. For more information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html\">Using generic\n          packages</a> in the <i>CodeArtifact User Guide</i>.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/package/version/publish",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#PublishPackageVersionRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain that contains the repository that contains the package version to publish.</p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces.</p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "repository": {
+                    "target": "com.amazonaws.codeartifact#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository that the package version will be published to.</p>",
+                        "smithy.api#httpQuery": "repository",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.codeartifact#PackageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A format that specifies the type of the package version with the requested asset file.</p>",
+                        "smithy.api#httpQuery": "format",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.codeartifact#PackageNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the package version to publish.</p>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                },
+                "package": {
+                    "target": "com.amazonaws.codeartifact#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the package version to publish.</p>",
+                        "smithy.api#httpQuery": "package",
+                        "smithy.api#required": {}
+                    }
+                },
+                "packageVersion": {
+                    "target": "com.amazonaws.codeartifact#PackageVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package version to publish (for example, <code>3.5.2</code>).</p>",
+                        "smithy.api#httpQuery": "version",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetContent": {
+                    "target": "com.amazonaws.codeartifact#Asset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the asset to publish.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetName": {
+                    "target": "com.amazonaws.codeartifact#AssetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset to publish. Asset names can include Unicode letters and numbers, and\n      the following special characters: <code>~ ! @ ^ & ( ) - ` _ + [ ] { } ; , .\n      `</code>\n         </p>",
+                        "smithy.api#httpQuery": "asset",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetSHA256": {
+                    "target": "com.amazonaws.codeartifact#SHA256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA256 hash of the <code>assetContent</code> to publish. This value must be calculated\n      by the caller and provided with the request (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages\">Publishing a generic package</a> in the <i>CodeArtifact User\n        Guide</i>).</p>\n         <p>This value is used as an integrity check to verify that the <code>assetContent</code> has\n      not changed after it was originally sent.</p>",
+                        "smithy.api#httpHeader": "x-amz-content-sha256",
+                        "smithy.api#required": {}
+                    }
+                },
+                "unfinished": {
+                    "target": "com.amazonaws.codeartifact#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the package version should remain in the <code>unfinished</code>\n      state. If omitted, the package version status will be set to <code>Published</code> (see\n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status\">Package version status</a> in the <i>CodeArtifact User Guide</i>).</p>\n         <p>Valid values: <code>unfinished</code>\n         </p>",
+                        "smithy.api#httpQuery": "unfinished"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#PublishPackageVersionResult": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.codeartifact#PackageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the package version.</p>"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.codeartifact#PackageNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the package version.</p>"
+                    }
+                },
+                "package": {
+                    "target": "com.amazonaws.codeartifact#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the package.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.codeartifact#PackageVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the package.</p>"
+                    }
+                },
+                "versionRevision": {
+                    "target": "com.amazonaws.codeartifact#PackageVersionRevision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the package version.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codeartifact#PackageVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains the status of the package version. For more information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status\">Package version status</a> in the <i>CodeArtifact User Guide</i>.</p>"
+                    }
+                },
+                "asset": {
+                    "target": "com.amazonaws.codeartifact#AssetSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html\">AssetSummary</a> for the published asset.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.codeartifact#PutDomainPermissionsPolicy": {
             "type": "operation",
             "input": {
@@ -5183,6 +5356,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#PutDomainPermissionsPolicyResult": {
@@ -5267,7 +5443,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package to be updated. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package to be updated. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -5286,6 +5462,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#PutPackageOriginConfigurationResult": {
@@ -5378,6 +5557,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#PutRepositoryPermissionsPolicyResult": {
@@ -5440,6 +5622,12 @@
                     "target": "com.amazonaws.codeartifact#RepositoryExternalConnectionInfoList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      An array of external connections associated with the repository.\n    </p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.codeartifact#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that represents the date and time the repository was created.</p>"
                     }
                 }
             },
@@ -5526,6 +5714,12 @@
                     "target": "com.amazonaws.codeartifact#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The description of the repository.\n    </p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.codeartifact#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that represents the date and time the repository was created.</p>"
                     }
                 }
             },
@@ -5630,6 +5824,16 @@
         },
         "com.amazonaws.codeartifact#RetryAfterSeconds": {
             "type": "integer"
+        },
+        "com.amazonaws.codeartifact#SHA256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 64,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9a-f]+$"
+            }
         },
         "com.amazonaws.codeartifact#ServiceQuotaExceededException": {
             "type": "structure",
@@ -5808,6 +6012,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#TagResourceResult": {
@@ -5899,6 +6106,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#UntagResourceResult": {
@@ -5979,7 +6189,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version to be updated. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version to be updated. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -6017,6 +6227,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#UpdatePackageVersionsStatusResult": {
@@ -6114,6 +6327,9 @@
                         "smithy.api#documentation": "<p> A list of upstream repositories to associate with the repository. The order of the upstream repositories \n        in the list determines their priority order when CodeArtifact looks for a requested package version. For more \n        information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html\">Working with upstream repositories</a>. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codeartifact#UpdateRepositoryResult": {

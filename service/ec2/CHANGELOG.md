@@ -1,3 +1,57 @@
+# v1.91.0 (2023-03-21)
+
+* **Feature**: This release adds support for AWS Network Firewall, AWS PrivateLink, and Gateway Load Balancers to Amazon VPC Reachability Analyzer, and it makes the path destination optional as long as a destination address in the filter at source is provided.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.90.0 (2023-03-14)
+
+* **Feature**: This release adds a new DnsOptions key (PrivateDnsOnlyForInboundResolverEndpoint) to CreateVpcEndpoint and ModifyVpcEndpoint APIs.
+
+# v1.89.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.89.0 (2023-03-08)
+
+* **Feature**: Introducing Amazon EC2 C7g, M7g and R7g instances, powered by the latest generation AWS Graviton3 processors and deliver up to 25% better performance over Graviton2-based instances.
+
+# v1.88.0 (2023-03-03)
+
+* **Feature**: This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.
+
+# v1.87.0 (2023-02-28)
+
+* **Feature**: This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default.
+
+# v1.86.1 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.86.0 (2023-02-14)
+
+* **Feature**: With this release customers can turn host maintenance on or off when allocating or modifying a supported dedicated host. Host maintenance is turned on by default for supported hosts.
+
+# v1.85.0 (2023-02-10)
+
+* **Feature**: Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.
+
+# v1.84.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
+# v1.84.0 (2023-02-02)
+
+* **Feature**: Documentation updates for EC2.
+
+# v1.83.0 (2023-01-31)
+
+* **Feature**: This launch allows customers to associate up to 8 IP addresses to their NAT Gateways to increase the limit on concurrent connections to a single destination by eight times from 55K to 440K.
+
+# v1.82.0 (2023-01-30)
+
+* **Feature**: We add Prefix Lists as a new route destination option for LocalGatewayRoutes. This will allow customers to create routes to Prefix Lists. Prefix List routes will allow customers to group individual CIDR routes with the same target into a single route.
+
 # v1.81.0 (2023-01-25)
 
 * **Feature**: This release adds new functionality that allows customers to provision IPv6 CIDR blocks through Amazon VPC IP Address Manager (IPAM) as well as allowing customers to utilize IPAM Resource Discovery APIs.

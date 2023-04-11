@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a hub.
+// Delete a hub. Hub APIs are only callable through SageMaker Studio.
 func (c *Client) DeleteHub(ctx context.Context, params *DeleteHubInput, optFns ...func(*Options)) (*DeleteHubOutput, error) {
 	if params == nil {
 		params = &DeleteHubInput{}

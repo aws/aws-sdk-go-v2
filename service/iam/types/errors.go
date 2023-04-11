@@ -27,7 +27,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModification"
 	}
 	return *e.ErrorCodeOverride
@@ -57,7 +57,7 @@ func (e *CredentialReportExpiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CredentialReportExpiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReportExpired"
 	}
 	return *e.ErrorCodeOverride
@@ -84,7 +84,7 @@ func (e *CredentialReportNotPresentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CredentialReportNotPresentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReportNotPresent"
 	}
 	return *e.ErrorCodeOverride
@@ -112,7 +112,7 @@ func (e *CredentialReportNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CredentialReportNotReadyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReportInProgress"
 	}
 	return *e.ErrorCodeOverride
@@ -139,7 +139,7 @@ func (e *DeleteConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeleteConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DeleteConflict"
 	}
 	return *e.ErrorCodeOverride
@@ -166,7 +166,7 @@ func (e *DuplicateCertificateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateCertificateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateCertificate"
 	}
 	return *e.ErrorCodeOverride
@@ -193,7 +193,7 @@ func (e *DuplicateSSHPublicKeyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateSSHPublicKeyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateSSHPublicKey"
 	}
 	return *e.ErrorCodeOverride
@@ -220,7 +220,7 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityAlreadyExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -249,7 +249,7 @@ func (e *EntityTemporarilyUnmodifiableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityTemporarilyUnmodifiableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityTemporarilyUnmodifiable"
 	}
 	return *e.ErrorCodeOverride
@@ -278,7 +278,7 @@ func (e *InvalidAuthenticationCodeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAuthenticationCodeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidAuthenticationCode"
 	}
 	return *e.ErrorCodeOverride
@@ -306,7 +306,7 @@ func (e *InvalidCertificateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCertificateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCertificate"
 	}
 	return *e.ErrorCodeOverride
@@ -333,7 +333,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInput"
 	}
 	return *e.ErrorCodeOverride
@@ -360,7 +360,7 @@ func (e *InvalidPublicKeyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPublicKeyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPublicKey"
 	}
 	return *e.ErrorCodeOverride
@@ -387,7 +387,7 @@ func (e *InvalidUserTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidUserTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidUserType"
 	}
 	return *e.ErrorCodeOverride
@@ -414,7 +414,7 @@ func (e *KeyPairMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KeyPairMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "KeyPairMismatch"
 	}
 	return *e.ErrorCodeOverride
@@ -442,7 +442,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -469,7 +469,7 @@ func (e *MalformedCertificateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedCertificateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedCertificate"
 	}
 	return *e.ErrorCodeOverride
@@ -496,7 +496,7 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MalformedPolicyDocument"
 	}
 	return *e.ErrorCodeOverride
@@ -523,7 +523,7 @@ func (e *NoSuchEntityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchEntityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchEntity"
 	}
 	return *e.ErrorCodeOverride
@@ -550,7 +550,7 @@ func (e *PasswordPolicyViolationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PasswordPolicyViolationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PasswordPolicyViolation"
 	}
 	return *e.ErrorCodeOverride
@@ -577,7 +577,7 @@ func (e *PolicyEvaluationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyEvaluationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyEvaluation"
 	}
 	return *e.ErrorCodeOverride
@@ -604,7 +604,7 @@ func (e *PolicyNotAttachableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyNotAttachableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PolicyNotAttachable"
 	}
 	return *e.ErrorCodeOverride
@@ -631,7 +631,7 @@ func (e *ReportGenerationLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReportGenerationLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReportGenerationLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -660,7 +660,7 @@ func (e *ServiceFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceFailure"
 	}
 	return *e.ErrorCodeOverride
@@ -686,17 +686,18 @@ func (e *ServiceNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotSupportedService"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because only the service that depends on the
-// service-linked role can modify or delete the role on your behalf. The error
-// message includes the name of the service that depends on this service-linked
-// role. You must request the change through that service.
+// The request was rejected because service-linked roles are protected Amazon Web
+// Services resources. Only the service that depends on the service-linked role can
+// modify or delete the role on your behalf. The error message includes the name of
+// the service that depends on this service-linked role. You must request the
+// change through that service.
 type UnmodifiableEntityException struct {
 	Message *string
 
@@ -715,7 +716,7 @@ func (e *UnmodifiableEntityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnmodifiableEntityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnmodifiableEntity"
 	}
 	return *e.ErrorCodeOverride
@@ -742,7 +743,7 @@ func (e *UnrecognizedPublicKeyEncodingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnrecognizedPublicKeyEncodingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnrecognizedPublicKeyEncoding"
 	}
 	return *e.ErrorCodeOverride

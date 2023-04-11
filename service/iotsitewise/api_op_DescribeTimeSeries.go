@@ -64,6 +64,14 @@ type DescribeTimeSeriesOutput struct {
 	// This member is required.
 	DataType types.PropertyDataType
 
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the time series, which has the following format.
+	// arn:${Partition}:iotsitewise:${Region}:${Account}:time-series/${TimeSeriesId}
+	//
+	// This member is required.
+	TimeSeriesArn *string
+
 	// The date that the time series was created, in Unix epoch time.
 	//
 	// This member is required.

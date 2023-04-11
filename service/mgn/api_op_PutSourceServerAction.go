@@ -57,8 +57,17 @@ type PutSourceServerActionInput struct {
 	// Source server post migration custom action active status.
 	Active *bool
 
+	// Source server post migration custom action category.
+	Category types.ActionCategory
+
+	// Source server post migration custom action description.
+	Description *string
+
 	// Source server post migration custom action document version.
 	DocumentVersion *string
+
+	// Source server post migration custom action external parameters.
+	ExternalParameters map[string]types.SsmExternalParameter
 
 	// Source server post migration custom action must succeed for cutover.
 	MustSucceedForCutover *bool
@@ -83,11 +92,20 @@ type PutSourceServerActionOutput struct {
 	// Source server post migration custom action active status.
 	Active *bool
 
+	// Source server post migration custom action category.
+	Category types.ActionCategory
+
+	// Source server post migration custom action description.
+	Description *string
+
 	// Source server post migration custom action document identifier.
 	DocumentIdentifier *string
 
 	// Source server post migration custom action document version.
 	DocumentVersion *string
+
+	// Source server post migration custom action external parameters.
+	ExternalParameters map[string]types.SsmExternalParameter
 
 	// Source server post migration custom action must succeed for cutover.
 	MustSucceedForCutover *bool

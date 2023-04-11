@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.
 func (c *Client) ListProxySessions(ctx context.Context, params *ListProxySessionsInput, optFns ...func(*Options)) (*ListProxySessionsOutput, error) {
 	if params == nil {
 		params = &ListProxySessionsInput{}
@@ -29,21 +30,29 @@ func (c *Client) ListProxySessions(ctx context.Context, params *ListProxySession
 
 type ListProxySessionsInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
+	// The token used to retrieve the next page of results.
 	NextToken *string
 
+	// The proxy session status.
 	Status types.ProxySessionStatus
 
 	noSmithyDocumentSerde
 }
 
 type ListProxySessionsOutput struct {
+
+	// The token used to retrieve the next page of results.
 	NextToken *string
 
+	// The proxy sessions' details.
 	ProxySessions []types.ProxySession
 
 	// Metadata pertaining to the operation's result.
@@ -125,6 +134,7 @@ var _ ListProxySessionsAPIClient = (*Client)(nil)
 
 // ListProxySessionsPaginatorOptions is the paginator options for ListProxySessions
 type ListProxySessionsPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates example findings of types specified by the list of finding types. If
-// 'NULL' is specified for findingTypes, the API generates example findings of all
+// Generates sample findings of types specified by the list of finding types. If
+// 'NULL' is specified for findingTypes, the API generates sample findings of all
 // supported finding types.
 func (c *Client) CreateSampleFindings(ctx context.Context, params *CreateSampleFindingsInput, optFns ...func(*Options)) (*CreateSampleFindingsOutput, error) {
 	if params == nil {

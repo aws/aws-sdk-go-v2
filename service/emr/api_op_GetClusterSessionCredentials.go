@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Provides Temporary, basic HTTP credentials that are associated with a given
+// Provides temporary, HTTP basic credentials that are associated with a given
 // runtime IAM role and used by a cluster with fine-grained access control
 // activated. You can use these credentials to connect to cluster endpoints that
-// support username-based and password-based authentication.
+// support username and password authentication.
 func (c *Client) GetClusterSessionCredentials(ctx context.Context, params *GetClusterSessionCredentialsInput, optFns ...func(*Options)) (*GetClusterSessionCredentialsOutput, error) {
 	if params == nil {
 		params = &GetClusterSessionCredentialsInput{}
@@ -52,7 +52,7 @@ type GetClusterSessionCredentialsInput struct {
 type GetClusterSessionCredentialsOutput struct {
 
 	// The credentials that you can use to connect to cluster endpoints that support
-	// username-based and password-based authentication.
+	// username and password authentication.
 	Credentials types.Credentials
 
 	// The time when the credentials that are returned by the

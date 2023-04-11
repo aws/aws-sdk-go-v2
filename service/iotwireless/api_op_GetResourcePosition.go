@@ -12,7 +12,7 @@ import (
 )
 
 // Get the position information for a given wireless device or a wireless gateway
-// resource. The postion information uses the  World Geodetic System (WGS84)
+// resource. The position information uses the  World Geodetic System (WGS84)
 // (https://gisgeography.com/wgs84-world-geodetic-system/).
 func (c *Client) GetResourcePosition(ctx context.Context, params *GetResourcePositionInput, optFns ...func(*Options)) (*GetResourcePositionOutput, error) {
 	if params == nil {
@@ -32,7 +32,7 @@ func (c *Client) GetResourcePosition(ctx context.Context, params *GetResourcePos
 type GetResourcePositionInput struct {
 
 	// The identifier of the resource for which position information is retrieved. It
-	// can be the wireless device ID or the wireless gateway ID depending on the
+	// can be the wireless device ID or the wireless gateway ID, depending on the
 	// resource type.
 	//
 	// This member is required.

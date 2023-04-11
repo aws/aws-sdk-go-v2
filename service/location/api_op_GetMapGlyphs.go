@@ -68,18 +68,20 @@ type GetMapGlyphsInput struct {
 	// * VectorGrabStandardLight, VectorGrabStandardDark – Noto Sans Regular |
 	// Noto Sans Medium | Noto Sans Bold
 	//
-	// Valid font stacks for Open Data (Preview)
+	// Valid font stacks for Open Data
 	// (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html)
 	// styles:
 	//
-	// * VectorOpenDataStandardLight – Amazon Ember Regular,Noto Sans Regular
-	// | Amazon Ember Bold,Noto Sans Bold | Amazon Ember Medium,Noto Sans Medium |
-	// Amazon Ember Regular Italic,Noto Sans Italic | Amazon Ember Condensed RC
-	// Regular,Noto Sans Regular | Amazon Ember Condensed RC Bold,Noto Sans Bold
+	// * VectorOpenDataStandardLight, VectorOpenDataStandardDark,
+	// VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – Amazon Ember
+	// Regular,Noto Sans Regular | Amazon Ember Bold,Noto Sans Bold | Amazon Ember
+	// Medium,Noto Sans Medium | Amazon Ember Regular Italic,Noto Sans Italic | Amazon
+	// Ember Condensed RC Regular,Noto Sans Regular | Amazon Ember Condensed RC
+	// Bold,Noto Sans Bold
 	//
-	// The
-	// fonts used by VectorOpenDataStandardLight are combined fonts that use Amazon
-	// Ember for most glyphs but Noto Sans for glyphs unsupported by Amazon Ember.
+	// The fonts used by the Open Data map styles are combined
+	// fonts that use Amazon Ember for most glyphs but Noto Sans for glyphs unsupported
+	// by Amazon Ember.
 	//
 	// This member is required.
 	FontStack *string
@@ -96,13 +98,21 @@ type GetMapGlyphsInput struct {
 	// This member is required.
 	MapName *string
 
+	// The optional API key
+	// (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+	// to authorize the request.
+	Key *string
+
 	noSmithyDocumentSerde
 }
 
 type GetMapGlyphsOutput struct {
 
-	// The blob's content type.
+	// The glyph, as binary blob.
 	Blob []byte
+
+	// The HTTP Cache-Control directive for the value.
+	CacheControl *string
 
 	// The map glyph content type. For example, application/octet-stream.
 	ContentType *string

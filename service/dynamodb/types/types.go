@@ -769,6 +769,9 @@ type Condition struct {
 type ConditionCheck struct {
 
 	// A condition that must be satisfied in order for a conditional update to succeed.
+	// For more information, see Condition expressions
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
+	// in the Amazon DynamoDB Developer Guide.
 	//
 	// This member is required.
 	ConditionExpression *string
@@ -784,10 +787,16 @@ type ConditionCheck struct {
 	// This member is required.
 	TableName *string
 
-	// One or more substitution tokens for attribute names in an expression.
+	// One or more substitution tokens for attribute names in an expression. For more
+	// information, see Expression attribute names
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html)
+	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]string
 
-	// One or more values that can be substituted in an expression.
+	// One or more values that can be substituted in an expression. For more
+	// information, see Condition expressions
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
+	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeValues map[string]AttributeValue
 
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the
@@ -2895,6 +2904,10 @@ type TableDescription struct {
 	// The date and time when the table was created, in UNIX epoch time
 	// (http://www.epochconverter.com/) format.
 	CreationDateTime *time.Time
+
+	// Indicates whether deletion protection is enabled (true) or disabled (false) on
+	// the table.
+	DeletionProtectionEnabled *bool
 
 	// The global secondary indexes, if any, on the table. Each index is scoped to a
 	// given partition key value. Each element is composed of:

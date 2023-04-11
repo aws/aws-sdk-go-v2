@@ -16,7 +16,10 @@ import (
 // represents the GuardDuty service. To start using GuardDuty, you must create a
 // detector in each Region where you enable the service. You can have only one
 // detector per account per Region. All data sources are enabled in a new detector
-// by default.
+// by default. There might be regional differences because some data sources might
+// not be available in all the Amazon Web Services Regions where GuardDuty is
+// presently supported. For more information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) CreateDetector(ctx context.Context, params *CreateDetectorInput, optFns ...func(*Options)) (*CreateDetectorOutput, error) {
 	if params == nil {
 		params = &CreateDetectorInput{}
@@ -42,8 +45,17 @@ type CreateDetectorInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string
 
-	// Describes which data sources will be enabled for the detector.
+	// Describes which data sources will be enabled for the detector. There might be
+	// regional differences because some data sources might not be available in all the
+	// Amazon Web Services Regions where GuardDuty is presently supported. For more
+	// information, see Regions and endpoints
+	// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *types.DataSourceConfigurations
+
+	// A list of features that will be configured for the detector.
+	Features []types.DetectorFeatureConfiguration
 
 	// A value that specifies how frequently updated findings are exported.
 	FindingPublishingFrequency types.FindingPublishingFrequency

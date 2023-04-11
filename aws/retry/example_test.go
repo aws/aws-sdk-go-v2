@@ -55,7 +55,7 @@ func Example_overrideSpecificOperation() {
 	_, err = client.GetObject(context.Background(), &s3.GetObjectInput{
 		Bucket: aws.String("my-bucket"),
 		Key:    aws.String("my-key"),
-	}, func(options *types.Options) {
+	}, func(options *s3.Options) {
 		options.Retryer = retry.AddWithErrorCodes(options.Retryer, (*types.NoSuchBucketException)(nil).ErrorCode())
 	})
 	if err != nil {

@@ -20,7 +20,8 @@ import (
 // single SELECT statement response can return up to the maximum number of items
 // (if using the Limit parameter) or a maximum of 1 MB of data (and then apply any
 // filtering to the results using WHERE clause). If LastEvaluatedKey is present in
-// the response, you need to paginate the result set.
+// the response, you need to paginate the result set. If NextToken is present, you
+// need to paginate the result set and include NextToken.
 func (c *Client) ExecuteStatement(ctx context.Context, params *ExecuteStatementInput, optFns ...func(*Options)) (*ExecuteStatementOutput, error) {
 	if params == nil {
 		params = &ExecuteStatementInput{}

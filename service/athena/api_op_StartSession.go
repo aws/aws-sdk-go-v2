@@ -54,9 +54,11 @@ type StartSessionInput struct {
 	// The session description.
 	Description *string
 
-	// The notebook version. This value is required only when requesting that a
-	// notebook server be started for the session. The only valid notebook version is
-	// Jupyter1.0.
+	// The notebook version. This value is supplied automatically for notebook sessions
+	// in the Athena console and is not required for programmatic session access. The
+	// only valid notebook version is Athena notebook version 1. If you specify a value
+	// for NotebookVersion, you must also specify a value for NotebookId. See
+	// EngineConfiguration$AdditionalConfigs.
 	NotebookVersion *string
 
 	// The idle timeout in minutes for the session.

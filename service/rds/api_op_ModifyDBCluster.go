@@ -17,7 +17,7 @@ import (
 // What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see  Multi-AZ deployments with two readable standby DB instances
+// see  Multi-AZ DB cluster deployments
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide.
 func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInput, optFns ...func(*Options)) (*ModifyDBClusterOutput, error) {
@@ -196,11 +196,9 @@ type ModifyDBClusterInput struct {
 	// The version number of the database engine to which you want to upgrade. Changing
 	// this parameter results in an outage. The change is applied during the next
 	// maintenance window unless ApplyImmediately is enabled. To list all of the
-	// available engine versions for MySQL 5.6-compatible Aurora, use the following
-	// command: aws rds describe-db-engine-versions --engine aurora --query
-	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following
-	// command: aws rds describe-db-engine-versions --engine aurora-mysql --query
+	// available engine versions for Aurora MySQL version 2 (5.7-compatible) and
+	// version 3 (MySQL 8.0-compatible), use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-mysql --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
 	// for Aurora PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine aurora-postgresql --query

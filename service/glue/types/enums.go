@@ -518,6 +518,24 @@ func (DeleteBehavior) Values() []DeleteBehavior {
 	}
 }
 
+type DeltaTargetCompressionType string
+
+// Enum values for DeltaTargetCompressionType
+const (
+	DeltaTargetCompressionTypeUncompressed DeltaTargetCompressionType = "uncompressed"
+	DeltaTargetCompressionTypeSnappy       DeltaTargetCompressionType = "snappy"
+)
+
+// Values returns all known values for DeltaTargetCompressionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeltaTargetCompressionType) Values() []DeltaTargetCompressionType {
+	return []DeltaTargetCompressionType{
+		"uncompressed",
+		"snappy",
+	}
+}
+
 type DQStopJobOnFailureTiming string
 
 // Enum values for DQStopJobOnFailureTiming
@@ -777,6 +795,30 @@ func (HudiTargetCompressionType) Values() []HudiTargetCompressionType {
 		"lzo",
 		"uncompressed",
 		"snappy",
+	}
+}
+
+type JDBCConnectionType string
+
+// Enum values for JDBCConnectionType
+const (
+	JDBCConnectionTypeSqlserver  JDBCConnectionType = "sqlserver"
+	JDBCConnectionTypeMysql      JDBCConnectionType = "mysql"
+	JDBCConnectionTypeOracle     JDBCConnectionType = "oracle"
+	JDBCConnectionTypePostgresql JDBCConnectionType = "postgresql"
+	JDBCConnectionTypeRedshift   JDBCConnectionType = "redshift"
+)
+
+// Values returns all known values for JDBCConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JDBCConnectionType) Values() []JDBCConnectionType {
+	return []JDBCConnectionType{
+		"sqlserver",
+		"mysql",
+		"oracle",
+		"postgresql",
+		"redshift",
 	}
 }
 
@@ -1617,6 +1659,7 @@ const (
 	TargetFormatOrc     TargetFormat = "orc"
 	TargetFormatParquet TargetFormat = "parquet"
 	TargetFormatHudi    TargetFormat = "hudi"
+	TargetFormatDelta   TargetFormat = "delta"
 )
 
 // Values returns all known values for TargetFormat. Note that this can be expanded
@@ -1630,6 +1673,7 @@ func (TargetFormat) Values() []TargetFormat {
 		"orc",
 		"parquet",
 		"hudi",
+		"delta",
 	}
 }
 

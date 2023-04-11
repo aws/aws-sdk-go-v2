@@ -50,7 +50,7 @@ type GetSensitivityInspectionTemplateOutput struct {
 	// included (used) when analyzing data.
 	Includes *types.SensitivityInspectionTemplateIncludes
 
-	// The name of the template.
+	// The name of the template: automated-sensitive-data-discovery.
 	Name *string
 
 	// The unique identifier for the template.

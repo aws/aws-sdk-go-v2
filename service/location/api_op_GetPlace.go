@@ -16,12 +16,13 @@ import (
 // operations. A PlaceId is valid only if all of the following are the same in the
 // original search request and the call to GetPlace.
 //
-// * Customer AWS account
+// * Customer Amazon Web
+// Services account
 //
-// * AWS
-// Region
+// * Amazon Web Services Region
 //
-// * Data provider specified in the place index resource
+// * Data provider specified in the
+// place index resource
 func (c *Client) GetPlace(ctx context.Context, params *GetPlaceInput, optFns ...func(*Options)) (*GetPlaceOutput, error) {
 	if params == nil {
 		params = &GetPlaceInput{}

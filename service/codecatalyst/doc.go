@@ -67,8 +67,11 @@
 // * StopDevEnvironment, which stops a specified Dev
 // Environment and puts it into an stopped state.
 //
-// * UpdateDevEnvironment, which
-// changes one or more values for a Dev Environment.
+// * StopDevEnvironmentSession,
+// which stops a session for a specified Dev Environment.
+//
+// * UpdateDevEnvironment,
+// which changes one or more values for a Dev Environment.
 //
 // * VerifySession, which
 // verifies whether the calling user has a valid Amazon CodeCatalyst login and

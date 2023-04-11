@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You have specified a template that is invalid or supported.
+// You have specified a template that is not valid or supported.
 type ConformancePackTemplateValidationException struct {
 	Message *string
 
@@ -26,7 +26,7 @@ func (e *ConformancePackTemplateValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConformancePackTemplateValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConformancePackTemplateValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *IdempotentParameterMismatch) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatch) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdempotentParameterMismatch"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *InsufficientDeliveryPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientDeliveryPolicyException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientDeliveryPolicyException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *InsufficientPermissionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientPermissionsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientPermissionsException"
 	}
 	return *e.ErrorCodeOverride
@@ -157,7 +157,7 @@ func (e *InvalidConfigurationRecorderNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationRecorderNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidConfigurationRecorderNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -166,7 +166,7 @@ func (e *InvalidConfigurationRecorderNameException) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
-// The specified delivery channel name is invalid.
+// The specified delivery channel name is not valid.
 type InvalidDeliveryChannelNameException struct {
 	Message *string
 
@@ -185,7 +185,7 @@ func (e *InvalidDeliveryChannelNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDeliveryChannelNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDeliveryChannelNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -213,7 +213,7 @@ func (e *InvalidExpressionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidExpressionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidExpressionException"
 	}
 	return *e.ErrorCodeOverride
@@ -239,14 +239,14 @@ func (e *InvalidLimitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLimitException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidLimitException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidLimitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified next token is invalid. Specify the nextToken string that was
+// The specified next token is not valid. Specify the nextToken string that was
 // returned in the previous response to get the next page of results.
 type InvalidNextTokenException struct {
 	Message *string
@@ -266,15 +266,15 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One or more of the specified parameters are invalid. Verify that your parameters
-// are valid and try again.
+// One or more of the specified parameters are not valid. Verify that your
+// parameters are valid and try again.
 type InvalidParameterValueException struct {
 	Message *string
 
@@ -293,7 +293,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterValueException"
 	}
 	return *e.ErrorCodeOverride
@@ -301,7 +301,8 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Config throws an exception if the recording group does not contain a valid list
-// of resource types. Invalid values might also be incorrectly formatted.
+// of resource types. Values that are not valid might also be incorrectly
+// formatted.
 type InvalidRecordingGroupException struct {
 	Message *string
 
@@ -320,14 +321,14 @@ func (e *InvalidRecordingGroupException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRecordingGroupException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRecordingGroupException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRecordingGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified ResultToken is invalid.
+// The specified ResultToken is not valid.
 type InvalidResultTokenException struct {
 	Message *string
 
@@ -346,7 +347,7 @@ func (e *InvalidResultTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResultTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResultTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -372,14 +373,14 @@ func (e *InvalidRoleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRoleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRoleException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon S3 key prefix is invalid.
+// The specified Amazon S3 key prefix is not valid.
 type InvalidS3KeyPrefixException struct {
 	Message *string
 
@@ -398,14 +399,14 @@ func (e *InvalidS3KeyPrefixException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3KeyPrefixException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3KeyPrefixException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidS3KeyPrefixException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon KMS Key ARN is invalid.
+// The specified Amazon KMS Key ARN is not valid.
 type InvalidS3KmsKeyArnException struct {
 	Message *string
 
@@ -424,7 +425,7 @@ func (e *InvalidS3KmsKeyArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3KmsKeyArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidS3KmsKeyArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -450,14 +451,14 @@ func (e *InvalidSNSTopicARNException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSNSTopicARNException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSNSTopicARNException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSNSTopicARNException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified time range is invalid. The earlier time is not chronologically
+// The specified time range is not valid. The earlier time is not chronologically
 // before the later time.
 type InvalidTimeRangeException struct {
 	Message *string
@@ -477,7 +478,7 @@ func (e *InvalidTimeRangeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTimeRangeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTimeRangeException"
 	}
 	return *e.ErrorCodeOverride
@@ -504,7 +505,7 @@ func (e *LastDeliveryChannelDeleteFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LastDeliveryChannelDeleteFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LastDeliveryChannelDeleteFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -535,7 +536,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -563,7 +564,7 @@ func (e *MaxActiveResourcesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxActiveResourcesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxActiveResourcesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -593,7 +594,7 @@ func (e *MaxNumberOfConfigRulesExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxNumberOfConfigRulesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfConfigRulesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -621,7 +622,7 @@ func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorMessage() stri
 	return *e.Message
 }
 func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfConfigurationRecordersExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -652,7 +653,7 @@ func (e *MaxNumberOfConformancePacksExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxNumberOfConformancePacksExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfConformancePacksExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -680,7 +681,7 @@ func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfDeliveryChannelsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -711,7 +712,7 @@ func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorMessage() str
 	return *e.Message
 }
 func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfOrganizationConfigRulesExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -742,7 +743,7 @@ func (e *MaxNumberOfOrganizationConformancePacksExceededException) ErrorMessage(
 	return *e.Message
 }
 func (e *MaxNumberOfOrganizationConformancePacksExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfOrganizationConformancePacksExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -771,7 +772,7 @@ func (e *MaxNumberOfRetentionConfigurationsExceededException) ErrorMessage() str
 	return *e.Message
 }
 func (e *MaxNumberOfRetentionConfigurationsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MaxNumberOfRetentionConfigurationsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -800,7 +801,7 @@ func (e *NoAvailableConfigurationRecorderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableConfigurationRecorderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAvailableConfigurationRecorderException"
 	}
 	return *e.ErrorCodeOverride
@@ -828,7 +829,7 @@ func (e *NoAvailableDeliveryChannelException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableDeliveryChannelException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAvailableDeliveryChannelException"
 	}
 	return *e.ErrorCodeOverride
@@ -856,7 +857,7 @@ func (e *NoAvailableOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableOrganizationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoAvailableOrganizationException"
 	}
 	return *e.ErrorCodeOverride
@@ -882,7 +883,7 @@ func (e *NoRunningConfigurationRecorderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoRunningConfigurationRecorderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoRunningConfigurationRecorderException"
 	}
 	return *e.ErrorCodeOverride
@@ -910,15 +911,15 @@ func (e *NoSuchBucketException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchBucketException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchBucketException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchBucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Config rule in the request is invalid. Verify that the rule is an Config
-// Custom Policy rule, that the rule name is correct, and that valid Amazon Resouce
+// The Config rule in the request is not valid. Verify that the rule is an Config
+// Process Check rule, that the rule name is correct, and that valid Amazon Resouce
 // Names (ARNs) are used before trying again.
 type NoSuchConfigRuleException struct {
 	Message *string
@@ -938,7 +939,7 @@ func (e *NoSuchConfigRuleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConfigRuleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConfigRuleException"
 	}
 	return *e.ErrorCodeOverride
@@ -964,7 +965,7 @@ func (e *NoSuchConfigRuleInConformancePackException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConfigRuleInConformancePackException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConfigRuleInConformancePackException"
 	}
 	return *e.ErrorCodeOverride
@@ -992,7 +993,7 @@ func (e *NoSuchConfigurationAggregatorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConfigurationAggregatorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConfigurationAggregatorException"
 	}
 	return *e.ErrorCodeOverride
@@ -1020,7 +1021,7 @@ func (e *NoSuchConfigurationRecorderException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConfigurationRecorderException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConfigurationRecorderException"
 	}
 	return *e.ErrorCodeOverride
@@ -1048,7 +1049,7 @@ func (e *NoSuchConformancePackException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchConformancePackException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchConformancePackException"
 	}
 	return *e.ErrorCodeOverride
@@ -1074,15 +1075,15 @@ func (e *NoSuchDeliveryChannelException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchDeliveryChannelException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchDeliveryChannelException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchDeliveryChannelException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Config rule in the request is invalid. Verify that the rule is an
-// organization Config Custom Policy rule, that the rule name is correct, and that
+// The Config rule in the request is not valid. Verify that the rule is an
+// organization Config Process Check rule, that the rule name is correct, and that
 // valid Amazon Resouce Names (ARNs) are used before trying again.
 type NoSuchOrganizationConfigRuleException struct {
 	Message *string
@@ -1102,7 +1103,7 @@ func (e *NoSuchOrganizationConfigRuleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchOrganizationConfigRuleException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchOrganizationConfigRuleException"
 	}
 	return *e.ErrorCodeOverride
@@ -1132,7 +1133,7 @@ func (e *NoSuchOrganizationConformancePackException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchOrganizationConformancePackException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchOrganizationConformancePackException"
 	}
 	return *e.ErrorCodeOverride
@@ -1160,7 +1161,7 @@ func (e *NoSuchRemediationConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchRemediationConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchRemediationConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1188,7 +1189,7 @@ func (e *NoSuchRemediationExceptionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchRemediationExceptionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchRemediationExceptionException"
 	}
 	return *e.ErrorCodeOverride
@@ -1216,7 +1217,7 @@ func (e *NoSuchRetentionConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchRetentionConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoSuchRetentionConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1269,7 +1270,7 @@ func (e *OrganizationAccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationAccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationAccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -1296,7 +1297,7 @@ func (e *OrganizationAllFeaturesNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationAllFeaturesNotEnabledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationAllFeaturesNotEnabledException"
 	}
 	return *e.ErrorCodeOverride
@@ -1305,7 +1306,7 @@ func (e *OrganizationAllFeaturesNotEnabledException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// You have specified a template that is invalid or supported.
+// You have specified a template that is not valid or supported.
 type OrganizationConformancePackTemplateValidationException struct {
 	Message *string
 
@@ -1324,7 +1325,7 @@ func (e *OrganizationConformancePackTemplateValidationException) ErrorMessage() 
 	return *e.Message
 }
 func (e *OrganizationConformancePackTemplateValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationConformancePackTemplateValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1352,7 +1353,7 @@ func (e *OversizedConfigurationItemException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OversizedConfigurationItemException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OversizedConfigurationItemException"
 	}
 	return *e.ErrorCodeOverride
@@ -1381,7 +1382,7 @@ func (e *RemediationInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RemediationInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RemediationInProgressException"
 	}
 	return *e.ErrorCodeOverride
@@ -1408,7 +1409,7 @@ func (e *ResourceConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -1462,7 +1463,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -1488,7 +1489,7 @@ func (e *ResourceNotDiscoveredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotDiscoveredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotDiscoveredException"
 	}
 	return *e.ErrorCodeOverride
@@ -1514,7 +1515,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -1543,18 +1544,19 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested action is invalid. For PutStoredQuery, you will see this exception
-// if there are missing required fields or if the input value fails the validation,
-// or if you are trying to create more than 300 queries. For GetStoredQuery,
-// ListStoredQuery, and DeleteStoredQuery you will see this exception if there are
-// missing required fields or if the input value fails the validation.
+// The requested action is not valid. For PutStoredQuery, you will see this
+// exception if there are missing required fields or if the input value fails the
+// validation, or if you are trying to create more than 300 queries. For
+// GetStoredQuery, ListStoredQuery, and DeleteStoredQuery you will see this
+// exception if there are missing required fields or if the input value fails the
+// validation.
 type ValidationException struct {
 	Message *string
 
@@ -1573,7 +1575,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

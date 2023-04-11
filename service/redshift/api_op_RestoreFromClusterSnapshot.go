@@ -214,17 +214,17 @@ type RestoreFromClusterSnapshotInput struct {
 	ReservedNodeId *string
 
 	// The Amazon Resource Name (ARN) of the snapshot associated with the message to
-	// restore from a cluster. You can specify this parameter or snapshotIdentifier,
+	// restore from a cluster. You must specify this parameter or snapshotIdentifier,
 	// but not both.
 	SnapshotArn *string
 
 	// The name of the cluster the source snapshot was created from. This parameter is
-	// required if your IAM user has a policy containing a snapshot resource element
-	// that specifies anything other than * for the cluster name.
+	// required if your IAM user or role has a policy containing a snapshot resource
+	// element that specifies anything other than * for the cluster name.
 	SnapshotClusterIdentifier *string
 
 	// The name of the snapshot from which to create the new cluster. This parameter
-	// isn't case sensitive. You can specify this parameter or snapshotArn, but not
+	// isn't case sensitive. You must specify this parameter or snapshotArn, but not
 	// both. Example: my-snapshot-id
 	SnapshotIdentifier *string
 

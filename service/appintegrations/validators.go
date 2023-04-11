@@ -337,6 +337,36 @@ func validateEventFilter(v *types.EventFilter) error {
 	}
 }
 
+func validateFileConfiguration(v *types.FileConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileConfiguration"}
+	if v.Folders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Folders"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfiguration"}
+	if v.ScheduleExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataIntegrationInput(v *CreateDataIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -344,6 +374,24 @@ func validateOpCreateDataIntegrationInput(v *CreateDataIntegrationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDataIntegrationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.KmsKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKey"))
+	}
+	if v.SourceURI == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceURI"))
+	}
+	if v.ScheduleConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfig"))
+	} else if v.ScheduleConfig != nil {
+		if err := validateScheduleConfiguration(v.ScheduleConfig); err != nil {
+			invalidParams.AddNested("ScheduleConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FileConfiguration != nil {
+		if err := validateFileConfiguration(v.FileConfiguration); err != nil {
+			invalidParams.AddNested("FileConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

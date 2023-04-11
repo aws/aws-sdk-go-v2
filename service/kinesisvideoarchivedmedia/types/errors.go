@@ -29,7 +29,7 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -56,7 +56,7 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -83,7 +83,7 @@ func (e *InvalidCodecPrivateDataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCodecPrivateDataException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCodecPrivateDataException"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *InvalidMediaFrameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMediaFrameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidMediaFrameException"
 	}
 	return *e.ErrorCodeOverride
@@ -136,7 +136,7 @@ func (e *MissingCodecPrivateDataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingCodecPrivateDataException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingCodecPrivateDataException"
 	}
 	return *e.ErrorCodeOverride
@@ -163,7 +163,7 @@ func (e *NoDataRetentionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoDataRetentionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoDataRetentionException"
 	}
 	return *e.ErrorCodeOverride
@@ -190,7 +190,7 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotAuthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotAuthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -221,7 +221,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -250,7 +250,7 @@ func (e *UnsupportedStreamMediaTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedStreamMediaTypeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedStreamMediaTypeException"
 	}
 	return *e.ErrorCodeOverride

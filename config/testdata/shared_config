@@ -1,5 +1,5 @@
 [default]
-s3 = 
+s3 =
   unsupported_key=123
   other_unsupported=abc
 
@@ -186,7 +186,6 @@ aws_session_token = DoNotNormalize_config_session_token
 aws_access_key_id = donotnormalize_config_akid
 aws_secret_access_key = donotnormalize_config_secret
 aws_session_token = donotnormalize_config_session_token
-
 
 [profile DONOTNORMALIZE]
 aws_access_key_id = DONOTNORMALIZE_config_akid

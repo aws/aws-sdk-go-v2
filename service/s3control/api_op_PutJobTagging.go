@@ -59,9 +59,9 @@ import (
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 // in the Billing and Cost Management User Guide.
 //
-// To use this action, you must
-// have permission to perform the s3:PutJobTagging action. Related actions
-// include:
+// To use the PutJobTagging
+// operation, you must have permission to perform the s3:PutJobTagging action.
+// Related actions include:
 //
 // * CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)

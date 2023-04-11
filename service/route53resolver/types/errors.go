@@ -27,13 +27,16 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The requested state transition isn't valid. For example, you can't delete a
+// firewall domain list if it is in the process of being deleted, or you can't
+// import domains into a domain list that is in the process of being deleted.
 type ConflictException struct {
 	Message *string
 
@@ -52,7 +55,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +81,7 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +107,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -132,7 +135,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -158,7 +161,7 @@ func (e *InvalidPolicyDocument) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPolicyDocument) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPolicyDocument"
 	}
 	return *e.ErrorCodeOverride
@@ -184,7 +187,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -210,7 +213,7 @@ func (e *InvalidTagException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagException"
 	}
 	return *e.ErrorCodeOverride
@@ -238,7 +241,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -266,7 +269,7 @@ func (e *ResourceExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -294,7 +297,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -322,7 +325,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -350,7 +353,7 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -376,7 +379,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -402,13 +405,15 @@ func (e *UnknownResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnknownResourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnknownResourceException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You have provided an invalid command. Supported values are ADD, REMOVE, or
+// REPLACE a domain.
 type ValidationException struct {
 	Message *string
 
@@ -427,7 +432,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the name of an inbound or an outbound Resolver endpoint.
+// Updates the name, or enpoint type for an inbound or an outbound Resolver
+// endpoint. You can only update between IPV4 and DUALSTACK, IPV6 endpoint type
+// can't be updated to other type.
 func (c *Client) UpdateResolverEndpoint(ctx context.Context, params *UpdateResolverEndpointInput, optFns ...func(*Options)) (*UpdateResolverEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateResolverEndpointInput{}
@@ -36,6 +38,13 @@ type UpdateResolverEndpointInput struct {
 
 	// The name of the Resolver endpoint that you want to update.
 	Name *string
+
+	// Specifies the endpoint type for what type of IP address the endpoint uses to
+	// forward DNS queries.
+	ResolverEndpointType types.ResolverEndpointType
+
+	// Updates the Resolver endpoint type to IpV4, Ipv6, or dual-stack.
+	UpdateIpAddresses []types.UpdateIpAddress
 
 	noSmithyDocumentSerde
 }

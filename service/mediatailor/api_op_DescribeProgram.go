@@ -57,8 +57,14 @@ type DescribeProgramOutput struct {
 	// The name of the channel that the program belongs to.
 	ChannelName *string
 
+	// The clip range configuration settings.
+	ClipRange *types.ClipRange
+
 	// The timestamp of when the program was created.
 	CreationTime *time.Time
+
+	// The duration of the live program in milliseconds.
+	DurationMillis *int64
 
 	// The name of the LiveSource for this Program.
 	LiveSourceName *string

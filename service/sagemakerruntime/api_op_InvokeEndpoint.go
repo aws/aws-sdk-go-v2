@@ -85,7 +85,7 @@ type InvokeEndpointInput struct {
 
 	// An optional JMESPath expression used to override the EnableExplanations
 	// parameter of the ClarifyExplainerConfig API. See the EnableExplanations
-	// (https://docs.aws.amazon.com/clarify-online-explainability-create-endpoint.html#clarify-online-exaplainability-create-endpoint-enable)
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable)
 	// section in the developer guide for more information.
 	EnableExplanations *string
 

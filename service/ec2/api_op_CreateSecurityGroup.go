@@ -53,9 +53,9 @@ func (c *Client) CreateSecurityGroup(ctx context.Context, params *CreateSecurity
 
 type CreateSecurityGroupInput struct {
 
-	// A description for the security group. This is informational only. Constraints:
-	// Up to 255 characters in length Constraints for EC2-Classic: ASCII characters
-	// Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
+	// A description for the security group. Constraints: Up to 255 characters in
+	// length Constraints for EC2-Classic: ASCII characters Constraints for EC2-VPC:
+	// a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
 	//
 	// This member is required.
 	Description *string

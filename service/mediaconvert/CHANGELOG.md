@@ -1,3 +1,44 @@
+# v1.34.0 (2023-03-23)
+
+* **Feature**: AWS Elemental MediaConvert SDK now supports passthrough of ID3v2 tags for audio inputs to audio-only HLS outputs.
+
+# v1.33.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.0 (2023-03-03)
+
+* **Feature**: The AWS Elemental MediaConvert SDK has improved handling for different input and output color space combinations.
+
+# v1.32.0 (2023-02-27)
+
+* **Feature**: The AWS Elemental MediaConvert SDK has added support for HDR10 to SDR tone mapping, and animated GIF video input sources.
+
+# v1.31.3 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.31.2 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.1 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.31.0 (2023-02-06)
+
+* **Feature**: The AWS Elemental MediaConvert SDK has added improved scene change detection capabilities and a bandwidth reduction filter, along with video quality enhancements, to the AVC encoder.
+
+# v1.30.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2023-01-12)
 
 * **Feature**: The AWS Elemental MediaConvert SDK has added support for compact DASH manifest generation, audio normalization using TruePeak measurements, and the ability to clip the sample range in the color corrector.

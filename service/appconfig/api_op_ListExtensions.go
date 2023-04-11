@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all custom and Amazon Web Services-authored AppConfig extensions in the
+// Lists all custom and Amazon Web Services authored AppConfig extensions in the
 // account. For more information about extensions, see Working with AppConfig
 // extensions
 // (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
@@ -49,7 +49,7 @@ type ListExtensionsInput struct {
 
 type ListExtensionsOutput struct {
 
-	// The list of available extensions. The list includes Amazon Web Services-authored
+	// The list of available extensions. The list includes Amazon Web Services authored
 	// and user-created extensions.
 	Items []types.ExtensionSummary
 

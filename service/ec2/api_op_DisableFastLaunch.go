@@ -63,7 +63,8 @@ type DisableFastLaunchOutput struct {
 	// pre-provisioned snapshots.
 	LaunchTemplate *types.FastLaunchLaunchTemplateSpecificationResponse
 
-	// The maximum number of parallel instances to launch for creating resources.
+	// The maximum number of instances that Amazon EC2 can launch at the same time to
+	// create pre-provisioned snapshots for Windows faster launching.
 	MaxParallelLaunches *int32
 
 	// The owner of the Windows AMI for which faster launching was turned off.

@@ -40,8 +40,8 @@ type GetECSServiceRecommendationProjectedMetricsInput struct {
 	// This member is required.
 	Period int32
 
-	// The ARN that identifies the ECS service. The following is the format of the ARN:
-	// arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
+	// The ARN that identifies the Amazon ECS service. The following is the format of
+	// the ARN: arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
 	//
 	// This member is required.
 	ServiceArn *string

@@ -64,7 +64,7 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArg.member.1=foo&ListArg.member.2=bar&ListArg.member.3=baz&ComplexListArg.member.1.hi=hello&ComplexListArg.member.2.hi=hola`))
 			},
 		},
-		// Does not serialize empty query lists
+		// Serializes empty query lists
 		"EmptyQueryLists": {
 			Params: &QueryListsInput{
 				ListArg: []string{},
@@ -77,7 +77,7 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArg=`))
 			},
 		},
 		// Flattens query lists by repeating the member name and removing the member

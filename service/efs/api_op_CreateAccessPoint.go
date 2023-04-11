@@ -101,7 +101,7 @@ type CreateAccessPointOutput struct {
 	// The name of the access point. This is the value of the Name tag.
 	Name *string
 
-	// Identified the Amazon Web Services account that owns the access point resource.
+	// Identifies the Amazon Web Services account that owns the access point resource.
 	OwnerId *string
 
 	// The full POSIX identity, including the user ID, group ID, and secondary group

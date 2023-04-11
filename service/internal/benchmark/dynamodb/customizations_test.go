@@ -25,8 +25,8 @@ import (
 
 type testData struct {
 	filename         string
-	respChecksum     int
-	respGzipChecksum int
+	respChecksum     int64
+	respGzipChecksum int64
 }
 
 func BenchmarkCustomizations(b *testing.B) {
@@ -71,7 +71,7 @@ func benchCustomizationsOld(b *testing.B, c testData) {
 			r.HTTPResponse = &http.Response{
 				StatusCode: 200,
 				Header: http.Header{
-					"X-Amz-Crc32": []string{strconv.Itoa(c.respChecksum)},
+					"X-Amz-Crc32": []string{strconv.FormatInt(c.respChecksum, 10)},
 				},
 				ContentLength: int64(len(body)),
 				Body:          ioutil.NopCloser(bytes.NewReader(body)),
@@ -127,7 +127,7 @@ func benchCustomizationsSmithy(b *testing.B, c testData) {
 		Region:      "us-west-2",
 		Credentials: unit.StubCredentialsProvider{},
 		HTTPClient: &mockClient{
-			ChecksumHeaderValue: []string{strconv.Itoa(c.respChecksum)},
+			ChecksumHeaderValue: []string{strconv.FormatInt(c.respChecksum, 10)},
 			ScanRespBody:        body,
 		},
 	}
@@ -141,7 +141,7 @@ func benchCustomizationsSmithy(b *testing.B, c testData) {
 	b.Run("all enabled", func(b *testing.B) {
 		client := dynamodb.New(options, func(o *dynamodb.Options) {
 			o.HTTPClient = &mockClient{
-				ChecksumHeaderValue: []string{strconv.Itoa(c.respGzipChecksum)},
+				ChecksumHeaderValue: []string{strconv.FormatInt(c.respGzipChecksum, 10)},
 				ScanRespGzipBody:    gzipBody,
 			}
 			o.DisableValidateResponseChecksum = false

@@ -15,6 +15,81 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpConfigureLogsForChannel struct {
+}
+
+func (*awsRestjson1_serializeOpConfigureLogsForChannel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpConfigureLogsForChannel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ConfigureLogsForChannelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configureLogs/channel")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentConfigureLogsForChannelInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsConfigureLogsForChannelInput(v *ConfigureLogsForChannelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentConfigureLogsForChannelInput(v *ConfigureLogsForChannelInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelName != nil {
+		ok := object.Key("ChannelName")
+		ok.String(*v.ChannelName)
+	}
+
+	if v.LogTypes != nil {
+		ok := object.Key("LogTypes")
+		if err := awsRestjson1_serializeDocumentLogTypes(v.LogTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpConfigureLogsForPlaybackConfiguration struct {
 }
 
@@ -2980,6 +3055,105 @@ func awsRestjson1_serializeOpDocumentUpdateLiveSourceInput(v *UpdateLiveSourceIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateProgram struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateProgram) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateProgram) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateProgramInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channel/{ChannelName}/program/{ProgramName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateProgramInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateProgramInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateProgramInput(v *UpdateProgramInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelName must not be empty")}
+	}
+	if v.ChannelName != nil {
+		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
+			return err
+		}
+	}
+
+	if v.ProgramName == nil || len(*v.ProgramName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ProgramName must not be empty")}
+	}
+	if v.ProgramName != nil {
+		if err := encoder.SetURI("ProgramName").String(*v.ProgramName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateProgramInput(v *UpdateProgramInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdBreaks != nil {
+		ok := object.Key("AdBreaks")
+		if err := awsRestjson1_serializeDocument__listOfAdBreak(v.AdBreaks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ScheduleConfiguration != nil {
+		ok := object.Key("ScheduleConfiguration")
+		if err := awsRestjson1_serializeDocumentUpdateProgramScheduleConfiguration(v.ScheduleConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateSourceLocation struct {
 }
 
@@ -3363,6 +3537,18 @@ func awsRestjson1_serializeDocumentCdnConfiguration(v *types.CdnConfiguration, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentClipRange(v *types.ClipRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("EndOffsetMillis")
+		ok.Long(v.EndOffsetMillis)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConfigurationAliasesRequest(v map[string]map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3511,6 +3697,17 @@ func awsRestjson1_serializeDocumentLivePreRollConfiguration(v *types.LivePreRoll
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLogTypes(v []types.LogType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentManifestProcessingRules(v *types.ManifestProcessingRules, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3620,6 +3817,13 @@ func awsRestjson1_serializeDocumentRequestOutputs(v []types.RequestOutputItem, v
 func awsRestjson1_serializeDocumentScheduleConfiguration(v *types.ScheduleConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClipRange != nil {
+		ok := object.Key("ClipRange")
+		if err := awsRestjson1_serializeDocumentClipRange(v.ClipRange, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Transition != nil {
 		ok := object.Key("Transition")
@@ -3815,6 +4019,44 @@ func awsRestjson1_serializeDocumentTransition(v *types.Transition, value smithyj
 	if v.Type != nil {
 		ok := object.Key("Type")
 		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateProgramScheduleConfiguration(v *types.UpdateProgramScheduleConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClipRange != nil {
+		ok := object.Key("ClipRange")
+		if err := awsRestjson1_serializeDocumentClipRange(v.ClipRange, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Transition != nil {
+		ok := object.Key("Transition")
+		if err := awsRestjson1_serializeDocumentUpdateProgramTransition(v.Transition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateProgramTransition(v *types.UpdateProgramTransition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationMillis != 0 {
+		ok := object.Key("DurationMillis")
+		ok.Long(v.DurationMillis)
+	}
+
+	if v.ScheduledStartTimeMillis != 0 {
+		ok := object.Key("ScheduledStartTimeMillis")
+		ok.Long(v.ScheduledStartTimeMillis)
 	}
 
 	return nil

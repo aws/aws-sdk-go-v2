@@ -41,7 +41,7 @@ type StartReferenceImportJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Sources for the job.
+	// The job's source files.
 	//
 	// This member is required.
 	Sources []types.StartReferenceImportJobSourceItem

@@ -47,6 +47,9 @@ type ResetServiceSettingInput struct {
 	// can be one of the following.
 	//
 	// *
+	// /ssm/managed-instance/default-ec2-instance-management-role
+	//
+	// *
 	// /ssm/automation/customer-script-log-destination
 	//
 	// *

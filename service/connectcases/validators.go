@@ -170,6 +170,26 @@ func (m *validateOpCreateTemplate) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDomain struct {
+}
+
+func (*validateOpDeleteDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCaseEventConfiguration struct {
 }
 
@@ -600,6 +620,10 @@ func addOpCreateRelatedItemValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTemplate{}, middleware.After)
+}
+
+func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
 }
 
 func addOpGetCaseEventConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1415,6 +1439,21 @@ func validateOpCreateTemplateInput(v *CreateTemplateInput) error {
 		if err := validateRequiredFieldList(v.RequiredFields); err != nil {
 			invalidParams.AddNested("RequiredFields", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

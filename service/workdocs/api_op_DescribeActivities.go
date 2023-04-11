@@ -4,6 +4,7 @@ package workdocs
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
@@ -34,8 +35,8 @@ type DescribeActivitiesInput struct {
 	// empty, all activity types are returned.
 	ActivityTypes *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// The timestamp that determines the end time of the activities. The response
@@ -145,6 +146,97 @@ func (c *Client) addOperationDescribeActivitiesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// DescribeActivitiesAPIClient is a client that implements the DescribeActivities
+// operation.
+type DescribeActivitiesAPIClient interface {
+	DescribeActivities(context.Context, *DescribeActivitiesInput, ...func(*Options)) (*DescribeActivitiesOutput, error)
+}
+
+var _ DescribeActivitiesAPIClient = (*Client)(nil)
+
+// DescribeActivitiesPaginatorOptions is the paginator options for
+// DescribeActivities
+type DescribeActivitiesPaginatorOptions struct {
+	// The maximum number of items to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeActivitiesPaginator is a paginator for DescribeActivities
+type DescribeActivitiesPaginator struct {
+	options   DescribeActivitiesPaginatorOptions
+	client    DescribeActivitiesAPIClient
+	params    *DescribeActivitiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeActivitiesPaginator returns a new DescribeActivitiesPaginator
+func NewDescribeActivitiesPaginator(client DescribeActivitiesAPIClient, params *DescribeActivitiesInput, optFns ...func(*DescribeActivitiesPaginatorOptions)) *DescribeActivitiesPaginator {
+	if params == nil {
+		params = &DescribeActivitiesInput{}
+	}
+
+	options := DescribeActivitiesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeActivitiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeActivitiesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeActivities page.
+func (p *DescribeActivitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeActivitiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeActivities(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeActivities(region string) *awsmiddleware.RegisterServiceMetadata {

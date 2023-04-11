@@ -16,10 +16,10 @@ import (
 // bucket and the Amazon Resource Name (ARN) of the dataset that you want to import
 // the data to. You must specify a DataSource
 // (https://docs.aws.amazon.com/forecast/latest/dg/API_DataSource.html) object that
-// includes an AWS Identity and Access Management (IAM) role that Amazon Forecast
-// can assume to access the data, as Amazon Forecast makes a copy of your data and
-// processes it in an internal AWS system. For more information, see Set up
-// permissions
+// includes an Identity and Access Management (IAM) role that Amazon Forecast can
+// assume to access the data, as Amazon Forecast makes a copy of your data and
+// processes it in an internal Amazon Web Services system. For more information,
+// see Set up permissions
 // (https://docs.aws.amazon.com/forecast/latest/dg/aws-forecast-iam-roles.html).
 // The training data must be in CSV or Parquet format. The delimiter must be a
 // comma (,). You can specify the path to a specific file, the S3 bucket, or to a
@@ -50,10 +50,10 @@ func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatas
 
 type CreateDatasetImportJobInput struct {
 
-	// The location of the training data to import and an AWS Identity and Access
+	// The location of the training data to import and an Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the data. The
 	// training data must be stored in an Amazon S3 bucket. If encryption is used,
-	// DataSource must include an AWS Key Management Service (KMS) key and the IAM role
+	// DataSource must include an Key Management Service (KMS) key and the IAM role
 	// must allow Amazon Forecast permission to access the key. The KMS key and IAM
 	// role must match those specified in the EncryptionConfig parameter of the
 	// CreateDataset
@@ -89,6 +89,11 @@ type CreateDatasetImportJobInput struct {
 	// country code (US), followed by the 5-digit ZIP code (Example: US_98121).
 	GeolocationFormat *string
 
+	// Specifies whether the dataset import job is a FULL or INCREMENTAL import. A FULL
+	// dataset import replaces all of the existing data with the newly imported data.
+	// An INCREMENTAL import appends the imported data to the existing data.
+	ImportMode types.ImportMode
+
 	// The optional metadata that you apply to the dataset import job to help you
 	// categorize and organize them. Each tag consists of a key and an optional value,
 	// both of which you define. The following basic restrictions apply to tags:
@@ -114,12 +119,12 @@ type CreateDatasetImportJobInput struct {
 	// keys and values are case sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or
-	// lowercase combination of such as a prefix for keys as it is reserved for AWS
-	// use. You cannot edit or delete tag keys with this prefix. Values can have this
-	// prefix. If a tag value has aws as its prefix but the key does not, then Forecast
-	// considers it to be a user tag and will count against the limit of 50 tags. Tags
-	// with only the key prefix of aws do not count against your tags per resource
-	// limit.
+	// lowercase combination of such as a prefix for keys as it is reserved for Amazon
+	// Web Services use. You cannot edit or delete tag keys with this prefix. Values
+	// can have this prefix. If a tag value has aws as its prefix but the key does not,
+	// then Forecast considers it to be a user tag and will count against the limit of
+	// 50 tags. Tags with only the key prefix of aws do not count against your tags per
+	// resource limit.
 	Tags []types.Tag
 
 	// A single time zone for every item in your dataset. This option is ideal for

@@ -33,6 +33,10 @@ func (c *Client) GetBundles(ctx context.Context, params *GetBundlesInput, optFns
 
 type GetBundlesInput struct {
 
+	// Returns a list of bundles that are specific to Lightsail for Research. You must
+	// use this parameter to view Lightsail for Research bundles.
+	AppCategory types.AppCategory
+
 	// A Boolean value that indicates whether to include inactive (unavailable) bundles
 	// in the response of your request.
 	IncludeInactive *bool

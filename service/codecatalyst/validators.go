@@ -390,6 +390,26 @@ func (m *validateOpStopDevEnvironment) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopDevEnvironmentSession struct {
+}
+
+func (*validateOpStopDevEnvironmentSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopDevEnvironmentSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopDevEnvironmentSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopDevEnvironmentSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDevEnvironment struct {
 }
 
@@ -484,6 +504,10 @@ func addOpStartDevEnvironmentSessionValidationMiddleware(stack *middleware.Stack
 
 func addOpStopDevEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopDevEnvironment{}, middleware.After)
+}
+
+func addOpStopDevEnvironmentSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopDevEnvironmentSession{}, middleware.After)
 }
 
 func addOpUpdateDevEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -1023,6 +1047,30 @@ func validateOpStopDevEnvironmentInput(v *StopDevEnvironmentInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopDevEnvironmentSessionInput(v *StopDevEnvironmentSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopDevEnvironmentSessionInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

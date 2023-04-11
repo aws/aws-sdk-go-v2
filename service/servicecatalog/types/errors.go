@@ -26,7 +26,7 @@ func (e *DuplicateResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateResourceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateResourceException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *InvalidParametersException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParametersException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParametersException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *InvalidStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *OperationNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -161,7 +161,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -187,7 +187,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -216,7 +216,7 @@ func (e *TagOptionNotMigratedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagOptionNotMigratedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagOptionNotMigratedException"
 	}
 	return *e.ErrorCodeOverride

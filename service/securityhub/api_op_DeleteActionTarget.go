@@ -30,7 +30,7 @@ func (c *Client) DeleteActionTarget(ctx context.Context, params *DeleteActionTar
 
 type DeleteActionTargetInput struct {
 
-	// The ARN of the custom action target to delete.
+	// The Amazon Resource Name (ARN) of the custom action target to delete.
 	//
 	// This member is required.
 	ActionTargetArn *string

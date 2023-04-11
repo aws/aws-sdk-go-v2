@@ -13,8 +13,14 @@ import (
 )
 
 // Creates a case in the specified Cases domain. Case system and custom fields are
-// taken as an array id/value pairs with a declared data types. customer_id is a
-// required field when creating a case.
+// taken as an array id/value pairs with a declared data types. The following
+// fields are required when creating a case:
+//
+// * customer_id - You must provide the
+// full customer profile ARN in this format: arn:aws:profile:your AWS Region:your
+// AWS account ID:domains/profiles domain name/profiles/profile ID
+//
+// * title
 func (c *Client) CreateCase(ctx context.Context, params *CreateCaseInput, optFns ...func(*Options)) (*CreateCaseOutput, error) {
 	if params == nil {
 		params = &CreateCaseInput{}

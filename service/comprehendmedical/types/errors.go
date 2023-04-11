@@ -26,7 +26,7 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *InvalidEncodingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEncodingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEncodingException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -107,7 +107,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -161,7 +161,7 @@ func (e *TextSizeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TextSizeLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TextSizeLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -189,7 +189,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRequestsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRequestsException"
 	}
 	return *e.ErrorCodeOverride
@@ -216,7 +216,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

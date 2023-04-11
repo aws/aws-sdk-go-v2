@@ -839,7 +839,7 @@ type RunGroupListItem struct {
 	// The group's maximum CPU count setting.
 	MaxCpus *int32
 
-	// The group's maximum duration setting.
+	// The group's maximum duration setting in minutes.
 	MaxDuration *int32
 
 	// The group's maximum concurrent run setting.
@@ -1081,7 +1081,7 @@ type TaskListItem struct {
 	// When the task was created.
 	CreationTime *time.Time
 
-	// The task's memory.
+	// The task's memory use in gigabyes.
 	Memory *int32
 
 	// The task's name.
@@ -1138,6 +1138,9 @@ type VariantImportItemDetail struct {
 	//
 	// This member is required.
 	Source *string
+
+	// A message that provides additional context about a job
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }

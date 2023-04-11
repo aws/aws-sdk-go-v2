@@ -66,7 +66,7 @@
                         "x-amz-apigw-id,date"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Managed Grafana is a fully managed and secure data visualization service that you can use to \n       instantly query, correlate, and visualize operational metrics, logs, and traces from multiple sources. \n       Amazon Managed Grafana makes it easy to deploy, operate, and scale Grafana, a widely deployed data visualization tool \n       that is popular for its extensible data support.</p>\n         <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called <i>workspaces</i>. In\n        a workspace,  you can create  Grafana dashboards and visualizations to analyze your metrics, logs, and traces without having to\n       build, package, or deploy any hardware to run Grafana servers.  </p>",
+                "smithy.api#documentation": "<p>Amazon Managed Grafana is a fully managed and secure data visualization service that\n            you can use to instantly query, correlate, and visualize operational metrics, logs, and\n            traces from multiple sources. Amazon Managed Grafana makes it easy to deploy, operate, and\n            scale Grafana, a widely deployed data visualization tool that is popular for its\n            extensible data support.</p>\n         <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called\n                <i>workspaces</i>. In a workspace, you can create Grafana dashboards\n            and visualizations to analyze your metrics, logs, and traces without having to build,\n            package, or deploy any hardware to run Grafana servers. </p>",
                 "smithy.api#title": "Amazon Managed Grafana",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -102,13 +102,12 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
                             "type": "tree",
@@ -116,23 +115,20 @@
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "booleanEquals",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
-                                                }
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
                                     "type": "tree",
                                     "rules": [
                                         {
@@ -141,19 +137,201 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
+                                                            "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
                                             "type": "error"
                                         },
                                         {
                                             "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://grafana-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://grafana-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -166,142 +344,250 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://grafana.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://grafana-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
                                                     "rules": [
                                                         {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-northeast-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.ap-northeast-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-northeast-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.ap-northeast-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-southeast-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.ap-southeast-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-southeast-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.ap-southeast-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-central-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.eu-central-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.eu-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-west-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.eu-west-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.us-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-east-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.us-east-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-west-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://grafana.us-west-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://grafana-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://grafana.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -310,74 +596,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://grafana.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://grafana.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -386,250 +611,16 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://grafana-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.eu-central-1.amazonaws.com"
+                                    "url": "https://grafana.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -646,97 +637,6 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
-                            }
-                        },
-                        {
                             "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -750,45 +650,6 @@
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
-                            }
-                        },
-                        {
                             "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -799,6 +660,84 @@
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -841,72 +780,163 @@
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://grafana.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://grafana-fips.us-east-2.api.aws"
+                                    "url": "https://grafana-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://grafana-fips.us-east-2.amazonaws.com"
+                                    "url": "https://grafana-fips.cn-north-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://grafana.us-east-2.api.aws"
+                                    "url": "https://grafana.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
                                 "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://grafana.us-east-2.amazonaws.com"
+                                    "url": "https://grafana.cn-north-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "cn-north-1"
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://grafana.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -916,6 +946,19 @@
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1047,25 +1090,25 @@
                 "name": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\" names for SAML users.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\"\n            names for SAML users.</p>"
                     }
                 },
                 "login": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the login names for SAML users.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the login names for SAML\n            users.</p>"
                     }
                 },
                 "email": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the email names for SAML users.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the email names for SAML\n            users.</p>"
                     }
                 },
                 "groups": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\" names for user groups.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\"\n            names for user groups.</p>"
                     }
                 },
                 "role": {
@@ -1077,12 +1120,12 @@
                 "org": {
                     "target": "com.amazonaws.grafana#AssertionAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\" names for the users' organizations.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute within the SAML assertion to use as the user full \"friendly\"\n            names for the users' organizations.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines which attributes in the IdP assertion are to be used to define\n         information about the users authenticated by the IdP to use the workspace.</p>"
+                "smithy.api#documentation": "<p>A structure that defines which attributes in the IdP assertion are to be used to\n            define information about the users authenticated by the IdP to use the workspace.</p>"
             }
         },
         "com.amazonaws.grafana#AssociateLicense": {
@@ -1111,7 +1154,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana Enterprise\n            incurs additional fees. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html\">Upgrade a workspace to\n                Grafana Enterprise</a>.</p>",
+                "smithy.api#documentation": "<p>Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana Enterprise\n            incurs additional fees. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html\">Upgrade a\n                workspace to Grafana Enterprise</a>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -1178,25 +1221,25 @@
                 "providers": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace uses IAM Identity Center, SAML, or both methods \n            to authenticate users to use the Grafana console in the Amazon Managed Grafana \n            workspace.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this workspace uses IAM Identity Center, SAML, or both methods to\n            authenticate users to use the Grafana console in the Amazon Managed Grafana\n            workspace.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "saml": {
                     "target": "com.amazonaws.grafana#SamlAuthentication",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing information about how this workspace works with \n            SAML, including what attributes within the assertion are to be mapped to \n            user information in the workspace. </p>"
+                        "smithy.api#documentation": "<p>A structure containing information about how this workspace works with SAML, including\n            what attributes within the assertion are to be mapped to user information in the\n            workspace. </p>"
                     }
                 },
                 "awsSso": {
                     "target": "com.amazonaws.grafana#AwsSsoAuthentication",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing information about how this workspace works with \n            IAM Identity Center. </p>"
+                        "smithy.api#documentation": "<p>A structure containing information about how this workspace works with IAM Identity Center. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about the user authentication methods used by \n            the workspace.</p>"
+                "smithy.api#documentation": "<p>A structure containing information about the user authentication methods used by the\n            workspace.</p>"
             }
         },
         "com.amazonaws.grafana#AuthenticationProviderTypes": {
@@ -1228,19 +1271,19 @@
                 "providers": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workspace uses SAML, IAM Identity Center, or both methods for user\n            authentication.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the workspace uses SAML, IAM Identity Center, or both methods for\n            user authentication.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "samlConfigurationStatus": {
                     "target": "com.amazonaws.grafana#SamlConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workplace's user authentication method is fully configured.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the workplace's user authentication method is fully\n            configured.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or \n            both methods for user authentication, and whether that authentication is fully \n            configured.</p>"
+                "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or\n            both methods for user authentication, and whether that authentication is fully\n            configured.</p>"
             }
         },
         "com.amazonaws.grafana#AwsSsoAuthentication": {
@@ -1254,7 +1297,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about how this workspace works with \n            IAM Identity Center. </p>"
+                "smithy.api#documentation": "<p>A structure containing information about how this workspace works with IAM Identity Center. </p>"
             }
         },
         "com.amazonaws.grafana#ClientToken": {
@@ -1344,7 +1387,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <i>workspace</i>. In a workspace, you can create Grafana\n            dashboards and visualizations to analyze your metrics, logs, and traces. You don't have to\n            build, package, or deploy any hardware to run the Grafana server.</p>\n        <p>Don't use <code>CreateWorkspace</code> to modify an existing workspace. Instead, \n            use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html\">UpdateWorkspace</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a <i>workspace</i>. In a workspace, you can create Grafana\n            dashboards and visualizations to analyze your metrics, logs, and traces. You don't have\n            to build, package, or deploy any hardware to run the Grafana server.</p>\n         <p>Don't use <code>CreateWorkspace</code> to modify an existing workspace. Instead, use\n                <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html\">UpdateWorkspace</a>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -1385,7 +1428,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Grafana API key for the workspace.  This key can be used to \n            authenticate requests sent to the workspace's HTTP API.\n            See <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a>\n            for available APIs and example requests.</p>",
+                "smithy.api#documentation": "<p>Creates a Grafana API key for the workspace. This key can be used to authenticate\n            requests sent to the workspace's HTTP API. See <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a>\n            for available APIs and example requests.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1406,14 +1449,14 @@
                 "keyRole": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the permission level of the key.</p>\n        <p> Valid values: <code>VIEWER</code>|<code>EDITOR</code>|<code>ADMIN</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the permission level of the key.</p>\n         <p> Valid values: <code>VIEWER</code>|<code>EDITOR</code>|<code>ADMIN</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "secondsToLive": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the time in seconds until the key expires. Keys can be valid for up to 30 days.</p>",
+                        "smithy.api#documentation": "<p>Specifies the time in seconds until the key expires. Keys can be valid for up to 30\n            days.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 2592000
@@ -1444,7 +1487,7 @@
                 "key": {
                     "target": "com.amazonaws.grafana#ApiKeyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key token. Use this value as a bearer token to \n            authenticate HTTP requests to the workspace.</p>",
+                        "smithy.api#documentation": "<p>The key token. Use this value as a bearer token to authenticate HTTP requests to the\n            workspace.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1463,46 +1506,46 @@
                 "accountAccessType": {
                     "target": "com.amazonaws.grafana#AccountAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in\n            other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must\n            specify which organizational units the workspace can access in the\n            <code>workspaceOrganizationalUnits</code> parameter.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this\n                Amazon Web Services account only, or whether it can also access Amazon Web Services\n            resources in other accounts in the same organization. If you specify\n                <code>ORGANIZATION</code>, you must specify which organizational units the workspace\n            can access in the <code>workspaceOrganizationalUnits</code> parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.grafana#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive, user-provided identifier to ensure the idempotency of the\n            request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "organizationRoleName": {
                     "target": "com.amazonaws.grafana#OrganizationRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an IAM role that already exists to use with Organizations to access Amazon Web Services\n            data sources and notification channels in other accounts in an organization.</p>"
+                        "smithy.api#documentation": "<p>The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts\n            in an organization.</p>"
                     }
                 },
                 "permissionType": {
                     "target": "com.amazonaws.grafana#PermissionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you specify <code>SERVICE_MANAGED</code> on AWS Grafana console, Amazon Managed Grafana automatically creates\n            the IAM roles and provisions the permissions that the workspace needs to use\n            Amazon Web Services data sources and notification channels. In the CLI mode, the permissionType <code>SERVICE_MANAGED</code> will not create the IAM role \n            for you. The ability for the Amazon Managed Grafana to create the IAM role on behalf of the user is supported only in the \n            Amazon Managed Grafana AWS console. Use only the <code>CUSTOMER_MANAGED</code> permission type when creating a workspace in the CLI. </p> \n        <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and\n            permissions yourself. If you are creating this workspace in a member account of an\n            organization that is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services\n            accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for\n            Amazon Web Services data sources and notification channels</a>.</p>",
+                        "smithy.api#documentation": "<p>When creating a workspace through the Amazon Web Services API, CLI or Amazon Web Services CloudFormation, you must manage IAM roles and provision the\n            permissions that the workspace needs to use Amazon Web Services data sources and\n            notification channels.</p>\n         <p>You must also specify a <code>workspaceRoleArn</code> for a role that you will\n            manage for the workspace to use when accessing those datasources and notification \n            channels.</p>\n         <p>The ability for Amazon Managed Grafana to create and update IAM roles on\n            behalf of the user is supported only in the Amazon Managed Grafana console, where this value\n            may be set to <code>SERVICE_MANAGED</code>.</p>\n         <note>\n            <p>Use only the <code>CUSTOMER_MANAGED</code> permission type when creating a\n                workspace with the API, CLI or Amazon Web Services CloudFormation. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana\n                permissions and policies for Amazon Web Services data sources and notification\n                channels</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "stackSetName": {
                     "target": "com.amazonaws.grafana#StackSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set to use to generate IAM roles\n            to be used for this workspace.</p>"
+                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set to use to generate IAM\n            roles to be used for this workspace.</p>"
                     }
                 },
                 "workspaceDataSources": {
                     "target": "com.amazonaws.grafana#DataSourceTypesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Amazon Web Services data sources that you want to be queried in this\n            workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these\n            sources. You must still add them as data sources in the Grafana console in the\n            workspace.</p>\n        <p>If you don't specify a data source here, you can still add it as a data source in the\n            workspace console later. However, you will then have to manually configure permissions for\n            it.</p>"
+                        "smithy.api#documentation": "<p>This parameter is for internal use only, and should not be used.</p>"
                     }
                 },
                 "workspaceDescription": {
                     "target": "com.amazonaws.grafana#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this workspace.</p>\n        <p>Pattern: <code>^[\\\\p{L}\\\\p{Z}\\\\p{N}\\\\p{P}]{0,2048}$</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this\n            workspace.</p>\n         <p>Pattern: <code>^[\\\\p{L}\\\\p{Z}\\\\p{N}\\\\p{P}]{0,2048}$</code>\n         </p>"
                     }
                 },
                 "workspaceName": {
@@ -1514,7 +1557,7 @@
                 "workspaceNotificationDestinations": {
                     "target": "com.amazonaws.grafana#NotificationDestinationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these \n            data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow \n            Amazon Managed Grafana to use these channels.</p>"
+                        "smithy.api#documentation": "<p>Specify the Amazon Web Services notification channels that you plan to use in this\n            workspace. Specifying these data sources here enables Amazon Managed Grafana to create\n                IAM roles and permissions that allow Amazon Managed Grafana to use these\n            channels.</p>"
                     }
                 },
                 "workspaceOrganizationalUnits": {
@@ -1526,13 +1569,13 @@
                 "workspaceRoleArn": {
                     "target": "com.amazonaws.grafana#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the \n            workspace will view data from. If you already have a role that you want to use, specify it here.  The permission type should be set to  <code>CUSTOMER_MANAGED</code>.</p>"
+                        "smithy.api#documentation": "<p>Specified the IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from, including both data \n            sources and notification channels. You are responsible for managing the permissions \n            for this role as new data sources or notification channels are added. </p>"
                     }
                 },
                 "authenticationProviders": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to authenticate \n            users for using the Grafana console within a workspace. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in \n                Amazon Managed Grafana</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to\n            authenticate users for using the Grafana console within a workspace. For more\n            information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in\n                    Amazon Managed Grafana</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1545,13 +1588,19 @@
                 "vpcConfiguration": {
                     "target": "com.amazonaws.grafana#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources\n            for your Grafana workspace to connect to.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>"
                     }
                 },
                 "configuration": {
                     "target": "com.amazonaws.grafana#OverridableConfigurationJson",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration string for the workspace that you create. For more information \n            about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana workspace</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration string for the workspace that you create. For more information about\n            the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana\n                workspace</a>.</p>"
+                    }
+                },
+                "networkAccessControl": {
+                    "target": "com.amazonaws.grafana#NetworkAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for network access to your workspace.</p>\n         <p>When this is configured, only listed IP addresses and VPC endpoints will be able to\n            access your workspace. Standard Grafana authentication and authorization will still be\n            required.</p>\n         <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will\n            be allowed. Standard Grafana authentication and authorization will still be\n            required.</p>"
                     }
                 }
             }
@@ -1827,7 +1876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays information about the authentication methods used in one Amazon Managed Grafana workspace.</p>",
+                "smithy.api#documentation": "<p>Displays information about the authentication methods used in one Amazon Managed Grafana\n            workspace.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1855,7 +1904,7 @@
                 "authentication": {
                     "target": "com.amazonaws.grafana#AuthenticationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in \n            the workspace.</p>",
+                        "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in the\n            workspace.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1911,7 +1960,7 @@
                 "configuration": {
                     "target": "com.amazonaws.grafana#OverridableConfigurationJson",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration string for the workspace that you requested. For more information \n            about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana workspace</a>.</p>",
+                        "smithy.api#documentation": "<p>The configuration string for the workspace that you requested. For more information\n            about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana\n                workspace</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2067,7 +2116,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing the identity provider (IdP) metadata used to integrate the\n            identity provider with this workspace. You can specify the metadata either by providing a\n            URL to its location in the <code>url</code> parameter, or by specifying the full metadata\n            in XML format in the <code>xml</code> parameter. Specifying both will cause an error.</p>"
+                "smithy.api#documentation": "<p>A structure containing the identity provider (IdP) metadata used to integrate the\n            identity provider with this workspace. You can specify the metadata either by providing\n            a URL to its location in the <code>url</code> parameter, or by specifying the full\n            metadata in XML format in the <code>xml</code> parameter. Specifying both will cause an\n            error.</p>"
             }
         },
         "com.amazonaws.grafana#IdpMetadataUrl": {
@@ -2171,7 +2220,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the users and groups who have the Grafana <code>Admin</code> and \n            <code>Editor</code> roles in this workspace. If you use this \n            operation without specifying <code>userId</code> or <code>groupId</code>, the operation returns\n            the roles of all users\n            and groups. If you specify a <code>userId</code> or a <code>groupId</code>, only the roles\n            for that user or group are returned. If you do this, you can specify only one <code>userId</code> or \n            one <code>groupId</code>.</p>",
+                "smithy.api#documentation": "<p>Lists the users and groups who have the Grafana <code>Admin</code> and\n                <code>Editor</code> roles in this workspace. If you use this operation without\n            specifying <code>userId</code> or <code>groupId</code>, the operation returns the roles\n            of all users and groups. If you specify a <code>userId</code> or a <code>groupId</code>,\n            only the roles for that user or group are returned. If you do this, you can specify only\n            one <code>userId</code> or one <code>groupId</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2204,14 +2253,14 @@
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n            <code>ListPermissions</code> operation.</p>",
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from\n            a previous <code>ListPermissions</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "userType": {
                     "target": "com.amazonaws.grafana#UserType",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) If you specify <code>SSO_USER</code>, then only the permissions of IAM Identity Center users\n            are returned. If you specify <code>SSO_GROUP</code>, only the permissions of IAM Identity Center groups\n            are returned.</p>",
+                        "smithy.api#documentation": "<p>(Optional) If you specify <code>SSO_USER</code>, then only the permissions of IAM Identity Center users are returned. If you specify <code>SSO_GROUP</code>, only the\n            permissions of IAM Identity Center groups are returned.</p>",
                         "smithy.api#httpQuery": "userType"
                     }
                 },
@@ -2246,7 +2295,7 @@
                     "target": "com.amazonaws.grafana#PaginationToken",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListPermissions</code> operation to return\n            the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListPermissions</code> operation to return the\n            next set of results.</p>"
                     }
                 },
                 "permissions": {
@@ -2284,7 +2333,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListTagsForResource</code> operation returns the tags that \n            are associated with the Amazon Managed Service for Grafana resource specified by the <code>resourceArn</code>. \n            Currently, the only resource that can be tagged is a workspace. </p>",
+                "smithy.api#documentation": "<p>The <code>ListTagsForResource</code> operation returns the tags that are associated\n            with the Amazon Managed Service for Grafana resource specified by the\n                <code>resourceArn</code>. Currently, the only resource that can be tagged is a\n            workspace. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}"
@@ -2380,7 +2429,7 @@
                 "workspaces": {
                     "target": "com.amazonaws.grafana#WorkspaceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that contain some information about the workspaces in the account.</p>",
+                        "smithy.api#documentation": "<p>An array of structures that contain some information about the workspaces in the\n            account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2396,6 +2445,28 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.grafana#NetworkAccessConfiguration": {
+            "type": "structure",
+            "members": {
+                "prefixListIds": {
+                    "target": "com.amazonaws.grafana#PrefixListIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses.\n            The IP addresses specified are allowed to access your workspace. If the list is not\n            included in the configuration then no IP addresses will be allowed to access the\n            workspace. You create a prefix list using the Amazon VPC console.</p>\n         <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i>\n            </code>.</p>\n         <p>For more information about prefix lists, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html\">Group CIDR blocks using managed\n                prefix lists</a>in the <i>Amazon Virtual Private Cloud User\n            Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpceIds": {
+                    "target": "com.amazonaws.grafana#VpceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC\n            endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a\n                <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints\n            specified here will be allowed to access the workspace.</p>\n         <p>VPC endpoint IDs have the format\n            <code>vpce-<i>1a2b3c4d</i>\n            </code>.</p>\n         <p>For more information about creating an interface VPC endpoint, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints\">Interface VPC\n                endpoints</a> in the <i>Amazon Managed Grafana User\n            Guide</i>.</p>\n         <note>\n            <p>The only VPC endpoints that can be specified here are interface VPC endpoints for\n                Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code>\n                service endpoint). Other VPC endpoints will be ignored.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for in-bound network access to your workspace.</p>\n         <p>When this is configured, only listed IP addresses and VPC endpoints will be able to\n            access your workspace. Standard Grafana authentication and authorization will still be\n            required.</p>\n         <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will\n            be allowed. Standard Grafana authentication and authorization will still be\n            required.</p>"
             }
         },
         "com.amazonaws.grafana#NotificationDestinationType": {
@@ -2489,13 +2560,13 @@
                 "role": {
                     "target": "com.amazonaws.grafana#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the user or group has the <code>Admin</code>,\n           <code>Editor</code>, or <code>Viewer</code> role.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the user or group has the <code>Admin</code>, <code>Editor</code>,\n            or <code>Viewer</code> role.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing the identity of one user or group and the <code>Admin</code>,\n           <code>Editor</code>, or <code>Viewer</code> role that they have.</p>"
+                "smithy.api#documentation": "<p>A structure containing the identity of one user or group and the <code>Admin</code>,\n                <code>Editor</code>, or <code>Viewer</code> role that they have.</p>"
             }
         },
         "com.amazonaws.grafana#PermissionEntryList": {
@@ -2519,6 +2590,21 @@
                         "documentation": "Service Managed"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.grafana#PrefixListId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.grafana#PrefixListIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.grafana#PrefixListId"
             }
         },
         "com.amazonaws.grafana#ResourceNotFoundException": {
@@ -2595,18 +2681,18 @@
                 "editor": {
                     "target": "com.amazonaws.grafana#RoleValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of groups from the SAML assertion attribute to grant the Grafana\n            <code>Editor</code> role to.</p>"
+                        "smithy.api#documentation": "<p>A list of groups from the SAML assertion attribute to grant the Grafana\n                <code>Editor</code> role to.</p>"
                     }
                 },
                 "admin": {
                     "target": "com.amazonaws.grafana#RoleValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of groups from the SAML assertion attribute to grant the Grafana\n            <code>Admin</code> role to.</p>"
+                        "smithy.api#documentation": "<p>A list of groups from the SAML assertion attribute to grant the Grafana\n                <code>Admin</code> role to.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines which groups defined in the SAML assertion attribute are to \n           be mapped to the Grafana <code>Admin</code> and <code>Editor</code> roles in the \n           workspace. SAML authenticated users not part of <code>Admin</code> or \n           <code>Editor</code> role groups have <code>Viewer</code> permission over the\n           workspace.</p>"
+                "smithy.api#documentation": "<p>This structure defines which groups defined in the SAML assertion attribute are to be\n            mapped to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.\n            SAML authenticated users not part of <code>Admin</code> or <code>Editor</code> role\n            groups have <code>Viewer</code> permission over the workspace.</p>"
             }
         },
         "com.amazonaws.grafana#SSOClientId": {
@@ -2625,12 +2711,12 @@
                 "configuration": {
                     "target": "com.amazonaws.grafana#SamlConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing details about how this workspace works with \n         SAML. </p>"
+                        "smithy.api#documentation": "<p>A structure containing details about how this workspace works with SAML. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about how this workspace works with \n         SAML. </p>"
+                "smithy.api#documentation": "<p>A structure containing information about how this workspace works with SAML. </p>"
             }
         },
         "com.amazonaws.grafana#SamlConfiguration": {
@@ -2646,19 +2732,19 @@
                 "assertionAttributes": {
                     "target": "com.amazonaws.grafana#AssertionAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that defines which attributes in the SAML assertion are to be used to define information about\n            the users authenticated by that IdP to use the workspace.</p>"
+                        "smithy.api#documentation": "<p>A structure that defines which attributes in the SAML assertion are to be used to\n            define information about the users authenticated by that IdP to use the\n            workspace.</p>"
                     }
                 },
                 "roleValues": {
                     "target": "com.amazonaws.grafana#RoleValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing arrays that map group names in the SAML assertion to the \n            Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>"
+                        "smithy.api#documentation": "<p>A structure containing arrays that map group names in the SAML assertion to the\n            Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>"
                     }
                 },
                 "allowedOrganizations": {
                     "target": "com.amazonaws.grafana#AllowedOrganizations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists which organizations defined in the SAML assertion are allowed to use the Amazon Managed Grafana workspace.\n            If this is empty, all organizations in the assertion attribute have access.</p>"
+                        "smithy.api#documentation": "<p>Lists which organizations defined in the SAML assertion are allowed to use the Amazon Managed Grafana workspace. If this is empty, all organizations in the assertion attribute\n            have access.</p>"
                     }
                 },
                 "loginValidityDuration": {
@@ -2670,7 +2756,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about how this workspace works with \n            SAML. </p>"
+                "smithy.api#documentation": "<p>A structure containing information about how this workspace works with SAML. </p>"
             }
         },
         "com.amazonaws.grafana#SamlConfigurationStatus": {
@@ -2844,7 +2930,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Grafana resource. \n            Currently, the only resource that can be tagged is workspaces. </p>\n        <p>If you specify a new tag key for the resource, this tag is appended to the list of tags associated\n            with the resource.  If you specify a tag key that is already associated with the resource, the new tag \n            value that you specify replaces the previous value for that tag.</p>",
+                "smithy.api#documentation": "<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Grafana\n            resource. Currently, the only resource that can be tagged is workspaces. </p>\n         <p>If you specify a new tag key for the resource, this tag is appended to the list of\n            tags associated with the resource. If you specify a tag key that is already associated\n            with the resource, the new tag value that you specify replaces the previous value for\n            that tag.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}"
@@ -2865,7 +2951,7 @@
                 "tags": {
                     "target": "com.amazonaws.grafana#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tag keys and values to associate with the resource.  You can associate tag keys only, tags (key and values) only\n            or a combination of tag keys and tags.</p>",
+                        "smithy.api#documentation": "<p>The list of tag keys and values to associate with the resource. You can associate tag\n            keys only, tags (key and values) only or a combination of tag keys and tags.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2947,7 +3033,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>UntagResource</code> operation removes the association of the tag with the Amazon Managed Grafana resource. \n        </p>",
+                "smithy.api#documentation": "<p>The <code>UntagResource</code> operation removes the association of the tag with the\n            Amazon Managed Grafana resource. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}"
@@ -2961,7 +3047,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource the tag association is removed from.  </p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource the tag association is removed from. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3027,7 +3113,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about one error encountered while performing an\n            <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a> operation.</p>"
+                "smithy.api#documentation": "<p>A structure containing information about one error encountered while performing an\n                <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a> operation.</p>"
             }
         },
         "com.amazonaws.grafana#UpdateErrorList": {
@@ -3049,7 +3135,7 @@
                 "role": {
                     "target": "com.amazonaws.grafana#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role to add or revoke for the user or the group specified in <code>users</code>.</p>",
+                        "smithy.api#documentation": "<p>The role to add or revoke for the user or the group specified in\n            <code>users</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3062,7 +3148,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the instructions for one Grafana role permission update in a\n            <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the instructions for one Grafana role permission update in a <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a> operation.</p>"
             }
         },
         "com.amazonaws.grafana#UpdateInstructionBatch": {
@@ -3103,7 +3189,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates which users in a workspace have the Grafana <code>Admin</code> or <code>Editor</code> roles.</p>",
+                "smithy.api#documentation": "<p>Updates which users in a workspace have the Grafana <code>Admin</code> or\n                <code>Editor</code> roles.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
@@ -3173,7 +3259,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies an existing Amazon Managed Grafana workspace. If you use this operation and omit any \n            optional parameters, the existing values of those parameters are not changed.</p>\n        <p>To modify the user authentication methods that the workspace uses, such as SAML or IAM Identity Center, \n            use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html\">UpdateWorkspaceAuthentication</a>.</p>\n        <p>To modify which users in the workspace have the <code>Admin</code> and <code>Editor</code> Grafana roles, \n            use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a>.</p>",
+                "smithy.api#documentation": "<p>Modifies an existing Amazon Managed Grafana workspace. If you use this operation and omit\n            any optional parameters, the existing values of those parameters are not changed.</p>\n         <p>To modify the user authentication methods that the workspace uses, such as SAML or\n                IAM Identity Center, use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html\">UpdateWorkspaceAuthentication</a>.</p>\n         <p>To modify which users in the workspace have the <code>Admin</code> and\n                <code>Editor</code> Grafana roles, use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -3210,7 +3296,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to define the identity provider (IdP) that this workspace\n            authenticates users from, using SAML. You can also map SAML assertion attributes to\n            workspace user information and define which groups in the assertion attribute are to have\n            the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>",
+                "smithy.api#documentation": "<p>Use this operation to define the identity provider (IdP) that this workspace\n            authenticates users from, using SAML. You can also map SAML assertion attributes to\n            workspace user information and define which groups in the assertion attribute are to\n            have the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>\n         <note>\n            <p>Changes to the authentication method for a workspace may take a few minutes to\n                take effect.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3232,14 +3318,14 @@
                 "authenticationProviders": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to authenticate \n            users for using the Grafana console within a workspace. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in \n                Amazon Managed Grafana</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to\n            authenticate users for using the Grafana console within a workspace. For more\n            information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in\n                    Amazon Managed Grafana</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "samlConfiguration": {
                     "target": "com.amazonaws.grafana#SamlConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the workspace uses SAML, use this structure to\n            map SAML assertion attributes to workspace user information and \n            define which groups in the assertion attribute are to have the <code>Admin</code> and <code>Editor</code> roles\n            in the workspace.</p>"
+                        "smithy.api#documentation": "<p>If the workspace uses SAML, use this structure to map SAML assertion attributes to\n            workspace user information and define which groups in the assertion attribute are to\n            have the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>"
                     }
                 }
             }
@@ -3250,7 +3336,7 @@
                 "authentication": {
                     "target": "com.amazonaws.grafana#AuthenticationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that describes the user authentication for this workspace after the update is made.</p>",
+                        "smithy.api#documentation": "<p>A structure that describes the user authentication for this workspace after the update\n            is made.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3299,7 +3385,7 @@
                 "configuration": {
                     "target": "com.amazonaws.grafana#OverridableConfigurationJson",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new configuration string for the workspace. For more information \n            about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana workspace</a>.</p>",
+                        "smithy.api#documentation": "<p>The new configuration string for the workspace. For more information about the format\n            and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana\n                workspace</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3323,37 +3409,37 @@
                 "accountAccessType": {
                     "target": "com.amazonaws.grafana#AccountAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in\n            other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must\n            specify which organizational units the workspace can access in the\n            <code>workspaceOrganizationalUnits</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this\n                Amazon Web Services account only, or whether it can also access Amazon Web Services\n            resources in other accounts in the same organization. If you specify\n                <code>ORGANIZATION</code>, you must specify which organizational units the workspace\n            can access in the <code>workspaceOrganizationalUnits</code> parameter.</p>"
                     }
                 },
                 "organizationRoleName": {
                     "target": "com.amazonaws.grafana#OrganizationRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an IAM role that already exists to use to access resources through Organizations.</p>"
+                        "smithy.api#documentation": "<p>The name of an IAM role that already exists to use to access resources\n            through Organizations. This can only be used with a workspace that has the \n            <code>permissionType</code> set to <code>CUSTOMER_MANAGED</code>.</p>"
                     }
                 },
                 "permissionType": {
                     "target": "com.amazonaws.grafana#PermissionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you specify <code>Service Managed</code>, Amazon Managed Grafana automatically creates\n            the IAM roles and provisions the permissions that the workspace needs to use\n            Amazon Web Services data sources and notification channels.</p>\n        <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and\n            permissions yourself. If you are creating this workspace in a member account of an\n            organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services\n            accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for\n            Amazon Web Services data sources and notification channels</a>\n         </p>"
+                        "smithy.api#documentation": "<p>Use this parameter if you want to change a workspace from <code>SERVICE_MANAGED</code>\n            to <code>CUSTOMER_MANAGED</code>. This allows you to manage the permissions that the \n            workspace uses to access datasources and notification channels. If the workspace is\n            in a member Amazon Web Services account of an organization, and that account is not\n            a delegated administrator account, and you want the workspace to access data sources in \n            other Amazon Web Services accounts in the organization, you must choose \n            <code>CUSTOMER_MANAGED</code>.</p>\n         <p>If you specify this as <code>CUSTOMER_MANAGED</code>, you must also specify a \n            <code>workspaceRoleArn</code> that the workspace will use for accessing Amazon Web Services\n            resources.</p>\n         <p>For more information on the role and permissions needed, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources \n            and notification channels</a>\n         </p>\n         <note>\n            <p>Do not use this to convert a <code>CUSTOMER_MANAGED</code> workspace to\n                <code>SERVICE_MANAGED</code>. Do not include this \n                parameter if you want to leave the workspace as <code>SERVICE_MANAGED</code>.</p>\n            <p>You can convert a <code>CUSTOMER_MANAGED</code> workspace to \n                <code>SERVICE_MANAGED</code> using the Amazon Managed Grafana console. For more \n                information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html\">Managing permissions for data sources and notification channels</a>.</p>\n         </note>"
                     }
                 },
                 "stackSetName": {
                     "target": "com.amazonaws.grafana#StackSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set to use to generate IAM roles\n            to be used for this workspace.</p>"
+                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set to use to generate IAM\n            roles to be used for this workspace.</p>"
                     }
                 },
                 "workspaceDataSources": {
                     "target": "com.amazonaws.grafana#DataSourceTypesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Amazon Web Services data sources that you want to be queried in this\n            workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these\n            sources. You must still add them as data sources in the Grafana console in the\n            workspace.</p>\n        <p>If you don't specify a data source here, you can still add it as a data source later in\n            the workspace console. However, you will then have to manually configure permissions for\n            it.</p>"
+                        "smithy.api#documentation": "<p>This parameter is for internal use only, and should not be used.</p>"
                     }
                 },
                 "workspaceDescription": {
                     "target": "com.amazonaws.grafana#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this workspace.</p>"
+                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this\n            workspace.</p>"
                     }
                 },
                 "workspaceId": {
@@ -3373,7 +3459,7 @@
                 "workspaceNotificationDestinations": {
                     "target": "com.amazonaws.grafana#NotificationDestinationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these \n            data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow \n            Amazon Managed Grafana to use these channels.</p>"
+                        "smithy.api#documentation": "<p>Specify the Amazon Web Services notification channels that you plan to use in this\n            workspace. Specifying these data sources here enables Amazon Managed Grafana to create\n                IAM roles and permissions that allow Amazon Managed Grafana to use these\n            channels.</p>"
                     }
                 },
                 "workspaceOrganizationalUnits": {
@@ -3385,19 +3471,31 @@
                 "workspaceRoleArn": {
                     "target": "com.amazonaws.grafana#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the \n            workspace will view data from. If you already have a role that you want to use, specify it here. If you omit\n            this field and you specify some Amazon Web Services resources in <code>workspaceDataSources</code> or\n            <code>workspaceNotificationDestinations</code>, a new IAM role with the necessary permissions is \n            automatically created.</p>"
+                        "smithy.api#documentation": "<p>Specifies an IAM role that grants permissions to Amazon Web Services\n            resources that the workspace accesses, such as data sources and notification channels.\n            If this workspace has <code>permissionType</code>\n            <code>CUSTOMER_MANAGED</code>,\n            then this role is required.</p>"
                     }
                 },
                 "vpcConfiguration": {
                     "target": "com.amazonaws.grafana#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources\n            for your Grafana workspace to connect to.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>"
                     }
                 },
                 "removeVpcConfiguration": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to remove the VPC configuration from the workspace.</p>\n        <p>Setting this to <code>true</code> and providing a <code>vpcConfiguration</code> to set \n            will return an error.</p>"
+                        "smithy.api#documentation": "<p>Whether to remove the VPC configuration from the workspace.</p>\n         <p>Setting this to <code>true</code> and providing a <code>vpcConfiguration</code> to set\n            will return an error.</p>"
+                    }
+                },
+                "networkAccessControl": {
+                    "target": "com.amazonaws.grafana#NetworkAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for network access to your workspace.</p>\n         <p>When this is configured, only listed IP addresses and VPC endpoints will be able to\n            access your workspace. Standard Grafana authentication and authorization will still be\n            required.</p>\n         <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will\n            be allowed. Standard Grafana authentication and authorization will still be\n            required.</p>"
+                    }
+                },
+                "removeNetworkAccessConfiguration": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to remove the network access configuration from the workspace.</p>\n         <p>Setting this to <code>true</code> and providing a <code>networkAccessControl</code> to\n            set will return an error.</p>\n         <p>If you remove this configuration by setting this to <code>true</code>, then all IP\n            addresses and VPC endpoints will be allowed. Standard Grafana authentication and\n            authorization will still be required.</p>"
                     }
                 }
             }
@@ -3420,7 +3518,7 @@
                 "id": {
                     "target": "com.amazonaws.grafana#SsoId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user or group.</p>\n        <p>Pattern: <code>^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The ID of the user or group.</p>\n         <p>Pattern:\n                <code>^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3508,7 +3606,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains information about a request parameter that caused an error.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about a request parameter that caused an\n            error.</p>"
             }
         },
         "com.amazonaws.grafana#ValidationExceptionFieldList": {
@@ -3546,20 +3644,35 @@
                 "securityGroupIds": {
                     "target": "com.amazonaws.grafana#SecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Amazon EC2 security group IDs attached to the Amazon VPC\n            for your Grafana workspace to connect.</p>",
+                        "smithy.api#documentation": "<p>The list of Amazon EC2 security group IDs attached to the Amazon VPC\n            for your Grafana workspace to connect. Duplicates not allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "subnetIds": {
                     "target": "com.amazonaws.grafana#SubnetIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Amazon EC2 subnet IDs created in the Amazon VPC for \n            your Grafana workspace to connect.</p>",
+                        "smithy.api#documentation": "<p>The list of Amazon EC2 subnet IDs created in the Amazon VPC for your\n            Grafana workspace to connect. Duplicates not allowed.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources\n            for your Grafana workspace to connect to.</p>"
+                "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>\n         <note>\n            <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of\n                the same VPC.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.grafana#VpceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.grafana#VpceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.grafana#VpceId"
             }
         },
         "com.amazonaws.grafana#Workspace": {
@@ -3597,7 +3710,7 @@
                 "accountAccessType": {
                     "target": "com.amazonaws.grafana#AccountAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in\n            other accounts in the same organization. If this is <code>ORGANIZATION</code>, the\n            <code>workspaceOrganizationalUnits</code> parameter specifies which organizational units\n            the workspace can access.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the workspace can access Amazon Web Services resources in this\n                Amazon Web Services account only, or whether it can also access Amazon Web Services\n            resources in other accounts in the same organization. If this is\n                <code>ORGANIZATION</code>, the <code>workspaceOrganizationalUnits</code> parameter\n            specifies which organizational units the workspace can access.</p>"
                     }
                 },
                 "created": {
@@ -3610,7 +3723,7 @@
                 "dataSources": {
                     "target": "com.amazonaws.grafana#DataSourceTypesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services data sources that have been configured to have IAM \n            roles and permissions created to allow \n            Amazon Managed Grafana to read data from these sources.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services data sources that have been configured to have\n                IAM roles and permissions created to allow Amazon Managed Grafana to read\n            data from these sources.</p>\n         <p>This list is only used when the workspace was created through the Amazon Web Services\n            console, and the <code>permissionType</code> is <code>SERVICE_MANAGED</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3657,13 +3770,13 @@
                 "organizationRoleName": {
                     "target": "com.amazonaws.grafana#OrganizationRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role that is used to access resources through Organizations.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM role that is used to access resources through\n                Organizations.</p>"
                     }
                 },
                 "notificationDestinations": {
                     "target": "com.amazonaws.grafana#NotificationDestinationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM \n            roles and permissions for, to allow \n            Amazon Managed Grafana to use these channels.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically\n            create IAM roles and permissions for, to allow Amazon Managed Grafana to use\n            these channels.</p>"
                     }
                 },
                 "organizationalUnits": {
@@ -3675,13 +3788,13 @@
                 "permissionType": {
                     "target": "com.amazonaws.grafana#PermissionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this is <code>Service Managed</code>, Amazon Managed Grafana automatically creates the IAM roles \n            and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p>\n        <p>If this is <code>CUSTOMER_MANAGED</code>, you manage those roles and permissions\n            yourself. If you are creating this workspace in a member account of an organization and that account is not a\n            delegated administrator account, and\n            you want the workspace to access data sources in other Amazon Web Services accounts in the\n            organization, you must choose <code>CUSTOMER_MANAGED</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for\n            Amazon Web Services data sources and notification channels</a>\n         </p>"
+                        "smithy.api#documentation": "<p>If this is <code>SERVICE_MANAGED</code>, and the workplace was created through the \n            Amazon Managed Grafana console, then Amazon Managed Grafana automatically creates the\n            IAM roles and provisions the permissions that the workspace needs to\n            use Amazon Web Services data sources and notification channels.</p>\n         <p>If this is <code>CUSTOMER_MANAGED</code>, you must manage those roles and permissions\n            yourself.</p>\n         <p>If you are working with a workspace in a member account of an organization and\n            that account is not a delegated administrator account, and you want the workspace to\n            access data sources in other Amazon Web Services accounts in the organization, this\n            parameter must be set to <code>CUSTOMER_MANAGED</code>.</p>\n         <p>For more information about converting between customer and service managed, see\n            <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html\">Managing permissions for data sources and notification channels</a>. For more\n            information about the roles and permissions that must be managed for customer managed \n            workspaces, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana\n            permissions and policies for Amazon Web Services data sources and notification\n            channels</a>\n         </p>"
                     }
                 },
                 "stackSetName": {
                     "target": "com.amazonaws.grafana#StackSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set that is used to generate IAM roles\n            to be used for this workspace.</p>"
+                        "smithy.api#documentation": "<p>The name of the CloudFormation stack set that is used to generate IAM roles to be used for this workspace.</p>"
                     }
                 },
                 "status": {
@@ -3694,37 +3807,37 @@
                 "workspaceRoleArn": {
                     "target": "com.amazonaws.grafana#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that grants permissions to the Amazon Web Services resources that the \n            workspace will view data from. This role must already exist.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that grants permissions to the Amazon Web Services\n            resources that the workspace will view data from. This role must already exist.</p>"
                     }
                 },
                 "licenseType": {
                     "target": "com.amazonaws.grafana#LicenseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license or a free trial license.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license or a free trial\n            license.</p>"
                     }
                 },
                 "freeTrialConsumed": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace has already fully used its free trial for Grafana Enterprise.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this workspace has already fully used its free trial for Grafana\n            Enterprise.</p>"
                     }
                 },
                 "licenseExpiration": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this workspace has a full Grafana Enterprise license, this specifies when the license ends and\n            will need to be renewed.</p>"
+                        "smithy.api#documentation": "<p>If this workspace has a full Grafana Enterprise license, this specifies when the\n            license ends and will need to be renewed.</p>"
                     }
                 },
                 "freeTrialExpiration": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this workspace is currently in the free trial period for Grafana Enterprise, this value specifies\n            when that free trial ends.</p>"
+                        "smithy.api#documentation": "<p>If this workspace is currently in the free trial period for Grafana Enterprise, this\n            value specifies when that free trial ends.</p>"
                     }
                 },
                 "authentication": {
                     "target": "com.amazonaws.grafana#AuthenticationSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or both methods\n            for user authentication.</p>",
+                        "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or\n            both methods for user authentication.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3737,12 +3850,18 @@
                 "vpcConfiguration": {
                     "target": "com.amazonaws.grafana#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for connecting to data sources in a private VPC \n            (Amazon Virtual Private Cloud).</p>"
+                        "smithy.api#documentation": "<p>The configuration for connecting to data sources in a private VPC (Amazon Virtual Private Cloud).</p>"
+                    }
+                },
+                "networkAccessControl": {
+                    "target": "com.amazonaws.grafana#NetworkAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for network access to your workspace.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about an Amazon Managed Grafana workspace in your account.</p>"
+                "smithy.api#documentation": "<p>A structure containing information about an Amazon Managed Grafana workspace in your\n            account.</p>"
             }
         },
         "com.amazonaws.grafana#WorkspaceId": {
@@ -3879,7 +3998,7 @@
                 "notificationDestinations": {
                     "target": "com.amazonaws.grafana#NotificationDestinationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically\n            create IAM roles and permissions for, which allows Amazon Managed Grafana to use\n            these channels.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically\n            create IAM roles and permissions for, which allows Amazon Managed Grafana to\n            use these channels.</p>"
                     }
                 },
                 "status": {
@@ -3892,7 +4011,7 @@
                 "authentication": {
                     "target": "com.amazonaws.grafana#AuthenticationSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in \n            the workspace.</p>",
+                        "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in the\n            workspace.</p>",
                         "smithy.api#required": {}
                     }
                 },

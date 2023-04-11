@@ -42,20 +42,25 @@ type UpdateTrialComponentInput struct {
 	// When the component ended.
 	EndTime *time.Time
 
-	// Replaces all of the component's input artifacts with the specified artifacts.
+	// Replaces all of the component's input artifacts with the specified artifacts or
+	// adds new input artifacts. Existing input artifacts are replaced if the trial
+	// component is updated with an identical input artifact key.
 	InputArtifacts map[string]types.TrialComponentArtifact
 
 	// The input artifacts to remove from the component.
 	InputArtifactsToRemove []string
 
-	// Replaces all of the component's output artifacts with the specified artifacts.
+	// Replaces all of the component's output artifacts with the specified artifacts or
+	// adds new output artifacts. Existing output artifacts are replaced if the trial
+	// component is updated with an identical output artifact key.
 	OutputArtifacts map[string]types.TrialComponentArtifact
 
 	// The output artifacts to remove from the component.
 	OutputArtifactsToRemove []string
 
 	// Replaces all of the component's hyperparameters with the specified
-	// hyperparameters.
+	// hyperparameters or add new hyperparameters. Existing hyperparameters are
+	// replaced if the trial component is updated with an identical hyperparameter key.
 	Parameters map[string]types.TrialComponentParameterValue
 
 	// The hyperparameters to remove from the component.

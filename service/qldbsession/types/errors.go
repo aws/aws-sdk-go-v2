@@ -29,7 +29,7 @@ func (e *BadRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BadRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *CapacityExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CapacityExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CapacityExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -83,7 +83,7 @@ func (e *InvalidSessionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSessionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidSessionException"
 	}
 	return *e.ErrorCodeOverride
@@ -109,7 +109,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -136,7 +136,7 @@ func (e *OccConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OccConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OccConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -162,7 +162,7 @@ func (e *RateExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RateExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RateExceededException"
 	}
 	return *e.ErrorCodeOverride

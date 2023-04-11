@@ -210,6 +210,26 @@ func (m *validateOpCreateAutoMLJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAutoMLJobV2 struct {
+}
+
+func (*validateOpCreateAutoMLJobV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAutoMLJobV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAutoMLJobV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAutoMLJobV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCodeRepository struct {
 }
 
@@ -2185,6 +2205,26 @@ func (m *validateOpDescribeAutoMLJob) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAutoMLJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAutoMLJobV2 struct {
+}
+
+func (*validateOpDescribeAutoMLJobV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAutoMLJobV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAutoMLJobV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAutoMLJobV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4870,6 +4910,10 @@ func addOpCreateAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAutoMLJob{}, middleware.After)
 }
 
+func addOpCreateAutoMLJobV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAutoMLJobV2{}, middleware.After)
+}
+
 func addOpCreateCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCodeRepository{}, middleware.After)
 }
@@ -5264,6 +5308,10 @@ func addOpDescribeArtifactValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAutoMLJob{}, middleware.After)
+}
+
+func addOpDescribeAutoMLJobV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAutoMLJobV2{}, middleware.After)
 }
 
 func addOpDescribeCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
@@ -5861,6 +5909,11 @@ func validateAlgorithmSpecification(v *types.AlgorithmSpecification) error {
 			invalidParams.AddNested("MetricDefinitions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TrainingImageConfig != nil {
+		if err := validateTrainingImageConfig(v.TrainingImageConfig); err != nil {
+			invalidParams.AddNested("TrainingImageConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6080,6 +6133,55 @@ func validateAthenaDatasetDefinition(v *types.AthenaDatasetDefinition) error {
 	}
 }
 
+func validateAutoMLAlgorithmConfig(v *types.AutoMLAlgorithmConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLAlgorithmConfig"}
+	if v.AutoMLAlgorithms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoMLAlgorithms"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoMLAlgorithmsConfig(v []types.AutoMLAlgorithmConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLAlgorithmsConfig"}
+	for i := range v {
+		if err := validateAutoMLAlgorithmConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoMLCandidateGenerationConfig(v *types.AutoMLCandidateGenerationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLCandidateGenerationConfig"}
+	if v.AlgorithmsConfig != nil {
+		if err := validateAutoMLAlgorithmsConfig(v.AlgorithmsConfig); err != nil {
+			invalidParams.AddNested("AlgorithmsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutoMLChannel(v *types.AutoMLChannel) error {
 	if v == nil {
 		return nil
@@ -6138,6 +6240,23 @@ func validateAutoMLInputDataConfig(v []types.AutoMLChannel) error {
 	}
 }
 
+func validateAutoMLJobChannel(v *types.AutoMLJobChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLJobChannel"}
+	if v.DataSource != nil {
+		if err := validateAutoMLDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutoMLJobConfig(v *types.AutoMLJobConfig) error {
 	if v == nil {
 		return nil
@@ -6146,6 +6265,28 @@ func validateAutoMLJobConfig(v *types.AutoMLJobConfig) error {
 	if v.SecurityConfig != nil {
 		if err := validateAutoMLSecurityConfig(v.SecurityConfig); err != nil {
 			invalidParams.AddNested("SecurityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CandidateGenerationConfig != nil {
+		if err := validateAutoMLCandidateGenerationConfig(v.CandidateGenerationConfig); err != nil {
+			invalidParams.AddNested("CandidateGenerationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoMLJobInputDataConfig(v []types.AutoMLJobChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLJobInputDataConfig"}
+	for i := range v {
+		if err := validateAutoMLJobChannel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7909,11 +8050,6 @@ func validateHyperParameterTuningJobConfig(v *types.HyperParameterTuningJobConfi
 	if v.ParameterRanges != nil {
 		if err := validateParameterRanges(v.ParameterRanges); err != nil {
 			invalidParams.AddNested("ParameterRanges", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TuningJobCompletionCriteria != nil {
-		if err := validateTuningJobCompletionCriteria(v.TuningJobCompletionCriteria); err != nil {
-			invalidParams.AddNested("TuningJobCompletionCriteria", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10504,6 +10640,26 @@ func validateTrafficRoutingConfig(v *types.TrafficRoutingConfig) error {
 	}
 }
 
+func validateTrainingImageConfig(v *types.TrainingImageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingImageConfig"}
+	if len(v.TrainingRepositoryAccessMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingRepositoryAccessMode"))
+	}
+	if v.TrainingRepositoryAuthConfig != nil {
+		if err := validateTrainingRepositoryAuthConfig(v.TrainingRepositoryAuthConfig); err != nil {
+			invalidParams.AddNested("TrainingRepositoryAuthConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrainingJobDefinition(v *types.TrainingJobDefinition) error {
 	if v == nil {
 		return nil
@@ -10535,6 +10691,21 @@ func validateTrainingJobDefinition(v *types.TrainingJobDefinition) error {
 	}
 	if v.StoppingCondition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StoppingCondition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainingRepositoryAuthConfig(v *types.TrainingRepositoryAuthConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingRepositoryAuthConfig"}
+	if v.TrainingRepositoryCredentialsProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingRepositoryCredentialsProviderArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10730,21 +10901,6 @@ func validateTrialComponentArtifacts(v map[string]types.TrialComponentArtifact) 
 		if err := validateTrialComponentArtifact(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTuningJobCompletionCriteria(v *types.TuningJobCompletionCriteria) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TuningJobCompletionCriteria"}
-	if v.TargetObjectiveMetricValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetObjectiveMetricValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11101,6 +11257,56 @@ func validateOpCreateAutoMLJobInput(v *CreateAutoMLJobInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAutoMLJobV2Input(v *CreateAutoMLJobV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAutoMLJobV2Input"}
+	if v.AutoMLJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoMLJobName"))
+	}
+	if v.AutoMLJobInputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoMLJobInputDataConfig"))
+	} else if v.AutoMLJobInputDataConfig != nil {
+		if err := validateAutoMLJobInputDataConfig(v.AutoMLJobInputDataConfig); err != nil {
+			invalidParams.AddNested("AutoMLJobInputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	} else if v.OutputDataConfig != nil {
+		if err := validateAutoMLOutputDataConfig(v.OutputDataConfig); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoMLProblemTypeConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoMLProblemTypeConfig"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecurityConfig != nil {
+		if err := validateAutoMLSecurityConfig(v.SecurityConfig); err != nil {
+			invalidParams.AddNested("SecurityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoMLJobObjective != nil {
+		if err := validateAutoMLJobObjective(v.AutoMLJobObjective); err != nil {
+			invalidParams.AddNested("AutoMLJobObjective", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -13605,6 +13811,21 @@ func validateOpDescribeAutoMLJobInput(v *DescribeAutoMLJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAutoMLJobInput"}
+	if v.AutoMLJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoMLJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAutoMLJobV2Input(v *DescribeAutoMLJobV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAutoMLJobV2Input"}
 	if v.AutoMLJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoMLJobName"))
 	}

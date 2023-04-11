@@ -166,18 +166,18 @@ type UpdateItemInput struct {
 	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
 
 	// Use ReturnValues if you want to get the item attributes as they appear before or
-	// after they are updated. For UpdateItem, the valid values are:
+	// after they are successfully updated. For UpdateItem, the valid values are:
 	//
-	// * NONE - If
-	// ReturnValues is not specified, or if its value is NONE, then nothing is
-	// returned. (This setting is the default for ReturnValues.)
+	// *
+	// NONE - If ReturnValues is not specified, or if its value is NONE, then nothing
+	// is returned. (This setting is the default for ReturnValues.)
 	//
-	// * ALL_OLD - Returns
-	// all of the attributes of the item, as they appeared before the UpdateItem
-	// operation.
+	// * ALL_OLD -
+	// Returns all of the attributes of the item, as they appeared before the
+	// UpdateItem operation.
 	//
-	// * UPDATED_OLD - Returns only the updated attributes, as they
-	// appeared before the UpdateItem operation.
+	// * UPDATED_OLD - Returns only the updated attributes, as
+	// they appeared before the UpdateItem operation.
 	//
 	// * ALL_NEW - Returns all of the
 	// attributes of the item, as they appear after the UpdateItem operation.
@@ -270,8 +270,8 @@ type UpdateItemOutput struct {
 
 	// A map of attribute values as they appear before or after the UpdateItem
 	// operation, as determined by the ReturnValues parameter. The Attributes map is
-	// only present if ReturnValues was specified as something other than NONE in the
-	// request. Each element represents one attribute.
+	// only present if the update was successful and ReturnValues was specified as
+	// something other than NONE in the request. Each element represents one attribute.
 	Attributes map[string]types.AttributeValue
 
 	// The capacity units consumed by the UpdateItem operation. The data returned
@@ -279,7 +279,7 @@ type UpdateItemOutput struct {
 	// the table and any indexes involved in the operation. ConsumedCapacity is only
 	// returned if the ReturnConsumedCapacity parameter was specified. For more
 	// information, see Provisioned Throughput
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *types.ConsumedCapacity
 

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a streaming media pipeline in an Amazon Chime SDK meeting.
+// Creates a media live connector pipeline in an Amazon Chime SDK meeting.
 func (c *Client) CreateMediaLiveConnectorPipeline(ctx context.Context, params *CreateMediaLiveConnectorPipelineInput, optFns ...func(*Options)) (*CreateMediaLiveConnectorPipelineOutput, error) {
 	if params == nil {
 		params = &CreateMediaLiveConnectorPipelineInput{}
@@ -30,12 +30,12 @@ func (c *Client) CreateMediaLiveConnectorPipeline(ctx context.Context, params *C
 
 type CreateMediaLiveConnectorPipelineInput struct {
 
-	// The media pipeline's data sinks.
+	// The media live connector pipeline's data sinks.
 	//
 	// This member is required.
 	Sinks []types.LiveConnectorSinkConfiguration
 
-	// The media pipeline's data sources.
+	// The media live connector pipeline's data sources.
 	//
 	// This member is required.
 	Sources []types.LiveConnectorSourceConfiguration
@@ -43,7 +43,7 @@ type CreateMediaLiveConnectorPipelineInput struct {
 	// The token assigned to the client making the request.
 	ClientRequestToken *string
 
-	// The tags associated with the media pipeline.
+	// The tags associated with the media live connector pipeline.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -51,7 +51,7 @@ type CreateMediaLiveConnectorPipelineInput struct {
 
 type CreateMediaLiveConnectorPipelineOutput struct {
 
-	// The new media pipeline.
+	// The new media live connector pipeline.
 	MediaLiveConnectorPipeline *types.MediaLiveConnectorPipeline
 
 	// Metadata pertaining to the operation's result.

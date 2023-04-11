@@ -46,17 +46,21 @@ func (c *Client) AssociateEnclaveCertificateIamRole(ctx context.Context, params 
 type AssociateEnclaveCertificateIamRoleInput struct {
 
 	// The ARN of the ACM certificate with which to associate the IAM role.
+	//
+	// This member is required.
 	CertificateArn *string
+
+	// The ARN of the IAM role to associate with the ACM certificate. You can associate
+	// up to 16 IAM roles with an ACM certificate.
+	//
+	// This member is required.
+	RoleArn *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ARN of the IAM role to associate with the ACM certificate. You can associate
-	// up to 16 IAM roles with an ACM certificate.
-	RoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -123,6 +127,9 @@ func (c *Client) addOperationAssociateEnclaveCertificateIamRoleMiddlewares(stack
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpAssociateEnclaveCertificateIamRoleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateEnclaveCertificateIamRole(options.Region), middleware.Before); err != nil {

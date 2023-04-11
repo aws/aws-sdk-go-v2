@@ -1329,6 +1329,21 @@ func validateElasticsearchDataSourceConfig(v *types.ElasticsearchDataSourceConfi
 	}
 }
 
+func validateEventBridgeDataSourceConfig(v *types.EventBridgeDataSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeDataSourceConfig"}
+	if v.EventBusArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventBusArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpDataSourceConfig(v *types.HttpDataSourceConfig) error {
 	if v == nil {
 		return nil
@@ -1539,6 +1554,11 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	if v.HttpConfig != nil {
 		if err := validateHttpDataSourceConfig(v.HttpConfig); err != nil {
 			invalidParams.AddNested("HttpConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventBridgeConfig != nil {
+		if err := validateEventBridgeDataSourceConfig(v.EventBridgeConfig); err != nil {
+			invalidParams.AddNested("EventBridgeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2313,6 +2333,11 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 	if v.HttpConfig != nil {
 		if err := validateHttpDataSourceConfig(v.HttpConfig); err != nil {
 			invalidParams.AddNested("HttpConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventBridgeConfig != nil {
+		if err := validateEventBridgeDataSourceConfig(v.EventBridgeConfig); err != nil {
+			invalidParams.AddNested("EventBridgeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

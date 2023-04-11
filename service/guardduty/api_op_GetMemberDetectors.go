@@ -12,6 +12,10 @@ import (
 )
 
 // Describes which data sources are enabled for the member account's detector.
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) GetMemberDetectors(ctx context.Context, params *GetMemberDetectorsInput, optFns ...func(*Options)) (*GetMemberDetectorsOutput, error) {
 	if params == nil {
 		params = &GetMemberDetectorsInput{}

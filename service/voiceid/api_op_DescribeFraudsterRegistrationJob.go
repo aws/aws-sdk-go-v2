@@ -29,12 +29,12 @@ func (c *Client) DescribeFraudsterRegistrationJob(ctx context.Context, params *D
 
 type DescribeFraudsterRegistrationJobInput struct {
 
-	// The identifier for the domain containing the fraudster registration job.
+	// The identifier of the domain that contains the fraudster registration job.
 	//
 	// This member is required.
 	DomainId *string
 
-	// The identifier for the fraudster registration job you are describing.
+	// The identifier of the fraudster registration job you are describing.
 	//
 	// This member is required.
 	JobId *string

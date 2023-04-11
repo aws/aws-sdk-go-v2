@@ -42,6 +42,8 @@ type JsonListsInput struct {
 
 	EnumList []types.FooEnum
 
+	IntEnumList []types.IntegerEnum
+
 	IntegerList []int32
 
 	// A list of lists of strings.
@@ -64,6 +66,8 @@ type JsonListsOutput struct {
 	BooleanList []bool
 
 	EnumList []types.FooEnum
+
+	IntEnumList []types.IntegerEnum
 
 	IntegerList []int32
 

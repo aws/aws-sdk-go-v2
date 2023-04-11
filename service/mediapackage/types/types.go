@@ -31,6 +31,9 @@ type Channel struct {
 	// The Amazon Resource Name (ARN) assigned to the Channel.
 	Arn *string
 
+	// The date and time the Channel was created.
+	CreatedAt *string
+
 	// A short text description of the Channel.
 	Description *string
 
@@ -262,7 +265,7 @@ type HarvestJob struct {
 	// The ID of the Channel that the HarvestJob will harvest from.
 	ChannelId *string
 
-	// The time the HarvestJob was submitted
+	// The date and time the HarvestJob was submitted.
 	CreatedAt *string
 
 	// The end of the time-window which will be harvested.
@@ -598,6 +601,9 @@ type OriginEndpoint struct {
 
 	// A Common Media Application Format (CMAF) packaging configuration.
 	CmafPackage *CmafPackage
+
+	// The date and time the OriginEndpoint was created.
+	CreatedAt *string
 
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *DashPackage

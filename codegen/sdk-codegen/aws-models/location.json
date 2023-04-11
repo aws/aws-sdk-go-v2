@@ -18,6 +18,113 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.location#ApiKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#externalDocumentation": {
+                    "Implementation Guide": "https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/03-Algorithm-Lucidity.md"
+                },
+                "smithy.api#length": {
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.location#ApiKeyAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^geo:GetMap\\*$"
+            }
+        },
+        "com.amazonaws.location#ApiKeyActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#ApiKeyAction"
+            }
+        },
+        "com.amazonaws.location#ApiKeyFilter": {
+            "type": "structure",
+            "members": {
+                "KeyStatus": {
+                    "target": "com.amazonaws.location#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter on <code>Active</code> or <code>Expired</code> API keys.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options for filtering API keys.</p>"
+            }
+        },
+        "com.amazonaws.location#ApiKeyResource": {
+            "type": "resource",
+            "identifiers": {
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.location#CreateKey"
+            },
+            "read": {
+                "target": "com.amazonaws.location#DescribeKey"
+            },
+            "update": {
+                "target": "com.amazonaws.location#UpdateKey"
+            },
+            "delete": {
+                "target": "com.amazonaws.location#DeleteKey"
+            },
+            "list": {
+                "target": "com.amazonaws.location#ListKeys"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "api-key/{KeyName}"
+                },
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.location#ApiKeyRestrictions": {
+            "type": "structure",
+            "members": {
+                "AllowActions": {
+                    "target": "com.amazonaws.location#ApiKeyActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of allowed actions that an API key resource grants permissions to\n            perform</p>\n         <note>\n            <p>Currently, the only valid action is <code>geo:GetMap*</code> as an input to the\n                list. For example, <code>[\"geo:GetMap*\"]</code> is valid but\n                    <code>[\"geo:GetMapTile\"]</code> is not.</p>\n         </note>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowResources": {
+                    "target": "com.amazonaws.location#GeoArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of allowed resource ARNs that a API key bearer can perform actions on</p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names\n                (ARNs)</a>.</p>\n         <note>\n            <p>In this preview, you can allow only map resources.</p>\n         </note>\n         <p>Requirements:</p>\n         <ul>\n            <li>\n               <p>Must be prefixed with <code>arn</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>partition</code> and <code>service</code> must not be empty and should\n                    begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only\n                    alphanumeric numbers, hyphens (-) and periods (.).</p>\n            </li>\n            <li>\n               <p>\n                  <code>region</code> and <code>account-id</code> can be empty or should begin\n                    with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric\n                    numbers, hyphens (-) and periods (.).</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-id</code> can begin with any character except for forward slash\n                    (/) and contain any characters after, including forward slashes to form a\n                    path.</p>\n               <p>\n                  <code>resource-id</code> can also include wildcard characters, denoted by an\n                    asterisk (*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>arn</code>, <code>partition</code>, <code>service</code>,\n                        <code>region</code>, <code>account-id</code> and <code>resource-id</code>\n                    must be delimited by a colon (:).</p>\n            </li>\n            <li>\n               <p>No spaces allowed. For example,\n                            <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowReferers": {
+                    "target": "com.amazonaws.location#RefererPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of allowed HTTP referers for which requests must originate from.\n            Requests using this API key from other domains will not be allowed.</p>\n         <p>Requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only alphanumeric characters (A–Z, a–z, 0–9) or any symbols in this\n                    list <code>$\\-._+!*`(),;/?:@=&amp;</code>\n               </p>\n            </li>\n            <li>\n               <p>May contain a percent (%) if followed by 2 hexadecimal digits (A-F, a-f, 0-9);\n                    this is used for URL encoding purposes.</p>\n            </li>\n            <li>\n               <p>May contain wildcard characters question mark (?) and asterisk (*).</p>\n               <p>Question mark (?) will replace any single character (including hexadecimal\n                    digits).</p>\n               <p>Asterisk (*) will replace any multiple characters (including multiple\n                    hexadecimal digits).</p>\n            </li>\n            <li>\n               <p>No spaces allowed. For example, <code>https://example.com</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>API Restrictions on the allowed actions, resources, and referers for an API key\n            resource.</p>"
+            }
+        },
         "com.amazonaws.location#Arn": {
             "type": "string",
             "traits": {
@@ -90,7 +197,7 @@
                 "ConsumerArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker\n            resource. Used when you need to specify a resource across all AWS.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker\n            resource. Used when you need to specify a resource across all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1436,7 +1543,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.location#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key identifier for an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">AWS KMS customer managed key</a>. Enter a key ID, key ARN, alias name, or alias ARN.\n\t</p>"
+                        "smithy.api#documentation": "<p>A key identifier for an \n            <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services \n                KMS customer managed key</a>. Enter a key ID, key ARN, alias name, or alias ARN.\n\t</p>"
                     }
                 }
             }
@@ -1454,7 +1561,7 @@
                 "CollectionArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the geofence collection resource. Used when you\n            need to specify a resource across all AWS. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the geofence collection resource. Used when you\n            need to specify a resource across all Amazon Web Services. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1462,6 +1569,122 @@
                     "target": "com.amazonaws.location#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp for when the geofence collection was created in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#CreateKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.location#CreateKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.location#CreateKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.location#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.location#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.location#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.location#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.location#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.location#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an API key resource in your Amazon Web Services account, which lets you grant\n                <code>geo:GetMap*</code> actions for Amazon Location Map resources to the API key\n            bearer.</p>\n         <important>\n            <p>The API keys feature is in preview. We may add, change, or remove \n            features before announcing general availability. For more information, see\n            <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">Using API keys</a>.</p>\n         </important>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "metadata."
+                },
+                "smithy.api#http": {
+                    "uri": "/metadata/v0/keys",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.location#CreateKeyRequest": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom name for the API key resource.</p>\n         <p>Requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods\n                    (.), and underscores (_). </p>\n            </li>\n            <li>\n               <p>Must be a unique API key name.</p>\n            </li>\n            <li>\n               <p>No spaces allowed. For example, <code>ExampleAPIKey</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Restrictions": {
+                    "target": "com.amazonaws.location#ApiKeyRestrictions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API key restrictions for the API key resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.location#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description for the API key resource.</p>"
+                    }
+                },
+                "ExpireTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional timestamp for when the API key resource will expire in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. One of <code>NoExpiry</code> or\n                <code>ExpireTime</code> must be set.</p>"
+                    }
+                },
+                "NoExpiry": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally set to <code>true</code> to set no expiration time for the API key. One of\n                <code>NoExpiry</code> or <code>ExpireTime</code> must be set.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.location#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applies one or more tags to the map resource. A tag is a key-value pair that helps\n            manage, identify, search, and filter your resources by labelling them.</p>\n         <p>Format: <code>\"key\" : \"value\"</code>\n         </p>\n         <p>Restrictions:</p>\n         <ul>\n            <li>\n               <p>Maximum 50 tags per resource</p>\n            </li>\n            <li>\n               <p>Each resource tag must be unique with a maximum of one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length: 128 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>Maximum value length: 256 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters:\n                    + - = . _ : / @. </p>\n            </li>\n            <li>\n               <p>Cannot use \"aws:\" as a prefix for a key.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#CreateKeyResponse": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.location#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key value/string of an API key. This value is used when making API calls to\n            authorize the call. For example, see <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_GetMapGlyphs.html\">GetMapGlyphs</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyArn": {
+                    "target": "com.amazonaws.location#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the API key resource. Used when you need to specify\n            a resource across all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                    <code>arn:aws:geo:region:account-id:key/ExampleKey</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the API key resource was created in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1496,7 +1719,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a map resource in your AWS account, which provides map tiles of different\n            styles sourced from global location data providers.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">AWS\n                    service terms</a> for more details.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a map resource in your Amazon Web Services account, which provides map tiles of different\n            styles sourced from global location data providers.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services\n                    service terms</a> for more details.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "maps."
                 },
@@ -1561,7 +1784,7 @@
                 "MapArn": {
                     "target": "com.amazonaws.location#GeoArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across\n            all AWS.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                    <code>arn:aws:geo:region:account-id:map/ExampleMap</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across\n            all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                    <code>arn:aws:geo:region:account-id:map/ExampleMap</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1603,7 +1826,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a place index resource in your AWS account. Use a place index resource to\n            geocode addresses and other text queries by using the\n                <code>SearchPlaceIndexForText</code> operation, and reverse geocode coordinates by\n            using the <code>SearchPlaceIndexForPosition</code> operation, and enable autosuggestions\n            by using the <code>SearchPlaceIndexForSuggestions</code> operation.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">AWS\n                    service terms</a> for more details.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a place index resource in your Amazon Web Services account. Use a place index resource to\n            geocode addresses and other text queries by using the\n                <code>SearchPlaceIndexForText</code> operation, and reverse geocode coordinates by\n            using the <code>SearchPlaceIndexForPosition</code> operation, and enable autosuggestions\n            by using the <code>SearchPlaceIndexForSuggestions</code> operation.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services\n                    service terms</a> for more details.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "places."
                 },
@@ -1627,7 +1850,7 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the geospatial data provider for the new place index.</p>\n         <note>\n            <p>This field is case-sensitive. Enter the valid values as shown. For example,\n                entering <code>HERE</code> returns an error.</p>\n         </note>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a>'s coverage in your region of interest, see <a href=\"https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm\">Esri details on geocoding coverage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Grab</code> – Grab provides place index functionality for Southeast \n                    Asia. For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a>' coverage, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area\">GrabMaps countries and areas covered</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                        Technologies</a>' coverage in your region of interest, see <a href=\"https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html\">HERE details on goecoding coverage</a>.</p>\n               <important>\n                  <p>If you specify HERE Technologies (<code>Here</code>) as the data provider,\n                        you may not <a href=\"https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html\">store results</a> for locations in Japan. For more information, see\n                        the <a href=\"https://aws.amazon.com/service-terms/\">AWS Service\n                            Terms</a> for Amazon Location Service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>For additional information , see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Data\n                providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the geospatial data provider for the new place index.</p>\n         <note>\n            <p>This field is case-sensitive. Enter the valid values as shown. For example,\n                entering <code>HERE</code> returns an error.</p>\n         </note>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a>'s coverage in your region of interest, see <a href=\"https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm\">Esri details on geocoding coverage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Grab</code> – Grab provides place index functionality for Southeast \n                    Asia. For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a>' coverage, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area\">GrabMaps countries and areas covered</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                        Technologies</a>' coverage in your region of interest, see <a href=\"https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html\">HERE details on goecoding coverage</a>.</p>\n               <important>\n                  <p>If you specify HERE Technologies (<code>Here</code>) as the data provider,\n                        you may not <a href=\"https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html\">store results</a> for locations in Japan. For more information, see\n                        the <a href=\"http://aws.amazon.com/service-terms/\">Amazon Web Services Service\n                            Terms</a> for Amazon Location Service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>For additional information , see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Data\n                providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1674,7 +1897,7 @@
                 "IndexArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a\n            resource across AWS. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a\n            resource across Amazon Web Services. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1716,7 +1939,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a route calculator resource in your AWS account.</p>\n         <p>You can send requests to a route calculator resource to estimate travel time,\n            distance, and get directions. A route calculator sources traffic and road network data\n            from your chosen data provider.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">AWS\n                    service terms</a> for more details.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a route calculator resource in your Amazon Web Services account.</p>\n         <p>You can send requests to a route calculator resource to estimate travel time,\n            distance, and get directions. A route calculator sources traffic and road network data\n            from your chosen data provider.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services\n                    service terms</a> for more details.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "routes."
                 },
@@ -1781,7 +2004,7 @@
                 "CalculatorArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the route calculator resource. Use the ARN when you\n            specify a resource across all AWS.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:route-calculator/ExampleCalculator</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the route calculator resource. Use the ARN when you\n            specify a resource across all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:route-calculator/ExampleCalculator</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1820,7 +2043,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a tracker resource in your AWS account, which lets you retrieve current and\n            historical location of devices.</p>",
+                "smithy.api#documentation": "<p>Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and\n            historical location of devices.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
                 },
@@ -1854,7 +2077,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.location#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key identifier for an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">AWS KMS customer managed key</a>. Enter a key ID, key ARN, alias name, or alias ARN.</p>"
+                        "smithy.api#documentation": "<p>A key identifier for an \n           <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services \n               KMS customer managed key</a>. Enter a key ID, key ARN, alias name, or alias ARN.</p>"
                     }
                 },
                 "PricingPlanDataSource": {
@@ -1900,7 +2123,7 @@
                 "TrackerArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify\n            a resource across all AWS.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:tracker/ExampleTracker</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify\n            a resource across all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:tracker/ExampleTracker</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1953,7 +2176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a geofence collection from your AWS account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the geofence collection is the\n                target of a tracker resource, the devices will no longer be monitored.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a geofence collection from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the geofence collection is the\n                target of a tracker resource, the devices will no longer be monitored.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
                 },
@@ -1978,6 +2201,60 @@
             }
         },
         "com.amazonaws.location#DeleteGeofenceCollectionResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.location#DeleteKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.location#DeleteKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.location#DeleteKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.location#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.location#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.location#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.location#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.location#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified API key. The API key must have been deactivated more than\n            90 days previously.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "metadata."
+                },
+                "smithy.api#http": {
+                    "uri": "/metadata/v0/keys/{KeyName}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.location#DeleteKeyRequest": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#DeleteKeyResponse": {
             "type": "structure",
             "members": {}
         },
@@ -2007,7 +2284,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a map resource from your AWS account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the map is being used in an application,\n                the map may not render.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a map resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the map is being used in an application,\n                the map may not render.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "maps."
                 },
@@ -2062,7 +2339,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a place index resource from your AWS account.</p>\n         <note>\n            <p>This operation deletes the resource permanently.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a place index resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "places."
                 },
@@ -2117,7 +2394,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a route calculator resource from your AWS account.</p>\n         <note>\n            <p>This operation deletes the resource permanently.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a route calculator resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "routes."
                 },
@@ -2172,7 +2449,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a tracker resource from your AWS account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the tracker resource is in use, you may\n                encounter an error. Make sure that the target resource isn't a dependency for your\n                applications.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a tracker resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the tracker resource is in use, you may\n                encounter an error. Make sure that the target resource isn't a dependency for your\n                applications.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
                 },
@@ -2263,7 +2540,7 @@
                 "CollectionArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the geofence collection resource. Used when you\n            need to specify a resource across all AWS. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the geofence collection resource. Used when you\n            need to specify a resource across all Amazon Web Services. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2297,7 +2574,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.location#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key identifier for an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">AWS KMS customer managed key</a> assigned to the Amazon Location resource</p>"
+                        "smithy.api#documentation": "<p>A key identifier for an \n            <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services \n                KMS customer managed key</a> assigned to the Amazon Location resource</p>"
                     }
                 },
                 "Tags": {
@@ -2318,6 +2595,121 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp for when the geofence collection was last updated in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>\n         </p>",
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#DescribeKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.location#DescribeKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.location#DescribeKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.location#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.location#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.location#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.location#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.location#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the API key resource details.</p>\n         <important>\n            <p>The API keys feature is in preview. We may add, change, or remove \n            features before announcing general availability. For more information, see\n            <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">Using API keys</a>.</p>\n         </important>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "metadata."
+                },
+                "smithy.api#http": {
+                    "uri": "/metadata/v0/keys/{KeyName}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.location#DescribeKeyRequest": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#DescribeKeyResponse": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.location#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key value/string of an API key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyArn": {
+                    "target": "com.amazonaws.location#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the API key resource. Used when you need to specify\n            a resource across all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                    <code>arn:aws:geo:region:account-id:key/ExampleKey</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Restrictions": {
+                    "target": "com.amazonaws.location#ApiKeyRestrictions",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the API key resource was created in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpireTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the API key resource will expire in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the API key resource was last updated in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.location#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional description for the API key resource.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.location#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags associated with the API key resource.</p>"
                     }
                 }
             }
@@ -2385,7 +2777,7 @@
                 "MapArn": {
                     "target": "com.amazonaws.location#GeoArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across\n            all AWS.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                    <code>arn:aws:geo:region:account-id:map/ExampleMap</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across\n            all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                    <code>arn:aws:geo:region:account-id:map/ExampleMap</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2505,7 +2897,7 @@
                 "IndexArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a\n            resource across AWS. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a\n            resource across Amazon Web Services. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2625,7 +3017,7 @@
                 "CalculatorArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN when you\n            specify a resource across AWS.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:route-calculator/ExampleCalculator</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN when you\n            specify a resource across Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:route-calculator/ExampleCalculator</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2738,7 +3130,7 @@
                 "TrackerArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify\n            a resource across all AWS.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:tracker/ExampleTracker</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify\n            a resource across all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:tracker/ExampleTracker</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2792,7 +3184,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.location#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key identifier for an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">AWS KMS customer managed key</a> assigned to the Amazon Location resource.</p>"
+                        "smithy.api#documentation": "<p>A key identifier for an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services\n            KMS customer managed key</a> assigned to the Amazon Location resource.</p>"
                     }
                 },
                 "PositionFiltering": {
@@ -2972,7 +3364,7 @@
                 "ConsumerArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the geofence collection to be disassociated from\n            the tracker resource. Used when you need to specify a resource across all AWS. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the geofence collection to be disassociated from\n            the tracker resource. Used when you need to specify a resource across all Amazon Web Services. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3027,6 +3419,12 @@
                     "max": 1600
                 },
                 "smithy.api#pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$"
+            }
+        },
+        "com.amazonaws.location#GeoArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#GeoArn"
             }
         },
         "com.amazonaws.location#GeofenceCollectionResource": {
@@ -3459,7 +3857,7 @@
                 "FontStack": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n         <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n         <ul>\n            <li>\n               <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \n                    <code>Fira GO Italic</code> | <code>Fira GO Map</code> | \n                    <code>Fira GO Map Bold</code> | <code>Noto Sans CJK JP Bold</code> | \n                    <code>Noto Sans CJK JP Light</code> | \n                    <code>Noto Sans CJK JP Regular</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorGrabStandardLight, VectorGrabStandardDark – \n                    <code>Noto Sans Regular</code> |\n                    <code>Noto Sans Medium</code> |\n                    <code>Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data (Preview)</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorOpenDataStandardLight – \n                    <code>Amazon Ember Regular,Noto Sans Regular</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold</code> | \n                    <code>Amazon Ember Medium,Noto Sans Medium</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic</code> | \n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular</code> | \n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The fonts used by <code>VectorOpenDataStandardLight</code> are combined fonts\n                that use <code>Amazon Ember</code> for most glyphs but <code>Noto Sans</code> \n                for glyphs unsupported by <code>Amazon Ember</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n         <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n         <ul>\n            <li>\n               <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \n                    <code>Fira GO Italic</code> | <code>Fira GO Map</code> | \n                    <code>Fira GO Map Bold</code> | <code>Noto Sans CJK JP Bold</code> | \n                    <code>Noto Sans CJK JP Light</code> | \n                    <code>Noto Sans CJK JP Regular</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorGrabStandardLight, VectorGrabStandardDark – \n                    <code>Noto Sans Regular</code> |\n                    <code>Noto Sans Medium</code> |\n                    <code>Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorOpenDataStandardLight, VectorOpenDataStandardDark,\n                    VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – \n                    <code>Amazon Ember Regular,Noto Sans Regular</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold</code> | \n                    <code>Amazon Ember Medium,Noto Sans Medium</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic</code> | \n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular</code> | \n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The fonts used by the Open Data map styles are combined fonts\n                that use <code>Amazon Ember</code> for most glyphs but <code>Noto Sans</code> \n                for glyphs unsupported by <code>Amazon Ember</code>.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3472,6 +3870,13 @@
                         "smithy.api#pattern": "^[0-9]+-[0-9]+\\.pbf$",
                         "smithy.api#required": {}
                     }
+                },
+                "Key": {
+                    "target": "com.amazonaws.location#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">API key</a> to authorize \n            the request.</p>",
+                        "smithy.api#httpQuery": "key"
+                    }
                 }
             }
         },
@@ -3481,7 +3886,7 @@
                 "Blob": {
                     "target": "smithy.api#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blob's content type.</p>",
+                        "smithy.api#documentation": "<p>The glyph, as binary blob.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 },
@@ -3490,6 +3895,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The map glyph content type. For example, <code>application/octet-stream</code>.</p>",
                         "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP Cache-Control directive for the value.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
                     }
                 }
             },
@@ -3555,6 +3967,13 @@
                         "smithy.api#pattern": "^sprites(@2x)?\\.(png|json)$",
                         "smithy.api#required": {}
                     }
+                },
+                "Key": {
+                    "target": "com.amazonaws.location#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">API key</a> to authorize \n            the request.</p>",
+                        "smithy.api#httpQuery": "key"
+                    }
                 }
             }
         },
@@ -3573,6 +3992,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The content type of the sprite sheet and offsets. For example, the sprite sheet\n            content type is <code>image/png</code>, and the sprite offset JSON document is\n                <code>application/json</code>. </p>",
                         "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP Cache-Control directive for the value.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
                     }
                 }
             }
@@ -3624,6 +4050,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "Key": {
+                    "target": "com.amazonaws.location#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">API key</a> to authorize \n            the request.</p>",
+                        "smithy.api#httpQuery": "key"
+                    }
                 }
             }
         },
@@ -3645,6 +4078,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The style descriptor's content type. For example,\n            <code>application/json</code>.</p>",
                         "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP Cache-Control directive for the value.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
                     }
                 }
             }
@@ -3723,6 +4163,13 @@
                         "smithy.api#pattern": "\\d+",
                         "smithy.api#required": {}
                     }
+                },
+                "Key": {
+                    "target": "com.amazonaws.location#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">API key</a> to authorize \n            the request.</p>",
+                        "smithy.api#httpQuery": "key"
+                    }
                 }
             }
         },
@@ -3741,6 +4188,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The map tile's content type. For example,\n                <code>application/vnd.mapbox-vector-tile</code>.</p>",
                         "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP Cache-Control directive for the value.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
                     }
                 }
             }
@@ -3771,7 +4225,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Finds a place by its unique ID. A <code>PlaceId</code> is returned by other search\n            operations.</p>\n         <note>\n            <p>A PlaceId is valid only if all of the following are the same in the original\n                search request and the call to <code>GetPlace</code>.</p>\n            <ul>\n               <li>\n                  <p>Customer AWS account</p>\n               </li>\n               <li>\n                  <p>AWS Region</p>\n               </li>\n               <li>\n                  <p>Data provider specified in the place index resource</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Finds a place by its unique ID. A <code>PlaceId</code> is returned by other search\n            operations.</p>\n         <note>\n            <p>A PlaceId is valid only if all of the following are the same in the original\n                search request and the call to <code>GetPlace</code>.</p>\n            <ul>\n               <li>\n                  <p>Customer Amazon Web Services account</p>\n               </li>\n               <li>\n                  <p>Amazon Web Services Region</p>\n               </li>\n               <li>\n                  <p>Data provider specified in the place index resource</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "places."
                 },
@@ -4160,7 +4614,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists geofence collections in your AWS account.</p>",
+                "smithy.api#documentation": "<p>Lists geofence collections in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
                 },
@@ -4204,7 +4658,7 @@
                 "Entries": {
                     "target": "com.amazonaws.location#ListGeofenceCollectionsResponseEntryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the geofence collections that exist in your AWS account.</p>",
+                        "smithy.api#documentation": "<p>Lists the geofence collections that exist in your Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4417,6 +4871,145 @@
                 }
             }
         },
+        "com.amazonaws.location#ListKeys": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.location#ListKeysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.location#ListKeysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.location#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.location#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.location#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.location#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists API key resources in your Amazon Web Services account.</p>\n         <important>\n            <p>The API keys feature is in preview. We may add, change, or remove \n            features before announcing general availability. For more information, see\n            <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">Using API keys</a>.</p>\n         </important>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "metadata."
+                },
+                "smithy.api#http": {
+                    "uri": "/metadata/v0/list-keys",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Entries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.location#ListKeysRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional limit for the number of resources returned in a single call. </p>\n         <p>Default value: <code>100</code>\n         </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.location#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token specifying which page of results to return in the response. If no\n            token is provided, the default page is the first page. </p>\n         <p>Default value: <code>null</code>\n         </p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.location#ApiKeyFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally filter the list to only <code>Active</code> or <code>Expired</code> API\n            keys.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#ListKeysResponse": {
+            "type": "structure",
+            "members": {
+                "Entries": {
+                    "target": "com.amazonaws.location#ListKeysResponseEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains API key resources in your Amazon Web Services account. Details include API key\n            name, allowed referers and timestamp for when the API key will expire.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.location#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token indicating there are additional pages available. You can use the\n            token in a following request to fetch the next set of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#ListKeysResponseEntry": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpireTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the API key resource will expire, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.location#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional description for the API key resource.</p>"
+                    }
+                },
+                "Restrictions": {
+                    "target": "com.amazonaws.location#ApiKeyRestrictions",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the API key was created, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the API key was last updated, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An API key resource listed in your Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.location#ListKeysResponseEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#ListKeysResponseEntry"
+            }
+        },
         "com.amazonaws.location#ListMaps": {
             "type": "operation",
             "input": {
@@ -4440,7 +5033,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists map resources in your AWS account.</p>",
+                "smithy.api#documentation": "<p>Lists map resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "maps."
                 },
@@ -4484,7 +5077,7 @@
                 "Entries": {
                     "target": "com.amazonaws.location#ListMapsResponseEntryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a list of maps in your AWS account</p>",
+                        "smithy.api#documentation": "<p>Contains a list of maps in your Amazon Web Services account</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4546,7 +5139,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details of an existing map resource in your AWS account.</p>"
+                "smithy.api#documentation": "<p>Contains details of an existing map resource in your Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.location#ListMapsResponseEntryList": {
@@ -4578,7 +5171,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists place index resources in your AWS account.</p>",
+                "smithy.api#documentation": "<p>Lists place index resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "places."
                 },
@@ -4622,7 +5215,7 @@
                 "Entries": {
                     "target": "com.amazonaws.location#ListPlaceIndexesResponseEntryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the place index resources that exist in your AWS account</p>",
+                        "smithy.api#documentation": "<p>Lists the place index resources that exist in your Amazon Web Services account</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4684,7 +5277,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A place index resource listed in your AWS account.</p>"
+                "smithy.api#documentation": "<p>A place index resource listed in your Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.location#ListPlaceIndexesResponseEntryList": {
@@ -4716,7 +5309,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists route calculator resources in your AWS account.</p>",
+                "smithy.api#documentation": "<p>Lists route calculator resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "routes."
                 },
@@ -4760,7 +5353,7 @@
                 "Entries": {
                     "target": "com.amazonaws.location#ListRouteCalculatorsResponseEntryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the route calculator resources that exist in your AWS account</p>",
+                        "smithy.api#documentation": "<p>Lists the route calculator resources that exist in your Amazon Web Services account</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4822,7 +5415,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A route calculator resource listed in your AWS account.</p>"
+                "smithy.api#documentation": "<p>A route calculator resource listed in your Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.location#ListRouteCalculatorsResponseEntryList": {
@@ -4874,7 +5467,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4887,7 +5480,7 @@
                 "Tags": {
                     "target": "com.amazonaws.location#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags that have been applied to the specified resource. Tags are mapped from the tag key to the tag value: <code>\"TagKey\" : \"TagValue\"</code>.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>{\"tag1\" : \"value1\", \"tag2\" : \"value2\"} </code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Tags that have been applied to the specified resource. Tags are mapped from the tag\n            key to the tag value: <code>\"TagKey\" : \"TagValue\"</code>.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>{\"tag1\" : \"value1\", \"tag2\" : \"value2\"} </code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -5005,7 +5598,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists tracker resources in your AWS account.</p>",
+                "smithy.api#documentation": "<p>Lists tracker resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
                 },
@@ -5049,7 +5642,7 @@
                 "Entries": {
                     "target": "com.amazonaws.location#ListTrackersResponseEntryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains tracker resources in your AWS account. Details include tracker name,\n            description and timestamps for when the tracker was created and last updated.</p>",
+                        "smithy.api#documentation": "<p>Contains tracker resources in your Amazon Web Services account. Details include tracker name,\n            description and timestamps for when the tracker was created and last updated.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5128,6 +5721,9 @@
             "version": "2020-11-19",
             "resources": [
                 {
+                    "target": "com.amazonaws.location#ApiKeyResource"
+                },
+                {
                     "target": "com.amazonaws.location#GenericResource"
                 },
                 {
@@ -5162,7 +5758,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -5191,15 +5787,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -5208,7 +5856,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -5218,22 +5866,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://geo-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -5246,82 +6029,52 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://geo.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
@@ -5329,7 +6082,7 @@
                                                         {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "url": "https://geo.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -5338,144 +6091,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://geo-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://geo.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [],
-                                            "endpoint": {
-                                                "url": "https://geo.{Region}.{PartitionResult#dnsSuffix}",
-                                                "properties": {},
-                                                "headers": {}
-                                            },
-                                            "type": "endpoint"
-                                        }
-                                    ]
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -5483,84 +6105,6 @@
                 },
                 "smithy.rules#endpointTests": {
                     "testCases": [
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://geo-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://geo-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://geo.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://geo.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://geo-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://geo.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
-                            }
-                        },
                         {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
@@ -5609,6 +6153,58 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false
                             }
@@ -5666,6 +6262,32 @@
                             }
                         },
                         {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -5692,7 +6314,7 @@
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -5700,6 +6322,19 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
@@ -5740,7 +6375,7 @@
                 "Style": {
                     "target": "com.amazonaws.location#MapStyle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorHereContrast</code> – The HERE Contrast (Berlin) map style is a \n                    high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n               <note>\n                  <p>The <code>VectorHereContrast</code> style has been renamed from \n                    <code>VectorHereBerlin</code>. \n                    <code>VectorHereBerlin</code> has been deprecated, but will continue to work in \n                    applications that use it.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RasterHereExploreSatellite</code> – A global map containing high\n                    resolution satellite imagery.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HybridHereExploreSatellite</code> – A global map displaying the road \n                    network, street names, and city labels over satellite imagery. This style \n                    will automatically retrieve both raster and vector tiles, and your charges \n                    will be based on total tiles retrieved.</p>\n               <note>\n                  <p>Hybrid styles use both vector and raster tiles when rendering the \n                    map that you see. This means that more tiles are retrieved than when using \n                    either vector or raster tiles alone. Your charges will include all tiles \n                    retrieved.</p>\n               </note>\n            </li>\n         </ul>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorGrabStandardLight</code> – The Grab Standard Light \n                    map style provides a basemap with detailed land use coloring, \n                    area names, roads, landmarks, and points of interest covering \n                    Southeast Asia.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorGrabStandardDark</code> – The Grab Standard Dark \n                    map style provides a dark variation of the standard basemap \n                    covering Southeast Asia.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Grab provides maps only for countries in Southeast Asia, and is only available \n                in the Asia Pacific (Singapore) Region (<code>ap-southeast-1</code>).\n                For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area\">GrabMaps countries and area covered</a>.</p>\n         </note>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data (Preview) map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorOpenDataStandardLight</code> – The Open Data Standard Light \n                    (preview) map style provides a detailed basemap for the world suitable for\n                    website and mobile application use. The map includes highways major roads, \n                    minor roads, railways, water features, cities, parks, landmarks, building\n                    footprints, and administrative boundaries.</p>\n               <important>\n                  <p>Open Data maps is in preview. We may add, change, or remove \n                    features before announcing general availability. For more information, see\n                    <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html#open-data-preview\">Open Data is in preview release</a>.</p>\n               </important>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorHereContrast</code> – The HERE Contrast (Berlin) map style is a \n                    high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n               <note>\n                  <p>The <code>VectorHereContrast</code> style has been renamed from \n                    <code>VectorHereBerlin</code>. \n                    <code>VectorHereBerlin</code> has been deprecated, but will continue to work in \n                    applications that use it.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RasterHereExploreSatellite</code> – A global map containing high\n                    resolution satellite imagery.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HybridHereExploreSatellite</code> – A global map displaying the road \n                    network, street names, and city labels over satellite imagery. This style \n                    will automatically retrieve both raster and vector tiles, and your charges \n                    will be based on total tiles retrieved.</p>\n               <note>\n                  <p>Hybrid styles use both vector and raster tiles when rendering the \n                    map that you see. This means that more tiles are retrieved than when using \n                    either vector or raster tiles alone. Your charges will include all tiles \n                    retrieved.</p>\n               </note>\n            </li>\n         </ul>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorGrabStandardLight</code> – The Grab Standard Light \n                    map style provides a basemap with detailed land use coloring, \n                    area names, roads, landmarks, and points of interest covering \n                    Southeast Asia.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorGrabStandardDark</code> – The Grab Standard Dark \n                    map style provides a dark variation of the standard basemap \n                    covering Southeast Asia.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Grab provides maps only for countries in Southeast Asia, and is only available \n                in the Asia Pacific (Singapore) Region (<code>ap-southeast-1</code>).\n                For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area\">GrabMaps countries and area covered</a>.</p>\n         </note>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorOpenDataStandardLight</code> – The Open Data Standard Light \n                    map style provides a detailed basemap for the world suitable for\n                    website and mobile application use. The map includes highways major roads, \n                    minor roads, railways, water features, cities, parks, landmarks, building\n                    footprints, and administrative boundaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataStandardDark</code> – Open Data Standard Dark is a\n                    dark-themed map style that provides a detailed basemap for the world \n                    suitable for website and mobile application use. The map includes highways \n                    major roads, minor roads, railways, water features, cities, parks, \n                    landmarks, building footprints, and administrative boundaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataVisualizationLight</code> – The Open Data \n                    Visualization Light map style is a light-themed style with muted colors and\n                    fewer features that aids in understanding overlaid data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataVisualizationDark</code> – The Open Data \n                    Visualization Dark map style is a dark-themed style with muted colors and\n                    fewer features that aids in understanding overlaid data.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6162,6 +6797,21 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.location#RefererPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 253
+                },
+                "smithy.api#pattern": "^([$\\-._+!*\\x{60}(),;/?:@=&\\w]|%([0-9a-fA-F?]{2}|[0-9a-fA-F?]?[*]))+$"
+            }
+        },
+        "com.amazonaws.location#RefererPatternList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#RefererPattern"
             }
         },
         "com.amazonaws.location#ResourceDescription": {
@@ -6921,6 +7571,21 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.location#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active",
+                        "documentation": "List all active API keys."
+                    },
+                    {
+                        "value": "Expired",
+                        "documentation": "List all expired API keys."
+                    }
+                ]
+            }
+        },
         "com.amazonaws.location#Step": {
             "type": "structure",
             "members": {
@@ -7040,7 +7705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon\n            Location Service resource.</p>\n         <p>Tags can help you organize and categorize your resources.\n            You can also use them to scope user permissions, by granting a user\n            permission to access or change only resources with certain tag values.</p>\n         <p>You can use the <code>TagResource</code> operation with an Amazon Location Service\n            resource that already has tags. If you specify a new tag key for the resource, this tag\n            is appended to the tags already associated with the resource. If you specify a tag key\n            that's already associated with the resource, the new tag value that you specify replaces\n            the previous value for that tag. </p>\n         <p>You can associate up to 50 tags with a resource.</p>",
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon Location Service\n            resource.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to\n            scope user permissions, by granting a user permission to access or change only resources\n            with certain tag values.</p>\n         <p>You can use the <code>TagResource</code> operation with an Amazon Location Service\n            resource that already has tags. If you specify a new tag key for the resource, this tag\n            is appended to the tags already associated with the resource. If you specify a tag key\n            that's already associated with the resource, the new tag value that you specify replaces\n            the previous value for that tag. </p>\n         <p>You can associate up to 50 tags with a resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "metadata."
                 },
@@ -7056,7 +7721,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags you want to update.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags you want to update.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7064,7 +7729,7 @@
                 "Tags": {
                     "target": "com.amazonaws.location#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies one or more tags to specific resource. A tag is a key-value pair that helps you\n            manage, identify, search, and filter your resources.</p>\n         <p>Format: <code>\"key\" : \"value\"</code>\n         </p>\n         <p>Restrictions:</p>\n         <ul>\n            <li>\n               <p>Maximum 50 tags per resource.</p>\n            </li>\n            <li>\n               <p>Each tag key must be unique and must have exactly one associated value.</p>\n            </li>\n            <li>\n               <p>Maximum key length: 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length: 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + -\n                    = . _ : / @</p>\n            </li>\n            <li>\n               <p>Cannot use \"aws:\" as a prefix for a key.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Applies one or more tags to specific resource. A tag is a key-value pair that helps\n            you manage, identify, search, and filter your resources.</p>\n         <p>Format: <code>\"key\" : \"value\"</code>\n         </p>\n         <p>Restrictions:</p>\n         <ul>\n            <li>\n               <p>Maximum 50 tags per resource.</p>\n            </li>\n            <li>\n               <p>Each tag key must be unique and must have exactly one associated value.</p>\n            </li>\n            <li>\n               <p>Maximum key length: 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length: 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters:\n                    + - = . _ : / @</p>\n            </li>\n            <li>\n               <p>Cannot use \"aws:\" as a prefix for a key.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7328,7 +7993,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which you want to remove tags.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which you want to remove\n            tags.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7436,7 +8101,7 @@
                 "CollectionArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated geofence collection. Used to specify a\n            resource across AWS.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated geofence collection. Used to specify a\n            resource across Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7444,6 +8109,112 @@
                     "target": "com.amazonaws.location#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the geofence collection was last updated in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#UpdateKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.location#UpdateKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.location#UpdateKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.location#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.location#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.location#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.location#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.location#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified properties of a given API key resource.</p>\n         <important>\n            <p>The API keys feature is in preview. We may add, change, or remove \n            features before announcing general availability. For more information, see\n            <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">Using API keys</a>.</p>\n         </important>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "metadata."
+                },
+                "smithy.api#http": {
+                    "uri": "/metadata/v0/keys/{KeyName}",
+                    "method": "PATCH"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.location#UpdateKeyRequest": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key resource to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.location#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the description for the API key resource.</p>"
+                    }
+                },
+                "ExpireTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the timestamp for when the API key resource will expire in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
+                    }
+                },
+                "NoExpiry": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the API key should expire. Set to <code>true</code> to set the API key to have\n            no expiration time.</p>"
+                    }
+                },
+                "ForceUpdate": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The boolean flag to be included for updating <code>ExpireTime</code> or\n                <code>Restrictions</code> details.</p>\n         <p>Must be set to <code>true</code> to update an API key resource that has been used in\n            the past 7 days.</p>\n         <p>\n            <code>False</code> if force update is not preferred</p>\n         <p>Default value: <code>False</code>\n         </p>"
+                    }
+                },
+                "Restrictions": {
+                    "target": "com.amazonaws.location#ApiKeyRestrictions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the API key restrictions for the API key resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#UpdateKeyResponse": {
+            "type": "structure",
+            "members": {
+                "KeyArn": {
+                    "target": "com.amazonaws.location#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the API key resource. Used when you need to specify\n            a resource across all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                    <code>arn:aws:geo:region:account-id:key/ExampleKey</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the API key resource was last updated in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7626,7 +8397,7 @@
                 "IndexArn": {
                     "target": "com.amazonaws.location#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the upated place index resource. Used to specify a\n            resource across AWS.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>arn:aws:geo:region:account-id:place-\n                        index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the upated place index resource. Used to specify a\n            resource across Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>arn:aws:geo:region:account-id:place-\n                        index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },

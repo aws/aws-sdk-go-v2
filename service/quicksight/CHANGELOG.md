@@ -1,3 +1,44 @@
+# v1.33.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.0 (2023-03-09)
+
+* **Feature**: This release has two changes: add state persistence feature for embedded dashboard and console in GenerateEmbedUrlForRegisteredUser API; add properties for hidden collapsed row dimensions in PivotTableOptions.
+
+# v1.32.2 (2023-03-03)
+
+* No change notes available for this release.
+
+# v1.32.1 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.32.0 (2023-02-21)
+
+* **Feature**: S3 data sources now accept a custom IAM role.
+
+# v1.31.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.2 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.31.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.0 (2023-02-02)
+
+* **Feature**: QuickSight support for Radar Chart and Dashboard Publish Options
+
 # v1.30.0 (2023-01-20)
 
 * **Feature**: This release adds support for data bars in QuickSight table and increases pivot table field well limit.

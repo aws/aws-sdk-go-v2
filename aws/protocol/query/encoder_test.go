@@ -3,8 +3,9 @@ package query
 import (
 	"bytes"
 	"fmt"
-	smithytesting "github.com/aws/smithy-go/testing"
 	"testing"
+
+	smithytesting "github.com/aws/smithy-go/testing"
 )
 
 func TestEncode(t *testing.T) {
@@ -35,6 +36,13 @@ func TestEncode(t *testing.T) {
 			},
 			Expect: []byte(`list.spam.1=spam&list.spam.2=eggs`),
 		},
+		"empty list": {
+			Encode: func(e *Encoder) error {
+				e.Object().Key("list").Array("spam")
+				return e.Encode()
+			},
+			Expect: []byte(`list=`),
+		},
 		"flat list": {
 			Encode: func(e *Encoder) error {
 				list := e.Object().FlatKey("list").Array("spam")
@@ -43,6 +51,13 @@ func TestEncode(t *testing.T) {
 				return e.Encode()
 			},
 			Expect: []byte(`list.1=spam&list.2=eggs`),
+		},
+		"empty flat list": {
+			Encode: func(e *Encoder) error {
+				e.Object().FlatKey("list").Array("spam")
+				return e.Encode()
+			},
+			Expect: []byte(`list=`),
 		},
 		"map": {
 			Encode: func(e *Encoder) error {

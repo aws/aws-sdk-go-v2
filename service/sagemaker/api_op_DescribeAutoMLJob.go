@@ -65,7 +65,7 @@ type DescribeAutoMLJobOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// Returns the input data configuration for the AutoML job..
+	// Returns the input data configuration for the AutoML job.
 	//
 	// This member is required.
 	InputDataConfig []types.AutoMLChannel
@@ -125,9 +125,9 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's problem type.
 	ProblemType types.ProblemType
 
-	// This contains ProblemType, AutoMLJobObjective, and CompletionCriteria. If you do
-	// not provide these values, they are auto-inferred. If you do provide them, the
-	// values used are the ones you provide.
+	// Contains ProblemType, AutoMLJobObjective, and CompletionCriteria. If you do not
+	// provide these values, they are auto-inferred. If you do provide them, the values
+	// used are the ones you provide.
 	ResolvedAttributes *types.ResolvedAttributes
 
 	// Metadata pertaining to the operation's result.

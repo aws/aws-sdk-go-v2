@@ -43,14 +43,14 @@ type CreateAssociationInput struct {
 	// The name of the SSM Command document or Automation runbook that contains the
 	// configuration information for the managed node. You can specify Amazon Web
 	// Services-predefined documents, documents you created, or a document that is
-	// shared with you from another account. For Systems Manager documents (SSM
-	// documents) that are shared with you from other Amazon Web Services accounts, you
-	// must specify the complete SSM document ARN, in the following format:
-	// arn:partition:ssm:region:account-id:document/document-name  For example:
-	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For Amazon Web
-	// Services-predefined documents and SSM documents you created in your account, you
-	// only need to specify the document name. For example, AWS-ApplyPatchBaseline or
-	// My-Document.
+	// shared with you from another Amazon Web Services account. For Systems Manager
+	// documents (SSM documents) that are shared with you from other Amazon Web
+	// Services accounts, you must specify the complete SSM document ARN, in the
+	// following format: arn:partition:ssm:region:account-id:document/document-name
+	// For example: arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For
+	// Amazon Web Services-predefined documents and SSM documents you created in your
+	// account, you only need to specify the document name. For example,
+	// AWS-ApplyPatchBaseline or My-Document.
 	//
 	// This member is required.
 	Name *string

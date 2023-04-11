@@ -167,6 +167,27 @@ func TestClient_JsonUnions_awsAwsjson10Serialize(t *testing.T) {
 			}`))
 			},
 		},
+		// Serializes an intEnum union value
+		"AwsJson10SerializeIntEnumUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberIntEnumValue{Value: 1},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+				"X-Amz-Target": []string{"JsonRpc10.JsonUnions"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "intEnumValue": 1
+			    }
+			}`))
+			},
+		},
 		// Serializes a list union value
 		"AwsJson10SerializeListUnionValue": {
 			Params: &JsonUnionsInput{
@@ -422,6 +443,22 @@ func TestClient_JsonUnions_awsAwsjson10Deserialize(t *testing.T) {
 			}`),
 			ExpectResult: &JsonUnionsOutput{
 				Contents: &types.MyUnionMemberEnumValue{Value: types.FooEnum("Foo")},
+			},
+		},
+		// Deserializes an intEnum union value
+		"AwsJson10DeserializeIntEnumUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "intEnumValue": 1
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberIntEnumValue{Value: 1},
 			},
 		},
 		// Deserializes a list union value

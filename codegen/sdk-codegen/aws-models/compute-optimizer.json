@@ -382,7 +382,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -411,15 +411,67 @@
                         {
                             "conditions": [
                                 {
-                                    "fn": "aws.partition",
+                                    "fn": "isSet",
                                     "argv": [
                                         {
-                                            "ref": "Region"
+                                            "ref": "Endpoint"
                                         }
-                                    ],
-                                    "assign": "PartitionResult"
+                                    ]
                                 }
                             ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
                             "type": "tree",
                             "rules": [
                                 {
@@ -428,7 +480,7 @@
                                             "fn": "isSet",
                                             "argv": [
                                                 {
-                                                    "ref": "Endpoint"
+                                                    "ref": "Region"
                                                 }
                                             ]
                                         }
@@ -438,22 +490,157 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "booleanEquals",
+                                                    "fn": "aws.partition",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error"
-                                        },
-                                        {
-                                            "conditions": [],
                                             "type": "tree",
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -466,142 +653,402 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                    "type": "error"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": {
-                                                            "ref": "Endpoint"
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://compute-optimizer.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         },
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        },
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
                                                         {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
                                                         }
                                                     ]
                                                 },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseFIPS"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsFIPS"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
                                                 {
                                                     "conditions": [],
                                                     "type": "tree",
                                                     "rules": [
                                                         {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-northeast-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.ap-northeast-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-northeast-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.ap-northeast-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-south-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.ap-south-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-southeast-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.ap-southeast-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ap-southeast-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.ap-southeast-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "ca-central-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.ca-central-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-central-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.eu-central-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-north-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.eu-north-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.eu-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-west-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.eu-west-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-west-3"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.eu-west-3.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "sa-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.sa-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.us-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-east-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.us-east-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.us-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-west-2"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.us-west-2.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "cn-north-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.cn-north-1.amazonaws.com.cn",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "cn-northwest-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.cn-northwest-1.amazonaws.com.cn",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
-                                                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "url": "https://compute-optimizer.{Region}.{PartitionResult#dnsSuffix}",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -610,74 +1057,13 @@
                                                     ]
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                            "type": "error"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        true,
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "supportsDualStack"
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [],
-                                                    "endpoint": {
-                                                        "url": "https://compute-optimizer.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {},
-                                                        "headers": {}
-                                                    },
-                                                    "type": "endpoint"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "conditions": [],
-                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                            "type": "error"
                                         }
                                     ]
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": "https://compute-optimizer.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
                                 }
                             ]
                         }
@@ -686,718 +1072,16 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-south-1.api.aws"
+                                    "url": "https://compute-optimizer.ap-northeast-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ca-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-central-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.af-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.af-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-west-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-west-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-northeast-3.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-northeast-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-northeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-northeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1408,360 +1092,22 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-northeast-1.api.aws"
+                                    "url": "https://compute-optimizer.ap-south-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-northeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-northeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.sa-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-southeast-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1772,48 +1118,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.ap-southeast-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1824,100 +1131,100 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-southeast-3.api.aws"
+                                    "url": "https://compute-optimizer.ca-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer-fips.ap-southeast-3.amazonaws.com"
+                                    "url": "https://compute-optimizer.eu-central-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer.ap-southeast-3.api.aws"
+                                    "url": "https://compute-optimizer.eu-north-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer.ap-southeast-3.amazonaws.com"
+                                    "url": "https://compute-optimizer.eu-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-east-1.api.aws"
+                                    "url": "https://compute-optimizer.eu-west-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-east-1.amazonaws.com"
+                                    "url": "https://compute-optimizer.eu-west-3.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer.us-east-1.api.aws"
+                                    "url": "https://compute-optimizer.sa-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1928,48 +1235,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer-fips.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://compute-optimizer.us-east-2.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1980,48 +1248,87 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://compute-optimizer.us-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer-fips.cn-northwest-1.amazonaws.com.cn"
+                                    "url": "https://compute-optimizer.us-west-2.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://compute-optimizer.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://compute-optimizer-fips.us-east-1.api.aws"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2032,22 +1339,178 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://compute-optimizer.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2057,9 +1520,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2069,9 +1532,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2609,7 +2072,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the projected metric.\n        </p>\n         <p>The following metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CPU</code> — The percentage of allocated compute units \n                    that are currently in use on the ECS service tasks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> — The percentage of memory that is \n                    currently in use on the ECS service tasks.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            The name of the projected metric.\n        </p>\n         <p>The following metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cpu</code> — The percentage of allocated compute units \n                    that are currently in use on the service tasks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> — The percentage of memory that's \n                    currently in use on the service tasks.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "timestamps": {
@@ -2632,7 +2095,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon ECS service recommendation option.\n        </p>\n         <p>To determine the performance difference between your current ECS service and the recommended option, \n            compare the metric data of your service against its projected metric data.</p>"
+                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon ECS service recommendation option.\n        </p>\n         <p>To determine the performance difference between your current Amazon ECS service and the recommended option, \n            compare the metric data of your service against its projected metric data.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#ECSServiceProjectedMetrics": {
@@ -2647,7 +2110,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the projected utilization metric.\n        </p>\n         <p>The following utilization metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CPU</code> — The percentage of allocated compute units \n                    that are currently in use on the ECS service tasks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> — The percentage of memory that is \n                    currently in use on the ECS service tasks.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            The name of the projected utilization metric.\n        </p>\n         <p>The following utilization metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cpu</code> — The percentage of allocated compute units \n                    that are currently in use on the service tasks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> — The percentage of memory that's \n                    currently in use on the service tasks.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "statistic": {
@@ -2672,7 +2135,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the projected utilization metrics of an Amazon ECS service recommendation option.\n        </p>\n         <p>To determine the performance difference between your current ECS service and the recommended option, \n            compare the utilization metric data of your service against its projected utilization metric data.</p>"
+                "smithy.api#documentation": "<p>\n            Describes the projected utilization metrics of an Amazon ECS service recommendation option.\n        </p>\n         <p>To determine the performance difference between your current Amazon ECS service and the recommended option, \n            compare the utilization metric data of your service against its projected utilization metric data.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#ECSServiceProjectedUtilizationMetrics": {
@@ -2687,68 +2150,68 @@
                 "serviceArn": {
                     "target": "com.amazonaws.computeoptimizer#ServiceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the current ECS service.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code>\n         </p>"
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the current Amazon ECS service.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code>\n         </p>"
                     }
                 },
                 "accountId": {
                     "target": "com.amazonaws.computeoptimizer#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account ID of the ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account ID of the Amazon ECS service.\n        </p>"
                     }
                 },
                 "currentServiceConfiguration": {
                     "target": "com.amazonaws.computeoptimizer#ServiceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The configuration of the current ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The configuration of the current Amazon ECS service.\n        </p>"
                     }
                 },
                 "utilizationMetrics": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceUtilizationMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the utilization metrics of the ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the utilization metrics of the Amazon ECS service.\n        </p>"
                     }
                 },
                 "lookbackPeriodInDays": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The number of days the ECS service utilization metrics were analyzed.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The number of days the Amazon ECS service utilization metrics were analyzed.\n        </p>"
                     }
                 },
                 "launchType": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceLaunchType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The launch type the ECS service is using. \n        </p>\n         <note>\n            <p>Compute Optimizer only supports the Fargate launch type.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The launch type the Amazon ECS service is using. \n        </p>\n         <note>\n            <p>Compute Optimizer only supports the Fargate launch type.</p>\n         </note>"
                     }
                 },
                 "lastRefreshTimestamp": {
                     "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The timestamp of when the ECS service recommendation was last generated.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The timestamp of when the Amazon ECS service recommendation was last generated.\n        </p>"
                     }
                 },
                 "finding": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceRecommendationFinding",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The finding classification of an ECS service.\n        </p>\n         <p>Findings for ECS services include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s not enough memory or CPU, an ECS \n                    service is considered under-provisioned. An under-provisioned ECS service might \n                    result in poor application performance.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s excessive memory or CPU, an ECS \n                    service is considered over-provisioned. An over-provisioned ECS service might \n                    result in additional infrastructure costs. </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — \n                    When both the CPU and memory of your ECS service meet the performance requirements \n                    of your workload, the service is considered optimized.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            The finding classification of an Amazon ECS service.\n        </p>\n         <p>Findings for Amazon ECS services include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s not enough memory or CPU, an Amazon ECS \n                    service is considered under-provisioned. An under-provisioned service might \n                    result in poor application performance.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s excessive memory or CPU, an Amazon ECS \n                    service is considered over-provisioned. An over-provisioned service might \n                    result in additional infrastructure costs. </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — \n                    When both the CPU and memory of your Amazon ECS service meet the performance requirements \n                    of your workload, the service is considered optimized.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "findingReasonCodes": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceRecommendationFindingReasonCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The reason for the finding classification of an ECS service.\n        </p>\n         <p>Finding reason codes for ECS services include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUUnderprovisioned</code>\n                  </b> — \n                    The ECS service CPU configuration can be sized up to enhance the performance of \n                    your workload. This is identified by analyzing the <code>CPUUtilization</code> metric of the \n                    current service during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUOverprovisioned</code>\n                  </b> — \n                    The ECS service CPU configuration can be sized down while still meeting the performance\n                    requirements of your workload. This is identified by analyzing the <code>CPUUtilization</code> \n                    metric of the current service during the look-back period. </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — \n                    The ECS service memory configuration  can be sized up to enhance the performance of \n                    your workload. This is identified by analyzing the <code>MemoryUtilization</code> metric of the \n                    current service during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — \n                    The ECS service memory configuration can be sized down while still meeting the \n                    performance requirements of your workload. This is identified by analyzing the \n                    <code>MemoryUtilization</code> metric of the current service during the look-back period.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            The reason for the finding classification of an Amazon ECS service.\n        </p>\n         <p>Finding reason codes for Amazon ECS services include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUUnderprovisioned</code>\n                  </b> — \n                    The service CPU configuration can be sized up to enhance the performance of \n                    your workload. This is identified by analyzing the <code>CPUUtilization</code> metric of the \n                    current service during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUOverprovisioned</code>\n                  </b> — \n                    The service CPU configuration can be sized down while still meeting the performance\n                    requirements of your workload. This is identified by analyzing the <code>CPUUtilization</code> \n                    metric of the current service during the look-back period. </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — \n                    The service memory configuration  can be sized up to enhance the performance of \n                    your workload. This is identified by analyzing the <code>MemoryUtilization</code> metric of the \n                    current service during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — \n                    The service memory configuration can be sized down while still meeting the \n                    performance requirements of your workload. This is identified by analyzing the \n                    <code>MemoryUtilization</code> metric of the current service during the look-back period.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "serviceRecommendationOptions": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceRecommendationOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the recommendation options for the ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the recommendation options for the Amazon ECS service.\n        </p>"
                     }
                 },
                 "currentPerformanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#CurrentPerformanceRisk",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The risk of the current ECS service not meeting the performance needs of its workloads. \n            The higher the risk, the more likely the current service can't meet the performance \n            requirements of its workload.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The risk of the current Amazon ECS service not meeting the performance needs of its workloads. \n            The higher the risk, the more likely the current service can't meet the performance \n            requirements of its workload.\n        </p>"
                     }
                 }
             },
@@ -2863,13 +2326,13 @@
                 "memory": {
                     "target": "com.amazonaws.computeoptimizer#NullableMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The memory size of the ECS service recommendation option.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The memory size of the Amazon ECS service recommendation option.\n        </p>"
                     }
                 },
                 "cpu": {
                     "target": "com.amazonaws.computeoptimizer#NullableCpu",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The CPU size of the ECS service recommendation option.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The CPU size of the Amazon ECS service recommendation option.\n        </p>"
                     }
                 },
                 "savingsOpportunity": {
@@ -2878,13 +2341,13 @@
                 "projectedUtilizationMetrics": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceProjectedUtilizationMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the projected utilization metrics of the ECS service recommendation option.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the projected utilization metrics of the Amazon ECS service recommendation option.\n        </p>"
                     }
                 },
                 "containerRecommendations": {
                     "target": "com.amazonaws.computeoptimizer#ContainerRecommendations",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The CPU and memory size recommendations for the containers within the task of your ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The CPU and memory size recommendations for the containers within the task of your Amazon ECS service.\n        </p>"
                     }
                 }
             },
@@ -2911,14 +2374,14 @@
                     "target": "com.amazonaws.computeoptimizer#CpuSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The recommended CPU size for the ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The recommended CPU size for the Amazon ECS service.\n        </p>"
                     }
                 },
                 "recommendedMemorySize": {
                     "target": "com.amazonaws.computeoptimizer#MemorySize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The recommended memory size for the ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The recommended memory size for the Amazon ECS service.\n        </p>"
                     }
                 },
                 "projectedMetrics": {
@@ -2929,7 +2392,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon ECS service recommendation option.\n        </p>\n         <p>To determine the performance difference between your current ECS service and the recommended option, \n            compare the metric data of your service against its projected metric data.</p>"
+                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon ECS service recommendation option.\n        </p>\n         <p>To determine the performance difference between your current Amazon ECS service and the recommended option, \n            compare the metric data of your service against its projected metric data.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#ECSServiceRecommendedOptionProjectedMetrics": {
@@ -2944,7 +2407,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the utilization metric.\n        </p>\n         <p>The following utilization metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cpu</code> — The amount of CPU units that are used in the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> — The amount  of memory that is used in the service.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            The name of the utilization metric.\n        </p>\n         <p>The following utilization metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cpu</code> — The amount of CPU capacity that's used in the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> — The amount of memory that's used in the service.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "statistic": {
@@ -2962,7 +2425,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the utilization metric of an Amazon ECS service.\n        </p>\n         <p>To determine the performance difference between your current ECS service and the recommended option, \n            compare the utilization metric data of your service against its projected utilization metric data.</p>"
+                "smithy.api#documentation": "<p>\n            Describes the utilization metric of an Amazon ECS service.\n        </p>\n         <p>To determine the performance difference between your current Amazon ECS service and the recommended option, \n            compare the utilization metric data of your service against its projected utilization metric data.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#ECSServiceUtilizationMetrics": {
@@ -3441,13 +2904,13 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account IDs for the export ECS service recommendations.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to specify the member account you want to \n            export recommendations to.</p>\n         <p>This parameter can't be specified together with the include member accounts \n            parameter. The parameters are mutually exclusive.</p>\n         <p>If this parameter or the include member accounts parameter is omitted,\n            the recommendations for member accounts aren't included in the export.</p>\n         <p>You can specify multiple account IDs per request.</p>"
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account IDs for the export Amazon ECS service recommendations.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to specify the member account you want to \n            export recommendations to.</p>\n         <p>This parameter can't be specified together with the include member accounts \n            parameter. The parameters are mutually exclusive.</p>\n         <p>If this parameter or the include member accounts parameter is omitted,\n            the recommendations for member accounts aren't included in the export.</p>\n         <p>You can specify multiple account IDs per request.</p>"
                     }
                 },
                 "filters": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceRecommendationFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that exports a more specific set \n            of ECS service recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that exports a more specific set \n            of Amazon ECS service recommendations.\n        </p>"
                     }
                 },
                 "fieldsToExport": {
@@ -5357,7 +4820,7 @@
                 "serviceArn": {
                     "target": "com.amazonaws.computeoptimizer#ServiceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The ARN that identifies the ECS service.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code>\n         </p>",
+                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon ECS service.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5447,31 +4910,31 @@
                 "serviceArns": {
                     "target": "com.amazonaws.computeoptimizer#ServiceArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The ARN that identifies the ECS service.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code>\n         </p>"
+                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon ECS service.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code>\n         </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.computeoptimizer#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of ECS service recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of Amazon ECS service recommendations.\n        </p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.computeoptimizer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The maximum number of ECS service recommendations to return with a single request.\n        </p>\n         <p>To retrieve the remaining results, make another request with the returned \n            <code>nextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>\n            The maximum number of Amazon ECS service recommendations to return with a single request.\n        </p>\n         <p>To retrieve the remaining results, make another request with the returned \n            <code>nextToken</code> value.</p>"
                     }
                 },
                 "filters": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceRecommendationFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that returns a more specific list of ECS service recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that returns a more specific list of Amazon ECS service recommendations.\n        </p>"
                     }
                 },
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Return the ECS service recommendations to the specified Amazon Web Services account IDs.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to return the ECS service recommendations to specific\n            member accounts.</p>\n         <p>You can only specify one account ID per request.</p>"
+                        "smithy.api#documentation": "<p>\n            Return the Amazon ECS service recommendations to the specified Amazon Web Services account IDs.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to return the Amazon ECS service recommendations to specific\n            member accounts.</p>\n         <p>You can only specify one account ID per request.</p>"
                     }
                 }
             }
@@ -5482,13 +4945,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.computeoptimizer#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of ECS service recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of Amazon ECS service recommendations.\n        </p>"
                     }
                 },
                 "ecsServiceRecommendations": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceRecommendations",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describe the ECS service recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the Amazon ECS service recommendations.\n        </p>"
                     }
                 },
                 "errors": {
@@ -6075,6 +5538,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Redis"
                     }
+                },
+                "KAFKA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kafka"
+                    }
                 }
             }
         },
@@ -6198,7 +5667,7 @@
                 "inferredWorkloadTypes": {
                     "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The applications that might be running on the instance as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The applications that might be running on the instance as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7837,31 +7306,31 @@
                 "memory": {
                     "target": "com.amazonaws.computeoptimizer#NullableMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The amount of memory used by the tasks in the ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The amount of memory used by the tasks in the Amazon ECS service.\n        </p>"
                     }
                 },
                 "cpu": {
                     "target": "com.amazonaws.computeoptimizer#NullableCpu",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The number of CPU units used by the tasks in the ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The number of CPU units used by the tasks in the Amazon ECS service.\n        </p>"
                     }
                 },
                 "containerConfigurations": {
                     "target": "com.amazonaws.computeoptimizer#ContainerConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The container configurations within a task of an ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The container configurations within a task of an Amazon ECS service.\n        </p>"
                     }
                 },
                 "autoScalingConfiguration": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the Auto Scaling configuration methods for an Amazon ECS service. This affects \n            the generated recommendations. For example, if Auto Scaling is configured on a \n            ECS service’s CPU, then Compute Optimizer doesn’t generate CPU size recommendations.\n        </p>\n         <p>The Auto Scaling configuration methods include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TARGET_TRACKING_SCALING_CPU</code> — If the ECS service is configured\n                    to use target scaling on CPU, Compute Optimizer doesn't generate CPU recommendations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TARGET_TRACKING_SCALING_MEMORY</code> — If the ECS service is configured\n                    to use target scaling on memory, Compute Optimizer doesn't generate memory recommendations.</p>\n            </li>\n         </ul>\n         <p>For more information about step scaling and target scaling, see \n            <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html\">\n                Step scaling policies for Application Auto Scaling</a> and \n            <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html\">\n                Target tracking scaling policies for Application Auto Scaling</a> in the \n            <i>Application Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>\n            Describes the Auto Scaling configuration methods for an Amazon ECS service. This affects \n            the generated recommendations. For example, if Auto Scaling is configured on a \n            service’s CPU, then Compute Optimizer doesn’t generate CPU size recommendations.\n        </p>\n         <p>The Auto Scaling configuration methods include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TARGET_TRACKING_SCALING_CPU</code> — If the Amazon ECS service is configured\n                    to use target scaling on CPU, Compute Optimizer doesn't generate CPU recommendations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TARGET_TRACKING_SCALING_MEMORY</code> — If the Amazon ECS service is configured\n                    to use target scaling on memory, Compute Optimizer doesn't generate memory recommendations.</p>\n            </li>\n         </ul>\n         <p>For more information about step scaling and target scaling, see \n            <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html\">\n                Step scaling policies for Application Auto Scaling</a> and \n            <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html\">\n                Target tracking scaling policies for Application Auto Scaling</a> in the \n            <i>Application Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "taskDefinitionArn": {
                     "target": "com.amazonaws.computeoptimizer#TaskDefinitionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The task definition ARN used by the tasks in the ECS service.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The task definition ARN used by the tasks in the Amazon ECS service.\n        </p>"
                     }
                 }
             },

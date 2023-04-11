@@ -33,15 +33,17 @@ func (c *Client) AcceptVpcPeeringConnection(ctx context.Context, params *AcceptV
 
 type AcceptVpcPeeringConnectionInput struct {
 
+	// The ID of the VPC peering connection. You must specify this parameter in the
+	// request.
+	//
+	// This member is required.
+	VpcPeeringConnectionId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the VPC peering connection. You must specify this parameter in the
-	// request.
-	VpcPeeringConnectionId *string
 
 	noSmithyDocumentSerde
 }
@@ -100,6 +102,9 @@ func (c *Client) addOperationAcceptVpcPeeringConnectionMiddlewares(stack *middle
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpAcceptVpcPeeringConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptVpcPeeringConnection(options.Region), middleware.Before); err != nil {

@@ -31,8 +31,9 @@ func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactI
 
 type StartTaskContactInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -76,6 +77,11 @@ type StartTaskContactInput struct {
 
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
 	References map[string]types.Reference
+
+	// The contactId that is related
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks)
+	// to this contact.
+	RelatedContactId *string
 
 	// The timestamp, in Unix Epoch seconds format, at which to start running the
 	// inbound flow. The scheduled time cannot be in the past. It must be within up to

@@ -10,8 +10,8 @@ import (
 // You don't have access to this item. The provided credentials couldn't be
 // validated. You might not be authorized to carry out the request. Make sure that
 // your account is authorized to use the Amazon QuickSight service, that your
-// policies have the correct permissions, and that you are using the correct access
-// keys.
+// policies have the correct permissions, and that you are using the correct
+// credentials.
 type AccessDeniedException struct {
 	Message *string
 
@@ -32,7 +32,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -61,7 +61,7 @@ func (e *ConcurrentUpdatingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentUpdatingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentUpdatingException"
 	}
 	return *e.ErrorCodeOverride
@@ -89,7 +89,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -118,7 +118,7 @@ func (e *DomainNotWhitelistedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DomainNotWhitelistedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DomainNotWhitelistedException"
 	}
 	return *e.ErrorCodeOverride
@@ -147,7 +147,7 @@ func (e *IdentityTypeNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdentityTypeNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "IdentityTypeNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -175,7 +175,7 @@ func (e *InternalFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalFailureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalFailureException"
 	}
 	return *e.ErrorCodeOverride
@@ -203,7 +203,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -231,7 +231,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValueException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterValueException"
 	}
 	return *e.ErrorCodeOverride
@@ -260,7 +260,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -289,7 +289,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -317,7 +317,7 @@ func (e *PreconditionNotMetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PreconditionNotMetException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PreconditionNotMetException"
 	}
 	return *e.ErrorCodeOverride
@@ -347,7 +347,7 @@ func (e *QuickSightUserNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QuickSightUserNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "QuickSightUserNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -376,7 +376,7 @@ func (e *ResourceExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceExistsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceExistsException"
 	}
 	return *e.ErrorCodeOverride
@@ -405,7 +405,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -434,7 +434,7 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -463,7 +463,7 @@ func (e *SessionLifetimeInMinutesInvalidException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SessionLifetimeInMinutesInvalidException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SessionLifetimeInMinutesInvalidException"
 	}
 	return *e.ErrorCodeOverride
@@ -493,7 +493,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -528,7 +528,7 @@ func (e *UnsupportedPricingPlanException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedPricingPlanException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedPricingPlanException"
 	}
 	return *e.ErrorCodeOverride
@@ -559,7 +559,7 @@ func (e *UnsupportedUserEditionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedUserEditionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedUserEditionException"
 	}
 	return *e.ErrorCodeOverride

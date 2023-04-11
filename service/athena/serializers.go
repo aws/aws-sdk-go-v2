@@ -3672,6 +3672,11 @@ func awsAwsjson11_serializeDocumentWorkGroupConfiguration(v *types.WorkGroupConf
 		}
 	}
 
+	if v.EnableMinimumEncryptionConfiguration != nil {
+		ok := object.Key("EnableMinimumEncryptionConfiguration")
+		ok.Boolean(*v.EnableMinimumEncryptionConfiguration)
+	}
+
 	if v.EnforceWorkGroupConfiguration != nil {
 		ok := object.Key("EnforceWorkGroupConfiguration")
 		ok.Boolean(*v.EnforceWorkGroupConfiguration)
@@ -3728,6 +3733,11 @@ func awsAwsjson11_serializeDocumentWorkGroupConfigurationUpdates(v *types.WorkGr
 		if err := awsAwsjson11_serializeDocumentCustomerContentEncryptionConfiguration(v.CustomerContentEncryptionConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.EnableMinimumEncryptionConfiguration != nil {
+		ok := object.Key("EnableMinimumEncryptionConfiguration")
+		ok.Boolean(*v.EnableMinimumEncryptionConfiguration)
 	}
 
 	if v.EnforceWorkGroupConfiguration != nil {

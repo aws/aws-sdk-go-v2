@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -79,7 +79,7 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -105,7 +105,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride

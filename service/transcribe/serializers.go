@@ -2944,6 +2944,11 @@ func awsAwsjson11_serializeOpDocumentCreateVocabularyFilterInput(v *CreateVocabu
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
@@ -2979,6 +2984,11 @@ func awsAwsjson11_serializeOpDocumentCreateVocabularyFilterInput(v *CreateVocabu
 func awsAwsjson11_serializeOpDocumentCreateVocabularyInput(v *CreateVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
 
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
@@ -3760,6 +3770,11 @@ func awsAwsjson11_serializeOpDocumentUpdateVocabularyFilterInput(v *UpdateVocabu
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
+
 	if v.VocabularyFilterFileUri != nil {
 		ok := object.Key("VocabularyFilterFileUri")
 		ok.String(*v.VocabularyFilterFileUri)
@@ -3783,6 +3798,11 @@ func awsAwsjson11_serializeOpDocumentUpdateVocabularyFilterInput(v *UpdateVocabu
 func awsAwsjson11_serializeOpDocumentUpdateVocabularyInput(v *UpdateVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
 
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")

@@ -714,9 +714,6 @@ func validateAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration)
 	if v.AppIntegrationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppIntegrationArn"))
 	}
-	if v.ObjectFields == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectFields"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

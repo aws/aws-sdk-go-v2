@@ -42,7 +42,7 @@ type DescribeRouteCalculatorInput struct {
 type DescribeRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN
-	// when you specify a resource across AWS.
+	// when you specify a resource across Amazon Web Services.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:route-calculator/ExampleCalculator

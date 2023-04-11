@@ -187,14 +187,34 @@ type AddIpamOperatingRegion struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an additional detail for a path analysis.
+// Describes an additional detail for a path analysis. For more information, see
+// Reachability Analyzer additional detail codes
+// (https://docs.aws.amazon.com/vpc/latest/reachability/additional-detail-codes.html).
 type AdditionalDetail struct {
 
-	// The information type.
+	// The additional detail code.
 	AdditionalDetailType *string
 
 	// The path component.
 	Component *AnalysisComponent
+
+	// The load balancers.
+	LoadBalancers []AnalysisComponent
+
+	// The rule options.
+	RuleGroupRuleOptionsPairs []RuleGroupRuleOptionsPair
+
+	// The rule group type.
+	RuleGroupTypePairs []RuleGroupTypePair
+
+	// The rule options.
+	RuleOptions []RuleOption
+
+	// The name of the VPC endpoint service.
+	ServiceName *string
+
+	// The VPC endpoint service.
+	VpcEndpointService *AnalysisComponent
 
 	noSmithyDocumentSerde
 }
@@ -441,6 +461,12 @@ type AnalysisPacketHeader struct {
 // Describes a route table route.
 type AnalysisRouteTableRoute struct {
 
+	// The ID of a carrier gateway.
+	CarrierGatewayId *string
+
+	// The Amazon Resource Name (ARN) of a core network.
+	CoreNetworkArn *string
+
 	// The destination IPv4 address, in CIDR notation.
 	DestinationCidr *string
 
@@ -455,6 +481,9 @@ type AnalysisRouteTableRoute struct {
 
 	// The ID of the instance, such as a NAT instance.
 	InstanceId *string
+
+	// The ID of a local gateway.
+	LocalGatewayId *string
 
 	// The ID of a NAT gateway.
 	NatGatewayId *string
@@ -2485,8 +2514,8 @@ type DescribeFastLaunchImagesSuccessItem struct {
 	// launches Windows instances from pre-provisioned snapshots.
 	LaunchTemplate *FastLaunchLaunchTemplateSpecificationResponse
 
-	// The maximum number of parallel instances that are launched for creating
-	// resources.
+	// The maximum number of instances that Amazon EC2 can launch at the same time to
+	// create pre-provisioned snapshots for Windows faster launching.
 	MaxParallelLaunches *int32
 
 	// The owner ID for the fast-launch enabled Windows AMI.
@@ -2899,6 +2928,9 @@ type DnsOptions struct {
 	// The DNS records created for the endpoint.
 	DnsRecordIpType DnsRecordIpType
 
+	// Indicates whether to enable private DNS only for inbound endpoints.
+	PrivateDnsOnlyForInboundResolverEndpoint *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2907,6 +2939,12 @@ type DnsOptionsSpecification struct {
 
 	// The DNS records created for the endpoint.
 	DnsRecordIpType DnsRecordIpType
+
+	// Indicates whether to enable private DNS only for inbound endpoints. This option
+	// is available only for services that support both gateway and interface
+	// endpoints. It routes traffic that originates from the VPC to the gateway
+	// endpoint and traffic that originates from on-premises to the interface endpoint.
+	PrivateDnsOnlyForInboundResolverEndpoint *bool
 
 	noSmithyDocumentSerde
 }
@@ -2946,8 +2984,31 @@ type EbsBlockDevice struct {
 	// support Amazon EBS encryption. For more information, see Supported instance
 	// types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
-	// This parameter is not returned by DescribeImageAttribute
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImageAttribute.html).
+	// This parameter is not returned by DescribeImageAttribute. For CreateImage and
+	// RegisterImage, whether you can include this parameter, and the allowed values
+	// differ depending on the type of block device mapping you are creating.
+	//
+	// * If you
+	// are creating a block device mapping for a new (empty) volume, you can include
+	// this parameter, and specify either true for an encrypted volume, or false for an
+	// unencrypted volume. If you omit this parameter, it defaults to false
+	// (unencrypted).
+	//
+	// * If you are creating a block device mapping from an existing
+	// encrypted or unencrypted snapshot, you must omit this parameter. If you include
+	// this parameter, the request will fail, regardless of the value that you
+	// specify.
+	//
+	// * If you are creating a block device mapping from an existing
+	// unencrypted volume, you can include this parameter, but you must specify false.
+	// If you specify true, the request will fail. In this case, we recommend that you
+	// omit the parameter.
+	//
+	// * If you are creating a block device mapping from an
+	// existing encrypted volume, you can include this parameter, and specify either
+	// true or false. However, if you specify false, the parameter is ignored and the
+	// block device mapping is always encrypted. In this case, we recommend that you
+	// omit the parameter.
 	Encrypted *bool
 
 	// The number of I/O operations per second (IOPS). For gp3, io1, and io2 volumes,
@@ -3548,6 +3609,12 @@ type Explanation struct {
 	// The explanation code.
 	ExplanationCode *string
 
+	// The Network Firewall stateful rule.
+	FirewallStatefulRule *FirewallStatefulRule
+
+	// The Network Firewall stateless rule.
+	FirewallStatelessRule *FirewallStatelessRule
+
 	// The route table.
 	IngressRouteTable *AnalysisComponent
 
@@ -3914,6 +3981,78 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a port range.
+type FilterPortRange struct {
+
+	// The first port in the range.
+	FromPort *int32
+
+	// The last port in the range.
+	ToPort *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes a stateful rule.
+type FirewallStatefulRule struct {
+
+	// The destination ports.
+	DestinationPorts []PortRange
+
+	// The destination IP addresses, in CIDR notation.
+	Destinations []string
+
+	// The direction. The possible values are FORWARD and ANY.
+	Direction *string
+
+	// The protocol.
+	Protocol *string
+
+	// The rule action. The possible values are pass, drop, and alert.
+	RuleAction *string
+
+	// The ARN of the stateful rule group.
+	RuleGroupArn *string
+
+	// The source ports.
+	SourcePorts []PortRange
+
+	// The source IP addresses, in CIDR notation.
+	Sources []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a stateless rule.
+type FirewallStatelessRule struct {
+
+	// The destination ports.
+	DestinationPorts []PortRange
+
+	// The destination IP addresses, in CIDR notation.
+	Destinations []string
+
+	// The rule priority.
+	Priority *int32
+
+	// The protocols.
+	Protocols []int32
+
+	// The rule action. The possible values are pass, drop, and forward_to_site.
+	RuleAction *string
+
+	// The ARN of the stateless rule group.
+	RuleGroupArn *string
+
+	// The source ports.
+	SourcePorts []PortRange
+
+	// The source IP addresses, in CIDR notation.
+	Sources []string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a Capacity Reservation in a Capacity Reservation Fleet.
 type FleetCapacityReservation struct {
 
@@ -3993,7 +4132,8 @@ type FleetData struct {
 	Errors []DescribeFleetError
 
 	// Indicates whether running instances should be terminated if the target capacity
-	// of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+	// of the EC2 Fleet is decreased below the current size of the EC2 Fleet. Supported
+	// only for fleets of type maintain.
 	ExcessCapacityTerminationPolicy FleetExcessCapacityTerminationPolicy
 
 	// The ID of the EC2 Fleet.
@@ -4110,8 +4250,8 @@ type FleetLaunchTemplateOverrides struct {
 	// InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirements
 
-	// The instance type. If you specify InstanceType, you can't specify
-	// InstanceRequirements.
+	// The instance type. mac1.metal is not supported as a launch template override. If
+	// you specify InstanceType, you can't specify InstanceRequirements.
 	InstanceType InstanceType
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -4160,8 +4300,8 @@ type FleetLaunchTemplateOverridesRequest struct {
 	// InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirementsRequest
 
-	// The instance type. If you specify InstanceType, you can't specify
-	// InstanceRequirements.
+	// The instance type. mac1.metal is not supported as a launch template override. If
+	// you specify InstanceType, you can't specify InstanceRequirements.
 	InstanceType InstanceType
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -4686,6 +4826,10 @@ type Host struct {
 
 	// The ID of the Dedicated Host.
 	HostId *string
+
+	// Indicates whether host maintenance is enabled or disabled for the Dedicated
+	// Host.
+	HostMaintenance HostMaintenance
 
 	// The hardware specifications of the Dedicated Host.
 	HostProperties *HostProperties
@@ -5352,7 +5496,11 @@ type Instance struct {
 	// Any block device mapping entries for the instance.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
-	// The boot mode of the instance. For more information, see Boot modes
+	// The boot mode that was specified by the AMI. If the value is uefi-preferred, the
+	// AMI supports both UEFI and Legacy BIOS. The currentInstanceBootMode parameter is
+	// the boot mode that is used to boot the instance at launch or start. The
+	// operating system contained in the AMI must be configured to support the
+	// specified boot mode. For more information, see Boot modes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
 	// Amazon EC2 User Guide.
 	BootMode BootModeValues
@@ -5369,6 +5517,12 @@ type Instance struct {
 
 	// The CPU options for the instance.
 	CpuOptions *CpuOptions
+
+	// The boot mode that is used to boot the instance at launch or start. For more
+	// information, see Boot modes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
+	// Amazon EC2 User Guide.
+	CurrentInstanceBootMode InstanceBootModeValues
 
 	// Indicates whether the instance is optimized for Amazon EBS I/O. This
 	// optimization provides dedicated throughput to Amazon EBS and an optimized
@@ -5623,13 +5777,15 @@ type InstanceCreditSpecification struct {
 // Describes the credit option for CPU usage of a burstable performance instance.
 type InstanceCreditSpecificationRequest struct {
 
+	// The ID of the instance.
+	//
+	// This member is required.
+	InstanceId *string
+
 	// The credit option for CPU usage of the instance. Valid values: standard |
 	// unlimited T3 instances with host tenancy do not support the unlimited CPU credit
 	// option.
 	CpuCredits *string
-
-	// The ID of the instance.
-	InstanceId *string
 
 	noSmithyDocumentSerde
 }
@@ -6772,6 +6928,11 @@ type InstanceRequirementsWithMetadataRequest struct {
 // The instance details to specify which volumes should be snapshotted.
 type InstanceSpecification struct {
 
+	// The instance to specify which volumes should be snapshotted.
+	//
+	// This member is required.
+	InstanceId *string
+
 	// Excludes the root volume from being snapshotted.
 	ExcludeBootVolume *bool
 
@@ -6780,9 +6941,6 @@ type InstanceSpecification struct {
 	// root volume, use ExcludeBootVolume. You can specify up to 40 volume IDs per
 	// request.
 	ExcludeDataVolumeIds []string
-
-	// The instance to specify which volumes should be snapshotted.
-	InstanceId *string
 
 	noSmithyDocumentSerde
 }
@@ -7649,8 +7807,8 @@ type IpamResourceCidr struct {
 	noSmithyDocumentSerde
 }
 
-// A resource discovery is an IPAM component that enables IPAM Service to manage
-// and monitor resources that belong to the owning account.
+// A resource discovery is an IPAM component that enables IPAM to manage and
+// monitor resources that belong to the owning account.
 type IpamResourceDiscovery struct {
 
 	// The resource discovery description.
@@ -8187,7 +8345,8 @@ type LaunchSpecification struct {
 	// The ID of the subnet in which to launch the instance.
 	SubnetId *string
 
-	// The Base64-encoded user data for the instance.
+	// The base64-encoded user data that instances use when starting up. User data is
+	// limited to 16 KB.
 	UserData *string
 
 	noSmithyDocumentSerde
@@ -9284,6 +9443,9 @@ type LocalGatewayRoute struct {
 	// The CIDR block used for destination matches.
 	DestinationCidrBlock *string
 
+	// The ID of the prefix list.
+	DestinationPrefixListId *string
+
 	// The Amazon Resource Name (ARN) of the local gateway route table.
 	LocalGatewayRouteTableArn *string
 
@@ -9925,6 +10087,16 @@ type NatGatewayAddress struct {
 	// associated with the NAT gateway.
 	AllocationId *string
 
+	// [Public NAT gateway only] The association ID of the Elastic IP address that's
+	// associated with the NAT gateway.
+	AssociationId *string
+
+	// The address failure message.
+	FailureMessage *string
+
+	// Defines if the IP address is the primary address.
+	IsPrimary *bool
+
 	// The ID of the network interface associated with the NAT gateway.
 	NetworkInterfaceId *string
 
@@ -9934,6 +10106,9 @@ type NatGatewayAddress struct {
 	// [Public NAT gateway only] The Elastic IP address associated with the NAT
 	// gateway.
 	PublicIp *string
+
+	// The address status.
+	Status NatGatewayAddressStatus
 
 	noSmithyDocumentSerde
 }
@@ -10208,8 +10383,7 @@ type NetworkInsightsAnalysis struct {
 	// (https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html).
 	Explanations []Explanation
 
-	// The Amazon Resource Names (ARN) of the Amazon Web Services resources that the
-	// path must traverse.
+	// The Amazon Resource Names (ARN) of the resources that the path must traverse.
 	FilterInArns []string
 
 	// The components in the path from source to destination.
@@ -10257,18 +10431,24 @@ type NetworkInsightsPath struct {
 	// The time stamp when the path was created.
 	CreatedDate *time.Time
 
-	// The Amazon Web Services resource that is the destination of the path.
+	// The ID of the destination.
 	Destination *string
 
 	// The Amazon Resource Name (ARN) of the destination.
 	DestinationArn *string
 
-	// The IP address of the Amazon Web Services resource that is the destination of
-	// the path.
+	// The IP address of the destination.
 	DestinationIp *string
 
 	// The destination port.
 	DestinationPort *int32
+
+	// Scopes the analysis to network paths that match specific filters at the
+	// destination.
+	FilterAtDestination *PathFilter
+
+	// Scopes the analysis to network paths that match specific filters at the source.
+	FilterAtSource *PathFilter
 
 	// The Amazon Resource Name (ARN) of the path.
 	NetworkInsightsPathArn *string
@@ -10279,14 +10459,13 @@ type NetworkInsightsPath struct {
 	// The protocol.
 	Protocol Protocol
 
-	// The Amazon Web Services resource that is the source of the path.
+	// The ID of the source.
 	Source *string
 
 	// The Amazon Resource Name (ARN) of the source.
 	SourceArn *string
 
-	// The IP address of the Amazon Web Services resource that is the source of the
-	// path.
+	// The IP address of the source.
 	SourceIp *string
 
 	// The tags associated with the path.
@@ -10742,6 +10921,12 @@ type PathComponent struct {
 	// The explanation codes.
 	Explanations []Explanation
 
+	// The Network Firewall stateful rule.
+	FirewallStatefulRule *FirewallStatefulRule
+
+	// The Network Firewall stateless rule.
+	FirewallStatelessRule *FirewallStatelessRule
+
 	// The inbound header.
 	InboundHeader *AnalysisPacketHeader
 
@@ -10757,6 +10942,9 @@ type PathComponent struct {
 	// The sequence number.
 	SequenceNumber *int32
 
+	// The name of the VPC endpoint service.
+	ServiceName *string
+
 	// The source VPC.
 	SourceVpc *AnalysisComponent
 
@@ -10771,6 +10959,44 @@ type PathComponent struct {
 
 	// The component VPC.
 	Vpc *AnalysisComponent
+
+	noSmithyDocumentSerde
+}
+
+// Describes a set of filters for a path analysis. Use path filters to scope the
+// analysis when there can be multiple resulting paths.
+type PathFilter struct {
+
+	// The destination IPv4 address.
+	DestinationAddress *string
+
+	// The destination port range.
+	DestinationPortRange *FilterPortRange
+
+	// The source IPv4 address.
+	SourceAddress *string
+
+	// The source port range.
+	SourcePortRange *FilterPortRange
+
+	noSmithyDocumentSerde
+}
+
+// Describes a set of filters for a path analysis. Use path filters to scope the
+// analysis when there can be multiple resulting paths.
+type PathRequestFilter struct {
+
+	// The destination IPv4 address.
+	DestinationAddress *string
+
+	// The destination port range.
+	DestinationPortRange *RequestFilterPortRange
+
+	// The source IPv4 address.
+	SourceAddress *string
+
+	// The source port range.
+	SourcePortRange *RequestFilterPortRange
 
 	noSmithyDocumentSerde
 }
@@ -11676,6 +11902,18 @@ type ReplaceRootVolumeTask struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a port range.
+type RequestFilterPortRange struct {
+
+	// The first port in the range.
+	FromPort *int32
+
+	// The last port in the range.
+	ToPort *int32
+
+	noSmithyDocumentSerde
+}
+
 // A tag on an IPAM resource.
 type RequestIpamResourceTag struct {
 
@@ -11771,8 +12009,8 @@ type RequestLaunchTemplateData struct {
 	// resolve:ssm:parameter-name:label
 	//
 	// For more information, see Use a Systems
-	// Manager parameter instead of an AMI ID
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id)
+	// Manager parameter to find an AMI
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	ImageId *string
 
@@ -11952,7 +12190,8 @@ type RequestSpotLaunchSpecification struct {
 	// The ID of the subnet in which to launch the instance.
 	SubnetId *string
 
-	// The Base64-encoded user data for the instance. User data is limited to 16 KB.
+	// The base64-encoded user data that instances use when starting up. User data is
+	// limited to 16 KB.
 	UserData *string
 
 	noSmithyDocumentSerde
@@ -12616,6 +12855,42 @@ type RouteTableAssociationState struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the rule options for a stateful rule group.
+type RuleGroupRuleOptionsPair struct {
+
+	// The ARN of the rule group.
+	RuleGroupArn *string
+
+	// The rule options.
+	RuleOptions []RuleOption
+
+	noSmithyDocumentSerde
+}
+
+// Describes the type of a stateful rule group.
+type RuleGroupTypePair struct {
+
+	// The ARN of the rule group.
+	RuleGroupArn *string
+
+	// The rule group type. The possible values are Domain List and Suricata.
+	RuleGroupType *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes additional settings for a stateful rule.
+type RuleOption struct {
+
+	// The Suricata keyword.
+	Keyword *string
+
+	// The settings for the keyword.
+	Settings []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the monitoring of an instance.
 type RunInstancesMonitoringEnabled struct {
 
@@ -12650,9 +12925,10 @@ type S3ObjectTag struct {
 type S3Storage struct {
 
 	// The access key ID of the owner of the bucket. Before you specify a value for
-	// your access key ID, review and follow the guidance in Best practices for
-	// managing Amazon Web Services access keys
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
+	// your access key ID, review and follow the guidance in Best Practices for Amazon
+	// Web Services accounts
+	// (https://docs.aws.amazon.com/accounts/latest/reference/best-practices.html) in
+	// the Account ManagementReference Guide.
 	AWSAccessKeyId *string
 
 	// The bucket in which to store the AMI. You can specify a bucket that you already
@@ -13224,11 +13500,13 @@ type SecurityGroupRuleRequest struct {
 // Describes an update to a security group rule.
 type SecurityGroupRuleUpdate struct {
 
+	// The ID of the security group rule.
+	//
+	// This member is required.
+	SecurityGroupRuleId *string
+
 	// Information about the security group rule.
 	SecurityGroupRule *SecurityGroupRuleRequest
-
-	// The ID of the security group rule.
-	SecurityGroupRuleId *string
 
 	noSmithyDocumentSerde
 }
@@ -13798,7 +14076,8 @@ type SpotFleetLaunchSpecification struct {
 	// The tags to apply during creation.
 	TagSpecifications []SpotFleetTagSpecification
 
-	// The Base64-encoded user data that instances use when starting up.
+	// The base64-encoded user data that instances use when starting up. User data is
+	// limited to 16 KB.
 	UserData *string
 
 	// The number of units provided by the specified instance type. These are the same
@@ -13916,9 +14195,9 @@ type SpotFleetRequestConfigData struct {
 	// Reserved.
 	Context *string
 
-	// Indicates whether running Spot Instances should be terminated if you decrease
-	// the target capacity of the Spot Fleet request below the current size of the Spot
-	// Fleet.
+	// Indicates whether running instances should be terminated if you decrease the
+	// target capacity of the Spot Fleet request below the current size of the Spot
+	// Fleet. Supported only for fleets of type maintain.
 	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy
 
 	// The number of units fulfilled by this request compared to the set target
@@ -14837,11 +15116,12 @@ type TagDescription struct {
 	noSmithyDocumentSerde
 }
 
-// The tags to apply to a resource when the resource is being created. The Valid
-// Values lists all the resource types that can be tagged. However, the action
-// you're using might not support tagging all of these resource types. If you try
-// to tag a resource type that is unsupported for the action you're using, you'll
-// get an error.
+// The tags to apply to a resource when the resource is being created. When you
+// specify a tag, you must specify the resource type to tag, otherwise the request
+// will fail. The Valid Values lists all the resource types that can be tagged.
+// However, the action you're using might not support tagging all of these resource
+// types. If you try to tag a resource type that is unsupported for the action
+// you're using, you'll get an error.
 type TagSpecification struct {
 
 	// The type of resource to tag on creation.

@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,24 +31,6 @@
     "shapes": {
         "com.amazonaws.applicationdiscoveryservice#AWSPoseidonService_V2015_11_01": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Application Discovery Service",
-                    "arnNamespace": "discovery",
-                    "cloudFormationName": "ApplicationDiscoveryService",
-                    "cloudTrailEventSource": "applicationdiscoveryservice.amazonaws.com",
-                    "endpointPrefix": "discovery"
-                },
-                "aws.auth#sigv4": {
-                    "name": "discovery"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon Web Services Application Discovery Service</fullname>\n\n         <p>Amazon Web Services Application Discovery Service helps you plan application migration projects. It\n      automatically identifies servers, virtual machines (VMs), and network dependencies in your\n      on-premises data centers. For more information, see the <a href=\"http://aws.amazon.com/application-discovery/faqs/\">Amazon Web Services Application Discovery Service FAQ</a>. \n      Application Discovery Service offers three ways of performing discovery and\n      collecting data about your on-premises servers:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <b>Agentless discovery</b> is recommended for environments\n          that use VMware vCenter Server. This mode doesn't require you to install an agent on each\n          host. It does not work in non-VMware environments.</p>\n\n               <ul>\n                  <li>\n                     <p>Agentless discovery gathers server information regardless of the operating\n              systems, which minimizes the time required for initial on-premises infrastructure\n              assessment.</p>\n                  </li>\n                  <li>\n                     <p>Agentless discovery doesn't collect information about network dependencies, only\n              agent-based discovery collects that information.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n         <ul>\n            <li>\n               <p>\n                  <b>Agent-based discovery</b> collects a richer set of data\n          than agentless discovery by using the Amazon Web Services Application Discovery Agent, which you install\n          on one or more hosts in your data center.</p>\n\n               <ul>\n                  <li>\n                     <p> The agent captures infrastructure and application information, including an\n              inventory of running processes, system performance information, resource utilization,\n              and network dependencies.</p>\n                  </li>\n                  <li>\n                     <p>The information collected by agents is secured at rest and in transit to the\n              Application Discovery Service database in the cloud. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Web Services Partner Network (APN) solutions</b> integrate with\n          Application Discovery Service, enabling you to import details of your on-premises\n          environment directly into Migration Hub without using the discovery connector or discovery\n          agent.</p>\n\n               <ul>\n                  <li>\n                     <p>Third-party application discovery tools can query Amazon Web Services Application Discovery\n              Service, and they can write to the Application Discovery Service database using the\n              public API.</p>\n                  </li>\n                  <li>\n                     <p>In this way, you can import data into Migration Hub and view it, so that you can\n              associate applications with servers and track migrations.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n\n         <p>\n            <b>Recommendations</b>\n         </p>\n         <p>We recommend that you use agent-based discovery for non-VMware environments, and\n      whenever you want to collect information about network dependencies. You can run agent-based\n      and agentless discovery simultaneously. Use agentless discovery to complete the initial\n      infrastructure assessment quickly, and then install agents on select hosts to collect\n      additional information.</p>\n\n         <p>\n            <b>Working With This Guide</b>\n         </p>\n\n         <p>This API reference provides descriptions, syntax, and usage examples for each of the\n      actions and data types for Application Discovery Service. The topic for each action shows the\n      API request parameters and the response. Alternatively, you can use one of the Amazon Web Services SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services\n      SDKs</a>.</p>\n\n         <note>\n            <ul>\n               <li>\n                  <p>Remember that you must set your Migration Hub home region before you call any of\n            these APIs.</p>\n               </li>\n               <li>\n                  <p>You must make API calls for write actions (create, notify, associate, disassociate,\n            import, or put) while in your home region, or a <code>HomeRegionNotSetException</code>\n            error is returned.</p>\n               </li>\n               <li>\n                  <p>API calls for read actions (list, describe, stop, and delete) are permitted outside\n            of your home region.</p>\n               </li>\n               <li>\n                  <p>Although it is unlikely, the Migration Hub home region could change. If you call\n            APIs outside the home region, an <code>InvalidInputException</code> is returned.</p>\n               </li>\n               <li>\n                  <p>You must call <code>GetHomeRegion</code> to obtain the latest Migration Hub home\n            region.</p>\n               </li>\n            </ul>\n         </note>\n\n         <p>This guide is intended for use with the <a href=\"http://docs.aws.amazon.com/application-discovery/latest/userguide/\">Amazon Web Services Application\n        Discovery Service User Guide</a>.</p>\n\n         <important>\n            <p>All data is handled according to the <a href=\"http://aws.amazon.com/privacy/\">Amazon Web Services \n          Privacy Policy</a>. You can operate Application Discovery Service offline to inspect\n        collected data before it is shared with the service.</p>\n         </important>",
-                "smithy.api#title": "AWS Application Discovery Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://ec2.amazon.com/awsposiedon/V2015_11_01/"
-                }
-            },
             "version": "2015-11-01",
             "operations": [
                 {
@@ -126,7 +108,717 @@
                 {
                     "target": "com.amazonaws.applicationdiscoveryservice#UpdateApplication"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Application Discovery Service",
+                    "arnNamespace": "discovery",
+                    "cloudFormationName": "ApplicationDiscoveryService",
+                    "cloudTrailEventSource": "applicationdiscoveryservice.amazonaws.com",
+                    "endpointPrefix": "discovery"
+                },
+                "aws.auth#sigv4": {
+                    "name": "discovery"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Amazon Web Services Application Discovery Service</fullname>\n         <p>Amazon Web Services Application Discovery Service helps you plan application migration projects. It\n      automatically identifies servers, virtual machines (VMs), and network dependencies in your\n      on-premises data centers. For more information, see the <a href=\"http://aws.amazon.com/application-discovery/faqs/\">Amazon Web Services Application Discovery Service FAQ</a>. \n      Application Discovery Service offers three ways of performing discovery and\n      collecting data about your on-premises servers:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Agentless discovery</b> is recommended for environments\n          that use VMware vCenter Server. This mode doesn't require you to install an agent on each\n          host. It does not work in non-VMware environments.</p>\n               <ul>\n                  <li>\n                     <p>Agentless discovery gathers server information regardless of the operating\n              systems, which minimizes the time required for initial on-premises infrastructure\n              assessment.</p>\n                  </li>\n                  <li>\n                     <p>Agentless discovery doesn't collect information about network dependencies, only\n              agent-based discovery collects that information.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <b>Agent-based discovery</b> collects a richer set of data\n          than agentless discovery by using the Amazon Web Services Application Discovery Agent, which you install\n          on one or more hosts in your data center.</p>\n               <ul>\n                  <li>\n                     <p> The agent captures infrastructure and application information, including an\n              inventory of running processes, system performance information, resource utilization,\n              and network dependencies.</p>\n                  </li>\n                  <li>\n                     <p>The information collected by agents is secured at rest and in transit to the\n              Application Discovery Service database in the cloud. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Web Services Partner Network (APN) solutions</b> integrate with\n          Application Discovery Service, enabling you to import details of your on-premises\n          environment directly into Migration Hub without using the discovery connector or discovery\n          agent.</p>\n               <ul>\n                  <li>\n                     <p>Third-party application discovery tools can query Amazon Web Services Application Discovery\n              Service, and they can write to the Application Discovery Service database using the\n              public API.</p>\n                  </li>\n                  <li>\n                     <p>In this way, you can import data into Migration Hub and view it, so that you can\n              associate applications with servers and track migrations.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Recommendations</b>\n         </p>\n         <p>We recommend that you use agent-based discovery for non-VMware environments, and\n      whenever you want to collect information about network dependencies. You can run agent-based\n      and agentless discovery simultaneously. Use agentless discovery to complete the initial\n      infrastructure assessment quickly, and then install agents on select hosts to collect\n      additional information.</p>\n         <p>\n            <b>Working With This Guide</b>\n         </p>\n         <p>This API reference provides descriptions, syntax, and usage examples for each of the\n      actions and data types for Application Discovery Service. The topic for each action shows the\n      API request parameters and the response. Alternatively, you can use one of the Amazon Web Services SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services\n      SDKs</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Remember that you must set your Migration Hub home region before you call any of\n            these APIs.</p>\n               </li>\n               <li>\n                  <p>You must make API calls for write actions (create, notify, associate, disassociate,\n            import, or put) while in your home region, or a <code>HomeRegionNotSetException</code>\n            error is returned.</p>\n               </li>\n               <li>\n                  <p>API calls for read actions (list, describe, stop, and delete) are permitted outside\n            of your home region.</p>\n               </li>\n               <li>\n                  <p>Although it is unlikely, the Migration Hub home region could change. If you call\n            APIs outside the home region, an <code>InvalidInputException</code> is returned.</p>\n               </li>\n               <li>\n                  <p>You must call <code>GetHomeRegion</code> to obtain the latest Migration Hub home\n            region.</p>\n               </li>\n            </ul>\n         </note>\n         <p>This guide is intended for use with the <a href=\"http://docs.aws.amazon.com/application-discovery/latest/userguide/\">Amazon Web Services Application\n        Discovery Service User Guide</a>.</p>\n         <important>\n            <p>All data is handled according to the <a href=\"http://aws.amazon.com/privacy/\">Amazon Web Services \n          Privacy Policy</a>. You can operate Application Discovery Service offline to inspect\n        collected data before it is shared with the service.</p>\n         </important>",
+                "smithy.api#title": "AWS Application Discovery Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://ec2.amazon.com/awsposiedon/V2015_11_01/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://discovery-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://discovery-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://discovery.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://discovery.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://discovery.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#AgentConfigurationStatus": {
             "type": "structure",
@@ -140,6 +832,7 @@
                 "operationSucceeded": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Information about the status of the <code>StartDataCollection</code> and\n        <code>StopDataCollection</code> operations. The system has recorded the data collection\n      operation. The agent/connector receives this command the next time it polls for a new command.\n    </p>"
                     }
                 },
@@ -271,34 +964,44 @@
             }
         },
         "com.amazonaws.applicationdiscoveryservice#AgentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
-                    },
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
-                    },
-                    {
-                        "value": "BLACKLISTED",
-                        "name": "BLACKLISTED"
-                    },
-                    {
-                        "value": "SHUTDOWN",
-                        "name": "SHUTDOWN"
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
                     }
-                ]
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "BLACKLISTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLACKLISTED"
+                    }
+                },
+                "SHUTDOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHUTDOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#AgentsInfo": {
@@ -389,11 +1092,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#AssociateConfigurationItemsToApplicationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#AuthorizationErrorException": {
             "type": "structure",
@@ -434,7 +1143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes one or more import tasks, each identified by their import ID. Each import task has\n      a number of records that can identify servers or applications. </p>\n\n         <p>Amazon Web Services Application Discovery Service has built-in matching logic that will identify when\n      discovered servers match existing entries that you've previously discovered, the information\n      for the already-existing discovered server is updated. When you delete an import task that\n      contains records that were used to match, the information in those matched records that comes\n      from the deleted records will also be deleted.</p>"
+                "smithy.api#documentation": "<p>Deletes one or more import tasks, each identified by their import ID. Each import task has\n      a number of records that can identify servers or applications. </p>\n         <p>Amazon Web Services Application Discovery Service has built-in matching logic that will identify when\n      discovered servers match existing entries that you've previously discovered, the information\n      for the already-existing discovered server is updated. When you delete an import task that\n      contains records that were used to match, the information in those matched records that comes\n      from the deleted records will also be deleted.</p>"
             }
         },
         "com.amazonaws.applicationdiscoveryservice#BatchDeleteImportDataError": {
@@ -464,22 +1173,26 @@
             }
         },
         "com.amazonaws.applicationdiscoveryservice#BatchDeleteImportDataErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NOT_FOUND",
-                        "name": "NOT_FOUND"
-                    },
-                    {
-                        "value": "INTERNAL_SERVER_ERROR",
-                        "name": "INTERNAL_SERVER_ERROR"
-                    },
-                    {
-                        "value": "OVER_LIMIT",
-                        "name": "OVER_LIMIT"
+            "type": "enum",
+            "members": {
+                "NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_FOUND"
                     }
-                ]
+                },
+                "INTERNAL_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_ERROR"
+                    }
+                },
+                "OVER_LIMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVER_LIMIT"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#BatchDeleteImportDataErrorDescription": {
@@ -501,6 +1214,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#BatchDeleteImportDataResponse": {
@@ -512,16 +1228,19 @@
                         "smithy.api#documentation": "<p>Error messages returned for each import task that you deleted as a response for this\n      command.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#BoxedInteger": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.applicationdiscoveryservice#ClientRequestToken": {
             "type": "string",
@@ -568,26 +1287,32 @@
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ConfigurationItemType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SERVER",
-                        "name": "SERVER"
-                    },
-                    {
-                        "value": "PROCESS",
-                        "name": "PROCESS"
-                    },
-                    {
-                        "value": "CONNECTION",
-                        "name": "CONNECTIONS"
-                    },
-                    {
-                        "value": "APPLICATION",
-                        "name": "APPLICATION"
+            "type": "enum",
+            "members": {
+                "SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER"
                     }
-                ]
+                },
+                "PROCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESS"
+                    }
+                },
+                "CONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTION"
+                    }
+                },
+                "APPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ConfigurationTag": {
@@ -687,7 +1412,7 @@
                 "statusDetail": {
                     "target": "com.amazonaws.applicationdiscoveryservice#StringMax255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about any errors that have occurred. This data type can have the\n      following values:</p>\n\n         <ul>\n            <li>\n               <p>ACCESS_DENIED - You don’t have permission to start Data Exploration in Amazon\n          Athena. Contact your Amazon Web Services administrator for help. For more information, see <a href=\"http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html\">Setting Up Amazon Web Services Application Discovery Service</a> in the Application Discovery\n          Service User Guide.</p>\n            </li>\n            <li>\n               <p>DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis Data\n          Firehose delivery streams. Reduce the number of streams or request a limit increase and\n          try again. For more information, see <a href=\"http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html\">Kinesis Data Streams Limits</a> in the Amazon Kinesis Data Streams Developer\n          Guide.</p>\n            </li>\n            <li>\n               <p>FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error state because\n          your IAM User is missing the AWSApplicationDiscoveryServiceFirehose role. Turn on Data\n          Exploration in Amazon Athena and try again. For more information, see <a href=\"http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy\">Step 3: Provide Application Discovery Service Access to Non-Administrator Users by\n            Attaching Policies</a> in the Application Discovery Service User Guide.</p>\n            </li>\n            <li>\n               <p>FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an error state\n          because your IAM User is missing one or more of the Kinesis data delivery\n          streams.</p>\n            </li>\n            <li>\n               <p>INTERNAL_FAILURE - The Data Exploration feature is in an error state because of an\n          internal failure. Try again later. If this problem persists, contact Amazon Web Services\n          Support.</p>\n            </li>\n            <li>\n               <p>LAKE_FORMATION_ACCESS_DENIED - You don't have sufficient lake formation permissions\n          to start continuous export. For more information, see <a href=\"http://docs.aws.amazon.com/lake-formation/latest/dg/upgrade-glue-lake-formation.html\">\n            Upgrading Amazon Web Services Glue Data Permissions to the Amazon Web Services Lake Formation Model </a> in the\n          Amazon Web Services <i>Lake Formation Developer Guide</i>. </p>\n               <p>You can use one of the following two ways to resolve this issue.</p>\n               <ol>\n                  <li>\n                     <p>If you don’t want to use the Lake Formation permission model, you can change\n              the default Data Catalog settings to use only Amazon Web Services Identity and Access Management\n              (IAM) access control for new databases. For more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#setup-change-cat-settings\">Change Data Catalog Settings</a> in the <i>Lake Formation\n                  Developer Guide</i>.</p>\n                  </li>\n                  <li>\n                     <p>You can give the service-linked IAM roles\n              AWSServiceRoleForApplicationDiscoveryServiceContinuousExport and\n              AWSApplicationDiscoveryServiceFirehose the required Lake Formation permissions. For\n              more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/granting-database-permissions.html\">\n                Granting Database Permissions</a> in the <i>Lake Formation\n                  Developer Guide</i>. </p>\n                     <ol>\n                        <li>\n                           <p>AWSServiceRoleForApplicationDiscoveryServiceContinuousExport - Grant\n                  database creator permissions, which gives the role database creation ability and\n                  implicit permissions for any created tables. For more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/implicit-permissions.html\">\n                    Implicit Lake Formation Permissions </a> in the <i>Lake\n                      Formation Developer Guide</i>.</p>\n                        </li>\n                        <li>\n                           <p>AWSApplicationDiscoveryServiceFirehose - Grant describe permissions for all\n                  tables in the database.</p>\n                        </li>\n                     </ol>\n                  </li>\n               </ol>\n            </li>\n            <li>\n               <p>S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce the\n          number of S3 buckets or request a limit increase and try again. For more\n          information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html\">Bucket\n            Restrictions and Limitations</a> in the Amazon Simple Storage Service Developer\n          Guide.</p>\n            </li>\n            <li>\n               <p>S3_NOT_SIGNED_UP - Your account is not signed up for the Amazon S3 service. You\n          must sign up before you can use Amazon S3. You can sign up at the following URL: <a href=\"https://aws.amazon.com/s3\">https://aws.amazon.com/s3</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Contains information about any errors that have occurred. This data type can have the\n      following values:</p>\n         <ul>\n            <li>\n               <p>ACCESS_DENIED - You don’t have permission to start Data Exploration in Amazon\n          Athena. Contact your Amazon Web Services administrator for help. For more information, see <a href=\"http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html\">Setting Up Amazon Web Services Application Discovery Service</a> in the Application Discovery\n          Service User Guide.</p>\n            </li>\n            <li>\n               <p>DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis Data\n          Firehose delivery streams. Reduce the number of streams or request a limit increase and\n          try again. For more information, see <a href=\"http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html\">Kinesis Data Streams Limits</a> in the Amazon Kinesis Data Streams Developer\n          Guide.</p>\n            </li>\n            <li>\n               <p>FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error state because\n          your IAM User is missing the AWSApplicationDiscoveryServiceFirehose role. Turn on Data\n          Exploration in Amazon Athena and try again. For more information, see <a href=\"http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy\">Step 3: Provide Application Discovery Service Access to Non-Administrator Users by\n            Attaching Policies</a> in the Application Discovery Service User Guide.</p>\n            </li>\n            <li>\n               <p>FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an error state\n          because your IAM User is missing one or more of the Kinesis data delivery\n          streams.</p>\n            </li>\n            <li>\n               <p>INTERNAL_FAILURE - The Data Exploration feature is in an error state because of an\n          internal failure. Try again later. If this problem persists, contact Amazon Web Services\n          Support.</p>\n            </li>\n            <li>\n               <p>LAKE_FORMATION_ACCESS_DENIED - You don't have sufficient lake formation permissions\n          to start continuous export. For more information, see <a href=\"http://docs.aws.amazon.com/lake-formation/latest/dg/upgrade-glue-lake-formation.html\">\n            Upgrading Amazon Web Services Glue Data Permissions to the Amazon Web Services Lake Formation Model </a> in the\n          Amazon Web Services <i>Lake Formation Developer Guide</i>. </p>\n               <p>You can use one of the following two ways to resolve this issue.</p>\n               <ol>\n                  <li>\n                     <p>If you don’t want to use the Lake Formation permission model, you can change\n              the default Data Catalog settings to use only Amazon Web Services Identity and Access Management\n              (IAM) access control for new databases. For more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#setup-change-cat-settings\">Change Data Catalog Settings</a> in the <i>Lake Formation\n                  Developer Guide</i>.</p>\n                  </li>\n                  <li>\n                     <p>You can give the service-linked IAM roles\n              AWSServiceRoleForApplicationDiscoveryServiceContinuousExport and\n              AWSApplicationDiscoveryServiceFirehose the required Lake Formation permissions. For\n              more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/granting-database-permissions.html\">\n                Granting Database Permissions</a> in the <i>Lake Formation\n                  Developer Guide</i>. </p>\n                     <ol>\n                        <li>\n                           <p>AWSServiceRoleForApplicationDiscoveryServiceContinuousExport - Grant\n                  database creator permissions, which gives the role database creation ability and\n                  implicit permissions for any created tables. For more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/implicit-permissions.html\">\n                    Implicit Lake Formation Permissions </a> in the <i>Lake\n                      Formation Developer Guide</i>.</p>\n                        </li>\n                        <li>\n                           <p>AWSApplicationDiscoveryServiceFirehose - Grant describe permissions for all\n                  tables in the database.</p>\n                        </li>\n                     </ol>\n                  </li>\n               </ol>\n            </li>\n            <li>\n               <p>S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce the\n          number of S3 buckets or request a limit increase and try again. For more\n          information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html\">Bucket\n            Restrictions and Limitations</a> in the Amazon Simple Storage Service Developer\n          Guide.</p>\n            </li>\n            <li>\n               <p>S3_NOT_SIGNED_UP - Your account is not signed up for the Amazon S3 service. You\n          must sign up before you can use Amazon S3. You can sign up at the following URL: <a href=\"https://aws.amazon.com/s3\">https://aws.amazon.com/s3</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "s3Bucket": {
@@ -738,38 +1463,50 @@
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ContinuousExportStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "START_IN_PROGRESS",
-                        "name": "START_IN_PROGRESS"
-                    },
-                    {
-                        "value": "START_FAILED",
-                        "name": "START_FAILED"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "STOP_IN_PROGRESS",
-                        "name": "STOP_IN_PROGRESS"
-                    },
-                    {
-                        "value": "STOP_FAILED",
-                        "name": "STOP_FAILED"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "START_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_IN_PROGRESS"
                     }
-                ]
+                },
+                "START_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "STOP_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_IN_PROGRESS"
+                    }
+                },
+                "STOP_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_FAILED"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#CreateApplication": {
@@ -817,6 +1554,9 @@
                         "smithy.api#documentation": "<p>Description of the application to be created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#CreateApplicationResponse": {
@@ -828,6 +1568,9 @@
                         "smithy.api#documentation": "<p>Configuration ID of an application to be created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#CreateTags": {
@@ -859,7 +1602,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates one or more tags for configuration items. Tags are metadata that help you\n      categorize IT assets. This API accepts a list of multiple configuration items.</p>\n\n         <important>\n            <p>Do not store sensitive information (like personal data) in tags.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates one or more tags for configuration items. Tags are metadata that help you\n      categorize IT assets. This API accepts a list of multiple configuration items.</p>\n         <important>\n            <p>Do not store sensitive information (like personal data) in tags.</p>\n         </important>"
             }
         },
         "com.amazonaws.applicationdiscoveryservice#CreateTagsRequest": {
@@ -879,11 +1622,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#CreateTagsResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#CustomerAgentInfo": {
             "type": "structure",
@@ -891,6 +1640,7 @@
                 "activeAgents": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of active discovery agents.</p>",
                         "smithy.api#required": {}
                     }
@@ -898,6 +1648,7 @@
                 "healthyAgents": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of healthy discovery agents</p>",
                         "smithy.api#required": {}
                     }
@@ -905,6 +1656,7 @@
                 "blackListedAgents": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of blacklisted discovery agents.</p>",
                         "smithy.api#required": {}
                     }
@@ -912,6 +1664,7 @@
                 "shutdownAgents": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of discovery agents with status SHUTDOWN.</p>",
                         "smithy.api#required": {}
                     }
@@ -919,6 +1672,7 @@
                 "unhealthyAgents": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of unhealthy discovery agents.</p>",
                         "smithy.api#required": {}
                     }
@@ -926,6 +1680,7 @@
                 "totalAgents": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of discovery agents.</p>",
                         "smithy.api#required": {}
                     }
@@ -933,6 +1688,7 @@
                 "unknownAgents": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of unknown discovery agents.</p>",
                         "smithy.api#required": {}
                     }
@@ -948,42 +1704,49 @@
                 "activeAgentlessCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#required": {}
                     }
                 },
                 "healthyAgentlessCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#required": {}
                     }
                 },
                 "denyListedAgentlessCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#required": {}
                     }
                 },
                 "shutdownAgentlessCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#required": {}
                     }
                 },
                 "unhealthyAgentlessCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#required": {}
                     }
                 },
                 "totalAgentlessCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#required": {}
                     }
                 },
                 "unknownAgentlessCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#required": {}
                     }
                 }
@@ -995,6 +1758,7 @@
                 "activeConnectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of active discovery connectors.</p>",
                         "smithy.api#required": {}
                     }
@@ -1002,6 +1766,7 @@
                 "healthyConnectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of healthy discovery connectors.</p>",
                         "smithy.api#required": {}
                     }
@@ -1009,6 +1774,7 @@
                 "blackListedConnectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of blacklisted discovery connectors.</p>",
                         "smithy.api#required": {}
                     }
@@ -1016,6 +1782,7 @@
                 "shutdownConnectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of discovery connectors with status SHUTDOWN,</p>",
                         "smithy.api#required": {}
                     }
@@ -1023,6 +1790,7 @@
                 "unhealthyConnectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of unhealthy discovery connectors.</p>",
                         "smithy.api#required": {}
                     }
@@ -1030,6 +1798,7 @@
                 "totalConnectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of discovery connectors.</p>",
                         "smithy.api#required": {}
                     }
@@ -1037,6 +1806,7 @@
                 "unknownConnectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of unknown discovery connectors.</p>",
                         "smithy.api#required": {}
                     }
@@ -1052,6 +1822,7 @@
                 "activeMeCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The number of active Migration Evaluator collectors.\n    </p>",
                         "smithy.api#required": {}
                     }
@@ -1059,6 +1830,7 @@
                 "healthyMeCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The number of healthy Migration Evaluator collectors.\n    </p>",
                         "smithy.api#required": {}
                     }
@@ -1066,6 +1838,7 @@
                 "denyListedMeCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The number of deny-listed Migration Evaluator collectors.\n    </p>",
                         "smithy.api#required": {}
                     }
@@ -1073,6 +1846,7 @@
                 "shutdownMeCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The number of Migration Evaluator collectors with <code>SHUTDOWN</code> status.\n    </p>",
                         "smithy.api#required": {}
                     }
@@ -1080,6 +1854,7 @@
                 "unhealthyMeCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The number of unhealthy Migration Evaluator collectors.\n    </p>",
                         "smithy.api#required": {}
                     }
@@ -1087,6 +1862,7 @@
                 "totalMeCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The total number of Migration Evaluator collectors.\n    </p>",
                         "smithy.api#required": {}
                     }
@@ -1094,6 +1870,7 @@
                 "unknownMeCollectors": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The number of unknown Migration Evaluator collectors.\n    </p>",
                         "smithy.api#required": {}
                     }
@@ -1104,14 +1881,14 @@
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DataSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AGENT",
-                        "name": "AGENT"
+            "type": "enum",
+            "members": {
+                "AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DatabaseName": {
@@ -1162,11 +1939,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DeleteApplicationsResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#DeleteTags": {
             "type": "operation",
@@ -1216,11 +1999,17 @@
                         "smithy.api#documentation": "<p>Tags that you want to delete from one or more configuration items. Specify the tags\n      that you want to delete in a <i>key</i>-<i>value</i> format. For\n      example:</p>\n         <p>\n            <code>{\"key\": \"serverType\", \"value\": \"webServer\"}</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DeleteTagsResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeAgents": {
             "type": "operation",
@@ -1269,6 +2058,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of agents/Connectors to return in a single page of output. The maximum\n      value is 100.</p>"
                     }
                 },
@@ -1278,6 +2068,9 @@
                         "smithy.api#documentation": "<p>Token to retrieve the next set of results. For example, if you previously specified 100\n      IDs for <code>DescribeAgentsRequest$agentIds</code> but set\n        <code>DescribeAgentsRequest$maxResults</code> to 10, you received a set of 10 results along\n      with a token. Use that token in this query to get the next set of 10.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeAgentsResponse": {
@@ -1295,6 +2088,9 @@
                         "smithy.api#documentation": "<p>Token to retrieve the next set of results. For example, if you specified 100 IDs for\n        <code>DescribeAgentsRequest$agentIds</code> but set\n        <code>DescribeAgentsRequest$maxResults</code> to 10, you received a set of 10 results along\n      with this token. Use this token in the next query to retrieve the next set of 10.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeConfigurations": {
@@ -1323,7 +2119,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves attributes for a list of configuration item IDs.</p>\n\n         <note>\n            <p>All of the supplied IDs must be for the same asset type from one of the\n        following:</p>\n            <ul>\n               <li>\n                  <p>server</p>\n               </li>\n               <li>\n                  <p>application</p>\n               </li>\n               <li>\n                  <p>process</p>\n               </li>\n               <li>\n                  <p>connection</p>\n               </li>\n            </ul>\n\n            <p>Output fields are specific to the asset type specified. For example, the output for a\n          <i>server</i> configuration item includes a list of attributes about the\n        server, such as host name, operating system, number of network cards, etc.</p>\n            <p>For a complete list of outputs for each asset type, see <a href=\"https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations\">Using the DescribeConfigurations Action</a> in the <i>Amazon Web Services Application\n          Discovery Service User Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves attributes for a list of configuration item IDs.</p>\n         <note>\n            <p>All of the supplied IDs must be for the same asset type from one of the\n        following:</p>\n            <ul>\n               <li>\n                  <p>server</p>\n               </li>\n               <li>\n                  <p>application</p>\n               </li>\n               <li>\n                  <p>process</p>\n               </li>\n               <li>\n                  <p>connection</p>\n               </li>\n            </ul>\n            <p>Output fields are specific to the asset type specified. For example, the output for a\n          <i>server</i> configuration item includes a list of attributes about the\n        server, such as host name, operating system, number of network cards, etc.</p>\n            <p>For a complete list of outputs for each asset type, see <a href=\"https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations\">Using the DescribeConfigurations Action</a> in the <i>Amazon Web Services Application\n          Discovery Service User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeConfigurationsAttribute": {
@@ -1351,6 +2147,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeConfigurationsResponse": {
@@ -1362,6 +2161,9 @@
                         "smithy.api#documentation": "<p>A key in the response map. The value is an array of data.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeContinuousExports": {
@@ -1407,7 +2209,6 @@
         "com.amazonaws.applicationdiscoveryservice#DescribeContinuousExportsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1435,6 +2236,9 @@
                         "smithy.api#documentation": "<p>The token from the previous call to <code>DescribeExportTasks</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeContinuousExportsResponse": {
@@ -1452,6 +2256,9 @@
                         "smithy.api#documentation": "<p>The token from the previous call to <code>DescribeExportTasks</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeExportConfigurations": {
@@ -1499,6 +2306,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>A number between 1 and 100 specifying the maximum number of continuous export\n      descriptions returned.</p>"
                     }
                 },
@@ -1508,6 +2316,9 @@
                         "smithy.api#documentation": "<p>The token from the previous call to describe-export-tasks.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeExportConfigurationsResponse": {
@@ -1525,6 +2336,9 @@
                         "smithy.api#documentation": "<p>The token from the previous call to describe-export-tasks.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeExportTasks": {
@@ -1574,6 +2388,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of volume results returned by <code>DescribeExportTasks</code> in\n      paginated output. When this parameter is used, <code>DescribeExportTasks</code> only returns\n        <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n      response element.</p>"
                     }
                 },
@@ -1583,6 +2398,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n        <code>DescribeExportTasks</code> request where <code>maxResults</code> was used and the\n      results exceeded the value of that parameter. Pagination continues from the end of the\n      previous results that returned the <code>nextToken</code> value. This value is null when there\n      are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeExportTasksResponse": {
@@ -1600,6 +2418,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n        <code>DescribeExportTasks</code> request. When the results of a\n        <code>DescribeExportTasks</code> request exceed <code>maxResults</code>, this value can be\n      used to retrieve the next page of results. This value is null when there are no more results\n      to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeImportTasks": {
@@ -1645,7 +2466,6 @@
         "com.amazonaws.applicationdiscoveryservice#DescribeImportTasksMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1673,6 +2493,9 @@
                         "smithy.api#documentation": "<p>The token to request a specific page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeImportTasksResponse": {
@@ -1690,6 +2513,9 @@
                         "smithy.api#documentation": "<p>A returned array of import tasks that match any applied filters, up to the specified\n      number of maximum results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeTags": {
@@ -1736,6 +2562,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of items to return in a single page of output. The maximum value is\n      100.</p>"
                     }
                 },
@@ -1745,6 +2572,9 @@
                         "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeTagsResponse": {
@@ -1762,6 +2592,9 @@
                         "smithy.api#documentation": "<p>The call returns a token. Use this token to get the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DisassociateConfigurationItemsFromApplication": {
@@ -1810,11 +2643,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DisassociateConfigurationItemsFromApplicationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#ExportConfigurations": {
             "type": "operation",
@@ -1858,21 +2697,26 @@
                         "smithy.api#documentation": "<p>A unique identifier that you can use to query the export status.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ExportDataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "GRAPHML",
-                        "name": "GRAPHML"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "GRAPHML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHML"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ExportDataFormats": {
@@ -1962,6 +2806,7 @@
                 "isTruncated": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true, the export of agent information exceeded the size limit for a single export\n      and the exported data is incomplete for the requested time range. To address this, select a\n      smaller time range for the export by using <code>startDate</code> and\n      <code>endDate</code>.</p>"
                     }
                 },
@@ -1986,22 +2831,26 @@
             "type": "timestamp"
         },
         "com.amazonaws.applicationdiscoveryservice#ExportStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
                     }
-                ]
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ExportStatusMessage": {
@@ -2108,7 +2957,10 @@
         },
         "com.amazonaws.applicationdiscoveryservice#GetDiscoverySummaryRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#GetDiscoverySummaryResponse": {
             "type": "structure",
@@ -2116,24 +2968,28 @@
                 "servers": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of servers discovered.</p>"
                     }
                 },
                 "applications": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of applications discovered.</p>"
                     }
                 },
                 "serversMappedToApplications": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of servers mapped to applications.</p>"
                     }
                 },
                 "serversMappedtoTags": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of servers mapped to tags.</p>"
                     }
                 },
@@ -2158,6 +3014,9 @@
                 "agentlessCollectorSummary": {
                     "target": "com.amazonaws.applicationdiscoveryservice#CustomerAgentlessCollectorInfo"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#HomeRegionNotSetException": {
@@ -2174,54 +3033,74 @@
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ImportStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IMPORT_IN_PROGRESS",
-                        "name": "IMPORT_IN_PROGRESS"
-                    },
-                    {
-                        "value": "IMPORT_COMPLETE",
-                        "name": "IMPORT_COMPLETE"
-                    },
-                    {
-                        "value": "IMPORT_COMPLETE_WITH_ERRORS",
-                        "name": "IMPORT_COMPLETE_WITH_ERRORS"
-                    },
-                    {
-                        "value": "IMPORT_FAILED",
-                        "name": "IMPORT_FAILED"
-                    },
-                    {
-                        "value": "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED",
-                        "name": "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED",
-                        "name": "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "DELETE_IN_PROGRESS",
-                        "name": "DELETE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "DELETE_COMPLETE",
-                        "name": "DELETE_COMPLETE"
-                    },
-                    {
-                        "value": "DELETE_FAILED",
-                        "name": "DELETE_FAILED"
-                    },
-                    {
-                        "value": "DELETE_FAILED_LIMIT_EXCEEDED",
-                        "name": "DELETE_FAILED_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "INTERNAL_ERROR",
-                        "name": "INTERNAL_ERROR"
+            "type": "enum",
+            "members": {
+                "IMPORT_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_IN_PROGRESS"
                     }
-                ]
+                },
+                "IMPORT_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_COMPLETE"
+                    }
+                },
+                "IMPORT_COMPLETE_WITH_ERRORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_COMPLETE_WITH_ERRORS"
+                    }
+                },
+                "IMPORT_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_FAILED"
+                    }
+                },
+                "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"
+                    }
+                },
+                "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_COMPLETE"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "DELETE_FAILED_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED_LIMIT_EXCEEDED"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ImportTask": {
@@ -2278,31 +3157,35 @@
                 "serverImportSuccess": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of server records in the import file that were successfully\n      imported.</p>"
                     }
                 },
                 "serverImportFailure": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of server records in the import file that failed to be imported.</p>"
                     }
                 },
                 "applicationImportSuccess": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of application records in the import file that were successfully\n      imported.</p>"
                     }
                 },
                 "applicationImportFailure": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of application records in the import file that failed to be\n      imported.</p>"
                     }
                 },
                 "errorsAndFailedEntriesZip": {
                     "target": "com.amazonaws.applicationdiscoveryservice#S3PresignedUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A link to a compressed archive folder (in the ZIP format) that contains an error log and a\n      file of failed records. You can use these two files to quickly identify records that failed,\n      why they failed, and correct those records. Afterward, you can upload the corrected file to\n      your Amazon S3 bucket and create another import task request.</p>\n\n         <p>This field also includes authorization information so you can confirm the authenticity of\n      the compressed archive before you download it.</p>\n\n         <p>If some records failed to be imported we recommend that you correct the records in the\n      failed entries file and then imports that failed entries file. This prevents you from having\n      to correct and update the larger original file and attempt importing it again.</p>"
+                        "smithy.api#documentation": "<p>A link to a compressed archive folder (in the ZIP format) that contains an error log and a\n      file of failed records. You can use these two files to quickly identify records that failed,\n      why they failed, and correct those records. Afterward, you can upload the corrected file to\n      your Amazon S3 bucket and create another import task request.</p>\n         <p>This field also includes authorization information so you can confirm the authenticity of\n      the compressed archive before you download it.</p>\n         <p>If some records failed to be imported we recommend that you correct the records in the\n      failed entries file and then imports that failed entries file. This prevents you from having\n      to correct and update the larger original file and attempt importing it again.</p>"
                     }
                 }
             },
@@ -2327,26 +3210,30 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A name-values pair of elements you can use to filter the results when querying your import\n      tasks. Currently, wildcards are not supported for filters.</p>\n\n         <note>\n            <p>When filtering by import status, all other filter values are ignored.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A name-values pair of elements you can use to filter the results when querying your import\n      tasks. Currently, wildcards are not supported for filters.</p>\n         <note>\n            <p>When filtering by import status, all other filter values are ignored.</p>\n         </note>"
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ImportTaskFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IMPORT_TASK_ID",
-                        "name": "IMPORT_TASK_ID"
-                    },
-                    {
-                        "value": "STATUS",
-                        "name": "STATUS"
-                    },
-                    {
-                        "value": "NAME",
-                        "name": "NAME"
+            "type": "enum",
+            "members": {
+                "IMPORT_TASK_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_TASK_ID"
                     }
-                ]
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATUS"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ImportTaskFilterValue": {
@@ -2354,7 +3241,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 255
                 }
             }
         },
@@ -2391,7 +3278,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 255
                 },
                 "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
             }
@@ -2407,7 +3294,10 @@
             }
         },
         "com.amazonaws.applicationdiscoveryservice#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#InvalidParameterException": {
             "type": "structure",
@@ -2486,6 +3376,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of items to return. The maximum value is 100.</p>"
                     }
                 },
@@ -2501,6 +3392,9 @@
                         "smithy.api#documentation": "<p>Certain filter criteria return output that can be sorted in ascending or descending\n      order. For a list of output characteristics for each filter, see <a href=\"https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations\">Using the ListConfigurations Action</a> in the <i>Amazon Web Services Application Discovery\n        Service User Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ListConfigurationsResponse": {
@@ -2518,6 +3412,9 @@
                         "smithy.api#documentation": "<p>Token to retrieve the next set of results. For example, if your call to\n      ListConfigurations returned 100 items, but you set\n        <code>ListConfigurationsRequest$maxResults</code> to 10, you received a set of 10 results\n      along with this token. Use this token in the next query to retrieve the next set of\n      10.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ListServerNeighbors": {
@@ -2562,6 +3459,7 @@
                 "portInformationNeeded": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Flag to indicate if port and protocol information is needed as part of the\n      response.</p>"
                     }
                 },
@@ -2574,6 +3472,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of results to return in a single page of output.</p>"
                     }
                 },
@@ -2583,6 +3482,9 @@
                         "smithy.api#documentation": "<p>Token to retrieve the next set of results. For example, if you previously specified 100\n      IDs for <code>ListServerNeighborsRequest$neighborConfigurationIds</code> but set\n        <code>ListServerNeighborsRequest$maxResults</code> to 10, you received a set of 10 results\n      along with a token. Use that token in this query to get the next set of 10.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ListServerNeighborsResponse": {
@@ -2604,13 +3506,20 @@
                 "knownDependencyCount": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Count of distinct servers that are one hop away from the given server.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#Message": {
             "type": "string"
@@ -2647,6 +3556,7 @@
                 "connectionsCount": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of open network connections with the neighboring server.</p>",
                         "smithy.api#required": {}
                     }
@@ -2809,7 +3719,10 @@
         },
         "com.amazonaws.applicationdiscoveryservice#StartContinuousExportRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#StartContinuousExportResponse": {
             "type": "structure",
@@ -2844,6 +3757,9 @@
                         "smithy.api#documentation": "<p>A dictionary which describes how the data is stored.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>databaseName</code> - the name of the Glue database used to store the\n          schema.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StartDataCollectionByAgentIds": {
@@ -2885,6 +3801,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StartDataCollectionByAgentIdsResponse": {
@@ -2896,6 +3815,9 @@
                         "smithy.api#documentation": "<p>Information about agents or the connector that were instructed to start collecting\n      data. Information includes the agent/connector ID, a description of the operation performed,\n      and whether the agent/connector configuration was updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StartExportTask": {
@@ -2957,6 +3879,9 @@
                         "smithy.api#documentation": "<p>The end timestamp for exported data from the single Application Discovery Agent\n      selected in the filters. If no value is specified, exported data includes the most recent data\n      collected by the agent.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StartExportTaskResponse": {
@@ -2968,6 +3893,9 @@
                         "smithy.api#documentation": "<p>A unique identifier used to query the status of an export request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StartImportTask": {
@@ -2999,7 +3927,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an import task, which allows you to import details of your on-premises environment\n      directly into Amazon Web Services Migration Hub without having to use the Application Discovery Service (ADS)\n      tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform\n      migration assessment and planning directly from your imported data, including the ability to\n      group your devices as applications and track their migration status.</p>\n\n         <p>To start an import request, do this:</p>\n\n         <ol>\n            <li>\n               <p>Download the specially formatted comma separated value (CSV) import template, which\n          you can find here: <a href=\"https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv\">https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv</a>.</p>\n            </li>\n            <li>\n               <p>Fill out the template with your server and application data.</p>\n            </li>\n            <li>\n               <p>Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL.\n          Your import file must be in the CSV format.</p>\n            </li>\n            <li>\n               <p>Use the console or the <code>StartImportTask</code> command with the Amazon Web Services CLI or one of\n          the Amazon Web Services SDKs to import the records from your file.</p>\n            </li>\n         </ol>\n\n         <p>For more information, including step-by-step procedures, see <a href=\"https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html\">Migration Hub\n        Import</a> in the <i>Amazon Web Services Application Discovery Service User\n      Guide</i>.</p>\n\n         <note>\n            <p>There are limits to the number of import tasks you can create (and delete) in an Amazon Web Services\n        account. For more information, see <a href=\"https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html\">Amazon Web Services Application\n          Discovery Service Limits</a> in the <i>Amazon Web Services Application Discovery Service User\n          Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Starts an import task, which allows you to import details of your on-premises environment\n      directly into Amazon Web Services Migration Hub without having to use the Application Discovery Service (ADS)\n      tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform\n      migration assessment and planning directly from your imported data, including the ability to\n      group your devices as applications and track their migration status.</p>\n         <p>To start an import request, do this:</p>\n         <ol>\n            <li>\n               <p>Download the specially formatted comma separated value (CSV) import template, which\n          you can find here: <a href=\"https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv\">https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv</a>.</p>\n            </li>\n            <li>\n               <p>Fill out the template with your server and application data.</p>\n            </li>\n            <li>\n               <p>Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL.\n          Your import file must be in the CSV format.</p>\n            </li>\n            <li>\n               <p>Use the console or the <code>StartImportTask</code> command with the Amazon Web Services CLI or one of\n          the Amazon Web Services SDKs to import the records from your file.</p>\n            </li>\n         </ol>\n         <p>For more information, including step-by-step procedures, see <a href=\"https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html\">Migration Hub\n        Import</a> in the <i>Amazon Web Services Application Discovery Service User\n      Guide</i>.</p>\n         <note>\n            <p>There are limits to the number of import tasks you can create (and delete) in an Amazon Web Services\n        account. For more information, see <a href=\"https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html\">Amazon Web Services Application\n          Discovery Service Limits</a> in the <i>Amazon Web Services Application Discovery Service User\n          Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StartImportTaskRequest": {
@@ -3008,7 +3936,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.applicationdiscoveryservice#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. A unique token that you can provide to prevent the same import request from\n      occurring more than once. If you don't provide a token, a token is automatically\n      generated.</p>\n\n         <p>Sending more than one <code>StartImportTask</code> request with the same client request\n      token will return information about the original import task with that client request\n      token.</p>",
+                        "smithy.api#documentation": "<p>Optional. A unique token that you can provide to prevent the same import request from\n      occurring more than once. If you don't provide a token, a token is automatically\n      generated.</p>\n         <p>Sending more than one <code>StartImportTask</code> request with the same client request\n      token will return information about the original import task with that client request\n      token.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3022,10 +3950,13 @@
                 "importUrl": {
                     "target": "com.amazonaws.applicationdiscoveryservice#ImportURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL for your import file that you've uploaded to Amazon S3.</p>\n\n         <note>\n            <p>If you're using the Amazon Web Services CLI, this URL is structured as follows:\n          <code>s3://BucketName/ImportFileName.CSV</code>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The URL for your import file that you've uploaded to Amazon S3.</p>\n         <note>\n            <p>If you're using the Amazon Web Services CLI, this URL is structured as follows:\n          <code>s3://BucketName/ImportFileName.CSV</code>\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StartImportTaskResponse": {
@@ -3037,6 +3968,9 @@
                         "smithy.api#documentation": "<p>An array of information related to the import task request including status information,\n      times, IDs, the Amazon S3 Object URL for the import file, and more. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StopContinuousExport": {
@@ -3087,6 +4021,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StopContinuousExportResponse": {
@@ -3104,6 +4041,9 @@
                         "smithy.api#documentation": "<p>Timestamp that represents when this continuous export was stopped.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StopDataCollectionByAgentIds": {
@@ -3145,6 +4085,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StopDataCollectionByAgentIdsResponse": {
@@ -3156,6 +4099,9 @@
                         "smithy.api#documentation": "<p>Information about the agents or connector that were instructed to stop collecting data.\n      Information includes the agent/connector ID, a description of the operation performed, and\n      whether the agent/connector configuration was updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#String": {
@@ -3309,25 +4255,33 @@
                         "smithy.api#documentation": "<p>New description of the application to be updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#UpdateApplicationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationdiscoveryservice#orderString": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASC",
-                        "name": "ASC"
-                    },
-                    {
-                        "value": "DESC",
-                        "name": "DESC"
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
                     }
-                ]
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
             }
         }
     }

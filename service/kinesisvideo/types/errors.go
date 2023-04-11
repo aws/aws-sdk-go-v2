@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *AccountChannelLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountChannelLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountChannelLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *AccountStreamLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountStreamLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccountStreamLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -136,7 +136,7 @@ func (e *DeviceStreamLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeviceStreamLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DeviceStreamLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -164,7 +164,7 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -190,7 +190,7 @@ func (e *InvalidDeviceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDeviceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidDeviceException"
 	}
 	return *e.ErrorCodeOverride
@@ -216,7 +216,7 @@ func (e *InvalidResourceFormatException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceFormatException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidResourceFormatException"
 	}
 	return *e.ErrorCodeOverride
@@ -242,7 +242,7 @@ func (e *NoDataRetentionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoDataRetentionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoDataRetentionException"
 	}
 	return *e.ErrorCodeOverride
@@ -268,7 +268,7 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotAuthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotAuthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -306,7 +306,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -332,7 +332,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -359,7 +359,7 @@ func (e *StreamEdgeConfigurationNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StreamEdgeConfigurationNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StreamEdgeConfigurationNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -388,7 +388,7 @@ func (e *TagsPerResourceExceededLimitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TagsPerResourceExceededLimitException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TagsPerResourceExceededLimitException"
 	}
 	return *e.ErrorCodeOverride
@@ -419,7 +419,7 @@ func (e *VersionMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VersionMismatchException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "VersionMismatchException"
 	}
 	return *e.ErrorCodeOverride

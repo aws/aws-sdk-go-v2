@@ -27,7 +27,7 @@ func (e *CustomHealthNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomHealthNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CustomHealthNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -55,7 +55,7 @@ func (e *DuplicateRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateRequest) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateRequest"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *InstanceNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InstanceNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InstanceNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *InvalidInput) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInput) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidInput"
 	}
 	return *e.ErrorCodeOverride
@@ -139,7 +139,7 @@ func (e *NamespaceAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NamespaceAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NamespaceAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -165,7 +165,7 @@ func (e *NamespaceNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NamespaceNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NamespaceNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -191,7 +191,7 @@ func (e *OperationNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -220,7 +220,7 @@ func (e *RequestLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -247,7 +247,7 @@ func (e *ResourceInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUse) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUse"
 	}
 	return *e.ErrorCodeOverride
@@ -274,7 +274,7 @@ func (e *ResourceLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceLimitExceeded) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceLimitExceeded"
 	}
 	return *e.ErrorCodeOverride
@@ -300,7 +300,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -330,7 +330,7 @@ func (e *ServiceAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceAlreadyExists) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceAlreadyExists"
 	}
 	return *e.ErrorCodeOverride
@@ -356,7 +356,7 @@ func (e *ServiceNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceNotFound) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceNotFound"
 	}
 	return *e.ErrorCodeOverride
@@ -385,7 +385,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride

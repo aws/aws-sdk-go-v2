@@ -63,6 +63,24 @@ func TestClient_XmlTimestamps_awsAwsqueryDeserialize(t *testing.T) {
 				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
+		// Ensures that the timestampFormat of date-time on the target shape works like
+		// normal timestamps
+		"QueryXmlTimestampsWithDateTimeOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <XmlTimestampsResult>
+			        <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
+			    </XmlTimestampsResult>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
 		// Ensures that the timestampFormat of epoch-seconds works
 		"QueryXmlTimestampsWithEpochSecondsFormat": {
 			StatusCode: 200,
@@ -80,6 +98,23 @@ func TestClient_XmlTimestamps_awsAwsqueryDeserialize(t *testing.T) {
 				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
+		// Ensures that the timestampFormat of epoch-seconds on the target shape works
+		"QueryXmlTimestampsWithEpochSecondsOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <XmlTimestampsResult>
+			        <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
+			    </XmlTimestampsResult>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
 		// Ensures that the timestampFormat of http-date works
 		"QueryXmlTimestampsWithHttpDateFormat": {
 			StatusCode: 200,
@@ -95,6 +130,23 @@ func TestClient_XmlTimestamps_awsAwsqueryDeserialize(t *testing.T) {
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+			},
+		},
+		// Ensures that the timestampFormat of http-date on the target shape works
+		"QueryXmlTimestampsWithHttpDateOnTargetFormat": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"text/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
+			    <XmlTimestampsResult>
+			        <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
+			    </XmlTimestampsResult>
+			</XmlTimestampsResponse>
+			`),
+			ExpectResult: &XmlTimestampsOutput{
+				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
 			},
 		},
 	}

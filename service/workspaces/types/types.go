@@ -302,17 +302,17 @@ type DefaultWorkspaceCreationProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the Standby WorkSpace that could not be created.
+// Describes the standby WorkSpace that could not be created.
 type FailedCreateStandbyWorkspacesRequest struct {
 
-	// The error code that is returned if the Standby WorkSpace could not be created.
+	// The error code that is returned if the standby WorkSpace could not be created.
 	ErrorCode *string
 
-	// The text of the error message that is returned if the Standby WorkSpace could
+	// The text of the error message that is returned if the standby WorkSpace could
 	// not be created.
 	ErrorMessage *string
 
-	// Information about the Standby WorkSpace that could not be created.
+	// Information about the standby WorkSpace that could not be created.
 	StandbyWorkspaceRequest *StandbyWorkspace
 
 	noSmithyDocumentSerde
@@ -518,23 +518,23 @@ type OperatingSystem struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the Standby WorkSpace.
+// Information about the standby WorkSpace.
 type PendingCreateStandbyWorkspacesRequest struct {
 
-	// The identifier of the directory for the Standby WorkSpace.
+	// The identifier of the directory for the standby WorkSpace.
 	DirectoryId *string
 
-	// The operational state of the Standby WorkSpace.
+	// The operational state of the standby WorkSpace.
 	State WorkspaceState
 
-	// Describes the Standby WorkSpace that was created. Because this operation is
+	// Describes the standby WorkSpace that was created. Because this operation is
 	// asynchronous, the identifier returned is not immediately available for use with
 	// other operations. For example, if you call  DescribeWorkspaces
 	// (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
 	// before the WorkSpace is created, the information returned can be incomplete.
 	UserName *string
 
-	// The identifier of the Standby WorkSpace.
+	// The identifier of the standby WorkSpace.
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
@@ -562,8 +562,8 @@ type RebuildRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the related WorkSpace. The related WorkSpace could be a Standby
-// WorkSpace or Primary WorkSpace related to the specified WorkSpace.
+// Describes the related WorkSpace. The related WorkSpace could be a standby
+// WorkSpace or primary WorkSpace related to the specified WorkSpace.
 type RelatedWorkspaceProperties struct {
 
 	// The Region of the related WorkSpace.
@@ -664,23 +664,23 @@ type Snapshot struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a Standby WorkSpace.
+// Describes a standby WorkSpace.
 type StandbyWorkspace struct {
 
-	// The identifier of the directory for the Standby WorkSpace.
+	// The identifier of the directory for the standby WorkSpace.
 	//
 	// This member is required.
 	DirectoryId *string
 
-	// The identifier of the Standby WorkSpace.
+	// The identifier of the standby WorkSpace.
 	//
 	// This member is required.
 	PrimaryWorkspaceId *string
 
-	// The tags associated with the Standby WorkSpace.
+	// The tags associated with the standby WorkSpace.
 	Tags []Tag
 
-	// The volume encryption key of the Standby WorkSpace.
+	// The volume encryption key of the standby WorkSpace.
 	VolumeEncryptionKey *string
 
 	noSmithyDocumentSerde
@@ -781,7 +781,7 @@ type Workspace struct {
 	// The modification states of the WorkSpace.
 	ModificationStates []ModificationState
 
-	// The Standby WorkSpace or Primary WorkSpace related to the specified WorkSpace.
+	// The standby WorkSpace or primary WorkSpace related to the specified WorkSpace.
 	RelatedWorkspaces []RelatedWorkspaceProperties
 
 	// Indicates whether the data stored on the root volume is encrypted.

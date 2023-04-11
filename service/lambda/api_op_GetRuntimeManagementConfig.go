@@ -61,6 +61,9 @@ type GetRuntimeManagementConfigInput struct {
 
 type GetRuntimeManagementConfigOutput struct {
 
+	// The Amazon Resource Name (ARN) of your function.
+	FunctionArn *string
+
 	// The ARN of the runtime the function is configured to use. If the runtime update
 	// mode is Manual, the ARN is returned, otherwise null is returned.
 	RuntimeVersionArn *string

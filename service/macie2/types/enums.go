@@ -391,6 +391,7 @@ const (
 	FindingTypePolicyIAMUserS3BucketReplicatedExternally FindingType = "Policy:IAMUser/S3BucketReplicatedExternally"
 	FindingTypePolicyIAMUserS3BucketEncryptionDisabled   FindingType = "Policy:IAMUser/S3BucketEncryptionDisabled"
 	FindingTypePolicyIAMUserS3BlockPublicAccessDisabled  FindingType = "Policy:IAMUser/S3BlockPublicAccessDisabled"
+	FindingTypePolicyIAMUserS3BucketSharedWithCloudFront FindingType = "Policy:IAMUser/S3BucketSharedWithCloudFront"
 )
 
 // Values returns all known values for FindingType. Note that this can be expanded
@@ -408,6 +409,7 @@ func (FindingType) Values() []FindingType {
 		"Policy:IAMUser/S3BucketReplicatedExternally",
 		"Policy:IAMUser/S3BucketEncryptionDisabled",
 		"Policy:IAMUser/S3BlockPublicAccessDisabled",
+		"Policy:IAMUser/S3BucketSharedWithCloudFront",
 	}
 }
 

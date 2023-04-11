@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the emergency calling configuration details for the specified Voice
+// Connector.
 func (c *Client) GetVoiceConnectorEmergencyCallingConfiguration(ctx context.Context, params *GetVoiceConnectorEmergencyCallingConfigurationInput, optFns ...func(*Options)) (*GetVoiceConnectorEmergencyCallingConfigurationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorEmergencyCallingConfigurationInput{}
@@ -28,6 +30,8 @@ func (c *Client) GetVoiceConnectorEmergencyCallingConfiguration(ctx context.Cont
 
 type GetVoiceConnectorEmergencyCallingConfigurationInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -35,6 +39,8 @@ type GetVoiceConnectorEmergencyCallingConfigurationInput struct {
 }
 
 type GetVoiceConnectorEmergencyCallingConfigurationOutput struct {
+
+	// The details of the emergency calling configuration.
 	EmergencyCallingConfiguration *types.EmergencyCallingConfiguration
 
 	// Metadata pertaining to the operation's result.

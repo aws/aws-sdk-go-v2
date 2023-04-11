@@ -122,6 +122,44 @@ type IdpMetadataMemberXml struct {
 
 func (*IdpMetadataMemberXml) isIdpMetadata() {}
 
+// The configuration settings for in-bound network access to your workspace. When
+// this is configured, only listed IP addresses and VPC endpoints will be able to
+// access your workspace. Standard Grafana authentication and authorization will
+// still be required. If this is not configured, or is removed, then all IP
+// addresses and VPC endpoints will be allowed. Standard Grafana authentication and
+// authorization will still be required.
+type NetworkAccessConfiguration struct {
+
+	// An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP
+	// addresses. The IP addresses specified are allowed to access your workspace. If
+	// the list is not included in the configuration then no IP addresses will be
+	// allowed to access the workspace. You create a prefix list using the Amazon VPC
+	// console. Prefix list IDs have the format pl-1a2b3c4d . For more information
+	// about prefix lists, see Group CIDR blocks using managed prefix lists
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html)in
+	// the Amazon Virtual Private Cloud User Guide.
+	//
+	// This member is required.
+	PrefixListIds []string
+
+	// An array of Amazon VPC endpoint IDs for the workspace. You can create VPC
+	// endpoints to your Amazon Managed Grafana workspace for access from within a VPC.
+	// If a NetworkAccessConfiguration is specified then only VPC endpoints specified
+	// here will be allowed to access the workspace. VPC endpoint IDs have the format
+	// vpce-1a2b3c4d . For more information about creating an interface VPC endpoint,
+	// see Interface VPC endpoints
+	// (https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints) in the
+	// Amazon Managed Grafana User Guide. The only VPC endpoints that can be specified
+	// here are interface VPC endpoints for Grafana workspaces (using the
+	// com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints
+	// will be ignored.
+	//
+	// This member is required.
+	VpceIds []string
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing the identity of one user or group and the Admin, Editor,
 // or Viewer role that they have.
 type PermissionEntry struct {
@@ -283,17 +321,18 @@ type ValidationExceptionField struct {
 }
 
 // The configuration settings for an Amazon VPC that contains data sources for your
-// Grafana workspace to connect to.
+// Grafana workspace to connect to. Provided securityGroupIds and subnetIds must be
+// part of the same VPC.
 type VpcConfiguration struct {
 
 	// The list of Amazon EC2 security group IDs attached to the Amazon VPC for your
-	// Grafana workspace to connect.
+	// Grafana workspace to connect. Duplicates not allowed.
 	//
 	// This member is required.
 	SecurityGroupIds []string
 
 	// The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana
-	// workspace to connect.
+	// workspace to connect. Duplicates not allowed.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -318,7 +357,9 @@ type WorkspaceDescription struct {
 
 	// Specifies the Amazon Web Services data sources that have been configured to have
 	// IAM roles and permissions created to allow Amazon Managed Grafana to read data
-	// from these sources.
+	// from these sources. This list is only used when the workspace was created
+	// through the Amazon Web Services console, and the permissionType is
+	// SERVICE_MANAGED.
 	//
 	// This member is required.
 	DataSources []DataSourceType
@@ -377,6 +418,9 @@ type WorkspaceDescription struct {
 	// The name of the workspace.
 	Name *string
 
+	// The configuration settings for network access to your workspace.
+	NetworkAccessControl *NetworkAccessConfiguration
+
 	// The Amazon Web Services notification channels that Amazon Managed Grafana can
 	// automatically create IAM roles and permissions for, to allow Amazon Managed
 	// Grafana to use these channels.
@@ -390,16 +434,21 @@ type WorkspaceDescription struct {
 	// organization.
 	OrganizationalUnits []string
 
-	// If this is Service Managed, Amazon Managed Grafana automatically creates the IAM
-	// roles and provisions the permissions that the workspace needs to use Amazon Web
-	// Services data sources and notification channels. If this is CUSTOMER_MANAGED,
-	// you manage those roles and permissions yourself. If you are creating this
-	// workspace in a member account of an organization and that account is not a
-	// delegated administrator account, and you want the workspace to access data
-	// sources in other Amazon Web Services accounts in the organization, you must
-	// choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana
-	// permissions and policies for Amazon Web Services data sources and notification
-	// channels
+	// If this is SERVICE_MANAGED, and the workplace was created through the Amazon
+	// Managed Grafana console, then Amazon Managed Grafana automatically creates the
+	// IAM roles and provisions the permissions that the workspace needs to use Amazon
+	// Web Services data sources and notification channels. If this is
+	// CUSTOMER_MANAGED, you must manage those roles and permissions yourself. If you
+	// are working with a workspace in a member account of an organization and that
+	// account is not a delegated administrator account, and you want the workspace to
+	// access data sources in other Amazon Web Services accounts in the organization,
+	// this parameter must be set to CUSTOMER_MANAGED. For more information about
+	// converting between customer and service managed, see Managing permissions for
+	// data sources and notification channels
+	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html).
+	// For more information about the roles and permissions that must be managed for
+	// customer managed workspaces, see Amazon Managed Grafana permissions and policies
+	// for Amazon Web Services data sources and notification channels
 	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
 	PermissionType PermissionType
 

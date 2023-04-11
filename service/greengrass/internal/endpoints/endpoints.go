@@ -309,36 +309,38 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "fips-us-gov-east-1",
 			}: endpoints.Endpoint{
-				Hostname: "greengrass-fips.us-gov-east-1.amazonaws.com",
+				Hostname: "greengrass.us-gov-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-east-1",
 				},
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
-				Region: "us-gov-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "greengrass.us-gov-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-east-1",
-				},
-			},
-			endpoints.EndpointKey{
-				Region:  "us-gov-east-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "greengrass-fips.us-gov-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-east-1",
-				},
-			},
-			endpoints.EndpointKey{
-				Region: "us-gov-west-1",
+				Region: "fips-us-gov-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "greengrass.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "greengrass.us-gov-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "greengrass.us-gov-west-1.amazonaws.com",
 			},
 		},
 	},

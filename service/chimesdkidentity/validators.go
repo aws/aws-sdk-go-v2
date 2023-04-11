@@ -30,6 +30,26 @@ func (m *validateOpCreateAppInstanceAdmin) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAppInstanceBot struct {
+}
+
+func (*validateOpCreateAppInstanceBot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAppInstanceBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAppInstanceBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAppInstanceBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAppInstance struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpDeleteAppInstanceAdmin) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAppInstanceAdminInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAppInstanceBot struct {
+}
+
+func (*validateOpDeleteAppInstanceBot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppInstanceBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppInstanceBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppInstanceBotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -165,6 +205,26 @@ func (m *validateOpDescribeAppInstanceAdmin) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAppInstanceAdminInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAppInstanceBot struct {
+}
+
+func (*validateOpDescribeAppInstanceBot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppInstanceBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppInstanceBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppInstanceBotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +330,26 @@ func (m *validateOpListAppInstanceAdmins) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAppInstanceBots struct {
+}
+
+func (*validateOpListAppInstanceBots) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAppInstanceBots) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAppInstanceBotsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAppInstanceBotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAppInstanceUserEndpoints struct {
 }
 
@@ -350,6 +430,26 @@ func (m *validateOpPutAppInstanceRetentionSettings) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAppInstanceUserExpirationSettings struct {
+}
+
+func (*validateOpPutAppInstanceUserExpirationSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAppInstanceUserExpirationSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAppInstanceUserExpirationSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAppInstanceUserExpirationSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterAppInstanceUserEndpoint struct {
 }
 
@@ -405,6 +505,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAppInstanceBot struct {
+}
+
+func (*validateOpUpdateAppInstanceBot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAppInstanceBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAppInstanceBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAppInstanceBotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -474,6 +594,10 @@ func addOpCreateAppInstanceAdminValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateAppInstanceAdmin{}, middleware.After)
 }
 
+func addOpCreateAppInstanceBotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAppInstanceBot{}, middleware.After)
+}
+
 func addOpCreateAppInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAppInstance{}, middleware.After)
 }
@@ -484,6 +608,10 @@ func addOpCreateAppInstanceUserValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteAppInstanceAdminValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAppInstanceAdmin{}, middleware.After)
+}
+
+func addOpDeleteAppInstanceBotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppInstanceBot{}, middleware.After)
 }
 
 func addOpDeleteAppInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -500,6 +628,10 @@ func addOpDeregisterAppInstanceUserEndpointValidationMiddleware(stack *middlewar
 
 func addOpDescribeAppInstanceAdminValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAppInstanceAdmin{}, middleware.After)
+}
+
+func addOpDescribeAppInstanceBotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppInstanceBot{}, middleware.After)
 }
 
 func addOpDescribeAppInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -522,6 +654,10 @@ func addOpListAppInstanceAdminsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListAppInstanceAdmins{}, middleware.After)
 }
 
+func addOpListAppInstanceBotsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAppInstanceBots{}, middleware.After)
+}
+
 func addOpListAppInstanceUserEndpointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAppInstanceUserEndpoints{}, middleware.After)
 }
@@ -538,6 +674,10 @@ func addOpPutAppInstanceRetentionSettingsValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpPutAppInstanceRetentionSettings{}, middleware.After)
 }
 
+func addOpPutAppInstanceUserExpirationSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAppInstanceUserExpirationSettings{}, middleware.After)
+}
+
 func addOpRegisterAppInstanceUserEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterAppInstanceUserEndpoint{}, middleware.After)
 }
@@ -548,6 +688,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAppInstanceBotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAppInstanceBot{}, middleware.After)
 }
 
 func addOpUpdateAppInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -562,6 +706,25 @@ func addOpUpdateAppInstanceUserValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateAppInstanceUser{}, middleware.After)
 }
 
+func validateConfiguration(v *types.Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Configuration"}
+	if v.Lex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Lex"))
+	} else if v.Lex != nil {
+		if err := validateLexConfiguration(v.Lex); err != nil {
+			invalidParams.AddNested("Lex", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEndpointAttributes(v *types.EndpointAttributes) error {
 	if v == nil {
 		return nil
@@ -569,6 +732,45 @@ func validateEndpointAttributes(v *types.EndpointAttributes) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointAttributes"}
 	if v.DeviceToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExpirationSettings(v *types.ExpirationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExpirationSettings"}
+	if v.ExpirationDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpirationDays"))
+	}
+	if len(v.ExpirationCriterion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpirationCriterion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLexConfiguration(v *types.LexConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LexConfiguration"}
+	if len(v.RespondsTo) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RespondsTo"))
+	}
+	if v.LexBotAliasArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LexBotAliasArn"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -630,6 +832,36 @@ func validateOpCreateAppInstanceAdminInput(v *CreateAppInstanceAdminInput) error
 	}
 }
 
+func validateOpCreateAppInstanceBotInput(v *CreateAppInstanceBotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAppInstanceBotInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAppInstanceInput(v *CreateAppInstanceInput) error {
 	if v == nil {
 		return nil
@@ -675,6 +907,11 @@ func validateOpCreateAppInstanceUserInput(v *CreateAppInstanceUserInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ExpirationSettings != nil {
+		if err := validateExpirationSettings(v.ExpirationSettings); err != nil {
+			invalidParams.AddNested("ExpirationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -692,6 +929,21 @@ func validateOpDeleteAppInstanceAdminInput(v *DeleteAppInstanceAdminInput) error
 	}
 	if v.AppInstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAppInstanceBotInput(v *DeleteAppInstanceBotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppInstanceBotInput"}
+	if v.AppInstanceBotArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceBotArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -758,6 +1010,21 @@ func validateOpDescribeAppInstanceAdminInput(v *DescribeAppInstanceAdminInput) e
 	}
 	if v.AppInstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAppInstanceBotInput(v *DescribeAppInstanceBotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppInstanceBotInput"}
+	if v.AppInstanceBotArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceBotArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -844,6 +1111,21 @@ func validateOpListAppInstanceAdminsInput(v *ListAppInstanceAdminsInput) error {
 	}
 }
 
+func validateOpListAppInstanceBotsInput(v *ListAppInstanceBotsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAppInstanceBotsInput"}
+	if v.AppInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAppInstanceUserEndpointsInput(v *ListAppInstanceUserEndpointsInput) error {
 	if v == nil {
 		return nil
@@ -899,6 +1181,26 @@ func validateOpPutAppInstanceRetentionSettingsInput(v *PutAppInstanceRetentionSe
 	}
 	if v.AppInstanceRetentionSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceRetentionSettings"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAppInstanceUserExpirationSettingsInput(v *PutAppInstanceUserExpirationSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAppInstanceUserExpirationSettingsInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if v.ExpirationSettings != nil {
+		if err := validateExpirationSettings(v.ExpirationSettings); err != nil {
+			invalidParams.AddNested("ExpirationSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -970,6 +1272,27 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAppInstanceBotInput(v *UpdateAppInstanceBotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppInstanceBotInput"}
+	if v.AppInstanceBotArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceBotArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Metadata == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

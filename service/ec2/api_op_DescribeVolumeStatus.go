@@ -104,21 +104,17 @@ type DescribeVolumeStatusInput struct {
 	// status of the volume (ok | impaired | warning | insufficient-data).
 	Filters []types.Filter
 
-	// The maximum number of volume results returned by DescribeVolumeStatus in
-	// paginated output. When this parameter is used, the request only returns
-	// MaxResults results in a single page along with a NextToken response element. The
-	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken value. This value can be between 5 and 1,000; if
-	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
-	// If this parameter is not used, then DescribeVolumeStatus returns all results.
-	// You cannot specify this parameter and the volume IDs parameter in the same
-	// request.
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. This value
+	// can be between 5 and 1,000; if the value is larger than 1,000, only 1,000
+	// results are returned. If this parameter is not used, then all items are
+	// returned. You cannot specify this parameter and the volume IDs parameter in the
+	// same request. For more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	MaxResults *int32
 
-	// The NextToken value to include in a future DescribeVolumeStatus request. When
-	// the results of the request exceed MaxResults, this value can be used to retrieve
-	// the next page of results. This value is null when there are no more results to
-	// return.
+	// The token returned from a previous paginated request. Pagination continues from
+	// the end of the items returned by the previous request.
 	NextToken *string
 
 	// The IDs of the volumes. Default: Describes all your volumes.
@@ -129,8 +125,8 @@ type DescribeVolumeStatusInput struct {
 
 type DescribeVolumeStatusOutput struct {
 
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The token to include in another request to get the next page of items. This
+	// value is null when there are no more items to return.
 	NextToken *string
 
 	// Information about the status of the volumes.
@@ -213,15 +209,13 @@ var _ DescribeVolumeStatusAPIClient = (*Client)(nil)
 // DescribeVolumeStatusPaginatorOptions is the paginator options for
 // DescribeVolumeStatus
 type DescribeVolumeStatusPaginatorOptions struct {
-	// The maximum number of volume results returned by DescribeVolumeStatus in
-	// paginated output. When this parameter is used, the request only returns
-	// MaxResults results in a single page along with a NextToken response element. The
-	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken value. This value can be between 5 and 1,000; if
-	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
-	// If this parameter is not used, then DescribeVolumeStatus returns all results.
-	// You cannot specify this parameter and the volume IDs parameter in the same
-	// request.
+	// The maximum number of items to return for this request. To get the next page of
+	// items, make another request with the token returned in the output. This value
+	// can be between 5 and 1,000; if the value is larger than 1,000, only 1,000
+	// results are returned. If this parameter is not used, then all items are
+	// returned. You cannot specify this parameter and the volume IDs parameter in the
+	// same request. For more information, see Pagination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -360,6 +360,9 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-iso-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "us-iso-west-1",
+			}: endpoints.Endpoint{},
 		},
 	},
 	{

@@ -21,19 +21,25 @@ import (
 // additional policies specified as strings to include in the simulation. If you
 // want to simulate only policies specified as strings, use SimulateCustomPolicy
 // instead. You can also optionally include one resource-based policy to be
-// evaluated with each of the resources included in the simulation. The simulation
-// does not perform the API operations; it only checks the authorization to
-// determine if the simulated policies allow or deny the operations. Note: This
-// operation discloses information about the permissions granted to other users. If
-// you do not want users to see other user's permissions, then consider allowing
-// them to use SimulateCustomPolicy instead. Context keys are variables maintained
-// by Amazon Web Services and its services that provide details about the context
-// of an API query request. You can use the Condition element of an IAM policy to
-// evaluate context keys. To get the list of context keys that the policies require
-// for correct simulation, use GetContextKeysForPrincipalPolicy. If the output is
-// long, you can use the MaxItems and Marker parameters to paginate the results.
-// For more information about using the policy simulator, see Testing IAM policies
-// with the IAM policy simulator
+// evaluated with each of the resources included in the simulation for IAM users
+// only. The simulation does not perform the API operations; it only checks the
+// authorization to determine if the simulated policies allow or deny the
+// operations. Note: This operation discloses information about the permissions
+// granted to other users. If you do not want users to see other user's
+// permissions, then consider allowing them to use SimulateCustomPolicy instead.
+// Context keys are variables maintained by Amazon Web Services and its services
+// that provide details about the context of an API query request. You can use the
+// Condition element of an IAM policy to evaluate context keys. To get the list of
+// context keys that the policies require for correct simulation, use
+// GetContextKeysForPrincipalPolicy. If the output is long, you can use the
+// MaxItems and Marker parameters to paginate the results. The IAM policy simulator
+// evaluates statements in the identity-based policy and the inputs that you
+// provide during simulation. The policy simulator results can differ from your
+// live Amazon Web Services environment. We recommend that you check your policies
+// against your live Amazon Web Services environment after testing using the policy
+// simulator to confirm that you have the desired results. For more information
+// about using the policy simulator, see Testing IAM policies with the IAM policy
+// simulator
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
 // the IAM User Guide.
 func (c *Client) SimulatePrincipalPolicy(ctx context.Context, params *SimulatePrincipalPolicyInput, optFns ...func(*Options)) (*SimulatePrincipalPolicyOutput, error) {
@@ -170,7 +176,8 @@ type SimulatePrincipalPolicyInput struct {
 	// ResourcePolicy parameter. For more information about ARNs, see Amazon Resource
 	// Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// the Amazon Web Services General Reference. Simulation of resource-based policies
+	// isn't supported for IAM roles.
 	ResourceArns []string
 
 	// Specifies the type of simulation to run. Different API operations that support
@@ -232,6 +239,9 @@ type SimulatePrincipalPolicyInput struct {
 	//
 	// * The special characters
 	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
+	//
+	// Simulation of
+	// resource-based policies isn't supported for IAM roles.
 	ResourcePolicy *string
 
 	noSmithyDocumentSerde

@@ -33,7 +33,7 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The keys of the tags to remove.
+	// The keys of the tags you want to remove.
 	//
 	// This member is required.
 	TagKeys []string

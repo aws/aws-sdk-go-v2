@@ -34,21 +34,27 @@ func (c *Client) AssociateTransitGatewayMulticastDomain(ctx context.Context, par
 
 type AssociateTransitGatewayMulticastDomainInput struct {
 
+	// The IDs of the subnets to associate with the transit gateway multicast domain.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The ID of the transit gateway attachment to associate with the transit gateway
+	// multicast domain.
+	//
+	// This member is required.
+	TransitGatewayAttachmentId *string
+
+	// The ID of the transit gateway multicast domain.
+	//
+	// This member is required.
+	TransitGatewayMulticastDomainId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The IDs of the subnets to associate with the transit gateway multicast domain.
-	SubnetIds []string
-
-	// The ID of the transit gateway attachment to associate with the transit gateway
-	// multicast domain.
-	TransitGatewayAttachmentId *string
-
-	// The ID of the transit gateway multicast domain.
-	TransitGatewayMulticastDomainId *string
 
 	noSmithyDocumentSerde
 }
@@ -107,6 +113,9 @@ func (c *Client) addOperationAssociateTransitGatewayMulticastDomainMiddlewares(s
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpAssociateTransitGatewayMulticastDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTransitGatewayMulticastDomain(options.Region), middleware.Before); err != nil {

@@ -29,17 +29,18 @@ func (c *Client) UpdateFirewallDomains(ctx context.Context, params *UpdateFirewa
 
 type UpdateFirewallDomainsInput struct {
 
-	// A list of domains to use in the update operation. Each domain specification in
-	// your domain list must satisfy the following requirements:
+	// A list of domains to use in the update operation. There is a limit of 1000
+	// domains per request. Each domain specification in your domain list must satisfy
+	// the following requirements:
 	//
-	// * It can optionally
-	// start with * (asterisk).
+	// * It can optionally start with * (asterisk).
 	//
-	// * With the exception of the optional starting
-	// asterisk, it must only contain the following characters: A-Z, a-z, 0-9, -
-	// (hyphen).
+	// *
+	// With the exception of the optional starting asterisk, it must only contain the
+	// following characters: A-Z, a-z, 0-9, - (hyphen).
 	//
-	// * It must be from 1-255 characters in length.
+	// * It must be from 1-255
+	// characters in length.
 	//
 	// This member is required.
 	Domains []string
@@ -74,7 +75,7 @@ type UpdateFirewallDomainsOutput struct {
 	// The name of the domain list.
 	Name *string
 
-	//
+	// Status of the UpdateFirewallDomains request.
 	Status types.FirewallDomainListStatus
 
 	// Additional information about the status of the list, if available.

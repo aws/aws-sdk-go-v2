@@ -16,30 +16,13 @@ import (
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
 // Scaling group after you make configuration changes. To help you determine the
-// status of an instance refresh, this operation returns information about the
-// instance refreshes you previously initiated, including their status, end time,
-// the percentage of the instance refresh that is complete, and the number of
-// instances remaining to update before the instance refresh is complete. The
-// following are the possible statuses:
-//
-// * Pending - The request was created, but
-// the operation has not started.
-//
-// * InProgress - The operation is in progress.
-//
-// *
-// Successful - The operation completed successfully.
-//
-// * Failed - The operation
-// failed to complete. You can troubleshoot using the status reason and the scaling
-// activities.
-//
-// * Cancelling - An ongoing operation is being cancelled.
-// Cancellation does not roll back any replacements that have already been
-// completed, but it prevents new replacements from being started.
-//
-// * Cancelled -
-// The operation is cancelled.
+// status of an instance refresh, Amazon EC2 Auto Scaling returns information about
+// the instance refreshes you previously initiated, including their status, start
+// time, end time, the percentage of the instance refresh that is complete, and the
+// number of instances remaining to update before the instance refresh is complete.
+// If a rollback is initiated while an instance refresh is in progress, Amazon EC2
+// Auto Scaling also returns information about the rollback of the instance
+// refresh.
 func (c *Client) DescribeInstanceRefreshes(ctx context.Context, params *DescribeInstanceRefreshesInput, optFns ...func(*Options)) (*DescribeInstanceRefreshesOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceRefreshesInput{}

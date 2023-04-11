@@ -29,6 +29,7 @@
         "api_op_ListOrders.go",
         "api_op_ListTagsForResource.go",
         "api_op_Ping.go",
+        "api_op_StartNetworkResourceUpdate.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateNetworkSite.go",

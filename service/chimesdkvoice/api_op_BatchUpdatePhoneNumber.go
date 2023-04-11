@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates one or more phone numbers.
 func (c *Client) BatchUpdatePhoneNumber(ctx context.Context, params *BatchUpdatePhoneNumberInput, optFns ...func(*Options)) (*BatchUpdatePhoneNumberOutput, error) {
 	if params == nil {
 		params = &BatchUpdatePhoneNumberInput{}
@@ -28,6 +29,8 @@ func (c *Client) BatchUpdatePhoneNumber(ctx context.Context, params *BatchUpdate
 
 type BatchUpdatePhoneNumberInput struct {
 
+	// Lists the phone numbers in the update request.
+	//
 	// This member is required.
 	UpdatePhoneNumberRequestItems []types.UpdatePhoneNumberRequestItem
 
@@ -35,6 +38,8 @@ type BatchUpdatePhoneNumberInput struct {
 }
 
 type BatchUpdatePhoneNumberOutput struct {
+
+	// A list of failed phone numbers and their error messages.
 	PhoneNumberErrors []types.PhoneNumberError
 
 	// Metadata pertaining to the operation's result.

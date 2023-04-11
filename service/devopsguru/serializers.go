@@ -1054,6 +1054,13 @@ func awsRestjson1_serializeOpDocumentListAnomaliesForInsightInput(v *ListAnomali
 		ok.String(*v.AccountId)
 	}
 
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsRestjson1_serializeDocumentListAnomaliesForInsightFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -2429,6 +2436,20 @@ func awsRestjson1_serializeDocumentInsightStatuses(v []types.InsightStatus, valu
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListAnomaliesForInsightFilters(v *types.ListAnomaliesForInsightFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ServiceCollection != nil {
+		ok := object.Key("ServiceCollection")
+		if err := awsRestjson1_serializeDocumentServiceCollection(v.ServiceCollection, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

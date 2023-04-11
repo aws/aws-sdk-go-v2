@@ -26,7 +26,7 @@ func (e *ActionNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActionNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActionNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -52,7 +52,7 @@ func (e *ActionTypeNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActionTypeNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActionTypeNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -78,7 +78,7 @@ func (e *ApprovalAlreadyCompletedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ApprovalAlreadyCompletedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ApprovalAlreadyCompletedException"
 	}
 	return *e.ErrorCodeOverride
@@ -104,7 +104,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -161,7 +161,7 @@ func (e *DuplicatedStopRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicatedStopRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicatedStopRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -187,7 +187,7 @@ func (e *InvalidActionDeclarationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidActionDeclarationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidActionDeclarationException"
 	}
 	return *e.ErrorCodeOverride
@@ -213,7 +213,7 @@ func (e *InvalidApprovalTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidApprovalTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidApprovalTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -239,7 +239,7 @@ func (e *InvalidArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArnException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArnException"
 	}
 	return *e.ErrorCodeOverride
@@ -265,7 +265,7 @@ func (e *InvalidBlockerDeclarationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidBlockerDeclarationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidBlockerDeclarationException"
 	}
 	return *e.ErrorCodeOverride
@@ -293,7 +293,7 @@ func (e *InvalidClientTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClientTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidClientTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -319,7 +319,7 @@ func (e *InvalidJobException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidJobException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidJobException"
 	}
 	return *e.ErrorCodeOverride
@@ -345,7 +345,7 @@ func (e *InvalidJobStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidJobStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidJobStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -372,7 +372,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNextTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -398,7 +398,7 @@ func (e *InvalidNonceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNonceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidNonceException"
 	}
 	return *e.ErrorCodeOverride
@@ -424,7 +424,7 @@ func (e *InvalidStageDeclarationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStageDeclarationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStageDeclarationException"
 	}
 	return *e.ErrorCodeOverride
@@ -450,7 +450,7 @@ func (e *InvalidStructureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStructureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidStructureException"
 	}
 	return *e.ErrorCodeOverride
@@ -476,7 +476,7 @@ func (e *InvalidTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagsException"
 	}
 	return *e.ErrorCodeOverride
@@ -502,7 +502,7 @@ func (e *InvalidWebhookAuthenticationParametersException) ErrorMessage() string 
 	return *e.Message
 }
 func (e *InvalidWebhookAuthenticationParametersException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidWebhookAuthenticationParametersException"
 	}
 	return *e.ErrorCodeOverride
@@ -530,7 +530,7 @@ func (e *InvalidWebhookFilterPatternException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidWebhookFilterPatternException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidWebhookFilterPatternException"
 	}
 	return *e.ErrorCodeOverride
@@ -558,7 +558,7 @@ func (e *JobNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *JobNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "JobNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -585,7 +585,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -612,7 +612,7 @@ func (e *NotLatestPipelineExecutionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotLatestPipelineExecutionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotLatestPipelineExecutionException"
 	}
 	return *e.ErrorCodeOverride
@@ -640,7 +640,7 @@ func (e *OutputVariablesSizeExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OutputVariablesSizeExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OutputVariablesSizeExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -669,7 +669,7 @@ func (e *PipelineExecutionNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PipelineExecutionNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PipelineExecutionNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -698,7 +698,7 @@ func (e *PipelineExecutionNotStoppableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PipelineExecutionNotStoppableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PipelineExecutionNotStoppableException"
 	}
 	return *e.ErrorCodeOverride
@@ -726,7 +726,7 @@ func (e *PipelineNameInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PipelineNameInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PipelineNameInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -752,7 +752,7 @@ func (e *PipelineNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PipelineNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PipelineNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -778,7 +778,7 @@ func (e *PipelineVersionNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PipelineVersionNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PipelineVersionNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -804,7 +804,7 @@ func (e *RequestFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RequestFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -830,7 +830,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -856,7 +856,7 @@ func (e *StageNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StageNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StageNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -883,7 +883,7 @@ func (e *StageNotRetryableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StageNotRetryableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "StageNotRetryableException"
 	}
 	return *e.ErrorCodeOverride
@@ -909,7 +909,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride
@@ -935,7 +935,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride
@@ -961,7 +961,7 @@ func (e *WebhookNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WebhookNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "WebhookNotFoundException"
 	}
 	return *e.ErrorCodeOverride

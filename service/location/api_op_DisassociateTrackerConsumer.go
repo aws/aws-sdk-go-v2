@@ -33,7 +33,7 @@ type DisassociateTrackerConsumerInput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection to be disassociated
 	// from the tracker resource. Used when you need to specify a resource across all
-	// AWS.
+	// Amazon Web Services.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer

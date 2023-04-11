@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.keyspaces#ARN": {
             "type": "string",
@@ -34,7 +34,7 @@
                 "throughputMode": {
                     "target": "com.amazonaws.keyspaces#ThroughputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <p>• <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n         <p>• <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n               <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n            </li>\n         </ul>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -52,7 +52,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Keyspaces has two read/write capacity modes for processing reads and writes on your tables: </p>\n         <p>• On-demand (default)</p>\n         <p>• Provisioned</p>\n         <p> The read/write capacity mode that you choose controls how you are charged for read and\n         write throughput and how table throughput capacity is managed.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Amazon Keyspaces has two read/write capacity modes for processing reads and writes on your tables: </p>\n         <ul>\n            <li>\n               <p>On-demand (default)</p>\n            </li>\n            <li>\n               <p>Provisioned</p>\n            </li>\n         </ul>\n         <p>The read/write capacity mode that you choose controls how you are charged for read and\n         write throughput and how table throughput capacity is managed.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#CapacitySpecificationSummary": {
@@ -61,7 +61,7 @@
                 "throughputMode": {
                     "target": "com.amazonaws.keyspaces#ThroughputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <p>• <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n         <p>• <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n               <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input. </p>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input. </p>\n            </li>\n         </ul>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -85,16 +85,41 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <p>• <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n         <p>• <code>throughputMode:PROVISIONED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code>.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#CapacityUnits": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.keyspaces#ClientSideTimestamps": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.keyspaces#ClientSideTimestampsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows how to enable client-side timestamps settings for the specified table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client-side timestamp setting of the table.</p>   \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps-how-it-works.html\">How it works: Amazon Keyspaces client-side timestamps</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#ClientSideTimestampsStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    }
+                ]
             }
         },
         "com.amazonaws.keyspaces#ClusteringKey": {
@@ -301,7 +326,7 @@
                 "schemaDefinition": {
                     "target": "com.amazonaws.keyspaces#SchemaDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>schemaDefinition</code> consists of the\n         following parameters.</p>\n         <p>For each column to be created:</p>\n         <p>• <code>name</code>  -  The name\n                           of the column.</p>\n         <p>• <code>type</code>  -  An Amazon Keyspaces\n                           data type. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer\n                                 Guide</i>.</p>\n         <p>The primary key of the table consists of the\n                     following columns:</p>\n         <p>• <code>partitionKeys</code> - The partition key can be a single column, or it can be a\n                           compound value composed of two or more columns. The partition\n                           key portion of the primary key is required and determines how\n                           Amazon Keyspaces stores your data.</p>\n         <p>• <code>name</code> - The name of each partition key column.</p>\n         <p>• <code>clusteringKeys</code> - The optional clustering column portion of your primary key\n                           determines how the data is clustered and sorted within each\n                           partition.</p>\n         <p>• <code>name</code> - The name of the clustering column. </p>\n         <p>• <code>orderBy</code> - Sets the\n                                 ascendant (<code>ASC</code>) or descendant (<code>DESC</code>) order modifier.</p>\n         <p>To define a column as static use <code>staticColumns</code>  - \n         Static columns store values that are shared by all rows in the same partition:</p>\n         <p>• <code>name</code>  -  The name\n               of the column.</p>\n         <p>• <code>type</code>  -  An Amazon Keyspaces\n               data type.</p>",
+                        "smithy.api#documentation": "<p>The <code>schemaDefinition</code> consists of the\n         following parameters.</p>\n         <p>For each column to be created:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>  -  The name\n            of the column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>  -  An Amazon Keyspaces\n            data type. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>\n         <p>The primary key of the table consists of the\n                     following columns:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>partitionKeys</code> - The partition key can be a single column, or it can be a\n            compound value composed of two or more columns. The partition\n            key portion of the primary key is required and determines how\n            Amazon Keyspaces stores your data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of each partition key column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>clusteringKeys</code> - The optional clustering column portion of your primary key\n            determines how the data is clustered and sorted within each\n            partition.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the clustering column. </p>\n            </li>\n            <li>\n               <p>\n                  <code>orderBy</code> - Sets the\n            ascendant (<code>ASC</code>) or descendant (<code>DESC</code>) order modifier.</p>\n               <p>To define a column as static use <code>staticColumns</code>  - \n               Static columns store values that are shared by all rows in the same partition:</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>  -  The name\n            of the column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>  -  An Amazon Keyspaces\n            data type.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -314,25 +339,25 @@
                 "capacitySpecification": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the read/write throughput capacity mode for the table. The options are:</p>\n         <p>• <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n         <p>• <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n                  <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n         <p>The default is\n         <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the read/write throughput capacity mode for the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n            </li>\n         </ul>\n         <p>The default is\n         <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "encryptionSpecification": {
                     "target": "com.amazonaws.keyspaces#EncryptionSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the encryption key for encryption at rest is managed for the table.  \n         You can choose one of the following KMS key (KMS key):</p>\n         <p>• <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>   \n         <p>• <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n               This option \n               requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input.</p>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies how the encryption key for encryption at rest is managed for the table.  \n         You can choose one of the following KMS key (KMS key):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n            This option \n            requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input.</p>\n            </li>\n         </ul>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "pointInTimeRecovery": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies if <code>pointInTimeRecovery</code> is enabled or disabled for the\n            table. The options are:</p>\n         <p>• <code>ENABLED</code>\n         </p>\n         <p>• <code>DISABLED</code>\n         </p>\n         <p>If it's not specified, the \n               default is <code>DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies if <code>pointInTimeRecovery</code> is enabled or disabled for the\n            table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the \n               default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "ttl": {
                     "target": "com.amazonaws.keyspaces#TimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables Time to Live custom settings for the\n            table. The options are:</p>\n         <p>• <code>status:enabled</code>\n         </p>\n         <p>• <code>status:disabled</code>\n         </p>\n         <p>The default is <code>status:disabled</code>. After\n            <code>ttl</code> is enabled, you can't disable it\n            for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Enables Time to Live custom settings for the\n            table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status:enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status:disabled</code>\n               </p>\n            </li>\n         </ul>\n         <p>The default is <code>status:disabled</code>. After\n            <code>ttl</code> is enabled, you can't disable it\n            for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "defaultTimeToLive": {
@@ -345,6 +370,12 @@
                     "target": "com.amazonaws.keyspaces#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pair tags to be\n         attached to the resource. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                    }
+                },
+                "clientSideTimestamps": {
+                    "target": "com.amazonaws.keyspaces#ClientSideTimestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Enables client-side timestamps for the table. By default, the setting is disabled. You can enable \n            client-side timestamps with the following option:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status: \"enabled\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>Once client-side timestamps are enabled for a table, this setting cannot be disabled.</p>"
                     }
                 }
             }
@@ -364,7 +395,6 @@
         "com.amazonaws.keyspaces#DefaultTimeToLive": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 630720000
@@ -480,7 +510,7 @@
                 "type": {
                     "target": "com.amazonaws.keyspaces#EncryptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption option specified for the table. You can choose one of the following KMS keys (KMS keys):</p>\n         <p>• <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n         <p>• <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n               This option \n               requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The encryption option specified for the table. You can choose one of the following KMS keys (KMS keys):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n            This option \n            requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n            </li>\n         </ul>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -492,7 +522,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Keyspaces encrypts and decrypts the table data at rest transparently and integrates with Key Management Service for storing and managing the encryption key. \n         You can choose one of the following KMS keys (KMS keys):</p>\n         <p>• Amazon Web Services owned key - This is the default encryption type. The key is owned by Amazon Keyspaces (no additional charge). </p>\n         <p>• Customer managed key - This key is stored in your account and is created, owned, and managed by you. You have full control over the customer \n               managed key (KMS charges apply).</p>\n         <p>For more information about encryption at rest in Amazon Keyspaces, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For more information about KMS, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">KMS management service concepts</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Amazon Keyspaces encrypts and decrypts the table data at rest transparently and integrates with Key Management Service for storing and managing the encryption key. \n         You can choose one of the following KMS keys (KMS keys):</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services owned key - This is the default encryption type. The key is owned by Amazon Keyspaces (no additional charge). </p>\n            </li>\n            <li>\n               <p>Customer managed key - This key is stored in your account and is created, owned, and managed by you. You have full control over the customer \n            managed key (KMS charges apply).</p>\n            </li>\n         </ul>\n         <p>For more information about encryption at rest in Amazon Keyspaces, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For more information about KMS, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">KMS management service concepts</a> in the <i>Key Management Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#EncryptionType": {
@@ -666,7 +696,7 @@
                 "capacitySpecification": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecificationSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <p>• <code>throughputMode:PAY_PER_REQUEST</code>\n         </p>\n         <p>• <code>throughputMode:PROVISIONED</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The read/write throughput capacity mode for a table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "encryptionSpecification": {
@@ -690,13 +720,19 @@
                 "defaultTimeToLive": {
                     "target": "com.amazonaws.keyspaces#DefaultTimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default Time to Live settings of the specified table.</p>"
+                        "smithy.api#documentation": "<p>The default Time to Live settings in seconds of the specified table.</p>"
                     }
                 },
                 "comment": {
                     "target": "com.amazonaws.keyspaces#Comment",
                     "traits": {
                         "smithy.api#documentation": "<p>The the description of the specified table.</p>"
+                    }
+                },
+                "clientSideTimestamps": {
+                    "target": "com.amazonaws.keyspaces#ClientSideTimestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The client-side timestamps setting of the table.</p>"
                     }
                 }
             }
@@ -758,21 +794,6 @@
         },
         "com.amazonaws.keyspaces#KeyspacesService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Keyspaces",
-                    "cloudFormationName": "Cassandra",
-                    "arnNamespace": "cassandra",
-                    "cloudTrailEventSource": "cassandra.amazonaws.com",
-                    "endpointPrefix": "cassandra"
-                },
-                "aws.auth#sigv4": {
-                    "name": "cassandra"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Keyspaces (for Apache Cassandra) is a scalable,\n        highly available, and managed Apache Cassandra-compatible database service. Amazon Keyspaces makes it easy to migrate,\n        run, and scale Cassandra workloads in the Amazon Web Services Cloud. With just a few clicks on the Amazon Web Services Management Console or a few lines of code, \n        you can create keyspaces and tables in Amazon Keyspaces, without deploying any infrastructure or installing software. </p>\n         <p>In addition to supporting Cassandra Query Language (CQL) requests via open-source Cassandra drivers, \n        Amazon Keyspaces supports data definition language (DDL) operations to manage keyspaces and tables using the Amazon Web Services SDK and CLI. This API reference describes\n        the supported DDL operations in detail.</p>\n         <p>For the list of all supported CQL APIs, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html\">Supported Cassandra APIs, operations, and data types \n        in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer\n              Guide</i>.</p>\n         <p>To learn how Amazon Keyspaces API actions are recorded with CloudTrail, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail\">Amazon Keyspaces information in CloudTrail</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For more information about Amazon Web Services APIs, for example how to implement retry logic or how to sign Amazon Web Services API requests, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a> in the <i>General Reference</i>.</p>",
-                "smithy.api#title": "Amazon Keyspaces"
-            },
             "version": "2022-02-10",
             "operations": [
                 {
@@ -814,7 +835,921 @@
                 {
                     "target": "com.amazonaws.keyspaces#UpdateTable"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Keyspaces",
+                    "cloudFormationName": "Cassandra",
+                    "arnNamespace": "cassandra",
+                    "cloudTrailEventSource": "cassandra.amazonaws.com",
+                    "endpointPrefix": "cassandra"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cassandra"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon Keyspaces (for Apache Cassandra) is a scalable,\n        highly available, and managed Apache Cassandra-compatible database service. Amazon Keyspaces makes it easy to migrate,\n        run, and scale Cassandra workloads in the Amazon Web Services Cloud. With just a few clicks on the Amazon Web Services Management Console or a few lines of code, \n        you can create keyspaces and tables in Amazon Keyspaces, without deploying any infrastructure or installing software. </p>\n         <p>In addition to supporting Cassandra Query Language (CQL) requests via open-source Cassandra drivers, \n           Amazon Keyspaces supports data definition language (DDL) operations to manage keyspaces and tables using the Amazon Web Services SDK and CLI, as well as\n           infrastructure as code (IaC) services and tools such as CloudFormation and Terraform. This API reference describes\n        the supported DDL operations in detail.</p>\n         <p>For the list of all supported CQL APIs, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html\">Supported Cassandra APIs, operations, and data types \n        in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer\n              Guide</i>.</p>\n         <p>To learn how Amazon Keyspaces API actions are recorded with CloudTrail, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail\">Amazon Keyspaces information in CloudTrail</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For more information about Amazon Web Services APIs, for example how to implement retry logic or how to sign Amazon Web Services API requests, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a> in the <i>General Reference</i>.</p>",
+                "smithy.api#title": "Amazon Keyspaces",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://cassandra-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "stringEquals",
+                                                                                    "argv": [
+                                                                                        "aws-us-gov",
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "PartitionResult"
+                                                                                                },
+                                                                                                "name"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "endpoint": {
+                                                                                "url": "https://cassandra.{Region}.amazonaws.com",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://cassandra-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://cassandra.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cassandra.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cassandra.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.keyspaces#ListKeyspaces": {
             "type": "operation",
@@ -1041,7 +1976,6 @@
         "com.amazonaws.keyspaces#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -1089,7 +2023,7 @@
                 "status": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecoveryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The options are:</p>\n         <p>• <code>ENABLED</code>\n         </p>\n         <p>• <code>DISABLED</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1186,7 +2120,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restores the specified table to the specified point in time within the\n         <code>earliest_restorable_timestamp</code> and the current time. For more information about restore points, see \n         <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_window\">\n            Time window for PITR continuous backups</a> in the <i>Amazon Keyspaces Developer Guide</i>. \n      </p>\n         <p>Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>\n         <p>When you restore using point in time recovery,\n         Amazon Keyspaces restores your source table's schema and data to the state \n         based on the selected timestamp <code>(day:hour:minute:second)</code> to a new table. The Time to Live (TTL) settings\n      are also restored to the state based on the selected timestamp.</p>\n         <p>In addition to the table's schema, data, and TTL settings,\n         <code>RestoreTable</code> restores the capacity mode, encryption, and\n         point-in-time recovery settings from the source table. \n         Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, \n         these settings are always restored based on the table's settings as of the current time or when the table was deleted.</p>\n         <p>You can also overwrite\n            these settings during restore:</p>\n         <p>• Read/write capacity mode</p>\n         <p>• Provisioned throughput capacity settings</p>\n         <p>• Point-in-time (PITR) settings</p>\n         <p>• Tags</p>\n         <p>For more \n               information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings\">PITR restore settings</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>Note that the following settings are not restored, and you must configure them manually for\n         the new table:</p>\n         <p>• Automatic scaling policies (for tables that use provisioned capacity\n               mode)</p>\n         <p>• Identity and Access Management (IAM) policies</p>\n         <p>• Amazon CloudWatch metrics and alarms</p>"
+                "smithy.api#documentation": "<p>Restores the specified table to the specified point in time within the\n         <code>earliest_restorable_timestamp</code> and the current time. For more information about restore points, see \n         <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_window\">\n            Time window for PITR continuous backups</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>\n         <p>Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>\n         <p>When you restore using point in time recovery,\n         Amazon Keyspaces restores your source table's schema and data to the state \n         based on the selected timestamp <code>(day:hour:minute:second)</code> to a new table. The Time to Live (TTL) settings\n      are also restored to the state based on the selected timestamp.</p>\n         <p>In addition to the table's schema, data, and TTL settings,\n         <code>RestoreTable</code> restores the capacity mode, encryption, and\n         point-in-time recovery settings from the source table. \n         Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, \n         these settings are always restored based on the table's settings as of the current time or when the table was deleted.</p>\n         <p>You can also overwrite\n            these settings during restore:</p>\n         <ul>\n            <li>\n               <p>Read/write capacity mode</p>\n            </li>\n            <li>\n               <p>Provisioned throughput capacity settings</p>\n            </li>\n            <li>\n               <p>Point-in-time (PITR) settings</p>\n            </li>\n            <li>\n               <p>Tags</p>\n            </li>\n         </ul>\n         <p>For more \n               information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings\">PITR restore settings</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>Note that the following settings are not restored, and you must configure them manually for\n         the new table:</p>\n         <ul>\n            <li>\n               <p>Automatic scaling policies (for tables that use provisioned capacity\n            mode)</p>\n            </li>\n            <li>\n               <p>Identity and Access Management (IAM) policies</p>\n            </li>\n            <li>\n               <p>Amazon CloudWatch metrics and alarms</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.keyspaces#RestoreTableRequest": {
@@ -1229,19 +2163,19 @@
                 "capacitySpecificationOverride": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the read/write throughput capacity mode for the target table. The options are:</p>\n         <p>• <code>throughputMode:PAY_PER_REQUEST</code>\n         </p>\n         <p>• <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the read/write throughput capacity mode for the target table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n            </li>\n         </ul>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "encryptionSpecificationOverride": {
                     "target": "com.amazonaws.keyspaces#EncryptionSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption settings for the target table. You can choose one of the following KMS key (KMS key):</p>\n         <p>• <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n         <p>• <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n               This option \n               requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption settings for the target table. You can choose one of the following KMS key (KMS key):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n            This option \n            requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n            </li>\n         </ul>\n         <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "pointInTimeRecoveryOverride": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the <code>pointInTimeRecovery</code> settings for the target\n            table. The options are:</p>\n         <p>• <code>ENABLED</code> \n         </p>\n         <p>• <code>DISABLED</code>\n         </p>\n         <p>If it's not specified, the default is <code>DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the <code>pointInTimeRecovery</code> settings for the target\n            table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.</p>"
                     }
                 },
                 "tagsOverride": {
@@ -1686,37 +2620,43 @@
                 "addColumns": {
                     "target": "com.amazonaws.keyspaces#ColumnDefinitionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>For each column to be added to the specified table:</p>\n         <p>• <code>name</code>  -  The name\n               of the column.</p>\n         <p>• <code>type</code>  -  An Amazon Keyspaces\n               data type. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer\n                     Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>For each column to be added to the specified table:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>  -  The name\n            of the column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>  -  An Amazon Keyspaces\n            data type. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types\">Data types</a> in the <i>Amazon Keyspaces Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "capacitySpecification": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies the read/write throughput capacity mode for the table. The options are:</p>\n         <p>• <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n         <p>• <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n               <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies the read/write throughput capacity mode for the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>throughputMode:PAY_PER_REQUEST</code> and </p>\n            </li>\n            <li>\n               <p>\n                  <code>throughputMode:PROVISIONED</code> - Provisioned capacity mode requires\n            <code>readCapacityUnits</code> and <code>writeCapacityUnits</code> as input.</p>\n            </li>\n         </ul>\n         <p>The default is <code>throughput_mode:PAY_PER_REQUEST</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html\">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "encryptionSpecification": {
                     "target": "com.amazonaws.keyspaces#EncryptionSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies the encryption settings of the table. You can choose one of the following KMS key (KMS key):</p>\n         <p>• <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n         <p>• <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n               This option \n               requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n         <p>The default is <code>AWS_OWNED_KMS_KEY</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies the encryption settings of the table. You can choose one of the following KMS key (KMS key):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. \n            This option \n            requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p>\n            </li>\n         </ul>\n         <p>The default is <code>AWS_OWNED_KMS_KEY</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html\">Encryption at rest</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "pointInTimeRecovery": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies the <code>pointInTimeRecovery</code> settings of the table. The options are:</p>\n         <p>• <code>ENABLED</code> \n         </p>\n         <p>• <code>DISABLED</code> \n         </p>\n         <p>If it's not specified, the default is <code>DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies the <code>pointInTimeRecovery</code> settings of the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code> \n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "ttl": {
                     "target": "com.amazonaws.keyspaces#TimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies Time to Live custom settings for the table. The options are:</p>\n         <p>• <code>status:enabled</code> \n         </p>\n         <p>• <code>status:disabled</code> \n         </p>\n         <p>The default is <code>status:disabled</code>. After\n         <code>ttl</code> is enabled, you can't disable it\n         for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies Time to Live custom settings for the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status:enabled</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status:disabled</code> \n               </p>\n            </li>\n         </ul>\n         <p>The default is <code>status:disabled</code>. After\n         <code>ttl</code> is enabled, you can't disable it\n         for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "defaultTimeToLive": {
                     "target": "com.amazonaws.keyspaces#DefaultTimeToLive",
                     "traits": {
                         "smithy.api#documentation": "<p>The default Time to Live setting in seconds for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl\">Setting the default TTL value for a table</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                    }
+                },
+                "clientSideTimestamps": {
+                    "target": "com.amazonaws.keyspaces#ClientSideTimestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables client-side timestamps for the table. By default, the setting is disabled. You can enable \n            client-side timestamps with the following option:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status: \"enabled\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>Once client-side timestamps are enabled for a table, this setting cannot be disabled.</p>"
                     }
                 }
             }

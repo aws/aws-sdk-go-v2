@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes an IPAM resource discovery. A resource discovery is an IPAM component
-// that enables IPAM Service to manage and monitor resources that belong to the
-// owning account.
+// that enables IPAM to manage and monitor resources that belong to the owning
+// account.
 func (c *Client) DeleteIpamResourceDiscovery(ctx context.Context, params *DeleteIpamResourceDiscoveryInput, optFns ...func(*Options)) (*DeleteIpamResourceDiscoveryOutput, error) {
 	if params == nil {
 		params = &DeleteIpamResourceDiscoveryInput{}

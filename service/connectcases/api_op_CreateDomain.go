@@ -16,7 +16,9 @@ import (
 // one Cases domain. This will not associate your connect instance to Cases domain.
 // Instead, use the Amazon Connect CreateIntegrationAssociation
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html)
-// API.
+// API. You need specific IAM permissions to successfully associate the Cases
+// domain. For more information, see Onboard to Cases
+// (https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam).
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}

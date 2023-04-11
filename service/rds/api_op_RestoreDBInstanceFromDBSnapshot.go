@@ -63,8 +63,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 
 	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
 	// Follow the allocation rules specified in CreateDBInstance. Be sure to allocate
-	// enough memory for your new DB instance so that the restore operation can
-	// succeed. You can also allocate additional memory for future growth.
+	// enough storage for your new DB instance so that the restore operation can
+	// succeed. You can also allocate additional storage for future growth.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor version upgrades are applied automatically
@@ -117,8 +117,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	CustomIamInstanceProfile *string
 
 	// The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore
-	// from. For more information on Multi-AZ DB clusters, see  Multi-AZ deployments
-	// with two readable standby DB instances
+	// from. For more information on Multi-AZ DB clusters, see  Multi-AZ DB cluster
+	// deployments
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide. Constraints:
 	//

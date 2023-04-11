@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the SIP credentials for the specified Amazon Chime SDK Voice Connector.
 func (c *Client) ListVoiceConnectorTerminationCredentials(ctx context.Context, params *ListVoiceConnectorTerminationCredentialsInput, optFns ...func(*Options)) (*ListVoiceConnectorTerminationCredentialsOutput, error) {
 	if params == nil {
 		params = &ListVoiceConnectorTerminationCredentialsInput{}
@@ -27,6 +28,8 @@ func (c *Client) ListVoiceConnectorTerminationCredentials(ctx context.Context, p
 
 type ListVoiceConnectorTerminationCredentialsInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -34,6 +37,8 @@ type ListVoiceConnectorTerminationCredentialsInput struct {
 }
 
 type ListVoiceConnectorTerminationCredentialsOutput struct {
+
+	// A list of user names.
 	Usernames []string
 
 	// Metadata pertaining to the operation's result.

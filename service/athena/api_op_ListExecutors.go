@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists, in descending order, the executors that have been submitted to a session.
-// Newer executors are listed first; older executors are listed later. The result
-// can be optionally filtered by state.
+// Lists, in descending order, the executors that joined a session. Newer executors
+// are listed first; older executors are listed later. The result can be optionally
+// filtered by state.
 func (c *Client) ListExecutors(ctx context.Context, params *ListExecutorsInput, optFns ...func(*Options)) (*ListExecutorsOutput, error) {
 	if params == nil {
 		params = &ListExecutorsInput{}

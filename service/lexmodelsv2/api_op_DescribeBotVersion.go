@@ -53,6 +53,9 @@ type DescribeBotVersionOutput struct {
 	// The identifier of the bot that contains the version.
 	BotId *string
 
+	// The members of bot network in the version that was described.
+	BotMembers []types.BotMember
+
 	// The name of the bot that contains the version.
 	BotName *string
 
@@ -60,7 +63,10 @@ type DescribeBotVersionOutput struct {
 	// ready for use.
 	BotStatus types.BotStatus
 
-	// The version of the bot to describe.
+	// The type of the bot in the version that was described.
+	BotType types.BotType
+
+	// The version of the bot that was described.
 	BotVersion *string
 
 	// A timestamp of the date and time that the bot version was created.
@@ -79,6 +85,9 @@ type DescribeBotVersionOutput struct {
 	// The number of seconds that a session with the bot remains active before it is
 	// discarded by Amazon Lex.
 	IdleSessionTTLInSeconds *int32
+
+	// A list of the networks to which the bot version you described belongs.
+	ParentBotNetworks []types.ParentBotNetwork
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permission to access the
 	// bot version.

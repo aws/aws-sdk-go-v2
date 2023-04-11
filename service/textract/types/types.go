@@ -73,46 +73,84 @@ type Block struct {
 	// table is grid-based information with two or more rows or columns, with a cell
 	// span of one row and one column each.
 	//
-	// * CELL - A cell within a detected table.
-	// The cell is the parent of the block that contains the text in the cell.
+	// * TABLE_TITLE - The title of a table. A
+	// title is typically a line of text above or below a table, or embedded as the
+	// first row of a table.
 	//
-	// *
-	// SELECTION_ELEMENT - A selection element such as an option button (radio button)
-	// or a check box that's detected on a document page. Use the value of
-	// SelectionStatus to determine the status of the selection element.
+	// * TABLE_FOOTER - The footer associated with a table. A
+	// footer is typically a line or lines of text below a table or embedded as the
+	// last row of a table.
 	//
-	// * SIGNATURE -
-	// The location and confidene score of a signature detected on a document page. Can
-	// be returned as part of a Key-Value pair or a detected cell.
+	// * CELL - A cell within a detected table. The cell is the
+	// parent of the block that contains the text in the cell.
 	//
-	// * QUERY - A
-	// question asked during the call of AnalyzeDocument. Contains an alias and an ID
-	// that attaches it to its answer.
+	// * MERGED_CELL - A cell
+	// in a table whose content spans more than one row or column. The Relationships
+	// array for this cell contain data from individual cells.
 	//
-	// * QUERY_RESULT - A response to a question asked
-	// during the call of analyze document. Comes with an alias and ID for ease of
-	// locating in a response. Also contains location and confidence score.
+	// * SELECTION_ELEMENT - A
+	// selection element such as an option button (radio button) or a check box that's
+	// detected on a document page. Use the value of SelectionStatus to determine the
+	// status of the selection element.
+	//
+	// * SIGNATURE - The location and confidene score
+	// of a signature detected on a document page. Can be returned as part of a
+	// Key-Value pair or a detected cell.
+	//
+	// * QUERY - A question asked during the call
+	// of AnalyzeDocument. Contains an alias and an ID that attaches it to its
+	// answer.
+	//
+	// * QUERY_RESULT - A response to a question asked during the call of
+	// analyze document. Comes with an alias and ID for ease of locating in a response.
+	// Also contains location and confidence score.
 	BlockType BlockType
 
 	// The column in which a table cell appears. The first column position is 1.
 	// ColumnIndex isn't returned by DetectDocumentText and GetDocumentTextDetection.
 	ColumnIndex *int32
 
-	// The number of columns that a table cell spans. Currently this value is always 1,
-	// even if the number of columns spanned is greater than 1. ColumnSpan isn't
-	// returned by DetectDocumentText and GetDocumentTextDetection.
+	// The number of columns that a table cell spans. ColumnSpan isn't returned by
+	// DetectDocumentText and GetDocumentTextDetection.
 	ColumnSpan *int32
 
 	// The confidence score that Amazon Textract has in the accuracy of the recognized
 	// text and the accuracy of the geometry points around the recognized text.
 	Confidence *float32
 
-	// The type of entity. The following can be returned:
+	// The type of entity. The following entity types can be returned by FORMS
+	// analysis:
 	//
-	// * KEY - An identifier for a
-	// field on the document.
+	// * KEY - An identifier for a field on the document.
 	//
-	// * VALUE - The field text.
+	// * VALUE - The
+	// field text.
+	//
+	// The following entity types can be returned by TABLES analysis:
+	//
+	// *
+	// COLUMN_HEADER - Identifies a cell that is a header of a column.
+	//
+	// * TABLE_TITLE -
+	// Identifies a cell that is a title within the table.
+	//
+	// * TABLE_SECTION_TITLE -
+	// Identifies a cell that is a title of a section within a table. A section title
+	// is a cell that typically spans an entire row above a section.
+	//
+	// * TABLE_FOOTER -
+	// Identifies a cell that is a footer of a table.
+	//
+	// * TABLE_SUMMARY - Identifies a
+	// summary cell of a table. A summary cell can be a row of a table or an
+	// additional, smaller table that contains summary information for another
+	// table.
+	//
+	// * STRUCTURED_TABLE - Identifies a table with column headers where the
+	// content of each row corresponds to the headers.
+	//
+	// * SEMI_STRUCTURED_TABLE -
+	// Identifies a non-structured table.
 	//
 	// EntityTypes isn't returned by
 	// DetectDocumentText and GetDocumentTextDetection.
@@ -132,32 +170,26 @@ type Block struct {
 	// multipage documents that are in PDF or TIFF format. A scanned image (JPEG/PNG)
 	// provided to an asynchronous operation, even if it contains multiple document
 	// pages, is considered a single-page document. This means that for scanned images
-	// the value of Page is always 1. Synchronous operations operations will also
-	// return a Page value of 1 because every input document is considered to be a
-	// single-page document.
+	// the value of Page is always 1. Synchronous operations will also return a Page
+	// value of 1 because every input document is considered to be a single-page
+	// document.
 	Page *int32
 
 	//
 	Query *Query
 
-	// A list of child blocks of the current block. For example, a LINE object has
-	// child blocks for each WORD block that's part of the line of text. There aren't
-	// Relationship objects in the list for relationships that don't exist, such as
-	// when the current block has no child blocks. The list size can be the
-	// following:
-	//
-	// * 0 - The block has no child blocks.
-	//
-	// * 1 - The block has child
-	// blocks.
+	// A list of relationship objects that describe how blocks are related to each
+	// other. For example, a LINE block object contains a CHILD relationship type with
+	// the WORD blocks that make up the line of text. There aren't Relationship objects
+	// in the list for relationships that don't exist, such as when the current block
+	// has no child blocks.
 	Relationships []Relationship
 
 	// The row in which a table cell is located. The first row position is 1. RowIndex
 	// isn't returned by DetectDocumentText and GetDocumentTextDetection.
 	RowIndex *int32
 
-	// The number of rows that a table cell spans. Currently this value is always 1,
-	// even if the number of rows spanned is greater than 1. RowSpan isn't returned by
+	// The number of rows that a table cell spans. RowSpan isn't returned by
 	// DetectDocumentText and GetDocumentTextDetection.
 	RowSpan *int32
 
@@ -253,8 +285,10 @@ type DocumentGroup struct {
 	// logical boundary.
 	SplitDocuments []SplitDocument
 
-	// The type of document that Amazon Textract has detected. See LINK for a list of
-	// all types returned by Textract.
+	// The type of document that Amazon Textract has detected. See Analyze Lending
+	// Response Objects
+	// (https://docs.aws.amazon.com/textract/latest/dg/lending-response-objects.html)
+	// for a list of all types returned by Textract.
 	Type *string
 
 	// A list of any expected signatures not found in a document group.
@@ -797,12 +831,32 @@ type Relationship struct {
 	// from the Type element.
 	Ids []string
 
-	// The type of relationship that the blocks in the IDs array have with the current
-	// block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a
-	// list that contains the ID of the VALUE block that's associated with the KEY of a
-	// key-value pair. A relationship of type CHILD is a list of IDs that identify WORD
-	// blocks in the case of lines Cell blocks in the case of Tables, and WORD blocks
-	// in the case of Selection Elements.
+	// The type of relationship between the blocks in the IDs array and the current
+	// block. The following list describes the relationship types that can be
+	// returned.
+	//
+	// * VALUE - A list that contains the ID of the VALUE block that's
+	// associated with the KEY of a key-value pair.
+	//
+	// * CHILD - A list of IDs that
+	// identify blocks found within the current block object. For example, WORD blocks
+	// have a CHILD relationship to the LINE block type.
+	//
+	// * MERGED_CELL - A list of IDs
+	// that identify each of the MERGED_CELL block types in a table.
+	//
+	// * ANSWER - A list
+	// that contains the ID of the QUERY_RESULT block that’s associated with the
+	// corresponding QUERY block.
+	//
+	// * TABLE - A list of IDs that identify associated
+	// TABLE block types.
+	//
+	// * TABLE_TITLE - A list that contains the ID for the
+	// TABLE_TITLE block type in a table.
+	//
+	// * TABLE_FOOTER - A list of IDs that identify
+	// the TABLE_FOOTER block types in a table.
 	Type RelationshipType
 
 	noSmithyDocumentSerde

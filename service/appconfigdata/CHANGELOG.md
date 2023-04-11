@@ -1,3 +1,36 @@
+# v1.6.6 (2023-03-22)
+
+* No change notes available for this release.
+
+# v1.6.5 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.4 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.3 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.6.2 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.1 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.6.0 (2023-02-13)
+
+* **Feature**: AWS AppConfig now offers the option to set a version label on hosted configuration versions. If a labeled hosted configuration version is deployed, its version label is available in the GetLatestConfiguration response.
+
+# v1.5.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

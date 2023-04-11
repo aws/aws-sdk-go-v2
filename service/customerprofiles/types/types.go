@@ -599,9 +599,9 @@ type ListIntegrationItem struct {
 	// This member is required.
 	Uri *string
 
-	// Boolean to indicate if the Flow associated with the Integration is created via
-	// Appflow console or with ObjectTypeName equals _unstructured via API/CLI in
-	// flowDefinition
+	// Boolean that shows if the Flow that's associated with the Integration is created
+	// in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in
+	// flowDefinition.
 	IsUnstructured *bool
 
 	// The name of the profile object type.
@@ -915,7 +915,12 @@ type Profile struct {
 	FoundByItems []FoundByKeyValue
 
 	// The gender with which the customer identifies.
+	//
+	// Deprecated: This member has been deprecated.
 	Gender Gender
+
+	// An alternative to Gender which accepts any string as input.
+	GenderString *string
 
 	// The customer’s home phone number.
 	HomePhoneNumber *string
@@ -933,7 +938,12 @@ type Profile struct {
 	MobilePhoneNumber *string
 
 	// The type of profile used to describe the customer.
+	//
+	// Deprecated: This member has been deprecated.
 	PartyType PartyType
+
+	// An alternative to PartyType which accepts any string as input.
+	PartyTypeString *string
 
 	// The customer’s personal email address.
 	PersonalEmailAddress *string

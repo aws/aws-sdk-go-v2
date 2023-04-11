@@ -106,7 +106,7 @@ type GetComponentTypeOutput struct {
 	// The current status of the component type.
 	Status *types.Status
 
-	// The syncSource of the sync job, if this entity was created by a sync job.
+	// The syncSource of the SyncJob, if this entity was created by a SyncJob.
 	SyncSource *string
 
 	// Metadata pertaining to the operation's result.

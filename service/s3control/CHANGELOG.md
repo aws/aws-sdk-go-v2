@@ -1,3 +1,31 @@
+# v1.31.1 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.0 (2023-03-15)
+
+* **Feature**: Added support for S3 Object Lambda aliases.
+
+# v1.30.0 (2023-03-13)
+
+* **Feature**: Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.
+
+# v1.29.5 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.4 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.29.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.1 (2023-01-23)
 
 * No change notes available for this release.

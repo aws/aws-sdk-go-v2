@@ -32,8 +32,9 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 
 type GetComplianceDetailsByResourceInput struct {
 
-	// Filters the results by compliance. The allowed values are COMPLIANT,
-	// NON_COMPLIANT, and NOT_APPLICABLE.
+	// Filters the results by compliance. INSUFFICIENT_DATA is a valid ComplianceType
+	// that is returned when an Config rule cannot be evaluated. However,
+	// INSUFFICIENT_DATA cannot be used as a ComplianceType for filtering results.
 	ComplianceTypes []types.ComplianceType
 
 	// The nextToken string returned on a previous page that you use to get the next

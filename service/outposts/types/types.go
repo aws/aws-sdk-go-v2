@@ -197,6 +197,12 @@ type LineItem struct {
 	// The ID of the line item.
 	LineItemId *string
 
+	// The ID of the previous line item.
+	PreviousLineItemId *string
+
+	// The ID of the previous order.
+	PreviousOrderId *string
+
 	// The quantity of the line item.
 	Quantity int32
 
@@ -248,11 +254,17 @@ type Order struct {
 	// The submission date for the order.
 	OrderSubmissionDate *time.Time
 
+	// The type of order.
+	OrderType OrderType
+
 	// The ID of the Outpost in the order.
 	OutpostId *string
 
 	// The payment option for the order.
 	PaymentOption PaymentOption
+
+	// The payment term.
+	PaymentTerm PaymentTerm
 
 	// The status of the order.
 	//

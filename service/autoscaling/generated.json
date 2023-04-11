@@ -66,6 +66,7 @@
         "api_op_PutWarmPool.go",
         "api_op_RecordLifecycleActionHeartbeat.go",
         "api_op_ResumeProcesses.go",
+        "api_op_RollbackInstanceRefresh.go",
         "api_op_SetDesiredCapacity.go",
         "api_op_SetInstanceHealth.go",
         "api_op_SetInstanceProtection.go",

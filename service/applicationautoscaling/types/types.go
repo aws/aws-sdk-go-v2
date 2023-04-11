@@ -44,40 +44,32 @@ type Alarm struct {
 // value of the metric should decrease when capacity increases, and increase when
 // capacity decreases.
 //
-// For an example of how creating new metrics can be useful,
-// see Scaling based on Amazon SQS
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html)
-// in the Amazon EC2 Auto Scaling User Guide. This topic mentions Auto Scaling
-// groups, but the same scenario for Amazon SQS can apply to the target tracking
-// scaling policies that you create for a Spot Fleet by using the Application Auto
-// Scaling API. For more information about the CloudWatch terminology below, see
-// Amazon CloudWatch concepts
+// For more information about the CloudWatch terminology
+// below, see Amazon CloudWatch concepts
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
 // in the Amazon CloudWatch User Guide.
 type CustomizedMetricSpecification struct {
 
-	// The name of the metric. To get the exact metric name, namespace, and dimensions,
-	// inspect the Metric
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
-	// object that is returned by a call to ListMetrics
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).
-	//
-	// This member is required.
-	MetricName *string
-
-	// The namespace of the metric.
-	//
-	// This member is required.
-	Namespace *string
-
-	// The statistic of the metric.
-	//
-	// This member is required.
-	Statistic MetricStatistic
-
 	// The dimensions of the metric. Conditional: If you published your metric with
 	// dimensions, you must specify the same dimensions in your scaling policy.
 	Dimensions []MetricDimension
+
+	// The name of the metric. To get the exact metric name, namespace, and dimensions,
+	// inspect the Metric
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
+	// object that's returned by a call to ListMetrics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).
+	MetricName *string
+
+	// The metrics to include in the target tracking scaling policy, as a metric data
+	// query. This can include both raw metric and metric math expressions.
+	Metrics []TargetTrackingMetricDataQuery
+
+	// The namespace of the metric.
+	Namespace *string
+
+	// The statistic of the metric.
+	Statistic MetricStatistic
 
 	// The unit of the metric. For a complete list of the units that CloudWatch
 	// supports, see the MetricDatum
@@ -364,6 +356,9 @@ type ScalableTarget struct {
 	//
 	// This member is required.
 	ServiceNamespace ServiceNamespace
+
+	// The ARN of the scalable target.
+	ScalableTargetARN *string
 
 	// Specifies whether the scaling activities for a scalable target are in a
 	// suspended state.
@@ -1029,12 +1024,12 @@ type ScheduledAction struct {
 // the alarm. For the following examples, suppose that you have an alarm with a
 // breach threshold of 50:
 //
-// * To trigger the adjustment when the metric is greater
+// * To initiate the adjustment when the metric is greater
 // than or equal to 50 and less than 60, specify a lower bound of 0 and an upper
 // bound of 10.
 //
-// * To trigger the adjustment when the metric is greater than 40 and
-// less than or equal to 50, specify a lower bound of -10 and an upper bound of
+// * To initiate the adjustment when the metric is greater than 40
+// and less than or equal to 50, specify a lower bound of -10 and an upper bound of
 // 0.
 //
 // There are a few rules for the step adjustments for your step policy:
@@ -1064,7 +1059,7 @@ type StepAdjustment struct {
 	// The lower bound for the difference between the alarm threshold and the
 	// CloudWatch metric. If the metric value is above the breach threshold, the lower
 	// bound is inclusive (the metric must be greater than or equal to the threshold
-	// plus the lower bound). Otherwise, it is exclusive (the metric must be greater
+	// plus the lower bound). Otherwise, it's exclusive (the metric must be greater
 	// than the threshold plus the lower bound). A null value indicates negative
 	// infinity.
 	MetricIntervalLowerBound *float64
@@ -1072,7 +1067,7 @@ type StepAdjustment struct {
 	// The upper bound for the difference between the alarm threshold and the
 	// CloudWatch metric. If the metric value is above the breach threshold, the upper
 	// bound is exclusive (the metric must be less than the threshold plus the upper
-	// bound). Otherwise, it is inclusive (the metric must be less than or equal to the
+	// bound). Otherwise, it's inclusive (the metric must be less than or equal to the
 	// threshold plus the upper bound). A null value indicates positive infinity. The
 	// upper bound must be greater than the lower bound.
 	MetricIntervalUpperBound *float64
@@ -1189,6 +1184,130 @@ type SuspendedState struct {
 	// Application Auto Scaling to add or remove capacity by initiating scheduled
 	// actions. The default is false.
 	ScheduledScalingSuspended *bool
+
+	noSmithyDocumentSerde
+}
+
+// Represents a specific metric. Metric is a property of the
+// TargetTrackingMetricStat object.
+type TargetTrackingMetric struct {
+
+	// The dimensions for the metric. For the list of available dimensions, see the
+	// Amazon Web Services documentation available from the table in Amazon Web
+	// Services services that publish CloudWatch metrics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
+	// in the Amazon CloudWatch User Guide. Conditional: If you published your metric
+	// with dimensions, you must specify the same dimensions in your scaling policy.
+	Dimensions []TargetTrackingMetricDimension
+
+	// The name of the metric.
+	MetricName *string
+
+	// The namespace of the metric. For more information, see the table in Amazon Web
+	// Services services that publish CloudWatch metrics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
+	// in the Amazon CloudWatch User Guide.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// The metric data to return. Also defines whether this call is returning data for
+// one metric only, or whether it is performing a math expression on the values of
+// returned metric statistics to create a new time series. A time series is a
+// series of data points, each of which is associated with a timestamp. For more
+// information and examples, see Create a target tracking scaling policy for
+// Application Auto Scaling using metric math
+// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking-metric-math.html)
+// in the Application Auto Scaling User Guide.
+type TargetTrackingMetricDataQuery struct {
+
+	// A short name that identifies the object's results in the response. This name
+	// must be unique among all MetricDataQuery objects specified for a single scaling
+	// policy. If you are performing math expressions on this set of data, this name
+	// represents that data and can serve as a variable in the mathematical expression.
+	// The valid characters are letters, numbers, and underscores. The first character
+	// must be a lowercase letter.
+	//
+	// This member is required.
+	Id *string
+
+	// The math expression to perform on the returned data, if this object is
+	// performing a math expression. This expression can use the Id of the other
+	// metrics to refer to those metrics, and can also use the Id of other expressions
+	// to use the result of those expressions. Conditional: Within each
+	// TargetTrackingMetricDataQuery object, you must specify either Expression or
+	// MetricStat, but not both.
+	Expression *string
+
+	// A human-readable label for this metric or expression. This is especially useful
+	// if this is a math expression, so that you know what the value represents.
+	Label *string
+
+	// Information about the metric data to return. Conditional: Within each
+	// MetricDataQuery object, you must specify either Expression or MetricStat, but
+	// not both.
+	MetricStat *TargetTrackingMetricStat
+
+	// Indicates whether to return the timestamps and raw data values of this metric.
+	// If you use any math expressions, specify true for this value for only the final
+	// math expression that the metric specification is based on. You must specify
+	// false for ReturnData for all the other metrics and expressions used in the
+	// metric specification. If you are only retrieving metrics and not performing any
+	// math expressions, do not specify anything for ReturnData. This sets it to its
+	// default (true).
+	ReturnData *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the dimension of a metric.
+type TargetTrackingMetricDimension struct {
+
+	// The name of the dimension.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of the dimension.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// This structure defines the CloudWatch metric to return, along with the
+// statistic, period, and unit. For more information about the CloudWatch
+// terminology below, see Amazon CloudWatch concepts
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
+// in the Amazon CloudWatch User Guide.
+type TargetTrackingMetricStat struct {
+
+	// The CloudWatch metric to return, including the metric name, namespace, and
+	// dimensions. To get the exact metric name, namespace, and dimensions, inspect the
+	// Metric
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
+	// object that is returned by a call to ListMetrics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).
+	//
+	// This member is required.
+	Metric *TargetTrackingMetric
+
+	// The statistic to return. It can include any CloudWatch statistic or extended
+	// statistic. For a list of valid values, see the table in Statistics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic)
+	// in the Amazon CloudWatch User Guide. The most commonly used metric for scaling
+	// is Average.
+	//
+	// This member is required.
+	Stat *string
+
+	// The unit to use for the returned data points. For a complete list of the units
+	// that CloudWatch supports, see the MetricDatum
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
+	// data type in the Amazon CloudWatch API Reference.
+	Unit *string
 
 	noSmithyDocumentSerde
 }

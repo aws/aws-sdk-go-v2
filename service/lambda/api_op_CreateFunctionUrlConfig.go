@@ -32,9 +32,9 @@ func (c *Client) CreateFunctionUrlConfig(ctx context.Context, params *CreateFunc
 type CreateFunctionUrlConfigInput struct {
 
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
-	// want to restrict access to authenticated IAM users only. Set to NONE if you want
-	// to bypass IAM authentication to create a public endpoint. For more information,
-	// see Security and auth model for Lambda function URLs
+	// want to restrict access to authenticated users only. Set to NONE if you want to
+	// bypass IAM authentication to create a public endpoint. For more information, see
+	// Security and auth model for Lambda function URLs
 	// (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
 	//
 	// This member is required.
@@ -71,9 +71,9 @@ type CreateFunctionUrlConfigInput struct {
 type CreateFunctionUrlConfigOutput struct {
 
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
-	// want to restrict access to authenticated IAM users only. Set to NONE if you want
-	// to bypass IAM authentication to create a public endpoint. For more information,
-	// see Security and auth model for Lambda function URLs
+	// want to restrict access to authenticated users only. Set to NONE if you want to
+	// bypass IAM authentication to create a public endpoint. For more information, see
+	// Security and auth model for Lambda function URLs
 	// (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
 	//
 	// This member is required.

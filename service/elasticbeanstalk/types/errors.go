@@ -26,7 +26,7 @@ func (e *CodeBuildNotInServiceRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CodeBuildNotInServiceRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CodeBuildNotInServiceRegionException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *ElasticBeanstalkServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ElasticBeanstalkServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ElasticBeanstalkServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *InsufficientPrivilegesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientPrivilegesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InsufficientPrivilegesException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *ManagedActionInvalidStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ManagedActionInvalidStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ManagedActionInvalidStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -163,7 +163,7 @@ func (e *OperationInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OperationInProgressFailure"
 	}
 	return *e.ErrorCodeOverride
@@ -190,7 +190,7 @@ func (e *PlatformVersionStillReferencedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformVersionStillReferencedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PlatformVersionStillReferencedException"
 	}
 	return *e.ErrorCodeOverride
@@ -218,7 +218,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -245,7 +245,7 @@ func (e *ResourceTypeNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceTypeNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceTypeNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -279,7 +279,7 @@ func (e *S3LocationNotInServiceRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *S3LocationNotInServiceRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "S3LocationNotInServiceRegionException"
 	}
 	return *e.ErrorCodeOverride
@@ -307,7 +307,7 @@ func (e *S3SubscriptionRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *S3SubscriptionRequiredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "S3SubscriptionRequiredException"
 	}
 	return *e.ErrorCodeOverride
@@ -334,7 +334,7 @@ func (e *SourceBundleDeletionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SourceBundleDeletionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "SourceBundleDeletionFailure"
 	}
 	return *e.ErrorCodeOverride
@@ -360,7 +360,7 @@ func (e *TooManyApplicationsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyApplicationsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyApplicationsException"
 	}
 	return *e.ErrorCodeOverride
@@ -386,7 +386,7 @@ func (e *TooManyApplicationVersionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyApplicationVersionsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyApplicationVersionsException"
 	}
 	return *e.ErrorCodeOverride
@@ -414,7 +414,7 @@ func (e *TooManyBucketsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyBucketsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyBucketsException"
 	}
 	return *e.ErrorCodeOverride
@@ -440,7 +440,7 @@ func (e *TooManyConfigurationTemplatesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyConfigurationTemplatesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyConfigurationTemplatesException"
 	}
 	return *e.ErrorCodeOverride
@@ -468,7 +468,7 @@ func (e *TooManyEnvironmentsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyEnvironmentsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyEnvironmentsException"
 	}
 	return *e.ErrorCodeOverride
@@ -495,7 +495,7 @@ func (e *TooManyPlatformsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyPlatformsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyPlatformsException"
 	}
 	return *e.ErrorCodeOverride
@@ -524,7 +524,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride

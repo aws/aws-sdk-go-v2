@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +33,15 @@ type UpdateSecurityHubConfigurationInput struct {
 	// that are enabled. By default, this is set to true, and new controls are enabled
 	// automatically. To not automatically enable new controls, set this to false.
 	AutoEnableControls bool
+
+	// Updates whether the calling account has consolidated control findings turned on.
+	// If the value for this field is set to SECURITY_CONTROL, Security Hub generates a
+	// single finding for a control check even when the check applies to multiple
+	// enabled standards. If the value for this field is set to STANDARD_CONTROL,
+	// Security Hub generates separate findings for a control check when the check
+	// applies to multiple enabled standards. For accounts that are part of an
+	// organization, this value can only be updated in the administrator account.
+	ControlFindingGenerator types.ControlFindingGenerator
 
 	noSmithyDocumentSerde
 }

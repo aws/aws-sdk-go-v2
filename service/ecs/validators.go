@@ -190,6 +190,26 @@ func (m *validateOpDeleteService) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTaskDefinitions struct {
+}
+
+func (*validateOpDeleteTaskDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTaskDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTaskDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTaskDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTaskSet struct {
 }
 
@@ -924,6 +944,10 @@ func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteService{}, middleware.After)
+}
+
+func addOpDeleteTaskDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTaskDefinitions{}, middleware.After)
 }
 
 func addOpDeleteTaskSetValidationMiddleware(stack *middleware.Stack) error {
@@ -2303,6 +2327,21 @@ func validateOpDeleteServiceInput(v *DeleteServiceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceInput"}
 	if v.Service == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTaskDefinitionsInput(v *DeleteTaskDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTaskDefinitionsInput"}
+	if v.TaskDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskDefinitions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

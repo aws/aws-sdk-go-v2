@@ -590,6 +590,26 @@ func (m *validateOpListPackagesForDomain) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListScheduledActions struct {
+}
+
+func (*validateOpListScheduledActions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListScheduledActions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListScheduledActionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListScheduledActionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTags struct {
 }
 
@@ -790,6 +810,26 @@ func (m *validateOpUpdatePackage) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateScheduledAction struct {
+}
+
+func (*validateOpUpdateScheduledAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateScheduledAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateScheduledActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateScheduledActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateVpcEndpoint struct {
 }
 
@@ -946,6 +986,10 @@ func addOpListPackagesForDomainValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListPackagesForDomain{}, middleware.After)
 }
 
+func addOpListScheduledActionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListScheduledActions{}, middleware.After)
+}
+
 func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTags{}, middleware.After)
 }
@@ -984,6 +1028,10 @@ func addOpUpdateDomainConfigValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePackage{}, middleware.After)
+}
+
+func addOpUpdateScheduledActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateScheduledAction{}, middleware.After)
 }
 
 func addOpUpdateVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -1075,6 +1123,40 @@ func validateDomainInformationContainer(v *types.DomainInformationContainer) err
 	}
 }
 
+func validateOffPeakWindow(v *types.OffPeakWindow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OffPeakWindow"}
+	if v.WindowStartTime != nil {
+		if err := validateWindowStartTime(v.WindowStartTime); err != nil {
+			invalidParams.AddNested("WindowStartTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOffPeakWindowOptions(v *types.OffPeakWindowOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OffPeakWindowOptions"}
+	if v.OffPeakWindow != nil {
+		if err := validateOffPeakWindow(v.OffPeakWindow); err != nil {
+			invalidParams.AddNested("OffPeakWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSAMLIdp(v *types.SAMLIdp) error {
 	if v == nil {
 		return nil
@@ -1138,6 +1220,18 @@ func validateTagList(v []types.Tag) error {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWindowStartTime(v *types.WindowStartTime) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WindowStartTime"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1254,6 +1348,11 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v.TagList != nil {
 		if err := validateTagList(v.TagList); err != nil {
 			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OffPeakWindowOptions != nil {
+		if err := validateOffPeakWindowOptions(v.OffPeakWindowOptions); err != nil {
+			invalidParams.AddNested("OffPeakWindowOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1637,6 +1736,21 @@ func validateOpListPackagesForDomainInput(v *ListPackagesForDomainInput) error {
 	}
 }
 
+func validateOpListScheduledActionsInput(v *ListScheduledActionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListScheduledActionsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsInput(v *ListTagsInput) error {
 	if v == nil {
 		return nil
@@ -1784,6 +1898,11 @@ func validateOpUpdateDomainConfigInput(v *UpdateDomainConfigInput) error {
 			invalidParams.AddNested("AdvancedSecurityOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OffPeakWindowOptions != nil {
+		if err := validateOffPeakWindowOptions(v.OffPeakWindowOptions); err != nil {
+			invalidParams.AddNested("OffPeakWindowOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1801,6 +1920,30 @@ func validateOpUpdatePackageInput(v *UpdatePackageInput) error {
 	}
 	if v.PackageSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageSource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateScheduledActionInput(v *UpdateScheduledActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateScheduledActionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ActionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionID"))
+	}
+	if len(v.ActionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionType"))
+	}
+	if len(v.ScheduleAt) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleAt"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

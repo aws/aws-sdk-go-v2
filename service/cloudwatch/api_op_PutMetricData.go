@@ -77,8 +77,10 @@ type PutMetricDataInput struct {
 	// This member is required.
 	MetricData []types.MetricDatum
 
-	// The namespace for the metric data. To avoid conflicts with Amazon Web Services
-	// service namespaces, you should not specify a namespace that begins with AWS/
+	// The namespace for the metric data. You can use ASCII characters for the
+	// namespace, except for control characters which are not supported. To avoid
+	// conflicts with Amazon Web Services service namespaces, you should not specify a
+	// namespace that begins with AWS/
 	//
 	// This member is required.
 	Namespace *string

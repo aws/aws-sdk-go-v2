@@ -12,7 +12,7 @@ import (
 )
 
 // Update the position information of a given wireless device or a wireless gateway
-// resource. The postion coordinates are based on the  World Geodetic System
+// resource. The position coordinates are based on the  World Geodetic System
 // (WGS84) (https://gisgeography.com/wgs84-world-geodetic-system/).
 func (c *Client) UpdateResourcePosition(ctx context.Context, params *UpdateResourcePositionInput, optFns ...func(*Options)) (*UpdateResourcePositionOutput, error) {
 	if params == nil {
@@ -32,7 +32,7 @@ func (c *Client) UpdateResourcePosition(ctx context.Context, params *UpdateResou
 type UpdateResourcePositionInput struct {
 
 	// The identifier of the resource for which position information is updated. It can
-	// be the wireless device ID or the wireless gateway ID depending on the resource
+	// be the wireless device ID or the wireless gateway ID, depending on the resource
 	// type.
 	//
 	// This member is required.

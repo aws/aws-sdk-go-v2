@@ -11,19 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers or updates a scalable target, the resource that you want to scale.
-// Scalable targets are uniquely identified by the combination of resource ID,
-// scalable dimension, and namespace, which represents some capacity dimension of
-// the underlying service. When you register a new scalable target, you must
+// Registers or updates a scalable target, which is the resource that you want to
+// scale. Scalable targets are uniquely identified by the combination of resource
+// ID, scalable dimension, and namespace, which represents some capacity dimension
+// of the underlying service. When you register a new scalable target, you must
 // specify values for the minimum and maximum capacity. If the specified resource
 // is not active in the target service, this operation does not change the
 // resource's current capacity. Otherwise, it changes the resource's current
-// capacity to a value that is inside of this range. If you choose to add a scaling
-// policy, current capacity is adjustable within the specified range when scaling
-// starts. Application Auto Scaling scaling policies will not scale capacity to
-// values that are outside of the minimum and maximum range. After you register a
-// scalable target, you do not need to register it again to use other Application
-// Auto Scaling operations. To see which resources have been registered, use
+// capacity to a value that is inside of this range. If you add a scaling policy,
+// current capacity is adjustable within the specified range when scaling starts.
+// Application Auto Scaling scaling policies will not scale capacity to values that
+// are outside of the minimum and maximum range. After you register a scalable
+// target, you do not need to register it again to use other Application Auto
+// Scaling operations. To see which resources have been registered, use
 // DescribeScalableTargets
 // (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html).
 // You can also view the scaling policies for a service namespace by using
@@ -35,12 +35,19 @@ import (
 // To update a scalable target, specify the parameters that you want to change.
 // Include the parameters that identify the scalable target: resource ID, scalable
 // dimension, and namespace. Any parameters that you don't specify are not changed
-// by this update request. If you call the RegisterScalableTarget API to update an
-// existing scalable target, Application Auto Scaling retrieves the current
-// capacity of the resource. If it is below the minimum capacity or above the
-// maximum capacity, Application Auto Scaling adjusts the capacity of the scalable
-// target to place it within these bounds, even if you don't include the
-// MinCapacity or MaxCapacity request parameters.
+// by this update request. If you call the RegisterScalableTarget API operation to
+// create a scalable target, there might be a brief delay until the operation
+// achieves eventual consistency
+// (https://en.wikipedia.org/wiki/Eventual_consistency). You might become aware of
+// this brief delay if you get unexpected errors when performing sequential
+// operations. The typical strategy is to retry the request, and some Amazon Web
+// Services SDKs include automatic backoff and retry logic. If you call the
+// RegisterScalableTarget API operation to update an existing scalable target,
+// Application Auto Scaling retrieves the current capacity of the resource. If it's
+// below the minimum capacity or above the maximum capacity, Application Auto
+// Scaling adjusts the capacity of the scalable target to place it within these
+// bounds, even if you don't include the MinCapacity or MaxCapacity request
+// parameters.
 func (c *Client) RegisterScalableTarget(ctx context.Context, params *RegisterScalableTargetInput, optFns ...func(*Options)) (*RegisterScalableTargetOutput, error) {
 	if params == nil {
 		params = &RegisterScalableTargetInput{}
@@ -223,8 +230,8 @@ type RegisterScalableTargetInput struct {
 	// effect, Application Auto Scaling can scale out (expand) as needed to the maximum
 	// capacity limit in response to changing demand. This property is required when
 	// registering a new scalable target. Although you can specify a large maximum
-	// capacity, note that service quotas may impose lower limits. Each service has its
-	// own default quotas for the maximum capacity of the resource. If you want to
+	// capacity, note that service quotas might impose lower limits. Each service has
+	// its own default quotas for the maximum capacity of the resource. If you want to
 	// specify a higher limit, you can request an increase. For more information,
 	// consult the documentation for that service. For information about the default
 	// quotas for each service, see Service endpoints and quotas
@@ -298,10 +305,24 @@ type RegisterScalableTargetInput struct {
 	// in the Application Auto Scaling User Guide.
 	SuspendedState *types.SuspendedState
 
+	// Assigns one or more tags to the scalable target. Use this parameter to tag the
+	// scalable target when it is created. To tag an existing scalable target, use the
+	// TagResource operation. Each tag consists of a tag key and a tag value. Both the
+	// tag key and the tag value are required. You cannot have more than one tag on a
+	// scalable target with the same tag key. Use tags to control access to a scalable
+	// target. For more information, see Tagging support for Application Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html)
+	// in the Application Auto Scaling User Guide.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
 type RegisterScalableTargetOutput struct {
+
+	// The ARN of the scalable target.
+	ScalableTargetARN *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

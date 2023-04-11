@@ -189,6 +189,7 @@ type NetworkFabricType string
 // Enum values for NetworkFabricType
 const (
 	NetworkFabricTypeTransitGateway NetworkFabricType = "TRANSIT_GATEWAY"
+	NetworkFabricTypeNone           NetworkFabricType = "NONE"
 )
 
 // Values returns all known values for NetworkFabricType. Note that this can be
@@ -197,6 +198,7 @@ const (
 func (NetworkFabricType) Values() []NetworkFabricType {
 	return []NetworkFabricType{
 		"TRANSIT_GATEWAY",
+		"NONE",
 	}
 }
 

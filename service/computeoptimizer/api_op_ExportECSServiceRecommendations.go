@@ -50,14 +50,14 @@ type ExportECSServiceRecommendationsInput struct {
 	// This member is required.
 	S3DestinationConfig *types.S3DestinationConfig
 
-	// The Amazon Web Services account IDs for the export ECS service recommendations.
-	// If your account is the management account or the delegated administrator of an
-	// organization, use this parameter to specify the member account you want to
-	// export recommendations to. This parameter can't be specified together with the
-	// include member accounts parameter. The parameters are mutually exclusive. If
-	// this parameter or the include member accounts parameter is omitted, the
-	// recommendations for member accounts aren't included in the export. You can
-	// specify multiple account IDs per request.
+	// The Amazon Web Services account IDs for the export Amazon ECS service
+	// recommendations. If your account is the management account or the delegated
+	// administrator of an organization, use this parameter to specify the member
+	// account you want to export recommendations to. This parameter can't be specified
+	// together with the include member accounts parameter. The parameters are mutually
+	// exclusive. If this parameter or the include member accounts parameter is
+	// omitted, the recommendations for member accounts aren't included in the export.
+	// You can specify multiple account IDs per request.
 	AccountIds []string
 
 	// The recommendations data to include in the export file. For more information
@@ -70,8 +70,8 @@ type ExportECSServiceRecommendationsInput struct {
 	// currently supported.
 	FileFormat types.FileFormat
 
-	// An array of objects to specify a filter that exports a more specific set of ECS
-	// service recommendations.
+	// An array of objects to specify a filter that exports a more specific set of
+	// Amazon ECS service recommendations.
 	Filters []types.ECSServiceRecommendationFilter
 
 	// If your account is the management account or the delegated administrator of an

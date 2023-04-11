@@ -291,7 +291,7 @@ type BlockPublicAccess struct {
 }
 
 // Provides information about the number of S3 buckets that are publicly accessible
-// based on a combination of permissions settings for each bucket.
+// due to a combination of permissions settings for each bucket.
 type BucketCountByEffectivePermission struct {
 
 	// The total number of buckets that allow the general public to have read or write
@@ -314,26 +314,28 @@ type BucketCountByEffectivePermission struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the number of S3 buckets that use certain types of
-// server-side encryption by default or don't encrypt new objects by default. For
-// detailed information about these settings, see Setting default server-side
-// encryption behavior for Amazon S3 buckets
+// Provides information about the number of S3 buckets whose settings do or don't
+// specify default server-side encryption behavior for objects that are added to
+// the buckets. For detailed information about these settings, see Setting default
+// server-side encryption behavior for Amazon S3 buckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
 // in the Amazon Simple Storage Service User Guide.
 type BucketCountByEncryptionType struct {
 
-	// The total number of buckets that use an KMS key to encrypt new objects by
-	// default, either an Amazon Web Services managed key or a customer managed key.
-	// These buckets use KMS encryption (SSE-KMS) by default.
+	// The total number of buckets whose default encryption settings are configured to
+	// encrypt new objects with an Amazon Web Services managed KMS key or a customer
+	// managed KMS key. By default, these buckets encrypt new objects automatically
+	// using SSE-KMS encryption.
 	KmsManaged int64
 
-	// The total number of buckets that use an Amazon S3 managed key to encrypt new
-	// objects by default. These buckets use Amazon S3 managed encryption (SSE-S3) by
-	// default.
+	// The total number of buckets whose default encryption settings are configured to
+	// encrypt new objects with an Amazon S3 managed key. By default, these buckets
+	// encrypt new objects automatically using SSE-S3 encryption.
 	S3Managed int64
 
-	// The total number of buckets that don't encrypt new objects by default. Default
-	// encryption is disabled for these buckets.
+	// The total number of buckets that don't specify default server-side encryption
+	// behavior for new objects. Default encryption settings aren't configured for
+	// these buckets.
 	Unencrypted int64
 
 	// The total number of buckets that Amazon Macie doesn't have current encryption
@@ -345,31 +347,37 @@ type BucketCountByEncryptionType struct {
 }
 
 // Provides information about the number of S3 buckets that are or aren't shared
-// with other Amazon Web Services accounts.
+// with other Amazon Web Services accounts, Amazon CloudFront origin access
+// identities (OAIs), or CloudFront origin access controls (OACs). In this data, an
+// Amazon Macie organization is defined as a set of Macie accounts that are
+// centrally managed as a group of related accounts through Organizations or by
+// Macie invitation.
 type BucketCountBySharedAccessType struct {
 
-	// The total number of buckets that are shared with an Amazon Web Services account
-	// that isn't part of the same Amazon Macie organization.
+	// The total number of buckets that are shared with one or more of the following or
+	// any combination of the following: an Amazon CloudFront OAI, a CloudFront OAC, or
+	// an Amazon Web Services account that isn't in the same Amazon Macie organization.
 	External int64
 
-	// The total number of buckets that are shared with an Amazon Web Services account
-	// that's part of the same Amazon Macie organization.
+	// The total number of buckets that are shared with one or more Amazon Web Services
+	// accounts in the same Amazon Macie organization. These buckets aren't shared with
+	// Amazon CloudFront OAIs or OACs.
 	Internal int64
 
 	// The total number of buckets that aren't shared with other Amazon Web Services
-	// accounts.
+	// accounts, Amazon CloudFront OAIs, or CloudFront OACs.
 	NotShared int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate shared
 	// access settings for. Macie can't determine whether these buckets are shared with
-	// other Amazon Web Services accounts.
+	// other Amazon Web Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.
 	Unknown int64
 
 	noSmithyDocumentSerde
 }
 
 // Provides information about the number of S3 buckets whose bucket policies do or
-// don't require server-side encryption of objects when objects are uploaded to the
+// don't require server-side encryption of objects when objects are added to the
 // buckets.
 type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
 
@@ -445,10 +453,15 @@ type BucketLevelPermissions struct {
 }
 
 // Provides statistical data and other information about an S3 bucket that Amazon
-// Macie monitors and analyzes for your account. If an error occurs when Macie
-// attempts to retrieve and process metadata from Amazon S3 for the bucket and the
-// bucket's objects, the value for the versioning property is false and the value
-// for most other properties is null. Key exceptions are accountId, bucketArn,
+// Macie monitors and analyzes for your account. By default, object count and
+// storage size values include data for object parts that are the result of
+// incomplete multipart uploads. For more information, see How Macie monitors
+// Amazon S3 data security
+// (https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html)
+// in the Amazon Macie User Guide. If an error occurs when Macie attempts to
+// retrieve and process metadata from Amazon S3 for the bucket or the bucket's
+// objects, the value for the versioning property is false and the value for most
+// other properties is null. Key exceptions are accountId, bucketArn,
 // bucketCreatedAt, bucketName, lastUpdated, and region. To identify the cause of
 // the error, refer to the errorCode and errorMessage values.
 type BucketMetadata struct {
@@ -457,7 +470,7 @@ type BucketMetadata struct {
 	AccountId *string
 
 	// Specifies whether the bucket policy for the bucket requires server-side
-	// encryption of objects when objects are uploaded to the bucket. Possible values
+	// encryption of objects when objects are added to the bucket. Possible values
 	// are:
 	//
 	// * FALSE - The bucket policy requires server-side encryption of new
@@ -482,8 +495,8 @@ type BucketMetadata struct {
 	BucketArn *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when the bucket was
-	// created, or changes such as edits to the bucket's policy were most recently made
-	// to the bucket.
+	// created. This value can also indicate when changes such as edits to the bucket's
+	// policy were most recently made to the bucket.
 	BucketCreatedAt *time.Time
 
 	// The name of the bucket.
@@ -502,12 +515,12 @@ type BucketMetadata struct {
 	// size of all versions of each applicable object in the bucket.
 	ClassifiableSizeInBytes int64
 
-	// Specifies the error code for an error that prevented Amazon Macie from
-	// retrieving and processing information about the bucket and the bucket's objects.
-	// If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the
-	// information. For example, the bucket has a restrictive bucket policy and Amazon
-	// S3 denied the request. If this value is null, Macie was able to retrieve and
-	// process the information.
+	// The error code for an error that prevented Amazon Macie from retrieving and
+	// processing information about the bucket and the bucket's objects. If this value
+	// is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For
+	// example, the bucket has a restrictive bucket policy and Amazon S3 denied the
+	// request. If this value is null, Macie was able to retrieve and process the
+	// information.
 	ErrorCode BucketMetadataErrorCode
 
 	// A brief description of the error (errorCode) that prevented Amazon Macie from
@@ -521,22 +534,21 @@ type BucketMetadata struct {
 	JobDetails *JobDetails
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
-	// recently performed automated sensitive data discovery for the bucket. This value
-	// is null if automated sensitive data discovery is currently disabled for your
-	// account.
+	// recently analyzed data in the bucket while performing automated sensitive data
+	// discovery for your account. This value is null if automated sensitive data
+	// discovery is currently disabled for your account.
 	LastAutomatedDiscoveryTime *time.Time
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
-	// recently retrieved both bucket and object metadata from Amazon S3 for the
-	// bucket.
+	// recently retrieved bucket or object metadata from Amazon S3 for the bucket.
 	LastUpdated *time.Time
 
 	// The total number of objects in the bucket.
 	ObjectCount int64
 
-	// The total number of objects that are in the bucket, grouped by server-side
-	// encryption type. This includes a grouping that reports the total number of
-	// objects that aren't encrypted or use client-side encryption.
+	// The total number of objects in the bucket, grouped by server-side encryption
+	// type. This includes a grouping that reports the total number of objects that
+	// aren't encrypted or use client-side encryption.
 	ObjectCountByEncryptionType *ObjectCountByEncryptionType
 
 	// Specifies whether the bucket is publicly accessible due to the combination of
@@ -551,30 +563,37 @@ type BucketMetadata struct {
 	// buckets for other Amazon Web Services accounts and, if so, which accounts.
 	ReplicationDetails *ReplicationDetails
 
-	// The sensitivity score for the bucket, ranging from -1 (no analysis due to an
-	// error) to 100 (sensitive). This value is null if automated sensitive data
-	// discovery is currently disabled for your account.
+	// The sensitivity score for the bucket, ranging from -1 (classification error) to
+	// 100 (sensitive). This value is null if automated sensitive data discovery is
+	// currently disabled for your account.
 	SensitivityScore int32
 
-	// Specifies whether the bucket encrypts new objects by default and, if so, the
-	// type of server-side encryption that's used.
+	// The default server-side encryption settings for the bucket.
 	ServerSideEncryption *BucketServerSideEncryption
 
-	// Specifies whether the bucket is shared with another Amazon Web Services account.
-	// Possible values are:
+	// Specifies whether the bucket is shared with another Amazon Web Services account,
+	// an Amazon CloudFront origin access identity (OAI), or a CloudFront origin access
+	// control (OAC). Possible values are:
 	//
-	// * EXTERNAL - The bucket is shared with an Amazon Web
-	// Services account that isn't part of the same Amazon Macie organization.
+	// * EXTERNAL - The bucket is shared with one
+	// or more of the following or any combination of the following: a CloudFront OAI,
+	// a CloudFront OAC, or an Amazon Web Services account that isn't part of your
+	// Amazon Macie organization.
 	//
-	// *
-	// INTERNAL - The bucket is shared with an Amazon Web Services account that's part
-	// of the same Amazon Macie organization.
+	// * INTERNAL - The bucket is shared with one or more
+	// Amazon Web Services accounts that are part of your Amazon Macie organization. It
+	// isn't shared with a CloudFront OAI or OAC.
 	//
-	// * NOT_SHARED - The bucket isn't shared
-	// with other Amazon Web Services accounts.
+	// * NOT_SHARED - The bucket isn't
+	// shared with another Amazon Web Services account, a CloudFront OAI, or a
+	// CloudFront OAC.
 	//
-	// * UNKNOWN - Amazon Macie wasn't able
-	// to evaluate the shared access settings for the bucket.
+	// * UNKNOWN - Amazon Macie wasn't able to evaluate the shared
+	// access settings for the bucket.
+	//
+	// An Amazon Macie organization is a set of Macie
+	// accounts that are centrally managed as a group of related accounts through
+	// Organizations or by Macie invitation.
 	SharedAccess SharedAccess
 
 	// The total storage size, in bytes, of the bucket. If versioning is enabled for
@@ -670,12 +689,12 @@ type BucketServerSideEncryption struct {
 
 	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key
 	// that's used by default to encrypt objects that are added to the bucket. This
-	// value is null if the bucket uses an Amazon S3 managed key to encrypt new objects
-	// or the bucket doesn't encrypt new objects by default.
+	// value is null if the bucket is configured to use an Amazon S3 managed key to
+	// encrypt new objects.
 	KmsMasterKeyId *string
 
-	// The type of server-side encryption that's used by default when storing new
-	// objects in the bucket. Possible values are:
+	// The server-side encryption algorithm that's used by default to encrypt objects
+	// that are added to the bucket. Possible values are:
 	//
 	// * AES256 - New objects are
 	// encrypted with an Amazon S3 managed key. They use SSE-S3 encryption.
@@ -685,8 +704,8 @@ type BucketServerSideEncryption struct {
 	// Web Services managed key or a customer managed key. They use SSE-KMS
 	// encryption.
 	//
-	// * NONE - New objects aren't encrypted by default. Default
-	// encryption is disabled for the bucket.
+	// * NONE - The bucket's default encryption settings don't specify
+	// server-side encryption behavior for new objects.
 	Type Type
 
 	noSmithyDocumentSerde
@@ -725,7 +744,7 @@ type BucketStatisticsBySensitivity struct {
 	NotClassified *SensitivityAggregations
 
 	// The aggregated statistical data for all buckets that have a sensitivity score of
-	// 0-49.
+	// 1-49.
 	NotSensitive *SensitivityAggregations
 
 	// The aggregated statistical data for all buckets that have a sensitivity score of
@@ -861,7 +880,7 @@ type ClassificationResultStatus struct {
 	// *
 	// ARCHIVE_CONTAINS_UNPROCESSED_FILES - The object is an archive file and Macie
 	// extracted and analyzed only some or none of the files in the archive. To
-	// determine which files Macie analyzed, if any, you can refer to the corresponding
+	// determine which files Macie analyzed, if any, refer to the corresponding
 	// sensitive data discovery result for the finding
 	// (ClassificationDetails.detailedResultsLocation).
 	//
@@ -888,32 +907,23 @@ type ClassificationResultStatus struct {
 	//
 	// *
 	// INVALID_ENCRYPTION - The object is encrypted using server-side encryption but
-	// Macie isn’t allowed to use the key. Macie can’t decrypt and analyze the
+	// Macie isn't allowed to use the key. Macie can't decrypt and analyze the
 	// object.
 	//
 	// * INVALID_KMS_KEY - The object is encrypted with an KMS key that was
-	// disabled or is being deleted. Macie can’t decrypt and analyze the object.
+	// disabled or is being deleted. Macie can't decrypt and analyze the object.
 	//
 	// *
-	// INVALID_OBJECT_STATE - The object doesn’t use a supported Amazon S3 storage
-	// class. For more information, see Discovering sensitive data
-	// (https://docs.aws.amazon.com/macie/latest/user/data-classification.html) in the
-	// Amazon Macie User Guide.
+	// INVALID_OBJECT_STATE - The object doesn't use a supported Amazon S3 storage
+	// class.
 	//
-	// * JSON_NESTING_LEVEL_OVER_LIMIT - The object contains
-	// JSON data and the nested depth of the data exceeds the quota for the number of
-	// nested levels that Macie analyzes for this type of file.
+	// * JSON_NESTING_LEVEL_OVER_LIMIT - The object contains JSON data and the
+	// nested depth of the data exceeds the quota for the number of nested levels that
+	// Macie analyzes for this type of file.
 	//
-	// * MALFORMED_FILE - The
-	// object is a malformed or corrupted file. An error occurred when Macie attempted
-	// to detect the file’s type or extract data from the file.
-	//
-	// *
-	// OBJECT_VERSION_MISMATCH - The object was changed while Macie was analyzing
-	// it.
-	//
-	// * NO_SUCH_BUCKET_AVAILABLE - The object was in a bucket that was deleted
-	// shortly before or when Macie attempted to analyze the object.
+	// * MALFORMED_FILE - The object is a
+	// malformed or corrupted file. An error occurred when Macie attempted to detect
+	// the file's type or extract data from the file.
 	//
 	// *
 	// MALFORMED_OR_FILE_SIZE_EXCEEDS_LIMIT - The object is a Microsoft Office file
@@ -921,35 +931,45 @@ type ClassificationResultStatus struct {
 	// is malformed, an error occurred when Macie attempted to extract data from the
 	// file.
 	//
+	// * NO_SUCH_BUCKET_AVAILABLE - The object was in a bucket that was deleted
+	// shortly before or when Macie attempted to analyze the object.
+	//
+	// *
+	// OBJECT_VERSION_MISMATCH - The object was changed while Macie was analyzing
+	// it.
+	//
+	// * OOXML_UNCOMPRESSED_RATIO_EXCEEDS_LIMIT - The object is an Office Open XML
+	// file whose compression ratio exceeds the compression quota for this type of
+	// file.
+	//
 	// * OOXML_UNCOMPRESSED_SIZE_EXCEEDS_LIMIT - The object is an Office Open
 	// XML file that exceeds the size quota for this type of file.
 	//
-	// *
-	// OOXML_UNCOMPRESSED_RATIO_EXCEEDS_LIMIT - The object is an Office Open XML file
-	// whose compression ratio exceeds the compression quota for this type of file.
+	// * PERMISSION_DENIED
+	// - Macie isn't allowed to access the object. The object's permissions settings
+	// prevent Macie from analyzing the object.
+	//
+	// * SOURCE_OBJECT_NO_LONGER_AVAILABLE -
+	// The object was deleted shortly before or when Macie attempted to analyze it.
 	//
 	// *
-	// PERMISSION_DENIED - Macie isn’t allowed to access the object. The object’s
-	// permissions settings prevent Macie from analyzing the object.
+	// TIME_CUT_OFF_REACHED - Macie started analyzing the object but additional
+	// analysis would exceed the time quota for analyzing an object.
 	//
 	// *
-	// SOURCE_OBJECT_NO_LONGER_AVAILABLE - The object was deleted shortly before or
-	// when Macie attempted to analyze it.
+	// UNABLE_TO_PARSE_FILE - The object is a file that contains structured data and an
+	// error occurred when Macie attempted to parse the data.
 	//
-	// * UNABLE_TO_PARSE_FILE - The object is a
-	// file that contains structured data and an error occurred when Macie attempted to
-	// parse the data.
+	// *
+	// UNSUPPORTED_FILE_TYPE_EXCEPTION - The object is a file that uses an unsupported
+	// file or storage format.
 	//
-	// * UNSUPPORTED_FILE_TYPE_EXCEPTION - The object is a file that
-	// uses an unsupported file or storage format. For more information, see Supported
-	// file and storage formats
-	// (https://docs.aws.amazon.com/macie/latest/user/discovery-supported-formats.html)
+	// For information about quotas, supported storage
+	// classes, and supported file and storage formats, see Quotas
+	// (https://docs.aws.amazon.com/macie/latest/user/macie-quotas.html) and Supported
+	// storage classes and formats
+	// (https://docs.aws.amazon.com/macie/latest/user/discovery-supported-storage.html)
 	// in the Amazon Macie User Guide.
-	//
-	// For information about sensitive data discovery
-	// quotas for files, see Amazon Macie quotas
-	// (https://docs.aws.amazon.com/macie/latest/user/macie-quotas.html) in the Amazon
-	// Macie User Guide.
 	Reason *string
 
 	noSmithyDocumentSerde
@@ -963,7 +983,7 @@ type ClassificationScopeSummary struct {
 	// The unique identifier for the classification scope.
 	Id *string
 
-	// The name of the classification scope.
+	// The name of the classification scope: automated-sensitive-data-discovery.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -1078,7 +1098,7 @@ type CustomDataIdentifierSummary struct {
 // data finding, and the sensitive data that it detected for the finding.
 type CustomDetection struct {
 
-	// The Amazon Resource Name (ARN) of the custom data identifier.
+	// The unique identifier for the custom data identifier.
 	Arn *string
 
 	// The total number of occurrences of the sensitive data that the custom data
@@ -1398,7 +1418,7 @@ type IamUser struct {
 	// The unique identifier for the IAM user who performed the action.
 	PrincipalId *string
 
-	// The user name of the IAM user who performed the action.
+	// The username of the IAM user who performed the action.
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -1785,11 +1805,16 @@ type ManagedDataIdentifierSummary struct {
 }
 
 // Provides statistical data and other information about an S3 bucket that Amazon
-// Macie monitors and analyzes for your account. If an error occurs when Macie
-// attempts to retrieve and process information about the bucket or the bucket's
-// objects, the value for most of these properties is null. Key exceptions are
-// accountId and bucketName. To identify the cause of the error, refer to the
-// errorCode and errorMessage values.
+// Macie monitors and analyzes for your account. By default, object count and
+// storage size values include data for object parts that are the result of
+// incomplete multipart uploads. For more information, see How Macie monitors
+// Amazon S3 data security
+// (https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html)
+// in the Amazon Macie User Guide. If an error occurs when Macie attempts to
+// retrieve and process information about the bucket or the bucket's objects, the
+// value for most of these properties is null. Key exceptions are accountId and
+// bucketName. To identify the cause of the error, refer to the errorCode and
+// errorMessage values.
 type MatchingBucket struct {
 
 	// The unique identifier for the Amazon Web Services account that owns the bucket.
@@ -1811,12 +1836,12 @@ type MatchingBucket struct {
 	// size of all versions of each applicable object in the bucket.
 	ClassifiableSizeInBytes int64
 
-	// Specifies the error code for an error that prevented Amazon Macie from
-	// retrieving and processing information about the bucket and the bucket's objects.
-	// If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the
-	// information. For example, the bucket has a restrictive bucket policy and Amazon
-	// S3 denied the request. If this value is null, Macie was able to retrieve and
-	// process the information.
+	// The error code for an error that prevented Amazon Macie from retrieving and
+	// processing information about the bucket and the bucket's objects. If this value
+	// is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For
+	// example, the bucket has a restrictive bucket policy and Amazon S3 denied the
+	// request. If this value is null, Macie was able to retrieve and process the
+	// information.
 	ErrorCode BucketMetadataErrorCode
 
 	// A brief description of the error (errorCode) that prevented Amazon Macie from
@@ -1830,9 +1855,9 @@ type MatchingBucket struct {
 	JobDetails *JobDetails
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
-	// recently performed automated sensitive data discovery for the bucket. This value
-	// is null if automated sensitive data discovery is currently disabled for your
-	// account.
+	// recently analyzed data in the bucket while performing automated sensitive data
+	// discovery for your account. This value is null if automated sensitive data
+	// discovery is currently disabled for your account.
 	LastAutomatedDiscoveryTime *time.Time
 
 	// The total number of objects in the bucket.
@@ -1843,8 +1868,8 @@ type MatchingBucket struct {
 	// aren't encrypted or use client-side encryption.
 	ObjectCountByEncryptionType *ObjectCountByEncryptionType
 
-	// The current sensitivity score for the bucket, ranging from -1 (no analysis due
-	// to an error) to 100 (sensitive). This value is null if automated sensitive data
+	// The current sensitivity score for the bucket, ranging from -1 (classification
+	// error) to 100 (sensitive). This value is null if automated sensitive data
 	// discovery is currently disabled for your account.
 	SensitivityScore int32
 
@@ -1897,12 +1922,13 @@ type Member struct {
 	// The Amazon Resource Name (ARN) of the account.
 	Arn *string
 
-	// The email address for the account.
+	// The email address for the account. This value is null if the account is
+	// associated with the administrator account through Organizations.
 	Email *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie
-	// membership invitation was last sent to the account. This value is null if an
-	// invitation hasn't been sent to the account.
+	// membership invitation was last sent to the account. This value is null if a
+	// Macie membership invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
 	// (Deprecated) The Amazon Web Services account ID for the administrator account.
@@ -1958,7 +1984,7 @@ type ObjectCountByEncryptionType struct {
 	// The objects use Amazon S3 managed encryption (SSE-S3).
 	S3Managed int64
 
-	// The total number of objects that aren't encrypted or use client-side encryption.
+	// The total number of objects that use client-side encryption or aren't encrypted.
 	Unencrypted int64
 
 	// The total number of objects that Amazon Macie doesn't have current encryption
@@ -2006,15 +2032,15 @@ type Occurrences struct {
 	// data.
 	Cells []Cell
 
-	// An array of objects, one for each occurrence of sensitive data in a non-binary
-	// text file, such as an HTML, TXT, or XML file. Each Range object specifies a line
-	// or inclusive range of lines that contains the sensitive data, and the position
-	// of the data on the specified line or lines. This value is often null for file
-	// types that are supported by Cell, Page, or Record objects. Exceptions are the
-	// location of sensitive data in: unstructured sections of an otherwise structured
-	// file, such as a comment in a file; a malformed file that Amazon Macie analyzes
-	// as plain text; and, a CSV or TSV file that has any column names that contain
-	// sensitive data.
+	// An array of objects, one for each occurrence of sensitive data in an email
+	// message or a non-binary text file such as an HTML, TXT, or XML file. Each Range
+	// object specifies a line or inclusive range of lines that contains the sensitive
+	// data, and the position of the data on the specified line or lines. This value is
+	// often null for file types that are supported by Cell, Page, or Record objects.
+	// Exceptions are the location of sensitive data in: unstructured sections of an
+	// otherwise structured file, such as a comment in a file; a malformed file that
+	// Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column
+	// names that contain sensitive data.
 	LineRanges []Range
 
 	// Reserved for future use.
@@ -2066,8 +2092,8 @@ type PolicyDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the location of an occurrence of sensitive data in a non-binary text
-// file, such as an HTML, TXT, or XML file.
+// Specifies the location of an occurrence of sensitive data in an email message or
+// a non-binary text file such as an HTML, TXT, or XML file.
 type Range struct {
 
 	// The number of lines from the beginning of the file to the end of the sensitive
@@ -2120,13 +2146,16 @@ type ReplicationDetails struct {
 	// any destination.
 	Replicated bool
 
-	// Specifies whether the bucket is configured to replicate one or more objects to
-	// an Amazon Web Services account that isn't part of the same Amazon Macie
-	// organization.
+	// Specifies whether the bucket is configured to replicate one or more objects to a
+	// bucket for an Amazon Web Services account that isn't part of your Amazon Macie
+	// organization. An Amazon Macie organization is a set of Macie accounts that are
+	// centrally managed as a group of related accounts through Organizations or by
+	// Macie invitation.
 	ReplicatedExternally bool
 
 	// An array of Amazon Web Services account IDs, one for each Amazon Web Services
-	// account that the bucket is configured to replicate one or more objects to.
+	// account that owns a bucket that the bucket is configured to replicate one or
+	// more objects to.
 	ReplicationAccounts []string
 
 	noSmithyDocumentSerde
@@ -2260,7 +2289,7 @@ type RevealConfiguration struct {
 type S3Bucket struct {
 
 	// Specifies whether the bucket policy for the bucket requires server-side
-	// encryption of objects when objects are uploaded to the bucket. Possible values
+	// encryption of objects when objects are added to the bucket. Possible values
 	// are:
 	//
 	// * FALSE - The bucket policy requires server-side encryption of new
@@ -2285,11 +2314,12 @@ type S3Bucket struct {
 	Arn *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when the bucket was
-	// created.
+	// created. This value can also indicate when changes such as edits to the bucket's
+	// policy were most recently made to the bucket, relative to when the finding was
+	// created or last updated.
 	CreatedAt *time.Time
 
-	// The type of server-side encryption that's used by default to encrypt objects in
-	// the bucket.
+	// The default server-side encryption settings for the bucket.
 	DefaultServerSideEncryption *ServerSideEncryption
 
 	// The name of the bucket.
@@ -2506,7 +2536,7 @@ type S3Object struct {
 	// permissions settings that apply to the object.
 	PublicAccess bool
 
-	// The type of server-side encryption that's used to encrypt the object.
+	// The type of server-side encryption that was used to encrypt the object.
 	ServerSideEncryption *ServerSideEncryption
 
 	// The total storage size, in bytes, of the object.
@@ -2746,8 +2776,8 @@ type SensitivityAggregations struct {
 	// storage size of all versions of all applicable objects in the buckets.
 	ClassifiableSizeInBytes int64
 
-	// The total number of buckets that are publicly accessible based on a combination
-	// of permissions settings for each bucket.
+	// The total number of buckets that are publicly accessible due to a combination of
+	// permissions settings for each bucket.
 	PubliclyAccessibleCount int64
 
 	// The total number of buckets.
@@ -2810,22 +2840,23 @@ type SensitivityInspectionTemplateIncludes struct {
 // sensitive data discovery for the account.
 type SensitivityInspectionTemplatesEntry struct {
 
-	// The unique identifier for the sensitivity inspection template for the account.
+	// The unique identifier for the sensitivity inspection template.
 	Id *string
 
-	// The name of the sensitivity inspection template for the account.
+	// The name of the sensitivity inspection template:
+	// automated-sensitive-data-discovery.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides information about the server-side encryption settings for an S3 bucket
-// or S3 object.
+// Provides information about the default server-side encryption settings for an S3
+// bucket or the encryption settings for an S3 object.
 type ServerSideEncryption struct {
 
 	// The server-side encryption algorithm that's used when storing data in the bucket
-	// or object. If default encryption is disabled for the bucket or the object isn't
-	// encrypted using server-side encryption, this value is NONE.
+	// or object. If default encryption settings aren't configured for the bucket or
+	// the object isn't encrypted using server-side encryption, this value is NONE.
 	EncryptionType EncryptionType
 
 	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key
@@ -2889,8 +2920,8 @@ type SessionIssuer struct {
 	// that was used to get the credentials.
 	AccountId *string
 
-	// The Amazon Resource Name (ARN) of the source account, IAM user, or role that was
-	// used to get the credentials.
+	// The Amazon Resource Name (ARN) of the source account, Identity and Access
+	// Management (IAM) user, or role that was used to get the credentials.
 	Arn *string
 
 	// The unique identifier for the entity that was used to get the credentials.

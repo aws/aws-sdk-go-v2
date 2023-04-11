@@ -47,6 +47,7 @@
         "api_op_RemoveAllResourcePermissions.go",
         "api_op_RemoveResourcePermission.go",
         "api_op_RestoreDocumentVersions.go",
+        "api_op_SearchResources.go",
         "api_op_UpdateDocument.go",
         "api_op_UpdateDocumentVersion.go",
         "api_op_UpdateFolder.go",

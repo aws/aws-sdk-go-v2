@@ -13,7 +13,6 @@ import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
 
-
 /**
  * wraps a smithy request error with an S3 Request error.
  */

@@ -46,7 +46,10 @@ type GetServiceSettingInput struct {
 	// The ID of the service setting to get. The setting ID can be one of the
 	// following.
 	//
-	// * /ssm/automation/customer-script-log-destination
+	// * /ssm/managed-instance/default-ec2-instance-management-role
+	//
+	// *
+	// /ssm/automation/customer-script-log-destination
 	//
 	// *
 	// /ssm/automation/customer-script-log-group-name

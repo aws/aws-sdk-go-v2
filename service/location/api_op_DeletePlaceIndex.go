@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a place index resource from your AWS account. This operation deletes the
-// resource permanently.
+// Deletes a place index resource from your Amazon Web Services account. This
+// operation deletes the resource permanently.
 func (c *Client) DeletePlaceIndex(ctx context.Context, params *DeletePlaceIndexInput, optFns ...func(*Options)) (*DeletePlaceIndexOutput, error) {
 	if params == nil {
 		params = &DeletePlaceIndexInput{}

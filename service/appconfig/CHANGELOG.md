@@ -1,3 +1,36 @@
+# v1.17.5 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.4 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.3 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.17.2 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.1 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.17.0 (2023-02-14)
+
+* **Feature**: AWS AppConfig now offers the option to set a version label on hosted configuration versions. Version labels allow you to identify specific hosted configuration versions based on an alternate versioning scheme that you define.
+
+# v1.16.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.0 (2023-02-02)
+
+* **Feature**: AWS AppConfig introduces KMS customer-managed key (CMK) encryption of configuration data, along with AWS Secrets Manager as a new configuration data source. S3 objects using SSE-KMS encryption and SSM Parameter Store SecureStrings are also now supported.
+
 # v1.15.1 (2023-01-23)
 
 * No change notes available for this release.

@@ -90,6 +90,10 @@ type GetResourceMetricsInput struct {
 	// value specified by MaxRecords.
 	NextToken *string
 
+	// The returned timestamp which is the start or end time of the time periods. The
+	// default value is END_TIME.
+	PeriodAlignment types.PeriodAlignment
+
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:

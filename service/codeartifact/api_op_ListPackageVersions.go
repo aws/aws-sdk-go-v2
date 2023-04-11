@@ -15,6 +15,8 @@ import (
 // Returns a list of PackageVersionSummary
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
 // objects for package versions in a repository that match the request parameters.
+// Package versions of all statuses will be returned by default when calling
+// list-package-versions with no --status parameter.
 func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVersionsInput, optFns ...func(*Options)) (*ListPackageVersionsOutput, error) {
 	if params == nil {
 		params = &ListPackageVersionsInput{}
@@ -38,7 +40,7 @@ type ListPackageVersionsInput struct {
 	// This member is required.
 	Domain *string
 
-	// The format of the returned package versions.
+	// The format of the package versions you want to list.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -71,6 +73,9 @@ type ListPackageVersionsInput struct {
 	//
 	// * Python and NuGet packages do not contain a
 	// corresponding component, packages of those formats do not have a namespace.
+	//
+	// *
+	// The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous

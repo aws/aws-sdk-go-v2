@@ -40,7 +40,7 @@ func (e *InvalidContentLocation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidContentLocation) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidContentLocation"
 	}
 	return *e.ErrorCodeOverride
@@ -67,7 +67,7 @@ func (e *MessageFrozen) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MessageFrozen) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MessageFrozen"
 	}
 	return *e.ErrorCodeOverride
@@ -94,7 +94,7 @@ func (e *MessageRejected) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MessageRejected) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MessageRejected"
 	}
 	return *e.ErrorCodeOverride
@@ -120,7 +120,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride

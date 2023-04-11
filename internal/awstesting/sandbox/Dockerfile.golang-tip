@@ -5,8 +5,10 @@ FROM buildpack-deps:buster-scm
 
 ENV GOLANG_SRC_REPO_URL https://github.com/golang/go
 
-ENV GOLANG_BOOTSTRAP_URL https://storage.googleapis.com/golang/go1.4.3.linux-amd64.tar.gz
-ENV GOLANG_BOOTSTRAP_SHA256 ce3140662f45356eb78bc16a88fc7cfb29fb00e18d7c632608245b789b2086d2
+# as of 1.20 Go 1.17 is required to bootstrap
+# see https://github.com/golang/go/issues/44505
+ENV GOLANG_BOOTSTRAP_URL https://go.dev/dl/go1.17.13.linux-amd64.tar.gz
+ENV GOLANG_BOOTSTRAP_SHA256 4cdd2bc664724dc7db94ad51b503512c5ae7220951cac568120f64f8e94399fc
 ENV GOLANG_BOOTSTRAP_PATH /usr/local/bootstrap
 
 # gcc for cgo

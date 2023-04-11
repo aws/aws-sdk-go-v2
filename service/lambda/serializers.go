@@ -511,6 +511,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		}
 	}
 
+	if v.DocumentDBEventSourceConfig != nil {
+		ok := object.Key("DocumentDBEventSourceConfig")
+		if err := awsRestjson1_serializeDocumentDocumentDBEventSourceConfig(v.DocumentDBEventSourceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
@@ -4650,6 +4657,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		}
 	}
 
+	if v.DocumentDBEventSourceConfig != nil {
+		ok := object.Key("DocumentDBEventSourceConfig")
+		if err := awsRestjson1_serializeDocumentDocumentDBEventSourceConfig(v.DocumentDBEventSourceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
@@ -5411,6 +5425,28 @@ func awsRestjson1_serializeDocumentDestinationConfig(v *types.DestinationConfig,
 		if err := awsRestjson1_serializeDocumentOnSuccess(v.OnSuccess, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocumentDBEventSourceConfig(v *types.DocumentDBEventSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CollectionName != nil {
+		ok := object.Key("CollectionName")
+		ok.String(*v.CollectionName)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if len(v.FullDocument) > 0 {
+		ok := object.Key("FullDocument")
+		ok.String(string(v.FullDocument))
 	}
 
 	return nil

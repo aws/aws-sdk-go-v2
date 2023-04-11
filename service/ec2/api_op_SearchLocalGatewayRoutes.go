@@ -43,22 +43,25 @@ type SearchLocalGatewayRoutesInput struct {
 
 	// One or more filters.
 	//
-	// * route-search.exact-match - The exact match of the
-	// specified filter.
+	// * prefix-list-id - The ID of the prefix list.
 	//
-	// * route-search.longest-prefix-match - The longest prefix that
-	// matches the route.
+	// *
+	// route-search.exact-match - The exact match of the specified filter.
 	//
-	// * route-search.subnet-of-match - The routes with a subnet
-	// that match the specified CIDR filter.
+	// *
+	// route-search.longest-prefix-match - The longest prefix that matches the
+	// route.
 	//
-	// * route-search.supernet-of-match - The
-	// routes with a CIDR that encompass the CIDR filter. For example, if you have
-	// 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify
-	// supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.
+	// * route-search.subnet-of-match - The routes with a subnet that match the
+	// specified CIDR filter.
 	//
-	// * state
-	// - The state of the route.
+	// * route-search.supernet-of-match - The routes with a
+	// CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+	// 10.0.1.0/31 routes in your route table and you specify supernet-of-match as
+	// 10.0.1.0/30, then the result returns 10.0.1.0/29.
+	//
+	// * state - The state of the
+	// route.
 	//
 	// * type - The route type.
 	Filters []types.Filter

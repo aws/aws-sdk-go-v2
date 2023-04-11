@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -190,10 +190,1038 @@
                     "name": "elasticbeanstalk"
                 },
                 "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>AWS Elastic Beanstalk</fullname>\n      \n    \n         <p>AWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable,\n      fault-tolerant applications running on the Amazon Web Services cloud.</p>\n         <p>For more information about this product, go to the <a href=\"http://aws.amazon.com/elasticbeanstalk/\">AWS Elastic Beanstalk</a> details page. The location of the\n      latest AWS Elastic Beanstalk WSDL is <a href=\"https://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl\">https://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>.\n      To install the Software Development Kits (SDKs), Integrated Development Environment (IDE)\n      Toolkits, and command line tools that enable you to access the API, go to <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to\n        <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region\">Regions and Endpoints</a> in the <i>Amazon Web Services\n      Glossary</i>.</p>",
+                "smithy.api#documentation": "<fullname>AWS Elastic Beanstalk</fullname>\n         <p>AWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable,\n      fault-tolerant applications running on the Amazon Web Services cloud.</p>\n         <p>For more information about this product, go to the <a href=\"http://aws.amazon.com/elasticbeanstalk/\">AWS Elastic Beanstalk</a> details page. The location of the\n      latest AWS Elastic Beanstalk WSDL is <a href=\"https://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl\">https://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>.\n      To install the Software Development Kits (SDKs), Integrated Development Environment (IDE)\n      Toolkits, and command line tools that enable you to access the API, go to <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to\n        <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region\">Regions and Endpoints</a> in the <i>Amazon Web Services\n      Glossary</i>.</p>",
                 "smithy.api#title": "AWS Elastic Beanstalk",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://elasticbeanstalk-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "stringEquals",
+                                                                                    "argv": [
+                                                                                        "aws-us-gov",
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "PartitionResult"
+                                                                                                },
+                                                                                                "name"
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "endpoint": {
+                                                                                "url": "https://elasticbeanstalk.{Region}.amazonaws.com",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://elasticbeanstalk-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://elasticbeanstalk.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://elasticbeanstalk.us-gov-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://elasticbeanstalk.us-gov-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elasticbeanstalk.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://elasticbeanstalk.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
                 }
             }
         },
@@ -201,6 +1229,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#AbortEnvironmentUpdateMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -232,70 +1263,81 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#AbortableOperationInProgress": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#ActionHistoryStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Completed",
-                        "name": "Completed"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Unknown",
-                        "name": "Unknown"
+            "type": "enum",
+            "members": {
+                "Completed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
                     }
-                ]
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unknown"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#ActionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Scheduled",
-                        "name": "Scheduled"
-                    },
-                    {
-                        "value": "Pending",
-                        "name": "Pending"
-                    },
-                    {
-                        "value": "Running",
-                        "name": "Running"
-                    },
-                    {
-                        "value": "Unknown",
-                        "name": "Unknown"
+            "type": "enum",
+            "members": {
+                "Scheduled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scheduled"
                     }
-                ]
+                },
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "Running": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Running"
+                    }
+                },
+                "Unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unknown"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#ActionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InstanceRefresh",
-                        "name": "InstanceRefresh"
-                    },
-                    {
-                        "value": "PlatformUpdate",
-                        "name": "PlatformUpdate"
-                    },
-                    {
-                        "value": "Unknown",
-                        "name": "Unknown"
+            "type": "enum",
+            "members": {
+                "InstanceRefresh": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRefresh"
                     }
-                ]
+                },
+                "PlatformUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformUpdate"
+                    }
+                },
+                "Unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unknown"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#ApplicationArn": {
@@ -403,6 +1445,7 @@
                 "RequestCount": {
                     "target": "com.amazonaws.elasticbeanstalk#RequestCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Average number of requests handled by the web server per second over the last 10\n      seconds.</p>"
                     }
                 },
@@ -607,36 +1650,41 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#ApplicationVersionProccess": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#ApplicationVersionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Processed",
-                        "name": "Processed"
-                    },
-                    {
-                        "value": "Unprocessed",
-                        "name": "Unprocessed"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Processing",
-                        "name": "Processing"
-                    },
-                    {
-                        "value": "Building",
-                        "name": "Building"
+            "type": "enum",
+            "members": {
+                "Processed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Processed"
                     }
-                ]
+                },
+                "Unprocessed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unprocessed"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Processing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Processing"
+                    }
+                },
+                "Building": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Building"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#ApplyEnvironmentManagedAction": {
@@ -683,7 +1731,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to execute a scheduled managed action immediately.</p>"
+                "smithy.api#documentation": "<p>Request to execute a scheduled managed action immediately.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ApplyEnvironmentManagedActionResult": {
@@ -723,6 +1772,9 @@
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#AssociateEnvironmentOperationsRoleMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.elasticbeanstalk#InsufficientPrivilegesException"
@@ -755,10 +1807,7 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#AutoCreateApplication": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#AutoScalingGroup": {
             "type": "structure",
@@ -793,22 +1842,19 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#BoxedBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#BoxedInt": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.elasticbeanstalk#BranchName": {
             "type": "string"
         },
         "com.amazonaws.elasticbeanstalk#BranchOrder": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.elasticbeanstalk#BuildConfiguration": {
             "type": "structure",
@@ -829,7 +1875,7 @@
                 "ComputeType": {
                     "target": "com.amazonaws.elasticbeanstalk#ComputeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the compute resources the build project will use.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds</code>\n               </p>\n            </li>\n            <li>\n\t              <p>\n                  <code>BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds</code>\n               </p>\n            </li>\n            <li>\n\t              <p>\n                  <code>BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Information about the compute resources the build project will use.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Image": {
@@ -983,10 +2029,7 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#CnameAvailability": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#CodeBuildNotInServiceRegionException": {
             "type": "structure",
@@ -1055,41 +2098,49 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#ComputeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BUILD_GENERAL1_SMALL",
-                        "name": "BUILD_GENERAL1_SMALL"
-                    },
-                    {
-                        "value": "BUILD_GENERAL1_MEDIUM",
-                        "name": "BUILD_GENERAL1_MEDIUM"
-                    },
-                    {
-                        "value": "BUILD_GENERAL1_LARGE",
-                        "name": "BUILD_GENERAL1_LARGE"
+            "type": "enum",
+            "members": {
+                "BUILD_GENERAL1_SMALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUILD_GENERAL1_SMALL"
                     }
-                ]
+                },
+                "BUILD_GENERAL1_MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUILD_GENERAL1_MEDIUM"
+                    }
+                },
+                "BUILD_GENERAL1_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUILD_GENERAL1_LARGE"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#ConfigurationDeploymentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "deployed",
-                        "name": "deployed"
-                    },
-                    {
-                        "value": "pending",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "failed",
-                        "name": "failed"
+            "type": "enum",
+            "members": {
+                "deployed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deployed"
                     }
-                ]
+                },
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#ConfigurationOptionDefaultValue": {
@@ -1232,18 +2283,20 @@
             "type": "string"
         },
         "com.amazonaws.elasticbeanstalk#ConfigurationOptionValueType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Scalar",
-                        "name": "Scalar"
-                    },
-                    {
-                        "value": "List",
-                        "name": "List"
+            "type": "enum",
+            "members": {
+                "Scalar": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scalar"
                     }
-                ]
+                },
+                "List": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "List"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#ConfigurationOptionsDescription": {
@@ -1581,7 +2634,7 @@
                 "PlatformArn": {
                     "target": "com.amazonaws.elasticbeanstalk#PlatformArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom platform. For more information, see <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html\"> Custom\n        Platforms</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p>\n         <note>\n      \n            <p>If you specify <code>PlatformArn</code>, then don't specify\n          <code>SolutionStackName</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom platform. For more information, see <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html\"> Custom\n        Platforms</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p>\n         <note>\n            <p>If you specify <code>PlatformArn</code>, then don't specify\n          <code>SolutionStackName</code>.</p>\n         </note>"
                     }
                 },
                 "SourceConfiguration": {
@@ -1706,7 +2759,7 @@
                 "PlatformArn": {
                     "target": "com.amazonaws.elasticbeanstalk#PlatformArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom platform to use with the environment. For\n      more information, see <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html\">Custom Platforms</a> in the\n        <i>AWS Elastic Beanstalk Developer Guide</i>.</p>\n         <note>\n      \n            <p>If you specify <code>PlatformArn</code>, don't specify\n        <code>SolutionStackName</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom platform to use with the environment. For\n      more information, see <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html\">Custom Platforms</a> in the\n        <i>AWS Elastic Beanstalk Developer Guide</i>.</p>\n         <note>\n            <p>If you specify <code>PlatformArn</code>, don't specify\n        <code>SolutionStackName</code>.</p>\n         </note>"
                     }
                 },
                 "OptionSettings": {
@@ -1799,7 +2852,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to create a new platform version.</p>"
+                "smithy.api#documentation": "<p>Request to create a new platform version.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CreatePlatformVersionResult": {
@@ -1821,6 +2875,9 @@
         },
         "com.amazonaws.elasticbeanstalk#CreateStorageLocation": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.elasticbeanstalk#CreateStorageLocationResultMessage"
             },
@@ -1905,6 +2962,9 @@
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#DeleteApplicationMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.elasticbeanstalk#OperationInProgressException"
@@ -1939,6 +2999,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#DeleteApplicationVersionMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1991,6 +3054,9 @@
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#DeleteConfigurationTemplateMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.elasticbeanstalk#OperationInProgressException"
@@ -2026,6 +3092,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#DeleteEnvironmentConfigurationMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the draft configuration associated with the running environment.</p>\n         <p>Updating a running environment with any configuration changes creates a draft\n      configuration set. You can get the draft configuration using <a>DescribeConfigurationSettings</a> while the update is in progress or if the update\n      fails. The <code>DeploymentStatus</code> for the draft configuration indicates whether the\n      deployment is in process or has failed. The draft configuration remains in existence until it\n      is deleted with this action.</p>"
@@ -2088,6 +3157,9 @@
                         "smithy.api#documentation": "<p>The ARN of the version of the custom platform.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DeletePlatformVersionResult": {
@@ -2102,10 +3174,7 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteSourceBundle": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#Deployment": {
             "type": "structure",
@@ -2144,6 +3213,9 @@
         },
         "com.amazonaws.elasticbeanstalk#DescribeAccountAttributes": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.elasticbeanstalk#DescribeAccountAttributesResult"
             },
@@ -2385,7 +3457,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>See the example below to learn how to create a request body.</p>"
+                "smithy.api#documentation": "<p>See the example below to learn how to create a request body.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentHealthResult": {
@@ -2496,7 +3569,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to list completed and failed managed actions.</p>"
+                "smithy.api#documentation": "<p>Request to list completed and failed managed actions.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentManagedActionHistoryResult": {
@@ -2559,7 +3633,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to list an environment's upcoming and in-progress managed actions.</p>"
+                "smithy.api#documentation": "<p>Request to list an environment's upcoming and in-progress managed actions.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentManagedActionsResult": {
@@ -2905,7 +3980,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameters for a call to <code>DescribeInstancesHealth</code>.</p>"
+                "smithy.api#documentation": "<p>Parameters for a call to <code>DescribeInstancesHealth</code>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeInstancesHealthResult": {
@@ -2963,6 +4039,9 @@
                         "smithy.api#documentation": "<p>The ARN of the platform version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribePlatformVersionResult": {
@@ -2989,6 +4068,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#DisassociateEnvironmentOperationsRoleMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3116,7 +4198,7 @@
                 "Status": {
                     "target": "com.amazonaws.elasticbeanstalk#EnvironmentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current operational status of the environment:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>Launching</code>: Environment is in the process of initial deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Updating</code>: Environment is in the process of updating its configuration\n          settings or application version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Ready</code>: Environment is available to have an action performed on it, such as\n          update or terminate.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Terminating</code>: Environment is in the shut-down process.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Terminated</code>: Environment is not running.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current operational status of the environment:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Launching</code>: Environment is in the process of initial deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Updating</code>: Environment is in the process of updating its configuration\n          settings or application version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Ready</code>: Environment is available to have an action performed on it, such as\n          update or terminate.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Terminating</code>: Environment is in the shut-down process.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Terminated</code>: Environment is not running.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AbortableOperationInProgress": {
@@ -3199,65 +4281,85 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentHealth": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Green",
-                        "name": "Green"
-                    },
-                    {
-                        "value": "Yellow",
-                        "name": "Yellow"
-                    },
-                    {
-                        "value": "Red",
-                        "name": "Red"
-                    },
-                    {
-                        "value": "Grey",
-                        "name": "Grey"
+            "type": "enum",
+            "members": {
+                "Green": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Green"
                     }
-                ]
+                },
+                "Yellow": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Yellow"
+                    }
+                },
+                "Red": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Red"
+                    }
+                },
+                "Grey": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Grey"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentHealthAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Status",
-                        "name": "Status"
-                    },
-                    {
-                        "value": "Color",
-                        "name": "Color"
-                    },
-                    {
-                        "value": "Causes",
-                        "name": "Causes"
-                    },
-                    {
-                        "value": "ApplicationMetrics",
-                        "name": "ApplicationMetrics"
-                    },
-                    {
-                        "value": "InstancesHealth",
-                        "name": "InstancesHealth"
-                    },
-                    {
-                        "value": "All",
-                        "name": "All"
-                    },
-                    {
-                        "value": "HealthStatus",
-                        "name": "HealthStatus"
-                    },
-                    {
-                        "value": "RefreshedAt",
-                        "name": "RefreshedAt"
+            "type": "enum",
+            "members": {
+                "Status": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
                     }
-                ]
+                },
+                "Color": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Color"
+                    }
+                },
+                "Causes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Causes"
+                    }
+                },
+                "ApplicationMetrics": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ApplicationMetrics"
+                    }
+                },
+                "InstancesHealth": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstancesHealth"
+                    }
+                },
+                "All": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                },
+                "HealthStatus": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HealthStatus"
+                    }
+                },
+                "RefreshedAt": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RefreshedAt"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentHealthAttributes": {
@@ -3267,46 +4369,62 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentHealthStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NoData",
-                        "name": "NoData"
-                    },
-                    {
-                        "value": "Unknown",
-                        "name": "Unknown"
-                    },
-                    {
-                        "value": "Pending",
-                        "name": "Pending"
-                    },
-                    {
-                        "value": "Ok",
-                        "name": "Ok"
-                    },
-                    {
-                        "value": "Info",
-                        "name": "Info"
-                    },
-                    {
-                        "value": "Warning",
-                        "name": "Warning"
-                    },
-                    {
-                        "value": "Degraded",
-                        "name": "Degraded"
-                    },
-                    {
-                        "value": "Severe",
-                        "name": "Severe"
-                    },
-                    {
-                        "value": "Suspended",
-                        "name": "Suspended"
+            "type": "enum",
+            "members": {
+                "NoData": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NoData"
                     }
-                ]
+                },
+                "Unknown": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unknown"
+                    }
+                },
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "Ok": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ok"
+                    }
+                },
+                "Info": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Info"
+                    }
+                },
+                "Warning": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Warning"
+                    }
+                },
+                "Degraded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Degraded"
+                    }
+                },
+                "Severe": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Severe"
+                    }
+                },
+                "Suspended": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Suspended"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentId": {
@@ -3357,18 +4475,20 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentInfoType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "tail",
-                        "name": "tail"
-                    },
-                    {
-                        "value": "bundle",
-                        "name": "bundle"
+            "type": "enum",
+            "members": {
+                "tail": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tail"
                     }
-                ]
+                },
+                "bundle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bundle"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentLink": {
@@ -3497,42 +4617,56 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Aborting",
-                        "name": "Aborting"
-                    },
-                    {
-                        "value": "Launching",
-                        "name": "Launching"
-                    },
-                    {
-                        "value": "Updating",
-                        "name": "Updating"
-                    },
-                    {
-                        "value": "LinkingFrom",
-                        "name": "LinkingFrom"
-                    },
-                    {
-                        "value": "LinkingTo",
-                        "name": "LinkingTo"
-                    },
-                    {
-                        "value": "Ready",
-                        "name": "Ready"
-                    },
-                    {
-                        "value": "Terminating",
-                        "name": "Terminating"
-                    },
-                    {
-                        "value": "Terminated",
-                        "name": "Terminated"
+            "type": "enum",
+            "members": {
+                "Aborting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Aborting"
                     }
-                ]
+                },
+                "Launching": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Launching"
+                    }
+                },
+                "Updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updating"
+                    }
+                },
+                "LinkingFrom": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LinkingFrom"
+                    }
+                },
+                "LinkingTo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LinkingTo"
+                    }
+                },
+                "Ready": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ready"
+                    }
+                },
+                "Terminating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terminating"
+                    }
+                },
+                "Terminated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terminated"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentTier": {
@@ -3656,72 +4790,94 @@
             "type": "string"
         },
         "com.amazonaws.elasticbeanstalk#EventSeverity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TRACE",
-                        "name": "TRACE"
-                    },
-                    {
-                        "value": "DEBUG",
-                        "name": "DEBUG"
-                    },
-                    {
-                        "value": "INFO",
-                        "name": "INFO"
-                    },
-                    {
-                        "value": "WARN",
-                        "name": "WARN"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "FATAL",
-                        "name": "FATAL"
+            "type": "enum",
+            "members": {
+                "TRACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRACE"
                     }
-                ]
+                },
+                "DEBUG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEBUG"
+                    }
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "WARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARN"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "FATAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FATAL"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#ExceptionMessage": {
             "type": "string"
         },
         "com.amazonaws.elasticbeanstalk#FailureType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UpdateCancelled",
-                        "name": "UpdateCancelled"
-                    },
-                    {
-                        "value": "CancellationFailed",
-                        "name": "CancellationFailed"
-                    },
-                    {
-                        "value": "RollbackFailed",
-                        "name": "RollbackFailed"
-                    },
-                    {
-                        "value": "RollbackSuccessful",
-                        "name": "RollbackSuccessful"
-                    },
-                    {
-                        "value": "InternalFailure",
-                        "name": "InternalFailure"
-                    },
-                    {
-                        "value": "InvalidEnvironmentState",
-                        "name": "InvalidEnvironmentState"
-                    },
-                    {
-                        "value": "PermissionsError",
-                        "name": "PermissionsError"
+            "type": "enum",
+            "members": {
+                "UpdateCancelled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateCancelled"
                     }
-                ]
+                },
+                "CancellationFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CancellationFailed"
+                    }
+                },
+                "RollbackFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RollbackFailed"
+                    }
+                },
+                "RollbackSuccessful": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RollbackSuccessful"
+                    }
+                },
+                "InternalFailure": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailure"
+                    }
+                },
+                "InvalidEnvironmentState": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidEnvironmentState"
+                    }
+                },
+                "PermissionsError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PermissionsError"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#FileTypeExtension": {
@@ -3734,10 +4890,7 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#ForceTerminate": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#GroupName": {
             "type": "string",
@@ -3752,10 +4905,7 @@
             "type": "string"
         },
         "com.amazonaws.elasticbeanstalk#IncludeDeleted": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#IncludeDeletedBackTo": {
             "type": "timestamp"
@@ -3852,54 +5002,74 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#InstancesHealthAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HealthStatus",
-                        "name": "HealthStatus"
-                    },
-                    {
-                        "value": "Color",
-                        "name": "Color"
-                    },
-                    {
-                        "value": "Causes",
-                        "name": "Causes"
-                    },
-                    {
-                        "value": "ApplicationMetrics",
-                        "name": "ApplicationMetrics"
-                    },
-                    {
-                        "value": "RefreshedAt",
-                        "name": "RefreshedAt"
-                    },
-                    {
-                        "value": "LaunchedAt",
-                        "name": "LaunchedAt"
-                    },
-                    {
-                        "value": "System",
-                        "name": "System"
-                    },
-                    {
-                        "value": "Deployment",
-                        "name": "Deployment"
-                    },
-                    {
-                        "value": "AvailabilityZone",
-                        "name": "AvailabilityZone"
-                    },
-                    {
-                        "value": "InstanceType",
-                        "name": "InstanceType"
-                    },
-                    {
-                        "value": "All",
-                        "name": "All"
+            "type": "enum",
+            "members": {
+                "HealthStatus": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HealthStatus"
                     }
-                ]
+                },
+                "Color": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Color"
+                    }
+                },
+                "Causes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Causes"
+                    }
+                },
+                "ApplicationMetrics": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ApplicationMetrics"
+                    }
+                },
+                "RefreshedAt": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RefreshedAt"
+                    }
+                },
+                "LaunchedAt": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LaunchedAt"
+                    }
+                },
+                "System": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "System"
+                    }
+                },
+                "Deployment": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deployment"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AvailabilityZone"
+                    }
+                },
+                "InstanceType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceType"
+                    }
+                },
+                "All": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#InstancesHealthAttributes": {
@@ -3929,7 +5099,10 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.elasticbeanstalk#InvalidRequestException": {
             "type": "structure",
@@ -4052,6 +5225,9 @@
         },
         "com.amazonaws.elasticbeanstalk#ListAvailableSolutionStacks": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.elasticbeanstalk#ListAvailableSolutionStacksResultMessage"
             },
@@ -4117,6 +5293,9 @@
                         "smithy.api#documentation": "<p>For a paginated request. Specify a token from a previous response page to retrieve the\n      next response page. All other parameter values must be identical to the ones specified in the\n      initial request.</p>\n         <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ListPlatformBranchesResult": {
@@ -4183,6 +5362,9 @@
                         "smithy.api#documentation": "<p>For a paginated request. Specify a token from a previous response page to retrieve the\n      next response page. All other parameter values must be identical to the ones specified in the\n      initial request.</p>\n         <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ListPlatformVersionsResult": {
@@ -4249,6 +5431,7 @@
                 "Port": {
                     "target": "com.amazonaws.elasticbeanstalk#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port that is used by the Listener.</p>"
                     }
                 }
@@ -4264,7 +5447,10 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#LoadAverageValue": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.elasticbeanstalk#LoadBalancer": {
             "type": "structure",
@@ -4430,7 +5616,6 @@
         "com.amazonaws.elasticbeanstalk#ManagedActionHistoryMaxItems": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4526,7 +5711,6 @@
         "com.amazonaws.elasticbeanstalk#MaxRecords": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -4552,22 +5736,13 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#NullableDouble": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.elasticbeanstalk#NullableInteger": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.elasticbeanstalk#NullableLong": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.elasticbeanstalk#OperatingSystemName": {
             "type": "string"
@@ -4608,22 +5783,13 @@
             "type": "string"
         },
         "com.amazonaws.elasticbeanstalk#OptionRestrictionMaxLength": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.elasticbeanstalk#OptionRestrictionMaxValue": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.elasticbeanstalk#OptionRestrictionMinValue": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.elasticbeanstalk#OptionRestrictionRegex": {
             "type": "structure",
@@ -4686,7 +5852,6 @@
         "com.amazonaws.elasticbeanstalk#PlatformBranchMaxRecords": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4716,6 +5881,7 @@
                 "BranchOrder": {
                     "target": "com.amazonaws.elasticbeanstalk#BranchOrder",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>An ordinal number that designates the order in which platform branches have been added to\n      a platform. This can be helpful, for example, if your code calls the\n        <code>ListPlatformBranches</code> action and then displays a list of platform\n      branches.</p>\n         <p>A larger <code>BranchOrder</code> value designates a newer platform branch within the\n      platform.</p>"
                     }
                 },
@@ -4952,7 +6118,6 @@
         "com.amazonaws.elasticbeanstalk#PlatformMaxRecords": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4991,30 +6156,38 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#PlatformStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Creating",
-                        "name": "Creating"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Ready",
-                        "name": "Ready"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "Deleting"
-                    },
-                    {
-                        "value": "Deleted",
-                        "name": "Deleted"
+            "type": "enum",
+            "members": {
+                "Creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
                     }
-                ]
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Ready": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ready"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "Deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleted"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#PlatformSummary": {
@@ -5157,6 +6330,9 @@
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#RebuildEnvironmentMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.elasticbeanstalk#InsufficientPrivilegesException"
@@ -5196,12 +6372,18 @@
             "type": "string"
         },
         "com.amazonaws.elasticbeanstalk#RequestCount": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.elasticbeanstalk#RequestEnvironmentInfo": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#RequestEnvironmentInfoMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Initiates a request to compile the specified type of information of the deployed\n      environment.</p>\n         <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from\n      the application server log files of every Amazon EC2 instance in your environment. </p>\n         <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application\n      server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET\n      containers do not support bundle logs. </p>\n         <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>RetrieveEnvironmentInfo</a>\n               </p>\n            </li>\n         </ul>"
@@ -5366,6 +6548,9 @@
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#RestartAppServerMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Causes the environment to restart the application container server running on each\n      Amazon EC2 instance.</p>"
             }
@@ -5496,7 +6681,7 @@
                     "code": "S3LocationNotInServiceRegionException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The specified S3 bucket does not belong to the S3 region in which the service is\n      running. The following regions are supported:</p>\n         <ul>\n            <li>\n\t              <p>IAD/us-east-1</p>\n\t           </li>\n            <li>\n\t              <p>PDX/us-west-2</p>\n\t           </li>\n            <li>\n\t              <p>DUB/eu-west-1</p>\n\t           </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The specified S3 bucket does not belong to the S3 region in which the service is\n      running. The following regions are supported:</p>\n         <ul>\n            <li>\n               <p>IAD/us-east-1</p>\n            </li>\n            <li>\n               <p>PDX/us-west-2</p>\n            </li>\n            <li>\n               <p>DUB/eu-west-1</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5674,21 +6859,21 @@
                 "SourceType": {
                     "target": "com.amazonaws.elasticbeanstalk#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of repository.</p>\n         <ul>\n            <li>\n\t              <p>\n                  <code>Git</code>\n               </p>\n            </li>\n            <li>\n\t              <p>\n                  <code>Zip</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of repository.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Git</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Zip</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourceRepository": {
                     "target": "com.amazonaws.elasticbeanstalk#SourceRepository",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location where the repository is stored.</p>\n         <ul>\n            <li>\n\t              <p>\n                  <code>CodeCommit</code>\n               </p>\n            </li>\n            <li>\n\t              <p>\n                  <code>S3</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Location where the repository is stored.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CodeCommit</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourceLocation": {
                     "target": "com.amazonaws.elasticbeanstalk#SourceLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the source code, as a formatted string, depending on the value of <code>SourceRepository</code>\n         </p>\n        <ul>\n            <li>\n\t              <p>For <code>CodeCommit</code>,\n\tthe format is the repository name and commit ID, separated by a forward slash.\n\tFor example,\n\t<code>my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p>\n            </li>\n            <li>\n\t              <p>For <code>S3</code>,\n\tthe format is the S3 bucket name and object key, separated by a forward slash.\n\tFor example,\n\t<code>my-s3-bucket/Folders/my-source-file</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The location of the source code, as a formatted string, depending on the value of <code>SourceRepository</code>\n         </p>\n         <ul>\n            <li>\n               <p>For <code>CodeCommit</code>,\n\tthe format is the repository name and commit ID, separated by a forward slash.\n\tFor example,\n\t<code>my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p>\n            </li>\n            <li>\n               <p>For <code>S3</code>,\n\tthe format is the S3 bucket name and object key, separated by a forward slash.\n\tFor example,\n\t<code>my-s3-bucket/Folders/my-source-file</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5748,33 +6933,37 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#SourceRepository": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CodeCommit",
-                        "name": "CodeCommit"
-                    },
-                    {
-                        "value": "S3",
-                        "name": "S3"
+            "type": "enum",
+            "members": {
+                "CodeCommit": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CodeCommit"
                     }
-                ]
+                },
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#SourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Git",
-                        "name": "Git"
-                    },
-                    {
-                        "value": "Zip",
-                        "name": "Zip"
+            "type": "enum",
+            "members": {
+                "Git": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Git"
                     }
-                ]
+                },
+                "Zip": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Zip"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#StatusCodes": {
@@ -5834,6 +7023,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#SwapEnvironmentCNAMEsMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Swaps the CNAMEs of two environments.</p>"
@@ -5948,10 +7140,7 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#TerminateEnvForce": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#TerminateEnvironment": {
             "type": "operation",
@@ -6003,10 +7192,7 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#TerminateEnvironmentResources": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#TimeFilterEnd": {
             "type": "timestamp"
@@ -6452,6 +7638,9 @@
             "input": {
                 "target": "com.amazonaws.elasticbeanstalk#UpdateTagsForResourceMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.elasticbeanstalk#InsufficientPrivilegesException"
@@ -6498,10 +7687,7 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#UserDefinedOption": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticbeanstalk#ValidateConfigurationSettings": {
             "type": "operation",
@@ -6599,18 +7785,20 @@
             }
         },
         "com.amazonaws.elasticbeanstalk#ValidationSeverity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "error",
-                        "name": "error"
-                    },
-                    {
-                        "value": "warning",
-                        "name": "warning"
+            "type": "enum",
+            "members": {
+                "error": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "error"
                     }
-                ]
+                },
+                "warning": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "warning"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticbeanstalk#VersionLabel": {

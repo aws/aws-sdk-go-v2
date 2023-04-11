@@ -374,6 +374,13 @@ func awsRestjson1_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 		}
 	}
 
+	if v.EventBridgeConfig != nil {
+		ok := object.Key("eventBridgeConfig")
+		if err := awsRestjson1_serializeDocumentEventBridgeDataSourceConfig(v.EventBridgeConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HttpConfig != nil {
 		ok := object.Key("httpConfig")
 		if err := awsRestjson1_serializeDocumentHttpDataSourceConfig(v.HttpConfig, ok); err != nil {
@@ -3516,6 +3523,13 @@ func awsRestjson1_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceIn
 		}
 	}
 
+	if v.EventBridgeConfig != nil {
+		ok := object.Key("eventBridgeConfig")
+		if err := awsRestjson1_serializeDocumentEventBridgeDataSourceConfig(v.EventBridgeConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HttpConfig != nil {
 		ok := object.Key("httpConfig")
 		if err := awsRestjson1_serializeDocumentHttpDataSourceConfig(v.HttpConfig, ok); err != nil {
@@ -4369,6 +4383,18 @@ func awsRestjson1_serializeDocumentElasticsearchDataSourceConfig(v *types.Elasti
 	if v.Endpoint != nil {
 		ok := object.Key("endpoint")
 		ok.String(*v.Endpoint)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventBridgeDataSourceConfig(v *types.EventBridgeDataSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventBusArn != nil {
+		ok := object.Key("eventBusArn")
+		ok.String(*v.EventBusArn)
 	}
 
 	return nil

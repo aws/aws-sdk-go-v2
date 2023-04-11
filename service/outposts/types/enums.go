@@ -140,6 +140,7 @@ const (
 	LineItemStatusInstalled  LineItemStatus = "INSTALLED"
 	LineItemStatusError      LineItemStatus = "ERROR"
 	LineItemStatusCancelled  LineItemStatus = "CANCELLED"
+	LineItemStatusReplaced   LineItemStatus = "REPLACED"
 )
 
 // Values returns all known values for LineItemStatus. Note that this can be
@@ -155,6 +156,7 @@ func (LineItemStatus) Values() []LineItemStatus {
 		"INSTALLED",
 		"ERROR",
 		"CANCELLED",
+		"REPLACED",
 	}
 }
 

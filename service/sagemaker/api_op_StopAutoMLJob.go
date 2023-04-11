@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A method for forcing the termination of a running job.
+// A method for forcing a running job to shut down.
 func (c *Client) StopAutoMLJob(ctx context.Context, params *StopAutoMLJobInput, optFns ...func(*Options)) (*StopAutoMLJobOutput, error) {
 	if params == nil {
 		params = &StopAutoMLJobInput{}

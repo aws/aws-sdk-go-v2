@@ -130,6 +130,26 @@ func (m *validateOpDeleteDomainPermissionsPolicy) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePackage struct {
+}
+
+func (*validateOpDeletePackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePackageVersions struct {
 }
 
@@ -550,6 +570,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPublishPackageVersion struct {
+}
+
+func (*validateOpPublishPackageVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishPackageVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishPackageVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishPackageVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDomainPermissionsPolicy struct {
 }
 
@@ -714,6 +754,10 @@ func addOpDeleteDomainPermissionsPolicyValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDeleteDomainPermissionsPolicy{}, middleware.After)
 }
 
+func addOpDeletePackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePackage{}, middleware.After)
+}
+
 func addOpDeletePackageVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePackageVersions{}, middleware.After)
 }
@@ -796,6 +840,10 @@ func addOpListRepositoriesInDomainValidationMiddleware(stack *middleware.Stack) 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPublishPackageVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishPackageVersion{}, middleware.After)
 }
 
 func addOpPutDomainPermissionsPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1029,6 +1077,30 @@ func validateOpDeleteDomainPermissionsPolicyInput(v *DeleteDomainPermissionsPoli
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainPermissionsPolicyInput"}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePackageInput(v *DeletePackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePackageInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1476,6 +1548,42 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPublishPackageVersionInput(v *PublishPackageVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishPackageVersionInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	}
+	if v.PackageVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
+	}
+	if v.AssetContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetContent"))
+	}
+	if v.AssetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetName"))
+	}
+	if v.AssetSHA256 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetSHA256"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

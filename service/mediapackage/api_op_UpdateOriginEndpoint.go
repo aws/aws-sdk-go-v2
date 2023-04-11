@@ -92,6 +92,9 @@ type UpdateOriginEndpointOutput struct {
 	// A Common Media Application Format (CMAF) packaging configuration.
 	CmafPackage *types.CmafPackage
 
+	// The date and time the OriginEndpoint was created.
+	CreatedAt *string
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *types.DashPackage
 

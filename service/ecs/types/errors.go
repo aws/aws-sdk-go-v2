@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *AttributeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttributeLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AttributeLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *BlockedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BlockedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BlockedException"
 	}
 	return *e.ErrorCodeOverride
@@ -110,7 +110,7 @@ func (e *ClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientException"
 	}
 	return *e.ErrorCodeOverride
@@ -138,7 +138,7 @@ func (e *ClusterContainsContainerInstancesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterContainsContainerInstancesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterContainsContainerInstancesException"
 	}
 	return *e.ErrorCodeOverride
@@ -168,7 +168,7 @@ func (e *ClusterContainsServicesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterContainsServicesException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterContainsServicesException"
 	}
 	return *e.ErrorCodeOverride
@@ -194,7 +194,7 @@ func (e *ClusterContainsTasksException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterContainsTasksException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterContainsTasksException"
 	}
 	return *e.ErrorCodeOverride
@@ -221,7 +221,7 @@ func (e *ClusterNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClusterNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -248,7 +248,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -274,7 +274,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -303,7 +303,7 @@ func (e *MissingVersionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingVersionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MissingVersionException"
 	}
 	return *e.ErrorCodeOverride
@@ -329,7 +329,7 @@ func (e *NamespaceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NamespaceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NamespaceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -357,7 +357,7 @@ func (e *NoUpdateAvailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoUpdateAvailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NoUpdateAvailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -384,7 +384,7 @@ func (e *PlatformTaskDefinitionIncompatibilityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformTaskDefinitionIncompatibilityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PlatformTaskDefinitionIncompatibilityException"
 	}
 	return *e.ErrorCodeOverride
@@ -412,7 +412,7 @@ func (e *PlatformUnknownException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformUnknownException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PlatformUnknownException"
 	}
 	return *e.ErrorCodeOverride
@@ -438,7 +438,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -464,7 +464,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -490,7 +490,7 @@ func (e *ServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServerException"
 	}
 	return *e.ErrorCodeOverride
@@ -518,7 +518,7 @@ func (e *ServiceNotActiveException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceNotActiveException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceNotActiveException"
 	}
 	return *e.ErrorCodeOverride
@@ -545,7 +545,7 @@ func (e *ServiceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -586,7 +586,7 @@ func (e *TargetNotConnectedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetNotConnectedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TargetNotConnectedException"
 	}
 	return *e.ErrorCodeOverride
@@ -614,7 +614,7 @@ func (e *TargetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TargetNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -641,7 +641,7 @@ func (e *TaskSetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TaskSetNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TaskSetNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -667,7 +667,7 @@ func (e *UnsupportedFeatureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedFeatureException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedFeatureException"
 	}
 	return *e.ErrorCodeOverride
@@ -697,7 +697,7 @@ func (e *UpdateInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UpdateInProgressException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UpdateInProgressException"
 	}
 	return *e.ErrorCodeOverride

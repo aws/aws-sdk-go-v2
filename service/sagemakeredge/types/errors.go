@@ -27,7 +27,7 @@ func (e *InternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceException"
 	}
 	return *e.ErrorCodeOverride

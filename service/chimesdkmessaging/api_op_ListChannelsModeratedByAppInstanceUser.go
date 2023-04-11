@@ -13,8 +13,8 @@ import (
 )
 
 // A list of the channels moderated by an AppInstanceUser. The x-amz-chime-bearer
-// request header is mandatory. Use the AppInstanceUserArn of the user that makes
-// the API call as the value in the header.
+// request header is mandatory. Use the ARN of the AppInstanceUser or
+// AppInstanceBot that makes the API call as the value in the header.
 func (c *Client) ListChannelsModeratedByAppInstanceUser(ctx context.Context, params *ListChannelsModeratedByAppInstanceUserInput, optFns ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &ListChannelsModeratedByAppInstanceUserInput{}
@@ -32,12 +32,12 @@ func (c *Client) ListChannelsModeratedByAppInstanceUser(ctx context.Context, par
 
 type ListChannelsModeratedByAppInstanceUserInput struct {
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
 
-	// The ARN of the user in the moderated channel.
+	// The ARN of the user or bot in the moderated channel.
 	AppInstanceUserArn *string
 
 	// The maximum number of channels in the request.

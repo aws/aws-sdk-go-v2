@@ -234,7 +234,7 @@ type CreateGovCloudAccountInput struct {
 	// value. You can set the value to an empty string, but you can't set it to null.
 	// For more information about tagging, see Tagging Organizations resources
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
-	// in the Organizations User Guide. If any one of the tags is invalid or if you
+	// in the Organizations User Guide. If any one of the tags is not valid or if you
 	// exceed the maximum allowed number of tags for an account, then the entire
 	// request fails and the account is not created.
 	Tags []types.Tag

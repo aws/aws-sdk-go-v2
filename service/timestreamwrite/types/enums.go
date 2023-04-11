@@ -2,6 +2,48 @@
 
 package types
 
+type BatchLoadDataFormat string
+
+// Enum values for BatchLoadDataFormat
+const (
+	BatchLoadDataFormatCsv BatchLoadDataFormat = "CSV"
+)
+
+// Values returns all known values for BatchLoadDataFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BatchLoadDataFormat) Values() []BatchLoadDataFormat {
+	return []BatchLoadDataFormat{
+		"CSV",
+	}
+}
+
+type BatchLoadStatus string
+
+// Enum values for BatchLoadStatus
+const (
+	BatchLoadStatusCreated         BatchLoadStatus = "CREATED"
+	BatchLoadStatusInProgress      BatchLoadStatus = "IN_PROGRESS"
+	BatchLoadStatusFailed          BatchLoadStatus = "FAILED"
+	BatchLoadStatusSucceeded       BatchLoadStatus = "SUCCEEDED"
+	BatchLoadStatusProgressStopped BatchLoadStatus = "PROGRESS_STOPPED"
+	BatchLoadStatusPendingResume   BatchLoadStatus = "PENDING_RESUME"
+)
+
+// Values returns all known values for BatchLoadStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BatchLoadStatus) Values() []BatchLoadStatus {
+	return []BatchLoadStatus{
+		"CREATED",
+		"IN_PROGRESS",
+		"FAILED",
+		"SUCCEEDED",
+		"PROGRESS_STOPPED",
+		"PENDING_RESUME",
+	}
+}
+
 type DimensionValueType string
 
 // Enum values for DimensionValueType
@@ -62,12 +104,37 @@ func (S3EncryptionOption) Values() []S3EncryptionOption {
 	}
 }
 
+type ScalarMeasureValueType string
+
+// Enum values for ScalarMeasureValueType
+const (
+	ScalarMeasureValueTypeDouble    ScalarMeasureValueType = "DOUBLE"
+	ScalarMeasureValueTypeBigint    ScalarMeasureValueType = "BIGINT"
+	ScalarMeasureValueTypeBoolean   ScalarMeasureValueType = "BOOLEAN"
+	ScalarMeasureValueTypeVarchar   ScalarMeasureValueType = "VARCHAR"
+	ScalarMeasureValueTypeTimestamp ScalarMeasureValueType = "TIMESTAMP"
+)
+
+// Values returns all known values for ScalarMeasureValueType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalarMeasureValueType) Values() []ScalarMeasureValueType {
+	return []ScalarMeasureValueType{
+		"DOUBLE",
+		"BIGINT",
+		"BOOLEAN",
+		"VARCHAR",
+		"TIMESTAMP",
+	}
+}
+
 type TableStatus string
 
 // Enum values for TableStatus
 const (
-	TableStatusActive   TableStatus = "ACTIVE"
-	TableStatusDeleting TableStatus = "DELETING"
+	TableStatusActive    TableStatus = "ACTIVE"
+	TableStatusDeleting  TableStatus = "DELETING"
+	TableStatusRestoring TableStatus = "RESTORING"
 )
 
 // Values returns all known values for TableStatus. Note that this can be expanded
@@ -77,6 +144,7 @@ func (TableStatus) Values() []TableStatus {
 	return []TableStatus{
 		"ACTIVE",
 		"DELETING",
+		"RESTORING",
 	}
 }
 

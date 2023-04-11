@@ -150,6 +150,26 @@ func (m *validateOpDescribeScheduledActions) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutScalingPolicy struct {
 }
 
@@ -210,6 +230,46 @@ func (m *validateOpRegisterScalableTarget) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpDeleteScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteScalingPolicy{}, middleware.After)
 }
@@ -238,6 +298,10 @@ func addOpDescribeScheduledActionsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDescribeScheduledActions{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpPutScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutScalingPolicy{}, middleware.After)
 }
@@ -250,24 +314,28 @@ func addOpRegisterScalableTargetValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpRegisterScalableTarget{}, middleware.After)
 }
 
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
 func validateCustomizedMetricSpecification(v *types.CustomizedMetricSpecification) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomizedMetricSpecification"}
-	if v.MetricName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
 	if v.Dimensions != nil {
 		if err := validateMetricDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Statistic) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	if v.Metrics != nil {
+		if err := validateTargetTrackingMetricDataQueries(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -367,6 +435,117 @@ func validateStepScalingPolicyConfiguration(v *types.StepScalingPolicyConfigurat
 		if err := validateStepAdjustments(v.StepAdjustments); err != nil {
 			invalidParams.AddNested("StepAdjustments", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetric(v *types.TargetTrackingMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetric"}
+	if v.Dimensions != nil {
+		if err := validateTargetTrackingMetricDimensions(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDataQueries(v []types.TargetTrackingMetricDataQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDataQueries"}
+	for i := range v {
+		if err := validateTargetTrackingMetricDataQuery(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDataQuery(v *types.TargetTrackingMetricDataQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDataQuery"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.MetricStat != nil {
+		if err := validateTargetTrackingMetricStat(v.MetricStat); err != nil {
+			invalidParams.AddNested("MetricStat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDimension(v *types.TargetTrackingMetricDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDimension"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDimensions(v []types.TargetTrackingMetricDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDimensions"}
+	for i := range v {
+		if err := validateTargetTrackingMetricDimension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricStat(v *types.TargetTrackingMetricStat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricStat"}
+	if v.Metric == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
+	} else if v.Metric != nil {
+		if err := validateTargetTrackingMetric(v.Metric); err != nil {
+			invalidParams.AddNested("Metric", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Stat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -529,6 +708,21 @@ func validateOpDescribeScheduledActionsInput(v *DescribeScheduledActionsInput) e
 	}
 }
 
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutScalingPolicyInput(v *PutScalingPolicyInput) error {
 	if v == nil {
 		return nil
@@ -600,6 +794,42 @@ func validateOpRegisterScalableTargetInput(v *RegisterScalableTargetInput) error
 	}
 	if len(v.ScalableDimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

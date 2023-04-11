@@ -72,7 +72,7 @@ type GetReadSetActivationJobOutput struct {
 	// When the job completed.
 	CompletionTime *time.Time
 
-	// The job's sources.
+	// The job's source files.
 	Sources []types.ActivateReadSetSourceItem
 
 	// The job's status message.

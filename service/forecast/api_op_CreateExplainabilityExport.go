@@ -14,10 +14,10 @@ import (
 // Exports an Explainability resource created by the CreateExplainability
 // operation. Exported files are exported to an Amazon Simple Storage Service
 // (Amazon S3) bucket. You must specify a DataDestination object that includes an
-// Amazon S3 bucket and an AWS Identity and Access Management (IAM) role that
-// Amazon Forecast can assume to access the Amazon S3 bucket. For more information,
-// see aws-forecast-iam-roles. The Status of the export job must be ACTIVE before
-// you can access the export in your Amazon S3 bucket. To get the status, use the
+// Amazon S3 bucket and an Identity and Access Management (IAM) role that Amazon
+// Forecast can assume to access the Amazon S3 bucket. For more information, see
+// aws-forecast-iam-roles. The Status of the export job must be ACTIVE before you
+// can access the export in your Amazon S3 bucket. To get the status, use the
 // DescribeExplainabilityExport operation.
 func (c *Client) CreateExplainabilityExport(ctx context.Context, params *CreateExplainabilityExportInput, optFns ...func(*Options)) (*CreateExplainabilityExportOutput, error) {
 	if params == nil {
@@ -36,9 +36,9 @@ func (c *Client) CreateExplainabilityExport(ctx context.Context, params *CreateE
 
 type CreateExplainabilityExportInput struct {
 
-	// The destination for an export job. Provide an S3 path, an AWS Identity and
-	// Access Management (IAM) role that allows Amazon Forecast to access the location,
-	// and an AWS Key Management Service (KMS) key (optional).
+	// The destination for an export job. Provide an S3 path, an Identity and Access
+	// Management (IAM) role that allows Amazon Forecast to access the location, and an
+	// Key Management Service (KMS) key (optional).
 	//
 	// This member is required.
 	Destination *types.DataDestination

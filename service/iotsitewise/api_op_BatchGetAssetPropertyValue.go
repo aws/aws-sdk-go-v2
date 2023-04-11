@@ -34,7 +34,7 @@ func (c *Client) BatchGetAssetPropertyValue(ctx context.Context, params *BatchGe
 type BatchGetAssetPropertyValueInput struct {
 
 	// The list of asset property value entries for the batch get request. You can
-	// specify up to 16 entries per request.
+	// specify up to 128 entries per request.
 	//
 	// This member is required.
 	Entries []types.BatchGetAssetPropertyValueEntry

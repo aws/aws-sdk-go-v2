@@ -1,3 +1,32 @@
+# v1.17.0 (2023-03-27)
+
+* **Feature**: In this release, we started supporting ARN in applicationSpecifier and attributeGroupSpecifier. GetAttributeGroup, ListAttributeGroups and ListAttributeGroupsForApplication APIs will now have CreatedBy field in the response.
+
+# v1.16.7 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.6 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.5 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.16.4 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.3 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.16.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.1 (2023-01-18)
 
 * No change notes available for this release.

@@ -22,19 +22,20 @@ import (
 // want to apply categories to your Call Analytics job, you must create them before
 // submitting your job request. Categories cannot be retroactively applied to a
 // job. To create a new category, use the operation. To learn more about Call
-// Analytics categories, see Creating categories for batch transcriptions
+// Analytics categories, see Creating categories for post-call transcriptions
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html) and
-// Creating categories for streaming transcriptions
+// Creating categories for real-time transcriptions
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html).
 // To make a StartCallAnalyticsJob request, you must first upload your media file
 // into an Amazon S3 bucket; you can then specify the Amazon S3 location of the
-// file using the Media parameter. You must include the following parameters in
-// your StartCallAnalyticsJob request:
+// file using the Media parameter. Note that job queuing is enabled by default for
+// Call Analytics jobs. You must include the following parameters in your
+// StartCallAnalyticsJob request:
 //
-// * region: The Amazon Web Services Region
-// where you are making your request. For a list of Amazon Web Services Regions
-// supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and
-// quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html).
+// * region: The Amazon Web Services Region where
+// you are making your request. For a list of Amazon Web Services Regions supported
+// with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas
+// (https://docs.aws.amazon.com/general/latest/gr/transcribe.html).
 //
 // *
 // CallAnalyticsJobName: A custom name that you create for your transcription job
@@ -132,7 +133,7 @@ type StartCallAnalyticsJobInput struct {
 	// If you don't specify an
 	// encryption key, your output is encrypted with the default Amazon S3 key
 	// (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify
-	// an output location using the OutputLocation parameter. Note that the user making
+	// an output location using the OutputLocation parameter. Note that the role making
 	// the request must have permission to use the specified KMS key.
 	OutputEncryptionKMSKeyId *string
 

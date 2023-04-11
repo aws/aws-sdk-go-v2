@@ -1530,6 +1530,26 @@ func (m *validateOpGetMetricData) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMetricDataV2 struct {
+}
+
+func (*validateOpGetMetricDataV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMetricDataV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMetricDataV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMetricDataV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTaskTemplate struct {
 }
 
@@ -3614,6 +3634,10 @@ func addOpGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMetricData{}, middleware.After)
 }
 
+func addOpGetMetricDataV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMetricDataV2{}, middleware.After)
+}
+
 func addOpGetTaskTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTaskTemplate{}, middleware.After)
 }
@@ -4308,6 +4332,24 @@ func validateKinesisVideoStreamConfig(v *types.KinesisVideoStreamConfig) error {
 	}
 }
 
+func validateLexBot(v *types.LexBot) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LexBot"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.LexRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LexRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMediaConcurrencies(v []types.MediaConcurrency) error {
 	if v == nil {
 		return nil
@@ -4812,6 +4854,11 @@ func validateOpAssociateBotInput(v *AssociateBotInput) error {
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
+	if v.LexBot != nil {
+		if err := validateLexBot(v.LexBot); err != nil {
+			invalidParams.AddNested("LexBot", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4890,6 +4937,10 @@ func validateOpAssociateLexBotInput(v *AssociateLexBotInput) error {
 	}
 	if v.LexBot == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LexBot"))
+	} else if v.LexBot != nil {
+		if err := validateLexBot(v.LexBot); err != nil {
+			invalidParams.AddNested("LexBot", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6020,6 +6071,11 @@ func validateOpDisassociateBotInput(v *DisassociateBotInput) error {
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
+	if v.LexBot != nil {
+		if err := validateLexBot(v.LexBot); err != nil {
+			invalidParams.AddNested("LexBot", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6281,6 +6337,33 @@ func validateOpGetMetricDataInput(v *GetMetricDataInput) error {
 	}
 	if v.HistoricalMetrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HistoricalMetrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMetricDataV2Input(v *GetMetricDataV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMetricDataV2Input"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

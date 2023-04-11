@@ -44,7 +44,7 @@ type ListConformancePackComplianceScoresInput struct {
 	Limit int32
 
 	// The nextToken string in a prior request that you can use to get the paginated
-	// response for next set of conformance pack compliance scores.
+	// response for the next set of conformance pack compliance scores.
 	NextToken *string
 
 	// Sorts your conformance pack compliance scores in either ascending or descending

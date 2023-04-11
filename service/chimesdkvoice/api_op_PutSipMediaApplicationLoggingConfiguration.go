@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the logging configuration for the specified SIP media application.
 func (c *Client) PutSipMediaApplicationLoggingConfiguration(ctx context.Context, params *PutSipMediaApplicationLoggingConfigurationInput, optFns ...func(*Options)) (*PutSipMediaApplicationLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutSipMediaApplicationLoggingConfigurationInput{}
@@ -28,15 +29,20 @@ func (c *Client) PutSipMediaApplicationLoggingConfiguration(ctx context.Context,
 
 type PutSipMediaApplicationLoggingConfigurationInput struct {
 
+	// The SIP media application ID.
+	//
 	// This member is required.
 	SipMediaApplicationId *string
 
+	// The logging configuration for the specified SIP media application.
 	SipMediaApplicationLoggingConfiguration *types.SipMediaApplicationLoggingConfiguration
 
 	noSmithyDocumentSerde
 }
 
 type PutSipMediaApplicationLoggingConfigurationOutput struct {
+
+	// The updated logging configuration for the specified SIP media application.
 	SipMediaApplicationLoggingConfiguration *types.SipMediaApplicationLoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

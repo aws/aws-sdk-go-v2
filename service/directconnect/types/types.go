@@ -278,6 +278,10 @@ type DirectConnectGatewayAssociation struct {
 	// gateway or transit gateway is disassociated from the Direct Connect gateway.
 	// Traffic flow between the Direct Connect gateway and virtual private gateway or
 	// transit gateway is stopped.
+	//
+	// * updating: The CIDR blocks for the virtual private
+	// gateway or transit gateway are currently being updated. This could be new CIDR
+	// blocks added or current CIDR blocks removed.
 	AssociationState DirectConnectGatewayAssociationState
 
 	// The ID of the Direct Connect gateway.

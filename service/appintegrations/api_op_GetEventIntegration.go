@@ -54,7 +54,8 @@ type GetEventIntegrationOutput struct {
 	// The name of the event integration.
 	Name *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

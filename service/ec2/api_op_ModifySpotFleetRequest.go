@@ -60,9 +60,9 @@ type ModifySpotFleetRequestInput struct {
 	// Reserved.
 	Context *string
 
-	// Indicates whether running Spot Instances should be terminated if the target
-	// capacity of the Spot Fleet request is decreased below the current size of the
-	// Spot Fleet.
+	// Indicates whether running instances should be terminated if the target capacity
+	// of the Spot Fleet request is decreased below the current size of the Spot Fleet.
+	// Supported only for fleets of type maintain.
 	ExcessCapacityTerminationPolicy types.ExcessCapacityTerminationPolicy
 
 	// The launch template and overrides. You can only use this parameter if you

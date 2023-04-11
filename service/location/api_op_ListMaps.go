@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists map resources in your AWS account.
+// Lists map resources in your Amazon Web Services account.
 func (c *Client) ListMaps(ctx context.Context, params *ListMapsInput, optFns ...func(*Options)) (*ListMapsOutput, error) {
 	if params == nil {
 		params = &ListMapsInput{}
@@ -43,7 +43,7 @@ type ListMapsInput struct {
 
 type ListMapsOutput struct {
 
-	// Contains a list of maps in your AWS account
+	// Contains a list of maps in your Amazon Web Services account
 	//
 	// This member is required.
 	Entries []types.ListMapsResponseEntry

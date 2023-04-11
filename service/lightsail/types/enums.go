@@ -64,7 +64,8 @@ type AddOnType string
 
 // Enum values for AddOnType
 const (
-	AddOnTypeAutoSnapshot AddOnType = "AutoSnapshot"
+	AddOnTypeAutoSnapshot       AddOnType = "AutoSnapshot"
+	AddOnTypeStopInstanceOnIdle AddOnType = "StopInstanceOnIdle"
 )
 
 // Values returns all known values for AddOnType. Note that this can be expanded in
@@ -73,6 +74,7 @@ const (
 func (AddOnType) Values() []AddOnType {
 	return []AddOnType{
 		"AutoSnapshot",
+		"StopInstanceOnIdle",
 	}
 }
 
@@ -93,6 +95,44 @@ func (AlarmState) Values() []AlarmState {
 		"OK",
 		"ALARM",
 		"INSUFFICIENT_DATA",
+	}
+}
+
+type AppCategory string
+
+// Enum values for AppCategory
+const (
+	AppCategoryLfR AppCategory = "LfR"
+)
+
+// Values returns all known values for AppCategory. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AppCategory) Values() []AppCategory {
+	return []AppCategory{
+		"LfR",
+	}
+}
+
+type AutoMountStatus string
+
+// Enum values for AutoMountStatus
+const (
+	AutoMountStatusFailed     AutoMountStatus = "Failed"
+	AutoMountStatusPending    AutoMountStatus = "Pending"
+	AutoMountStatusMounted    AutoMountStatus = "Mounted"
+	AutoMountStatusNotMounted AutoMountStatus = "NotMounted"
+)
+
+// Values returns all known values for AutoMountStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMountStatus) Values() []AutoMountStatus {
+	return []AutoMountStatus{
+		"Failed",
+		"Pending",
+		"Mounted",
+		"NotMounted",
 	}
 }
 
@@ -484,6 +524,22 @@ func (ContainerServiceStateDetailCode) Values() []ContainerServiceStateDetailCod
 		"ACTIVATING_DEPLOYMENT",
 		"CERTIFICATE_LIMIT_EXCEEDED",
 		"UNKNOWN_ERROR",
+	}
+}
+
+type Currency string
+
+// Enum values for Currency
+const (
+	CurrencyUsd Currency = "USD"
+)
+
+// Values returns all known values for Currency. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Currency) Values() []Currency {
+	return []Currency{
+		"USD",
 	}
 }
 
@@ -1470,6 +1526,8 @@ const (
 	OperationTypeUpdateBucket                         OperationType = "UpdateBucket"
 	OperationTypeSetResourceAccessForBucket           OperationType = "SetResourceAccessForBucket"
 	OperationTypeUpdateInstanceMetadataOptions        OperationType = "UpdateInstanceMetadataOptions"
+	OperationTypeStartGUISession                      OperationType = "StartGUISession"
+	OperationTypeStopGUISession                       OperationType = "StopGUISession"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -1557,6 +1615,8 @@ func (OperationType) Values() []OperationType {
 		"UpdateBucket",
 		"SetResourceAccessForBucket",
 		"UpdateInstanceMetadataOptions",
+		"StartGUISession",
+		"StopGUISession",
 	}
 }
 
@@ -1633,6 +1693,30 @@ func (PortState) Values() []PortState {
 	return []PortState{
 		"open",
 		"closed",
+	}
+}
+
+type PricingUnit string
+
+// Enum values for PricingUnit
+const (
+	PricingUnitGb      PricingUnit = "GB"
+	PricingUnitHrs     PricingUnit = "Hrs"
+	PricingUnitGBMo    PricingUnit = "GB-Mo"
+	PricingUnitBundles PricingUnit = "Bundles"
+	PricingUnitQueries PricingUnit = "Queries"
+)
+
+// Values returns all known values for PricingUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PricingUnit) Values() []PricingUnit {
+	return []PricingUnit{
+		"GB",
+		"Hrs",
+		"GB-Mo",
+		"Bundles",
+		"Queries",
 	}
 }
 
@@ -1877,6 +1961,40 @@ func (ResourceType) Values() []ResourceType {
 		"Distribution",
 		"Certificate",
 		"Bucket",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusStartExpired             Status = "startExpired"
+	StatusNotStarted               Status = "notStarted"
+	StatusStarted                  Status = "started"
+	StatusStarting                 Status = "starting"
+	StatusStopped                  Status = "stopped"
+	StatusStopping                 Status = "stopping"
+	StatusSettingUpInstance        Status = "settingUpInstance"
+	StatusFailedInstanceCreation   Status = "failedInstanceCreation"
+	StatusFailedStartingGUISession Status = "failedStartingGUISession"
+	StatusFailedStoppingGUISession Status = "failedStoppingGUISession"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"startExpired",
+		"notStarted",
+		"started",
+		"starting",
+		"stopped",
+		"stopping",
+		"settingUpInstance",
+		"failedInstanceCreation",
+		"failedStartingGUISession",
+		"failedStoppingGUISession",
 	}
 }
 

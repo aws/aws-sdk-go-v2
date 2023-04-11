@@ -1,3 +1,36 @@
+# v1.12.5 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.4 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.3 (2023-02-23)
+
+* **Documentation**: Doc-only update. Updated information on attached role policies for customer provided roles
+
+# v1.12.2 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.12.1 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.0 (2023-02-16)
+
+* **Feature**: With this release Amazon Managed Grafana now supports inbound Network Access Control that helps you to restrict user access to your Grafana workspaces
+
+# v1.11.2 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.11.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

@@ -16,7 +16,13 @@ import (
 // ID from the proactive rules that were run. The results indicate which evaluation
 // context was used to evaluate the rules, which resource details were evaluated,
 // the evaluation mode that was run, and whether the resource details comply with
-// the configuration of the proactive rules.
+// the configuration of the proactive rules. To see additional information about
+// the evaluation result, such as which rule flagged a resource as NON_COMPLIANT,
+// use the GetComplianceDetailsByResource
+// (https://docs.aws.amazon.com/config/latest/APIReference/API_GetComplianceDetailsByResource.html)
+// API. For more information, see the Examples
+// (https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceEvaluationSummary.html#API_GetResourceEvaluationSummary_Examples)
+// section.
 func (c *Client) GetResourceEvaluationSummary(ctx context.Context, params *GetResourceEvaluationSummaryInput, optFns ...func(*Options)) (*GetResourceEvaluationSummaryOutput, error) {
 	if params == nil {
 		params = &GetResourceEvaluationSummaryInput{}

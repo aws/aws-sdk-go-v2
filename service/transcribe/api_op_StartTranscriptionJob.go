@@ -237,7 +237,7 @@ type StartTranscriptionJobInput struct {
 	// If you don't specify an
 	// encryption key, your output is encrypted with the default Amazon S3 key
 	// (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify
-	// an output location using the OutputLocation parameter. Note that the user making
+	// an output location using the OutputLocation parameter. Note that the role making
 	// the request must have permission to use the specified KMS key.
 	OutputEncryptionKMSKeyId *string
 

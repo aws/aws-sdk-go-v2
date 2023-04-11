@@ -1,3 +1,32 @@
+# v1.41.0 (2023-03-24)
+
+* **Feature**: Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.
+
+# v1.40.7 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.6 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.5 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.40.4 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.3 (2023-02-15)
+
+* **Documentation**: Database Activity Stream support for RDS for SQL Server.
+
+# v1.40.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
 # v1.40.1 (2023-01-23)
 
 * No change notes available for this release.

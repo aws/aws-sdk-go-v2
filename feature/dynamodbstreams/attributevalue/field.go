@@ -128,7 +128,7 @@ func enumFields(t reflect.Type, opts structFieldOptions) []field {
 				structField := buildField(f.Index, i, sf, fieldTag)
 				structField.Type = ft
 
-				if !sf.Anonymous || ft.Kind() != reflect.Struct {
+				if !sf.Anonymous || fieldTag.Name != "" || ft.Kind() != reflect.Struct {
 					fields = append(fields, structField)
 					if count[f.Type] > 1 {
 						// If there were multiple instances, add a second,

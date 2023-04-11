@@ -48,6 +48,24 @@ func (FeatureStatus) Values() []FeatureStatus {
 	}
 }
 
+type PeriodAlignment string
+
+// Enum values for PeriodAlignment
+const (
+	PeriodAlignmentEndTime   PeriodAlignment = "END_TIME"
+	PeriodAlignmentStartTime PeriodAlignment = "START_TIME"
+)
+
+// Values returns all known values for PeriodAlignment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PeriodAlignment) Values() []PeriodAlignment {
+	return []PeriodAlignment{
+		"END_TIME",
+		"START_TIME",
+	}
+}
+
 type ServiceType string
 
 // Enum values for ServiceType

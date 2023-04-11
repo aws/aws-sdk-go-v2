@@ -44,11 +44,27 @@ type UpdateFuotaTaskInput struct {
 	// The firmware update role that is to be used with a FUOTA task.
 	FirmwareUpdateRole *string
 
+	// The interval of sending fragments in milliseconds. Currently the interval will
+	// be rounded to the nearest second. Note that this interval only controls the
+	// timing when the cloud sends the fragments down. The actual delay of receiving
+	// fragments at device side depends on the device's class and the communication
+	// delay with the cloud.
+	FragmentIntervalMS *int32
+
+	// The size of each fragment in bytes. Currently only supported in fuota tasks with
+	// multicast groups.
+	FragmentSizeBytes *int32
+
 	// The LoRaWAN information used with a FUOTA task.
 	LoRaWAN *types.LoRaWANFuotaTask
 
 	// The name of a FUOTA task.
 	Name *string
+
+	// The percentage of added redundant fragments. For example, if firmware file is
+	// 100 bytes and fragment size is 10 bytes, with RedundancyPercent set to 50(%),
+	// the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+	RedundancyPercent *int32
 
 	noSmithyDocumentSerde
 }

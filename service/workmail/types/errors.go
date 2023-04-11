@@ -27,7 +27,7 @@ func (e *DirectoryInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *DirectoryServiceAuthenticationFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryServiceAuthenticationFailedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryServiceAuthenticationFailedException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *DirectoryUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryUnavailableException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DirectoryUnavailableException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *EmailAddressInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EmailAddressInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EmailAddressInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -135,7 +135,7 @@ func (e *EntityAlreadyRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityAlreadyRegisteredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityAlreadyRegisteredException"
 	}
 	return *e.ErrorCodeOverride
@@ -162,7 +162,7 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -189,7 +189,7 @@ func (e *EntityStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "EntityStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -217,7 +217,7 @@ func (e *InvalidConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -246,7 +246,7 @@ func (e *InvalidCustomSesConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCustomSesConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCustomSesConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -274,7 +274,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -301,7 +301,7 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPasswordException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPasswordException"
 	}
 	return *e.ErrorCodeOverride
@@ -327,7 +327,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -354,7 +354,7 @@ func (e *MailDomainInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MailDomainInUseException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MailDomainInUseException"
 	}
 	return *e.ErrorCodeOverride
@@ -380,7 +380,7 @@ func (e *MailDomainNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MailDomainNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MailDomainNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -407,7 +407,7 @@ func (e *MailDomainStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MailDomainStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "MailDomainStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -433,7 +433,7 @@ func (e *NameAvailabilityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NameAvailabilityException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NameAvailabilityException"
 	}
 	return *e.ErrorCodeOverride
@@ -460,7 +460,7 @@ func (e *OrganizationNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -487,7 +487,7 @@ func (e *OrganizationStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationStateException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "OrganizationStateException"
 	}
 	return *e.ErrorCodeOverride
@@ -513,7 +513,7 @@ func (e *ReservedNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedNameException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ReservedNameException"
 	}
 	return *e.ErrorCodeOverride
@@ -539,7 +539,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -565,7 +565,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyTagsException"
 	}
 	return *e.ErrorCodeOverride
@@ -591,7 +591,7 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "UnsupportedOperationException"
 	}
 	return *e.ErrorCodeOverride

@@ -27,7 +27,7 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ClientLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *ConnectionLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConnectionLimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConnectionLimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgumentException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidArgumentException"
 	}
 	return *e.ErrorCodeOverride
@@ -109,7 +109,7 @@ func (e *InvalidEndpointException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEndpointException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEndpointException"
 	}
 	return *e.ErrorCodeOverride
@@ -136,7 +136,7 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotAuthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotAuthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -162,7 +162,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride

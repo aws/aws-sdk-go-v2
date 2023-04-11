@@ -26,7 +26,7 @@ func (e *ActiveStatementsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActiveStatementsExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ActiveStatementsExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -54,7 +54,7 @@ func (e *BatchExecuteStatementException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchExecuteStatementException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "BatchExecuteStatementException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,7 +80,7 @@ func (e *DatabaseConnectionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DatabaseConnectionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DatabaseConnectionException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *ExecuteStatementException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExecuteStatementException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExecuteStatementException"
 	}
 	return *e.ErrorCodeOverride
@@ -134,7 +134,7 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerException"
 	}
 	return *e.ErrorCodeOverride
@@ -162,7 +162,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -188,7 +188,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

@@ -39,6 +39,62 @@ func (BlockType) Values() []BlockType {
 	}
 }
 
+type DatasetDataFormat string
+
+// Enum values for DatasetDataFormat
+const (
+	DatasetDataFormatComprehendCsv     DatasetDataFormat = "COMPREHEND_CSV"
+	DatasetDataFormatAugmentedManifest DatasetDataFormat = "AUGMENTED_MANIFEST"
+)
+
+// Values returns all known values for DatasetDataFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetDataFormat) Values() []DatasetDataFormat {
+	return []DatasetDataFormat{
+		"COMPREHEND_CSV",
+		"AUGMENTED_MANIFEST",
+	}
+}
+
+type DatasetStatus string
+
+// Enum values for DatasetStatus
+const (
+	DatasetStatusCreating  DatasetStatus = "CREATING"
+	DatasetStatusCompleted DatasetStatus = "COMPLETED"
+	DatasetStatusFailed    DatasetStatus = "FAILED"
+)
+
+// Values returns all known values for DatasetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetStatus) Values() []DatasetStatus {
+	return []DatasetStatus{
+		"CREATING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type DatasetType string
+
+// Enum values for DatasetType
+const (
+	DatasetTypeTrain DatasetType = "TRAIN"
+	DatasetTypeTest  DatasetType = "TEST"
+)
+
+// Values returns all known values for DatasetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DatasetType) Values() []DatasetType {
+	return []DatasetType{
+		"TRAIN",
+		"TEST",
+	}
+}
+
 type DocumentClassifierDataFormat string
 
 // Enum values for DocumentClassifierDataFormat
@@ -231,6 +287,56 @@ func (EntityType) Values() []EntityType {
 	}
 }
 
+type FlywheelIterationStatus string
+
+// Enum values for FlywheelIterationStatus
+const (
+	FlywheelIterationStatusTraining      FlywheelIterationStatus = "TRAINING"
+	FlywheelIterationStatusEvaluating    FlywheelIterationStatus = "EVALUATING"
+	FlywheelIterationStatusCompleted     FlywheelIterationStatus = "COMPLETED"
+	FlywheelIterationStatusFailed        FlywheelIterationStatus = "FAILED"
+	FlywheelIterationStatusStopRequested FlywheelIterationStatus = "STOP_REQUESTED"
+	FlywheelIterationStatusStopped       FlywheelIterationStatus = "STOPPED"
+)
+
+// Values returns all known values for FlywheelIterationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FlywheelIterationStatus) Values() []FlywheelIterationStatus {
+	return []FlywheelIterationStatus{
+		"TRAINING",
+		"EVALUATING",
+		"COMPLETED",
+		"FAILED",
+		"STOP_REQUESTED",
+		"STOPPED",
+	}
+}
+
+type FlywheelStatus string
+
+// Enum values for FlywheelStatus
+const (
+	FlywheelStatusCreating FlywheelStatus = "CREATING"
+	FlywheelStatusActive   FlywheelStatus = "ACTIVE"
+	FlywheelStatusUpdating FlywheelStatus = "UPDATING"
+	FlywheelStatusDeleting FlywheelStatus = "DELETING"
+	FlywheelStatusFailed   FlywheelStatus = "FAILED"
+)
+
+// Values returns all known values for FlywheelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FlywheelStatus) Values() []FlywheelStatus {
+	return []FlywheelStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type InputFormat string
 
 // Enum values for InputFormat
@@ -355,13 +461,14 @@ type ModelStatus string
 
 // Enum values for ModelStatus
 const (
-	ModelStatusSubmitted     ModelStatus = "SUBMITTED"
-	ModelStatusTraining      ModelStatus = "TRAINING"
-	ModelStatusDeleting      ModelStatus = "DELETING"
-	ModelStatusStopRequested ModelStatus = "STOP_REQUESTED"
-	ModelStatusStopped       ModelStatus = "STOPPED"
-	ModelStatusInError       ModelStatus = "IN_ERROR"
-	ModelStatusTrained       ModelStatus = "TRAINED"
+	ModelStatusSubmitted          ModelStatus = "SUBMITTED"
+	ModelStatusTraining           ModelStatus = "TRAINING"
+	ModelStatusDeleting           ModelStatus = "DELETING"
+	ModelStatusStopRequested      ModelStatus = "STOP_REQUESTED"
+	ModelStatusStopped            ModelStatus = "STOPPED"
+	ModelStatusInError            ModelStatus = "IN_ERROR"
+	ModelStatusTrained            ModelStatus = "TRAINED"
+	ModelStatusTrainedWithWarning ModelStatus = "TRAINED_WITH_WARNING"
 )
 
 // Values returns all known values for ModelStatus. Note that this can be expanded
@@ -376,6 +483,25 @@ func (ModelStatus) Values() []ModelStatus {
 		"STOPPED",
 		"IN_ERROR",
 		"TRAINED",
+		"TRAINED_WITH_WARNING",
+	}
+}
+
+type ModelType string
+
+// Enum values for ModelType
+const (
+	ModelTypeDocumentClassifier ModelType = "DOCUMENT_CLASSIFIER"
+	ModelTypeEntityRecognizer   ModelType = "ENTITY_RECOGNIZER"
+)
+
+// Values returns all known values for ModelType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ModelType) Values() []ModelType {
+	return []ModelType{
+		"DOCUMENT_CLASSIFIER",
+		"ENTITY_RECOGNIZER",
 	}
 }
 

@@ -27,7 +27,7 @@ func (e *CustomerNotEntitledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomerNotEntitledException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "CustomerNotEntitledException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *DisabledApiException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DisabledApiException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DisabledApiException"
 	}
 	return *e.ErrorCodeOverride
@@ -81,7 +81,7 @@ func (e *DuplicateRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateRequestException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DuplicateRequestException"
 	}
 	return *e.ErrorCodeOverride
@@ -111,7 +111,7 @@ func (e *ExpiredTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExpiredTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExpiredTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -138,7 +138,7 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServiceErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -164,7 +164,7 @@ func (e *InvalidCustomerIdentifierException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCustomerIdentifierException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidCustomerIdentifierException"
 	}
 	return *e.ErrorCodeOverride
@@ -194,7 +194,7 @@ func (e *InvalidEndpointRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEndpointRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEndpointRegionException"
 	}
 	return *e.ErrorCodeOverride
@@ -221,7 +221,7 @@ func (e *InvalidProductCodeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidProductCodeException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidProductCodeException"
 	}
 	return *e.ErrorCodeOverride
@@ -247,7 +247,7 @@ func (e *InvalidPublicKeyVersionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPublicKeyVersionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidPublicKeyVersionException"
 	}
 	return *e.ErrorCodeOverride
@@ -275,7 +275,7 @@ func (e *InvalidRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRegionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidRegionException"
 	}
 	return *e.ErrorCodeOverride
@@ -301,7 +301,7 @@ func (e *InvalidTagException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTagException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTagException"
 	}
 	return *e.ErrorCodeOverride
@@ -327,7 +327,7 @@ func (e *InvalidTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTokenException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidTokenException"
 	}
 	return *e.ErrorCodeOverride
@@ -354,7 +354,7 @@ func (e *InvalidUsageAllocationsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidUsageAllocationsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidUsageAllocationsException"
 	}
 	return *e.ErrorCodeOverride
@@ -381,7 +381,7 @@ func (e *InvalidUsageDimensionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidUsageDimensionException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidUsageDimensionException"
 	}
 	return *e.ErrorCodeOverride
@@ -408,7 +408,7 @@ func (e *PlatformNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformNotSupportedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "PlatformNotSupportedException"
 	}
 	return *e.ErrorCodeOverride
@@ -434,7 +434,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
@@ -462,7 +462,7 @@ func (e *TimestampOutOfBoundsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TimestampOutOfBoundsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TimestampOutOfBoundsException"
 	}
 	return *e.ErrorCodeOverride

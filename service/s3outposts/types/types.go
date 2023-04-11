@@ -31,6 +31,9 @@ type Endpoint struct {
 	// The Amazon Resource Name (ARN) of the endpoint.
 	EndpointArn *string
 
+	// The failure reason, if any, for a create or delete endpoint operation.
+	FailedReason *FailedReason
+
 	// The network interface of the endpoint.
 	NetworkInterfaces []NetworkInterface
 
@@ -52,11 +55,42 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
+// The failure reason, if any, for a create or delete endpoint operation.
+type FailedReason struct {
+
+	// The failure code, if any, for a create or delete endpoint operation.
+	ErrorCode *string
+
+	// Additional error details describing the endpoint failure and recommended action.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The container for the network interface.
 type NetworkInterface struct {
 
 	// The ID for the network interface.
 	NetworkInterfaceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details for the Outpost object.
+type Outpost struct {
+
+	// The Amazon S3 capacity of the outpost in bytes.
+	CapacityInBytes int64
+
+	// Specifies the unique Amazon Resource Name (ARN) for the outpost.
+	OutpostArn *string
+
+	// Specifies the unique identifier for the outpost.
+	OutpostId *string
+
+	// Returns the Amazon Web Services account ID of the outpost owner. Useful for
+	// comparing owned versus shared outposts.
+	OwnerId *string
 
 	noSmithyDocumentSerde
 }

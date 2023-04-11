@@ -26,7 +26,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConcurrentModificationException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *DeveloperUserAlreadyRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeveloperUserAlreadyRegisteredException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "DeveloperUserAlreadyRegisteredException"
 	}
 	return *e.ErrorCodeOverride
@@ -82,7 +82,7 @@ func (e *ExternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExternalServiceException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ExternalServiceException"
 	}
 	return *e.ErrorCodeOverride
@@ -108,7 +108,7 @@ func (e *InternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalErrorException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalErrorException"
 	}
 	return *e.ErrorCodeOverride
@@ -135,7 +135,7 @@ func (e *InvalidIdentityPoolConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidIdentityPoolConfigurationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidIdentityPoolConfigurationException"
 	}
 	return *e.ErrorCodeOverride
@@ -163,7 +163,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidParameterException"
 	}
 	return *e.ErrorCodeOverride
@@ -189,7 +189,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "LimitExceededException"
 	}
 	return *e.ErrorCodeOverride
@@ -215,7 +215,7 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotAuthorizedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "NotAuthorizedException"
 	}
 	return *e.ErrorCodeOverride
@@ -242,7 +242,7 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -269,7 +269,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
@@ -295,7 +295,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRequestsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "TooManyRequestsException"
 	}
 	return *e.ErrorCodeOverride

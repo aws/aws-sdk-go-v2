@@ -52,7 +52,7 @@ type GetRunGroupOutput struct {
 	// The group's maximum number of CPUs to use.
 	MaxCpus *int32
 
-	// The group's maximum run duration.
+	// The group's maximum run time in minutes.
 	MaxDuration *int32
 
 	// The maximum number of concurrent runs for the group.

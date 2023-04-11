@@ -189,6 +189,11 @@ type AccountLevelBpaSync struct {
 // Describes an add-on that is enabled for an Amazon Lightsail resource.
 type AddOn struct {
 
+	// The amount of idle time in minutes after which your virtual computer will
+	// automatically stop. This add-on only applies to Lightsail for Research
+	// resources.
+	Duration *string
+
 	// The name of the add-on.
 	Name *string
 
@@ -204,6 +209,10 @@ type AddOn struct {
 
 	// The status of the add-on.
 	Status *string
+
+	// The trigger threshold of the action. This add-on only applies to Lightsail for
+	// Research resources.
+	Threshold *string
 
 	noSmithyDocumentSerde
 }
@@ -222,6 +231,11 @@ type AddOnRequest struct {
 	// An object that represents additional parameters when enabling or modifying the
 	// automatic snapshot add-on.
 	AutoSnapshotAddOnRequest *AutoSnapshotAddOnRequest
+
+	// An object that represents additional parameters when enabling or modifying the
+	// StopInstanceOnIdle add-on. This object only applies to Lightsail for Research
+	// resources.
+	StopInstanceOnIdleRequest *StopInstanceOnIdleRequest
 
 	noSmithyDocumentSerde
 }
@@ -425,7 +439,8 @@ type AutoSnapshotDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an Availability Zone.
+// Describes an Availability Zone. This is returned only as part of a GetRegions
+// request.
 type AvailabilityZone struct {
 
 	// The state of the Availability Zone.
@@ -439,6 +454,10 @@ type AvailabilityZone struct {
 
 // Describes a blueprint (a virtual private server image).
 type Blueprint struct {
+
+	// Virtual computer blueprints that are supported by Lightsail for Research. This
+	// parameter only applies to Lightsail for Research resources.
+	AppCategory AppCategory
 
 	// The ID for the virtual private server image (e.g., app_wordpress_4_4 or
 	// app_lamp_7_0).
@@ -679,6 +698,10 @@ type Bundle struct {
 
 	// The amount of RAM in GB (e.g., 2.0).
 	RamSizeInGb *float32
+
+	// Virtual computer blueprints that are supported by a Lightsail for Research
+	// bundle. This parameter only applies to Lightsail for Research resources.
+	SupportedAppCategories []AppCategory
 
 	// The operating system platform (Linux/Unix-based or Windows Server-based) that
 	// the bundle supports. You can only launch a WINDOWS bundle on a blueprint that
@@ -1423,11 +1446,11 @@ type ContainerServicePower struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the login information for the container image registry of an Amazon
+// Describes the sign-in credentials for the container image registry of an Amazon
 // Lightsail account.
 type ContainerServiceRegistryLogin struct {
 
-	// The timestamp of when the container image registry username and password expire.
+	// The timestamp of when the container image registry sign-in credentials expire.
 	// The log in credentials expire 12 hours after they are created, at which point
 	// you will need to create a new set of log in credentials using the
 	// CreateContainerServiceRegistryLogin action.
@@ -1515,6 +1538,20 @@ type CookieObject struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the estimated cost for resources in your Lightsail for Research
+// account.
+type CostEstimate struct {
+
+	// The cost estimate result that's associated with a time period.
+	ResultsByTime []EstimateByTime
+
+	// The types of usage that are included in the estimate, such as costs, usage, or
+	// data transfer.
+	UsageType *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the destination of a record.
 type DestinationInfo struct {
 
@@ -1545,6 +1582,10 @@ type Disk struct {
 	//
 	// Deprecated: This member has been deprecated.
 	AttachmentState *string
+
+	// The status of automatically mounting a storage disk to a virtual computer. This
+	// parameter only applies to Lightsail for Research resources.
+	AutoMountStatus AutoMountStatus
 
 	// The date when the disk was created.
 	CreatedAt *time.Time
@@ -1797,8 +1838,11 @@ type DomainEntry struct {
 	Id *string
 
 	// When true, specifies whether the domain entry is an alias used by the Lightsail
-	// load balancer. You can include an alias (A type) record in your request, which
-	// points to a load balancer DNS name and routes traffic to your load balancer.
+	// load balancer, Lightsail container service, Lightsail content delivery network
+	// (CDN) distribution, or another Amazon Web Services resource. You can include an
+	// alias (A type) record in your request, which points to the DNS name of a load
+	// balancer, container service, CDN distribution, or other Amazon Web Services
+	// resource and routes traffic to that resource.
 	IsAlias *bool
 
 	// The name of the domain.
@@ -1885,6 +1929,29 @@ type EndpointRequest struct {
 
 	// An object that describes the health check configuration of the container.
 	HealthCheck *ContainerServiceHealthCheckConfig
+
+	noSmithyDocumentSerde
+}
+
+// An estimate that's associated with a time period.
+type EstimateByTime struct {
+
+	// The currency of the estimate in USD.
+	Currency Currency
+
+	// The unit of measurement that's used for the cost estimate.
+	PricingUnit PricingUnit
+
+	// The period of time, in days, that an estimate covers. The period has a start
+	// date and an end date. The start date must come before the end date.
+	TimePeriod *TimePeriod
+
+	// The number of pricing units used to calculate the total number of hours. For
+	// example, 1 unit equals 1 hour.
+	Unit *float64
+
+	// The amount of cost or usage that's measured for the cost estimate.
+	UsageCost *float64
 
 	noSmithyDocumentSerde
 }
@@ -3976,6 +4043,27 @@ type RenewalSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the estimated cost or usage that a budget tracks.
+type ResourceBudgetEstimate struct {
+
+	// The cost estimate for the specified budget.
+	CostEstimates []CostEstimate
+
+	// The estimate end time.
+	EndTime *time.Time
+
+	// The resource name.
+	ResourceName *string
+
+	// The type of resource the budget will track.
+	ResourceType ResourceType
+
+	// The estimate start time.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Describes the resource location.
 type ResourceLocation struct {
 
@@ -4016,6 +4104,24 @@ type ResourceRecord struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a web-based, remote graphical user interface (GUI), NICE DCV session.
+// The session is used to access a virtual computer’s operating system or
+// application.
+type Session struct {
+
+	// When true, this Boolean value indicates the primary session for the specified
+	// resource.
+	IsPrimary *bool
+
+	// The session name.
+	Name *string
+
+	// The session URL.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a static IP.
 type StaticIp struct {
 
@@ -4052,6 +4158,20 @@ type StaticIp struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a request to create or edit the StopInstanceOnIdle add-on. This add-on
+// only applies to Lightsail for Research resources.
+type StopInstanceOnIdleRequest struct {
+
+	// The amount of idle time in minutes after which your virtual computer will
+	// automatically stop.
+	Duration *string
+
+	// The value to compare with the duration.
+	Threshold *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a tag key and optional value assigned to an Amazon Lightsail resource.
 // For more information about tags in Lightsail, see the Amazon Lightsail Developer
 // Guide
@@ -4065,6 +4185,26 @@ type Tag struct {
 	// The value of the tag. Constraints: Tag values accept a maximum of 256 letters,
 	// numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Sets the start date and end date for retrieving a cost estimate. The start date
+// is inclusive, but the end date is exclusive. For example, if start is 2017-01-01
+// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
+// up to and including 2017-04-30 but not including 2017-05-01.
+type TimePeriod struct {
+
+	// The end of the time period. The end date is exclusive. For example, if end is
+	// 2017-05-01, Lightsail for Research retrieves cost and usage data from the start
+	// date up to, but not including, 2017-05-01.
+	End *time.Time
+
+	// The beginning of the time period. The start date is inclusive. For example, if
+	// start is 2017-01-01, Lightsail for Research retrieves cost and usage data
+	// starting at 2017-01-01 up to the end date. The start date must be equal to or no
+	// later than the current date to avoid a validation error.
+	Start *time.Time
 
 	noSmithyDocumentSerde
 }

@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "AccessDeniedException"
 	}
 	return *e.ErrorCodeOverride
@@ -53,7 +53,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ConflictException"
 	}
 	return *e.ErrorCodeOverride
@@ -80,14 +80,14 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InternalServerException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The requested endpoint was invalid.
+// The requested endpoint was not valid.
 type InvalidEndpointException struct {
 	Message *string
 
@@ -106,7 +106,7 @@ func (e *InvalidEndpointException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEndpointException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "InvalidEndpointException"
 	}
 	return *e.ErrorCodeOverride
@@ -131,7 +131,7 @@ func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smith
 // for the record set to a value greater than the ExistingVersion.
 //
 // * Records with
-// timestamps that lie outside the retention duration of the memory store
+// timestamps that lie outside the retention duration of the memory store.
 //
 // *
 // Records with dimensions or measures that exceed the Timestream defined
@@ -139,7 +139,7 @@ func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smith
 //
 // For more information, see Quotas
 // (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html) in
-// the Timestream Developer Guide.
+// the Amazon Timestream Developer Guide.
 type RejectedRecordsException struct {
 	Message *string
 
@@ -160,7 +160,7 @@ func (e *RejectedRecordsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RejectedRecordsException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "RejectedRecordsException"
 	}
 	return *e.ErrorCodeOverride
@@ -187,14 +187,14 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ResourceNotFoundException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Instance quota of resource exceeded for this account.
+// The instance quota of resource exceeded for this account.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -213,15 +213,15 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ServiceQuotaExceededException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Too many requests were made by a user exceeding service quotas. The request was
-// throttled.
+// Too many requests were made by a user and they exceeded the service quotas. The
+// request was throttled.
 type ThrottlingException struct {
 	Message *string
 
@@ -240,14 +240,14 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ThrottlingException"
 	}
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Invalid or malformed request.
+// An invalid or malformed request.
 type ValidationException struct {
 	Message *string
 
@@ -266,7 +266,7 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.ErrorCodeOverride == nil {
+	if e == nil || e.ErrorCodeOverride == nil {
 		return "ValidationException"
 	}
 	return *e.ErrorCodeOverride

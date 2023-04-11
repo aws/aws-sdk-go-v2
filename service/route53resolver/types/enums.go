@@ -26,8 +26,9 @@ type AutodefinedReverseFlag string
 
 // Enum values for AutodefinedReverseFlag
 const (
-	AutodefinedReverseFlagEnable  AutodefinedReverseFlag = "ENABLE"
-	AutodefinedReverseFlagDisable AutodefinedReverseFlag = "DISABLE"
+	AutodefinedReverseFlagEnable                  AutodefinedReverseFlag = "ENABLE"
+	AutodefinedReverseFlagDisable                 AutodefinedReverseFlag = "DISABLE"
+	AutodefinedReverseFlagUseLocalResourceSetting AutodefinedReverseFlag = "USE_LOCAL_RESOURCE_SETTING"
 )
 
 // Values returns all known values for AutodefinedReverseFlag. Note that this can
@@ -37,6 +38,7 @@ func (AutodefinedReverseFlag) Values() []AutodefinedReverseFlag {
 	return []AutodefinedReverseFlag{
 		"ENABLE",
 		"DISABLE",
+		"USE_LOCAL_RESOURCE_SETTING",
 	}
 }
 
@@ -142,8 +144,9 @@ type FirewallFailOpenStatus string
 
 // Enum values for FirewallFailOpenStatus
 const (
-	FirewallFailOpenStatusEnabled  FirewallFailOpenStatus = "ENABLED"
-	FirewallFailOpenStatusDisabled FirewallFailOpenStatus = "DISABLED"
+	FirewallFailOpenStatusEnabled                 FirewallFailOpenStatus = "ENABLED"
+	FirewallFailOpenStatusDisabled                FirewallFailOpenStatus = "DISABLED"
+	FirewallFailOpenStatusUseLocalResourceSetting FirewallFailOpenStatus = "USE_LOCAL_RESOURCE_SETTING"
 )
 
 // Values returns all known values for FirewallFailOpenStatus. Note that this can
@@ -153,6 +156,7 @@ func (FirewallFailOpenStatus) Values() []FirewallFailOpenStatus {
 	return []FirewallFailOpenStatus{
 		"ENABLED",
 		"DISABLED",
+		"USE_LOCAL_RESOURCE_SETTING",
 	}
 }
 
@@ -211,6 +215,7 @@ const (
 	IpAddressStatusFailedResourceGone     IpAddressStatus = "FAILED_RESOURCE_GONE"
 	IpAddressStatusDeleting               IpAddressStatus = "DELETING"
 	IpAddressStatusDeleteFailedFasExpired IpAddressStatus = "DELETE_FAILED_FAS_EXPIRED"
+	IpAddressStatusUpdating               IpAddressStatus = "UPDATING"
 )
 
 // Values returns all known values for IpAddressStatus. Note that this can be
@@ -228,6 +233,7 @@ func (IpAddressStatus) Values() []IpAddressStatus {
 		"FAILED_RESOURCE_GONE",
 		"DELETING",
 		"DELETE_FAILED_FAS_EXPIRED",
+		"UPDATING",
 	}
 }
 
@@ -253,10 +259,12 @@ type ResolverAutodefinedReverseStatus string
 
 // Enum values for ResolverAutodefinedReverseStatus
 const (
-	ResolverAutodefinedReverseStatusEnabling  ResolverAutodefinedReverseStatus = "ENABLING"
-	ResolverAutodefinedReverseStatusEnabled   ResolverAutodefinedReverseStatus = "ENABLED"
-	ResolverAutodefinedReverseStatusDisabling ResolverAutodefinedReverseStatus = "DISABLING"
-	ResolverAutodefinedReverseStatusDisabled  ResolverAutodefinedReverseStatus = "DISABLED"
+	ResolverAutodefinedReverseStatusEnabling                          ResolverAutodefinedReverseStatus = "ENABLING"
+	ResolverAutodefinedReverseStatusEnabled                           ResolverAutodefinedReverseStatus = "ENABLED"
+	ResolverAutodefinedReverseStatusDisabling                         ResolverAutodefinedReverseStatus = "DISABLING"
+	ResolverAutodefinedReverseStatusDisabled                          ResolverAutodefinedReverseStatus = "DISABLED"
+	ResolverAutodefinedReverseStatusUpdatingToUseLocalResourceSetting ResolverAutodefinedReverseStatus = "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"
+	ResolverAutodefinedReverseStatusUseLocalResourceSetting           ResolverAutodefinedReverseStatus = "USE_LOCAL_RESOURCE_SETTING"
 )
 
 // Values returns all known values for ResolverAutodefinedReverseStatus. Note that
@@ -269,6 +277,8 @@ func (ResolverAutodefinedReverseStatus) Values() []ResolverAutodefinedReverseSta
 		"ENABLED",
 		"DISABLING",
 		"DISABLED",
+		"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING",
+		"USE_LOCAL_RESOURCE_SETTING",
 	}
 }
 
@@ -276,10 +286,12 @@ type ResolverDNSSECValidationStatus string
 
 // Enum values for ResolverDNSSECValidationStatus
 const (
-	ResolverDNSSECValidationStatusEnabling  ResolverDNSSECValidationStatus = "ENABLING"
-	ResolverDNSSECValidationStatusEnabled   ResolverDNSSECValidationStatus = "ENABLED"
-	ResolverDNSSECValidationStatusDisabling ResolverDNSSECValidationStatus = "DISABLING"
-	ResolverDNSSECValidationStatusDisabled  ResolverDNSSECValidationStatus = "DISABLED"
+	ResolverDNSSECValidationStatusEnabling                        ResolverDNSSECValidationStatus = "ENABLING"
+	ResolverDNSSECValidationStatusEnabled                         ResolverDNSSECValidationStatus = "ENABLED"
+	ResolverDNSSECValidationStatusDisabling                       ResolverDNSSECValidationStatus = "DISABLING"
+	ResolverDNSSECValidationStatusDisabled                        ResolverDNSSECValidationStatus = "DISABLED"
+	ResolverDNSSECValidationStatusUpdateToUseLocalResourceSetting ResolverDNSSECValidationStatus = "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"
+	ResolverDNSSECValidationStatusUseLocalResourceSetting         ResolverDNSSECValidationStatus = "USE_LOCAL_RESOURCE_SETTING"
 )
 
 // Values returns all known values for ResolverDNSSECValidationStatus. Note that
@@ -292,6 +304,8 @@ func (ResolverDNSSECValidationStatus) Values() []ResolverDNSSECValidationStatus 
 		"ENABLED",
 		"DISABLING",
 		"DISABLED",
+		"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING",
+		"USE_LOCAL_RESOURCE_SETTING",
 	}
 }
 
@@ -336,6 +350,26 @@ func (ResolverEndpointStatus) Values() []ResolverEndpointStatus {
 		"AUTO_RECOVERING",
 		"ACTION_NEEDED",
 		"DELETING",
+	}
+}
+
+type ResolverEndpointType string
+
+// Enum values for ResolverEndpointType
+const (
+	ResolverEndpointTypeIpv6      ResolverEndpointType = "IPV6"
+	ResolverEndpointTypeIpv4      ResolverEndpointType = "IPV4"
+	ResolverEndpointTypeDualstack ResolverEndpointType = "DUALSTACK"
+)
+
+// Values returns all known values for ResolverEndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResolverEndpointType) Values() []ResolverEndpointType {
+	return []ResolverEndpointType{
+		"IPV6",
+		"IPV4",
+		"DUALSTACK",
 	}
 }
 
@@ -518,8 +552,9 @@ type Validation string
 
 // Enum values for Validation
 const (
-	ValidationEnable  Validation = "ENABLE"
-	ValidationDisable Validation = "DISABLE"
+	ValidationEnable                  Validation = "ENABLE"
+	ValidationDisable                 Validation = "DISABLE"
+	ValidationUseLocalResourceSetting Validation = "USE_LOCAL_RESOURCE_SETTING"
 )
 
 // Values returns all known values for Validation. Note that this can be expanded
@@ -529,5 +564,6 @@ func (Validation) Values() []Validation {
 	return []Validation{
 		"ENABLE",
 		"DISABLE",
+		"USE_LOCAL_RESOURCE_SETTING",
 	}
 }

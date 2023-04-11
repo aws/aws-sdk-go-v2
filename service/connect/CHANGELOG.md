@@ -1,3 +1,45 @@
+# v1.50.0 (2023-03-27)
+
+* **Feature**: This release introduces support for RelatedContactId in the StartChatContact API. Interactive message and interactive message response have been added to the list of supported message content types for this API as well.
+
+# v1.49.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.0 (2023-03-09)
+
+* **Feature**: This release adds a new API, GetMetricDataV2, which returns metric data for Amazon Connect.
+
+# v1.48.0 (2023-02-24)
+
+* **Feature**: StartTaskContact API now supports linked task creation with a new optional RelatedContactId parameter
+
+# v1.47.1 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.47.0 (2023-02-20)
+
+* **Feature**: Reasons for failed diff has been approved by SDK Reviewer
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.1 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.46.0 (2023-02-10)
+
+* **Feature**: This update provides the Wisdom session ARN for contacts enabled for Wisdom in the chat channel.
+
+# v1.45.1 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2023-01-19)
 
 * **Feature**: Amazon Connect Chat introduces Persistent Chat, allowing customers to resume previous conversations with context and transcripts carried over from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.

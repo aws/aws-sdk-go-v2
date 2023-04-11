@@ -39,8 +39,9 @@ type CreateRoutingProfileInput struct {
 	// This member is required.
 	Description *string
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// The identifier of the Amazon Connect instance. You can find the instance ID
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -57,7 +58,12 @@ type CreateRoutingProfileInput struct {
 	Name *string
 
 	// The inbound queues associated with the routing profile. If no queue is added,
-	// the agent can make only outbound calls.
+	// the agent can make only outbound calls. The limit of 10 array members applies to
+	// the maximum number of RoutingProfileQueueConfig objects that can be passed
+	// during a CreateRoutingProfile API request. It is different from the quota of 50
+	// queues per routing profile per instance that is listed in Amazon Connect service
+	// quotas
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html).
 	QueueConfigs []types.RoutingProfileQueueConfig
 
 	// The tags used to organize, track, or control access for this resource. For

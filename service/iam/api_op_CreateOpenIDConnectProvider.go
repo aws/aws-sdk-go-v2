@@ -31,15 +31,18 @@ import (
 // client IDs (also known as audiences) that identify the application or
 // applications allowed to authenticate using the OIDC provider
 //
-// * A list of
-// thumbprints of one or more server certificates that the IdP uses
+// * A list of tags
+// that are attached to the specified IAM OIDC provider
 //
-// You get all of
-// this information from the OIDC IdP you want to use to access Amazon Web
-// Services. Amazon Web Services secures communication with some OIDC identity
-// providers (IdPs) through our library of trusted certificate authorities (CAs)
-// instead of using a certificate thumbprint to verify your IdP server certificate.
-// These OIDC IdPs include Google, and those that use an Amazon S3 bucket to host a
+// * A list of thumbprints of
+// one or more server certificates that the IdP uses
+//
+// You get all of this
+// information from the OIDC IdP you want to use to access Amazon Web Services.
+// Amazon Web Services secures communication with some OIDC identity providers
+// (IdPs) through our library of trusted certificate authorities (CAs) instead of
+// using a certificate thumbprint to verify your IdP server certificate. These OIDC
+// IdPs include Google, Auth0, and those that use an Amazon S3 bucket to host a
 // JSON Web Key Set (JWKS) endpoint. In these cases, your legacy thumbprint remains
 // in your configuration, but is no longer used for validation. The trust for the
 // OIDC provider is derived from the IAM provider that this operation creates.
@@ -77,7 +80,7 @@ type CreateOpenIDConnectProviderInput struct {
 	// the OIDC provider thumbprint, see Obtaining the thumbprint for an OpenID Connect
 	// provider
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html)
-	// in the IAM User Guide.
+	// in the IAM user Guide.
 	//
 	// This member is required.
 	ThumbprintList []string

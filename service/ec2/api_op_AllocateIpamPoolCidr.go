@@ -16,7 +16,9 @@ import (
 // from an IPAM pool to another IPAM pool or to a resource. For more information,
 // see Allocate CIDRs
 // (https://docs.aws.amazon.com/vpc/latest/ipam/allocate-cidrs-ipam.html) in the
-// Amazon VPC IPAM User Guide.
+// Amazon VPC IPAM User Guide. This action creates an allocation with strong
+// consistency. The returned CIDR will not overlap with any other allocations from
+// the same pool.
 func (c *Client) AllocateIpamPoolCidr(ctx context.Context, params *AllocateIpamPoolCidrInput, optFns ...func(*Options)) (*AllocateIpamPoolCidrOutput, error) {
 	if params == nil {
 		params = &AllocateIpamPoolCidrInput{}

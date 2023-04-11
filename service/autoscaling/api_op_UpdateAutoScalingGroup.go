@@ -91,21 +91,22 @@ type UpdateAutoScalingGroupInput struct {
 	// Amazon EC2 Auto Scaling User Guide.
 	DefaultCooldown *int32
 
-	// The amount of time, in seconds, until a newly launched instance can contribute
-	// to the Amazon CloudWatch metrics. This delay lets an instance finish
-	// initializing before Amazon EC2 Auto Scaling aggregates instance metrics,
-	// resulting in more reliable usage data. Set this value equal to the amount of
-	// time that it takes for resource consumption to become stable after an instance
-	// reaches the InService state. For more information, see Set the default instance
-	// warmup for an Auto Scaling group
+	// The amount of time, in seconds, until a new instance is considered to have
+	// finished initializing and resource consumption to become stable after it enters
+	// the InService state. During an instance refresh, Amazon EC2 Auto Scaling waits
+	// for the warm-up period after it replaces an instance before it moves on to
+	// replacing the next instance. Amazon EC2 Auto Scaling also waits for the warm-up
+	// period before aggregating the metrics for new instances with existing instances
+	// in the Amazon CloudWatch metrics that are used for scaling, resulting in more
+	// reliable usage data. For more information, see Set the default instance warmup
+	// for an Auto Scaling group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html)
-	// in the Amazon EC2 Auto Scaling User Guide. To manage your warm-up settings at
+	// in the Amazon EC2 Auto Scaling User Guide. To manage various warm-up settings at
 	// the group level, we recommend that you set the default instance warmup, even if
-	// its value is set to 0 seconds. This also optimizes the performance of scaling
-	// policies that scale continuously, such as target tracking and step scaling
-	// policies. If you need to remove a value that you previously set, include the
+	// it is set to 0 seconds. To remove a value that you previously set, include the
 	// property but specify -1 for the value. However, we strongly recommend keeping
-	// the default instance warmup enabled by specifying a minimum value of 0.
+	// the default instance warmup enabled by specifying a value of 0 or other nominal
+	// value.
 	DefaultInstanceWarmup *int32
 
 	// The desired capacity is the initial capacity of the Auto Scaling group after

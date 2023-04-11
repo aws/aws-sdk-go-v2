@@ -1,3 +1,36 @@
+# v1.3.2 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.1 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.0 (2023-02-24)
+
+* **Feature**: This release adds the ability to delete domains through the DeleteDomain API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+
+# v1.2.6 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.2.5 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.2.4 (2023-02-16)
+
+* No change notes available for this release.
+
+# v1.2.3 (2023-02-15)
+
+* **Announcement**: When receiving an error response in restJson-based services, an incorrect error type may have been returned based on the content of the response. This has been fixed via PR #2012 tracked in issue #1910.
+* **Bug Fix**: Correct error type parsing for restJson services.
+
+# v1.2.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.1 (2023-01-26)
 
 * No change notes available for this release.

@@ -95,10 +95,21 @@ type PutParameterInput struct {
 	// String parameter and specify aws:ec2:image, Amazon Web Services Systems Manager
 	// validates the parameter value is in the required format, such as
 	// ami-12345abcdeEXAMPLE, and that the specified AMI is available in your Amazon
-	// Web Services account. For more information, see Native parameter support for
-	// Amazon Machine Image (AMI) IDs
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
-	// in the Amazon Web Services Systems Manager User Guide.
+	// Web Services account. If the action is successful, the service sends back an
+	// HTTP 200 response which indicates a successful PutParameter call for all cases
+	// except for data type aws:ec2:image. If you call PutParameter with aws:ec2:image
+	// data type, a successful HTTP 200 response does not guarantee that your parameter
+	// was successfully created or updated. The aws:ec2:image value is validated
+	// asynchronously, and the PutParameter call returns before the validation is
+	// complete. If you submit an invalid AMI value, the PutParameter operation will
+	// return success, but the asynchronous validation will fail and the parameter will
+	// not be created or updated. To monitor whether your aws:ec2:image parameters are
+	// created successfully, see Setting up notifications or trigger actions based on
+	// Parameter Store events
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html).
+	// For more information about AMI format validation , see Native parameter support
+	// for Amazon Machine Image (AMI) IDs
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html).
 	DataType *string
 
 	// Information about the parameter that you want to add to the system. Optional but
@@ -106,18 +117,13 @@ type PutParameterInput struct {
 	Description *string
 
 	// The Key Management Service (KMS) ID that you want to use to encrypt a parameter.
-	// Either the default KMS key automatically assigned to your Amazon Web Services
-	// account or a custom key. Required for parameters that use the SecureString data
-	// type. If you don't specify a key ID, the system uses the default key associated
-	// with your Amazon Web Services account.
+	// Use a custom key for better security. Required for parameters that use the
+	// SecureString data type. If you don't specify a key ID, the system uses the
+	// default key associated with your Amazon Web Services account which is not as
+	// secure as using a custom key.
 	//
-	// * To use your default KMS key, choose
-	// the SecureString data type, and do not specify the Key ID when you create the
-	// parameter. The system automatically populates Key ID with your default KMS
-	// key.
-	//
-	// * To use a custom KMS key, choose the SecureString data type with the Key
-	// ID parameter.
+	// * To use a custom KMS key, choose the
+	// SecureString data type with the Key ID parameter.
 	KeyId *string
 
 	// Overwrite an existing parameter. The default value is false.

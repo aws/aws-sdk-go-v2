@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -663,7 +663,10 @@
             }
         },
         "com.amazonaws.ses#Counter": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.ses#CreateConfigurationSet": {
             "type": "operation",
@@ -826,6 +829,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.ses#CreateCustomVerificationEmailTemplateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1362,6 +1368,9 @@
             "input": {
                 "target": "com.amazonaws.ses#DeleteCustomVerificationEmailTemplateRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing custom verification email template. </p>\n        <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer\n                Guide</i>.</p>\n        <p>You can execute this operation no more than once per second.</p>"
             }
@@ -1610,6 +1619,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.ses#DeleteVerifiedEmailAddressRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deprecated. Use the <code>DeleteIdentity</code> operation to delete email addresses\n            and domains.</p>"
@@ -1958,7 +1970,10 @@
             "type": "string"
         },
         "com.amazonaws.ses#Enabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.ses#Error": {
             "type": "string"
@@ -1979,6 +1994,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Sets whether Amazon SES publishes events to this destination when you send an email with\n            the associated configuration set. Set to <code>true</code> to enable publishing to this\n            destination; set to <code>false</code> to prevent publishing to this destination. The\n            default value is <code>false</code>.</p>"
                     }
                 },
@@ -2192,6 +2208,9 @@
         },
         "com.amazonaws.ses#GetAccountSendingEnabled": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.ses#GetAccountSendingEnabledResponse"
             },
@@ -2205,6 +2224,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether email sending is enabled or disabled for your Amazon SES account in the\n            current AWS Region.</p>"
                     }
                 }
@@ -2525,6 +2545,9 @@
         },
         "com.amazonaws.ses#GetSendQuota": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.ses#GetSendQuotaResponse"
             },
@@ -2538,18 +2561,21 @@
                 "Max24HourSend": {
                     "target": "com.amazonaws.ses#Max24HourSend",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of emails the user is allowed to send in a 24-hour interval. A\n            value of -1 signifies an unlimited quota.</p>"
                     }
                 },
                 "MaxSendRate": {
                     "target": "com.amazonaws.ses#MaxSendRate",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of emails that Amazon SES can accept from the user's account per\n            second.</p>\n        <note>\n            <p>The rate at which Amazon SES accepts the user's messages might be less than the maximum\n                send rate.</p>\n        </note>"
                     }
                 },
                 "SentLast24Hours": {
                     "target": "com.amazonaws.ses#SentLast24Hours",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of emails sent during the previous 24 hours.</p>"
                     }
                 }
@@ -2560,6 +2586,9 @@
         },
         "com.amazonaws.ses#GetSendStatistics": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.ses#GetSendStatisticsResponse"
             },
@@ -2636,6 +2665,7 @@
                 "DkimEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Is true if DKIM signing is enabled for email sent from the identity. It's false\n            otherwise. The default value is true.</p>",
                         "smithy.api#required": {}
                     }
@@ -2720,6 +2750,7 @@
                 "ForwardingEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether Amazon SES will forward bounce and complaint notifications as email.\n                <code>true</code> indicates that Amazon SES will forward bounce and complaint\n            notifications as email, while <code>false</code> indicates that bounce and complaint\n            notifications will be published only to the specified bounce and complaint Amazon SNS\n            topics.</p>",
                         "smithy.api#required": {}
                     }
@@ -2727,18 +2758,21 @@
                 "HeadersInBounceNotificationsEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether Amazon SES includes the original email headers in Amazon SNS notifications of\n            type <code>Bounce</code>. A value of <code>true</code> specifies that Amazon SES will include\n            headers in bounce notifications, and a value of <code>false</code> specifies that Amazon SES\n            will not include headers in bounce notifications.</p>"
                     }
                 },
                 "HeadersInComplaintNotificationsEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether Amazon SES includes the original email headers in Amazon SNS notifications of\n            type <code>Complaint</code>. A value of <code>true</code> specifies that Amazon SES will\n            include headers in complaint notifications, and a value of <code>false</code> specifies\n            that Amazon SES will not include headers in complaint notifications.</p>"
                     }
                 },
                 "HeadersInDeliveryNotificationsEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether Amazon SES includes the original email headers in Amazon SNS notifications of\n            type <code>Delivery</code>. A value of <code>true</code> specifies that Amazon SES will\n            include headers in delivery notifications, and a value of <code>false</code> specifies\n            that Amazon SES will not include headers in delivery notifications.</p>"
                     }
                 }
@@ -3477,6 +3511,9 @@
         },
         "com.amazonaws.ses#ListVerifiedEmailAddresses": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.ses#ListVerifiedEmailAddressesResponse"
             },
@@ -3528,18 +3565,17 @@
             }
         },
         "com.amazonaws.ses#Max24HourSend": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.ses#MaxItems": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.ses#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -3547,7 +3583,10 @@
             }
         },
         "com.amazonaws.ses#MaxSendRate": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.ses#Message": {
             "type": "structure",
@@ -4014,6 +4053,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, the receipt rule is active. The default value is\n                <code>false</code>.</p>"
                     }
                 },
@@ -4038,6 +4078,7 @@
                 "ScanEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, then messages that this receipt rule applies to are scanned for\n            spam and viruses. The default value is <code>false</code>.</p>"
                     }
                 }
@@ -4215,12 +4256,14 @@
                 "SendingEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether email sending is enabled or disabled for the configuration set. If\n            the value is <code>true</code>, then Amazon SES will send emails that use the configuration\n            set. If the value is <code>false</code>, Amazon SES will not send emails that use the\n            configuration set. The default value is <code>true</code>. You can change this setting\n            using <a>UpdateConfigurationSetSendingEnabled</a>.</p>"
                     }
                 },
                 "ReputationMetricsEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether or not Amazon SES publishes reputation metrics for the configuration set,\n            such as bounce and complaint rates, to Amazon CloudWatch.</p>\n        <p>If the value is <code>true</code>, reputation metrics are published. If the value is\n                <code>false</code>, reputation metrics are not published. The default value is\n                <code>false</code>.</p>"
                     }
                 },
@@ -4656,24 +4699,28 @@
                 "DeliveryAttempts": {
                     "target": "com.amazonaws.ses#Counter",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of emails that have been sent.</p>"
                     }
                 },
                 "Bounces": {
                     "target": "com.amazonaws.ses#Counter",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of emails that have bounced.</p>"
                     }
                 },
                 "Complaints": {
                     "target": "com.amazonaws.ses#Counter",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of unwanted emails that were rejected by recipients.</p>"
                     }
                 },
                 "Rejects": {
                     "target": "com.amazonaws.ses#Counter",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of emails rejected by Amazon SES.</p>"
                     }
                 }
@@ -5021,7 +5068,10 @@
             }
         },
         "com.amazonaws.ses#SentLast24Hours": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.ses#SetActiveReceiptRuleSet": {
             "type": "operation",
@@ -5086,6 +5136,7 @@
                 "DkimEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Sets whether DKIM signing is enabled for an identity. Set to <code>true</code> to\n            enable DKIM signing for this identity; <code>false</code> to disable it. </p>",
                         "smithy.api#required": {}
                     }
@@ -5127,6 +5178,7 @@
                 "ForwardingEnabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Sets whether Amazon SES will forward bounce and complaint notifications as email.\n                <code>true</code> specifies that Amazon SES will forward bounce and complaint\n            notifications as email, in addition to any Amazon SNS topic publishing otherwise specified.\n                <code>false</code> specifies that Amazon SES will publish bounce and complaint\n            notifications only through Amazon SNS. This value can only be set to <code>false</code> when\n            Amazon SNS topics are set for both <code>Bounce</code> and <code>Complaint</code>\n            notification types.</p>",
                         "smithy.api#required": {}
                     }
@@ -5175,6 +5227,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Sets whether Amazon SES includes the original email headers in Amazon SNS notifications of the\n            specified notification type. A value of <code>true</code> specifies that Amazon SES will\n            include headers in notifications, and a value of <code>false</code> specifies that Amazon SES\n            will not include headers in notifications.</p>\n        <p>This value can only be set when <code>NotificationType</code> is already set to use a\n            particular Amazon SNS topic.</p>",
                         "smithy.api#required": {}
                     }
@@ -5573,6 +5626,906 @@
                 "smithy.api#title": "Amazon Simple Email Service",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ses.amazonaws.com/doc/2010-12-01/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://email-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
                 }
             }
         },
@@ -5850,6 +6803,9 @@
             "input": {
                 "target": "com.amazonaws.ses#UpdateAccountSendingEnabledRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Enables or disables email sending across your entire Amazon SES account in the current\n            AWS Region. You can use this operation in conjunction with Amazon CloudWatch alarms to\n            temporarily pause email sending across your Amazon SES account in a given AWS Region when\n            reputation metrics (such as your bounce or complaint rates) reach certain\n            thresholds.</p>\n        <p>You can execute this operation no more than once per second.</p>"
             }
@@ -5860,6 +6816,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether email sending is enabled or disabled for your Amazon SES account in the\n            current AWS Region.</p>"
                     }
                 }
@@ -5931,6 +6888,9 @@
             "input": {
                 "target": "com.amazonaws.ses#UpdateConfigurationSetReputationMetricsEnabledRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.ses#ConfigurationSetDoesNotExistException"
@@ -5953,6 +6913,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether or not Amazon SES will publish reputation metrics for the configuration\n            set, such as bounce and complaint rates, to Amazon CloudWatch.</p>",
                         "smithy.api#required": {}
                     }
@@ -5966,6 +6927,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.ses#UpdateConfigurationSetSendingEnabledRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5989,6 +6953,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.ses#Enabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes whether email sending is enabled or disabled for the configuration set.\n        </p>",
                         "smithy.api#required": {}
                     }
@@ -6053,6 +7018,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.ses#UpdateCustomVerificationEmailTemplateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -6343,6 +7311,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.ses#VerifyEmailAddressRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deprecated. Use the <code>VerifyEmailIdentity</code> operation to verify a new email\n            address.</p>"

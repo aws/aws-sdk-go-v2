@@ -1,3 +1,36 @@
+# v1.19.8 (2023-03-22)
+
+* **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+
+# v1.19.7 (2023-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.6 (2023-03-14)
+
+* **Documentation**: Documentation only updates to correct customer-reported issues
+
+# v1.19.5 (2023-03-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.4 (2023-02-22)
+
+* **Bug Fix**: Prevent nil pointer dereference when retrieving error codes.
+
+# v1.19.3 (2023-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.2 (2023-02-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade smithy to 1.27.2 and correct empty query list serialization.
+
+# v1.19.1 (2023-02-01)
+
+* **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+
 # v1.19.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
