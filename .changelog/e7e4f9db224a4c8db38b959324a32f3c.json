@@ -1,8 +1,0 @@
-{
-    "id": "e7e4f9db-224a-4c8d-b38b-959324a32f3c",
-    "type": "feature",
-    "description": "EventBridge PutTarget support for multiple SQL arguments on RedshiftDataParameters",
-    "modules": [
-        "service/eventbridge"
-    ]
-}

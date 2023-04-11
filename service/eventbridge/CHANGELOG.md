@@ -1,3 +1,7 @@
+# v1.19.0 (2023-04-11)
+
+* **Feature**: EventBridge PutTarget support for multiple SQL arguments on RedshiftDataParameters
+
 # v1.18.9 (2023-04-10)
 
 * No change notes available for this release.

@@ -1,3 +1,17 @@
+# Release (2023-04-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.16.0](service/ecrpublic/CHANGELOG.md#v1160-2023-04-11)
+  * **Feature**: This release will allow using registry alias as registryId in BatchDeleteImage request.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.6.0](service/emrserverless/CHANGELOG.md#v160-2023-04-11)
+  * **Feature**: This release extends GetJobRun API to return job run timeout (executionTimeoutMinutes) specified during StartJobRun call (or default timeout of 720 minutes if none was specified).
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.19.0](service/eventbridge/CHANGELOG.md#v1190-2023-04-11)
+  * **Feature**: EventBridge PutTarget support for multiple SQL arguments on RedshiftDataParameters
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.15.0](service/iotdataplane/CHANGELOG.md#v1150-2023-04-11)
+  * **Feature**: This release adds support for MQTT5 user properties when calling the AWS IoT GetRetainedMessage API
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.29.0](service/wafv2/CHANGELOG.md#v1290-2023-04-11)
+  * **Feature**: For web ACLs that protect CloudFront protections, the default request body inspection size is now 16 KB, and you can use the new association configuration to increase the inspection size further, up to 64 KB. Sizes over 16 KB can incur additional costs.
+
 # Release (2023-04-10)
 
 ## General Highlights

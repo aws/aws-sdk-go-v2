@@ -1,3 +1,7 @@
+# v1.16.0 (2023-04-11)
+
+* **Feature**: This release will allow using registry alias as registryId in BatchDeleteImage request.
+
 # v1.15.8 (2023-04-10)
 
 * No change notes available for this release.

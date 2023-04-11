@@ -1,8 +1,0 @@
-{
-    "id": "b2c56f48-a49c-4379-bd51-0fc5d7537dda",
-    "type": "feature",
-    "description": "This release extends GetJobRun API to return job run timeout (executionTimeoutMinutes) specified during StartJobRun call (or default timeout of 720 minutes if none was specified).",
-    "modules": [
-        "service/emrserverless"
-    ]
-}
