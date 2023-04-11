@@ -1,0 +1,8 @@
+{
+    "id": "d696298f-0561-4846-9aa7-8311bd49cddb",
+    "type": "feature",
+    "description": "This release adds support for MQTT5 user properties when calling the AWS IoT GetRetainedMessage API",
+    "modules": [
+        "service/iotdataplane"
+    ]
+}

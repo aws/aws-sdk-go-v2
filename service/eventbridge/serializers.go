@@ -3945,6 +3945,13 @@ func awsAwsjson11_serializeDocumentRedshiftDataParameters(v *types.RedshiftDataP
 		ok.String(*v.Sql)
 	}
 
+	if v.Sqls != nil {
+		ok := object.Key("Sqls")
+		if err := awsAwsjson11_serializeDocumentSqls(v.Sqls, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StatementName != nil {
 		ok := object.Key("StatementName")
 		ok.String(*v.StatementName)
@@ -4141,6 +4148,17 @@ func awsAwsjson11_serializeDocumentSecondary(v *types.Secondary, value smithyjso
 		ok.String(*v.Route)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSqls(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

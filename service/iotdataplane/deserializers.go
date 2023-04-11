@@ -350,6 +350,19 @@ func awsRestjson1_deserializeOpDocumentGetRetainedMessageOutput(v **GetRetainedM
 				sv.Topic = ptr.String(jtv)
 			}
 
+		case "userProperties":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserPropertiesBlob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode UserPropertiesBlob, %w", err)
+				}
+				sv.UserProperties = dv
+			}
+
 		default:
 			_, _ = key, value
 

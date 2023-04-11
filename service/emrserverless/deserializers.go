@@ -3255,6 +3255,19 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				sv.ExecutionRole = ptr.String(jtv)
 			}
 
+		case "executionTimeoutMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExecutionTimeoutMinutes = ptr.Int64(i64)
+			}
+
 		case "jobDriver":
 			if err := awsRestjson1_deserializeDocumentJobDriver(&sv.JobDriver, value); err != nil {
 				return err

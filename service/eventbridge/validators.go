@@ -1464,9 +1464,6 @@ func validateRedshiftDataParameters(v *types.RedshiftDataParameters) error {
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
-	if v.Sql == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sql"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

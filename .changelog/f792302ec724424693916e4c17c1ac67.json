@@ -1,0 +1,8 @@
+{
+    "id": "f792302e-c724-4246-9391-6e4c17c1ac67",
+    "type": "feature",
+    "description": "Re-release to remove unexpected API changes",
+    "modules": [
+        "service/iot"
+    ]
+}

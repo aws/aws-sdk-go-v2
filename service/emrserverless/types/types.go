@@ -339,6 +339,10 @@ type JobRun struct {
 	// The configuration settings that are used to override default configuration.
 	ConfigurationOverrides *ConfigurationOverrides
 
+	// Maximum duration for the job run to run. If the job run runs beyond this
+	// duration, it will be automatically cancelled.
+	ExecutionTimeoutMinutes *int64
+
 	// The optional job run name. This doesn't have to be unique.
 	Name *string
 

@@ -38,7 +38,7 @@ type DescribeManagedRuleGroupInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
 	//   - CLI - Specify the Region when you use the CloudFront scope:
@@ -68,12 +68,15 @@ type DescribeManagedRuleGroupOutput struct {
 	// requests. These labels are defined in the RuleLabels for a Rule .
 	AvailableLabels []types.LabelSummary
 
-	// The web ACL capacity units (WCUs) required for this rule group. WAF uses web
-	// ACL capacity units (WCU) to calculate and control the operating resources that
-	// are used to run your rules, rule groups, and web ACLs. WAF calculates capacity
-	// differently for each rule type, to reflect each rule's relative cost. Rule group
-	// capacity is fixed at creation, so users can plan their web ACL WCU usage when
-	// they use a rule group. The WCU limit for web ACLs is 1,500.
+	// The web ACL capacity units (WCUs) required for this rule group. WAF uses WCUs
+	// to calculate and control the operating resources that are used to run your
+	// rules, rule groups, and web ACLs. WAF calculates capacity differently for each
+	// rule type, to reflect the relative cost of each rule. Simple rules that cost
+	// little to run use fewer WCUs than more complex rules that use more processing
+	// power. Rule group capacity is fixed at creation, which helps users plan their
+	// web ACL WCU usage when they use a rule group. For more information, see WAF web
+	// ACL capacity units (WCU) (https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
+	// in the WAF Developer Guide.
 	Capacity int64
 
 	// The labels that one or more rules in this rule group match against in label

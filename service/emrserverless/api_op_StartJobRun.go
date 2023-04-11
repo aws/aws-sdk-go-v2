@@ -72,7 +72,7 @@ type StartJobRunOutput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The output lists the execution role ARN of the job run.
+	// This output displays the ARN of the job run..
 	//
 	// This member is required.
 	Arn *string

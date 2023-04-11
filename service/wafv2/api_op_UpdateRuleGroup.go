@@ -76,7 +76,7 @@ type UpdateRuleGroupInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
 	//   - CLI - Specify the Region when you use the CloudFront scope:
@@ -96,11 +96,9 @@ type UpdateRuleGroupInput struct {
 	// these for the rule group, and then use them in the rules that you define in the
 	// rule group. For information about customizing web requests and responses, see
 	// Customizing web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-	// . For information about the limits on count and size for custom request and
-	// response settings, see WAF quotas (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html)
-	// in the WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-	// .
+	// in the WAF Developer Guide. For information about the limits on count and size
+	// for custom request and response settings, see WAF quotas (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html)
+	// in the WAF Developer Guide.
 	CustomResponseBodies map[string]types.CustomResponseBody
 
 	// A description of the rule group that helps with identification.

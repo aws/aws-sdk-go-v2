@@ -1008,11 +1008,6 @@ type RedshiftDataParameters struct {
 	// This member is required.
 	Database *string
 
-	// The SQL statement text to run.
-	//
-	// This member is required.
-	Sql *string
-
 	// The database user name. Required when authenticating using temporary
 	// credentials. Do not provide this parameter when connecting to a Redshift
 	// Serverless workgroup.
@@ -1021,6 +1016,12 @@ type RedshiftDataParameters struct {
 	// The name or ARN of the secret that enables access to the database. Required
 	// when authenticating using Amazon Web Services Secrets Manager.
 	SecretManagerArn *string
+
+	// The SQL statement text to run.
+	Sql *string
+
+	// A list of SQLs.
+	Sqls []string
 
 	// The name of the SQL statement. You can name the SQL statement when you create
 	// it to identify the query.

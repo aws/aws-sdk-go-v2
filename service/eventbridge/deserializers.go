@@ -10185,6 +10185,11 @@ func awsAwsjson11_deserializeDocumentRedshiftDataParameters(v **types.RedshiftDa
 				sv.Sql = ptr.String(jtv)
 			}
 
+		case "Sqls":
+			if err := awsAwsjson11_deserializeDocumentSqls(&sv.Sqls, value); err != nil {
+				return err
+			}
+
 		case "StatementName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11268,6 +11273,42 @@ func awsAwsjson11_deserializeDocumentSecondary(v **types.Secondary, value interf
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSqls(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Sql to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

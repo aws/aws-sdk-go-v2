@@ -1,0 +1,8 @@
+{
+    "id": "dbca0f91-0be6-4907-b3c5-abe1d1073d3a",
+    "type": "feature",
+    "description": "This release will allow using registry alias as registryId in BatchDeleteImage request.",
+    "modules": [
+        "service/ecrpublic"
+    ]
+}

@@ -218,8 +218,7 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 
 // The operation failed because the specified policy isn't in the proper format.
 // The policy specifications must conform to the following:
-//   - The policy must be composed using IAM Policy version 2012-10-17 or version
-//     2015-01-01.
+//   - The policy must be composed using IAM Policy version 2012-10-17.
 //   - The policy must include specifications for Effect , Action , and Principal .
 //   - Effect must specify Allow .
 //   - Action must specify wafv2:CreateWebACL , wafv2:UpdateWebACL , and

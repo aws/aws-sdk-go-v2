@@ -12,23 +12,23 @@ import (
 
 // Associates a web ACL with a regional application resource, to protect the
 // resource. A regional application can be an Application Load Balancer (ALB), an
-// Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool,
-// or an App Runner service. For Amazon CloudFront, don't use this call. Instead,
-// use your CloudFront distribution configuration. To associate a web ACL, in the
-// CloudFront call UpdateDistribution , set the web ACL ID to the Amazon Resource
-// Name (ARN) of the web ACL. For information, see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
-// . When you make changes to web ACLs or web ACL components, like rules and rule
-// groups, WAF propagates the changes everywhere that the web ACL and its
-// components are stored and used. Your changes are applied within seconds, but
-// there might be a brief period of inconsistency when the changes have arrived in
-// some places and not in others. So, for example, if you change a rule action
-// setting, the action might be the old action in one area and the new action in
-// another area. Or if you add an IP address to an IP set used in a blocking rule,
-// the new address might briefly be blocked in one area while still allowed in
-// another. This temporary inconsistency can occur when you first associate a web
-// ACL with an Amazon Web Services resource and when you change a web ACL that is
-// already associated with a resource. Generally, any inconsistencies of this type
-// last only a few seconds.
+// Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user
+// pool, or an App Runner service. For Amazon CloudFront, don't use this call.
+// Instead, use your CloudFront distribution configuration. To associate a web ACL,
+// in the CloudFront call UpdateDistribution , set the web ACL ID to the Amazon
+// Resource Name (ARN) of the web ACL. For information, see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
+// in the Amazon CloudFront Developer Guide. When you make changes to web ACLs or
+// web ACL components, like rules and rule groups, WAF propagates the changes
+// everywhere that the web ACL and its components are stored and used. Your changes
+// are applied within seconds, but there might be a brief period of inconsistency
+// when the changes have arrived in some places and not in others. So, for example,
+// if you change a rule action setting, the action might be the old action in one
+// area and the new action in another area. Or if you add an IP address to an IP
+// set used in a blocking rule, the new address might briefly be blocked in one
+// area while still allowed in another. This temporary inconsistency can occur when
+// you first associate a web ACL with an Amazon Web Services resource and when you
+// change a web ACL that is already associated with a resource. Generally, any
+// inconsistencies of this type last only a few seconds.
 func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInput, optFns ...func(*Options)) (*AssociateWebACLOutput, error) {
 	if params == nil {
 		params = &AssociateWebACLInput{}
@@ -49,16 +49,16 @@ type AssociateWebACLInput struct {
 	// The Amazon Resource Name (ARN) of the resource to associate with the web ACL.
 	// The ARN must be in one of the following formats:
 	//   - For an Application Load Balancer:
-	//   arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+	//   arn:partition:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
 	//   - For an Amazon API Gateway REST API:
-	//   arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
+	//   arn:partition:apigateway:region::/restapis/api-id/stages/stage-name
 	//   - For an AppSync GraphQL API:
-	//   arn:aws:appsync:region:account-id:apis/GraphQLApiId
+	//   arn:partition:appsync:region:account-id:apis/GraphQLApiId
 	//   - For an Amazon Cognito user pool:
-	//   arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
+	//   arn:partition:cognito-idp:region:account-id:userpool/user-pool-id
 	//   - For an App Runner service:
-	//   arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+	//   arn:partition:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
 	//
 	// This member is required.
 	ResourceArn *string
