@@ -1,3 +1,7 @@
+# v1.15.5 (2023-04-12)
+
+* **Documentation**: Removal of the Ropsten network. The Ethereum foundation ceased support of Ropsten on December 31st, 2022..
+
 # v1.15.4 (2023-04-10)
 
 * No change notes available for this release.

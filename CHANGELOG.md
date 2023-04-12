@@ -1,3 +1,11 @@
+# Release (2023-04-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.18.0](service/groundstation/CHANGELOG.md#v1180-2023-04-12)
+  * **Feature**: AWS Ground Station Wideband DigIF GA Release
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.15.5](service/managedblockchain/CHANGELOG.md#v1155-2023-04-12)
+  * **Documentation**: Removal of the Ropsten network. The Ethereum foundation ceased support of Ropsten on December 31st, 2022..
+
 # Release (2023-04-11)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "2e24ccc8-b3ae-4773-9983-077df22dbec5",
-    "type": "documentation",
-    "description": "Removal of the Ropsten network. The Ethereum foundation ceased support of Ropsten on December 31st, 2022..",
-    "modules": [
-        "service/managedblockchain"
-    ]
-}
