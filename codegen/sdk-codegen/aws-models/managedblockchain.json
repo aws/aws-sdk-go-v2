@@ -54,7 +54,7 @@
                 "Type": {
                     "target": "com.amazonaws.managedblockchain#AccessorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the accessor.</p>\n         <note>\n            <p>Currently accessor type is restricted to <code>BILLING_TOKEN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The type of the accessor.</p>\n         <note>\n            <p>Currently, accessor type is restricted to <code>BILLING_TOKEN</code>.</p>\n         </note>"
                     }
                 },
                 "BillingToken": {
@@ -290,7 +290,7 @@
                 "AccessorType": {
                     "target": "com.amazonaws.managedblockchain#AccessorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of accessor.</p>\n         <note>\n            <p>Currently accessor type is restricted to <code>BILLING_TOKEN</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of accessor.</p>\n         <note>\n            <p>Currently, accessor type is restricted to <code>BILLING_TOKEN</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -612,7 +612,7 @@
                 "NetworkId": {
                     "target": "com.amazonaws.managedblockchain#ResourceIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the network for the node.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-ropsten</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the network for the node.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -927,7 +927,7 @@
                 "NetworkId": {
                     "target": "com.amazonaws.managedblockchain#ResourceIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the network that the node is on.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-ropsten</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the network that the node is on.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2421,13 +2421,13 @@
                 "AdminPassword": {
                     "target": "com.amazonaws.managedblockchain#PasswordString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the member's initial administrative user. The <code>AdminPassword</code> must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quotation mark (‘), a double quotation marks (“), a forward slash(/), a backward slash(\\), @, or a space.</p>",
+                        "smithy.api#documentation": "<p>The password for the member's initial administrative user. The <code>AdminPassword</code> must be at least 8 characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quotation mark (‘), a double quotation marks (“), a forward slash(/), a backward slash(\\), @, or a space.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration properties for Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.</p>"
+                "smithy.api#documentation": "<p>Configuration properties for Hyperledger Fabric for a member in a Managed Blockchain network that is using the Hyperledger Fabric framework.</p>"
             }
         },
         "com.amazonaws.managedblockchain#MemberFabricLogPublishingConfiguration": {
@@ -2656,7 +2656,7 @@
                 "VotingPolicy": {
                     "target": "com.amazonaws.managedblockchain#VotingPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The voting rules for the network to decide if a proposal is accepted.</p>"
+                        "smithy.api#documentation": "<p>The voting rules that the network uses to decide if a proposal is accepted.</p>"
                     }
                 },
                 "Status": {
@@ -2694,7 +2694,7 @@
                 "ChainId": {
                     "target": "com.amazonaws.managedblockchain#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p>\n         <ul>\n            <li>\n               <p>mainnet = <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>goerli = <code>5</code>\n               </p>\n            </li>\n            <li>\n               <p>rinkeby = <code>4</code>\n               </p>\n            </li>\n            <li>\n               <p>ropsten = <code>3</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p>\n         <ul>\n            <li>\n               <p>mainnet = <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>goerli = <code>5</code>\n               </p>\n            </li>\n            <li>\n               <p>rinkeby = <code>4</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4211,9 +4211,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4224,9 +4224,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4237,9 +4237,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4250,9 +4250,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4263,9 +4263,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4276,9 +4276,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4289,9 +4289,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4302,9 +4302,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4315,9 +4315,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4328,9 +4328,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4341,9 +4341,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4354,9 +4354,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4367,9 +4367,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4380,9 +4380,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4393,9 +4393,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4406,9 +4406,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4419,9 +4419,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4432,9 +4443,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4445,9 +4467,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4458,9 +4491,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4471,9 +4515,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4484,9 +4528,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4498,8 +4542,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4509,9 +4553,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4521,10 +4565,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],

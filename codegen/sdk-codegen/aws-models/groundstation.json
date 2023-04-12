@@ -33,6 +33,18 @@
                 }
             }
         },
+        "com.amazonaws.groundstation#AgentCpuCoresList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Integer"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.groundstation#AgentDetails": {
             "type": "structure",
             "members": {
@@ -58,10 +70,15 @@
                     }
                 },
                 "reservedCpuCores": {
-                    "target": "com.amazonaws.groundstation#ReservedCpuCoresList",
+                    "target": "com.amazonaws.groundstation#AgentCpuCoresList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Number of Cpu cores reserved for agent.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<note>\n            <p>This field should not be used. Use agentCpuCores instead.</p>\n         </note>\n         <p>List of CPU cores reserved for processes other than the agent running on the EC2 instance.</p>"
+                    }
+                },
+                "agentCpuCores": {
+                    "target": "com.amazonaws.groundstation#AgentCpuCoresList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of CPU cores reserved for the agent.</p>"
                     }
                 },
                 "componentVersions": {
@@ -380,11 +397,73 @@
                 }
             }
         },
+        "com.amazonaws.groundstation#CapabilityHealth": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNHEALTHY",
+                        "name": "UNHEALTHY"
+                    },
+                    {
+                        "value": "HEALTHY",
+                        "name": "HEALTHY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.groundstation#CapabilityHealthReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NO_REGISTERED_AGENT",
+                        "name": "NO_REGISTERED_AGENT"
+                    },
+                    {
+                        "value": "INVALID_IP_OWNERSHIP",
+                        "name": "INVALID_IP_OWNERSHIP"
+                    },
+                    {
+                        "value": "NOT_AUTHORIZED_TO_CREATE_SLR",
+                        "name": "NOT_AUTHORIZED_TO_CREATE_SLR"
+                    },
+                    {
+                        "value": "UNVERIFIED_IP_OWNERSHIP",
+                        "name": "UNVERIFIED_IP_OWNERSHIP"
+                    },
+                    {
+                        "value": "INITIALIZING_DATAPLANE",
+                        "name": "INITIALIZING_DATAPLANE"
+                    },
+                    {
+                        "value": "DATAPLANE_FAILURE",
+                        "name": "DATAPLANE_FAILURE"
+                    },
+                    {
+                        "value": "HEALTHY",
+                        "name": "HEALTHY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.groundstation#CapabilityHealthReasonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.groundstation#CapabilityHealthReason"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.groundstation#ComponentStatusData": {
             "type": "structure",
             "members": {
                 "componentType": {
-                    "target": "com.amazonaws.groundstation#ComponentType",
+                    "target": "com.amazonaws.groundstation#ComponentTypeString",
                     "traits": {
                         "smithy.api#documentation": "<p>The Component type.</p>",
                         "smithy.api#required": {}
@@ -444,35 +523,22 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 20
                 }
             }
         },
-        "com.amazonaws.groundstation#ComponentType": {
+        "com.amazonaws.groundstation#ComponentTypeString": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LAMINAR_FLOW",
-                        "name": "LAMINAR_FLOW"
-                    },
-                    {
-                        "value": "PRISM",
-                        "name": "PRISM"
-                    },
-                    {
-                        "value": "DIGITIZER",
-                        "name": "DIGITIZER"
-                    }
-                ]
+                "smithy.api#pattern": "^[a-zA-Z0-9_]{1,64}$"
             }
         },
         "com.amazonaws.groundstation#ComponentVersion": {
             "type": "structure",
             "members": {
                 "componentType": {
-                    "target": "com.amazonaws.groundstation#ComponentType",
+                    "target": "com.amazonaws.groundstation#ComponentTypeString",
                     "traits": {
                         "smithy.api#documentation": "<p>Component type.</p>",
                         "smithy.api#required": {}
@@ -1035,13 +1101,13 @@
                 "contactPrePassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time, in seconds, prior to contact start for the contact to remain in a <code>PREPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>PREPASS</code> state.</p>"
+                        "smithy.api#documentation": "<p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>"
                     }
                 },
                 "contactPostPassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time, in seconds, after a contact ends for the contact to remain in a <code>POSTPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>POSTPASS</code> state.</p>"
+                        "smithy.api#documentation": "<p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>"
                     }
                 }
             },
@@ -2103,6 +2169,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An agent endpoint.</p>"
                     }
+                },
+                "healthStatus": {
+                    "target": "com.amazonaws.groundstation#CapabilityHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A dataflow endpoint health status. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.</p>"
+                    }
+                },
+                "healthReasons": {
+                    "target": "com.amazonaws.groundstation#CapabilityHealthReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Health reasons for a dataflow endpoint. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2513,7 +2591,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the latest configuration information for a registered agent.</p>",
+                "smithy.api#documentation": "<note>\n            <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>\n         </note>\n         <p>Gets the latest configuration information for a registered agent.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/agent/{agentId}/configuration"
@@ -2725,13 +2803,13 @@
                 "contactPrePassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time, in seconds, prior to contact start for the contact to remain in a <code>PREPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>PREPASS</code> state.</p>"
+                        "smithy.api#documentation": "<p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>"
                     }
                 },
                 "contactPostPassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time, in seconds, after a contact ends for the contact to remain in a <code>POSTPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>POSTPASS</code> state.</p>"
+                        "smithy.api#documentation": "<p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>"
                     }
                 }
             },
@@ -3460,9 +3538,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -3473,9 +3551,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -3486,9 +3564,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -3499,9 +3577,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -3512,9 +3590,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -3525,9 +3603,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -3538,9 +3616,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -3551,9 +3629,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -3564,9 +3642,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3577,9 +3655,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3590,9 +3668,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -3603,9 +3681,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -3616,9 +3694,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3629,9 +3707,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3642,9 +3720,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3655,9 +3733,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3668,9 +3746,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3681,9 +3759,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3694,9 +3772,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3707,9 +3785,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3720,9 +3798,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3733,9 +3811,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3746,9 +3824,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3759,9 +3837,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -3772,9 +3861,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -3785,9 +3885,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3798,9 +3909,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3811,9 +3933,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3824,9 +3946,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3838,8 +3960,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3849,9 +3971,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3861,10 +3983,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -4961,7 +5089,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a new agent with AWS Groundstation.</p>",
+                "smithy.api#documentation": "<note>\n            <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>\n         </note>\n         <p> Registers a new agent with AWS Ground Station. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/agent"
@@ -4974,7 +5102,7 @@
                 "discoveryData": {
                     "target": "com.amazonaws.groundstation#DiscoveryData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data for associating and agent with the capabilities it is managing.</p>",
+                        "smithy.api#documentation": "<p>Data for associating an agent with the capabilities it is managing.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5072,18 +5200,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p/>"
-            }
-        },
-        "com.amazonaws.groundstation#ReservedCpuCoresList": {
-            "type": "list",
-            "member": {
-                "target": "smithy.api#Integer"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 256
-                }
             }
         },
         "com.amazonaws.groundstation#ResourceLimitExceededException": {
@@ -5737,7 +5853,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the status of the agent.</p>",
+                "smithy.api#documentation": "<note>\n            <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>\n         </note>\n         <p>Update the status of the agent.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/agent/{agentId}"
