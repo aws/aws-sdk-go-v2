@@ -696,9 +696,6 @@ func validateAgentDetails(v *types.AgentDetails) error {
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
-	if v.ReservedCpuCores == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReservedCpuCores"))
-	}
 	if v.ComponentVersions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComponentVersions"))
 	} else if v.ComponentVersions != nil {
@@ -840,7 +837,7 @@ func validateComponentStatusData(v *types.ComponentStatusData) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ComponentStatusData"}
-	if len(v.ComponentType) == 0 {
+	if v.ComponentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComponentType"))
 	}
 	if v.CapabilityArn == nil {
@@ -881,7 +878,7 @@ func validateComponentVersion(v *types.ComponentVersion) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ComponentVersion"}
-	if len(v.ComponentType) == 0 {
+	if v.ComponentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComponentType"))
 	}
 	if v.Versions == nil {

@@ -80,23 +80,49 @@ func (BandwidthUnits) Values() []BandwidthUnits {
 	}
 }
 
-type ComponentType string
+type CapabilityHealth string
 
-// Enum values for ComponentType
+// Enum values for CapabilityHealth
 const (
-	ComponentTypeLaminarFlow ComponentType = "LAMINAR_FLOW"
-	ComponentTypePrism       ComponentType = "PRISM"
-	ComponentTypeDigitizer   ComponentType = "DIGITIZER"
+	CapabilityHealthUnhealthy CapabilityHealth = "UNHEALTHY"
+	CapabilityHealthHealthy   CapabilityHealth = "HEALTHY"
 )
 
-// Values returns all known values for ComponentType. Note that this can be
+// Values returns all known values for CapabilityHealth. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
-func (ComponentType) Values() []ComponentType {
-	return []ComponentType{
-		"LAMINAR_FLOW",
-		"PRISM",
-		"DIGITIZER",
+func (CapabilityHealth) Values() []CapabilityHealth {
+	return []CapabilityHealth{
+		"UNHEALTHY",
+		"HEALTHY",
+	}
+}
+
+type CapabilityHealthReason string
+
+// Enum values for CapabilityHealthReason
+const (
+	CapabilityHealthReasonNoRegisteredAgent        CapabilityHealthReason = "NO_REGISTERED_AGENT"
+	CapabilityHealthReasonInvalidIpOwnership       CapabilityHealthReason = "INVALID_IP_OWNERSHIP"
+	CapabilityHealthReasonNotAuthorizedToCreateSlr CapabilityHealthReason = "NOT_AUTHORIZED_TO_CREATE_SLR"
+	CapabilityHealthReasonUnverifiedIpOwnership    CapabilityHealthReason = "UNVERIFIED_IP_OWNERSHIP"
+	CapabilityHealthReasonInitializingDataplane    CapabilityHealthReason = "INITIALIZING_DATAPLANE"
+	CapabilityHealthReasonDataplaneFailure         CapabilityHealthReason = "DATAPLANE_FAILURE"
+	CapabilityHealthReasonHealthy                  CapabilityHealthReason = "HEALTHY"
+)
+
+// Values returns all known values for CapabilityHealthReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityHealthReason) Values() []CapabilityHealthReason {
+	return []CapabilityHealthReason{
+		"NO_REGISTERED_AGENT",
+		"INVALID_IP_OWNERSHIP",
+		"NOT_AUTHORIZED_TO_CREATE_SLR",
+		"UNVERIFIED_IP_OWNERSHIP",
+		"INITIALIZING_DATAPLANE",
+		"DATAPLANE_FAILURE",
+		"HEALTHY",
 	}
 }
 

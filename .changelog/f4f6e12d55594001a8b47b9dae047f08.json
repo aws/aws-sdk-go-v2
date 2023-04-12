@@ -1,0 +1,8 @@
+{
+    "id": "f4f6e12d-5559-4001-a8b4-7b9dae047f08",
+    "type": "feature",
+    "description": "AWS Ground Station Wideband DigIF GA Release",
+    "modules": [
+        "service/groundstation"
+    ]
+}

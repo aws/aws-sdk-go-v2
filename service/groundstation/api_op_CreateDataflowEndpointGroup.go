@@ -38,14 +38,16 @@ type CreateDataflowEndpointGroupInput struct {
 	// This member is required.
 	EndpointDetails []types.EndpointDetails
 
-	// Amount of time, in seconds, after a contact ends for the contact to remain in a
-	// POSTPASS state. A CloudWatch event is emitted when the contact enters and exits
-	// the POSTPASS state.
+	// Amount of time, in seconds, after a contact ends that the Ground Station
+	// Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow
+	// Endpoint Group State Change event will be emitted when the Dataflow Endpoint
+	// Group enters and exits the POSTPASS state.
 	ContactPostPassDurationSeconds *int32
 
-	// Amount of time, in seconds, prior to contact start for the contact to remain in
-	// a PREPASS state. A CloudWatch event is emitted when the contact enters and
-	// exits the PREPASS state.
+	// Amount of time, in seconds, before a contact starts that the Ground Station
+	// Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow
+	// Endpoint Group State Change event will be emitted when the Dataflow Endpoint
+	// Group enters and exits the PREPASS state.
 	ContactPrePassDurationSeconds *int32
 
 	// Tags of a dataflow endpoint group.

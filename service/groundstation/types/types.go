@@ -30,9 +30,11 @@ type AgentDetails struct {
 	// This member is required.
 	InstanceType *string
 
-	// Number of Cpu cores reserved for agent.
-	//
-	// This member is required.
+	// List of CPU cores reserved for the agent.
+	AgentCpuCores []int32
+
+	// This field should not be used. Use agentCpuCores instead. List of CPU cores
+	// reserved for processes other than the agent running on the EC2 instance.
 	ReservedCpuCores []int32
 
 	noSmithyDocumentSerde
@@ -153,7 +155,7 @@ type ComponentStatusData struct {
 	// The Component type.
 	//
 	// This member is required.
-	ComponentType ComponentType
+	ComponentType *string
 
 	// Dataflow UUID associated with the component.
 	//
@@ -183,7 +185,7 @@ type ComponentVersion struct {
 	// Component type.
 	//
 	// This member is required.
-	ComponentType ComponentType
+	ComponentType *string
 
 	// List of versions.
 	//
@@ -556,6 +558,14 @@ type EndpointDetails struct {
 
 	// A dataflow endpoint.
 	Endpoint *DataflowEndpoint
+
+	// Health reasons for a dataflow endpoint. This field is ignored when calling
+	// CreateDataflowEndpointGroup .
+	HealthReasons []CapabilityHealthReason
+
+	// A dataflow endpoint health status. This field is ignored when calling
+	// CreateDataflowEndpointGroup .
+	HealthStatus CapabilityHealth
 
 	// Endpoint security details including a list of subnets, a list of security
 	// groups and a role to connect streams to instances.

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a new agent with AWS Groundstation.
+// For use by AWS Ground Station Agent and shouldn't be called directly. Registers
+// a new agent with AWS Ground Station.
 func (c *Client) RegisterAgent(ctx context.Context, params *RegisterAgentInput, optFns ...func(*Options)) (*RegisterAgentOutput, error) {
 	if params == nil {
 		params = &RegisterAgentInput{}
@@ -34,7 +35,7 @@ type RegisterAgentInput struct {
 	// This member is required.
 	AgentDetails *types.AgentDetails
 
-	// Data for associating and agent with the capabilities it is managing.
+	// Data for associating an agent with the capabilities it is managing.
 	//
 	// This member is required.
 	DiscoveryData *types.DiscoveryData

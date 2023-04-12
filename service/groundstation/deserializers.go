@@ -6028,6 +6028,42 @@ func awsRestjson1_deserializeDocumentAwsGroundStationAgentEndpoint(v **types.Aws
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCapabilityHealthReasonList(v *[]types.CapabilityHealthReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CapabilityHealthReason
+	if *v == nil {
+		cv = []types.CapabilityHealthReason{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CapabilityHealthReason
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CapabilityHealthReason to be of type string, got %T instead", value)
+			}
+			col = types.CapabilityHealthReason(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConfigDetails(v *types.ConfigDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7261,6 +7297,20 @@ func awsRestjson1_deserializeDocumentEndpointDetails(v **types.EndpointDetails, 
 		case "endpoint":
 			if err := awsRestjson1_deserializeDocumentDataflowEndpoint(&sv.Endpoint, value); err != nil {
 				return err
+			}
+
+		case "healthReasons":
+			if err := awsRestjson1_deserializeDocumentCapabilityHealthReasonList(&sv.HealthReasons, value); err != nil {
+				return err
+			}
+
+		case "healthStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityHealth to be of type string, got %T instead", value)
+				}
+				sv.HealthStatus = types.CapabilityHealth(jtv)
 			}
 
 		case "securityDetails":

@@ -2464,9 +2464,27 @@ func awsRestjson1_serializeOpDocumentUpdateMissionProfileInput(v *UpdateMissionP
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAgentCpuCoresList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAgentDetails(v *types.AgentDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AgentCpuCores != nil {
+		ok := object.Key("agentCpuCores")
+		if err := awsRestjson1_serializeDocumentAgentCpuCoresList(v.AgentCpuCores, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AgentVersion != nil {
 		ok := object.Key("agentVersion")
@@ -2492,7 +2510,7 @@ func awsRestjson1_serializeDocumentAgentDetails(v *types.AgentDetails, value smi
 
 	if v.ReservedCpuCores != nil {
 		ok := object.Key("reservedCpuCores")
-		if err := awsRestjson1_serializeDocumentReservedCpuCoresList(v.ReservedCpuCores, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentAgentCpuCoresList(v.ReservedCpuCores, ok); err != nil {
 			return err
 		}
 	}
@@ -2634,6 +2652,17 @@ func awsRestjson1_serializeDocumentCapabilityArnList(v []string, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCapabilityHealthReasonList(v []types.CapabilityHealthReason, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComponentStatusData(v *types.ComponentStatusData, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2653,9 +2682,9 @@ func awsRestjson1_serializeDocumentComponentStatusData(v *types.ComponentStatusD
 		ok.String(*v.CapabilityArn)
 	}
 
-	if len(v.ComponentType) > 0 {
+	if v.ComponentType != nil {
 		ok := object.Key("componentType")
-		ok.String(string(v.ComponentType))
+		ok.String(*v.ComponentType)
 	}
 
 	if v.DataflowId != nil {
@@ -2693,9 +2722,9 @@ func awsRestjson1_serializeDocumentComponentVersion(v *types.ComponentVersion, v
 	object := value.Object()
 	defer object.Close()
 
-	if len(v.ComponentType) > 0 {
+	if v.ComponentType != nil {
 		ok := object.Key("componentType")
-		ok.String(string(v.ComponentType))
+		ok.String(*v.ComponentType)
 	}
 
 	if v.Versions != nil {
@@ -2967,6 +2996,18 @@ func awsRestjson1_serializeDocumentEndpointDetails(v *types.EndpointDetails, val
 		}
 	}
 
+	if v.HealthReasons != nil {
+		ok := object.Key("healthReasons")
+		if err := awsRestjson1_serializeDocumentCapabilityHealthReasonList(v.HealthReasons, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.HealthStatus) > 0 {
+		ok := object.Key("healthStatus")
+		ok.String(string(v.HealthStatus))
+	}
+
 	if v.SecurityDetails != nil {
 		ok := object.Key("securityDetails")
 		if err := awsRestjson1_serializeDocumentSecurityDetails(v.SecurityDetails, ok); err != nil {
@@ -3187,17 +3228,6 @@ func awsRestjson1_serializeDocumentRangedSocketAddress(v *types.RangedSocketAddr
 		}
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeDocumentReservedCpuCoresList(v []int32, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.Integer(v[i])
-	}
 	return nil
 }
 

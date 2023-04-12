@@ -36,8 +36,8 @@ type Accessor struct {
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
 
-	// The type of the accessor. Currently accessor type is restricted to BILLING_TOKEN
-	// .
+	// The type of the accessor. Currently, accessor type is restricted to
+	// BILLING_TOKEN .
 	Type AccessorType
 
 	noSmithyDocumentSerde
@@ -299,11 +299,11 @@ type MemberFabricAttributes struct {
 }
 
 // Configuration properties for Hyperledger Fabric for a member in a Managed
-// Blockchain network using the Hyperledger Fabric framework.
+// Blockchain network that is using the Hyperledger Fabric framework.
 type MemberFabricConfiguration struct {
 
 	// The password for the member's initial administrative user. The AdminPassword
-	// must be at least eight characters long and no more than 32 characters. It must
+	// must be at least 8 characters long and no more than 32 characters. It must
 	// contain at least one uppercase letter, one lowercase letter, and one digit. It
 	// cannot have a single quotation mark (‘), a double quotation marks (“), a forward
 	// slash(/), a backward slash(\), @, or a space.
@@ -454,7 +454,7 @@ type Network struct {
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
 
-	// The voting rules for the network to decide if a proposal is accepted.
+	// The voting rules that the network uses to decide if a proposal is accepted.
 	VotingPolicy *VotingPolicy
 
 	// The VPC endpoint service name of the VPC endpoint service of the network.
@@ -473,7 +473,6 @@ type NetworkEthereumAttributes struct {
 	//   - mainnet = 1
 	//   - goerli = 5
 	//   - rinkeby = 4
-	//   - ropsten = 3
 	ChainId *string
 
 	noSmithyDocumentSerde

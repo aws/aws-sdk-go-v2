@@ -32,7 +32,7 @@ func (c *Client) CreateAccessor(ctx context.Context, params *CreateAccessorInput
 
 type CreateAccessorInput struct {
 
-	// The type of accessor. Currently accessor type is restricted to BILLING_TOKEN .
+	// The type of accessor. Currently, accessor type is restricted to BILLING_TOKEN .
 	//
 	// This member is required.
 	AccessorType types.AccessorType
