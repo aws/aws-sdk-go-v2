@@ -67,7 +67,7 @@ func TestListMultipartUploadsPaginator(t *testing.T) {
 
 			paginator.NextPage(context.TODO(), initializeMiddlewareFn(&testListMPUMiddleware{1}))
 
-			testNextPageResult(c.limit, paginator.keyMarker, paginator.uploadIdMarker, t)
+			testNextPageResult(c.limit, paginator.keyMarker, paginator.uploadIDMarker, t)
 		})
 	}
 }
@@ -99,7 +99,7 @@ func TestListObjectVersionsPaginator(t *testing.T) {
 
 			paginator.NextPage(context.TODO(), initializeMiddlewareFn(&testListOVMiddleware{1}))
 
-			testNextPageResult(c.limit, paginator.keyMarker, paginator.versionIdMarker, t)
+			testNextPageResult(c.limit, paginator.keyMarker, paginator.versionIDMarker, t)
 		})
 	}
 }
