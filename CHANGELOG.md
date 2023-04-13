@@ -1,3 +1,11 @@
+# Release (2023-04-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.5.0](service/chimesdkvoice/CHANGELOG.md#v150-2023-04-13)
+  * **Feature**: This release adds tagging support for Voice Connectors and SIP Media Applications
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.19.0](service/mediaconnect/CHANGELOG.md#v1190-2023-04-13)
+  * **Feature**: Gateway is a new feature of AWS Elemental MediaConnect. Gateway allows the deployment of on-premises resources for the purpose of transporting live video to and from the AWS Cloud.
+
 # Release (2023-04-12)
 
 ## Module Highlights

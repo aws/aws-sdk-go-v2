@@ -1,8 +1,0 @@
-{
-    "id": "004400c2-552b-4c2c-9ed9-c93850216dc4",
-    "type": "feature",
-    "description": "Gateway is a new feature of AWS Elemental MediaConnect. Gateway allows the deployment of on-premises resources for the purpose of transporting live video to and from the AWS Cloud.",
-    "modules": [
-        "service/mediaconnect"
-    ]
-}

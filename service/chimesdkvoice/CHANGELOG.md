@@ -1,3 +1,7 @@
+# v1.5.0 (2023-04-13)
+
+* **Feature**: This release adds tagging support for Voice Connectors and SIP Media Applications
+
 # v1.4.2 (2023-04-10)
 
 * No change notes available for this release.
