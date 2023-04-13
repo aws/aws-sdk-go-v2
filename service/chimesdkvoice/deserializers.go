@@ -17457,6 +17457,15 @@ func awsRestjson1_deserializeDocumentSipMediaApplication(v **types.SipMediaAppli
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "SipMediaApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SipMediaApplicationArn = ptr.String(jtv)
+			}
+
 		case "SipMediaApplicationId":
 			if value != nil {
 				jtv, ok := value.(string)

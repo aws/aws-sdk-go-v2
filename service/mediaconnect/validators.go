@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddBridgeOutputs struct {
+}
+
+func (*validateOpAddBridgeOutputs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddBridgeOutputs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddBridgeOutputsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddBridgeOutputsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAddBridgeSources struct {
+}
+
+func (*validateOpAddBridgeSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddBridgeSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddBridgeSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddBridgeSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddFlowMediaStreams struct {
 }
 
@@ -90,6 +130,26 @@ func (m *validateOpAddFlowVpcInterfaces) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBridge struct {
+}
+
+func (*validateOpCreateBridge) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBridge) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBridgeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBridgeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFlow struct {
 }
 
@@ -105,6 +165,46 @@ func (m *validateOpCreateFlow) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateGateway struct {
+}
+
+func (*validateOpCreateGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBridge struct {
+}
+
+func (*validateOpDeleteBridge) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBridge) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBridgeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBridgeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,6 +230,66 @@ func (m *validateOpDeleteFlow) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteGateway struct {
+}
+
+func (*validateOpDeleteGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeregisterGatewayInstance struct {
+}
+
+func (*validateOpDeregisterGatewayInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterGatewayInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterGatewayInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterGatewayInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBridge struct {
+}
+
+func (*validateOpDescribeBridge) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBridge) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBridgeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBridgeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFlow struct {
 }
 
@@ -145,6 +305,46 @@ func (m *validateOpDescribeFlow) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeGateway struct {
+}
+
+func (*validateOpDescribeGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeGatewayInstance struct {
+}
+
+func (*validateOpDescribeGatewayInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeGatewayInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeGatewayInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeGatewayInstanceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -245,6 +445,46 @@ func (m *validateOpPurchaseOffering) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPurchaseOfferingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveBridgeOutput struct {
+}
+
+func (*validateOpRemoveBridgeOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveBridgeOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveBridgeOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveBridgeOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveBridgeSource struct {
+}
+
+func (*validateOpRemoveBridgeSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveBridgeSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveBridgeSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveBridgeSourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +670,86 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateBridge struct {
+}
+
+func (*validateOpUpdateBridge) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBridge) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBridgeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBridgeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateBridgeOutput struct {
+}
+
+func (*validateOpUpdateBridgeOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBridgeOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBridgeOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBridgeOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateBridgeSource struct {
+}
+
+func (*validateOpUpdateBridgeSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBridgeSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBridgeSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBridgeSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateBridgeState struct {
+}
+
+func (*validateOpUpdateBridgeState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBridgeState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBridgeStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBridgeStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFlowEntitlement struct {
 }
 
@@ -530,6 +850,34 @@ func (m *validateOpUpdateFlowSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateGatewayInstance struct {
+}
+
+func (*validateOpUpdateGatewayInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateGatewayInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateGatewayInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateGatewayInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAddBridgeOutputsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddBridgeOutputs{}, middleware.After)
+}
+
+func addOpAddBridgeSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddBridgeSources{}, middleware.After)
+}
+
 func addOpAddFlowMediaStreamsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddFlowMediaStreams{}, middleware.After)
 }
@@ -546,16 +894,48 @@ func addOpAddFlowVpcInterfacesValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpAddFlowVpcInterfaces{}, middleware.After)
 }
 
+func addOpCreateBridgeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBridge{}, middleware.After)
+}
+
 func addOpCreateFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFlow{}, middleware.After)
+}
+
+func addOpCreateGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGateway{}, middleware.After)
+}
+
+func addOpDeleteBridgeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBridge{}, middleware.After)
 }
 
 func addOpDeleteFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFlow{}, middleware.After)
 }
 
+func addOpDeleteGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteGateway{}, middleware.After)
+}
+
+func addOpDeregisterGatewayInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterGatewayInstance{}, middleware.After)
+}
+
+func addOpDescribeBridgeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBridge{}, middleware.After)
+}
+
 func addOpDescribeFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFlow{}, middleware.After)
+}
+
+func addOpDescribeGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeGateway{}, middleware.After)
+}
+
+func addOpDescribeGatewayInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeGatewayInstance{}, middleware.After)
 }
 
 func addOpDescribeOfferingValidationMiddleware(stack *middleware.Stack) error {
@@ -576,6 +956,14 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPurchaseOfferingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPurchaseOffering{}, middleware.After)
+}
+
+func addOpRemoveBridgeOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveBridgeOutput{}, middleware.After)
+}
+
+func addOpRemoveBridgeSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveBridgeSource{}, middleware.After)
 }
 
 func addOpRemoveFlowMediaStreamValidationMiddleware(stack *middleware.Stack) error {
@@ -614,6 +1002,22 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateBridgeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBridge{}, middleware.After)
+}
+
+func addOpUpdateBridgeOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBridgeOutput{}, middleware.After)
+}
+
+func addOpUpdateBridgeSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBridgeSource{}, middleware.After)
+}
+
+func addOpUpdateBridgeStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBridgeState{}, middleware.After)
+}
+
 func addOpUpdateFlowEntitlementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFlowEntitlement{}, middleware.After)
 }
@@ -632,6 +1036,44 @@ func addOpUpdateFlowOutputValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateFlowSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFlowSource{}, middleware.After)
+}
+
+func addOpUpdateGatewayInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateGatewayInstance{}, middleware.After)
+}
+
+func validate__listOfAddBridgeOutputRequest(v []types.AddBridgeOutputRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAddBridgeOutputRequest"}
+	for i := range v {
+		if err := validateAddBridgeOutputRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfAddBridgeSourceRequest(v []types.AddBridgeSourceRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAddBridgeSourceRequest"}
+	for i := range v {
+		if err := validateAddBridgeSourceRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validate__listOfAddMediaStreamRequest(v []types.AddMediaStreamRequest) error {
@@ -675,6 +1117,23 @@ func validate__listOfDestinationConfigurationRequest(v []types.DestinationConfig
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfDestinationConfigurationRequest"}
 	for i := range v {
 		if err := validateDestinationConfigurationRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfGatewayNetwork(v []types.GatewayNetwork) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfGatewayNetwork"}
+	for i := range v {
+		if err := validateGatewayNetwork(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -780,6 +1239,135 @@ func validate__listOfVpcInterfaceRequest(v []types.VpcInterfaceRequest) error {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddBridgeFlowSourceRequest(v *types.AddBridgeFlowSourceRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddBridgeFlowSourceRequest"}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddBridgeNetworkOutputRequest(v *types.AddBridgeNetworkOutputRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddBridgeNetworkOutputRequest"}
+	if v.IpAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.NetworkName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkName"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddBridgeNetworkSourceRequest(v *types.AddBridgeNetworkSourceRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddBridgeNetworkSourceRequest"}
+	if v.MulticastIp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MulticastIp"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.NetworkName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkName"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddBridgeOutputRequest(v *types.AddBridgeOutputRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddBridgeOutputRequest"}
+	if v.NetworkOutput != nil {
+		if err := validateAddBridgeNetworkOutputRequest(v.NetworkOutput); err != nil {
+			invalidParams.AddNested("NetworkOutput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddBridgeSourceRequest(v *types.AddBridgeSourceRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddBridgeSourceRequest"}
+	if v.FlowSource != nil {
+		if err := validateAddBridgeFlowSourceRequest(v.FlowSource); err != nil {
+			invalidParams.AddNested("FlowSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkSource != nil {
+		if err := validateAddBridgeNetworkSourceRequest(v.NetworkSource); err != nil {
+			invalidParams.AddNested("NetworkSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddEgressGatewayBridgeRequest(v *types.AddEgressGatewayBridgeRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddEgressGatewayBridgeRequest"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddIngressGatewayBridgeRequest(v *types.AddIngressGatewayBridgeRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddIngressGatewayBridgeRequest"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -900,6 +1488,24 @@ func validateEncryption(v *types.Encryption) error {
 	}
 }
 
+func validateGatewayNetwork(v *types.GatewayNetwork) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayNetwork"}
+	if v.CidrBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CidrBlock"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGrantEntitlementRequest(v *types.GrantEntitlementRequest) error {
 	if v == nil {
 		return nil
@@ -1005,6 +1611,21 @@ func validateMediaStreamSourceConfigurationRequest(v *types.MediaStreamSourceCon
 	}
 }
 
+func validateSetGatewayBridgeSourceRequest(v *types.SetGatewayBridgeSourceRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetGatewayBridgeSourceRequest"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSetSourceRequest(v *types.SetSourceRequest) error {
 	if v == nil {
 		return nil
@@ -1018,6 +1639,11 @@ func validateSetSourceRequest(v *types.SetSourceRequest) error {
 	if v.MediaStreamSourceConfigurations != nil {
 		if err := validate__listOfMediaStreamSourceConfigurationRequest(v.MediaStreamSourceConfigurations); err != nil {
 			invalidParams.AddNested("MediaStreamSourceConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GatewayBridgeSource != nil {
+		if err := validateSetGatewayBridgeSourceRequest(v.GatewayBridgeSource); err != nil {
+			invalidParams.AddNested("GatewayBridgeSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1043,6 +1669,50 @@ func validateVpcInterfaceRequest(v *types.VpcInterfaceRequest) error {
 	}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddBridgeOutputsInput(v *AddBridgeOutputsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddBridgeOutputsInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if v.Outputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Outputs"))
+	} else if v.Outputs != nil {
+		if err := validate__listOfAddBridgeOutputRequest(v.Outputs); err != nil {
+			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddBridgeSourcesInput(v *AddBridgeSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddBridgeSourcesInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validate__listOfAddBridgeSourceRequest(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1139,6 +1809,46 @@ func validateOpAddFlowVpcInterfacesInput(v *AddFlowVpcInterfacesInput) error {
 	}
 }
 
+func validateOpCreateBridgeInput(v *CreateBridgeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBridgeInput"}
+	if v.EgressGatewayBridge != nil {
+		if err := validateAddEgressGatewayBridgeRequest(v.EgressGatewayBridge); err != nil {
+			invalidParams.AddNested("EgressGatewayBridge", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IngressGatewayBridge != nil {
+		if err := validateAddIngressGatewayBridgeRequest(v.IngressGatewayBridge); err != nil {
+			invalidParams.AddNested("IngressGatewayBridge", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Outputs != nil {
+		if err := validate__listOfAddBridgeOutputRequest(v.Outputs); err != nil {
+			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PlacementArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementArn"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validate__listOfAddBridgeSourceRequest(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFlowInput(v *CreateFlowInput) error {
 	if v == nil {
 		return nil
@@ -1189,6 +1899,46 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 	}
 }
 
+func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGatewayInput"}
+	if v.EgressCidrBlocks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EgressCidrBlocks"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Networks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Networks"))
+	} else if v.Networks != nil {
+		if err := validate__listOfGatewayNetwork(v.Networks); err != nil {
+			invalidParams.AddNested("Networks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBridgeInput(v *DeleteBridgeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBridgeInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFlowInput(v *DeleteFlowInput) error {
 	if v == nil {
 		return nil
@@ -1204,6 +1954,51 @@ func validateOpDeleteFlowInput(v *DeleteFlowInput) error {
 	}
 }
 
+func validateOpDeleteGatewayInput(v *DeleteGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteGatewayInput"}
+	if v.GatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeregisterGatewayInstanceInput(v *DeregisterGatewayInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterGatewayInstanceInput"}
+	if v.GatewayInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBridgeInput(v *DescribeBridgeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBridgeInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeFlowInput(v *DescribeFlowInput) error {
 	if v == nil {
 		return nil
@@ -1211,6 +2006,36 @@ func validateOpDescribeFlowInput(v *DescribeFlowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeFlowInput"}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeGatewayInput(v *DescribeGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeGatewayInput"}
+	if v.GatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeGatewayInstanceInput(v *DescribeGatewayInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeGatewayInstanceInput"}
+	if v.GatewayInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayInstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1299,6 +2124,42 @@ func validateOpPurchaseOfferingInput(v *PurchaseOfferingInput) error {
 	}
 	if v.Start == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Start"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveBridgeOutputInput(v *RemoveBridgeOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveBridgeOutputInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if v.OutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveBridgeSourceInput(v *RemoveBridgeSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveBridgeSourceInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if v.SourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1463,6 +2324,75 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateBridgeInput(v *UpdateBridgeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBridgeInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBridgeOutputInput(v *UpdateBridgeOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBridgeOutputInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if v.OutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBridgeSourceInput(v *UpdateBridgeSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBridgeSourceInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if v.SourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBridgeStateInput(v *UpdateBridgeStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBridgeStateInput"}
+	if v.BridgeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BridgeArn"))
+	}
+	if len(v.DesiredState) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DesiredState"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFlowEntitlementInput(v *UpdateFlowEntitlementInput) error {
 	if v == nil {
 		return nil
@@ -1552,6 +2482,21 @@ func validateOpUpdateFlowSourceInput(v *UpdateFlowSourceInput) error {
 	}
 	if v.SourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateGatewayInstanceInput(v *UpdateGatewayInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewayInstanceInput"}
+	if v.GatewayInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayInstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

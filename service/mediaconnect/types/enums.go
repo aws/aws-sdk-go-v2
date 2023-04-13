@@ -22,6 +22,62 @@ func (Algorithm) Values() []Algorithm {
 	}
 }
 
+type BridgePlacement string
+
+// Enum values for BridgePlacement
+const (
+	BridgePlacementAvailable BridgePlacement = "AVAILABLE"
+	BridgePlacementLocked    BridgePlacement = "LOCKED"
+)
+
+// Values returns all known values for BridgePlacement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BridgePlacement) Values() []BridgePlacement {
+	return []BridgePlacement{
+		"AVAILABLE",
+		"LOCKED",
+	}
+}
+
+type BridgeState string
+
+// Enum values for BridgeState
+const (
+	BridgeStateCreating     BridgeState = "CREATING"
+	BridgeStateStandby      BridgeState = "STANDBY"
+	BridgeStateStarting     BridgeState = "STARTING"
+	BridgeStateDeploying    BridgeState = "DEPLOYING"
+	BridgeStateActive       BridgeState = "ACTIVE"
+	BridgeStateStopping     BridgeState = "STOPPING"
+	BridgeStateDeleting     BridgeState = "DELETING"
+	BridgeStateDeleted      BridgeState = "DELETED"
+	BridgeStateStartFailed  BridgeState = "START_FAILED"
+	BridgeStateStartPending BridgeState = "START_PENDING"
+	BridgeStateStopFailed   BridgeState = "STOP_FAILED"
+	BridgeStateUpdating     BridgeState = "UPDATING"
+)
+
+// Values returns all known values for BridgeState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BridgeState) Values() []BridgeState {
+	return []BridgeState{
+		"CREATING",
+		"STANDBY",
+		"STARTING",
+		"DEPLOYING",
+		"ACTIVE",
+		"STOPPING",
+		"DELETING",
+		"DELETED",
+		"START_FAILED",
+		"START_PENDING",
+		"STOP_FAILED",
+		"UPDATING",
+	}
+}
+
 type Colorimetry string
 
 // Enum values for Colorimetry
@@ -47,6 +103,44 @@ func (Colorimetry) Values() []Colorimetry {
 		"ST2065-1",
 		"ST2065-3",
 		"XYZ",
+	}
+}
+
+type ConnectionStatus string
+
+// Enum values for ConnectionStatus
+const (
+	ConnectionStatusConnected    ConnectionStatus = "CONNECTED"
+	ConnectionStatusDisconnected ConnectionStatus = "DISCONNECTED"
+)
+
+// Values returns all known values for ConnectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStatus) Values() []ConnectionStatus {
+	return []ConnectionStatus{
+		"CONNECTED",
+		"DISCONNECTED",
+	}
+}
+
+type DesiredState string
+
+// Enum values for DesiredState
+const (
+	DesiredStateActive  DesiredState = "ACTIVE"
+	DesiredStateStandby DesiredState = "STANDBY"
+	DesiredStateDeleted DesiredState = "DELETED"
+)
+
+// Values returns all known values for DesiredState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DesiredState) Values() []DesiredState {
+	return []DesiredState{
+		"ACTIVE",
+		"STANDBY",
+		"DELETED",
 	}
 }
 
@@ -139,6 +233,58 @@ func (FailoverMode) Values() []FailoverMode {
 	return []FailoverMode{
 		"MERGE",
 		"FAILOVER",
+	}
+}
+
+type GatewayState string
+
+// Enum values for GatewayState
+const (
+	GatewayStateCreating GatewayState = "CREATING"
+	GatewayStateActive   GatewayState = "ACTIVE"
+	GatewayStateUpdating GatewayState = "UPDATING"
+	GatewayStateError    GatewayState = "ERROR"
+	GatewayStateDeleting GatewayState = "DELETING"
+	GatewayStateDeleted  GatewayState = "DELETED"
+)
+
+// Values returns all known values for GatewayState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayState) Values() []GatewayState {
+	return []GatewayState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"ERROR",
+		"DELETING",
+		"DELETED",
+	}
+}
+
+type InstanceState string
+
+// Enum values for InstanceState
+const (
+	InstanceStateRegistering         InstanceState = "REGISTERING"
+	InstanceStateActive              InstanceState = "ACTIVE"
+	InstanceStateDeregistering       InstanceState = "DEREGISTERING"
+	InstanceStateDeregistered        InstanceState = "DEREGISTERED"
+	InstanceStateRegistrationError   InstanceState = "REGISTRATION_ERROR"
+	InstanceStateDeregistrationError InstanceState = "DEREGISTRATION_ERROR"
+)
+
+// Values returns all known values for InstanceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceState) Values() []InstanceState {
+	return []InstanceState{
+		"REGISTERING",
+		"ACTIVE",
+		"DEREGISTERING",
+		"DEREGISTERED",
+		"REGISTRATION_ERROR",
+		"DEREGISTRATION_ERROR",
 	}
 }
 
@@ -258,6 +404,7 @@ const (
 	ProtocolSrtListener  Protocol = "srt-listener"
 	ProtocolSrtCaller    Protocol = "srt-caller"
 	ProtocolFujitsuQos   Protocol = "fujitsu-qos"
+	ProtocolUdp          Protocol = "udp"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -275,6 +422,7 @@ func (Protocol) Values() []Protocol {
 		"srt-listener",
 		"srt-caller",
 		"fujitsu-qos",
+		"udp",
 	}
 }
 

@@ -40,7 +40,8 @@ type UpdateFlowSourceInput struct {
 	// This member is required.
 	SourceArn *string
 
-	// The type of encryption used on the content ingested from this source.
+	// The type of encryption used on the content ingested from this source. Allowable
+	// encryption types: static-key.
 	Decryption *types.UpdateEncryption
 
 	// A description for the source. This value is not used or seen outside of the
@@ -52,10 +53,13 @@ type UpdateFlowSourceInput struct {
 	// the originator's flow.
 	EntitlementArn *string
 
+	// The source configuration for cloud flows receiving a stream from a bridge.
+	GatewayBridgeSource *types.UpdateGatewayBridgeSourceRequest
+
 	// The port that the flow will be listening on for incoming content.
 	IngestPort int32
 
-	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
+	// The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
@@ -94,7 +98,7 @@ type UpdateFlowSourceInput struct {
 	SourceListenerPort int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
-	// only to Zixi-based streams.
+	// only to Zixi and SRT caller-based streams.
 	StreamId *string
 
 	// The name of the VPC interface to use for this source.

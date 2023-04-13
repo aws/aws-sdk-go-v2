@@ -66,6 +66,62 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
 // exception.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Exception raised by AWS Elemental MediaConnect. See the error message and
+// documentation for the operation for more information on the cause of this
+// exception.
+type CreateBridge420Exception struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CreateBridge420Exception) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CreateBridge420Exception) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CreateBridge420Exception) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CreateBridge420Exception"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CreateBridge420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Exception raised by AWS Elemental MediaConnect. See the error message and
+// documentation for the operation for more information on the cause of this
+// exception.
 type CreateFlow420Exception struct {
 	Message *string
 
@@ -90,6 +146,34 @@ func (e *CreateFlow420Exception) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CreateFlow420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Exception raised by AWS Elemental MediaConnect. See the error message and
+// documentation for the operation for more information on the cause of this
+// exception.
+type CreateGateway420Exception struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CreateGateway420Exception) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CreateGateway420Exception) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CreateGateway420Exception) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CreateGateway420Exception"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CreateGateway420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this

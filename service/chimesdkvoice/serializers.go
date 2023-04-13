@@ -599,6 +599,13 @@ func awsRestjson1_serializeOpDocumentCreateSipMediaApplicationInput(v *CreateSip
 		ok.String(*v.Name)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -865,6 +872,13 @@ func awsRestjson1_serializeOpDocumentCreateVoiceConnectorInput(v *CreateVoiceCon
 	if v.RequireEncryption != nil {
 		ok := object.Key("RequireEncryption")
 		ok.Boolean(*v.RequireEncryption)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

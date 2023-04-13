@@ -6,6 +6,142 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Add a flow source to an existing bridge.
+type AddBridgeFlowSourceRequest struct {
+
+	// The Amazon Resource Number (ARN) of the cloud flow to use as a source of this
+	// bridge.
+	//
+	// This member is required.
+	FlowArn *string
+
+	// The name of the flow source. This name is used to reference the source and must
+	// be unique among sources in this bridge.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the VPC interface attachment to use for this source.
+	FlowVpcInterfaceAttachment *VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
+}
+
+// Add a network output to an existing bridge.
+type AddBridgeNetworkOutputRequest struct {
+
+	// The network output IP Address.
+	//
+	// This member is required.
+	IpAddress *string
+
+	// The network output name. This name is used to reference the output and must be
+	// unique among outputs in this bridge.
+	//
+	// This member is required.
+	Name *string
+
+	// The network output's gateway network name.
+	//
+	// This member is required.
+	NetworkName *string
+
+	// The network output port.
+	//
+	// This member is required.
+	Port int32
+
+	// The network output protocol.
+	//
+	// This member is required.
+	Protocol Protocol
+
+	// The network output TTL.
+	//
+	// This member is required.
+	Ttl int32
+
+	noSmithyDocumentSerde
+}
+
+// Add a network source to an existing bridge.
+type AddBridgeNetworkSourceRequest struct {
+
+	// The network source multicast IP.
+	//
+	// This member is required.
+	MulticastIp *string
+
+	// The name of the network source. This name is used to reference the source and
+	// must be unique among sources in this bridge.
+	//
+	// This member is required.
+	Name *string
+
+	// The network source's gateway network name.
+	//
+	// This member is required.
+	NetworkName *string
+
+	// The network source port.
+	//
+	// This member is required.
+	Port int32
+
+	// The network source protocol.
+	//
+	// This member is required.
+	Protocol Protocol
+
+	noSmithyDocumentSerde
+}
+
+// Add an output to a bridge.
+type AddBridgeOutputRequest struct {
+
+	// Add a network output to an existing bridge.
+	NetworkOutput *AddBridgeNetworkOutputRequest
+
+	noSmithyDocumentSerde
+}
+
+// Add a source to an existing bridge.
+type AddBridgeSourceRequest struct {
+
+	// Add a flow source to an existing bridge.
+	FlowSource *AddBridgeFlowSourceRequest
+
+	// Add a network source to an existing bridge.
+	NetworkSource *AddBridgeNetworkSourceRequest
+
+	noSmithyDocumentSerde
+}
+
+type AddEgressGatewayBridgeRequest struct {
+
+	// The maximum expected bitrate (in bps).
+	//
+	// This member is required.
+	MaxBitrate int32
+
+	noSmithyDocumentSerde
+}
+
+type AddIngressGatewayBridgeRequest struct {
+
+	// The maximum expected bitrate (in bps).
+	//
+	// This member is required.
+	MaxBitrate int32
+
+	// The maximum number of expected outputs.
+	//
+	// This member is required.
+	MaxOutputs int32
+
+	noSmithyDocumentSerde
+}
+
 // Create maintenance setting for a flow
 type AddMaintenance struct {
 
@@ -81,7 +217,8 @@ type AddOutputRequest struct {
 	Destination *string
 
 	// The type of key used for the encryption. If no keyType is provided, the service
-	// will use the default setting (static-key).
+	// will use the default setting (static-key). Allowable encryption types:
+	// static-key.
 	Encryption *Encryption
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
@@ -116,11 +253,188 @@ type AddOutputRequest struct {
 	SmoothingLatency int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
-	// only to Zixi-based streams.
+	// only to Zixi and SRT caller-based streams.
 	StreamId *string
 
 	// The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
+}
+
+// A Bridge is the connection between your datacenter's Instances and the AWS
+// cloud. A bridge can be used to send video from the AWS cloud to your datacenter
+// or from your datacenter to the AWS cloud.
+type Bridge struct {
+
+	// The Amazon Resource Number (ARN) of the bridge.
+	//
+	// This member is required.
+	BridgeArn *string
+
+	// This member is required.
+	BridgeState BridgeState
+
+	// The name of the bridge.
+	//
+	// This member is required.
+	Name *string
+
+	// The placement Amazon Resource Number (ARN) of the bridge.
+	//
+	// This member is required.
+	PlacementArn *string
+
+	BridgeMessages []MessageDetail
+
+	EgressGatewayBridge *EgressGatewayBridge
+
+	IngressGatewayBridge *IngressGatewayBridge
+
+	// The outputs on this bridge.
+	Outputs []BridgeOutput
+
+	// The settings for source failover.
+	SourceFailoverConfig *FailoverConfig
+
+	// The sources on this bridge.
+	Sources []BridgeSource
+
+	noSmithyDocumentSerde
+}
+
+// The output of the bridge. A flow output is delivered to the AWS cloud.
+type BridgeFlowOutput struct {
+
+	// The Amazon Resource Number (ARN) of the cloud flow.
+	//
+	// This member is required.
+	FlowArn *string
+
+	// The Amazon Resource Number (ARN) of the flow source.
+	//
+	// This member is required.
+	FlowSourceArn *string
+
+	// The name of the bridge's output.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The source of the bridge. A flow source originates in MediaConnect as an
+// existing cloud flow.
+type BridgeFlowSource struct {
+
+	// The ARN of the cloud flow used as a source of this bridge.
+	//
+	// This member is required.
+	FlowArn *string
+
+	// The name of the flow source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the VPC interface attachment to use for this source.
+	FlowVpcInterfaceAttachment *VpcInterfaceAttachment
+
+	// The Amazon Resource Number (ARN) of the output.
+	OutputArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The output of the bridge. A network output is delivered to your premises.
+type BridgeNetworkOutput struct {
+
+	// The network output IP Address.
+	//
+	// This member is required.
+	IpAddress *string
+
+	// The network output name.
+	//
+	// This member is required.
+	Name *string
+
+	// The network output's gateway network name.
+	//
+	// This member is required.
+	NetworkName *string
+
+	// The network output port.
+	//
+	// This member is required.
+	Port int32
+
+	// The network output protocol.
+	//
+	// This member is required.
+	Protocol Protocol
+
+	// The network output TTL.
+	//
+	// This member is required.
+	Ttl int32
+
+	noSmithyDocumentSerde
+}
+
+// The source of the bridge. A network source originates at your premises.
+type BridgeNetworkSource struct {
+
+	// The network source multicast IP.
+	//
+	// This member is required.
+	MulticastIp *string
+
+	// The name of the network source.
+	//
+	// This member is required.
+	Name *string
+
+	// The network source's gateway network name.
+	//
+	// This member is required.
+	NetworkName *string
+
+	// The network source port.
+	//
+	// This member is required.
+	Port int32
+
+	// The network source protocol.
+	//
+	// This member is required.
+	Protocol Protocol
+
+	noSmithyDocumentSerde
+}
+
+// The output of the bridge.
+type BridgeOutput struct {
+
+	// The output of the bridge. A flow output is delivered to the AWS cloud.
+	FlowOutput *BridgeFlowOutput
+
+	// The output of the bridge. A network output is delivered to your premises.
+	NetworkOutput *BridgeNetworkOutput
+
+	noSmithyDocumentSerde
+}
+
+// The bridge's source.
+type BridgeSource struct {
+
+	// The source of the bridge. A flow source originates in MediaConnect as an
+	// existing cloud flow.
+	FlowSource *BridgeFlowSource
+
+	// The source of the bridge. A network source originates at your premises.
+	NetworkSource *BridgeNetworkSource
 
 	noSmithyDocumentSerde
 }
@@ -175,6 +489,19 @@ type DestinationConfigurationRequest struct {
 	//
 	// This member is required.
 	Interface *InterfaceRequest
+
+	noSmithyDocumentSerde
+}
+
+type EgressGatewayBridge struct {
+
+	// The maximum expected bitrate (in bps) of the egress bridge.
+	//
+	// This member is required.
+	MaxBitrate int32
+
+	// The ID of the instance running this bridge.
+	InstanceId *string
 
 	noSmithyDocumentSerde
 }
@@ -346,8 +673,7 @@ type Flow struct {
 	// This member is required.
 	Entitlements []Entitlement
 
-	// The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of
-	// the flow.
+	// The Amazon Resource Name (ARN) of the flow.
 	//
 	// This member is required.
 	FlowArn *string
@@ -455,6 +781,120 @@ type FmtpRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The settings for a gateway, including its networks.
+type Gateway struct {
+
+	// The range of IP addresses that contribute content or initiate output requests
+	// for flows communicating with this gateway. These IP addresses should be in the
+	// form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+	//
+	// This member is required.
+	EgressCidrBlocks []string
+
+	// The Amazon Resource Name (ARN) of the gateway.
+	//
+	// This member is required.
+	GatewayArn *string
+
+	// The name of the gateway. This name can not be modified after the gateway is
+	// created.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of networks in the gateway.
+	//
+	// This member is required.
+	Networks []GatewayNetwork
+
+	GatewayMessages []MessageDetail
+
+	// The current status of the gateway.
+	GatewayState GatewayState
+
+	noSmithyDocumentSerde
+}
+
+// The source configuration for cloud flows receiving a stream from a bridge.
+type GatewayBridgeSource struct {
+
+	// The ARN of the bridge feeding this flow.
+	//
+	// This member is required.
+	BridgeArn *string
+
+	// The name of the VPC interface attachment to use for this bridge source.
+	VpcInterfaceAttachment *VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
+}
+
+// The settings for an instance in a gateway.
+type GatewayInstance struct {
+
+	// The availability of the instance to host new bridges. The bridgePlacement
+	// property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be
+	// deployed to this instance. If it is AVAILABLE, new bridges can be added to this
+	// instance.
+	//
+	// This member is required.
+	BridgePlacement BridgePlacement
+
+	// The connection state of the instance.
+	//
+	// This member is required.
+	ConnectionStatus ConnectionStatus
+
+	// The Amazon Resource Name (ARN) of the instance.
+	//
+	// This member is required.
+	GatewayArn *string
+
+	// The Amazon Resource Name (ARN) of the gateway.
+	//
+	// This member is required.
+	GatewayInstanceArn *string
+
+	// The managed instance ID generated by the SSM install. This will begin with
+	// "mi-".
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The status of the instance.
+	//
+	// This member is required.
+	InstanceState InstanceState
+
+	// The running bridge count.
+	//
+	// This member is required.
+	RunningBridgeCount int32
+
+	InstanceMessages []MessageDetail
+
+	noSmithyDocumentSerde
+}
+
+// The network settings for a gateway.
+type GatewayNetwork struct {
+
+	// A unique IP address range to use for this network. These IP addresses should be
+	// in the form of a Classless Inter-Domain Routing (CIDR) block; for example,
+	// 10.0.0.0/16.
+	//
+	// This member is required.
+	CidrBlock *string
+
+	// The name of the network. This name is used to reference the network and must be
+	// unique among networks in this gateway.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The entitlements that you want to grant on a flow.
 type GrantEntitlementRequest struct {
 
@@ -474,7 +914,7 @@ type GrantEntitlementRequest struct {
 	Description *string
 
 	// The type of encryption that will be used on the output that is associated with
-	// this entitlement.
+	// this entitlement. Allowable encryption types: static-key, speke.
 	Encryption *Encryption
 
 	// An indication of whether the new entitlement should be enabled or disabled as
@@ -484,6 +924,24 @@ type GrantEntitlementRequest struct {
 
 	// The name of the entitlement. This value must be unique within the current flow.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+type IngressGatewayBridge struct {
+
+	// The maximum expected bitrate (in bps) of the ingress bridge.
+	//
+	// This member is required.
+	MaxBitrate int32
+
+	// The maximum number of outputs on the ingress bridge.
+	//
+	// This member is required.
+	MaxOutputs int32
+
+	// The ID of the instance running this bridge.
+	InstanceId *string
 
 	noSmithyDocumentSerde
 }
@@ -550,6 +1008,35 @@ type InterfaceRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Displays details of the selected bridge.
+type ListedBridge struct {
+
+	// The ARN of the bridge.
+	//
+	// This member is required.
+	BridgeArn *string
+
+	// This member is required.
+	BridgeState BridgeState
+
+	// The type of the bridge.
+	//
+	// This member is required.
+	BridgeType *string
+
+	// The name of the bridge.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the gateway associated with the bridge.
+	//
+	// This member is required.
+	PlacementArn *string
+
+	noSmithyDocumentSerde
+}
+
 // An entitlement that has been granted to you from other AWS accounts.
 type ListedEntitlement struct {
 
@@ -607,6 +1094,50 @@ type ListedFlow struct {
 
 	// The maintenance setting of a flow
 	Maintenance *Maintenance
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of a gateway, including its name, ARN, and status.
+type ListedGateway struct {
+
+	// The Amazon Resource Name (ARN) of the gateway.
+	//
+	// This member is required.
+	GatewayArn *string
+
+	// This member is required.
+	GatewayState GatewayState
+
+	// The name of the gateway.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of an instance.
+type ListedGatewayInstance struct {
+
+	// The Amazon Resource Name (ARN) of the gateway.
+	//
+	// This member is required.
+	GatewayArn *string
+
+	// The Amazon Resource Name (ARN) of the instance.
+	//
+	// This member is required.
+	GatewayInstanceArn *string
+
+	// The managed instance ID generated by the SSM install. This will begin with
+	// "mi-".
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The status of the instance.
+	InstanceState InstanceState
 
 	noSmithyDocumentSerde
 }
@@ -802,6 +1333,25 @@ type MediaStreamSourceConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
+type MessageDetail struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code *string
+
+	// The specific error message that MediaConnect returns to help you understand the
+	// reason that the request did not succeed.
+	//
+	// This member is required.
+	Message *string
+
+	// The name of the resource.
+	ResourceName *string
+
+	noSmithyDocumentSerde
+}
+
 // Messages that provide the state of the flow.
 type Messages struct {
 
@@ -876,6 +1426,12 @@ type Output struct {
 	//
 	// This member is required.
 	OutputArn *string
+
+	// The ARN of the bridge that added this output.
+	BridgeArn *string
+
+	// The bridge output ports currently in use.
+	BridgePorts []int32
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent int32
@@ -1021,10 +1577,25 @@ type ResourceSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// The source configuration for cloud flows receiving a stream from a bridge.
+type SetGatewayBridgeSourceRequest struct {
+
+	// The ARN of the bridge feeding this flow.
+	//
+	// This member is required.
+	BridgeArn *string
+
+	// The name of the VPC interface attachment to use for this bridge source.
+	VpcInterfaceAttachment *VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
+}
+
 // The settings for the source of the flow.
 type SetSourceRequest struct {
 
 	// The type of encryption that is used on the content ingested from this source.
+	// Allowable encryption types: static-key.
 	Decryption *Encryption
 
 	// A description for the source. This value is not used or seen outside of the
@@ -1036,10 +1607,13 @@ type SetSourceRequest struct {
 	// the originator's flow.
 	EntitlementArn *string
 
+	// The source configuration for cloud flows receiving a stream from a bridge.
+	GatewayBridgeSource *SetGatewayBridgeSourceRequest
+
 	// The port that the flow will be listening on for incoming content.
 	IngestPort int32
 
-	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
+	// The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
@@ -1081,7 +1655,7 @@ type SetSourceRequest struct {
 	SourceListenerPort int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
-	// only to Zixi-based streams.
+	// only to Zixi and SRT caller-based streams.
 	StreamId *string
 
 	// The name of the VPC interface to use for this source.
@@ -1122,6 +1696,9 @@ type Source struct {
 	// from another AWS account. The entitlement is set by the content originator and
 	// the ARN is generated as part of the originator's flow.
 	EntitlementArn *string
+
+	// The source configuration for cloud flows receiving a stream from a bridge.
+	GatewayBridgeSource *GatewayBridgeSource
 
 	// The IP address that the flow will be listening on for incoming content.
 	IngestIp *string
@@ -1178,7 +1755,7 @@ type Transport struct {
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	CidrAllowList []string
 
-	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
+	// The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
@@ -1216,8 +1793,67 @@ type Transport struct {
 	SourceListenerPort int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
-	// only to Zixi-based streams.
+	// only to Zixi and SRT caller-based streams.
 	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
+// Update the flow source of the bridge.
+type UpdateBridgeFlowSourceRequest struct {
+
+	// The ARN of the cloud flow to use as a source of this bridge.
+	FlowArn *string
+
+	// The name of the VPC interface attachment to use for this source.
+	FlowVpcInterfaceAttachment *VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
+}
+
+// Update an existing network output.
+type UpdateBridgeNetworkOutputRequest struct {
+
+	// The network output IP Address.
+	IpAddress *string
+
+	// The network output's gateway network name.
+	NetworkName *string
+
+	// The network output port.
+	Port int32
+
+	// The network output protocol.
+	Protocol Protocol
+
+	// The network output TTL.
+	Ttl int32
+
+	noSmithyDocumentSerde
+}
+
+// Update the network source of the bridge.
+type UpdateBridgeNetworkSourceRequest struct {
+
+	// The network source multicast IP.
+	MulticastIp *string
+
+	// The network source's gateway network name.
+	NetworkName *string
+
+	// The network source port.
+	Port int32
+
+	// The network source protocol.
+	Protocol Protocol
+
+	noSmithyDocumentSerde
+}
+
+type UpdateEgressGatewayBridgeRequest struct {
+
+	// Update an existing egress-type bridge.
+	MaxBitrate int32
 
 	noSmithyDocumentSerde
 }
@@ -1291,6 +1927,29 @@ type UpdateFailoverConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The source configuration for cloud flows receiving a stream from a bridge.
+type UpdateGatewayBridgeSourceRequest struct {
+
+	// The ARN of the bridge feeding this flow.
+	BridgeArn *string
+
+	// The name of the VPC interface attachment to use for this bridge source.
+	VpcInterfaceAttachment *VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
+}
+
+type UpdateIngressGatewayBridgeRequest struct {
+
+	// The maximum expected bitrate (in bps).
+	MaxBitrate int32
+
+	// The maximum number of expected outputs.
+	MaxOutputs int32
+
+	noSmithyDocumentSerde
+}
+
 // Update maintenance setting for a flow
 type UpdateMaintenance struct {
 
@@ -1345,10 +2004,10 @@ type VpcInterface struct {
 	noSmithyDocumentSerde
 }
 
-// The settings for attaching a VPC interface to an output.
+// The settings for attaching a VPC interface to an resource.
 type VpcInterfaceAttachment struct {
 
-	// The name of the VPC interface to use for this output.
+	// The name of the VPC interface to use for this resource.
 	VpcInterfaceName *string
 
 	noSmithyDocumentSerde

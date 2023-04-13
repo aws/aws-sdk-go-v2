@@ -1,0 +1,8 @@
+{
+    "id": "efc6d55f-6633-4751-9bbe-325f80489154",
+    "type": "feature",
+    "description": "This release adds tagging support for Voice Connectors and SIP Media Applications",
+    "modules": [
+        "service/chimesdkvoice"
+    ]
+}

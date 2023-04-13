@@ -2326,6 +2326,11 @@ func validateOpCreateSipMediaApplicationInput(v *CreateSipMediaApplicationInput)
 	if v.Endpoints == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Endpoints"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2384,6 +2389,11 @@ func validateOpCreateVoiceConnectorInput(v *CreateVoiceConnectorInput) error {
 	}
 	if v.RequireEncryption == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequireEncryption"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -53,7 +53,8 @@ type UpdateFlowOutputInput struct {
 	Destination *string
 
 	// The type of key used for the encryption. If no keyType is provided, the service
-	// will use the default setting (static-key).
+	// will use the default setting (static-key). Allowable encryption types:
+	// static-key.
 	Encryption *types.UpdateEncryption
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
@@ -92,7 +93,7 @@ type UpdateFlowOutputInput struct {
 	SmoothingLatency int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
-	// only to Zixi-based streams.
+	// only to Zixi and SRT caller-based streams.
 	StreamId *string
 
 	// The name of the VPC interface attachment to use for this output.

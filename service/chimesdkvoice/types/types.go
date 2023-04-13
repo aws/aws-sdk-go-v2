@@ -156,7 +156,7 @@ type LoggingConfiguration struct {
 	// Enables or disables media metrics logging.
 	EnableMediaMetricLogs *bool
 
-	// Boolean that enables sending SIP message logs to Amazon CloudWatch logs.
+	// Boolean that enables sending SIP message logs to Amazon CloudWatch.
 	EnableSIPLogs *bool
 
 	noSmithyDocumentSerde
@@ -481,12 +481,15 @@ type SipMediaApplication struct {
 	// The SIP media application creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
 
-	// List of endpoints for SIP media application. Currently, only one endpoint per
+	// List of endpoints for a SIP media application. Currently, only one endpoint per
 	// SIP media application is permitted.
 	Endpoints []SipMediaApplicationEndpoint
 
 	// The SIP media application's name.
 	Name *string
+
+	// The ARN of the SIP media application.
+	SipMediaApplicationArn *string
 
 	// A SIP media application's ID.
 	SipMediaApplicationId *string

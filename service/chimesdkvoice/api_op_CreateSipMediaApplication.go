@@ -46,6 +46,9 @@ type CreateSipMediaApplicationInput struct {
 	// This member is required.
 	Name *string
 
+	// The tags assigned to the SIP media application.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

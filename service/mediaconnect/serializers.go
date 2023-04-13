@@ -15,6 +15,172 @@ import (
 	"math"
 )
 
+type awsRestjson1_serializeOpAddBridgeOutputs struct {
+}
+
+func (*awsRestjson1_serializeOpAddBridgeOutputs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAddBridgeOutputs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddBridgeOutputsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}/outputs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAddBridgeOutputsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAddBridgeOutputsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAddBridgeOutputsInput(v *AddBridgeOutputsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAddBridgeOutputsInput(v *AddBridgeOutputsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Outputs != nil {
+		ok := object.Key("outputs")
+		if err := awsRestjson1_serializeDocument__listOfAddBridgeOutputRequest(v.Outputs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpAddBridgeSources struct {
+}
+
+func (*awsRestjson1_serializeOpAddBridgeSources) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAddBridgeSources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddBridgeSourcesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}/sources")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAddBridgeSourcesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAddBridgeSourcesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAddBridgeSourcesInput(v *AddBridgeSourcesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAddBridgeSourcesInput(v *AddBridgeSourcesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocument__listOfAddBridgeSourceRequest(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpAddFlowMediaStreams struct {
 }
 
@@ -347,6 +513,114 @@ func awsRestjson1_serializeOpDocumentAddFlowVpcInterfacesInput(v *AddFlowVpcInte
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateBridge struct {
+}
+
+func (*awsRestjson1_serializeOpCreateBridge) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateBridge) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateBridgeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateBridgeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateBridgeInput(v *CreateBridgeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateBridgeInput(v *CreateBridgeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EgressGatewayBridge != nil {
+		ok := object.Key("egressGatewayBridge")
+		if err := awsRestjson1_serializeDocumentAddEgressGatewayBridgeRequest(v.EgressGatewayBridge, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IngressGatewayBridge != nil {
+		ok := object.Key("ingressGatewayBridge")
+		if err := awsRestjson1_serializeDocumentAddIngressGatewayBridgeRequest(v.IngressGatewayBridge, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Outputs != nil {
+		ok := object.Key("outputs")
+		if err := awsRestjson1_serializeDocument__listOfAddBridgeOutputRequest(v.Outputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PlacementArn != nil {
+		ok := object.Key("placementArn")
+		ok.String(*v.PlacementArn)
+	}
+
+	if v.SourceFailoverConfig != nil {
+		ok := object.Key("sourceFailoverConfig")
+		if err := awsRestjson1_serializeDocumentFailoverConfig(v.SourceFailoverConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocument__listOfAddBridgeSourceRequest(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateFlow struct {
 }
 
@@ -476,6 +750,146 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateGateway struct {
+}
+
+func (*awsRestjson1_serializeOpCreateGateway) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateGatewayInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/gateways")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateGatewayInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateGatewayInput(v *CreateGatewayInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateGatewayInput(v *CreateGatewayInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EgressCidrBlocks != nil {
+		ok := object.Key("egressCidrBlocks")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.EgressCidrBlocks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Networks != nil {
+		ok := object.Key("networks")
+		if err := awsRestjson1_serializeDocument__listOfGatewayNetwork(v.Networks, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteBridge struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteBridge) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteBridge) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteBridgeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteBridgeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteBridgeInput(v *DeleteBridgeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteFlow struct {
 }
 
@@ -534,6 +948,184 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFlowInput(v *DeleteFlowInput, enc
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteGateway struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteGateway) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteGatewayInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/gateways/{GatewayArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteGatewayInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteGatewayInput(v *DeleteGatewayInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayArn == nil || len(*v.GatewayArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GatewayArn must not be empty")}
+	}
+	if v.GatewayArn != nil {
+		if err := encoder.SetURI("GatewayArn").String(*v.GatewayArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeregisterGatewayInstance struct {
+}
+
+func (*awsRestjson1_serializeOpDeregisterGatewayInstance) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeregisterGatewayInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeregisterGatewayInstanceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/gateway-instances/{GatewayInstanceArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeregisterGatewayInstanceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeregisterGatewayInstanceInput(v *DeregisterGatewayInstanceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Force {
+		encoder.SetQuery("force").Boolean(v.Force)
+	}
+
+	if v.GatewayInstanceArn == nil || len(*v.GatewayInstanceArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GatewayInstanceArn must not be empty")}
+	}
+	if v.GatewayInstanceArn != nil {
+		if err := encoder.SetURI("GatewayInstanceArn").String(*v.GatewayInstanceArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeBridge struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeBridge) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeBridge) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeBridgeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeBridgeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeBridgeInput(v *DescribeBridgeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeFlow struct {
 }
 
@@ -585,6 +1177,122 @@ func awsRestjson1_serializeOpHttpBindingsDescribeFlowInput(v *DescribeFlowInput,
 	}
 	if v.FlowArn != nil {
 		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeGateway struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeGateway) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeGatewayInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/gateways/{GatewayArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeGatewayInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeGatewayInput(v *DescribeGatewayInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayArn == nil || len(*v.GatewayArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GatewayArn must not be empty")}
+	}
+	if v.GatewayArn != nil {
+		if err := encoder.SetURI("GatewayArn").String(*v.GatewayArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeGatewayInstance struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeGatewayInstance) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeGatewayInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeGatewayInstanceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/gateway-instances/{GatewayInstanceArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeGatewayInstanceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeGatewayInstanceInput(v *DescribeGatewayInstanceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayInstanceArn == nil || len(*v.GatewayInstanceArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GatewayInstanceArn must not be empty")}
+	}
+	if v.GatewayInstanceArn != nil {
+		if err := encoder.SetURI("GatewayInstanceArn").String(*v.GatewayInstanceArn); err != nil {
 			return err
 		}
 	}
@@ -791,6 +1499,67 @@ func awsRestjson1_serializeOpDocumentGrantFlowEntitlementsInput(v *GrantFlowEnti
 	return nil
 }
 
+type awsRestjson1_serializeOpListBridges struct {
+}
+
+func (*awsRestjson1_serializeOpListBridges) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListBridges) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListBridgesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListBridgesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListBridgesInput(v *ListBridgesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FilterArn != nil {
+		encoder.SetQuery("filterArn").String(*v.FilterArn)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListEntitlements struct {
 }
 
@@ -890,6 +1659,124 @@ func (m *awsRestjson1_serializeOpListFlows) HandleSerialize(ctx context.Context,
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListFlowsInput(v *ListFlowsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListGatewayInstances struct {
+}
+
+func (*awsRestjson1_serializeOpListGatewayInstances) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListGatewayInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListGatewayInstancesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/gateway-instances")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListGatewayInstancesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListGatewayInstancesInput(v *ListGatewayInstancesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FilterArn != nil {
+		encoder.SetQuery("filterArn").String(*v.FilterArn)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListGateways struct {
+}
+
+func (*awsRestjson1_serializeOpListGateways) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListGatewaysInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/gateways")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListGatewaysInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListGatewaysInput(v *ListGatewaysInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1158,6 +2045,140 @@ func awsRestjson1_serializeOpDocumentPurchaseOfferingInput(v *PurchaseOfferingIn
 	if v.Start != nil {
 		ok := object.Key("start")
 		ok.String(*v.Start)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpRemoveBridgeOutput struct {
+}
+
+func (*awsRestjson1_serializeOpRemoveBridgeOutput) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRemoveBridgeOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveBridgeOutputInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}/outputs/{OutputName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRemoveBridgeOutputInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRemoveBridgeOutputInput(v *RemoveBridgeOutputInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	if v.OutputName == nil || len(*v.OutputName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OutputName must not be empty")}
+	}
+	if v.OutputName != nil {
+		if err := encoder.SetURI("OutputName").String(*v.OutputName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpRemoveBridgeSource struct {
+}
+
+func (*awsRestjson1_serializeOpRemoveBridgeSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRemoveBridgeSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveBridgeSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}/sources/{SourceName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRemoveBridgeSourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRemoveBridgeSourceInput(v *RemoveBridgeSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceName == nil || len(*v.SourceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceName must not be empty")}
+	}
+	if v.SourceName != nil {
+		if err := encoder.SetURI("SourceName").String(*v.SourceName); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1761,6 +2782,375 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateBridge struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateBridge) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateBridge) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateBridgeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateBridgeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateBridgeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateBridgeInput(v *UpdateBridgeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateBridgeInput(v *UpdateBridgeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EgressGatewayBridge != nil {
+		ok := object.Key("egressGatewayBridge")
+		if err := awsRestjson1_serializeDocumentUpdateEgressGatewayBridgeRequest(v.EgressGatewayBridge, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IngressGatewayBridge != nil {
+		ok := object.Key("ingressGatewayBridge")
+		if err := awsRestjson1_serializeDocumentUpdateIngressGatewayBridgeRequest(v.IngressGatewayBridge, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceFailoverConfig != nil {
+		ok := object.Key("sourceFailoverConfig")
+		if err := awsRestjson1_serializeDocumentUpdateFailoverConfig(v.SourceFailoverConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateBridgeOutput struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateBridgeOutput) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateBridgeOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateBridgeOutputInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}/outputs/{OutputName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateBridgeOutputInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateBridgeOutputInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateBridgeOutputInput(v *UpdateBridgeOutputInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	if v.OutputName == nil || len(*v.OutputName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OutputName must not be empty")}
+	}
+	if v.OutputName != nil {
+		if err := encoder.SetURI("OutputName").String(*v.OutputName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateBridgeOutputInput(v *UpdateBridgeOutputInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NetworkOutput != nil {
+		ok := object.Key("networkOutput")
+		if err := awsRestjson1_serializeDocumentUpdateBridgeNetworkOutputRequest(v.NetworkOutput, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateBridgeSource struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateBridgeSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateBridgeSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateBridgeSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}/sources/{SourceName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateBridgeSourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateBridgeSourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateBridgeSourceInput(v *UpdateBridgeSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceName == nil || len(*v.SourceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceName must not be empty")}
+	}
+	if v.SourceName != nil {
+		if err := encoder.SetURI("SourceName").String(*v.SourceName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateBridgeSourceInput(v *UpdateBridgeSourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FlowSource != nil {
+		ok := object.Key("flowSource")
+		if err := awsRestjson1_serializeDocumentUpdateBridgeFlowSourceRequest(v.FlowSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkSource != nil {
+		ok := object.Key("networkSource")
+		if err := awsRestjson1_serializeDocumentUpdateBridgeNetworkSourceRequest(v.NetworkSource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateBridgeState struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateBridgeState) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateBridgeState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateBridgeStateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/bridges/{BridgeArn}/state")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateBridgeStateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateBridgeStateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateBridgeStateInput(v *UpdateBridgeStateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BridgeArn == nil || len(*v.BridgeArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BridgeArn must not be empty")}
+	}
+	if v.BridgeArn != nil {
+		if err := encoder.SetURI("BridgeArn").String(*v.BridgeArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateBridgeStateInput(v *UpdateBridgeStateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DesiredState) > 0 {
+		ok := object.Key("desiredState")
+		ok.String(string(v.DesiredState))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateFlow struct {
 }
 
@@ -2339,6 +3729,13 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		ok.String(*v.EntitlementArn)
 	}
 
+	if v.GatewayBridgeSource != nil {
+		ok := object.Key("gatewayBridgeSource")
+		if err := awsRestjson1_serializeDocumentUpdateGatewayBridgeSourceRequest(v.GatewayBridgeSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IngestPort != 0 {
 		ok := object.Key("ingestPort")
 		ok.Integer(v.IngestPort)
@@ -2414,6 +3811,87 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateGatewayInstance struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateGatewayInstance) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateGatewayInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateGatewayInstanceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/gateway-instances/{GatewayInstanceArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateGatewayInstanceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateGatewayInstanceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateGatewayInstanceInput(v *UpdateGatewayInstanceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayInstanceArn == nil || len(*v.GatewayInstanceArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GatewayInstanceArn must not be empty")}
+	}
+	if v.GatewayInstanceArn != nil {
+		if err := encoder.SetURI("GatewayInstanceArn").String(*v.GatewayInstanceArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateGatewayInstanceInput(v *UpdateGatewayInstanceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BridgePlacement) > 0 {
+		ok := object.Key("bridgePlacement")
+		ok.String(string(v.BridgePlacement))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2421,6 +3899,32 @@ func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfAddBridgeOutputRequest(v []types.AddBridgeOutputRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAddBridgeOutputRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfAddBridgeSourceRequest(v []types.AddBridgeSourceRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAddBridgeSourceRequest(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -2458,6 +3962,19 @@ func awsRestjson1_serializeDocument__listOfDestinationConfigurationRequest(v []t
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentDestinationConfigurationRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfGatewayNetwork(v []types.GatewayNetwork, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGatewayNetwork(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2550,6 +4067,163 @@ func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value sm
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddBridgeFlowSourceRequest(v *types.AddBridgeFlowSourceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FlowArn != nil {
+		ok := object.Key("flowArn")
+		ok.String(*v.FlowArn)
+	}
+
+	if v.FlowVpcInterfaceAttachment != nil {
+		ok := object.Key("flowVpcInterfaceAttachment")
+		if err := awsRestjson1_serializeDocumentVpcInterfaceAttachment(v.FlowVpcInterfaceAttachment, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddBridgeNetworkOutputRequest(v *types.AddBridgeNetworkOutputRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IpAddress != nil {
+		ok := object.Key("ipAddress")
+		ok.String(*v.IpAddress)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.NetworkName != nil {
+		ok := object.Key("networkName")
+		ok.String(*v.NetworkName)
+	}
+
+	{
+		ok := object.Key("port")
+		ok.Integer(v.Port)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("protocol")
+		ok.String(string(v.Protocol))
+	}
+
+	{
+		ok := object.Key("ttl")
+		ok.Integer(v.Ttl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddBridgeNetworkSourceRequest(v *types.AddBridgeNetworkSourceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MulticastIp != nil {
+		ok := object.Key("multicastIp")
+		ok.String(*v.MulticastIp)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.NetworkName != nil {
+		ok := object.Key("networkName")
+		ok.String(*v.NetworkName)
+	}
+
+	{
+		ok := object.Key("port")
+		ok.Integer(v.Port)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("protocol")
+		ok.String(string(v.Protocol))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddBridgeOutputRequest(v *types.AddBridgeOutputRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NetworkOutput != nil {
+		ok := object.Key("networkOutput")
+		if err := awsRestjson1_serializeDocumentAddBridgeNetworkOutputRequest(v.NetworkOutput, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddBridgeSourceRequest(v *types.AddBridgeSourceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FlowSource != nil {
+		ok := object.Key("flowSource")
+		if err := awsRestjson1_serializeDocumentAddBridgeFlowSourceRequest(v.FlowSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkSource != nil {
+		ok := object.Key("networkSource")
+		if err := awsRestjson1_serializeDocumentAddBridgeNetworkSourceRequest(v.NetworkSource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddEgressGatewayBridgeRequest(v *types.AddEgressGatewayBridgeRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxBitrate")
+		ok.Integer(v.MaxBitrate)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddIngressGatewayBridgeRequest(v *types.AddIngressGatewayBridgeRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxBitrate")
+		ok.Integer(v.MaxBitrate)
+	}
+
+	{
+		ok := object.Key("maxOutputs")
+		ok.Integer(v.MaxOutputs)
+	}
+
 	return nil
 }
 
@@ -2881,6 +4555,23 @@ func awsRestjson1_serializeDocumentFmtpRequest(v *types.FmtpRequest, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGatewayNetwork(v *types.GatewayNetwork, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CidrBlock != nil {
+		ok := object.Key("cidrBlock")
+		ok.String(*v.CidrBlock)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGrantEntitlementRequest(v *types.GrantEntitlementRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3027,6 +4718,25 @@ func awsRestjson1_serializeDocumentMediaStreamSourceConfigurationRequest(v *type
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSetGatewayBridgeSourceRequest(v *types.SetGatewayBridgeSourceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BridgeArn != nil {
+		ok := object.Key("bridgeArn")
+		ok.String(*v.BridgeArn)
+	}
+
+	if v.VpcInterfaceAttachment != nil {
+		ok := object.Key("vpcInterfaceAttachment")
+		if err := awsRestjson1_serializeDocumentVpcInterfaceAttachment(v.VpcInterfaceAttachment, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3046,6 +4756,13 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	if v.EntitlementArn != nil {
 		ok := object.Key("entitlementArn")
 		ok.String(*v.EntitlementArn)
+	}
+
+	if v.GatewayBridgeSource != nil {
+		ok := object.Key("gatewayBridgeSource")
+		if err := awsRestjson1_serializeDocumentSetGatewayBridgeSourceRequest(v.GatewayBridgeSource, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IngestPort != 0 {
@@ -3140,6 +4857,96 @@ func awsRestjson1_serializeDocumentSourcePriority(v *types.SourcePriority, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentUpdateBridgeFlowSourceRequest(v *types.UpdateBridgeFlowSourceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FlowArn != nil {
+		ok := object.Key("flowArn")
+		ok.String(*v.FlowArn)
+	}
+
+	if v.FlowVpcInterfaceAttachment != nil {
+		ok := object.Key("flowVpcInterfaceAttachment")
+		if err := awsRestjson1_serializeDocumentVpcInterfaceAttachment(v.FlowVpcInterfaceAttachment, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateBridgeNetworkOutputRequest(v *types.UpdateBridgeNetworkOutputRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IpAddress != nil {
+		ok := object.Key("ipAddress")
+		ok.String(*v.IpAddress)
+	}
+
+	if v.NetworkName != nil {
+		ok := object.Key("networkName")
+		ok.String(*v.NetworkName)
+	}
+
+	if v.Port != 0 {
+		ok := object.Key("port")
+		ok.Integer(v.Port)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("protocol")
+		ok.String(string(v.Protocol))
+	}
+
+	if v.Ttl != 0 {
+		ok := object.Key("ttl")
+		ok.Integer(v.Ttl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateBridgeNetworkSourceRequest(v *types.UpdateBridgeNetworkSourceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MulticastIp != nil {
+		ok := object.Key("multicastIp")
+		ok.String(*v.MulticastIp)
+	}
+
+	if v.NetworkName != nil {
+		ok := object.Key("networkName")
+		ok.String(*v.NetworkName)
+	}
+
+	if v.Port != 0 {
+		ok := object.Key("port")
+		ok.Integer(v.Port)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("protocol")
+		ok.String(string(v.Protocol))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateEgressGatewayBridgeRequest(v *types.UpdateEgressGatewayBridgeRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxBitrate != 0 {
+		ok := object.Key("maxBitrate")
+		ok.Integer(v.MaxBitrate)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentUpdateEncryption(v *types.UpdateEncryption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3216,6 +5023,42 @@ func awsRestjson1_serializeDocumentUpdateFailoverConfig(v *types.UpdateFailoverC
 	if len(v.State) > 0 {
 		ok := object.Key("state")
 		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateGatewayBridgeSourceRequest(v *types.UpdateGatewayBridgeSourceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BridgeArn != nil {
+		ok := object.Key("bridgeArn")
+		ok.String(*v.BridgeArn)
+	}
+
+	if v.VpcInterfaceAttachment != nil {
+		ok := object.Key("vpcInterfaceAttachment")
+		if err := awsRestjson1_serializeDocumentVpcInterfaceAttachment(v.VpcInterfaceAttachment, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateIngressGatewayBridgeRequest(v *types.UpdateIngressGatewayBridgeRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxBitrate != 0 {
+		ok := object.Key("maxBitrate")
+		ok.Integer(v.MaxBitrate)
+	}
+
+	if v.MaxOutputs != 0 {
+		ok := object.Key("maxOutputs")
+		ok.Integer(v.MaxOutputs)
 	}
 
 	return nil

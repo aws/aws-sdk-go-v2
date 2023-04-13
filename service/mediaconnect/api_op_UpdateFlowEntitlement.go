@@ -48,7 +48,7 @@ type UpdateFlowEntitlementInput struct {
 	Description *string
 
 	// The type of encryption that will be used on the output associated with this
-	// entitlement.
+	// entitlement. Allowable encryption types: static-key, speke.
 	Encryption *types.UpdateEncryption
 
 	// An indication of whether you want to enable the entitlement to allow access, or
