@@ -1316,8 +1316,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-gov-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true
                             }
                         },
@@ -1329,8 +1329,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true
                             }
                         },
@@ -1342,8 +1342,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-gov-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false
                             }
                         },
@@ -1355,8 +1355,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false
                             }
                         },
@@ -1368,8 +1368,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "cn-north-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true
                             }
                         },
@@ -1381,8 +1381,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-north-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true
                             }
                         },
@@ -1394,8 +1394,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "cn-north-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false
                             }
                         },
@@ -1407,8 +1407,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-north-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false
                             }
                         },
@@ -1418,8 +1418,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true
                             }
                         },
@@ -1431,8 +1431,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true
                             }
                         },
@@ -1442,8 +1442,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false
                             }
                         },
@@ -1455,8 +1455,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false
                             }
                         },
@@ -1468,8 +1468,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true
                             }
                         },
@@ -1481,8 +1481,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true
                             }
                         },
@@ -1494,8 +1494,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false
                             }
                         },
@@ -1507,8 +1507,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false
                             }
                         },
@@ -1518,8 +1518,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true
                             }
                         },
@@ -1531,8 +1531,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true
                             }
                         },
@@ -1542,8 +1542,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false
                             }
                         },
@@ -1555,8 +1555,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false
                             }
                         },
@@ -1568,8 +1568,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1580,8 +1580,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -1592,8 +1592,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -2022,6 +2022,12 @@
                         "smithy.api#documentation": "<p>List of endpoints (Lambda ARNs) specified for the SIP media application.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkvoice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the SIP media application.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2285,6 +2291,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables or disables encryption for the Voice Connector.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkvoice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the Voice Connector.</p>"
                     }
                 }
             },
@@ -3710,7 +3722,7 @@
                 "Country": {
                     "target": "com.amazonaws.chimesdkvoice#Country",
                     "traits": {
-                        "smithy.api#documentation": "<p>The country. </p>",
+                        "smithy.api#documentation": "<p>The country.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6418,7 +6430,7 @@
                 "EnableSIPLogs": {
                     "target": "com.amazonaws.chimesdkvoice#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean that enables sending SIP message logs to Amazon CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>Boolean that enables sending SIP message logs to Amazon CloudWatch.</p>"
                     }
                 },
                 "EnableMediaMetricLogs": {
@@ -8504,7 +8516,7 @@
                 "Endpoints": {
                     "target": "com.amazonaws.chimesdkvoice#SipMediaApplicationEndpointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of endpoints for SIP media application. Currently, only one endpoint per \n         SIP media application is permitted.</p>"
+                        "smithy.api#documentation": "<p>List of endpoints for a SIP media application. Currently, only one endpoint per \n         SIP media application is permitted.</p>"
                     }
                 },
                 "CreatedTimestamp": {
@@ -8517,6 +8529,12 @@
                     "target": "com.amazonaws.chimesdkvoice#Iso8601Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the SIP media application was updated.</p>"
+                    }
+                },
+                "SipMediaApplicationArn": {
+                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the SIP media application.</p>"
                     }
                 }
             },
@@ -8998,7 +9016,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a voice tone analysis task. For more information about voice tone analysis, see \n         <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html\">Using Amazon Chime SDK voice analytics</a> \n         in the <i>Amazon Chime SDK Developer Guide</i>.</p>\n         <important>\n            <p>Before starting any voice tone analysis tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the  \n         <a href=\"https://aws.amazon.com/service-terms/\">AWS service terms</a> for the Amazon Chime SDK.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Starts a voice tone analysis task. For more information about voice tone analysis, see \n         <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html\">Using Amazon Chime SDK voice analytics</a> \n         in the <i>Amazon Chime SDK Developer Guide</i>.</p>\n         <important>\n            <p>Before starting any voice tone analysis tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the \n         <a href=\"https://aws.amazon.com/service-terms/\">AWS service terms</a> for the Amazon Chime SDK.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks",
