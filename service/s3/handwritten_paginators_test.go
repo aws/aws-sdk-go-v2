@@ -141,7 +141,7 @@ func initializeMiddlewareFn(initializeMiddleware middleware.InitializeMiddleware
 }
 
 // unit test can not control client API call's output, so just check marker's default nil value
-func testNextPageResult(c testCase, pKeyMarker *string, pIdMarker *string, t *testing.T) {
+func testNextPageResult(c testCase, pKeyMarker *string, pIDMarker *string, t *testing.T) {
 	if c.limit != limit {
 		t.Errorf("Expect page limit to be %d, got %d", c.limit, limit)
 	}
@@ -154,7 +154,7 @@ func testNextPageResult(c testCase, pKeyMarker *string, pIdMarker *string, t *te
 	if c.idMarker != nil && *c.idMarker != *idMarker {
 		t.Errorf("Expect idMarker to be %s, got %s", *c.idMarker, *idMarker)
 	}
-	if pKeyMarker != nil || pIdMarker != nil {
-		t.Errorf("Expect paginator keyMarker and idMarker to be nil, got %s and %s", *pKeyMarker, *pIdMarker)
+	if pKeyMarker != nil || pIDMarker != nil {
+		t.Errorf("Expect paginator keyMarker and idMarker to be nil, got %s and %s", *pKeyMarker, *pIDMarker)
 	}
 }
