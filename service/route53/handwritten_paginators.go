@@ -75,7 +75,6 @@ func (p *ListResourceRecordSetsPaginator) NextPage(ctx context.Context, optFns .
 
 	params := *p.params
 	params.StartRecordName = p.startRecordName
-
 	params.StartRecordIdentifier = p.startRecordIdentifier
 	params.StartRecordType = p.startRecordType
 
@@ -93,7 +92,6 @@ func (p *ListResourceRecordSetsPaginator) NextPage(ctx context.Context, optFns .
 
 	prevToken := p.startRecordName
 	p.startRecordName = result.NextRecordName
-
 	p.startRecordIdentifier = result.NextRecordIdentifier
 	p.startRecordType = result.NextRecordType
 
