@@ -1,3 +1,15 @@
+# Release (2023-04-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.25.1](service/ecs/CHANGELOG.md#v1251-2023-04-14)
+  * **Documentation**: This release supports  ephemeral storage for AWS Fargate Windows containers.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.32.0](service/lambda/CHANGELOG.md#v1320-2023-04-14)
+  * **Feature**: This release adds SnapStart related exceptions to InvokeWithResponseStream API. IAM access related documentation is also added for this API.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.9.8](service/migrationhubrefactorspaces/CHANGELOG.md#v198-2023-04-14)
+  * **Documentation**: Doc only update for Refactor Spaces environments without network bridge feature.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.43.0](service/rds/CHANGELOG.md#v1430-2023-04-14)
+  * **Feature**: This release adds support of modifying the engine mode of database clusters.
+
 # Release (2023-04-13)
 
 ## Module Highlights

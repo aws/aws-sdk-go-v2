@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.9
 	github.com/aws/aws-sdk-go-v2/service/athena v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.3
-	github.com/aws/aws-sdk-go-v2/service/batch v1.23.2
+	github.com/aws/aws-sdk-go-v2/service/batch v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.8
@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.93.2
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.9
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.25.0
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.26.8
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.8
@@ -53,19 +53,19 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.35.4
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.10
 	github.com/aws/aws-sdk-go-v2/service/kms v1.20.10
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.8
-	github.com/aws/aws-sdk-go-v2/service/rds v1.42.3
+	github.com/aws/aws-sdk-go-v2/service/rds v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.9
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.14.8
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.5
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.6
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.3

@@ -1,3 +1,7 @@
+# v1.9.8 (2023-04-14)
+
+* **Documentation**: Doc only update for Refactor Spaces environments without network bridge feature.
+
 # v1.9.7 (2023-04-10)
 
 * No change notes available for this release.

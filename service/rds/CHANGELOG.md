@@ -1,3 +1,7 @@
+# v1.43.0 (2023-04-14)
+
+* **Feature**: This release adds support of modifying the engine mode of database clusters.
+
 # v1.42.3 (2023-04-10)
 
 * No change notes available for this release.

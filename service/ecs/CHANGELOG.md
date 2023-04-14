@@ -1,3 +1,7 @@
+# v1.25.1 (2023-04-14)
+
+* **Documentation**: This release supports  ephemeral storage for AWS Fargate Windows containers.
+
 # v1.25.0 (2023-04-10)
 
 * **Feature**: This release adds support for enabling FIPS compliance on Amazon ECS Fargate tasks

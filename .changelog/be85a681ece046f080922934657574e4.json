@@ -1,8 +1,0 @@
-{
-    "id": "be85a681-ece0-46f0-8092-2934657574e4",
-    "type": "documentation",
-    "description": "This release supports  ephemeral storage for AWS Fargate Windows containers.",
-    "modules": [
-        "service/ecs"
-    ]
-}

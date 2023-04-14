@@ -1,8 +1,0 @@
-{
-    "id": "6b3ba293-1c23-44eb-8b6c-088878393d36",
-    "type": "documentation",
-    "description": "Doc only update for Refactor Spaces environments without network bridge feature.",
-    "modules": [
-        "service/migrationhubrefactorspaces"
-    ]
-}
