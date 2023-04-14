@@ -15647,6 +15647,9 @@
                     "target": "com.amazonaws.rds#DBClusterParameterGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#DBInstanceAlreadyExistsFault"
+                },
+                {
                     "target": "com.amazonaws.rds#DBSubnetGroupNotFoundFault"
                 },
                 {
@@ -15896,7 +15899,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.</p>\n         <p>Type: Integer</p>\n         <p>Valid for: Multi-AZ DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.</p>\n         <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
                 "StorageType": {
@@ -15972,6 +15975,19 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if both of the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>The DB cluster doesn't manage the master user password in Amazon Web Services Secrets Manager.</p>\n               <p>If the DB cluster already manages the master user password in Amazon Web Services Secrets\n                    Manager, you can't change the KMS key that is used to encrypt the secret.</p>\n            </li>\n            <li>\n               <p>You are turning on <code>ManageMasterUserPassword</code> to manage the master user password \n                    in Amazon Web Services Secrets Manager.</p>\n               <p>If you are turning on <code>ManageMasterUserPassword</code> and don't specify \n                    <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n                    KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n                    use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n                    managed KMS key.</p>\n            </li>\n         </ul>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.</p>\n         <note>\n            <p>The DB engine mode can be modified only from <code>serverless</code> to <code>provisioned</code>.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html\">\n            CreateDBCluster</a>.</p>\n         <p>Valid for: Aurora DB clusters only</p>"
+                    }
+                },
+                "AllowEngineModeChange": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A value that indicates whether engine mode changes from <code>serverless</code> to <code>provisioned</code> \n            are allowed.</p>\n         <p>Constraints: You must allow engine mode changes when specifying a different value for the <code>EngineMode</code> parameter\n            from the DB cluster's current engine mode.</p>\n         <p>Valid for: Aurora Serverless v1 DB clusters only</p>"
                     }
                 }
             },
