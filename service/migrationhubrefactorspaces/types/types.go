@@ -177,7 +177,7 @@ type EnvironmentSummary struct {
 	// The tags assigned to the environment.
 	Tags map[string]string
 
-	// The ID of the transit gateway set up by the environment.
+	// The ID of the Transit Gateway set up by the environment.
 	TransitGatewayId *string
 
 	noSmithyDocumentSerde

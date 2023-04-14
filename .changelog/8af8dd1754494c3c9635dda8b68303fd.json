@@ -1,0 +1,8 @@
+{
+    "id": "8af8dd17-5449-4c3c-9635-dda8b68303fd",
+    "type": "feature",
+    "description": "This release adds support of modifying the engine mode of database clusters.",
+    "modules": [
+        "service/rds"
+    ]
+}

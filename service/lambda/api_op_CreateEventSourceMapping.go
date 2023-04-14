@@ -257,7 +257,8 @@ type CreateEventSourceMappingOutput struct {
 
 	// (Kinesis and DynamoDB Streams only) Discard records older than the specified
 	// age. The default value is -1, which sets the maximum age to infinite. When the
-	// value is set to infinite, Lambda never discards old records.
+	// value is set to infinite, Lambda never discards old records. The minimum value
+	// that can be set is 60 seconds.
 	MaximumRecordAgeInSeconds *int32
 
 	// (Kinesis and DynamoDB Streams only) Discard records after the specified number

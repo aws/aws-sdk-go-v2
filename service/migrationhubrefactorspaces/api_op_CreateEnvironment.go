@@ -19,8 +19,13 @@ import (
 // environment owner. The environment owner has cross-account visibility and
 // control of Refactor Spaces resources that are added to the environment by other
 // accounts that the environment is shared with. When creating an environment with
-// a network fabric type of TRANSIT_GATEWAY , Refactor Spaces provisions a transit
-// gateway in your account.
+// a CreateEnvironment:NetworkFabricType (https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType)
+// of TRANSIT_GATEWAY , Refactor Spaces provisions a transit gateway to enable
+// services in VPCs to communicate directly across accounts. If
+// CreateEnvironment:NetworkFabricType (https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType)
+// is NONE , Refactor Spaces does not create a transit gateway and you must use
+// your network infrastructure to route traffic to services with private URL
+// endpoints.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}

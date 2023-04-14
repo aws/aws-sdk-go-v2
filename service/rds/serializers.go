@@ -13105,6 +13105,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.Integer(*v.AllocatedStorage)
 	}
 
+	if v.AllowEngineModeChange {
+		objectKey := object.Key("AllowEngineModeChange")
+		objectKey.Boolean(v.AllowEngineModeChange)
+	}
+
 	if v.AllowMajorVersionUpgrade {
 		objectKey := object.Key("AllowMajorVersionUpgrade")
 		objectKey.Boolean(v.AllowMajorVersionUpgrade)
@@ -13195,6 +13200,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	if v.EnablePerformanceInsights != nil {
 		objectKey := object.Key("EnablePerformanceInsights")
 		objectKey.Boolean(*v.EnablePerformanceInsights)
+	}
+
+	if v.EngineMode != nil {
+		objectKey := object.Key("EngineMode")
+		objectKey.String(*v.EngineMode)
 	}
 
 	if v.EngineVersion != nil {

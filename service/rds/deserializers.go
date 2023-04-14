@@ -10668,6 +10668,9 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("DBClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterParameterGroupNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("DBInstanceAlreadyExists", errorCode):
+		return awsAwsquery_deserializeErrorDBInstanceAlreadyExistsFault(response, errorBody)
+
 	case strings.EqualFold("DBSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBSubnetGroupNotFoundFault(response, errorBody)
 

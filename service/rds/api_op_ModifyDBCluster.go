@@ -43,8 +43,14 @@ type ModifyDBClusterInput struct {
 	DBClusterIdentifier *string
 
 	// The amount of storage in gibibytes (GiB) to allocate to each DB instance in the
-	// Multi-AZ DB cluster. Type: Integer Valid for: Multi-AZ DB clusters only
+	// Multi-AZ DB cluster. Valid for: Multi-AZ DB clusters only
 	AllocatedStorage *int32
+
+	// A value that indicates whether engine mode changes from serverless to
+	// provisioned are allowed. Constraints: You must allow engine mode changes when
+	// specifying a different value for the EngineMode parameter from the DB cluster's
+	// current engine mode. Valid for: Aurora Serverless v1 DB clusters only
+	AllowEngineModeChange bool
 
 	// A value that indicates whether major version upgrades are allowed. Constraints:
 	// You must allow major version upgrades when specifying a value for the
@@ -170,6 +176,12 @@ type ModifyDBClusterInput struct {
 	// cluster. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 	// in the Amazon RDS User Guide. Valid for: Multi-AZ DB clusters only
 	EnablePerformanceInsights *bool
+
+	// The DB engine mode of the DB cluster, either provisioned or serverless . The DB
+	// engine mode can be modified only from serverless to provisioned . For more
+	// information, see CreateDBCluster (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)
+	// . Valid for: Aurora DB clusters only
+	EngineMode *string
 
 	// The version number of the database engine to which you want to upgrade.
 	// Changing this parameter results in an outage. The change is applied during the

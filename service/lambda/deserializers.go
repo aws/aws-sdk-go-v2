@@ -6960,6 +6960,15 @@ func awsRestjson1_deserializeOpErrorInvokeWithResponseStream(response *smithyhtt
 	case strings.EqualFold("ServiceException", errorCode):
 		return awsRestjson1_deserializeErrorServiceException(response, errorBody)
 
+	case strings.EqualFold("SnapStartException", errorCode):
+		return awsRestjson1_deserializeErrorSnapStartException(response, errorBody)
+
+	case strings.EqualFold("SnapStartNotReadyException", errorCode):
+		return awsRestjson1_deserializeErrorSnapStartNotReadyException(response, errorBody)
+
+	case strings.EqualFold("SnapStartTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorSnapStartTimeoutException(response, errorBody)
+
 	case strings.EqualFold("SubnetIPAddressLimitReachedException", errorCode):
 		return awsRestjson1_deserializeErrorSubnetIPAddressLimitReachedException(response, errorBody)
 

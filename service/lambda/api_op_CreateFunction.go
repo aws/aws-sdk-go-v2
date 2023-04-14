@@ -277,7 +277,11 @@ type CreateFunctionOutput struct {
 	// The function's execution role.
 	Role *string
 
-	// The runtime environment for the Lambda function.
+	// The identifier of the function's runtime (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+	// . Runtime is required if the deployment package is a .zip file archive. The
+	// following list includes deprecated runtimes. For more information, see Runtime
+	// deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
+	// .
 	Runtime types.Runtime
 
 	// The ARN of the runtime and any errors that occured.

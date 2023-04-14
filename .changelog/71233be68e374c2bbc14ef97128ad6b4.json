@@ -1,0 +1,8 @@
+{
+    "id": "71233be6-8e37-4c2b-bc14-ef97128ad6b4",
+    "type": "feature",
+    "description": "This release adds SnapStart related exceptions to InvokeWithResponseStream API. IAM access related documentation is also added for this API.",
+    "modules": [
+        "service/lambda"
+    ]
+}
