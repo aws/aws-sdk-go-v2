@@ -295,6 +295,36 @@ type JobLogEventData struct {
 	noSmithyDocumentSerde
 }
 
+// Account level Launch Configuration Template.
+type LaunchConfigurationTemplate struct {
+
+	// ARN of the Launch Configuration Template.
+	Arn *string
+
+	// Copy private IP.
+	CopyPrivateIp *bool
+
+	// Copy tags.
+	CopyTags *bool
+
+	// ID of the Launch Configuration Template.
+	LaunchConfigurationTemplateID *string
+
+	// Launch disposition.
+	LaunchDisposition LaunchDisposition
+
+	// Licensing.
+	Licensing *Licensing
+
+	// Tags of the Launch Configuration Template.
+	Tags map[string]string
+
+	// Target instance type right-sizing method.
+	TargetInstanceTypeRightSizingMethod TargetInstanceTypeRightSizingMethod
+
+	noSmithyDocumentSerde
+}
+
 // Configuration of a machine's license.
 type Licensing struct {
 
@@ -797,6 +827,9 @@ type SourceProperties struct {
 	// The recommended EC2 instance type that will be used when recovering the Source
 	// Server.
 	RecommendedInstanceType *string
+
+	// Are EC2 nitro instance types supported when recovering the Source Server.
+	SupportsNitroInstances *bool
 
 	noSmithyDocumentSerde
 }

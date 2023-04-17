@@ -70,6 +70,26 @@ func (m *validateOpDeleteJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteLaunchConfigurationTemplate struct {
+}
+
+func (*validateOpDeleteLaunchConfigurationTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLaunchConfigurationTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLaunchConfigurationTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLaunchConfigurationTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRecoveryInstance struct {
 }
 
@@ -550,6 +570,26 @@ func (m *validateOpUpdateLaunchConfiguration) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLaunchConfigurationTemplate struct {
+}
+
+func (*validateOpUpdateLaunchConfigurationTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLaunchConfigurationTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLaunchConfigurationTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLaunchConfigurationTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateReplicationConfiguration struct {
 }
 
@@ -600,6 +640,10 @@ func addOpCreateReplicationConfigurationTemplateValidationMiddleware(stack *midd
 
 func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteJob{}, middleware.After)
+}
+
+func addOpDeleteLaunchConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLaunchConfigurationTemplate{}, middleware.After)
 }
 
 func addOpDeleteRecoveryInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -696,6 +740,10 @@ func addOpUpdateFailbackReplicationConfigurationValidationMiddleware(stack *midd
 
 func addOpUpdateLaunchConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLaunchConfiguration{}, middleware.After)
+}
+
+func addOpUpdateLaunchConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLaunchConfigurationTemplate{}, middleware.After)
 }
 
 func addOpUpdateReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -841,6 +889,21 @@ func validateOpDeleteJobInput(v *DeleteJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteJobInput"}
 	if v.JobID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLaunchConfigurationTemplateInput(v *DeleteLaunchConfigurationTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLaunchConfigurationTemplateInput"}
+	if v.LaunchConfigurationTemplateID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfigurationTemplateID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1211,6 +1274,21 @@ func validateOpUpdateLaunchConfigurationInput(v *UpdateLaunchConfigurationInput)
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLaunchConfigurationInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLaunchConfigurationTemplateInput(v *UpdateLaunchConfigurationTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLaunchConfigurationTemplateInput"}
+	if v.LaunchConfigurationTemplateID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfigurationTemplateID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

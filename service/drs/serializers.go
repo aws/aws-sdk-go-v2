@@ -89,6 +89,103 @@ func awsRestjson1_serializeOpDocumentCreateExtendedSourceServerInput(v *CreateEx
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateLaunchConfigurationTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpCreateLaunchConfigurationTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateLaunchConfigurationTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLaunchConfigurationTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/CreateLaunchConfigurationTemplate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateLaunchConfigurationTemplateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateLaunchConfigurationTemplateInput(v *CreateLaunchConfigurationTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateLaunchConfigurationTemplateInput(v *CreateLaunchConfigurationTemplateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CopyPrivateIp != nil {
+		ok := object.Key("copyPrivateIp")
+		ok.Boolean(*v.CopyPrivateIp)
+	}
+
+	if v.CopyTags != nil {
+		ok := object.Key("copyTags")
+		ok.Boolean(*v.CopyTags)
+	}
+
+	if len(v.LaunchDisposition) > 0 {
+		ok := object.Key("launchDisposition")
+		ok.String(string(v.LaunchDisposition))
+	}
+
+	if v.Licensing != nil {
+		ok := object.Key("licensing")
+		if err := awsRestjson1_serializeDocumentLicensing(v.Licensing, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TargetInstanceTypeRightSizingMethod) > 0 {
+		ok := object.Key("targetInstanceTypeRightSizingMethod")
+		ok.String(string(v.TargetInstanceTypeRightSizingMethod))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateReplicationConfigurationTemplate struct {
 }
 
@@ -298,6 +395,74 @@ func awsRestjson1_serializeOpDocumentDeleteJobInput(v *DeleteJobInput, value smi
 	if v.JobID != nil {
 		ok := object.Key("jobID")
 		ok.String(*v.JobID)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteLaunchConfigurationTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteLaunchConfigurationTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteLaunchConfigurationTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLaunchConfigurationTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DeleteLaunchConfigurationTemplate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDeleteLaunchConfigurationTemplateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteLaunchConfigurationTemplateInput(v *DeleteLaunchConfigurationTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDeleteLaunchConfigurationTemplateInput(v *DeleteLaunchConfigurationTemplateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LaunchConfigurationTemplateID != nil {
+		ok := object.Key("launchConfigurationTemplateID")
+		ok.String(*v.LaunchConfigurationTemplateID)
 	}
 
 	return nil
@@ -648,6 +813,86 @@ func awsRestjson1_serializeOpDocumentDescribeJobsInput(v *DescribeJobsInput, val
 	if v.Filters != nil {
 		ok := object.Key("filters")
 		if err := awsRestjson1_serializeDocumentDescribeJobsRequestFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeLaunchConfigurationTemplates struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeLaunchConfigurationTemplates) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeLaunchConfigurationTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeLaunchConfigurationTemplatesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DescribeLaunchConfigurationTemplates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDescribeLaunchConfigurationTemplatesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeLaunchConfigurationTemplatesInput(v *DescribeLaunchConfigurationTemplatesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDescribeLaunchConfigurationTemplatesInput(v *DescribeLaunchConfigurationTemplatesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LaunchConfigurationTemplateIDs != nil {
+		ok := object.Key("launchConfigurationTemplateIDs")
+		if err := awsRestjson1_serializeDocumentLaunchConfigurationTemplateIDs(v.LaunchConfigurationTemplateIDs, ok); err != nil {
 			return err
 		}
 	}
@@ -2472,6 +2717,101 @@ func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationInput(v *UpdateLau
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateLaunchConfigurationTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateLaunchConfigurationTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateLaunchConfigurationTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLaunchConfigurationTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/UpdateLaunchConfigurationTemplate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationTemplateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateLaunchConfigurationTemplateInput(v *UpdateLaunchConfigurationTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationTemplateInput(v *UpdateLaunchConfigurationTemplateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CopyPrivateIp != nil {
+		ok := object.Key("copyPrivateIp")
+		ok.Boolean(*v.CopyPrivateIp)
+	}
+
+	if v.CopyTags != nil {
+		ok := object.Key("copyTags")
+		ok.Boolean(*v.CopyTags)
+	}
+
+	if v.LaunchConfigurationTemplateID != nil {
+		ok := object.Key("launchConfigurationTemplateID")
+		ok.String(*v.LaunchConfigurationTemplateID)
+	}
+
+	if len(v.LaunchDisposition) > 0 {
+		ok := object.Key("launchDisposition")
+		ok.String(string(v.LaunchDisposition))
+	}
+
+	if v.Licensing != nil {
+		ok := object.Key("licensing")
+		if err := awsRestjson1_serializeDocumentLicensing(v.Licensing, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TargetInstanceTypeRightSizingMethod) > 0 {
+		ok := object.Key("targetInstanceTypeRightSizingMethod")
+		ok.String(string(v.TargetInstanceTypeRightSizingMethod))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateReplicationConfiguration struct {
 }
 
@@ -2888,6 +3228,17 @@ func awsRestjson1_serializeDocumentDescribeSourceServersRequestFilters(v *types.
 }
 
 func awsRestjson1_serializeDocumentDescribeSourceServersRequestFiltersIDs(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLaunchConfigurationTemplateIDs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

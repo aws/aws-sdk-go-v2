@@ -42,9 +42,9 @@ import (
 // in the Amazon DynamoDB Developer Guide. By default, BatchGetItem performs
 // eventually consistent reads on every table in the request. If you want strongly
 // consistent reads instead, you can set ConsistentRead to true for any or all
-// tables. In order to minimize response latency, BatchGetItem retrieves items in
-// parallel. When designing your application, keep in mind that DynamoDB does not
-// return items in any particular order. To help parse the response by item,
+// tables. In order to minimize response latency, BatchGetItem may retrieve items
+// in parallel. When designing your application, keep in mind that DynamoDB does
+// not return items in any particular order. To help parse the response by item,
 // include the primary key values for the items in your request in the
 // ProjectionExpression parameter. If a requested item does not exist, it is not
 // returned in the result. Requests for nonexistent items consume the minimum read

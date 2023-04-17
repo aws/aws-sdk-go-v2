@@ -1,0 +1,8 @@
+{
+    "id": "96905fcc-f3aa-43a3-8c7d-e6b7abf88628",
+    "type": "feature",
+    "description": "This release includes a new configurable value, TrafficPercentageToMonitor, which allows users to adjust the amount of traffic monitored by percentage",
+    "modules": [
+        "service/internetmonitor"
+    ]
+}

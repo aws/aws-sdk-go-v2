@@ -74,6 +74,10 @@ type UpdateMonitorInput struct {
 	// accepted: PENDING , and ERROR .
 	Status types.MonitorConfigState
 
+	// The percentage of the internet-facing traffic for your application that you
+	// want to monitor with this monitor.
+	TrafficPercentageToMonitor int32
+
 	noSmithyDocumentSerde
 }
 

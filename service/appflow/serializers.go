@@ -75,6 +75,11 @@ func awsRestjson1_serializeOpDocumentCreateConnectorProfileInput(v *CreateConnec
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if len(v.ConnectionMode) > 0 {
 		ok := object.Key("connectionMode")
 		ok.String(string(v.ConnectionMode))
@@ -169,6 +174,11 @@ func awsRestjson1_serializeOpHttpBindingsCreateFlowInput(v *CreateFlowInput, enc
 func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")
@@ -1205,6 +1215,11 @@ func awsRestjson1_serializeOpDocumentRegisterConnectorInput(v *RegisterConnector
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.ConnectorLabel != nil {
 		ok := object.Key("connectorLabel")
 		ok.String(*v.ConnectorLabel)
@@ -1289,6 +1304,11 @@ func awsRestjson1_serializeOpHttpBindingsStartFlowInput(v *StartFlowInput, encod
 func awsRestjson1_serializeOpDocumentStartFlowInput(v *StartFlowInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.FlowName != nil {
 		ok := object.Key("flowName")
@@ -1646,6 +1666,11 @@ func awsRestjson1_serializeOpDocumentUpdateConnectorProfileInput(v *UpdateConnec
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if len(v.ConnectionMode) > 0 {
 		ok := object.Key("connectionMode")
 		ok.String(string(v.ConnectionMode))
@@ -1726,6 +1751,11 @@ func awsRestjson1_serializeOpDocumentUpdateConnectorRegistrationInput(v *UpdateC
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.ConnectorLabel != nil {
 		ok := object.Key("connectorLabel")
 		ok.String(*v.ConnectorLabel)
@@ -1805,6 +1835,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFlowInput(v *UpdateFlowInput, enc
 func awsRestjson1_serializeOpDocumentUpdateFlowInput(v *UpdateFlowInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")

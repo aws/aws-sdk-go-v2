@@ -364,6 +364,7 @@ const (
 	RuntimeProvided     Runtime = "provided"
 	RuntimeProvidedal2  Runtime = "provided.al2"
 	RuntimeNodejs18x    Runtime = "nodejs18.x"
+	RuntimePython310    Runtime = "python3.10"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -399,6 +400,7 @@ func (Runtime) Values() []Runtime {
 		"provided",
 		"provided.al2",
 		"nodejs18.x",
+		"python3.10",
 	}
 }
 

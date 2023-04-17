@@ -1,0 +1,8 @@
+{
+    "id": "815a7068-e8a3-44bb-a537-52555057651d",
+    "type": "feature",
+    "description": "Supports the new feature of LoRaWAN roaming, allows to configure MaxEirp for LoRaWAN gateway, and allows to configure PingSlotPeriod for LoRaWAN multicast group",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

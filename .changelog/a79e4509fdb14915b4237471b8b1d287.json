@@ -1,0 +1,8 @@
+{
+    "id": "a79e4509-fdb1-4915-b423-7471b8b1d287",
+    "type": "feature",
+    "description": "This release adds a Client Token parameter to the following AppFlow APIs: Create/Update Connector Profile, Create/Update Flow, Start Flow, Register Connector, Update Connector Registration. The Client Token parameter allows idempotent operations for these APIs.",
+    "modules": [
+        "service/appflow"
+    ]
+}
