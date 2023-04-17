@@ -833,7 +833,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>The <code>BatchGetItem</code> operation returns the attributes of one or more items\n            from one or more tables. You identify requested items by primary key.</p>\n         <p>A single operation can retrieve up to 16 MB of data, which can contain as many as 100\n            items. <code>BatchGetItem</code> returns a partial result if the response size limit is\n            exceeded, the table's provisioned throughput is exceeded, or an internal processing\n            failure occurs. If a partial result is returned, the operation returns a value for\n                <code>UnprocessedKeys</code>. You can use this value to retry the operation starting\n            with the next item to get.</p>\n         <important>\n            <p>If you request more than 100 items, <code>BatchGetItem</code> returns a\n                    <code>ValidationException</code> with the message \"Too many items requested for\n                the BatchGetItem call.\"</p>\n         </important>\n         <p>For example, if you ask to retrieve 100 items, but each individual item is 300 KB in\n            size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns\n            an appropriate <code>UnprocessedKeys</code> value so you can get the next page of\n            results. If desired, your application can include its own logic to assemble the pages of\n            results into one dataset.</p>\n         <p>If <i>none</i> of the items can be processed due to insufficient\n            provisioned throughput on all of the tables in the request, then\n                <code>BatchGetItem</code> returns a\n                <code>ProvisionedThroughputExceededException</code>. If <i>at least\n                one</i> of the items is successfully processed, then\n                <code>BatchGetItem</code> completes successfully, while returning the keys of the\n            unread items in <code>UnprocessedKeys</code>.</p>\n         <important>\n            <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on\n                those items. However, <i>we strongly recommend that you use an exponential\n                    backoff algorithm</i>. If you retry the batch operation immediately, the\n                underlying read or write requests can still fail due to throttling on the individual\n                tables. If you delay the batch operation using exponential backoff, the individual\n                requests in the batch are much more likely to succeed.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations\">Batch Operations and Error Handling</a> in the <i>Amazon DynamoDB\n                    Developer Guide</i>.</p>\n         </important>\n         <p>By default, <code>BatchGetItem</code> performs eventually consistent reads on every\n            table in the request. If you want strongly consistent reads instead, you can set\n                <code>ConsistentRead</code> to <code>true</code> for any or all tables.</p>\n         <p>In order to minimize response latency, <code>BatchGetItem</code> retrieves items in\n            parallel.</p>\n         <p>When designing your application, keep in mind that DynamoDB does not return items in\n            any particular order. To help parse the response by item, include the primary key values\n            for the items in your request in the <code>ProjectionExpression</code> parameter.</p>\n         <p>If a requested item does not exist, it is not returned in the result. Requests for\n            nonexistent items consume the minimum read capacity units according to the type of read.\n            For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations\">Working with Tables</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The <code>BatchGetItem</code> operation returns the attributes of one or more items\n            from one or more tables. You identify requested items by primary key.</p>\n         <p>A single operation can retrieve up to 16 MB of data, which can contain as many as 100\n            items. <code>BatchGetItem</code> returns a partial result if the response size limit is\n            exceeded, the table's provisioned throughput is exceeded, or an internal processing\n            failure occurs. If a partial result is returned, the operation returns a value for\n                <code>UnprocessedKeys</code>. You can use this value to retry the operation starting\n            with the next item to get.</p>\n         <important>\n            <p>If you request more than 100 items, <code>BatchGetItem</code> returns a\n                    <code>ValidationException</code> with the message \"Too many items requested for\n                the BatchGetItem call.\"</p>\n         </important>\n         <p>For example, if you ask to retrieve 100 items, but each individual item is 300 KB in\n            size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns\n            an appropriate <code>UnprocessedKeys</code> value so you can get the next page of\n            results. If desired, your application can include its own logic to assemble the pages of\n            results into one dataset.</p>\n         <p>If <i>none</i> of the items can be processed due to insufficient\n            provisioned throughput on all of the tables in the request, then\n                <code>BatchGetItem</code> returns a\n                <code>ProvisionedThroughputExceededException</code>. If <i>at least\n                one</i> of the items is successfully processed, then\n                <code>BatchGetItem</code> completes successfully, while returning the keys of the\n            unread items in <code>UnprocessedKeys</code>.</p>\n         <important>\n            <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on\n                those items. However, <i>we strongly recommend that you use an exponential\n                    backoff algorithm</i>. If you retry the batch operation immediately, the\n                underlying read or write requests can still fail due to throttling on the individual\n                tables. If you delay the batch operation using exponential backoff, the individual\n                requests in the batch are much more likely to succeed.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations\">Batch Operations and Error Handling</a> in the <i>Amazon DynamoDB\n                    Developer Guide</i>.</p>\n         </important>\n         <p>By default, <code>BatchGetItem</code> performs eventually consistent reads on every\n            table in the request. If you want strongly consistent reads instead, you can set\n                <code>ConsistentRead</code> to <code>true</code> for any or all tables.</p>\n         <p>In order to minimize response latency, <code>BatchGetItem</code> may retrieve items in\n            parallel.</p>\n         <p>When designing your application, keep in mind that DynamoDB does not return items in\n            any particular order. To help parse the response by item, include the primary key values\n            for the items in your request in the <code>ProjectionExpression</code> parameter.</p>\n         <p>If a requested item does not exist, it is not returned in the result. Requests for\n            nonexistent items consume the minimum read capacity units according to the type of read.\n            For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations\">Working with Tables</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
             }
         },
         "com.amazonaws.dynamodb#BatchGetItemInput": {
@@ -3924,8 +3924,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3937,8 +3937,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3950,8 +3950,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3963,8 +3963,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3976,8 +3976,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3989,8 +3989,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4002,8 +4002,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4015,8 +4015,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4028,8 +4028,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4041,8 +4041,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4054,8 +4054,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4067,8 +4067,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4080,8 +4080,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4093,8 +4093,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4106,8 +4106,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4119,8 +4119,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4132,8 +4132,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4154,8 +4154,8 @@
                             },
                             "params": {
                                 "Region": "local",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4167,8 +4167,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4180,8 +4180,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4193,8 +4193,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4206,8 +4206,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4219,8 +4219,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4232,8 +4232,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4245,8 +4245,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4258,8 +4258,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4271,8 +4271,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4284,8 +4284,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4297,8 +4297,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4310,8 +4310,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4323,8 +4323,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4336,8 +4336,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4349,8 +4349,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4362,8 +4362,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4375,8 +4375,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4388,8 +4388,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4401,8 +4401,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4414,8 +4414,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4427,8 +4427,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4440,8 +4440,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4453,8 +4453,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4466,8 +4466,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4479,8 +4479,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4492,8 +4503,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4505,8 +4527,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4518,8 +4551,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4531,8 +4575,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4544,8 +4588,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4556,8 +4600,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4568,9 +4612,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -8863,7 +8913,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Creates a new table from an existing backup. Any number of users can execute up to 4\n            concurrent restores (any type of restore) in a given account. </p>\n         <p>You can call <code>RestoreTableFromBackup</code> at a maximum rate of 10 times per\n            second.</p>\n         <p>You must manually set up the following on the restored table:</p>\n         <ul>\n            <li>\n               <p>Auto scaling policies</p>\n            </li>\n            <li>\n               <p>IAM policies</p>\n            </li>\n            <li>\n               <p>Amazon CloudWatch metrics and alarms</p>\n            </li>\n            <li>\n               <p>Tags</p>\n            </li>\n            <li>\n               <p>Stream settings</p>\n            </li>\n            <li>\n               <p>Time to Live (TTL) settings</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a new table from an existing backup. Any number of users can execute up to 50\n            concurrent restores (any type of restore) in a given account. </p>\n         <p>You can call <code>RestoreTableFromBackup</code> at a maximum rate of 10 times per\n            second.</p>\n         <p>You must manually set up the following on the restored table:</p>\n         <ul>\n            <li>\n               <p>Auto scaling policies</p>\n            </li>\n            <li>\n               <p>IAM policies</p>\n            </li>\n            <li>\n               <p>Amazon CloudWatch metrics and alarms</p>\n            </li>\n            <li>\n               <p>Tags</p>\n            </li>\n            <li>\n               <p>Stream settings</p>\n            </li>\n            <li>\n               <p>Time to Live (TTL) settings</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.dynamodb#RestoreTableFromBackupInput": {
