@@ -1,3 +1,7 @@
+# v1.33.0 (2023-04-17)
+
+* **Feature**: Add Python 3.10 (python3.10) support to AWS Lambda
+
 # v1.32.0 (2023-04-14)
 
 * **Feature**: This release adds SnapStart related exceptions to InvokeWithResponseStream API. IAM access related documentation is also added for this API.

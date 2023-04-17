@@ -4,8 +4,8 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.17.8
-	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.10.21
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.4
+	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.10.22
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.5
 	github.com/google/go-cmp v0.5.8
 )
 

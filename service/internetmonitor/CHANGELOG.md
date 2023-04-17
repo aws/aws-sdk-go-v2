@@ -1,3 +1,7 @@
+# v1.2.0 (2023-04-17)
+
+* **Feature**: This release includes a new configurable value, TrafficPercentageToMonitor, which allows users to adjust the amount of traffic monitored by percentage
+
 # v1.1.2 (2023-04-10)
 
 * No change notes available for this release.

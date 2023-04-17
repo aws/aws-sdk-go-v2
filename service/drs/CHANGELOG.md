@@ -1,3 +1,7 @@
+# v1.13.0 (2023-04-17)
+
+* **Feature**: Changed existing APIs and added new APIs to support using an account-level launch configuration template with AWS Elastic Disaster Recovery.
+
 # v1.12.2 (2023-04-10)
 
 * No change notes available for this release.

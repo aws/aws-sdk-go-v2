@@ -1,8 +1,0 @@
-{
-    "id": "aa276009-8270-4f20-8c51-f37d6fedba8e",
-    "type": "feature",
-    "description": "Changed existing APIs and added new APIs to support using an account-level launch configuration template with AWS Elastic Disaster Recovery.",
-    "modules": [
-        "service/drs"
-    ]
-}

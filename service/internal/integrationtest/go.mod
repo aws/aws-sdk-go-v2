@@ -30,7 +30,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.10
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.16.10
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.1
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.4
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.93.2
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.9
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.25.1
@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.35.4
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.10
 	github.com/aws/aws-sdk-go-v2/service/kms v1.20.10
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.32.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.20.3
@@ -74,7 +74,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.8
 	github.com/aws/aws-sdk-go-v2/service/sms v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.18.7
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.18.8
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.2

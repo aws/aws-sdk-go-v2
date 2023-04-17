@@ -1,3 +1,7 @@
+# v1.26.0 (2023-04-17)
+
+* **Feature**: This release adds a Client Token parameter to the following AppFlow APIs: Create/Update Connector Profile, Create/Update Flow, Start Flow, Register Connector, Update Connector Registration. The Client Token parameter allows idempotent operations for these APIs.
+
 # v1.25.4 (2023-04-10)
 
 * No change notes available for this release.
