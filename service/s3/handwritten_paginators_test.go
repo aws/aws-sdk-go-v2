@@ -2,159 +2,271 @@ package s3
 
 import (
 	"context"
-	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/smithy-go/middleware"
 	"testing"
 )
 
-var bucket *string
-var limit int32
-var keyMarker *string
-var idMarker *string
-
-type testListMPUMiddleware struct {
-	id int
+type mockListObjectVersionsClient struct {
+	outputs []*ListObjectVersionsOutput
+	inputs  []*ListObjectVersionsInput
+	t       *testing.T
+	limit   int32
 }
 
-type testListOVMiddleware struct {
-	id int
+type mockListMultipartUploadsClient struct {
+	outputs []*ListMultipartUploadsOutput
+	inputs  []*ListMultipartUploadsInput
+	t       *testing.T
+	limit   int32
 }
 
-func (m *testListMPUMiddleware) ID() string {
-	return fmt.Sprintf("mock middleware %d", m.id)
+func (c *mockListObjectVersionsClient) ListObjectVersions(ctx context.Context, input *ListObjectVersionsInput, optFns ...func(*Options)) (*ListObjectVersionsOutput, error) {
+	if input.MaxKeys != c.limit {
+		c.t.Errorf("Expect page limit to be %d, got %d", c.limit, input.MaxKeys)
+	}
+	c.inputs = append(c.inputs, input)
+	requestCnt := len(c.inputs)
+	testCurRequestCnt(len(c.outputs), requestCnt, c.t)
+	return c.outputs[requestCnt-1], nil
 }
 
-func (m *testListMPUMiddleware) HandleInitialize(ctx context.Context, input middleware.InitializeInput, next middleware.InitializeHandler) (
-	output middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	params := input.Parameters.(*ListMultipartUploadsInput)
-	bucket = params.Bucket
-	limit = params.MaxUploads
-	keyMarker = params.KeyMarker
-	idMarker = params.UploadIdMarker
-	return middleware.InitializeOutput{Result: &ListMultipartUploadsOutput{}}, metadata, nil
-}
-
-func (m *testListOVMiddleware) ID() string {
-	return fmt.Sprintf("mock middleware %d", m.id)
-}
-
-func (m *testListOVMiddleware) HandleInitialize(ctx context.Context, input middleware.InitializeInput, next middleware.InitializeHandler) (
-	output middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	params := input.Parameters.(*ListObjectVersionsInput)
-	bucket = params.Bucket
-	limit = params.MaxKeys
-	keyMarker = params.KeyMarker
-	idMarker = params.VersionIdMarker
-	return middleware.InitializeOutput{Result: &ListObjectVersionsOutput{}}, metadata, nil
+func (c *mockListMultipartUploadsClient) ListMultipartUploads(ctx context.Context, input *ListMultipartUploadsInput, optFns ...func(*Options)) (*ListMultipartUploadsOutput, error) {
+	if input.MaxUploads != c.limit {
+		c.t.Errorf("Expect page limit to be %d, got %d", c.limit, input.MaxUploads)
+	}
+	c.inputs = append(c.inputs, input)
+	requestCnt := len(c.inputs)
+	testCurRequestCnt(len(c.outputs), requestCnt, c.t)
+	return c.outputs[requestCnt-1], nil
 }
 
 type testCase struct {
-	bucket    *string
-	limit     int32
-	keyMarker *string
-	idMarker  *string
+	bucket                 *string
+	limit                  int32
+	requestCnt             int
+	stopOnDuplicationToken bool
 }
 
-func TestListMultipartUploadsPaginator(t *testing.T) {
-	cases := map[string]testCase{
-		"page limit 5 without marker": {
-			bucket: aws.String("testBucket1"),
-			limit:  5,
-		},
-		"page limit 10 with marker": {
-			bucket:    aws.String("testBucket2"),
-			limit:     10,
-			keyMarker: aws.String("testKey1"),
-			idMarker:  aws.String("abc"),
-		},
-	}
+type listOVTestCase struct {
+	testCase
+	outputs []*ListObjectVersionsOutput
+}
 
-	for name, c := range cases {
-		t.Run(name, func(t *testing.T) {
-			client := NewFromConfig(aws.Config{})
-
-			paginator := NewListMultipartUploadsPaginator(client, &ListMultipartUploadsInput{
-				Bucket:         c.bucket,
-				KeyMarker:      c.keyMarker,
-				UploadIdMarker: c.idMarker,
-			}, func(options *ListMultipartUploadsPaginatorOptions) {
-				options.Limit = c.limit
-			})
-			if !paginator.HasMorePages() {
-				t.Errorf("Expect paginator has more page, got not")
-			}
-
-			paginator.NextPage(context.TODO(), initializeMiddlewareFn(&testListMPUMiddleware{1}))
-
-			testNextPageResult(c, paginator.keyMarker, paginator.uploadIDMarker, t)
-		})
-	}
+type listMPUTestCase struct {
+	testCase
+	outputs []*ListMultipartUploadsOutput
 }
 
 func TestListObjectVersionsPaginator(t *testing.T) {
-	cases := map[string]testCase{
+	cases := map[string]listOVTestCase{
 		"page limit 5": {
-			bucket: aws.String("testBucket3"),
-			limit:  5,
+			testCase: testCase{
+				bucket:     aws.String("testBucket1"),
+				limit:      5,
+				requestCnt: 3,
+			},
+			outputs: []*ListObjectVersionsOutput{
+				&ListObjectVersionsOutput{
+					NextKeyMarker:       aws.String("testKey1"),
+					NextVersionIdMarker: aws.String("testID1"),
+					IsTruncated:         true,
+				},
+				&ListObjectVersionsOutput{
+					NextKeyMarker:       aws.String("testKey2"),
+					NextVersionIdMarker: aws.String("testID2"),
+					IsTruncated:         true,
+				},
+				&ListObjectVersionsOutput{
+					NextKeyMarker:       aws.String("testKey3"),
+					NextVersionIdMarker: aws.String("testID3"),
+					IsTruncated:         false,
+				},
+			},
 		},
-		"page limit 10 with marker": {
-			bucket:    aws.String("testBucket4"),
-			limit:     10,
-			keyMarker: aws.String("testKey2"),
-			idMarker:  aws.String("def"),
+		"page limit 10 with duplicate marker": {
+			testCase: testCase{
+				bucket:                 aws.String("testBucket2"),
+				limit:                  10,
+				requestCnt:             3,
+				stopOnDuplicationToken: true,
+			},
+			outputs: []*ListObjectVersionsOutput{
+				&ListObjectVersionsOutput{
+					NextKeyMarker:       aws.String("testKey1"),
+					NextVersionIdMarker: aws.String("testID1"),
+					IsTruncated:         true,
+				},
+				&ListObjectVersionsOutput{
+					NextKeyMarker:       aws.String("testKey2"),
+					NextVersionIdMarker: aws.String("testID2"),
+					IsTruncated:         true,
+				},
+				&ListObjectVersionsOutput{
+					NextKeyMarker:       aws.String("testKey2"),
+					NextVersionIdMarker: aws.String("testID2"),
+					IsTruncated:         true,
+				},
+				&ListObjectVersionsOutput{
+					NextKeyMarker:       aws.String("testKey3"),
+					NextVersionIdMarker: aws.String("testID3"),
+					IsTruncated:         false,
+				},
+			},
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			client := NewFromConfig(aws.Config{})
-
-			paginator := NewListObjectVersionsPaginator(client, &ListObjectVersionsInput{
-				Bucket:          c.bucket,
-				KeyMarker:       c.keyMarker,
-				VersionIdMarker: c.idMarker,
+			client := mockListObjectVersionsClient{
+				limit:   c.limit,
+				t:       t,
+				outputs: c.outputs,
+				inputs:  []*ListObjectVersionsInput{},
+			}
+			paginator := NewListObjectVersionsPaginator(&client, &ListObjectVersionsInput{
+				Bucket: c.bucket,
 			}, func(options *ListObjectVersionsPaginatorOptions) {
 				options.Limit = c.limit
+				options.StopOnDuplicateToken = c.stopOnDuplicationToken
 			})
-			if !paginator.HasMorePages() {
-				t.Errorf("Expect paginator has more page, got not")
+
+			for paginator.HasMorePages() {
+				_, err := paginator.NextPage(context.TODO())
+				if err != nil {
+					t.Errorf("error: %v", err)
+				}
 			}
 
-			paginator.NextPage(context.TODO(), initializeMiddlewareFn(&testListOVMiddleware{1}))
-
-			testNextPageResult(c, paginator.keyMarker, paginator.versionIDMarker, t)
+			inputLen := len(client.inputs)
+			testTotalRequests(c.requestCnt, inputLen, t)
+			for i := 1; i < inputLen; i++ {
+				if *client.inputs[i].KeyMarker != *c.outputs[i-1].NextKeyMarker {
+					t.Errorf("Expect next input's KeyMarker to be eaqul to %s, got %s",
+						*c.outputs[i-1].NextKeyMarker, *client.inputs[i].KeyMarker)
+				}
+				if *client.inputs[i].VersionIdMarker != *c.outputs[i-1].NextVersionIdMarker {
+					t.Errorf("Expect next input's VersionIdMarker to be eaqul to %s, got %s",
+						*c.outputs[i-1].NextVersionIdMarker, *client.inputs[i].VersionIdMarker)
+				}
+			}
 		})
 	}
 }
 
-// insert middleware at the beginning of initialize step to see if page limit
-// can be passed to API call's stack input
-func initializeMiddlewareFn(initializeMiddleware middleware.InitializeMiddleware) func(*Options) {
-	return func(options *Options) {
-		options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-			return stack.Initialize.Add(initializeMiddleware, middleware.Before)
+func TestListMultipartUploadsPaginator(t *testing.T) {
+	cases := map[string]listMPUTestCase{
+		"page limit 5": {
+			testCase: testCase{
+				bucket:     aws.String("testBucket1"),
+				limit:      5,
+				requestCnt: 4,
+			},
+			outputs: []*ListMultipartUploadsOutput{
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey1"),
+					NextUploadIdMarker: aws.String("testID1"),
+					IsTruncated:        true,
+				},
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey2"),
+					NextUploadIdMarker: aws.String("testID2"),
+					IsTruncated:        true,
+				},
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey3"),
+					NextUploadIdMarker: aws.String("testID3"),
+					IsTruncated:        true,
+				},
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey4"),
+					NextUploadIdMarker: aws.String("testID4"),
+					IsTruncated:        false,
+				},
+			},
+		},
+		"page limit 10 with duplicate marker": {
+			testCase: testCase{
+				bucket:                 aws.String("testBucket2"),
+				limit:                  10,
+				requestCnt:             3,
+				stopOnDuplicationToken: true,
+			},
+			outputs: []*ListMultipartUploadsOutput{
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey1"),
+					NextUploadIdMarker: aws.String("testID1"),
+					IsTruncated:        true,
+				},
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey2"),
+					NextUploadIdMarker: aws.String("testID2"),
+					IsTruncated:        true,
+				},
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey2"),
+					NextUploadIdMarker: aws.String("testID2"),
+					IsTruncated:        true,
+				},
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey4"),
+					NextUploadIdMarker: aws.String("testID4"),
+					IsTruncated:        false,
+				},
+				&ListMultipartUploadsOutput{
+					NextKeyMarker:      aws.String("testKey5"),
+					NextUploadIdMarker: aws.String("testID5"),
+					IsTruncated:        false,
+				},
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			client := mockListMultipartUploadsClient{
+				outputs: c.outputs,
+				inputs:  []*ListMultipartUploadsInput{},
+				t:       t,
+				limit:   c.limit,
+			}
+			paginator := NewListMultipartUploadsPaginator(&client, &ListMultipartUploadsInput{
+				Bucket: c.bucket,
+			}, func(options *ListMultipartUploadsPaginatorOptions) {
+				options.Limit = c.limit
+				options.StopOnDuplicateToken = c.stopOnDuplicationToken
+			})
+
+			for paginator.HasMorePages() {
+				_, err := paginator.NextPage(context.TODO())
+				if err != nil {
+					t.Errorf("error: %v", err)
+				}
+			}
+
+			inputLen := len(client.inputs)
+			testTotalRequests(c.requestCnt, inputLen, t)
+			for i := 1; i < inputLen; i++ {
+				if *client.inputs[i].KeyMarker != *c.outputs[i-1].NextKeyMarker {
+					t.Errorf("Expect next input's KeyMarker to be eaqul to %s, got %s",
+						*c.outputs[i-1].NextKeyMarker, *client.inputs[i].KeyMarker)
+				}
+				if *client.inputs[i].UploadIdMarker != *c.outputs[i-1].NextUploadIdMarker {
+					t.Errorf("Expect next input's UploadIdMarker to be eaqul to %s, got %s",
+						*c.outputs[i-1].NextUploadIdMarker, *client.inputs[i].UploadIdMarker)
+				}
+			}
 		})
 	}
 }
 
-// unit test can not control client API call's output, so just check marker's default nil value
-func testNextPageResult(c testCase, pKeyMarker *string, pIDMarker *string, t *testing.T) {
-	if c.limit != limit {
-		t.Errorf("Expect page limit to be %d, got %d", c.limit, limit)
+func testTotalRequests(expect, actual int, t *testing.T) {
+	if actual != expect {
+		t.Errorf("Expect total request number to be %d, got %d", expect, actual)
 	}
-	if *c.bucket != *bucket {
-		t.Errorf("Expect bucket to be %s, got %s", *c.bucket, *bucket)
-	}
-	if c.keyMarker != nil && *c.keyMarker != *keyMarker {
-		t.Errorf("Expect keyMarker to be %s, got %s", *c.keyMarker, *keyMarker)
-	}
-	if c.idMarker != nil && *c.idMarker != *idMarker {
-		t.Errorf("Expect idMarker to be %s, got %s", *c.idMarker, *idMarker)
-	}
-	if pKeyMarker != nil || pIDMarker != nil {
-		t.Errorf("Expect paginator keyMarker and idMarker to be nil, got %s and %s", *pKeyMarker, *pIDMarker)
+}
+
+func testCurRequestCnt(expectMax, actual int, t *testing.T) {
+	if actual > expectMax {
+		t.Errorf("Paginator calls client more than expected %d times", expectMax)
 	}
 }

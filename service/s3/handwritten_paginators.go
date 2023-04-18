@@ -32,6 +32,7 @@ type ListObjectVersionsPaginator struct {
 	firstPage       bool
 	keyMarker       *string
 	versionIDMarker *string
+	isTruncated     bool
 }
 
 // NewListObjectVersionsPaginator returns a new ListObjectVersionsPaginator
@@ -59,7 +60,7 @@ func NewListObjectVersionsPaginator(client ListObjectVersionsAPIClient, params *
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListObjectVersionsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.keyMarker != nil && len(*p.keyMarker) != 0) && (p.versionIDMarker != nil && len(*p.versionIDMarker) != 0)
+	return p.firstPage || p.isTruncated
 }
 
 // NextPage retrieves the next ListObjectVersions page.
@@ -85,6 +86,7 @@ func (p *ListObjectVersionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	p.firstPage = false
 
 	prevToken := p.keyMarker
+	p.isTruncated = result.IsTruncated
 	p.keyMarker = nil
 	p.versionIDMarker = nil
 	if result.IsTruncated {
@@ -96,7 +98,7 @@ func (p *ListObjectVersionsPaginator) NextPage(ctx context.Context, optFns ...fu
 		prevToken != nil &&
 		p.keyMarker != nil &&
 		*prevToken == *p.keyMarker {
-		p.keyMarker = nil
+		p.isTruncated = false
 	}
 
 	return result, nil
@@ -129,6 +131,7 @@ type ListMultipartUploadsPaginator struct {
 	firstPage      bool
 	keyMarker      *string
 	uploadIDMarker *string
+	isTruncated    bool
 }
 
 // NewListMultipartUploadsPaginator returns a new ListMultipartUploadsPaginator
@@ -156,7 +159,7 @@ func NewListMultipartUploadsPaginator(client ListMultipartUploadsAPIClient, para
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListMultipartUploadsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.keyMarker != nil && len(*p.keyMarker) != 0) && (p.uploadIDMarker != nil && len(*p.uploadIDMarker) != 0)
+	return p.firstPage || p.isTruncated
 }
 
 // NextPage retrieves the next ListMultipartUploads page.
@@ -182,7 +185,7 @@ func (p *ListMultipartUploadsPaginator) NextPage(ctx context.Context, optFns ...
 	p.firstPage = false
 
 	prevToken := p.keyMarker
-
+	p.isTruncated = result.IsTruncated
 	p.keyMarker = nil
 	p.uploadIDMarker = nil
 	if result.IsTruncated {
@@ -194,7 +197,7 @@ func (p *ListMultipartUploadsPaginator) NextPage(ctx context.Context, optFns ...
 		prevToken != nil &&
 		p.keyMarker != nil &&
 		*prevToken == *p.keyMarker {
-		p.keyMarker = nil
+		p.isTruncated = false
 	}
 
 	return result, nil
