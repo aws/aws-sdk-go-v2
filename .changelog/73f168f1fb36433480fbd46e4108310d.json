@@ -1,8 +1,0 @@
-{
-    "id": "73f168f1-fb36-4334-80fb-d46e4108310d",
-    "type": "feature",
-    "description": "This release adds support for customer managed permissions. Customer managed permissions enable customers to author and manage tailored permissions for resources shared using RAM.",
-    "modules": [
-        "service/ram"
-    ]
-}

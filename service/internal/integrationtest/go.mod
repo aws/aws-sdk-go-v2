@@ -5,7 +5,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.18.21
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.9
-	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.3
+	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.9
 	github.com/aws/aws-sdk-go-v2/service/athena v1.25.2
@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.93.2
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.9
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.25.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.26.8
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.8
@@ -60,15 +60,15 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.8
-	github.com/aws/aws-sdk-go-v2/service/rds v1.43.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.9
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.6
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.31.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.3
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.3
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.9

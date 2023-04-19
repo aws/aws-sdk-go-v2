@@ -3,4 +3,4 @@
 package arczonalshift
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.1.15"
+const goModuleVersion = "1.1.16"

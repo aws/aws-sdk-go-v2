@@ -1,3 +1,7 @@
+# v1.18.0 (2023-04-19)
+
+* **Feature**: This release adds support for customer managed permissions. Customer managed permissions enable customers to author and manage tailored permissions for resources shared using RAM.
+
 # v1.17.10 (2023-04-10)
 
 * No change notes available for this release.
