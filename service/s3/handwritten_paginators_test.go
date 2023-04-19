@@ -10,33 +10,25 @@ type mockListObjectVersionsClient struct {
 	outputs []*ListObjectVersionsOutput
 	inputs  []*ListObjectVersionsInput
 	t       *testing.T
-	limit   int32
 }
 
 type mockListMultipartUploadsClient struct {
 	outputs []*ListMultipartUploadsOutput
 	inputs  []*ListMultipartUploadsInput
 	t       *testing.T
-	limit   int32
 }
 
 func (c *mockListObjectVersionsClient) ListObjectVersions(ctx context.Context, input *ListObjectVersionsInput, optFns ...func(*Options)) (*ListObjectVersionsOutput, error) {
-	if input.MaxKeys != c.limit {
-		c.t.Errorf("Expect page limit to be %d, got %d", c.limit, input.MaxKeys)
-	}
 	c.inputs = append(c.inputs, input)
 	requestCnt := len(c.inputs)
-	testCurRequestCnt(len(c.outputs), requestCnt, c.t)
+	testCurRequest(len(c.outputs), requestCnt, c.outputs[requestCnt-1].MaxKeys, input.MaxKeys, c.t)
 	return c.outputs[requestCnt-1], nil
 }
 
 func (c *mockListMultipartUploadsClient) ListMultipartUploads(ctx context.Context, input *ListMultipartUploadsInput, optFns ...func(*Options)) (*ListMultipartUploadsOutput, error) {
-	if input.MaxUploads != c.limit {
-		c.t.Errorf("Expect page limit to be %d, got %d", c.limit, input.MaxUploads)
-	}
 	c.inputs = append(c.inputs, input)
 	requestCnt := len(c.inputs)
-	testCurRequestCnt(len(c.outputs), requestCnt, c.t)
+	testCurRequest(len(c.outputs), requestCnt, c.outputs[requestCnt-1].MaxUploads, input.MaxUploads, c.t)
 	return c.outputs[requestCnt-1], nil
 }
 
@@ -69,16 +61,19 @@ func TestListObjectVersionsPaginator(t *testing.T) {
 				&ListObjectVersionsOutput{
 					NextKeyMarker:       aws.String("testKey1"),
 					NextVersionIdMarker: aws.String("testID1"),
+					MaxKeys:             5,
 					IsTruncated:         true,
 				},
 				&ListObjectVersionsOutput{
 					NextKeyMarker:       aws.String("testKey2"),
 					NextVersionIdMarker: aws.String("testID2"),
+					MaxKeys:             5,
 					IsTruncated:         true,
 				},
 				&ListObjectVersionsOutput{
 					NextKeyMarker:       aws.String("testKey3"),
 					NextVersionIdMarker: aws.String("testID3"),
+					MaxKeys:             5,
 					IsTruncated:         false,
 				},
 			},
@@ -94,21 +89,25 @@ func TestListObjectVersionsPaginator(t *testing.T) {
 				&ListObjectVersionsOutput{
 					NextKeyMarker:       aws.String("testKey1"),
 					NextVersionIdMarker: aws.String("testID1"),
+					MaxKeys:             10,
 					IsTruncated:         true,
 				},
 				&ListObjectVersionsOutput{
 					NextKeyMarker:       aws.String("testKey2"),
 					NextVersionIdMarker: aws.String("testID2"),
+					MaxKeys:             10,
 					IsTruncated:         true,
 				},
 				&ListObjectVersionsOutput{
 					NextKeyMarker:       aws.String("testKey2"),
 					NextVersionIdMarker: aws.String("testID2"),
+					MaxKeys:             10,
 					IsTruncated:         true,
 				},
 				&ListObjectVersionsOutput{
 					NextKeyMarker:       aws.String("testKey3"),
 					NextVersionIdMarker: aws.String("testID3"),
+					MaxKeys:             10,
 					IsTruncated:         false,
 				},
 			},
@@ -118,7 +117,6 @@ func TestListObjectVersionsPaginator(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			client := mockListObjectVersionsClient{
-				limit:   c.limit,
 				t:       t,
 				outputs: c.outputs,
 				inputs:  []*ListObjectVersionsInput{},
@@ -165,21 +163,25 @@ func TestListMultipartUploadsPaginator(t *testing.T) {
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey1"),
 					NextUploadIdMarker: aws.String("testID1"),
+					MaxUploads:         5,
 					IsTruncated:        true,
 				},
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey2"),
 					NextUploadIdMarker: aws.String("testID2"),
+					MaxUploads:         5,
 					IsTruncated:        true,
 				},
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey3"),
 					NextUploadIdMarker: aws.String("testID3"),
+					MaxUploads:         5,
 					IsTruncated:        true,
 				},
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey4"),
 					NextUploadIdMarker: aws.String("testID4"),
+					MaxUploads:         5,
 					IsTruncated:        false,
 				},
 			},
@@ -195,26 +197,31 @@ func TestListMultipartUploadsPaginator(t *testing.T) {
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey1"),
 					NextUploadIdMarker: aws.String("testID1"),
+					MaxUploads:         10,
 					IsTruncated:        true,
 				},
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey2"),
 					NextUploadIdMarker: aws.String("testID2"),
+					MaxUploads:         10,
 					IsTruncated:        true,
 				},
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey2"),
 					NextUploadIdMarker: aws.String("testID2"),
+					MaxUploads:         10,
 					IsTruncated:        true,
 				},
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey4"),
 					NextUploadIdMarker: aws.String("testID4"),
+					MaxUploads:         10,
 					IsTruncated:        false,
 				},
 				&ListMultipartUploadsOutput{
 					NextKeyMarker:      aws.String("testKey5"),
 					NextUploadIdMarker: aws.String("testID5"),
+					MaxUploads:         10,
 					IsTruncated:        false,
 				},
 			},
@@ -227,7 +234,6 @@ func TestListMultipartUploadsPaginator(t *testing.T) {
 				outputs: c.outputs,
 				inputs:  []*ListMultipartUploadsInput{},
 				t:       t,
-				limit:   c.limit,
 			}
 			paginator := NewListMultipartUploadsPaginator(&client, &ListMultipartUploadsInput{
 				Bucket: c.bucket,
@@ -265,8 +271,11 @@ func testTotalRequests(expect, actual int, t *testing.T) {
 	}
 }
 
-func testCurRequestCnt(expectMax, actual int, t *testing.T) {
-	if actual > expectMax {
-		t.Errorf("Paginator calls client more than expected %d times", expectMax)
+func testCurRequest(maxReqCnt, actualReqCnt int, expectLimit, actualLimit int32, t *testing.T) {
+	if actualReqCnt > maxReqCnt {
+		t.Errorf("Paginator calls client more than expected %d times", maxReqCnt)
+	}
+	if expectLimit != actualLimit {
+		t.Errorf("Expect page limit to be %d, got %d", expectLimit, actualLimit)
 	}
 }
