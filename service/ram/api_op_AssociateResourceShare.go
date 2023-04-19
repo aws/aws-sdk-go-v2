@@ -32,7 +32,7 @@ func (c *Client) AssociateResourceShare(ctx context.Context, params *AssociateRe
 
 type AssociateResourceShareInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the resource share that you want to add principals or resources to.
 	//
 	// This member is required.
@@ -44,7 +44,8 @@ type AssociateResourceShareInput struct {
 	// to a later call to an operation requires that you also pass the same value for
 	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you.
+	// one for you. If you retry the operation with the same ClientToken , but with
+	// different parameters, the retry fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
 	// Specifies a list of principals to whom you want to the resource share. This can
@@ -53,7 +54,7 @@ type AssociateResourceShareInput struct {
 	// with the resource share. See AssociateResourceSharePermission . You can include
 	// the following values:
 	//   - An Amazon Web Services account ID, for example: 123456789012
-	//   - An Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   - An Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	//   of an organization in Organizations, for example:
 	//   organizations::123456789012:organization/o-exampleorgid
 	//   - An ARN of an organizational unit (OU) in Organizations, for example:

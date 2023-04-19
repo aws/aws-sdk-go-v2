@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the resource and principal associations for resource shares that you
-// own.
+// Retrieves the lists of resources and principals that associated for resource
+// shares that you own.
 func (c *Client) GetResourceShareAssociations(ctx context.Context, params *GetResourceShareAssociationsInput, optFns ...func(*Options)) (*GetResourceShareAssociationsOutput, error) {
 	if params == nil {
 		params = &GetResourceShareAssociationsInput{}
@@ -33,15 +33,13 @@ type GetResourceShareAssociationsInput struct {
 
 	// Specifies whether you want to retrieve the associations that involve a
 	// specified resource or principal.
-	//   - PRINCIPAL – list the principals that are associated with the specified
-	//   resource share.
-	//   - RESOURCE – list the resources that are associated with the specified
-	//   resource share.
+	//   - PRINCIPAL – list the principals whose associations you want to see.
+	//   - RESOURCE – list the resources whose associations you want to see.
 	//
 	// This member is required.
 	AssociationType types.ResourceShareAssociationType
 
-	// Specifies that you want to retrieve only associations with this status.
+	// Specifies that you want to retrieve only associations that have this status.
 	AssociationStatus types.ResourceShareAssociationStatus
 
 	// Specifies the total number of results that you want included on each page of
@@ -63,13 +61,13 @@ type GetResourceShareAssociationsInput struct {
 
 	// Specifies the ID of the principal whose resource shares you want to retrieve.
 	// This can be an Amazon Web Services account ID, an organization ID, an
-	// organizational unit ID, or the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// organizational unit ID, or the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of an individual IAM user or role. You cannot specify this parameter if the
 	// association type is RESOURCE .
 	Principal *string
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource whose resource shares you want to retrieve. You cannot specify
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of a resource whose resource shares you want to retrieve. You cannot specify
 	// this parameter if the association type is PRINCIPAL .
 	ResourceArn *string
 

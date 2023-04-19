@@ -7546,6 +7546,9 @@ func awsAwsjson11_deserializeOpErrorStartDocumentClassificationJob(response *smi
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -7675,6 +7678,9 @@ func awsAwsjson11_deserializeOpErrorStartDominantLanguageDetectionJob(response *
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
@@ -7797,6 +7803,9 @@ func awsAwsjson11_deserializeOpErrorStartEntitiesDetectionJob(response *smithyht
 
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
+
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -7926,6 +7935,9 @@ func awsAwsjson11_deserializeOpErrorStartEventsDetectionJob(response *smithyhttp
 
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
+
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
@@ -8173,6 +8185,9 @@ func awsAwsjson11_deserializeOpErrorStartKeyPhrasesDetectionJob(response *smithy
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
@@ -8295,6 +8310,9 @@ func awsAwsjson11_deserializeOpErrorStartPiiEntitiesDetectionJob(response *smith
 
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
+
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
@@ -8419,6 +8437,9 @@ func awsAwsjson11_deserializeOpErrorStartSentimentDetectionJob(response *smithyh
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
@@ -8542,6 +8563,9 @@ func awsAwsjson11_deserializeOpErrorStartTargetedSentimentDetectionJob(response 
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
@@ -8664,6 +8688,9 @@ func awsAwsjson11_deserializeOpErrorStartTopicsDetectionJob(response *smithyhttp
 
 	case strings.EqualFold("KmsKeyValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyValidationException(response, errorBody)
+
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
@@ -12752,6 +12779,55 @@ func awsAwsjson11_deserializeDocumentDocumentClassifierAugmentedManifestsList(v 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDocumentClassifierDocuments(v **types.DocumentClassifierDocuments, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocumentClassifierDocuments
+	if *v == nil {
+		sv = &types.DocumentClassifierDocuments{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		case "TestS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.TestS3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDocumentClassifierInputDataConfig(v **types.DocumentClassifierInputDataConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12786,6 +12862,25 @@ func awsAwsjson11_deserializeDocumentDocumentClassifierInputDataConfig(v **types
 					return fmt.Errorf("expected DocumentClassifierDataFormat to be of type string, got %T instead", value)
 				}
 				sv.DataFormat = types.DocumentClassifierDataFormat(jtv)
+			}
+
+		case "DocumentReaderConfig":
+			if err := awsAwsjson11_deserializeDocumentDocumentReaderConfig(&sv.DocumentReaderConfig, value); err != nil {
+				return err
+			}
+
+		case "Documents":
+			if err := awsAwsjson11_deserializeDocumentDocumentClassifierDocuments(&sv.Documents, value); err != nil {
+				return err
+			}
+
+		case "DocumentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentClassifierDocumentTypeFormat to be of type string, got %T instead", value)
+				}
+				sv.DocumentType = types.DocumentClassifierDocumentTypeFormat(jtv)
 			}
 
 		case "LabelDelimiter":
@@ -18008,6 +18103,40 @@ func awsAwsjson11_deserializeDocumentListOfTargetedSentimentEntities(v *[]types.
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentListOfWarnings(v *[]types.WarningsListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.WarningsListItem
+	if *v == nil {
+		cv = []types.WarningsListItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.WarningsListItem
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentWarningsListItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMentionSentiment(v **types.MentionSentiment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20415,6 +20544,68 @@ func awsAwsjson11_deserializeDocumentVpcConfig(v **types.VpcConfig, value interf
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentWarningsListItem(v **types.WarningsListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WarningsListItem
+	if *v == nil {
+		sv = &types.WarningsListItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Page":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Page = ptr.Int32(int32(i64))
+			}
+
+		case "WarnCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PageBasedWarningCode to be of type string, got %T instead", value)
+				}
+				sv.WarnCode = types.PageBasedWarningCode(jtv)
+			}
+
+		case "WarnMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.WarnMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentBatchDetectDominantLanguageOutput(v **BatchDetectDominantLanguageOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20705,6 +20896,11 @@ func awsAwsjson11_deserializeOpDocumentClassifyDocumentOutput(v **ClassifyDocume
 
 		case "Labels":
 			if err := awsAwsjson11_deserializeDocumentListOfLabels(&sv.Labels, value); err != nil {
+				return err
+			}
+
+		case "Warnings":
+			if err := awsAwsjson11_deserializeDocumentListOfWarnings(&sv.Warnings, value); err != nil {
 				return err
 			}
 

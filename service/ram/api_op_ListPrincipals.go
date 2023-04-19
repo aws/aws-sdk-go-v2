@@ -59,7 +59,7 @@ type ListPrincipalsInput struct {
 	// Specifies that you want to list information for only the listed principals. You
 	// can include the following values:
 	//   - An Amazon Web Services account ID, for example: 123456789012
-	//   - An Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   - An Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	//   of an organization in Organizations, for example:
 	//   organizations::123456789012:organization/o-exampleorgid
 	//   - An ARN of an organizational unit (OU) in Organizations, for example:
@@ -72,7 +72,7 @@ type ListPrincipalsInput struct {
 	Principals []string
 
 	// Specifies that you want to list principal information for the resource share
-	// with the specified Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// with the specified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// .
 	ResourceArn *string
 

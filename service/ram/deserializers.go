@@ -566,6 +566,372 @@ func awsRestjson1_deserializeOpDocumentAssociateResourceSharePermissionOutput(v 
 	return nil
 }
 
+type awsRestjson1_deserializeOpCreatePermission struct {
+}
+
+func (*awsRestjson1_deserializeOpCreatePermission) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpCreatePermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorCreatePermission(response, &metadata)
+	}
+	output := &CreatePermissionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreatePermissionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorCreatePermission(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("IdempotentParameterMismatchException", errorCode):
+		return awsRestjson1_deserializeErrorIdempotentParameterMismatchException(response, errorBody)
+
+	case strings.EqualFold("InvalidClientTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidClientTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("InvalidPolicyException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidPolicyException(response, errorBody)
+
+	case strings.EqualFold("MalformedPolicyTemplateException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedPolicyTemplateException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsRestjson1_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("PermissionAlreadyExistsException", errorCode):
+		return awsRestjson1_deserializeErrorPermissionAlreadyExistsException(response, errorBody)
+
+	case strings.EqualFold("PermissionLimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorPermissionLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreatePermissionOutput(v **CreatePermissionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreatePermissionOutput
+	if *v == nil {
+		sv = &CreatePermissionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClientToken = ptr.String(jtv)
+			}
+
+		case "permission":
+			if err := awsRestjson1_deserializeDocumentResourceSharePermissionSummary(&sv.Permission, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpCreatePermissionVersion struct {
+}
+
+func (*awsRestjson1_deserializeOpCreatePermissionVersion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpCreatePermissionVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorCreatePermissionVersion(response, &metadata)
+	}
+	output := &CreatePermissionVersionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreatePermissionVersionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorCreatePermissionVersion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("IdempotentParameterMismatchException", errorCode):
+		return awsRestjson1_deserializeErrorIdempotentParameterMismatchException(response, errorBody)
+
+	case strings.EqualFold("InvalidClientTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidClientTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("InvalidPolicyException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidPolicyException(response, errorBody)
+
+	case strings.EqualFold("MalformedArnException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
+
+	case strings.EqualFold("MalformedPolicyTemplateException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedPolicyTemplateException(response, errorBody)
+
+	case strings.EqualFold("PermissionVersionsLimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorPermissionVersionsLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnknownResourceException", errorCode):
+		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreatePermissionVersionOutput(v **CreatePermissionVersionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreatePermissionVersionOutput
+	if *v == nil {
+		sv = &CreatePermissionVersionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClientToken = ptr.String(jtv)
+			}
+
+		case "permission":
+			if err := awsRestjson1_deserializeDocumentResourceSharePermissionDetail(&sv.Permission, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpCreateResourceShare struct {
 }
 
@@ -741,6 +1107,383 @@ func awsRestjson1_deserializeOpDocumentCreateResourceShareOutput(v **CreateResou
 		case "resourceShare":
 			if err := awsRestjson1_deserializeDocumentResourceShare(&sv.ResourceShare, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpDeletePermission struct {
+}
+
+func (*awsRestjson1_deserializeOpDeletePermission) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeletePermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeletePermission(response, &metadata)
+	}
+	output := &DeletePermissionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDeletePermissionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeletePermission(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("IdempotentParameterMismatchException", errorCode):
+		return awsRestjson1_deserializeErrorIdempotentParameterMismatchException(response, errorBody)
+
+	case strings.EqualFold("InvalidClientTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidClientTokenException(response, errorBody)
+
+	case strings.EqualFold("MalformedArnException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsRestjson1_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnknownResourceException", errorCode):
+		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDeletePermissionOutput(v **DeletePermissionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeletePermissionOutput
+	if *v == nil {
+		sv = &DeletePermissionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClientToken = ptr.String(jtv)
+			}
+
+		case "permissionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PermissionStatus to be of type string, got %T instead", value)
+				}
+				sv.PermissionStatus = types.PermissionStatus(jtv)
+			}
+
+		case "returnValue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ReturnValue = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpDeletePermissionVersion struct {
+}
+
+func (*awsRestjson1_deserializeOpDeletePermissionVersion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeletePermissionVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeletePermissionVersion(response, &metadata)
+	}
+	output := &DeletePermissionVersionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDeletePermissionVersionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeletePermissionVersion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("IdempotentParameterMismatchException", errorCode):
+		return awsRestjson1_deserializeErrorIdempotentParameterMismatchException(response, errorBody)
+
+	case strings.EqualFold("InvalidClientTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidClientTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("MalformedArnException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsRestjson1_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnknownResourceException", errorCode):
+		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDeletePermissionVersionOutput(v **DeletePermissionVersionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeletePermissionVersionOutput
+	if *v == nil {
+		sv = &DeletePermissionVersionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClientToken = ptr.String(jtv)
+			}
+
+		case "permissionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PermissionStatus to be of type string, got %T instead", value)
+				}
+				sv.PermissionStatus = types.PermissionStatus(jtv)
+			}
+
+		case "returnValue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ReturnValue = ptr.Bool(jtv)
 			}
 
 		default:
@@ -2492,6 +3235,174 @@ func awsRestjson1_deserializeOpDocumentListPendingInvitationResourcesOutput(v **
 	return nil
 }
 
+type awsRestjson1_deserializeOpListPermissionAssociations struct {
+}
+
+func (*awsRestjson1_deserializeOpListPermissionAssociations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListPermissionAssociations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListPermissionAssociations(response, &metadata)
+	}
+	output := &ListPermissionAssociationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListPermissionAssociationsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListPermissionAssociations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("MalformedArnException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListPermissionAssociationsOutput(v **ListPermissionAssociationsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListPermissionAssociationsOutput
+	if *v == nil {
+		sv = &ListPermissionAssociationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "permissions":
+			if err := awsRestjson1_deserializeDocumentAssociatedPermissionList(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpListPermissions struct {
 }
 
@@ -2993,6 +3904,171 @@ func awsRestjson1_deserializeOpDocumentListPrincipalsOutput(v **ListPrincipalsOu
 
 		case "principals":
 			if err := awsRestjson1_deserializeDocumentPrincipalList(&sv.Principals, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListReplacePermissionAssociationsWork struct {
+}
+
+func (*awsRestjson1_deserializeOpListReplacePermissionAssociationsWork) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListReplacePermissionAssociationsWork) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListReplacePermissionAssociationsWork(response, &metadata)
+	}
+	output := &ListReplacePermissionAssociationsWorkOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListReplacePermissionAssociationsWorkOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListReplacePermissionAssociationsWork(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListReplacePermissionAssociationsWorkOutput(v **ListReplacePermissionAssociationsWorkOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListReplacePermissionAssociationsWorkOutput
+	if *v == nil {
+		sv = &ListReplacePermissionAssociationsWorkOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "replacePermissionAssociationsWorks":
+			if err := awsRestjson1_deserializeDocumentReplacePermissionAssociationsWorkList(&sv.ReplacePermissionAssociationsWorks, value); err != nil {
 				return err
 			}
 
@@ -3518,6 +4594,180 @@ func awsRestjson1_deserializeOpDocumentListResourceTypesOutput(v **ListResourceT
 	return nil
 }
 
+type awsRestjson1_deserializeOpPromotePermissionCreatedFromPolicy struct {
+}
+
+func (*awsRestjson1_deserializeOpPromotePermissionCreatedFromPolicy) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpPromotePermissionCreatedFromPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorPromotePermissionCreatedFromPolicy(response, &metadata)
+	}
+	output := &PromotePermissionCreatedFromPolicyOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentPromotePermissionCreatedFromPolicyOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorPromotePermissionCreatedFromPolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("MalformedArnException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
+
+	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+		return awsRestjson1_deserializeErrorMissingRequiredParameterException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsRestjson1_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnknownResourceException", errorCode):
+		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentPromotePermissionCreatedFromPolicyOutput(v **PromotePermissionCreatedFromPolicyOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *PromotePermissionCreatedFromPolicyOutput
+	if *v == nil {
+		sv = &PromotePermissionCreatedFromPolicyOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClientToken = ptr.String(jtv)
+			}
+
+		case "permission":
+			if err := awsRestjson1_deserializeDocumentResourceSharePermissionSummary(&sv.Permission, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpPromoteResourceShareCreatedFromPolicy struct {
 }
 
@@ -3619,6 +4869,9 @@ func awsRestjson1_deserializeOpErrorPromoteResourceShareCreatedFromPolicy(respon
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("InvalidStateTransitionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidStateTransitionException(response, errorBody)
+
 	case strings.EqualFold("MalformedArnException", errorCode):
 		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
 
@@ -3639,6 +4892,9 @@ func awsRestjson1_deserializeOpErrorPromoteResourceShareCreatedFromPolicy(respon
 
 	case strings.EqualFold("UnknownResourceException", errorCode):
 		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
+
+	case strings.EqualFold("UnmatchedPolicyPermissionException", errorCode):
+		return awsRestjson1_deserializeErrorUnmatchedPolicyPermissionException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3873,6 +5129,361 @@ func awsRestjson1_deserializeOpDocumentRejectResourceShareInvitationOutput(v **R
 	return nil
 }
 
+type awsRestjson1_deserializeOpReplacePermissionAssociations struct {
+}
+
+func (*awsRestjson1_deserializeOpReplacePermissionAssociations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpReplacePermissionAssociations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorReplacePermissionAssociations(response, &metadata)
+	}
+	output := &ReplacePermissionAssociationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentReplacePermissionAssociationsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorReplacePermissionAssociations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("IdempotentParameterMismatchException", errorCode):
+		return awsRestjson1_deserializeErrorIdempotentParameterMismatchException(response, errorBody)
+
+	case strings.EqualFold("InvalidClientTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidClientTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("MalformedArnException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsRestjson1_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnknownResourceException", errorCode):
+		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentReplacePermissionAssociationsOutput(v **ReplacePermissionAssociationsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ReplacePermissionAssociationsOutput
+	if *v == nil {
+		sv = &ReplacePermissionAssociationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClientToken = ptr.String(jtv)
+			}
+
+		case "replacePermissionAssociationsWork":
+			if err := awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(&sv.ReplacePermissionAssociationsWork, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpSetDefaultPermissionVersion struct {
+}
+
+func (*awsRestjson1_deserializeOpSetDefaultPermissionVersion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpSetDefaultPermissionVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorSetDefaultPermissionVersion(response, &metadata)
+	}
+	output := &SetDefaultPermissionVersionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentSetDefaultPermissionVersionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorSetDefaultPermissionVersion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("IdempotentParameterMismatchException", errorCode):
+		return awsRestjson1_deserializeErrorIdempotentParameterMismatchException(response, errorBody)
+
+	case strings.EqualFold("InvalidClientTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidClientTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("MalformedArnException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
+
+	case strings.EqualFold("ServerInternalException", errorCode):
+		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnknownResourceException", errorCode):
+		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentSetDefaultPermissionVersionOutput(v **SetDefaultPermissionVersionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *SetDefaultPermissionVersionOutput
+	if *v == nil {
+		sv = &SetDefaultPermissionVersionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClientToken = ptr.String(jtv)
+			}
+
+		case "returnValue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ReturnValue = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpTagResource struct {
 }
 
@@ -4050,11 +5661,17 @@ func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("MalformedArnException", errorCode):
+		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
+
 	case strings.EqualFold("ServerInternalException", errorCode):
 		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnknownResourceException", errorCode):
+		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -4426,6 +6043,42 @@ func awsRestjson1_deserializeErrorInvalidParameterException(response *smithyhttp
 	return output
 }
 
+func awsRestjson1_deserializeErrorInvalidPolicyException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InvalidPolicyException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentInvalidPolicyException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorInvalidResourceTypeException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidResourceTypeException{}
 	var buff [1024]byte
@@ -4534,6 +6187,42 @@ func awsRestjson1_deserializeErrorMalformedArnException(response *smithyhttp.Res
 	return output
 }
 
+func awsRestjson1_deserializeErrorMalformedPolicyTemplateException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.MalformedPolicyTemplateException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentMalformedPolicyTemplateException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorMissingRequiredParameterException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.MissingRequiredParameterException{}
 	var buff [1024]byte
@@ -4590,6 +6279,114 @@ func awsRestjson1_deserializeErrorOperationNotPermittedException(response *smith
 	}
 
 	err := awsRestjson1_deserializeDocumentOperationNotPermittedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorPermissionAlreadyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.PermissionAlreadyExistsException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentPermissionAlreadyExistsException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorPermissionLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.PermissionLimitExceededException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentPermissionLimitExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorPermissionVersionsLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.PermissionVersionsLimitExceededException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentPermissionVersionsLimitExceededException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -5038,6 +6835,186 @@ func awsRestjson1_deserializeErrorUnknownResourceException(response *smithyhttp.
 	return output
 }
 
+func awsRestjson1_deserializeErrorUnmatchedPolicyPermissionException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.UnmatchedPolicyPermissionException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentUnmatchedPolicyPermissionException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPermission, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssociatedPermission
+	if *v == nil {
+		sv = &types.AssociatedPermission{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "defaultVersion":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DefaultVersion = ptr.Bool(jtv)
+			}
+
+		case "featureSet":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PermissionFeatureSet to be of type string, got %T instead", value)
+				}
+				sv.FeatureSet = types.PermissionFeatureSet(jtv)
+			}
+
+		case "lastUpdatedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "permissionVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PermissionVersion = ptr.String(jtv)
+			}
+
+		case "resourceShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResourceShareArn = ptr.String(jtv)
+			}
+
+		case "resourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssociatedPermissionList(v *[]types.AssociatedPermission, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssociatedPermission
+	if *v == nil {
+		cv = []types.AssociatedPermission{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssociatedPermission
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssociatedPermission(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdempotentParameterMismatchException(v **types.IdempotentParameterMismatchException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5238,6 +7215,46 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInvalidPolicyException(v **types.InvalidPolicyException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidPolicyException
+	if *v == nil {
+		sv = &types.InvalidPolicyException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInvalidResourceTypeException(v **types.InvalidResourceTypeException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5358,6 +7375,46 @@ func awsRestjson1_deserializeDocumentMalformedArnException(v **types.MalformedAr
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMalformedPolicyTemplateException(v **types.MalformedPolicyTemplateException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MalformedPolicyTemplateException
+	if *v == nil {
+		sv = &types.MalformedPolicyTemplateException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMissingRequiredParameterException(v **types.MissingRequiredParameterException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5414,6 +7471,126 @@ func awsRestjson1_deserializeDocumentOperationNotPermittedException(v **types.Op
 	var sv *types.OperationNotPermittedException
 	if *v == nil {
 		sv = &types.OperationNotPermittedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPermissionAlreadyExistsException(v **types.PermissionAlreadyExistsException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PermissionAlreadyExistsException
+	if *v == nil {
+		sv = &types.PermissionAlreadyExistsException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPermissionLimitExceededException(v **types.PermissionLimitExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PermissionLimitExceededException
+	if *v == nil {
+		sv = &types.PermissionLimitExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPermissionVersionsLimitExceededException(v **types.PermissionVersionsLimitExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PermissionVersionsLimitExceededException
+	if *v == nil {
+		sv = &types.PermissionVersionsLimitExceededException{}
 	} else {
 		sv = *v
 	}
@@ -5588,6 +7765,166 @@ func awsRestjson1_deserializeDocumentPrincipalList(v *[]types.Principal, value i
 		var col types.Principal
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentPrincipal(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types.ReplacePermissionAssociationsWork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplacePermissionAssociationsWork
+	if *v == nil {
+		sv = &types.ReplacePermissionAssociationsWork{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "creationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "fromPermissionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FromPermissionArn = ptr.String(jtv)
+			}
+
+		case "fromPermissionVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FromPermissionVersion = ptr.String(jtv)
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "lastUpdatedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReplacePermissionAssociationsWorkStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ReplacePermissionAssociationsWorkStatus(jtv)
+			}
+
+		case "statusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "toPermissionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ToPermissionArn = ptr.String(jtv)
+			}
+
+		case "toPermissionVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ToPermissionVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWorkList(v *[]types.ReplacePermissionAssociationsWork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ReplacePermissionAssociationsWork
+	if *v == nil {
+		cv = []types.ReplacePermissionAssociationsWork{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ReplacePermissionAssociationsWork
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -6528,6 +8865,15 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				sv.DefaultVersion = ptr.Bool(jtv)
 			}
 
+		case "featureSet":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PermissionFeatureSet to be of type string, got %T instead", value)
+				}
+				sv.FeatureSet = types.PermissionFeatureSet(jtv)
+			}
+
 		case "isResourceTypeDefault":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6571,6 +8917,15 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				sv.Permission = ptr.String(jtv)
 			}
 
+		case "permissionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PermissionType to be of type string, got %T instead", value)
+				}
+				sv.PermissionType = types.PermissionType(jtv)
+			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6578,6 +8933,20 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PermissionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.PermissionStatus(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "version":
@@ -6688,6 +9057,15 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				sv.DefaultVersion = ptr.Bool(jtv)
 			}
 
+		case "featureSet":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PermissionFeatureSet to be of type string, got %T instead", value)
+				}
+				sv.FeatureSet = types.PermissionFeatureSet(jtv)
+			}
+
 		case "isResourceTypeDefault":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6722,6 +9100,15 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "permissionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PermissionType to be of type string, got %T instead", value)
+				}
+				sv.PermissionType = types.PermissionType(jtv)
+			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6738,6 +9125,11 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Status = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "version":
@@ -7149,6 +9541,46 @@ func awsRestjson1_deserializeDocumentUnknownResourceException(v **types.UnknownR
 	var sv *types.UnknownResourceException
 	if *v == nil {
 		sv = &types.UnknownResourceException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUnmatchedPolicyPermissionException(v **types.UnmatchedPolicyPermissionException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnmatchedPolicyPermissionException
+	if *v == nil {
+		sv = &types.UnmatchedPolicyPermissionException{}
 	} else {
 		sv = *v
 	}

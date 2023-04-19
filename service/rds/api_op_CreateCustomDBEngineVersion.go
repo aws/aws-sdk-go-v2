@@ -56,8 +56,12 @@ type CreateCustomDBEngineVersionInput struct {
 	// An optional description of your CEV.
 	Description *string
 
-	// The ID of the AMI. An AMI ID is required to create a CEV for RDS Custom for SQL
-	// Server.
+	// The ID of the Amazon Machine Image (AMI). For RDS Custom for SQL Server, an AMI
+	// ID is required to create a CEV. For RDS Custom for Oracle, the default is the
+	// most recent AMI available, but you can specify an AMI ID that was used in a
+	// different Oracle CEV. Find the AMIs used by your CEVs by calling the
+	// DescribeDBEngineVersions (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html)
+	// operation.
 	ImageId *string
 
 	// The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric

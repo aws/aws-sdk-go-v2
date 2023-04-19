@@ -1,0 +1,8 @@
+{
+    "id": "317ef553-e245-44ff-b78d-ef09377e404e",
+    "type": "feature",
+    "description": "This release supports native document models for custom classification, in addition to plain-text models. You train native document models using documents (PDF, Word, images) in their native format.",
+    "modules": [
+        "service/comprehend"
+    ]
+}

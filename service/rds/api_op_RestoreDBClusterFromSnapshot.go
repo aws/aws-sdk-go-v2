@@ -149,17 +149,16 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableIAMDatabaseAuthentication *bool
 
-	// The DB engine mode of the DB cluster, either provisioned , serverless ,
-	// parallelquery , global , or multimaster . For more information, see
-	// CreateDBCluster (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)
+	// The DB engine mode of the DB cluster, either provisioned or serverless . For
+	// more information, see CreateDBCluster (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)
 	// . Valid for: Aurora DB clusters only
 	EngineMode *string
 
 	// The version of the database engine to use for the new DB cluster. If you don't
 	// specify an engine version, the default version for the database engine in the
 	// Amazon Web Services Region is used. To list all of the available engine versions
-	// for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following
-	// command: aws rds describe-db-engine-versions --engine aurora-mysql --query
+	// for Aurora MySQL, use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-mysql --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
 	// for Aurora PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine aurora-postgresql --query

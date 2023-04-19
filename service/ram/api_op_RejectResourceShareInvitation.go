@@ -30,7 +30,7 @@ func (c *Client) RejectResourceShareInvitation(ctx context.Context, params *Reje
 
 type RejectResourceShareInvitationInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the invitation that you want to reject.
 	//
 	// This member is required.
@@ -42,7 +42,8 @@ type RejectResourceShareInvitationInput struct {
 	// to a later call to an operation requires that you also pass the same value for
 	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you.
+	// one for you. If you retry the operation with the same ClientToken , but with
+	// different parameters, the retry fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
 	noSmithyDocumentSerde

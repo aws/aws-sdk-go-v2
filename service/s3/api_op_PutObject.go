@@ -18,42 +18,39 @@ import (
 
 // Adds an object to a bucket. You must have WRITE permissions on a bucket to add
 // an object to it. Amazon S3 never adds partial objects; if you receive a success
-// response, Amazon S3 added the entire object to the bucket. You cannot use
-// PutObject to only update a single piece of metadata for an existing object. You
-// must put the entire object with updated metadata if you want to update some
-// values. Amazon S3 is a distributed system. If it receives multiple write
-// requests for the same object simultaneously, it overwrites all but the last
-// object written. To prevent objects from being deleted or overwritten, you can
-// use Amazon S3 Object Lock (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)
-// . To ensure that data is not corrupted traversing the network, use the
-// Content-MD5 header. When you use this header, Amazon S3 checks the object
-// against the provided MD5 value and, if they do not match, returns an error.
-// Additionally, you can calculate the MD5 while putting an object to Amazon S3 and
-// compare the returned ETag to the calculated MD5 value.
+// response, Amazon S3 added the entire object to the bucket. Amazon S3 is a
+// distributed system. If it receives multiple write requests for the same object
+// simultaneously, it overwrites all but the last object written. Amazon S3 does
+// not provide object locking; if you need this, make sure to build it into your
+// application layer or use versioning instead. To ensure that data is not
+// corrupted traversing the network, use the Content-MD5 header. When you use this
+// header, Amazon S3 checks the object against the provided MD5 value and, if they
+// do not match, returns an error. Additionally, you can calculate the MD5 while
+// putting an object to Amazon S3 and compare the returned ETag to the calculated
+// MD5 value.
 //   - To successfully complete the PutObject request, you must have the
 //     s3:PutObject in your IAM permissions.
 //   - To successfully change the objects acl of your PutObject request, you must
 //     have the s3:PutObjectAcl in your IAM permissions.
-//   - To successfully set the tag-set with your PutObject request, you must have
-//     the s3:PutObjectTagging in your IAM permissions.
 //   - The Content-MD5 header is required for any request to upload an object with
 //     a retention period configured using Amazon S3 Object Lock. For more information
 //     about Amazon S3 Object Lock, see Amazon S3 Object Lock Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html)
 //     in the Amazon S3 User Guide.
 //
-// You have three mutually exclusive options to protect data using server-side
-// encryption in Amazon S3, depending on how you choose to manage the encryption
-// keys. Specifically, the encryption key options are Amazon S3 managed keys
-// (SSE-S3), Amazon Web Services KMS keys (SSE-KMS), and customer-provided keys
-// (SSE-C). Amazon S3 encrypts data with server-side encryption by using Amazon S3
-// managed keys (SSE-S3) by default. You can optionally tell Amazon S3 to encrypt
-// data at by rest using server-side encryption with other key options. For more
-// information, see Using Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
-// . When adding a new object, you can use headers to grant ACL-based permissions
-// to individual Amazon Web Services accounts or to predefined groups defined by
-// Amazon S3. These permissions are then added to the ACL on the object. By
-// default, all objects are private. Only the owner has full access control. For
-// more information, see Access Control List (ACL) Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html)
+// Server-side Encryption You can optionally request server-side encryption. With
+// server-side encryption, Amazon S3 encrypts your data as it writes it to disks in
+// its data centers and decrypts the data when you access it. You have the option
+// to provide your own encryption key or use Amazon Web Services managed encryption
+// keys (SSE-S3 or SSE-KMS). For more information, see Using Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
+// . If you request server-side encryption using Amazon Web Services Key Management
+// Service (SSE-KMS), you can enable an S3 Bucket Key at the object-level. For more
+// information, see Amazon S3 Bucket Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html)
+// in the Amazon S3 User Guide. Access Control List (ACL)-Specific Request Headers
+// You can use headers to grant ACL- based permissions. By default, all objects are
+// private. Only the owner has full access control. When adding a new object, you
+// can grant permissions to individual Amazon Web Services accounts or to
+// predefined groups defined by Amazon S3. These permissions are then added to the
+// ACL on the object. For more information, see Access Control List (ACL) Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html)
 // and Managing ACLs Using the REST API (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html)
 // . If the bucket that you're uploading objects to uses the bucket owner enforced
 // setting for S3 Object Ownership, ACLs are disabled and no longer affect
@@ -66,20 +63,21 @@ import (
 // see Controlling ownership of objects and disabling ACLs (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
 // in the Amazon S3 User Guide. If your bucket uses the bucket owner enforced
 // setting for Object Ownership, all objects written to the bucket by any account
-// will be owned by the bucket owner. By default, Amazon S3 uses the STANDARD
-// Storage Class to store newly created objects. The STANDARD storage class
-// provides high durability and high availability. Depending on performance needs,
-// you can specify a different Storage Class. Amazon S3 on Outposts only uses the
-// OUTPOSTS Storage Class. For more information, see Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)
-// in the Amazon S3 User Guide. If you enable versioning for a bucket, Amazon S3
-// automatically generates a unique version ID for the object being stored. Amazon
-// S3 returns this ID in the response. When you enable versioning for a bucket, if
-// Amazon S3 receives multiple write requests for the same object simultaneously,
-// it stores all of the objects. For more information about versioning, see Adding
-// Objects to Versioning Enabled Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html)
+// will be owned by the bucket owner. Storage Class Options By default, Amazon S3
+// uses the STANDARD Storage Class to store newly created objects. The STANDARD
+// storage class provides high durability and high availability. Depending on
+// performance needs, you can specify a different Storage Class. Amazon S3 on
+// Outposts only uses the OUTPOSTS Storage Class. For more information, see
+// Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)
+// in the Amazon S3 User Guide. Versioning If you enable versioning for a bucket,
+// Amazon S3 automatically generates a unique version ID for the object being
+// stored. Amazon S3 returns this ID in the response. When you enable versioning
+// for a bucket, if Amazon S3 receives multiple write requests for the same object
+// simultaneously, it stores all of the objects. For more information about
+// versioning, see Adding Objects to Versioning Enabled Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html)
 // . For information about returning the versioning state of a bucket, see
 // GetBucketVersioning (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html)
-// . For more information about related Amazon S3 APIs, see the following:
+// . Related Resources
 //   - CopyObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
 //   - DeleteObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*Options)) (*PutObjectOutput, error) {
@@ -106,13 +104,13 @@ type PutObjectInput struct {
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
 	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon S3 User Guide. When you use this action with Amazon S3 on
-	// Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on
-	// Outposts hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When you
-	// use this action with S3 on Outposts through the Amazon Web Services SDKs, you
-	// provide the Outposts access point ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see What is S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
+	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
+	// hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
+	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
@@ -181,14 +179,14 @@ type PutObjectInput struct {
 	ChecksumSHA256 *string
 
 	// Specifies presentational information for the object. For more information, see
-	// https://www.rfc-editor.org/rfc/rfc6266#section-4 (https://www.rfc-editor.org/rfc/rfc6266#section-4)
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1)
 	// .
 	ContentDisposition *string
 
 	// Specifies what content encodings have been applied to the object and thus what
 	// decoding mechanisms must be applied to obtain the media-type referenced by the
 	// Content-Type header field. For more information, see
-	// https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding (https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding)
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11)
 	// .
 	ContentEncoding *string
 
@@ -197,7 +195,7 @@ type PutObjectInput struct {
 
 	// Size of the body in bytes. This parameter is useful when the size of the body
 	// cannot be determined automatically. For more information, see
-	// https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length (https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length)
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13)
 	// .
 	ContentLength int64
 
@@ -211,7 +209,7 @@ type PutObjectInput struct {
 	ContentMD5 *string
 
 	// A standard MIME type describing the format of the contents. For more
-	// information, see https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type (https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type)
+	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17)
 	// .
 	ContentType *string
 
@@ -221,7 +219,7 @@ type PutObjectInput struct {
 	ExpectedBucketOwner *string
 
 	// The date and time at which the object is no longer cacheable. For more
-	// information, see https://www.rfc-editor.org/rfc/rfc7234#section-5.3 (https://www.rfc-editor.org/rfc/rfc7234#section-5.3)
+	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21)
 	// .
 	Expires *time.Time
 
@@ -281,14 +279,12 @@ type PutObjectInput struct {
 
 	// Specifies the Amazon Web Services KMS Encryption Context to use for object
 	// encryption. The value of this header is a base64-encoded UTF-8 string holding
-	// JSON with the encryption context key-value pairs. This value is stored as object
-	// metadata and automatically gets passed on to Amazon Web Services KMS for future
-	// GetObject or CopyObject operations on this object.
+	// JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
-	// If x-amz-server-side-encryption has a valid value of aws:kms , this header
-	// specifies the ID of the Amazon Web Services Key Management Service (Amazon Web
-	// Services KMS) symmetric encryption customer managed key that was used for the
+	// If x-amz-server-side-encryption is present and has the value of aws:kms , this
+	// header specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetrical customer managed key that was used for the
 	// object. If you specify x-amz-server-side-encryption:aws:kms , but do not provide
 	// x-amz-server-side-encryption-aws-kms-key-id , Amazon S3 uses the Amazon Web
 	// Services managed key to protect the data. If the KMS key does not exist in the
@@ -296,7 +292,7 @@ type PutObjectInput struct {
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3
-	// (for example, AES256, aws:kms ).
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// By default, Amazon S3 uses the STANDARD Storage Class to store newly created
@@ -388,19 +384,19 @@ type PutObjectOutput struct {
 
 	// If present, specifies the Amazon Web Services KMS Encryption Context to use for
 	// object encryption. The value of this header is a base64-encoded UTF-8 string
-	// holding JSON with the encryption context key-value pairs. This value is stored
-	// as object metadata and automatically gets passed on to Amazon Web Services KMS
-	// for future GetObject or CopyObject operations on this object.
+	// holding JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
-	// If x-amz-server-side-encryption is has a valid value of aws:kms , this header
-	// specifies the ID of the Amazon Web Services Key Management Service (Amazon Web
-	// Services KMS) symmetric encryption customer managed key that was used for the
+	// If x-amz-server-side-encryption is present and has the value of aws:kms , this
+	// header specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetric customer managed key that was used for the
 	// object.
 	SSEKMSKeyId *string
 
-	// The server-side encryption algorithm used when storing this object in Amazon S3
-	// (for example, AES256, aws:kms ).
+	// If you specified server-side encryption either with an Amazon Web Services KMS
+	// key or Amazon S3-managed encryption key in your PUT request, the response
+	// includes this header. It confirms the encryption algorithm that Amazon S3 used
+	// to encrypt the object.
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Version of the object.

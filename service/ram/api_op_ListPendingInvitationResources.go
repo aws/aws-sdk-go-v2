@@ -32,7 +32,7 @@ func (c *Client) ListPendingInvitationResources(ctx context.Context, params *Lis
 
 type ListPendingInvitationResourcesInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the invitation. You can use GetResourceShareInvitations to find the ARN of
 	// the invitation.
 	//

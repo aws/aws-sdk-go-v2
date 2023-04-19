@@ -34,7 +34,14 @@ import (
 // containerInsights is turned on, any new clusters that are created will have
 // Container Insights turned on unless you disable it during cluster creation. For
 // more information, see CloudWatch Container Insights (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html)
-// in the Amazon Elastic Container Service Developer Guide.
+// in the Amazon Elastic Container Service Developer Guide. Amazon ECS is
+// introducing tagging authorization for resource creation. Users must have
+// permissions for actions that create the resource, such as ecsCreateCluster . If
+// tags are specified when you create a resource, Amazon Web Services performs
+// additional authorization to verify if users or roles have permissions to create
+// tags. Therefore, you must grant explicit permissions to use the ecs:TagResource
+// action. For more information, see Grant permission to tag resources on creation (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html)
+// in the Amazon ECS Developer Guide.
 func (c *Client) PutAccountSetting(ctx context.Context, params *PutAccountSettingInput, optFns ...func(*Options)) (*PutAccountSettingOutput, error) {
 	if params == nil {
 		params = &PutAccountSettingInput{}
@@ -61,7 +68,10 @@ type PutAccountSettingInput struct {
 	// Amazon ECS container instances is affected. If containerInsights is specified,
 	// the default setting for Amazon Web Services CloudWatch Container Insights for
 	// your clusters is affected. If fargateFIPSMode is specified, Fargate FIPS 140
-	// compliance is affected.
+	// compliance is affected. If tagResourceAuthorization is specified, the opt-in
+	// option for tagging resources on creation is affected. For information about the
+	// opt-in timeline, see Tagging authorization timeline (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources)
+	// in the Amazon ECS Developer Guide.
 	//
 	// This member is required.
 	Name types.SettingName

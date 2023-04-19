@@ -52,7 +52,7 @@ type RestoreDBClusterFromS3Input struct {
 	DBClusterIdentifier *string
 
 	// The name of the database engine to be used for this DB cluster. Valid Values:
-	// aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
+	// aurora-mysql (for Aurora MySQL)
 	//
 	// This member is required.
 	Engine *string
@@ -115,7 +115,8 @@ type RestoreDBClusterFromS3Input struct {
 	CopyTagsToSnapshot *bool
 
 	// The name of the DB cluster parameter group to associate with the restored DB
-	// cluster. If this argument is omitted, default.aurora5.6 is used. Constraints:
+	// cluster. If this argument is omitted, the default parameter group for the engine
+	// version is used. Constraints:
 	//   - If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
@@ -158,10 +159,10 @@ type RestoreDBClusterFromS3Input struct {
 	EnableIAMDatabaseAuthentication *bool
 
 	// The version number of the database engine to use. To list all of the available
-	// engine versions for aurora-mysql (MySQL 5.7-compatible and MySQL 8.0-compatible
-	// Aurora), use the following command: aws rds describe-db-engine-versions
-	// --engine aurora-mysql --query "DBEngineVersions[].EngineVersion" Aurora MySQL
-	// Examples: 5.7.mysql_aurora.2.07.1 , 8.0.mysql_aurora.3.02.0
+	// engine versions for aurora-mysql (Aurora MySQL), use the following command: aws
+	// rds describe-db-engine-versions --engine aurora-mysql --query
+	// "DBEngineVersions[].EngineVersion" Aurora MySQL Examples:
+	// 5.7.mysql_aurora.2.07.1 , 8.0.mysql_aurora.3.02.0
 	EngineVersion *string
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB cluster. The

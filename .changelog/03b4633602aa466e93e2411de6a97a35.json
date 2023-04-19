@@ -1,0 +1,8 @@
+{
+    "id": "03b46336-02aa-466e-93e2-411de6a97a35",
+    "type": "feature",
+    "description": "Provides support for overriding endpoint when region is \"snow\". This will enable bucket APIs for Amazon S3 Compatible storage on Snow Family devices.",
+    "modules": [
+        "service/s3control"
+    ]
+}

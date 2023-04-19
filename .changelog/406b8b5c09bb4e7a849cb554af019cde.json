@@ -1,0 +1,8 @@
+{
+    "id": "406b8b5c-09bb-4e7a-849c-b554af019cde",
+    "type": "feature",
+    "description": "This release supports the Account Setting \"TagResourceAuthorization\" that allows for enhanced Tagging security controls.",
+    "modules": [
+        "service/ecs"
+    ]
+}

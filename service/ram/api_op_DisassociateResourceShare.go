@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the specified principals or resources from the specified resource
-// share.
+// Removes the specified principals or resources from participating in the
+// specified resource share.
 func (c *Client) DisassociateResourceShare(ctx context.Context, params *DisassociateResourceShareInput, optFns ...func(*Options)) (*DisassociateResourceShareOutput, error) {
 	if params == nil {
 		params = &DisassociateResourceShareInput{}
@@ -30,8 +30,8 @@ func (c *Client) DisassociateResourceShare(ctx context.Context, params *Disassoc
 
 type DisassociateResourceShareInput struct {
 
-	// Specifies Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share that you want to remove resources from.
+	// Specifies Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource share that you want to remove resources or principals from.
 	//
 	// This member is required.
 	ResourceShareArn *string
@@ -42,13 +42,14 @@ type DisassociateResourceShareInput struct {
 	// to a later call to an operation requires that you also pass the same value for
 	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you.
+	// one for you. If you retry the operation with the same ClientToken , but with
+	// different parameters, the retry fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
 	// Specifies a list of one or more principals that no longer are to have access to
 	// the resources in this resource share. You can include the following values:
 	//   - An Amazon Web Services account ID, for example: 123456789012
-	//   - An Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   - An Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	//   of an organization in Organizations, for example:
 	//   organizations::123456789012:organization/o-exampleorgid
 	//   - An ARN of an organizational unit (OU) in Organizations, for example:
@@ -62,8 +63,8 @@ type DisassociateResourceShareInput struct {
 
 	// Specifies a list of Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// for one or more resources that you want to remove from the resource share. After
-	// the operation runs, these resources are no longer shared with principals outside
-	// of the Amazon Web Services account that created the resources.
+	// the operation runs, these resources are no longer shared with principals
+	// associated with the resource share.
 	ResourceArns []string
 
 	noSmithyDocumentSerde
@@ -77,8 +78,8 @@ type DisassociateResourceShareOutput struct {
 	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// An array of objects that contain information about the updated associations for
-	// this resource share.
+	// An array of objects with information about the updated associations for this
+	// resource share.
 	ResourceShareAssociations []types.ResourceShareAssociation
 
 	// Metadata pertaining to the operation's result.

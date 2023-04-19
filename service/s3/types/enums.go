@@ -811,6 +811,7 @@ const (
 	ObjectStorageClassDeepArchive        ObjectStorageClass = "DEEP_ARCHIVE"
 	ObjectStorageClassOutposts           ObjectStorageClass = "OUTPOSTS"
 	ObjectStorageClassGlacierIr          ObjectStorageClass = "GLACIER_IR"
+	ObjectStorageClassSnow               ObjectStorageClass = "SNOW"
 )
 
 // Values returns all known values for ObjectStorageClass. Note that this can be
@@ -827,6 +828,7 @@ func (ObjectStorageClass) Values() []ObjectStorageClass {
 		"DEEP_ARCHIVE",
 		"OUTPOSTS",
 		"GLACIER_IR",
+		"SNOW",
 	}
 }
 
@@ -1114,6 +1116,7 @@ const (
 	StorageClassDeepArchive        StorageClass = "DEEP_ARCHIVE"
 	StorageClassOutposts           StorageClass = "OUTPOSTS"
 	StorageClassGlacierIr          StorageClass = "GLACIER_IR"
+	StorageClassSnow               StorageClass = "SNOW"
 )
 
 // Values returns all known values for StorageClass. Note that this can be
@@ -1130,6 +1133,7 @@ func (StorageClass) Values() []StorageClass {
 		"DEEP_ARCHIVE",
 		"OUTPOSTS",
 		"GLACIER_IR",
+		"SNOW",
 	}
 }
 

@@ -40,8 +40,9 @@ type DescribeDBEngineVersionsInput struct {
 	DefaultOnly bool
 
 	// The database engine to return. Valid Values:
-	//   - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
+	//   - aurora-mysql
 	//   - aurora-postgresql
+	//   - custom-oracle-ee
 	//   - mariadb
 	//   - mysql
 	//   - oracle-ee

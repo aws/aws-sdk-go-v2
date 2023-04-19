@@ -223,10 +223,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//   cluster.
 	//   - copy-on-write - The new DB cluster is restored as a clone of the source DB
 	//   cluster.
-	// Constraints: You can't specify copy-on-write if the engine version of the
-	// source DB cluster is earlier than 1.11. If you don't specify a RestoreType
-	// value, then the new DB cluster is restored as a full copy of the source DB
-	// cluster. Valid for: Aurora DB clusters and Multi-AZ DB clusters
+	// If you don't specify a RestoreType value, then the new DB cluster is restored
+	// as a full copy of the source DB cluster. Valid for: Aurora DB clusters and
+	// Multi-AZ DB clusters
 	RestoreType *string
 
 	// For DB clusters in serverless DB engine mode, the scaling properties of the DB

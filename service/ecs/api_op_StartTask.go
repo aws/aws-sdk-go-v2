@@ -62,7 +62,8 @@ type StartTaskInput struct {
 	EnableECSManagedTags bool
 
 	// Whether or not the execute command functionality is turned on for the task. If
-	// true , this enables execute command functionality on all containers in the task.
+	// true , this turns on the execute command functionality on all containers in the
+	// task.
 	EnableExecuteCommand bool
 
 	// The name of the task group to associate with the task. The default value is the

@@ -1860,6 +1860,21 @@ func validateDocumentClassifierAugmentedManifestsList(v []types.AugmentedManifes
 	}
 }
 
+func validateDocumentClassifierDocuments(v *types.DocumentClassifierDocuments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentClassifierDocuments"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDocumentClassifierInputDataConfig(v *types.DocumentClassifierInputDataConfig) error {
 	if v == nil {
 		return nil
@@ -1868,6 +1883,16 @@ func validateDocumentClassifierInputDataConfig(v *types.DocumentClassifierInputD
 	if v.AugmentedManifests != nil {
 		if err := validateDocumentClassifierAugmentedManifestsList(v.AugmentedManifests); err != nil {
 			invalidParams.AddNested("AugmentedManifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Documents != nil {
+		if err := validateDocumentClassifierDocuments(v.Documents); err != nil {
+			invalidParams.AddNested("Documents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DocumentReaderConfig != nil {
+		if err := validateDocumentReaderConfig(v.DocumentReaderConfig); err != nil {
+			invalidParams.AddNested("DocumentReaderConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

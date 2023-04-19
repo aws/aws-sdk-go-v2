@@ -76,10 +76,10 @@ import (
 //   - By the person's ID: <>ID<><>GranteesEmail<> DisplayName is optional and
 //     ignored in the request
 //   - By URI: <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
-//   - By Email address: <>Grantees@email.com<>& The grantee is resolved to the
-//     CanonicalUser and, in a response to a GET Object acl request, appears as the
-//     CanonicalUser. Using email addresses to specify a grantee is only supported in
-//     the following Amazon Web Services Regions:
+//   - By Email address: <>Grantees@email.com<>lt;/Grantee> The grantee is resolved
+//     to the CanonicalUser and, in a response to a GET Object acl request, appears as
+//     the CanonicalUser. Using email addresses to specify a grantee is only supported
+//     in the following Amazon Web Services Regions:
 //   - US East (N. Virginia)
 //   - US West (N. California)
 //   - US West (Oregon)

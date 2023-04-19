@@ -59,9 +59,8 @@ type CreateDBInstanceInput struct {
 	// The name of the database engine to be used for this instance. Not every
 	// database engine is available for every Amazon Web Services Region. Valid Values:
 	//
-	//   - aurora (for MySQL 5.6-compatible Aurora)
-	//   - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
-	//   - aurora-postgresql
+	//   - aurora-mysql (for Aurora MySQL DB instances)
+	//   - aurora-postgresql (for Aurora PostgreSQL DB instances)
 	//   - custom-oracle-ee (for RDS Custom for Oracle DB instances)
 	//   - custom-oracle-ee-cdb (for RDS Custom for Oracle DB instances)
 	//   - custom-sqlserver-ee (for RDS Custom for SQL Server DB instances)

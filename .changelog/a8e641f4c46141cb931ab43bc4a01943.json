@@ -1,0 +1,8 @@
+{
+    "id": "a8e641f4-c461-41cb-931a-b43bc4a01943",
+    "type": "documentation",
+    "description": "Update that adds SDK code examples for Security Hub",
+    "modules": [
+        "service/securityhub"
+    ]
+}

@@ -32,8 +32,9 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// The name of the engine to retrieve DB instance options for. Valid Values:
-	//   - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
+	//   - aurora-mysql
 	//   - aurora-postgresql
+	//   - custom-oracle-ee
 	//   - mariadb
 	//   - mysql
 	//   - oracle-ee

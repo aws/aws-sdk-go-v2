@@ -1,0 +1,8 @@
+{
+    "id": "8476afa1-6b3c-495a-ae36-30d2cbc536dc",
+    "type": "feature",
+    "description": "Provides support for \"Snow\" Storage class.",
+    "modules": [
+        "service/s3"
+    ]
+}

@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The client token input parameter was matched one used with a previous call to
-// the operation, but at least one of the other input parameters is different from
-// the previous call.
+// The operation failed because the client token input parameter matched one that
+// was used with a previous call to the operation, but at least one of the other
+// input parameters is different from the previous call.
 type IdempotentParameterMismatchException struct {
 	Message *string
 
@@ -37,7 +37,7 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The client token is not valid.
+// The operation failed because the specified client token isn't valid.
 type InvalidClientTokenException struct {
 	Message *string
 
@@ -63,7 +63,7 @@ func (e *InvalidClientTokenException) ErrorCode() string {
 }
 func (e *InvalidClientTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified value for MaxResults is not valid.
+// The operation failed because the specified value for MaxResults isn't valid.
 type InvalidMaxResultsException struct {
 	Message *string
 
@@ -89,7 +89,9 @@ func (e *InvalidMaxResultsException) ErrorCode() string {
 }
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified value for NextToken is not valid.
+// The operation failed because the specified value for NextToken isn't valid. You
+// must specify a value you received in the NextToken response of a previous call
+// to this operation.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -115,7 +117,7 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A parameter is not valid.
+// The operation failed because a parameter you specified isn't valid.
 type InvalidParameterException struct {
 	Message *string
 
@@ -141,7 +143,33 @@ func (e *InvalidParameterException) ErrorCode() string {
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resource type is not valid.
+// The operation failed because a policy you specified isn't valid.
+type InvalidPolicyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidPolicyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidPolicyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidPolicyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidPolicyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The operation failed because the specified resource type isn't valid.
 type InvalidResourceTypeException struct {
 	Message *string
 
@@ -167,7 +195,8 @@ func (e *InvalidResourceTypeException) ErrorCode() string {
 }
 func (e *InvalidResourceTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested state transition is not valid.
+// The operation failed because the requested operation isn't valid for the
+// resource share in its current state.
 type InvalidStateTransitionException struct {
 	Message *string
 
@@ -193,7 +222,8 @@ func (e *InvalidStateTransitionException) ErrorCode() string {
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The format of an Amazon Resource Name (ARN) is not valid.
+// The operation failed because the specified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// has a format that isn't valid.
 type MalformedArnException struct {
 	Message *string
 
@@ -219,7 +249,33 @@ func (e *MalformedArnException) ErrorCode() string {
 }
 func (e *MalformedArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A required input parameter is missing.
+// The operation failed because the policy template that you provided isn't valid.
+type MalformedPolicyTemplateException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MalformedPolicyTemplateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MalformedPolicyTemplateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MalformedPolicyTemplateException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MalformedPolicyTemplateException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MalformedPolicyTemplateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The operation failed because a required input parameter is missing.
 type MissingRequiredParameterException struct {
 	Message *string
 
@@ -245,7 +301,7 @@ func (e *MissingRequiredParameterException) ErrorCode() string {
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested operation is not permitted.
+// The operation failed because the requested operation isn't permitted.
 type OperationNotPermittedException struct {
 	Message *string
 
@@ -271,7 +327,95 @@ func (e *OperationNotPermittedException) ErrorCode() string {
 }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon Resource Name (ARN) was not found.
+// The operation failed because a permission with the specified name already
+// exists in the requested Amazon Web Services Region. Choose a different name.
+type PermissionAlreadyExistsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PermissionAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PermissionAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PermissionAlreadyExistsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PermissionAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PermissionAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The operation failed because it would exceed the maximum number of permissions
+// you can create in each Amazon Web Services Region. To view the limits for your
+// Amazon Web Services account, see the RAM page in the Service Quotas console (https://console.aws.amazon.com/servicequotas/home/services/ram/quotas)
+// .
+type PermissionLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PermissionLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PermissionLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PermissionLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PermissionLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PermissionLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The operation failed because it would exceed the limit for the number of
+// versions you can have for a permission. To view the limits for your Amazon Web
+// Services account, see the RAM page in the Service Quotas console (https://console.aws.amazon.com/servicequotas/home/services/ram/quotas)
+// .
+type PermissionVersionsLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PermissionVersionsLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PermissionVersionsLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PermissionVersionsLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PermissionVersionsLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PermissionVersionsLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The operation failed because the specified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// was not found.
 type ResourceArnNotFoundException struct {
 	Message *string
 
@@ -297,7 +441,7 @@ func (e *ResourceArnNotFoundException) ErrorCode() string {
 }
 func (e *ResourceArnNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified invitation was already accepted.
+// The operation failed because the specified invitation was already accepted.
 type ResourceShareInvitationAlreadyAcceptedException struct {
 	Message *string
 
@@ -325,7 +469,7 @@ func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorFault() smithy.Er
 	return smithy.FaultClient
 }
 
-// The specified invitation was already rejected.
+// The operation failed because the specified invitation was already rejected.
 type ResourceShareInvitationAlreadyRejectedException struct {
 	Message *string
 
@@ -353,7 +497,8 @@ func (e *ResourceShareInvitationAlreadyRejectedException) ErrorFault() smithy.Er
 	return smithy.FaultClient
 }
 
-// The specified Amazon Resource Name (ARN) for an invitation was not found.
+// The operation failed because the specified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// for an invitation was not found.
 type ResourceShareInvitationArnNotFoundException struct {
 	Message *string
 
@@ -381,7 +526,8 @@ func (e *ResourceShareInvitationArnNotFoundException) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
-// The specified invitation is expired.
+// The operation failed because the specified invitation is past its expiration
+// date and time.
 type ResourceShareInvitationExpiredException struct {
 	Message *string
 
@@ -409,7 +555,10 @@ func (e *ResourceShareInvitationExpiredException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// This request would exceed the limit for resource shares for your account.
+// The operation failed because it would exceed the limit for resource shares for
+// your account. To view the limits for your Amazon Web Services account, see the
+// RAM page in the Service Quotas console (https://console.aws.amazon.com/servicequotas/home/services/ram/quotas)
+// .
 type ResourceShareLimitExceededException struct {
 	Message *string
 
@@ -437,7 +586,8 @@ func (e *ResourceShareLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The service could not respond to the request due to an internal problem.
+// The operation failed because the service could not respond to the request due
+// to an internal problem. Try again later.
 type ServerInternalException struct {
 	Message *string
 
@@ -463,7 +613,7 @@ func (e *ServerInternalException) ErrorCode() string {
 }
 func (e *ServerInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The service is not available.
+// The operation failed because the service isn't available. Try again later.
 type ServiceUnavailableException struct {
 	Message *string
 
@@ -489,7 +639,8 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// This request would exceed the limit for tags for your account.
+// The operation failed because it would exceed the limit for tags for your Amazon
+// Web Services account.
 type TagLimitExceededException struct {
 	Message *string
 
@@ -515,7 +666,8 @@ func (e *TagLimitExceededException) ErrorCode() string {
 }
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified tag key is a reserved word and can't be used.
+// The operation failed because the specified tag key is a reserved word and can't
+// be used.
 type TagPolicyViolationException struct {
 	Message *string
 
@@ -541,8 +693,8 @@ func (e *TagPolicyViolationException) ErrorCode() string {
 }
 func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You exceeded the rate at which you are allowed to perform this operation.
-// Please try again later.
+// The operation failed because it exceeded the rate at which you are allowed to
+// perform this operation. Please try again later.
 type ThrottlingException struct {
 	Message *string
 
@@ -568,7 +720,7 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A specified resource was not found.
+// The operation failed because a specified resource couldn't be found.
 type UnknownResourceException struct {
 	Message *string
 
@@ -593,3 +745,33 @@ func (e *UnknownResourceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// There isn't an existing managed permission defined in RAM that has the same IAM
+// permissions as the resource-based policy attached to the resource. You should
+// first run PromotePermissionCreatedFromPolicy to create that managed permission.
+type UnmatchedPolicyPermissionException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnmatchedPolicyPermissionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnmatchedPolicyPermissionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnmatchedPolicyPermissionException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnmatchedPolicyPermissionException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnmatchedPolicyPermissionException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}

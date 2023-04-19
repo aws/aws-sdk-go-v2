@@ -262,6 +262,174 @@ func awsRestjson1_serializeOpDocumentAssociateResourceSharePermissionInput(v *As
 	return nil
 }
 
+type awsRestjson1_serializeOpCreatePermission struct {
+}
+
+func (*awsRestjson1_serializeOpCreatePermission) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreatePermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreatePermissionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/createpermission")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreatePermissionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreatePermissionInput(v *CreatePermissionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreatePermissionInput(v *CreatePermissionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.PolicyTemplate != nil {
+		ok := object.Key("policyTemplate")
+		ok.String(*v.PolicyTemplate)
+	}
+
+	if v.ResourceType != nil {
+		ok := object.Key("resourceType")
+		ok.String(*v.ResourceType)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreatePermissionVersion struct {
+}
+
+func (*awsRestjson1_serializeOpCreatePermissionVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreatePermissionVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreatePermissionVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/createpermissionversion")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreatePermissionVersionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreatePermissionVersionInput(v *CreatePermissionVersionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreatePermissionVersionInput(v *CreatePermissionVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.PermissionArn != nil {
+		ok := object.Key("permissionArn")
+		ok.String(*v.PermissionArn)
+	}
+
+	if v.PolicyTemplate != nil {
+		ok := object.Key("policyTemplate")
+		ok.String(*v.PolicyTemplate)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateResourceShare struct {
 }
 
@@ -363,6 +531,124 @@ func awsRestjson1_serializeOpDocumentCreateResourceShareInput(v *CreateResourceS
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeletePermission struct {
+}
+
+func (*awsRestjson1_serializeOpDeletePermission) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeletePermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePermissionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/deletepermission")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeletePermissionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeletePermissionInput(v *DeletePermissionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	if v.PermissionArn != nil {
+		encoder.SetQuery("permissionArn").String(*v.PermissionArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeletePermissionVersion struct {
+}
+
+func (*awsRestjson1_serializeOpDeletePermissionVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeletePermissionVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePermissionVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/deletepermissionversion")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeletePermissionVersionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeletePermissionVersionInput(v *DeletePermissionVersionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	if v.PermissionArn != nil {
+		encoder.SetQuery("permissionArn").String(*v.PermissionArn)
+	}
+
+	if v.PermissionVersion != nil {
+		encoder.SetQuery("permissionVersion").Integer(*v.PermissionVersion)
 	}
 
 	return nil
@@ -1060,6 +1346,11 @@ func awsRestjson1_serializeOpDocumentGetResourceSharesInput(v *GetResourceShares
 		ok.String(*v.PermissionArn)
 	}
 
+	if v.PermissionVersion != nil {
+		ok := object.Key("permissionVersion")
+		ok.Integer(*v.PermissionVersion)
+	}
+
 	if len(v.ResourceOwner) > 0 {
 		ok := object.Key("resourceOwner")
 		ok.String(string(v.ResourceOwner))
@@ -1170,6 +1461,109 @@ func awsRestjson1_serializeOpDocumentListPendingInvitationResourcesInput(v *List
 	return nil
 }
 
+type awsRestjson1_serializeOpListPermissionAssociations struct {
+}
+
+func (*awsRestjson1_serializeOpListPermissionAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListPermissionAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListPermissionAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/listpermissionassociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListPermissionAssociationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListPermissionAssociationsInput(v *ListPermissionAssociationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListPermissionAssociationsInput(v *ListPermissionAssociationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AssociationStatus) > 0 {
+		ok := object.Key("associationStatus")
+		ok.String(string(v.AssociationStatus))
+	}
+
+	if v.DefaultVersion != nil {
+		ok := object.Key("defaultVersion")
+		ok.Boolean(*v.DefaultVersion)
+	}
+
+	if len(v.FeatureSet) > 0 {
+		ok := object.Key("featureSet")
+		ok.String(string(v.FeatureSet))
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PermissionArn != nil {
+		ok := object.Key("permissionArn")
+		ok.String(*v.PermissionArn)
+	}
+
+	if v.PermissionVersion != nil {
+		ok := object.Key("permissionVersion")
+		ok.Integer(*v.PermissionVersion)
+	}
+
+	if v.ResourceType != nil {
+		ok := object.Key("resourceType")
+		ok.String(*v.ResourceType)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListPermissions struct {
 }
 
@@ -1238,6 +1632,11 @@ func awsRestjson1_serializeOpDocumentListPermissionsInput(v *ListPermissionsInpu
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.PermissionType) > 0 {
+		ok := object.Key("permissionType")
+		ok.String(string(v.PermissionType))
 	}
 
 	if v.ResourceType != nil {
@@ -1423,6 +1822,91 @@ func awsRestjson1_serializeOpDocumentListPrincipalsInput(v *ListPrincipalsInput,
 	if v.ResourceType != nil {
 		ok := object.Key("resourceType")
 		ok.String(*v.ResourceType)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListReplacePermissionAssociationsWork struct {
+}
+
+func (*awsRestjson1_serializeOpListReplacePermissionAssociationsWork) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListReplacePermissionAssociationsWork) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListReplacePermissionAssociationsWorkInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/listreplacepermissionassociationswork")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListReplacePermissionAssociationsWorkInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListReplacePermissionAssociationsWorkInput(v *ListReplacePermissionAssociationsWorkInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListReplacePermissionAssociationsWorkInput(v *ListReplacePermissionAssociationsWorkInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	if v.WorkIds != nil {
+		ok := object.Key("workIds")
+		if err := awsRestjson1_serializeDocumentReplacePermissionAssociationsWorkIdList(v.WorkIds, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1691,6 +2175,84 @@ func awsRestjson1_serializeOpDocumentListResourceTypesInput(v *ListResourceTypes
 	return nil
 }
 
+type awsRestjson1_serializeOpPromotePermissionCreatedFromPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpPromotePermissionCreatedFromPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPromotePermissionCreatedFromPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PromotePermissionCreatedFromPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/promotepermissioncreatedfrompolicy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPromotePermissionCreatedFromPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPromotePermissionCreatedFromPolicyInput(v *PromotePermissionCreatedFromPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPromotePermissionCreatedFromPolicyInput(v *PromotePermissionCreatedFromPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.PermissionArn != nil {
+		ok := object.Key("permissionArn")
+		ok.String(*v.PermissionArn)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPromoteResourceShareCreatedFromPolicy struct {
 }
 
@@ -1817,6 +2379,167 @@ func awsRestjson1_serializeOpDocumentRejectResourceShareInvitationInput(v *Rejec
 	return nil
 }
 
+type awsRestjson1_serializeOpReplacePermissionAssociations struct {
+}
+
+func (*awsRestjson1_serializeOpReplacePermissionAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpReplacePermissionAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ReplacePermissionAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/replacepermissionassociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentReplacePermissionAssociationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsReplacePermissionAssociationsInput(v *ReplacePermissionAssociationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentReplacePermissionAssociationsInput(v *ReplacePermissionAssociationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.FromPermissionArn != nil {
+		ok := object.Key("fromPermissionArn")
+		ok.String(*v.FromPermissionArn)
+	}
+
+	if v.FromPermissionVersion != nil {
+		ok := object.Key("fromPermissionVersion")
+		ok.Integer(*v.FromPermissionVersion)
+	}
+
+	if v.ToPermissionArn != nil {
+		ok := object.Key("toPermissionArn")
+		ok.String(*v.ToPermissionArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpSetDefaultPermissionVersion struct {
+}
+
+func (*awsRestjson1_serializeOpSetDefaultPermissionVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSetDefaultPermissionVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SetDefaultPermissionVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/setdefaultpermissionversion")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSetDefaultPermissionVersionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSetDefaultPermissionVersionInput(v *SetDefaultPermissionVersionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSetDefaultPermissionVersionInput(v *SetDefaultPermissionVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.PermissionArn != nil {
+		ok := object.Key("permissionArn")
+		ok.String(*v.PermissionArn)
+	}
+
+	if v.PermissionVersion != nil {
+		ok := object.Key("permissionVersion")
+		ok.Integer(*v.PermissionVersion)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -1876,6 +2599,11 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 func awsRestjson1_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
+	}
 
 	if v.ResourceShareArn != nil {
 		ok := object.Key("resourceShareArn")
@@ -1951,6 +2679,11 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 func awsRestjson1_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
+	}
 
 	if v.ResourceShareArn != nil {
 		ok := object.Key("resourceShareArn")
@@ -2062,6 +2795,17 @@ func awsRestjson1_serializeDocumentPermissionArnList(v []string, value smithyjso
 }
 
 func awsRestjson1_serializeDocumentPrincipalArnOrIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReplacePermissionAssociationsWorkIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

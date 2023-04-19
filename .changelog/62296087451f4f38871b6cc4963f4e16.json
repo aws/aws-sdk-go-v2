@@ -1,0 +1,8 @@
+{
+    "id": "62296087-451f-4f38-871b-6cc4963f4e16",
+    "type": "documentation",
+    "description": "Adds support for the ImageId parameter of CreateCustomDBEngineVersion to RDS Custom for Oracle",
+    "modules": [
+        "service/rds"
+    ]
+}
