@@ -34,6 +34,7 @@ type ListResourceRecordSetsPaginator struct {
 	startRecordName       *string
 	startRecordType       types.RRType
 	startRecordIdentifier *string
+	isTruncated           bool
 }
 
 // NewListResourceRecordSetsPaginator returns a new ListResourceRecordSetsPaginator
@@ -64,7 +65,7 @@ func NewListResourceRecordSetsPaginator(client ListResourceRecordSetsAPIClient, 
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListResourceRecordSetsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.startRecordName != nil && len(*p.startRecordName) != 0)
+	return p.firstPage || p.isTruncated
 }
 
 // NextPage retrieves the next ListResourceRecordSets page.
@@ -91,15 +92,21 @@ func (p *ListResourceRecordSetsPaginator) NextPage(ctx context.Context, optFns .
 	p.firstPage = false
 
 	prevToken := p.startRecordName
-	p.startRecordName = result.NextRecordName
-	p.startRecordIdentifier = result.NextRecordIdentifier
-	p.startRecordType = result.NextRecordType
+	p.isTruncated = result.IsTruncated
+	p.startRecordName = nil
+	p.startRecordIdentifier = nil
+	p.startRecordType = ""
+	if result.IsTruncated {
+		p.startRecordName = result.NextRecordName
+		p.startRecordIdentifier = result.NextRecordIdentifier
+		p.startRecordType = result.NextRecordType
+	}
 
 	if p.options.StopOnDuplicateToken &&
 		prevToken != nil &&
 		p.startRecordName != nil &&
 		*prevToken == *p.startRecordName {
-		p.startRecordName = nil
+		p.isTruncated = false
 	}
 
 	return result, nil

@@ -2,112 +2,146 @@ package route53
 
 import (
 	"context"
-	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
-	"github.com/aws/smithy-go/middleware"
 	"testing"
 )
 
-var limit int32
-var startRecordName *string
-var startRecordIdentifier *string
-var startRecordType types.RRType
-
-type testListRRSMiddleware struct {
-	id int
+type mockListResourceRecordSetsClient struct {
+	outputs []*ListResourceRecordSetsOutput
+	inputs  []*ListResourceRecordSetsInput
+	t       *testing.T
 }
 
-func (m *testListRRSMiddleware) ID() string {
-	return fmt.Sprintf("mock middleware %d", m.id)
+func (c *mockListResourceRecordSetsClient) ListResourceRecordSets(ctx context.Context, input *ListResourceRecordSetsInput, optFns ...func(*Options)) (*ListResourceRecordSetsOutput, error) {
+	c.inputs = append(c.inputs, input)
+	requestCnt := len(c.inputs)
+	if *input.MaxItems != *c.outputs[requestCnt-1].MaxItems {
+		c.t.Errorf("Expect page limit to be %d, got %d", *c.outputs[requestCnt-1].MaxItems, *input.MaxItems)
+	}
+	if outputLen := len(c.outputs); requestCnt > outputLen {
+		c.t.Errorf("Paginator calls client more than expected %d times", outputLen)
+	}
+	return c.outputs[requestCnt-1], nil
 }
 
-func (m *testListRRSMiddleware) HandleInitialize(ctx context.Context, input middleware.InitializeInput, next middleware.InitializeHandler) (
-	output middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	params := input.Parameters.(*ListResourceRecordSetsInput)
-	startRecordName = params.StartRecordName
-	limit = *params.MaxItems
-	startRecordIdentifier = params.StartRecordIdentifier
-	startRecordType = params.StartRecordType
-	return middleware.InitializeOutput{Result: &ListResourceRecordSetsOutput{}}, metadata, nil
-}
-
-type testCase struct {
-	startRecordName       *string
-	limit                 int32
-	startRecordIdentifier *string
-	startRecordType       types.RRType
+type listRRSTestCase struct {
+	limit                  int32
+	requestCnt             int
+	stopOnDuplicationToken bool
+	outputs                []*ListResourceRecordSetsOutput
 }
 
 func TestListResourceRecordSetsPaginator(t *testing.T) {
-	cases := map[string]testCase{
-		"page limit 5 with record name but without record type and identifier": {
-			startRecordName: aws.String("testRecord1"),
-			limit:           5,
+	cases := map[string]listRRSTestCase{
+		"page limit 5": {
+			limit:      5,
+			requestCnt: 3,
+			outputs: []*ListResourceRecordSetsOutput{
+				&ListResourceRecordSetsOutput{
+					MaxItems:             aws.Int32(5),
+					NextRecordName:       aws.String("testRecord1"),
+					NextRecordIdentifier: aws.String("testID1"),
+					NextRecordType:       types.RRTypeA,
+					IsTruncated:          true,
+				},
+				&ListResourceRecordSetsOutput{
+					MaxItems:             aws.Int32(5),
+					NextRecordName:       aws.String("testRecord2"),
+					NextRecordIdentifier: aws.String("testID2"),
+					NextRecordType:       types.RRTypeA,
+					IsTruncated:          true,
+				},
+				&ListResourceRecordSetsOutput{
+					MaxItems:             aws.Int32(5),
+					NextRecordName:       aws.String("testRecord3"),
+					NextRecordIdentifier: aws.String("testID3"),
+					NextRecordType:       types.RRTypeA,
+					IsTruncated:          false,
+				},
+			},
 		},
-		"page limit 10 with record name and type": {
-			startRecordName: aws.String("testRecord2"),
-			limit:           10,
-			startRecordType: types.RRTypeTxt,
-		},
-		"page limit 15 with record name, type and identifier": {
-			startRecordName:       aws.String("testRecord3"),
-			limit:                 15,
-			startRecordIdentifier: aws.String("testID1"),
-			startRecordType:       types.RRTypeTxt,
+		"page limit 10 with duplicate record": {
+			limit:                  10,
+			requestCnt:             4,
+			stopOnDuplicationToken: true,
+			outputs: []*ListResourceRecordSetsOutput{
+				&ListResourceRecordSetsOutput{
+					MaxItems:             aws.Int32(10),
+					NextRecordName:       aws.String("testRecord1"),
+					NextRecordIdentifier: aws.String("testID1"),
+					NextRecordType:       types.RRTypeA,
+					IsTruncated:          true,
+				},
+				&ListResourceRecordSetsOutput{
+					MaxItems:             aws.Int32(10),
+					NextRecordName:       aws.String("testRecord2"),
+					NextRecordIdentifier: aws.String("testID2"),
+					NextRecordType:       types.RRTypeA,
+					IsTruncated:          true,
+				},
+				&ListResourceRecordSetsOutput{
+					MaxItems:             aws.Int32(10),
+					NextRecordName:       aws.String("testRecord3"),
+					NextRecordIdentifier: aws.String("testID3"),
+					NextRecordType:       types.RRTypeA,
+					IsTruncated:          true,
+				},
+				&ListResourceRecordSetsOutput{
+					MaxItems:             aws.Int32(10),
+					NextRecordName:       aws.String("testRecord3"),
+					NextRecordIdentifier: aws.String("testID3"),
+					NextRecordType:       types.RRTypeA,
+					IsTruncated:          true,
+				},
+				&ListResourceRecordSetsOutput{
+					MaxItems:             aws.Int32(10),
+					NextRecordName:       aws.String("testRecord5"),
+					NextRecordIdentifier: aws.String("testID5"),
+					NextRecordType:       types.RRTypeA,
+					IsTruncated:          false,
+				},
+			},
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			client := NewFromConfig(aws.Config{})
-
-			paginator := NewListResourceRecordSetsPaginator(client, &ListResourceRecordSetsInput{
-				StartRecordName:       c.startRecordName,
-				StartRecordType:       c.startRecordType,
-				StartRecordIdentifier: c.startRecordIdentifier,
-			}, func(options *ListResourceRecordSetsPaginatorOptions) {
-				options.Limit = c.limit
-			})
-			if !paginator.HasMorePages() {
-				t.Errorf("Expect paginator has more page, got not")
+			client := mockListResourceRecordSetsClient{
+				inputs:  []*ListResourceRecordSetsInput{},
+				outputs: c.outputs,
+				t:       t,
 			}
 
-			paginator.NextPage(context.TODO(), initializeMiddlewareFn(&testListRRSMiddleware{1}))
+			paginator := NewListResourceRecordSetsPaginator(&client, &ListResourceRecordSetsInput{}, func(options *ListResourceRecordSetsPaginatorOptions) {
+				options.Limit = c.limit
+				options.StopOnDuplicateToken = c.stopOnDuplicationToken
+			})
+			for paginator.HasMorePages() {
+				_, err := paginator.NextPage(context.TODO())
+				if err != nil {
+					t.Errorf("error: %v", err)
+				}
+			}
 
-			testNextPageResult(c, paginator, t)
+			inputLen := len(client.inputs)
+			if inputLen != c.requestCnt {
+				t.Errorf("Expect total request number to be %d, got %d", c.requestCnt, inputLen)
+			}
+			for i := 1; i < inputLen; i++ {
+				if *client.inputs[i].StartRecordName != *c.outputs[i-1].NextRecordName {
+					t.Errorf("Expect next input's RecordName to be eaqul to %s, got %s",
+						*c.outputs[i-1].NextRecordName, *client.inputs[i].StartRecordName)
+				}
+				if *client.inputs[i].StartRecordIdentifier != *c.outputs[i-1].NextRecordIdentifier {
+					t.Errorf("Expect next input's RecordIdentifier to be eaqul to %s, got %s",
+						*c.outputs[i-1].NextRecordIdentifier, *client.inputs[i].StartRecordIdentifier)
+				}
+				if client.inputs[i].StartRecordType != c.outputs[i-1].NextRecordType {
+					t.Errorf("Expect next input's RecordType to be eaqul to %s, got %s",
+						c.outputs[i-1].NextRecordType, client.inputs[i].StartRecordType)
+				}
+			}
 		})
-	}
-}
-
-// insert middleware at the beginning of initialize step to see if page limit and other params
-// can be passed to API call's stack input
-func initializeMiddlewareFn(initializeMiddleware middleware.InitializeMiddleware) func(*Options) {
-	return func(options *Options) {
-		options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-			return stack.Initialize.Add(initializeMiddleware, middleware.Before)
-		})
-	}
-}
-
-// unit test can not control client API call's output, so just check params' default nil value
-func testNextPageResult(c testCase, p *ListResourceRecordSetsPaginator, t *testing.T) {
-	if c.limit != limit {
-		t.Errorf("Expect page limit to be %d, got %d", c.limit, limit)
-	}
-	if *c.startRecordName != *startRecordName {
-		t.Errorf("Expect startRecordName to be %s, got %s", *c.startRecordName, *startRecordName)
-	}
-	if c.startRecordType != startRecordType {
-		t.Errorf("Expect startRecordType to be %s, got %s", c.startRecordType, startRecordType)
-	}
-	if c.startRecordIdentifier != nil && *c.startRecordIdentifier != *startRecordIdentifier {
-		t.Errorf("Expect startRecordIdentifier to be %s, got %s",
-			*c.startRecordIdentifier, *startRecordIdentifier)
-	}
-	if p.startRecordName != nil || p.startRecordType != "" || p.startRecordIdentifier != nil {
-		t.Errorf("Expect paginator record params to be zero value, got %s, %s and %s",
-			*p.startRecordName, p.startRecordType, *p.startRecordIdentifier)
 	}
 }
