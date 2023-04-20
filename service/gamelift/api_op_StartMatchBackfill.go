@@ -17,10 +17,10 @@ import (
 // original match, and they provide matchmaking data for all players currently in
 // the game session. FlexMatch uses this information to select new players so that
 // backfilled match continues to meet the original match requirements. When using
-// FlexMatch with GameLift managed hosting, you can request a backfill match from a
-// client service by calling this operation with a GameSessions ID. You also have
-// the option of making backfill requests directly from your game server. In
-// response to a request, FlexMatch creates player sessions for the new players,
+// FlexMatch with Amazon GameLift managed hosting, you can request a backfill match
+// from a client service by calling this operation with a GameSessions ID. You
+// also have the option of making backfill requests directly from your game server.
+// In response to a request, FlexMatch creates player sessions for the new players,
 // updates the GameSession resource, and sends updated matchmaking data to the
 // game server. You can request a backfill match at any point after a game session
 // is started. Each game session can have only one active backfill request at a
@@ -37,7 +37,7 @@ import (
 // sessions created by FlexMatch are supported for match backfill. Learn more
 // Backfill existing games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html)
 // Matchmaking events (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html)
-// (reference) How GameLift FlexMatch works (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
+// (reference) How Amazon GameLift FlexMatch works (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
 func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackfillInput, optFns ...func(*Options)) (*StartMatchBackfillOutput, error) {
 	if params == nil {
 		params = &StartMatchBackfillInput{}

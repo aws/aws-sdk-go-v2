@@ -17,9 +17,12 @@ import (
 // experiments, trials, and trial components are automatically tracked, logged, and
 // indexed. When you use the Amazon Web Services SDK for Python (Boto), you must
 // use the logging APIs provided by the SDK. You can add tags to a trial and then
-// use the Search API to search for the tags. To get a list of all your trials,
-// call the ListTrials API. To view a trial's properties, call the DescribeTrial
-// API. To create a trial component, call the CreateTrialComponent API.
+// use the Search (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html)
+// API to search for the tags. To get a list of all your trials, call the
+// ListTrials (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTrials.html)
+// API. To view a trial's properties, call the DescribeTrial (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrial.html)
+// API. To create a trial component, call the CreateTrialComponent (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrialComponent.html)
+// API.
 func (c *Client) CreateTrial(ctx context.Context, params *CreateTrialInput, optFns ...func(*Options)) (*CreateTrialOutput, error) {
 	if params == nil {
 		params = &CreateTrialInput{}
@@ -55,8 +58,8 @@ type CreateTrialInput struct {
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *types.MetadataProperties
 
-	// A list of tags to associate with the trial. You can use Search API to search on
-	// the tags.
+	// A list of tags to associate with the trial. You can use Search (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html)
+	// API to search on the tags.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

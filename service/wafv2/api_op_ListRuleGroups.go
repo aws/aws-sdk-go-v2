@@ -64,7 +64,8 @@ type ListRuleGroupsOutput struct {
 	// the marker from the prior call in your next request.
 	NextMarker *string
 
-	//
+	// Array of rule groups. If you specified a Limit in your request, this might not
+	// be the full list.
 	RuleGroups []types.RuleGroupSummary
 
 	// Metadata pertaining to the operation's result.

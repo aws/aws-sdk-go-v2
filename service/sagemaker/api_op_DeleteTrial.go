@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the specified trial. All trial components that make up the trial must
-// be deleted first. Use the DescribeTrialComponent API to get the list of trial
-// components.
+// be deleted first. Use the DescribeTrialComponent (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrialComponent.html)
+// API to get the list of trial components.
 func (c *Client) DeleteTrial(ctx context.Context, params *DeleteTrialInput, optFns ...func(*Options)) (*DeleteTrialOutput, error) {
 	if params == nil {
 		params = &DeleteTrialInput{}

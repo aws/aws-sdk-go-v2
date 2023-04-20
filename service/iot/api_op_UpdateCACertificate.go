@@ -128,7 +128,7 @@ func newServiceMetadataMiddleware_opUpdateCACertificate(region string) *awsmiddl
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "UpdateCACertificate",
 	}
 }

@@ -64,6 +64,27 @@ type AndStatement struct {
 	noSmithyDocumentSerde
 }
 
+// Information for a single API key.
+type APIKeySummary struct {
+
+	// The generated, encrypted API key. You can copy this for use in your JavaScript
+	// CAPTCHA integration. For information about how to use this in your CAPTCHA
+	// JavaScript integration, see WAF client application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
+	// in the WAF Developer Guide.
+	APIKey *string
+
+	// The date and time that the key was created.
+	CreationTimestamp *time.Time
+
+	// The token domains that are defined in this API key.
+	TokenDomains []string
+
+	// Internal value used by WAF to manage the key.
+	Version int32
+
+	noSmithyDocumentSerde
+}
+
 // Specifies custom configurations for the associations between the web ACL and
 // protected resources. Use this to customize the maximum size of the request body
 // that your protected CloudFront distributions forward to WAF for inspection. The

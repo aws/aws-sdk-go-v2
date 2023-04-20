@@ -36921,6 +36921,11 @@ func awsAwsjson11_deserializeDocumentCanvasAppSettings(v **types.CanvasAppSettin
 
 	for key, value := range shape {
 		switch key {
+		case "ModelRegisterSettings":
+			if err := awsAwsjson11_deserializeDocumentModelRegisterSettings(&sv.ModelRegisterSettings, value); err != nil {
+				return err
+			}
+
 		case "TimeSeriesForecastingSettings":
 			if err := awsAwsjson11_deserializeDocumentTimeSeriesForecastingSettings(&sv.TimeSeriesForecastingSettings, value); err != nil {
 				return err
@@ -55576,6 +55581,55 @@ func awsAwsjson11_deserializeDocumentModelQualityJobInput(v **types.ModelQuality
 		case "GroundTruthS3Input":
 			if err := awsAwsjson11_deserializeDocumentMonitoringGroundTruthS3Input(&sv.GroundTruthS3Input, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentModelRegisterSettings(v **types.ModelRegisterSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelRegisterSettings
+	if *v == nil {
+		sv = &types.ModelRegisterSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CrossAccountModelRegisterRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.CrossAccountModelRegisterRoleArn = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.FeatureStatus(jtv)
 			}
 
 		default:

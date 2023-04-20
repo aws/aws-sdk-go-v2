@@ -14,7 +14,7 @@ import (
 // Updates a fleet's mutable attributes, including game session protection and
 // resource creation limits. To update fleet attributes, specify the fleet ID and
 // the property values that you want to change. If successful, an updated
-// FleetAttributes object is returned. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// FleetAttributes object is returned. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetAttributesInput, optFns ...func(*Options)) (*UpdateFleetAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateFleetAttributesInput{}
@@ -38,7 +38,7 @@ type UpdateFleetAttributesInput struct {
 	// This member is required.
 	FleetId *string
 
-	// GameLift Anywhere configuration options.
+	// Amazon GameLift Anywhere configuration options.
 	AnywhereConfiguration *types.AnywhereConfiguration
 
 	// A human-readable description of a fleet.
@@ -74,8 +74,8 @@ type UpdateFleetAttributesInput struct {
 type UpdateFleetAttributesOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
-	// are unique across all Regions. Format is
+	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
+	// it. ARNs are unique across all Regions. Format is
 	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 

@@ -121,7 +121,7 @@ func newServiceMetadataMiddleware_opGetTopicRule(region string) *awsmiddleware.R
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "GetTopicRule",
 	}
 }

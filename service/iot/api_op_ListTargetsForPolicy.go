@@ -217,7 +217,7 @@ func newServiceMetadataMiddleware_opListTargetsForPolicy(region string) *awsmidd
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ListTargetsForPolicy",
 	}
 }

@@ -113,7 +113,7 @@ func newServiceMetadataMiddleware_opCancelAuditMitigationActionsTask(region stri
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "CancelAuditMitigationActionsTask",
 	}
 }

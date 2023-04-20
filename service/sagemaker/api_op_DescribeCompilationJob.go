@@ -13,8 +13,10 @@ import (
 )
 
 // Returns information about a model compilation job. To create a model
-// compilation job, use CreateCompilationJob . To get information about multiple
-// model compilation jobs, use ListCompilationJobs .
+// compilation job, use CreateCompilationJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html)
+// . To get information about multiple model compilation jobs, use
+// ListCompilationJobs (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListCompilationJobs.html)
+// .
 func (c *Client) DescribeCompilationJob(ctx context.Context, params *DescribeCompilationJobInput, optFns ...func(*Options)) (*DescribeCompilationJobOutput, error) {
 	if params == nil {
 		params = &DescribeCompilationJobInput{}
@@ -112,10 +114,9 @@ type DescribeCompilationJobOutput struct {
 
 	// The time when the model compilation job started the CompilationJob instances.
 	// You are billed for the time between this timestamp and the timestamp in the
-	// DescribeCompilationJobResponse$CompilationEndTime field. In Amazon CloudWatch
-	// Logs, the start time might be later than this time. That's because it takes time
-	// to download the compilation job, which depends on the size of the compilation
-	// job container.
+	// CompilationEndTime field. In Amazon CloudWatch Logs, the start time might be
+	// later than this time. That's because it takes time to download the compilation
+	// job, which depends on the size of the compilation job container.
 	CompilationStartTime *time.Time
 
 	// The inference image to use when compiling a model. Specify an image only if the
@@ -130,10 +131,11 @@ type DescribeCompilationJobOutput struct {
 	// to SageMaker Neo when you initiated a compilation job.
 	ModelPackageVersionArn *string
 
-	// A VpcConfig object that specifies the VPC that you want your compilation job to
-	// connect to. Control access to your models by configuring the VPC. For more
-	// information, see Protect Compilation Jobs by Using an Amazon Virtual Private
-	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html) .
+	// A VpcConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html)
+	// object that specifies the VPC that you want your compilation job to connect to.
+	// Control access to your models by configuring the VPC. For more information, see
+	// Protect Compilation Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html)
+	// .
 	VpcConfig *types.NeoVpcConfig
 
 	// Metadata pertaining to the operation's result.

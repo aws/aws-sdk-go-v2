@@ -35,7 +35,7 @@ type UpdateModelCardInput struct {
 	// This member is required.
 	ModelCardName *string
 
-	// The updated model card content. Content must be in model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html)
+	// The updated model card content. Content must be in model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema)
 	// and provided as a string. When updating model card content, be sure to include
 	// the full content and not just updated content.
 	Content *string

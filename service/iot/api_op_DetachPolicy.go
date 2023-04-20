@@ -119,7 +119,7 @@ func newServiceMetadataMiddleware_opDetachPolicy(region string) *awsmiddleware.R
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "DetachPolicy",
 	}
 }

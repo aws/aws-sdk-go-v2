@@ -1120,6 +1120,7 @@ const (
 	OperatingSystemWindows2012  OperatingSystem = "WINDOWS_2012"
 	OperatingSystemAmazonLinux  OperatingSystem = "AMAZON_LINUX"
 	OperatingSystemAmazonLinux2 OperatingSystem = "AMAZON_LINUX_2"
+	OperatingSystemWindows2016  OperatingSystem = "WINDOWS_2016"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -1130,6 +1131,7 @@ func (OperatingSystem) Values() []OperatingSystem {
 		"WINDOWS_2012",
 		"AMAZON_LINUX",
 		"AMAZON_LINUX_2",
+		"WINDOWS_2016",
 	}
 }
 

@@ -154,7 +154,7 @@ func newServiceMetadataMiddleware_opCreateCertificateFromCsr(region string) *aws
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "CreateCertificateFromCsr",
 	}
 }

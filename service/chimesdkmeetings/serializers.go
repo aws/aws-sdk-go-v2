@@ -1476,9 +1476,19 @@ func awsRestjson1_serializeDocumentEngineTranscribeSettings(v *types.EngineTrans
 		ok.String(*v.VocabularyFilterName)
 	}
 
+	if v.VocabularyFilterNames != nil {
+		ok := object.Key("VocabularyFilterNames")
+		ok.String(*v.VocabularyFilterNames)
+	}
+
 	if v.VocabularyName != nil {
 		ok := object.Key("VocabularyName")
 		ok.String(*v.VocabularyName)
+	}
+
+	if v.VocabularyNames != nil {
+		ok := object.Key("VocabularyNames")
+		ok.String(*v.VocabularyNames)
 	}
 
 	return nil

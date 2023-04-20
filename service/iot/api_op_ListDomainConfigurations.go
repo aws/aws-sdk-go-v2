@@ -216,7 +216,7 @@ func newServiceMetadataMiddleware_opListDomainConfigurations(region string) *aws
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ListDomainConfigurations",
 	}
 }

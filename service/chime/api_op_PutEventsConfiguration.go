@@ -52,8 +52,8 @@ type PutEventsConfigurationInput struct {
 
 type PutEventsConfigurationOutput struct {
 
-	// The configuration that allows a bot to receive outgoing events. Can be either
-	// an HTTPS endpoint or a Lambda function ARN.
+	// The configuration that allows a bot to receive outgoing events. Can be an HTTPS
+	// endpoint or an AWS Lambda function ARN.
 	EventsConfiguration *types.EventsConfiguration
 
 	// Metadata pertaining to the operation's result.

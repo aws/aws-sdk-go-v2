@@ -42,7 +42,8 @@ type RenderUiTemplateInput struct {
 
 	// The HumanTaskUiArn of the worker UI that you want to render. Do not provide a
 	// HumanTaskUiArn if you use the UiTemplate parameter. See a list of available
-	// Human Ui Amazon Resource Names (ARNs) in UiConfig .
+	// Human Ui Amazon Resource Names (ARNs) in UiConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UiConfig.html)
+	// .
 	HumanTaskUiArn *string
 
 	// A Template object containing the worker UI template to render.

@@ -60,11 +60,13 @@ type ListInferenceExperimentsInput struct {
 	SortOrder types.SortOrder
 
 	// Selects inference experiments which are in this status. For the possible
-	// statuses, see DescribeInferenceExperimentResponse$Status .
+	// statuses, see DescribeInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html)
+	// .
 	StatusEquals types.InferenceExperimentStatus
 
 	// Selects inference experiments of this type. For the possible types of inference
-	// experiments, see CreateInferenceExperimentRequest$Type .
+	// experiments, see CreateInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html)
+	// .
 	Type types.InferenceExperimentType
 
 	noSmithyDocumentSerde

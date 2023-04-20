@@ -11,7 +11,9 @@ import (
 )
 
 // Updates the properties of a SageMaker image. To change the image's tags, use
-// the AddTags and DeleteTags APIs.
+// the AddTags (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AddTags.html)
+// and DeleteTags (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteTags.html)
+// APIs.
 func (c *Client) UpdateImage(ctx context.Context, params *UpdateImageInput, optFns ...func(*Options)) (*UpdateImageOutput, error) {
 	if params == nil {
 		params = &UpdateImageInput{}

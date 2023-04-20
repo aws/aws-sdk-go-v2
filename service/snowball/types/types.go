@@ -563,9 +563,39 @@ type OnDeviceServiceConfiguration struct {
 	// Represents the NFS (Network File System) service on a Snow Family device.
 	NFSOnDeviceService *NFSOnDeviceServiceConfiguration
 
+	// Configuration for Amazon S3 compatible storage on Snow family devices.
+	S3OnDeviceService *S3OnDeviceServiceConfiguration
+
 	// Represents the Storage Gateway service Tape Gateway type on a Snow Family
 	// device.
 	TGWOnDeviceService *TGWOnDeviceServiceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Amazon S3 compatible storage on Snow family devices configuration items.
+type S3OnDeviceServiceConfiguration struct {
+
+	// >Fault tolerance level of the cluster. This indicates the number of nodes that
+	// can go down without degrading the performance of the cluster. This additional
+	// input helps when the specified StorageLimit matches more than one Amazon S3
+	// compatible storage on Snow family devices service configuration.
+	FaultTolerance *int32
+
+	// Applicable when creating a cluster. Specifies how many nodes are needed for
+	// Amazon S3 compatible storage on Snow family devices. If specified, the other
+	// input can be omitted.
+	ServiceSize *int32
+
+	// If the specified storage limit value matches storage limit of one of the
+	// defined configurations, that configuration will be used. If the specified
+	// storage limit value does not match any defined configuration, the request will
+	// fail. If more than one configuration has the same storage limit as specified,
+	// the other input need to be provided.
+	StorageLimit *float64
+
+	// Storage unit. Currently the only supported unit is TB.
+	StorageUnit StorageUnit
 
 	noSmithyDocumentSerde
 }

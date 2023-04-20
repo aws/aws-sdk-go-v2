@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes an SageMaker experiment. All trials associated with the experiment must
-// be deleted first. Use the ListTrials API to get a list of the trials associated
-// with the experiment.
+// be deleted first. Use the ListTrials (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTrials.html)
+// API to get a list of the trials associated with the experiment.
 func (c *Client) DeleteExperiment(ctx context.Context, params *DeleteExperimentInput, optFns ...func(*Options)) (*DeleteExperimentOutput, error) {
 	if params == nil {
 		params = &DeleteExperimentInput{}

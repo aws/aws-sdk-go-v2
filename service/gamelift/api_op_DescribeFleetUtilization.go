@@ -29,7 +29,7 @@ import (
 // set to the fleet's home Region. Some API operations may limit the number of
 // fleet IDs allowed in one request. If a request exceeds this limit, the request
 // fails and the error message includes the maximum allowed. Learn more Setting up
-// GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // GameLift Metrics for Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
 func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeFleetUtilizationInput, optFns ...func(*Options)) (*DescribeFleetUtilizationOutput, error) {
 	if params == nil {

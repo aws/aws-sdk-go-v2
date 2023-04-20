@@ -15,9 +15,9 @@ import (
 // capacity determines the number of game sessions and players that can be hosted
 // based on the fleet configuration. Use this operation to set the following fleet
 // capacity properties:
-//   - Minimum/maximum size: Set hard limits on fleet capacity. GameLift cannot
-//     set the fleet's capacity to a value outside of this range, whether the capacity
-//     is changed manually or through automatic scaling.
+//   - Minimum/maximum size: Set hard limits on fleet capacity. Amazon GameLift
+//     cannot set the fleet's capacity to a value outside of this range, whether the
+//     capacity is changed manually or through automatic scaling.
 //   - Desired capacity: Manually set the number of Amazon EC2 instances to be
 //     maintained in a fleet location. Before changing a fleet's desired capacity, you
 //     may want to call DescribeEC2InstanceLimits (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeEC2InstanceLimits.html)
@@ -33,7 +33,7 @@ import (
 //     status.
 //
 // If successful, capacity settings are updated immediately. In response a change
-// in desired capacity, GameLift initiates steps to start new instances or
+// in desired capacity, Amazon GameLift initiates steps to start new instances or
 // terminate existing instances in the requested fleet location. This continues
 // until the location's active instance count matches the new desired instance
 // count. You can track a fleet's current capacity by calling DescribeFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html)
@@ -85,8 +85,8 @@ type UpdateFleetCapacityInput struct {
 type UpdateFleetCapacityOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
-	// are unique across all Regions. Format is
+	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
+	// it. ARNs are unique across all Regions. Format is
 	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 

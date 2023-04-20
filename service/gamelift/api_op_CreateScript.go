@@ -49,7 +49,7 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, op
 
 type CreateScriptInput struct {
 
-	// A descriptive label that is associated with a script. Script names do not need
+	// A descriptive label that is associated with a script. Script names don't need
 	// to be unique. You can use UpdateScript (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
 	// to change this value later.
 	Name *string
@@ -76,7 +76,7 @@ type CreateScriptInput struct {
 	// See the Amazon Web Services General Reference for actual tagging limits.
 	Tags []types.Tag
 
-	// Version information associated with a build or script. Version strings do not
+	// Version information associated with a build or script. Version strings don't
 	// need to be unique. You can use UpdateScript (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
 	// to change this value later.
 	Version *string

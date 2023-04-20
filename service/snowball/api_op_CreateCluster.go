@@ -46,19 +46,6 @@ type CreateClusterInput struct {
 	// This member is required.
 	JobType types.JobType
 
-	// The resources associated with the cluster job. These resources include Amazon
-	// S3 buckets and optional Lambda functions written in the Python language.
-	//
-	// This member is required.
-	Resources *types.JobResource
-
-	// The RoleARN that you want to associate with this cluster. RoleArn values are
-	// created by using the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
-	// API action in Identity and Access Management (IAM).
-	//
-	// This member is required.
-	RoleARN *string
-
 	// The shipping speed for each node in this cluster. This speed doesn't dictate
 	// how soon you'll get each Snowball Edge device, rather it represents how quickly
 	// each device moves to its destination while in transit. Regional shipping speeds
@@ -100,14 +87,28 @@ type CreateClusterInput struct {
 	// Data Cluster-01 .
 	Description *string
 
+	// Force to create cluster when user attempts to overprovision or underprovision a
+	// cluster. A cluster is overprovisioned or underprovisioned if the initial size of
+	// the cluster is more (overprovisioned) or less (underprovisioned) than what
+	// needed to meet capacity requirement specified with OnDeviceServiceConfiguration .
+	ForceCreateJobs bool
+
 	// The forwarding address ID for a cluster. This field is not supported in most
 	// regions.
 	ForwardingAddressId *string
+
+	// If provided, each job will be automatically created and associated with the new
+	// cluster. If not provided, will be treated as 0.
+	InitialClusterSize *int32
 
 	// The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN
 	// values are created by using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
 	// API action in Key Management Service (KMS).
 	KmsKeyARN *string
+
+	// Lists long-term pricing id that will be used to associate with jobs
+	// automatically created for the new cluster.
+	LongTermPricingIds []string
 
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
 	// this cluster.
@@ -124,6 +125,24 @@ type CreateClusterInput struct {
 	// location. Otherwise, you need to use the Snowball Client to manage the device.
 	RemoteManagement types.RemoteManagement
 
+	// The resources associated with the cluster job. These resources include Amazon
+	// S3 buckets and optional Lambda functions written in the Python language.
+	Resources *types.JobResource
+
+	// The RoleARN that you want to associate with this cluster. RoleArn values are
+	// created by using the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// API action in Identity and Access Management (IAM).
+	RoleARN *string
+
+	// If your job is being created in one of the US regions, you have the option of
+	// specifying what size Snow device you'd like for this job. In all other regions,
+	// Snowballs come with 80 TB in storage capacity. For more information, see
+	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
+	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
+	SnowballCapacityPreference types.SnowballCapacity
+
 	// The tax documents required in your Amazon Web Services Region.
 	TaxDocuments *types.TaxDocuments
 
@@ -134,6 +153,11 @@ type CreateClusterOutput struct {
 
 	// The automatically generated ID for a cluster.
 	ClusterId *string
+
+	// List of jobs created for this cluster. For syntax, see
+	// ListJobsResult$JobListEntries (https://docs.aws.amazon.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax)
+	// in this guide.
+	JobListEntries []types.JobListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

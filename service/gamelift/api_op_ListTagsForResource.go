@@ -11,20 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves all tags that are assigned to a GameLift resource. Resource tags are
-// used to organize Amazon Web Services resources for a range of purposes. This
-// operation handles the permissions necessary to manage tags for the following
-// GameLift resource types:
-//   - Build
-//   - Script
-//   - Fleet
-//   - Alias
-//   - GameSessionQueue
-//   - MatchmakingConfiguration
-//   - MatchmakingRuleSet
-//
-// To list tags for a resource, specify the unique ARN value for the resource.
-// Learn more Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+// Retrieves all tags assigned to a Amazon GameLift resource. Use resource tags to
+// organize Amazon Web Services resources for a range of purposes. This operation
+// handles the permissions necessary to manage tags for Amazon GameLift resources
+// that support tagging. To list tags for a resource, specify the unique ARN value
+// for the resource. Learn more Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 // in the Amazon Web Services General Reference Amazon Web Services Tagging
 // Strategies (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
@@ -46,10 +37,10 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to and uniquely identifies the GameLift resource that you
-	// want to retrieve tags for. GameLift resource ARNs are included in the data
-	// object for the resource, which can be retrieved by calling a List or Describe
-	// operation for the resource type.
+	// ) that uniquely identifies the Amazon GameLift resource that you want to
+	// retrieve tags for. Amazon GameLift includes resource ARNs in the data object for
+	// the resource. You can retrieve the ARN by calling a List or Describe operation
+	// for the resource type.
 	//
 	// This member is required.
 	ResourceARN *string
@@ -59,7 +50,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The collection of tags that have been assigned to the specified resource.
+	// The collection of tags assigned to the resource.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

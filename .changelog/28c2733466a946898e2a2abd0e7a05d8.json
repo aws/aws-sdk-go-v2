@@ -1,0 +1,8 @@
+{
+    "id": "28c27334-66a9-4689-8e2a-2abd0e7a05d8",
+    "type": "feature",
+    "description": "Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API.",
+    "modules": [
+        "service/chime"
+    ]
+}

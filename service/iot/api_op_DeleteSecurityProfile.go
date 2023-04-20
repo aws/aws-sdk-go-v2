@@ -117,7 +117,7 @@ func newServiceMetadataMiddleware_opDeleteSecurityProfile(region string) *awsmid
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "DeleteSecurityProfile",
 	}
 }

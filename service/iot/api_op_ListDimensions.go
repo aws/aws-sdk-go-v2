@@ -210,7 +210,7 @@ func newServiceMetadataMiddleware_opListDimensions(region string) *awsmiddleware
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ListDimensions",
 	}
 }

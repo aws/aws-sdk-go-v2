@@ -45,7 +45,7 @@ type RegenerateSecurityTokenInput struct {
 type RegenerateSecurityTokenOutput struct {
 
 	// A resource that allows Enterprise account administrators to configure an
-	// interface to receive events from Amazon Chime.
+	// interface that receives events from Amazon Chime.
 	Bot *types.Bot
 
 	// Metadata pertaining to the operation's result.

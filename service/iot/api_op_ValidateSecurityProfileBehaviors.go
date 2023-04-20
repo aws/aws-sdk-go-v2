@@ -120,7 +120,7 @@ func newServiceMetadataMiddleware_opValidateSecurityProfileBehaviors(region stri
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ValidateSecurityProfileBehaviors",
 	}
 }

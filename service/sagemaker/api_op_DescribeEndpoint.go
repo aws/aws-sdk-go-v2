@@ -68,9 +68,11 @@ type DescribeEndpointOutput struct {
 
 	// The status of the endpoint.
 	//   - OutOfService : Endpoint is not available to take incoming requests.
-	//   - Creating : CreateEndpoint is executing.
-	//   - Updating : UpdateEndpoint or UpdateEndpointWeightsAndCapacities is
-	//   executing.
+	//   - Creating : CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
+	//   is executing.
+	//   - Updating : UpdateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html)
+	//   or UpdateEndpointWeightsAndCapacities (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html)
+	//   is executing.
 	//   - SystemUpdating : Endpoint is undergoing maintenance and cannot be updated or
 	//   deleted or re-scaled until it has completed. This maintenance operation does not
 	//   change any customer-specified values such as VPC config, KMS encryption, model,
@@ -80,14 +82,16 @@ type DescribeEndpointOutput struct {
 	//   the rollback completes, endpoint returns to an InService status. This
 	//   transitional status only applies to an endpoint that has autoscaling enabled and
 	//   is undergoing variant weight or capacity changes as part of an
-	//   UpdateEndpointWeightsAndCapacities call or when the
-	//   UpdateEndpointWeightsAndCapacities operation is called explicitly.
+	//   UpdateEndpointWeightsAndCapacities (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html)
+	//   call or when the UpdateEndpointWeightsAndCapacities (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html)
+	//   operation is called explicitly.
 	//   - InService : Endpoint is available to process incoming requests.
-	//   - Deleting : DeleteEndpoint is executing.
-	//   - Failed : Endpoint could not be created, updated, or re-scaled. Use
-	//   DescribeEndpointOutput$FailureReason for information about the failure.
-	//   DeleteEndpoint is the only operation that can be performed on a failed
-	//   endpoint.
+	//   - Deleting : DeleteEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html)
+	//   is executing.
+	//   - Failed : Endpoint could not be created, updated, or re-scaled. Use the
+	//   FailureReason value returned by DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html)
+	//   for information about the failure. DeleteEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html)
+	//   is the only operation that can be performed on a failed endpoint.
 	//
 	// This member is required.
 	EndpointStatus types.EndpointStatus
@@ -118,13 +122,14 @@ type DescribeEndpointOutput struct {
 	// when the endpoint is creating or updating with a new endpoint configuration.
 	PendingDeploymentSummary *types.PendingDeploymentSummary
 
-	// An array of ProductionVariantSummary objects, one for each model hosted behind
-	// this endpoint.
+	// An array of ProductionVariantSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html)
+	// objects, one for each model hosted behind this endpoint.
 	ProductionVariants []types.ProductionVariantSummary
 
-	// An array of ProductionVariantSummary objects, one for each model that you want
-	// to host at this endpoint in shadow mode with production traffic replicated from
-	// the model specified on ProductionVariants .
+	// An array of ProductionVariantSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html)
+	// objects, one for each model that you want to host at this endpoint in shadow
+	// mode with production traffic replicated from the model specified on
+	// ProductionVariants .
 	ShadowProductionVariants []types.ProductionVariantSummary
 
 	// Metadata pertaining to the operation's result.

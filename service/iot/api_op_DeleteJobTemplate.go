@@ -110,7 +110,7 @@ func newServiceMetadataMiddleware_opDeleteJobTemplate(region string) *awsmiddlew
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "DeleteJobTemplate",
 	}
 }

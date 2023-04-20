@@ -1,0 +1,8 @@
+{
+    "id": "4a953b6d-c89b-4a65-919f-d26544dcff15",
+    "type": "feature",
+    "description": "Adds support for Amazon S3 compatible storage. AWS Snow Family customers can now use Amazon S3 compatible storage on Snowball Edge devices. Also adds support for V3_5S. This is a refreshed AWS Snowball Edge Storage Optimized device type with 210TB SSD (customer usable).",
+    "modules": [
+        "service/snowball"
+    ]
+}

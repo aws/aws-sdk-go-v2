@@ -57,8 +57,8 @@ type ListIPSetsInput struct {
 
 type ListIPSetsOutput struct {
 
-	// Array of IPSets. This may not be the full list of IPSets that you have defined.
-	// See the Limit specification for this request.
+	// Array of IPSets. If you specified a Limit in your request, this might not be
+	// the full list.
 	IPSets []types.IPSetSummary
 
 	// When you request a list of objects with a Limit setting, if the number of

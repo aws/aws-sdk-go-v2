@@ -125,7 +125,7 @@ func newServiceMetadataMiddleware_opGetCardinality(region string) *awsmiddleware
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "GetCardinality",
 	}
 }

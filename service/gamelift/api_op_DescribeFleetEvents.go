@@ -19,7 +19,7 @@ import (
 // changes to status and capacity in remote locations. You can specify a time range
 // to limit the result set. Use the pagination parameters to retrieve results as a
 // set of sequential pages. If successful, a collection of event log entries
-// matching the request are returned. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// matching the request are returned. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetEventsInput, optFns ...func(*Options)) (*DescribeFleetEventsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetEventsInput{}

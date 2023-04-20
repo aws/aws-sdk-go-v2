@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of TrainingJobSummary objects that describe the training jobs that
-// a hyperparameter tuning job launched.
+// Gets a list of TrainingJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html)
+// objects that describe the training jobs that a hyperparameter tuning job
+// launched.
 func (c *Client) ListTrainingJobsForHyperParameterTuningJob(ctx context.Context, params *ListTrainingJobsForHyperParameterTuningJobInput, optFns ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error) {
 	if params == nil {
 		params = &ListTrainingJobsForHyperParameterTuningJobInput{}
@@ -60,7 +61,8 @@ type ListTrainingJobsForHyperParameterTuningJobInput struct {
 
 type ListTrainingJobsForHyperParameterTuningJobOutput struct {
 
-	// A list of TrainingJobSummary objects that describe the training jobs that the
+	// A list of TrainingJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html)
+	// objects that describe the training jobs that the
 	// ListTrainingJobsForHyperParameterTuningJob request returned.
 	//
 	// This member is required.

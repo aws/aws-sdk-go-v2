@@ -25,11 +25,12 @@ import (
 // does not support Source Ip restriction for worker portals in VPC. Use OidcConfig
 // to update the configuration of a workforce created using your own OIDC IdP. You
 // can only update your OIDC IdP configuration when there are no work teams
-// associated with your workforce. You can delete work teams using the operation.
-// After restricting access to a range of IP addresses or updating your OIDC IdP
-// configuration with this operation, you can view details about your update
-// workforce using the operation. This operation only applies to private
-// workforces.
+// associated with your workforce. You can delete work teams using the
+// DeleteWorkteam (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html)
+// operation. After restricting access to a range of IP addresses or updating your
+// OIDC IdP configuration with this operation, you can view details about your
+// update workforce using the DescribeWorkforce (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeWorkforce.html)
+// operation. This operation only applies to private workforces.
 func (c *Client) UpdateWorkforce(ctx context.Context, params *UpdateWorkforceInput, optFns ...func(*Options)) (*UpdateWorkforceOutput, error) {
 	if params == nil {
 		params = &UpdateWorkforceInput{}
@@ -48,7 +49,8 @@ func (c *Client) UpdateWorkforce(ctx context.Context, params *UpdateWorkforceInp
 type UpdateWorkforceInput struct {
 
 	// The name of the private workforce that you want to update. You can find your
-	// workforce name by using the operation.
+	// workforce name by using the ListWorkforces (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListWorkforces.html)
+	// operation.
 	//
 	// This member is required.
 	WorkforceName *string

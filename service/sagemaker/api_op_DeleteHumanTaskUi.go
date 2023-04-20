@@ -12,8 +12,9 @@ import (
 
 // Use this operation to delete a human task user interface (worker task
 // template). To see a list of human task user interfaces (work task templates) in
-// your account, use . When you delete a worker task template, it no longer appears
-// when you call ListHumanTaskUis .
+// your account, use ListHumanTaskUis (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListHumanTaskUis.html)
+// . When you delete a worker task template, it no longer appears when you call
+// ListHumanTaskUis .
 func (c *Client) DeleteHumanTaskUi(ctx context.Context, params *DeleteHumanTaskUiInput, optFns ...func(*Options)) (*DeleteHumanTaskUiOutput, error) {
 	if params == nil {
 		params = &DeleteHumanTaskUiInput{}

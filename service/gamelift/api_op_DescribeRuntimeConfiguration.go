@@ -12,11 +12,11 @@ import (
 )
 
 // Retrieves a fleet's runtime configuration settings. The runtime configuration
-// tells GameLift which server processes to run (and how) on each instance in the
-// fleet. To get the runtime configuration that is currently in forces for a fleet,
-// provide the fleet ID. If successful, a RuntimeConfiguration object is returned
-// for the requested fleet. If the requested fleet has been deleted, the result set
-// is empty. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// tells Amazon GameLift which server processes to run (and how) on each instance
+// in the fleet. To get the runtime configuration that is currently in forces for a
+// fleet, provide the fleet ID. If successful, a RuntimeConfiguration object is
+// returned for the requested fleet. If the requested fleet has been deleted, the
+// result set is empty. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Running multiple processes on a fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
 func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *DescribeRuntimeConfigurationInput, optFns ...func(*Options)) (*DescribeRuntimeConfigurationOutput, error) {
 	if params == nil {

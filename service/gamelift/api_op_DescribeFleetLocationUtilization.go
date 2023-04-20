@@ -17,7 +17,7 @@ import (
 // home Region (you can also retrieve home Region utilization by calling
 // DescribeFleetUtilization ). To retrieve utilization data, identify a fleet and
 // location. If successful, a FleetUtilization object is returned for the
-// requested fleet location. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// requested fleet location. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // GameLift metrics for fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
 func (c *Client) DescribeFleetLocationUtilization(ctx context.Context, params *DescribeFleetLocationUtilizationInput, optFns ...func(*Options)) (*DescribeFleetLocationUtilizationOutput, error) {
 	if params == nil {

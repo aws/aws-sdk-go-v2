@@ -79,6 +79,7 @@ type ListAvailableManagedRuleGroupVersionsOutput struct {
 	NextMarker *string
 
 	// The versions that are currently available for the specified managed rule group.
+	// If you specified a Limit in your request, this might not be the full list.
 	Versions []types.ManagedRuleGroupVersion
 
 	// Metadata pertaining to the operation's result.

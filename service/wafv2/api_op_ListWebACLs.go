@@ -63,7 +63,8 @@ type ListWebACLsOutput struct {
 	// the marker from the prior call in your next request.
 	NextMarker *string
 
-	//
+	// Array of web ACLs. If you specified a Limit in your request, this might not be
+	// the full list.
 	WebACLs []types.WebACLSummary
 
 	// Metadata pertaining to the operation's result.

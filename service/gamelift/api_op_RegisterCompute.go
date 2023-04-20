@@ -13,8 +13,8 @@ import (
 
 // Registers your compute resources in a fleet you previously created. After you
 // register a compute to your fleet, you can monitor and manage your compute using
-// GameLift. The operation returns the compute resource containing SDK endpoint you
-// can use to connect your game server to GameLift. Learn more
+// Amazon GameLift. The operation returns the compute resource containing SDK
+// endpoint you can use to connect your game server to Amazon GameLift. Learn more
 //   - Create an Anywhere fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html)
 //   - Test your integration (https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html)
 func (c *Client) RegisterCompute(ctx context.Context, params *RegisterComputeInput, optFns ...func(*Options)) (*RegisterComputeOutput, error) {
@@ -47,15 +47,15 @@ type RegisterComputeInput struct {
 	FleetId *string
 
 	// The path to the TLS certificate on your compute resource. The path and
-	// certificate are not validated by GameLift.
+	// certificate are not validated by Amazon GameLift.
 	CertificatePath *string
 
-	// The DNS name of the compute resource. GameLift requires the DNS name or IP
-	// address to manage your compute resource.
+	// The DNS name of the compute resource. Amazon GameLift requires the DNS name or
+	// IP address to manage your compute resource.
 	DnsName *string
 
-	// The IP address of the compute resource. GameLift requires the DNS name or IP
-	// address to manage your compute resource.
+	// The IP address of the compute resource. Amazon GameLift requires the DNS name
+	// or IP address to manage your compute resource.
 	IpAddress *string
 
 	// The name of the custom location you added to the fleet you are registering this

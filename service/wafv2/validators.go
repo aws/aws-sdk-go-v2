@@ -50,6 +50,26 @@ func (m *validateOpCheckCapacity) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAPIKey struct {
+}
+
+func (*validateOpCreateAPIKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAPIKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAPIKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAPIKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIPSet struct {
 }
 
@@ -330,6 +350,26 @@ func (m *validateOpGenerateMobileSdkReleaseUrl) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDecryptedAPIKey struct {
+}
+
+func (*validateOpGetDecryptedAPIKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDecryptedAPIKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDecryptedAPIKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDecryptedAPIKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetIPSet struct {
 }
 
@@ -525,6 +565,26 @@ func (m *validateOpGetWebACL) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetWebACLInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAPIKeys struct {
+}
+
+func (*validateOpListAPIKeys) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAPIKeys) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAPIKeysInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAPIKeysInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -958,6 +1018,10 @@ func addOpCheckCapacityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCheckCapacity{}, middleware.After)
 }
 
+func addOpCreateAPIKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAPIKey{}, middleware.After)
+}
+
 func addOpCreateIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIPSet{}, middleware.After)
 }
@@ -1014,6 +1078,10 @@ func addOpGenerateMobileSdkReleaseUrlValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpGenerateMobileSdkReleaseUrl{}, middleware.After)
 }
 
+func addOpGetDecryptedAPIKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDecryptedAPIKey{}, middleware.After)
+}
+
 func addOpGetIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIPSet{}, middleware.After)
 }
@@ -1052,6 +1120,10 @@ func addOpGetWebACLForResourceValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetWebACLValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWebACL{}, middleware.After)
+}
+
+func addOpListAPIKeysValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAPIKeys{}, middleware.After)
 }
 
 func addOpListAvailableManagedRuleGroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -2899,6 +2971,24 @@ func validateOpCheckCapacityInput(v *CheckCapacityInput) error {
 	}
 }
 
+func validateOpCreateAPIKeyInput(v *CreateAPIKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAPIKeyInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.TokenDomains == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenDomains"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateIPSetInput(v *CreateIPSetInput) error {
 	if v == nil {
 		return nil
@@ -3254,6 +3344,24 @@ func validateOpGenerateMobileSdkReleaseUrlInput(v *GenerateMobileSdkReleaseUrlIn
 	}
 }
 
+func validateOpGetDecryptedAPIKeyInput(v *GetDecryptedAPIKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDecryptedAPIKeyInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.APIKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("APIKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetIPSetInput(v *GetIPSetInput) error {
 	if v == nil {
 		return nil
@@ -3445,6 +3553,21 @@ func validateOpGetWebACLInput(v *GetWebACLInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAPIKeysInput(v *ListAPIKeysInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAPIKeysInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

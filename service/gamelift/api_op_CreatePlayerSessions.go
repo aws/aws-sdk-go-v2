@@ -20,9 +20,10 @@ import (
 // slot is reserved in the game session for each player, and new PlayerSession
 // objects are returned with player session IDs. Each player references their
 // player session ID when sending a connection request to the game session, and the
-// game server can use it to validate the player reservation with the GameLift
-// service. Player sessions cannot be updated. The maximum number of players per
-// game session is 200. It is not adjustable. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// game server can use it to validate the player reservation with the Amazon
+// GameLift service. Player sessions cannot be updated. The maximum number of
+// players per game session is 200. It is not adjustable. Related actions All APIs
+// by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerSessionsInput, optFns ...func(*Options)) (*CreatePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &CreatePlayerSessionsInput{}

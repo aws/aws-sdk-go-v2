@@ -18,7 +18,7 @@ import (
 // can also retrieve home Region capacity by calling DescribeFleetCapacity ). To
 // retrieve capacity data, identify a fleet and location. If successful, a
 // FleetCapacity object is returned for the requested fleet location. Learn more
-// Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // GameLift metrics for fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
 func (c *Client) DescribeFleetLocationCapacity(ctx context.Context, params *DescribeFleetLocationCapacityInput, optFns ...func(*Options)) (*DescribeFleetLocationCapacityOutput, error) {
 	if params == nil {

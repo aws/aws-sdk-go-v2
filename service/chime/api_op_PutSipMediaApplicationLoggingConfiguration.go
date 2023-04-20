@@ -42,7 +42,7 @@ type PutSipMediaApplicationLoggingConfigurationInput struct {
 
 type PutSipMediaApplicationLoggingConfigurationOutput struct {
 
-	// Logging configuration of the SIP media application.
+	// The logging configuration of the SIP media application.
 	SipMediaApplicationLoggingConfiguration *types.SipMediaApplicationLoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

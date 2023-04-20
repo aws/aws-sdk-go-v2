@@ -28,7 +28,8 @@ import (
 // IDs is provided, attribute objects are returned only for fleets that currently
 // exist. Some API operations may limit the number of fleet IDs that are allowed in
 // one request. If a request exceeds this limit, the request fails and the error
-// message includes the maximum allowed. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// message includes the maximum allowed. Learn more Setting up Amazon GameLift
+// fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // GameLift metrics for fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
 func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFleetCapacityInput, optFns ...func(*Options)) (*DescribeFleetCapacityOutput, error) {
 	if params == nil {

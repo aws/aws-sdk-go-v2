@@ -61,7 +61,8 @@ type ListMobileSdkReleasesOutput struct {
 	// the marker from the prior call in your next request.
 	NextMarker *string
 
-	// High level information for the available SDK releases.
+	// The high level information for the available SDK releases. If you specified a
+	// Limit in your request, this might not be the full list.
 	ReleaseSummaries []types.ReleaseSummary
 
 	// Metadata pertaining to the operation's result.

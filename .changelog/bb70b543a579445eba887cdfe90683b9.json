@@ -1,0 +1,8 @@
+{
+    "id": "bb70b543-a579-445e-ba88-7cdfe90683b9",
+    "type": "feature",
+    "description": "Amazon SageMaker Canvas adds ModelRegisterSettings support for CanvasAppSettings.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}
