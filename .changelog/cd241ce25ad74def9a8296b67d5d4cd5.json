@@ -1,8 +1,0 @@
-{
-    "id": "cd241ce2-5ad7-4def-9a82-96b67d5d4cd5",
-    "type": "feature",
-    "description": "This release adds support for specifying the recording file format in an S3 recording sink configuration.",
-    "modules": [
-        "service/chimesdkmediapipelines"
-    ]
-}

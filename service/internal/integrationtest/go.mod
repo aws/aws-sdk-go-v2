@@ -44,15 +44,15 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/emr v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.10
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.17.8
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/glue v1.45.3
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.8
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.10
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/iot v1.35.4
+	github.com/aws/aws-sdk-go-v2/service/iot v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.10
-	github.com/aws/aws-sdk-go-v2/service/kms v1.20.10
+	github.com/aws/aws-sdk-go-v2/service/kms v1.20.11
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.8
@@ -74,7 +74,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.8
 	github.com/aws/aws-sdk-go-v2/service/sms v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.18.8
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.2
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.8
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.10
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.29.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.9
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

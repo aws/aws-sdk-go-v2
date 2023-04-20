@@ -1,8 +1,0 @@
-{
-    "id": "9eefc320-d10d-4124-9b0a-4a4754e7d75b",
-    "type": "feature",
-    "description": "This release adds support for the new Lambda Protection feature.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

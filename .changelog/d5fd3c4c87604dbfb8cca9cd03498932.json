@@ -1,8 +1,0 @@
-{
-    "id": "d5fd3c4c-8760-4dbf-b8cc-a9cd03498932",
-    "type": "feature",
-    "description": "Support additional OTA states in GetOTAUpdate API",
-    "modules": [
-        "service/iot"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "2c332e79-660d-40ee-a769-c4a31c55870f",
-    "type": "feature",
-    "description": "Amazon GameLift supports creating Builds for Windows 2016 operating system.",
-    "modules": [
-        "service/gamelift"
-    ]
-}

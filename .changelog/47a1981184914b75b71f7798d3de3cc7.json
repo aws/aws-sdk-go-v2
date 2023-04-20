@@ -1,8 +1,0 @@
-{
-    "id": "47a19811-8491-4b75-b71f-7798d3de3cc7",
-    "type": "feature",
-    "description": "Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API.",
-    "modules": [
-        "service/chimesdkmeetings"
-    ]
-}

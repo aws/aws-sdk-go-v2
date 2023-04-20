@@ -1,8 +1,0 @@
-{
-    "id": "70168ae7-e4e9-4a7d-85d9-a347b4c9ef0e",
-    "type": "feature",
-    "description": "You can now create encrypted API keys to use in a client application integration of the JavaScript CAPTCHA API . You can also retrieve a list of your API keys and the JavaScript application integration URL.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

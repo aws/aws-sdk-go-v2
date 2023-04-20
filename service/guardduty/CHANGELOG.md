@@ -1,3 +1,7 @@
+# v1.21.0 (2023-04-20)
+
+* **Feature**: This release adds support for the new Lambda Protection feature.
+
 # v1.20.2 (2023-04-10)
 
 * No change notes available for this release.
