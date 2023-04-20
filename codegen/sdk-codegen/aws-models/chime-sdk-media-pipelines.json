@@ -120,7 +120,7 @@
                 "CallAnalyticsStreamCategories": {
                     "target": "com.amazonaws.chimesdkmediapipelines#CategoryNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>By default, all <code>CategoryEvents</code> will be sent to the insights target. If this parameter is specified, only included categories will be sent to the insights target. </p>"
+                        "smithy.api#documentation": "<p>By default, all <code>CategoryEvents</code> are sent to the insights target. If this parameter is specified, only included categories are sent to the insights target. </p>"
                     }
                 }
             },
@@ -191,7 +191,7 @@
                 "PiiEntityTypes": {
                     "target": "com.amazonaws.chimesdkmediapipelines#PiiEntityTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of personally identifiable information (PII) to redact from a transcript. You\n         can include as many types as you'd like, or you can select <code>ALL</code>.</p>\n         <p>To include <code>PiiEntityTypes</code> in your Call Analytics request, you must also include <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>, but you can't include both.</p>\n         <p>Values must be comma-separated and can include: <code>ADDRESS</code>, <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>, <code>CREDIT_DEBIT_CVV</code>, \n         <code>CREDIT_DEBIT_EXPIRY</code>, <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, \n         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, <code>SSN</code>, or <code>ALL</code>.</p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 300.</p>"
+                        "smithy.api#documentation": "<p>The types of personally identifiable information (PII) to redact from a transcript. You\n         can include as many types as you'd like, or you can select <code>ALL</code>.</p>\n         <p>To include <code>PiiEntityTypes</code> in your Call Analytics request, you must also include <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>, but you can't include both.</p>\n         <p>Values must be comma-separated and can include: <code>ADDRESS</code>, <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>, <code>CREDIT_DEBIT_CVV</code>, \n         <code>CREDIT_DEBIT_EXPIRY</code>, <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, \n         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, <code>SSN</code>, or <code>ALL</code>.</p>\n         <p>If you leave this parameter empty, the default behavior is equivalent to <code>ALL</code>.</p>"
                     }
                 },
                 "LanguageModelName": {
@@ -1036,9 +1036,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1049,9 +1049,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1062,9 +1062,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1075,9 +1075,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1088,9 +1088,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1101,9 +1101,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1114,9 +1114,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1127,9 +1127,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1140,9 +1140,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1153,9 +1153,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1166,9 +1166,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1179,9 +1179,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1192,9 +1192,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1205,9 +1205,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1218,9 +1218,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1231,9 +1231,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1242,9 +1242,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1255,9 +1255,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1266,9 +1266,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1279,9 +1279,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1290,9 +1290,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1303,9 +1303,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1314,9 +1314,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1327,9 +1327,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1340,9 +1340,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1365,9 +1365,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1377,9 +1377,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2872,7 +2872,7 @@
                 "InsightsTarget": {
                     "target": "com.amazonaws.chimesdkmediapipelines#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the sink, <a href=\"https://aws.amazon.com/kinesis/data-streams/\">https://aws.amazon.com/kinesis/data-streams/</a>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the sink.</p>"
                     }
                 }
             },
@@ -2947,7 +2947,7 @@
                 "InsightsTarget": {
                     "target": "com.amazonaws.chimesdkmediapipelines#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the sink, <a href=\"https://aws.amazon.com/kinesis/data-streams/\">https://aws.amazon.com/kinesis/data-streams/</a>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the sink.</p>"
                     }
                 }
             },
@@ -4241,12 +4241,12 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.chimesdkmediapipelines#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS (Key Management System) key used to encrypt the output.</p>"
+                        "smithy.api#documentation": "<p>The ID of the KMS (Key Management Service) key used to encrypt the output.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The settings for a post-call voice analytics task.</p>"
+                "smithy.api#documentation": "<p>Allows you to specify additional settings for your Call Analytics post-call request, including output locations for your redacted transcript, which IAM role to use, and which encryption key to use.</p>\n         <p>\n            <code>DataAccessRoleArn</code> and <code>OutputLocation</code> are required fields.</p>\n         <p>\n            <code>PostCallAnalyticsSettings</code> provides the same insights as a Call Analytics post-call transcription. For more information, refer to \n         <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html\">Post-call analytics with real-time transcriptions</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#PresenterOnlyConfiguration": {
@@ -4260,7 +4260,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the configuration for a presenter only video tile.</p>"
+                "smithy.api#documentation": "<p>Defines the configuration for a presenter-only video tile.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#PresenterPosition": {
@@ -4409,7 +4409,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure the holds the settings for recording audio and video.</p>"
+                "smithy.api#documentation": "<p>A structure that holds the settings for recording media.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#RecordingStreamList": {
@@ -4503,12 +4503,18 @@
                 "Destination": {
                     "target": "com.amazonaws.chimesdkmediapipelines#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the Amazon S3 bucket used as the recording sink.</p>"
+                        "smithy.api#documentation": "<p>The default URI of the Amazon S3 bucket used as the recording sink.</p>"
+                    }
+                },
+                "RecordingFileFormat": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#RecordingFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default file format for the media files sent to the Amazon S3 bucket.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The structure that holds the settings for transmitting audio and video to the Amazon S3 bucket.</p>"
+                "smithy.api#documentation": "<p>The structure that holds the settings for transmitting media to the Amazon S3 bucket. These values are used as defaults if <code>S3RecordingSinkRuntimeConfiguration</code> is not specified.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#S3RecordingSinkRuntimeConfiguration": {
@@ -4517,20 +4523,20 @@
                 "Destination": {
                     "target": "com.amazonaws.chimesdkmediapipelines#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the S3 bucket used as the runtime sink.</p>",
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket used as the sink.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RecordingFileFormat": {
                     "target": "com.amazonaws.chimesdkmediapipelines#RecordingFileFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file formats for the audio and video files sent to the Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>The file format for the media files sent to the Amazon S3 bucket.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that holds the settings for transmitting audio and video recordings to the runtime Amazon S3 bucket.</p>"
+                "smithy.api#documentation": "<p>A structure that holds the settings for transmitting media files to the Amazon S3 bucket. If specified, the settings in this structure override any settings in <code>S3RecordingSinkConfiguration</code>.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#SelectedVideoStreams": {
@@ -4664,7 +4670,7 @@
                 "InsightsTarget": {
                     "target": "com.amazonaws.chimesdkmediapipelines#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the SNS sink, <a href=\"https://aws.amazon.com/kinesis/data-streams/\">https://aws.amazon.com/kinesis/data-streams/</a>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the SNS sink.</p>"
                     }
                 }
             },
@@ -4692,12 +4698,12 @@
                 "InsightsTarget": {
                     "target": "com.amazonaws.chimesdkmediapipelines#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the SQS sink, <a href=\"https://aws.amazon.com/kinesis/data-streams/\">https://aws.amazon.com/kinesis/data-streams/</a>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the SQS sink.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The URL of the SQS sink.</p>"
+                "smithy.api#documentation": "<p>The configuration settings for the SQS sink.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#StreamChannelDefinition": {
