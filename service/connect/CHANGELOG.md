@@ -1,3 +1,7 @@
+# v1.52.0 (2023-04-21)
+
+* **Feature**: This release adds a new API CreateParticipant. For Amazon Connect Chat, you can use this new API to customize chat flow experiences.
+
 # v1.51.0 (2023-04-10)
 
 * **Feature**: This release adds the ability to configure an agent's routing profile to receive contacts from multiple channels at the same time via extending the UpdateRoutingProfileConcurrency, CreateRoutingProfile and DescribeRoutingProfile APIs.

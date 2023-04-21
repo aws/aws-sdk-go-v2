@@ -1,3 +1,13 @@
+# Release (2023-04-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.52.0](service/connect/CHANGELOG.md#v1520-2023-04-21)
+  * **Feature**: This release adds a new API CreateParticipant. For Amazon Connect Chat, you can use this new API to customize chat flow experiences.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.26.1](service/ecs/CHANGELOG.md#v1261-2023-04-21)
+  * **Documentation**: Documentation update to address various Amazon ECS tickets.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.23.0](service/fms/CHANGELOG.md#v1230-2023-04-21)
+  * **Feature**: AWS Firewall Manager adds support for multiple administrators. You can now delegate more than one administrator per organization.
+
 # Release (2023-04-20)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.26.1 (2023-04-21)
+
+* **Documentation**: Documentation update to address various Amazon ECS tickets.
+
 # v1.26.0 (2023-04-19)
 
 * **Feature**: This release supports the Account Setting "TagResourceAuthorization" that allows for enhanced Tagging security controls.

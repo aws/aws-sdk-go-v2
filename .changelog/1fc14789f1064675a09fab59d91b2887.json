@@ -1,8 +1,0 @@
-{
-    "id": "1fc14789-f106-4675-a09f-ab59d91b2887",
-    "type": "feature",
-    "description": "AWS Firewall Manager adds support for multiple administrators. You can now delegate more than one administrator per organization.",
-    "modules": [
-        "service/fms"
-    ]
-}
