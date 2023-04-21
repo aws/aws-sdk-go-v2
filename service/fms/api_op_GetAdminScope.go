@@ -11,52 +11,51 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates resources from a Firewall Manager resource set.
-func (c *Client) BatchDisassociateResource(ctx context.Context, params *BatchDisassociateResourceInput, optFns ...func(*Options)) (*BatchDisassociateResourceOutput, error) {
+// Returns information about the specified account's administrative scope. The
+// admistrative scope defines the resources that an Firewall Manager administrator
+// can manage.
+func (c *Client) GetAdminScope(ctx context.Context, params *GetAdminScopeInput, optFns ...func(*Options)) (*GetAdminScopeOutput, error) {
 	if params == nil {
-		params = &BatchDisassociateResourceInput{}
+		params = &GetAdminScopeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateResource", params, optFns, c.addOperationBatchDisassociateResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAdminScope", params, optFns, c.addOperationGetAdminScopeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*BatchDisassociateResourceOutput)
+	out := result.(*GetAdminScopeOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type BatchDisassociateResourceInput struct {
+type GetAdminScopeInput struct {
 
-	// The uniform resource identifiers (URI) of resources that should be
-	// disassociated from the resource set. The URIs must be Amazon Resource Names
-	// (ARNs).
+	// The administator account that you want to get the details for.
 	//
 	// This member is required.
-	Items []string
-
-	// A unique identifier for the resource set, used in a request to refer to the
-	// resource set.
-	//
-	// This member is required.
-	ResourceSetIdentifier *string
+	AdminAccount *string
 
 	noSmithyDocumentSerde
 }
 
-type BatchDisassociateResourceOutput struct {
+type GetAdminScopeOutput struct {
 
-	// The resources that failed to disassociate from the resource set.
-	//
-	// This member is required.
-	FailedItems []types.FailedItem
+	// Contains details about the administrative scope of the requested account.
+	AdminScope *types.AdminScope
 
-	// A unique identifier for the resource set, used in a request to refer to the
-	// resource set.
-	//
-	// This member is required.
-	ResourceSetIdentifier *string
+	// The current status of the request to onboard a member account as an Firewall
+	// Manager administator.
+	//   - ONBOARDING - The account is onboarding to Firewall Manager as an
+	//   administrator.
+	//   - ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall
+	//   Manager as an administrator, and can perform actions on the resources defined in
+	//   their AdminScope .
+	//   - OFFBOARDING - The account is being removed as an Firewall Manager
+	//   administrator.
+	//   - OFFBOARDING_COMPLETE - The account has been removed as an Firewall Manager
+	//   administrator.
+	Status types.OrganizationStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,12 +63,12 @@ type BatchDisassociateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationBatchDisassociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateResource{}, middleware.After)
+func (c *Client) addOperationGetAdminScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAdminScope{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDisassociateResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAdminScope{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -109,10 +108,10 @@ func (c *Client) addOperationBatchDisassociateResourceMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpBatchDisassociateResourceValidationMiddleware(stack); err != nil {
+	if err = addOpGetAdminScopeValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateResource(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAdminScope(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -127,11 +126,11 @@ func (c *Client) addOperationBatchDisassociateResourceMiddlewares(stack *middlew
 	return nil
 }
 
-func newServiceMetadataMiddleware_opBatchDisassociateResource(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetAdminScope(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "fms",
-		OperationName: "BatchDisassociateResource",
+		OperationName: "GetAdminScope",
 	}
 }

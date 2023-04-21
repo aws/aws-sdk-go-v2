@@ -7,6 +7,37 @@ import (
 	"time"
 )
 
+// Configures the accounts within the administrator's Organizations organization
+// that the specified Firewall Manager administrator can apply policies to.
+type AccountScope struct {
+
+	// The list of accounts within the organization that the specified Firewall
+	// Manager administrator either can or cannot apply policies to, based on the value
+	// of ExcludeSpecifiedAccounts . If ExcludeSpecifiedAccounts is set to true , then
+	// the Firewall Manager administrator can apply policies to all members of the
+	// organization except for the accounts in this list. If ExcludeSpecifiedAccounts
+	// is set to false , then the Firewall Manager administrator can only apply
+	// policies to the accounts in this list.
+	Accounts []string
+
+	// A boolean value that indicates if the administrator can apply policies to all
+	// accounts within an organization. If true, the administrator can apply policies
+	// to all accounts within the organization. You can either enable management of all
+	// accounts through this operation, or you can specify a list of accounts to manage
+	// in AccountScope$Accounts . You cannot specify both.
+	AllAccountsEnabled bool
+
+	// A boolean value that excludes the accounts in AccountScope$Accounts from the
+	// administrator's scope. If true, the Firewall Manager administrator can apply
+	// policies to all members of the organization except for the accounts listed in
+	// AccountScope$Accounts . You can either specify a list of accounts to exclude by
+	// AccountScope$Accounts , or you can enable management of all accounts by
+	// AccountScope$AllAccountsEnabled . You cannot specify both.
+	ExcludeSpecifiedAccounts bool
+
+	noSmithyDocumentSerde
+}
+
 // Describes a remediation action target.
 type ActionTarget struct {
 
@@ -15,6 +46,66 @@ type ActionTarget struct {
 
 	// The ID of the remediation target.
 	ResourceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains high level information about the Firewall Manager administrator
+// account.
+type AdminAccountSummary struct {
+
+	// The Amazon Web Services account ID of the Firewall Manager administrator's
+	// account.
+	AdminAccount *string
+
+	// A boolean value that indicates if the administrator is the default
+	// administrator. If true, then this is the default administrator account. The
+	// default administrator can manage third-party firewalls and has full
+	// administrative scope. There is only one default administrator account per
+	// organization. For information about Firewall Manager default administrator
+	// accounts, see Managing Firewall Manager administrators (https://docs.aws.amazon.com/waf/latest/developerguide/fms-administrators.html)
+	// in the Firewall Manager Developer Guide.
+	DefaultAdmin bool
+
+	// The current status of the request to onboard a member account as an Firewall
+	// Manager administator.
+	//   - ONBOARDING - The account is onboarding to Firewall Manager as an
+	//   administrator.
+	//   - ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall
+	//   Manager as an administrator, and can perform actions on the resources defined in
+	//   their AdminScope .
+	//   - OFFBOARDING - The account is being removed as an Firewall Manager
+	//   administrator.
+	//   - OFFBOARDING_COMPLETE - The account has been removed as an Firewall Manager
+	//   administrator.
+	Status OrganizationStatus
+
+	noSmithyDocumentSerde
+}
+
+// Defines the resources that the Firewall Manager administrator can manage. For
+// more information about administrative scope, see Managing Firewall Manager
+// administrators (https://docs.aws.amazon.com/waf/latest/developerguide/fms-administrators.html)
+// in the Firewall Manager Developer Guide.
+type AdminScope struct {
+
+	// Defines the accounts that the specified Firewall Manager administrator can
+	// apply policies to.
+	AccountScope *AccountScope
+
+	// Defines the Organizations organizational units that the specified Firewall
+	// Manager administrator can apply policies to. For more information about OUs in
+	// Organizations, see Managing organizational units (OUs)  (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html)
+	// in the Organizations User Guide.
+	OrganizationalUnitScope *OrganizationalUnitScope
+
+	// Defines the Firewall Manager policy types that the specified Firewall Manager
+	// administrator can create and manage.
+	PolicyTypeScope *PolicyTypeScope
+
+	// Defines the Amazon Web Services Regions that the specified Firewall Manager
+	// administrator can perform actions in.
+	RegionScope *RegionScope
 
 	noSmithyDocumentSerde
 }
@@ -841,6 +932,43 @@ type NetworkFirewallUnexpectedGatewayRoutesViolation struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the Organizations organizational units (OUs) that the specified
+// Firewall Manager administrator can apply policies to. For more information about
+// OUs in Organizations, see Managing organizational units (OUs)  (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html)
+// in the Organizations User Guide.
+type OrganizationalUnitScope struct {
+
+	// A boolean value that indicates if the administrator can apply policies to all
+	// OUs within an organization. If true, the administrator can manage all OUs within
+	// the organization. You can either enable management of all OUs through this
+	// operation, or you can specify OUs to manage in
+	// OrganizationalUnitScope$OrganizationalUnits . You cannot specify both.
+	AllOrganizationalUnitsEnabled bool
+
+	// A boolean value that excludes the OUs in
+	// OrganizationalUnitScope$OrganizationalUnits from the administrator's scope. If
+	// true, the Firewall Manager administrator can apply policies to all OUs in the
+	// organization except for the OUs listed in
+	// OrganizationalUnitScope$OrganizationalUnits . You can either specify a list of
+	// OUs to exclude by OrganizationalUnitScope$OrganizationalUnits , or you can
+	// enable management of all OUs by
+	// OrganizationalUnitScope$AllOrganizationalUnitsEnabled . You cannot specify both.
+	ExcludeSpecifiedOrganizationalUnits bool
+
+	// The list of OUs within the organization that the specified Firewall Manager
+	// administrator either can or cannot apply policies to, based on the value of
+	// OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits . If
+	// OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits is set to true ,
+	// then the Firewall Manager administrator can apply policies to all OUs in the
+	// organization except for the OUs in this list. If
+	// OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits is set to false ,
+	// then the Firewall Manager administrator can only apply policies to the OUs in
+	// this list.
+	OrganizationalUnits []string
+
+	noSmithyDocumentSerde
+}
+
 // The reference rule that partially matches the ViolationTarget rule and
 // violation reason.
 type PartialMatch struct {
@@ -951,6 +1079,13 @@ type Policy struct {
 
 	// The ID of the Firewall Manager policy.
 	PolicyId *string
+
+	// Indicates whether the policy is in or out of an admin's policy or Region scope.
+	//   - ACTIVE - The administrator can manage and delete the policy.
+	//   - OUT_OF_ADMIN_SCOPE - The administrator can view the policy, but they can't
+	//   edit or delete the policy. Existing policy protections stay in place. Any new
+	//   resources that come into scope of the policy won't be protected.
+	PolicyStatus CustomerPolicyStatus
 
 	// A unique identifier for each update to the policy. When issuing a PutPolicy
 	// request, the PolicyUpdateToken in the request must match the PolicyUpdateToken
@@ -1070,6 +1205,13 @@ type PolicySummary struct {
 	// The name of the specified policy.
 	PolicyName *string
 
+	// Indicates whether the policy is in or out of an admin's policy or Region scope.
+	//   - ACTIVE - The administrator can manage and delete the policy.
+	//   - OUT_OF_ADMIN_SCOPE - The administrator can view the policy, but they can't
+	//   edit or delete the policy. Existing policy protections stay in place. Any new
+	//   resources that come into scope of the policy won't be protected.
+	PolicyStatus CustomerPolicyStatus
+
 	// Indicates if the policy should be automatically applied to new resources.
 	RemediationEnabled bool
 
@@ -1089,6 +1231,22 @@ type PolicySummary struct {
 	// the type of policy that is created, either an WAF policy, a Shield Advanced
 	// policy, or a security group policy.
 	SecurityServiceType SecurityServiceType
+
+	noSmithyDocumentSerde
+}
+
+// Defines the policy types that the specified Firewall Manager administrator can
+// manage.
+type PolicyTypeScope struct {
+
+	// Allows the specified Firewall Manager administrator to manage all Firewall
+	// Manager policy types, except for third-party policy types. Third-party policy
+	// types can only be managed by the Firewall Manager default administrator.
+	AllPolicyTypesEnabled bool
+
+	// The list of policy types that the specified Firewall Manager administrator can
+	// manage.
+	PolicyTypes []SecurityServiceType
 
 	noSmithyDocumentSerde
 }
@@ -1170,6 +1328,21 @@ type ProtocolsListDataSummary struct {
 
 	// An array of protocols in the Firewall Manager protocols list.
 	ProtocolsList []string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the Amazon Web Services Regions that the specified Firewall Manager
+// administrator can manage.
+type RegionScope struct {
+
+	// Allows the specified Firewall Manager administrator to manage all Amazon Web
+	// Services Regions.
+	AllRegionsEnabled bool
+
+	// The Amazon Web Services Regions that the specified Firewall Manager
+	// administrator can perform actions in.
+	Regions []string
 
 	noSmithyDocumentSerde
 }
@@ -1260,6 +1433,13 @@ type ResourceSet struct {
 	// The last time that the resource set was changed.
 	LastUpdateTime *time.Time
 
+	// Indicates whether the resource set is in or out of an admin's Region scope.
+	//   - ACTIVE - The administrator can manage and delete the resource set.
+	//   - OUT_OF_ADMIN_SCOPE - The administrator can view the resource set, but they
+	//   can't edit or delete the resource set. Existing protections stay in place. Any
+	//   new resource that come into scope of the resource set won't be protected.
+	ResourceSetStatus ResourceSetStatus
+
 	// An optional token that you can use for optimistic locking. Firewall Manager
 	// returns a token to your requests that access the resource set. The token marks
 	// the state of the resource set resource at the time of the request. Update tokens
@@ -1296,6 +1476,13 @@ type ResourceSetSummary struct {
 	// The descriptive name of the resource set. You can't change the name of a
 	// resource set after you create it.
 	Name *string
+
+	// Indicates whether the resource set is in or out of an admin's Region scope.
+	//   - ACTIVE - The administrator can manage and delete the resource set.
+	//   - OUT_OF_ADMIN_SCOPE - The administrator can view the resource set, but they
+	//   can't edit or delete the resource set. Existing protections stay in place. Any
+	//   new resource that come into scope of the resource set won't be protected.
+	ResourceSetStatus ResourceSetStatus
 
 	noSmithyDocumentSerde
 }
@@ -1540,6 +1727,11 @@ type SecurityServicePolicyData struct {
 	//   "{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"
 	//   Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
 	//   postProcessRuleGroups are between 9901 and 10000.
+	//   - Example: IMPORT_NETWORK_FIREWALL
+	//   "{\"type\":\"IMPORT_NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-2:000000000000:stateless-rulegroup\/rg1\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:drop\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:pass\"],\"networkFirewallStatelessCustomActions\":[],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-2:aws-managed:stateful-rulegroup\/ThreatSignaturesEmergingEventsStrictOrder\",\"priority\":8}],\"networkFirewallStatefulEngineOptions\":{\"ruleOrder\":\"STRICT_ORDER\"},\"networkFirewallStatefulDefaultActions\":[\"aws:drop_strict\"]}}"
+	//   "{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"
+	//   Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
+	//   postProcessRuleGroups are between 9901 and 10000.
 	//   - Example: NETWORK_FIREWALL - Centralized deployment model
 	//   "{\"type\":\"NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}},\"firewallDeploymentModel\":{\"centralizedFirewallDeploymentModel\":{\"centralizedFirewallOrchestrationConfig\":{\"inspectionVpcIds\":[{\"resourceId\":\"vpc-1234\",\"accountId\":\"123456789011\"}],\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneId\":null,\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"allowedIPV4CidrList\":[]}}}}"
 	//   To use the centralized deployment model, you must set PolicyOption (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
@@ -1625,11 +1817,32 @@ type SecurityServicePolicyData struct {
 	//   value for overrideCustomerWebaclClassic is false . For other resource types
 	//   that you can protect with a Shield Advanced policy, this ManagedServiceData
 	//   configuration is an empty string.
-	//   - Example: WAFV2
-	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAmazonIpReputationList\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
-	//   In the loggingConfiguration , you can specify one logDestinationConfigs , you
-	//   can optionally provide up to 20 redactedFields , and the RedactedFieldType
-	//   must be one of URI , QUERY_STRING , HEADER , or METHOD .
+	//   - Example: WAFV2 - Account takeover prevention and Bot Control managed rule
+	//   groups, and rule action override
+	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesATPRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesATPRuleSet\":{\"loginPath\":\"/loginpath\",\"requestInspection\":{\"payloadType\":\"FORM_ENCODED|JSON\",\"usernameField\":{\"identifier\":\"/form/username\"},\"passwordField\":{\"identifier\":\"/form/password\"}}}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true},{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesBotControlRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesBotControlRuleSet\":{\"inspectionLevel\":\"TARGETED|COMMON\"}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true,\"ruleActionOverrides\":[{\"name\":\"Rule1\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}},{\"name\":\"Rule2\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true}"
+	//   - Fraud Control account takeover prevention (ATP) - For information about the
+	//   properties available for AWSManagedRulesATPRuleSet managed rule groups, see
+	//   AWSManagedRulesATPRuleSet (https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesATPRuleSet.html)
+	//   in the WAF API Reference.
+	//   - Bot Control - For information about AWSManagedRulesBotControlRuleSet managed
+	//   rule groups, see AWSManagedRulesBotControlRuleSet (https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesBotControlRuleSet.html)
+	//   in the WAF API Reference.
+	//   - Rule action overrides - Firewall Manager supports rule action overrides
+	//   only for managed rule groups. To configure a RuleActionOverrides add the Name
+	//   of the rule to override, and ActionToUse , which is the new action to use for
+	//   the rule. For information about using rule action override, see
+	//   RuleActionOverride (https://docs.aws.amazon.com/waf/latest/APIReference/API_RuleActionOverride.html)
+	//   in the WAF API Reference.
+	//   - Example: WAFV2 - CAPTCHA and Challenge configs
+	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true,\"captchaConfig\":{\"immunityTimeProperty\":{\"immunityTime\":500}},\"challengeConfig\":{\"immunityTimeProperty\":{\"immunityTime\":800}},\"tokenDomains\":[\"google.com\",\"amazon.com\"]}"
+	//   If you update the policy's values for captchaConfig , challengeConfig , or
+	//   tokenDomains , Firewall Manager will overwrite your local web ACLs to contain
+	//   the new value(s). However, if you don't update the policy's captchaConfig ,
+	//   challengeConfig , or tokenDomains values, the values in your local web ACLs
+	//   will remain unchanged. For information about CAPTCHA and Challenge configs, see
+	//   CaptchaConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_CaptchaConfig.html)
+	//   and ChallengeConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_ChallengeConfig.html)
+	//   in the WAF API Reference.
 	//   - Example: WAFV2 - Firewall Manager support for WAF managed rule group
 	//   versioning
 	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":true,\"version\":\"Version_2.0\",\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesCommonRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
@@ -1638,6 +1851,28 @@ type SecurityServicePolicyData struct {
 	//   you'd like to use. If you don't set versionEnabled to true , or if you omit
 	//   versionEnabled , then Firewall Manager uses the default version of the WAF
 	//   managed rule group.
+	//   - Example: WAFV2 - Logging configurations
+	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,
+	//   \"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":
+	//   {\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",
+	//   \"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\"}
+	//   ,\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],
+	//   \"sampledRequestsEnabled\":true}],\"postProcessRuleGroups\":[],
+	//   \"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\"
+	//   :null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\"
+	//   :false,\"loggingConfiguration\":{\"logDestinationConfigs\":
+	//   [\"arn:aws:s3:::aws-waf-logs-example-bucket\"]
+	//   ,\"redactedFields\":[],\"loggingFilterConfigs\":{\"defaultBehavior\":\"KEEP\",
+	//   \"filters\":[{\"behavior\":\"KEEP\",\"requirement\":\"MEETS_ALL\",
+	//   \"conditions\":[{\"actionCondition\":\"CAPTCHA\"},{\"actionCondition\":
+	//   \"CHALLENGE\"},
+	//   {\"actionCondition\":\"EXCLUDED_AS_COUNT\"}]}]}},\"sampledRequestsEnabledForDefaultActions\":true}"
+	//   Firewall Manager supports Amazon Kinesis Data Firehose and Amazon S3 as the
+	//   logDestinationConfigs in your loggingConfiguration . For information about WAF
+	//   logging configurations, see LoggingConfiguration (https://docs.aws.amazon.com/waf/latest/APIReference/API_LoggingConfiguration.html)
+	//   in the WAF API Reference In the loggingConfiguration , you can specify one
+	//   logDestinationConfigs . Optionally provide as many as 20 redactedFields . The
+	//   RedactedFieldType must be one of URI , QUERY_STRING , HEADER , or METHOD .
 	//   - Example: WAF Classic "{\"type\": \"WAF\", \"ruleGroups\":
 	//   [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" :
 	//   {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}"

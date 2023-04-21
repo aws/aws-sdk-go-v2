@@ -12,8 +12,8 @@ import (
 )
 
 // Returns a MemberAccounts object that lists the member accounts in the
-// administrator's Amazon Web Services organization. The ListMemberAccounts must
-// be submitted by the account that is set as the Firewall Manager administrator.
+// administrator's Amazon Web Services organization. Either an Firewall Manager
+// administrator or the organization's management account can make this request.
 func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccountsInput, optFns ...func(*Options)) (*ListMemberAccountsOutput, error) {
 	if params == nil {
 		params = &ListMemberAccountsInput{}

@@ -29,7 +29,7 @@ func (c *Client) GetResourceSet(ctx context.Context, params *GetResourceSetInput
 
 type GetResourceSetInput struct {
 
-	// A unique identifier for the resource set, used in a TODO to refer to the
+	// A unique identifier for the resource set, used in a request to refer to the
 	// resource set.
 	//
 	// This member is required.

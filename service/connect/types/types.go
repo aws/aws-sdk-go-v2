@@ -1317,7 +1317,10 @@ type MetricDataV2 struct {
 type MetricFilterV2 struct {
 
 	// The key to use for filtering data. Valid metric filter keys: INITIATION_METHOD ,
-	// DISCONNECT_REASON
+	// DISCONNECT_REASON . These are the same values as the InitiationMethod and
+	// DisconnectReason in the contact record. For more information, see
+	// ContactTraceRecord (https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord)
+	// in the Amazon Connect Administrator's Guide.
 	MetricFilterKey *string
 
 	// The values to use for filtering data. Valid metric filter values for
@@ -1409,6 +1412,18 @@ type ParticipantDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The details to add for the participant.
+type ParticipantDetailsToAdd struct {
+
+	// The display name of the participant.
+	DisplayName *string
+
+	// The role of the participant being added.
+	ParticipantRole ParticipantRole
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information for the timer. After the timer configuration is set,
 // it persists for the duration of the chat. It persists across new contacts in the
 // chain, for example, transfer contacts. For more information about how chat
@@ -1469,6 +1484,20 @@ type ParticipantTimerValueMemberParticipantTimerDurationInMinutes struct {
 }
 
 func (*ParticipantTimerValueMemberParticipantTimerDurationInMinutes) isParticipantTimerValue() {}
+
+// The credentials used by the participant.
+type ParticipantTokenCredentials struct {
+
+	// The expiration of the token. It's specified in ISO 8601 format:
+	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	Expiry *string
+
+	// The token used by the chat participant to call CreateParticipantConnection (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
+	// . The participant token is valid for the lifetime of a chat participant.
+	ParticipantToken *string
+
+	noSmithyDocumentSerde
+}
 
 // Enable persistent chats. For more information about enabling persistent chat,
 // and for example use cases and how to configure for them, see Enable persistent

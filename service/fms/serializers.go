@@ -676,6 +676,61 @@ func (m *awsAwsjson11_serializeOpGetAdminAccount) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetAdminScope struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAdminScope) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAdminScope) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAdminScopeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetAdminScope")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAdminScopeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetAppsList struct {
 }
 
@@ -1156,6 +1211,116 @@ func (m *awsAwsjson11_serializeOpGetViolationDetails) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetViolationDetailsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListAdminAccountsForOrganization struct {
+}
+
+func (*awsAwsjson11_serializeOpListAdminAccountsForOrganization) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListAdminAccountsForOrganization) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAdminAccountsForOrganizationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.ListAdminAccountsForOrganization")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListAdminAccountsForOrganizationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListAdminsManagingAccount struct {
+}
+
+func (*awsAwsjson11_serializeOpListAdminsManagingAccount) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListAdminsManagingAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAdminsManagingAccountInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.ListAdminsManagingAccount")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListAdminsManagingAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1721,6 +1886,61 @@ func (m *awsAwsjson11_serializeOpListThirdPartyFirewallFirewallPolicies) HandleS
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpPutAdminAccount struct {
+}
+
+func (*awsAwsjson11_serializeOpPutAdminAccount) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpPutAdminAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutAdminAccountInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.PutAdminAccount")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentPutAdminAccountInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpPutAppsList struct {
 }
 
@@ -2105,6 +2325,76 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAccountIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAccountScope(v *types.AccountScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Accounts != nil {
+		ok := object.Key("Accounts")
+		if err := awsAwsjson11_serializeDocumentAccountIdList(v.Accounts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllAccountsEnabled {
+		ok := object.Key("AllAccountsEnabled")
+		ok.Boolean(v.AllAccountsEnabled)
+	}
+
+	if v.ExcludeSpecifiedAccounts {
+		ok := object.Key("ExcludeSpecifiedAccounts")
+		ok.Boolean(v.ExcludeSpecifiedAccounts)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAdminScope(v *types.AdminScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountScope != nil {
+		ok := object.Key("AccountScope")
+		if err := awsAwsjson11_serializeDocumentAccountScope(v.AccountScope, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationalUnitScope != nil {
+		ok := object.Key("OrganizationalUnitScope")
+		if err := awsAwsjson11_serializeDocumentOrganizationalUnitScope(v.OrganizationalUnitScope, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PolicyTypeScope != nil {
+		ok := object.Key("PolicyTypeScope")
+		if err := awsAwsjson11_serializeDocumentPolicyTypeScope(v.PolicyTypeScope, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RegionScope != nil {
+		ok := object.Key("RegionScope")
+		if err := awsAwsjson11_serializeDocumentRegionScope(v.RegionScope, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentApp(v *types.App, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2197,6 +2487,17 @@ func awsAwsjson11_serializeDocumentAWSAccountIdList(v []string, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAWSRegionList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCustomerPolicyScopeIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2247,6 +2548,41 @@ func awsAwsjson11_serializeDocumentNetworkFirewallPolicy(v *types.NetworkFirewal
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOrganizationalUnitIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOrganizationalUnitScope(v *types.OrganizationalUnitScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllOrganizationalUnitsEnabled {
+		ok := object.Key("AllOrganizationalUnitsEnabled")
+		ok.Boolean(v.AllOrganizationalUnitsEnabled)
+	}
+
+	if v.ExcludeSpecifiedOrganizationalUnits {
+		ok := object.Key("ExcludeSpecifiedOrganizationalUnits")
+		ok.Boolean(v.ExcludeSpecifiedOrganizationalUnits)
+	}
+
+	if v.OrganizationalUnits != nil {
+		ok := object.Key("OrganizationalUnits")
+		if err := awsAwsjson11_serializeDocumentOrganizationalUnitIdList(v.OrganizationalUnits, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2288,6 +2624,11 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 	if v.PolicyName != nil {
 		ok := object.Key("PolicyName")
 		ok.String(*v.PolicyName)
+	}
+
+	if len(v.PolicyStatus) > 0 {
+		ok := object.Key("PolicyStatus")
+		ok.String(string(v.PolicyStatus))
 	}
 
 	if v.PolicyUpdateToken != nil {
@@ -2350,6 +2691,25 @@ func awsAwsjson11_serializeDocumentPolicyOption(v *types.PolicyOption, value smi
 	if v.ThirdPartyFirewallPolicy != nil {
 		ok := object.Key("ThirdPartyFirewallPolicy")
 		if err := awsAwsjson11_serializeDocumentThirdPartyFirewallPolicy(v.ThirdPartyFirewallPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPolicyTypeScope(v *types.PolicyTypeScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllPolicyTypesEnabled {
+		ok := object.Key("AllPolicyTypesEnabled")
+		ok.Boolean(v.AllPolicyTypesEnabled)
+	}
+
+	if v.PolicyTypes != nil {
+		ok := object.Key("PolicyTypes")
+		if err := awsAwsjson11_serializeDocumentSecurityServiceTypeList(v.PolicyTypes, ok); err != nil {
 			return err
 		}
 	}
@@ -2446,6 +2806,25 @@ func awsAwsjson11_serializeDocumentProtocolsListData(v *types.ProtocolsListData,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRegionScope(v *types.RegionScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllRegionsEnabled {
+		ok := object.Key("AllRegionsEnabled")
+		ok.Boolean(v.AllRegionsEnabled)
+	}
+
+	if v.Regions != nil {
+		ok := object.Key("Regions")
+		if err := awsAwsjson11_serializeDocumentAWSRegionList(v.Regions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceSet(v *types.ResourceSet, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2468,6 +2847,11 @@ func awsAwsjson11_serializeDocumentResourceSet(v *types.ResourceSet, value smith
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.ResourceSetStatus) > 0 {
+		ok := object.Key("ResourceSetStatus")
+		ok.String(string(v.ResourceSetStatus))
 	}
 
 	if v.ResourceTypeList != nil {
@@ -2558,6 +2942,17 @@ func awsAwsjson11_serializeDocumentSecurityServicePolicyData(v *types.SecuritySe
 		ok.String(string(v.Type))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSecurityServiceTypeList(v []types.SecurityServiceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -2762,6 +3157,18 @@ func awsAwsjson11_serializeOpDocumentGetAdminAccountInput(v *GetAdminAccountInpu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetAdminScopeInput(v *GetAdminScopeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdminAccount != nil {
+		ok := object.Key("AdminAccount")
+		ok.String(*v.AdminAccount)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetAppsListInput(v *GetAppsListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2915,6 +3322,40 @@ func awsAwsjson11_serializeOpDocumentGetViolationDetailsInput(v *GetViolationDet
 	if v.ResourceType != nil {
 		ok := object.Key("ResourceType")
 		ok.String(*v.ResourceType)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListAdminAccountsForOrganizationInput(v *ListAdminAccountsForOrganizationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListAdminsManagingAccountInput(v *ListAdminsManagingAccountInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil
@@ -3117,6 +3558,25 @@ func awsAwsjson11_serializeOpDocumentListThirdPartyFirewallFirewallPoliciesInput
 	if len(v.ThirdPartyFirewall) > 0 {
 		ok := object.Key("ThirdPartyFirewall")
 		ok.String(string(v.ThirdPartyFirewall))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentPutAdminAccountInput(v *PutAdminAccountInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdminAccount != nil {
+		ok := object.Key("AdminAccount")
+		ok.String(*v.AdminAccount)
+	}
+
+	if v.AdminScope != nil {
+		ok := object.Key("AdminScope")
+		if err := awsAwsjson11_serializeDocumentAdminScope(v.AdminScope, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

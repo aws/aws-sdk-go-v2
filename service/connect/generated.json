@@ -25,6 +25,7 @@
         "api_op_CreateHoursOfOperation.go",
         "api_op_CreateInstance.go",
         "api_op_CreateIntegrationAssociation.go",
+        "api_op_CreateParticipant.go",
         "api_op_CreateQueue.go",
         "api_op_CreateQuickConnect.go",
         "api_op_CreateRoutingProfile.go",

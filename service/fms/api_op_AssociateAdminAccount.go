@@ -10,11 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the Firewall Manager administrator account. The account must be a member
-// of the organization in Organizations whose resources you want to protect.
-// Firewall Manager sets the permissions that allow the account to administer your
-// Firewall Manager policies. The account that you associate with Firewall Manager
-// is called the Firewall Manager administrator account.
+// Sets a Firewall Manager default administrator account. The Firewall Manager
+// default administrator account can manage third-party firewalls and has full
+// administrative scope that allows administration of all policy types, accounts,
+// organizational units, and Regions. This account must be a member account of the
+// organization in Organizations whose resources you want to protect. For
+// information about working with Firewall Manager administrator accounts, see
+// Managing Firewall Manager administrators (https://docs.aws.amazon.com/organizations/latest/userguide/fms-administrators.html)
+// in the Firewall Manager Developer Guide.
 func (c *Client) AssociateAdminAccount(ctx context.Context, params *AssociateAdminAccountInput, optFns ...func(*Options)) (*AssociateAdminAccountOutput, error) {
 	if params == nil {
 		params = &AssociateAdminAccountInput{}
@@ -33,8 +36,9 @@ func (c *Client) AssociateAdminAccount(ctx context.Context, params *AssociateAdm
 type AssociateAdminAccountInput struct {
 
 	// The Amazon Web Services account ID to associate with Firewall Manager as the
-	// Firewall Manager administrator account. This must be an Organizations member
-	// account. For more information about Organizations, see Managing the Amazon Web
+	// Firewall Manager default administrator account. This account must be a member
+	// account of the organization in Organizations whose resources you want to
+	// protect. For more information about Organizations, see Managing the Amazon Web
 	// Services Accounts in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
 	// .
 	//

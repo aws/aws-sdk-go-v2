@@ -46,7 +46,7 @@ type PutAccountSettingDefaultInput struct {
 	// and enabled for the value , Fargate uses FIPS-140 compliant cryptographic
 	// algorithms on your tasks. For more information about FIPS-140 compliance with
 	// Fargate, see Amazon Web Services Fargate Federal Information Processing
-	// Standard (FIPS) 140-2 compliance (https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html)
+	// Standard (FIPS) 140-2 compliance (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// This member is required.
