@@ -105,6 +105,9 @@ func (c *Client) addOperationDisassociateDelegateFromResourceMiddlewares(stack *
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateDelegateFromResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

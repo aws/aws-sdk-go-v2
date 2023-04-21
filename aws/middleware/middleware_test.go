@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"net/http"
+	"os"
 	"reflect"
 	"strings"
 	"testing"
@@ -185,5 +186,100 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 				t.Fatal("expected attempt skew to be set in metadata, was not")
 			}
 		})
+	}
+}
+
+func TestRecursionDetection(t *testing.T) {
+	const lambdaFunc = "AWS_LAMBDA_FUNCTION_NAME"
+	const traceID = "_X_AMZN_TRACE_ID"
+	const traceIDHeaderKey = "X-Amzn-Trace-Id"
+
+	cases := map[string]struct {
+		LambdaFuncName string
+		TraceID        string
+		HeaderBefore   string
+		HeaderAfter    string
+	}{
+		"non lambda env and no trace ID header before": {},
+		"with lambda env but no trace ID env variable, no trace ID header before": {
+			LambdaFuncName: "some-function1",
+		},
+		"with lambda env and trace ID env variable, no trace ID header before": {
+			LambdaFuncName: "some-function2",
+			TraceID:        "traceID1",
+			HeaderAfter:    "traceID1",
+		},
+		"with lambda env and trace ID env variable, has trace ID header before": {
+			LambdaFuncName: "some-function3",
+			TraceID:        "traceID2",
+			HeaderBefore:   "traceID1",
+			HeaderAfter:    "traceID1",
+		},
+		"with lambda env and trace ID (needs encoding) env variable, no trace ID header before": {
+			LambdaFuncName: "some-function4",
+			TraceID:        "traceID3\n",
+			HeaderAfter:    "traceID3%0A",
+		},
+		"with lambda env and trace ID (contains chars must not be encoded) env variable, no trace ID header before": {
+			LambdaFuncName: "some-function5",
+			TraceID:        "traceID4-=;:+&[]{}\"'",
+			HeaderAfter:    "traceID4-=;:+&[]{}\"'",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			// has to pre-check if current os has lambda function and trace ID environment variable
+			// if exists, need to restore them after each test case
+			initialLambdaFunc, hasInitialLambdaFunc := os.LookupEnv(lambdaFunc)
+			initialTraceID, hasInitialTraceID := os.LookupEnv(traceID)
+
+			setEnvVar(t, lambdaFunc, c.LambdaFuncName)
+			setEnvVar(t, traceID, c.TraceID)
+
+			req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+			if c.HeaderBefore != "" {
+				req.Header.Set(traceIDHeaderKey, c.HeaderBefore)
+			}
+			var updatedRequest *smithyhttp.Request
+			m := middleware.RecursionDetection{}
+			_, _, err := m.HandleBuild(context.Background(),
+				smithymiddleware.BuildInput{Request: req},
+				smithymiddleware.BuildHandlerFunc(func(ctx context.Context, input smithymiddleware.BuildInput) (
+					out smithymiddleware.BuildOutput, metadata smithymiddleware.Metadata, err error) {
+					updatedRequest = input.Request.(*smithyhttp.Request)
+					return out, metadata, nil
+				}),
+			)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.HeaderAfter, updatedRequest.Header.Get(traceIDHeaderKey); e != a {
+				t.Errorf("expect header value %v found, got %v", e, a)
+			}
+
+			recoverEnvVar(hasInitialLambdaFunc, lambdaFunc, initialLambdaFunc)
+			recoverEnvVar(hasInitialTraceID, traceID, initialTraceID)
+		})
+	}
+}
+
+// check if test case has environment variable and set to os if it has
+func setEnvVar(t *testing.T, key, value string) {
+	if value != "" {
+		err := os.Setenv(key, value)
+		if err != nil {
+			t.Fatalf("expect no error, got %v", err)
+		}
+	}
+}
+
+// check and recover initial lambda env variables or unset them
+func recoverEnvVar(hasEnvVar bool, key, value string) {
+	if hasEnvVar {
+		os.Setenv(key, value)
+	} else {
+		os.Unsetenv(key)
 	}
 }

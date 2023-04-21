@@ -95,6 +95,9 @@ func (c *Client) addOperationDeleteConnectInstanceConfigMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConnectInstanceConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

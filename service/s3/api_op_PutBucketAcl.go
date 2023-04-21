@@ -230,6 +230,9 @@ func (c *Client) addOperationPutBucketAclMiddlewares(stack *middleware.Stack, op
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addPutBucketAclInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}

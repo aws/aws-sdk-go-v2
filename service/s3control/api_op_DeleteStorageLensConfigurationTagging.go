@@ -115,6 +115,9 @@ func (c *Client) addOperationDeleteStorageLensConfigurationTaggingMiddlewares(st
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addDeleteStorageLensConfigurationTaggingUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

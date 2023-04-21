@@ -125,6 +125,9 @@ func (c *Client) addOperationGetAccessPointPolicyMiddlewares(stack *middleware.S
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addGetAccessPointPolicyUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

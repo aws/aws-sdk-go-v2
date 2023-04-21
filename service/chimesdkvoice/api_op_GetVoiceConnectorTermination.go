@@ -99,6 +99,9 @@ func (c *Client) addOperationGetVoiceConnectorTerminationMiddlewares(stack *midd
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVoiceConnectorTermination(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

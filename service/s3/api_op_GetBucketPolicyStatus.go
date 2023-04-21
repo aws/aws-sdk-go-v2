@@ -121,6 +121,9 @@ func (c *Client) addOperationGetBucketPolicyStatusMiddlewares(stack *middleware.
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addGetBucketPolicyStatusUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

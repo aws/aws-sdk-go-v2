@@ -125,6 +125,9 @@ func (c *Client) addOperationGetTransitGatewayRouteTablePropagationsMiddlewares(
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTransitGatewayRouteTablePropagations(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

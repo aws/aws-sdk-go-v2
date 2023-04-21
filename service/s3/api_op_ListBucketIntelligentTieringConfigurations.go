@@ -142,6 +142,9 @@ func (c *Client) addOperationListBucketIntelligentTieringConfigurationsMiddlewar
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addListBucketIntelligentTieringConfigurationsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

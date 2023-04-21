@@ -112,6 +112,9 @@ func (c *Client) addOperationDescribeNotificationConfigurationsMiddlewares(stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNotificationConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

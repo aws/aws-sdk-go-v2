@@ -5,7 +5,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.18.21
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.9
-	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.3
+	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.9
 	github.com/aws/aws-sdk-go-v2/service/athena v1.25.2
@@ -30,10 +30,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.10
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.16.10
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.1
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.4
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.93.2
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.9
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.25.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.26.8
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.8
@@ -44,37 +44,37 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/emr v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.10
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.17.8
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/glue v1.45.3
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.8
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.10
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/iot v1.35.4
+	github.com/aws/aws-sdk-go-v2/service/iot v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.10
-	github.com/aws/aws-sdk-go-v2/service/kms v1.20.10
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.32.0
+	github.com/aws/aws-sdk-go-v2/service/kms v1.20.11
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.8
-	github.com/aws/aws-sdk-go-v2/service/rds v1.43.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.9
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.6
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.31.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.3
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.3
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.8
 	github.com/aws/aws-sdk-go-v2/service/sms v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.18.7
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.2
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.8
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.10
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.29.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.9
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

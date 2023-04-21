@@ -118,6 +118,9 @@ func (c *Client) addOperationListAccessControlConfigurationsMiddlewares(stack *m
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccessControlConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

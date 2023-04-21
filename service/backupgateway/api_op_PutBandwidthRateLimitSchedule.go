@@ -112,6 +112,9 @@ func (c *Client) addOperationPutBandwidthRateLimitScheduleMiddlewares(stack *mid
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutBandwidthRateLimitSchedule(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

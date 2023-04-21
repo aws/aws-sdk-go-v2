@@ -111,6 +111,9 @@ func (c *Client) addOperationListMulticastGroupsByFuotaTaskMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMulticastGroupsByFuotaTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

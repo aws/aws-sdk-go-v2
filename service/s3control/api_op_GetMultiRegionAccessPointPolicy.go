@@ -129,6 +129,9 @@ func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *m
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addGetMultiRegionAccessPointPolicyUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

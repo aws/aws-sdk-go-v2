@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteInlinePolicyFromPermissionSetMiddlewares(stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInlinePolicyFromPermissionSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

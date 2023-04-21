@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateTransitGatewayVpcAttachmentMiddlewares(stack 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTransitGatewayVpcAttachment(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

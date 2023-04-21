@@ -119,6 +119,9 @@ func (c *Client) addOperationGetEffectivePermissionsForPathMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEffectivePermissionsForPath(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

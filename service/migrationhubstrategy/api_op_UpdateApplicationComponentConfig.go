@@ -118,6 +118,9 @@ func (c *Client) addOperationUpdateApplicationComponentConfigMiddlewares(stack *
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplicationComponentConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

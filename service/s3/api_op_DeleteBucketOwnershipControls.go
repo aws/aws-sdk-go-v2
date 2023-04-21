@@ -112,6 +112,9 @@ func (c *Client) addOperationDeleteBucketOwnershipControlsMiddlewares(stack *mid
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addDeleteBucketOwnershipControlsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

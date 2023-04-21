@@ -139,6 +139,9 @@ func (c *Client) addOperationGetSavingsPlansUtilizationMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSavingsPlansUtilization(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

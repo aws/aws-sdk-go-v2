@@ -93,6 +93,9 @@ func (c *Client) addOperationDeleteTextMessageSpendLimitOverrideMiddlewares(stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTextMessageSpendLimitOverride(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

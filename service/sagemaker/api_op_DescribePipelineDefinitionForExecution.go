@@ -102,6 +102,9 @@ func (c *Client) addOperationDescribePipelineDefinitionForExecutionMiddlewares(s
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePipelineDefinitionForExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

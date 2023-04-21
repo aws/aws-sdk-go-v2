@@ -186,6 +186,9 @@ func (c *Client) addOperationDescribeReservedCacheNodesMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedCacheNodes(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

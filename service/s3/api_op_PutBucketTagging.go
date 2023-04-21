@@ -164,6 +164,9 @@ func (c *Client) addOperationPutBucketTaggingMiddlewares(stack *middleware.Stack
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addPutBucketTaggingInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}

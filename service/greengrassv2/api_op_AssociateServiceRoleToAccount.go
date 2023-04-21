@@ -109,6 +109,9 @@ func (c *Client) addOperationAssociateServiceRoleToAccountMiddlewares(stack *mid
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateServiceRoleToAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

@@ -122,6 +122,9 @@ func (c *Client) addOperationGetObjectLockConfigurationMiddlewares(stack *middle
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addGetObjectLockConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

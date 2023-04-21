@@ -117,6 +117,9 @@ func (c *Client) addOperationCreateTransitGatewayPrefixListReferenceMiddlewares(
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTransitGatewayPrefixListReference(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

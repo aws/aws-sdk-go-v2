@@ -143,6 +143,9 @@ func (c *Client) addOperationStartDocumentTextDetectionMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDocumentTextDetection(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
