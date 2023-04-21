@@ -182,6 +182,7 @@ func (m *RecursionDetection) ID() string {
 	return "RecursionDetection"
 }
 
+// HandleBuild detects Lambda environment and adds its trace ID to request header if absent
 func (m *RecursionDetection) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
 ) (
