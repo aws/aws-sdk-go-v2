@@ -13,8 +13,8 @@ import (
 
 // Updates an inference experiment that you created. The status of the inference
 // experiment has to be either Created , Running . For more information on the
-// status of an inference experiment, see
-// DescribeInferenceExperimentResponse$Status .
+// status of an inference experiment, see DescribeInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html)
+// .
 func (c *Client) UpdateInferenceExperiment(ctx context.Context, params *UpdateInferenceExperimentInput, optFns ...func(*Options)) (*UpdateInferenceExperimentOutput, error) {
 	if params == nil {
 		params = &UpdateInferenceExperimentInput{}

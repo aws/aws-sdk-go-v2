@@ -1,3 +1,7 @@
+# v1.23.0 (2023-04-20)
+
+* **Feature**: Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API.
+
 # v1.22.8 (2023-04-10)
 
 * No change notes available for this release.

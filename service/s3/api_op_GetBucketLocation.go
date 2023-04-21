@@ -24,10 +24,8 @@ import (
 // information, see CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 // . To use this implementation of the operation, you must be the bucket owner. To
 // use this API against an access point, provide the alias of the access point in
-// place of the bucket name. For requests made using Amazon Web Services Signature
-// Version 4 (SigV4), we recommend that you use HeadBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadBucket.html)
-// to return the bucket Region instead of GetBucketLocation. The following
-// operations are related to GetBucketLocation :
+// place of the bucket name. The following operations are related to
+// GetBucketLocation :
 //   - GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //   - CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 func (c *Client) GetBucketLocation(ctx context.Context, params *GetBucketLocationInput, optFns ...func(*Options)) (*GetBucketLocationOutput, error) {

@@ -6700,6 +6700,15 @@ func awsRestjson1_deserializeDocumentS3RecordingSinkConfiguration(v **types.S3Re
 				sv.Destination = ptr.String(jtv)
 			}
 
+		case "RecordingFileFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingFileFormat to be of type string, got %T instead", value)
+				}
+				sv.RecordingFileFormat = types.RecordingFileFormat(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

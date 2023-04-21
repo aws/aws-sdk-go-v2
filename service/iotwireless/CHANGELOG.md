@@ -1,3 +1,7 @@
+# v1.27.0 (2023-04-17)
+
+* **Feature**: Supports the new feature of LoRaWAN roaming, allows to configure MaxEirp for LoRaWAN gateway, and allows to configure PingSlotPeriod for LoRaWAN multicast group
+
 # v1.26.2 (2023-04-10)
 
 * No change notes available for this release.

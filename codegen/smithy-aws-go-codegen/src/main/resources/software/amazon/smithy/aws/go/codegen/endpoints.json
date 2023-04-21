@@ -1835,15 +1835,21 @@
           "ap-northeast-2" : { },
           "ap-northeast-3" : { },
           "ap-south-1" : { },
+          "ap-south-2" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
+          "ap-southeast-4" : { },
           "ca-central-1" : { },
           "eu-central-1" : { },
+          "eu-central-2" : { },
           "eu-north-1" : { },
+          "eu-south-1" : { },
+          "eu-south-2" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
           "eu-west-3" : { },
+          "me-central-1" : { },
           "me-south-1" : { },
           "sa-east-1" : { },
           "us-east-1" : { },
@@ -7427,6 +7433,7 @@
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
+          "ap-southeast-4" : { },
           "ca-central-1" : { },
           "eu-central-1" : { },
           "eu-central-2" : { },
@@ -9026,6 +9033,12 @@
             },
             "deprecated" : true,
             "hostname" : "kms-fips.eu-west-3.amazonaws.com"
+          },
+          "il-central-1-fips" : {
+            "credentialScope" : {
+              "region" : "il-central-1"
+            },
+            "hostname" : "kms-fips.il-central-1.amazonaws.com"
           },
           "me-central-1" : {
             "variants" : [ {
@@ -14687,6 +14700,7 @@
             "deprecated" : true,
             "hostname" : "snowball-fips.us-west-2.amazonaws.com"
           },
+          "me-central-1" : { },
           "sa-east-1" : {
             "variants" : [ {
               "hostname" : "snowball-fips.sa-east-1.amazonaws.com",
@@ -18955,9 +18969,29 @@
         },
         "endpoints" : {
           "us-gov-east-1" : {
+            "hostname" : "application-autoscaling.us-gov-east-1.amazonaws.com",
+            "protocols" : [ "http", "https" ],
+            "variants" : [ {
+              "hostname" : "application-autoscaling.us-gov-east-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-gov-east-1-fips" : {
+            "deprecated" : true,
+            "hostname" : "application-autoscaling.us-gov-east-1.amazonaws.com",
             "protocols" : [ "http", "https" ]
           },
           "us-gov-west-1" : {
+            "hostname" : "application-autoscaling.us-gov-west-1.amazonaws.com",
+            "protocols" : [ "http", "https" ],
+            "variants" : [ {
+              "hostname" : "application-autoscaling.us-gov-west-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-gov-west-1-fips" : {
+            "deprecated" : true,
+            "hostname" : "application-autoscaling.us-gov-west-1.amazonaws.com",
             "protocols" : [ "http", "https" ]
           }
         }

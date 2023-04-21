@@ -14,10 +14,10 @@ import (
 
 // Creates a new Amazon Chime SDK meeting in the specified media Region, with
 // attendees. For more information about specifying media Regions, see Amazon
-// Chime SDK Media Regions (https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html)
-// in the Amazon Chime Developer Guide . For more information about the Amazon
-// Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html)
-// in the Amazon Chime Developer Guide .
+// Chime SDK Media Regions (https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html)
+// in the Amazon Chime SDK Developer Guide . For more information about the Amazon
+// Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
+// in the Amazon Chime SDK Developer Guide .
 func (c *Client) CreateMeetingWithAttendees(ctx context.Context, params *CreateMeetingWithAttendeesInput, optFns ...func(*Options)) (*CreateMeetingWithAttendeesOutput, error) {
 	if params == nil {
 		params = &CreateMeetingWithAttendeesInput{}
@@ -59,7 +59,7 @@ type CreateMeetingWithAttendeesInput struct {
 
 	// The resource target configurations for receiving Amazon Chime SDK meeting and
 	// attendee event notifications. The Amazon Chime SDK supports resource targets
-	// located in the US East (N. Virginia) AWS Region ( us-east-1 ).
+	// located in the US East (N. Virginia) AWS Region (us-east-1).
 	NotificationsConfiguration *types.MeetingNotificationConfiguration
 
 	// The tag key-value pairs.

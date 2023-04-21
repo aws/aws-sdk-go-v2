@@ -4,6 +4,7 @@ package appflow
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
@@ -57,6 +58,18 @@ type UpdateFlowInput struct {
 	//
 	// This member is required.
 	TriggerConfig *types.TriggerConfig
+
+	// The clientToken parameter is an idempotency token. It ensures that your
+	// UpdateFlow request completes only once. You choose the value to pass. For
+	// example, if you don't receive a response from your request, you can safely retry
+	// the request with the same clientToken parameter value. If you omit a clientToken
+	// value, the Amazon Web Services SDK that you are using inserts a value for you.
+	// This way, the SDK can safely retry requests multiple times after a network
+	// error. You must provide your own value for other use cases. If you specify input
+	// parameters that differ from your first request, an error occurs. If you use a
+	// different value for clientToken , Amazon AppFlow considers it a new call to
+	// UpdateFlow . The token is active for 8 hours.
+	ClientToken *string
 
 	// A description of the flow.
 	Description *string
@@ -125,6 +138,9 @@ func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateFlowMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateFlowValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,6 +160,39 @@ func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateFlow struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateFlow) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateFlowInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateFlowMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateFlow{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateFlow(region string) *awsmiddleware.RegisterServiceMetadata {

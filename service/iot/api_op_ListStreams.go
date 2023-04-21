@@ -214,7 +214,7 @@ func newServiceMetadataMiddleware_opListStreams(region string) *awsmiddleware.Re
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ListStreams",
 	}
 }

@@ -243,7 +243,7 @@ func newServiceMetadataMiddleware_opListMetricValues(region string) *awsmiddlewa
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ListMetricValues",
 	}
 }

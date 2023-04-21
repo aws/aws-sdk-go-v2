@@ -23,9 +23,9 @@ import (
 //   - To stop actions on instances in one of the fleet's remote locations,
 //     provide a fleet ID, a location name, and the type of actions to suspend.
 //
-// If successful, GameLift no longer initiates scaling events except in response
-// to manual changes using UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
-// . Learn more Setting up GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// If successful, Amazon GameLift no longer initiates scaling events except in
+// response to manual changes using UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
+// . Learn more Setting up Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {
 		params = &StopFleetActionsInput{}
@@ -64,8 +64,8 @@ type StopFleetActionsInput struct {
 type StopFleetActionsOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
-	// are unique across all Regions. Format is
+	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
+	// it. ARNs are unique across all Regions. Format is
 	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 

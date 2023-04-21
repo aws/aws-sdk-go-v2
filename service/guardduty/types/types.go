@@ -1284,6 +1284,42 @@ type KubernetesWorkloadDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the Lambda function involved in the finding.
+type LambdaDetails struct {
+
+	// Description of the Lambda function.
+	Description *string
+
+	// Amazon Resource Name (ARN) of the Lambda function.
+	FunctionArn *string
+
+	// Name of the Lambda function.
+	FunctionName *string
+
+	// The version of the Lambda function.
+	FunctionVersion *string
+
+	// The timestamp when the Lambda function was last modified. This field is in the
+	// UTC date string format (2023-03-22T19:37:20.168Z) .
+	LastModifiedAt *time.Time
+
+	// The revision ID of the Lambda function version.
+	RevisionId *string
+
+	// The execution role of the Lambda function.
+	Role *string
+
+	// A list of tags attached to this resource, listed in the format of key : value
+	// pair.
+	Tags []Tag
+
+	// Amazon Virtual Private Cloud configuration details associated with your Lambda
+	// function.
+	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
 // Information about the runtime process details.
 type LineageObject struct {
 
@@ -2133,6 +2169,9 @@ type Resource struct {
 	// Details about the Kubernetes user and workload involved in a Kubernetes finding.
 	KubernetesDetails *KubernetesDetails
 
+	// Contains information about the Lambda function that was involved in a finding.
+	LambdaDetails *LambdaDetails
+
 	// Contains information about the database instance to which an anomalous login
 	// attempt was made.
 	RdsDbInstanceDetails *RdsDbInstanceDetails
@@ -2832,6 +2871,22 @@ type VolumeMount struct {
 
 	// Volume mount name.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Virtual Private Cloud configuration details associated with your Lambda
+// function.
+type VpcConfig struct {
+
+	// The identifier of the security group attached to the Lambda function.
+	SecurityGroups []SecurityGroup
+
+	// The identifiers of the subnets that are associated with your Lambda function.
+	SubnetIds []string
+
+	// The identifier of the Amazon Virtual Private Cloud.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

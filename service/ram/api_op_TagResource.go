@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified tag keys and values to the specified resource share. The
-// tags are attached only to the resource share, not to the resources that are in
-// the resource share.
+// Adds the specified tag keys and values to a resource share or managed
+// permission. If you choose a resource share, the tags are attached to only the
+// resource share, not to the resources that are in the resource share. The tags on
+// a managed permission are the same for all versions of the managed permission.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -31,18 +32,22 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share that you want to add tags to.
-	//
-	// This member is required.
-	ResourceShareArn *string
-
 	// A list of one or more tag key and value pairs. The tag key must be present and
 	// not be an empty string. The tag value must be present but can be an empty
 	// string.
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the managed permission that you want to add tags to. You must specify either
+	// resourceArn , or resourceShareArn , but not both.
+	ResourceArn *string
+
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource share that you want to add tags to. You must specify either
+	// resourceShareArn , or resourceArn , but not both.
+	ResourceShareArn *string
 
 	noSmithyDocumentSerde
 }

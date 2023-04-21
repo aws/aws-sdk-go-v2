@@ -93,6 +93,13 @@ type ClassifyDocumentOutput struct {
 	// and a comedy, all at the same time.
 	Labels []types.DocumentLabel
 
+	// Warnings detected while processing the input document. The response includes a
+	// warning if there is a mismatch between the input document type and the model
+	// type associated with the endpoint that you specified. The response can also
+	// include warnings for individual pages that have a mismatch. The field is empty
+	// if the system generated no warnings.
+	Warnings []types.WarningsListItem
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

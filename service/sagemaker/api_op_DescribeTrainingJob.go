@@ -74,8 +74,9 @@ type DescribeTrainingJobOutput struct {
 
 	// Provides detailed information about the state of the training job. For detailed
 	// information on the secondary status of the training job, see StatusMessage
-	// under SecondaryStatusTransition . SageMaker provides primary statuses and
-	// secondary statuses that apply to each of them: InProgress
+	// under SecondaryStatusTransition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SecondaryStatusTransition.html)
+	// . SageMaker provides primary statuses and secondary statuses that apply to each
+	// of them: InProgress
 	//   - Starting - Starting the training job.
 	//   - Downloading - An optional stage for algorithms that support File training
 	//   input mode. It indicates that data is being downloaded to the ML storage
@@ -195,9 +196,9 @@ type DescribeTrainingJobOutput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//   - CreateProcessingJob
-	//   - CreateTrainingJob
-	//   - CreateTransformJob
+	//   - CreateProcessingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html)
+	//   - CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+	//   - CreateTransformJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html)
 	ExperimentConfig *types.ExperimentConfig
 
 	// If the training job failed, the reason it failed.
@@ -277,9 +278,10 @@ type DescribeTrainingJobOutput struct {
 	// the training job was launched by a hyperparameter tuning job.
 	TuningJobArn *string
 
-	// A VpcConfig object that specifies the VPC that this training job has access to.
-	// For more information, see Protect Training Jobs by Using an Amazon Virtual
-	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html) .
+	// A VpcConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html)
+	// object that specifies the VPC that this training job has access to. For more
+	// information, see Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// .
 	VpcConfig *types.VpcConfig
 
 	// The status of the warm pool associated with the training job.

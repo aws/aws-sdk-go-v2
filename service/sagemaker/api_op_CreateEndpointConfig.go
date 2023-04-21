@@ -14,25 +14,28 @@ import (
 // Creates an endpoint configuration that SageMaker hosting services uses to
 // deploy models. In the configuration, you identify one or more models, created
 // using the CreateModel API, to deploy and the resources that you want SageMaker
-// to provision. Then you call the CreateEndpoint API. Use this API if you want to
-// use SageMaker hosting services to deploy models into production. In the request,
-// you define a ProductionVariant , for each model that you want to deploy. Each
-// ProductionVariant parameter also describes the resources that you want SageMaker
-// to provision. This includes the number and type of ML compute instances to
-// deploy. If you are hosting multiple models, you also assign a VariantWeight to
-// specify how much traffic you want to allocate to each model. For example,
-// suppose that you want to host two models, A and B, and you assign traffic weight
-// 2 for model A and 1 for model B. SageMaker distributes two-thirds of the traffic
-// to Model A, and one-third to model B. When you call CreateEndpoint , a load call
-// is made to DynamoDB to verify that your endpoint configuration exists. When you
-// read data from a DynamoDB table supporting Eventually Consistent Reads (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html)
+// to provision. Then you call the CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
+// API. Use this API if you want to use SageMaker hosting services to deploy models
+// into production. In the request, you define a ProductionVariant , for each model
+// that you want to deploy. Each ProductionVariant parameter also describes the
+// resources that you want SageMaker to provision. This includes the number and
+// type of ML compute instances to deploy. If you are hosting multiple models, you
+// also assign a VariantWeight to specify how much traffic you want to allocate to
+// each model. For example, suppose that you want to host two models, A and B, and
+// you assign traffic weight 2 for model A and 1 for model B. SageMaker distributes
+// two-thirds of the traffic to Model A, and one-third to model B. When you call
+// CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
+// , a load call is made to DynamoDB to verify that your endpoint configuration
+// exists. When you read data from a DynamoDB table supporting Eventually
+// Consistent Reads (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html)
 // , the response might not reflect the results of a recently completed write
 // operation. The response might include some stale data. If the dependent entities
 // are not yet in DynamoDB, this causes a validation error. If you repeat your read
 // request after a short time, the response should return the latest data. So retry
 // logic is recommended to handle these possible issues. We also recommend that
-// customers call DescribeEndpointConfig before calling CreateEndpoint to minimize
-// the potential impact of a DynamoDB eventually consistent read.
+// customers call DescribeEndpointConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpointConfig.html)
+// before calling CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
+// to minimize the potential impact of a DynamoDB eventually consistent read.
 func (c *Client) CreateEndpointConfig(ctx context.Context, params *CreateEndpointConfigInput, optFns ...func(*Options)) (*CreateEndpointConfigOutput, error) {
 	if params == nil {
 		params = &CreateEndpointConfigInput{}
@@ -51,7 +54,8 @@ func (c *Client) CreateEndpointConfig(ctx context.Context, params *CreateEndpoin
 type CreateEndpointConfigInput struct {
 
 	// The name of the endpoint configuration. You specify this name in a
-	// CreateEndpoint request.
+	// CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
+	// request.
 	//
 	// This member is required.
 	EndpointConfigName *string

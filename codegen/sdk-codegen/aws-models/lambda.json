@@ -9930,6 +9930,12 @@
                     "traits": {
                         "smithy.api#enumValue": "nodejs18.x"
                     }
+                },
+                "python310": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "python3.10"
+                    }
                 }
             }
         },

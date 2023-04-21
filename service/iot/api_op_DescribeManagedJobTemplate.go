@@ -143,7 +143,7 @@ func newServiceMetadataMiddleware_opDescribeManagedJobTemplate(region string) *a
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "DescribeManagedJobTemplate",
 	}
 }

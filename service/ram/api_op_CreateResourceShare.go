@@ -53,7 +53,8 @@ type CreateResourceShareInput struct {
 	// to a later call to an operation requires that you also pass the same value for
 	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you.
+	// one for you. If you retry the operation with the same ClientToken , but with
+	// different parameters, the retry fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
 	// Specifies the Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -66,7 +67,7 @@ type CreateResourceShareInput struct {
 	// Specifies a list of one or more principals to associate with the resource
 	// share. You can include the following values:
 	//   - An Amazon Web Services account ID, for example: 123456789012
-	//   - An Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	//   - An Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	//   of an organization in Organizations, for example:
 	//   organizations::123456789012:organization/o-exampleorgid
 	//   - An ARN of an organizational unit (OU) in Organizations, for example:

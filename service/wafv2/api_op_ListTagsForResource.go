@@ -63,7 +63,8 @@ type ListTagsForResourceOutput struct {
 	// the marker from the prior call in your next request.
 	NextMarker *string
 
-	// The collection of tagging definitions for the resource.
+	// The collection of tagging definitions for the resource. If you specified a Limit
+	// in your request, this might not be the full list.
 	TagInfoForResource *types.TagInfoForResource
 
 	// Metadata pertaining to the operation's result.

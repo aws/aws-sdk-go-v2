@@ -1,3 +1,7 @@
+# v1.4.0 (2023-04-20)
+
+* **Feature**: This release adds support for specifying the recording file format in an S3 recording sink configuration.
+
 # v1.3.2 (2023-04-10)
 
 * No change notes available for this release.

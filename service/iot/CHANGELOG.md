@@ -1,3 +1,7 @@
+# v1.36.0 (2023-04-20)
+
+* **Feature**: Support additional OTA states in GetOTAUpdate API
+
 # v1.35.4 (2023-04-10)
 
 * No change notes available for this release.

@@ -82,8 +82,8 @@ type RotateSecretInput struct {
 	// function to rotate, if you don't immediately rotate the secret, Secrets Manager
 	// tests the rotation configuration by running the testSecret step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html)
 	// of the Lambda rotation function. The test creates an AWSPENDING version of the
-	// secret and then removes it. If you don't specify this value, then by default,
-	// Secrets Manager rotates the secret immediately.
+	// secret and then removes it. By default, Secrets Manager rotates the secret
+	// immediately.
 	RotateImmediately *bool
 
 	// For secrets that use a Lambda rotation function to rotate, the ARN of the

@@ -1706,6 +1706,7 @@ type EnvironmentFile struct {
 // in the Amazon ECS User Guide for Fargate. For tasks using the Fargate launch
 // type, the task requires the following platforms:
 //   - Linux platform version 1.4.0 or later.
+//   - Windows platform version 1.0.0 or later.
 type EphemeralStorage struct {
 
 	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum

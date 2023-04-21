@@ -29,6 +29,75 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.wafv2#APIKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.wafv2#APIKeySummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#APIKeySummary"
+            }
+        },
+        "com.amazonaws.wafv2#APIKeySummary": {
+            "type": "structure",
+            "members": {
+                "TokenDomains": {
+                    "target": "com.amazonaws.wafv2#TokenDomains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token domains that are defined in this API key. </p>"
+                    }
+                },
+                "APIKey": {
+                    "target": "com.amazonaws.wafv2#APIKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated, encrypted API key. You can copy this for use in your JavaScript CAPTCHA integration.  </p>\n         <p>For information about how to use this in your CAPTCHA JavaScript integration, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.wafv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the key was created. </p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.wafv2#APIKeyVersion",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Internal value used by WAF to manage the key. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information for a single API key. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#APIKeyTokenDomains": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#TokenDomain"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.wafv2#APIKeyVersion": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.wafv2#AWSManagedRulesATPRuleSet": {
             "type": "structure",
             "members": {
@@ -82,6 +151,9 @@
                     "target": "com.amazonaws.wafv2#CheckCapacity"
                 },
                 {
+                    "target": "com.amazonaws.wafv2#CreateAPIKey"
+                },
+                {
                     "target": "com.amazonaws.wafv2#CreateIPSet"
                 },
                 {
@@ -124,6 +196,9 @@
                     "target": "com.amazonaws.wafv2#GenerateMobileSdkReleaseUrl"
                 },
                 {
+                    "target": "com.amazonaws.wafv2#GetDecryptedAPIKey"
+                },
+                {
                     "target": "com.amazonaws.wafv2#GetIPSet"
                 },
                 {
@@ -155,6 +230,9 @@
                 },
                 {
                     "target": "com.amazonaws.wafv2#GetWebACLForResource"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#ListAPIKeys"
                 },
                 {
                     "target": "com.amazonaws.wafv2#ListAvailableManagedRuleGroups"
@@ -3655,6 +3733,68 @@
                 }
             }
         },
+        "com.amazonaws.wafv2#CreateAPIKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#CreateAPIKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#CreateAPIKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFLimitsExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an API key for use in the integration of the CAPTCHA API in your JavaScript client applications. \n           The integration lets you customize the placement and characteristics of the CAPTCHA puzzle for your end users. \n           For more information about the CAPTCHA JavaScript integration, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>\n         <p>The CAPTCHA API requires a key that authorizes CAPTCHA use from the client application domain. \n       You can use a single key for up to 5 domains. After you generate a key, you can copy it for use in your JavaScript \n           integration. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#CreateAPIKeyRequest": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.wafv2#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TokenDomains": {
+                    "target": "com.amazonaws.wafv2#APIKeyTokenDomains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client application domains that you want to use this API key for.  </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wafv2#CreateAPIKeyResponse": {
+            "type": "structure",
+            "members": {
+                "APIKey": {
+                    "target": "com.amazonaws.wafv2#APIKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated, encrypted API key. You can copy this for use in your JavaScript CAPTCHA integration.  </p>\n         <p>For information about how to use this in your CAPTCHA JavaScript integration, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wafv2#CreateIPSet": {
             "type": "operation",
             "input": {
@@ -5427,6 +5567,74 @@
                 "smithy.api#documentation": "<p>A rule statement that labels web requests by country and region and that matches against web requests based on country code. A geo match rule labels every request that it inspects regardless of whether it finds a match.</p>\n         <ul>\n            <li>\n               <p>To manage requests only by country, you can use this statement by itself and specify the countries that you want to match against in the <code>CountryCodes</code> array. </p>\n            </li>\n            <li>\n               <p>Otherwise, configure your geo match rule with Count action so that it only labels requests. Then, add one or more label match rules to run after the geo match rule and configure them to match against the geographic labels and handle the requests as needed. </p>\n            </li>\n         </ul>\n         <p>WAF labels requests using the alpha-2 country and region codes from the International Organization for Standardization (ISO) 3166 standard. WAF determines the codes using either the IP address in the web request origin or, if you specify it, the address in the geo match <code>ForwardedIPConfig</code>. </p>\n         <p>If you use the web request origin, the label formats are <code>awswaf:clientip:geo:region:<ISO country code>-<ISO region code></code> and <code>awswaf:clientip:geo:country:<ISO country code></code>.</p>\n         <p>If you use a forwarded IP address, the label formats are <code>awswaf:forwardedip:geo:region:<ISO country code>-<ISO region code></code> and <code>awswaf:forwardedip:geo:country:<ISO country code></code>.</p>\n         <p>For additional details, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-geo-match.html\">Geographic match rule statement</a> in the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>"
             }
         },
+        "com.amazonaws.wafv2#GetDecryptedAPIKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#GetDecryptedAPIKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#GetDecryptedAPIKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidResourceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns your API key in decrypted form. Use this to check the token domains that you have defined for the key. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#GetDecryptedAPIKeyRequest": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.wafv2#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "APIKey": {
+                    "target": "com.amazonaws.wafv2#APIKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encrypted API key. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wafv2#GetDecryptedAPIKeyResponse": {
+            "type": "structure",
+            "members": {
+                "TokenDomains": {
+                    "target": "com.amazonaws.wafv2#TokenDomains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token domains that are defined in this API key. </p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.wafv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the key was created. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wafv2#GetIPSet": {
             "type": "operation",
             "input": {
@@ -6793,6 +7001,85 @@
                 "target": "com.amazonaws.wafv2#Label"
             }
         },
+        "com.amazonaws.wafv2#ListAPIKeys": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#ListAPIKeysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#ListAPIKeysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidResourceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of the API keys that you've defined for the specified scope. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#ListAPIKeysRequest": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.wafv2#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.wafv2#NextMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available\n         for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> \n         value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.wafv2#PaginationLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want WAF to return for this request. If more \n          objects are available, in the response, WAF provides a \n         <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wafv2#ListAPIKeysResponse": {
+            "type": "structure",
+            "members": {
+                "NextMarker": {
+                    "target": "com.amazonaws.wafv2#NextMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available\n         for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> \n         value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+                    }
+                },
+                "APIKeySummaries": {
+                    "target": "com.amazonaws.wafv2#APIKeySummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of key summaries. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
+                    }
+                },
+                "ApplicationIntegrationURL": {
+                    "target": "com.amazonaws.wafv2#OutputUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CAPTCHA application integration URL, for use in your JavaScript implementation. </p>\n         <p>For information about how to use this in your CAPTCHA JavaScript integration, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wafv2#ListAvailableManagedRuleGroupVersions": {
             "type": "operation",
             "input": {
@@ -6872,7 +7159,7 @@
                 "Versions": {
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The versions that are currently available for the specified managed rule group. </p>"
+                        "smithy.api#documentation": "<p>The versions that are currently available for the specified managed rule group. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 },
                 "CurrentDefaultVersion": {
@@ -6948,7 +7235,7 @@
                 "ManagedRuleGroups": {
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Array of managed rule groups that you can use. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 }
             },
@@ -7018,7 +7305,7 @@
                 "IPSets": {
                     "target": "com.amazonaws.wafv2#IPSetSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of IPSets. This may not be the full list of IPSets that you have defined. See the\n            <code>Limit</code> specification for this request.</p>"
+                        "smithy.api#documentation": "<p>Array of IPSets. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 }
             },
@@ -7082,7 +7369,7 @@
                 "LoggingConfigurations": {
                     "target": "com.amazonaws.wafv2#LoggingConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Array of logging configurations. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 },
                 "NextMarker": {
@@ -7158,7 +7445,7 @@
                 "ManagedRuleSets": {
                     "target": "com.amazonaws.wafv2#ManagedRuleSetSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your managed rule sets. </p>"
+                        "smithy.api#documentation": "<p>Your managed rule sets. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 }
             },
@@ -7232,7 +7519,7 @@
                 "ReleaseSummaries": {
                     "target": "com.amazonaws.wafv2#ReleaseSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>High level information for the available SDK releases. </p>"
+                        "smithy.api#documentation": "<p>The high level information for the available SDK releases. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 },
                 "NextMarker": {
@@ -7308,7 +7595,7 @@
                 "RegexPatternSets": {
                     "target": "com.amazonaws.wafv2#RegexPatternSetSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Array of regex pattern sets. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 }
             },
@@ -7439,7 +7726,7 @@
                 "RuleGroups": {
                     "target": "com.amazonaws.wafv2#RuleGroupSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Array of rule groups. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 }
             },
@@ -7518,7 +7805,7 @@
                 "TagInfoForResource": {
                     "target": "com.amazonaws.wafv2#TagInfoForResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The collection of tagging definitions for the resource. </p>"
+                        "smithy.api#documentation": "<p>The collection of tagging definitions for the resource. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 }
             },
@@ -7588,7 +7875,7 @@
                 "WebACLs": {
                     "target": "com.amazonaws.wafv2#WebACLSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Array of web ACLs. If you specified a <code>Limit</code> in your request, this might not be the full list. </p>"
                     }
                 }
             },

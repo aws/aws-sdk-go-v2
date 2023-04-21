@@ -43,16 +43,6 @@ func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, 
 
 type CreateMonitorInput struct {
 
-	// The maximum number of city-networks to monitor for your resources. A
-	// city-network is the location (city) where clients access your application
-	// resources from and the network or ASN, such as an internet service provider
-	// (ISP), that clients access the resources through. This limit helps control
-	// billing costs. To learn more, see Choosing a city-network maximum value  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
-	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
-	//
-	// This member is required.
-	MaxCityNetworksToMonitor int32
-
 	// The name of the monitor.
 	//
 	// This member is required.
@@ -63,10 +53,17 @@ type CreateMonitorInput struct {
 	// API requests.
 	ClientToken *string
 
-	// Publish internet measurements for Internet Monitor to another location, such as
-	// an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch
-	// Logs.
+	// Publish internet measurements for Internet Monitor to an Amazon S3 bucket in
+	// addition to CloudWatch Logs.
 	InternetMeasurementsLogDelivery *types.InternetMeasurementsLogDelivery
+
+	// The maximum number of city-networks to monitor for your resources. A
+	// city-network is the location (city) where clients access your application
+	// resources from and the network or ASN, such as an internet service provider
+	// (ISP), that clients access the resources through. This limit helps control
+	// billing costs. To learn more, see Choosing a city-network maximum value  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+	MaxCityNetworksToMonitor int32
 
 	// The resources to include in a monitor, which you provide as a set of Amazon
 	// Resource Names (ARNs). You can add a combination of Amazon Virtual Private
@@ -78,6 +75,10 @@ type CreateMonitorInput struct {
 
 	// The tags for a monitor. You can add a maximum of 50 tags in Internet Monitor.
 	Tags map[string]string
+
+	// The percentage of the internet-facing traffic for your application that you
+	// want to monitor with this monitor.
+	TrafficPercentageToMonitor int32
 
 	noSmithyDocumentSerde
 }

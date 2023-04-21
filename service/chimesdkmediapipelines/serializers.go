@@ -2441,6 +2441,11 @@ func awsRestjson1_serializeDocumentS3RecordingSinkConfiguration(v *types.S3Recor
 		ok.String(*v.Destination)
 	}
 
+	if len(v.RecordingFileFormat) > 0 {
+		ok := object.Key("RecordingFileFormat")
+		ok.String(string(v.RecordingFileFormat))
+	}
+
 	return nil
 }
 

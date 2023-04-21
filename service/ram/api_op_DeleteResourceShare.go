@@ -12,7 +12,7 @@ import (
 
 // Deletes the specified resource share. This doesn't delete any of the resources
 // that were associated with the resource share; it only stops the sharing of those
-// resources outside of the Amazon Web Services account that created them.
+// resources through this resource share.
 func (c *Client) DeleteResourceShare(ctx context.Context, params *DeleteResourceShareInput, optFns ...func(*Options)) (*DeleteResourceShareOutput, error) {
 	if params == nil {
 		params = &DeleteResourceShareInput{}
@@ -30,7 +30,7 @@ func (c *Client) DeleteResourceShare(ctx context.Context, params *DeleteResource
 
 type DeleteResourceShareInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the resource share to delete.
 	//
 	// This member is required.
@@ -42,7 +42,8 @@ type DeleteResourceShareInput struct {
 	// to a later call to an operation requires that you also pass the same value for
 	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you.
+	// one for you. If you retry the operation with the same ClientToken , but with
+	// different parameters, the retry fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
 	noSmithyDocumentSerde

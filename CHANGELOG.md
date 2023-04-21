@@ -1,3 +1,65 @@
+# Release (2023-04-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.23.0](service/chime/CHANGELOG.md#v1230-2023-04-20)
+  * **Feature**: Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.4.0](service/chimesdkmediapipelines/CHANGELOG.md#v140-2023-04-20)
+  * **Feature**: This release adds support for specifying the recording file format in an S3 recording sink configuration.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.15.0](service/chimesdkmeetings/CHANGELOG.md#v1150-2023-04-20)
+  * **Feature**: Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.18.0](service/gamelift/CHANGELOG.md#v1180-2023-04-20)
+  * **Feature**: Amazon GameLift supports creating Builds for Windows 2016 operating system.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.21.0](service/guardduty/CHANGELOG.md#v1210-2023-04-20)
+  * **Feature**: This release adds support for the new Lambda Protection feature.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.36.0](service/iot/CHANGELOG.md#v1360-2023-04-20)
+  * **Feature**: Support additional OTA states in GetOTAUpdate API
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.74.0](service/sagemaker/CHANGELOG.md#v1740-2023-04-20)
+  * **Feature**: Amazon SageMaker Canvas adds ModelRegisterSettings support for CanvasAppSettings.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.19.0](service/snowball/CHANGELOG.md#v1190-2023-04-20)
+  * **Feature**: Adds support for Amazon S3 compatible storage. AWS Snow Family customers can now use Amazon S3 compatible storage on Snowball Edge devices. Also adds support for V3_5S. This is a refreshed AWS Snowball Edge Storage Optimized device type with 210TB SSD (customer usable).
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.30.0](service/wafv2/CHANGELOG.md#v1300-2023-04-20)
+  * **Feature**: You can now create encrypted API keys to use in a client application integration of the JavaScript CAPTCHA API . You can also retrieve a list of your API keys and the JavaScript application integration URL.
+
+# Release (2023-04-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.24.0](service/comprehend/CHANGELOG.md#v1240-2023-04-19)
+  * **Feature**: This release supports native document models for custom classification, in addition to plain-text models. You train native document models using documents (PDF, Word, images) in their native format.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.26.0](service/ecs/CHANGELOG.md#v1260-2023-04-19)
+  * **Feature**: This release supports the Account Setting "TagResourceAuthorization" that allows for enhanced Tagging security controls.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.18.0](service/ram/CHANGELOG.md#v1180-2023-04-19)
+  * **Feature**: This release adds support for customer managed permissions. Customer managed permissions enable customers to author and manage tailored permissions for resources shared using RAM.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.43.1](service/rds/CHANGELOG.md#v1431-2023-04-19)
+  * **Documentation**: Adds support for the ImageId parameter of CreateCustomDBEngineVersion to RDS Custom for Oracle
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.32.0](service/s3/CHANGELOG.md#v1320-2023-04-19)
+  * **Feature**: Provides support for "Snow" Storage class.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.19.4](service/secretsmanager/CHANGELOG.md#v1194-2023-04-19)
+  * **Documentation**: Documentation updates for Secrets Manager
+
+# Release (2023-04-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.26.0](service/appflow/CHANGELOG.md#v1260-2023-04-17)
+  * **Feature**: This release adds a Client Token parameter to the following AppFlow APIs: Create/Update Connector Profile, Create/Update Flow, Start Flow, Register Connector, Update Connector Registration. The Client Token parameter allows idempotent operations for these APIs.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.13.0](service/drs/CHANGELOG.md#v1130-2023-04-17)
+  * **Feature**: Changed existing APIs and added new APIs to support using an account-level launch configuration template with AWS Elastic Disaster Recovery.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.19.5](service/dynamodb/CHANGELOG.md#v1195-2023-04-17)
+  * **Documentation**: Documentation updates for DynamoDB API
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.7.0](service/emrserverless/CHANGELOG.md#v170-2023-04-17)
+  * **Feature**: The GetJobRun API has been updated to include the job's billed resource utilization. This utilization shows the aggregate vCPU, memory and storage that AWS has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.2.0](service/internetmonitor/CHANGELOG.md#v120-2023-04-17)
+  * **Feature**: This release includes a new configurable value, TrafficPercentageToMonitor, which allows users to adjust the amount of traffic monitored by percentage
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.27.0](service/iotwireless/CHANGELOG.md#v1270-2023-04-17)
+  * **Feature**: Supports the new feature of LoRaWAN roaming, allows to configure MaxEirp for LoRaWAN gateway, and allows to configure PingSlotPeriod for LoRaWAN multicast group
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.33.0](service/lambda/CHANGELOG.md#v1330-2023-04-17)
+  * **Feature**: Add Python 3.10 (python3.10) support to AWS Lambda
+
 # Release (2023-04-14)
 
 ## Module Highlights

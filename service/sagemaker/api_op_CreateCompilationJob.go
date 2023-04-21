@@ -27,10 +27,12 @@ import (
 //
 // You can also provide a Tag to track the model compilation job's resource use
 // and costs. The response body contains the CompilationJobArn for the compiled
-// job. To stop a model compilation job, use StopCompilationJob . To get
-// information about a particular model compilation job, use DescribeCompilationJob
+// job. To stop a model compilation job, use StopCompilationJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StopCompilationJob.html)
+// . To get information about a particular model compilation job, use
+// DescribeCompilationJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeCompilationJob.html)
 // . To get information about multiple model compilation jobs, use
-// ListCompilationJobs .
+// ListCompilationJobs (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListCompilationJobs.html)
+// .
 func (c *Client) CreateCompilationJob(ctx context.Context, params *CreateCompilationJobInput, optFns ...func(*Options)) (*CreateCompilationJobOutput, error) {
 	if params == nil {
 		params = &CreateCompilationJobInput{}
@@ -98,10 +100,11 @@ type CreateCompilationJobInput struct {
 	// .
 	Tags []types.Tag
 
-	// A VpcConfig object that specifies the VPC that you want your compilation job to
-	// connect to. Control access to your models by configuring the VPC. For more
-	// information, see Protect Compilation Jobs by Using an Amazon Virtual Private
-	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html) .
+	// A VpcConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html)
+	// object that specifies the VPC that you want your compilation job to connect to.
+	// Control access to your models by configuring the VPC. For more information, see
+	// Protect Compilation Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html)
+	// .
 	VpcConfig *types.NeoVpcConfig
 
 	noSmithyDocumentSerde

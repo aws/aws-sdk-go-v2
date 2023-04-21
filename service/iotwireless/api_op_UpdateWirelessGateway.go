@@ -39,6 +39,9 @@ type UpdateWirelessGatewayInput struct {
 	// A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
 	JoinEuiFilters [][]string
 
+	// The MaxEIRP value.
+	MaxEirp *float32
+
 	// The new name of the resource.
 	Name *string
 

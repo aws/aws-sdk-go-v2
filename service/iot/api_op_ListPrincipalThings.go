@@ -225,7 +225,7 @@ func newServiceMetadataMiddleware_opListPrincipalThings(region string) *awsmiddl
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ListPrincipalThings",
 	}
 }

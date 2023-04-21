@@ -28,13 +28,8 @@ import (
 // S3 is copying the files. If the error occurs before the copy action starts, you
 // receive a standard Amazon S3 error. If the error occurs during the copy
 // operation, the error response is embedded in the 200 OK response. This means
-// that a 200 OK response can contain either a success or an error. If you call
-// the S3 API directly, make sure to design your application to parse the contents
-// of the response and handle it appropriately. If you use Amazon Web Services
-// SDKs, SDKs handle this condition. The SDKs detect the embedded error and apply
-// error handling per your configuration settings (including automatically retrying
-// the request as appropriate). If the condition persists, the SDKs throws an
-// exception (or, for the SDKs that don't use exceptions, they return the error).
+// that a 200 OK response can contain either a success or an error. Design your
+// application to parse the contents of the response and handle it appropriately.
 // If the copy is successful, you receive a response with information about the
 // copied object. If the request is an HTTP 1.1 request, the response is chunk
 // encoded. If it were not, it would not contain the content-length, and you would
@@ -56,11 +51,9 @@ import (
 // Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html)
 // in the Amazon S3 User Guide. For a complete list of Amazon S3-specific condition
 // keys, see Actions, Resources, and Condition Keys for Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html)
-// . x-amz-website-redirect-location is unique to each object and must be
-// specified in the request headers to copy the value. x-amz-copy-source-if Headers
-// To only copy an object under certain conditions, such as whether the Etag
-// matches or whether the object was modified before or after a specified date, use
-// the following request parameters:
+// . x-amz-copy-source-if Headers To only copy an object under certain conditions,
+// such as whether the Etag matches or whether the object was modified before or
+// after a specified date, use the following request parameters:
 //   - x-amz-copy-source-if-match
 //   - x-amz-copy-source-if-none-match
 //   - x-amz-copy-source-if-unmodified-since
@@ -80,28 +73,13 @@ import (
 //   - x-amz-copy-source-if-modified-since condition evaluates to true
 //
 // All headers with the x-amz- prefix, including x-amz-copy-source , must be
-// signed. Server-side encryption Amazon S3 automatically encrypts all new objects
-// that are copied to an S3 bucket. When copying an object, if you don't specify
-// encryption information in your copy request, the encryption setting of the
-// target object is set to the default encryption configuration of the destination
-// bucket. By default, all buckets have a base level of encryption configuration
-// that uses server-side encryption with Amazon S3 managed keys (SSE-S3). If the
-// destination bucket has a default encryption configuration that uses server-side
-// encryption with an Key Management Service (KMS) key (SSE-KMS), or a
-// customer-provided encryption key (SSE-C), Amazon S3 uses the corresponding KMS
-// key, or a customer-provided key to encrypt the target object copy. When you
-// perform a CopyObject operation, if you want to use a different type of
-// encryption setting for the target object, you can use other appropriate
-// encryption-related headers to encrypt the target object with a KMS key, an
-// Amazon S3 managed key, or a customer-provided key. With server-side encryption,
-// Amazon S3 encrypts your data as it writes it to disks in its data centers and
-// decrypts the data when you access it. If the encryption setting in your request
-// is different from the default encryption configuration of the destination
-// bucket, the encryption setting in your request takes precedence. If the source
-// object for the copy is stored in Amazon S3 using SSE-C, you must provide the
-// necessary encryption information in your request so that Amazon S3 can decrypt
-// the object for copying. For more information about server-side encryption, see
-// Using Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)
+// signed. Server-side encryption When you perform a CopyObject operation, you can
+// optionally use the appropriate encryption-related headers to encrypt the object
+// using server-side encryption with Amazon Web Services managed encryption keys
+// (SSE-S3 or SSE-KMS) or a customer-provided encryption key. With server-side
+// encryption, Amazon S3 encrypts your data as it writes it to disks in its data
+// centers and decrypts the data when you access it. For more information about
+// server-side encryption, see Using Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)
 // . If a target object uses SSE-KMS, you can enable an S3 Bucket Key for the
 // object. For more information, see Amazon S3 Bucket Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html)
 // in the Amazon S3 User Guide. Access Control List (ACL)-Specific Request Headers
@@ -170,13 +148,13 @@ type CopyObjectInput struct {
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
 	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon S3 User Guide. When you use this action with Amazon S3 on
-	// Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on
-	// Outposts hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When you
-	// use this action with S3 on Outposts through the Amazon Web Services SDKs, you
-	// provide the Outposts access point ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see What is S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
+	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
+	// hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
+	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
@@ -361,7 +339,7 @@ type CopyObjectInput struct {
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3
-	// (for example, AES256, aws:kms ).
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// By default, Amazon S3 uses the STANDARD Storage Class to store newly created
@@ -383,9 +361,7 @@ type CopyObjectInput struct {
 
 	// If the bucket is configured as a website, redirects requests for this object to
 	// another object in the same bucket or to an external URL. Amazon S3 stores the
-	// value of this header in the object metadata. This value is unique to each object
-	// and is not copied when using the x-amz-metadata-directive header. Instead, you
-	// may opt to provide this header in combination with the directive.
+	// value of this header in the object metadata.
 	WebsiteRedirectLocation *string
 
 	noSmithyDocumentSerde
@@ -426,12 +402,12 @@ type CopyObjectOutput struct {
 	SSEKMSEncryptionContext *string
 
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
-	// (Amazon Web Services KMS) symmetric encryption customer managed key that was
-	// used for the object.
+	// (Amazon Web Services KMS) symmetric customer managed key that was used for the
+	// object.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3
-	// (for example, AES256, aws:kms ).
+	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Version ID of the newly created copy.

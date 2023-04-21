@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the GameLift FleetIQ solution and game server
-// groups. Retrieves information on all game servers that are currently active in a
-// specified game server group. You can opt to sort the list by game server age.
-// Use the pagination parameters to retrieve results in a set of sequential
-// segments. Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// This operation is used with the Amazon GameLift FleetIQ solution and game
+// server groups. Retrieves information on all game servers that are currently
+// active in a specified game server group. You can opt to sort the list by game
+// server age. Use the pagination parameters to retrieve results in a set of
+// sequential segments. Learn more Amazon GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInput, optFns ...func(*Options)) (*ListGameServersOutput, error) {
 	if params == nil {
 		params = &ListGameServersInput{}

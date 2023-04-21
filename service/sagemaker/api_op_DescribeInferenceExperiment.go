@@ -75,8 +75,8 @@ type DescribeInferenceExperimentOutput struct {
 	//   - Stopping - Amazon SageMaker is stopping your experiment.
 	//   - Completed - Your experiment has completed.
 	//   - Cancelled - When you conclude your experiment early using the
-	//   StopInferenceExperiment API, or if any operation fails with an unexpected
-	//   error, it shows as cancelled.
+	//   StopInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StopInferenceExperiment.html)
+	//   API, or if any operation fails with an unexpected error, it shows as cancelled.
 	//
 	// This member is required.
 	Status types.InferenceExperimentStatus
@@ -102,7 +102,8 @@ type DescribeInferenceExperimentOutput struct {
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
 	// ML compute instance that hosts the endpoint. For more information, see
-	// CreateInferenceExperimentRequest$KmsKey .
+	// CreateInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html)
+	// .
 	KmsKey *string
 
 	// The timestamp at which you last modified the inference experiment.
@@ -123,7 +124,7 @@ type DescribeInferenceExperimentOutput struct {
 	// SageMaker replicates.
 	ShadowModeConfig *types.ShadowModeConfig
 
-	// The error message or client-specified Reason from the StopInferenceExperiment
+	// The error message or client-specified Reason from the StopInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StopInferenceExperiment.html)
 	// API, that explains the status of the inference experiment.
 	StatusReason *string
 

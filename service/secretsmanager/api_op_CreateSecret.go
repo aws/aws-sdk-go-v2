@@ -106,7 +106,7 @@ type CreateSecretInput struct {
 	Description *string
 
 	// Specifies whether to overwrite a secret with the same name in the destination
-	// Region.
+	// Region. By default, secrets aren't overwritten.
 	ForceOverwriteReplicaSecret bool
 
 	// The ARN, key ID, or alias of the KMS key that Secrets Manager uses to encrypt

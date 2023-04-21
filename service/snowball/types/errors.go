@@ -64,8 +64,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your IAM user lacks the necessary Amazon EC2 permissions to perform the
-// attempted action.
+// Your user lacks the necessary Amazon EC2 permissions to perform the attempted
+// action.
 type Ec2RequestFailedException struct {
 	Message *string
 

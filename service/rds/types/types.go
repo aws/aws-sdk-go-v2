@@ -1379,11 +1379,9 @@ type DBInstance struct {
 
 	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
 	// accounts to database accounts is enabled, and otherwise false. IAM database
-	// authentication can be enabled for the following database engines
-	//   - For MySQL 5.6, minor version 5.6.34 or higher
-	//   - For MySQL 5.7, minor version 5.7.16 or higher
-	//   - Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see
-	//   DBCluster Type.
+	// authentication can be enabled for the following database engines:
+	//   - For MySQL 5.7, minor version 5.7.16 or higher.
+	//   - For Amazon Aurora, all versions of Aurora MySQL and Aurora PostgreSQL.
 	IAMDatabaseAuthenticationEnabled bool
 
 	// Provides the date and time the DB instance was created.

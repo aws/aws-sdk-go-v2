@@ -21,10 +21,10 @@ import (
 // more information about Region availability, see Amazon Web Services Regional
 // Services (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4)
 // . Snow Family devices and their capacities.
-//   - Snow Family device type: SNC1_SSD
+//   - Device type: SNC1_SSD
 //   - Capacity: T14
 //   - Description: Snowcone
-//   - Snow Family device type: SNC1_HDD
+//   - Device type: SNC1_HDD
 //   - Capacity: T8
 //   - Description: Snowcone
 //   - Device type: EDGE_S
@@ -47,6 +47,12 @@ import (
 //   - Capacity: T80
 //   - Description: Original Snowball device This device is only available in the
 //     Ningxia, Beijing, and Singapore Amazon Web Services Region.
+//   - Device type: V3_5C
+//   - Capacity: T32
+//   - Description: Snowball Edge Compute Optimized without GPU
+//   - Device type: V3_5S
+//   - Capacity: T240
+//   - Description: Snowball Edge Storage Optimized 210TB
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}

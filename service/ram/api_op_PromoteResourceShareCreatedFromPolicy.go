@@ -10,13 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// When you attach a resource-based permission policy to a resource, it
-// automatically creates a resource share. However, resource shares created this
-// way are visible only to the resource share owner, and the resource share can't
-// be modified in RAM. You can use this operation to promote the resource share to
-// a full RAM resource share. When you promote a resource share, you can then
-// manage the resource share in RAM and it becomes visible to all of the principals
-// you shared it with.
+// When you attach a resource-based policy to a resource, RAM automatically
+// creates a resource share of featureSet = CREATED_FROM_POLICY with a managed
+// permission that has the same IAM permissions as the original resource-based
+// policy. However, this type of managed permission is visible to only the resource
+// share owner, and the associated resource share can't be modified by using RAM.
+// This operation promotes the resource share to a STANDARD resource share that is
+// fully manageable in RAM. When you promote a resource share, you can then manage
+// the resource share in RAM and it becomes visible to all of the principals you
+// shared it with. Before you perform this operation, you should first run
+// PromotePermissionCreatedFromPolicy to ensure that you have an appropriate
+// customer managed permission that can be associated with this resource share
+// after its is promoted. If this operation can't find a managed permission that
+// exactly matches the existing CREATED_FROM_POLICY permission, then this
+// operation fails.
 func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, params *PromoteResourceShareCreatedFromPolicyInput, optFns ...func(*Options)) (*PromoteResourceShareCreatedFromPolicyOutput, error) {
 	if params == nil {
 		params = &PromoteResourceShareCreatedFromPolicyInput{}
@@ -34,7 +41,7 @@ func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, para
 
 type PromoteResourceShareCreatedFromPolicyInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the resource share to promote.
 	//
 	// This member is required.

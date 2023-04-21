@@ -2,6 +2,107 @@
 
 package types
 
+type PermissionFeatureSet string
+
+// Enum values for PermissionFeatureSet
+const (
+	PermissionFeatureSetCreatedFromPolicy   PermissionFeatureSet = "CREATED_FROM_POLICY"
+	PermissionFeatureSetPromotingToStandard PermissionFeatureSet = "PROMOTING_TO_STANDARD"
+	PermissionFeatureSetStandard            PermissionFeatureSet = "STANDARD"
+)
+
+// Values returns all known values for PermissionFeatureSet. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionFeatureSet) Values() []PermissionFeatureSet {
+	return []PermissionFeatureSet{
+		"CREATED_FROM_POLICY",
+		"PROMOTING_TO_STANDARD",
+		"STANDARD",
+	}
+}
+
+type PermissionStatus string
+
+// Enum values for PermissionStatus
+const (
+	PermissionStatusAttachable   PermissionStatus = "ATTACHABLE"
+	PermissionStatusUnattachable PermissionStatus = "UNATTACHABLE"
+	PermissionStatusDeleting     PermissionStatus = "DELETING"
+	PermissionStatusDeleted      PermissionStatus = "DELETED"
+)
+
+// Values returns all known values for PermissionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionStatus) Values() []PermissionStatus {
+	return []PermissionStatus{
+		"ATTACHABLE",
+		"UNATTACHABLE",
+		"DELETING",
+		"DELETED",
+	}
+}
+
+type PermissionType string
+
+// Enum values for PermissionType
+const (
+	PermissionTypeCustomerManaged PermissionType = "CUSTOMER_MANAGED"
+	PermissionTypeAwsManaged      PermissionType = "AWS_MANAGED"
+)
+
+// Values returns all known values for PermissionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionType) Values() []PermissionType {
+	return []PermissionType{
+		"CUSTOMER_MANAGED",
+		"AWS_MANAGED",
+	}
+}
+
+type PermissionTypeFilter string
+
+// Enum values for PermissionTypeFilter
+const (
+	PermissionTypeFilterAll             PermissionTypeFilter = "ALL"
+	PermissionTypeFilterAwsManaged      PermissionTypeFilter = "AWS_MANAGED"
+	PermissionTypeFilterCustomerManaged PermissionTypeFilter = "CUSTOMER_MANAGED"
+)
+
+// Values returns all known values for PermissionTypeFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionTypeFilter) Values() []PermissionTypeFilter {
+	return []PermissionTypeFilter{
+		"ALL",
+		"AWS_MANAGED",
+		"CUSTOMER_MANAGED",
+	}
+}
+
+type ReplacePermissionAssociationsWorkStatus string
+
+// Enum values for ReplacePermissionAssociationsWorkStatus
+const (
+	ReplacePermissionAssociationsWorkStatusInProgress ReplacePermissionAssociationsWorkStatus = "IN_PROGRESS"
+	ReplacePermissionAssociationsWorkStatusCompleted  ReplacePermissionAssociationsWorkStatus = "COMPLETED"
+	ReplacePermissionAssociationsWorkStatusFailed     ReplacePermissionAssociationsWorkStatus = "FAILED"
+)
+
+// Values returns all known values for ReplacePermissionAssociationsWorkStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReplacePermissionAssociationsWorkStatus) Values() []ReplacePermissionAssociationsWorkStatus {
+	return []ReplacePermissionAssociationsWorkStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type ResourceOwner string
 
 // Enum values for ResourceOwner

@@ -31,7 +31,7 @@ func (c *Client) AssociateResourceSharePermission(ctx context.Context, params *A
 
 type AssociateResourceSharePermissionInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the RAM permission to associate with the resource share. To find the ARN for
 	// a permission, use either the ListPermissions operation or go to the Permissions
 	// library (https://console.aws.amazon.com/ram/home#Permissions:) page in the RAM
@@ -41,7 +41,7 @@ type AssociateResourceSharePermissionInput struct {
 	// This member is required.
 	PermissionArn *string
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the resource share to which you want to add or replace permissions.
 	//
 	// This member is required.
@@ -53,22 +53,27 @@ type AssociateResourceSharePermissionInput struct {
 	// to a later call to an operation requires that you also pass the same value for
 	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you.
+	// one for you. If you retry the operation with the same ClientToken , but with
+	// different parameters, the retry fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
 	// Specifies the version of the RAM permission to associate with the resource
-	// share. If you don't specify this parameter, the operation uses the version
-	// designated as the default. You can use the ListPermissionVersions operation to
-	// discover the available versions of a permission.
+	// share. You can specify only the version that is currently set as the default
+	// version for the permission. If you also set the replace pararameter to true ,
+	// then this operation updates an outdated version of the permission to the current
+	// default version. You don't need to specify this parameter because the default
+	// behavior is to use the version that is currently set as the default version for
+	// the permission. This parameter is supported for backwards compatibility.
 	PermissionVersion *int32
 
-	// Specifies whether the specified permission should replace or add to the
-	// existing permission associated with the resource share. Use true to replace the
-	// current permissions. Use false to add the permission to the current permission.
-	// The default value is false . A resource share can have only one permission per
-	// resource type. If a resource share already has a permission for the specified
-	// resource type and you don't set replace to true then the operation returns an
-	// error. This helps prevent accidental overwriting of a permission.
+	// Specifies whether the specified permission should replace the existing
+	// permission associated with the resource share. Use true to replace the current
+	// permissions. Use false to add the permission to a resource share that currently
+	// doesn't have a permission. The default value is false . A resource share can
+	// have only one permission per resource type. If a resource share already has a
+	// permission for the specified resource type and you don't set replace to true
+	// then the operation returns an error. This helps prevent accidental overwriting
+	// of a permission.
 	Replace *bool
 
 	noSmithyDocumentSerde

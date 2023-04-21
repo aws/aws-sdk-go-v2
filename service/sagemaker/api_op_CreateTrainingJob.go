@@ -169,9 +169,9 @@ type CreateTrainingJobInput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//   - CreateProcessingJob
-	//   - CreateTrainingJob
-	//   - CreateTransformJob
+	//   - CreateProcessingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html)
+	//   - CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+	//   - CreateTransformJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html)
 	ExperimentConfig *types.ExperimentConfig
 
 	// Algorithm-specific parameters that influence the quality of the model. You set
@@ -222,11 +222,11 @@ type CreateTrainingJobInput struct {
 	// TensorBoard output data.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig
 
-	// A VpcConfig object that specifies the VPC that you want your training job to
-	// connect to. Control access to and from your training container by configuring
-	// the VPC. For more information, see Protect Training Jobs by Using an Amazon
-	// Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
-	// .
+	// A VpcConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html)
+	// object that specifies the VPC that you want your training job to connect to.
+	// Control access to and from your training container by configuring the VPC. For
+	// more information, see Protect Training Jobs by Using an Amazon Virtual Private
+	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html) .
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

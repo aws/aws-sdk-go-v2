@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a URL to access the job run dashboard.
+// Returns a URL to access the job run dashboard. The generated URL is valid for
+// one hour, after which you must invoke the API again to generate a new URL.
 func (c *Client) GetDashboardForJobRun(ctx context.Context, params *GetDashboardForJobRunInput, optFns ...func(*Options)) (*GetDashboardForJobRunOutput, error) {
 	if params == nil {
 		params = &GetDashboardForJobRunInput{}

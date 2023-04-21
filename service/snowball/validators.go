@@ -592,18 +592,13 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if len(v.JobType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("JobType"))
 	}
-	if v.Resources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
-	} else if v.Resources != nil {
+	if v.Resources != nil {
 		if err := validateJobResource(v.Resources); err != nil {
 			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AddressId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AddressId"))
-	}
-	if v.RoleARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
 	}
 	if len(v.SnowballType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SnowballType"))

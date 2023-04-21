@@ -142,7 +142,7 @@ func newServiceMetadataMiddleware_opTestAuthorization(region string) *awsmiddlew
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "TestAuthorization",
 	}
 }

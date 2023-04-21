@@ -25,7 +25,7 @@ import (
 // identifier is not found. Some API operations limit the number of fleet IDs that
 // allowed in one request. If a request exceeds this limit, the request fails and
 // the error message contains the maximum allowed number. Learn more Setting up
-// GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DescribeFleetAttributes(ctx context.Context, params *DescribeFleetAttributesInput, optFns ...func(*Options)) (*DescribeFleetAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetAttributesInput{}

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the GameLift FleetIQ solution and game server
-// groups. Terminates a game server group and permanently deletes the game server
-// group record. You have several options for how these resources are impacted when
-// deleting the game server group. Depending on the type of delete operation
-// selected, this operation might affect these resources:
+// This operation is used with the Amazon GameLift FleetIQ solution and game
+// server groups. Terminates a game server group and permanently deletes the game
+// server group record. You have several options for how these resources are
+// impacted when deleting the game server group. Depending on the type of delete
+// operation selected, this operation might affect these resources:
 //   - The game server group
 //   - The corresponding Auto Scaling group
 //   - All game servers that are currently running in the group
@@ -26,10 +26,10 @@ import (
 // successful, a series of operations are kicked off. The game server group status
 // is changed to DELETE_SCHEDULED , which prevents new game servers from being
 // registered and stops automatic scaling activity. Once all game servers in the
-// game server group are deregistered, GameLift FleetIQ can begin deleting
+// game server group are deregistered, Amazon GameLift FleetIQ can begin deleting
 // resources. If any of the delete operations fail, the game server group is placed
-// in ERROR status. GameLift FleetIQ emits delete events to Amazon CloudWatch.
-// Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// in ERROR status. Amazon GameLift FleetIQ emits delete events to Amazon
+// CloudWatch. Learn more Amazon GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameServerGroupInput, optFns ...func(*Options)) (*DeleteGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGameServerGroupInput{}

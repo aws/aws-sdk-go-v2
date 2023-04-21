@@ -16,8 +16,8 @@ type AmazonTranscribeCallAnalyticsProcessorConfiguration struct {
 	// This member is required.
 	LanguageCode CallAnalyticsLanguageCode
 
-	// By default, all CategoryEvents will be sent to the insights target. If this
-	// parameter is specified, only included categories will be sent to the insights
+	// By default, all CategoryEvents are sent to the insights target. If this
+	// parameter is specified, only included categories are sent to the insights
 	// target.
 	CallAnalyticsStreamCategories []string
 
@@ -170,8 +170,8 @@ type AmazonTranscribeProcessorConfiguration struct {
 	// ContentIdentificationType or ContentRedactionType , but you can't include both.
 	// Values must be comma-separated and can include: ADDRESS , BANK_ACCOUNT_NUMBER ,
 	// BANK_ROUTING , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY , CREDIT_DEBIT_NUMBER ,
-	// EMAIL , NAME , PHONE , PIN , SSN , or ALL . Length Constraints: Minimum length
-	// of 1. Maximum length of 300.
+	// EMAIL , NAME , PHONE , PIN , SSN , or ALL . If you leave this parameter empty,
+	// the default behavior is equivalent to ALL .
 	PiiEntityTypes *string
 
 	// Enables speaker partitioning (diarization) in your transcription output.
@@ -521,8 +521,7 @@ type KeywordMatchConfiguration struct {
 // sink.
 type KinesisDataStreamSinkConfiguration struct {
 
-	// The URL of the sink, https://aws.amazon.com/kinesis/data-streams/ (https://aws.amazon.com/kinesis/data-streams/)
-	// .
+	// The ARN of the sink.
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
@@ -578,8 +577,7 @@ type KinesisVideoStreamSourceRuntimeConfiguration struct {
 // function's data sink.
 type LambdaFunctionSinkConfiguration struct {
 
-	// The URL of the sink, https://aws.amazon.com/kinesis/data-streams/ (https://aws.amazon.com/kinesis/data-streams/)
-	// .
+	// The ARN of the sink.
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
@@ -924,7 +922,13 @@ type MeetingEventsConcatenationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The settings for a post-call voice analytics task.
+// Allows you to specify additional settings for your Call Analytics post-call
+// request, including output locations for your redacted transcript, which IAM role
+// to use, and which encryption key to use. DataAccessRoleArn and OutputLocation
+// are required fields. PostCallAnalyticsSettings provides the same insights as a
+// Call Analytics post-call transcription. For more information, refer to
+// Post-call analytics with real-time transcriptions (https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html)
+// in the Amazon Transcribe Developer Guide.
 type PostCallAnalyticsSettings struct {
 
 	// The ARN of the role used by Amazon Web Services Transcribe to upload your post
@@ -943,13 +947,13 @@ type PostCallAnalyticsSettings struct {
 	// The content redaction output settings for a post-call analysis task.
 	ContentRedactionOutput ContentRedactionOutput
 
-	// The ID of the KMS (Key Management System) key used to encrypt the output.
+	// The ID of the KMS (Key Management Service) key used to encrypt the output.
 	OutputEncryptionKMSKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// Defines the configuration for a presenter only video tile.
+// Defines the configuration for a presenter-only video tile.
 type PresenterOnlyConfiguration struct {
 
 	// Defines the position of the presenter video tile. Default: TopRight .
@@ -991,7 +995,7 @@ type RealTimeAlertRule struct {
 	noSmithyDocumentSerde
 }
 
-// A structure the holds the settings for recording audio and video.
+// A structure that holds the settings for recording media.
 type RecordingStreamConfiguration struct {
 
 	// The ARN of the recording stream.
@@ -1011,26 +1015,31 @@ type S3BucketSinkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The structure that holds the settings for transmitting audio and video to the
-// Amazon S3 bucket.
+// The structure that holds the settings for transmitting media to the Amazon S3
+// bucket. These values are used as defaults if S3RecordingSinkRuntimeConfiguration
+// is not specified.
 type S3RecordingSinkConfiguration struct {
 
-	// The URL of the Amazon S3 bucket used as the recording sink.
+	// The default URI of the Amazon S3 bucket used as the recording sink.
 	Destination *string
+
+	// The default file format for the media files sent to the Amazon S3 bucket.
+	RecordingFileFormat RecordingFileFormat
 
 	noSmithyDocumentSerde
 }
 
-// A structure that holds the settings for transmitting audio and video recordings
-// to the runtime Amazon S3 bucket.
+// A structure that holds the settings for transmitting media files to the Amazon
+// S3 bucket. If specified, the settings in this structure override any settings in
+// S3RecordingSinkConfiguration .
 type S3RecordingSinkRuntimeConfiguration struct {
 
-	// The URL of the S3 bucket used as the runtime sink.
+	// The URI of the S3 bucket used as the sink.
 	//
 	// This member is required.
 	Destination *string
 
-	// The file formats for the audio and video files sent to the Amazon S3 bucket.
+	// The file format for the media files sent to the Amazon S3 bucket.
 	//
 	// This member is required.
 	RecordingFileFormat RecordingFileFormat
@@ -1076,8 +1085,7 @@ type SentimentConfiguration struct {
 // The configuration settings for the SNS topic sink.
 type SnsTopicSinkConfiguration struct {
 
-	// The URL of the SNS sink, https://aws.amazon.com/kinesis/data-streams/ (https://aws.amazon.com/kinesis/data-streams/)
-	// .
+	// The ARN of the SNS sink.
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
@@ -1093,11 +1101,10 @@ type SourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The URL of the SQS sink.
+// The configuration settings for the SQS sink.
 type SqsQueueSinkConfiguration struct {
 
-	// The URL of the SQS sink, https://aws.amazon.com/kinesis/data-streams/ (https://aws.amazon.com/kinesis/data-streams/)
-	// .
+	// The ARN of the SQS sink.
 	InsightsTarget *string
 
 	noSmithyDocumentSerde

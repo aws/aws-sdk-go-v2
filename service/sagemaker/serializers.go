@@ -17626,6 +17626,13 @@ func awsAwsjson11_serializeDocumentCanvasAppSettings(v *types.CanvasAppSettings,
 	object := value.Object()
 	defer object.Close()
 
+	if v.ModelRegisterSettings != nil {
+		ok := object.Key("ModelRegisterSettings")
+		if err := awsAwsjson11_serializeDocumentModelRegisterSettings(v.ModelRegisterSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TimeSeriesForecastingSettings != nil {
 		ok := object.Key("TimeSeriesForecastingSettings")
 		if err := awsAwsjson11_serializeDocumentTimeSeriesForecastingSettings(v.TimeSeriesForecastingSettings, ok); err != nil {
@@ -21793,6 +21800,23 @@ func awsAwsjson11_serializeDocumentModelQualityJobInput(v *types.ModelQualityJob
 		if err := awsAwsjson11_serializeDocumentMonitoringGroundTruthS3Input(v.GroundTruthS3Input, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentModelRegisterSettings(v *types.ModelRegisterSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrossAccountModelRegisterRoleArn != nil {
+		ok := object.Key("CrossAccountModelRegisterRoleArn")
+		ok.String(*v.CrossAccountModelRegisterRoleArn)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	return nil

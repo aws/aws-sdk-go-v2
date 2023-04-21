@@ -4977,6 +4977,23 @@ func awsAwsjson11_serializeDocumentDocumentClassifierAugmentedManifestsList(v []
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDocumentClassifierDocuments(v *types.DocumentClassifierDocuments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	if v.TestS3Uri != nil {
+		ok := object.Key("TestS3Uri")
+		ok.String(*v.TestS3Uri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDocumentClassifierFilter(v *types.DocumentClassifierFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5018,6 +5035,25 @@ func awsAwsjson11_serializeDocumentDocumentClassifierInputDataConfig(v *types.Do
 	if len(v.DataFormat) > 0 {
 		ok := object.Key("DataFormat")
 		ok.String(string(v.DataFormat))
+	}
+
+	if v.DocumentReaderConfig != nil {
+		ok := object.Key("DocumentReaderConfig")
+		if err := awsAwsjson11_serializeDocumentDocumentReaderConfig(v.DocumentReaderConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Documents != nil {
+		ok := object.Key("Documents")
+		if err := awsAwsjson11_serializeDocumentDocumentClassifierDocuments(v.Documents, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DocumentType) > 0 {
+		ok := object.Key("DocumentType")
+		ok.String(string(v.DocumentType))
 	}
 
 	if v.LabelDelimiter != nil {

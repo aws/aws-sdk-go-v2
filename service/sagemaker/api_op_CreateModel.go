@@ -83,10 +83,11 @@ type CreateModelInput struct {
 	// .
 	Tags []types.Tag
 
-	// A VpcConfig object that specifies the VPC that you want your model to connect
-	// to. Control access to and from your model container by configuring the VPC.
-	// VpcConfig is used in hosting services and in batch transform. For more
-	// information, see Protect Endpoints by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
+	// A VpcConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html)
+	// object that specifies the VPC that you want your model to connect to. Control
+	// access to and from your model container by configuring the VPC. VpcConfig is
+	// used in hosting services and in batch transform. For more information, see
+	// Protect Endpoints by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 	// and Protect Data in Batch Transform Jobs by Using an Amazon Virtual Private
 	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html) .
 	VpcConfig *types.VpcConfig

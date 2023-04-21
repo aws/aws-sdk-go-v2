@@ -107,9 +107,9 @@ type CreateTransformJobInput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//   - CreateProcessingJob
-	//   - CreateTrainingJob
-	//   - CreateTransformJob
+	//   - CreateProcessingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html)
+	//   - CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+	//   - CreateTransformJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html)
 	ExperimentConfig *types.ExperimentConfig
 
 	// The maximum number of parallel requests that can be sent to each instance in a

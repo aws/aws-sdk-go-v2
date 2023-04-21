@@ -92,6 +92,8 @@ const (
 	TranscribeLanguageCodeJaJp TranscribeLanguageCode = "ja-JP"
 	TranscribeLanguageCodeKoKr TranscribeLanguageCode = "ko-KR"
 	TranscribeLanguageCodeZhCn TranscribeLanguageCode = "zh-CN"
+	TranscribeLanguageCodeThTh TranscribeLanguageCode = "th-TH"
+	TranscribeLanguageCodeHiIn TranscribeLanguageCode = "hi-IN"
 )
 
 // Values returns all known values for TranscribeLanguageCode. Note that this can
@@ -111,6 +113,8 @@ func (TranscribeLanguageCode) Values() []TranscribeLanguageCode {
 		"ja-JP",
 		"ko-KR",
 		"zh-CN",
+		"th-TH",
+		"hi-IN",
 	}
 }
 

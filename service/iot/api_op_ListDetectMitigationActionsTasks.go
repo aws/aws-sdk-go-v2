@@ -232,7 +232,7 @@ func newServiceMetadataMiddleware_opListDetectMitigationActionsTasks(region stri
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ListDetectMitigationActionsTasks",
 	}
 }

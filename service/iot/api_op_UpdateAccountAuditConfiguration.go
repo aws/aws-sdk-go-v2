@@ -129,7 +129,7 @@ func newServiceMetadataMiddleware_opUpdateAccountAuditConfiguration(region strin
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "UpdateAccountAuditConfiguration",
 	}
 }

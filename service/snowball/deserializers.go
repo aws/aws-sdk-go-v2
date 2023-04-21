@@ -16,6 +16,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"math"
 	"strings"
 )
 
@@ -5737,6 +5738,11 @@ func awsAwsjson11_deserializeDocumentOnDeviceServiceConfiguration(v **types.OnDe
 				return err
 			}
 
+		case "S3OnDeviceService":
+			if err := awsAwsjson11_deserializeDocumentS3OnDeviceServiceConfiguration(&sv.S3OnDeviceService, value); err != nil {
+				return err
+			}
+
 		case "TGWOnDeviceService":
 			if err := awsAwsjson11_deserializeDocumentTGWOnDeviceServiceConfiguration(&sv.TGWOnDeviceService, value); err != nil {
 				return err
@@ -5780,6 +5786,106 @@ func awsAwsjson11_deserializeDocumentReturnShippingLabelAlreadyExistsException(v
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3OnDeviceServiceConfiguration(v **types.S3OnDeviceServiceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3OnDeviceServiceConfiguration
+	if *v == nil {
+		sv = &types.S3OnDeviceServiceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FaultTolerance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NodeFaultTolerance to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FaultTolerance = ptr.Int32(int32(i64))
+			}
+
+		case "ServiceSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ServiceSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ServiceSize = ptr.Int32(int32(i64))
+			}
+
+		case "StorageLimit":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StorageLimit = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.StorageLimit = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected S3StorageLimit to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "StorageUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageUnit to be of type string, got %T instead", value)
+				}
+				sv.StorageUnit = types.StorageUnit(jtv)
 			}
 
 		default:
@@ -6467,6 +6573,11 @@ func awsAwsjson11_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutp
 					return fmt.Errorf("expected ClusterId to be of type string, got %T instead", value)
 				}
 				sv.ClusterId = ptr.String(jtv)
+			}
+
+		case "JobListEntries":
+			if err := awsAwsjson11_deserializeDocumentJobListEntryList(&sv.JobListEntries, value); err != nil {
+				return err
 			}
 
 		default:

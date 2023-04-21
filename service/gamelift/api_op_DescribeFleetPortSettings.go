@@ -25,7 +25,7 @@ import (
 // If successful, a set of IpPermission objects is returned for the requested
 // fleet ID. When a location is specified, a pending status is included. If the
 // requested fleet has been deleted, the result set is empty. Learn more Setting
-// up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *DescribeFleetPortSettingsInput, optFns ...func(*Options)) (*DescribeFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetPortSettingsInput{}
@@ -59,8 +59,8 @@ type DescribeFleetPortSettingsInput struct {
 type DescribeFleetPortSettingsOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
-	// are unique across all Regions. Format is
+	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
+	// it. ARNs are unique across all Regions. Format is
 	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 

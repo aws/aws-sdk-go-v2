@@ -62,7 +62,8 @@ type ListManagedRuleSetsInput struct {
 
 type ListManagedRuleSetsOutput struct {
 
-	// Your managed rule sets.
+	// Your managed rule sets. If you specified a Limit in your request, this might
+	// not be the full list.
 	ManagedRuleSets []types.ManagedRuleSetSummary
 
 	// When you request a list of objects with a Limit setting, if the number of

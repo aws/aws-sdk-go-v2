@@ -139,7 +139,7 @@ func newServiceMetadataMiddleware_opUpdateAuthorizer(region string) *awsmiddlewa
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "UpdateAuthorizer",
 	}
 }

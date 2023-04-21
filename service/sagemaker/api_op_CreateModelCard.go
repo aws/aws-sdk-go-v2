@@ -31,7 +31,7 @@ func (c *Client) CreateModelCard(ctx context.Context, params *CreateModelCardInp
 
 type CreateModelCardInput struct {
 
-	// The content of the model card. Content must be in model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html)
+	// The content of the model card. Content must be in model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema)
 	// and provided as a string.
 	//
 	// This member is required.

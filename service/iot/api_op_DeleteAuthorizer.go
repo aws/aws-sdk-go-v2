@@ -114,7 +114,7 @@ func newServiceMetadataMiddleware_opDeleteAuthorizer(region string) *awsmiddlewa
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "DeleteAuthorizer",
 	}
 }

@@ -1149,6 +1149,8 @@ const (
 	OTAUpdateStatusCreateInProgress OTAUpdateStatus = "CREATE_IN_PROGRESS"
 	OTAUpdateStatusCreateComplete   OTAUpdateStatus = "CREATE_COMPLETE"
 	OTAUpdateStatusCreateFailed     OTAUpdateStatus = "CREATE_FAILED"
+	OTAUpdateStatusDeleteInProgress OTAUpdateStatus = "DELETE_IN_PROGRESS"
+	OTAUpdateStatusDeleteFailed     OTAUpdateStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for OTAUpdateStatus. Note that this can be
@@ -1160,6 +1162,8 @@ func (OTAUpdateStatus) Values() []OTAUpdateStatus {
 		"CREATE_IN_PROGRESS",
 		"CREATE_COMPLETE",
 		"CREATE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
 	}
 }
 

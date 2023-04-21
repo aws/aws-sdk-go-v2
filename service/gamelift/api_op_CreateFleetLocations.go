@@ -19,8 +19,8 @@ import (
 // feature and were created after the feature was released in March 2021. To add
 // fleet locations, specify the fleet to be updated and provide a list of one or
 // more locations. If successful, this operation returns the list of added
-// locations with their status set to NEW . GameLift initiates the process of
-// starting an instance in each added location. You can track the status of each
+// locations with their status set to NEW . Amazon GameLift initiates the process
+// of starting an instance in each added location. You can track the status of each
 // new location by monitoring location creation events using DescribeFleetEvents (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html)
 // . Learn more Setting up fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Multi-location fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
@@ -48,8 +48,9 @@ type CreateFleetLocationsInput struct {
 	FleetId *string
 
 	// A list of locations to deploy additional instances to and manage as part of the
-	// fleet. You can add any GameLift-supported Amazon Web Services Region as a remote
-	// location, in the form of an Amazon Web Services Region code such as us-west-2 .
+	// fleet. You can add any Amazon GameLift-supported Amazon Web Services Region as a
+	// remote location, in the form of an Amazon Web Services Region code such as
+	// us-west-2 .
 	//
 	// This member is required.
 	Locations []types.LocationConfiguration
@@ -60,8 +61,8 @@ type CreateFleetLocationsInput struct {
 type CreateFleetLocationsOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
-	// are unique across all Regions. Format is
+	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
+	// it. ARNs are unique across all Regions. Format is
 	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 
@@ -70,8 +71,8 @@ type CreateFleetLocationsOutput struct {
 
 	// The remote locations that are being added to the fleet, and the life-cycle
 	// status of each location. For new locations, the status is set to NEW . During
-	// location creation, GameLift updates each location's status as instances are
-	// deployed there and prepared for game hosting. This list does not include the
+	// location creation, Amazon GameLift updates each location's status as instances
+	// are deployed there and prepared for game hosting. This list does not include the
 	// fleet home Region or any remote locations that were already added to the fleet.
 	LocationStates []types.LocationState
 

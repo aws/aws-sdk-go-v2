@@ -87,7 +87,7 @@ func awsRestjson1_serializeOpDocumentCreateMonitorInput(v *CreateMonitorInput, v
 		}
 	}
 
-	{
+	if v.MaxCityNetworksToMonitor != 0 {
 		ok := object.Key("MaxCityNetworksToMonitor")
 		ok.Integer(v.MaxCityNetworksToMonitor)
 	}
@@ -109,6 +109,11 @@ func awsRestjson1_serializeOpDocumentCreateMonitorInput(v *CreateMonitorInput, v
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TrafficPercentageToMonitor != 0 {
+		ok := object.Key("TrafficPercentageToMonitor")
+		ok.Integer(v.TrafficPercentageToMonitor)
 	}
 
 	return nil
@@ -748,6 +753,11 @@ func awsRestjson1_serializeOpDocumentUpdateMonitorInput(v *UpdateMonitorInput, v
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	if v.TrafficPercentageToMonitor != 0 {
+		ok := object.Key("TrafficPercentageToMonitor")
+		ok.Integer(v.TrafficPercentageToMonitor)
 	}
 
 	return nil

@@ -12,7 +12,8 @@ import (
 
 // Associates a trial component with a trial. A trial component can be associated
 // with multiple trials. To disassociate a trial component from a trial, call the
-// DisassociateTrialComponent API.
+// DisassociateTrialComponent (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DisassociateTrialComponent.html)
+// API.
 func (c *Client) AssociateTrialComponent(ctx context.Context, params *AssociateTrialComponentInput, optFns ...func(*Options)) (*AssociateTrialComponentOutput, error) {
 	if params == nil {
 		params = &AssociateTrialComponentInput{}

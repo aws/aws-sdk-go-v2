@@ -145,7 +145,7 @@ func newServiceMetadataMiddleware_opUpdateCustomMetric(region string) *awsmiddle
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "UpdateCustomMetric",
 	}
 }

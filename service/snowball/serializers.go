@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"path"
 )
 
@@ -1739,6 +1740,17 @@ func awsAwsjson11_serializeDocumentLambdaResourceList(v []types.LambdaResource, 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLongTermPricingIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNFSOnDeviceServiceConfiguration(v *types.NFSOnDeviceServiceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1798,11 +1810,58 @@ func awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v *types.OnDevic
 		}
 	}
 
+	if v.S3OnDeviceService != nil {
+		ok := object.Key("S3OnDeviceService")
+		if err := awsAwsjson11_serializeDocumentS3OnDeviceServiceConfiguration(v.S3OnDeviceService, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TGWOnDeviceService != nil {
 		ok := object.Key("TGWOnDeviceService")
 		if err := awsAwsjson11_serializeDocumentTGWOnDeviceServiceConfiguration(v.TGWOnDeviceService, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3OnDeviceServiceConfiguration(v *types.S3OnDeviceServiceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FaultTolerance != nil {
+		ok := object.Key("FaultTolerance")
+		ok.Integer(*v.FaultTolerance)
+	}
+
+	if v.ServiceSize != nil {
+		ok := object.Key("ServiceSize")
+		ok.Integer(*v.ServiceSize)
+	}
+
+	if v.StorageLimit != nil {
+		ok := object.Key("StorageLimit")
+		switch {
+		case math.IsNaN(*v.StorageLimit):
+			ok.String("NaN")
+
+		case math.IsInf(*v.StorageLimit, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.StorageLimit, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.StorageLimit)
+
+		}
+	}
+
+	if len(v.StorageUnit) > 0 {
+		ok := object.Key("StorageUnit")
+		ok.String(string(v.StorageUnit))
 	}
 
 	return nil
@@ -1998,9 +2057,19 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.Description)
 	}
 
+	if v.ForceCreateJobs {
+		ok := object.Key("ForceCreateJobs")
+		ok.Boolean(v.ForceCreateJobs)
+	}
+
 	if v.ForwardingAddressId != nil {
 		ok := object.Key("ForwardingAddressId")
 		ok.String(*v.ForwardingAddressId)
+	}
+
+	if v.InitialClusterSize != nil {
+		ok := object.Key("InitialClusterSize")
+		ok.Integer(*v.InitialClusterSize)
 	}
 
 	if len(v.JobType) > 0 {
@@ -2011,6 +2080,13 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 	if v.KmsKeyARN != nil {
 		ok := object.Key("KmsKeyARN")
 		ok.String(*v.KmsKeyARN)
+	}
+
+	if v.LongTermPricingIds != nil {
+		ok := object.Key("LongTermPricingIds")
+		if err := awsAwsjson11_serializeDocumentLongTermPricingIdList(v.LongTermPricingIds, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Notification != nil {
@@ -2047,6 +2123,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 	if len(v.ShippingOption) > 0 {
 		ok := object.Key("ShippingOption")
 		ok.String(string(v.ShippingOption))
+	}
+
+	if len(v.SnowballCapacityPreference) > 0 {
+		ok := object.Key("SnowballCapacityPreference")
+		ok.String(string(v.SnowballCapacityPreference))
 	}
 
 	if len(v.SnowballType) > 0 {

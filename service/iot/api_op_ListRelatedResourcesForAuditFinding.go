@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
@@ -142,11 +143,104 @@ func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stac
 	return nil
 }
 
+// ListRelatedResourcesForAuditFindingAPIClient is a client that implements the
+// ListRelatedResourcesForAuditFinding operation.
+type ListRelatedResourcesForAuditFindingAPIClient interface {
+	ListRelatedResourcesForAuditFinding(context.Context, *ListRelatedResourcesForAuditFindingInput, ...func(*Options)) (*ListRelatedResourcesForAuditFindingOutput, error)
+}
+
+var _ ListRelatedResourcesForAuditFindingAPIClient = (*Client)(nil)
+
+// ListRelatedResourcesForAuditFindingPaginatorOptions is the paginator options
+// for ListRelatedResourcesForAuditFinding
+type ListRelatedResourcesForAuditFindingPaginatorOptions struct {
+	// The maximum number of results to return at one time.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRelatedResourcesForAuditFindingPaginator is a paginator for
+// ListRelatedResourcesForAuditFinding
+type ListRelatedResourcesForAuditFindingPaginator struct {
+	options   ListRelatedResourcesForAuditFindingPaginatorOptions
+	client    ListRelatedResourcesForAuditFindingAPIClient
+	params    *ListRelatedResourcesForAuditFindingInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRelatedResourcesForAuditFindingPaginator returns a new
+// ListRelatedResourcesForAuditFindingPaginator
+func NewListRelatedResourcesForAuditFindingPaginator(client ListRelatedResourcesForAuditFindingAPIClient, params *ListRelatedResourcesForAuditFindingInput, optFns ...func(*ListRelatedResourcesForAuditFindingPaginatorOptions)) *ListRelatedResourcesForAuditFindingPaginator {
+	if params == nil {
+		params = &ListRelatedResourcesForAuditFindingInput{}
+	}
+
+	options := ListRelatedResourcesForAuditFindingPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListRelatedResourcesForAuditFindingPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRelatedResourcesForAuditFindingPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListRelatedResourcesForAuditFinding page.
+func (p *ListRelatedResourcesForAuditFindingPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRelatedResourcesForAuditFindingOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListRelatedResourcesForAuditFinding(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListRelatedResourcesForAuditFinding(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "ListRelatedResourcesForAuditFinding",
 	}
 }

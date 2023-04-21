@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the GameLift FleetIQ solution and game server
-// groups. Updates information about a registered game server to help GameLift
-// FleetIQ to track game server availability. This operation is called by a game
-// server process that is running on an instance in a game server group. Use this
-// operation to update the following types of game server information. You can make
-// all three types of updates in the same request:
+// This operation is used with the Amazon GameLift FleetIQ solution and game
+// server groups. Updates information about a registered game server to help Amazon
+// GameLift FleetIQ to track game server availability. This operation is called by
+// a game server process that is running on an instance in a game server group. Use
+// this operation to update the following types of game server information. You can
+// make all three types of updates in the same request:
 //   - To update the game server's utilization status, identify the game server
 //     and game server group and specify the current utilization status. Use this
 //     status to identify when game servers are currently hosting games and when they
@@ -30,7 +30,7 @@ import (
 //   - To change game server metadata, provide updated game server data.
 //
 // Once a game server is successfully updated, the relevant statuses and
-// timestamps are updated. Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// timestamps are updated. Learn more Amazon GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerInput, optFns ...func(*Options)) (*UpdateGameServerOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerInput{}

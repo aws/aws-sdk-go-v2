@@ -336,11 +336,17 @@ type JobRun struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The aggregate vCPU, memory, and storage that AWS has billed for the job run.
+	// The billed resources include a 1-minute minimum usage for workers, plus
+	// additional storage over 20 GB per worker. Note that billed resources do not
+	// include usage for idle pre-initialized workers.
+	BilledResourceUtilization *ResourceUtilization
+
 	// The configuration settings that are used to override default configuration.
 	ConfigurationOverrides *ConfigurationOverrides
 
-	// Maximum duration for the job run to run. If the job run runs beyond this
-	// duration, it will be automatically cancelled.
+	// Returns the job run timeout value from the StartJobRun call. If no timeout was
+	// specified, then it returns the default timeout of 720 minutes.
 	ExecutionTimeoutMinutes *int64
 
 	// The optional job run name. This doesn't have to be unique.
@@ -356,8 +362,9 @@ type JobRun struct {
 	// for job runs in a COMPLETED , FAILED , or CANCELLED state.
 	TotalExecutionDurationSeconds *int32
 
-	// The aggregate vCPU, memory, and storage resources used from the time job start
-	// executing till the time job is terminated, rounded up to the nearest second.
+	// The aggregate vCPU, memory, and storage resources used from the time the job
+	// starts to execute, until the time the job terminates, rounded up to the nearest
+	// second.
 	TotalResourceUtilization *TotalResourceUtilization
 
 	noSmithyDocumentSerde
@@ -478,6 +485,24 @@ type NetworkConfiguration struct {
 
 	// The array of subnet Ids for customer VPC connectivity.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The resource utilization for memory, storage, and vCPU for jobs.
+type ResourceUtilization struct {
+
+	// The aggregated memory used per hour from the time the job starts executing
+	// until the job is terminated.
+	MemoryGBHour *float64
+
+	// The aggregated storage used per hour from the time the job starts executing
+	// until the job is terminated.
+	StorageGBHour *float64
+
+	// The aggregated vCPU used per hour from the time the job starts executing until
+	// the job is terminated.
+	VCPUHour *float64
 
 	noSmithyDocumentSerde
 }

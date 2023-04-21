@@ -124,7 +124,7 @@ func newServiceMetadataMiddleware_opSetDefaultPolicyVersion(region string) *awsm
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "SetDefaultPolicyVersion",
 	}
 }

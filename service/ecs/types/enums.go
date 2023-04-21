@@ -894,6 +894,7 @@ const (
 	SettingNameAwsvpcTrunking                 SettingName = "awsvpcTrunking"
 	SettingNameContainerInsights              SettingName = "containerInsights"
 	SettingNameFargateFipsMode                SettingName = "fargateFIPSMode"
+	SettingNameTagResourceAuthorization       SettingName = "tagResourceAuthorization"
 )
 
 // Values returns all known values for SettingName. Note that this can be expanded
@@ -907,6 +908,7 @@ func (SettingName) Values() []SettingName {
 		"awsvpcTrunking",
 		"containerInsights",
 		"fargateFIPSMode",
+		"tagResourceAuthorization",
 	}
 }
 

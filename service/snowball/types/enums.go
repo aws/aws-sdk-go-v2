@@ -110,6 +110,7 @@ type LongTermPricingType string
 const (
 	LongTermPricingTypeOneYear   LongTermPricingType = "OneYear"
 	LongTermPricingTypeThreeYear LongTermPricingType = "ThreeYear"
+	LongTermPricingTypeOneMonth  LongTermPricingType = "OneMonth"
 )
 
 // Values returns all known values for LongTermPricingType. Note that this can be
@@ -119,6 +120,7 @@ func (LongTermPricingType) Values() []LongTermPricingType {
 	return []LongTermPricingType{
 		"OneYear",
 		"ThreeYear",
+		"OneMonth",
 	}
 }
 
@@ -233,6 +235,7 @@ const (
 	SnowballCapacityT14          SnowballCapacity = "T14"
 	SnowballCapacityT32          SnowballCapacity = "T32"
 	SnowballCapacityNoPreference SnowballCapacity = "NoPreference"
+	SnowballCapacityT240         SnowballCapacity = "T240"
 )
 
 // Values returns all known values for SnowballCapacity. Note that this can be
@@ -249,6 +252,7 @@ func (SnowballCapacity) Values() []SnowballCapacity {
 		"T14",
 		"T32",
 		"NoPreference",
+		"T240",
 	}
 }
 
@@ -264,6 +268,7 @@ const (
 	SnowballTypeSnc1Hdd  SnowballType = "SNC1_HDD"
 	SnowballTypeSnc1Ssd  SnowballType = "SNC1_SSD"
 	SnowballTypeV35c     SnowballType = "V3_5C"
+	SnowballTypeV35s     SnowballType = "V3_5S"
 )
 
 // Values returns all known values for SnowballType. Note that this can be
@@ -279,6 +284,7 @@ func (SnowballType) Values() []SnowballType {
 		"SNC1_HDD",
 		"SNC1_SSD",
 		"V3_5C",
+		"V3_5S",
 	}
 }
 

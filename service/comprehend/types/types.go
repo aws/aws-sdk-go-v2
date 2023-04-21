@@ -678,6 +678,22 @@ type DocumentClassificationJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The location of the training documents. This parameter is required in a request
+// to create a native classifier model.
+type DocumentClassifierDocuments struct {
+
+	// The S3 URI location of the training documents specified in the S3Uri CSV file.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The S3 URI location of the test documents included in the TestS3Uri CSV file.
+	// This field is not required if you do not specify a test CSV file.
+	TestS3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information for filtering a list of document classifiers. You can only
 // specify one filtering parameter in a request. For more information, see the
 // ListDocumentClassifiers operation.
@@ -725,6 +741,29 @@ type DocumentClassifierInputDataConfig struct {
 	// default.
 	DataFormat DocumentClassifierDataFormat
 
+	// Provides configuration parameters to override the default actions for
+	// extracting text from PDF documents and image files. By default, Amazon
+	// Comprehend performs the following actions to extract text from files, based on
+	// the input file type:
+	//   - Word files - Amazon Comprehend parser extracts the text.
+	//   - Digital PDF files - Amazon Comprehend parser extracts the text.
+	//   - Image files and scanned PDF files - Amazon Comprehend uses the Amazon
+	//   Textract DetectDocumentText API to extract the text.
+	// DocumentReaderConfig does not apply to plain text files or Word files. For
+	// image files and PDF documents, you can override these default actions using the
+	// fields listed below. For more information, see Setting text extraction options (https://docs.aws.amazon.com/comprehend/latest/dg/idp-set-textract-options.html)
+	// in the Comprehend Developer Guide.
+	DocumentReaderConfig *DocumentReaderConfig
+
+	// The type of input documents for training the model. Provide plain-text
+	// documents to create a plain-text model, and provide semi-structured documents to
+	// create a native model.
+	DocumentType DocumentClassifierDocumentTypeFormat
+
+	// The S3 location of the training documents. This parameter is required in a
+	// request to create a native classifier model.
+	Documents *DocumentClassifierDocuments
+
 	// Indicates the delimiter used to separate each label for training a multi-label
 	// classifier. The default delimiter between labels is a pipe (|). You can use a
 	// different character as a delimiter (if it's an allowed character) by specifying
@@ -750,7 +789,8 @@ type DocumentClassifierInputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Provides output results configuration parameters for custom classifier jobs.
+// Provide the location for output data from a custom classifier job. This field
+// is mandatory if you are training a native classifier model.
 type DocumentClassifierOutputDataConfig struct {
 
 	// The Amazon S3 prefix for the data lake location of the flywheel statistics.
@@ -768,13 +808,13 @@ type DocumentClassifierOutputDataConfig struct {
 	KmsKeyId *string
 
 	// When you use the OutputDataConfig object while creating a custom classifier,
-	// you specify the Amazon S3 location where you want to write the confusion matrix.
-	// The URI must be in the same Region as the API endpoint that you are calling. The
-	// location is used as the prefix for the actual location of this output file. When
-	// the custom classifier job is finished, the service creates the output file in a
-	// directory specific to the job. The S3Uri field contains the location of the
-	// output file, called output.tar.gz . It is a compressed archive that contains the
-	// confusion matrix.
+	// you specify the Amazon S3 location where you want to write the confusion matrix
+	// and other output files. The URI must be in the same Region as the API endpoint
+	// that you are calling. The location is used as the prefix for the actual location
+	// of this output file. When the custom classifier job is finished, the service
+	// creates the output file in a directory specific to the job. The S3Uri field
+	// contains the location of the output file, called output.tar.gz . It is a
+	// compressed archive that contains the confusion matrix.
 	S3Uri *string
 
 	noSmithyDocumentSerde
@@ -834,8 +874,11 @@ type DocumentClassifierProperties struct {
 	SourceModelArn *string
 
 	// The status of the document classifier. If the status is TRAINED the classifier
-	// is ready to use. If the status is FAILED you can see additional information
-	// about why the classifier wasn't trained in the Message field.
+	// is ready to use. If the status is TRAINED_WITH_WARNINGS the classifier training
+	// succeeded, but you should review the warnings returned in the
+	// CreateDocumentClassifier response. If the status is FAILED you can see
+	// additional information about why the classifier wasn't trained in the Message
+	// field.
 	Status ModelStatus
 
 	// The time that the document classifier was submitted for training.
@@ -935,8 +978,8 @@ type DocumentMetadata struct {
 //
 // DocumentReaderConfig does not apply to plain text files or Word files. For
 // image files and PDF documents, you can override these default actions using the
-// fields listed below. For more information, see Setting text extraction options (https://docs.aws.amazon.com/comprehend/latest/dg/detecting-cer.html#detecting-cer-pdf)
-// .
+// fields listed below. For more information, see Setting text extraction options (https://docs.aws.amazon.com/comprehend/latest/dg/idp-set-textract-options.html)
+// in the Comprehend Developer Guide.
 type DocumentReaderConfig struct {
 
 	// This field defines the Amazon Textract API operation that Amazon Comprehend
@@ -2755,6 +2798,26 @@ type VpcConfig struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
+// The system identified one of the following warnings while processing the input
+// document:
+//   - The document to classify is plain text, but the classifier is a native
+//     model.
+//   - The document to classify is semi-structured, but the classifier is a
+//     plain-text model.
+type WarningsListItem struct {
+
+	// Page number in the input document.
+	Page *int32
+
+	// The type of warning.
+	WarnCode PageBasedWarningCode
+
+	// Text message associated with the warning.
+	WarnMessage *string
 
 	noSmithyDocumentSerde
 }

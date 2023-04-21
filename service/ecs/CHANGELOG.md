@@ -1,3 +1,7 @@
+# v1.26.0 (2023-04-19)
+
+* **Feature**: This release supports the Account Setting "TagResourceAuthorization" that allows for enhanced Tagging security controls.
+
 # v1.25.1 (2023-04-14)
 
 * **Documentation**: This release supports  ephemeral storage for AWS Fargate Windows containers.

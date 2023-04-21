@@ -1,3 +1,7 @@
+# v1.18.0 (2023-04-20)
+
+* **Feature**: Amazon GameLift supports creating Builds for Windows 2016 operating system.
+
 # v1.17.8 (2023-04-10)
 
 * No change notes available for this release.

@@ -41,10 +41,11 @@ func (c *Client) CreateHyperParameterTuningJob(ctx context.Context, params *Crea
 
 type CreateHyperParameterTuningJobInput struct {
 
-	// The HyperParameterTuningJobConfig object that describes the tuning job,
-	// including the search strategy, the objective metric used to evaluate training
-	// jobs, ranges of parameters to search, and resource limits for the tuning job.
-	// For more information, see How Hyperparameter Tuning Works (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html)
+	// The HyperParameterTuningJobConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html)
+	// object that describes the tuning job, including the search strategy, the
+	// objective metric used to evaluate training jobs, ranges of parameters to search,
+	// and resource limits for the tuning job. For more information, see How
+	// Hyperparameter Tuning Works (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html)
 	// .
 	//
 	// This member is required.
@@ -66,14 +67,14 @@ type CreateHyperParameterTuningJobInput struct {
 	// that the tuning job launches.
 	Tags []types.Tag
 
-	// The HyperParameterTrainingJobDefinition object that describes the training jobs
-	// that this tuning job launches, including static hyperparameters, input data
-	// configuration, output data configuration, resource configuration, and stopping
-	// condition.
+	// The HyperParameterTrainingJobDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html)
+	// object that describes the training jobs that this tuning job launches, including
+	// static hyperparameters, input data configuration, output data configuration,
+	// resource configuration, and stopping condition.
 	TrainingJobDefinition *types.HyperParameterTrainingJobDefinition
 
-	// A list of the HyperParameterTrainingJobDefinition objects launched for this
-	// tuning job.
+	// A list of the HyperParameterTrainingJobDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html)
+	// objects launched for this tuning job.
 	TrainingJobDefinitions []types.HyperParameterTrainingJobDefinition
 
 	// Specifies the configuration for starting the hyperparameter tuning job using

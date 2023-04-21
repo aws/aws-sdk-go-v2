@@ -114,6 +114,25 @@ func (DocumentClassifierDataFormat) Values() []DocumentClassifierDataFormat {
 	}
 }
 
+type DocumentClassifierDocumentTypeFormat string
+
+// Enum values for DocumentClassifierDocumentTypeFormat
+const (
+	DocumentClassifierDocumentTypeFormatPlainTextDocument      DocumentClassifierDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"
+	DocumentClassifierDocumentTypeFormatSemiStructuredDocument DocumentClassifierDocumentTypeFormat = "SEMI_STRUCTURED_DOCUMENT"
+)
+
+// Values returns all known values for DocumentClassifierDocumentTypeFormat. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DocumentClassifierDocumentTypeFormat) Values() []DocumentClassifierDocumentTypeFormat {
+	return []DocumentClassifierDocumentTypeFormat{
+		"PLAIN_TEXT_DOCUMENT",
+		"SEMI_STRUCTURED_DOCUMENT",
+	}
+}
+
 type DocumentClassifierMode string
 
 // Enum values for DocumentClassifierMode
@@ -527,6 +546,24 @@ func (PageBasedErrorCode) Values() []PageBasedErrorCode {
 		"PAGE_CHARACTERS_EXCEEDED",
 		"PAGE_SIZE_EXCEEDED",
 		"INTERNAL_SERVER_ERROR",
+	}
+}
+
+type PageBasedWarningCode string
+
+// Enum values for PageBasedWarningCode
+const (
+	PageBasedWarningCodeInferencingPlaintextWithNativeTrainedModel         PageBasedWarningCode = "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL"
+	PageBasedWarningCodeInferencingNativeDocumentWithPlaintextTrainedModel PageBasedWarningCode = "INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL"
+)
+
+// Values returns all known values for PageBasedWarningCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PageBasedWarningCode) Values() []PageBasedWarningCode {
+	return []PageBasedWarningCode{
+		"INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL",
+		"INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL",
 	}
 }
 

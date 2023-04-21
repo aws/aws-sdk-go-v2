@@ -50,7 +50,8 @@ type ListSecretVersionIdsInput struct {
 
 	// Specifies whether to include versions of secrets that don't have any staging
 	// labels attached to them. Versions without staging labels are considered
-	// deprecated and are subject to deletion by Secrets Manager.
+	// deprecated and are subject to deletion by Secrets Manager. By default, versions
+	// without staging labels aren't included.
 	IncludeDeprecated *bool
 
 	// The number of results to include in the response. If there are more results

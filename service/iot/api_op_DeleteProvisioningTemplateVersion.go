@@ -120,7 +120,7 @@ func newServiceMetadataMiddleware_opDeleteProvisioningTemplateVersion(region str
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "execute-api",
+		SigningName:   "iot",
 		OperationName: "DeleteProvisioningTemplateVersion",
 	}
 }

@@ -47,7 +47,8 @@ type ListSecretsInput struct {
 	// The filters to apply to the list of secrets.
 	Filters []types.Filter
 
-	// Specifies whether to include secrets scheduled for deletion.
+	// Specifies whether to include secrets scheduled for deletion. By default,
+	// secrets scheduled for deletion aren't included.
 	IncludePlannedDeletion *bool
 
 	// The number of results to include in the response. If there are more results

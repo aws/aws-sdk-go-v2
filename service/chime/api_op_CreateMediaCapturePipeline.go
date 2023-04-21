@@ -56,7 +56,8 @@ type CreateMediaCapturePipelineInput struct {
 	// ChimeSdkMeeting .
 	ChimeSdkMeetingConfiguration *types.ChimeSdkMeetingConfiguration
 
-	// The token assigned to the client making the pipeline request.
+	// The unique identifier for the client request. The token makes the API request
+	// idempotent. Use a different token for different media pipeline requests.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

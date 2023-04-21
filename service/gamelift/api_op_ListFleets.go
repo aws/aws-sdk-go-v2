@@ -30,7 +30,7 @@ import (
 // If successful, a list of fleet IDs that match the request parameters is
 // returned. A NextToken value is also returned if there are more result pages to
 // retrieve. Fleet resources are not listed in a particular order. Learn more
-// Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}

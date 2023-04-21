@@ -57,7 +57,8 @@ type ListLoggingConfigurationsInput struct {
 
 type ListLoggingConfigurationsOutput struct {
 
-	//
+	// Array of logging configurations. If you specified a Limit in your request, this
+	// might not be the full list.
 	LoggingConfigurations []types.LoggingConfiguration
 
 	// When you request a list of objects with a Limit setting, if the number of

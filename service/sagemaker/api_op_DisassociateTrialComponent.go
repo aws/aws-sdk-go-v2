@@ -13,10 +13,10 @@ import (
 // Disassociates a trial component from a trial. This doesn't effect other trials
 // the component is associated with. Before you can delete a component, you must
 // disassociate the component from all trials it is associated with. To associate a
-// trial component with a trial, call the AssociateTrialComponent API. To get a
-// list of the trials a component is associated with, use the Search API. Specify
-// ExperimentTrialComponent for the Resource parameter. The list appears in the
-// response under Results.TrialComponent.Parents .
+// trial component with a trial, call the AssociateTrialComponent (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AssociateTrialComponent.html)
+// API. To get a list of the trials a component is associated with, use the Search (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html)
+// API. Specify ExperimentTrialComponent for the Resource parameter. The list
+// appears in the response under Results.TrialComponent.Parents .
 func (c *Client) DisassociateTrialComponent(ctx context.Context, params *DisassociateTrialComponentInput, optFns ...func(*Options)) (*DisassociateTrialComponentOutput, error) {
 	if params == nil {
 		params = &DisassociateTrialComponentInput{}

@@ -69,6 +69,46 @@ func (m *validateOpAssociateResourceSharePermission) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePermission struct {
+}
+
+func (*validateOpCreatePermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePermissionVersion struct {
+}
+
+func (*validateOpCreatePermissionVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePermissionVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePermissionVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePermissionVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateResourceShare struct {
 }
 
@@ -84,6 +124,46 @@ func (m *validateOpCreateResourceShare) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateResourceShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePermission struct {
+}
+
+func (*validateOpDeletePermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePermissionVersion struct {
+}
+
+func (*validateOpDeletePermissionVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePermissionVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePermissionVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePermissionVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -329,6 +409,26 @@ func (m *validateOpListResources) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPromotePermissionCreatedFromPolicy struct {
+}
+
+func (*validateOpPromotePermissionCreatedFromPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPromotePermissionCreatedFromPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PromotePermissionCreatedFromPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPromotePermissionCreatedFromPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPromoteResourceShareCreatedFromPolicy struct {
 }
 
@@ -364,6 +464,46 @@ func (m *validateOpRejectResourceShareInvitation) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRejectResourceShareInvitationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpReplacePermissionAssociations struct {
+}
+
+func (*validateOpReplacePermissionAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReplacePermissionAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReplacePermissionAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReplacePermissionAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSetDefaultPermissionVersion struct {
+}
+
+func (*validateOpSetDefaultPermissionVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetDefaultPermissionVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetDefaultPermissionVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetDefaultPermissionVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -441,8 +581,24 @@ func addOpAssociateResourceSharePermissionValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpAssociateResourceSharePermission{}, middleware.After)
 }
 
+func addOpCreatePermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePermission{}, middleware.After)
+}
+
+func addOpCreatePermissionVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePermissionVersion{}, middleware.After)
+}
+
 func addOpCreateResourceShareValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateResourceShare{}, middleware.After)
+}
+
+func addOpDeletePermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePermission{}, middleware.After)
+}
+
+func addOpDeletePermissionVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePermissionVersion{}, middleware.After)
 }
 
 func addOpDeleteResourceShareValidationMiddleware(stack *middleware.Stack) error {
@@ -493,12 +649,24 @@ func addOpListResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResources{}, middleware.After)
 }
 
+func addOpPromotePermissionCreatedFromPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPromotePermissionCreatedFromPolicy{}, middleware.After)
+}
+
 func addOpPromoteResourceShareCreatedFromPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPromoteResourceShareCreatedFromPolicy{}, middleware.After)
 }
 
 func addOpRejectResourceShareInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRejectResourceShareInvitation{}, middleware.After)
+}
+
+func addOpReplacePermissionAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReplacePermissionAssociations{}, middleware.After)
+}
+
+func addOpSetDefaultPermissionVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetDefaultPermissionVersion{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -561,6 +729,45 @@ func validateOpAssociateResourceSharePermissionInput(v *AssociateResourceSharePe
 	}
 }
 
+func validateOpCreatePermissionInput(v *CreatePermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePermissionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.PolicyTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyTemplate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePermissionVersionInput(v *CreatePermissionVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePermissionVersionInput"}
+	if v.PermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
+	}
+	if v.PolicyTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyTemplate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateResourceShareInput(v *CreateResourceShareInput) error {
 	if v == nil {
 		return nil
@@ -568,6 +775,39 @@ func validateOpCreateResourceShareInput(v *CreateResourceShareInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceShareInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePermissionInput(v *DeletePermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePermissionInput"}
+	if v.PermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePermissionVersionInput(v *DeletePermissionVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePermissionVersionInput"}
+	if v.PermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
+	}
+	if v.PermissionVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -759,6 +999,24 @@ func validateOpListResourcesInput(v *ListResourcesInput) error {
 	}
 }
 
+func validateOpPromotePermissionCreatedFromPolicyInput(v *PromotePermissionCreatedFromPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromotePermissionCreatedFromPolicyInput"}
+	if v.PermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPromoteResourceShareCreatedFromPolicyInput(v *PromoteResourceShareCreatedFromPolicyInput) error {
 	if v == nil {
 		return nil
@@ -789,14 +1047,47 @@ func validateOpRejectResourceShareInvitationInput(v *RejectResourceShareInvitati
 	}
 }
 
+func validateOpReplacePermissionAssociationsInput(v *ReplacePermissionAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplacePermissionAssociationsInput"}
+	if v.FromPermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromPermissionArn"))
+	}
+	if v.ToPermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToPermissionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetDefaultPermissionVersionInput(v *SetDefaultPermissionVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetDefaultPermissionVersionInput"}
+	if v.PermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
+	}
+	if v.PermissionVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceShareArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
@@ -812,9 +1103,6 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceShareArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}

@@ -1,3 +1,7 @@
+# v1.19.4 (2023-04-19)
+
+* **Documentation**: Documentation updates for Secrets Manager
+
 # v1.19.3 (2023-04-10)
 
 * No change notes available for this release.

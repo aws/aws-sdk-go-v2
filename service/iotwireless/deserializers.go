@@ -18192,6 +18192,40 @@ func awsRestjson1_deserializeDocumentLoRaWANGateway(v **types.LoRaWANGateway, va
 				return err
 			}
 
+		case "MaxEirp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxEirp = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxEirp = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected GatewayMaxEirp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "NetIdFilters":
 			if err := awsRestjson1_deserializeDocumentNetIdFilters(&sv.NetIdFilters, value); err != nil {
 				return err
@@ -18935,6 +18969,19 @@ func awsRestjson1_deserializeDocumentLoRaWANMulticastSession(v **types.LoRaWANMu
 					return err
 				}
 				sv.DlFreq = ptr.Int32(int32(i64))
+			}
+
+		case "PingSlotPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PingSlotPeriod to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PingSlotPeriod = ptr.Int32(int32(i64))
 			}
 
 		case "SessionStartTime":

@@ -26,7 +26,7 @@ import (
 //     flow from the attendee to the other meeting participants.
 //   - When you change a video or content capability from None or Receive to Send
 //     or SendReceive , and if the attendee turned on their video or content streams,
-//     remote attendess can receive those streams, but only after media renegotiation
+//     remote attendees can receive those streams, but only after media renegotiation
 //     between the client and the Amazon Chime back-end server.
 func (c *Client) BatchUpdateAttendeeCapabilitiesExcept(ctx context.Context, params *BatchUpdateAttendeeCapabilitiesExceptInput, optFns ...func(*Options)) (*BatchUpdateAttendeeCapabilitiesExceptOutput, error) {
 	if params == nil {

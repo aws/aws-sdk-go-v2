@@ -60,7 +60,8 @@ type ListAvailableManagedRuleGroupsInput struct {
 
 type ListAvailableManagedRuleGroupsOutput struct {
 
-	//
+	// Array of managed rule groups that you can use. If you specified a Limit in your
+	// request, this might not be the full list.
 	ManagedRuleGroups []types.ManagedRuleGroupSummary
 
 	// When you request a list of objects with a Limit setting, if the number of

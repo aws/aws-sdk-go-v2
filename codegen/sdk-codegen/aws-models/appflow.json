@@ -552,6 +552,16 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.appflow#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[ -~]+$"
+            }
+        },
         "com.amazonaws.appflow#ClusterIdentifier": {
             "type": "string",
             "traits": {
@@ -2060,6 +2070,13 @@
                         "smithy.api#documentation": "<p> Defines the connector-specific configuration and credentials. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.appflow#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your\n        <code>CreateConnectorProfile</code> request completes only once. You choose the value to\n      pass. For example, if you don't receive a response from your request, you can safely retry the\n      request with the same <code>clientToken</code> parameter value.</p>\n         <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are\n      using inserts a value for you. This way, the SDK can safely retry requests multiple times\n      after a network error. You must provide your own value for other use cases.</p>\n         <p>If you specify input parameters that differ from your first request, an error occurs. If\n      you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new\n      call to <code>CreateConnectorProfile</code>. The token is active for 8 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -2180,6 +2197,13 @@
                     "target": "com.amazonaws.appflow#MetadataCatalogConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's\n      transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it\n      stores metadata in a data catalog.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.appflow#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your\n      <code>CreateFlow</code> request completes only once. You choose the value to\n      pass. For example, if you don't receive a response from your request, you can safely retry the\n      request with the same <code>clientToken</code> parameter value.</p>\n         <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are\n      using inserts a value for you. This way, the SDK can safely retry requests multiple times\n      after a network error. You must provide your own value for other use cases.</p>\n         <p>If you specify input parameters that differ from your first request, an error occurs. If\n      you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new\n      call to <code>CreateFlow</code>. The token is active for 8 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -6776,6 +6800,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The provisioning type of the connector. Currently the only supported value is\n      LAMBDA.</p>"
                     }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.appflow#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your\n      <code>RegisterConnector</code> request completes only once. You choose the value to\n      pass. For example, if you don't receive a response from your request, you can safely retry the\n      request with the same <code>clientToken</code> parameter value.</p>\n         <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are\n      using inserts a value for you. This way, the SDK can safely retry requests multiple times\n      after a network error. You must provide your own value for other use cases.</p>\n         <p>If you specify input parameters that differ from your first request, an error occurs. If\n      you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new\n      call to <code>RegisterConnector</code>. The token is active for 8 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -8114,9 +8145,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8127,9 +8158,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8140,9 +8171,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8153,9 +8184,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8166,9 +8197,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8179,9 +8210,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8192,9 +8223,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8205,9 +8236,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8218,9 +8249,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8231,9 +8262,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8244,9 +8275,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8257,9 +8288,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8270,9 +8301,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8283,9 +8314,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8296,9 +8327,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8309,9 +8340,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8322,9 +8353,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8335,9 +8366,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8348,9 +8379,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8361,9 +8392,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8374,9 +8405,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8387,9 +8418,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8400,9 +8431,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8413,9 +8444,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8426,9 +8457,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8439,9 +8470,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8452,9 +8483,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8465,9 +8507,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8478,9 +8531,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8491,9 +8555,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8504,9 +8579,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8517,9 +8592,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8531,8 +8606,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8542,9 +8617,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8554,10 +8629,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -9587,6 +9668,13 @@
                         "smithy.api#documentation": "<p> The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens\n      (-) only. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.appflow#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your\n      <code>StartFlow</code> request completes only once. You choose the value to\n      pass. For example, if you don't receive a response from your request, you can safely retry the\n      request with the same <code>clientToken</code> parameter value.</p>\n         <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are\n      using inserts a value for you. This way, the SDK can safely retry requests multiple times\n      after a network error. You must provide your own value for other use cases.</p>\n         <p>If you specify input parameters that differ from your first request, an error occurs for\n      flows that run on a schedule or based on an event. However, the error doesn't occur for flows\n      that run on demand. You set the conditions that initiate your flow for the\n        <code>triggerConfig</code> parameter.</p>\n         <p>If you use a different value for <code>clientToken</code>, Amazon AppFlow considers\n      it a new call to <code>StartFlow</code>. The token is active for 8 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -10426,6 +10514,13 @@
                         "smithy.api#documentation": "<p> Defines the connector-specific profile configuration and credentials. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.appflow#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your\n      <code>UpdateConnectorProfile</code> request completes only once. You choose the value to\n      pass. For example, if you don't receive a response from your request, you can safely retry the\n      request with the same <code>clientToken</code> parameter value.</p>\n         <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are\n      using inserts a value for you. This way, the SDK can safely retry requests multiple times\n      after a network error. You must provide your own value for other use cases.</p>\n         <p>If you specify input parameters that differ from your first request, an error occurs. If\n      you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new\n      call to <code>UpdateConnectorProfile</code>. The token is active for 8 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -10510,6 +10605,13 @@
                 },
                 "connectorProvisioningConfig": {
                     "target": "com.amazonaws.appflow#ConnectorProvisioningConfig"
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.appflow#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your\n      <code>UpdateConnectorRegistration</code> request completes only once. You choose the value to\n      pass. For example, if you don't receive a response from your request, you can safely retry the\n      request with the same <code>clientToken</code> parameter value.</p>\n         <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are\n      using inserts a value for you. This way, the SDK can safely retry requests multiple times\n      after a network error. You must provide your own value for other use cases.</p>\n         <p>If you specify input parameters that differ from your first request, an error occurs. If\n      you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new\n      call to <code>UpdateConnectorRegistration</code>. The token is active for 8 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -10617,6 +10719,13 @@
                     "target": "com.amazonaws.appflow#MetadataCatalogConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's\n      transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it\n      stores metadata in a data catalog.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.appflow#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your\n      <code>UpdateFlow</code> request completes only once. You choose the value to\n      pass. For example, if you don't receive a response from your request, you can safely retry the\n      request with the same <code>clientToken</code> parameter value.</p>\n         <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are\n      using inserts a value for you. This way, the SDK can safely retry requests multiple times\n      after a network error. You must provide your own value for other use cases.</p>\n         <p>If you specify input parameters that differ from your first request, an error occurs. If\n      you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new\n      call to <code>UpdateFlow</code>. The token is active for 8 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },

@@ -47,7 +47,7 @@ type ReplicateSecretToRegionsInput struct {
 	SecretId *string
 
 	// Specifies whether to overwrite a secret with the same name in the destination
-	// Region.
+	// Region. By default, secrets aren't overwritten.
 	ForceOverwriteReplicaSecret bool
 
 	noSmithyDocumentSerde

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The capabilties that you want to update. You use the capabilities with a set of
-// values that control what the capabilities can do, such as SendReceive data. For
-// more information about those values, see . When using capabilities, be aware of
-// these corner cases:
+// The capabilities that you want to update. You use the capabilities with a set
+// of values that control what the capabilities can do, such as SendReceive data.
+// For more information about those values, see . When using capabilities, be aware
+// of these corner cases:
 //   - You can't set content capabilities to SendReceive or Receive unless you also
 //     set video capabilities to SendReceive or Receive . If you don't set the video
 //     capability to receive, the response will contain an HTTP 400 Bad Request status
@@ -25,7 +25,7 @@ import (
 //     flow from the attendee to the other meeting participants.
 //   - When you change a video or content capability from None or Receive to Send
 //     or SendReceive , and if the attendee turned on their video or content streams,
-//     remote attendess can receive those streams, but only after media renegotiation
+//     remote attendees can receive those streams, but only after media renegotiation
 //     between the client and the Amazon Chime back-end server.
 func (c *Client) UpdateAttendeeCapabilities(ctx context.Context, params *UpdateAttendeeCapabilitiesInput, optFns ...func(*Options)) (*UpdateAttendeeCapabilitiesOutput, error) {
 	if params == nil {
@@ -49,7 +49,7 @@ type UpdateAttendeeCapabilitiesInput struct {
 	// This member is required.
 	AttendeeId *string
 
-	// The capabilties that you want to update.
+	// The capabilities that you want to update.
 	//
 	// This member is required.
 	Capabilities *types.AttendeeCapabilities

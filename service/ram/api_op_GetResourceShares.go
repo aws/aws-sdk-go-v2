@@ -61,9 +61,13 @@ type GetResourceSharesInput struct {
 	NextToken *string
 
 	// Specifies that you want to retrieve details of only those resource shares that
-	// use the RAM permission with this Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// use the managed permission with this Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// .
 	PermissionArn *string
+
+	// Specifies that you want to retrieve details for only those resource shares that
+	// use the specified version of the managed permission.
+	PermissionVersion *int32
 
 	// Specifies the Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of individual resource shares that you want information about.

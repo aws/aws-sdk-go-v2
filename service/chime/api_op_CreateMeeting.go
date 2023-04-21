@@ -14,10 +14,10 @@ import (
 
 // Creates a new Amazon Chime SDK meeting in the specified media Region with no
 // initial attendees. For more information about specifying media Regions, see
-// Amazon Chime SDK Media Regions (https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html)
-// in the Amazon Chime Developer Guide . For more information about the Amazon
-// Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html)
-// in the Amazon Chime Developer Guide .
+// Amazon Chime SDK Media Regions (https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html)
+// in the Amazon Chime SDK Developer Guide . For more information about the Amazon
+// Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
+// in the Amazon Chime SDK Developer Guide .
 func (c *Client) CreateMeeting(ctx context.Context, params *CreateMeetingInput, optFns ...func(*Options)) (*CreateMeetingOutput, error) {
 	if params == nil {
 		params = &CreateMeetingInput{}

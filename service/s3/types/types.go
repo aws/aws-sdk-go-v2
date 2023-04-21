@@ -492,7 +492,7 @@ type CSVInput struct {
 
 	// A single character used to indicate that a row should be ignored when the
 	// character is present at the start of that row. You can specify any character to
-	// indicate a comment line. The default character is # . Default: #
+	// indicate a comment line.
 	Comments *string
 
 	// A single character used to separate individual fields in a record. You can
@@ -709,7 +709,7 @@ type Destination struct {
 type Encryption struct {
 
 	// The server-side encryption algorithm used when storing job results in Amazon S3
-	// (for example, AES256, aws:kms ).
+	// (for example, AES256, aws:kms).
 	//
 	// This member is required.
 	EncryptionType ServerSideEncryption
@@ -719,9 +719,9 @@ type Encryption struct {
 	KMSContext *string
 
 	// If the encryption type is aws:kms , this optional value specifies the ID of the
-	// symmetric encryption customer managed key to use for encryption of job results.
-	// Amazon S3 only supports symmetric encryption KMS keys. For more information, see
-	// Asymmetric keys in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// symmetric customer managed key to use for encryption of job results. Amazon S3
+	// only supports symmetric keys. For more information, see Using symmetric and
+	// asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KMSKeyId *string
 
@@ -735,8 +735,8 @@ type EncryptionConfiguration struct {
 	// Specifies the ID (Key ARN or Alias ARN) of the customer managed Amazon Web
 	// Services KMS key stored in Amazon Web Services Key Management Service (KMS) for
 	// the destination bucket. Amazon S3 uses this key to encrypt replica objects.
-	// Amazon S3 only supports symmetric encryption KMS keys. For more information, see
-	// Asymmetric keys in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// Amazon S3 only supports symmetric, customer managed KMS keys. For more
+	// information, see Using symmetric and asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	ReplicaKmsKeyID *string
 
@@ -1129,7 +1129,7 @@ type Error struct {
 	//   - HTTP Status Code: 403 Forbidden
 	//   - SOAP Fault Code Prefix: Client
 	//   - Code: ServiceUnavailable
-	//   - Description: Service is unable to handle request.
+	//   - Description: Reduce your request rate.
 	//   - HTTP Status Code: 503 Service Unavailable
 	//   - SOAP Fault Code Prefix: Server
 	//   - Code: SlowDown
@@ -1206,7 +1206,7 @@ type EventBridgeConfiguration struct {
 // in the Amazon S3 User Guide.
 type ExistingObjectReplication struct {
 
-	// Specifies whether Amazon S3 replicates existing source bucket objects.
+	//
 	//
 	// This member is required.
 	Status ExistingObjectReplicationStatus
@@ -1603,9 +1603,7 @@ type LambdaFunctionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the expiration for the lifecycle of the object. For more
-// information see, Managing your storage lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
-// in the Amazon S3 User Guide.
+// Container for the expiration for the lifecycle of the object.
 type LifecycleExpiration struct {
 
 	// Indicates at what date the object is to be moved or deleted. Should be in GMT
@@ -1625,9 +1623,7 @@ type LifecycleExpiration struct {
 	noSmithyDocumentSerde
 }
 
-// A lifecycle rule for individual objects in an Amazon S3 bucket. For more
-// information see, Managing your storage lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
-// in the Amazon S3 User Guide.
+// A lifecycle rule for individual objects in an Amazon S3 bucket.
 type LifecycleRule struct {
 
 	// If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is
@@ -1854,8 +1850,7 @@ type MetricsAndOperator struct {
 // .
 type MetricsConfiguration struct {
 
-	// The ID used to identify the metrics configuration. The ID has a 64 character
-	// limit and can only contain letters, numbers, periods, dashes, and underscores.
+	// The ID used to identify the metrics configuration.
 	//
 	// This member is required.
 	Id *string
@@ -2242,16 +2237,7 @@ type OutputSerialization struct {
 // Container for the owner's display name and ID.
 type Owner struct {
 
-	// Container for the display name of the owner. This value is only supported in
-	// the following Amazon Web Services Regions:
-	//   - US East (N. Virginia)
-	//   - US West (N. California)
-	//   - US West (Oregon)
-	//   - Asia Pacific (Singapore)
-	//   - Asia Pacific (Sydney)
-	//   - Asia Pacific (Tokyo)
-	//   - Europe (Ireland)
-	//   - South America (São Paulo)
+	// Container for the display name of the owner.
 	DisplayName *string
 
 	// Container for the ID of the owner.
@@ -2575,9 +2561,7 @@ type ReplicationRule struct {
 	// .
 	DeleteMarkerReplication *DeleteMarkerReplication
 
-	// Optional configuration to replicate existing source bucket objects. For more
-	// information, see Replicating Existing Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication)
-	// in the Amazon S3 User Guide.
+	//
 	ExistingObjectReplication *ExistingObjectReplication
 
 	// A filter that identifies the subset of objects to which the replication rule
@@ -2965,8 +2949,8 @@ type ServerSideEncryptionByDefault struct {
 	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//   - Key ARN:
 	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// Amazon S3 only supports symmetric encryption KMS keys. For more information,
-	// see Asymmetric keys in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// Amazon S3 only supports symmetric KMS keys and not asymmetric KMS keys. For
+	// more information, see Using symmetric and asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KMSMasterKeyID *string
 
@@ -3032,8 +3016,8 @@ type SourceSelectionCriteria struct {
 type SSEKMS struct {
 
 	// Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web
-	// Services KMS) symmetric encryption customer managed key to use for encrypting
-	// inventory reports.
+	// Services KMS) symmetric customer managed key to use for encrypting inventory
+	// reports.
 	//
 	// This member is required.
 	KeyId *string

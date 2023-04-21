@@ -221,6 +221,7 @@ const (
 	DetectorFeatureEbsMalwareProtection DetectorFeature = "EBS_MALWARE_PROTECTION"
 	DetectorFeatureRdsLoginEvents       DetectorFeature = "RDS_LOGIN_EVENTS"
 	DetectorFeatureEksRuntimeMonitoring DetectorFeature = "EKS_RUNTIME_MONITORING"
+	DetectorFeatureLambdaNetworkLogs    DetectorFeature = "LAMBDA_NETWORK_LOGS"
 )
 
 // Values returns all known values for DetectorFeature. Note that this can be
@@ -233,6 +234,7 @@ func (DetectorFeature) Values() []DetectorFeature {
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
 		"EKS_RUNTIME_MONITORING",
+		"LAMBDA_NETWORK_LOGS",
 	}
 }
 
@@ -248,6 +250,7 @@ const (
 	DetectorFeatureResultEbsMalwareProtection DetectorFeatureResult = "EBS_MALWARE_PROTECTION"
 	DetectorFeatureResultRdsLoginEvents       DetectorFeatureResult = "RDS_LOGIN_EVENTS"
 	DetectorFeatureResultEksRuntimeMonitoring DetectorFeatureResult = "EKS_RUNTIME_MONITORING"
+	DetectorFeatureResultLambdaNetworkLogs    DetectorFeatureResult = "LAMBDA_NETWORK_LOGS"
 )
 
 // Values returns all known values for DetectorFeatureResult. Note that this can
@@ -263,6 +266,7 @@ func (DetectorFeatureResult) Values() []DetectorFeatureResult {
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
 		"EKS_RUNTIME_MONITORING",
+		"LAMBDA_NETWORK_LOGS",
 	}
 }
 
@@ -421,6 +425,7 @@ const (
 	FreeTrialFeatureResultEbsMalwareProtection FreeTrialFeatureResult = "EBS_MALWARE_PROTECTION"
 	FreeTrialFeatureResultRdsLoginEvents       FreeTrialFeatureResult = "RDS_LOGIN_EVENTS"
 	FreeTrialFeatureResultEksRuntimeMonitoring FreeTrialFeatureResult = "EKS_RUNTIME_MONITORING"
+	FreeTrialFeatureResultLambdaNetworkLogs    FreeTrialFeatureResult = "LAMBDA_NETWORK_LOGS"
 )
 
 // Values returns all known values for FreeTrialFeatureResult. Note that this can
@@ -436,6 +441,7 @@ func (FreeTrialFeatureResult) Values() []FreeTrialFeatureResult {
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
 		"EKS_RUNTIME_MONITORING",
+		"LAMBDA_NETWORK_LOGS",
 	}
 }
 
@@ -520,6 +526,7 @@ const (
 	OrgFeatureEbsMalwareProtection OrgFeature = "EBS_MALWARE_PROTECTION"
 	OrgFeatureRdsLoginEvents       OrgFeature = "RDS_LOGIN_EVENTS"
 	OrgFeatureEksRuntimeMonitoring OrgFeature = "EKS_RUNTIME_MONITORING"
+	OrgFeatureLambdaNetworkLogs    OrgFeature = "LAMBDA_NETWORK_LOGS"
 )
 
 // Values returns all known values for OrgFeature. Note that this can be expanded
@@ -532,6 +539,7 @@ func (OrgFeature) Values() []OrgFeature {
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
 		"EKS_RUNTIME_MONITORING",
+		"LAMBDA_NETWORK_LOGS",
 	}
 }
 

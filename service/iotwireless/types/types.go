@@ -795,6 +795,9 @@ type LoRaWANGateway struct {
 	// A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
 	JoinEuiFilters [][]string
 
+	// The MaxEIRP value.
+	MaxEirp *float32
+
 	// A list of NetId values that are used by LoRa gateways to filter the uplink
 	// frames.
 	NetIdFilters []string
@@ -986,6 +989,9 @@ type LoRaWANMulticastSession struct {
 	// Downlink frequency.
 	DlFreq *int32
 
+	// The PingSlotPeriod value.
+	PingSlotPeriod *int32
+
 	// Timestamp of when the multicast group session is to start.
 	SessionStartTime *time.Time
 
@@ -1019,6 +1025,12 @@ type LoRaWANServiceProfile struct {
 
 	// The DrMin value.
 	DrMin *int32
+
+	// The PRAllowed value that describes whether passive roaming is allowed.
+	PrAllowed bool
+
+	// The RAAllowed value that describes whether roaming activation is allowed.
+	RaAllowed bool
 
 	noSmithyDocumentSerde
 }

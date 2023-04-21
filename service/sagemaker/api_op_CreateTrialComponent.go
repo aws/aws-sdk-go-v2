@@ -19,7 +19,8 @@ import (
 // SDK, all experiments, trials, and trial components are automatically tracked,
 // logged, and indexed. When you use the Amazon Web Services SDK for Python (Boto),
 // you must use the logging APIs provided by the SDK. You can add tags to a trial
-// component and then use the Search API to search for the tags.
+// component and then use the Search (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html)
+// API to search for the tags.
 func (c *Client) CreateTrialComponent(ctx context.Context, params *CreateTrialComponentInput, optFns ...func(*Options)) (*CreateTrialComponentOutput, error) {
 	if params == nil {
 		params = &CreateTrialComponentInput{}
@@ -73,8 +74,8 @@ type CreateTrialComponentInput struct {
 	//   - Failed
 	Status *types.TrialComponentStatus
 
-	// A list of tags to associate with the component. You can use Search API to
-	// search on the tags.
+	// A list of tags to associate with the component. You can use Search (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html)
+	// API to search on the tags.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

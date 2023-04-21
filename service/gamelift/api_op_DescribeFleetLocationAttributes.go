@@ -25,7 +25,7 @@ import (
 // LocationAttributes object is returned for each requested location. If the fleet
 // does not have a requested location, no information is returned. This operation
 // does not return the home Region. To get information on a fleet's home Region,
-// call DescribeFleetAttributes . Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// call DescribeFleetAttributes . Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DescribeFleetLocationAttributes(ctx context.Context, params *DescribeFleetLocationAttributesInput, optFns ...func(*Options)) (*DescribeFleetLocationAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetLocationAttributesInput{}
@@ -68,8 +68,8 @@ type DescribeFleetLocationAttributesInput struct {
 type DescribeFleetLocationAttributesOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
-	// are unique across all Regions. Format is
+	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
+	// it. ARNs are unique across all Regions. Format is
 	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 

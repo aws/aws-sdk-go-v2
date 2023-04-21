@@ -70,13 +70,13 @@ type UpdateMatchmakingConfigurationInput struct {
 	// A description for the matchmaking configuration.
 	Description *string
 
-	// Indicates whether this matchmaking configuration is being used with GameLift
-	// hosting or as a standalone matchmaking solution.
+	// Indicates whether this matchmaking configuration is being used with Amazon
+	// GameLift hosting or as a standalone matchmaking solution.
 	//   - STANDALONE - FlexMatch forms matches and returns match information,
 	//   including players and team assignments, in a MatchmakingSucceeded (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded)
 	//   event.
-	//   - WITH_QUEUE - FlexMatch forms matches and uses the specified GameLift queue
-	//   to start a game session for the match.
+	//   - WITH_QUEUE - FlexMatch forms matches and uses the specified Amazon GameLift
+	//   queue to start a game session for the match.
 	FlexMatchMode types.FlexMatchMode
 
 	// A set of custom properties for a game session, formatted as key:value pairs.
@@ -96,12 +96,12 @@ type UpdateMatchmakingConfigurationInput struct {
 	GameSessionData *string
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a GameLift game session queue resource and uniquely
+	// ) that is assigned to a Amazon GameLift game session queue resource and uniquely
 	// identifies it. ARNs are unique across all Regions. Format is
 	// arn:aws:gamelift:::gamesessionqueue/ . Queues can be located in any Region.
-	// Queues are used to start new GameLift-hosted game sessions for matches that are
-	// created with this matchmaking configuration. If FlexMatchMode is set to
-	// STANDALONE , do not set this parameter.
+	// Queues are used to start new Amazon GameLift-hosted game sessions for matches
+	// that are created with this matchmaking configuration. If FlexMatchMode is set
+	// to STANDALONE , do not set this parameter.
 	GameSessionQueueArns []string
 
 	// An SNS topic ARN that is set up to receive matchmaking notifications. See

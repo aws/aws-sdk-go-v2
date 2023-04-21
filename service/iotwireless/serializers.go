@@ -7828,6 +7828,24 @@ func awsRestjson1_serializeOpDocumentUpdateWirelessGatewayInput(v *UpdateWireles
 		}
 	}
 
+	if v.MaxEirp != nil {
+		ok := object.Key("MaxEirp")
+		switch {
+		case math.IsNaN(float64(*v.MaxEirp)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MaxEirp), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MaxEirp), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MaxEirp)
+
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -8827,6 +8845,24 @@ func awsRestjson1_serializeDocumentLoRaWANGateway(v *types.LoRaWANGateway, value
 		}
 	}
 
+	if v.MaxEirp != nil {
+		ok := object.Key("MaxEirp")
+		switch {
+		case math.IsNaN(float64(*v.MaxEirp)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MaxEirp), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MaxEirp), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MaxEirp)
+
+		}
+	}
+
 	if v.NetIdFilters != nil {
 		ok := object.Key("NetIdFilters")
 		if err := awsRestjson1_serializeDocumentNetIdFilters(v.NetIdFilters, ok); err != nil {
@@ -8938,6 +8974,11 @@ func awsRestjson1_serializeDocumentLoRaWANMulticastSession(v *types.LoRaWANMulti
 		ok.Integer(*v.DlFreq)
 	}
 
+	if v.PingSlotPeriod != nil {
+		ok := object.Key("PingSlotPeriod")
+		ok.Integer(*v.PingSlotPeriod)
+	}
+
 	if v.SessionStartTime != nil {
 		ok := object.Key("SessionStartTime")
 		ok.String(smithytime.FormatDateTime(*v.SessionStartTime))
@@ -8987,6 +9028,16 @@ func awsRestjson1_serializeDocumentLoRaWANServiceProfile(v *types.LoRaWANService
 	if v.DrMin != nil {
 		ok := object.Key("DrMin")
 		ok.Integer(*v.DrMin)
+	}
+
+	if v.PrAllowed {
+		ok := object.Key("PrAllowed")
+		ok.Boolean(v.PrAllowed)
+	}
+
+	if v.RaAllowed {
+		ok := object.Key("RaAllowed")
+		ok.Boolean(v.RaAllowed)
 	}
 
 	return nil

@@ -13,8 +13,8 @@ import (
 
 // Gets the Amazon Chime SDK attendee details for a specified meeting ID and
 // attendee ID. For more information about the Amazon Chime SDK, see Using the
-// Amazon Chime SDK (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html)
-// in the Amazon Chime Developer Guide .
+// Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
+// in the Amazon Chime SDK Developer Guide .
 func (c *Client) GetAttendee(ctx context.Context, params *GetAttendeeInput, optFns ...func(*Options)) (*GetAttendeeOutput, error) {
 	if params == nil {
 		params = &GetAttendeeInput{}

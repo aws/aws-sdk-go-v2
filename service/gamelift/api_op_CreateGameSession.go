@@ -14,7 +14,7 @@ import (
 // Creates a multiplayer game session for players in a specific fleet location.
 // This operation prompts an available server process to start a game session and
 // retrieves connection information for the new game session. As an alternative,
-// consider using the GameLift game session placement feature with
+// consider using the Amazon GameLift game session placement feature with
 // StartGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
 // , which uses FleetIQ algorithms and queues to optimize the placement process.
 // When creating a game session, you specify exactly where you want to place it and
@@ -67,12 +67,15 @@ type CreateGameSessionInput struct {
 	// reference either a fleet ID or alias ID, but not both.
 	AliasId *string
 
-	// A unique identifier for a player or entity creating the game session. This
-	// parameter is required when requesting a new game session on a fleet with a
-	// resource creation limit policy. This type of policy limits the number of
-	// concurrent active game sessions that one player can create within a certain time
-	// span. GameLift uses the CreatorId to evaluate the new request against the
-	// policy.
+	// A unique identifier for a player or entity creating the game session. If you
+	// add a resource creation limit policy to a fleet, the CreateGameSession
+	// operation requires a CreatorId . Amazon GameLift limits the number of game
+	// session creation requests with the same CreatorId in a specified time period.
+	// If you your fleet doesn't have a resource creation limit policy and you provide
+	// a CreatorId in your CreateGameSession requests, Amazon GameLift limits requests
+	// to one request per CreatorId per second. To not limit CreateGameSession
+	// requests with the same CreatorId , don't provide a CreatorId in your
+	// CreateGameSession request.
 	CreatorId *string
 
 	// A unique identifier for the fleet to create a game session in. You can use

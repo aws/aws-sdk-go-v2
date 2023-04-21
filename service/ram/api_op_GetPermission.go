@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the contents of an RAM permission in JSON format.
+// Retrieves the contents of a managed permission in JSON format.
 func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, optFns ...func(*Options)) (*GetPermissionOutput, error) {
 	if params == nil {
 		params = &GetPermissionInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, 
 
 type GetPermissionInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the permission whose contents you want to retrieve. To find the ARN for a
 	// permission, use either the ListPermissions operation or go to the Permissions
 	// library (https://console.aws.amazon.com/ram/home#Permissions:) page in the RAM
@@ -39,8 +39,9 @@ type GetPermissionInput struct {
 	// This member is required.
 	PermissionArn *string
 
-	// Specifies identifier for the version of the RAM permission to retrieve. If you
-	// don't specify this parameter, the operation retrieves the default version.
+	// Specifies the version number of the RAM permission to retrieve. If you don't
+	// specify this parameter, the operation retrieves the default version. To see the
+	// list of available versions, use ListPermissionVersions .
 	PermissionVersion *int32
 
 	noSmithyDocumentSerde
@@ -48,7 +49,7 @@ type GetPermissionInput struct {
 
 type GetPermissionOutput struct {
 
-	// An object that contains information about the permission.
+	// An object with details about the permission.
 	Permission *types.ResourceSharePermissionDetail
 
 	// Metadata pertaining to the operation's result.
