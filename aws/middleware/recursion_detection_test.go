@@ -49,11 +49,11 @@ func TestRecursionDetection(t *testing.T) {
 			defer restoreEnv()
 
 			setEnvVar(t, envAwsLambdaFunctionName, c.LambdaFuncName)
-			setEnvVar(t, envAmznTraceId, c.TraceID)
+			setEnvVar(t, envAmznTraceID, c.TraceID)
 
 			req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 			if c.HeaderBefore != "" {
-				req.Header.Set(amznTraceIdHeader, c.HeaderBefore)
+				req.Header.Set(amznTraceIDHeader, c.HeaderBefore)
 			}
 			var updatedRequest *smithyhttp.Request
 			m := RecursionDetection{}
@@ -69,7 +69,7 @@ func TestRecursionDetection(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if e, a := c.HeaderAfter, updatedRequest.Header.Get(amznTraceIdHeader); e != a {
+			if e, a := c.HeaderAfter, updatedRequest.Header.Get(amznTraceIDHeader); e != a {
 				t.Errorf("expect header value %v found, got %v", e, a)
 			}
 		})
