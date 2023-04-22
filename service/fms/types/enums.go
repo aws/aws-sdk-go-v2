@@ -44,6 +44,24 @@ func (CustomerPolicyScopeIdType) Values() []CustomerPolicyScopeIdType {
 	}
 }
 
+type CustomerPolicyStatus string
+
+// Enum values for CustomerPolicyStatus
+const (
+	CustomerPolicyStatusActive          CustomerPolicyStatus = "ACTIVE"
+	CustomerPolicyStatusOutOfAdminScope CustomerPolicyStatus = "OUT_OF_ADMIN_SCOPE"
+)
+
+// Values returns all known values for CustomerPolicyStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomerPolicyStatus) Values() []CustomerPolicyStatus {
+	return []CustomerPolicyStatus{
+		"ACTIVE",
+		"OUT_OF_ADMIN_SCOPE",
+	}
+}
+
 type DependentServiceName string
 
 // Enum values for DependentServiceName
@@ -168,6 +186,28 @@ func (NetworkFirewallOverrideAction) Values() []NetworkFirewallOverrideAction {
 	}
 }
 
+type OrganizationStatus string
+
+// Enum values for OrganizationStatus
+const (
+	OrganizationStatusOnboarding          OrganizationStatus = "ONBOARDING"
+	OrganizationStatusOnboardingComplete  OrganizationStatus = "ONBOARDING_COMPLETE"
+	OrganizationStatusOffboarding         OrganizationStatus = "OFFBOARDING"
+	OrganizationStatusOffboardingComplete OrganizationStatus = "OFFBOARDING_COMPLETE"
+)
+
+// Values returns all known values for OrganizationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationStatus) Values() []OrganizationStatus {
+	return []OrganizationStatus{
+		"ONBOARDING",
+		"ONBOARDING_COMPLETE",
+		"OFFBOARDING",
+		"OFFBOARDING_COMPLETE",
+	}
+}
+
 type PolicyComplianceStatusType string
 
 // Enum values for PolicyComplianceStatusType
@@ -201,6 +241,24 @@ func (RemediationActionType) Values() []RemediationActionType {
 	return []RemediationActionType{
 		"REMOVE",
 		"MODIFY",
+	}
+}
+
+type ResourceSetStatus string
+
+// Enum values for ResourceSetStatus
+const (
+	ResourceSetStatusActive          ResourceSetStatus = "ACTIVE"
+	ResourceSetStatusOutOfAdminScope ResourceSetStatus = "OUT_OF_ADMIN_SCOPE"
+)
+
+// Values returns all known values for ResourceSetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceSetStatus) Values() []ResourceSetStatus {
+	return []ResourceSetStatus{
+		"ACTIVE",
+		"OUT_OF_ADMIN_SCOPE",
 	}
 }
 

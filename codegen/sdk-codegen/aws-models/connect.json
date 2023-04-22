@@ -523,6 +523,9 @@
                     "target": "com.amazonaws.connect#CreateIntegrationAssociation"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateParticipant"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateQueue"
                 },
                 {
@@ -2805,14 +2808,14 @@
                 "ContentType": {
                     "target": "com.amazonaws.connect#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>,\n   <code>text/markdown</code>, <code>application/json</code>, and \n   <code>application/vnd.amazonaws.connect.message.interactive.response</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>,\n    <code>text/markdown</code>, <code>application/json</code>, and\n    <code>application/vnd.amazonaws.connect.message.interactive.response</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connect#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the chat message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are\n     Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of\n     12000. </p>\n            </li>\n            <li>\n               <p>For <code>application/vnd.amazonaws.connect.message.interactive.response</code>, the Length\n     Constraints are Minimum of 1, Maximum of 12288.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The content of the chat message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are\n     Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of\n     12000. </p>\n            </li>\n            <li>\n               <p>For <code>application/vnd.amazonaws.connect.message.interactive.response</code>, the\n     Length Constraints are Minimum of 1, Maximum of 12288.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4420,6 +4423,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#CreateParticipant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateParticipantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateParticipantResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat\n    flow experiences by integrating custom participants</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact/create-participant",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateParticipantRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect.  Only contacts in the CHAT channel are supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ParticipantDetails": {
+                    "target": "com.amazonaws.connect#ParticipantDetailsToAdd",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information identifying the participant.</p>\n         <important>\n            <p>The only Valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code>. </p>\n            <p>\n               <code>DisplayName</code> is <b>Required</b>.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateParticipantResponse": {
+            "type": "structure",
+            "members": {
+                "ParticipantCredentials": {
+                    "target": "com.amazonaws.connect#ParticipantTokenCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used by the chat participant to call <code>CreateParticipantConnection</code>. The participant\n   token is valid for the lifetime of a chat participant.</p>"
+                    }
+                },
+                "ParticipantId": {
+                    "target": "com.amazonaws.connect#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a chat participant. The participantId for a chat participant is the same\n   throughout the chat lifecycle.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#CreateQueue": {
             "type": "operation",
             "input": {
@@ -5709,13 +5805,13 @@
                 "BehaviorType": {
                     "target": "com.amazonaws.connect#BehaviorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the other channels that can be routed to an agent handling their current channel.</p>",
+                        "smithy.api#documentation": "<p>Specifies the other channels that can be routed to an agent handling their current\n   channel.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the cross-channel routing behavior that allows an agent working on a contact in \n   one channel to be offered a contact from a different channel.</p>"
+                "smithy.api#documentation": "<p>Defines the cross-channel routing behavior that allows an agent working on a contact in one\n   channel to be offered a contact from a different channel.</p>"
             }
         },
         "com.amazonaws.connect#CurrentMetric": {
@@ -9761,7 +9857,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the\n   retrieval of historical metrics data. The time must be later than the start time\n   timestamp.  It cannot be later than the current timestamp.</p>\n         <p>The time range between the start and end time must be less than 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the\n   retrieval of historical metrics data. The time must be later than the start time timestamp. It\n   cannot be later than the current timestamp.</p>\n         <p>The time range between the start and end time must be less than 24 hours.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10917,6 +11013,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>The start time or end time for an hours of operation.</p>"
             }
+        },
+        "com.amazonaws.connect#ISO8601Datetime": {
+            "type": "string"
         },
         "com.amazonaws.connect#IdempotencyException": {
             "type": "structure",
@@ -14887,7 +14986,7 @@
                 "CrossChannelBehavior": {
                     "target": "com.amazonaws.connect#CrossChannelBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the cross-channel routing behavior for each channel that is enabled for this Routing \n   Profile. For example, this allows you to offer an agent a different contact from another channel \n   when they are currently working with a contact from a Voice channel.</p>"
+                        "smithy.api#documentation": "<p>Defines the cross-channel routing behavior for each channel that is enabled for this Routing\n   Profile. For example, this allows you to offer an agent a different contact from another channel\n   when they are currently working with a contact from a Voice channel.</p>"
                     }
                 }
             },
@@ -14930,7 +15029,7 @@
                 "MetricFilterKey": {
                     "target": "com.amazonaws.connect#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key to use for filtering data. </p>\n         <p>Valid metric filter keys: <code>INITIATION_METHOD</code>,\n   <code>DISCONNECT_REASON</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The key to use for filtering data. </p>\n         <p>Valid metric filter keys: <code>INITIATION_METHOD</code>, <code>DISCONNECT_REASON</code>.\n   These are the same values as the <code>InitiationMethod</code> and <code>DisconnectReason</code>\n   in the contact record. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>"
                     }
                 },
                 "MetricFilterValues": {
@@ -15348,12 +15447,61 @@
                 "smithy.api#documentation": "<p>The customer's details.</p>"
             }
         },
+        "com.amazonaws.connect#ParticipantDetailsToAdd": {
+            "type": "structure",
+            "members": {
+                "ParticipantRole": {
+                    "target": "com.amazonaws.connect#ParticipantRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the participant being added.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.connect#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the participant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details to add for the participant.</p>"
+            }
+        },
         "com.amazonaws.connect#ParticipantId": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantRole": {
+            "type": "enum",
+            "members": {
+                "AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT"
+                    }
+                },
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM"
+                    }
+                },
+                "CUSTOM_BOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_BOT"
+                    }
                 }
             }
         },
@@ -15462,6 +15610,26 @@
                     "min": 1,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTokenCredentials": {
+            "type": "structure",
+            "members": {
+                "ParticipantToken": {
+                    "target": "com.amazonaws.connect#ParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used by the chat participant to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat\n   participant. </p>"
+                    }
+                },
+                "Expiry": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration of the token. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ.\n   For example, 2019-11-08T02:41:28.172Z.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The credentials used by the participant.</p>"
             }
         },
         "com.amazonaws.connect#Password": {
@@ -20181,7 +20349,7 @@
                 "SupportedMessagingContentTypes": {
                     "target": "com.amazonaws.connect#SupportedMessagingContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported chat message content types. \n   Supported types are <code>text/plain</code>,\n   <code>text/markdown</code>, <code>application/json</code>,  <code>application/vnd.amazonaws.connect.message.interactive</code>, and \n   <code>application/vnd.amazonaws.connect.message.interactive.response</code>. </p>\n         <p>Content types must always contain\n    <code>text/plain</code>. You can then put any other supported type in the list. For example, all\n   the following lists are valid because they contain <code>text/plain</code>: <code>[text/plain,\n    text/markdown, application/json]</code>, <code>[text/markdown, text/plain]</code>,\n    <code>[text/plain, application/json,\n    application/vnd.amazonaws.connect.message.interactive.response]</code>. </p>\n         <note>\n            <p>The type <code>application/vnd.amazonaws.connect.message.interactive</code> is required to\n    use the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/show-view-block.html\">Show\n     view</a> flow block.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The supported chat message content types. Supported types are <code>text/plain</code>,\n    <code>text/markdown</code>, <code>application/json</code>,\n    <code>application/vnd.amazonaws.connect.message.interactive</code>, and\n    <code>application/vnd.amazonaws.connect.message.interactive.response</code>. </p>\n         <p>Content types must always contain <code>text/plain</code>. You can then put any other\n   supported type in the list. For example, all the following lists are valid because they contain\n    <code>text/plain</code>: <code>[text/plain, text/markdown, application/json]</code>,\n    <code>[text/markdown, text/plain]</code>, <code>[text/plain, application/json,\n    application/vnd.amazonaws.connect.message.interactive.response]</code>. </p>\n         <note>\n            <p>The type <code>application/vnd.amazonaws.connect.message.interactive</code> is required to\n    use the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/show-view-block.html\">Show\n     view</a> flow block.</p>\n         </note>"
                     }
                 },
                 "PersistentChat": {

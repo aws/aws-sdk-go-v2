@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the Organizations account that is associated with Firewall Manager as
-// the Firewall Manager administrator.
+// the Firewall Manager default administrator.
 func (c *Client) GetAdminAccount(ctx context.Context, params *GetAdminAccountInput, optFns ...func(*Options)) (*GetAdminAccountOutput, error) {
 	if params == nil {
 		params = &GetAdminAccountInput{}
@@ -34,12 +34,11 @@ type GetAdminAccountInput struct {
 
 type GetAdminAccountOutput struct {
 
-	// The Amazon Web Services account that is set as the Firewall Manager
-	// administrator.
+	// The account that is set as the Firewall Manager default administrator.
 	AdminAccount *string
 
-	// The status of the Amazon Web Services account that you set as the Firewall
-	// Manager administrator.
+	// The status of the account that you set as the Firewall Manager default
+	// administrator.
 	RoleStatus types.AccountRoleStatus
 
 	// Metadata pertaining to the operation's result.

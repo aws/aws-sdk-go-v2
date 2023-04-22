@@ -2126,7 +2126,8 @@ type LinuxParameters struct {
 	// omitted, the container will use the swap configuration for the container
 	// instance it is running on. A maxSwap value must be set for the swappiness
 	// parameter to be used. If you're using tasks that use the Fargate launch type,
-	// the maxSwap parameter isn't supported.
+	// the maxSwap parameter isn't supported. If you're using tasks on Amazon Linux
+	// 2023 the swappiness parameter isn't supported.
 	MaxSwap *int32
 
 	// The value for the size (in MiB) of the /dev/shm volume. This parameter maps to
@@ -2143,7 +2144,8 @@ type LinuxParameters struct {
 	// specified for maxSwap then this parameter is ignored. This parameter maps to
 	// the --memory-swappiness option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
 	// . If you're using tasks that use the Fargate launch type, the swappiness
-	// parameter isn't supported.
+	// parameter isn't supported. If you're using tasks on Amazon Linux 2023 the
+	// swappiness parameter isn't supported.
 	Swappiness *int32
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
@@ -2523,11 +2525,17 @@ type PlatformDevice struct {
 // to send or receive traffic. Port mappings are specified as part of the container
 // definition. If you use containers in a task with the awsvpc or host network
 // mode, specify the exposed ports using containerPort . The hostPort can be left
-// blank or it must be the same value as the containerPort . You can't expose the
-// same container port for multiple protocols. If you attempt this, an error is
-// returned. After a task reaches the RUNNING status, manual and automatic host
-// and container port assignments are visible in the networkBindings section of
-// DescribeTasks API responses.
+// blank or it must be the same value as the containerPort . Most fields of this
+// parameter ( containerPort , hostPort , protocol ) maps to PortBindings in the
+// Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+// and the --publish option to docker run (https://docs.docker.com/engine/reference/commandline/run/)
+// . If the network mode of a task definition is set to host , host ports must
+// either be undefined or match the container port in the port mapping. You can't
+// expose the same container port for multiple protocols. If you attempt this, an
+// error is returned. After a task reaches the RUNNING status, manual and
+// automatic host and container port assignments are visible in the networkBindings
+// section of DescribeTasks API responses.
 type PortMapping struct {
 
 	// The application protocol that's used for the port mapping. This parameter only

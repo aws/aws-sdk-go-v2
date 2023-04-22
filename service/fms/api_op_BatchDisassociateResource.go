@@ -36,7 +36,7 @@ type BatchDisassociateResourceInput struct {
 	// This member is required.
 	Items []string
 
-	// A unique identifier for the resource set, used in a TODO to refer to the
+	// A unique identifier for the resource set, used in a request to refer to the
 	// resource set.
 	//
 	// This member is required.
@@ -52,7 +52,7 @@ type BatchDisassociateResourceOutput struct {
 	// This member is required.
 	FailedItems []types.FailedItem
 
-	// A unique identifier for the resource set, used in a TODO to refer to the
+	// A unique identifier for the resource set, used in a request to refer to the
 	// resource set.
 	//
 	// This member is required.

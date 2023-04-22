@@ -10,9 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the account that has been set as the Firewall Manager
-// administrator account. To set a different account as the administrator account,
-// you must submit an AssociateAdminAccount request.
+// Disassociates an Firewall Manager administrator account. To set a different
+// account as an Firewall Manager administrator, submit a PutAdminAccount request.
+// To set an account as a default administrator account, you must submit an
+// AssociateAdminAccount request. Disassociation of the default administrator
+// account follows the first in, last out principle. If you are the default
+// administrator, all Firewall Manager administrators within the organization must
+// first disassociate their accounts before you can disassociate your account.
 func (c *Client) DisassociateAdminAccount(ctx context.Context, params *DisassociateAdminAccountInput, optFns ...func(*Options)) (*DisassociateAdminAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateAdminAccountInput{}

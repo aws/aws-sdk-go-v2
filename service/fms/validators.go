@@ -190,6 +190,26 @@ func (m *validateOpDisassociateThirdPartyFirewall) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAdminScope struct {
+}
+
+func (*validateOpGetAdminScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAdminScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAdminScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAdminScopeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAppsList struct {
 }
 
@@ -490,6 +510,26 @@ func (m *validateOpListThirdPartyFirewallFirewallPolicies) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAdminAccount struct {
+}
+
+func (*validateOpPutAdminAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAdminAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAdminAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAdminAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutAppsList struct {
 }
 
@@ -666,6 +706,10 @@ func addOpDisassociateThirdPartyFirewallValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpDisassociateThirdPartyFirewall{}, middleware.After)
 }
 
+func addOpGetAdminScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAdminScope{}, middleware.After)
+}
+
 func addOpGetAppsListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAppsList{}, middleware.After)
 }
@@ -724,6 +768,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListThirdPartyFirewallFirewallPoliciesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListThirdPartyFirewallFirewallPolicies{}, middleware.After)
+}
+
+func addOpPutAdminAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAdminAccount{}, middleware.After)
 }
 
 func addOpPutAppsListValidationMiddleware(stack *middleware.Stack) error {
@@ -1125,6 +1173,21 @@ func validateOpDisassociateThirdPartyFirewallInput(v *DisassociateThirdPartyFire
 	}
 }
 
+func validateOpGetAdminScopeInput(v *GetAdminScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAdminScopeInput"}
+	if v.AdminAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdminAccount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAppsListInput(v *GetAppsListInput) error {
 	if v == nil {
 		return nil
@@ -1360,6 +1423,21 @@ func validateOpListThirdPartyFirewallFirewallPoliciesInput(v *ListThirdPartyFire
 	}
 	if v.MaxResults == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAdminAccountInput(v *PutAdminAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAdminAccountInput"}
+	if v.AdminAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdminAccount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

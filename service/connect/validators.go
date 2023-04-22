@@ -350,6 +350,26 @@ func (m *validateOpCreateIntegrationAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateParticipant struct {
+}
+
+func (*validateOpCreateParticipant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateParticipant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateParticipantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateParticipantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateQueue struct {
 }
 
@@ -3398,6 +3418,10 @@ func addOpCreateIntegrationAssociationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateIntegrationAssociation{}, middleware.After)
 }
 
+func addOpCreateParticipantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateParticipant{}, middleware.After)
+}
+
 func addOpCreateQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateQueue{}, middleware.After)
 }
@@ -5200,6 +5224,27 @@ func validateOpCreateIntegrationAssociationInput(v *CreateIntegrationAssociation
 	}
 	if v.IntegrationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateParticipantInput(v *CreateParticipantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateParticipantInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.ParticipantDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantDetails"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
