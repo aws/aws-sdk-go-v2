@@ -27,6 +27,8 @@ import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.ErrorTrait;
+import software.amazon.smithy.go.codegen.endpoints.EndpointRulesEngineGenerator;
+import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 
 /**
  * Handles generating the aws query protocol for services.
@@ -212,7 +214,15 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     }
 
     @Override
+    public void generateEndpointRulesEngine(GenerationContext context) {
+        var generator = new EndpointRulesEngineGenerator(new AwsFnProvider());
+        generator.generate(context);
+    }
+
+    @Override
     protected void writeOperationSerializerMiddlewareEventStreamSetup(GenerationContext context, EventStreamInfo info) {
         throw new CodegenException("event streams not supported with AWS QUERY protocol.");
     }
+
+
 }

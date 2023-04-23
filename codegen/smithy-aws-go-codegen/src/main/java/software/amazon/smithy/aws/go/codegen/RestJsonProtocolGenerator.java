@@ -58,6 +58,9 @@ import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlNamespaceTrait;
+import software.amazon.smithy.go.codegen.endpoints.EndpointRulesEngineGenerator;
+import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
+
 
 /**
  * Handles general components across the AWS JSON protocols that have HTTP bindings.
@@ -107,6 +110,15 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 .supportJsonName(true)
                 .build());
     }
+
+
+    @Override
+    public void generateEndpointRulesEngine(GenerationContext context) {
+        var generator = new EndpointRulesEngineGenerator(new AwsFnProvider());
+        generator.generate(context);
+    }
+
+
 
     @Override
     protected void writeMiddlewarePayloadAsDocumentSerializerDelegator(

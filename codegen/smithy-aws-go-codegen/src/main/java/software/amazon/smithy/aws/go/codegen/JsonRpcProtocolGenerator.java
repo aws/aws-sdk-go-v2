@@ -42,6 +42,9 @@ import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.ErrorTrait;
 import software.amazon.smithy.model.traits.EventHeaderTrait;
 import software.amazon.smithy.model.traits.EventPayloadTrait;
+import software.amazon.smithy.go.codegen.endpoints.EndpointRulesEngineGenerator;
+import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
+
 
 /**
  * Handles generating the aws.rest-json protocol for services.
@@ -358,6 +361,12 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
                     .deserializerNameProvider((shape, serviceShape, proto) -> functionName)
                     .build());
         }
+    }
+
+    @Override
+    public void generateEndpointRulesEngine(GenerationContext context) {
+        var generator = new EndpointRulesEngineGenerator(new AwsFnProvider());
+        generator.generate(context);
     }
 
 }
