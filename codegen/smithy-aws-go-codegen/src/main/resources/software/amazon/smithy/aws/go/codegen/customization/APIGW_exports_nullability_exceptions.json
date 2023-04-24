@@ -71,6 +71,7 @@
         "com.amazonaws.mediaconvert#__doubleMinNegative60Max6",
         "com.amazonaws.mediaconvert#__doubleMinNegative60MaxNegative1",
         "com.amazonaws.mediaconvert#__doubleMinNegative6Max3",
+        "com.amazonaws.mediaconvert#__doubleMinNegative8Max0",
         "com.amazonaws.mediaconvert#__integer",
         "com.amazonaws.mediaconvert#__integerMin0Max0",
         "com.amazonaws.mediaconvert#__integerMin0Max1",
