@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -142,7 +143,7 @@ public class ApiGatewayExportsNullabilityExceptionIntegration implements GoInteg
         Model previousModel = handleApiGateWayExportsNullabilityExceptions(
                 getPreviousModel(service, model), service, nullabilityExceptions, true);
         model = handleApiGateWayExportsNullabilityExceptions(
-                model, service, nullabilityExceptions, false);
+                model, service, nullabilityExceptions, true);
         List<ValidationEvent> awsSdkGoV2ChangedNullabilityEvents = getAwsSdkGoV2ChangedNullabilityEvents(
                 previousModel,
                 model);
@@ -266,6 +267,7 @@ public class ApiGatewayExportsNullabilityExceptionIntegration implements GoInteg
         // Patch default traits to nullability exceptions
         for (ShapeId shapeId : nullabilityExceptions) {
             if (relaxed && !model.getShape(shapeId).isPresent()) {
+                LOGGER.warning("Shape `" + shapeId + "` nullability exception is not present in the model");
                 continue;
             }
             Shape shape = model.expectShape(shapeId);
@@ -317,8 +319,14 @@ public class ApiGatewayExportsNullabilityExceptionIntegration implements GoInteg
     }
 
     private static void validateNullabilityExceptions(Set<ShapeId> nullabilityExceptions, Model model) {
-        Map<ShapeId, Shape> nullabilityExceptionMap = nullabilityExceptions.stream()
-                .collect(Collectors.toMap(s -> s, s -> model.expectShape(s)));
+        Map<ShapeId, Shape> nullabilityExceptionMap = new HashMap<>();
+        for (ShapeId shapeId : nullabilityExceptions) {
+            if (model.getShape(shapeId).isPresent()) {
+                nullabilityExceptionMap.put(shapeId, model.expectShape(shapeId));
+            } else {
+                LOGGER.warning("Shape `" + shapeId + "` nullability exception is not present in the model");
+            }
+        }
         // Existing “defaulted” root boolean or number shapes MUST be backfilled with a
         // default trait.
         for (Map.Entry<ShapeId, Shape> entry : nullabilityExceptionMap.entrySet()) {
