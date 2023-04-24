@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified Verified Access group configuration.
+// Modifies the specified Amazon Web Services Verified Access group configuration.
 func (c *Client) ModifyVerifiedAccessGroup(ctx context.Context, params *ModifyVerifiedAccessGroupInput, optFns ...func(*Options)) (*ModifyVerifiedAccessGroupOutput, error) {
 	if params == nil {
 		params = &ModifyVerifiedAccessGroupInput{}
@@ -30,7 +30,7 @@ func (c *Client) ModifyVerifiedAccessGroup(ctx context.Context, params *ModifyVe
 
 type ModifyVerifiedAccessGroupInput struct {
 
-	// The ID of the Amazon Web Services Verified Access group.
+	// The ID of the Verified Access group.
 	//
 	// This member is required.
 	VerifiedAccessGroupId *string
@@ -40,7 +40,7 @@ type ModifyVerifiedAccessGroupInput struct {
 	// .
 	ClientToken *string
 
-	// A description for the Amazon Web Services Verified Access group.
+	// A description for the Verified Access group.
 	Description *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -49,7 +49,7 @@ type ModifyVerifiedAccessGroupInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	VerifiedAccessInstanceId *string
 
 	noSmithyDocumentSerde
@@ -57,7 +57,7 @@ type ModifyVerifiedAccessGroupInput struct {
 
 type ModifyVerifiedAccessGroupOutput struct {
 
-	// Details of Amazon Web Services Verified Access group.
+	// Details of Verified Access group.
 	VerifiedAccessGroup *types.VerifiedAccessGroup
 
 	// Metadata pertaining to the operation's result.

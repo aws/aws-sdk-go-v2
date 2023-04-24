@@ -37,7 +37,7 @@ type CreateVerifiedAccessInstanceInput struct {
 	// .
 	ClientToken *string
 
-	// A description for the Amazon Web Services Verified Access instance.
+	// A description for the Verified Access instance.
 	Description *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -46,7 +46,7 @@ type CreateVerifiedAccessInstanceInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The tags to assign to the Amazon Web Services Verified Access instance.
+	// The tags to assign to the Verified Access instance.
 	TagSpecifications []types.TagSpecification
 
 	noSmithyDocumentSerde
@@ -54,7 +54,7 @@ type CreateVerifiedAccessInstanceInput struct {
 
 type CreateVerifiedAccessInstanceOutput struct {
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	VerifiedAccessInstance *types.VerifiedAccessInstance
 
 	// Metadata pertaining to the operation's result.

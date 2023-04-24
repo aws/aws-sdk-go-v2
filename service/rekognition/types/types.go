@@ -1321,7 +1321,7 @@ type LivenessOutputConfig struct {
 	// This member is required.
 	S3Bucket *string
 
-	// The prefix appended to the output files for the Face Liveness session results.
+	// The prefix prepended to the output files for the Face Liveness session results.
 	S3KeyPrefix *string
 
 	noSmithyDocumentSerde

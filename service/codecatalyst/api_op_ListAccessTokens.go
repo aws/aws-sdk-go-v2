@@ -12,7 +12,7 @@ import (
 )
 
 // Lists all personal access tokens (PATs) associated with the user who calls the
-// API. You can only list PATs associated with your user account.
+// API. You can only list PATs associated with your Amazon Web Services Builder ID.
 func (c *Client) ListAccessTokens(ctx context.Context, params *ListAccessTokensInput, optFns ...func(*Options)) (*ListAccessTokensOutput, error) {
 	if params == nil {
 		params = &ListAccessTokensInput{}
@@ -44,7 +44,8 @@ type ListAccessTokensInput struct {
 
 type ListAccessTokensOutput struct {
 
-	// A list of personal access tokens (PATs) associated with the calling user.
+	// A list of personal access tokens (PATs) associated with the calling user
+	// identity.
 	//
 	// This member is required.
 	Items []types.AccessTokenSummary

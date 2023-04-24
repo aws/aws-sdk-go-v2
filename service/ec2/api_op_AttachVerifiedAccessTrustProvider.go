@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A trust provider is a third-party entity that creates, maintains, and manages
-// identity information for users and devices. One or more trust providers can be
-// attached to an Amazon Web Services Verified Access instance.
+// Attaches the specified Amazon Web Services Verified Access trust provider to
+// the specified Amazon Web Services Verified Access instance.
 func (c *Client) AttachVerifiedAccessTrustProvider(ctx context.Context, params *AttachVerifiedAccessTrustProviderInput, optFns ...func(*Options)) (*AttachVerifiedAccessTrustProviderOutput, error) {
 	if params == nil {
 		params = &AttachVerifiedAccessTrustProviderInput{}
@@ -32,12 +31,12 @@ func (c *Client) AttachVerifiedAccessTrustProvider(ctx context.Context, params *
 
 type AttachVerifiedAccessTrustProviderInput struct {
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	//
 	// This member is required.
 	VerifiedAccessInstanceId *string
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	//
 	// This member is required.
 	VerifiedAccessTrustProviderId *string
@@ -58,10 +57,10 @@ type AttachVerifiedAccessTrustProviderInput struct {
 
 type AttachVerifiedAccessTrustProviderOutput struct {
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	VerifiedAccessInstance *types.VerifiedAccessInstance
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	VerifiedAccessTrustProvider *types.VerifiedAccessTrustProvider
 
 	// Metadata pertaining to the operation's result.

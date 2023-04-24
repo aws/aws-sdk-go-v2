@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detach a trust provider from an Amazon Web Services Verified Access instance.
+// Detaches the specified Amazon Web Services Verified Access trust provider from
+// the specified Amazon Web Services Verified Access instance.
 func (c *Client) DetachVerifiedAccessTrustProvider(ctx context.Context, params *DetachVerifiedAccessTrustProviderInput, optFns ...func(*Options)) (*DetachVerifiedAccessTrustProviderOutput, error) {
 	if params == nil {
 		params = &DetachVerifiedAccessTrustProviderInput{}
@@ -30,12 +31,12 @@ func (c *Client) DetachVerifiedAccessTrustProvider(ctx context.Context, params *
 
 type DetachVerifiedAccessTrustProviderInput struct {
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	//
 	// This member is required.
 	VerifiedAccessInstanceId *string
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	//
 	// This member is required.
 	VerifiedAccessTrustProviderId *string
@@ -56,10 +57,10 @@ type DetachVerifiedAccessTrustProviderInput struct {
 
 type DetachVerifiedAccessTrustProviderOutput struct {
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	VerifiedAccessInstance *types.VerifiedAccessInstance
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	VerifiedAccessTrustProvider *types.VerifiedAccessTrustProvider
 
 	// Metadata pertaining to the operation's result.

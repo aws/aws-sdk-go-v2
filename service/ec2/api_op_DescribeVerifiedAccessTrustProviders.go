@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe details of existing Verified Access trust providers.
+// Describes the specified Amazon Web Services Verified Access trust providers.
 func (c *Client) DescribeVerifiedAccessTrustProviders(ctx context.Context, params *DescribeVerifiedAccessTrustProvidersInput, optFns ...func(*Options)) (*DescribeVerifiedAccessTrustProvidersOutput, error) {
 	if params == nil {
 		params = &DescribeVerifiedAccessTrustProvidersInput{}
@@ -46,7 +46,7 @@ type DescribeVerifiedAccessTrustProvidersInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The IDs of the Amazon Web Services Verified Access trust providers.
+	// The IDs of the Verified Access trust providers.
 	VerifiedAccessTrustProviderIds []string
 
 	noSmithyDocumentSerde
@@ -58,7 +58,7 @@ type DescribeVerifiedAccessTrustProvidersOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
-	// The IDs of the Amazon Web Services Verified Access trust providers.
+	// The IDs of the Verified Access trust providers.
 	VerifiedAccessTrustProviders []types.VerifiedAccessTrustProvider
 
 	// Metadata pertaining to the operation's result.

@@ -31,12 +31,12 @@ func (c *Client) ModifyVerifiedAccessInstanceLoggingConfiguration(ctx context.Co
 
 type ModifyVerifiedAccessInstanceLoggingConfigurationInput struct {
 
-	// The configuration options for Amazon Web Services Verified Access instances.
+	// The configuration options for Verified Access instances.
 	//
 	// This member is required.
 	AccessLogs *types.VerifiedAccessLogOptions
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	//
 	// This member is required.
 	VerifiedAccessInstanceId *string
@@ -57,7 +57,7 @@ type ModifyVerifiedAccessInstanceLoggingConfigurationInput struct {
 
 type ModifyVerifiedAccessInstanceLoggingConfigurationOutput struct {
 
-	// The logging configuration for Amazon Web Services Verified Access instance.
+	// The logging configuration for the Verified Access instance.
 	LoggingConfiguration *types.VerifiedAccessInstanceLoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

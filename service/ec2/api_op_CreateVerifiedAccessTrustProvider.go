@@ -14,9 +14,8 @@ import (
 
 // A trust provider is a third-party entity that creates, maintains, and manages
 // identity information for users and devices. When an application request is made,
-// the identity information sent by the trust provider will be evaluated by Amazon
-// Web Services Verified Access, before allowing or denying the application
-// request.
+// the identity information sent by the trust provider is evaluated by Verified
+// Access before allowing or denying the application request.
 func (c *Client) CreateVerifiedAccessTrustProvider(ctx context.Context, params *CreateVerifiedAccessTrustProviderInput, optFns ...func(*Options)) (*CreateVerifiedAccessTrustProviderOutput, error) {
 	if params == nil {
 		params = &CreateVerifiedAccessTrustProviderInput{}
@@ -39,7 +38,7 @@ type CreateVerifiedAccessTrustProviderInput struct {
 	// This member is required.
 	PolicyReferenceName *string
 
-	// The type of trust provider can be either user or device-based.
+	// The type of trust provider.
 	//
 	// This member is required.
 	TrustProviderType types.TrustProviderType
@@ -49,13 +48,15 @@ type CreateVerifiedAccessTrustProviderInput struct {
 	// .
 	ClientToken *string
 
-	// A description for the Amazon Web Services Verified Access trust provider.
+	// A description for the Verified Access trust provider.
 	Description *string
 
-	// The options for device identity based trust providers.
+	// The options for a device-based trust provider. This parameter is required when
+	// the provider type is device .
 	DeviceOptions *types.CreateVerifiedAccessTrustProviderDeviceOptions
 
-	// The type of device-based trust provider.
+	// The type of device-based trust provider. This parameter is required when the
+	// provider type is device .
 	DeviceTrustProviderType types.DeviceTrustProviderType
 
 	// Checks whether you have the required permissions for the action, without
@@ -64,13 +65,15 @@ type CreateVerifiedAccessTrustProviderInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The OpenID Connect details for an oidc -type, user-identity based trust provider.
+	// The options for a OpenID Connect-compatible user-identity trust provider. This
+	// parameter is required when the provider type is user .
 	OidcOptions *types.CreateVerifiedAccessTrustProviderOidcOptions
 
-	// The tags to assign to the Amazon Web Services Verified Access trust provider.
+	// The tags to assign to the Verified Access trust provider.
 	TagSpecifications []types.TagSpecification
 
-	// The type of user-based trust provider.
+	// The type of user-based trust provider. This parameter is required when the
+	// provider type is user .
 	UserTrustProviderType types.UserTrustProviderType
 
 	noSmithyDocumentSerde
@@ -78,7 +81,7 @@ type CreateVerifiedAccessTrustProviderInput struct {
 
 type CreateVerifiedAccessTrustProviderOutput struct {
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	VerifiedAccessTrustProvider *types.VerifiedAccessTrustProvider
 
 	// Metadata pertaining to the operation's result.

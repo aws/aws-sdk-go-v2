@@ -3,11 +3,10 @@
 // Package codecatalyst provides the API client, operations, and parameter types
 // for Amazon CodeCatalyst.
 //
-// Amazon CodeCatalyst is in preview release and subject to change. Welcome to the
-// Amazon CodeCatalyst API reference. This reference provides descriptions of
-// operations and data types for Amazon CodeCatalyst. You can use the Amazon
-// CodeCatalyst API to work with the following objects. Dev Environments and the
-// Amazon Web Services Toolkits, by calling the following:
+// Welcome to the Amazon CodeCatalyst API reference. This reference provides
+// descriptions of operations and data types for Amazon CodeCatalyst. You can use
+// the Amazon CodeCatalyst API to work with the following objects. Dev Environments
+// and the Amazon Web Services Toolkits, by calling the following:
 //   - CreateAccessToken , which creates a personal access token (PAT) for the
 //     current user.
 //   - CreateDevEnvironment , which creates a Dev Environment, where you can
@@ -20,11 +19,12 @@
 //   - GetProject , which returns information about a project.
 //   - GetSourceRepositoryCloneUrls , which returns information about the URLs that
 //     can be used with a Git client to clone a source repository.
+//   - GetSpace , which returns information about a space.
 //   - GetSubscription , which returns information about the Amazon Web Services
 //     account used for billing purposes and the billing plan for the space.
 //   - GetUserDetails , which returns information about a user in Amazon
 //     CodeCatalyst.
-//   - ListDevEnvironments , which retrives a list of Dev Environments in a
+//   - ListDevEnvironments , which retrieves a list of Dev Environments in a
 //     project.
 //   - ListProjects , which retrieves a list of projects in a space.
 //   - ListSourceRepositories , which retrieves a list of source repositories in a
@@ -52,4 +52,10 @@
 //     with a user.
 //   - ListEventLogs , which retrieves a list of events that occurred during a
 //     specified time period in a space.
+//
+// If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must
+// configure your computer to work with Amazon CodeCatalyst and single sign-on
+// (SSO). For more information, see Setting up to use the CLI with Amazon
+// CodeCatalyst (https://docs.aws.amazon.com/codecatalyst/latest/userguide/set-up-cli.html)
+// and the SSO documentation for your SDK.
 package codecatalyst

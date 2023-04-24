@@ -6094,6 +6094,55 @@ func awsRestjson1_deserializeDocumentAccelerationSettings(v **types.Acceleration
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdvancedInputFilterSettings(v **types.AdvancedInputFilterSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdvancedInputFilterSettings
+	if *v == nil {
+		sv = &types.AdvancedInputFilterSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "addTexture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdvancedInputFilterAddTexture to be of type string, got %T instead", value)
+				}
+				sv.AddTexture = types.AdvancedInputFilterAddTexture(jtv)
+			}
+
+		case "sharpening":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdvancedInputFilterSharpen to be of type string, got %T instead", value)
+				}
+				sv.Sharpening = types.AdvancedInputFilterSharpen(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6674,7 +6723,7 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 					sv.TruePeakLimiterThreshold = f64
 
 				default:
-					return fmt.Errorf("expected __doubleMinNegative20Max0 to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected __doubleMinNegative8Max0 to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -11650,6 +11699,15 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				sv.Convert608To708 = types.FileSourceConvert608To708(jtv)
 			}
 
+		case "convertPaintToPop":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CaptionSourceConvertPaintOnToPopOn to be of type string, got %T instead", value)
+				}
+				sv.ConvertPaintToPop = types.CaptionSourceConvertPaintOnToPopOn(jtv)
+			}
+
 		case "framerate":
 			if err := awsRestjson1_deserializeDocumentCaptionSourceFramerate(&sv.Framerate, value); err != nil {
 				return err
@@ -14314,6 +14372,20 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 
 	for key, value := range shape {
 		switch key {
+		case "advancedInputFilter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdvancedInputFilter to be of type string, got %T instead", value)
+				}
+				sv.AdvancedInputFilter = types.AdvancedInputFilter(jtv)
+			}
+
+		case "advancedInputFilterSettings":
+			if err := awsRestjson1_deserializeDocumentAdvancedInputFilterSettings(&sv.AdvancedInputFilterSettings, value); err != nil {
+				return err
+			}
+
 		case "audioSelectorGroups":
 			if err := awsRestjson1_deserializeDocument__mapOfAudioSelectorGroup(&sv.AudioSelectorGroups, value); err != nil {
 				return err
@@ -14623,6 +14695,20 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 
 	for key, value := range shape {
 		switch key {
+		case "advancedInputFilter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdvancedInputFilter to be of type string, got %T instead", value)
+				}
+				sv.AdvancedInputFilter = types.AdvancedInputFilter(jtv)
+			}
+
+		case "advancedInputFilterSettings":
+			if err := awsRestjson1_deserializeDocumentAdvancedInputFilterSettings(&sv.AdvancedInputFilterSettings, value); err != nil {
+				return err
+			}
+
 		case "audioSelectorGroups":
 			if err := awsRestjson1_deserializeDocument__mapOfAudioSelectorGroup(&sv.AudioSelectorGroups, value); err != nil {
 				return err
@@ -15774,7 +15860,7 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternHttpsKantarmediaCom to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternHttpsKantarmediaComFr to be of type string, got %T instead", value)
 				}
 				sv.KantarServerUrl = ptr.String(jtv)
 			}

@@ -38,21 +38,21 @@ func TestListResourceRecordSetsPaginator(t *testing.T) {
 			limit:      5,
 			requestCnt: 3,
 			outputs: []*ListResourceRecordSetsOutput{
-				&ListResourceRecordSetsOutput{
+				{
 					MaxItems:             aws.Int32(5),
 					NextRecordName:       aws.String("testRecord1"),
 					NextRecordIdentifier: aws.String("testID1"),
 					NextRecordType:       types.RRTypeA,
 					IsTruncated:          true,
 				},
-				&ListResourceRecordSetsOutput{
+				{
 					MaxItems:             aws.Int32(5),
 					NextRecordName:       aws.String("testRecord2"),
 					NextRecordIdentifier: aws.String("testID2"),
 					NextRecordType:       types.RRTypeA,
 					IsTruncated:          true,
 				},
-				&ListResourceRecordSetsOutput{
+				{
 					MaxItems:             aws.Int32(5),
 					NextRecordName:       aws.String("testRecord3"),
 					NextRecordIdentifier: aws.String("testID3"),
@@ -66,35 +66,35 @@ func TestListResourceRecordSetsPaginator(t *testing.T) {
 			requestCnt:             4,
 			stopOnDuplicationToken: true,
 			outputs: []*ListResourceRecordSetsOutput{
-				&ListResourceRecordSetsOutput{
+				{
 					MaxItems:             aws.Int32(10),
 					NextRecordName:       aws.String("testRecord1"),
 					NextRecordIdentifier: aws.String("testID1"),
 					NextRecordType:       types.RRTypeA,
 					IsTruncated:          true,
 				},
-				&ListResourceRecordSetsOutput{
+				{
 					MaxItems:             aws.Int32(10),
 					NextRecordName:       aws.String("testRecord2"),
 					NextRecordIdentifier: aws.String("testID2"),
 					NextRecordType:       types.RRTypeA,
 					IsTruncated:          true,
 				},
-				&ListResourceRecordSetsOutput{
+				{
 					MaxItems:             aws.Int32(10),
 					NextRecordName:       aws.String("testRecord3"),
 					NextRecordIdentifier: aws.String("testID3"),
 					NextRecordType:       types.RRTypeA,
 					IsTruncated:          true,
 				},
-				&ListResourceRecordSetsOutput{
+				{
 					MaxItems:             aws.Int32(10),
 					NextRecordName:       aws.String("testRecord3"),
 					NextRecordIdentifier: aws.String("testID3"),
 					NextRecordType:       types.RRTypeA,
 					IsTruncated:          true,
 				},
-				&ListResourceRecordSetsOutput{
+				{
 					MaxItems:             aws.Int32(10),
 					NextRecordName:       aws.String("testRecord5"),
 					NextRecordIdentifier: aws.String("testID5"),

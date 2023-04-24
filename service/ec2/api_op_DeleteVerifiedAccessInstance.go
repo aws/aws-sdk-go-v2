@@ -30,7 +30,7 @@ func (c *Client) DeleteVerifiedAccessInstance(ctx context.Context, params *Delet
 
 type DeleteVerifiedAccessInstanceInput struct {
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	//
 	// This member is required.
 	VerifiedAccessInstanceId *string
@@ -51,7 +51,7 @@ type DeleteVerifiedAccessInstanceInput struct {
 
 type DeleteVerifiedAccessInstanceOutput struct {
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	VerifiedAccessInstance *types.VerifiedAccessInstance
 
 	// Metadata pertaining to the operation's result.

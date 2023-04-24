@@ -1,0 +1,8 @@
+{
+    "id": "a65b2d11-b473-4cb9-b875-90aa0ab302da",
+    "type": "feature",
+    "description": "Added new status result to Liveness session status.",
+    "modules": [
+        "service/rekognition"
+    ]
+}

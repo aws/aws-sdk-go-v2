@@ -422,6 +422,7 @@ const (
 	LivenessSessionStatusInProgress LivenessSessionStatus = "IN_PROGRESS"
 	LivenessSessionStatusSucceeded  LivenessSessionStatus = "SUCCEEDED"
 	LivenessSessionStatusFailed     LivenessSessionStatus = "FAILED"
+	LivenessSessionStatusExpired    LivenessSessionStatus = "EXPIRED"
 )
 
 // Values returns all known values for LivenessSessionStatus. Note that this can
@@ -433,6 +434,7 @@ func (LivenessSessionStatus) Values() []LivenessSessionStatus {
 		"IN_PROGRESS",
 		"SUCCEEDED",
 		"FAILED",
+		"EXPIRED",
 	}
 }
 

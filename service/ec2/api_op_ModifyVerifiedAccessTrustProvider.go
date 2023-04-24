@@ -31,7 +31,7 @@ func (c *Client) ModifyVerifiedAccessTrustProvider(ctx context.Context, params *
 
 type ModifyVerifiedAccessTrustProviderInput struct {
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	//
 	// This member is required.
 	VerifiedAccessTrustProviderId *string
@@ -41,7 +41,7 @@ type ModifyVerifiedAccessTrustProviderInput struct {
 	// .
 	ClientToken *string
 
-	// A description for the Amazon Web Services Verified Access trust provider.
+	// A description for the Verified Access trust provider.
 	Description *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -50,7 +50,7 @@ type ModifyVerifiedAccessTrustProviderInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The OpenID Connect details for an oidc -type, user-identity based trust provider.
+	// The options for an OpenID Connect-compatible user-identity trust provider.
 	OidcOptions *types.ModifyVerifiedAccessTrustProviderOidcOptions
 
 	noSmithyDocumentSerde
@@ -58,7 +58,7 @@ type ModifyVerifiedAccessTrustProviderInput struct {
 
 type ModifyVerifiedAccessTrustProviderOutput struct {
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	VerifiedAccessTrustProvider *types.VerifiedAccessTrustProvider
 
 	// Metadata pertaining to the operation's result.

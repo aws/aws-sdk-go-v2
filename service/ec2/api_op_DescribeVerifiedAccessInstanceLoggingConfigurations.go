@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the current logging configuration for the Amazon Web Services
-// Verified Access instances.
+// Describes the specified Amazon Web Services Verified Access instances.
 func (c *Client) DescribeVerifiedAccessInstanceLoggingConfigurations(ctx context.Context, params *DescribeVerifiedAccessInstanceLoggingConfigurationsInput, optFns ...func(*Options)) (*DescribeVerifiedAccessInstanceLoggingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeVerifiedAccessInstanceLoggingConfigurationsInput{}
@@ -47,7 +46,7 @@ type DescribeVerifiedAccessInstanceLoggingConfigurationsInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The IDs of the Amazon Web Services Verified Access instances.
+	// The IDs of the Verified Access instances.
 	VerifiedAccessInstanceIds []string
 
 	noSmithyDocumentSerde
@@ -55,8 +54,7 @@ type DescribeVerifiedAccessInstanceLoggingConfigurationsInput struct {
 
 type DescribeVerifiedAccessInstanceLoggingConfigurationsOutput struct {
 
-	// The current logging configuration for the Amazon Web Services Verified Access
-	// instances.
+	// The current logging configuration for the Verified Access instances.
 	LoggingConfigurations []types.VerifiedAccessInstanceLoggingConfiguration
 
 	// The token to use to retrieve the next page of results. This value is null when

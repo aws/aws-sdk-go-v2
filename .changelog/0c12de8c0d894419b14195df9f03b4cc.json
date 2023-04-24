@@ -1,0 +1,8 @@
+{
+    "id": "0c12de8c-0d89-4419-b141-95df9f03b4cc",
+    "type": "feature",
+    "description": "API changes to AWS Verified Access related to identity providers' information.",
+    "modules": [
+        "service/ec2"
+    ]
+}

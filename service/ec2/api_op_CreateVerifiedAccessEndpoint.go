@@ -36,7 +36,7 @@ type CreateVerifiedAccessEndpointInput struct {
 	// This member is required.
 	ApplicationDomain *string
 
-	// The Amazon Web Services network component Verified Access attaches to.
+	// The type of attachment.
 	//
 	// This member is required.
 	AttachmentType types.VerifiedAccessEndpointAttachmentType
@@ -48,13 +48,13 @@ type CreateVerifiedAccessEndpointInput struct {
 	// This member is required.
 	DomainCertificateArn *string
 
-	// A custom identifier that gets prepended to a DNS name that is generated for the
+	// A custom identifier that is prepended to the DNS name that is generated for the
 	// endpoint.
 	//
 	// This member is required.
 	EndpointDomainPrefix *string
 
-	// The type of Amazon Web Services Verified Access endpoint to create.
+	// The type of Verified Access endpoint to create.
 	//
 	// This member is required.
 	EndpointType types.VerifiedAccessEndpointType
@@ -69,7 +69,7 @@ type CreateVerifiedAccessEndpointInput struct {
 	// .
 	ClientToken *string
 
-	// A description for the Amazon Web Services Verified Access endpoint.
+	// A description for the Verified Access endpoint.
 	Description *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -78,22 +78,21 @@ type CreateVerifiedAccessEndpointInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The load balancer details if creating the Amazon Web Services Verified Access
-	// endpoint as load-balancer type.
+	// The load balancer details. This parameter is required if the endpoint type is
+	// load-balancer .
 	LoadBalancerOptions *types.CreateVerifiedAccessEndpointLoadBalancerOptions
 
-	// The network interface details if creating the Amazon Web Services Verified
-	// Access endpoint as network-interface type.
+	// The network interface details. This parameter is required if the endpoint type
+	// is network-interface .
 	NetworkInterfaceOptions *types.CreateVerifiedAccessEndpointEniOptions
 
-	// The Amazon Web Services Verified Access policy document.
+	// The Verified Access policy document.
 	PolicyDocument *string
 
-	// The Amazon EC2 security groups to associate with the Amazon Web Services
-	// Verified Access endpoint.
+	// The IDs of the security groups to associate with the Verified Access endpoint.
 	SecurityGroupIds []string
 
-	// The tags to assign to the Amazon Web Services Verified Access endpoint.
+	// The tags to assign to the Verified Access endpoint.
 	TagSpecifications []types.TagSpecification
 
 	noSmithyDocumentSerde
@@ -101,7 +100,7 @@ type CreateVerifiedAccessEndpointInput struct {
 
 type CreateVerifiedAccessEndpointOutput struct {
 
-	// The ID of the Amazon Web Services Verified Access endpoint.
+	// The ID of the Verified Access endpoint.
 	VerifiedAccessEndpoint *types.VerifiedAccessEndpoint
 
 	// Metadata pertaining to the operation's result.

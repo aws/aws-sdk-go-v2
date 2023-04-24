@@ -28,7 +28,7 @@ func (c *Client) GetVerifiedAccessEndpointPolicy(ctx context.Context, params *Ge
 
 type GetVerifiedAccessEndpointPolicyInput struct {
 
-	// The ID of the Amazon Web Services Verified Access endpoint.
+	// The ID of the Verified Access endpoint.
 	//
 	// This member is required.
 	VerifiedAccessEndpointId *string
@@ -44,7 +44,7 @@ type GetVerifiedAccessEndpointPolicyInput struct {
 
 type GetVerifiedAccessEndpointPolicyOutput struct {
 
-	// The Amazon Web Services Verified Access policy document.
+	// The Verified Access policy document.
 	PolicyDocument *string
 
 	// The status of the Verified Access policy.

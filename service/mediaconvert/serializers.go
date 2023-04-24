@@ -2655,6 +2655,23 @@ func awsRestjson1_serializeDocumentAccelerationSettings(v *types.AccelerationSet
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdvancedInputFilterSettings(v *types.AdvancedInputFilterSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AddTexture) > 0 {
+		ok := object.Key("addTexture")
+		ok.String(string(v.AddTexture))
+	}
+
+	if len(v.Sharpening) > 0 {
+		ok := object.Key("sharpening")
+		ok.String(string(v.Sharpening))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAiffSettings(v *types.AiffSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5191,6 +5208,11 @@ func awsRestjson1_serializeDocumentFileSourceSettings(v *types.FileSourceSetting
 		ok.String(string(v.Convert608To708))
 	}
 
+	if len(v.ConvertPaintToPop) > 0 {
+		ok := object.Key("convertPaintToPop")
+		ok.String(string(v.ConvertPaintToPop))
+	}
+
 	if v.Framerate != nil {
 		ok := object.Key("framerate")
 		if err := awsRestjson1_serializeDocumentCaptionSourceFramerate(v.Framerate, ok); err != nil {
@@ -6347,6 +6369,18 @@ func awsRestjson1_serializeDocumentInput(v *types.Input, value smithyjson.Value)
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AdvancedInputFilter) > 0 {
+		ok := object.Key("advancedInputFilter")
+		ok.String(string(v.AdvancedInputFilter))
+	}
+
+	if v.AdvancedInputFilterSettings != nil {
+		ok := object.Key("advancedInputFilterSettings")
+		if err := awsRestjson1_serializeDocumentAdvancedInputFilterSettings(v.AdvancedInputFilterSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AudioSelectorGroups != nil {
 		ok := object.Key("audioSelectorGroups")
 		if err := awsRestjson1_serializeDocument__mapOfAudioSelectorGroup(v.AudioSelectorGroups, ok); err != nil {
@@ -6529,6 +6563,18 @@ func awsRestjson1_serializeDocumentInputDecryptionSettings(v *types.InputDecrypt
 func awsRestjson1_serializeDocumentInputTemplate(v *types.InputTemplate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AdvancedInputFilter) > 0 {
+		ok := object.Key("advancedInputFilter")
+		ok.String(string(v.AdvancedInputFilter))
+	}
+
+	if v.AdvancedInputFilterSettings != nil {
+		ok := object.Key("advancedInputFilterSettings")
+		if err := awsRestjson1_serializeDocumentAdvancedInputFilterSettings(v.AdvancedInputFilterSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AudioSelectorGroups != nil {
 		ok := object.Key("audioSelectorGroups")

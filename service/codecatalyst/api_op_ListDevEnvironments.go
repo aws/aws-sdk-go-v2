@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrives a list of Dev Environments in a project.
+// Retrieves a list of Dev Environments in a project.
 func (c *Client) ListDevEnvironments(ctx context.Context, params *ListDevEnvironmentsInput, optFns ...func(*Options)) (*ListDevEnvironmentsOutput, error) {
 	if params == nil {
 		params = &ListDevEnvironmentsInput{}

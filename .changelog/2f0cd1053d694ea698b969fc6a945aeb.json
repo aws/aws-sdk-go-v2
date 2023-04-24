@@ -1,0 +1,8 @@
+{
+    "id": "2f0cd105-3d69-4ea6-98b9-69fc6a945aeb",
+    "type": "feature",
+    "description": "This release introduces a noise reduction pre-filter, linear interpolation deinterlace mode, video pass-through, updated default job settings, and expanded LC-AAC Stereo audio bitrate ranges.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

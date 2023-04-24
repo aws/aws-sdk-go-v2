@@ -30,7 +30,7 @@ func (c *Client) DeleteVerifiedAccessTrustProvider(ctx context.Context, params *
 
 type DeleteVerifiedAccessTrustProviderInput struct {
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	//
 	// This member is required.
 	VerifiedAccessTrustProviderId *string
@@ -51,7 +51,7 @@ type DeleteVerifiedAccessTrustProviderInput struct {
 
 type DeleteVerifiedAccessTrustProviderOutput struct {
 
-	// The ID of the Amazon Web Services Verified Access trust provider.
+	// The ID of the Verified Access trust provider.
 	VerifiedAccessTrustProvider *types.VerifiedAccessTrustProvider
 
 	// Metadata pertaining to the operation's result.

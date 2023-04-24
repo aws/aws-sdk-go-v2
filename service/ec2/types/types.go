@@ -2120,7 +2120,8 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Options for a network interface-type endpoint.
+// Describes the network interface options when creating an Amazon Web Services
+// Verified Access endpoint using the network-interface type.
 type CreateVerifiedAccessEndpointEniOptions struct {
 
 	// The ID of the network interface.
@@ -2135,8 +2136,8 @@ type CreateVerifiedAccessEndpointEniOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a load balancer when creating an Amazon Web Services Verified Access
-// endpoint using the load-balancer type.
+// Describes the load balancer options when creating an Amazon Web Services
+// Verified Access endpoint using the load-balancer type.
 type CreateVerifiedAccessEndpointLoadBalancerOptions struct {
 
 	// The ARN of the load balancer.
@@ -2154,7 +2155,8 @@ type CreateVerifiedAccessEndpointLoadBalancerOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Options for a device-identity type trust provider.
+// Describes the options when creating an Amazon Web Services Verified Access
+// trust provider using the device type.
 type CreateVerifiedAccessTrustProviderDeviceOptions struct {
 
 	// The ID of the tenant application with the device-identity provider.
@@ -2163,7 +2165,8 @@ type CreateVerifiedAccessTrustProviderDeviceOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Options for an OIDC-based, user-identity type trust provider.
+// Describes the options when creating an Amazon Web Services Verified Access
+// trust provider using the user type.
 type CreateVerifiedAccessTrustProviderOidcOptions struct {
 
 	// The OIDC authorization endpoint.
@@ -2600,8 +2603,8 @@ type DestinationOptionsResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Options for an Amazon Web Services Verified Access device-identity based trust
-// provider.
+// Describes the options for an Amazon Web Services Verified Access
+// device-identity based trust provider.
 type DeviceOptions struct {
 
 	// The ID of the tenant application with the device-identity provider.
@@ -9351,7 +9354,8 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Options for a network-interface type Verified Access endpoint.
+// Describes the options when modifying a Verified Access endpoint with the
+// network-interface type.
 type ModifyVerifiedAccessEndpointEniOptions struct {
 
 	// The IP port number.
@@ -9379,13 +9383,31 @@ type ModifyVerifiedAccessEndpointLoadBalancerOptions struct {
 	noSmithyDocumentSerde
 }
 
-// OpenID Connect options for an oidc -type, user-identity based trust provider.
+// Options for an OpenID Connect-compatible user-identity trust provider.
 type ModifyVerifiedAccessTrustProviderOidcOptions struct {
+
+	// The OIDC authorization endpoint.
+	AuthorizationEndpoint *string
+
+	// The client identifier.
+	ClientId *string
+
+	// The client secret.
+	ClientSecret *string
+
+	// The OIDC issuer.
+	Issuer *string
 
 	// OpenID Connect (OIDC) scopes are used by an application during authentication
 	// to authorize access to a user's details. Each scope returns a specific set of
 	// user attributes.
 	Scope *string
+
+	// The OIDC token endpoint.
+	TokenEndpoint *string
+
+	// The OIDC user info endpoint.
+	UserInfoEndpoint *string
 
 	noSmithyDocumentSerde
 }
@@ -10262,7 +10284,8 @@ type NewDhcpConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Options for OIDC-based, user-identity type trust provider.
+// Describes the options for an OpenID Connect-compatible user-identity trust
+// provider.
 type OidcOptions struct {
 
 	// The OIDC authorization endpoint.
@@ -16485,7 +16508,7 @@ type VerifiedAccessTrustProvider struct {
 	// A description for the Amazon Web Services Verified Access trust provider.
 	Description *string
 
-	// The options for device-identity type trust provider.
+	// The options for device-identity trust provider.
 	DeviceOptions *DeviceOptions
 
 	// The type of device-based trust provider.
@@ -16494,7 +16517,7 @@ type VerifiedAccessTrustProvider struct {
 	// The last updated time.
 	LastUpdatedTime *string
 
-	// The OpenID Connect details for an oidc -type, user-identity based trust provider.
+	// The options for an OpenID Connect-compatible user-identity trust provider.
 	OidcOptions *OidcOptions
 
 	// The identifier to be used when working with policy rules.

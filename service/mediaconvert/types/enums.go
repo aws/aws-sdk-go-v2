@@ -344,6 +344,63 @@ func (AccelerationStatus) Values() []AccelerationStatus {
 	}
 }
 
+type AdvancedInputFilter string
+
+// Enum values for AdvancedInputFilter
+const (
+	AdvancedInputFilterEnabled  AdvancedInputFilter = "ENABLED"
+	AdvancedInputFilterDisabled AdvancedInputFilter = "DISABLED"
+)
+
+// Values returns all known values for AdvancedInputFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdvancedInputFilter) Values() []AdvancedInputFilter {
+	return []AdvancedInputFilter{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type AdvancedInputFilterAddTexture string
+
+// Enum values for AdvancedInputFilterAddTexture
+const (
+	AdvancedInputFilterAddTextureEnabled  AdvancedInputFilterAddTexture = "ENABLED"
+	AdvancedInputFilterAddTextureDisabled AdvancedInputFilterAddTexture = "DISABLED"
+)
+
+// Values returns all known values for AdvancedInputFilterAddTexture. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AdvancedInputFilterAddTexture) Values() []AdvancedInputFilterAddTexture {
+	return []AdvancedInputFilterAddTexture{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type AdvancedInputFilterSharpen string
+
+// Enum values for AdvancedInputFilterSharpen
+const (
+	AdvancedInputFilterSharpenOff  AdvancedInputFilterSharpen = "OFF"
+	AdvancedInputFilterSharpenLow  AdvancedInputFilterSharpen = "LOW"
+	AdvancedInputFilterSharpenHigh AdvancedInputFilterSharpen = "HIGH"
+)
+
+// Values returns all known values for AdvancedInputFilterSharpen. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdvancedInputFilterSharpen) Values() []AdvancedInputFilterSharpen {
+	return []AdvancedInputFilterSharpen{
+		"OFF",
+		"LOW",
+		"HIGH",
+	}
+}
+
 type AfdSignaling string
 
 // Enum values for AfdSignaling
@@ -1281,6 +1338,25 @@ func (CaptionDestinationType) Values() []CaptionDestinationType {
 		"TELETEXT",
 		"TTML",
 		"WEBVTT",
+	}
+}
+
+type CaptionSourceConvertPaintOnToPopOn string
+
+// Enum values for CaptionSourceConvertPaintOnToPopOn
+const (
+	CaptionSourceConvertPaintOnToPopOnEnabled  CaptionSourceConvertPaintOnToPopOn = "ENABLED"
+	CaptionSourceConvertPaintOnToPopOnDisabled CaptionSourceConvertPaintOnToPopOn = "DISABLED"
+)
+
+// Values returns all known values for CaptionSourceConvertPaintOnToPopOn. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CaptionSourceConvertPaintOnToPopOn) Values() []CaptionSourceConvertPaintOnToPopOn {
+	return []CaptionSourceConvertPaintOnToPopOn{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -2315,10 +2391,11 @@ type DeinterlaceAlgorithm string
 
 // Enum values for DeinterlaceAlgorithm
 const (
-	DeinterlaceAlgorithmInterpolate       DeinterlaceAlgorithm = "INTERPOLATE"
-	DeinterlaceAlgorithmInterpolateTicker DeinterlaceAlgorithm = "INTERPOLATE_TICKER"
-	DeinterlaceAlgorithmBlend             DeinterlaceAlgorithm = "BLEND"
-	DeinterlaceAlgorithmBlendTicker       DeinterlaceAlgorithm = "BLEND_TICKER"
+	DeinterlaceAlgorithmInterpolate         DeinterlaceAlgorithm = "INTERPOLATE"
+	DeinterlaceAlgorithmInterpolateTicker   DeinterlaceAlgorithm = "INTERPOLATE_TICKER"
+	DeinterlaceAlgorithmBlend               DeinterlaceAlgorithm = "BLEND"
+	DeinterlaceAlgorithmBlendTicker         DeinterlaceAlgorithm = "BLEND_TICKER"
+	DeinterlaceAlgorithmLinearInterpolation DeinterlaceAlgorithm = "LINEAR_INTERPOLATION"
 )
 
 // Values returns all known values for DeinterlaceAlgorithm. Note that this can be
@@ -2330,6 +2407,7 @@ func (DeinterlaceAlgorithm) Values() []DeinterlaceAlgorithm {
 		"INTERPOLATE_TICKER",
 		"BLEND",
 		"BLEND_TICKER",
+		"LINEAR_INTERPOLATION",
 	}
 }
 
@@ -7779,6 +7857,7 @@ const (
 	VideoCodecH264         VideoCodec = "H_264"
 	VideoCodecH265         VideoCodec = "H_265"
 	VideoCodecMpeg2        VideoCodec = "MPEG2"
+	VideoCodecPassthrough  VideoCodec = "PASSTHROUGH"
 	VideoCodecProres       VideoCodec = "PRORES"
 	VideoCodecVc3          VideoCodec = "VC3"
 	VideoCodecVp8          VideoCodec = "VP8"
@@ -7797,6 +7876,7 @@ func (VideoCodec) Values() []VideoCodec {
 		"H_264",
 		"H_265",
 		"MPEG2",
+		"PASSTHROUGH",
 		"PRORES",
 		"VC3",
 		"VP8",

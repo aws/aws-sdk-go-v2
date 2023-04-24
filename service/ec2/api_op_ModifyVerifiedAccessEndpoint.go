@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the configuration of an Amazon Web Services Verified Access endpoint.
+// Modifies the configuration of the specified Amazon Web Services Verified Access
+// endpoint.
 func (c *Client) ModifyVerifiedAccessEndpoint(ctx context.Context, params *ModifyVerifiedAccessEndpointInput, optFns ...func(*Options)) (*ModifyVerifiedAccessEndpointOutput, error) {
 	if params == nil {
 		params = &ModifyVerifiedAccessEndpointInput{}
@@ -30,7 +31,7 @@ func (c *Client) ModifyVerifiedAccessEndpoint(ctx context.Context, params *Modif
 
 type ModifyVerifiedAccessEndpointInput struct {
 
-	// The ID of the Amazon Web Services Verified Access endpoint.
+	// The ID of the Verified Access endpoint.
 	//
 	// This member is required.
 	VerifiedAccessEndpointId *string
@@ -40,7 +41,7 @@ type ModifyVerifiedAccessEndpointInput struct {
 	// .
 	ClientToken *string
 
-	// A description for the Amazon Web Services Verified Access endpoint.
+	// A description for the Verified Access endpoint.
 	Description *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -49,14 +50,14 @@ type ModifyVerifiedAccessEndpointInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The load balancer details if creating the Amazon Web Services Verified Access
-	// endpoint as load-balancer type.
+	// The load balancer details if creating the Verified Access endpoint as
+	// load-balancer type.
 	LoadBalancerOptions *types.ModifyVerifiedAccessEndpointLoadBalancerOptions
 
 	// The network interface options.
 	NetworkInterfaceOptions *types.ModifyVerifiedAccessEndpointEniOptions
 
-	// The ID of the Amazon Web Services Verified Access group.
+	// The ID of the Verified Access group.
 	VerifiedAccessGroupId *string
 
 	noSmithyDocumentSerde
@@ -64,7 +65,7 @@ type ModifyVerifiedAccessEndpointInput struct {
 
 type ModifyVerifiedAccessEndpointOutput struct {
 
-	// The Amazon Web Services Verified Access endpoint details.
+	// The Verified Access endpoint details.
 	VerifiedAccessEndpoint *types.VerifiedAccessEndpoint
 
 	// Metadata pertaining to the operation's result.

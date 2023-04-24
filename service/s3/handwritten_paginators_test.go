@@ -58,19 +58,19 @@ func TestListObjectVersionsPaginator(t *testing.T) {
 				requestCnt: 3,
 			},
 			outputs: []*ListObjectVersionsOutput{
-				&ListObjectVersionsOutput{
+				{
 					NextKeyMarker:       aws.String("testKey1"),
 					NextVersionIdMarker: aws.String("testID1"),
 					MaxKeys:             5,
 					IsTruncated:         true,
 				},
-				&ListObjectVersionsOutput{
+				{
 					NextKeyMarker:       aws.String("testKey2"),
 					NextVersionIdMarker: aws.String("testID2"),
 					MaxKeys:             5,
 					IsTruncated:         true,
 				},
-				&ListObjectVersionsOutput{
+				{
 					NextKeyMarker:       aws.String("testKey3"),
 					NextVersionIdMarker: aws.String("testID3"),
 					MaxKeys:             5,
@@ -86,25 +86,25 @@ func TestListObjectVersionsPaginator(t *testing.T) {
 				stopOnDuplicationToken: true,
 			},
 			outputs: []*ListObjectVersionsOutput{
-				&ListObjectVersionsOutput{
+				{
 					NextKeyMarker:       aws.String("testKey1"),
 					NextVersionIdMarker: aws.String("testID1"),
 					MaxKeys:             10,
 					IsTruncated:         true,
 				},
-				&ListObjectVersionsOutput{
+				{
 					NextKeyMarker:       aws.String("testKey2"),
 					NextVersionIdMarker: aws.String("testID2"),
 					MaxKeys:             10,
 					IsTruncated:         true,
 				},
-				&ListObjectVersionsOutput{
+				{
 					NextKeyMarker:       aws.String("testKey2"),
 					NextVersionIdMarker: aws.String("testID2"),
 					MaxKeys:             10,
 					IsTruncated:         true,
 				},
-				&ListObjectVersionsOutput{
+				{
 					NextKeyMarker:       aws.String("testKey3"),
 					NextVersionIdMarker: aws.String("testID3"),
 					MaxKeys:             10,
@@ -160,25 +160,25 @@ func TestListMultipartUploadsPaginator(t *testing.T) {
 				requestCnt: 4,
 			},
 			outputs: []*ListMultipartUploadsOutput{
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey1"),
 					NextUploadIdMarker: aws.String("testID1"),
 					MaxUploads:         5,
 					IsTruncated:        true,
 				},
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey2"),
 					NextUploadIdMarker: aws.String("testID2"),
 					MaxUploads:         5,
 					IsTruncated:        true,
 				},
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey3"),
 					NextUploadIdMarker: aws.String("testID3"),
 					MaxUploads:         5,
 					IsTruncated:        true,
 				},
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey4"),
 					NextUploadIdMarker: aws.String("testID4"),
 					MaxUploads:         5,
@@ -194,31 +194,31 @@ func TestListMultipartUploadsPaginator(t *testing.T) {
 				stopOnDuplicationToken: true,
 			},
 			outputs: []*ListMultipartUploadsOutput{
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey1"),
 					NextUploadIdMarker: aws.String("testID1"),
 					MaxUploads:         10,
 					IsTruncated:        true,
 				},
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey2"),
 					NextUploadIdMarker: aws.String("testID2"),
 					MaxUploads:         10,
 					IsTruncated:        true,
 				},
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey2"),
 					NextUploadIdMarker: aws.String("testID2"),
 					MaxUploads:         10,
 					IsTruncated:        true,
 				},
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey4"),
 					NextUploadIdMarker: aws.String("testID4"),
 					MaxUploads:         10,
 					IsTruncated:        false,
 				},
-				&ListMultipartUploadsOutput{
+				{
 					NextKeyMarker:      aws.String("testKey5"),
 					NextUploadIdMarker: aws.String("testID5"),
 					MaxUploads:         10,

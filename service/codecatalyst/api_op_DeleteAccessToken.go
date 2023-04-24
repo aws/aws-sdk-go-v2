@@ -29,7 +29,8 @@ func (c *Client) DeleteAccessToken(ctx context.Context, params *DeleteAccessToke
 type DeleteAccessTokenInput struct {
 
 	// The ID of the personal access token to delete. You can find the IDs of all PATs
-	// associated with your user account by calling ListAccessTokens .
+	// associated with your Amazon Web Services Builder ID in a space by calling
+	// ListAccessTokens .
 	//
 	// This member is required.
 	Id *string

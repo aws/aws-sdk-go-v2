@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified Verified Access group policy.
+// Modifies the specified Amazon Web Services Verified Access group policy.
 func (c *Client) ModifyVerifiedAccessGroupPolicy(ctx context.Context, params *ModifyVerifiedAccessGroupPolicyInput, optFns ...func(*Options)) (*ModifyVerifiedAccessGroupPolicyOutput, error) {
 	if params == nil {
 		params = &ModifyVerifiedAccessGroupPolicyInput{}
@@ -34,7 +34,7 @@ type ModifyVerifiedAccessGroupPolicyInput struct {
 	// This member is required.
 	PolicyEnabled *bool
 
-	// The ID of the Amazon Web Services Verified Access group.
+	// The ID of the Verified Access group.
 	//
 	// This member is required.
 	VerifiedAccessGroupId *string
@@ -50,7 +50,7 @@ type ModifyVerifiedAccessGroupPolicyInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The Amazon Web Services Verified Access policy document.
+	// The Verified Access policy document.
 	PolicyDocument *string
 
 	noSmithyDocumentSerde
@@ -58,7 +58,7 @@ type ModifyVerifiedAccessGroupPolicyInput struct {
 
 type ModifyVerifiedAccessGroupPolicyOutput struct {
 
-	// The Amazon Web Services Verified Access policy document.
+	// The Verified Access policy document.
 	PolicyDocument *string
 
 	// The status of the Verified Access policy.

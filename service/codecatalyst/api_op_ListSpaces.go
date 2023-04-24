@@ -38,7 +38,7 @@ type ListSpacesInput struct {
 
 type ListSpacesOutput struct {
 
-	// Information about the space.
+	// Information about the spaces.
 	Items []types.SpaceSummary
 
 	// A token returned from a call to this API to indicate the next batch of results

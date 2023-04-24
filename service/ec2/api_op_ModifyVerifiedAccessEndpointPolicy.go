@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified Verified Access endpoint policy.
+// Modifies the specified Amazon Web Services Verified Access endpoint policy.
 func (c *Client) ModifyVerifiedAccessEndpointPolicy(ctx context.Context, params *ModifyVerifiedAccessEndpointPolicyInput, optFns ...func(*Options)) (*ModifyVerifiedAccessEndpointPolicyOutput, error) {
 	if params == nil {
 		params = &ModifyVerifiedAccessEndpointPolicyInput{}
@@ -34,7 +34,7 @@ type ModifyVerifiedAccessEndpointPolicyInput struct {
 	// This member is required.
 	PolicyEnabled *bool
 
-	// The ID of the Amazon Web Services Verified Access endpoint.
+	// The ID of the Verified Access endpoint.
 	//
 	// This member is required.
 	VerifiedAccessEndpointId *string
@@ -50,7 +50,7 @@ type ModifyVerifiedAccessEndpointPolicyInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The Amazon Web Services Verified Access policy document.
+	// The Verified Access policy document.
 	PolicyDocument *string
 
 	noSmithyDocumentSerde
@@ -58,7 +58,7 @@ type ModifyVerifiedAccessEndpointPolicyInput struct {
 
 type ModifyVerifiedAccessEndpointPolicyOutput struct {
 
-	// The Amazon Web Services Verified Access policy document.
+	// The Verified Access policy document.
 	PolicyDocument *string
 
 	// The status of the Verified Access policy.

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe Verified Access instances.
+// Describes the specified Amazon Web Services Verified Access instances.
 func (c *Client) DescribeVerifiedAccessInstances(ctx context.Context, params *DescribeVerifiedAccessInstancesInput, optFns ...func(*Options)) (*DescribeVerifiedAccessInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeVerifiedAccessInstancesInput{}
@@ -46,7 +46,7 @@ type DescribeVerifiedAccessInstancesInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The IDs of the Amazon Web Services Verified Access instances.
+	// The IDs of the Verified Access instances.
 	VerifiedAccessInstanceIds []string
 
 	noSmithyDocumentSerde
@@ -58,7 +58,7 @@ type DescribeVerifiedAccessInstancesOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
-	// The IDs of the Amazon Web Services Verified Access instances.
+	// The IDs of the Verified Access instances.
 	VerifiedAccessInstances []types.VerifiedAccessInstance
 
 	// Metadata pertaining to the operation's result.

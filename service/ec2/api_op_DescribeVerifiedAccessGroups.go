@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe details of existing Verified Access groups.
+// Describes the specified Verified Access groups.
 func (c *Client) DescribeVerifiedAccessGroups(ctx context.Context, params *DescribeVerifiedAccessGroupsInput, optFns ...func(*Options)) (*DescribeVerifiedAccessGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeVerifiedAccessGroupsInput{}
@@ -46,10 +46,10 @@ type DescribeVerifiedAccessGroupsInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The ID of the Amazon Web Services Verified Access groups.
+	// The ID of the Verified Access groups.
 	VerifiedAccessGroupIds []string
 
-	// The ID of the Amazon Web Services Verified Access instance.
+	// The ID of the Verified Access instance.
 	VerifiedAccessInstanceId *string
 
 	noSmithyDocumentSerde

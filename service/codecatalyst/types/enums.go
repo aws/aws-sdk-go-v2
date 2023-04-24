@@ -2,25 +2,6 @@
 
 package types
 
-type CatalogActionVersionFileRecordType string
-
-// Enum values for CatalogActionVersionFileRecordType
-const (
-	CatalogActionVersionFileRecordTypeLicense CatalogActionVersionFileRecordType = "LICENSE"
-	CatalogActionVersionFileRecordTypeReadme  CatalogActionVersionFileRecordType = "README"
-)
-
-// Values returns all known values for CatalogActionVersionFileRecordType. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
-func (CatalogActionVersionFileRecordType) Values() []CatalogActionVersionFileRecordType {
-	return []CatalogActionVersionFileRecordType{
-		"LICENSE",
-		"README",
-	}
-}
-
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
