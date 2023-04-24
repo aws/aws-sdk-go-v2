@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeConformancePackComplianceMiddlewares(stack 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConformancePackCompliance(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

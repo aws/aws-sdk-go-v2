@@ -110,6 +110,9 @@ func (c *Client) addOperationListSubscriptionDefinitionVersionsMiddlewares(stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSubscriptionDefinitionVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

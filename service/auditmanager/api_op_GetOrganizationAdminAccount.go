@@ -93,6 +93,9 @@ func (c *Client) addOperationGetOrganizationAdminAccountMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOrganizationAdminAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

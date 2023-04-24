@@ -99,6 +99,9 @@ func (c *Client) addOperationAssociateBudgetWithResourceMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateBudgetWithResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

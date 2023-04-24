@@ -113,6 +113,9 @@ func (c *Client) addOperationListSMSSandboxPhoneNumbersMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSMSSandboxPhoneNumbers(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

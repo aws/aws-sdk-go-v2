@@ -118,6 +118,9 @@ func (c *Client) addOperationCreateDataflowEndpointGroupMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataflowEndpointGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

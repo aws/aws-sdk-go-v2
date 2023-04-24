@@ -125,6 +125,9 @@ func (c *Client) addOperationDeleteBucketMetricsConfigurationMiddlewares(stack *
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addDeleteBucketMetricsConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}

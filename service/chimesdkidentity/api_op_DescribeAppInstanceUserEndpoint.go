@@ -106,6 +106,9 @@ func (c *Client) addOperationDescribeAppInstanceUserEndpointMiddlewares(stack *m
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAppInstanceUserEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

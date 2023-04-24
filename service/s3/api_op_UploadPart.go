@@ -340,6 +340,9 @@ func (c *Client) addOperationUploadPartMiddlewares(stack *middleware.Stack, opti
 	if err = add100Continue(stack, options); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addUploadPartInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}

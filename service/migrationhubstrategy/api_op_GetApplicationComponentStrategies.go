@@ -100,6 +100,9 @@ func (c *Client) addOperationGetApplicationComponentStrategiesMiddlewares(stack 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetApplicationComponentStrategies(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

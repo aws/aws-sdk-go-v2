@@ -98,6 +98,9 @@ func (c *Client) addOperationDeleteRolePermissionsBoundaryMiddlewares(stack *mid
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRolePermissionsBoundary(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

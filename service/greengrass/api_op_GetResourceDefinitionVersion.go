@@ -123,6 +123,9 @@ func (c *Client) addOperationGetResourceDefinitionVersionMiddlewares(stack *midd
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceDefinitionVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

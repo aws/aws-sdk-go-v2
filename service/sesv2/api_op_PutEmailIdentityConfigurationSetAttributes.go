@@ -100,6 +100,9 @@ func (c *Client) addOperationPutEmailIdentityConfigurationSetAttributesMiddlewar
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutEmailIdentityConfigurationSetAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

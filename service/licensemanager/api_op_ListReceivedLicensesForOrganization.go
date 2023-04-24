@@ -105,6 +105,9 @@ func (c *Client) addOperationListReceivedLicensesForOrganizationMiddlewares(stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReceivedLicensesForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}

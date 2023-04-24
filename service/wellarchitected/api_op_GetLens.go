@@ -108,6 +108,9 @@ func (c *Client) addOperationGetLensMiddlewares(stack *middleware.Stack, options
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLens(options.Region), middleware.Before); err != nil {
 		return err
 	}
+	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
