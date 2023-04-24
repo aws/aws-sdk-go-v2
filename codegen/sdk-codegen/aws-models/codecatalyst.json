@@ -98,373 +98,6 @@
                 "smithy.api#documentation": "<p>Information about a specified personal access token (PAT).</p>"
             }
         },
-        "com.amazonaws.codecatalyst#Action": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "actionId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ActionLogResource": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "actionLogId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ActionRun": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "workflowId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                },
-                "workflowRunId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                },
-                "actionRunId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#ActionRunArtifactMetadata"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ActionRunLogEntries"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#ActionRunArtifactMetadata": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "workflowId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                },
-                "workflowRunId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                },
-                "actionRunId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                },
-                "artifactName": {
-                    "target": "com.amazonaws.codecatalyst#ArtifactNameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ActionRunLogEntries": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "workflowId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                },
-                "workflowRunId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                },
-                "actionRunId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ActionRunLogsDownloadableUrl": {
-            "type": "resource",
-            "identifiers": {
-                "actionRunId": {
-                    "target": "smithy.api#String"
-                },
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "workflowName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ActionTestVersion": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceBranchName": {
-                    "target": "smithy.api#String"
-                },
-                "sourceRepositoryName": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ActionVersion": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "actionId": {
-                    "target": "smithy.api#String"
-                },
-                "versionId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ArtifactNameString": {
-            "type": "string",
-            "traits": {
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
-            }
-        },
-        "com.amazonaws.codecatalyst#ArtifactPackage": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "artifactRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#ArtifactRepositoryNameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ArtifactPackageVersion": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "artifactRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#ArtifactRepositoryNameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ArtifactRepository": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "artifactRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#ArtifactRepositoryNameString"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#ArtifactPackage"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ArtifactPackageVersion"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#ArtifactRepositoryNameString": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 2,
-                    "max": 100
-                },
-                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9-_.]{1,99}$"
-            }
-        },
-        "com.amazonaws.codecatalyst#AwsAccountOnboardingResource": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "awsAccountName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#AwsAccountResource": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "awsAccountName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#AwsAccountRoleResource"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#AwsAccountRoleResource": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "awsAccountName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "roleName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#AwsAccountToEnvironmentAssociation": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "awsAccountName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "environmentName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#Bar": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "barName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#BillingAccountChangeStatus": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#Blueprint": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#BuildLogsMigration": {
-            "type": "resource",
-            "identifiers": {
-                "buildId": {
-                    "target": "smithy.api#String"
-                },
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#CatalogAction": {
-            "type": "resource",
-            "identifiers": {
-                "catalogActionId": {
-                    "target": "smithy.api#String"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#CatalogActionVersion"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#CatalogActionVersion": {
-            "type": "resource",
-            "identifiers": {
-                "catalogActionId": {
-                    "target": "smithy.api#String"
-                },
-                "versionId": {
-                    "target": "smithy.api#String"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#CatalogActionVersionFileRecord"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#CatalogActionVersionFileRecord": {
-            "type": "resource",
-            "identifiers": {
-                "catalogActionId": {
-                    "target": "smithy.api#String"
-                },
-                "versionId": {
-                    "target": "smithy.api#String"
-                },
-                "fileType": {
-                    "target": "com.amazonaws.codecatalyst#CatalogActionVersionFileRecordType"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#CatalogActionVersionFileRecordType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "LICENSE",
-                        "value": "LICENSE"
-                    },
-                    {
-                        "name": "README",
-                        "value": "README"
-                    }
-                ]
-            }
-        },
         "com.amazonaws.codecatalyst#ClientToken": {
             "type": "string",
             "traits": {
@@ -490,43 +123,7 @@
                     "target": "com.amazonaws.codecatalyst#AccessToken"
                 },
                 {
-                    "target": "com.amazonaws.codecatalyst#ActionRunLogsDownloadableUrl"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#BuildLogsMigration"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#CatalogAction"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#CommentForIssue"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#LinkableIssueScope"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Organization"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Person"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ProjectInvitations"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#PullRequestComment"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#RoleMappingAssociations"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#RoleMappingAssociationsMigration"
-                },
-                {
                     "target": "com.amazonaws.codecatalyst#Space"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SSHPublicKey"
                 }
             ],
             "errors": [
@@ -555,7 +152,7 @@
                     "endpointPrefix": "codecatalyst"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<note>\n            <p>\n               <b>Amazon CodeCatalyst is in preview release and subject to change.</b>\n            </p>\n         </note>\n         <p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst \n      API to work with the following objects. </p>\n         <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateDevEnvironment</a>, which creates a Dev Environment, \n       where you can quickly work on the code stored in the source repositories of your project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateProject</a> which creates a project in a specified space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetProject</a>, which returns information about a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source\n       repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes \n       and the billing plan for the space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListDevEnvironments</a>, which retrives a list of Dev Environments in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListProjects</a>, which retrieves a list of projects in a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSpaces</a>, which retrieves a list of spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironmentSession</a>, which stops a session for a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p>\n            </li>\n         </ul>\n         <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst \n      API to work with the following objects. </p>\n         <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateDevEnvironment</a>, which creates a Dev Environment, \n       where you can quickly work on the code stored in the source repositories of your project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateProject</a> which creates a project in a specified space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetProject</a>, which returns information about a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source\n       repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSpace</a>, which returns information about a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes \n       and the billing plan for the space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListDevEnvironments</a>, which retrieves a list of Dev Environments in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListProjects</a>, which retrieves a list of projects in a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSpaces</a>, which retrieves a list of spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironmentSession</a>, which stops a session for a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p>\n            </li>\n         </ul>\n         <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must configure your computer to work with Amazon CodeCatalyst and single sign-on (SSO).\n        For more information, see <a href=\"https://docs.aws.amazon.com/codecatalyst/latest/userguide/set-up-cli.html\">Setting up to use the CLI with Amazon CodeCatalyst</a>\n      and the SSO documentation for your SDK.</p>\n         </note>",
                 "smithy.api#httpBearerAuth": {},
                 "smithy.api#title": "Amazon CodeCatalyst",
                 "smithy.rules#endpointRuleSet": {
@@ -877,56 +474,6 @@
                 }
             }
         },
-        "com.amazonaws.codecatalyst#CodeCoverageReport": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "codeCoverageReportId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#CodeCoverageResult": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "codeCoverageResultId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#CommentForIssue": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueId": {
-                    "target": "smithy.api#String"
-                },
-                "commentId": {
-                    "target": "smithy.api#String"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#IssueCommentReaction"
-                }
-            ]
-        },
         "com.amazonaws.codecatalyst#ComparisonOperator": {
             "type": "string",
             "traits": {
@@ -954,34 +501,6 @@
                 ]
             }
         },
-        "com.amazonaws.codecatalyst#ComputeFleet": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "computeFleetName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ComputeFleetMigration": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "computeFleetName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#ConflictException": {
             "type": "structure",
             "members": {
@@ -998,20 +517,6 @@
                 "smithy.api#httpError": 409
             }
         },
-        "com.amazonaws.codecatalyst#Connection": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "providerId": {
-                    "target": "com.amazonaws.codecatalyst#ProviderIdString"
-                },
-                "connectionName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#CreateAccessToken": {
             "type": "operation",
             "input": {
@@ -1021,7 +526,7 @@
                 "target": "com.amazonaws.codecatalyst#CreateAccessTokenResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a personal access token (PAT) for the current user. A personal access token (PAT) is similar to a password. \n      It is associated with your user account. You use PATs to access Amazon CodeCatalyst resources such as source repositories from third-party applications \n      like Git and integrated development environments (IDEs). For more information, see \n      <a href=\"https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-tokens-keys.html\">Managing personal access tokens in Amazon CodeCatalyst</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a personal access token (PAT) for the current user. A personal access token (PAT) is similar to a password. \n      It is associated with your user identity for use across all spaces and projects in Amazon CodeCatalyst. You use PATs to access CodeCatalyst \n      from resources that include integrated development environments (IDEs) and Git-based source repositories.  \n      PATs represent you in Amazon CodeCatalyst and you can manage them in your user settings.For more information, see \n      <a href=\"https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-tokens-keys.html\">Managing personal access tokens in Amazon CodeCatalyst</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/accessTokens",
@@ -1091,7 +596,7 @@
                 "target": "com.amazonaws.codecatalyst#CreateDevEnvironmentResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev Environment that you can use to quickly work on the code stored in the source repositories of your project. \n      </p>\n         <note>\n            <p>When created in the Amazon CodeCatalyst console, by default a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. None of these\n      defaults apply to a Dev Environment created programmatically.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development environment that you can use to quickly work on the code stored \n      in the source repositories of your project.       </p>\n         <note>\n            <p>When created in the Amazon CodeCatalyst console, by default a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. None of these\n      defaults apply to a Dev Environment created programmatically.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments",
@@ -1389,7 +894,7 @@
                 "id": {
                     "target": "com.amazonaws.codecatalyst#AccessTokenId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the personal access token to delete. You can find the IDs of all PATs associated with your user account by calling <a>ListAccessTokens</a>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the personal access token to delete. You can find the IDs of all PATs associated with your Amazon Web Services Builder ID in a space by calling <a>ListAccessTokens</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "accessTokenId"
@@ -1759,17 +1264,6 @@
                 "target": "com.amazonaws.codecatalyst#DevEnvironmentSummary"
             }
         },
-        "com.amazonaws.codecatalyst#DummyData": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "dummyDataName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#EmailAddress": {
             "type": "structure",
             "members": {
@@ -1788,79 +1282,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about an email address.</p>"
-            }
-        },
-        "com.amazonaws.codecatalyst#Environment": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "environmentName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#EnvironmentDeployment"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#EnvironmentDeploymentTarget"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#EnvironmentResourceMetadata"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#EnvironmentDeployment": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "environmentName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "deploymentId": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#EnvironmentDeploymentTarget": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "environmentName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "targetId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#EnvironmentResourceMetadata": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "environmentName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
             }
         },
         "com.amazonaws.codecatalyst#EventLogEntries": {
@@ -2044,69 +1465,6 @@
                         "min": 1,
                         "max": 255
                     }
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ExtensionIdString": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 1024
-                },
-                "smithy.api#pattern": "^[0-9a-zA-z\\-]+$"
-            }
-        },
-        "com.amazonaws.codecatalyst#ExtensionInstallation": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "extensionId": {
-                    "target": "com.amazonaws.codecatalyst#ExtensionIdString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ExtensionIssue": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ExtensionIssueScope": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "extensionIssueScopeName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ExternalArtifactRepository": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "artifactRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#ArtifactRepositoryNameString"
                 }
             }
         },
@@ -2716,17 +2074,6 @@
                 }
             }
         },
-        "com.amazonaws.codecatalyst#Incident": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "incidentId": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#InstanceType": {
             "type": "string",
             "traits": {
@@ -2750,217 +2097,6 @@
                 ]
             }
         },
-        "com.amazonaws.codecatalyst#Issue": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
-                },
-                "issueId": {
-                    "target": "com.amazonaws.codecatalyst#IssueId"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#IssueCommentReaction": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueId": {
-                    "target": "smithy.api#String"
-                },
-                "commentId": {
-                    "target": "smithy.api#String"
-                },
-                "reactionId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#IssueId": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#IssueMigration": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
-                },
-                "issueId": {
-                    "target": "com.amazonaws.codecatalyst#IssueId"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#IssueStore": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#Issue"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreLabel"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreSavedView"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreStatusResource"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#IssueStoreLabel": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
-                },
-                "issueStoreLabelId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#IssueStoreMigration": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#IssueMigration"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#IssueStoreNameString": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 63
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#IssueStoreSavedView": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#IssueStoreStatusResource": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "issueStoreName": {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreNameString"
-                },
-                "issueStoreStatusId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#Link": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "linkId": {
-                    "target": "com.amazonaws.codecatalyst#LinkId"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#LinkId": {
-            "type": "string",
-            "traits": {
-                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}_[0-9a-zA-Z_]{4,62}_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            }
-        },
-        "com.amazonaws.codecatalyst#LinkableIssueScope": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "connectionName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "extensionIssueScopeName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#LinkableSourceRepository": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "connectionName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#ListAccessTokens": {
             "type": "operation",
             "input": {
@@ -2970,7 +2106,7 @@
                 "target": "com.amazonaws.codecatalyst#ListAccessTokensResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists all personal access tokens (PATs) associated with the user who calls the API. You can only list PATs associated with your user account.</p>",
+                "smithy.api#documentation": "<p>Lists all personal access tokens (PATs) associated with the user who calls the API. You can only list PATs associated with your Amazon Web Services Builder ID.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/accessTokens",
@@ -3018,7 +2154,7 @@
                 "items": {
                     "target": "com.amazonaws.codecatalyst#AccessTokenSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of personal access tokens (PATs) associated with the calling user.</p>",
+                        "smithy.api#documentation": "<p>A list of personal access tokens (PATs) associated with the calling user identity.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3042,7 +2178,7 @@
                 "target": "com.amazonaws.codecatalyst#ListDevEnvironmentsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrives a list of Dev Environments in a project.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of Dev Environments in a project.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments",
@@ -3609,19 +2745,8 @@
                 "items": {
                     "target": "com.amazonaws.codecatalyst#SpaceSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the space. </p>"
+                        "smithy.api#documentation": "<p>Information about the spaces. </p>"
                     }
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#MigrateAwsAccountResource": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "awsAccountName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
                 }
             }
         },
@@ -3633,42 +2758,6 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-            }
-        },
-        "com.amazonaws.codecatalyst#NotificationChannel": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "notificationChannelId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#NotificationClient": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "notificationClientId": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#Onboarding": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "onboardingId": {
-                    "target": "smithy.api#String"
-                }
             }
         },
         "com.amazonaws.codecatalyst#OperationType": {
@@ -3684,58 +2773,6 @@
                         "value": "MUTATION"
                     }
                 ]
-            }
-        },
-        "com.amazonaws.codecatalyst#Organization": {
-            "type": "resource",
-            "identifiers": {
-                "organizationName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#OrganizationArtifactRepository"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#OrganizationInvitations"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#OrganizationUsers"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#OrganizationArtifactRepository": {
-            "type": "resource",
-            "identifiers": {
-                "organizationName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "artifactRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#ArtifactRepositoryNameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#OrganizationInvitations": {
-            "type": "resource",
-            "identifiers": {
-                "organizationName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "organizationInvitationId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#OrganizationUsers": {
-            "type": "resource",
-            "identifiers": {
-                "organizationName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "username": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
             }
         },
         "com.amazonaws.codecatalyst#PersistentStorage": {
@@ -3776,14 +2813,6 @@
                 "smithy.api#documentation": "<p>Information about the configuration of persistent storage for a Dev Environment. </p>"
             }
         },
-        "com.amazonaws.codecatalyst#Person": {
-            "type": "resource",
-            "identifiers": {
-                "personId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#Project": {
             "type": "resource",
             "identifiers": {
@@ -3805,124 +2834,10 @@
             },
             "resources": [
                 {
-                    "target": "com.amazonaws.codecatalyst#Action"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ActionTestVersion"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ActionVersion"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ArtifactRepository"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#CodeCoverageReport"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#CodeCoverageResult"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ComputeFleet"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ComputeFleetMigration"
-                },
-                {
                     "target": "com.amazonaws.codecatalyst#DevEnvironment"
                 },
                 {
-                    "target": "com.amazonaws.codecatalyst#Environment"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ExtensionIssue"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ExtensionIssueScope"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ExternalArtifactRepository"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#IssueStore"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#IssueStoreMigration"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#NotificationChannel"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ProjectNotificationSettings"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ProjectStatus"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ProjectUsers"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#PullRequest"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Secret"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SecretMigration"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SoftwareCompositionAnalysisFinding"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SoftwareCompositionAnalysisReport"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SoftwareQualityReportsLogEntries"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SoftwareTestingReport"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourcePullRequest"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourcePullRequestToJiraIssueLink"
-                },
-                {
                     "target": "com.amazonaws.codecatalyst#SourceRepository"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryMigration"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#StaticAnalysisFinding"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#StaticAnalysisReport"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#StaticWebsite"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#TestAction"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#TestCaseResult"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#TestReport"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#TestReportStatus"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Workflow"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#WorkflowDraft"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#WorkflowRun"
                 }
             ]
         },
@@ -3966,14 +2881,6 @@
                 "smithy.api#documentation": "<p>Information about a project in a space.</p>"
             }
         },
-        "com.amazonaws.codecatalyst#ProjectInvitations": {
-            "type": "resource",
-            "identifiers": {
-                "projectInvitationId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#ProjectListFilter": {
             "type": "structure",
             "members": {
@@ -4008,28 +2915,6 @@
                 "target": "com.amazonaws.codecatalyst#ProjectListFilter"
             }
         },
-        "com.amazonaws.codecatalyst#ProjectNotificationSettings": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ProjectStatus": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#ProjectSummaries": {
             "type": "list",
             "member": {
@@ -4061,85 +2946,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a project.</p>"
-            }
-        },
-        "com.amazonaws.codecatalyst#ProjectUsers": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "username": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#ProviderIdString": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 1024
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#PullRequest": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "pullRequestNumber": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#PullRequestComment": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "pullRequestId": {
-                    "target": "smithy.api#String"
-                },
-                "commentId": {
-                    "target": "smithy.api#String"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#PullRequestCommentReaction"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#PullRequestCommentReaction": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "pullRequestId": {
-                    "target": "smithy.api#String"
-                },
-                "commentId": {
-                    "target": "smithy.api#String"
-                },
-                "reactionId": {
-                    "target": "smithy.api#String"
-                }
             }
         },
         "com.amazonaws.codecatalyst#RegionString": {
@@ -4195,54 +3001,6 @@
                 "smithy.api#httpError": 404
             }
         },
-        "com.amazonaws.codecatalyst#RoleMappingAssociations": {
-            "type": "resource"
-        },
-        "com.amazonaws.codecatalyst#RoleMappingAssociationsMigration": {
-            "type": "resource"
-        },
-        "com.amazonaws.codecatalyst#SSHPublicKey": {
-            "type": "resource",
-            "identifiers": {
-                "SSHPublicKeyId": {
-                    "target": "com.amazonaws.codecatalyst#SSHPublicKeyIdString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SSHPublicKeyIdString": {
-            "type": "string",
-            "traits": {
-                "smithy.api#pattern": "^[A-Fa-f0-9]{64}$"
-            }
-        },
-        "com.amazonaws.codecatalyst#Secret": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "secretName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SecretMigration": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "secretName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#SensitiveString": {
             "type": "string",
             "traits": {
@@ -4263,197 +3021,6 @@
                 "smithy.api#documentation": "<p>The request was denied because one or more resources has reached its limits for the tier the space belongs to. Either reduce\n      the number of resources, or change the tier if applicable.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
-            }
-        },
-        "com.amazonaws.codecatalyst#SoftwareCompositionAnalysisFinding": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "softwareCompositionAnalysisFindingId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SoftwareCompositionAnalysisReport": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "softwareCompositionAnalysisReportId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SoftwareQualityReportsLogEntries": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "reportStatusId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SoftwareTestingReport": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "reportId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceBranch": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                },
-                "branchName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryBranchString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceCommit": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                },
-                "sourceCommitSha1": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceDifferenceMetadata": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceFile": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                },
-                "sourceFilePath": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceFolder": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                },
-                "sourceFolderPath": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SourcePullRequest": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourcePullRequestNumber": {
-                    "target": "smithy.api#String"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceRevision"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#SourcePullRequestToJiraIssueLink": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "linkId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceReferencePolicy": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                },
-                "prefixPattern": {
-                    "target": "smithy.api#String"
-                },
-                "referenceType": {
-                    "target": "smithy.api#String"
-                }
             }
         },
         "com.amazonaws.codecatalyst#SourceRepository": {
@@ -4479,31 +3046,7 @@
             ],
             "resources": [
                 {
-                    "target": "com.amazonaws.codecatalyst#SourceBranch"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceCommit"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceDifferenceMetadata"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceFile"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceFolder"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceReferencePolicy"
-                },
-                {
                     "target": "com.amazonaws.codecatalyst#SourceRepositoryBranch"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryCommit"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryCommitDifference"
                 }
             ]
         },
@@ -4551,37 +3094,6 @@
                 }
             }
         },
-        "com.amazonaws.codecatalyst#SourceRepositoryCommit": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                },
-                "sourceRepositoryCommitId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceRepositoryCommitDifference": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#SourceRepositoryDescriptionString": {
             "type": "string",
             "traits": {
@@ -4597,20 +3109,6 @@
                 "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
             }
         },
-        "com.amazonaws.codecatalyst#SourceRepositoryMigration": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourceRepositoryName": {
-                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameStringMigration"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#SourceRepositoryNameString": {
             "type": "string",
             "traits": {
@@ -4619,33 +3117,6 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^(?!.*[.]git$)[\\w\\-.]*$"
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceRepositoryNameStringMigration": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 100
-                },
-                "smithy.api#pattern": "^(?!.*[.]git$)[\\w\\-.]*$"
-            }
-        },
-        "com.amazonaws.codecatalyst#SourceRevision": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "sourcePullRequestNumber": {
-                    "target": "smithy.api#String"
-                },
-                "revisionNumber": {
-                    "target": "smithy.api#String"
-                }
             }
         },
         "com.amazonaws.codecatalyst#Space": {
@@ -4663,89 +3134,15 @@
             },
             "resources": [
                 {
-                    "target": "com.amazonaws.codecatalyst#ActionLogResource"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#AwsAccountOnboardingResource"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#AwsAccountResource"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#AwsAccountToEnvironmentAssociation"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Bar"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#BillingAccountChangeStatus"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Blueprint"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Connection"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#DummyData"
-                },
-                {
                     "target": "com.amazonaws.codecatalyst#EventLogResource"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#ExtensionInstallation"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Incident"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Link"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#LinkableSourceRepository"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#MigrateAwsAccountResource"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#NotificationClient"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#Onboarding"
                 },
                 {
                     "target": "com.amazonaws.codecatalyst#Project"
                 },
                 {
-                    "target": "com.amazonaws.codecatalyst#SpaceInvitations"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SpaceUsageReport"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#SpaceUsers"
-                },
-                {
                     "target": "com.amazonaws.codecatalyst#Subscription"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#UsageReport"
-                },
-                {
-                    "target": "com.amazonaws.codecatalyst#UserNotificationSettings"
                 }
             ]
-        },
-        "com.amazonaws.codecatalyst#SpaceInvitations": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "spaceInvitationId": {
-                    "target": "smithy.api#String"
-                }
-            }
         },
         "com.amazonaws.codecatalyst#SpaceSummaries": {
             "type": "list",
@@ -4785,25 +3182,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about an space.</p>"
-            }
-        },
-        "com.amazonaws.codecatalyst#SpaceUsageReport": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#SpaceUsers": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "username": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
             }
         },
         "com.amazonaws.codecatalyst#StartDevEnvironment": {
@@ -5000,45 +3378,6 @@
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "devEnvironmentId"
                     }
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#StaticAnalysisFinding": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "staticAnalysisFindingId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#StaticAnalysisReport": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "staticAnalysisReportId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#StaticWebsite": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
                 }
             }
         },
@@ -5247,62 +3586,6 @@
                 "target": "com.amazonaws.codecatalyst#GetSubscription"
             }
         },
-        "com.amazonaws.codecatalyst#TestAction": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "testActionRunId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#TestCaseResult": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "testCaseResultId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#TestReport": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "testReportId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#TestReportStatus": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "reportStatusId": {
-                    "target": "smithy.api#String"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -5472,14 +3755,6 @@
                 }
             }
         },
-        "com.amazonaws.codecatalyst#UsageReport": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
         "com.amazonaws.codecatalyst#UserIdentity": {
             "type": "structure",
             "members": {
@@ -5512,14 +3787,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a user whose activity is recorded in an event for a space.</p>"
-            }
-        },
-        "com.amazonaws.codecatalyst#UserNotificationSettings": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
             }
         },
         "com.amazonaws.codecatalyst#UserType": {
@@ -5593,69 +3860,6 @@
                             "max": 256
                         }
                     }
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#Workflow": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "workflowId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#WorkflowState"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#WorkflowDraft": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                }
-            }
-        },
-        "com.amazonaws.codecatalyst#WorkflowRun": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "workflowRunId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
-                }
-            },
-            "resources": [
-                {
-                    "target": "com.amazonaws.codecatalyst#ActionRun"
-                }
-            ]
-        },
-        "com.amazonaws.codecatalyst#WorkflowState": {
-            "type": "resource",
-            "identifiers": {
-                "spaceName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "projectName": {
-                    "target": "com.amazonaws.codecatalyst#NameString"
-                },
-                "workflowId": {
-                    "target": "com.amazonaws.codecatalyst#Uuid"
                 }
             }
         }

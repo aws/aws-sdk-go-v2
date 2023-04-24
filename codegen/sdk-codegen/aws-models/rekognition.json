@@ -1151,7 +1151,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API operation initiates a Face Liveness session. It returns a <code>SessionId</code>,\n      which you can use to start streaming Face Liveness video and get the results for a Face\n      Liveness session. You can use the <code>OutputConfig</code> option in the Settings parameter\n      to provide an Amazon S3 bucket location. The Amazon S3 bucket stores reference images and\n      audit images. You can use <code>AuditImagesLimit</code> to limit of audit images returned.\n      This number is between 0 and 4. By default, it is set to 0. The limit is best effort and based\n      on the duration of the selfie-video. </p>",
+                "smithy.api#documentation": "<p>This API operation initiates a Face Liveness session. It returns a <code>SessionId</code>,\n      which you can use to start streaming Face Liveness video and get the results for a Face\n      Liveness session. You can use the <code>OutputConfig</code> option in the Settings parameter\n      to provide an Amazon S3 bucket location. The Amazon S3 bucket stores reference images and audit images.\n      You can use <code>AuditImagesLimit</code> to limit the number of audit images returned.  This\n      number is between 0 and 4. By default, it is set to 0. The limit is best effort and based on\n      the duration of the selfie-video. </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -7255,7 +7255,7 @@
                 "S3KeyPrefix": {
                     "target": "com.amazonaws.rekognition#LivenessS3KeyPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix appended to the output files for the Face Liveness session results.</p>"
+                        "smithy.api#documentation": "<p>The prefix prepended to the output files for the Face Liveness session results.</p>"
                     }
                 }
             },
@@ -7277,8 +7277,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 255
+                    "min": 36,
+                    "max": 36
                 },
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
@@ -7308,6 +7308,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
                     }
                 }
             }

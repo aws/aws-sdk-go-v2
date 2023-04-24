@@ -291,7 +291,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2048
+                    "max": 4096
                 },
                 "smithy.api#pattern": "^\\S+$"
             }
@@ -6707,7 +6707,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2048
+                    "max": 4096
                 },
                 "smithy.api#pattern": "^\\S+$"
             }
