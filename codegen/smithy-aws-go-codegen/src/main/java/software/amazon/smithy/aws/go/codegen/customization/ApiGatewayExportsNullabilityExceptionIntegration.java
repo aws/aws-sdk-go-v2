@@ -32,6 +32,7 @@ import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.diff.ModelDiff;
 import software.amazon.smithy.go.codegen.AddOperationShapes;
 import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.Synthetic;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.loader.ModelAssembler;
@@ -154,7 +155,7 @@ public class ApiGatewayExportsNullabilityExceptionIntegration implements GoInteg
             }
             throw new CodegenException(sb.toString());
         }
-        validateNullabilityExceptions(nullabilityExceptions, model);
+        validateNullabilityExceptions(nullabilityExceptions, model, service);
         return model;
     }
 
@@ -318,7 +319,7 @@ public class ApiGatewayExportsNullabilityExceptionIntegration implements GoInteg
         return ModelTransformer.create().replaceShapes(model, shapesToReplace);
     }
 
-    private static void validateNullabilityExceptions(Set<ShapeId> nullabilityExceptions, Model model) {
+    private static void validateNullabilityExceptions(Set<ShapeId> nullabilityExceptions, Model model, ShapeId service) {
         Map<ShapeId, Shape> nullabilityExceptionMap = new HashMap<>();
         for (ShapeId shapeId : nullabilityExceptions) {
             if (model.getShape(shapeId).isPresent()) {
@@ -327,6 +328,31 @@ public class ApiGatewayExportsNullabilityExceptionIntegration implements GoInteg
                 LOGGER.warning("Shape `" + shapeId + "` nullability exception is not present in the model");
             }
         }
+
+        for (BooleanShape shape : model.getBooleanShapesWithTrait(DefaultTrait.class)) {
+            ShapeId shapeId = shape.toShapeId();
+            String namespace = shapeId.getNamespace();
+            if (!namespace.equals(service.getNamespace()) && !namespace.equals(Synthetic.ID.getNamespace())) {
+                continue;
+            }
+            if (!nullabilityExceptions.contains(shapeId)) {
+                throw new CodegenException("Shape `" + shapeId + "` should be in nullability exceptions");
+            }
+        }
+
+        for (NumberShape shape : model.toSet(NumberShape.class).stream()
+                .filter(s -> s.hasTrait(DefaultTrait.class))
+                .collect(Collectors.toList())) {
+            ShapeId shapeId = shape.toShapeId();
+            String namespace = shapeId.getNamespace();
+            if (!namespace.equals(service.getNamespace()) && !namespace.equals(Synthetic.ID.getNamespace())) {
+                continue;
+            }
+            if (!nullabilityExceptions.contains(shapeId)) {
+                throw new CodegenException("Shape `" + shapeId + "` should be in nullability exceptions");
+            }
+        }
+
         // Existing “defaulted” root boolean or number shapes MUST be backfilled with a
         // default trait.
         for (Map.Entry<ShapeId, Shape> entry : nullabilityExceptionMap.entrySet()) {
