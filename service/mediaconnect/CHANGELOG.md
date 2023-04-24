@@ -1,3 +1,7 @@
+# v1.19.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-04-13)
 
 * **Feature**: Gateway is a new feature of AWS Elemental MediaConnect. Gateway allows the deployment of on-premises resources for the purpose of transporting live video to and from the AWS Cloud.

@@ -1,3 +1,7 @@
+# v1.4.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2023-04-20)
 
 * **Feature**: This release adds support for specifying the recording file format in an S3 recording sink configuration.

@@ -1,3 +1,7 @@
+# v1.52.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2023-04-21)
 
 * **Feature**: This release adds a new API CreateParticipant. For Amazon Connect Chat, you can use this new API to customize chat flow experiences.

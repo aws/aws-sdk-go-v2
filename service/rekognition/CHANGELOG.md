@@ -1,3 +1,8 @@
+# v1.25.0 (2023-04-24)
+
+* **Feature**: Added new status result to Liveness session status.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-04-10)
 
 * **Feature**: This release adds support for Face Liveness APIs in Amazon Rekognition. Updates UpdateStreamProcessor to return ResourceInUseException Exception. Minor updates to API documentation.

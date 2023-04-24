@@ -1,3 +1,8 @@
+# v1.27.0 (2023-04-24)
+
+* **Feature**: Increased the max length for RefreshToken and AuthCode from 2048 to 4096.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-04-17)
 
 * **Feature**: This release adds a Client Token parameter to the following AppFlow APIs: Create/Update Connector Profile, Create/Update Flow, Start Flow, Register Connector, Update Connector Registration. The Client Token parameter allows idempotent operations for these APIs.

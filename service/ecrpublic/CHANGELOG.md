@@ -1,3 +1,7 @@
+# v1.16.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2023-04-11)
 
 * **Feature**: This release will allow using registry alias as registryId in BatchDeleteImage request.

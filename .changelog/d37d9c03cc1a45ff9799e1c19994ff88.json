@@ -1,8 +1,0 @@
-{
-    "id": "d37d9c03-cc1a-45ff-9799-e1c19994ff88",
-    "type": "feature",
-    "description": "Increased the max length for RefreshToken and AuthCode from 2048 to 4096.",
-    "modules": [
-        "service/appflow"
-    ]
-}

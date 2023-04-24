@@ -1,3 +1,8 @@
+# v1.33.0 (2023-04-24)
+
+* **Feature**: added custom paginators for listMultipartUploads and ListObjectVersions
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2023-04-19)
 
 * **Feature**: Provides support for "Snow" Storage class.

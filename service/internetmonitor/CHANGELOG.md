@@ -1,3 +1,7 @@
+# v1.2.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2023-04-17)
 
 * **Feature**: This release includes a new configurable value, TrafficPercentageToMonitor, which allows users to adjust the amount of traffic monitored by percentage

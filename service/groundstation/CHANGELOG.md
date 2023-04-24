@@ -1,3 +1,7 @@
+# v1.18.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-04-12)
 
 * **Feature**: AWS Ground Station Wideband DigIF GA Release

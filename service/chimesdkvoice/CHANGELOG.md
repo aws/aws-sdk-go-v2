@@ -1,3 +1,7 @@
+# v1.5.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2023-04-13)
 
 * **Feature**: This release adds tagging support for Voice Connectors and SIP Media Applications

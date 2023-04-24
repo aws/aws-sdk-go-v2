@@ -1,3 +1,7 @@
+# v1.19.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-04-11)
 
 * **Feature**: EventBridge PutTarget support for multiple SQL arguments on RedshiftDataParameters

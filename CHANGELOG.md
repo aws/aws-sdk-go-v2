@@ -1,3 +1,26 @@
+# Release (2023-04-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.18.0
+  * **Feature**: add recursion detection middleware to all SDK requests to avoid recursion invocation in Lambda
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.27.0](service/appflow/CHANGELOG.md#v1270-2023-04-24)
+  * **Feature**: Increased the max length for RefreshToken and AuthCode from 2048 to 4096.
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.2.5](service/codecatalyst/CHANGELOG.md#v125-2023-04-24)
+  * **Documentation**: Documentation updates for Amazon CodeCatalyst.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.94.0](service/ec2/CHANGELOG.md#v1940-2023-04-24)
+  * **Feature**: API changes to AWS Verified Access related to identity providers' information.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.36.0](service/mediaconvert/CHANGELOG.md#v1360-2023-04-24)
+  * **Feature**: This release introduces a noise reduction pre-filter, linear interpolation deinterlace mode, video pass-through, updated default job settings, and expanded LC-AAC Stereo audio bitrate ranges.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.25.0](service/rekognition/CHANGELOG.md#v1250-2023-04-24)
+  * **Feature**: Added new status result to Liveness session status.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.28.0](service/route53/CHANGELOG.md#v1280-2023-04-24)
+  * **Feature**: added paginator for listResourceRecordSets
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.33.0](service/s3/CHANGELOG.md#v1330-2023-04-24)
+  * **Feature**: added custom paginators for listMultipartUploads and ListObjectVersions
+
 # Release (2023-04-21)
 
 ## Module Highlights

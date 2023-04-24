@@ -1,3 +1,7 @@
+# v1.43.2 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.1 (2023-04-19)
 
 * **Documentation**: Adds support for the ImageId parameter of CreateCustomDBEngineVersion to RDS Custom for Oracle

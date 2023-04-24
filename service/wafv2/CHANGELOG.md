@@ -1,3 +1,7 @@
+# v1.30.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2023-04-20)
 
 * **Feature**: You can now create encrypted API keys to use in a client application integration of the JavaScript CAPTCHA API . You can also retrieve a list of your API keys and the JavaScript application integration URL.

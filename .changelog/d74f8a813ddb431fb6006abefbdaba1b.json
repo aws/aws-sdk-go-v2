@@ -1,8 +1,0 @@
-{
-    "id": "d74f8a81-3ddb-431f-b600-6abefbdaba1b",
-    "type": "feature",
-    "description": "add recursion detection middleware to all SDK requests to avoid recursion invocation in Lambda",
-    "modules": [
-        "."
-    ]
-}

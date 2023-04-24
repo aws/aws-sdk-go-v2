@@ -1,3 +1,7 @@
+# v1.23.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-04-21)
 
 * **Feature**: AWS Firewall Manager adds support for multiple administrators. You can now delegate more than one administrator per organization.

@@ -1,3 +1,7 @@
+# v1.74.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.0 (2023-04-20)
 
 * **Feature**: Amazon SageMaker Canvas adds ModelRegisterSettings support for CanvasAppSettings.

@@ -1,3 +1,7 @@
+# v1.13.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2023-04-17)
 
 * **Feature**: Changed existing APIs and added new APIs to support using an account-level launch configuration template with AWS Elastic Disaster Recovery.

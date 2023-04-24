@@ -1,3 +1,7 @@
+# v1.26.2 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.1 (2023-04-21)
 
 * **Documentation**: Documentation update to address various Amazon ECS tickets.

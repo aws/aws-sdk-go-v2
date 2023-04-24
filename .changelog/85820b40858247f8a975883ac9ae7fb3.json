@@ -1,8 +1,0 @@
-{
-    "id": "85820b40-8582-47f8-a975-883ac9ae7fb3",
-    "type": "feature",
-    "description": "added paginator for listResourceRecordSets",
-    "modules": [
-        "service/route53"
-    ]
-}

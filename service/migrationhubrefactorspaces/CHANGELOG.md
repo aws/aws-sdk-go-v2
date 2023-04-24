@@ -1,3 +1,7 @@
+# v1.9.9 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.8 (2023-04-14)
 
 * **Documentation**: Doc only update for Refactor Spaces environments without network bridge feature.

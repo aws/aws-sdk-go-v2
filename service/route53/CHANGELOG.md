@@ -1,3 +1,8 @@
+# v1.28.0 (2023-04-24)
+
+* **Feature**: added paginator for listResourceRecordSets
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.7 (2023-04-10)
 
 * No change notes available for this release.

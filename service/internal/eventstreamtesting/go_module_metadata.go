@@ -3,4 +3,4 @@
 package eventstreamtesting
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.0.59"
+const goModuleVersion = "1.0.60"

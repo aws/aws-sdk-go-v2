@@ -1,3 +1,8 @@
+# v1.36.0 (2023-04-24)
+
+* **Feature**: This release introduces a noise reduction pre-filter, linear interpolation deinterlace mode, video pass-through, updated default job settings, and expanded LC-AAC Stereo audio bitrate ranges.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2023-04-10)
 
 * **Feature**: AWS Elemental MediaConvert SDK now supports conversion of 608 paint-on captions to pop-on captions for SCC sources.

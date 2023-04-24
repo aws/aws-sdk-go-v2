@@ -1,8 +1,0 @@
-{
-    "id": "a7aeef88-7867-446a-8c51-7f39c2be006e",
-    "type": "feature",
-    "description": "added custom paginators for listMultipartUploads and ListObjectVersions",
-    "modules": [
-        "service/s3"
-    ]
-}

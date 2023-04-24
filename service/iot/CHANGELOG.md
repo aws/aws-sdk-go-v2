@@ -1,3 +1,7 @@
+# v1.36.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2023-04-20)
 
 * **Feature**: Support additional OTA states in GetOTAUpdate API

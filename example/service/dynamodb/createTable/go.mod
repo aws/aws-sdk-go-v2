@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/example/service/dynamodb/createTable
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.17.8
-	github.com/aws/aws-sdk-go-v2/config v1.18.21
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.5
+	github.com/aws/aws-sdk-go-v2 v1.18.0
+	github.com/aws/aws-sdk-go-v2/config v1.18.22
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.6
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

@@ -1,3 +1,7 @@
+# v1.18.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-04-19)
 
 * **Feature**: This release adds support for customer managed permissions. Customer managed permissions enable customers to author and manage tailored permissions for resources shared using RAM.

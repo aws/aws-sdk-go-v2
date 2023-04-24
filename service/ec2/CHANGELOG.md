@@ -1,3 +1,8 @@
+# v1.94.0 (2023-04-24)
+
+* **Feature**: API changes to AWS Verified Access related to identity providers' information.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.93.2 (2023-04-10)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.24.1 (2023-04-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-04-19)
 
 * **Feature**: This release supports native document models for custom classification, in addition to plain-text models. You train native document models using documents (PDF, Word, images) in their native format.

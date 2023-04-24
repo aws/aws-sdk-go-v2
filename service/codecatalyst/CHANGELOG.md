@@ -1,3 +1,8 @@
+# v1.2.5 (2023-04-24)
+
+* **Documentation**: Documentation updates for Amazon CodeCatalyst.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.4 (2023-04-10)
 
 * No change notes available for this release.
