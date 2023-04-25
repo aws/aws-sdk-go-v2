@@ -1,3 +1,7 @@
+# v1.53.0 (2023-04-25)
+
+* **Feature**: Amazon Connect, Contact Lens Evaluation API release including ability to manage forms and to submit contact evaluations.
+
 # v1.52.1 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

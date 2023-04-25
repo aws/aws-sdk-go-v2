@@ -1,8 +1,0 @@
-{
-    "id": "2902664a-03ec-4d96-bd28-f236bbe16c19",
-    "type": "feature",
-    "description": "Remove non actionable field from UpdateChannelReadMarker and DeleteChannelRequest.  Add precise exceptions to DeleteChannel and DeleteStreamingConfigurations error cases.",
-    "modules": [
-        "service/chimesdkmessaging"
-    ]
-}

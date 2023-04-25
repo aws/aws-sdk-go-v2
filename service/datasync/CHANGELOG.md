@@ -1,3 +1,7 @@
+# v1.24.0 (2023-04-25)
+
+* **Feature**: This release adds 13 new APIs to support AWS DataSync Discovery GA.
+
 # v1.23.5 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

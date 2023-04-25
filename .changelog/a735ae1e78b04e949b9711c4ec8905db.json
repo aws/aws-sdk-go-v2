@@ -1,8 +1,0 @@
-{
-    "id": "a735ae1e-78b0-4e94-9b97-11c4ec8905db",
-    "type": "feature",
-    "description": "This release adds 13 new APIs to support AWS DataSync Discovery GA.",
-    "modules": [
-        "service/datasync"
-    ]
-}

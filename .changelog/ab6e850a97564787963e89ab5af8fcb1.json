@@ -1,8 +1,0 @@
-{
-    "id": "ab6e850a-9756-4787-963e-89ab5af8fcb1",
-    "type": "feature",
-    "description": "New field added in AWS Managed Microsoft AD DescribeSettings response and regex pattern update for UpdateSettings value.  Added length validation to RemoteDomainName.",
-    "modules": [
-        "service/directoryservice"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.15.0 (2023-04-25)
+
+* **Feature**: Remove non actionable field from UpdateChannelReadMarker and DeleteChannelRequest.  Add precise exceptions to DeleteChannel and DeleteStreamingConfigurations error cases.
+
 # v1.14.3 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

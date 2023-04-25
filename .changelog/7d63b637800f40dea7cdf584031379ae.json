@@ -1,8 +1,0 @@
-{
-    "id": "7d63b637-800f-40de-a7cd-f584031379ae",
-    "type": "feature",
-    "description": "Adds support for journey runs and querying journey execution metrics based on journey runs. Adds execution metrics to campaign activities. Updates docs for Advanced Quiet Time.",
-    "modules": [
-        "service/pinpoint"
-    ]
-}

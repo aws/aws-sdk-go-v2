@@ -1,3 +1,17 @@
+# Release (2023-04-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.15.0](service/chimesdkmessaging/CHANGELOG.md#v1150-2023-04-25)
+  * **Feature**: Remove non actionable field from UpdateChannelReadMarker and DeleteChannelRequest.  Add precise exceptions to DeleteChannel and DeleteStreamingConfigurations error cases.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.53.0](service/connect/CHANGELOG.md#v1530-2023-04-25)
+  * **Feature**: Amazon Connect, Contact Lens Evaluation API release including ability to manage forms and to submit contact evaluations.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.24.0](service/datasync/CHANGELOG.md#v1240-2023-04-25)
+  * **Feature**: This release adds 13 new APIs to support AWS DataSync Discovery GA.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.17.0](service/directoryservice/CHANGELOG.md#v1170-2023-04-25)
+  * **Feature**: New field added in AWS Managed Microsoft AD DescribeSettings response and regex pattern update for UpdateSettings value.  Added length validation to RemoteDomainName.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.19.0](service/pinpoint/CHANGELOG.md#v1190-2023-04-25)
+  * **Feature**: Adds support for journey runs and querying journey execution metrics based on journey runs. Adds execution metrics to campaign activities. Updates docs for Advanced Quiet Time.
+
 # Release (2023-04-24)
 
 ## General Highlights
