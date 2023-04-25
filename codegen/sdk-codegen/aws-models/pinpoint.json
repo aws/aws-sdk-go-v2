@@ -978,22 +978,26 @@
             }
         },
         "com.amazonaws.pinpoint#Action": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OPEN_APP",
-                        "name": "OPEN_APP"
-                    },
-                    {
-                        "value": "DEEP_LINK",
-                        "name": "DEEP_LINK"
-                    },
-                    {
-                        "value": "URL",
-                        "name": "URL"
+            "type": "enum",
+            "members": {
+                "OPEN_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN_APP"
                     }
-                ]
+                },
+                "DEEP_LINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEEP_LINK"
+                    }
+                },
+                "URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#ActivitiesResponse": {
@@ -1178,6 +1182,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the campaign treatment that the activity applies to. A treatment is a variation of a campaign that's used for A/B testing of a campaign.</p>"
                     }
+                },
+                "ExecutionMetrics": {
+                    "target": "com.amazonaws.pinpoint#MapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object that contains metrics relating to the campaign execution for this campaign activity. For information about the structure and contents of the results, see <a href=\"https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html\">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1229,22 +1239,26 @@
             }
         },
         "com.amazonaws.pinpoint#Alignment": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LEFT",
-                        "name": "LEFT"
-                    },
-                    {
-                        "value": "CENTER",
-                        "name": "CENTER"
-                    },
-                    {
-                        "value": "RIGHT",
-                        "name": "RIGHT"
+            "type": "enum",
+            "members": {
+                "LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEFT"
                     }
-                ]
+                },
+                "CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CENTER"
+                    }
+                },
+                "RIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RIGHT"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#AndroidPushNotificationTemplate": {
@@ -1481,38 +1495,50 @@
             }
         },
         "com.amazonaws.pinpoint#AttributeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INCLUSIVE",
-                        "name": "INCLUSIVE"
-                    },
-                    {
-                        "value": "EXCLUSIVE",
-                        "name": "EXCLUSIVE"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "BEFORE",
-                        "name": "BEFORE"
-                    },
-                    {
-                        "value": "AFTER",
-                        "name": "AFTER"
-                    },
-                    {
-                        "value": "ON",
-                        "name": "ON"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
+            "type": "enum",
+            "members": {
+                "INCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUSIVE"
                     }
-                ]
+                },
+                "EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "BEFORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEFORE"
+                    }
+                },
+                "AFTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER"
+                    }
+                },
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#AttributesResource": {
@@ -1784,22 +1810,26 @@
             }
         },
         "com.amazonaws.pinpoint#ButtonAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LINK",
-                        "name": "LINK"
-                    },
-                    {
-                        "value": "DEEP_LINK",
-                        "name": "DEEP_LINK"
-                    },
-                    {
-                        "value": "CLOSE",
-                        "name": "CLOSE"
+            "type": "enum",
+            "members": {
+                "LINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINK"
                     }
-                ]
+                },
+                "DEEP_LINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEEP_LINK"
+                    }
+                },
+                "CLOSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOSE"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#CampaignCustomMessage": {
@@ -2257,38 +2287,50 @@
             }
         },
         "com.amazonaws.pinpoint#CampaignStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SCHEDULED",
-                        "name": "SCHEDULED"
-                    },
-                    {
-                        "value": "EXECUTING",
-                        "name": "EXECUTING"
-                    },
-                    {
-                        "value": "PENDING_NEXT_RUN",
-                        "name": "PENDING_NEXT_RUN"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "PAUSED",
-                        "name": "PAUSED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
-                    },
-                    {
-                        "value": "INVALID",
-                        "name": "INVALID"
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED"
                     }
-                ]
+                },
+                "EXECUTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXECUTING"
+                    }
+                },
+                "PENDING_NEXT_RUN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_NEXT_RUN"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#CampaignsResponse": {
@@ -2379,62 +2421,86 @@
             }
         },
         "com.amazonaws.pinpoint#ChannelType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PUSH",
-                        "name": "PUSH"
-                    },
-                    {
-                        "value": "GCM",
-                        "name": "GCM"
-                    },
-                    {
-                        "value": "APNS",
-                        "name": "APNS"
-                    },
-                    {
-                        "value": "APNS_SANDBOX",
-                        "name": "APNS_SANDBOX"
-                    },
-                    {
-                        "value": "APNS_VOIP",
-                        "name": "APNS_VOIP"
-                    },
-                    {
-                        "value": "APNS_VOIP_SANDBOX",
-                        "name": "APNS_VOIP_SANDBOX"
-                    },
-                    {
-                        "value": "ADM",
-                        "name": "ADM"
-                    },
-                    {
-                        "value": "SMS",
-                        "name": "SMS"
-                    },
-                    {
-                        "value": "VOICE",
-                        "name": "VOICE"
-                    },
-                    {
-                        "value": "EMAIL",
-                        "name": "EMAIL"
-                    },
-                    {
-                        "value": "BAIDU",
-                        "name": "BAIDU"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
-                    },
-                    {
-                        "value": "IN_APP",
-                        "name": "IN_APP"
+            "type": "enum",
+            "members": {
+                "PUSH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUSH"
                     }
-                ]
+                },
+                "GCM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCM"
+                    }
+                },
+                "APNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS"
+                    }
+                },
+                "APNS_SANDBOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS_SANDBOX"
+                    }
+                },
+                "APNS_VOIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS_VOIP"
+                    }
+                },
+                "APNS_VOIP_SANDBOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS_VOIP_SANDBOX"
+                    }
+                },
+                "ADM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADM"
+                    }
+                },
+                "SMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMS"
+                    }
+                },
+                "VOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICE"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "BAIDU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BAIDU"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "IN_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_APP"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#ChannelsResponse": {
@@ -2458,36 +2524,36 @@
                 "EMAIL": {
                     "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for Email Channel.</p>"
+                        "smithy.api#documentation": "<p>Rules for the Email channel.</p>"
                     }
                 },
                 "SMS": {
                     "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for SMS Channel.</p>"
+                        "smithy.api#documentation": "<p>Rules for the SMS channel.</p>"
                     }
                 },
                 "PUSH": {
                     "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for Push Channel.</p>"
+                        "smithy.api#documentation": "<p>Rules for the Push channel.</p>"
                     }
                 },
                 "VOICE": {
                     "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for Voice Channel.</p>"
+                        "smithy.api#documentation": "<p>Rules for the Voice channel.</p>"
                     }
                 },
                 "CUSTOM": {
                     "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for Custom Channel.</p>"
+                        "smithy.api#documentation": "<p>Rules for the Custom channel.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The time when journey will stop sending messages.</p>"
+                "smithy.api#documentation": "<p>The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
             }
         },
         "com.amazonaws.pinpoint#ClosedDaysRule": {
@@ -2496,24 +2562,24 @@
                 "Name": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the rule.</p>"
+                        "smithy.api#documentation": "<p>The name of the closed day rule.</p>"
                     }
                 },
                 "StartDateTime": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Start Datetime in ISO 8601 format.</p>"
+                        "smithy.api#documentation": "<p>Start DateTime ISO 8601 format</p>"
                     }
                 },
                 "EndDateTime": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>End Datetime in ISO 8601 format.</p>"
+                        "smithy.api#documentation": "<p>End DateTime ISO 8601 format</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Closed Days Rule. Part of Journey sending schedule.</p>"
+                "smithy.api#documentation": "<p>Specifies the rule settings for when messages can't be sent.</p>"
             }
         },
         "com.amazonaws.pinpoint#Condition": {
@@ -2651,6 +2717,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateAppResponse": {
@@ -2663,6 +2732,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateApplicationRequest": {
@@ -2745,6 +2817,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateCampaignResponse": {
@@ -2757,6 +2832,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateEmailTemplate": {
@@ -2811,6 +2889,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateEmailTemplateResponse": {
@@ -2823,6 +2904,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateExportJob": {
@@ -2883,6 +2967,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateExportJobResponse": {
@@ -2895,6 +2982,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateImportJob": {
@@ -2955,6 +3045,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateImportJobResponse": {
@@ -2967,6 +3060,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateInAppTemplate": {
@@ -3021,6 +3117,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateInAppTemplateResponse": {
@@ -3033,6 +3132,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateJourney": {
@@ -3093,6 +3195,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateJourneyResponse": {
@@ -3105,6 +3210,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreatePushTemplate": {
@@ -3159,6 +3267,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreatePushTemplateResponse": {
@@ -3171,6 +3282,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateRecommenderConfiguration": {
@@ -3223,6 +3337,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateRecommenderConfigurationResponse": {
@@ -3235,6 +3352,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateRecommenderConfigurationShape": {
@@ -3360,6 +3480,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateSegmentResponse": {
@@ -3372,6 +3495,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateSmsTemplate": {
@@ -3426,6 +3552,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateSmsTemplateResponse": {
@@ -3438,6 +3567,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CreateTemplateMessageBody": {
@@ -3518,6 +3650,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#CreateVoiceTemplateResponse": {
@@ -3530,6 +3665,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#CustomDeliveryConfiguration": {
@@ -3598,38 +3736,50 @@
             }
         },
         "com.amazonaws.pinpoint#DayOfWeek": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MONDAY",
-                        "name": "MONDAY"
-                    },
-                    {
-                        "value": "TUESDAY",
-                        "name": "TUESDAY"
-                    },
-                    {
-                        "value": "WEDNESDAY",
-                        "name": "WEDNESDAY"
-                    },
-                    {
-                        "value": "THURSDAY",
-                        "name": "THURSDAY"
-                    },
-                    {
-                        "value": "FRIDAY",
-                        "name": "FRIDAY"
-                    },
-                    {
-                        "value": "SATURDAY",
-                        "name": "SATURDAY"
-                    },
-                    {
-                        "value": "SUNDAY",
-                        "name": "SUNDAY"
+            "type": "enum",
+            "members": {
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONDAY"
                     }
-                ]
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUESDAY"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEDNESDAY"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THURSDAY"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRIDAY"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SATURDAY"
+                    }
+                },
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUNDAY"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#DefaultButtonConfiguration": {
@@ -3839,6 +3989,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteAdmChannelResponse": {
@@ -3851,6 +4004,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApnsChannel": {
@@ -3904,6 +4060,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApnsChannelResponse": {
@@ -3916,6 +4075,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApnsSandboxChannel": {
@@ -3969,6 +4131,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApnsSandboxChannelResponse": {
@@ -3981,6 +4146,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApnsVoipChannel": {
@@ -4034,6 +4202,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApnsVoipChannelResponse": {
@@ -4046,6 +4217,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApnsVoipSandboxChannel": {
@@ -4099,6 +4273,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApnsVoipSandboxChannelResponse": {
@@ -4111,6 +4288,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteApp": {
@@ -4164,6 +4344,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteAppResponse": {
@@ -4176,6 +4359,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteBaiduChannel": {
@@ -4229,6 +4415,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteBaiduChannelResponse": {
@@ -4241,6 +4430,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteCampaign": {
@@ -4302,6 +4494,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteCampaignResponse": {
@@ -4314,6 +4509,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteEmailChannel": {
@@ -4367,6 +4565,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteEmailChannelResponse": {
@@ -4379,6 +4580,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteEmailTemplate": {
@@ -4439,6 +4643,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteEmailTemplateResponse": {
@@ -4451,6 +4658,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteEndpoint": {
@@ -4512,6 +4722,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteEndpointResponse": {
@@ -4524,6 +4737,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteEventStream": {
@@ -4577,6 +4793,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteEventStreamResponse": {
@@ -4589,6 +4808,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteGcmChannel": {
@@ -4642,6 +4864,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteGcmChannelResponse": {
@@ -4654,6 +4879,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteInAppTemplate": {
@@ -4714,6 +4942,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteInAppTemplateResponse": {
@@ -4726,6 +4957,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteJourney": {
@@ -4787,6 +5021,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteJourneyResponse": {
@@ -4799,6 +5036,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeletePushTemplate": {
@@ -4859,6 +5099,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeletePushTemplateResponse": {
@@ -4871,6 +5114,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteRecommenderConfiguration": {
@@ -4924,6 +5170,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteRecommenderConfigurationResponse": {
@@ -4936,6 +5185,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteSegment": {
@@ -4997,6 +5249,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteSegmentResponse": {
@@ -5009,6 +5264,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteSmsChannel": {
@@ -5062,6 +5320,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteSmsChannelResponse": {
@@ -5074,6 +5335,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteSmsTemplate": {
@@ -5134,6 +5398,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteSmsTemplateResponse": {
@@ -5146,6 +5413,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteUserEndpoints": {
@@ -5207,6 +5477,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteUserEndpointsResponse": {
@@ -5219,6 +5492,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteVoiceChannel": {
@@ -5272,6 +5548,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteVoiceChannelResponse": {
@@ -5284,6 +5563,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteVoiceTemplate": {
@@ -5344,6 +5626,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#DeleteVoiceTemplateResponse": {
@@ -5356,56 +5641,73 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#DeliveryStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUCCESSFUL",
-                        "name": "SUCCESSFUL"
-                    },
-                    {
-                        "value": "THROTTLED",
-                        "name": "THROTTLED"
-                    },
-                    {
-                        "value": "TEMPORARY_FAILURE",
-                        "name": "TEMPORARY_FAILURE"
-                    },
-                    {
-                        "value": "PERMANENT_FAILURE",
-                        "name": "PERMANENT_FAILURE"
-                    },
-                    {
-                        "value": "UNKNOWN_FAILURE",
-                        "name": "UNKNOWN_FAILURE"
-                    },
-                    {
-                        "value": "OPT_OUT",
-                        "name": "OPT_OUT"
-                    },
-                    {
-                        "value": "DUPLICATE",
-                        "name": "DUPLICATE"
+            "type": "enum",
+            "members": {
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
                     }
-                ]
+                },
+                "THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLED"
+                    }
+                },
+                "TEMPORARY_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEMPORARY_FAILURE"
+                    }
+                },
+                "PERMANENT_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMANENT_FAILURE"
+                    }
+                },
+                "UNKNOWN_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN_FAILURE"
+                    }
+                },
+                "OPT_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPT_OUT"
+                    }
+                },
+                "DUPLICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#DimensionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INCLUSIVE",
-                        "name": "INCLUSIVE"
-                    },
-                    {
-                        "value": "EXCLUSIVE",
-                        "name": "EXCLUSIVE"
+            "type": "enum",
+            "members": {
+                "INCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUSIVE"
                     }
-                ]
+                },
+                "EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#DirectMessageConfiguration": {
@@ -5471,26 +5773,32 @@
             }
         },
         "com.amazonaws.pinpoint#Duration": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HR_24",
-                        "name": "HR_24"
-                    },
-                    {
-                        "value": "DAY_7",
-                        "name": "DAY_7"
-                    },
-                    {
-                        "value": "DAY_14",
-                        "name": "DAY_14"
-                    },
-                    {
-                        "value": "DAY_30",
-                        "name": "DAY_30"
+            "type": "enum",
+            "members": {
+                "HR_24": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HR_24"
                     }
-                ]
+                },
+                "DAY_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY_7"
+                    }
+                },
+                "DAY_14": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY_14"
+                    }
+                },
+                "DAY_30": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY_30"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#EmailChannelRequest": {
@@ -6832,18 +7140,20 @@
             }
         },
         "com.amazonaws.pinpoint#FilterType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SYSTEM",
-                        "name": "SYSTEM"
-                    },
-                    {
-                        "value": "ENDPOINT",
-                        "name": "ENDPOINT"
+            "type": "enum",
+            "members": {
+                "SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM"
                     }
-                ]
+                },
+                "ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDPOINT"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#ForbiddenException": {
@@ -6869,53 +7179,67 @@
             }
         },
         "com.amazonaws.pinpoint#Format": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#Frequency": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ONCE",
-                        "name": "ONCE"
-                    },
-                    {
-                        "value": "HOURLY",
-                        "name": "HOURLY"
-                    },
-                    {
-                        "value": "DAILY",
-                        "name": "DAILY"
-                    },
-                    {
-                        "value": "WEEKLY",
-                        "name": "WEEKLY"
-                    },
-                    {
-                        "value": "MONTHLY",
-                        "name": "MONTHLY"
-                    },
-                    {
-                        "value": "EVENT",
-                        "name": "EVENT"
-                    },
-                    {
-                        "value": "IN_APP_EVENT",
-                        "name": "IN_APP_EVENT"
+            "type": "enum",
+            "members": {
+                "ONCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONCE"
                     }
-                ]
+                },
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
+                    }
+                },
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
+                    }
+                },
+                "WEEKLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKLY"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                },
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT"
+                    }
+                },
+                "IN_APP_EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_APP_EVENT"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#GCMChannelRequest": {
@@ -7229,6 +7553,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetAdmChannelResponse": {
@@ -7241,6 +7568,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetApnsChannel": {
@@ -7294,6 +7624,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetApnsChannelResponse": {
@@ -7306,6 +7639,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetApnsSandboxChannel": {
@@ -7359,6 +7695,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetApnsSandboxChannelResponse": {
@@ -7371,6 +7710,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetApnsVoipChannel": {
@@ -7424,6 +7766,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetApnsVoipChannelResponse": {
@@ -7436,6 +7781,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetApnsVoipSandboxChannel": {
@@ -7489,6 +7837,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetApnsVoipSandboxChannelResponse": {
@@ -7501,6 +7852,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetApp": {
@@ -7554,6 +7908,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetAppResponse": {
@@ -7566,6 +7923,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetApplicationDateRangeKpi": {
@@ -7655,6 +8015,9 @@
                         "smithy.api#httpQuery": "start-time"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetApplicationDateRangeKpiResponse": {
@@ -7667,6 +8030,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetApplicationSettings": {
@@ -7720,6 +8086,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetApplicationSettingsResponse": {
@@ -7732,6 +8101,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetApps": {
@@ -7791,6 +8163,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetAppsResponse": {
@@ -7803,6 +8178,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetBaiduChannel": {
@@ -7856,6 +8234,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetBaiduChannelResponse": {
@@ -7868,6 +8249,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaign": {
@@ -7983,6 +8367,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignActivitiesResponse": {
@@ -7995,6 +8382,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignDateRangeKpi": {
@@ -8092,6 +8482,9 @@
                         "smithy.api#httpQuery": "start-time"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignDateRangeKpiResponse": {
@@ -8104,6 +8497,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignRequest": {
@@ -8125,6 +8521,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignResponse": {
@@ -8137,6 +8536,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignVersion": {
@@ -8206,6 +8608,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignVersionResponse": {
@@ -8218,6 +8623,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignVersions": {
@@ -8293,6 +8701,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignVersionsResponse": {
@@ -8305,6 +8716,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaigns": {
@@ -8372,6 +8786,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetCampaignsResponse": {
@@ -8384,6 +8801,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetChannels": {
@@ -8437,6 +8857,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetChannelsResponse": {
@@ -8449,6 +8872,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetEmailChannel": {
@@ -8502,6 +8928,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetEmailChannelResponse": {
@@ -8514,6 +8943,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetEmailTemplate": {
@@ -8574,6 +9006,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetEmailTemplateResponse": {
@@ -8586,6 +9021,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetEndpoint": {
@@ -8647,6 +9085,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetEndpointResponse": {
@@ -8659,6 +9100,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetEventStream": {
@@ -8712,6 +9156,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetEventStreamResponse": {
@@ -8724,6 +9171,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetExportJob": {
@@ -8785,6 +9235,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetExportJobResponse": {
@@ -8797,6 +9250,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetExportJobs": {
@@ -8864,6 +9320,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetExportJobsResponse": {
@@ -8876,6 +9335,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetGcmChannel": {
@@ -8929,6 +9391,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetGcmChannelResponse": {
@@ -8941,6 +9406,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetImportJob": {
@@ -9002,6 +9470,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetImportJobResponse": {
@@ -9014,6 +9485,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetImportJobs": {
@@ -9081,6 +9555,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetImportJobsResponse": {
@@ -9093,6 +9570,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetInAppMessages": {
@@ -9154,6 +9634,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetInAppMessagesResponse": {
@@ -9166,6 +9649,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetInAppTemplate": {
@@ -9226,6 +9712,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetInAppTemplateResponse": {
@@ -9238,6 +9727,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetJourney": {
@@ -9375,6 +9867,9 @@
                         "smithy.api#httpQuery": "start-time"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetJourneyDateRangeKpiResponse": {
@@ -9387,6 +9882,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetJourneyExecutionActivityMetrics": {
@@ -9459,7 +9957,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
+                        "smithy.api#documentation": "<p>The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
                         "smithy.api#httpQuery": "next-token"
                     }
                 },
@@ -9470,6 +9968,9 @@
                         "smithy.api#httpQuery": "page-size"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetJourneyExecutionActivityMetricsResponse": {
@@ -9482,6 +9983,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetJourneyExecutionMetrics": {
@@ -9546,7 +10050,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
+                        "smithy.api#documentation": "<p>The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
                         "smithy.api#httpQuery": "next-token"
                     }
                 },
@@ -9557,6 +10061,9 @@
                         "smithy.api#httpQuery": "page-size"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetJourneyExecutionMetricsResponse": {
@@ -9569,6 +10076,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetJourneyRequest": {
@@ -9590,6 +10100,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetJourneyResponse": {
@@ -9602,6 +10115,389 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRunExecutionActivityMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpoint#GetJourneyRunExecutionActivityMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpoint#GetJourneyRunExecutionActivityMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpoint#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#PayloadTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey activity.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the activity execution metrics for a journey run",
+                        "documentation": "The following example gets activity execution metrics for a single run of a journey.",
+                        "input": {
+                            "ApplicationId": "11111111112222222222333333333344",
+                            "JourneyId": "aaaaaaaaaabbbbbbbbbbccccccccccdd",
+                            "RunId": "99999999998888888888777777777766",
+                            "JourneyActivityId": "AAAAAAAAAA"
+                        },
+                        "output": {
+                            "JourneyRunExecutionActivityMetricsResponse": {
+                                "ApplicationId": "11111111112222222222333333333344",
+                                "JourneyId": "aaaaaaaaaabbbbbbbbbbccccccccccdd",
+                                "RunId": "99999999998888888888777777777766",
+                                "JourneyActivityId": "AAAAAAAAAA",
+                                "ActivityType": "EMAIL",
+                                "LastEvaluatedTime": "2000-01-01T00:00:05.000Z",
+                                "Metrics": {
+                                    "SUCCESS": "1"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/apps/{ApplicationId}/journeys/{JourneyId}/runs/{RunId}/activities/{JourneyActivityId}/execution-metrics",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRunExecutionActivityMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JourneyActivityId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey activity.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JourneyId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
+                        "smithy.api#httpQuery": "page-size"
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey run.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRunExecutionActivityMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "JourneyRunExecutionActivityMetricsResponse": {
+                    "target": "com.amazonaws.pinpoint#JourneyRunExecutionActivityMetricsResponse",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRunExecutionMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpoint#GetJourneyRunExecutionMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpoint#GetJourneyRunExecutionMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpoint#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#PayloadTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the execution metrics for a journey run",
+                        "documentation": "The following example gets execution metrics for a single run of a journey.",
+                        "input": {
+                            "ApplicationId": "11111111112222222222333333333344",
+                            "JourneyId": "aaaaaaaaaabbbbbbbbbbccccccccccdd",
+                            "RunId": "99999999998888888888777777777766"
+                        },
+                        "output": {
+                            "JourneyRunExecutionMetricsResponse": {
+                                "ApplicationId": "11111111112222222222333333333344",
+                                "JourneyId": "aaaaaaaaaabbbbbbbbbbccccccccccdd",
+                                "RunId": "99999999998888888888777777777766",
+                                "LastEvaluatedTime": "2000-01-01T00:00:05.000Z",
+                                "Metrics": {
+                                    "ENDPOINT_PRODUCED": "1",
+                                    "ENDPOINT_ENTERED": "1",
+                                    "ENDPOINT_LEFT": "1"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/apps/{ApplicationId}/journeys/{JourneyId}/runs/{RunId}/execution-metrics",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRunExecutionMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JourneyId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
+                        "smithy.api#httpQuery": "page-size"
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey run.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRunExecutionMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "JourneyRunExecutionMetricsResponse": {
+                    "target": "com.amazonaws.pinpoint#JourneyRunExecutionMetricsResponse",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRuns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpoint#GetJourneyRunsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpoint#GetJourneyRunsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpoint#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#PayloadTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the runs of a journey.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the runs of a journey",
+                        "documentation": "The following example gets the runs of a journey.",
+                        "input": {
+                            "ApplicationId": "11111111112222222222333333333344",
+                            "JourneyId": "aaaaaaaaaabbbbbbbbbbccccccccccdd"
+                        },
+                        "output": {
+                            "JourneyRunsResponse": {
+                                "Item": [
+                                    {
+                                        "RunId": "99999999998888888888777777777766",
+                                        "CreationTime": "2000-01-01T00:00:00.000Z",
+                                        "LastUpdateTime": "2000-01-01T00:00:05.000Z",
+                                        "Status": "COMPLETED"
+                                    },
+                                    {
+                                        "RunId": "ffffffffffeeeeeeeeeeddddddddddcc",
+                                        "CreationTime": "2000-01-01T00:00:10.000Z",
+                                        "LastUpdateTime": "2000-01-01T00:00:10.000Z",
+                                        "Status": "SCHEDULED"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/apps/{ApplicationId}/journeys/{JourneyId}/runs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRunsRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JourneyId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>",
+                        "smithy.api#httpQuery": "page-size"
+                    }
+                },
+                "Token": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response.</p>",
+                        "smithy.api#httpQuery": "token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpoint#GetJourneyRunsResponse": {
+            "type": "structure",
+            "members": {
+                "JourneyRunsResponse": {
+                    "target": "com.amazonaws.pinpoint#JourneyRunsResponse",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetPushTemplate": {
@@ -9662,6 +10558,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetPushTemplateResponse": {
@@ -9674,6 +10573,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetRecommenderConfiguration": {
@@ -9727,6 +10629,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetRecommenderConfigurationResponse": {
@@ -9739,6 +10644,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetRecommenderConfigurations": {
@@ -9798,6 +10706,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetRecommenderConfigurationsResponse": {
@@ -9810,6 +10721,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegment": {
@@ -9925,6 +10839,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentExportJobsResponse": {
@@ -9937,6 +10854,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentImportJobs": {
@@ -10012,6 +10932,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentImportJobsResponse": {
@@ -10024,6 +10947,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentRequest": {
@@ -10045,6 +10971,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentResponse": {
@@ -10057,6 +10986,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentVersion": {
@@ -10126,6 +11058,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentVersionResponse": {
@@ -10138,6 +11073,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentVersions": {
@@ -10213,6 +11151,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentVersionsResponse": {
@@ -10225,6 +11166,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegments": {
@@ -10292,6 +11236,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetSegmentsResponse": {
@@ -10304,6 +11251,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetSmsChannel": {
@@ -10357,6 +11307,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetSmsChannelResponse": {
@@ -10369,6 +11322,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetSmsTemplate": {
@@ -10429,6 +11385,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetSmsTemplateResponse": {
@@ -10441,6 +11400,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetUserEndpoints": {
@@ -10502,6 +11464,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetUserEndpointsResponse": {
@@ -10514,6 +11479,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetVoiceChannel": {
@@ -10567,6 +11535,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetVoiceChannelResponse": {
@@ -10579,6 +11550,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#GetVoiceTemplate": {
@@ -10639,6 +11613,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#GetVoiceTemplateResponse": {
@@ -10651,6 +11628,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#HoldoutActivity": {
@@ -11294,22 +12274,26 @@
             }
         },
         "com.amazonaws.pinpoint#Include": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "ANY",
-                        "name": "ANY"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#InternalServerErrorException": {
@@ -11355,46 +12339,62 @@
             }
         },
         "com.amazonaws.pinpoint#JobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATED",
-                        "name": "CREATED"
-                    },
-                    {
-                        "value": "PREPARING_FOR_INITIALIZATION",
-                        "name": "PREPARING_FOR_INITIALIZATION"
-                    },
-                    {
-                        "value": "INITIALIZING",
-                        "name": "INITIALIZING"
-                    },
-                    {
-                        "value": "PROCESSING",
-                        "name": "PROCESSING"
-                    },
-                    {
-                        "value": "PENDING_JOB",
-                        "name": "PENDING_JOB"
-                    },
-                    {
-                        "value": "COMPLETING",
-                        "name": "COMPLETING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILING",
-                        "name": "FAILING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
                     }
-                ]
+                },
+                "PREPARING_FOR_INITIALIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPARING_FOR_INITIALIZATION"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "PENDING_JOB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_JOB"
+                    }
+                },
+                "COMPLETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#JourneyChannelSettings": {
@@ -11507,7 +12507,7 @@
                 "ActivityType": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT - For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE - For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT - For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT - For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT - For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE – For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11738,14 +12738,14 @@
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether endpoints in quiet hours should enter a wait activity until quiet hours have elapsed.</p>"
                     }
                 },
                 "RefreshOnSegmentUpdate": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the journey participants should be refreshed when a segment is updated.</p>"
                     }
                 },
                 "JourneyChannelSettings": {
@@ -11758,24 +12758,210 @@
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)</p>"
+                        "smithy.api#documentation": "<p>Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.</p>"
                     }
                 },
                 "OpenHours": {
                     "target": "com.amazonaws.pinpoint#OpenHours",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+                        "smithy.api#documentation": "<p>The time when a journey can send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
                     }
                 },
                 "ClosedDays": {
                     "target": "com.amazonaws.pinpoint#ClosedDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+                        "smithy.api#documentation": "<p>The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the status, configuration, and other settings for a journey.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#JourneyRunExecutionActivityMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "ActivityType": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE – For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the application that the metric applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JourneyActivityId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the activity that the metric applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JourneyId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey that the metric applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastEvaluatedTime": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the execution status of the activity for this journey run and updated the data for the metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.pinpoint#MapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see see <a href=\"https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html\">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey run that the metric applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity for a particular journey run, and provides information about that query.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#JourneyRunExecutionMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the application that the metric applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JourneyId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey that the metric applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastEvaluatedTime": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the journey run and updated the data for the metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.pinpoint#MapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html\">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the journey run that the metric applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey run, and provides information about that query.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#JourneyRunResponse": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the journey run was created or scheduled, in ISO 8601 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the journey run was updated, in ISO 8601 format..</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpoint#JourneyRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the journey run.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information from a specified run of a journey.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#JourneyRunStatus": {
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#JourneyRunsResponse": {
+            "type": "structure",
+            "members": {
+                "Item": {
+                    "target": "com.amazonaws.pinpoint#ListOfJourneyRunResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of responses, one for each run of the journey</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information from all runs of a journey.</p>"
             }
         },
         "com.amazonaws.pinpoint#JourneySMSMessage": {
@@ -11878,34 +13064,44 @@
             }
         },
         "com.amazonaws.pinpoint#Layout": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BOTTOM_BANNER",
-                        "name": "BOTTOM_BANNER"
-                    },
-                    {
-                        "value": "TOP_BANNER",
-                        "name": "TOP_BANNER"
-                    },
-                    {
-                        "value": "OVERLAYS",
-                        "name": "OVERLAYS"
-                    },
-                    {
-                        "value": "MOBILE_FEED",
-                        "name": "MOBILE_FEED"
-                    },
-                    {
-                        "value": "MIDDLE_BANNER",
-                        "name": "MIDDLE_BANNER"
-                    },
-                    {
-                        "value": "CAROUSEL",
-                        "name": "CAROUSEL"
+            "type": "enum",
+            "members": {
+                "BOTTOM_BANNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTOM_BANNER"
                     }
-                ]
+                },
+                "TOP_BANNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOP_BANNER"
+                    }
+                },
+                "OVERLAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERLAYS"
+                    }
+                },
+                "MOBILE_FEED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MOBILE_FEED"
+                    }
+                },
+                "MIDDLE_BANNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIDDLE_BANNER"
+                    }
+                },
+                "CAROUSEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAROUSEL"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#ListJourneys": {
@@ -11973,6 +13169,9 @@
                         "smithy.api#httpQuery": "token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#ListJourneysResponse": {
@@ -11985,6 +13184,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#ListOfActivityResponse": {
@@ -12054,6 +13256,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.pinpoint#JourneyResponse"
+            }
+        },
+        "com.amazonaws.pinpoint#ListOfJourneyRunResponse": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpoint#JourneyRunResponse"
             }
         },
         "com.amazonaws.pinpoint#ListOfMultiConditionalBranch": {
@@ -12210,6 +13418,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#ListTagsForResourceResponse": {
@@ -12222,6 +13433,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#ListTemplateVersions": {
@@ -12298,6 +13512,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#ListTemplateVersionsResponse": {
@@ -12310,6 +13527,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#ListTemplates": {
@@ -12377,6 +13597,9 @@
                         "smithy.api#httpQuery": "template-type"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#ListTemplatesResponse": {
@@ -12389,6 +13612,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#MapOfActivity": {
@@ -12843,18 +14069,20 @@
             }
         },
         "com.amazonaws.pinpoint#MessageType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TRANSACTIONAL",
-                        "name": "TRANSACTIONAL"
-                    },
-                    {
-                        "value": "PROMOTIONAL",
-                        "name": "PROMOTIONAL"
+            "type": "enum",
+            "members": {
+                "TRANSACTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSACTIONAL"
                     }
-                ]
+                },
+                "PROMOTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROMOTIONAL"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#MethodNotAllowedException": {
@@ -12903,18 +14131,20 @@
             }
         },
         "com.amazonaws.pinpoint#Mode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DELIVERY",
-                        "name": "DELIVERY"
-                    },
-                    {
-                        "value": "FILTER",
-                        "name": "FILTER"
+            "type": "enum",
+            "members": {
+                "DELIVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY"
                     }
-                ]
+                },
+                "FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILTER"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#MultiConditionalBranch": {
@@ -13104,36 +14334,36 @@
                 "EMAIL": {
                     "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for Email Channel.</p>"
+                        "smithy.api#documentation": "<p>Specifies the schedule settings for the email channel.</p>"
                     }
                 },
                 "SMS": {
                     "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for SMS Channel.</p>"
+                        "smithy.api#documentation": "<p>Specifies the schedule settings for the SMS channel.</p>"
                     }
                 },
                 "PUSH": {
                     "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for Push Channel.</p>"
+                        "smithy.api#documentation": "<p>Specifies the schedule settings for the push channel.</p>"
                     }
                 },
                 "VOICE": {
                     "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for Voice Channel.</p>"
+                        "smithy.api#documentation": "<p>Specifies the schedule settings for the voice channel.</p>"
                     }
                 },
                 "CUSTOM": {
                     "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Rules for Custom Channel.</p>"
+                        "smithy.api#documentation": "<p>Specifies the schedule settings for the custom channel.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+                "smithy.api#documentation": "<p>Specifies the times when message are allowed to be sent to endpoints.</p>"
             }
         },
         "com.amazonaws.pinpoint#OpenHoursRule": {
@@ -13142,33 +14372,35 @@
                 "StartTime": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Local start time in ISO 8601 format.</p>"
+                        "smithy.api#documentation": "<p>The start of the scheduled time, in ISO 8601 format, when the channel can send messages.</p>"
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Local start time in ISO 8601 format.</p>"
+                        "smithy.api#documentation": "<p>The end of the scheduled time, in ISO 8601 format, when the channel can't send messages.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>List of OpenHours Rules.</p>"
+                "smithy.api#documentation": "<p>Specifies the start and end time for OpenHours.</p>"
             }
         },
         "com.amazonaws.pinpoint#Operator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "ANY",
-                        "name": "ANY"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#OverrideButtonConfiguration": {
@@ -13264,6 +14496,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#PhoneNumberValidateResponse": {
@@ -13276,6 +14511,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#Pinpoint": {
@@ -13482,6 +14720,15 @@
                 },
                 {
                     "target": "com.amazonaws.pinpoint#GetJourneyExecutionMetrics"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#GetJourneyRunExecutionActivityMetrics"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#GetJourneyRunExecutionMetrics"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#GetJourneyRuns"
                 },
                 {
                     "target": "com.amazonaws.pinpoint#GetPushTemplate"
@@ -14122,8 +15369,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14135,8 +15382,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14148,8 +15395,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14161,8 +15408,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14174,8 +15421,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14187,8 +15434,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14200,8 +15447,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14213,8 +15460,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14226,8 +15473,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14239,8 +15486,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14252,8 +15499,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14265,8 +15512,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14278,8 +15525,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14291,8 +15538,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14304,8 +15551,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14317,8 +15564,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14330,8 +15577,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14343,8 +15590,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14356,8 +15603,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14369,8 +15616,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14382,8 +15629,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14395,8 +15642,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14408,8 +15655,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14421,8 +15668,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14434,8 +15681,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14447,8 +15705,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14460,8 +15729,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14473,8 +15753,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -14486,8 +15777,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -14499,8 +15790,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -14512,8 +15803,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -14524,8 +15815,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -14536,9 +15827,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -14876,6 +16173,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#PutEventStreamResponse": {
@@ -14888,6 +16188,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#PutEvents": {
@@ -14948,6 +16251,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#PutEventsResponse": {
@@ -14960,6 +16266,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#QuietTime": {
@@ -15054,18 +16363,20 @@
             }
         },
         "com.amazonaws.pinpoint#RecencyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#RecommenderConfigurationResponse": {
@@ -15220,6 +16531,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#RemoveAttributesResponse": {
@@ -15232,6 +16546,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#ResultRow": {
@@ -16024,18 +17341,20 @@
             }
         },
         "com.amazonaws.pinpoint#SegmentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DIMENSIONAL",
-                        "name": "DIMENSIONAL"
-                    },
-                    {
-                        "value": "IMPORT",
-                        "name": "IMPORT"
+            "type": "enum",
+            "members": {
+                "DIMENSIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIMENSIONAL"
                     }
-                ]
+                },
+                "IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#SegmentsResponse": {
@@ -16117,6 +17436,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#SendMessagesResponse": {
@@ -16129,6 +17451,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#SendOTPMessage": {
@@ -16189,6 +17514,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#SendOTPMessageRequestParameters": {
@@ -16283,6 +17611,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#SendUsersMessageRequest": {
@@ -16410,6 +17741,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#SendUsersMessagesResponse": {
@@ -16422,6 +17756,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#Session": {
@@ -16554,22 +17891,26 @@
             }
         },
         "com.amazonaws.pinpoint#SourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "ANY",
-                        "name": "ANY"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#StartCondition": {
@@ -16596,34 +17937,44 @@
             }
         },
         "com.amazonaws.pinpoint#State": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DRAFT",
-                        "name": "DRAFT"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "CLOSED",
-                        "name": "CLOSED"
-                    },
-                    {
-                        "value": "PAUSED",
-                        "name": "PAUSED"
+            "type": "enum",
+            "members": {
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOSED"
+                    }
+                },
+                "PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSED"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#TagResource": {
@@ -16661,6 +18012,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#TagsModel": {
@@ -16839,30 +18193,38 @@
             }
         },
         "com.amazonaws.pinpoint#TemplateType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EMAIL",
-                        "name": "EMAIL"
-                    },
-                    {
-                        "value": "SMS",
-                        "name": "SMS"
-                    },
-                    {
-                        "value": "VOICE",
-                        "name": "VOICE"
-                    },
-                    {
-                        "value": "PUSH",
-                        "name": "PUSH"
-                    },
-                    {
-                        "value": "INAPP",
-                        "name": "INAPP"
+            "type": "enum",
+            "members": {
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
                     }
-                ]
+                },
+                "SMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMS"
+                    }
+                },
+                "VOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICE"
+                    }
+                },
+                "PUSH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUSH"
+                    }
+                },
+                "INAPP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INAPP"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#TemplateVersionResponse": {
@@ -17061,22 +18423,26 @@
             }
         },
         "com.amazonaws.pinpoint#Type": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "ANY",
-                        "name": "ANY"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#UntagResource": {
@@ -17115,6 +18481,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateAdmChannel": {
@@ -17175,6 +18544,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateAdmChannelResponse": {
@@ -17187,6 +18559,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApnsChannel": {
@@ -17247,6 +18622,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApnsChannelResponse": {
@@ -17259,6 +18637,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApnsSandboxChannel": {
@@ -17319,6 +18700,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApnsSandboxChannelResponse": {
@@ -17331,6 +18715,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApnsVoipChannel": {
@@ -17391,6 +18778,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApnsVoipChannelResponse": {
@@ -17403,6 +18793,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApnsVoipSandboxChannel": {
@@ -17463,6 +18856,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApnsVoipSandboxChannelResponse": {
@@ -17475,6 +18871,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApplicationSettings": {
@@ -17535,6 +18934,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateApplicationSettingsResponse": {
@@ -17547,6 +18949,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateAttributesRequest": {
@@ -17621,6 +19026,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateBaiduChannelResponse": {
@@ -17633,6 +19041,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateCampaign": {
@@ -17701,6 +19112,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateCampaignResponse": {
@@ -17713,6 +19127,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateEmailChannel": {
@@ -17773,6 +19190,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateEmailChannelResponse": {
@@ -17785,6 +19205,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateEmailTemplate": {
@@ -17860,6 +19283,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateEmailTemplateResponse": {
@@ -17872,6 +19298,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateEndpoint": {
@@ -17940,6 +19369,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateEndpointResponse": {
@@ -17952,6 +19384,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateEndpointsBatch": {
@@ -18012,6 +19447,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateEndpointsBatchResponse": {
@@ -18024,6 +19462,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateGcmChannel": {
@@ -18084,6 +19525,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateGcmChannelResponse": {
@@ -18096,6 +19540,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateInAppTemplate": {
@@ -18171,6 +19618,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateInAppTemplateResponse": {
@@ -18183,6 +19633,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateJourney": {
@@ -18254,6 +19707,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateJourneyResponse": {
@@ -18266,6 +19722,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateJourneyState": {
@@ -18334,6 +19793,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateJourneyStateResponse": {
@@ -18346,6 +19808,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdatePushTemplate": {
@@ -18421,6 +19886,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdatePushTemplateResponse": {
@@ -18433,6 +19901,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateRecommenderConfiguration": {
@@ -18493,6 +19964,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateRecommenderConfigurationResponse": {
@@ -18505,6 +19979,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateRecommenderConfigurationShape": {
@@ -18638,6 +20115,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateSegmentResponse": {
@@ -18650,6 +20130,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateSmsChannel": {
@@ -18710,6 +20193,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateSmsChannelResponse": {
@@ -18722,6 +20208,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateSmsTemplate": {
@@ -18797,6 +20286,9 @@
                         "smithy.api#httpQuery": "version"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateSmsTemplateResponse": {
@@ -18809,6 +20301,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateTemplateActiveVersion": {
@@ -18878,6 +20373,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateTemplateActiveVersionResponse": {
@@ -18890,6 +20388,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateVoiceChannel": {
@@ -18950,6 +20451,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateVoiceChannelResponse": {
@@ -18962,6 +20466,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateVoiceTemplate": {
@@ -19037,6 +20544,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#UpdateVoiceTemplateResponse": {
@@ -19049,6 +20559,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#VerificationResponse": {
@@ -19124,6 +20637,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpoint#VerifyOTPMessageRequestParameters": {
@@ -19165,6 +20681,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpoint#VoiceChannelRequest": {
@@ -19727,7 +21246,7 @@
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the journey participants should be refreshed when a segment is updated.</p>"
                     }
                 },
                 "JourneyChannelSettings": {
@@ -19740,7 +21259,7 @@
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)</p>"
+                        "smithy.api#documentation": "<p>Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.</p>"
                     }
                 },
                 "OpenHours": {
@@ -19846,62 +21365,86 @@
             }
         },
         "com.amazonaws.pinpoint#__EndpointTypesElement": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PUSH",
-                        "name": "PUSH"
-                    },
-                    {
-                        "value": "GCM",
-                        "name": "GCM"
-                    },
-                    {
-                        "value": "APNS",
-                        "name": "APNS"
-                    },
-                    {
-                        "value": "APNS_SANDBOX",
-                        "name": "APNS_SANDBOX"
-                    },
-                    {
-                        "value": "APNS_VOIP",
-                        "name": "APNS_VOIP"
-                    },
-                    {
-                        "value": "APNS_VOIP_SANDBOX",
-                        "name": "APNS_VOIP_SANDBOX"
-                    },
-                    {
-                        "value": "ADM",
-                        "name": "ADM"
-                    },
-                    {
-                        "value": "SMS",
-                        "name": "SMS"
-                    },
-                    {
-                        "value": "VOICE",
-                        "name": "VOICE"
-                    },
-                    {
-                        "value": "EMAIL",
-                        "name": "EMAIL"
-                    },
-                    {
-                        "value": "BAIDU",
-                        "name": "BAIDU"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
-                    },
-                    {
-                        "value": "IN_APP",
-                        "name": "IN_APP"
+            "type": "enum",
+            "members": {
+                "PUSH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUSH"
                     }
-                ]
+                },
+                "GCM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCM"
+                    }
+                },
+                "APNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS"
+                    }
+                },
+                "APNS_SANDBOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS_SANDBOX"
+                    }
+                },
+                "APNS_VOIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS_VOIP"
+                    }
+                },
+                "APNS_VOIP_SANDBOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS_VOIP_SANDBOX"
+                    }
+                },
+                "ADM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADM"
+                    }
+                },
+                "SMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMS"
+                    }
+                },
+                "VOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICE"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "BAIDU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BAIDU"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "IN_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_APP"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#__blob": {

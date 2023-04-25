@@ -68,6 +68,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#AcceptSharedDirectoryResult": {
@@ -161,9 +164,12 @@
                     "target": "com.amazonaws.directoryservice#UpdateSecurityGroupForDirectoryControllers",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>If set to true, updates the inbound and outbound rules of the security group that has\n         the description: \"Amazon Web Services created security group for <i>directory ID</i>\n         directory controllers.\" Following are the new rules: </p>\n         <p>Inbound:</p>\n         <ul>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:\n               0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:\n               0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0</p>\n            </li>\n         </ul>\n\n         <p></p>\n         <p>Outbound:</p>\n         <ul>\n            <li>\n               <p>Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0</p>\n            </li>\n         </ul>\n         <p>These security rules impact an internal network interface that is not exposed\n         publicly.</p>"
+                        "smithy.api#documentation": "<p>If set to true, updates the inbound and outbound rules of the security group that has\n         the description: \"Amazon Web Services created security group for <i>directory ID</i>\n         directory controllers.\" Following are the new rules: </p>\n         <p>Inbound:</p>\n         <ul>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:\n               0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:\n               0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0</p>\n            </li>\n            <li>\n               <p>Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0</p>\n            </li>\n         </ul>\n         <p></p>\n         <p>Outbound:</p>\n         <ul>\n            <li>\n               <p>Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0</p>\n            </li>\n         </ul>\n         <p>These security rules impact an internal network interface that is not exposed\n         publicly.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#AddIpRoutesResult": {
@@ -237,6 +243,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#AddRegionResult": {
@@ -289,6 +298,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#AddTagsToResourceResult": {
@@ -421,6 +433,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CancelSchemaExtensionResult": {
@@ -940,7 +955,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>ConnectDirectory</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>ConnectDirectory</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#ConnectDirectoryResult": {
@@ -1021,7 +1037,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>CreateAlias</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>CreateAlias</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CreateAliasResult": {
@@ -1120,7 +1137,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>CreateComputer</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>CreateComputer</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CreateComputerResult": {
@@ -1198,7 +1216,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Initiates the creation of a conditional forwarder for your Directory Service for Microsoft Active\n      Directory. Conditional forwarders are required in order to set up a trust relationship with\n      another domain.</p>"
+                "smithy.api#documentation": "<p>Initiates the creation of a conditional forwarder for your Directory Service for Microsoft Active\n      Directory. Conditional forwarders are required in order to set up a trust relationship with\n      another domain.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CreateConditionalForwarderResult": {
@@ -1284,7 +1303,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>CreateDirectory</a> operation. </p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>CreateDirectory</a> operation. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CreateDirectoryResult": {
@@ -1350,6 +1370,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CreateLogSubscriptionResult": {
@@ -1435,7 +1458,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Managed Microsoft AD directory.</p>"
+                "smithy.api#documentation": "<p>Creates an Managed Microsoft AD directory.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CreateMicrosoftADResult": {
@@ -1511,7 +1535,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>CreateSnapshot</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>CreateSnapshot</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CreateSnapshotResult": {
@@ -1611,7 +1636,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Directory Service for Microsoft Active Directory allows you to configure trust relationships. For\n      example, you can establish a trust between your Managed Microsoft AD directory, and your existing\n      self-managed Microsoft Active Directory. This would allow you to provide users and groups\n      access to resources in either domain, with a single set of credentials.</p>\n         <p>This action initiates the creation of the Amazon Web Services side of a trust relationship between an\n      Managed Microsoft AD directory and an external domain.</p>"
+                "smithy.api#documentation": "<p>Directory Service for Microsoft Active Directory allows you to configure trust relationships. For\n      example, you can establish a trust between your Managed Microsoft AD directory, and your existing\n      self-managed Microsoft Active Directory. This would allow you to provide users and groups\n      access to resources in either domain, with a single set of credentials.</p>\n         <p>This action initiates the creation of the Amazon Web Services side of a trust relationship between an\n      Managed Microsoft AD directory and an external domain.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#CreateTrustResult": {
@@ -1704,7 +1730,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a conditional forwarder.</p>"
+                "smithy.api#documentation": "<p>Deletes a conditional forwarder.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteConditionalForwarderResult": {
@@ -1749,7 +1776,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>DeleteDirectory</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>DeleteDirectory</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteDirectoryResult": {
@@ -1802,6 +1830,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteLogSubscriptionResult": {
@@ -1846,7 +1877,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>DeleteSnapshot</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>DeleteSnapshot</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteSnapshotResult": {
@@ -1911,7 +1943,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the local side of an existing trust relationship between the Managed Microsoft AD\n      directory and the external domain.</p>"
+                "smithy.api#documentation": "<p>Deletes the local side of an existing trust relationship between the Managed Microsoft AD\n      directory and the external domain.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteTrustResult": {
@@ -1983,6 +2016,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DeregisterCertificateResult": {
@@ -2034,7 +2070,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified directory as a publisher to the specified Amazon SNS topic.</p>"
+                "smithy.api#documentation": "<p>Removes the specified directory as a publisher to the specified Amazon SNS topic.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DeregisterEventTopicResult": {
@@ -2093,6 +2130,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeCertificateResult": {
@@ -2172,6 +2212,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeClientAuthenticationSettingsResult": {
@@ -2241,7 +2284,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a conditional forwarder.</p>"
+                "smithy.api#documentation": "<p>Describes a conditional forwarder.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeConditionalForwardersResult": {
@@ -2316,7 +2360,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>DescribeDirectories</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>DescribeDirectories</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeDirectoriesResult": {
@@ -2404,6 +2449,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeDomainControllersResult": {
@@ -2466,7 +2514,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes event topics.</p>"
+                "smithy.api#documentation": "<p>Describes event topics.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeEventTopicsResult": {
@@ -2549,6 +2598,9 @@
                         "smithy.api#documentation": "<p>Specifies the number of items that should be displayed on one page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeLDAPSSettingsResult": {
@@ -2630,6 +2682,9 @@
                         "smithy.api#documentation": "<p>The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeRegionsResult": {
@@ -2703,6 +2758,9 @@
                         "smithy.api#documentation": "<p>The <code>DescribeSettingsResult.NextToken</code> value from a previous call to <a>DescribeSettings</a>. Pass null if this is the first call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeSettingsResult": {
@@ -2794,6 +2852,9 @@
                         "smithy.api#documentation": "<p>The number of shared directories to return in the response object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeSharedDirectoriesResult": {
@@ -2877,7 +2938,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>DescribeSnapshots</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>DescribeSnapshots</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeSnapshotsResult": {
@@ -2967,7 +3029,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the trust relationships for a particular Managed Microsoft AD directory. If no input\n      parameters are provided, such as directory ID or trust ID, this request describes all the\n      trust relationships.</p>"
+                "smithy.api#documentation": "<p>Describes the trust relationships for a particular Managed Microsoft AD directory. If no input\n      parameters are provided, such as directory ID or trust ID, this request describes all the\n      trust relationships.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeTrustsResult": {
@@ -3056,6 +3119,9 @@
                         "smithy.api#documentation": "<p>\n      The <code>DescribeUpdateDirectoryResult</code>. NextToken value from a previous call to <a>DescribeUpdateDirectory</a>. Pass null if this is the first call.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeUpdateDirectoryResult": {
@@ -3127,6 +3193,9 @@
         "com.amazonaws.directoryservice#DirectoryConfigurationSettingAllowedValues": {
             "type": "string"
         },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingDataType": {
+            "type": "string"
+        },
         "com.amazonaws.directoryservice#DirectoryConfigurationSettingLastRequestedDateTime": {
             "type": "timestamp"
         },
@@ -3165,7 +3234,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_]*$"
             }
         },
         "com.amazonaws.directoryservice#DirectoryConfigurationStatus": {
@@ -4205,8 +4274,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4218,8 +4287,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4231,8 +4300,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4244,8 +4313,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4257,8 +4326,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4270,8 +4339,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4283,8 +4352,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4296,8 +4365,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4309,8 +4378,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4322,8 +4391,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4335,8 +4404,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4348,8 +4417,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4361,8 +4430,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4374,8 +4443,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4387,8 +4456,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4400,8 +4469,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4413,8 +4482,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4426,8 +4495,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4439,8 +4508,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4452,8 +4521,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4465,8 +4534,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4478,8 +4547,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4491,8 +4560,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4504,8 +4573,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4517,8 +4586,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4530,8 +4599,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4543,8 +4612,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4556,8 +4625,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4569,8 +4638,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4582,8 +4651,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4595,8 +4664,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4608,8 +4677,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4621,8 +4690,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4634,8 +4703,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4647,8 +4716,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4660,8 +4729,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4673,8 +4742,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4686,8 +4755,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4699,8 +4768,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4712,8 +4781,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4725,8 +4805,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4738,8 +4829,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4751,8 +4853,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4764,8 +4877,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4777,8 +4890,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4789,8 +4902,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4801,9 +4914,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -5052,6 +5171,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DisableClientAuthenticationResult": {
@@ -5110,6 +5232,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DisableLDAPSResult": {
@@ -5151,7 +5276,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>DisableRadius</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>DisableRadius</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DisableRadiusResult": {
@@ -5214,7 +5340,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>DisableSso</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>DisableSso</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#DisableSsoResult": {
@@ -5433,6 +5560,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#EnableClientAuthenticationResult": {
@@ -5494,6 +5624,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#EnableLDAPSResult": {
@@ -5548,7 +5681,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>EnableRadius</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>EnableRadius</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#EnableRadiusResult": {
@@ -5611,7 +5745,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>EnableSso</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>EnableSso</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#EnableSsoResult": {
@@ -5731,7 +5866,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>GetDirectoryLimits</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>GetDirectoryLimits</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#GetDirectoryLimitsResult": {
@@ -5783,7 +5919,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>GetSnapshotLimits</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>GetSnapshotLimits</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#GetSnapshotLimitsResult": {
@@ -6243,6 +6380,9 @@
                         "smithy.api#documentation": "<p>The number of items that should show up on one page</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#ListCertificatesResult": {
@@ -6319,6 +6459,9 @@
                         "smithy.api#documentation": "<p>Maximum number of items to return. If this value is zero, the maximum number of items\n         is specified by the limitations of the operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#ListIpRoutesResult": {
@@ -6391,6 +6534,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#ListLogSubscriptionsResult": {
@@ -6464,6 +6610,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#ListSchemaExtensionsResult": {
@@ -6540,6 +6689,9 @@
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#ListTagsForResourceResult": {
@@ -7119,6 +7271,9 @@
                         "smithy.api#documentation": "<p>A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#RegisterCertificateResult": {
@@ -7177,7 +7332,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Registers a new event topic.</p>"
+                "smithy.api#documentation": "<p>Registers a new event topic.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#RegisterEventTopicResult": {
@@ -7226,6 +7382,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#RejectSharedDirectoryResult": {
@@ -7242,6 +7401,10 @@
         "com.amazonaws.directoryservice#RemoteDomainName": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
                 "smithy.api#pattern": "^([a-zA-Z0-9]+[\\\\.-])+([a-zA-Z0-9])+[.]?$"
             }
         },
@@ -7297,6 +7460,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#RemoveIpRoutesResult": {
@@ -7345,6 +7511,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#RemoveRegionResult": {
@@ -7394,6 +7563,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#RemoveTagsFromResourceResult": {
@@ -7477,6 +7649,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#ResetUserPasswordResult": {
@@ -7527,7 +7702,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.</p>"
+                "smithy.api#documentation": "<p>An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#RestoreFromSnapshotResult": {
@@ -7758,7 +7934,7 @@
                 "Type": {
                     "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of directory setting. For example, <code>Protocol</code> or <code>Cipher</code>.</p>"
+                        "smithy.api#documentation": "<p>The type, or category, of a directory setting. Similar settings have the same type. For example, <code>Protocol</code>, <code>Cipher</code>, \n      or <code>Certificate-Based Authentication</code>.</p>"
                     }
                 },
                 "Name": {
@@ -7770,7 +7946,7 @@
                 "AllowedValues": {
                     "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingAllowedValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid range of values for the directory setting.</p>"
+                        "smithy.api#documentation": "<p>The valid range of values for the directory setting. These values depend on the <code>DataType</code> of your directory.</p>"
                     }
                 },
                 "AppliedValue": {
@@ -7813,6 +7989,12 @@
                     "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingLastRequestedDateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the request to update a directory setting was last submitted.</p>"
+                    }
+                },
+                "DataType": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of a directory setting. This is used to define the <code>AllowedValues</code> of a setting.\n      For example a data type can be <code>Boolean</code>, <code>DurationInSeconds</code>, or <code>Enum</code>.</p>"
                     }
                 }
             },
@@ -7900,6 +8082,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#ShareDirectoryResult": {
@@ -8330,6 +8515,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#StartSchemaExtensionResult": {
@@ -8764,6 +8952,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#UnshareDirectoryResult": {
@@ -8893,7 +9084,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a conditional forwarder.</p>"
+                "smithy.api#documentation": "<p>Updates a conditional forwarder.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateConditionalForwarderResult": {
@@ -8974,6 +9166,9 @@
                         "smithy.api#documentation": "<p>\n      The boolean that specifies if a snapshot for the directory needs to be taken before updating the directory.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateDirectorySetupResult": {
@@ -9089,6 +9284,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateNumberOfDomainControllersResult": {
@@ -9140,7 +9338,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the inputs for the <a>UpdateRadius</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>UpdateRadius</a> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateRadiusResult": {
@@ -9211,6 +9410,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateSettingsResult": {
@@ -9292,6 +9494,9 @@
                         "smithy.api#documentation": "<p>Updates selective authentication for the trust.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateTrustResult": {
@@ -9414,7 +9619,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Initiates the verification of an existing trust relationship between an Managed Microsoft AD\n      directory and an external domain.</p>"
+                "smithy.api#documentation": "<p>Initiates the verification of an existing trust relationship between an Managed Microsoft AD\n      directory and an external domain.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.directoryservice#VerifyTrustResult": {
