@@ -675,6 +675,713 @@ type EncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a contact evaluation.
+type Evaluation struct {
+
+	// A map of question identifiers to answer value.
+	//
+	// This member is required.
+	Answers map[string]EvaluationAnswerOutput
+
+	// The timestamp for when the evaluation was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the contact evaluation resource.
+	//
+	// This member is required.
+	EvaluationArn *string
+
+	// A unique identifier for the contact evaluation.
+	//
+	// This member is required.
+	EvaluationId *string
+
+	// The timestamp for when the evaluation was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// Metadata about the contact evaluation.
+	//
+	// This member is required.
+	Metadata *EvaluationMetadata
+
+	// A map of question identifiers to note value.
+	//
+	// This member is required.
+	Notes map[string]EvaluationNote
+
+	// The status of the contact evaluation.
+	//
+	// This member is required.
+	Status EvaluationStatus
+
+	// A map of item (section or question) identifiers to score value.
+	Scores map[string]EvaluationScore
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Information about answer data for a contact evaluation. Answer data must be
+// either string, numeric, or not applicable.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationAnswerDataMemberNotApplicable
+//	EvaluationAnswerDataMemberNumericValue
+//	EvaluationAnswerDataMemberStringValue
+type EvaluationAnswerData interface {
+	isEvaluationAnswerData()
+}
+
+// The flag to mark the question as not applicable.
+type EvaluationAnswerDataMemberNotApplicable struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationAnswerDataMemberNotApplicable) isEvaluationAnswerData() {}
+
+// The numeric value for an answer in a contact evaluation.
+type EvaluationAnswerDataMemberNumericValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationAnswerDataMemberNumericValue) isEvaluationAnswerData() {}
+
+// The string value for an answer in a contact evaluation.
+type EvaluationAnswerDataMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationAnswerDataMemberStringValue) isEvaluationAnswerData() {}
+
+// Information about input answers for a contact evaluation.
+type EvaluationAnswerInput struct {
+
+	// The value for an answer in a contact evaluation.
+	Value EvaluationAnswerData
+
+	noSmithyDocumentSerde
+}
+
+// Information about output answers for a contact evaluation.
+type EvaluationAnswerOutput struct {
+
+	// The system suggested value for an answer in a contact evaluation.
+	SystemSuggestedValue EvaluationAnswerData
+
+	// The value for an answer in a contact evaluation.
+	Value EvaluationAnswerData
+
+	noSmithyDocumentSerde
+}
+
+// Information about the evaluation form.
+type EvaluationForm struct {
+
+	// The Amazon Resource Name (ARN) of the user who created the evaluation form.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The timestamp for when the evaluation form was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the evaluation form resource.
+	//
+	// This member is required.
+	EvaluationFormArn *string
+
+	// The unique identifier for the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormId *string
+
+	// A version of the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormVersion *int32
+
+	// Items that are part of the evaluation form. The total number of sections and
+	// questions must not exceed 100 each. Questions must be contained in a section.
+	//
+	// This member is required.
+	Items []EvaluationFormItem
+
+	// The Amazon Resource Name (ARN) of the user who last updated the evaluation form.
+	//
+	// This member is required.
+	LastModifiedBy *string
+
+	// The timestamp for when the evaluation form was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The flag indicating whether the evaluation form is locked for changes.
+	//
+	// This member is required.
+	Locked bool
+
+	// The status of the evaluation form.
+	//
+	// This member is required.
+	Status EvaluationFormVersionStatus
+
+	// A unique title of the evaluation form.
+	//
+	// This member is required.
+	Title *string
+
+	// The description of the evaluation form.
+	Description *string
+
+	// A scoring strategy of the evaluation form.
+	ScoringStrategy *EvaluationFormScoringStrategy
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an evaluation form used in a contact evaluation.
+type EvaluationFormContent struct {
+
+	// The Amazon Resource Name (ARN) for the evaluation form resource.
+	//
+	// This member is required.
+	EvaluationFormArn *string
+
+	// The unique identifier for the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormId *string
+
+	// A version of the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormVersion *int32
+
+	// Items that are part of the evaluation form. The total number of sections and
+	// questions must not exceed 100 each. Questions must be contained in a section.
+	//
+	// This member is required.
+	Items []EvaluationFormItem
+
+	// A unique title of the evaluation form.
+	//
+	// This member is required.
+	Title *string
+
+	// The description of the evaluation form.
+	Description *string
+
+	// A scoring strategy of the evaluation form.
+	ScoringStrategy *EvaluationFormScoringStrategy
+
+	noSmithyDocumentSerde
+}
+
+// Information about an item from an evaluation form. The item must be either a
+// section or a question.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationFormItemMemberQuestion
+//	EvaluationFormItemMemberSection
+type EvaluationFormItem interface {
+	isEvaluationFormItem()
+}
+
+// The information of the question.
+type EvaluationFormItemMemberQuestion struct {
+	Value EvaluationFormQuestion
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormItemMemberQuestion) isEvaluationFormItem() {}
+
+// The information of the section.
+type EvaluationFormItemMemberSection struct {
+	Value EvaluationFormSection
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormItemMemberSection) isEvaluationFormItem() {}
+
+// Information about the automation configuration in numeric questions.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationFormNumericQuestionAutomationMemberPropertyValue
+type EvaluationFormNumericQuestionAutomation interface {
+	isEvaluationFormNumericQuestionAutomation()
+}
+
+// The property value of the automation.
+type EvaluationFormNumericQuestionAutomationMemberPropertyValue struct {
+	Value NumericQuestionPropertyValueAutomation
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormNumericQuestionAutomationMemberPropertyValue) isEvaluationFormNumericQuestionAutomation() {
+}
+
+// Information about the option range used for scoring in numeric questions.
+type EvaluationFormNumericQuestionOption struct {
+
+	// The maximum answer value of the range option.
+	//
+	// This member is required.
+	MaxValue int32
+
+	// The minimum answer value of the range option.
+	//
+	// This member is required.
+	MinValue int32
+
+	// The flag to mark the option as automatic fail. If an automatic fail answer is
+	// provided, the overall evaluation gets a score of 0.
+	AutomaticFail bool
+
+	// The score assigned to answer values within the range option.
+	Score int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about properties for a numeric question in an evaluation form.
+type EvaluationFormNumericQuestionProperties struct {
+
+	// The maximum answer value.
+	//
+	// This member is required.
+	MaxValue int32
+
+	// The minimum answer value.
+	//
+	// This member is required.
+	MinValue int32
+
+	// The automation properties of the numeric question.
+	Automation EvaluationFormNumericQuestionAutomation
+
+	// The scoring options of the numeric question.
+	Options []EvaluationFormNumericQuestionOption
+
+	noSmithyDocumentSerde
+}
+
+// Information about a question from an evaluation form.
+type EvaluationFormQuestion struct {
+
+	// The type of the question.
+	//
+	// This member is required.
+	QuestionType EvaluationFormQuestionType
+
+	// The identifier of the question. An identifier must be unique within the
+	// evaluation form.
+	//
+	// This member is required.
+	RefId *string
+
+	// The title of the question.
+	//
+	// This member is required.
+	Title *string
+
+	// The instructions of the section.
+	Instructions *string
+
+	// The flag to enable not applicable answers to the question.
+	NotApplicableEnabled bool
+
+	// The properties of the type of question. Text questions do not have to define
+	// question type properties.
+	QuestionTypeProperties EvaluationFormQuestionTypeProperties
+
+	// The scoring weight of the section.
+	Weight float64
+
+	noSmithyDocumentSerde
+}
+
+// Information about properties for a question in an evaluation form. The question
+// type properties must be either for a numeric question or a single select
+// question.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationFormQuestionTypePropertiesMemberNumeric
+//	EvaluationFormQuestionTypePropertiesMemberSingleSelect
+type EvaluationFormQuestionTypeProperties interface {
+	isEvaluationFormQuestionTypeProperties()
+}
+
+// The properties of the numeric question.
+type EvaluationFormQuestionTypePropertiesMemberNumeric struct {
+	Value EvaluationFormNumericQuestionProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormQuestionTypePropertiesMemberNumeric) isEvaluationFormQuestionTypeProperties() {}
+
+// The properties of the numeric question.
+type EvaluationFormQuestionTypePropertiesMemberSingleSelect struct {
+	Value EvaluationFormSingleSelectQuestionProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormQuestionTypePropertiesMemberSingleSelect) isEvaluationFormQuestionTypeProperties() {
+}
+
+// Information about scoring strategy for an evaluation form.
+type EvaluationFormScoringStrategy struct {
+
+	// The scoring mode of the evaluation form.
+	//
+	// This member is required.
+	Mode EvaluationFormScoringMode
+
+	// The scoring status of the evaluation form.
+	//
+	// This member is required.
+	Status EvaluationFormScoringStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about a section from an evaluation form. A section can contain
+// sections and/or questions. Evaluation forms can only contain sections and
+// subsections (two level nesting).
+type EvaluationFormSection struct {
+
+	// The identifier of the section. An identifier must be unique within the
+	// evaluation form.
+	//
+	// This member is required.
+	RefId *string
+
+	// The title of the section.
+	//
+	// This member is required.
+	Title *string
+
+	// The instructions of the section.
+	Instructions *string
+
+	// The items of the section.
+	Items []EvaluationFormItem
+
+	// The scoring weight of the section.
+	Weight float64
+
+	noSmithyDocumentSerde
+}
+
+// Information about the automation configuration in single select questions.
+// Automation options are evaluated in order, and the first matched option is
+// applied. If no automation option matches, and there is a default option, then
+// the default option is applied.
+type EvaluationFormSingleSelectQuestionAutomation struct {
+
+	// The automation options of the single select question.
+	//
+	// This member is required.
+	Options []EvaluationFormSingleSelectQuestionAutomationOption
+
+	// The identifier of the default answer option, when none of the automation
+	// options match the criteria.
+	DefaultOptionRefId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the automation option of a single select question.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory
+type EvaluationFormSingleSelectQuestionAutomationOption interface {
+	isEvaluationFormSingleSelectQuestionAutomationOption()
+}
+
+// The automation option based on a rule category for the single select question.
+type EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory struct {
+	Value SingleSelectQuestionRuleCategoryAutomation
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory) isEvaluationFormSingleSelectQuestionAutomationOption() {
+}
+
+// Information about the automation configuration in single select questions.
+type EvaluationFormSingleSelectQuestionOption struct {
+
+	// The identifier of the answer option. An identifier must be unique within the
+	// question.
+	//
+	// This member is required.
+	RefId *string
+
+	// The title of the answer option.
+	//
+	// This member is required.
+	Text *string
+
+	// The flag to mark the option as automatic fail. If an automatic fail answer is
+	// provided, the overall evaluation gets a score of 0.
+	AutomaticFail bool
+
+	// The score assigned to the answer option.
+	Score int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about the options in single select questions.
+type EvaluationFormSingleSelectQuestionProperties struct {
+
+	// The answer options of the single select question.
+	//
+	// This member is required.
+	Options []EvaluationFormSingleSelectQuestionOption
+
+	// The display mode of the single select question.
+	Automation *EvaluationFormSingleSelectQuestionAutomation
+
+	// The display mode of the single select question.
+	DisplayAs EvaluationFormSingleSelectQuestionDisplayMode
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an evaluation form.
+type EvaluationFormSummary struct {
+
+	// The Amazon Resource Name (ARN) of the user who created the evaluation form.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The timestamp for when the evaluation form was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the evaluation form resource.
+	//
+	// This member is required.
+	EvaluationFormArn *string
+
+	// The unique identifier for the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the evaluation form.
+	//
+	// This member is required.
+	LastModifiedBy *string
+
+	// The timestamp for when the evaluation form was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The version number of the latest evaluation form version.
+	//
+	// This member is required.
+	LatestVersion *int32
+
+	// A unique title of the evaluation form.
+	//
+	// This member is required.
+	Title *string
+
+	// The version of the active evaluation form version.
+	ActiveVersion *int32
+
+	// The Amazon Resource Name (ARN) of the user who last activated the evaluation
+	// form.
+	LastActivatedBy *string
+
+	// The timestamp for when the evaluation form was last activated.
+	LastActivatedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an evaluation form.
+type EvaluationFormVersionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the user who created the evaluation form.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The timestamp for when the evaluation form was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the evaluation form resource.
+	//
+	// This member is required.
+	EvaluationFormArn *string
+
+	// The unique identifier for the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormId *string
+
+	// A version of the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormVersion *int32
+
+	// The Amazon Resource Name (ARN) of the user who last updated the evaluation form.
+	//
+	// This member is required.
+	LastModifiedBy *string
+
+	// The timestamp for when the evaluation form was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The flag indicating whether the evaluation form is locked for changes.
+	//
+	// This member is required.
+	Locked bool
+
+	// The status of the evaluation form.
+	//
+	// This member is required.
+	Status EvaluationFormVersionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Metadata information about a contact evaluation.
+type EvaluationMetadata struct {
+
+	// The identifier of the contact in this instance of Amazon Connect.
+	//
+	// This member is required.
+	ContactId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the evaluation.
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	// The identifier of the agent who performed the contact.
+	ContactAgentId *string
+
+	// The overall score of the contact evaluation.
+	Score *EvaluationScore
+
+	noSmithyDocumentSerde
+}
+
+// Information about notes for a contact evaluation.
+type EvaluationNote struct {
+
+	// The note for an item (section or question) in a contact evaluation.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about scores of a contact evaluation item (section or question).
+type EvaluationScore struct {
+
+	// The flag that marks the item as automatic fail. If the item or a child item
+	// gets an automatic fail answer, this flag will be true.
+	AutomaticFail bool
+
+	// The flag to mark the item as not applicable for scoring.
+	NotApplicable bool
+
+	// The score percentage for an item in a contact evaluation.
+	Percentage float64
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a contact evaluation.
+type EvaluationSummary struct {
+
+	// The timestamp for when the evaluation was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the contact evaluation resource.
+	//
+	// This member is required.
+	EvaluationArn *string
+
+	// The unique identifier for the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormId *string
+
+	// A unique title of the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormTitle *string
+
+	// A unique identifier for the contact evaluation.
+	//
+	// This member is required.
+	EvaluationId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the evaluation.
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	// The timestamp for when the evaluation was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The status of the contact evaluation.
+	//
+	// This member is required.
+	Status EvaluationStatus
+
+	// The overall score of the contact evaluation.
+	Score *EvaluationScore
+
+	noSmithyDocumentSerde
+}
+
 // The EventBridge action definition.
 type EventBridgeActionDefinition struct {
 
@@ -1382,6 +2089,25 @@ type NumberReference struct {
 
 	// A valid number.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the property value used in automation of a numeric questions.
+// Label values are associated with minimum and maximum values for the numeric
+// question.
+//   - Sentiment scores have a minimum value of -5 and maximum value of 5.
+//   - Duration labels, such as NON_TALK_TIME , CONTACT_DURATION ,
+//     AGENT_INTERACTION_DURATION , CUSTOMER_HOLD_TIME have a minimum value of 0 and
+//     maximum value of 28800.
+//   - Percantages have a minimum value of 0 and maximum value of 100.
+//   - NUMBER_OF_INTERRUPTIONS has a minimum value of 0 and maximum value of 100.
+type NumericQuestionPropertyValueAutomation struct {
+
+	// The property label of the automation.
+	//
+	// This member is required.
+	Label NumericQuestionPropertyAutomationLabel
 
 	noSmithyDocumentSerde
 }
@@ -2432,6 +3158,31 @@ type SendNotificationActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the automation option based on a rule category for a single
+// select question.
+type SingleSelectQuestionRuleCategoryAutomation struct {
+
+	// The category name, as defined in Rules.
+	//
+	// This member is required.
+	Category *string
+
+	// The condition to apply for the automation option. If the condition is PRESENT ,
+	// then the option is applied when the contact data includes the category.
+	// Similarly, if the condition is NOT_PRESENT , then the option is applied when the
+	// contact data does not include the category.
+	//
+	// This member is required.
+	Condition SingleSelectQuestionRuleCategoryAutomationCondition
+
+	// The identifier of the answer option tha
+	//
+	// This member is required.
+	OptionRefId *string
+
+	noSmithyDocumentSerde
+}
+
 // A leaf node condition which can be used to specify a string condition. The
 // currently supported value for FieldName : name
 type StringCondition struct {
@@ -3144,6 +3895,11 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isParticipantTimerValue()                  {}
-func (*UnknownUnionMember) isReferenceSummary()                       {}
-func (*UnknownUnionMember) isUpdateParticipantRoleConfigChannelInfo() {}
+func (*UnknownUnionMember) isEvaluationAnswerData()                               {}
+func (*UnknownUnionMember) isEvaluationFormItem()                                 {}
+func (*UnknownUnionMember) isEvaluationFormNumericQuestionAutomation()            {}
+func (*UnknownUnionMember) isEvaluationFormQuestionTypeProperties()               {}
+func (*UnknownUnionMember) isEvaluationFormSingleSelectQuestionAutomationOption() {}
+func (*UnknownUnionMember) isParticipantTimerValue()                              {}
+func (*UnknownUnionMember) isReferenceSummary()                                   {}
+func (*UnknownUnionMember) isUpdateParticipantRoleConfigChannelInfo()             {}

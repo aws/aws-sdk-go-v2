@@ -656,6 +656,14 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-il-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2-fips.il-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "il-central-1",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "fips-me-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "wafv2-fips.me-central-1.amazonaws.com",

@@ -4,6 +4,7 @@ package chimesdkmessaging
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
@@ -122,6 +123,9 @@ func (c *Client) addOperationCreateChannelFlowMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateChannelFlowMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateChannelFlowValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,6 +145,39 @@ func (c *Client) addOperationCreateChannelFlowMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateChannelFlow struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateChannelFlow) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateChannelFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateChannelFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateChannelFlowInput ")
+	}
+
+	if input.ClientRequestToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientRequestToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateChannelFlowMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateChannelFlow{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateChannelFlow(region string) *awsmiddleware.RegisterServiceMetadata {

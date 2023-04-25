@@ -14,7 +14,10 @@ import (
 // Configures a task, which defines where and how DataSync transfers your data. A
 // task includes a source location, a destination location, and the preferences for
 // how and when you want to transfer your data (such as bandwidth limits,
-// scheduling, among other options).
+// scheduling, among other options). If you're planning to transfer data to or from
+// an Amazon S3 location, review how DataSync can affect your S3 request charges (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests)
+// and the DataSync pricing page (http://aws.amazon.com/datasync/pricing/) before
+// you begin.
 func (c *Client) CreateTask(ctx context.Context, params *CreateTaskInput, optFns ...func(*Options)) (*CreateTaskOutput, error) {
 	if params == nil {
 		params = &CreateTaskInput{}

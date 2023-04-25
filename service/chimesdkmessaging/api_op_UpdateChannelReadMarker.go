@@ -41,9 +41,6 @@ type UpdateChannelReadMarkerInput struct {
 	// This member is required.
 	ChimeBearer *string
 
-	// The ID of the SubChannel in the request.
-	SubChannelId *string
-
 	noSmithyDocumentSerde
 }
 
@@ -51,9 +48,6 @@ type UpdateChannelReadMarkerOutput struct {
 
 	// The ARN of the channel.
 	ChannelArn *string
-
-	// The ID of the SubChannel in the response.
-	SubChannelId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

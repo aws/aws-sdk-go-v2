@@ -11,11 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates execution of a task. You can modify bandwidth throttling for a task
-// execution that is running or queued. For more information, see Adjusting
-// Bandwidth Throttling for a Task Execution (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling)
-// . The only Option that can be modified by UpdateTaskExecution is BytesPerSecond (https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond)
-// .
+// Modifies a running DataSync task. Currently, the only Option that you can
+// modify with UpdateTaskExecution is BytesPerSecond (https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond)
+// , which throttles bandwidth for a running or queued task.
 func (c *Client) UpdateTaskExecution(ctx context.Context, params *UpdateTaskExecutionInput, optFns ...func(*Options)) (*UpdateTaskExecutionOutput, error) {
 	if params == nil {
 		params = &UpdateTaskExecutionInput{}
@@ -42,8 +40,8 @@ type UpdateTaskExecutionInput struct {
 	// This member is required.
 	Options *types.Options
 
-	// The Amazon Resource Name (ARN) of the specific task execution that is being
-	// updated.
+	// Specifies the Amazon Resource Name (ARN) of the task execution that you're
+	// updating.
 	//
 	// This member is required.
 	TaskExecutionArn *string

@@ -1330,6 +1330,66 @@ func (m *validateOpGetJourney) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetJourneyRunExecutionActivityMetrics struct {
+}
+
+func (*validateOpGetJourneyRunExecutionActivityMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetJourneyRunExecutionActivityMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetJourneyRunExecutionActivityMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetJourneyRunExecutionActivityMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetJourneyRunExecutionMetrics struct {
+}
+
+func (*validateOpGetJourneyRunExecutionMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetJourneyRunExecutionMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetJourneyRunExecutionMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetJourneyRunExecutionMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetJourneyRuns struct {
+}
+
+func (*validateOpGetJourneyRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetJourneyRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetJourneyRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetJourneyRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPushTemplate struct {
 }
 
@@ -2592,6 +2652,18 @@ func addOpGetJourneyExecutionMetricsValidationMiddleware(stack *middleware.Stack
 
 func addOpGetJourneyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJourney{}, middleware.After)
+}
+
+func addOpGetJourneyRunExecutionActivityMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetJourneyRunExecutionActivityMetrics{}, middleware.After)
+}
+
+func addOpGetJourneyRunExecutionMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetJourneyRunExecutionMetrics{}, middleware.After)
+}
+
+func addOpGetJourneyRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetJourneyRuns{}, middleware.After)
 }
 
 func addOpGetPushTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -5359,6 +5431,69 @@ func validateOpGetJourneyInput(v *GetJourneyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetJourneyInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.JourneyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JourneyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetJourneyRunExecutionActivityMetricsInput(v *GetJourneyRunExecutionActivityMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetJourneyRunExecutionActivityMetricsInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.JourneyActivityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JourneyActivityId"))
+	}
+	if v.JourneyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JourneyId"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetJourneyRunExecutionMetricsInput(v *GetJourneyRunExecutionMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetJourneyRunExecutionMetricsInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.JourneyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JourneyId"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetJourneyRunsInput(v *GetJourneyRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetJourneyRunsInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}

@@ -13866,6 +13866,15 @@ func awsAwsjson11_deserializeDocumentSettingEntry(v **types.SettingEntry, value 
 				sv.AppliedValue = ptr.String(jtv)
 			}
 
+		case "DataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DirectoryConfigurationSettingDataType to be of type string, got %T instead", value)
+				}
+				sv.DataType = ptr.String(jtv)
+			}
+
 		case "LastRequestedDateTime":
 			if value != nil {
 				switch jtv := value.(type) {

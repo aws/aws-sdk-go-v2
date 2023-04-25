@@ -97,6 +97,12 @@ type ActivityResponse struct {
 	// COMPLETED.
 	End *string
 
+	// A JSON object that contains metrics relating to the campaign execution for this
+	// campaign activity. For information about the structure and contents of the
+	// results, see Standard Amazon Pinpoint analytics metrics (https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// in the Amazon Pinpoint Developer Guide.
+	ExecutionMetrics map[string]string
+
 	// Specifies whether the activity succeeded. Possible values are SUCCESS and FAIL.
 	Result *string
 
@@ -1645,37 +1651,38 @@ type ChannelsResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The time when journey will stop sending messages.
+// The time when a journey will not send messages. QuietTime should be configured
+// first and SendingSchedule should be set to true.
 type ClosedDays struct {
 
-	// Rules for Custom Channel.
+	// Rules for the Custom channel.
 	CUSTOM []ClosedDaysRule
 
-	// Rules for Email Channel.
+	// Rules for the Email channel.
 	EMAIL []ClosedDaysRule
 
-	// Rules for Push Channel.
+	// Rules for the Push channel.
 	PUSH []ClosedDaysRule
 
-	// Rules for SMS Channel.
+	// Rules for the SMS channel.
 	SMS []ClosedDaysRule
 
-	// Rules for Voice Channel.
+	// Rules for the Voice channel.
 	VOICE []ClosedDaysRule
 
 	noSmithyDocumentSerde
 }
 
-// Closed Days Rule. Part of Journey sending schedule.
+// Specifies the rule settings for when messages can't be sent.
 type ClosedDaysRule struct {
 
-	// End Datetime in ISO 8601 format.
+	// End DateTime ISO 8601 format
 	EndDateTime *string
 
-	// Name of the rule.
+	// The name of the closed day rule.
 	Name *string
 
-	// Start Datetime in ISO 8601 format.
+	// Start DateTime ISO 8601 format
 	StartDateTime *string
 
 	noSmithyDocumentSerde
@@ -3873,18 +3880,18 @@ type JourneyEmailMessage struct {
 type JourneyExecutionActivityMetricsResponse struct {
 
 	// The type of activity that the metric applies to. Possible values are:
-	//   - CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity that
+	//   - CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that
 	//   sends participants down one of two paths in a journey.
-	//   - HOLDOUT - For a holdout activity, which is an activity that stops a journey
+	//   - HOLDOUT – For a holdout activity, which is an activity that stops a journey
 	//   for a specified percentage of participants.
-	//   - MESSAGE - For an email activity, which is an activity that sends an email
+	//   - MESSAGE – For an email activity, which is an activity that sends an email
 	//   message to participants.
-	//   - MULTI_CONDITIONAL_SPLIT - For a multivariate split activity, which is an
+	//   - MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an
 	//   activity that sends participants down one of as many as five paths in a journey.
-	//   - RANDOM_SPLIT - For a random split activity, which is an activity that sends
+	//   - RANDOM_SPLIT – For a random split activity, which is an activity that sends
 	//   specified percentages of participants down one of as many as five paths in a
 	//   journey.
-	//   - WAIT - For a wait activity, which is an activity that waits for a certain
+	//   - WAIT – For a wait activity, which is an activity that waits for a certain
 	//   amount of time or until a specific date and time before moving participants to
 	//   the next activity in a journey.
 	//
@@ -4017,8 +4024,8 @@ type JourneyResponse struct {
 	// for an activity and the value is the settings for the activity.
 	Activities map[string]Activity
 
-	// The time when journey will stop sending messages. QuietTime should be
-	// configured first and SendingSchedule should be set to true.
+	// The time when a journey will not send messages. QuietTime should be configured
+	// first and SendingSchedule should be set to true.
 	ClosedDays *ClosedDays
 
 	// The date, in ISO 8601 format, when the journey was created.
@@ -4038,8 +4045,8 @@ type JourneyResponse struct {
 	// participant's local time.
 	LocalTime bool
 
-	// The time when journey allow to send messages. QuietTime should be configured
-	// first and SendingSchedule should be set to true.
+	// The time when a journey can send messages. QuietTime should be configured first
+	// and SendingSchedule should be set to true.
 	OpenHours *OpenHours
 
 	// The quiet time settings for the journey. Quiet time is a specific time range
@@ -4059,14 +4066,15 @@ type JourneyResponse struct {
 	// the journey, as a duration in ISO 8601 format.
 	RefreshFrequency *string
 
-	// Specifies whether a journey should be refreshed on segment update.
+	// Indicates whether the journey participants should be refreshed when a segment
+	// is updated.
 	RefreshOnSegmentUpdate bool
 
 	// The schedule settings for the journey.
 	Schedule *JourneySchedule
 
-	// Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This
-	// flag should be set to true in order to allow (OpenHours and ClosedDays)
+	// Indicates if journey has Advance Quiet Time enabled. This flag should be set to
+	// true in order to allow using OpenHours and ClosedDays.
 	SendingSchedule bool
 
 	// The unique identifier for the first activity in the journey.
@@ -4098,9 +4106,149 @@ type JourneyResponse struct {
 	// This object is not used or supported.
 	Tags map[string]string
 
-	// Specifies whether endpoints in quiet hours should enter a wait till the end of
-	// their quiet hours.
+	// Indicates whether endpoints in quiet hours should enter a wait activity until
+	// quiet hours have elapsed.
 	WaitForQuietTime bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides the results of a query that retrieved the data for a standard
+// execution metric that applies to a journey activity for a particular journey
+// run, and provides information about that query.
+type JourneyRunExecutionActivityMetricsResponse struct {
+
+	// The type of activity that the metric applies to. Possible values are:
+	//   - CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that
+	//   sends participants down one of two paths in a journey.
+	//   - HOLDOUT – For a holdout activity, which is an activity that stops a journey
+	//   for a specified percentage of participants.
+	//   - MESSAGE – For an email activity, which is an activity that sends an email
+	//   message to participants.
+	//   - MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an
+	//   activity that sends participants down one of as many as five paths in a journey.
+	//   - RANDOM_SPLIT – For a random split activity, which is an activity that sends
+	//   specified percentages of participants down one of as many as five paths in a
+	//   journey.
+	//   - WAIT – For a wait activity, which is an activity that waits for a certain
+	//   amount of time or until a specific date and time before moving participants to
+	//   the next activity in a journey.
+	//
+	// This member is required.
+	ActivityType *string
+
+	// The unique identifier for the application that the metric applies to.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The unique identifier for the activity that the metric applies to.
+	//
+	// This member is required.
+	JourneyActivityId *string
+
+	// The unique identifier for the journey that the metric applies to.
+	//
+	// This member is required.
+	JourneyId *string
+
+	// The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the
+	// execution status of the activity for this journey run and updated the data for
+	// the metric.
+	//
+	// This member is required.
+	LastEvaluatedTime *string
+
+	// A JSON object that contains the results of the query. For information about the
+	// structure and contents of the results, see see Standard Amazon Pinpoint
+	// analytics metrics (https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// in the Amazon Pinpoint Developer Guide.
+	//
+	// This member is required.
+	Metrics map[string]string
+
+	// The unique identifier for the journey run that the metric applies to.
+	//
+	// This member is required.
+	RunId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the results of a query that retrieved the data for a standard
+// execution metric that applies to a journey run, and provides information about
+// that query.
+type JourneyRunExecutionMetricsResponse struct {
+
+	// The unique identifier for the application that the metric applies to.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The unique identifier for the journey that the metric applies to.
+	//
+	// This member is required.
+	JourneyId *string
+
+	// The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the
+	// journey run and updated the data for the metric.
+	//
+	// This member is required.
+	LastEvaluatedTime *string
+
+	// A JSON object that contains the results of the query. For information about the
+	// structure and contents of the results, see the Standard Amazon Pinpoint
+	// analytics metrics (https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// in the Amazon Pinpoint Developer Guide.
+	//
+	// This member is required.
+	Metrics map[string]string
+
+	// The unique identifier for the journey run that the metric applies to.
+	//
+	// This member is required.
+	RunId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information from a specified run of a journey.
+type JourneyRunResponse struct {
+
+	// The time when the journey run was created or scheduled, in ISO 8601 format.
+	//
+	// This member is required.
+	CreationTime *string
+
+	// The last time the journey run was updated, in ISO 8601 format..
+	//
+	// This member is required.
+	LastUpdateTime *string
+
+	// The unique identifier for the run.
+	//
+	// This member is required.
+	RunId *string
+
+	// The current status of the journey run.
+	//
+	// This member is required.
+	Status JourneyRunStatus
+
+	noSmithyDocumentSerde
+}
+
+// Provides information from all runs of a journey.
+type JourneyRunsResponse struct {
+
+	// An array of responses, one for each run of the journey
+	//
+	// This member is required.
+	Item []JourneyRunResponse
+
+	// The string to use in a subsequent request to get the next page of results in a
+	// paginated response. This value is null if there are no additional pages.
+	NextToken *string
 
 	noSmithyDocumentSerde
 }
@@ -4569,35 +4717,36 @@ type NumberValidateResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The time when journey allow to send messages. QuietTime should be configured
-// first and SendingSchedule should be set to true.
+// Specifies the times when message are allowed to be sent to endpoints.
 type OpenHours struct {
 
-	// Rules for Custom Channel.
+	// Specifies the schedule settings for the custom channel.
 	CUSTOM map[string][]OpenHoursRule
 
-	// Rules for Email Channel.
+	// Specifies the schedule settings for the email channel.
 	EMAIL map[string][]OpenHoursRule
 
-	// Rules for Push Channel.
+	// Specifies the schedule settings for the push channel.
 	PUSH map[string][]OpenHoursRule
 
-	// Rules for SMS Channel.
+	// Specifies the schedule settings for the SMS channel.
 	SMS map[string][]OpenHoursRule
 
-	// Rules for Voice Channel.
+	// Specifies the schedule settings for the voice channel.
 	VOICE map[string][]OpenHoursRule
 
 	noSmithyDocumentSerde
 }
 
-// List of OpenHours Rules.
+// Specifies the start and end time for OpenHours.
 type OpenHoursRule struct {
 
-	// Local start time in ISO 8601 format.
+	// The end of the scheduled time, in ISO 8601 format, when the channel can't send
+	// messages.
 	EndTime *string
 
-	// Local start time in ISO 8601 format.
+	// The start of the scheduled time, in ISO 8601 format, when the channel can send
+	// messages.
 	StartTime *string
 
 	noSmithyDocumentSerde
@@ -6627,14 +6776,15 @@ type WriteJourneyRequest struct {
 	// the journey, as a duration in ISO 8601 format.
 	RefreshFrequency *string
 
-	// Specifies whether a journey should be refreshed on segment update.
+	// Indicates whether the journey participants should be refreshed when a segment
+	// is updated.
 	RefreshOnSegmentUpdate bool
 
 	// The schedule settings for the journey.
 	Schedule *JourneySchedule
 
-	// Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This
-	// flag should be set to true in order to allow (OpenHours and ClosedDays)
+	// Indicates if journey has Advance Quiet Time enabled. This flag should be set to
+	// true in order to allow using OpenHours and ClosedDays.
 	SendingSchedule bool
 
 	// The unique identifier for the first activity in the journey. The identifier for

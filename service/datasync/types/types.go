@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Represents a single entry in a list (or array) of DataSync agents when you call
@@ -20,6 +21,71 @@ type AgentListEntry struct {
 	// The status of an agent. For more information, see DataSync agent statuses (https://docs.aws.amazon.com/datasync/latest/userguide/understand-agent-statuses.html)
 	// .
 	Status AgentStatus
+
+	noSmithyDocumentSerde
+}
+
+// The storage capacity of an on-premises storage system resource (for example, a
+// volume).
+type Capacity struct {
+
+	// The amount of space that's being used in a storage system resource without
+	// accounting for compression or deduplication.
+	LogicalUsed *int64
+
+	// The total amount of space available in a storage system resource.
+	Provisioned *int64
+
+	// The amount of space that's being used in a storage system resource.
+	Used *int64
+
+	noSmithyDocumentSerde
+}
+
+// The credentials that provide DataSync Discovery read access to your on-premises
+// storage system's management interface. DataSync Discovery stores these
+// credentials in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+// . For more information, see Accessing your on-premises storage system (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-configure-storage.html)
+// .
+type Credentials struct {
+
+	// Specifies the password for your storage system's management interface.
+	//
+	// This member is required.
+	Password *string
+
+	// Specifies the user name for your storage system's management interface.
+	//
+	// This member is required.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// The details about a specific DataSync discovery job.
+type DiscoveryJobListEntry struct {
+
+	// The Amazon Resource Name (ARN) of a discovery job.
+	DiscoveryJobArn *string
+
+	// The status of a discovery job. For more information, see Discovery job statuses (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table)
+	// .
+	Status DiscoveryJobStatus
+
+	noSmithyDocumentSerde
+}
+
+// The network settings that DataSync Discovery uses to connect with your
+// on-premises storage system's management interface.
+type DiscoveryServerConfiguration struct {
+
+	// The domain name or IP address of your storage system's management interface.
+	//
+	// This member is required.
+	ServerHostname *string
+
+	// The network port for accessing the storage system's management interface.
+	ServerPort *int32
 
 	noSmithyDocumentSerde
 }
@@ -153,6 +219,41 @@ type HdfsNameNode struct {
 	noSmithyDocumentSerde
 }
 
+// The IOPS peaks for an on-premises storage system resource. Each data point
+// represents the 95th percentile peak value during a 1-hour interval.
+type IOPS struct {
+
+	// Peak IOPS unrelated to read and write operations.
+	Other *float64
+
+	// Peak IOPS related to read operations.
+	Read *float64
+
+	// Peak total IOPS on your on-premises storage system resource.
+	Total *float64
+
+	// Peak IOPS related to write operations.
+	Write *float64
+
+	noSmithyDocumentSerde
+}
+
+// The latency peaks for an on-premises storage system resource. Each data point
+// represents the 95th percentile peak value during a 1-hour interval.
+type Latency struct {
+
+	// Peak latency for operations unrelated to read and write operations.
+	Other *float64
+
+	// Peak latency for read operations.
+	Read *float64
+
+	// Peak latency for write operations.
+	Write *float64
+
+	noSmithyDocumentSerde
+}
+
 // Narrow down the list of resources returned by ListLocations . For example, to
 // see all your Amazon S3 locations, create a filter using "Name": "LocationType" ,
 // "Operator": "Equals" , and "Values": "S3" . For more information, see filtering
@@ -203,6 +304,199 @@ type LocationListEntry struct {
 	// it's the export path to mount the location. For Amazon S3, it's the prefix path
 	// that you mount to and treat as the root of the location.
 	LocationUri *string
+
+	noSmithyDocumentSerde
+}
+
+// The performance data that DataSync Discovery collects about an on-premises
+// storage system resource.
+type MaxP95Performance struct {
+
+	// Peak IOPS unrelated to read and write operations.
+	IopsOther *float64
+
+	// Peak IOPS related to read operations.
+	IopsRead *float64
+
+	// Peak total IOPS on your on-premises storage system resource.
+	IopsTotal *float64
+
+	// Peak IOPS related to write operations.
+	IopsWrite *float64
+
+	// Peak latency for operations unrelated to read and write operations.
+	LatencyOther *float64
+
+	// Peak latency for read operations.
+	LatencyRead *float64
+
+	// Peak latency for write operations.
+	LatencyWrite *float64
+
+	// Peak throughput unrelated to read and write operations.
+	ThroughputOther *float64
+
+	// Peak throughput related to read operations.
+	ThroughputRead *float64
+
+	// Peak total throughput on your on-premises storage system resource.
+	ThroughputTotal *float64
+
+	// Peak throughput related to write operations.
+	ThroughputWrite *float64
+
+	noSmithyDocumentSerde
+}
+
+// The information that DataSync Discovery collects about an on-premises storage
+// system cluster.
+type NetAppONTAPCluster struct {
+
+	// The number of CIFS shares in the cluster.
+	CifsShareCount *int64
+
+	// The storage space that's being used in the cluster without accounting for
+	// compression or deduplication.
+	ClusterBlockStorageLogicalUsed *int64
+
+	// The total storage space that's available in the cluster.
+	ClusterBlockStorageSize *int64
+
+	// The storage space that's being used in a cluster.
+	ClusterBlockStorageUsed *int64
+
+	// The name of the cluster.
+	ClusterName *string
+
+	// The performance data that DataSync Discovery collects about the cluster.
+	MaxP95Performance *MaxP95Performance
+
+	// The number of NFS volumes in the cluster.
+	NfsExportedVolumes *int64
+
+	// Indicates whether DataSync Discovery recommendations for the cluster are ready
+	// to view, incomplete, or can't be determined. For more information, see
+	// Recommendation statuses (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table)
+	// .
+	RecommendationStatus RecommendationStatus
+
+	// The Amazon Web Services storage services that DataSync Discovery recommends for
+	// the cluster. For more information, see Recommendations provided by DataSync
+	// Discovery (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html)
+	// .
+	Recommendations []Recommendation
+
+	// The universally unique identifier (UUID) of the cluster.
+	ResourceId *string
+
+	noSmithyDocumentSerde
+}
+
+// The information that DataSync Discovery collects about a storage virtual
+// machine (SVM) in your on-premises storage system.
+type NetAppONTAPSVM struct {
+
+	// The number of CIFS shares in the SVM.
+	CifsShareCount *int64
+
+	// The universally unique identifier (UUID) of the cluster associated with the SVM.
+	ClusterUuid *string
+
+	// The data transfer protocols (such as NFS) configured for the SVM.
+	EnabledProtocols []string
+
+	// The performance data that DataSync Discovery collects about the SVM.
+	MaxP95Performance *MaxP95Performance
+
+	// The number of NFS volumes in the SVM.
+	NfsExportedVolumes *int64
+
+	// Indicates whether DataSync Discovery recommendations for the SVM are ready to
+	// view, incomplete, or can't be determined. For more information, see
+	// Recommendation statuses (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table)
+	// .
+	RecommendationStatus RecommendationStatus
+
+	// The Amazon Web Services storage services that DataSync Discovery recommends for
+	// the SVM. For more information, see Recommendations provided by DataSync
+	// Discovery (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html)
+	// .
+	Recommendations []Recommendation
+
+	// The UUID of the SVM.
+	ResourceId *string
+
+	// The name of the SVM
+	SvmName *string
+
+	// The total storage space that's available in the SVM.
+	TotalCapacityProvisioned *int64
+
+	// The storage space that's being used in the SVM.
+	TotalCapacityUsed *int64
+
+	// The storage space that's being used in the SVM without accounting for
+	// compression or deduplication.
+	TotalLogicalCapacityUsed *int64
+
+	// The amount of storage in the SVM that's being used for snapshots.
+	TotalSnapshotCapacityUsed *int64
+
+	noSmithyDocumentSerde
+}
+
+// The information that DataSync Discovery collects about a volume in your
+// on-premises storage system.
+type NetAppONTAPVolume struct {
+
+	// The total storage space that's available in the volume.
+	CapacityProvisioned *int64
+
+	// The storage space that's being used in the volume.
+	CapacityUsed *int64
+
+	// The number of CIFS shares in the volume.
+	CifsShareCount *int64
+
+	// The storage space that's being used in the volume without accounting for
+	// compression or deduplication.
+	LogicalCapacityUsed *int64
+
+	// The performance data that DataSync Discovery collects about the volume.
+	MaxP95Performance *MaxP95Performance
+
+	// The number of NFS volumes in the volume.
+	NfsExported bool
+
+	// Indicates whether DataSync Discovery recommendations for the volume are ready
+	// to view, incomplete, or can't be determined. For more information, see
+	// Recommendation statuses (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table)
+	// .
+	RecommendationStatus RecommendationStatus
+
+	// The Amazon Web Services storage services that DataSync Discovery recommends for
+	// the volume. For more information, see Recommendations provided by DataSync
+	// Discovery (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html)
+	// .
+	Recommendations []Recommendation
+
+	// The universally unique identifier (UUID) of the volume.
+	ResourceId *string
+
+	// The volume's security style (such as Unix or NTFS).
+	SecurityStyle *string
+
+	// The amount of storage in the volume that's being used for snapshots.
+	SnapshotCapacityUsed *int64
+
+	// The name of the SVM associated with the volume.
+	SvmName *string
+
+	// The UUID of the storage virtual machine (SVM) associated with the volume.
+	SvmUuid *string
+
+	// The name of the volume.
+	VolumeName *string
 
 	noSmithyDocumentSerde
 }
@@ -399,6 +693,25 @@ type Options struct {
 	noSmithyDocumentSerde
 }
 
+// The types of performance data that DataSync Discovery collects about an
+// on-premises storage system resource.
+type P95Metrics struct {
+
+	// The IOPS peaks for an on-premises storage system resource. Each data point
+	// represents the 95th percentile peak value during a 1-hour interval.
+	IOPS *IOPS
+
+	// The latency peaks for an on-premises storage system resource. Each data point
+	// represents the 95th percentile peak value during a 1-hour interval.
+	Latency *Latency
+
+	// The throughput peaks for an on-premises storage system resource. Each data
+	// point represents the 95th percentile peak value during a 1-hour interval.
+	Throughput *Throughput
+
+	noSmithyDocumentSerde
+}
+
 // The VPC endpoint, subnet, and security group that an agent uses to access IP
 // addresses in a VPC (Virtual Private Cloud).
 type PrivateLinkConfig struct {
@@ -443,6 +756,71 @@ type QopConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The details about an Amazon Web Services storage service that DataSync
+// Discovery recommends for a resource in your on-premises storage system. For more
+// information, see Recommendations provided by DataSync Discovery (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html)
+// .
+type Recommendation struct {
+
+	// The estimated monthly cost of the recommended Amazon Web Services storage
+	// service.
+	EstimatedMonthlyStorageCost *string
+
+	// Information about how you can set up a recommended Amazon Web Services storage
+	// service.
+	StorageConfiguration map[string]string
+
+	// A recommended Amazon Web Services storage service that you can migrate data to
+	// based on information that DataSync Discovery collects about your on-premises
+	// storage system.
+	StorageType *string
+
+	noSmithyDocumentSerde
+}
+
+// Information provided by DataSync Discovery about the resources in your
+// on-premises storage system.
+type ResourceDetails struct {
+
+	// The information that DataSync Discovery collects about the cluster in your
+	// on-premises storage system.
+	NetAppONTAPClusters []NetAppONTAPCluster
+
+	// The information that DataSync Discovery collects about storage virtual machines
+	// (SVMs) in your on-premises storage system.
+	NetAppONTAPSVMs []NetAppONTAPSVM
+
+	// The information that DataSync Discovery collects about volumes in your
+	// on-premises storage system.
+	NetAppONTAPVolumes []NetAppONTAPVolume
+
+	noSmithyDocumentSerde
+}
+
+// Information, including performance data and capacity usage, provided by
+// DataSync Discovery about a resource in your on-premises storage system.
+type ResourceMetrics struct {
+
+	// The storage capacity of the on-premises storage system resource.
+	Capacity *Capacity
+
+	// The types of performance data that DataSync Discovery collects about the
+	// on-premises storage system resource.
+	P95Metrics *P95Metrics
+
+	// The universally unique identifier (UUID) of the on-premises storage system
+	// resource.
+	ResourceId *string
+
+	// The type of on-premises storage system resource.
+	ResourceType DiscoveryResourceType
+
+	// The time when DataSync Discovery collected this information from the resource.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 // used to access an Amazon S3 bucket. For detailed information about using such a
 // role, see Creating a Location for Amazon S3 in the DataSync User Guide.
@@ -465,11 +843,10 @@ type SmbMountOptions struct {
 	// specific SMB version, but we recommend doing this only if DataSync has trouble
 	// negotiating with the SMB file server automatically. These are the following
 	// options for configuring the SMB version:
-	//   - AUTOMATIC (default): DataSync and the SMB file server negotiate a protocol
-	//   version that they mutually support. (DataSync supports SMB versions 1.0 and
-	//   later.) This is the recommended option. If you instead choose a specific version
-	//   that your file server doesn't support, you may get an Operation Not Supported
-	//   error.
+	//   - AUTOMATIC (default): DataSync and the SMB file server negotiate the highest
+	//   version of SMB that they mutually support between 2.1 and 3.1.1. This is the
+	//   recommended option. If you instead choose a specific version that your file
+	//   server doesn't support, you may get an Operation Not Supported error.
 	//   - SMB3 : Restricts the protocol negotiation to only SMB version 3.0.2.
 	//   - SMB2 : Restricts the protocol negotiation to only SMB version 2.1.
 	//   - SMB2_0 : Restricts the protocol negotiation to only SMB version 2.0.
@@ -477,6 +854,20 @@ type SmbMountOptions struct {
 	//   option isn't available when creating an Amazon FSx for NetApp ONTAP location (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationFsxOntap.html)
 	//   .
 	Version SmbVersion
+
+	noSmithyDocumentSerde
+}
+
+// Information that identifies an on-premises storage system that you're using
+// with DataSync Discovery.
+type StorageSystemListEntry struct {
+
+	// The name of an on-premises storage system that you added to DataSync Discovery.
+	Name *string
+
+	// The Amazon Resource Names (ARN) of an on-premises storage system that you added
+	// to DataSync Discovery.
+	StorageSystemArn *string
 
 	noSmithyDocumentSerde
 }
@@ -605,6 +996,25 @@ type TaskSchedule struct {
 	//
 	// This member is required.
 	ScheduleExpression *string
+
+	noSmithyDocumentSerde
+}
+
+// The throughput peaks for an on-premises storage system volume. Each data point
+// represents the 95th percentile peak value during a 1-hour interval.
+type Throughput struct {
+
+	// Peak throughput unrelated to read and write operations.
+	Other *float64
+
+	// Peak throughput related to read operations.
+	Read *float64
+
+	// Peak total throughput on your on-premises storage system resource.
+	Total *float64
+
+	// Peak throughput related to write operations.
+	Write *float64
 
 	noSmithyDocumentSerde
 }

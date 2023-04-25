@@ -4502,6 +4502,258 @@ func awsRestjson1_serializeOpHttpBindingsGetJourneyExecutionMetricsInput(v *GetJ
 	return nil
 }
 
+type awsRestjson1_serializeOpGetJourneyRunExecutionActivityMetrics struct {
+}
+
+func (*awsRestjson1_serializeOpGetJourneyRunExecutionActivityMetrics) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetJourneyRunExecutionActivityMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetJourneyRunExecutionActivityMetricsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/apps/{ApplicationId}/journeys/{JourneyId}/runs/{RunId}/activities/{JourneyActivityId}/execution-metrics")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetJourneyRunExecutionActivityMetricsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetJourneyRunExecutionActivityMetricsInput(v *GetJourneyRunExecutionActivityMetricsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
+	if v.ApplicationId != nil {
+		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
+			return err
+		}
+	}
+
+	if v.JourneyActivityId == nil || len(*v.JourneyActivityId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JourneyActivityId must not be empty")}
+	}
+	if v.JourneyActivityId != nil {
+		if err := encoder.SetURI("JourneyActivityId").String(*v.JourneyActivityId); err != nil {
+			return err
+		}
+	}
+
+	if v.JourneyId == nil || len(*v.JourneyId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JourneyId must not be empty")}
+	}
+	if v.JourneyId != nil {
+		if err := encoder.SetURI("JourneyId").String(*v.JourneyId); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		encoder.SetQuery("page-size").String(*v.PageSize)
+	}
+
+	if v.RunId == nil || len(*v.RunId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RunId must not be empty")}
+	}
+	if v.RunId != nil {
+		if err := encoder.SetURI("RunId").String(*v.RunId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetJourneyRunExecutionMetrics struct {
+}
+
+func (*awsRestjson1_serializeOpGetJourneyRunExecutionMetrics) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetJourneyRunExecutionMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetJourneyRunExecutionMetricsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/apps/{ApplicationId}/journeys/{JourneyId}/runs/{RunId}/execution-metrics")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetJourneyRunExecutionMetricsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetJourneyRunExecutionMetricsInput(v *GetJourneyRunExecutionMetricsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
+	if v.ApplicationId != nil {
+		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
+			return err
+		}
+	}
+
+	if v.JourneyId == nil || len(*v.JourneyId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JourneyId must not be empty")}
+	}
+	if v.JourneyId != nil {
+		if err := encoder.SetURI("JourneyId").String(*v.JourneyId); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		encoder.SetQuery("page-size").String(*v.PageSize)
+	}
+
+	if v.RunId == nil || len(*v.RunId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RunId must not be empty")}
+	}
+	if v.RunId != nil {
+		if err := encoder.SetURI("RunId").String(*v.RunId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetJourneyRuns struct {
+}
+
+func (*awsRestjson1_serializeOpGetJourneyRuns) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetJourneyRuns) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetJourneyRunsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/apps/{ApplicationId}/journeys/{JourneyId}/runs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetJourneyRunsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetJourneyRunsInput(v *GetJourneyRunsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
+	if v.ApplicationId != nil {
+		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
+			return err
+		}
+	}
+
+	if v.JourneyId == nil || len(*v.JourneyId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JourneyId must not be empty")}
+	}
+	if v.JourneyId != nil {
+		if err := encoder.SetURI("JourneyId").String(*v.JourneyId); err != nil {
+			return err
+		}
+	}
+
+	if v.PageSize != nil {
+		encoder.SetQuery("page-size").String(*v.PageSize)
+	}
+
+	if v.Token != nil {
+		encoder.SetQuery("token").String(*v.Token)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetPushTemplate struct {
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "189785b0-2435-498e-b3e1-bc369281a5c9",
+    "type": "feature",
+    "description": "Amazon Connect, Contact Lens Evaluation API release including ability to manage forms and to submit contact evaluations.",
+    "modules": [
+        "service/connect"
+    ]
+}

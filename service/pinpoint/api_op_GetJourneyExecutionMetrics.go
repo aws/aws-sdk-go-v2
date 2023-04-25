@@ -41,7 +41,7 @@ type GetJourneyExecutionMetricsInput struct {
 	// This member is required.
 	JourneyId *string
 
-	// The string that specifies which page of results to return in a paginated
+	// The  string that specifies which page of results to return in a paginated
 	// response. This parameter is not supported for application, campaign, and journey
 	// metrics.
 	NextToken *string

@@ -854,10 +854,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelInput(v *DeleteChannelInpu
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
 
-	if v.SubChannelId != nil {
-		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
-	}
-
 	return nil
 }
 
@@ -3961,17 +3957,6 @@ func (m *awsRestjson1_serializeOpUpdateChannelReadMarker) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentUpdateChannelReadMarkerInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3996,18 +3981,6 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelReadMarkerInput(v *UpdateC
 	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentUpdateChannelReadMarkerInput(v *UpdateChannelReadMarkerInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.SubChannelId != nil {
-		ok := object.Key("SubChannelId")
-		ok.String(*v.SubChannelId)
 	}
 
 	return nil

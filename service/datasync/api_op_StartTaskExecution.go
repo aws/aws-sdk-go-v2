@@ -14,7 +14,10 @@ import (
 // Starts an DataSync task. For each task, you can only run one task execution at
 // a time. There are several phases to a task execution. For more information, see
 // Task execution statuses (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses)
-// .
+// . If you're planning to transfer data to or from an Amazon S3 location, review
+// how DataSync can affect your S3 request charges (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests)
+// and the DataSync pricing page (http://aws.amazon.com/datasync/pricing/) before
+// you begin.
 func (c *Client) StartTaskExecution(ctx context.Context, params *StartTaskExecutionInput, optFns ...func(*Options)) (*StartTaskExecutionOutput, error) {
 	if params == nil {
 		params = &StartTaskExecutionInput{}

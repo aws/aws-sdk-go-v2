@@ -340,6 +340,117 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type EvaluationFormQuestionType string
+
+// Enum values for EvaluationFormQuestionType
+const (
+	EvaluationFormQuestionTypeText         EvaluationFormQuestionType = "TEXT"
+	EvaluationFormQuestionTypeSingleselect EvaluationFormQuestionType = "SINGLESELECT"
+	EvaluationFormQuestionTypeNumeric      EvaluationFormQuestionType = "NUMERIC"
+)
+
+// Values returns all known values for EvaluationFormQuestionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormQuestionType) Values() []EvaluationFormQuestionType {
+	return []EvaluationFormQuestionType{
+		"TEXT",
+		"SINGLESELECT",
+		"NUMERIC",
+	}
+}
+
+type EvaluationFormScoringMode string
+
+// Enum values for EvaluationFormScoringMode
+const (
+	EvaluationFormScoringModeQuestionOnly EvaluationFormScoringMode = "QUESTION_ONLY"
+	EvaluationFormScoringModeSectionOnly  EvaluationFormScoringMode = "SECTION_ONLY"
+)
+
+// Values returns all known values for EvaluationFormScoringMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormScoringMode) Values() []EvaluationFormScoringMode {
+	return []EvaluationFormScoringMode{
+		"QUESTION_ONLY",
+		"SECTION_ONLY",
+	}
+}
+
+type EvaluationFormScoringStatus string
+
+// Enum values for EvaluationFormScoringStatus
+const (
+	EvaluationFormScoringStatusEnabled  EvaluationFormScoringStatus = "ENABLED"
+	EvaluationFormScoringStatusDisabled EvaluationFormScoringStatus = "DISABLED"
+)
+
+// Values returns all known values for EvaluationFormScoringStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormScoringStatus) Values() []EvaluationFormScoringStatus {
+	return []EvaluationFormScoringStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type EvaluationFormSingleSelectQuestionDisplayMode string
+
+// Enum values for EvaluationFormSingleSelectQuestionDisplayMode
+const (
+	EvaluationFormSingleSelectQuestionDisplayModeDropdown EvaluationFormSingleSelectQuestionDisplayMode = "DROPDOWN"
+	EvaluationFormSingleSelectQuestionDisplayModeRadio    EvaluationFormSingleSelectQuestionDisplayMode = "RADIO"
+)
+
+// Values returns all known values for
+// EvaluationFormSingleSelectQuestionDisplayMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EvaluationFormSingleSelectQuestionDisplayMode) Values() []EvaluationFormSingleSelectQuestionDisplayMode {
+	return []EvaluationFormSingleSelectQuestionDisplayMode{
+		"DROPDOWN",
+		"RADIO",
+	}
+}
+
+type EvaluationFormVersionStatus string
+
+// Enum values for EvaluationFormVersionStatus
+const (
+	EvaluationFormVersionStatusDraft  EvaluationFormVersionStatus = "DRAFT"
+	EvaluationFormVersionStatusActive EvaluationFormVersionStatus = "ACTIVE"
+)
+
+// Values returns all known values for EvaluationFormVersionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormVersionStatus) Values() []EvaluationFormVersionStatus {
+	return []EvaluationFormVersionStatus{
+		"DRAFT",
+		"ACTIVE",
+	}
+}
+
+type EvaluationStatus string
+
+// Enum values for EvaluationStatus
+const (
+	EvaluationStatusDraft     EvaluationStatus = "DRAFT"
+	EvaluationStatusSubmitted EvaluationStatus = "SUBMITTED"
+)
+
+// Values returns all known values for EvaluationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationStatus) Values() []EvaluationStatus {
+	return []EvaluationStatus{
+		"DRAFT",
+		"SUBMITTED",
+	}
+}
+
 type EventSourceName string
 
 // Enum values for EventSourceName
@@ -673,6 +784,37 @@ const (
 func (NotificationDeliveryType) Values() []NotificationDeliveryType {
 	return []NotificationDeliveryType{
 		"EMAIL",
+	}
+}
+
+type NumericQuestionPropertyAutomationLabel string
+
+// Enum values for NumericQuestionPropertyAutomationLabel
+const (
+	NumericQuestionPropertyAutomationLabelOverallCustomerSentimentScore NumericQuestionPropertyAutomationLabel = "OVERALL_CUSTOMER_SENTIMENT_SCORE"
+	NumericQuestionPropertyAutomationLabelOverallAgentSentimentScore    NumericQuestionPropertyAutomationLabel = "OVERALL_AGENT_SENTIMENT_SCORE"
+	NumericQuestionPropertyAutomationLabelNonTalkTime                   NumericQuestionPropertyAutomationLabel = "NON_TALK_TIME"
+	NumericQuestionPropertyAutomationLabelNonTalkTimePercentage         NumericQuestionPropertyAutomationLabel = "NON_TALK_TIME_PERCENTAGE"
+	NumericQuestionPropertyAutomationLabelNumberOfInterruptions         NumericQuestionPropertyAutomationLabel = "NUMBER_OF_INTERRUPTIONS"
+	NumericQuestionPropertyAutomationLabelContactDuration               NumericQuestionPropertyAutomationLabel = "CONTACT_DURATION"
+	NumericQuestionPropertyAutomationLabelAgentInteractionDuration      NumericQuestionPropertyAutomationLabel = "AGENT_INTERACTION_DURATION"
+	NumericQuestionPropertyAutomationLabelCustomerHoldTime              NumericQuestionPropertyAutomationLabel = "CUSTOMER_HOLD_TIME"
+)
+
+// Values returns all known values for NumericQuestionPropertyAutomationLabel.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NumericQuestionPropertyAutomationLabel) Values() []NumericQuestionPropertyAutomationLabel {
+	return []NumericQuestionPropertyAutomationLabel{
+		"OVERALL_CUSTOMER_SENTIMENT_SCORE",
+		"OVERALL_AGENT_SENTIMENT_SCORE",
+		"NON_TALK_TIME",
+		"NON_TALK_TIME_PERCENTAGE",
+		"NUMBER_OF_INTERRUPTIONS",
+		"CONTACT_DURATION",
+		"AGENT_INTERACTION_DURATION",
+		"CUSTOMER_HOLD_TIME",
 	}
 }
 
@@ -1480,6 +1622,25 @@ const (
 func (SearchableQueueType) Values() []SearchableQueueType {
 	return []SearchableQueueType{
 		"STANDARD",
+	}
+}
+
+type SingleSelectQuestionRuleCategoryAutomationCondition string
+
+// Enum values for SingleSelectQuestionRuleCategoryAutomationCondition
+const (
+	SingleSelectQuestionRuleCategoryAutomationConditionPresent    SingleSelectQuestionRuleCategoryAutomationCondition = "PRESENT"
+	SingleSelectQuestionRuleCategoryAutomationConditionNotPresent SingleSelectQuestionRuleCategoryAutomationCondition = "NOT_PRESENT"
+)
+
+// Values returns all known values for
+// SingleSelectQuestionRuleCategoryAutomationCondition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SingleSelectQuestionRuleCategoryAutomationCondition) Values() []SingleSelectQuestionRuleCategoryAutomationCondition {
+	return []SingleSelectQuestionRuleCategoryAutomationCondition{
+		"PRESENT",
+		"NOT_PRESENT",
 	}
 }
 

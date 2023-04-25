@@ -410,6 +410,28 @@ func (JobStatus) Values() []JobStatus {
 	}
 }
 
+type JourneyRunStatus string
+
+// Enum values for JourneyRunStatus
+const (
+	JourneyRunStatusScheduled JourneyRunStatus = "SCHEDULED"
+	JourneyRunStatusRunning   JourneyRunStatus = "RUNNING"
+	JourneyRunStatusCompleted JourneyRunStatus = "COMPLETED"
+	JourneyRunStatusCancelled JourneyRunStatus = "CANCELLED"
+)
+
+// Values returns all known values for JourneyRunStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JourneyRunStatus) Values() []JourneyRunStatus {
+	return []JourneyRunStatus{
+		"SCHEDULED",
+		"RUNNING",
+		"COMPLETED",
+		"CANCELLED",
+	}
+}
+
 type Layout string
 
 // Enum values for Layout

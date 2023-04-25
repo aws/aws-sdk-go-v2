@@ -1447,6 +1447,9 @@ func awsRestjson1_deserializeOpErrorDeleteChannel(response *smithyhttp.Response,
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
@@ -2074,6 +2077,9 @@ func awsRestjson1_deserializeOpErrorDeleteMessagingStreamingConfigurations(respo
 	}
 
 	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
@@ -8075,15 +8081,6 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelReadMarkerOutput(v **UpdateC
 					return fmt.Errorf("expected ChimeArn to be of type string, got %T instead", value)
 				}
 				sv.ChannelArn = ptr.String(jtv)
-			}
-
-		case "SubChannelId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
-				}
-				sv.SubChannelId = ptr.String(jtv)
 			}
 
 		default:

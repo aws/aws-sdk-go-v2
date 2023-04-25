@@ -666,11 +666,17 @@ type Setting struct {
 // Contains information about the specified configurable setting for a directory.
 type SettingEntry struct {
 
-	// The valid range of values for the directory setting.
+	// The valid range of values for the directory setting. These values depend on the
+	// DataType of your directory.
 	AllowedValues *string
 
 	// The value of the directory setting that is applied to the directory.
 	AppliedValue *string
+
+	// The data type of a directory setting. This is used to define the AllowedValues
+	// of a setting. For example a data type can be Boolean , DurationInSeconds , or
+	// Enum .
+	DataType *string
 
 	// The date and time when the request to update a directory setting was last
 	// submitted.
@@ -698,7 +704,8 @@ type SettingEntry struct {
 	// The value that was last requested for the directory setting.
 	RequestedValue *string
 
-	// The type of directory setting. For example, Protocol or Cipher .
+	// The type, or category, of a directory setting. Similar settings have the same
+	// type. For example, Protocol , Cipher , or Certificate-Based Authentication .
 	Type *string
 
 	noSmithyDocumentSerde
