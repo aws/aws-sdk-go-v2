@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"time"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -32,18 +33,39 @@ import (
 // requesting Spot Instances, see Which is the best Spot request method to use? (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use)
 // in the Amazon EC2 User Guide.
 func (c *Client) RequestSpotFleet(ctx context.Context, params *RequestSpotFleetInput, optFns ...func(*Options)) (*RequestSpotFleetOutput, error) {
-	if params == nil {
-		params = &RequestSpotFleetInput{}
+	p := params
+	if p == nil {
+		p = &RequestSpotFleetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RequestSpotFleet", params, optFns, c.addOperationRequestSpotFleetMiddlewares)
-	if err != nil {
-		return nil, err
+	if p.SpotFleetRequestConfig != nil {
+		if p.SpotFleetRequestConfig.ValidFrom != nil {
+			tf, err := time.Parse(time.RFC3339, p.SpotFleetRequestConfig.ValidFrom.Format(time.RFC3339))
+			if err!= nil {
+				return nil, err
+			}
+	
+			p.SpotFleetRequestConfig.ValidFrom = &tf
+		}
+	
+		if p.SpotFleetRequestConfig.ValidUntil != nil {
+			tu, err := time.Parse(time.RFC3339, p.SpotFleetRequestConfig.ValidUntil.Format(time.RFC3339))
+			if err!= nil {
+				return nil, err
+			}
+	
+			p.SpotFleetRequestConfig.ValidUntil = &tu
+		}
 	}
 
-	out := result.(*RequestSpotFleetOutput)
-	out.ResultMetadata = metadata
-	return out, nil
+	result, metadata, err := c.invokeOperation(ctx, "RequestSpotFleet", p, optFns, c.addOperationRequestSpotFleetMiddlewares)
+		if err != nil {
+			return nil, err
+		}
+	
+		out := result.(*RequestSpotFleetOutput)
+		out.ResultMetadata = metadata
+		return out, nil
 }
 
 // Contains the parameters for RequestSpotFleet.
