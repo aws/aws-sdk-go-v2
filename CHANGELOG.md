@@ -1,3 +1,10 @@
+# Release (2023-04-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.0.0](service/osis/CHANGELOG.md#v100-2023-04-26)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release for OpenSearch Ingestion
+
 # Release (2023-04-25)
 
 ## Module Highlights
