@@ -1,0 +1,8 @@
+{
+    "id": "3f544dc4-0caf-4b8f-b860-311bcbe7c43b",
+    "type": "feature",
+    "description": "Initial release for OpenSearch Ingestion",
+    "modules": [
+        "service/osis"
+    ]
+}
