@@ -13768,11 +13768,11 @@ type SpotFleetRequestConfigData struct {
 	// Default: maintain . instant is listed but is not used by Spot Fleet.
 	Type FleetType
 
-	// The start date and time of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+	// The start date and time of the request, in UTC.
 	// By default, Amazon EC2 starts fulfilling the request immediately.
 	ValidFrom *time.Time
 
-	// The end date and time of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+	// The end date and time of the request, in UTC.
 	// After the end date and time, no new Spot Instance requests are placed or able to
 	// fulfill the request. If no value is specified, the Spot Fleet request remains
 	// until you cancel it.
