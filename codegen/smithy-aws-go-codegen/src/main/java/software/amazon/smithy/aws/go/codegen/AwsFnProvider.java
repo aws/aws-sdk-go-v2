@@ -3,6 +3,7 @@ package software.amazon.smithy.aws.go.codegen;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.endpoints.FnProvider;
+import software.amazon.smithy.rulesengine.language.syntax.fn.FunctionDefinition;
 
 
 public class AwsFnProvider implements FnProvider {
@@ -18,6 +19,15 @@ public class AwsFnProvider implements FnProvider {
                     AwsGoDependency.AWS_ENDPOINT_RULESFN).build();
 
             default -> null;
+        };
+    }
+
+    static boolean isFnResultOptional(FunctionDefinition fn) {
+        return switch (fn.getId()) {
+            case "aws.partition" -> true;
+            case "aws.parseArn" -> true;
+            case "aws.isVirtualHostableS3Bucket" -> true;
+            default -> false;
         };
     }
 }
