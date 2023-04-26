@@ -1,0 +1,2471 @@
+{
+    "smithy": "2.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.osis#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have permissions to access the resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.osis#AmazonOpenSearchIngestionService": {
+            "type": "service",
+            "version": "2022-01-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.osis#CreatePipeline"
+                },
+                {
+                    "target": "com.amazonaws.osis#DeletePipeline"
+                },
+                {
+                    "target": "com.amazonaws.osis#GetPipeline"
+                },
+                {
+                    "target": "com.amazonaws.osis#GetPipelineBlueprint"
+                },
+                {
+                    "target": "com.amazonaws.osis#GetPipelineChangeProgress"
+                },
+                {
+                    "target": "com.amazonaws.osis#ListPipelineBlueprints"
+                },
+                {
+                    "target": "com.amazonaws.osis#ListPipelines"
+                },
+                {
+                    "target": "com.amazonaws.osis#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.osis#StartPipeline"
+                },
+                {
+                    "target": "com.amazonaws.osis#StopPipeline"
+                },
+                {
+                    "target": "com.amazonaws.osis#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.osis#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.osis#UpdatePipeline"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidatePipeline"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "OSIS",
+                    "arnNamespace": "osis",
+                    "cloudFormationName": "OSIS",
+                    "cloudTrailEventSource": "osis.amazonaws.com",
+                    "endpointPrefix": "osis"
+                },
+                "aws.auth#sigv4": {
+                    "name": "osis"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Use the Amazon OpenSearch Ingestion API to create and manage ingestion pipelines. OpenSearch Ingestion is a \n   fully managed data collector that delivers real-time log and trace data to OpenSearch Service domains. For more information, see\n   <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ingestion.html\">Getting data into your cluster using OpenSearch Ingestion</a>.</p>",
+                "smithy.api#title": "Amazon OpenSearch Ingestion",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://osis.amazonaws.com/doc/2022-01-01"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://osis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://osis-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://osis.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://osis.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://osis.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.osis#Boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.osis#ChangeProgressStage": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stage.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.osis#ChangeProgressStageStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the stage that the change is in.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the stage.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.osis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent updated timestamp of the stage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Progress details for a specific stage of a pipeline configuration change.</p>"
+            }
+        },
+        "com.amazonaws.osis#ChangeProgressStageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#ChangeProgressStage"
+            }
+        },
+        "com.amazonaws.osis#ChangeProgressStageStatuses": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.osis#ChangeProgressStatus": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.osis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the configuration change is made on the pipeline.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.osis#ChangeProgressStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall status of the pipeline configuration change.</p>"
+                    }
+                },
+                "TotalNumberOfStages": {
+                    "target": "com.amazonaws.osis#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of stages required for the pipeline configuration change.</p>"
+                    }
+                },
+                "ChangeProgressStages": {
+                    "target": "com.amazonaws.osis#ChangeProgressStageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the stages that the pipeline is going through to perform the configuration change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The progress details of a pipeline configuration change.</p>"
+            }
+        },
+        "com.amazonaws.osis#ChangeProgressStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#ChangeProgressStatus"
+            }
+        },
+        "com.amazonaws.osis#ChangeProgressStatuses": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.osis#CloudWatchLogDestination": {
+            "type": "structure",
+            "members": {
+                "LogGroup": {
+                    "target": "com.amazonaws.osis#LogGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch Logs group to send pipeline logs to. You can specify an existing\n   log group or create a new one. For example,\n    <code>/aws/OpenSearchService/IngestionService/my-pipeline</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination for OpenSearch Ingestion logs sent to Amazon CloudWatch.</p>"
+            }
+        },
+        "com.amazonaws.osis#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client attempted to remove a resource that is currently in use.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.osis#CreatePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#CreatePipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#CreatePipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2022-01-01/osis/createPipeline",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#CreatePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the pipelines\n   owned by an account within an Amazon Web Services Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinUnits": {
+                    "target": "com.amazonaws.osis#PipelineUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum pipeline capacity, in Ingestion Compute Units (ICUs).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxUnits": {
+                    "target": "com.amazonaws.osis#PipelineUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum pipeline capacity, in Ingestion Compute Units (ICUs).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PipelineConfigurationBody": {
+                    "target": "com.amazonaws.osis#PipelineConfigurationBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline configuration in YAML format. The command accepts the pipeline configuration as\n   a string or within a .yaml file. If you provide the configuration as a string, each new line must\n   be escaped with <code>\\n</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogPublishingOptions": {
+                    "target": "com.amazonaws.osis#LogPublishingOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to configure log publishing.</p>"
+                    }
+                },
+                "VpcOptions": {
+                    "target": "com.amazonaws.osis#VpcOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the values required to configure VPC access for the pipeline. If you don't specify\n   these values, OpenSearch Ingestion creates the pipeline with a public endpoint.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.osis#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of tags to add to the pipeline upon creation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#CreatePipelineResponse": {
+            "type": "structure",
+            "members": {
+                "Pipeline": {
+                    "target": "com.amazonaws.osis#Pipeline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for information about the created pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#DeletePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#DeletePipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#DeletePipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#delete-pipeline\">Deleting\n    pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2022-01-01/osis/deletePipeline/{PipelineName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#DeletePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#DeletePipelineResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.osis#GetPipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#GetPipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#GetPipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about an OpenSearch Ingestion pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2022-01-01/osis/getPipeline/{PipelineName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#GetPipelineBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#GetPipelineBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#GetPipelineBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are\n   templates for the configuration needed for a <code>CreatePipeline</code> request.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2022-01-01/osis/getPipelineBlueprint/{BlueprintName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#GetPipelineBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "BlueprintName": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#GetPipelineBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "Blueprint": {
+                    "target": "com.amazonaws.osis#PipelineBlueprint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested blueprint in YAML format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#GetPipelineChangeProgress": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#GetPipelineChangeProgressRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#GetPipelineChangeProgressResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns progress information for the current change happening on an OpenSearch Ingestion\n   pipeline. Currently, this operation only returns information when a pipeline is being\n   created.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2022-01-01/osis/getPipelineChangeProgress/{PipelineName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#GetPipelineChangeProgressRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#GetPipelineChangeProgressResponse": {
+            "type": "structure",
+            "members": {
+                "ChangeProgressStatuses": {
+                    "target": "com.amazonaws.osis#ChangeProgressStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the change happening on the pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#GetPipelineRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline to get information about.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#GetPipelineResponse": {
+            "type": "structure",
+            "members": {
+                "Pipeline": {
+                    "target": "com.amazonaws.osis#Pipeline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed information about the requested pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#IngestEndpointUrlsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#String"
+            }
+        },
+        "com.amazonaws.osis#Integer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.osis#InternalException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed because of an unknown error, exception, or failure (the failure is\n   internal to the service).</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.osis#InvalidPaginationTokenException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An invalid pagination token provided in the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.osis#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You attempted to create more than the allowed number of tags.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.osis#ListPipelineBlueprints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#ListPipelineBlueprintsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#ListPipelineBlueprintsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of all available blueprints for Data Prepper.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2022-01-01/osis/listPipelineBlueprints",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#ListPipelineBlueprintsRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#ListPipelineBlueprintsResponse": {
+            "type": "structure",
+            "members": {
+                "Blueprints": {
+                    "target": "com.amazonaws.osis#PipelineBlueprintsSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of available blueprints for Data Prepper.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#ListPipelines": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#ListPipelinesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#ListPipelinesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For\n   more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2022-01-01/osis/listPipelines",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.osis#ListPipelinesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.osis#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n   <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.osis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListPipelines</code> operation returns a <code>nextToken</code>, you\n   can include the returned <code>nextToken</code> in subsequent <code>ListPipelines</code>\n   operations, which returns results in the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#ListPipelinesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.osis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n   <code>nextToken</code> is a unique pagination token for each page. Make the call again using\n   the returned token to retrieve the next page.</p>"
+                    }
+                },
+                "Pipelines": {
+                    "target": "com.amazonaws.osis#PipelineSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all existing Data Prepper pipelines.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information,\n   see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2022-01-01/osis/listTagsForResource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline to retrieve tags for.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.osis#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the given pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#LogGroup": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^\\/aws\\/vendedlogs\\/[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.osis#LogPublishingOptions": {
+            "type": "structure",
+            "members": {
+                "IsLoggingEnabled": {
+                    "target": "com.amazonaws.osis#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether logs should be published.</p>"
+                    }
+                },
+                "CloudWatchLogDestination": {
+                    "target": "com.amazonaws.osis#CloudWatchLogDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for OpenSearch Ingestion logs sent to Amazon CloudWatch Logs. This\n   parameter is required if <code>IsLoggingEnabled</code> is set to <code>true</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the values required to configure logging for the pipeline. If you don't\n   specify these values, OpenSearch Ingestion will not publish logs from your application to\n   CloudWatch Logs.</p>"
+            }
+        },
+        "com.amazonaws.osis#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.osis#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3000
+                },
+                "smithy.api#pattern": "^([\\s\\S]*)$"
+            }
+        },
+        "com.amazonaws.osis#Pipeline": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline.</p>"
+                    }
+                },
+                "PipelineArn": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline.</p>"
+                    }
+                },
+                "MinUnits": {
+                    "target": "com.amazonaws.osis#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The minimum pipeline capacity, in Ingestion Compute Units (ICUs).</p>"
+                    }
+                },
+                "MaxUnits": {
+                    "target": "com.amazonaws.osis#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum pipeline capacity, in Ingestion Compute Units (ICUs).</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.osis#PipelineStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the pipeline.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.osis#PipelineStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status of the pipeline.</p>"
+                    }
+                },
+                "PipelineConfigurationBody": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Data Prepper pipeline configuration in YAML format.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.osis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the pipeline was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.osis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the pipeline was last updated.</p>"
+                    }
+                },
+                "IngestEndpointUrls": {
+                    "target": "com.amazonaws.osis#IngestEndpointUrlsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ingestion endpoints for the pipeline, which you can send data to.</p>"
+                    }
+                },
+                "LogPublishingOptions": {
+                    "target": "com.amazonaws.osis#LogPublishingOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that represent log publishing settings.</p>"
+                    }
+                },
+                "VpcEndpoints": {
+                    "target": "com.amazonaws.osis#VpcEndpointsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC interface endpoints that have access to the pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an existing OpenSearch Ingestion pipeline.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 46,
+                    "max": 76
+                },
+                "smithy.api#pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b):osis:.+:pipeline\\/.+$"
+            }
+        },
+        "com.amazonaws.osis#PipelineBlueprint": {
+            "type": "structure",
+            "members": {
+                "BlueprintName": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>"
+                    }
+                },
+                "PipelineConfigurationBody": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The YAML configuration of the blueprint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for information about an OpenSearch Ingestion blueprint.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineBlueprintSummary": {
+            "type": "structure",
+            "members": {
+                "BlueprintName": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an OpenSearch Ingestion blueprint.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineBlueprintsSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#PipelineBlueprintSummary"
+            }
+        },
+        "com.amazonaws.osis#PipelineConfigurationBody": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 24000
+                }
+            }
+        },
+        "com.amazonaws.osis#PipelineName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.osis#PipelineStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "START_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_FAILED"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.osis#PipelineStatusReason": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of why a pipeline has a certain status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a pipeline's current status.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineSummary": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.osis#PipelineStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the pipeline.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.osis#PipelineStatusReason"
+                },
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline.</p>"
+                    }
+                },
+                "PipelineArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline.</p>"
+                    }
+                },
+                "MinUnits": {
+                    "target": "com.amazonaws.osis#PipelineUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum pipeline capacity, in Ingestion Compute Units (ICUs).</p>"
+                    }
+                },
+                "MaxUnits": {
+                    "target": "com.amazonaws.osis#PipelineUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum pipeline capacity, in Ingestion Compute Units (ICUs).</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.osis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the pipeline was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.osis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the pipeline was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information for an OpenSearch Ingestion pipeline.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#PipelineSummary"
+            }
+        },
+        "com.amazonaws.osis#PipelineUnits": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 96
+                }
+            }
+        },
+        "com.amazonaws.osis#ResourceAlreadyExistsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You attempted to create a resource that already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.osis#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You attempted to access or delete a resource that does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.osis#SecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 11,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^sg-\\w{8}(\\w{9})?$"
+            }
+        },
+        "com.amazonaws.osis#SecurityGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#SecurityGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 12
+                }
+            }
+        },
+        "com.amazonaws.osis#StartPipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#StartPipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#StartPipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#start-pipeline\">Starting\n   pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2022-01-01/osis/startPipeline/{PipelineName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#StartPipelineRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline to start.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#StartPipelineResponse": {
+            "type": "structure",
+            "members": {
+                "Pipeline": {
+                    "target": "com.amazonaws.osis#Pipeline"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#StopPipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#StopPipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#StopPipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#stop-pipeline\">Stopping\n   pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2022-01-01/osis/stopPipeline/{PipelineName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#StopPipelineRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline to stop.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#StopPipelineResponse": {
+            "type": "structure",
+            "members": {
+                "Pipeline": {
+                    "target": "com.amazonaws.osis#Pipeline"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#String": {
+            "type": "string"
+        },
+        "com.amazonaws.osis#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#String"
+            }
+        },
+        "com.amazonaws.osis#SubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 24
+                },
+                "smithy.api#pattern": "^subnet-\\w{8}(\\w{9})?$"
+            }
+        },
+        "com.amazonaws.osis#SubnetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#SubnetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 12
+                }
+            }
+        },
+        "com.amazonaws.osis#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.osis#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key. Tag keys must be unique for the pipeline to which they are attached.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.osis#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value assigned to the corresponding tag key. Tag values can be null and don't have to\n   be unique in a tag set. For example, you can have a key value pair in a tag set of\n   <code>project : Trinity</code> and <code>cost-center : Trinity</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tag (key-value pair) for an OpenSearch Ingestion pipeline.</p>"
+            }
+        },
+        "com.amazonaws.osis#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.osis#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#Tag"
+            }
+        },
+        "com.amazonaws.osis#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging OpenSearch Ingestion\n    pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2022-01-01/osis/tagResource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline to tag.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.osis#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value tags to add to the pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.osis#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.osis#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2022-01-01/osis/untagResource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline to remove tags from.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.osis#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys to remove.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#UpdatePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#UpdatePipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#UpdatePipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2022-01-01/osis/updatePipeline/{PipelineName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#UpdatePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.osis#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinUnits": {
+                    "target": "com.amazonaws.osis#PipelineUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum pipeline capacity, in Ingestion Compute Units (ICUs).</p>"
+                    }
+                },
+                "MaxUnits": {
+                    "target": "com.amazonaws.osis#PipelineUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum pipeline capacity, in Ingestion Compute Units (ICUs)</p>"
+                    }
+                },
+                "PipelineConfigurationBody": {
+                    "target": "com.amazonaws.osis#PipelineConfigurationBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline configuration in YAML format. The command accepts the pipeline configuration as\n   a string or within a .yaml file. If you provide the configuration as a string, each new line must\n   be escaped with <code>\\n</code>.</p>"
+                    }
+                },
+                "LogPublishingOptions": {
+                    "target": "com.amazonaws.osis#LogPublishingOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to configure log publishing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#UpdatePipelineResponse": {
+            "type": "structure",
+            "members": {
+                "Pipeline": {
+                    "target": "com.amazonaws.osis#Pipeline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for information about the updated pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#ValidatePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#ValidatePipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#ValidatePipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For\n   more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2022-01-01/osis/validatePipeline",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#ValidatePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineConfigurationBody": {
+                    "target": "com.amazonaws.osis#PipelineConfigurationBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline configuration in YAML format. The command accepts the pipeline configuration as\n   a string or within a .yaml file. If you provide the configuration as a string, each new line must\n   be escaped with <code>\\n</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#ValidatePipelineResponse": {
+            "type": "structure",
+            "members": {
+                "isValid": {
+                    "target": "com.amazonaws.osis#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean indicating whether or not the pipeline configuration is valid.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.osis#ValidationMessageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors if the configuration is invalid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception for missing or invalid input fields.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.osis#ValidationMessage": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A validation message associated with a <code>ValidatePipeline</code> request in OpenSearch\n   Ingestion.</p>"
+            }
+        },
+        "com.amazonaws.osis#ValidationMessageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#ValidationMessage"
+            }
+        },
+        "com.amazonaws.osis#VpcEndpoint": {
+            "type": "structure",
+            "members": {
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the endpoint.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for your VPC. Amazon Web Services PrivateLink generates this value when you create a\n   VPC.</p>"
+                    }
+                },
+                "VpcOptions": {
+                    "target": "com.amazonaws.osis#VpcOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the VPC, including associated subnets and security groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An OpenSearch Ingestion-managed VPC endpoint that will access one or more\n   pipelines.</p>"
+            }
+        },
+        "com.amazonaws.osis#VpcEndpointsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#VpcEndpoint"
+            }
+        },
+        "com.amazonaws.osis#VpcOptions": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.osis#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of subnet IDs associated with the VPC endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.osis#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of security groups associated with the VPC endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options that specify the subnets and security groups for an OpenSearch Ingestion\n   VPC endpoint.</p>"
+            }
+        }
+    }
+}
