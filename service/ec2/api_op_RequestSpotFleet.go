@@ -33,39 +33,41 @@ import (
 // requesting Spot Instances, see Which is the best Spot request method to use? (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use)
 // in the Amazon EC2 User Guide.
 func (c *Client) RequestSpotFleet(ctx context.Context, params *RequestSpotFleetInput, optFns ...func(*Options)) (*RequestSpotFleetOutput, error) {
-	p := params
-	if p == nil {
-		p = &RequestSpotFleetInput{}
+	p := &RequestSpotFleetInput{}
+	if params != nil {
+		*p = *params
 	}
 
-	if p.SpotFleetRequestConfig != nil {
+	if params.SpotFleetRequestConfig != nil {
+		*p.SpotFleetRequestConfig = *params.SpotFleetRequestConfig
+
 		if p.SpotFleetRequestConfig.ValidFrom != nil {
 			tf, err := time.Parse(time.RFC3339, p.SpotFleetRequestConfig.ValidFrom.Format(time.RFC3339))
-			if err!= nil {
+			if err != nil {
 				return nil, err
 			}
-	
+
 			p.SpotFleetRequestConfig.ValidFrom = &tf
 		}
-	
+
 		if p.SpotFleetRequestConfig.ValidUntil != nil {
 			tu, err := time.Parse(time.RFC3339, p.SpotFleetRequestConfig.ValidUntil.Format(time.RFC3339))
-			if err!= nil {
+			if err != nil {
 				return nil, err
 			}
-	
+
 			p.SpotFleetRequestConfig.ValidUntil = &tu
 		}
 	}
 
 	result, metadata, err := c.invokeOperation(ctx, "RequestSpotFleet", p, optFns, c.addOperationRequestSpotFleetMiddlewares)
-		if err != nil {
-			return nil, err
-		}
-	
-		out := result.(*RequestSpotFleetOutput)
-		out.ResultMetadata = metadata
-		return out, nil
+	if err != nil {
+		return nil, err
+	}
+
+	out := result.(*RequestSpotFleetOutput)
+	out.ResultMetadata = metadata
+	return out, nil
 }
 
 // Contains the parameters for RequestSpotFleet.
