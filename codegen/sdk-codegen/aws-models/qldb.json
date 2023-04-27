@@ -106,7 +106,7 @@
                     "name": "qldb"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The control plane for Amazon QLDB</p>",
+                "smithy.api#documentation": "<p>The resource management API for Amazon QLDB</p>",
                 "smithy.api#title": "Amazon QLDB",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ledger.amazonaws.com/doc/2019-01-02/"
@@ -472,8 +472,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -485,8 +485,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -498,8 +498,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -511,8 +511,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -524,8 +524,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -537,8 +537,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -550,8 +550,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -563,8 +563,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -576,8 +576,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -589,8 +589,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -602,8 +602,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -615,8 +615,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -628,8 +628,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -641,8 +641,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -654,8 +654,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -667,8 +667,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -680,8 +680,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -693,8 +693,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -706,8 +706,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -719,8 +719,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -732,8 +732,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -745,8 +745,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -758,8 +758,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -771,8 +771,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -784,8 +784,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -797,8 +808,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -810,8 +832,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -823,8 +856,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -836,8 +880,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -849,8 +893,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -862,8 +906,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -874,8 +918,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -886,9 +930,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -955,6 +1005,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#CancelJournalKinesisStreamResponse": {
@@ -966,6 +1019,9 @@
                         "smithy.api#documentation": "<p>The UUID (Base62-encoded text) of the canceled QLDB journal stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#CreateLedger": {
@@ -1025,15 +1081,18 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the ledger is protected from being deleted by any user. If not defined during\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set this parameter to <code>false</code>.</p>"
                     }
                 },
                 "KmsKey": {
                     "target": "com.amazonaws.qldb#KmsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key in Key Management Service (KMS) to use for encryption of data at rest in the ledger. For\n         more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in\n         the <i>Amazon QLDB Developer Guide</i>.</p>\n         <p>Use one of the following options to specify this parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_OWNED_KMS_KEY</code>: Use an KMS key that is owned and managed by Amazon Web Services\n               on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Undefined</b>: By default, use an Amazon Web Services owned KMS\n               key.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A valid symmetric customer managed KMS key</b>: Use\n               the specified KMS key in your account that you create, own, and manage.</p>\n               <p>Amazon QLDB does not support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>\n         <p>To specify a customer managed KMS key, you can use its key ID, Amazon Resource Name\n         (ARN), alias name, or alias ARN. When using an alias name, prefix it with\n            <code>\"alias/\"</code>. To specify a key in a different Amazon Web Services account, you must use the key\n         ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n                  <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN:\n               <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in\n         the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The key in Key Management Service (KMS) to use for encryption of data at rest in the ledger. For\n         more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in\n         the <i>Amazon QLDB Developer Guide</i>.</p>\n         <p>Use one of the following options to specify this parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_OWNED_KMS_KEY</code>: Use an KMS key that is owned and managed by Amazon Web Services\n               on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Undefined</b>: By default, use an Amazon Web Services owned KMS\n               key.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A valid symmetric customer managed KMS key</b>: Use\n               the specified symmetric encryption KMS key in your account that you create, own, and\n               manage.</p>\n               <p>Amazon QLDB does not support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>\n         <p>To specify a customer managed KMS key, you can use its key ID, Amazon Resource Name\n         (ARN), alias name, or alias ARN. When using an alias name, prefix it with\n            <code>\"alias/\"</code>. To specify a key in a different Amazon Web Services account, you must use the key\n         ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n                  <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN:\n               <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in\n         the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#CreateLedgerResponse": {
@@ -1072,7 +1131,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the ledger is protected from being deleted by any user. If not defined during\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set this parameter to <code>false</code>.</p>"
                     }
                 },
                 "KmsKeyArn": {
@@ -1081,6 +1140,9 @@
                         "smithy.api#documentation": "<p>The ARN of the customer managed KMS key that the ledger uses for encryption at rest. If\n         this parameter is undefined, the ledger uses an Amazon Web Services owned KMS key for encryption.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#DeleteLedger": {
@@ -1106,7 +1168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a ledger and all of its contents. This action is irreversible.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>",
+                "smithy.api#documentation": "<p>Deletes a ledger and all of its contents. This action is irreversible.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set this parameter to <code>false</code>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/ledgers/{Name}",
@@ -1125,6 +1187,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#DeletionProtection": {
@@ -1177,6 +1242,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#DescribeJournalKinesisStreamResponse": {
@@ -1188,6 +1256,9 @@
                         "smithy.api#documentation": "<p>Information about the QLDB journal stream returned by a\n            <code>DescribeJournalS3Export</code> request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#DescribeJournalS3Export": {
@@ -1231,6 +1302,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#DescribeJournalS3ExportResponse": {
@@ -1243,6 +1317,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#DescribeLedger": {
@@ -1281,6 +1358,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#DescribeLedgerResponse": {
@@ -1319,7 +1399,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the ledger is protected from being deleted by any user. If not defined during\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set this parameter to <code>false</code>.</p>"
                     }
                 },
                 "EncryptionDescription": {
@@ -1328,6 +1408,9 @@
                         "smithy.api#documentation": "<p>Information about the encryption of data at rest in the ledger. This includes the\n         current status, the KMS key, and when the key became inaccessible (in the case of an\n         error).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#Digest": {
@@ -1340,37 +1423,43 @@
             }
         },
         "com.amazonaws.qldb#EncryptionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "KMS_KEY_INACCESSIBLE",
-                        "name": "KMS_KEY_INACCESSIBLE"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "KMS_KEY_INACCESSIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KMS_KEY_INACCESSIBLE"
+                    }
+                }
             }
         },
         "com.amazonaws.qldb#ErrorCause": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "KINESIS_STREAM_NOT_FOUND",
-                        "name": "KINESIS_STREAM_NOT_FOUND"
-                    },
-                    {
-                        "value": "IAM_PERMISSION_REVOKED",
-                        "name": "IAM_PERMISSION_REVOKED"
+            "type": "enum",
+            "members": {
+                "KINESIS_STREAM_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KINESIS_STREAM_NOT_FOUND"
                     }
-                ]
+                },
+                "IAM_PERMISSION_REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_PERMISSION_REVOKED"
+                    }
+                }
             }
         },
         "com.amazonaws.qldb#ErrorMessage": {
@@ -1393,7 +1482,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Exports journal contents within a date and time range from a ledger into a specified\n         Amazon Simple Storage Service (Amazon S3) bucket. A journal export job can write the data objects in either the text\n         or binary representation of Amazon Ion format, or in <i>JSON Lines</i> text\n         format.</p>\n         <p>In JSON Lines format, each journal block in the exported data object is a valid JSON\n         object that is delimited by a newline. You can use this format to easily integrate JSON\n         exports with analytics tools such as Glue and Amazon Athena\n         because these services can parse newline-delimited JSON automatically. For more information\n         about the format, see <a href=\"https://jsonlines.org/\">JSON Lines</a>.</p>\n         <p>If the ledger with the given <code>Name</code> doesn't exist, then throws\n            <code>ResourceNotFoundException</code>.</p>\n         <p>If the ledger with the given <code>Name</code> is in <code>CREATING</code> status, then\n         throws <code>ResourcePreconditionNotMetException</code>.</p>\n         <p>You can initiate up to two concurrent journal export requests for each ledger. Beyond\n         this limit, journal export requests throw <code>LimitExceededException</code>.</p>",
+                "smithy.api#documentation": "<p>Exports journal contents within a date and time range from a ledger into a specified\n         Amazon Simple Storage Service (Amazon S3) bucket. A journal export job can write the data objects in either the text\n         or binary representation of Amazon Ion format, or in <i>JSON Lines</i> text\n         format.</p>\n         <p>If the ledger with the given <code>Name</code> doesn't exist, then throws\n            <code>ResourceNotFoundException</code>.</p>\n         <p>If the ledger with the given <code>Name</code> is in <code>CREATING</code> status, then\n         throws <code>ResourcePreconditionNotMetException</code>.</p>\n         <p>You can initiate up to two concurrent journal export requests for each ledger. Beyond\n         this limit, journal export requests throw <code>LimitExceededException</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ledgers/{Name}/journal-s3-exports",
@@ -1436,16 +1525,19 @@
                 "RoleArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a\n         journal export job to do the following:</p>\n         <ul>\n            <li>\n               <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p>\n            </li>\n            <li>\n               <p>(Optional) Use your customer managed key in Key Management Service (KMS) for server-side\n               encryption of your exported data.</p>\n            </li>\n         </ul>\n         <p>To pass a role to QLDB when requesting a journal export, you must have permissions to\n         perform the <code>iam:PassRole</code> action on the IAM role resource. This is required for\n         all journal export requests.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a\n         journal export job to do the following:</p>\n         <ul>\n            <li>\n               <p>Write objects into your Amazon S3 bucket.</p>\n            </li>\n            <li>\n               <p>(Optional) Use your customer managed key in Key Management Service (KMS) for server-side\n               encryption of your exported data.</p>\n            </li>\n         </ul>\n         <p>To pass a role to QLDB when requesting a journal export, you must have permissions to\n         perform the <code>iam:PassRole</code> action on the IAM role resource. This is required for\n         all journal export requests.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OutputFormat": {
                     "target": "com.amazonaws.qldb#OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output format of your exported journal data. If this parameter is not specified, the\n         exported data defaults to <code>ION_TEXT</code> format.</p>"
+                        "smithy.api#documentation": "<p>The output format of your exported journal data. A journal export job can write the data\n         objects in either the text or binary representation of <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/ion.html\">Amazon Ion</a> format, or in <a href=\"https://jsonlines.org/\">JSON Lines</a> text format.</p>\n         <p>Default: <code>ION_TEXT</code>\n         </p>\n         <p>In JSON Lines format, each journal block in an exported data object is a valid JSON\n         object that is delimited by a newline. You can use this format to directly integrate JSON\n         exports with analytics tools such as Amazon Athena and Glue\n         because these services can parse newline-delimited JSON automatically.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#ExportJournalToS3Response": {
@@ -1458,25 +1550,32 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#ExportStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
             }
         },
         "com.amazonaws.qldb#GetBlock": {
@@ -1531,6 +1630,9 @@
                         "smithy.api#documentation": "<p>The latest block location covered by the digest for which to request a proof. An address\n         is an Amazon Ion structure that has two fields: <code>strandId</code> and\n            <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#GetBlockResponse": {
@@ -1549,6 +1651,9 @@
                         "smithy.api#documentation": "<p>The proof object in Amazon Ion format returned by a <code>GetBlock</code> request. A\n         proof contains the list of hash values required to recalculate the specified digest using a\n         Merkle tree, starting with the specified block.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#GetDigest": {
@@ -1590,6 +1695,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#GetDigestResponse": {
@@ -1609,6 +1717,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#GetRevision": {
@@ -1670,6 +1781,9 @@
                         "smithy.api#documentation": "<p>The latest block location covered by the digest for which to request a proof. An address\n         is an Amazon Ion structure that has two fields: <code>strandId</code> and\n            <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#GetRevisionResponse": {
@@ -1688,6 +1802,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#InvalidParameterException": {
@@ -1893,7 +2010,7 @@
                 "AggregationEnabled": {
                     "target": "com.amazonaws.qldb#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record, increasing the\n         number of records sent per API call.</p>\n         <p>\n            <i>This option is enabled by default.</i> Record aggregation has important\n         implications for processing records and requires de-aggregation in your stream consumer. To\n         learn more, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html\">KPL Key Concepts</a> and <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html\">Consumer De-aggregation</a> in the <i>Amazon Kinesis Data Streams Developer\n         Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record, increasing the\n         number of records sent per API call.</p>\n         <p>Default: <code>True</code>\n         </p>\n         <important>\n            <p>Record aggregation has important implications for processing records and requires\n            de-aggregation in your stream consumer. To learn more, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html\">KPL Key Concepts</a> and\n               <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html\">Consumer\n               De-aggregation</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>\n         </important>"
                     }
                 }
             },
@@ -1955,26 +2072,32 @@
             }
         },
         "com.amazonaws.qldb#LedgerState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.qldb#LedgerSummary": {
@@ -2042,7 +2165,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The\n         output of each stream descriptor includes the same details that are returned by\n            <code>DescribeJournalKinesisStream</code>.</p>\n         <p>This action does not return any expired journal streams. For more information, see\n            <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration\">Expiration for terminal streams</a> in the <i>Amazon QLDB Developer\n            Guide</i>.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items. It is paginated so that\n         you can retrieve all the items by calling <code>ListJournalKinesisStreamsForLedger</code>\n         multiple times.</p>",
+                "smithy.api#documentation": "<p>Returns all Amazon QLDB journal streams for a given ledger.</p>\n         <p>This action does not return any expired journal streams. For more information, see\n            <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration\">Expiration for terminal streams</a> in the <i>Amazon QLDB Developer\n            Guide</i>.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items. It is paginated so that\n         you can retrieve all the items by calling <code>ListJournalKinesisStreamsForLedger</code>\n         multiple times.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers/{LedgerName}/journal-kinesis-streams",
@@ -2080,6 +2203,9 @@
                         "smithy.api#httpQuery": "next_token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#ListJournalKinesisStreamsForLedgerResponse": {
@@ -2088,7 +2214,7 @@
                 "Streams": {
                     "target": "com.amazonaws.qldb#JournalKinesisStreamDescriptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of QLDB journal stream descriptors that are associated with the given\n         ledger.</p>"
+                        "smithy.api#documentation": "<p>The QLDB journal streams that are currently associated with the given ledger.</p>"
                     }
                 },
                 "NextToken": {
@@ -2097,6 +2223,9 @@
                         "smithy.api#documentation": "<ul>\n            <li>\n               <p>If <code>NextToken</code> is empty, the last page of results has been processed\n               and there are no more results to be retrieved.</p>\n            </li>\n            <li>\n               <p>If <code>NextToken</code> is <i>not</i> empty, more results are\n               available. To retrieve the next page of results, use the value of\n                  <code>NextToken</code> in a subsequent\n                  <code>ListJournalKinesisStreamsForLedger</code> call.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#ListJournalS3Exports": {
@@ -2108,7 +2237,7 @@
                 "target": "com.amazonaws.qldb#ListJournalS3ExportsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of journal export job descriptions for all ledgers that are associated\n         with the current Amazon Web Services account and Region.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple\n         times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns all journal export jobs for all ledgers that are associated with the current\n         Amazon Web Services account and Region.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple\n         times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/journal-s3-exports",
@@ -2130,7 +2259,7 @@
                 "target": "com.amazonaws.qldb#ListJournalS3ExportsForLedgerResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of journal export job descriptions for a specified ledger.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3ExportsForLedger</code>\n         multiple times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns all journal export jobs for a specified ledger.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3ExportsForLedger</code>\n         multiple times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers/{Name}/journal-s3-exports",
@@ -2168,6 +2297,9 @@
                         "smithy.api#httpQuery": "next_token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#ListJournalS3ExportsForLedgerResponse": {
@@ -2176,7 +2308,7 @@
                 "JournalS3Exports": {
                     "target": "com.amazonaws.qldb#JournalS3ExportList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of journal export job descriptions that are associated with the specified\n         ledger.</p>"
+                        "smithy.api#documentation": "<p>The journal export jobs that are currently associated with the specified ledger.</p>"
                     }
                 },
                 "NextToken": {
@@ -2185,6 +2317,9 @@
                         "smithy.api#documentation": "<ul>\n            <li>\n               <p>If <code>NextToken</code> is empty, then the last page of results has been\n               processed and there are no more results to be retrieved.</p>\n            </li>\n            <li>\n               <p>If <code>NextToken</code> is <i>not</i> empty, then there are more\n               results available. To retrieve the next page of results, use the value of\n                  <code>NextToken</code> in a subsequent <code>ListJournalS3ExportsForLedger</code>\n               call.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#ListJournalS3ExportsRequest": {
@@ -2204,6 +2339,9 @@
                         "smithy.api#httpQuery": "next_token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#ListJournalS3ExportsResponse": {
@@ -2212,7 +2350,7 @@
                 "JournalS3Exports": {
                     "target": "com.amazonaws.qldb#JournalS3ExportList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of journal export job descriptions for all ledgers that are associated with\n         the current Amazon Web Services account and Region.</p>"
+                        "smithy.api#documentation": "<p>The journal export jobs for all ledgers that are associated with the current\n         Amazon Web Services account and Region.</p>"
                     }
                 },
                 "NextToken": {
@@ -2221,6 +2359,9 @@
                         "smithy.api#documentation": "<ul>\n            <li>\n               <p>If <code>NextToken</code> is empty, then the last page of results has been\n               processed and there are no more results to be retrieved.</p>\n            </li>\n            <li>\n               <p>If <code>NextToken</code> is <i>not</i> empty, then there are more\n               results available. To retrieve the next page of results, use the value of\n                  <code>NextToken</code> in a subsequent <code>ListJournalS3Exports</code>\n               call.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#ListLedgers": {
@@ -2232,7 +2373,7 @@
                 "target": "com.amazonaws.qldb#ListLedgersResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of ledger summaries that are associated with the current Amazon Web Services account\n         and Region.</p>\n         <p>This action returns a maximum of 100 items and is paginated so that you can\n         retrieve all the items by calling <code>ListLedgers</code> multiple times.</p>",
+                "smithy.api#documentation": "<p>Returns all ledgers that are associated with the current Amazon Web Services account and\n         Region.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items and is paginated so that\n         you can retrieve all the items by calling <code>ListLedgers</code> multiple times.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers",
@@ -2262,6 +2403,9 @@
                         "smithy.api#httpQuery": "next_token"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#ListLedgersResponse": {
@@ -2270,7 +2414,7 @@
                 "Ledgers": {
                     "target": "com.amazonaws.qldb#LedgerList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of ledger summaries that are associated with the current Amazon Web Services account and\n         Region.</p>"
+                        "smithy.api#documentation": "<p>The ledgers that are associated with the current Amazon Web Services account and Region.</p>"
                     }
                 },
                 "NextToken": {
@@ -2279,6 +2423,9 @@
                         "smithy.api#documentation": "<p>A pagination token, indicating whether there are more results available:</p>\n         <ul>\n            <li>\n               <p>If <code>NextToken</code> is empty, then the last page of results has been\n               processed and there are no more results to be retrieved.</p>\n            </li>\n            <li>\n               <p>If <code>NextToken</code> is <i>not</i> empty, then there are more\n               results available. To retrieve the next page of results, use the value of\n                  <code>NextToken</code> in a subsequent <code>ListLedgers</code> call.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#ListTagsForResource": {
@@ -2317,6 +2464,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#ListTagsForResourceResponse": {
@@ -2328,6 +2478,9 @@
                         "smithy.api#documentation": "<p>The tags that are currently associated with the specified Amazon QLDB resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#MaxResults": {
@@ -2350,40 +2503,46 @@
             }
         },
         "com.amazonaws.qldb#OutputFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ION_BINARY",
-                        "name": "ION_BINARY"
-                    },
-                    {
-                        "value": "ION_TEXT",
-                        "name": "ION_TEXT"
-                    },
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
+            "type": "enum",
+            "members": {
+                "ION_BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ION_BINARY"
                     }
-                ]
+                },
+                "ION_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ION_TEXT"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                }
             }
         },
         "com.amazonaws.qldb#ParameterName": {
             "type": "string"
         },
         "com.amazonaws.qldb#PermissionsMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALLOW_ALL",
-                        "name": "ALLOW_ALL"
-                    },
-                    {
-                        "value": "STANDARD",
-                        "name": "STANDARD"
+            "type": "enum",
+            "members": {
+                "ALLOW_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW_ALL"
                     }
-                ]
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
             }
         },
         "com.amazonaws.qldb#ResourceAlreadyExistsException": {
@@ -2515,7 +2674,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric key in Key Management Service (KMS). Amazon S3 does not\n         support asymmetric KMS keys.</p>\n         <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the\n            <code>ObjectEncryptionType</code>.</p>\n         <p>\n            <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the\n            <code>ObjectEncryptionType</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric encryption key in Key Management Service (KMS). Amazon S3\n         does not support asymmetric KMS keys.</p>\n         <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the\n            <code>ObjectEncryptionType</code>.</p>\n         <p>\n            <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the\n            <code>ObjectEncryptionType</code>.</p>"
                     }
                 }
             },
@@ -2553,22 +2712,26 @@
             }
         },
         "com.amazonaws.qldb#S3ObjectEncryptionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SSE_KMS",
-                        "name": "SSE_KMS"
-                    },
-                    {
-                        "value": "SSE_S3",
-                        "name": "SSE_S3"
-                    },
-                    {
-                        "value": "NO_ENCRYPTION",
-                        "name": "NO_ENCRYPTION"
+            "type": "enum",
+            "members": {
+                "SSE_KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSE_KMS"
                     }
-                ]
+                },
+                "SSE_S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSE_S3"
+                    }
+                },
+                "NO_ENCRYPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_ENCRYPTION"
+                    }
+                }
             }
         },
         "com.amazonaws.qldb#S3Prefix": {
@@ -2659,6 +2822,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#StreamJournalToKinesisResponse": {
@@ -2670,6 +2836,9 @@
                         "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) that QLDB assigns to each QLDB journal\n         stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#StreamName": {
@@ -2683,30 +2852,38 @@
             }
         },
         "com.amazonaws.qldb#StreamStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "CANCELED",
-                        "name": "CANCELED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "IMPAIRED",
-                        "name": "IMPAIRED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPAIRED"
+                    }
+                }
             }
         },
         "com.amazonaws.qldb#TagKey": {
@@ -2773,11 +2950,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.qldb#TagValue": {
             "type": "string",
@@ -2861,11 +3044,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.qldb#UpdateLedger": {
             "type": "operation",
@@ -2935,6 +3124,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#UpdateLedgerPermissionsModeResponse": {
@@ -2958,6 +3150,9 @@
                         "smithy.api#documentation": "<p>The current permissions mode of the ledger.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#UpdateLedgerRequest": {
@@ -2974,15 +3169,18 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the ledger is protected from being deleted by any user. If not defined during\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set this parameter to <code>false</code>.</p>"
                     }
                 },
                 "KmsKey": {
                     "target": "com.amazonaws.qldb#KmsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key in Key Management Service (KMS) to use for encryption of data at rest in the ledger. For\n         more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in\n         the <i>Amazon QLDB Developer Guide</i>.</p>\n         <p>Use one of the following options to specify this parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_OWNED_KMS_KEY</code>: Use an KMS key that is owned and managed by Amazon Web Services\n               on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Undefined</b>: Make no changes to the KMS key of the\n               ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A valid symmetric customer managed KMS key</b>: Use\n               the specified KMS key in your account that you create, own, and manage.</p>\n               <p>Amazon QLDB does not support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>\n         <p>To specify a customer managed KMS key, you can use its key ID, Amazon Resource Name\n         (ARN), alias name, or alias ARN. When using an alias name, prefix it with\n            <code>\"alias/\"</code>. To specify a key in a different Amazon Web Services account, you must use the key\n         ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n                  <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN:\n               <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in\n         the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The key in Key Management Service (KMS) to use for encryption of data at rest in the ledger. For\n         more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in\n         the <i>Amazon QLDB Developer Guide</i>.</p>\n         <p>Use one of the following options to specify this parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_OWNED_KMS_KEY</code>: Use an KMS key that is owned and managed by Amazon Web Services\n               on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Undefined</b>: Make no changes to the KMS key of the\n               ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A valid symmetric customer managed KMS key</b>: Use\n               the specified symmetric encryption KMS key in your account that you create, own, and\n               manage.</p>\n               <p>Amazon QLDB does not support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>\n         <p>To specify a customer managed KMS key, you can use its key ID, Amazon Resource Name\n         (ARN), alias name, or alias ARN. When using an alias name, prefix it with\n            <code>\"alias/\"</code>. To specify a key in a different Amazon Web Services account, you must use the key\n         ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n                  <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN:\n               <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in\n         the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qldb#UpdateLedgerResponse": {
@@ -3015,7 +3213,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the ledger is protected from being deleted by any user. If not defined during\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set this parameter to <code>false</code>.</p>"
                     }
                 },
                 "EncryptionDescription": {
@@ -3024,6 +3222,9 @@
                         "smithy.api#documentation": "<p>Information about the encryption of data at rest in the ledger. This includes the\n         current status, the KMS key, and when the key became inaccessible (in the case of an\n         error).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qldb#ValueHolder": {

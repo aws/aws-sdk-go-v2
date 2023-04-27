@@ -466,8 +466,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -479,8 +479,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -492,8 +492,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -505,8 +505,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -518,8 +518,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -531,8 +531,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -544,8 +544,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -557,8 +557,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -568,8 +568,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -581,8 +581,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -592,8 +592,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -605,8 +605,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -618,8 +618,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -631,8 +631,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -644,8 +644,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -657,8 +657,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -668,8 +668,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -681,8 +681,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -692,8 +692,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -705,8 +705,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -718,8 +718,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -730,8 +730,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -742,8 +742,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -945,7 +945,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html\">Creating Amazon OpenSearch Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/createPipeline",
@@ -1047,7 +1047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#delete-pipeline\">Deleting\n    pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html\">Deleting Amazon OpenSearch Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2022-01-01/osis/deletePipeline/{PipelineName}",
@@ -1135,7 +1135,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are\n   templates for the configuration needed for a <code>CreatePipeline</code> request.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are\n   templates for the configuration needed for a <code>CreatePipeline</code> request. For more\n   information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint\">Using\n    blueprints to create a pipeline</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2022-01-01/osis/getPipelineBlueprint/{BlueprintName}",
@@ -1196,7 +1196,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns progress information for the current change happening on an OpenSearch Ingestion\n   pipeline. Currently, this operation only returns information when a pipeline is being\n   created.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Returns progress information for the current change happening on an OpenSearch Ingestion\n   pipeline. Currently, this operation only returns information when a pipeline is being\n   created.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#get-pipeline-progress\">Tracking the status of pipeline creation</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2022-01-01/osis/getPipelineChangeProgress/{PipelineName}",
@@ -1338,7 +1338,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of all available blueprints for Data Prepper.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of all available blueprints for Data Prepper. For more information, see\n   <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint\">Using blueprints to create a pipeline</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/listPipelineBlueprints",
@@ -1390,7 +1390,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For\n   more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For\n   more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html\">Viewing Amazon OpenSearch Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2022-01-01/osis/listPipelines",
@@ -1468,7 +1468,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information,\n   see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information,\n   see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon OpenSearch Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2022-01-01/osis/listTagsForResource",
@@ -1927,7 +1927,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#start-pipeline\">Starting\n   pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Starts an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--start\">Starting an OpenSearch Ingestion pipeline</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2022-01-01/osis/startPipeline/{PipelineName}",
@@ -1988,7 +1988,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#stop-pipeline\">Stopping\n   pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop\">Stopping an OpenSearch Ingestion pipeline</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2022-01-01/osis/stopPipeline/{PipelineName}",
@@ -2118,7 +2118,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging OpenSearch Ingestion\n    pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon OpenSearch Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/tagResource",
@@ -2192,7 +2192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon\n    OpenSearch Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/untagResource",
@@ -2256,7 +2256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/update-pipeline.html\">Updating Amazon OpenSearch Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2022-01-01/osis/updatePipeline/{PipelineName}",
@@ -2338,7 +2338,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For\n   more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For\n   more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html\">Creating Amazon OpenSearch\n    Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/validatePipeline",

@@ -939,6 +939,30 @@
                 "smithy.api#documentation": "<p>Contains information about the condition.</p>"
             }
         },
+        "com.amazonaws.guardduty#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error type.</p>",
+                        "smithy.api#jsonName": "__type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request conflict exception object.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.guardduty#Container": {
             "type": "structure",
             "members": {
@@ -2081,6 +2105,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SCAN_STATUS"
+                    }
+                },
+                "SCAN_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCAN_TYPE"
                     }
                 }
             }
@@ -3841,6 +3871,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains a complete view providing malware scan result details.</p>",
                         "smithy.api#jsonName": "scanDetections"
+                    }
+                },
+                "ScanType": {
+                    "target": "com.amazonaws.guardduty#ScanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the scan type that invoked the malware scan.</p>",
+                        "smithy.api#jsonName": "scanType"
                     }
                 }
             },
@@ -6091,6 +6128,9 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#ListThreatIntelSets"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#StartMalwareScan"
                 },
                 {
                     "target": "com.amazonaws.guardduty#StartMonitoringMembers"
@@ -10755,6 +10795,12 @@
                 "smithy.api#documentation": "<p>Contains information about the Amazon Web Services resource associated with the activity that prompted\n      GuardDuty to generate a finding.</p>"
             }
         },
+        "com.amazonaws.guardduty#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[A-Za-z-]+:[A-Za-z0-9]+:[A-Za-z0-9-]+:\\d+:(([A-Za-z0-9-]+)[:\\/])?[A-Za-z0-9-]*$"
+            }
+        },
         "com.amazonaws.guardduty#ResourceDetails": {
             "type": "structure",
             "members": {
@@ -11163,6 +11209,13 @@
                         "smithy.api#documentation": "<p>List of volumes that were attached to the original instance to be scanned.</p>",
                         "smithy.api#jsonName": "attachedVolumes"
                     }
+                },
+                "ScanType": {
+                    "target": "com.amazonaws.guardduty#ScanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the scan type that invoked the malware scan.</p>",
+                        "smithy.api#jsonName": "scanType"
+                    }
                 }
             },
             "traits": {
@@ -11411,6 +11464,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
                 }
             }
         },
@@ -11455,6 +11514,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#ScanThreatName"
+            }
+        },
+        "com.amazonaws.guardduty#ScanType": {
+            "type": "enum",
+            "members": {
+                "GUARDDUTY_INITIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GUARDDUTY_INITIATED"
+                    }
+                },
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#ScannedItemCount": {
@@ -11701,6 +11777,65 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#StartMalwareScan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#StartMalwareScanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#StartMalwareScanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates the malware scan. Invoking this API will automatically create the <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html\">Service-linked role </a> in \n      the corresponding account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/malware-scan/start",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#StartMalwareScanRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.guardduty#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the resource for which you invoked the API.</p>",
+                        "smithy.api#jsonName": "resourceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#StartMalwareScanResponse": {
+            "type": "structure",
+            "members": {
+                "ScanId": {
+                    "target": "com.amazonaws.guardduty#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that gets generated when you invoke the API without any error. Each malware scan has \n      a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.</p>",
+                        "smithy.api#jsonName": "scanId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.guardduty#StartMonitoringMembers": {

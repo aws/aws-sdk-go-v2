@@ -341,6 +341,13 @@
                         "smithy.api#documentation": "<p>Information about the broker access configuration.</p>",
                         "smithy.api#jsonName": "connectivityInfo"
                     }
+                },
+                "ZoneIds": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of zoneIds for the cluster in the virtual private cloud (VPC).</p>",
+                        "smithy.api#jsonName": "zoneIds"
+                    }
                 }
             },
             "traits": {
@@ -481,6 +488,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Client-broker encryption in transit setting.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ClientVpcConnection": {
+            "type": "structure",
+            "members": {
+                "Authentication": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the auth scheme of Vpc Connection.</p>",
+                        "smithy.api#jsonName": "authentication"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creation time of the Vpc Connection.</p>",
+                        "smithy.api#jsonName": "creationTime"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#VpcConnectionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the Vpc Connection.</p>",
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "VpcConnectionArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN that identifies the Vpc Connection.</p>",
+                        "smithy.api#jsonName": "vpcConnectionArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Owner of the Vpc Connection.</p>",
+                        "smithy.api#jsonName": "owner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client VPC connection object.</p>"
             }
         },
         "com.amazonaws.kafka#CloudWatchLogs": {
@@ -806,6 +857,13 @@
                         "smithy.api#documentation": "<p>Information about cluster attributes after a cluster is updated.</p>",
                         "smithy.api#jsonName": "targetClusterInfo"
                     }
+                },
+                "VpcConnectionInfo": {
+                    "target": "com.amazonaws.kafka#VpcConnectionInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>",
+                        "smithy.api#jsonName": "vpcConnectionInfo"
+                    }
                 }
             },
             "traits": {
@@ -1126,6 +1184,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Public access control for brokers.</p>",
                         "smithy.api#jsonName": "publicAccess"
+                    }
+                },
+                "VpcConnectivity": {
+                    "target": "com.amazonaws.kafka#VpcConnectivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC connectivity access control for brokers.</p>",
+                        "smithy.api#jsonName": "vpcConnectivity"
                     }
                 }
             },
@@ -1532,6 +1597,162 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#CreateVpcConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#CreateVpcConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#CreateVpcConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new MSK VPC connection.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/vpc-connection",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#CreateVpcConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "TargetClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster Amazon Resource Name (ARN) for the VPC connection.</p>",
+                        "smithy.api#jsonName": "targetClusterArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Authentication": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type of VPC connection.</p>",
+                        "smithy.api#jsonName": "authentication",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC ID of VPC connection.</p>",
+                        "smithy.api#jsonName": "vpcId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientSubnets": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of client subnets.</p>",
+                        "smithy.api#jsonName": "clientSubnets",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroups": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of security groups.</p>",
+                        "smithy.api#jsonName": "securityGroups",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kafka#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tags for the VPC connection.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#CreateVpcConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "VpcConnectionArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC connection ARN.</p>",
+                        "smithy.api#jsonName": "vpcConnectionArn"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#VpcConnectionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The State of Vpc Connection.</p>",
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "Authentication": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type of VPC connection.</p>",
+                        "smithy.api#jsonName": "authentication"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC ID of the VPC connection.</p>",
+                        "smithy.api#jsonName": "vpcId"
+                    }
+                },
+                "ClientSubnets": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of client subnets.</p>",
+                        "smithy.api#jsonName": "clientSubnets"
+                    }
+                },
+                "SecurityGroups": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of security groups.</p>",
+                        "smithy.api#jsonName": "securityGroups"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of VPC connection.</p>",
+                        "smithy.api#jsonName": "creationTime"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kafka#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tags for the VPC connection.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#DeleteCluster": {
             "type": "operation",
             "input": {
@@ -1561,6 +1782,60 @@
                     "uri": "/v1/clusters/{ClusterArn}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.kafka#DeleteClusterPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DeleteClusterPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DeleteClusterPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/clusters/{ClusterArn}/policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DeleteClusterPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteClusterPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kafka#DeleteClusterRequest": {
@@ -1669,6 +1944,75 @@
                     "target": "com.amazonaws.kafka#ConfigurationState",
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
+                        "smithy.api#jsonName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteVpcConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DeleteVpcConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DeleteVpcConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a MSK VPC connection.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/vpc-connection/{Arn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DeleteVpcConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteVpcConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "VpcConnectionArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.</p>",
+                        "smithy.api#jsonName": "vpcConnectionArn"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#VpcConnectionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the VPC connection.</p>",
                         "smithy.api#jsonName": "state"
                     }
                 }
@@ -2088,6 +2432,130 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#DescribeVpcConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DescribeVpcConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DescribeVpcConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a description of this MSK VPC connection.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/vpc-connection/{Arn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DescribeVpcConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeVpcConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "VpcConnectionArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.</p>",
+                        "smithy.api#jsonName": "vpcConnectionArn"
+                    }
+                },
+                "TargetClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK cluster.</p>",
+                        "smithy.api#jsonName": "targetClusterArn"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#VpcConnectionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of VPC connection.</p>",
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "Authentication": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type of VPC connection.</p>",
+                        "smithy.api#jsonName": "authentication"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC Id for the VPC connection.</p>",
+                        "smithy.api#jsonName": "vpcId"
+                    }
+                },
+                "Subnets": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of subnets for the VPC connection.</p>",
+                        "smithy.api#jsonName": "subnets"
+                    }
+                },
+                "SecurityGroups": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of security groups for the VPC connection.</p>",
+                        "smithy.api#jsonName": "securityGroups"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the VPC connection.</p>",
+                        "smithy.api#jsonName": "creationTime"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kafka#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tags for the VPC connection.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#EBSStorageInfo": {
             "type": "structure",
             "members": {
@@ -2370,6 +2838,96 @@
                         "smithy.api#documentation": "<p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>",
                         "smithy.api#jsonName": "bootstrapBrokerStringPublicSaslIam"
                     }
+                },
+                "BootstrapBrokerStringVpcConnectivityTls": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and TLS port pairs for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringVpcConnectivityTls"
+                    }
+                },
+                "BootstrapBrokerStringVpcConnectivitySaslScram": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and SASL/SCRAM port pairs for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringVpcConnectivitySaslScram"
+                    }
+                },
+                "BootstrapBrokerStringVpcConnectivitySaslIam": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and SASL/IAM port pairs for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringVpcConnectivitySaslIam"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#GetClusterPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#GetClusterPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#GetClusterPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/clusters/{ClusterArn}/policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#GetClusterPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#GetClusterPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of cluster policy.</p>",
+                        "smithy.api#jsonName": "currentVersion"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster policy.</p>",
+                        "smithy.api#jsonName": "policy"
+                    }
                 }
             },
             "traits": {
@@ -2540,10 +3098,19 @@
                     "target": "com.amazonaws.kafka#CreateConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.kafka#CreateVpcConnection"
+                },
+                {
                     "target": "com.amazonaws.kafka#DeleteCluster"
                 },
                 {
+                    "target": "com.amazonaws.kafka#DeleteClusterPolicy"
+                },
+                {
                     "target": "com.amazonaws.kafka#DeleteConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.kafka#DeleteVpcConnection"
                 },
                 {
                     "target": "com.amazonaws.kafka#DescribeCluster"
@@ -2561,10 +3128,19 @@
                     "target": "com.amazonaws.kafka#DescribeConfigurationRevision"
                 },
                 {
+                    "target": "com.amazonaws.kafka#DescribeVpcConnection"
+                },
+                {
                     "target": "com.amazonaws.kafka#GetBootstrapBrokers"
                 },
                 {
+                    "target": "com.amazonaws.kafka#GetClusterPolicy"
+                },
+                {
                     "target": "com.amazonaws.kafka#GetCompatibleKafkaVersions"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ListClientVpcConnections"
                 },
                 {
                     "target": "com.amazonaws.kafka#ListClusterOperations"
@@ -2594,7 +3170,16 @@
                     "target": "com.amazonaws.kafka#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.kafka#ListVpcConnections"
+                },
+                {
+                    "target": "com.amazonaws.kafka#PutClusterPolicy"
+                },
+                {
                     "target": "com.amazonaws.kafka#RebootBroker"
+                },
+                {
+                    "target": "com.amazonaws.kafka#RejectClientVpcConnection"
                 },
                 {
                     "target": "com.amazonaws.kafka#TagResource"
@@ -3033,8 +3618,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3046,8 +3631,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3059,8 +3644,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3072,8 +3657,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3085,8 +3670,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3098,8 +3683,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3111,8 +3696,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3124,8 +3709,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3137,8 +3722,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3150,8 +3735,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3163,8 +3748,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3176,8 +3761,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3189,8 +3774,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3202,8 +3787,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3215,8 +3800,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3228,8 +3813,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3241,8 +3826,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3254,8 +3839,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3267,8 +3852,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3280,8 +3865,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3293,8 +3878,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3306,8 +3891,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3319,8 +3904,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3332,8 +3917,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3345,8 +3930,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3358,8 +3943,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3371,8 +3956,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3384,8 +3969,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3397,8 +3982,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3410,8 +3995,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3423,8 +4008,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3436,8 +4021,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3449,8 +4034,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3462,8 +4047,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3475,8 +4060,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3488,8 +4084,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3501,8 +4108,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3514,8 +4132,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3527,8 +4156,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3540,8 +4169,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3553,8 +4182,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3565,8 +4194,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3577,9 +4206,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3619,6 +4254,99 @@
                         "smithy.api#enumValue": "DEPRECATED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.kafka#ListClientVpcConnections": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#ListClientVpcConnectionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#ListClientVpcConnectionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all the VPC connections in this Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/clusters/{ClusterArn}/client-vpc-connections",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ClientVpcConnections",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kafka#ListClientVpcConnectionsRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kafka#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#ListClientVpcConnectionsResponse": {
+            "type": "structure",
+            "members": {
+                "ClientVpcConnections": {
+                    "target": "com.amazonaws.kafka#__listOfClientVpcConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of client VPC connections.</p>",
+                        "smithy.api#jsonName": "clientVpcConnections"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. \n               To get another batch of configurations, provide this token in your next request.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kafka#ListClusterOperations": {
@@ -4405,6 +5133,91 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#ListVpcConnections": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#ListVpcConnectionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#ListVpcConnectionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all the VPC connections in this Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/vpc-connections",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "VpcConnections",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kafka#ListVpcConnectionsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.kafka#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#ListVpcConnectionsResponse": {
+            "type": "structure",
+            "members": {
+                "VpcConnections": {
+                    "target": "com.amazonaws.kafka#__listOfVpcConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of VPC connections.</p>",
+                        "smithy.api#jsonName": "vpcConnections"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. \n               To get another batch of configurations, provide this token in your next request.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#LoggingInfo": {
             "type": "structure",
             "members": {
@@ -4927,6 +5740,80 @@
                 "smithy.api#documentation": "Public access control for brokers."
             }
         },
+        "com.amazonaws.kafka#PutClusterPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#PutClusterPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#PutClusterPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the MSK cluster policy specified by the cluster Amazon Resource Name (ARN) in the request.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/clusters/{ClusterArn}/policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#PutClusterPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy version.</p>",
+                        "smithy.api#jsonName": "currentVersion"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy.</p>",
+                        "smithy.api#jsonName": "policy",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#PutClusterPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy version.</p>",
+                        "smithy.api#jsonName": "currentVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#RebootBroker": {
             "type": "operation",
             "input": {
@@ -5010,6 +5897,71 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#RejectClientVpcConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#RejectClientVpcConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#RejectClientVpcConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns empty response.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/clusters/{ClusterArn}/client-vpc-connection",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#RejectClientVpcConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcConnectionArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC connection ARN.</p>",
+                        "smithy.api#jsonName": "vpcConnectionArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#RejectClientVpcConnectionResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -6401,6 +7353,48 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#UserIdentity": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.kafka#UserIdentityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity type of the requester that calls the API operation.</p>",
+                        "smithy.api#jsonName": "type"
+                    }
+                },
+                "PrincipalId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the requester that calls the API operation.</p>",
+                        "smithy.api#jsonName": "principalId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Description of the requester that calls the API operation.</p>"
+            }
+        },
+        "com.amazonaws.kafka#UserIdentityType": {
+            "type": "enum",
+            "members": {
+                "AWSACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSACCOUNT"
+                    }
+                },
+                "AWSSERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSSERVICE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identity type of the requester that calls the API operation.</p>"
+            }
+        },
         "com.amazonaws.kafka#VpcConfig": {
             "type": "structure",
             "members": {
@@ -6422,6 +7416,257 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration of the Amazon VPCs for the cluster.</p>"
+            }
+        },
+        "com.amazonaws.kafka#VpcConnection": {
+            "type": "structure",
+            "members": {
+                "VpcConnectionArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN that identifies the Vpc Connection.</p>",
+                        "smithy.api#jsonName": "vpcConnectionArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN that identifies the Cluster which the Vpc Connection belongs to.</p>",
+                        "smithy.api#jsonName": "targetClusterArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creation time of the Vpc Connection.</p>",
+                        "smithy.api#jsonName": "creationTime"
+                    }
+                },
+                "Authentication": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the auth scheme of Vpc Connection.</p>",
+                        "smithy.api#jsonName": "authentication"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vpcId that belongs to the Vpc Connection.</p>",
+                        "smithy.api#jsonName": "vpcId"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#VpcConnectionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the Vpc Connection.</p>",
+                        "smithy.api#jsonName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC connection object.</p>"
+            }
+        },
+        "com.amazonaws.kafka#VpcConnectionInfo": {
+            "type": "structure",
+            "members": {
+                "VpcConnectionArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the VPC connection.</p>",
+                        "smithy.api#jsonName": "vpcConnectionArn"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the VPC Connection.</p>",
+                        "smithy.api#jsonName": "owner"
+                    }
+                },
+                "UserIdentity": {
+                    "target": "com.amazonaws.kafka#UserIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the requester that calls the API operation.</p>",
+                        "smithy.api#jsonName": "userIdentity"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when Amazon MSK creates the VPC Connnection.</p>",
+                        "smithy.api#jsonName": "creationTime"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Description of the VPC connection.</p>"
+            }
+        },
+        "com.amazonaws.kafka#VpcConnectionState": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "DEACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEACTIVATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "REJECTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a VPC connection.</p>"
+            }
+        },
+        "com.amazonaws.kafka#VpcConnectivity": {
+            "type": "structure",
+            "members": {
+                "ClientAuthentication": {
+                    "target": "com.amazonaws.kafka#VpcConnectivityClientAuthentication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Includes all client authentication information for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "clientAuthentication"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "VPC connectivity access control for brokers."
+            }
+        },
+        "com.amazonaws.kafka#VpcConnectivityClientAuthentication": {
+            "type": "structure",
+            "members": {
+                "Sasl": {
+                    "target": "com.amazonaws.kafka#VpcConnectivitySasl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>SASL authentication type details for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "sasl"
+                    }
+                },
+                "Tls": {
+                    "target": "com.amazonaws.kafka#VpcConnectivityTls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TLS authentication type details for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "tls"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Includes all client authentication information for VPC connectivity.</p>"
+            }
+        },
+        "com.amazonaws.kafka#VpcConnectivityIam": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>SASL/IAM authentication is on or off for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "enabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for IAM access control for VPC connectivity.</p>"
+            }
+        },
+        "com.amazonaws.kafka#VpcConnectivitySasl": {
+            "type": "structure",
+            "members": {
+                "Scram": {
+                    "target": "com.amazonaws.kafka#VpcConnectivityScram",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for SASL/SCRAM client authentication for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "scram"
+                    }
+                },
+                "Iam": {
+                    "target": "com.amazonaws.kafka#VpcConnectivityIam",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for SASL/IAM client authentication for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "iam"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for SASL client authentication for VPC connectivity.</p>"
+            }
+        },
+        "com.amazonaws.kafka#VpcConnectivityScram": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>SASL/SCRAM authentication is on or off for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "enabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for SASL/SCRAM client authentication for VPC connectivity.</p>"
+            }
+        },
+        "com.amazonaws.kafka#VpcConnectivityTls": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>TLS authentication is on or off for VPC connectivity.</p>",
+                        "smithy.api#jsonName": "enabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for TLS client authentication for VPC connectivity.</p>"
             }
         },
         "com.amazonaws.kafka#ZookeeperNodeInfo": {
@@ -6515,6 +7760,12 @@
                 "target": "com.amazonaws.kafka#BrokerEBSVolumeInfo"
             }
         },
+        "com.amazonaws.kafka#__listOfClientVpcConnection": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#ClientVpcConnection"
+            }
+        },
         "com.amazonaws.kafka#__listOfCluster": {
             "type": "list",
             "member": {
@@ -6579,6 +7830,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kafka#VpcConfig"
+            }
+        },
+        "com.amazonaws.kafka#__listOfVpcConnection": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#VpcConnection"
             }
         },
         "com.amazonaws.kafka#__listOf__string": {
