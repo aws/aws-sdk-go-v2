@@ -1,8 +1,0 @@
-{
-    "id": "6afc35ce-371d-42d0-ab99-1a8cc9fbbc61",
-    "type": "feature",
-    "description": "This release adds support for AMD SEV-SNP on EC2 instances.",
-    "modules": [
-        "service/ec2"
-    ]
-}

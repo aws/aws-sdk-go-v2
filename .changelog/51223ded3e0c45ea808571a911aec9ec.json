@@ -1,8 +1,0 @@
-{
-    "id": "51223ded-3e0c-45ea-8085-71a911aec9ec",
-    "type": "documentation",
-    "description": "Updated X-Ray documentation with Resource Policy API descriptions.",
-    "modules": [
-        "service/xray"
-    ]
-}

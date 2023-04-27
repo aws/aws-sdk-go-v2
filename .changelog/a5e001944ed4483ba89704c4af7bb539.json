@@ -1,8 +1,0 @@
-{
-    "id": "a5e00194-4ed4-483b-a897-04c4af7bb539",
-    "type": "feature",
-    "description": "Add Java 17 (java17) support to AWS Lambda",
-    "modules": [
-        "service/lambda"
-    ]
-}

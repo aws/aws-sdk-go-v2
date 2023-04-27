@@ -1,3 +1,7 @@
+# v1.18.0 (2023-04-27)
+
+* **Feature**: This release adds GetManagedEndpointSessionCredentials, a new API that allows customers to generate an auth token to connect to a managed endpoint, enabling features such as self-hosted Jupyter notebooks for EMR on EKS.
+
 # v1.17.10 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

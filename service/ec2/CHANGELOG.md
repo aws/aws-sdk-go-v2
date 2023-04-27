@@ -1,3 +1,7 @@
+# v1.95.0 (2023-04-27)
+
+* **Feature**: This release adds support for AMD SEV-SNP on EC2 instances.
+
 # v1.94.0 (2023-04-24)
 
 * **Feature**: API changes to AWS Verified Access related to identity providers' information.

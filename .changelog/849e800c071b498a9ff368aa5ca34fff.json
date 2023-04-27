@@ -1,8 +1,0 @@
-{
-    "id": "849e800c-071b-498a-9ff3-68aa5ca34fff",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon QLDB",
-    "modules": [
-        "service/qldb"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.75.0 (2023-04-27)
+
+* **Feature**: Added ml.p4d.24xlarge and ml.p4de.24xlarge as supported instances for SageMaker Studio
+
 # v1.74.1 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

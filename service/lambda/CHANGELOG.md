@@ -1,3 +1,7 @@
+# v1.34.0 (2023-04-27)
+
+* **Feature**: Add Java 17 (java17) support to AWS Lambda
+
 # v1.33.1 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

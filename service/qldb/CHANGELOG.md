@@ -1,3 +1,7 @@
+# v1.15.10 (2023-04-27)
+
+* **Documentation**: Documentation updates for Amazon QLDB
+
 # v1.15.9 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.22.0 (2023-04-27)
+
+* **Feature**: Added API support to initiate on-demand malware scan on specific resources.
+
 # v1.21.1 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

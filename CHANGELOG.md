@@ -1,3 +1,25 @@
+# Release (2023-04-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.95.0](service/ec2/CHANGELOG.md#v1950-2023-04-27)
+  * **Feature**: This release adds support for AMD SEV-SNP on EC2 instances.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.18.0](service/emrcontainers/CHANGELOG.md#v1180-2023-04-27)
+  * **Feature**: This release adds GetManagedEndpointSessionCredentials, a new API that allows customers to generate an auth token to connect to a managed endpoint, enabling features such as self-hosted Jupyter notebooks for EMR on EKS.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.22.0](service/guardduty/CHANGELOG.md#v1220-2023-04-27)
+  * **Feature**: Added API support to initiate on-demand malware scan on specific resources.
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.18.0](service/iotdeviceadvisor/CHANGELOG.md#v1180-2023-04-27)
+  * **Feature**: AWS IoT Core Device Advisor now supports MQTT over WebSocket. With this update, customers can run all three test suites of AWS IoT Core Device Advisor - qualification, custom, and long duration tests - using Signature Version 4 for MQTT over WebSocket.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.20.0](service/kafka/CHANGELOG.md#v1200-2023-04-27)
+  * **Feature**: Amazon MSK has added new APIs that allows multi-VPC private connectivity and cluster policy support for Amazon MSK clusters that simplify connectivity and access between your Apache Kafka clients hosted in different VPCs and AWS accounts and your Amazon MSK clusters.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.34.0](service/lambda/CHANGELOG.md#v1340-2023-04-27)
+  * **Feature**: Add Java 17 (java17) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.0.1](service/osis/CHANGELOG.md#v101-2023-04-27)
+  * **Documentation**: Documentation updates for OpenSearch Ingestion
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.15.10](service/qldb/CHANGELOG.md#v11510-2023-04-27)
+  * **Documentation**: Documentation updates for Amazon QLDB
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.75.0](service/sagemaker/CHANGELOG.md#v1750-2023-04-27)
+  * **Feature**: Added ml.p4d.24xlarge and ml.p4de.24xlarge as supported instances for SageMaker Studio
+
 # Release (2023-04-26)
 
 ## Module Highlights
