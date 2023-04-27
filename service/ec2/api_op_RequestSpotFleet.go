@@ -41,8 +41,8 @@ func (c *Client) RequestSpotFleet(ctx context.Context, params *RequestSpotFleetI
 	if params.SpotFleetRequestConfig != nil {
 		*p.SpotFleetRequestConfig = *params.SpotFleetRequestConfig
 
-		if p.SpotFleetRequestConfig.ValidFrom != nil {
-			tf, err := time.Parse(time.RFC3339, p.SpotFleetRequestConfig.ValidFrom.Format(time.RFC3339))
+		if params.SpotFleetRequestConfig.ValidFrom != nil {
+			tf, err := time.Parse(time.RFC3339, params.SpotFleetRequestConfig.ValidFrom.Format(time.RFC3339))
 			if err != nil {
 				return nil, err
 			}
@@ -50,8 +50,8 @@ func (c *Client) RequestSpotFleet(ctx context.Context, params *RequestSpotFleetI
 			p.SpotFleetRequestConfig.ValidFrom = &tf
 		}
 
-		if p.SpotFleetRequestConfig.ValidUntil != nil {
-			tu, err := time.Parse(time.RFC3339, p.SpotFleetRequestConfig.ValidUntil.Format(time.RFC3339))
+		if params.SpotFleetRequestConfig.ValidUntil != nil {
+			tu, err := time.Parse(time.RFC3339, params.SpotFleetRequestConfig.ValidUntil.Format(time.RFC3339))
 			if err != nil {
 				return nil, err
 			}
