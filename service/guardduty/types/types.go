@@ -751,6 +751,9 @@ type EbsVolumeScanDetails struct {
 	// Returns the start date and time of the malware scan.
 	ScanStartedAt *time.Time
 
+	// Specifies the scan type that invoked the malware scan.
+	ScanType ScanType
+
 	// Contains list of threat intelligence sources used to detect threats.
 	Sources []string
 
@@ -2377,6 +2380,9 @@ type Scan struct {
 
 	// An enum value representing possible scan statuses.
 	ScanStatus ScanStatus
+
+	// Specifies the scan type that invoked the malware scan.
+	ScanType ScanType
 
 	// Represents total bytes that were scanned.
 	TotalBytes int64

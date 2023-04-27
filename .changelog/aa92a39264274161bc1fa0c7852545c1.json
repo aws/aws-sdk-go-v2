@@ -1,0 +1,8 @@
+{
+    "id": "aa92a392-6427-4161-bc1f-a0c7852545c1",
+    "type": "documentation",
+    "description": "Documentation updates for OpenSearch Ingestion",
+    "modules": [
+        "service/osis"
+    ]
+}

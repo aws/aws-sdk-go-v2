@@ -15,10 +15,7 @@ import (
 // Zone, instance count, or instance type. The Reserved Instances to be modified
 // must be identical, except for Availability Zone, network platform, and instance
 // type. For more information, see Modifying Reserved Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html)
-// in the Amazon EC2 User Guide. We are retiring EC2-Classic. We recommend that you
-// migrate from EC2-Classic to a VPC. For more information, see Migrate from
-// EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 func (c *Client) ModifyReservedInstances(ctx context.Context, params *ModifyReservedInstancesInput, optFns ...func(*Options)) (*ModifyReservedInstancesOutput, error) {
 	if params == nil {
 		params = &ModifyReservedInstancesInput{}

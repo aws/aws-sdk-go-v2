@@ -179,3 +179,51 @@ func (StorageMode) Values() []StorageMode {
 		"TIERED",
 	}
 }
+
+type UserIdentityType string
+
+// Enum values for UserIdentityType
+const (
+	UserIdentityTypeAwsaccount UserIdentityType = "AWSACCOUNT"
+	UserIdentityTypeAwsservice UserIdentityType = "AWSSERVICE"
+)
+
+// Values returns all known values for UserIdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserIdentityType) Values() []UserIdentityType {
+	return []UserIdentityType{
+		"AWSACCOUNT",
+		"AWSSERVICE",
+	}
+}
+
+type VpcConnectionState string
+
+// Enum values for VpcConnectionState
+const (
+	VpcConnectionStateCreating     VpcConnectionState = "CREATING"
+	VpcConnectionStateAvailable    VpcConnectionState = "AVAILABLE"
+	VpcConnectionStateInactive     VpcConnectionState = "INACTIVE"
+	VpcConnectionStateDeactivating VpcConnectionState = "DEACTIVATING"
+	VpcConnectionStateDeleting     VpcConnectionState = "DELETING"
+	VpcConnectionStateFailed       VpcConnectionState = "FAILED"
+	VpcConnectionStateRejected     VpcConnectionState = "REJECTED"
+	VpcConnectionStateRejecting    VpcConnectionState = "REJECTING"
+)
+
+// Values returns all known values for VpcConnectionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VpcConnectionState) Values() []VpcConnectionState {
+	return []VpcConnectionState{
+		"CREATING",
+		"AVAILABLE",
+		"INACTIVE",
+		"DEACTIVATING",
+		"DELETING",
+		"FAILED",
+		"REJECTED",
+		"REJECTING",
+	}
+}

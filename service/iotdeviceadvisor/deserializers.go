@@ -2439,6 +2439,15 @@ func awsRestjson1_deserializeDocumentDeviceUnderTest(v **types.DeviceUnderTest, 
 				sv.CertificateArn = ptr.String(jtv)
 			}
 
+		case "deviceRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonResourceName to be of type string, got %T instead", value)
+				}
+				sv.DeviceRoleArn = ptr.String(jtv)
+			}
+
 		case "thingArn":
 			if value != nil {
 				jtv, ok := value.(string)

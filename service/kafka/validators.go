@@ -110,6 +110,26 @@ func (m *validateOpCreateConfiguration) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcConnection struct {
+}
+
+func (*validateOpCreateVpcConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCluster struct {
 }
 
@@ -130,6 +150,26 @@ func (m *validateOpDeleteCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteClusterPolicy struct {
+}
+
+func (*validateOpDeleteClusterPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteClusterPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteClusterPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteClusterPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteConfiguration struct {
 }
 
@@ -145,6 +185,26 @@ func (m *validateOpDeleteConfiguration) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVpcConnection struct {
+}
+
+func (*validateOpDeleteVpcConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcConnectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +310,26 @@ func (m *validateOpDescribeConfigurationRevision) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeVpcConnection struct {
+}
+
+func (*validateOpDescribeVpcConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeVpcConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeVpcConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeVpcConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetBootstrapBrokers struct {
 }
 
@@ -265,6 +345,46 @@ func (m *validateOpGetBootstrapBrokers) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetBootstrapBrokersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetClusterPolicy struct {
+}
+
+func (*validateOpGetClusterPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetClusterPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetClusterPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetClusterPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListClientVpcConnections struct {
+}
+
+func (*validateOpListClientVpcConnections) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListClientVpcConnections) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListClientVpcConnectionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListClientVpcConnectionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +490,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutClusterPolicy struct {
+}
+
+func (*validateOpPutClusterPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutClusterPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutClusterPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutClusterPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRebootBroker struct {
 }
 
@@ -385,6 +525,26 @@ func (m *validateOpRebootBroker) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRebootBrokerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRejectClientVpcConnection struct {
+}
+
+func (*validateOpRejectClientVpcConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectClientVpcConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectClientVpcConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectClientVpcConnectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,12 +810,24 @@ func addOpCreateConfigurationValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateConfiguration{}, middleware.After)
 }
 
+func addOpCreateVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcConnection{}, middleware.After)
+}
+
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
 }
 
+func addOpDeleteClusterPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteClusterPolicy{}, middleware.After)
+}
+
 func addOpDeleteConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConfiguration{}, middleware.After)
+}
+
+func addOpDeleteVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcConnection{}, middleware.After)
 }
 
 func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -678,8 +850,20 @@ func addOpDescribeConfigurationRevisionValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDescribeConfigurationRevision{}, middleware.After)
 }
 
+func addOpDescribeVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeVpcConnection{}, middleware.After)
+}
+
 func addOpGetBootstrapBrokersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBootstrapBrokers{}, middleware.After)
+}
+
+func addOpGetClusterPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetClusterPolicy{}, middleware.After)
+}
+
+func addOpListClientVpcConnectionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListClientVpcConnections{}, middleware.After)
 }
 
 func addOpListClusterOperationsValidationMiddleware(stack *middleware.Stack) error {
@@ -702,8 +886,16 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutClusterPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutClusterPolicy{}, middleware.After)
+}
+
 func addOpRebootBrokerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRebootBroker{}, middleware.After)
+}
+
+func addOpRejectClientVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectClientVpcConnection{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1215,6 +1407,33 @@ func validateOpCreateConfigurationInput(v *CreateConfigurationInput) error {
 	}
 }
 
+func validateOpCreateVpcConnectionInput(v *CreateVpcConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcConnectionInput"}
+	if v.TargetClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetClusterArn"))
+	}
+	if v.Authentication == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Authentication"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.ClientSubnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSubnets"))
+	}
+	if v.SecurityGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroups"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	if v == nil {
 		return nil
@@ -1230,11 +1449,41 @@ func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	}
 }
 
+func validateOpDeleteClusterPolicyInput(v *DeleteClusterPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterPolicyInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteConfigurationInput(v *DeleteConfigurationInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVpcConnectionInput(v *DeleteVpcConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcConnectionInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -1320,11 +1569,56 @@ func validateOpDescribeConfigurationRevisionInput(v *DescribeConfigurationRevisi
 	}
 }
 
+func validateOpDescribeVpcConnectionInput(v *DescribeVpcConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcConnectionInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetBootstrapBrokersInput(v *GetBootstrapBrokersInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBootstrapBrokersInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetClusterPolicyInput(v *GetClusterPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetClusterPolicyInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListClientVpcConnectionsInput(v *ListClientVpcConnectionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListClientVpcConnectionsInput"}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
@@ -1410,6 +1704,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutClusterPolicyInput(v *PutClusterPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutClusterPolicyInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRebootBrokerInput(v *RebootBrokerInput) error {
 	if v == nil {
 		return nil
@@ -1420,6 +1732,24 @@ func validateOpRebootBrokerInput(v *RebootBrokerInput) error {
 	}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRejectClientVpcConnectionInput(v *RejectClientVpcConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectClientVpcConnectionInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.VpcConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConnectionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

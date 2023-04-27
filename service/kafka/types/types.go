@@ -74,6 +74,9 @@ type BrokerNodeGroupInfo struct {
 	// Contains information about storage volumes attached to MSK broker nodes.
 	StorageInfo *StorageInfo
 
+	// The list of zoneIds for the cluster in the virtual private cloud (VPC).
+	ZoneIds []string
+
 	noSmithyDocumentSerde
 }
 
@@ -130,6 +133,29 @@ type ClientAuthentication struct {
 
 	// Contains information about unauthenticated traffic to the cluster.
 	Unauthenticated *Unauthenticated
+
+	noSmithyDocumentSerde
+}
+
+// The client VPC connection object.
+type ClientVpcConnection struct {
+
+	// The ARN that identifies the Vpc Connection.
+	//
+	// This member is required.
+	VpcConnectionArn *string
+
+	// Information about the auth scheme of Vpc Connection.
+	Authentication *string
+
+	// Creation time of the Vpc Connection.
+	CreationTime *time.Time
+
+	// The Owner of the Vpc Connection.
+	Owner *string
+
+	// State of the Vpc Connection.
+	State VpcConnectionState
 
 	noSmithyDocumentSerde
 }
@@ -287,6 +313,10 @@ type ClusterOperationInfo struct {
 	// Information about cluster attributes after a cluster is updated.
 	TargetClusterInfo *MutableClusterInfo
 
+	// Description of the VPC connection for CreateVpcConnection and
+	// DeleteVpcConnection operations.
+	VpcConnectionInfo *VpcConnectionInfo
+
 	noSmithyDocumentSerde
 }
 
@@ -408,6 +438,9 @@ type ConnectivityInfo struct {
 
 	// Public access control for brokers.
 	PublicAccess *PublicAccess
+
+	// VPC connectivity access control for brokers.
+	VpcConnectivity *VpcConnectivity
 
 	noSmithyDocumentSerde
 }
@@ -920,6 +953,18 @@ type UnprocessedScramSecret struct {
 	noSmithyDocumentSerde
 }
 
+// Description of the requester that calls the API operation.
+type UserIdentity struct {
+
+	// A unique identifier for the requester that calls the API operation.
+	PrincipalId *string
+
+	// The identity type of the requester that calls the API operation.
+	Type UserIdentityType
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the Amazon VPCs for the cluster.
 type VpcConfig struct {
 
@@ -930,6 +975,112 @@ type VpcConfig struct {
 
 	// The IDs of the security groups associated with the cluster.
 	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection object.
+type VpcConnection struct {
+
+	// The ARN that identifies the Cluster which the Vpc Connection belongs to.
+	//
+	// This member is required.
+	TargetClusterArn *string
+
+	// The ARN that identifies the Vpc Connection.
+	//
+	// This member is required.
+	VpcConnectionArn *string
+
+	// Information about the auth scheme of Vpc Connection.
+	Authentication *string
+
+	// Creation time of the Vpc Connection.
+	CreationTime *time.Time
+
+	// State of the Vpc Connection.
+	State VpcConnectionState
+
+	// The vpcId that belongs to the Vpc Connection.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Description of the VPC connection.
+type VpcConnectionInfo struct {
+
+	// The time when Amazon MSK creates the VPC Connnection.
+	CreationTime *time.Time
+
+	// The owner of the VPC Connection.
+	Owner *string
+
+	// Description of the requester that calls the API operation.
+	UserIdentity *UserIdentity
+
+	// The Amazon Resource Name (ARN) of the VPC connection.
+	VpcConnectionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// VPC connectivity access control for brokers.
+type VpcConnectivity struct {
+
+	// Includes all client authentication information for VPC connectivity.
+	ClientAuthentication *VpcConnectivityClientAuthentication
+
+	noSmithyDocumentSerde
+}
+
+// Includes all client authentication information for VPC connectivity.
+type VpcConnectivityClientAuthentication struct {
+
+	// SASL authentication type details for VPC connectivity.
+	Sasl *VpcConnectivitySasl
+
+	// TLS authentication type details for VPC connectivity.
+	Tls *VpcConnectivityTls
+
+	noSmithyDocumentSerde
+}
+
+// Details for IAM access control for VPC connectivity.
+type VpcConnectivityIam struct {
+
+	// SASL/IAM authentication is on or off for VPC connectivity.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Details for SASL client authentication for VPC connectivity.
+type VpcConnectivitySasl struct {
+
+	// Details for SASL/IAM client authentication for VPC connectivity.
+	Iam *VpcConnectivityIam
+
+	// Details for SASL/SCRAM client authentication for VPC connectivity.
+	Scram *VpcConnectivityScram
+
+	noSmithyDocumentSerde
+}
+
+// Details for SASL/SCRAM client authentication for VPC connectivity.
+type VpcConnectivityScram struct {
+
+	// SASL/SCRAM authentication is on or off for VPC connectivity.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Details for TLS client authentication for VPC connectivity.
+type VpcConnectivityTls struct {
+
+	// TLS authentication is on or off for VPC connectivity.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }

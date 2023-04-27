@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an OpenSearch Ingestion pipeline. For more information, see Stopping
-// pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#stop-pipeline)
+// Stops an OpenSearch Ingestion pipeline. For more information, see Stopping an
+// OpenSearch Ingestion pipeline (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop)
 // .
 func (c *Client) StopPipeline(ctx context.Context, params *StopPipelineInput, optFns ...func(*Options)) (*StopPipelineOutput, error) {
 	if params == nil {

@@ -230,6 +230,26 @@ func (m *validateOpDescribeVirtualCluster) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetManagedEndpointSessionCredentials struct {
+}
+
+func (*validateOpGetManagedEndpointSessionCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetManagedEndpointSessionCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetManagedEndpointSessionCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetManagedEndpointSessionCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListJobRuns struct {
 }
 
@@ -392,6 +412,10 @@ func addOpDescribeManagedEndpointValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDescribeVirtualClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeVirtualCluster{}, middleware.After)
+}
+
+func addOpGetManagedEndpointSessionCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetManagedEndpointSessionCredentials{}, middleware.After)
 }
 
 func addOpListJobRunsValidationMiddleware(stack *middleware.Stack) error {
@@ -850,6 +874,30 @@ func validateOpDescribeVirtualClusterInput(v *DescribeVirtualClusterInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeVirtualClusterInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetManagedEndpointSessionCredentialsInput(v *GetManagedEndpointSessionCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetManagedEndpointSessionCredentialsInput"}
+	if v.EndpointIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointIdentifier"))
+	}
+	if v.VirtualClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VirtualClusterIdentifier"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.CredentialType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -13,8 +13,8 @@ import (
 )
 
 // Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services
-// account and Region. For more information, see Creating and managing OpenSearch
-// Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html)
+// account and Region. For more information, see Viewing Amazon OpenSearch
+// Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html)
 // .
 func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, optFns ...func(*Options)) (*ListPipelinesOutput, error) {
 	if params == nil {

@@ -14,11 +14,11 @@ import (
 // Modifies the specified attribute of the specified instance. You can specify
 // only one attribute at a time. Note: Using this action to change the security
 // groups associated with an elastic network interface (ENI) attached to an
-// instance in a VPC can result in an error if the instance has more than one ENI.
-// To change the security groups associated with an ENI attached to an instance
-// that has multiple ENIs, we recommend that you use the
-// ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance
-// must be stopped. For more information, see Modify a stopped instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html)
+// instance can result in an error if the instance has more than one ENI. To change
+// the security groups associated with an ENI attached to an instance that has
+// multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute
+// action. To modify some attributes, the instance must be stopped. For more
+// information, see Modify a stopped instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) ModifyInstanceAttribute(ctx context.Context, params *ModifyInstanceAttributeInput, optFns ...func(*Options)) (*ModifyInstanceAttributeOutput, error) {
 	if params == nil {
@@ -86,10 +86,9 @@ type ModifyInstanceAttributeInput struct {
 	// instance can make it unreachable.
 	EnaSupport *types.AttributeBooleanValue
 
-	// [EC2-VPC] Replaces the security groups of the instance with the specified
-	// security groups. You must specify at least one security group, even if it's just
-	// the default security group for the VPC. You must specify the security group ID,
-	// not the security group name.
+	// Replaces the security groups of the instance with the specified security
+	// groups. You must specify the ID of at least one security group, even if it's
+	// just the default security group for the VPC.
 	Groups []string
 
 	// Specifies whether an instance stops or terminates when you initiate shutdown

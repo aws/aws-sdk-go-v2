@@ -3,5 +3,5 @@
 // Package qldb provides the API client, operations, and parameter types for
 // Amazon QLDB.
 //
-// The control plane for Amazon QLDB
+// The resource management API for Amazon QLDB
 package qldb

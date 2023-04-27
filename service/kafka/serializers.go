@@ -491,6 +491,105 @@ func awsRestjson1_serializeOpDocumentCreateConfigurationInput(v *CreateConfigura
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateVpcConnection struct {
+}
+
+func (*awsRestjson1_serializeOpCreateVpcConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateVpcConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateVpcConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/vpc-connection")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateVpcConnectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateVpcConnectionInput(v *CreateVpcConnectionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateVpcConnectionInput(v *CreateVpcConnectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Authentication != nil {
+		ok := object.Key("authentication")
+		ok.String(*v.Authentication)
+	}
+
+	if v.ClientSubnets != nil {
+		ok := object.Key("clientSubnets")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.ClientSubnets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecurityGroups != nil {
+		ok := object.Key("securityGroups")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.SecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetClusterArn != nil {
+		ok := object.Key("targetClusterArn")
+		ok.String(*v.TargetClusterArn)
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("vpcId")
+		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteCluster struct {
 }
 
@@ -553,6 +652,64 @@ func awsRestjson1_serializeOpHttpBindingsDeleteClusterInput(v *DeleteClusterInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteClusterPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteClusterPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteClusterPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteClusterPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/policy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteClusterPolicyInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteClusterPolicyInput(v *DeleteClusterPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteConfiguration struct {
 }
 
@@ -595,6 +752,64 @@ func (m *awsRestjson1_serializeOpDeleteConfiguration) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteConfigurationInput(v *DeleteConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Arn == nil || len(*v.Arn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+	}
+	if v.Arn != nil {
+		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteVpcConnection struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteVpcConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteVpcConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteVpcConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/vpc-connection/{Arn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteVpcConnectionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteVpcConnectionInput(v *DeleteVpcConnectionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -907,6 +1122,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeConfigurationRevisionInput(v *D
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeVpcConnection struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeVpcConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeVpcConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeVpcConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/vpc-connection/{Arn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeVpcConnectionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeVpcConnectionInput(v *DescribeVpcConnectionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Arn == nil || len(*v.Arn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+	}
+	if v.Arn != nil {
+		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetBootstrapBrokers struct {
 }
 
@@ -949,6 +1222,64 @@ func (m *awsRestjson1_serializeOpGetBootstrapBrokers) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetBootstrapBrokersInput(v *GetBootstrapBrokersInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetClusterPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpGetClusterPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetClusterPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetClusterPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/policy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetClusterPolicyInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetClusterPolicyInput(v *GetClusterPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1013,6 +1344,72 @@ func awsRestjson1_serializeOpHttpBindingsGetCompatibleKafkaVersionsInput(v *GetC
 
 	if v.ClusterArn != nil {
 		encoder.SetQuery("clusterArn").String(*v.ClusterArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListClientVpcConnections struct {
+}
+
+func (*awsRestjson1_serializeOpListClientVpcConnections) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListClientVpcConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListClientVpcConnectionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/client-vpc-connections")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListClientVpcConnectionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListClientVpcConnectionsInput(v *ListClientVpcConnectionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -1580,6 +1977,149 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	return nil
 }
 
+type awsRestjson1_serializeOpListVpcConnections struct {
+}
+
+func (*awsRestjson1_serializeOpListVpcConnections) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListVpcConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListVpcConnectionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/vpc-connections")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListVpcConnectionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListVpcConnectionsInput(v *ListVpcConnectionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutClusterPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpPutClusterPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutClusterPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutClusterPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/policy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutClusterPolicyInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutClusterPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutClusterPolicyInput(v *PutClusterPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutClusterPolicyInput(v *PutClusterPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CurrentVersion != nil {
+		ok := object.Key("currentVersion")
+		ok.String(*v.CurrentVersion)
+	}
+
+	if v.Policy != nil {
+		ok := object.Key("policy")
+		ok.String(*v.Policy)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpRebootBroker struct {
 }
 
@@ -1658,6 +2198,87 @@ func awsRestjson1_serializeOpDocumentRebootBrokerInput(v *RebootBrokerInput, val
 		if err := awsRestjson1_serializeDocument__listOf__string(v.BrokerIds, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpRejectClientVpcConnection struct {
+}
+
+func (*awsRestjson1_serializeOpRejectClientVpcConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRejectClientVpcConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RejectClientVpcConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/client-vpc-connection")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRejectClientVpcConnectionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRejectClientVpcConnectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRejectClientVpcConnectionInput(v *RejectClientVpcConnectionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRejectClientVpcConnectionInput(v *RejectClientVpcConnectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VpcConnectionArn != nil {
+		ok := object.Key("vpcConnectionArn")
+		ok.String(*v.VpcConnectionArn)
 	}
 
 	return nil
@@ -2860,6 +3481,13 @@ func awsRestjson1_serializeDocumentBrokerNodeGroupInfo(v *types.BrokerNodeGroupI
 		}
 	}
 
+	if v.ZoneIds != nil {
+		ok := object.Key("zoneIds")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.ZoneIds, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2932,6 +3560,13 @@ func awsRestjson1_serializeDocumentConnectivityInfo(v *types.ConnectivityInfo, v
 	if v.PublicAccess != nil {
 		ok := object.Key("publicAccess")
 		if err := awsRestjson1_serializeDocumentPublicAccess(v.PublicAccess, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConnectivity != nil {
+		ok := object.Key("vpcConnectivity")
+		if err := awsRestjson1_serializeDocumentVpcConnectivity(v.VpcConnectivity, ok); err != nil {
 			return err
 		}
 	}
@@ -3373,6 +4008,98 @@ func awsRestjson1_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjso
 		if err := awsRestjson1_serializeDocument__listOf__string(v.SubnetIds, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConnectivity(v *types.VpcConnectivity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientAuthentication != nil {
+		ok := object.Key("clientAuthentication")
+		if err := awsRestjson1_serializeDocumentVpcConnectivityClientAuthentication(v.ClientAuthentication, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConnectivityClientAuthentication(v *types.VpcConnectivityClientAuthentication, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Sasl != nil {
+		ok := object.Key("sasl")
+		if err := awsRestjson1_serializeDocumentVpcConnectivitySasl(v.Sasl, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tls != nil {
+		ok := object.Key("tls")
+		if err := awsRestjson1_serializeDocumentVpcConnectivityTls(v.Tls, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConnectivityIam(v *types.VpcConnectivityIam, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConnectivitySasl(v *types.VpcConnectivitySasl, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Iam != nil {
+		ok := object.Key("iam")
+		if err := awsRestjson1_serializeDocumentVpcConnectivityIam(v.Iam, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Scram != nil {
+		ok := object.Key("scram")
+		if err := awsRestjson1_serializeDocumentVpcConnectivityScram(v.Scram, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConnectivityScram(v *types.VpcConnectivityScram, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConnectivityTls(v *types.VpcConnectivityTls, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil

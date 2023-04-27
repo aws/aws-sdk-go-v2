@@ -33,6 +33,32 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The request throttled.
+type RequestThrottledException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RequestThrottledException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RequestThrottledException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RequestThrottledException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RequestThrottledException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RequestThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string

@@ -62927,6 +62927,19 @@ func awsEc2query_deserializeDocumentCpuOptions(v **types.CpuOptions, decoder smi
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("amdSevSnp", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AmdSevSnp = types.AmdSevSnpSpecification(xtv)
+			}
+
 		case strings.EqualFold("coreCount", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -89893,6 +89906,19 @@ func awsEc2query_deserializeDocumentLaunchTemplateCpuOptions(v **types.LaunchTem
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("amdSevSnp", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AmdSevSnp = types.AmdSevSnpSpecification(xtv)
+			}
+
 		case strings.EqualFold("coreCount", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -102654,6 +102680,12 @@ func awsEc2query_deserializeDocumentProcessorInfo(v **types.ProcessorInfo, decod
 		case strings.EqualFold("supportedArchitectures", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentArchitectureTypeList(&sv.SupportedArchitectures, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("supportedFeatures", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentSupportedAdditionalProcessorFeatureList(&sv.SupportedFeatures, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -116005,6 +116037,86 @@ func awsEc2query_deserializeDocumentSuccessfulQueuedPurchaseDeletionSetUnwrapped
 			return err
 		}
 		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentSupportedAdditionalProcessorFeatureList(v *[]types.SupportedAdditionalProcessorFeature, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.SupportedAdditionalProcessorFeature
+	if *v == nil {
+		sv = make([]types.SupportedAdditionalProcessorFeature, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("item", t.Name.Local):
+			var col types.SupportedAdditionalProcessorFeature
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = types.SupportedAdditionalProcessorFeature(xtv)
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentSupportedAdditionalProcessorFeatureListUnwrapped(v *[]types.SupportedAdditionalProcessorFeature, decoder smithyxml.NodeDecoder) error {
+	var sv []types.SupportedAdditionalProcessorFeature
+	if *v == nil {
+		sv = make([]types.SupportedAdditionalProcessorFeature, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.SupportedAdditionalProcessorFeature
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = types.SupportedAdditionalProcessorFeature(xtv)
+		}
 		sv = append(sv, mv)
 	}
 	*v = sv

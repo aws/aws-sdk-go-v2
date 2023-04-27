@@ -137,10 +137,10 @@ type KinesisConfiguration struct {
 	StreamArn *string
 
 	// Enables QLDB to publish multiple data records in a single Kinesis Data Streams
-	// record, increasing the number of records sent per API call. This option is
-	// enabled by default. Record aggregation has important implications for processing
-	// records and requires de-aggregation in your stream consumer. To learn more, see
-	// KPL Key Concepts (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html)
+	// record, increasing the number of records sent per API call. Default: True
+	// Record aggregation has important implications for processing records and
+	// requires de-aggregation in your stream consumer. To learn more, see KPL Key
+	// Concepts (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html)
 	// and Consumer De-aggregation (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
 	AggregationEnabled *bool
@@ -220,10 +220,10 @@ type S3EncryptionConfiguration struct {
 	// This member is required.
 	ObjectEncryptionType S3ObjectEncryptionType
 
-	// The Amazon Resource Name (ARN) of a symmetric key in Key Management Service
-	// (KMS). Amazon S3 does not support asymmetric KMS keys. You must provide a
-	// KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType . KmsKeyArn is not
-	// required if you specify SSE_S3 as the ObjectEncryptionType .
+	// The Amazon Resource Name (ARN) of a symmetric encryption key in Key Management
+	// Service (KMS). Amazon S3 does not support asymmetric KMS keys. You must provide
+	// a KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType . KmsKeyArn is
+	// not required if you specify SSE_S3 as the ObjectEncryptionType .
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde

@@ -195,8 +195,16 @@ func awsRestjson1_serializeOpHttpBindingsGetEndpointInput(v *GetEndpointInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.AuthenticationMethod) > 0 {
+		encoder.SetQuery("authenticationMethod").String(string(v.AuthenticationMethod))
+	}
+
 	if v.CertificateArn != nil {
 		encoder.SetQuery("certificateArn").String(*v.CertificateArn)
+	}
+
+	if v.DeviceRoleArn != nil {
+		encoder.SetQuery("deviceRoleArn").String(*v.DeviceRoleArn)
 	}
 
 	if v.ThingArn != nil {
@@ -981,6 +989,11 @@ func awsRestjson1_serializeDocumentDeviceUnderTest(v *types.DeviceUnderTest, val
 	if v.CertificateArn != nil {
 		ok := object.Key("certificateArn")
 		ok.String(*v.CertificateArn)
+	}
+
+	if v.DeviceRoleArn != nil {
+		ok := object.Key("deviceRoleArn")
+		ok.String(*v.DeviceRoleArn)
 	}
 
 	if v.ThingArn != nil {

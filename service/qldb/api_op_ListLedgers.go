@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of ledger summaries that are associated with the current
-// Amazon Web Services account and Region. This action returns a maximum of 100
-// items and is paginated so that you can retrieve all the items by calling
-// ListLedgers multiple times.
+// Returns all ledgers that are associated with the current Amazon Web Services
+// account and Region. This action returns a maximum of MaxResults items and is
+// paginated so that you can retrieve all the items by calling ListLedgers
+// multiple times.
 func (c *Client) ListLedgers(ctx context.Context, params *ListLedgersInput, optFns ...func(*Options)) (*ListLedgersOutput, error) {
 	if params == nil {
 		params = &ListLedgersInput{}
@@ -47,8 +47,8 @@ type ListLedgersInput struct {
 
 type ListLedgersOutput struct {
 
-	// The array of ledger summaries that are associated with the current Amazon Web
-	// Services account and Region.
+	// The ledgers that are associated with the current Amazon Web Services account
+	// and Region.
 	Ledgers []types.LedgerSummary
 
 	// A pagination token, indicating whether there are more results available:

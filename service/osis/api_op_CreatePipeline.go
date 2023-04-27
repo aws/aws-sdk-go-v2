@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an OpenSearch Ingestion pipeline. For more information, see Creating
-// and managing OpenSearch Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html)
+// Amazon OpenSearch Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html)
 // .
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {

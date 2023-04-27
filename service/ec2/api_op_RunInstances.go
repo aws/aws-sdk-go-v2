@@ -15,17 +15,12 @@ import (
 // Launches the specified number of instances using an AMI for which you have
 // permissions. You can specify a number of options, or leave the default options.
 // The following rules apply:
-//   - [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from
-//     your default VPC for you. If you don't have a default VPC, you must specify a
-//     subnet ID in the request.
-//   - [EC2-Classic] If don't specify an Availability Zone, we choose one for you.
-//   - Some instance types must be launched into a VPC. If you do not have a
-//     default VPC, or if you do not specify a subnet ID, the request fails. For more
-//     information, see Instance types available only in a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types)
-//     .
-//   - [EC2-VPC] All instances have a network interface with a primary private
-//     IPv4 address. If you don't specify this address, we choose one from the IPv4
-//     range of your subnet.
+//   - If you don't specify a subnet ID, we choose a default subnet from your
+//     default VPC for you. If you don't have a default VPC, you must specify a subnet
+//     ID in the request.
+//   - All instances have a network interface with a primary private IPv4 address.
+//     If you don't specify this address, we choose one from the IPv4 range of your
+//     subnet.
 //   - Not all instance types support IPv6 addresses. For more information, see
 //     Instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
 //     .
@@ -51,9 +46,7 @@ import (
 // information, see Key pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 // . For troubleshooting, see What to do if an instance immediately terminates (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html)
 // , and Troubleshooting connecting to your instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html)
-// . We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
-// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon EC2 User Guide.
+// .
 func (c *Client) RunInstances(ctx context.Context, params *RunInstancesInput, optFns ...func(*Options)) (*RunInstancesOutput, error) {
 	if params == nil {
 		params = &RunInstancesInput{}
@@ -207,19 +200,19 @@ type RunInstancesInput struct {
 	// in the Amazon EC2 User Guide. Default: m1.small
 	InstanceType types.InstanceType
 
-	// [EC2-VPC] The number of IPv6 addresses to associate with the primary network
-	// interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
-	// You cannot specify this option and the option to assign specific IPv6 addresses
-	// in the same request. You can specify this option if you've specified a minimum
-	// number of instances to launch. You cannot specify this option and the network
-	// interfaces option in the same request.
+	// The number of IPv6 addresses to associate with the primary network interface.
+	// Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot
+	// specify this option and the option to assign specific IPv6 addresses in the same
+	// request. You can specify this option if you've specified a minimum number of
+	// instances to launch. You cannot specify this option and the network interfaces
+	// option in the same request.
 	Ipv6AddressCount *int32
 
-	// [EC2-VPC] The IPv6 addresses from the range of the subnet to associate with the
-	// primary network interface. You cannot specify this option and the option to
-	// assign a number of IPv6 addresses in the same request. You cannot specify this
-	// option if you've specified a minimum number of instances to launch. You cannot
-	// specify this option and the network interfaces option in the same request.
+	// The IPv6 addresses from the range of the subnet to associate with the primary
+	// network interface. You cannot specify this option and the option to assign a
+	// number of IPv6 addresses in the same request. You cannot specify this option if
+	// you've specified a minimum number of instances to launch. You cannot specify
+	// this option and the network interfaces option in the same request.
 	Ipv6Addresses []types.InstanceIpv6Address
 
 	// The ID of the kernel. We recommend that you use PV-GRUB instead of kernels and
@@ -264,13 +257,13 @@ type RunInstancesInput struct {
 	// the subnet.
 	PrivateDnsNameOptions *types.PrivateDnsNameOptionsRequest
 
-	// [EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4
-	// address range of the subnet. Only one private IP address can be designated as
-	// primary. You can't specify this option if you've specified the option to
-	// designate a private IP address as the primary IP address in a network interface
-	// specification. You cannot specify this option if you're launching more than one
-	// instance in the request. You cannot specify this option and the network
-	// interfaces option in the same request.
+	// The primary IPv4 address. You must specify a value from the IPv4 address range
+	// of the subnet. Only one private IP address can be designated as primary. You
+	// can't specify this option if you've specified the option to designate a private
+	// IP address as the primary IP address in a network interface specification. You
+	// cannot specify this option if you're launching more than one instance in the
+	// request. You cannot specify this option and the network interfaces option in the
+	// same request.
 	PrivateIpAddress *string
 
 	// The ID of the RAM disk to select. Some kernels require additional drivers at
@@ -287,14 +280,13 @@ type RunInstancesInput struct {
 	// part of the network interface.
 	SecurityGroupIds []string
 
-	// [EC2-Classic, default VPC] The names of the security groups. If you specify a
-	// network interface, you must specify any security groups as part of the network
+	// [Default VPC] The names of the security groups. If you specify a network
+	// interface, you must specify any security groups as part of the network
 	// interface. Default: Amazon EC2 uses the default security group.
 	SecurityGroups []string
 
-	// [EC2-VPC] The ID of the subnet to launch the instance into. If you specify a
-	// network interface, you must specify any subnets as part of the network
-	// interface.
+	// The ID of the subnet to launch the instance into. If you specify a network
+	// interface, you must specify any subnets as part of the network interface.
 	SubnetId *string
 
 	// The tags to apply to the resources that are created during instance launch. You
@@ -324,7 +316,7 @@ type RunInstancesInput struct {
 // launch request.
 type RunInstancesOutput struct {
 
-	// [EC2-Classic only] The security groups.
+	// Not supported.
 	Groups []types.GroupIdentifier
 
 	// The instances.

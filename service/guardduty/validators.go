@@ -990,6 +990,26 @@ func (m *validateOpListThreatIntelSets) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMalwareScan struct {
+}
+
+func (*validateOpStartMalwareScan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMalwareScan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMalwareScanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMalwareScanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMonitoringMembers struct {
 }
 
@@ -1464,6 +1484,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListThreatIntelSetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListThreatIntelSets{}, middleware.After)
+}
+
+func addOpStartMalwareScanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMalwareScan{}, middleware.After)
 }
 
 func addOpStartMonitoringMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -2613,6 +2637,21 @@ func validateOpListThreatIntelSetsInput(v *ListThreatIntelSetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListThreatIntelSetsInput"}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMalwareScanInput(v *StartMalwareScanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMalwareScanInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

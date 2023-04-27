@@ -152,6 +152,8 @@ const (
 	AppInstanceTypeMlG524xlarge            AppInstanceType = "ml.g5.24xlarge"
 	AppInstanceTypeMlG548xlarge            AppInstanceType = "ml.g5.48xlarge"
 	AppInstanceTypeMlGeospatialInteractive AppInstanceType = "ml.geospatial.interactive"
+	AppInstanceTypeMlP4d24xlarge           AppInstanceType = "ml.p4d.24xlarge"
+	AppInstanceTypeMlP4de24xlarge          AppInstanceType = "ml.p4de.24xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -217,6 +219,8 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.g5.24xlarge",
 		"ml.g5.48xlarge",
 		"ml.geospatial.interactive",
+		"ml.p4d.24xlarge",
+		"ml.p4de.24xlarge",
 	}
 }
 

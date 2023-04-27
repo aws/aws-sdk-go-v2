@@ -12,12 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of journal export job descriptions for all ledgers that are
-// associated with the current Amazon Web Services account and Region. This action
-// returns a maximum of MaxResults items, and is paginated so that you can
-// retrieve all the items by calling ListJournalS3Exports multiple times. This
-// action does not return any expired export jobs. For more information, see
-// Export job expiration (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
+// Returns all journal export jobs for all ledgers that are associated with the
+// current Amazon Web Services account and Region. This action returns a maximum of
+// MaxResults items, and is paginated so that you can retrieve all the items by
+// calling ListJournalS3Exports multiple times. This action does not return any
+// expired export jobs. For more information, see Export job expiration (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
 // in the Amazon QLDB Developer Guide.
 func (c *Client) ListJournalS3Exports(ctx context.Context, params *ListJournalS3ExportsInput, optFns ...func(*Options)) (*ListJournalS3ExportsOutput, error) {
 	if params == nil {
@@ -50,8 +49,8 @@ type ListJournalS3ExportsInput struct {
 
 type ListJournalS3ExportsOutput struct {
 
-	// The array of journal export job descriptions for all ledgers that are
-	// associated with the current Amazon Web Services account and Region.
+	// The journal export jobs for all ledgers that are associated with the current
+	// Amazon Web Services account and Region.
 	JournalS3Exports []types.JournalS3ExportDescription
 
 	//   - If NextToken is empty, then the last page of results has been processed and

@@ -1,0 +1,8 @@
+{
+    "id": "670bd998-86bc-461e-8e3b-df614dc9771e",
+    "type": "feature",
+    "description": "This release adds GetManagedEndpointSessionCredentials, a new API that allows customers to generate an auth token to connect to a managed endpoint, enabling features such as self-hosted Jupyter notebooks for EMR on EKS.",
+    "modules": [
+        "service/emrcontainers"
+    ]
+}

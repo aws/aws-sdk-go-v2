@@ -38,8 +38,8 @@ type DescribeInstanceTypesInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
-	//   - auto-recovery-supported - Indicates whether auto recovery is supported ( true
-	//   | false ).
+	//   - auto-recovery-supported - Indicates whether Amazon CloudWatch action based
+	//   recovery is supported ( true | false ).
 	//   - bare-metal - Indicates whether it is a bare metal instance type ( true |
 	//   false ).
 	//   - burstable-performance-supported - Indicates whether it is a burstable

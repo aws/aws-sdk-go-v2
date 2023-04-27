@@ -1992,6 +1992,9 @@ type ConversionTask struct {
 // The CPU options for the instance.
 type CpuOptions struct {
 
+	// Indicates whether the instance is enabled for AMD SEV-SNP.
+	AmdSevSnp AmdSevSnpSpecification
+
 	// The number of CPU cores for the instance.
 	CoreCount *int32
 
@@ -2004,6 +2007,10 @@ type CpuOptions struct {
 // The CPU options for the instance. Both the core count and threads per core must
 // be specified in the request.
 type CpuOptionsRequest struct {
+
+	// Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is
+	// supported with M6a, R6a, and C6a instance types only.
+	AmdSevSnp AmdSevSnpSpecification
 
 	// The number of CPU cores for the instance.
 	CoreCount *int32
@@ -5411,7 +5418,7 @@ type Instance struct {
 	// The monitoring for the instance.
 	Monitoring *Monitoring
 
-	// [EC2-VPC] The network interfaces for the instance.
+	// The network interfaces for the instance.
 	NetworkInterfaces []InstanceNetworkInterface
 
 	// The Amazon Resource Name (ARN) of the Outpost.
@@ -5428,13 +5435,13 @@ type Instance struct {
 	// in the Amazon EC2 User Guide.
 	PlatformDetails *string
 
-	// (IPv4 only) The private DNS hostname name assigned to the instance. This DNS
+	// [IPv4 only] The private DNS hostname name assigned to the instance. This DNS
 	// hostname can only be used inside the Amazon EC2 network. This name is not
-	// available until the instance enters the running state. [EC2-VPC] The
-	// Amazon-provided DNS server resolves Amazon-provided private DNS hostnames if
-	// you've enabled DNS resolution and DNS hostnames in your VPC. If you are not
-	// using the Amazon-provided DNS server in your VPC, your custom domain name
-	// servers must resolve the hostname as appropriate.
+	// available until the instance enters the running state. The Amazon-provided DNS
+	// server resolves Amazon-provided private DNS hostnames if you've enabled DNS
+	// resolution and DNS hostnames in your VPC. If you are not using the
+	// Amazon-provided DNS server in your VPC, your custom domain name servers must
+	// resolve the hostname as appropriate.
 	PrivateDnsName *string
 
 	// The options for the instance hostname.
@@ -5446,9 +5453,9 @@ type Instance struct {
 	// The product codes attached to this instance, if applicable.
 	ProductCodes []ProductCode
 
-	// (IPv4 only) The public DNS name assigned to the instance. This name is not
-	// available until the instance enters the running state. For EC2-VPC, this name
-	// is only available if you've enabled DNS hostnames for your VPC.
+	// [IPv4 only] The public DNS name assigned to the instance. This name is not
+	// available until the instance enters the running state. This name is only
+	// available if you've enabled DNS hostnames for your VPC.
 	PublicDnsName *string
 
 	// The public IPv4 address, or the Carrier IP address assigned to the instance, if
@@ -5488,7 +5495,7 @@ type Instance struct {
 	// The reason for the most recent state transition. This might be an empty string.
 	StateTransitionReason *string
 
-	// [EC2-VPC] The ID of the subnet in which the instance is running.
+	// The ID of the subnet in which the instance is running.
 	SubnetId *string
 
 	// Any tags assigned to the instance.
@@ -5510,7 +5517,7 @@ type Instance struct {
 	// The virtualization type of the instance.
 	VirtualizationType VirtualizationType
 
-	// [EC2-VPC] The ID of the VPC in which the instance is running.
+	// The ID of the VPC in which the instance is running.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -6757,7 +6764,7 @@ type InstanceTagNotificationAttribute struct {
 // Describes the instance type.
 type InstanceTypeInfo struct {
 
-	// Indicates whether auto recovery is supported.
+	// Indicates whether Amazon CloudWatch action based recovery is supported.
 	AutoRecoverySupported *bool
 
 	// Indicates whether the instance is a bare metal instance type.
@@ -7858,7 +7865,7 @@ type LaunchSpecification struct {
 	// Deprecated.
 	AddressingType *string
 
-	// One or more block device mapping entries.
+	// The block device mapping entries.
 	BlockDeviceMappings []BlockDeviceMapping
 
 	// Indicates whether the instance is optimized for EBS I/O. This optimization
@@ -7886,8 +7893,8 @@ type LaunchSpecification struct {
 	// Describes the monitoring of an instance.
 	Monitoring *RunInstancesMonitoringEnabled
 
-	// One or more network interfaces. If you specify a network interface, you must
-	// specify subnet IDs and security group IDs using the network interface.
+	// The network interfaces. If you specify a network interface, you must specify
+	// subnet IDs and security group IDs using the network interface.
 	NetworkInterfaces []InstanceNetworkInterfaceSpecification
 
 	// The placement information for the instance.
@@ -7896,9 +7903,7 @@ type LaunchSpecification struct {
 	// The ID of the RAM disk.
 	RamdiskId *string
 
-	// One or more security groups. When requesting instances in a VPC, you must
-	// specify the IDs of the security groups. When requesting instances in
-	// EC2-Classic, you can specify the names or the IDs of the security groups.
+	// The IDs of the security groups.
 	SecurityGroups []GroupIdentifier
 
 	// The ID of the subnet in which to launch the instance.
@@ -8047,6 +8052,9 @@ type LaunchTemplateConfig struct {
 // The CPU options for the instance.
 type LaunchTemplateCpuOptions struct {
 
+	// Indicates whether the instance is enabled for AMD SEV-SNP.
+	AmdSevSnp AmdSevSnpSpecification
+
 	// The number of CPU cores for the instance.
 	CoreCount *int32
 
@@ -8059,6 +8067,10 @@ type LaunchTemplateCpuOptions struct {
 // The CPU options for the instance. Both the core count and threads per core must
 // be specified in the request.
 type LaunchTemplateCpuOptionsRequest struct {
+
+	// Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is
+	// supported with M6a, R6a, and C6a instance types only.
+	AmdSevSnp AmdSevSnpSpecification
 
 	// The number of CPU cores for the instance.
 	CoreCount *int32
@@ -8627,8 +8639,8 @@ type LaunchTemplatePlacement struct {
 	// Reserved for future use.
 	SpreadDomain *string
 
-	// The tenancy of the instance (if the instance is running in a VPC). An instance
-	// with a tenancy of dedicated runs on single-tenant hardware.
+	// The tenancy of the instance. An instance with a tenancy of dedicated runs on
+	// single-tenant hardware.
 	Tenancy Tenancy
 
 	noSmithyDocumentSerde
@@ -8664,8 +8676,8 @@ type LaunchTemplatePlacementRequest struct {
 	// Reserved for future use.
 	SpreadDomain *string
 
-	// The tenancy of the instance (if the instance is running in a VPC). An instance
-	// with a tenancy of dedicated runs on single-tenant hardware.
+	// The tenancy of the instance. An instance with a tenancy of dedicated runs on
+	// single-tenant hardware.
 	Tenancy Tenancy
 
 	noSmithyDocumentSerde
@@ -10810,9 +10822,8 @@ type Placement struct {
 	// Reserved for future use.
 	SpreadDomain *string
 
-	// The tenancy of the instance (if the instance is running in a VPC). An instance
-	// with a tenancy of dedicated runs on single-tenant hardware. This parameter is
-	// not supported for CreateFleet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet)
+	// The tenancy of the instance. An instance with a tenancy of dedicated runs on
+	// single-tenant hardware. This parameter is not supported for CreateFleet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet)
 	// . The host tenancy is not supported for ImportInstance (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html)
 	// or for T3 instances that are configured for the unlimited CPU credit option.
 	Tenancy Tenancy
@@ -11116,6 +11127,10 @@ type ProcessorInfo struct {
 
 	// The architectures supported by the instance type.
 	SupportedArchitectures []ArchitectureType
+
+	// Indicates whether the instance type supports AMD SEV-SNP. If the request
+	// returns amd-sev-snp , AMD SEV-SNP is supported. Otherwise, it is not supported.
+	SupportedFeatures []SupportedAdditionalProcessorFeature
 
 	// The speed of the processor, in GHz.
 	SustainedClockSpeedInGhz *float64
@@ -11515,7 +11530,11 @@ type RequestLaunchTemplateData struct {
 	//   - resolve:ssm:parameter-name
 	//   - resolve:ssm:parameter-name:version-number
 	//   - resolve:ssm:parameter-name:label
-	// For more information, see Use a Systems Manager parameter to find an AMI (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI)
+	//   - resolve:ssm:public-parameter
+	// Currently, EC2 Fleet and Spot Fleet do not support specifying a Systems Manager
+	// parameter. If the launch template will be used by an EC2 Fleet or Spot Fleet,
+	// you must specify the AMI ID. For more information, see Use a Systems Manager
+	// parameter instead of an AMI ID (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#use-an-ssm-parameter-instead-of-an-ami-id)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	ImageId *string
 
@@ -11621,8 +11640,8 @@ type RequestSpotLaunchSpecification struct {
 	// Deprecated.
 	AddressingType *string
 
-	// One or more block device mapping entries. You can't specify both a snapshot ID
-	// and an encryption value. This is because only blank volumes can be encrypted on
+	// The block device mapping entries. You can't specify both a snapshot ID and an
+	// encryption value. This is because only blank volumes can be encrypted on
 	// creation. If a snapshot is the basis for a volume, it is not blank and its
 	// encryption status is used for the volume encryption status.
 	BlockDeviceMappings []BlockDeviceMapping
@@ -11653,8 +11672,8 @@ type RequestSpotLaunchSpecification struct {
 	// Default: Disabled
 	Monitoring *RunInstancesMonitoringEnabled
 
-	// One or more network interfaces. If you specify a network interface, you must
-	// specify subnet IDs and security group IDs using the network interface.
+	// The network interfaces. If you specify a network interface, you must specify
+	// subnet IDs and security group IDs using the network interface.
 	NetworkInterfaces []InstanceNetworkInterfaceSpecification
 
 	// The placement information for the instance.
@@ -11663,12 +11682,10 @@ type RequestSpotLaunchSpecification struct {
 	// The ID of the RAM disk.
 	RamdiskId *string
 
-	// One or more security group IDs.
+	// The IDs of the security groups.
 	SecurityGroupIds []string
 
-	// One or more security groups. When requesting instances in a VPC, you must
-	// specify the IDs of the security groups. When requesting instances in
-	// EC2-Classic, you can specify the names or the IDs of the security groups.
+	// Not supported.
 	SecurityGroups []string
 
 	// The ID of the subnet in which to launch the instance.
@@ -11686,7 +11703,7 @@ type RequestSpotLaunchSpecification struct {
 // launch request.
 type Reservation struct {
 
-	// [EC2-Classic only] The security groups.
+	// Not supported.
 	Groups []GroupIdentifier
 
 	// The instances.
@@ -11868,8 +11885,7 @@ type ReservedInstancesConfiguration struct {
 	// The instance type for the modified Reserved Instances.
 	InstanceType InstanceType
 
-	// The network platform of the modified Reserved Instances, which is either
-	// EC2-Classic or EC2-VPC.
+	// The network platform of the modified Reserved Instances.
 	Platform *string
 
 	// Whether the Reserved Instance is applied to instances in a Region or instances
@@ -12430,7 +12446,7 @@ type ScheduledInstance struct {
 	// The instance type.
 	InstanceType *string
 
-	// The network platform ( EC2-Classic or EC2-VPC ).
+	// The network platform.
 	NetworkPlatform *string
 
 	// The time for the next schedule to start.
@@ -12487,7 +12503,7 @@ type ScheduledInstanceAvailability struct {
 	// The minimum term. The only possible value is 365 days.
 	MinTermDurationInDays *int32
 
-	// The network platform ( EC2-Classic or EC2-VPC ).
+	// The network platform.
 	NetworkPlatform *string
 
 	// The platform ( Linux/UNIX or Windows ).
@@ -13509,9 +13525,7 @@ type SpotFleetLaunchSpecification struct {
 	// Resource Center and search for the kernel ID.
 	RamdiskId *string
 
-	// One or more security groups. When requesting instances in a VPC, you must
-	// specify the IDs of the security groups. When requesting instances in
-	// EC2-Classic, you can specify the names or the IDs of the security groups.
+	// The security groups.
 	SecurityGroups []GroupIdentifier
 
 	// The maximum price per unit hour that you are willing to pay for a Spot

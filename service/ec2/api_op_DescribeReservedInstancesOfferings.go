@@ -60,16 +60,11 @@ type DescribeReservedInstancesOfferingsInput struct {
 	//   offerings. When this filter is not used, which is the default behavior, all
 	//   offerings from both Amazon Web Services and the Reserved Instance Marketplace
 	//   are listed.
-	//   - product-description - The Reserved Instance product platform description.
-	//   Instances that include (Amazon VPC) in the product platform description will
-	//   only be displayed to EC2-Classic account holders and are for use with Amazon
-	//   VPC. ( Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux | SUSE Linux (Amazon
-	//   VPC) | Red Hat Enterprise Linux | Red Hat Enterprise Linux (Amazon VPC) | Red
-	//   Hat Enterprise Linux with HA (Amazon VPC) | Windows | Windows (Amazon VPC) |
-	//   Windows with SQL Server Standard | Windows with SQL Server Standard (Amazon
-	//   VPC) | Windows with SQL Server Web | Windows with SQL Server Web (Amazon VPC)
-	//   | Windows with SQL Server Enterprise | Windows with SQL Server Enterprise
-	//   (Amazon VPC) )
+	//   - product-description - The Reserved Instance product platform description (
+	//   Linux/UNIX | Linux with SQL Server Standard | Linux with SQL Server Web |
+	//   Linux with SQL Server Enterprise | SUSE Linux | Red Hat Enterprise Linux |
+	//   Red Hat Enterprise Linux with HA | Windows | Windows with SQL Server Standard
+	//   | Windows with SQL Server Web | Windows with SQL Server Enterprise ).
 	//   - reserved-instances-offering-id - The Reserved Instances offering ID.
 	//   - scope - The scope of the Reserved Instance ( Availability Zone or Region ).
 	//   - usage-price - The usage price of the Reserved Instance, per hour (for

@@ -55,7 +55,7 @@ type DescribeSpotInstanceRequestsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - availability-zone-group - The Availability Zone group.
 	//   - create-time - The time stamp when the Spot Instance request was created.
 	//   - fault-code - The fault code related to the request.
@@ -132,7 +132,7 @@ type DescribeSpotInstanceRequestsInput struct {
 	// the end of the items returned by the previous request.
 	NextToken *string
 
-	// One or more Spot Instance request IDs.
+	// The IDs of the Spot Instance requests.
 	SpotInstanceRequestIds []string
 
 	noSmithyDocumentSerde
@@ -145,7 +145,7 @@ type DescribeSpotInstanceRequestsOutput struct {
 	// value is null when there are no more items to return.
 	NextToken *string
 
-	// One or more Spot Instance requests.
+	// The Spot Instance requests.
 	SpotInstanceRequests []types.SpotInstanceRequest
 
 	// Metadata pertaining to the operation's result.

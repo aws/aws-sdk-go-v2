@@ -12,7 +12,7 @@ import (
 )
 
 // Lists all resource tags associated with an OpenSearch Ingestion pipeline. For
-// more information, see Tagging OpenSearch Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html)
+// more information, see Tagging Amazon OpenSearch Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html)
 // .
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

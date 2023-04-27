@@ -12,8 +12,8 @@ import (
 )
 
 // Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to
-// creation. For more information, see Creating and managing OpenSearch Ingestion
-// pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html)
+// creation. For more information, see Creating Amazon OpenSearch Ingestion
+// pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html)
 // .
 func (c *Client) ValidatePipeline(ctx context.Context, params *ValidatePipelineInput, optFns ...func(*Options)) (*ValidatePipelineOutput, error) {
 	if params == nil {

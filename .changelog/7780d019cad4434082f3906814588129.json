@@ -1,0 +1,8 @@
+{
+    "id": "7780d019-cad4-4340-82f3-906814588129",
+    "type": "feature",
+    "description": "AWS IoT Core Device Advisor now supports MQTT over WebSocket. With this update, customers can run all three test suites of AWS IoT Core Device Advisor - qualification, custom, and long duration tests - using Signature Version 4 for MQTT over WebSocket.",
+    "modules": [
+        "service/iotdeviceadvisor"
+    ]
+}

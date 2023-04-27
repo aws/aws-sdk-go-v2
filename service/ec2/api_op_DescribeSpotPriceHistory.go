@@ -50,7 +50,7 @@ type DescribeSpotPriceHistoryInput struct {
 	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	EndTime *time.Time
 
-	// One or more filters.
+	// The filters.
 	//   - availability-zone - The Availability Zone for which prices should be
 	//   returned.
 	//   - instance-type - The type of instance (for example, m3.medium ).

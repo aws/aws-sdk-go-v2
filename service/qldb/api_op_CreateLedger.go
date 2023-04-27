@@ -60,11 +60,11 @@ type CreateLedgerInput struct {
 	// This member is required.
 	PermissionsMode types.PermissionsMode
 
-	// The flag that prevents a ledger from being deleted by any user. If not provided
-	// on ledger creation, this feature is enabled ( true ) by default. If deletion
-	// protection is enabled, you must first disable it before you can delete the
-	// ledger. You can disable it by calling the UpdateLedger operation to set the
-	// flag to false .
+	// Specifies whether the ledger is protected from being deleted by any user. If
+	// not defined during ledger creation, this feature is enabled ( true ) by default.
+	// If deletion protection is enabled, you must first disable it before you can
+	// delete the ledger. You can disable it by calling the UpdateLedger operation to
+	// set this parameter to false .
 	DeletionProtection *bool
 
 	// The key in Key Management Service (KMS) to use for encryption of data at rest
@@ -74,9 +74,10 @@ type CreateLedgerInput struct {
 	//   - AWS_OWNED_KMS_KEY : Use an KMS key that is owned and managed by Amazon Web
 	//   Services on your behalf.
 	//   - Undefined: By default, use an Amazon Web Services owned KMS key.
-	//   - A valid symmetric customer managed KMS key: Use the specified KMS key in
-	//   your account that you create, own, and manage. Amazon QLDB does not support
-	//   asymmetric keys. For more information, see Using symmetric and asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	//   - A valid symmetric customer managed KMS key: Use the specified symmetric
+	//   encryption KMS key in your account that you create, own, and manage. Amazon QLDB
+	//   does not support asymmetric keys. For more information, see Using symmetric
+	//   and asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	//   in the Key Management Service Developer Guide.
 	// To specify a customer managed KMS key, you can use its key ID, Amazon Resource
 	// Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with
@@ -108,11 +109,11 @@ type CreateLedgerOutput struct {
 	// UTC.)
 	CreationDateTime *time.Time
 
-	// The flag that prevents a ledger from being deleted by any user. If not provided
-	// on ledger creation, this feature is enabled ( true ) by default. If deletion
-	// protection is enabled, you must first disable it before you can delete the
-	// ledger. You can disable it by calling the UpdateLedger operation to set the
-	// flag to false .
+	// Specifies whether the ledger is protected from being deleted by any user. If
+	// not defined during ledger creation, this feature is enabled ( true ) by default.
+	// If deletion protection is enabled, you must first disable it before you can
+	// delete the ledger. You can disable it by calling the UpdateLedger operation to
+	// set this parameter to false .
 	DeletionProtection *bool
 
 	// The ARN of the customer managed KMS key that the ledger uses for encryption at

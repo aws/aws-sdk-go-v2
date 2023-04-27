@@ -61,6 +61,18 @@ type GetBootstrapBrokersOutput struct {
 	// A string containing one or more DNS names (or IP) and TLS port pairs.
 	BootstrapBrokerStringTls *string
 
+	// A string containing one or more DNS names (or IP) and SASL/IAM port pairs for
+	// VPC connectivity.
+	BootstrapBrokerStringVpcConnectivitySaslIam *string
+
+	// A string containing one or more DNS names (or IP) and SASL/SCRAM port pairs for
+	// VPC connectivity.
+	BootstrapBrokerStringVpcConnectivitySaslScram *string
+
+	// A string containing one or more DNS names (or IP) and TLS port pairs for VPC
+	// connectivity.
+	BootstrapBrokerStringVpcConnectivityTls *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -1,0 +1,8 @@
+{
+    "id": "8b89ea0d-8fdb-4b0a-afeb-c4620ffa8038",
+    "type": "feature",
+    "description": "Added ml.p4d.24xlarge and ml.p4de.24xlarge as supported instances for SageMaker Studio",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

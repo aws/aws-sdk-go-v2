@@ -1,0 +1,8 @@
+{
+    "id": "f283acc7-ca69-4632-9312-b747f78fe1a0",
+    "type": "feature",
+    "description": "Added API support to initiate on-demand malware scan on specific resources.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

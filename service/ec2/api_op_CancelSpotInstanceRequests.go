@@ -31,7 +31,7 @@ func (c *Client) CancelSpotInstanceRequests(ctx context.Context, params *CancelS
 // Contains the parameters for CancelSpotInstanceRequests.
 type CancelSpotInstanceRequestsInput struct {
 
-	// One or more Spot Instance request IDs.
+	// The IDs of the Spot Instance requests.
 	//
 	// This member is required.
 	SpotInstanceRequestIds []string
@@ -48,7 +48,7 @@ type CancelSpotInstanceRequestsInput struct {
 // Contains the output of CancelSpotInstanceRequests.
 type CancelSpotInstanceRequestsOutput struct {
 
-	// One or more Spot Instance requests.
+	// The Spot Instance requests.
 	CancelledSpotInstanceRequests []types.CancelledSpotInstanceRequest
 
 	// Metadata pertaining to the operation's result.

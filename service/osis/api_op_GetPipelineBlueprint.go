@@ -13,7 +13,8 @@ import (
 
 // Retrieves information about a specific blueprint for OpenSearch Ingestion.
 // Blueprints are templates for the configuration needed for a CreatePipeline
-// request.
+// request. For more information, see Using blueprints to create a pipeline (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint)
+// .
 func (c *Client) GetPipelineBlueprint(ctx context.Context, params *GetPipelineBlueprintInput, optFns ...func(*Options)) (*GetPipelineBlueprintOutput, error) {
 	if params == nil {
 		params = &GetPipelineBlueprintInput{}

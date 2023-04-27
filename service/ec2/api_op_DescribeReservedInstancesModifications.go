@@ -49,8 +49,6 @@ type DescribeReservedInstancesModificationsInput struct {
 	//   Reserved Instances.
 	//   - modification-result.target-configuration.instance-type - The instance type
 	//   of the new Reserved Instances.
-	//   - modification-result.target-configuration.platform - The network platform of
-	//   the new Reserved Instances ( EC2-Classic | EC2-VPC ).
 	//   - reserved-instances-id - The ID of the Reserved Instances modified.
 	//   - reserved-instances-modification-id - The ID of the modification request.
 	//   - status - The status of the Reserved Instances modification request (

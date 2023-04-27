@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes an OpenSearch Ingestion pipeline. For more information, see Deleting
-// pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#delete-pipeline)
+// Amazon OpenSearch Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html)
 // .
 func (c *Client) DeletePipeline(ctx context.Context, params *DeletePipelineInput, optFns ...func(*Options)) (*DeletePipelineOutput, error) {
 	if params == nil {

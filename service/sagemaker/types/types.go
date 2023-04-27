@@ -8653,7 +8653,8 @@ type ModelRegisterSettings struct {
 
 	// The Amazon Resource Name (ARN) of the SageMaker model registry account.
 	// Required only to register model versions created by a different SageMaker Canvas
-	// AWS account than the AWS account in which SageMaker model registry is set up.
+	// Amazon Web Services account than the Amazon Web Services account in which
+	// SageMaker model registry is set up.
 	CrossAccountModelRegisterRoleArn *string
 
 	// Describes whether the integration to the model registry is enabled or disabled

@@ -21,10 +21,7 @@ import (
 // specify a purchase time. If you do not specify a purchase time, the default is
 // the current time. For more information, see Reserved Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html)
 // and Reserved Instance Marketplace (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html)
-// in the Amazon EC2 User Guide. We are retiring EC2-Classic. We recommend that you
-// migrate from EC2-Classic to a VPC. For more information, see Migrate from
-// EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 func (c *Client) PurchaseReservedInstancesOffering(ctx context.Context, params *PurchaseReservedInstancesOfferingInput, optFns ...func(*Options)) (*PurchaseReservedInstancesOfferingOutput, error) {
 	if params == nil {
 		params = &PurchaseReservedInstancesOfferingInput{}

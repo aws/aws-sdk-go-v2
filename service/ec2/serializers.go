@@ -38665,6 +38665,11 @@ func awsEc2query_serializeDocumentCpuOptionsRequest(v *types.CpuOptionsRequest, 
 	object := value.Object()
 	_ = object
 
+	if len(v.AmdSevSnp) > 0 {
+		objectKey := object.Key("AmdSevSnp")
+		objectKey.String(string(v.AmdSevSnp))
+	}
+
 	if v.CoreCount != nil {
 		objectKey := object.Key("CoreCount")
 		objectKey.Integer(*v.CoreCount)
@@ -41401,6 +41406,11 @@ func awsEc2query_serializeDocumentLaunchTemplateConfigList(v []types.LaunchTempl
 func awsEc2query_serializeDocumentLaunchTemplateCpuOptionsRequest(v *types.LaunchTemplateCpuOptionsRequest, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if len(v.AmdSevSnp) > 0 {
+		objectKey := object.Key("AmdSevSnp")
+		objectKey.String(string(v.AmdSevSnp))
+	}
 
 	if v.CoreCount != nil {
 		objectKey := object.Key("CoreCount")

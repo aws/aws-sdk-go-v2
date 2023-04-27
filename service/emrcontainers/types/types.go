@@ -106,6 +106,24 @@ type ContainerProvider struct {
 	noSmithyDocumentSerde
 }
 
+// The structure containing the session token being returned.
+//
+// The following types satisfy this interface:
+//
+//	CredentialsMemberToken
+type Credentials interface {
+	isCredentials()
+}
+
+// The actual session token being returned.
+type CredentialsMemberToken struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialsMemberToken) isCredentials() {}
+
 // The information about the Amazon EKS cluster.
 type EksInfo struct {
 
@@ -514,3 +532,4 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isContainerInfo() {}
+func (*UnknownUnionMember) isCredentials()   {}

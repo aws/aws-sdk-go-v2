@@ -19,6 +19,7 @@
         "api_op_DescribeJobTemplate.go",
         "api_op_DescribeManagedEndpoint.go",
         "api_op_DescribeVirtualCluster.go",
+        "api_op_GetManagedEndpointSessionCredentials.go",
         "api_op_ListJobRuns.go",
         "api_op_ListJobTemplates.go",
         "api_op_ListManagedEndpoints.go",

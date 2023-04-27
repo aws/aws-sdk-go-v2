@@ -272,6 +272,24 @@ func (AllowsMultipleInstanceTypes) Values() []AllowsMultipleInstanceTypes {
 	}
 }
 
+type AmdSevSnpSpecification string
+
+// Enum values for AmdSevSnpSpecification
+const (
+	AmdSevSnpSpecificationEnabled  AmdSevSnpSpecification = "enabled"
+	AmdSevSnpSpecificationDisabled AmdSevSnpSpecification = "disabled"
+)
+
+// Values returns all known values for AmdSevSnpSpecification. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AmdSevSnpSpecification) Values() []AmdSevSnpSpecification {
+	return []AmdSevSnpSpecification{
+		"enabled",
+		"disabled",
+	}
+}
+
 type AnalysisStatus string
 
 // Enum values for AnalysisStatus
@@ -6617,6 +6635,23 @@ func (SummaryStatus) Values() []SummaryStatus {
 		"insufficient-data",
 		"not-applicable",
 		"initializing",
+	}
+}
+
+type SupportedAdditionalProcessorFeature string
+
+// Enum values for SupportedAdditionalProcessorFeature
+const (
+	SupportedAdditionalProcessorFeatureAmdSevSnp SupportedAdditionalProcessorFeature = "amd-sev-snp"
+)
+
+// Values returns all known values for SupportedAdditionalProcessorFeature. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SupportedAdditionalProcessorFeature) Values() []SupportedAdditionalProcessorFeature {
+	return []SupportedAdditionalProcessorFeature{
+		"amd-sev-snp",
 	}
 }
 

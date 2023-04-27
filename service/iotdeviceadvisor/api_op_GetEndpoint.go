@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -28,8 +29,14 @@ func (c *Client) GetEndpoint(ctx context.Context, params *GetEndpointInput, optF
 
 type GetEndpointInput struct {
 
+	// The authentication method used during the device connection.
+	AuthenticationMethod types.AuthenticationMethod
+
 	// The certificate ARN of the device. This is an optional parameter.
 	CertificateArn *string
+
+	// The device role ARN of the device. This is an optional parameter.
+	DeviceRoleArn *string
 
 	// The thing ARN of the device. This is an optional parameter.
 	ThingArn *string

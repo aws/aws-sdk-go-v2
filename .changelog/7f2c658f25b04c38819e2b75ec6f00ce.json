@@ -1,0 +1,8 @@
+{
+    "id": "7f2c658f-25b0-4c38-819e-2b75ec6f00ce",
+    "type": "feature",
+    "description": "Enabled Pagination for List Entities and List Change Sets operations",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

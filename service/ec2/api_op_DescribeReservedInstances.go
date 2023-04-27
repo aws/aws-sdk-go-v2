@@ -49,16 +49,11 @@ type DescribeReservedInstancesInput struct {
 	//   9800.0).
 	//   - instance-type - The instance type that is covered by the reservation.
 	//   - scope - The scope of the Reserved Instance ( Region or Availability Zone ).
-	//   - product-description - The Reserved Instance product platform description.
-	//   Instances that include (Amazon VPC) in the product platform description will
-	//   only be displayed to EC2-Classic account holders and are for use with Amazon VPC
-	//   ( Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux | SUSE Linux (Amazon VPC)
-	//   | Red Hat Enterprise Linux | Red Hat Enterprise Linux (Amazon VPC) | Red Hat
-	//   Enterprise Linux with HA (Amazon VPC) | Windows | Windows (Amazon VPC) |
-	//   Windows with SQL Server Standard | Windows with SQL Server Standard (Amazon
-	//   VPC) | Windows with SQL Server Web | Windows with SQL Server Web (Amazon VPC)
-	//   | Windows with SQL Server Enterprise | Windows with SQL Server Enterprise
-	//   (Amazon VPC) ).
+	//   - product-description - The Reserved Instance product platform description (
+	//   Linux/UNIX | Linux with SQL Server Standard | Linux with SQL Server Web |
+	//   Linux with SQL Server Enterprise | SUSE Linux | Red Hat Enterprise Linux |
+	//   Red Hat Enterprise Linux with HA | Windows | Windows with SQL Server Standard
+	//   | Windows with SQL Server Web | Windows with SQL Server Enterprise ).
 	//   - reserved-instances-id - The ID of the Reserved Instance.
 	//   - start - The time at which the Reserved Instance purchase request was placed
 	//   (for example, 2014-08-07T11:54:42.000Z).

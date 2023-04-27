@@ -18,9 +18,6 @@ import (
 // the RequestSpotInstances API because it is a legacy API with no planned
 // investment. For options for requesting Spot Instances, see Which is the best
 // Spot request method to use? (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use)
-// in the Amazon EC2 User Guide for Linux Instances. We are retiring EC2-Classic.
-// We recommend that you migrate from EC2-Classic to a VPC. For more information,
-// see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
 // in the Amazon EC2 User Guide for Linux Instances.
 func (c *Client) RequestSpotInstances(ctx context.Context, params *RequestSpotInstancesInput, optFns ...func(*Options)) (*RequestSpotInstancesOutput, error) {
 	if params == nil {
@@ -128,7 +125,7 @@ type RequestSpotInstancesInput struct {
 // Contains the output of RequestSpotInstances.
 type RequestSpotInstancesOutput struct {
 
-	// One or more Spot Instance requests.
+	// The Spot Instance requests.
 	SpotInstanceRequests []types.SpotInstanceRequest
 
 	// Metadata pertaining to the operation's result.

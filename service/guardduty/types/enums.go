@@ -136,6 +136,7 @@ const (
 	CriterionKeyGuarddutyFindingId CriterionKey = "GUARDDUTY_FINDING_ID"
 	CriterionKeyScanStartTime      CriterionKey = "SCAN_START_TIME"
 	CriterionKeyScanStatus         CriterionKey = "SCAN_STATUS"
+	CriterionKeyScanType           CriterionKey = "SCAN_TYPE"
 )
 
 // Values returns all known values for CriterionKey. Note that this can be
@@ -149,6 +150,7 @@ func (CriterionKey) Values() []CriterionKey {
 		"GUARDDUTY_FINDING_ID",
 		"SCAN_START_TIME",
 		"SCAN_STATUS",
+		"SCAN_TYPE",
 	}
 }
 
@@ -657,6 +659,7 @@ const (
 	ScanStatusRunning   ScanStatus = "RUNNING"
 	ScanStatusCompleted ScanStatus = "COMPLETED"
 	ScanStatusFailed    ScanStatus = "FAILED"
+	ScanStatusSkipped   ScanStatus = "SKIPPED"
 )
 
 // Values returns all known values for ScanStatus. Note that this can be expanded
@@ -667,6 +670,25 @@ func (ScanStatus) Values() []ScanStatus {
 		"RUNNING",
 		"COMPLETED",
 		"FAILED",
+		"SKIPPED",
+	}
+}
+
+type ScanType string
+
+// Enum values for ScanType
+const (
+	ScanTypeGuarddutyInitiated ScanType = "GUARDDUTY_INITIATED"
+	ScanTypeOnDemand           ScanType = "ON_DEMAND"
+)
+
+// Values returns all known values for ScanType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ScanType) Values() []ScanType {
+	return []ScanType{
+		"GUARDDUTY_INITIATED",
+		"ON_DEMAND",
 	}
 }
 

@@ -7,13 +7,17 @@ import (
 	"time"
 )
 
-// Information of a test device. A thing ARN or a certificate ARN is required.
+// Information of a test device. A thing ARN, certificate ARN or device role ARN
+// is required.
 type DeviceUnderTest struct {
 
-	// Lists devices certificate ARN.
+	// Lists device's certificate ARN.
 	CertificateArn *string
 
-	// Lists devices thing ARN.
+	// Lists device's role ARN.
+	DeviceRoleArn *string
+
+	// Lists device's thing ARN.
 	ThingArn *string
 
 	noSmithyDocumentSerde

@@ -2,12 +2,32 @@
 
 package types
 
+type AuthenticationMethod string
+
+// Enum values for AuthenticationMethod
+const (
+	AuthenticationMethodX509ClientCertificate AuthenticationMethod = "X509ClientCertificate"
+	AuthenticationMethodSignatureVersion4     AuthenticationMethod = "SignatureVersion4"
+)
+
+// Values returns all known values for AuthenticationMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationMethod) Values() []AuthenticationMethod {
+	return []AuthenticationMethod{
+		"X509ClientCertificate",
+		"SignatureVersion4",
+	}
+}
+
 type Protocol string
 
 // Enum values for Protocol
 const (
-	ProtocolMqttV311 Protocol = "MqttV3_1_1"
-	ProtocolMqttV5   Protocol = "MqttV5"
+	ProtocolMqttV311              Protocol = "MqttV3_1_1"
+	ProtocolMqttV5                Protocol = "MqttV5"
+	ProtocolMqttV311OverWebSocket Protocol = "MqttV3_1_1_OverWebSocket"
+	ProtocolMqttV5OverWebSocket   Protocol = "MqttV5_OverWebSocket"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -17,6 +37,8 @@ func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"MqttV3_1_1",
 		"MqttV5",
+		"MqttV3_1_1_OverWebSocket",
+		"MqttV5_OverWebSocket",
 	}
 }
 

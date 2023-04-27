@@ -814,6 +814,116 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualClusterInput(v *Describe
 	return nil
 }
 
+type awsRestjson1_serializeOpGetManagedEndpointSessionCredentials struct {
+}
+
+func (*awsRestjson1_serializeOpGetManagedEndpointSessionCredentials) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetManagedEndpointSessionCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetManagedEndpointSessionCredentialsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/virtualclusters/{virtualClusterIdentifier}/endpoints/{endpointIdentifier}/credentials")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetManagedEndpointSessionCredentialsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetManagedEndpointSessionCredentialsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetManagedEndpointSessionCredentialsInput(v *GetManagedEndpointSessionCredentialsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EndpointIdentifier == nil || len(*v.EndpointIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member endpointIdentifier must not be empty")}
+	}
+	if v.EndpointIdentifier != nil {
+		if err := encoder.SetURI("endpointIdentifier").String(*v.EndpointIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.VirtualClusterIdentifier == nil || len(*v.VirtualClusterIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualClusterIdentifier must not be empty")}
+	}
+	if v.VirtualClusterIdentifier != nil {
+		if err := encoder.SetURI("virtualClusterIdentifier").String(*v.VirtualClusterIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetManagedEndpointSessionCredentialsInput(v *GetManagedEndpointSessionCredentialsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.CredentialType != nil {
+		ok := object.Key("credentialType")
+		ok.String(*v.CredentialType)
+	}
+
+	if v.DurationInSeconds != nil {
+		ok := object.Key("durationInSeconds")
+		ok.Integer(*v.DurationInSeconds)
+	}
+
+	if v.ExecutionRoleArn != nil {
+		ok := object.Key("executionRoleArn")
+		ok.String(*v.ExecutionRoleArn)
+	}
+
+	if v.LogContext != nil {
+		ok := object.Key("logContext")
+		ok.String(*v.LogContext)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListJobRuns struct {
 }
 

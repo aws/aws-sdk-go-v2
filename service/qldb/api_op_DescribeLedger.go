@@ -49,11 +49,11 @@ type DescribeLedgerOutput struct {
 	// UTC.)
 	CreationDateTime *time.Time
 
-	// The flag that prevents a ledger from being deleted by any user. If not provided
-	// on ledger creation, this feature is enabled ( true ) by default. If deletion
-	// protection is enabled, you must first disable it before you can delete the
-	// ledger. You can disable it by calling the UpdateLedger operation to set the
-	// flag to false .
+	// Specifies whether the ledger is protected from being deleted by any user. If
+	// not defined during ledger creation, this feature is enabled ( true ) by default.
+	// If deletion protection is enabled, you must first disable it before you can
+	// delete the ledger. You can disable it by calling the UpdateLedger operation to
+	// set this parameter to false .
 	DeletionProtection *bool
 
 	// Information about the encryption of data at rest in the ledger. This includes

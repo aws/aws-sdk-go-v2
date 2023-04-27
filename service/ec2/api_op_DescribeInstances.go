@@ -75,9 +75,6 @@ type DescribeInstancesInput struct {
 	//   - client-token - The idempotency token you provided when you launched the
 	//   instance.
 	//   - dns-name - The public DNS name of the instance.
-	//   - group-id - The ID of the security group for the instance. EC2-Classic only.
-	//   - group-name - The name of the security group for the instance. EC2-Classic
-	//   only.
 	//   - hibernation-options.configured - A Boolean that indicates whether the
 	//   instance is enabled for hibernation. A value of true means that the instance
 	//   is enabled for hibernation.
