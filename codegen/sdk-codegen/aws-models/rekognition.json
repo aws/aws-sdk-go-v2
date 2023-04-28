@@ -785,6 +785,23 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#ContentModerationAggregateBy": {
+            "type": "enum",
+            "members": {
+                "TIMESTAMPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMESTAMPS"
+                    }
+                },
+                "SEGMENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEGMENTS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rekognition#ContentModerationDetection": {
             "type": "structure",
             "members": {
@@ -799,6 +816,24 @@
                     "target": "com.amazonaws.rekognition#ModerationLabel",
                     "traits": {
                         "smithy.api#documentation": "<p>The content moderation label detected by in the stored video.</p>"
+                    }
+                },
+                "StartTimestampMillis": {
+                    "target": "com.amazonaws.rekognition#ULong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time in milliseconds defining the start of the timeline \n      segment containing a continuously detected moderation label.</p>"
+                    }
+                },
+                "EndTimestampMillis": {
+                    "target": "com.amazonaws.rekognition#ULong",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The time in milliseconds defining the end of the \n      timeline segment containing a continuously detected moderation label. </p>"
+                    }
+                },
+                "DurationMillis": {
+                    "target": "com.amazonaws.rekognition#ULong",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The time duration of a segment in milliseconds, \n      I.e. time elapsed from StartTimestampMillis to EndTimestampMillis. </p>"
                     }
                 }
             },
@@ -4556,6 +4591,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Array of celebrities recognized in the video.</p>"
                     }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job identifier for the celebrity recognition operation for which you \n      want to obtain results. The job identifer is returned by an initial call \n      to StartCelebrityRecognition.</p>"
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.rekognition#Video"
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.rekognition#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A job identifier specified in the call to StartCelebrityRecognition and \n      returned in the job completion notification sent to your \n      Amazon Simple Notification Service topic.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4629,10 +4679,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Sort to use for elements in the <code>ModerationLabelDetections</code> array.\n       Use <code>TIMESTAMP</code> to sort array elements by the time labels are detected.\n       Use <code>NAME</code> to alphabetically group elements for a label together.\n       Within each label group, the array element are sorted by detection confidence.\n       The default sort is by <code>TIMESTAMP</code>.</p>"
                     }
+                },
+                "AggregateBy": {
+                    "target": "com.amazonaws.rekognition#ContentModerationAggregateBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines how to aggregate results of the StartContentModeration request. \n      Default aggregation option is TIMESTAMPS. \n      SEGMENTS mode aggregates moderation labels over time.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rekognition#GetContentModerationRequestMetadata": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.rekognition#ContentModerationSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting method chosen for a GetContentModeration request.</p>"
+                    }
+                },
+                "AggregateBy": {
+                    "target": "com.amazonaws.rekognition#ContentModerationAggregateBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation method chosen for a GetContentModeration request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a content moderation request, \n      including the SortBy and AggregateBy options.</p>"
             }
         },
         "com.amazonaws.rekognition#GetContentModerationResponse": {
@@ -4672,6 +4748,27 @@
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Version number of the moderation detection model that was used to detect inappropriate, unwanted, or offensive content.</p>"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job identifier for the content moderation operation for which you \n      want to obtain results. The job identifer is returned by an initial call \n      to StartContentModeration.</p>"
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.rekognition#Video"
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.rekognition#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A job identifier specified in the call to StartContentModeration and \n      returned in the job completion notification sent to your \n      Amazon Simple Notification Service topic.</p>"
+                    }
+                },
+                "GetRequestMetadata": {
+                    "target": "com.amazonaws.rekognition#GetContentModerationRequestMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the paramters used when getting a response. Includes \n      information on aggregation and sorting methods.</p>"
                     }
                 }
             },
@@ -4777,6 +4874,21 @@
                     "target": "com.amazonaws.rekognition#FaceDetections",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of faces detected in the video. Each element contains a detected face's details and the time,\n       in milliseconds from the start of the video, the face was detected. </p>"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job identifier for the face detection operation for which you \n      want to obtain results. The job identifer is returned by an initial call \n      to StartFaceDetection.</p>"
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.rekognition#Video"
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.rekognition#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A job identifier specified in the call to StartFaceDetection and \n      returned in the job completion notification sent to your \n      Amazon Simple Notification Service topic.</p>"
                     }
                 }
             },
@@ -4976,6 +5088,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of persons,  <a>PersonMatch</a>,\n      in the video whose face(s) match the face(s) in an Amazon Rekognition collection. It also includes time information\n       for when persons are matched in the video.\n      You specify the input collection in an initial call to <code>StartFaceSearch</code>.\n      Each  <code>Persons</code> element includes a time the person was matched,\n      face match details (<code>FaceMatches</code>) for matching faces in the collection,\n       and person information (<code>Person</code>) for the matched person. </p>"
                     }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job identifier for the face search operation for which you \n      want to obtain results. The job identifer is returned by an initial call \n      to StartFaceSearch.</p>"
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.rekognition#Video"
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.rekognition#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A job identifier specified in the call to StartFaceSearch and \n      returned in the job completion notification sent to your \n      Amazon Simple Notification Service topic.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5061,6 +5188,26 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.rekognition#GetLabelDetectionRequestMetadata": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.rekognition#LabelDetectionSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting method chosen for a GetLabelDetection request.</p>"
+                    }
+                },
+                "AggregateBy": {
+                    "target": "com.amazonaws.rekognition#LabelDetectionAggregateBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation method chosen for a GetLabelDetection request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a label detection request, \n      including the SortBy and AggregateBy options.</p>"
+            }
+        },
         "com.amazonaws.rekognition#GetLabelDetectionResponse": {
             "type": "structure",
             "members": {
@@ -5098,6 +5245,27 @@
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Version number of the label detection model that was used to detect labels.</p>"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job identifier for the label detection operation for which you \n      want to obtain results. The job identifer is returned by an initial call \n      to StartLabelDetection.</p>"
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.rekognition#Video"
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.rekognition#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A job identifier specified in the call to StartLabelDetection and \n      returned in the job completion notification sent to your \n      Amazon Simple Notification Service topic.</p>"
+                    }
+                },
+                "GetRequestMetadata": {
+                    "target": "com.amazonaws.rekognition#GetLabelDetectionRequestMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the paramters used when getting a response. Includes \n      information on aggregation and sorting methods.</p>"
                     }
                 }
             },
@@ -5209,6 +5377,21 @@
                     "target": "com.amazonaws.rekognition#PersonDetections",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of the persons detected in the video and the time(s) their path was tracked throughout the video.\n        An array element will exist for each time a person's path is tracked. </p>"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job identifier for the person tracking operation for which you \n      want to obtain results. The job identifer is returned by an initial call \n      to StartPersonTracking.</p>"
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.rekognition#Video"
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.rekognition#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A job identifier specified in the call to StartCelebrityRecognition and \n      returned in the job completion notification sent to your \n      Amazon Simple Notification Service topic.</p>"
                     }
                 }
             },
@@ -5327,6 +5510,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array containing the segment types requested in the call to <code>StartSegmentDetection</code>.\n    </p>"
                     }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job identifier for the segment detection operation for which you \n      want to obtain results. The job identifer is returned by an initial call \n      to StartSegmentDetection.</p>"
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.rekognition#Video"
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.rekognition#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A job identifier specified in the call to StartSegmentDetection and \n      returned in the job completion notification sent to your \n      Amazon Simple Notification Service topic.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5434,6 +5632,21 @@
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Version number of the text detection model that was used to detect text.</p>"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job identifier for the text detection operation for which you \n      want to obtain results. The job identifer is returned by an initial call \n      to StartTextDetection.</p>"
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.rekognition#Video"
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.rekognition#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A job identifier specified in the call to StartTextDetection and \n      returned in the job completion notification sent to your \n      Amazon Simple Notification Service topic.</p>"
                     }
                 }
             },
@@ -6014,9 +6227,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 256
+                    "max": 1024
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-:]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-:+=\\/]+$"
             }
         },
         "com.amazonaws.rekognition#KinesisDataArn": {

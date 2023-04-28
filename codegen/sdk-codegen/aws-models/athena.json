@@ -53,6 +53,14 @@
                 }
             }
         },
+        "com.amazonaws.athena#AllocatedDpusInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.athena#AmazonAthena": {
             "type": "service",
             "version": "2017-05-18",
@@ -65,6 +73,12 @@
                 },
                 {
                     "target": "com.amazonaws.athena#BatchGetQueryExecution"
+                },
+                {
+                    "target": "com.amazonaws.athena#CancelCapacityReservation"
+                },
+                {
+                    "target": "com.amazonaws.athena#CreateCapacityReservation"
                 },
                 {
                     "target": "com.amazonaws.athena#CreateDataCatalog"
@@ -112,6 +126,12 @@
                     "target": "com.amazonaws.athena#GetCalculationExecutionStatus"
                 },
                 {
+                    "target": "com.amazonaws.athena#GetCapacityAssignmentConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.athena#GetCapacityReservation"
+                },
+                {
                     "target": "com.amazonaws.athena#GetDatabase"
                 },
                 {
@@ -157,6 +177,9 @@
                     "target": "com.amazonaws.athena#ListCalculationExecutions"
                 },
                 {
+                    "target": "com.amazonaws.athena#ListCapacityReservations"
+                },
+                {
                     "target": "com.amazonaws.athena#ListDatabases"
                 },
                 {
@@ -196,6 +219,9 @@
                     "target": "com.amazonaws.athena#ListWorkGroups"
                 },
                 {
+                    "target": "com.amazonaws.athena#PutCapacityAssignmentConfiguration"
+                },
+                {
                     "target": "com.amazonaws.athena#StartCalculationExecution"
                 },
                 {
@@ -218,6 +244,9 @@
                 },
                 {
                     "target": "com.amazonaws.athena#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.athena#UpdateCapacityReservation"
                 },
                 {
                     "target": "com.amazonaws.athena#UpdateDataCatalog"
@@ -1742,6 +1771,255 @@
                 }
             }
         },
+        "com.amazonaws.athena#CancelCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#CancelCapacityReservationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#CancelCapacityReservationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the capacity reservation with the specified name.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.athena#CancelCapacityReservationInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity reservation to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#CancelCapacityReservationOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.athena#CapacityAllocation": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.athena#CapacityAllocationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the capacity allocation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.athena#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the capacity allocation.</p>"
+                    }
+                },
+                "RequestTime": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the capacity allocation was requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestCompletionTime": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the capacity allocation request was completed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the submission time of a single allocation request for a capacity reservation and the most recent status of the attempted allocation.</p>"
+            }
+        },
+        "com.amazonaws.athena#CapacityAllocationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#CapacityAssignment": {
+            "type": "structure",
+            "members": {
+                "WorkGroupNames": {
+                    "target": "com.amazonaws.athena#WorkGroupNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of workgroup names for the capacity assignment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A mapping between one or more workgroups and a capacity reservation.</p>"
+            }
+        },
+        "com.amazonaws.athena#CapacityAssignmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationName": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the reservation that the capacity assignment configuration is for.</p>"
+                    }
+                },
+                "CapacityAssignments": {
+                    "target": "com.amazonaws.athena#CapacityAssignmentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of assignments that make up the capacity assignment configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns Athena workgroups (and hence their queries) to capacity reservations. A capacity reservation can have only one capacity assignment configuration, but the capacity assignment configuration can be made up of multiple individual assignments. Each assignment specifies how Athena queries can consume capacity from the capacity reservation that their workgroup is mapped to.</p>"
+            }
+        },
+        "com.amazonaws.athena#CapacityAssignmentsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#CapacityAssignment"
+            }
+        },
+        "com.amazonaws.athena#CapacityReservation": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.athena#CapacityReservationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the capacity reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetDpus": {
+                    "target": "com.amazonaws.athena#TargetDpusInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of data processing units requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllocatedDpus": {
+                    "target": "com.amazonaws.athena#AllocatedDpusInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of data processing units currently allocated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastAllocation": {
+                    "target": "com.amazonaws.athena#CapacityAllocation"
+                },
+                "LastSuccessfulAllocationTime": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of the most recent capacity allocation that succeeded.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time in UTC epoch millis when the capacity reservation was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reservation for a specified number of data processing units (DPUs). When a reservation is initially created, it has no DPUs. Athena allocates DPUs until the allocated amount equals the requested amount.</p>"
+            }
+        },
+        "com.amazonaws.athena#CapacityReservationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._-]+$"
+            }
+        },
+        "com.amazonaws.athena#CapacityReservationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "UPDATE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_PENDING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#CapacityReservationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#CapacityReservation"
+            }
+        },
         "com.amazonaws.athena#CatalogNameString": {
             "type": "string",
             "traits": {
@@ -1923,6 +2201,62 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.athena#CreateCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#CreateCapacityReservationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#CreateCapacityReservationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a capacity reservation with the specified name and number of requested data processing units.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.athena#CreateCapacityReservationInput": {
+            "type": "structure",
+            "members": {
+                "TargetDpus": {
+                    "target": "com.amazonaws.athena#TargetDpusInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of requested data processing units.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity reservation to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.athena#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the capacity reservation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#CreateCapacityReservationOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#CreateDataCatalog": {
@@ -2786,7 +3120,7 @@
                 "CoordinatorDpuSize": {
                     "target": "com.amazonaws.athena#CoordinatorDpuSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of DPUs to use for the coordinator. A coordinator is a special executor\n            that orchestrates processing work and manages other executors in a notebook\n            session.</p>"
+                        "smithy.api#documentation": "<p>The number of DPUs to use for the coordinator. A coordinator is a special executor\n            that orchestrates processing work and manages other executors in a notebook\n            session. The default is 1.</p>"
                     }
                 },
                 "MaxConcurrentDpus": {
@@ -2800,7 +3134,7 @@
                 "DefaultExecutorDpuSize": {
                     "target": "com.amazonaws.athena#DefaultExecutorDpuSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default number of DPUs to use for executors. An executor is the smallest unit of\n            compute that a notebook session can request from Athena.</p>"
+                        "smithy.api#documentation": "<p>The default number of DPUs to use for executors. An executor is the smallest unit of\n            compute that a notebook session can request from Athena. The default is 1.</p>"
                     }
                 },
                 "AdditionalConfigs": {
@@ -3294,6 +3628,106 @@
                     "target": "com.amazonaws.athena#CalculationStatistics",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the DPU execution time and progress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.athena#GetCapacityAssignmentConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#GetCapacityAssignmentConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#GetCapacityAssignmentConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the capacity assignment configuration for a capacity reservation, if one exists.</p>"
+            }
+        },
+        "com.amazonaws.athena#GetCapacityAssignmentConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationName": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity reservation to retrieve the capacity assignment configuration for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#GetCapacityAssignmentConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "CapacityAssignmentConfiguration": {
+                    "target": "com.amazonaws.athena#CapacityAssignmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested capacity assignment configuration for the specified capacity reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.athena#GetCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#GetCapacityReservationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#GetCapacityReservationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the capacity reservation with the specified name.</p>"
+            }
+        },
+        "com.amazonaws.athena#GetCapacityReservationInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#GetCapacityReservationOutput": {
+            "type": "structure",
+            "members": {
+                "CapacityReservation": {
+                    "target": "com.amazonaws.athena#CapacityReservation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested capacity reservation structure.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -4311,6 +4745,72 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.athena#ListCapacityReservations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#ListCapacityReservationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#ListCapacityReservationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the capacity reservations for the current account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.athena#ListCapacityReservationsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.athena#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.athena#MaxCapacityReservationsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#ListCapacityReservationsOutput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.athena#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the NextToken from the response object of the previous page call.</p>"
+                    }
+                },
+                "CapacityReservations": {
+                    "target": "com.amazonaws.athena#CapacityReservationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity reservations for the current account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.athena#ListDataCatalogs": {
             "type": "operation",
             "input": {
@@ -5157,7 +5657,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags associated with an Athena workgroup or data catalog\n            resource.</p>",
+                "smithy.api#documentation": "<p>Lists the tags associated with an Athena resource.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5296,6 +5796,15 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.athena#MaxCapacityReservationsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
                 }
             }
         },
@@ -5751,6 +6260,56 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.athena#PutCapacityAssignmentConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#PutCapacityAssignmentConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#PutCapacityAssignmentConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Puts a new capacity assignment configuration for a specified capacity reservation. If a capacity assignment configuration already exists for the capacity reservation, replaces the existing capacity assignment configuration.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.athena#PutCapacityAssignmentConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationName": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity reservation to put a capacity assignment configuration for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapacityAssignments": {
+                    "target": "com.amazonaws.athena#CapacityAssignmentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of assignments for the capacity assignment configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#PutCapacityAssignmentConfigurationOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#QueryExecution": {
@@ -7187,7 +7746,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A label that you assign to a resource. In Athena, a resource can be a\n            workgroup or data catalog. Each tag consists of a key and an optional value, both of\n            which you define. For example, you can use tags to categorize Athena\n            workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of\n            tag keys to make it easier to search and filter workgroups or data catalogs in your\n            account. For best practices, see <a href=\"https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html\">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode\n            characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use\n            letters and numbers representable in UTF-8, and the following characters: + - = . _ : /\n            @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you\n            specify more than one tag, separate them by commas. </p>"
+                "smithy.api#documentation": "<p>A label that you assign to a resource. Athena resources include \n            workgroups, data catalogs, and capacity reservations. Each tag consists of a key and an optional value, both of\n            which you define. For example, you can use tags to categorize Athena\n            resources by purpose, owner, or environment. Use a consistent set of\n            tag keys to make it easier to search and filter the resources in your\n            account. For best practices, see <a href=\"https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html\">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode\n            characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use\n            letters and numbers representable in UTF-8, and the following characters: + - = . _ : /\n            @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you\n            specify more than one tag, separate them by commas. </p>"
             }
         },
         "com.amazonaws.athena#TagKey": {
@@ -7231,7 +7790,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to an Athena resource. A tag is a label that you\n            assign to a resource. In Athena, a resource can be a workgroup or data\n            catalog. Each tag consists of a key and an optional value, both of which you define. For\n            example, you can use tags to categorize Athena workgroups or data catalogs\n            by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to\n            search and filter workgroups or data catalogs in your account. For best practices, see\n            <a href=\"https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html\">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode\n            characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use\n            letters and numbers representable in UTF-8, and the following characters: + - = . _ : /\n            @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you\n            specify more than one tag, separate them by commas.</p>"
+                "smithy.api#documentation": "<p>Adds one or more tags to an Athena resource. A tag is a label that you\n            assign to a resource. Each tag consists of a key and an optional value, both of which you define. For\n            example, you can use tags to categorize Athena workgroups, data catalogs, or capacity reservations by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to\n            search and filter the resources in your account. For best practices, see\n            <a href=\"https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html\">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode\n            characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use\n            letters and numbers representable in UTF-8, and the following characters: + - = . _ : /\n            @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you\n            specify more than one tag, separate them by commas.</p>"
             }
         },
         "com.amazonaws.athena#TagResourceInput": {
@@ -7240,14 +7799,14 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.athena#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the Athena resource (workgroup or data catalog) to\n            which tags are to be added.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ARN of the Athena resource to\n            which tags are to be added.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.athena#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of one or more tags, separated by commas, to be added to an Athena workgroup or data catalog resource.</p>",
+                        "smithy.api#documentation": "<p>A collection of one or more tags, separated by commas, to be added to an Athena resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7269,6 +7828,14 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.athena#TargetDpusInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 24
                 }
             }
         },
@@ -7491,7 +8058,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags from a data catalog or workgroup resource.</p>"
+                "smithy.api#documentation": "<p>Removes one or more tags from an Athena resource.</p>"
             }
         },
         "com.amazonaws.athena#UntagResourceInput": {
@@ -7517,6 +8084,55 @@
             }
         },
         "com.amazonaws.athena#UntagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.athena#UpdateCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#UpdateCapacityReservationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#UpdateCapacityReservationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the number of requested data processing units for the capacity reservation with the specified name.</p>"
+            }
+        },
+        "com.amazonaws.athena#UpdateCapacityReservationInput": {
+            "type": "structure",
+            "members": {
+                "TargetDpus": {
+                    "target": "com.amazonaws.athena#TargetDpusInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new number of requested data processing units.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#UpdateCapacityReservationOutput": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -8098,6 +8714,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z0-9._-]{1,128}$"
+            }
+        },
+        "com.amazonaws.athena#WorkGroupNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#WorkGroupName"
             }
         },
         "com.amazonaws.athena#WorkGroupState": {

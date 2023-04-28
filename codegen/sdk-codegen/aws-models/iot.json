@@ -6776,6 +6776,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata which can be used to manage the domain configuration.</p>\n         <note>\n            <p>For URI Request parameters use format: ...key1=value1&key2=value2...</p>\n            <p>For the CLI command-line parameter use format: &&tags\n            \"key1=value1&key2=value2...\"</p>\n            <p>For the cli-input-json file use format: \"tags\":\n            \"key1=value1&key2=value2...\"</p>\n         </note>"
                     }
+                },
+                "tlsConfig": {
+                    "target": "com.amazonaws.iot#TlsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7137,7 +7143,7 @@
                 "documentSource": {
                     "target": "com.amazonaws.iot#JobDocumentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 link to the job document. Required if you don't specify a value for <code>document</code>.</p>\n         <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for <code>document</code>.</p>\n         <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html\">Methods for accessing a bucket</a>.</p>"
                     }
                 },
                 "document": {
@@ -12367,6 +12373,12 @@
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the domain configuration's status was last changed.</p>"
+                    }
+                },
+                "tlsConfig": {
+                    "target": "com.amazonaws.iot#TlsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
                     }
                 }
             },
@@ -25884,7 +25896,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job\n            data/updates are stored. The role must also grant permission for IoT to download the files.</p>\n         <important>\n            <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service\n                confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that grants permission to download files from the S3 bucket\n            where the job data/updates are stored. The role must also grant permission for IoT to\n            download the files.</p>\n         <important>\n            <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service\n                confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p>\n         </important>"
                     }
                 },
                 "expiresInSec": {
@@ -28005,6 +28017,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iot#SecurityGroupId"
+            }
+        },
+        "com.amazonaws.iot#SecurityPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#SecurityProfileArn": {
@@ -30819,6 +30841,20 @@
                 }
             }
         },
+        "com.amazonaws.iot#TlsConfig": {
+            "type": "structure",
+            "members": {
+                "securityPolicy": {
+                    "target": "com.amazonaws.iot#SecurityPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security policy for a domain configuration. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table\">Security\n            policies </a> in the <i>Amazon Web Services IoT Core developer\n         guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
+            }
+        },
         "com.amazonaws.iot#TlsContext": {
             "type": "structure",
             "members": {
@@ -32213,6 +32249,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Removes the authorization configuration from a domain.</p>"
+                    }
+                },
+                "tlsConfig": {
+                    "target": "com.amazonaws.iot#TlsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
                     }
                 }
             },
