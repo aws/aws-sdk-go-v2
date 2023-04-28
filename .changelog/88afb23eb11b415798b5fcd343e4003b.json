@@ -1,8 +1,0 @@
-{
-    "id": "88afb23e-b11b-4157-98b5-fcd343e4003b",
-    "type": "feature",
-    "description": "You can now associate a web ACL with a Verified Access instance.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

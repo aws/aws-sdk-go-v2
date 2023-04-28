@@ -1,3 +1,7 @@
+# v1.18.12 (2023-04-28)
+
+* **Documentation**: This release corrects the jumbo frames MTU from 9100 to 8500.
+
 # v1.18.11 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

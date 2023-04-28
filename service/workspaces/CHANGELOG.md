@@ -1,3 +1,7 @@
+# v1.28.11 (2023-04-28)
+
+* **Documentation**: Added Windows 11 to support Microsoft_Office_2019
+
 # v1.28.10 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

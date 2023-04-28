@@ -1,3 +1,7 @@
+# v1.28.0 (2023-04-28)
+
+* **Feature**: Adds Jwt Support for Salesforce Credentials.
+
 # v1.27.0 (2023-04-24)
 
 * **Feature**: Increased the max length for RefreshToken and AuthCode from 2048 to 4096.

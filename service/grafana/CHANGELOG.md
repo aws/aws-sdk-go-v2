@@ -1,3 +1,7 @@
+# v1.13.0 (2023-04-28)
+
+* **Feature**: This release adds support for the grafanaVersion parameter in CreateWorkspace.
+
 # v1.12.8 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

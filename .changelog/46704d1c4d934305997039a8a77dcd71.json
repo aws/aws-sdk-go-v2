@@ -1,8 +1,0 @@
-{
-    "id": "46704d1c-4d93-4305-9970-39a8a77dcd71",
-    "type": "documentation",
-    "description": "This release corrects the jumbo frames MTU from 9100 to 8500.",
-    "modules": [
-        "service/directconnect"
-    ]
-}

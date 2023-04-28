@@ -1,8 +1,0 @@
-{
-    "id": "74e9d535-4bf0-4a85-96b1-bb1875264dca",
-    "type": "feature",
-    "description": "This release allows AWS IoT Core users to specify a TLS security policy when creating and updating AWS IoT Domain Configurations.",
-    "modules": [
-        "service/iot"
-    ]
-}

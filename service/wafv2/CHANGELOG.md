@@ -1,3 +1,7 @@
+# v1.31.0 (2023-04-28)
+
+* **Feature**: You can now associate a web ACL with a Verified Access instance.
+
 # v1.30.2 (2023-04-25)
 
 * No change notes available for this release.

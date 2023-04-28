@@ -1,3 +1,27 @@
+# Release (2023-04-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.28.0](service/appflow/CHANGELOG.md#v1280-2023-04-28)
+  * **Feature**: Adds Jwt Support for Salesforce Credentials.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.26.0](service/athena/CHANGELOG.md#v1260-2023-04-28)
+  * **Feature**: You can now use capacity reservations on Amazon Athena to run SQL queries on fully-managed compute capacity.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.18.12](service/directconnect/CHANGELOG.md#v11812-2023-04-28)
+  * **Documentation**: This release corrects the jumbo frames MTU from 9100 to 8500.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.20.0](service/efs/CHANGELOG.md#v1200-2023-04-28)
+  * **Feature**: This release adds PAUSED and PAUSING state as a returned value for DescribeReplicationConfigurations response.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.13.0](service/grafana/CHANGELOG.md#v1130-2023-04-28)
+  * **Feature**: This release adds support for the grafanaVersion parameter in CreateWorkspace.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.37.0](service/iot/CHANGELOG.md#v1370-2023-04-28)
+  * **Feature**: This release allows AWS IoT Core users to specify a TLS security policy when creating and updating AWS IoT Domain Configurations.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.26.0](service/rekognition/CHANGELOG.md#v1260-2023-04-28)
+  * **Feature**: Added support for aggregating moderation labels by video segment timestamps for Stored Video Content Moderation APIs and added additional information about the job to all Stored Video Get API responses.
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.2.0](service/simspaceweaver/CHANGELOG.md#v120-2023-04-28)
+  * **Feature**: Added a new CreateSnapshot API. For the StartSimulation API, SchemaS3Location is now optional, added a new SnapshotS3Location parameter. For the DescribeSimulation API, added SNAPSHOT_IN_PROGRESS simulation state, deprecated SchemaError, added new fields: StartError and SnapshotS3Location.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.31.0](service/wafv2/CHANGELOG.md#v1310-2023-04-28)
+  * **Feature**: You can now associate a web ACL with a Verified Access instance.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.28.11](service/workspaces/CHANGELOG.md#v12811-2023-04-28)
+  * **Documentation**: Added Windows 11 to support Microsoft_Office_2019
+
 # Release (2023-04-27)
 
 ## Module Highlights

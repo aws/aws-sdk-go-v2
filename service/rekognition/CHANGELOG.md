@@ -1,3 +1,7 @@
+# v1.26.0 (2023-04-28)
+
+* **Feature**: Added support for aggregating moderation labels by video segment timestamps for Stored Video Content Moderation APIs and added additional information about the job to all Stored Video Get API responses.
+
 # v1.25.0 (2023-04-24)
 
 * **Feature**: Added new status result to Liveness session status.

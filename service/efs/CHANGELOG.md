@@ -1,3 +1,7 @@
+# v1.20.0 (2023-04-28)
+
+* **Feature**: This release adds PAUSED and PAUSING state as a returned value for DescribeReplicationConfigurations response.
+
 # v1.19.13 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
