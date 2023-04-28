@@ -57,6 +57,9 @@ type CreateDomainConfigurationInput struct {
 	// file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
 
+	// An object that specifies the TLS configuration for a domain.
+	TlsConfig *types.TlsConfig
+
 	// The certificate used to validate the server certificate and prove domain name
 	// ownership. This certificate must be signed by a public certificate authority.
 	// This value is not required for Amazon Web Services-managed domains.

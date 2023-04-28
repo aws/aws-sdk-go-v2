@@ -53,8 +53,7 @@ type StartAppInput struct {
 	// The description of the app.
 	Description *string
 
-	// Options that apply when the app starts. These optiAons override default
-	// behavior.
+	// Options that apply when the app starts. These options override default behavior.
 	LaunchOverrides *types.LaunchOverrides
 
 	noSmithyDocumentSerde

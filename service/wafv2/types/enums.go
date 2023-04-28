@@ -1050,6 +1050,7 @@ const (
 	ResourceTypeAppsync                 ResourceType = "APPSYNC"
 	ResourceTypeCognitioUserPool        ResourceType = "COGNITO_USER_POOL"
 	ResourceTypeAppRunnerService        ResourceType = "APP_RUNNER_SERVICE"
+	ResourceTypeVerifiedAccessInstance  ResourceType = "VERIFIED_ACCESS_INSTANCE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1062,6 +1063,7 @@ func (ResourceType) Values() []ResourceType {
 		"APPSYNC",
 		"COGNITO_USER_POOL",
 		"APP_RUNNER_SERVICE",
+		"VERIFIED_ACCESS_INSTANCE",
 	}
 }
 

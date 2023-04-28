@@ -70,6 +70,9 @@ type DescribeDomainConfigurationOutput struct {
 	// The type of service delivered by the endpoint.
 	ServiceType types.ServiceType
 
+	// An object that specifies the TLS configuration for a domain.
+	TlsConfig *types.TlsConfig
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

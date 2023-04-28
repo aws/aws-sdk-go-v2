@@ -3599,6 +3599,16 @@ func awsRestjson1_serializeDocumentSalesforceConnectorProfileCredentials(v *type
 		ok.String(*v.ClientCredentialsArn)
 	}
 
+	if v.JwtToken != nil {
+		ok := object.Key("jwtToken")
+		ok.String(*v.JwtToken)
+	}
+
+	if len(v.OAuth2GrantType) > 0 {
+		ok := object.Key("oAuth2GrantType")
+		ok.String(string(v.OAuth2GrantType))
+	}
+
 	if v.OAuthRequest != nil {
 		ok := object.Key("oAuthRequest")
 		if err := awsRestjson1_serializeDocumentConnectorOAuthRequest(v.OAuthRequest, ok); err != nil {

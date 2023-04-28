@@ -10140,6 +10140,11 @@ func awsRestjson1_deserializeDocumentSalesforceMetadata(v **types.SalesforceMeta
 				return err
 			}
 
+		case "oauth2GrantTypesSupported":
+			if err := awsRestjson1_deserializeDocumentOAuth2GrantTypeSupportedList(&sv.Oauth2GrantTypesSupported, value); err != nil {
+				return err
+			}
+
 		case "oAuthScopes":
 			if err := awsRestjson1_deserializeDocumentOAuthScopeList(&sv.OAuthScopes, value); err != nil {
 				return err

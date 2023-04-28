@@ -345,8 +345,20 @@ type ConnectedHomeSettingsForUpdate struct {
 // detection in a stored video.
 type ContentModerationDetection struct {
 
+	// The time duration of a segment in milliseconds, I.e. time elapsed from
+	// StartTimestampMillis to EndTimestampMillis.
+	DurationMillis *int64
+
+	// The time in milliseconds defining the end of the timeline segment containing a
+	// continuously detected moderation label.
+	EndTimestampMillis *int64
+
 	// The content moderation label detected by in the stored video.
 	ModerationLabel *ModerationLabel
+
+	// The time in milliseconds defining the start of the timeline segment containing
+	// a continuously detected moderation label.
+	StartTimestampMillis *int64
 
 	// Time, in milliseconds from the beginning of the video, that the content
 	// moderation label was detected. Note that Timestamp is not guaranteed to be
@@ -1022,6 +1034,32 @@ type Geometry struct {
 
 	// Within the bounding box, a fine-grained polygon around the detected item.
 	Polygon []Point
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a content moderation request, including the SortBy and
+// AggregateBy options.
+type GetContentModerationRequestMetadata struct {
+
+	// The aggregation method chosen for a GetContentModeration request.
+	AggregateBy ContentModerationAggregateBy
+
+	// The sorting method chosen for a GetContentModeration request.
+	SortBy ContentModerationSortBy
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a label detection request, including the SortBy and
+// AggregateBy options.
+type GetLabelDetectionRequestMetadata struct {
+
+	// The aggregation method chosen for a GetLabelDetection request.
+	AggregateBy LabelDetectionAggregateBy
+
+	// The sorting method chosen for a GetLabelDetection request.
+	SortBy LabelDetectionSortBy
 
 	noSmithyDocumentSerde
 }

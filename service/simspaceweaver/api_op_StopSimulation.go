@@ -11,8 +11,8 @@ import (
 )
 
 // Stops the given simulation. You can't restart a simulation after you stop it.
-// If you need to restart a simulation, you must stop it, delete it, and start a
-// new instance of it.
+// If you want to restart a simulation, then you must stop it, delete it, and start
+// a new instance of it.
 func (c *Client) StopSimulation(ctx context.Context, params *StopSimulationInput, optFns ...func(*Options)) (*StopSimulationOutput, error) {
 	if params == nil {
 		params = &StopSimulationInput{}

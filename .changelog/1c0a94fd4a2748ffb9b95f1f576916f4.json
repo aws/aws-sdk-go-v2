@@ -1,0 +1,8 @@
+{
+    "id": "1c0a94fd-4a27-48ff-b9b9-5f1f576916f4",
+    "type": "documentation",
+    "description": "Added Windows 11 to support Microsoft_Office_2019",
+    "modules": [
+        "service/workspaces"
+    ]
+}

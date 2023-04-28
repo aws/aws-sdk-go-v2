@@ -62,9 +62,11 @@ type DescribeSimulationOutput struct {
 	// Settings that control how SimSpace Weaver handles your simulation log data.
 	LoggingConfiguration *types.LoggingConfiguration
 
-	// The maximum running time of the simulation, specified as a number of months (m
+	// The maximum running time of the simulation, specified as a number of minutes (m
 	// or M), hours (h or H), or days (d or D). The simulation stops when it reaches
-	// this limit.
+	// this limit. The maximum value is 14D , or its equivalent in the other units. The
+	// default value is 14D . A value equivalent to 0 makes the simulation immediately
+	// transition to Stopping as soon as it reaches Started .
 	MaximumDuration *string
 
 	// The name of the simulation.
@@ -80,6 +82,8 @@ type DescribeSimulationOutput struct {
 
 	// An error message that SimSpace Weaver returns only if there is a problem with
 	// the simulation schema.
+	//
+	// Deprecated: SchemaError is no longer used, check StartError instead.
 	SchemaError *string
 
 	// The location of the simulation schema in Amazon Simple Storage Service (Amazon
@@ -87,6 +91,16 @@ type DescribeSimulationOutput struct {
 	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 	// .
 	SchemaS3Location *types.S3Location
+
+	// A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver
+	// stores simulation data, such as your app .zip files and schema file. For more
+	// information about Amazon S3, see the Amazon Simple Storage Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+	// .
+	SnapshotS3Location *types.S3Location
+
+	// An error message that SimSpace Weaver returns only if a problem occurs when the
+	// simulation is in the STARTING state.
+	StartError *string
 
 	// The current lifecycle state of the simulation.
 	Status types.SimulationStatus

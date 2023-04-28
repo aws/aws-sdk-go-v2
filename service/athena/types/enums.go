@@ -32,6 +32,52 @@ func (CalculationExecutionState) Values() []CalculationExecutionState {
 	}
 }
 
+type CapacityAllocationStatus string
+
+// Enum values for CapacityAllocationStatus
+const (
+	CapacityAllocationStatusPending   CapacityAllocationStatus = "PENDING"
+	CapacityAllocationStatusSucceeded CapacityAllocationStatus = "SUCCEEDED"
+	CapacityAllocationStatusFailed    CapacityAllocationStatus = "FAILED"
+)
+
+// Values returns all known values for CapacityAllocationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityAllocationStatus) Values() []CapacityAllocationStatus {
+	return []CapacityAllocationStatus{
+		"PENDING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type CapacityReservationStatus string
+
+// Enum values for CapacityReservationStatus
+const (
+	CapacityReservationStatusPending       CapacityReservationStatus = "PENDING"
+	CapacityReservationStatusActive        CapacityReservationStatus = "ACTIVE"
+	CapacityReservationStatusCancelling    CapacityReservationStatus = "CANCELLING"
+	CapacityReservationStatusCancelled     CapacityReservationStatus = "CANCELLED"
+	CapacityReservationStatusFailed        CapacityReservationStatus = "FAILED"
+	CapacityReservationStatusUpdatePending CapacityReservationStatus = "UPDATE_PENDING"
+)
+
+// Values returns all known values for CapacityReservationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationStatus) Values() []CapacityReservationStatus {
+	return []CapacityReservationStatus{
+		"PENDING",
+		"ACTIVE",
+		"CANCELLING",
+		"CANCELLED",
+		"FAILED",
+		"UPDATE_PENDING",
+	}
+}
+
 type ColumnNullable string
 
 // Enum values for ColumnNullable

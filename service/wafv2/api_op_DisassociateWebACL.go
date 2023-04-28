@@ -13,11 +13,11 @@ import (
 // Disassociates the specified regional application resource from any existing web
 // ACL association. A resource can have at most one web ACL association. A regional
 // application can be an Application Load Balancer (ALB), an Amazon API Gateway
-// REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner
-// service. For Amazon CloudFront, don't use this call. Instead, use your
-// CloudFront distribution configuration. To disassociate a web ACL, provide an
-// empty web ACL ID in the CloudFront call UpdateDistribution . For information,
-// see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
+// REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
+// service, or an Amazon Web Services Verified Access instance. For Amazon
+// CloudFront, don't use this call. Instead, use your CloudFront distribution
+// configuration. To disassociate a web ACL, provide an empty web ACL ID in the
+// CloudFront call UpdateDistribution . For information, see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
 // in the Amazon CloudFront API Reference.
 func (c *Client) DisassociateWebACL(ctx context.Context, params *DisassociateWebACLInput, optFns ...func(*Options)) (*DisassociateWebACLOutput, error) {
 	if params == nil {
@@ -49,6 +49,9 @@ type DisassociateWebACLInput struct {
 	//   arn:partition:cognito-idp:region:account-id:userpool/user-pool-id
 	//   - For an App Runner service:
 	//   arn:partition:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+	//
+	//   - For an Amazon Web Services Verified Access instance:
+	//   arn:partition:ec2:region:account-id:verified-access-instance/instance-id
 	//
 	// This member is required.
 	ResourceArn *string

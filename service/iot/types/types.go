@@ -2864,8 +2864,8 @@ type PresignedUrlConfig struct {
 	// receives an MQTT request for the job document.
 	ExpiresInSec *int64
 
-	// The ARN of an IAM role that grants grants permission to download files from the
-	// S3 bucket where the job data/updates are stored. The role must also grant
+	// The ARN of an IAM role that grants permission to download files from the S3
+	// bucket where the job data/updates are stored. The role must also grant
 	// permission for IoT to download the files. For information about addressing the
 	// confused deputy problem, see cross-service confused deputy prevention (https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html)
 	// in the Amazon Web Services IoT Core developer guide.
@@ -4001,6 +4001,17 @@ type TimestreamTimestamp struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that specifies the TLS configuration for a domain.
+type TlsConfig struct {
+
+	// The security policy for a domain configuration. For more information, see
+	// Security policies  (https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table)
+	// in the Amazon Web Services IoT Core developer guide.
+	SecurityPolicy *string
 
 	noSmithyDocumentSerde
 }

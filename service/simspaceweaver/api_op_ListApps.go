@@ -41,12 +41,12 @@ type ListAppsInput struct {
 	// The maximum number of apps to list.
 	MaxResults *int32
 
-	// If SimSpace Weaver returns nextToken , there are more results available. The
-	// value of nextToken is a unique pagination token for each page. To retrieve the
-	// next page, call the operation again using the returned token. Keep all other
-	// arguments unchanged. If no results remain, nextToken is set to null . Each
+	// If SimSpace Weaver returns nextToken , then there are more results available.
+	// The value of nextToken is a unique pagination token for each page. To retrieve
+	// the next page, call the operation again using the returned token. Keep all other
+	// arguments unchanged. If no results remain, then nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
-	// valid, you receive an HTTP 400 ValidationException error.
+	// valid, then you receive an HTTP 400 ValidationException error.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -57,12 +57,12 @@ type ListAppsOutput struct {
 	// The list of apps for the given simulation and domain.
 	Apps []types.SimulationAppMetadata
 
-	// If SimSpace Weaver returns nextToken , there are more results available. The
-	// value of nextToken is a unique pagination token for each page. To retrieve the
-	// next page, call the operation again using the returned token. Keep all other
-	// arguments unchanged. If no results remain, nextToken is set to null . Each
+	// If SimSpace Weaver returns nextToken , then there are more results available.
+	// The value of nextToken is a unique pagination token for each page. To retrieve
+	// the next page, call the operation again using the returned token. Keep all other
+	// arguments unchanged. If no results remain, then nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
-	// valid, you receive an HTTP 400 ValidationException error.
+	// valid, then you receive an HTTP 400 ValidationException error.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

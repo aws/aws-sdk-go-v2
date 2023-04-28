@@ -78,6 +78,25 @@ func (ContentClassifier) Values() []ContentClassifier {
 	}
 }
 
+type ContentModerationAggregateBy string
+
+// Enum values for ContentModerationAggregateBy
+const (
+	ContentModerationAggregateByTimestamps ContentModerationAggregateBy = "TIMESTAMPS"
+	ContentModerationAggregateBySegments   ContentModerationAggregateBy = "SEGMENTS"
+)
+
+// Values returns all known values for ContentModerationAggregateBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContentModerationAggregateBy) Values() []ContentModerationAggregateBy {
+	return []ContentModerationAggregateBy{
+		"TIMESTAMPS",
+		"SEGMENTS",
+	}
+}
+
 type ContentModerationSortBy string
 
 // Enum values for ContentModerationSortBy

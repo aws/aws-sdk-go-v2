@@ -43,6 +43,9 @@ type GetWebACLForResourceInput struct {
 	//   - For an App Runner service:
 	//   arn:partition:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
 	//
+	//   - For an Amazon Web Services Verified Access instance:
+	//   arn:partition:ec2:region:account-id:verified-access-instance/instance-id
+	//
 	// This member is required.
 	ResourceArn *string
 

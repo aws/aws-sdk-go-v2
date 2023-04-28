@@ -64,13 +64,16 @@ type AndStatement struct {
 	noSmithyDocumentSerde
 }
 
-// Information for a single API key.
+// Information for a single API key. API keys are required for the integration of
+// the CAPTCHA API in your JavaScript client applications. The API lets you
+// customize the placement and characteristics of the CAPTCHA puzzle for your end
+// users. For more information about the CAPTCHA JavaScript integration, see WAF
+// client application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
+// in the WAF Developer Guide.
 type APIKeySummary struct {
 
 	// The generated, encrypted API key. You can copy this for use in your JavaScript
-	// CAPTCHA integration. For information about how to use this in your CAPTCHA
-	// JavaScript integration, see WAF client application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
-	// in the WAF Developer Guide.
+	// CAPTCHA integration.
 	APIKey *string
 
 	// The date and time that the key was created.
@@ -3054,7 +3057,8 @@ type VisibilityConfig struct {
 // , and managed rule group. You can associate a web ACL with one or more Amazon
 // Web Services resources to protect. The resources can be an Amazon CloudFront
 // distribution, an Amazon API Gateway REST API, an Application Load Balancer, an
-// AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+// AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+// Amazon Web Services Verified Access instance.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with

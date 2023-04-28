@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes all SimSpace Weaver resources assigned to the given simulation. Your
-// simulation uses resources in other Amazon Web Services services. This API
-// operation doesn't delete resources in other Amazon Web Services services.
+// simulation uses resources in other Amazon Web Services. This API operation
+// doesn't delete resources in other Amazon Web Services.
 func (c *Client) DeleteSimulation(ctx context.Context, params *DeleteSimulationInput, optFns ...func(*Options)) (*DeleteSimulationOutput, error) {
 	if params == nil {
 		params = &DeleteSimulationInput{}

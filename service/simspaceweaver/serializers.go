@@ -14,6 +14,81 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpCreateSnapshot struct {
+}
+
+func (*awsRestjson1_serializeOpCreateSnapshot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateSnapshotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/createsnapshot")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateSnapshotInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateSnapshotInput(v *CreateSnapshotInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateSnapshotInput(v *CreateSnapshotInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("Destination")
+		if err := awsRestjson1_serializeDocumentS3Destination(v.Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Simulation != nil {
+		ok := object.Key("Simulation")
+		ok.String(*v.Simulation)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteApp struct {
 }
 
@@ -677,6 +752,13 @@ func awsRestjson1_serializeOpDocumentStartSimulationInput(v *StartSimulationInpu
 		}
 	}
 
+	if v.SnapshotS3Location != nil {
+		ok := object.Key("SnapshotS3Location")
+		if err := awsRestjson1_serializeDocumentS3Location(v.SnapshotS3Location, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -1068,6 +1150,23 @@ func awsRestjson1_serializeDocumentLaunchOverrides(v *types.LaunchOverrides, val
 		if err := awsRestjson1_serializeDocumentLaunchCommandList(v.LaunchCommands, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3Destination(v *types.S3Destination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.ObjectKeyPrefix != nil {
+		ok := object.Key("ObjectKeyPrefix")
+		ok.String(*v.ObjectKeyPrefix)
 	}
 
 	return nil

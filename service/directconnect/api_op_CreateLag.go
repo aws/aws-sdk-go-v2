@@ -64,7 +64,8 @@ type CreateLagInput struct {
 	Location *string
 
 	// The number of physical dedicated connections initially provisioned and bundled
-	// by the LAG.
+	// by the LAG. You can have a maximum of four connections when the port speed is 1G
+	// or 10G, or two when the port speed is 100G.
 	//
 	// This member is required.
 	NumberOfConnections int32

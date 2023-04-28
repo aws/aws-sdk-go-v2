@@ -24,20 +24,18 @@ type CloudWatchLogsLogGroup struct {
 
 // A collection of app instances that run the same executable app code and have
 // the same launch options and commands. For more information about domains, see
-// Key concepts (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
-// in the Amazon Web Services SimSpace Weaver User Guide.
+// Key concepts: Domains (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains)
+// in the SimSpace Weaver User Guide.
 type Domain struct {
 
-	// The type of lifecycle management for apps in the domain. This value indicates
-	// whether apps in this domain are managed (SimSpace Weaver starts and stops the
-	// apps) or unmanaged (you must start and stop the apps). Lifecycle types
-	//   - PerWorker – Managed: SimSpace Weaver starts 1 app on each worker
-	//   - BySpatialSubdivision – Managed: SimSpace Weaver starts 1 app for each
-	//   spatial partition
+	// The type of lifecycle management for apps in the domain. Indicates whether apps
+	// in this domain are managed (SimSpace Weaver starts and stops the apps) or
+	// unmanaged (you must start and stop the apps). Lifecycle types
+	//   - PerWorker – Managed: SimSpace Weaver starts one app on each worker.
+	//   - BySpatialSubdivision – Managed: SimSpace Weaver starts one app for each
+	//   spatial partition.
 	//   - ByRequest – Unmanaged: You use the StartApp API to start the apps and use
 	//   the StopApp API to stop the apps.
-	// The lifecycle types will change when the service is released for general
-	// availability (GA).
 	Lifecycle LifecycleManagementStrategy
 
 	// The name of the domain.
@@ -46,8 +44,7 @@ type Domain struct {
 	noSmithyDocumentSerde
 }
 
-// Options that apply when the app starts. These optiAons override default
-// behavior.
+// Options that apply when the app starts. These options override default behavior.
 type LaunchOverrides struct {
 
 	// App launch commands and command line parameters that override the launch
@@ -65,8 +62,8 @@ type LiveSimulationState struct {
 	Clocks []SimulationClock
 
 	// A list of domains for the simulation. For more information about domains, see
-	// Key concepts (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
-	// in the Amazon Web Services SimSpace Weaver User Guide.
+	// Key concepts: Domains (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains)
+	// in the SimSpace Weaver User Guide.
 	Domains []Domain
 
 	noSmithyDocumentSerde
@@ -92,8 +89,26 @@ type LoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An Amazon S3 bucket and optional folder (object key prefix) where SimSpace
+// Weaver creates a file.
+type S3Destination struct {
+
+	// The name of an Amazon S3 bucket. For more information about buckets, see
+	// Creating, configuring, and working with Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html)
+	// in the Amazon Simple Storage Service User Guide.
+	BucketName *string
+
+	// A string prefix for an Amazon S3 object key. It's usually a folder name. For
+	// more information about folders in Amazon S3, see Organizing objects in the
+	// Amazon S3 console using folders (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)
+	// in the Amazon Simple Storage Service User Guide.
+	ObjectKeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
 // A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver
-// stores simulation data, such as your app zip files and schema file. For more
+// stores simulation data, such as your app .zip files and schema file. For more
 // information about Amazon S3, see the Amazon Simple Storage Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 // .
 type S3Location struct {
@@ -113,7 +128,9 @@ type S3Location struct {
 }
 
 // Information about the network endpoint that you can use to connect to your
-// custom or service app.
+// custom or service app. For more information about SimSpace Weaver apps, see Key
+// concepts: Apps (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_apps)
+// in the SimSpace Weaver User Guide..
 type SimulationAppEndpointInfo struct {
 
 	// The IP address of the app. SimSpace Weaver dynamically assigns this IP address
@@ -127,11 +144,12 @@ type SimulationAppEndpointInfo struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of metadata about an app.
+// A collection of metadata about the app.
 type SimulationAppMetadata struct {
 
-	// The domain of the app. For more information about domains, see Key concepts (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
-	// in the Amazon Web Services SimSpace Weaver User Guide.
+	// The domain of the app. For more information about domains, see Key concepts:
+	// Domains (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains)
+	// in the SimSpace Weaver User Guide.
 	Domain *string
 
 	// The name of the app.

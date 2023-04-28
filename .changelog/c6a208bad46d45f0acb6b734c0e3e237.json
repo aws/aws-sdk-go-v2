@@ -1,0 +1,8 @@
+{
+    "id": "c6a208ba-d46d-45f0-acb6-b734c0e3e237",
+    "type": "feature",
+    "description": "Added support for aggregating moderation labels by video segment timestamps for Stored Video Content Moderation APIs and added additional information about the job to all Stored Video Get API responses.",
+    "modules": [
+        "service/rekognition"
+    ]
+}

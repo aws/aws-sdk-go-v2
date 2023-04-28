@@ -16,21 +16,21 @@
 // . WAF is a web application firewall that lets you monitor the HTTP and HTTPS
 // requests that are forwarded to an Amazon CloudFront distribution, Amazon API
 // Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito
-// user pool, or App Runner service. WAF also lets you control access to your
-// content, to protect the Amazon Web Services resource that WAF is monitoring.
-// Based on conditions that you specify, such as the IP addresses that requests
-// originate from or the values of query strings, the protected resource responds
-// to requests with either the requested content, an HTTP 403 status code
-// (Forbidden), or with a custom response. This API guide is for developers who
-// need detailed information about WAF API actions, data types, and errors. For
-// detailed information about WAF features and guidance for configuring and using
-// WAF, see the WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html)
+// user pool, App Runner service, or Amazon Web Services Verified Access instance.
+// WAF also lets you control access to your content, to protect the Amazon Web
+// Services resource that WAF is monitoring. Based on conditions that you specify,
+// such as the IP addresses that requests originate from or the values of query
+// strings, the protected resource responds to requests with either the requested
+// content, an HTTP 403 status code (Forbidden), or with a custom response. This
+// API guide is for developers who need detailed information about WAF API actions,
+// data types, and errors. For detailed information about WAF features and guidance
+// for configuring and using WAF, see the WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html)
 // . You can make calls using the endpoints listed in WAF endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/waf.html)
 // .
 //   - For regional applications, you can use any of the endpoints in the list. A
 //     regional application can be an Application Load Balancer (ALB), an Amazon API
-//     Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App
-//     Runner service.
+//     Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App
+//     Runner service, or an Amazon Web Services Verified Access instance.
 //   - For Amazon CloudFront applications, you must use the API endpoint listed
 //     for US East (N. Virginia): us-east-1.
 //

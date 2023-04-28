@@ -39,8 +39,9 @@ type ListResourcesForWebACLInput struct {
 
 	// Used for web ACLs that are scoped for regional applications. A regional
 	// application can be an Application Load Balancer (ALB), an Amazon API Gateway
-	// REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner
-	// service. If you don't provide a resource type, the call uses the resource type
+	// REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
+	// service, or an Amazon Web Services Verified Access instance. If you don't
+	// provide a resource type, the call uses the resource type
 	// APPLICATION_LOAD_BALANCER . Default: APPLICATION_LOAD_BALANCER
 	ResourceType types.ResourceType
 

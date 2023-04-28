@@ -8,6 +8,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_CreateSnapshot.go",
         "api_op_DeleteApp.go",
         "api_op_DeleteSimulation.go",
         "api_op_DescribeApp.go",

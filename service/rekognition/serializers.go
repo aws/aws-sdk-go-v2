@@ -5559,6 +5559,11 @@ func awsAwsjson11_serializeOpDocumentGetContentModerationInput(v *GetContentMode
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AggregateBy) > 0 {
+		ok := object.Key("AggregateBy")
+		ok.String(string(v.AggregateBy))
+	}
+
 	if v.JobId != nil {
 		ok := object.Key("JobId")
 		ok.String(*v.JobId)

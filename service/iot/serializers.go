@@ -1814,6 +1814,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainConfigurationInput(v *CreateDom
 		}
 	}
 
+	if v.TlsConfig != nil {
+		ok := object.Key("tlsConfig")
+		if err := awsRestjson1_serializeDocumentTlsConfig(v.TlsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ValidationCertificateArn != nil {
 		ok := object.Key("validationCertificateArn")
 		ok.String(*v.ValidationCertificateArn)
@@ -15849,6 +15856,13 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigurationInput(v *UpdateDom
 		ok.Boolean(v.RemoveAuthorizerConfig)
 	}
 
+	if v.TlsConfig != nil {
+		ok := object.Key("tlsConfig")
+		if err := awsRestjson1_serializeDocumentTlsConfig(v.TlsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -20735,6 +20749,18 @@ func awsRestjson1_serializeDocumentTimestreamTimestamp(v *types.TimestreamTimest
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTlsConfig(v *types.TlsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityPolicy != nil {
+		ok := object.Key("securityPolicy")
+		ok.String(*v.SecurityPolicy)
 	}
 
 	return nil

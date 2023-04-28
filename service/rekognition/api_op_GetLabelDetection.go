@@ -110,8 +110,22 @@ type GetLabelDetectionInput struct {
 
 type GetLabelDetectionOutput struct {
 
+	// Information about the paramters used when getting a response. Includes
+	// information on aggregation and sorting methods.
+	GetRequestMetadata *types.GetLabelDetectionRequestMetadata
+
+	// Job identifier for the label detection operation for which you want to obtain
+	// results. The job identifer is returned by an initial call to
+	// StartLabelDetection.
+	JobId *string
+
 	// The current status of the label detection job.
 	JobStatus types.VideoJobStatus
+
+	// A job identifier specified in the call to StartLabelDetection and returned in
+	// the job completion notification sent to your Amazon Simple Notification Service
+	// topic.
+	JobTag *string
 
 	// Version number of the label detection model that was used to detect labels.
 	LabelModelVersion *string
@@ -127,6 +141,11 @@ type GetLabelDetectionOutput struct {
 
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
+
+	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
+	// operations such as StartLabelDetection use Video to specify a video for
+	// analysis. The supported file formats are .mp4, .mov and .avi.
+	Video *types.Video
 
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
 	// is returned in every page of paginated responses from a Amazon Rekognition video

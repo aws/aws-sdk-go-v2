@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateSnapshot struct {
+}
+
+func (*validateOpCreateSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteApp struct {
 }
 
@@ -289,6 +309,10 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSnapshot{}, middleware.After)
+}
+
 func addOpDeleteAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApp{}, middleware.After)
 }
@@ -343,6 +367,24 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapshotInput"}
+	if v.Simulation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Simulation"))
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpDeleteAppInput(v *DeleteAppInput) error {
@@ -493,9 +535,6 @@ func validateOpStartSimulationInput(v *StartSimulationInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.SchemaS3Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaS3Location"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

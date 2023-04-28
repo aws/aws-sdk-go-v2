@@ -147,6 +147,94 @@ type CalculationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the submission time of a single allocation request for a capacity
+// reservation and the most recent status of the attempted allocation.
+type CapacityAllocation struct {
+
+	// The time when the capacity allocation was requested.
+	//
+	// This member is required.
+	RequestTime *time.Time
+
+	// The status of the capacity allocation.
+	//
+	// This member is required.
+	Status CapacityAllocationStatus
+
+	// The time when the capacity allocation request was completed.
+	RequestCompletionTime *time.Time
+
+	// The status message of the capacity allocation.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A mapping between one or more workgroups and a capacity reservation.
+type CapacityAssignment struct {
+
+	// The list of workgroup names for the capacity assignment.
+	WorkGroupNames []string
+
+	noSmithyDocumentSerde
+}
+
+// Assigns Athena workgroups (and hence their queries) to capacity reservations. A
+// capacity reservation can have only one capacity assignment configuration, but
+// the capacity assignment configuration can be made up of multiple individual
+// assignments. Each assignment specifies how Athena queries can consume capacity
+// from the capacity reservation that their workgroup is mapped to.
+type CapacityAssignmentConfiguration struct {
+
+	// The list of assignments that make up the capacity assignment configuration.
+	CapacityAssignments []CapacityAssignment
+
+	// The name of the reservation that the capacity assignment configuration is for.
+	CapacityReservationName *string
+
+	noSmithyDocumentSerde
+}
+
+// A reservation for a specified number of data processing units (DPUs). When a
+// reservation is initially created, it has no DPUs. Athena allocates DPUs until
+// the allocated amount equals the requested amount.
+type CapacityReservation struct {
+
+	// The number of data processing units currently allocated.
+	//
+	// This member is required.
+	AllocatedDpus *int32
+
+	// The time in UTC epoch millis when the capacity reservation was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The name of the capacity reservation.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the capacity reservation.
+	//
+	// This member is required.
+	Status CapacityReservationStatus
+
+	// The number of data processing units requested.
+	//
+	// This member is required.
+	TargetDpus *int32
+
+	// Contains the submission time of a single allocation request for a capacity
+	// reservation and the most recent status of the attempted allocation.
+	LastAllocation *CapacityAllocation
+
+	// The time of the most recent capacity allocation that succeeded.
+	LastSuccessfulAllocationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains metadata for a column in a table.
 type Column struct {
 
@@ -345,11 +433,12 @@ type EngineConfiguration struct {
 
 	// The number of DPUs to use for the coordinator. A coordinator is a special
 	// executor that orchestrates processing work and manages other executors in a
-	// notebook session.
+	// notebook session. The default is 1.
 	CoordinatorDpuSize *int32
 
 	// The default number of DPUs to use for executors. An executor is the smallest
-	// unit of compute that a notebook session can request from Athena.
+	// unit of compute that a notebook session can request from Athena. The default is
+	// 1.
 	DefaultExecutorDpuSize *int32
 
 	noSmithyDocumentSerde
@@ -1091,11 +1180,11 @@ type TableMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A label that you assign to a resource. In Athena, a resource can be a workgroup
-// or data catalog. Each tag consists of a key and an optional value, both of which
-// you define. For example, you can use tags to categorize Athena workgroups or
-// data catalogs by purpose, owner, or environment. Use a consistent set of tag
-// keys to make it easier to search and filter workgroups or data catalogs in your
+// A label that you assign to a resource. Athena resources include workgroups,
+// data catalogs, and capacity reservations. Each tag consists of a key and an
+// optional value, both of which you define. For example, you can use tags to
+// categorize Athena resources by purpose, owner, or environment. Use a consistent
+// set of tag keys to make it easier to search and filter the resources in your
 // account. For best practices, see Tagging Best Practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 // . Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be
 // from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers

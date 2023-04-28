@@ -63,6 +63,11 @@ type GetContentModerationInput struct {
 	// This member is required.
 	JobId *string
 
+	// Defines how to aggregate results of the StartContentModeration request. Default
+	// aggregation option is TIMESTAMPS. SEGMENTS mode aggregates moderation labels
+	// over time.
+	AggregateBy types.ContentModerationAggregateBy
+
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
 	// results is returned. The default value is 1000.
@@ -86,8 +91,22 @@ type GetContentModerationInput struct {
 
 type GetContentModerationOutput struct {
 
+	// Information about the paramters used when getting a response. Includes
+	// information on aggregation and sorting methods.
+	GetRequestMetadata *types.GetContentModerationRequestMetadata
+
+	// Job identifier for the content moderation operation for which you want to
+	// obtain results. The job identifer is returned by an initial call to
+	// StartContentModeration.
+	JobId *string
+
 	// The current status of the content moderation analysis job.
 	JobStatus types.VideoJobStatus
+
+	// A job identifier specified in the call to StartContentModeration and returned
+	// in the job completion notification sent to your Amazon Simple Notification
+	// Service topic.
+	JobTag *string
 
 	// The detected inappropriate, unwanted, or offensive content moderation labels
 	// and the time(s) they were detected.
@@ -104,6 +123,11 @@ type GetContentModerationOutput struct {
 
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
+
+	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
+	// operations such as StartLabelDetection use Video to specify a video for
+	// analysis. The supported file formats are .mp4, .mov and .avi.
+	Video *types.Video
 
 	// Information about a video that Amazon Rekognition analyzed. Videometadata is
 	// returned in every page of paginated responses from GetContentModeration .

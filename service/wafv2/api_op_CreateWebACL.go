@@ -20,7 +20,8 @@ import (
 // associate a web ACL with one or more Amazon Web Services resources to protect.
 // The resources can be an Amazon CloudFront distribution, an Amazon API Gateway
 // REST API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
-// Cognito user pool, or an App Runner service.
+// Cognito user pool, an App Runner service, or an Amazon Web Services Verified
+// Access instance.
 func (c *Client) CreateWebACL(ctx context.Context, params *CreateWebACLInput, optFns ...func(*Options)) (*CreateWebACLOutput, error) {
 	if params == nil {
 		params = &CreateWebACLInput{}
@@ -52,8 +53,9 @@ type CreateWebACLInput struct {
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
-	// user pool, or an App Runner service. To work with CloudFront, you must also
-	// specify the Region US East (N. Virginia) as follows:
+	// user pool, an App Runner service, or an Amazon Web Services Verified Access
+	// instance. To work with CloudFront, you must also specify the Region US East (N.
+	// Virginia) as follows:
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.

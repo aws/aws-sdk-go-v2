@@ -81,6 +81,10 @@ type CreateWorkspaceInput struct {
 	// This value conforms to the media type: application/json
 	Configuration *string
 
+	// Specifies the version of Grafana to support in the new workspace. Supported
+	// values are 8.4 and 9.4 .
+	GrafanaVersion *string
+
 	// Configuration for network access to your workspace. When this is configured,
 	// only listed IP addresses and VPC endpoints will be able to access your
 	// workspace. Standard Grafana authentication and authorization will still be

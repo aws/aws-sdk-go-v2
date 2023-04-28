@@ -1,0 +1,8 @@
+{
+    "id": "efac686e-5a24-4710-8ac0-a542a870f997",
+    "type": "feature",
+    "description": "This release adds PAUSED and PAUSING state as a returned value for DescribeReplicationConfigurations response.",
+    "modules": [
+        "service/efs"
+    ]
+}

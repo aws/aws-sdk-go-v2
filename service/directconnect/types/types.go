@@ -783,7 +783,7 @@ type NewTransitVirtualInterface struct {
 	EnableSiteLink *bool
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 9001. The default value is 1500.
+	// and 8500. The default value is 1500.
 	Mtu *int32
 
 	// The tags associated with the transitive virtual interface.

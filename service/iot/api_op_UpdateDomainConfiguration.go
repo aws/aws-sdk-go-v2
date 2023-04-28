@@ -46,6 +46,9 @@ type UpdateDomainConfigurationInput struct {
 	// Removes the authorization configuration from a domain.
 	RemoveAuthorizerConfig bool
 
+	// An object that specifies the TLS configuration for a domain.
+	TlsConfig *types.TlsConfig
+
 	noSmithyDocumentSerde
 }
 

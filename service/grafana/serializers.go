@@ -163,6 +163,11 @@ func awsRestjson1_serializeOpDocumentCreateWorkspaceInput(v *CreateWorkspaceInpu
 		ok.String(*v.Configuration)
 	}
 
+	if v.GrafanaVersion != nil {
+		ok := object.Key("grafanaVersion")
+		ok.String(*v.GrafanaVersion)
+	}
+
 	if v.NetworkAccessControl != nil {
 		ok := object.Key("networkAccessControl")
 		if err := awsRestjson1_serializeDocumentNetworkAccessConfiguration(v.NetworkAccessControl, ok); err != nil {

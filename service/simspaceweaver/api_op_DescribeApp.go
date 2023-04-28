@@ -59,8 +59,7 @@ type DescribeAppOutput struct {
 	// endpoint to connect to the custom app.
 	EndpointInfo *types.SimulationAppEndpointInfo
 
-	// Options that apply when the app starts. These optiAons override default
-	// behavior.
+	// Options that apply when the app starts. These options override default behavior.
 	LaunchOverrides *types.LaunchOverrides
 
 	// The name of the app.

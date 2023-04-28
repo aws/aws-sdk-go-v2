@@ -72,8 +72,17 @@ type GetFaceDetectionOutput struct {
 	// face was detected.
 	Faces []types.FaceDetection
 
+	// Job identifier for the face detection operation for which you want to obtain
+	// results. The job identifer is returned by an initial call to StartFaceDetection.
+	JobId *string
+
 	// The current status of the face detection job.
 	JobStatus types.VideoJobStatus
+
+	// A job identifier specified in the call to StartFaceDetection and returned in
+	// the job completion notification sent to your Amazon Simple Notification Service
+	// topic.
+	JobTag *string
 
 	// If the response is truncated, Amazon Rekognition returns this token that you
 	// can use in the subsequent request to retrieve the next set of faces.
@@ -81,6 +90,11 @@ type GetFaceDetectionOutput struct {
 
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
+
+	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
+	// operations such as StartLabelDetection use Video to specify a video for
+	// analysis. The supported file formats are .mp4, .mov and .avi.
+	Video *types.Video
 
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
 	// is returned in every page of paginated responses from a Amazon Rekognition video

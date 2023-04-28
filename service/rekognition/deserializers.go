@@ -10735,9 +10735,48 @@ func awsAwsjson11_deserializeDocumentContentModerationDetection(v **types.Conten
 
 	for key, value := range shape {
 		switch key {
+		case "DurationMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationMillis = ptr.Int64(i64)
+			}
+
+		case "EndTimestampMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndTimestampMillis = ptr.Int64(i64)
+			}
+
 		case "ModerationLabel":
 			if err := awsAwsjson11_deserializeDocumentModerationLabel(&sv.ModerationLabel, value); err != nil {
 				return err
+			}
+
+		case "StartTimestampMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTimestampMillis = ptr.Int64(i64)
 			}
 
 		case "Timestamp":
@@ -13155,6 +13194,104 @@ func awsAwsjson11_deserializeDocumentGeometry(v **types.Geometry, value interfac
 		case "Polygon":
 			if err := awsAwsjson11_deserializeDocumentPolygon(&sv.Polygon, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGetContentModerationRequestMetadata(v **types.GetContentModerationRequestMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GetContentModerationRequestMetadata
+	if *v == nil {
+		sv = &types.GetContentModerationRequestMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AggregateBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentModerationAggregateBy to be of type string, got %T instead", value)
+				}
+				sv.AggregateBy = types.ContentModerationAggregateBy(jtv)
+			}
+
+		case "SortBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentModerationSortBy to be of type string, got %T instead", value)
+				}
+				sv.SortBy = types.ContentModerationSortBy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGetLabelDetectionRequestMetadata(v **types.GetLabelDetectionRequestMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GetLabelDetectionRequestMetadata
+	if *v == nil {
+		sv = &types.GetLabelDetectionRequestMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AggregateBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LabelDetectionAggregateBy to be of type string, got %T instead", value)
+				}
+				sv.AggregateBy = types.LabelDetectionAggregateBy(jtv)
+			}
+
+		case "SortBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LabelDetectionSortBy to be of type string, got %T instead", value)
+				}
+				sv.SortBy = types.LabelDetectionSortBy(jtv)
 			}
 
 		default:
@@ -18592,6 +18729,42 @@ func awsAwsjson11_deserializeDocumentValidationData(v **types.ValidationData, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentVideo(v **types.Video, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Video
+	if *v == nil {
+		sv = &types.Video{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Object":
+			if err := awsAwsjson11_deserializeDocumentS3Object(&sv.S3Object, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentVideoMetadata(v **types.VideoMetadata, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20178,6 +20351,15 @@ func awsAwsjson11_deserializeOpDocumentGetCelebrityRecognitionOutput(v **GetCele
 				return err
 			}
 
+		case "JobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20185,6 +20367,15 @@ func awsAwsjson11_deserializeOpDocumentGetCelebrityRecognitionOutput(v **GetCele
 					return fmt.Errorf("expected VideoJobStatus to be of type string, got %T instead", value)
 				}
 				sv.JobStatus = types.VideoJobStatus(jtv)
+			}
+
+		case "JobTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobTag to be of type string, got %T instead", value)
+				}
+				sv.JobTag = ptr.String(jtv)
 			}
 
 		case "NextToken":
@@ -20203,6 +20394,11 @@ func awsAwsjson11_deserializeOpDocumentGetCelebrityRecognitionOutput(v **GetCele
 					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Video":
+			if err := awsAwsjson11_deserializeDocumentVideo(&sv.Video, value); err != nil {
+				return err
 			}
 
 		case "VideoMetadata":
@@ -20241,6 +20437,20 @@ func awsAwsjson11_deserializeOpDocumentGetContentModerationOutput(v **GetContent
 
 	for key, value := range shape {
 		switch key {
+		case "GetRequestMetadata":
+			if err := awsAwsjson11_deserializeDocumentGetContentModerationRequestMetadata(&sv.GetRequestMetadata, value); err != nil {
+				return err
+			}
+
+		case "JobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20248,6 +20458,15 @@ func awsAwsjson11_deserializeOpDocumentGetContentModerationOutput(v **GetContent
 					return fmt.Errorf("expected VideoJobStatus to be of type string, got %T instead", value)
 				}
 				sv.JobStatus = types.VideoJobStatus(jtv)
+			}
+
+		case "JobTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobTag to be of type string, got %T instead", value)
+				}
+				sv.JobTag = ptr.String(jtv)
 			}
 
 		case "ModerationLabels":
@@ -20280,6 +20499,11 @@ func awsAwsjson11_deserializeOpDocumentGetContentModerationOutput(v **GetContent
 					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Video":
+			if err := awsAwsjson11_deserializeDocumentVideo(&sv.Video, value); err != nil {
+				return err
 			}
 
 		case "VideoMetadata":
@@ -20323,6 +20547,15 @@ func awsAwsjson11_deserializeOpDocumentGetFaceDetectionOutput(v **GetFaceDetecti
 				return err
 			}
 
+		case "JobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20330,6 +20563,15 @@ func awsAwsjson11_deserializeOpDocumentGetFaceDetectionOutput(v **GetFaceDetecti
 					return fmt.Errorf("expected VideoJobStatus to be of type string, got %T instead", value)
 				}
 				sv.JobStatus = types.VideoJobStatus(jtv)
+			}
+
+		case "JobTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobTag to be of type string, got %T instead", value)
+				}
+				sv.JobTag = ptr.String(jtv)
 			}
 
 		case "NextToken":
@@ -20348,6 +20590,11 @@ func awsAwsjson11_deserializeOpDocumentGetFaceDetectionOutput(v **GetFaceDetecti
 					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Video":
+			if err := awsAwsjson11_deserializeDocumentVideo(&sv.Video, value); err != nil {
+				return err
 			}
 
 		case "VideoMetadata":
@@ -20479,6 +20726,15 @@ func awsAwsjson11_deserializeOpDocumentGetFaceSearchOutput(v **GetFaceSearchOutp
 
 	for key, value := range shape {
 		switch key {
+		case "JobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20486,6 +20742,15 @@ func awsAwsjson11_deserializeOpDocumentGetFaceSearchOutput(v **GetFaceSearchOutp
 					return fmt.Errorf("expected VideoJobStatus to be of type string, got %T instead", value)
 				}
 				sv.JobStatus = types.VideoJobStatus(jtv)
+			}
+
+		case "JobTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobTag to be of type string, got %T instead", value)
+				}
+				sv.JobTag = ptr.String(jtv)
 			}
 
 		case "NextToken":
@@ -20509,6 +20774,11 @@ func awsAwsjson11_deserializeOpDocumentGetFaceSearchOutput(v **GetFaceSearchOutp
 					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Video":
+			if err := awsAwsjson11_deserializeDocumentVideo(&sv.Video, value); err != nil {
+				return err
 			}
 
 		case "VideoMetadata":
@@ -20547,6 +20817,20 @@ func awsAwsjson11_deserializeOpDocumentGetLabelDetectionOutput(v **GetLabelDetec
 
 	for key, value := range shape {
 		switch key {
+		case "GetRequestMetadata":
+			if err := awsAwsjson11_deserializeDocumentGetLabelDetectionRequestMetadata(&sv.GetRequestMetadata, value); err != nil {
+				return err
+			}
+
+		case "JobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20554,6 +20838,15 @@ func awsAwsjson11_deserializeOpDocumentGetLabelDetectionOutput(v **GetLabelDetec
 					return fmt.Errorf("expected VideoJobStatus to be of type string, got %T instead", value)
 				}
 				sv.JobStatus = types.VideoJobStatus(jtv)
+			}
+
+		case "JobTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobTag to be of type string, got %T instead", value)
+				}
+				sv.JobTag = ptr.String(jtv)
 			}
 
 		case "LabelModelVersion":
@@ -20586,6 +20879,11 @@ func awsAwsjson11_deserializeOpDocumentGetLabelDetectionOutput(v **GetLabelDetec
 					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Video":
+			if err := awsAwsjson11_deserializeDocumentVideo(&sv.Video, value); err != nil {
+				return err
 			}
 
 		case "VideoMetadata":
@@ -20624,6 +20922,15 @@ func awsAwsjson11_deserializeOpDocumentGetPersonTrackingOutput(v **GetPersonTrac
 
 	for key, value := range shape {
 		switch key {
+		case "JobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20631,6 +20938,15 @@ func awsAwsjson11_deserializeOpDocumentGetPersonTrackingOutput(v **GetPersonTrac
 					return fmt.Errorf("expected VideoJobStatus to be of type string, got %T instead", value)
 				}
 				sv.JobStatus = types.VideoJobStatus(jtv)
+			}
+
+		case "JobTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobTag to be of type string, got %T instead", value)
+				}
+				sv.JobTag = ptr.String(jtv)
 			}
 
 		case "NextToken":
@@ -20654,6 +20970,11 @@ func awsAwsjson11_deserializeOpDocumentGetPersonTrackingOutput(v **GetPersonTrac
 					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Video":
+			if err := awsAwsjson11_deserializeDocumentVideo(&sv.Video, value); err != nil {
+				return err
 			}
 
 		case "VideoMetadata":
@@ -20697,6 +21018,15 @@ func awsAwsjson11_deserializeOpDocumentGetSegmentDetectionOutput(v **GetSegmentD
 				return err
 			}
 
+		case "JobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20704,6 +21034,15 @@ func awsAwsjson11_deserializeOpDocumentGetSegmentDetectionOutput(v **GetSegmentD
 					return fmt.Errorf("expected VideoJobStatus to be of type string, got %T instead", value)
 				}
 				sv.JobStatus = types.VideoJobStatus(jtv)
+			}
+
+		case "JobTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobTag to be of type string, got %T instead", value)
+				}
+				sv.JobTag = ptr.String(jtv)
 			}
 
 		case "NextToken":
@@ -20732,6 +21071,11 @@ func awsAwsjson11_deserializeOpDocumentGetSegmentDetectionOutput(v **GetSegmentD
 					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Video":
+			if err := awsAwsjson11_deserializeDocumentVideo(&sv.Video, value); err != nil {
+				return err
 			}
 
 		case "VideoMetadata":
@@ -20770,6 +21114,15 @@ func awsAwsjson11_deserializeOpDocumentGetTextDetectionOutput(v **GetTextDetecti
 
 	for key, value := range shape {
 		switch key {
+		case "JobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20777,6 +21130,15 @@ func awsAwsjson11_deserializeOpDocumentGetTextDetectionOutput(v **GetTextDetecti
 					return fmt.Errorf("expected VideoJobStatus to be of type string, got %T instead", value)
 				}
 				sv.JobStatus = types.VideoJobStatus(jtv)
+			}
+
+		case "JobTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobTag to be of type string, got %T instead", value)
+				}
+				sv.JobTag = ptr.String(jtv)
 			}
 
 		case "NextToken":
@@ -20809,6 +21171,11 @@ func awsAwsjson11_deserializeOpDocumentGetTextDetectionOutput(v **GetTextDetecti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.TextModelVersion = ptr.String(jtv)
+			}
+
+		case "Video":
+			if err := awsAwsjson11_deserializeDocumentVideo(&sv.Video, value); err != nil {
+				return err
 			}
 
 		case "VideoMetadata":

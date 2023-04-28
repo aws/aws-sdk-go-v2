@@ -13,7 +13,12 @@ import (
 	"time"
 )
 
-// Starts a simulation with the given name and schema.
+// Starts a simulation with the given name. You must choose to start your
+// simulation from a schema or from a snapshot. For more information about the
+// schema, see the schema reference (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/schema-reference.html)
+// in the SimSpace Weaver User Guide. For more information about snapshots, see
+// Snapshots (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html)
+// in the SimSpace Weaver User Guide.
 func (c *Client) StartSimulation(ctx context.Context, params *StartSimulationInput, optFns ...func(*Options)) (*StartSimulationOutput, error) {
 	if params == nil {
 		params = &StartSimulationInput{}
@@ -46,14 +51,6 @@ type StartSimulationInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The location of the simulation schema in Amazon Simple Storage Service (Amazon
-	// S3). For more information about Amazon S3, see the Amazon Simple Storage
-	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
-	// .
-	//
-	// This member is required.
-	SchemaS3Location *types.S3Location
-
 	// A value that you provide to ensure that repeated calls to this API operation
 	// using the same parameters complete only once. A ClientToken is also known as an
 	// idempotency token. A ClientToken expires after 24 hours.
@@ -62,10 +59,26 @@ type StartSimulationInput struct {
 	// The description of the simulation.
 	Description *string
 
-	// The maximum running time of the simulation, specified as a number of months (m
+	// The maximum running time of the simulation, specified as a number of minutes (m
 	// or M), hours (h or H), or days (d or D). The simulation stops when it reaches
-	// this limit.
+	// this limit. The maximum value is 14D , or its equivalent in the other units. The
+	// default value is 14D . A value equivalent to 0 makes the simulation immediately
+	// transition to Stopping as soon as it reaches Started .
 	MaximumDuration *string
+
+	// The location of the simulation schema in Amazon Simple Storage Service (Amazon
+	// S3). For more information about Amazon S3, see the Amazon Simple Storage
+	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+	// . Provide a SchemaS3Location to start your simulation from a schema. If you
+	// provide a SchemaS3Location then you can't provide a SnapshotS3Location .
+	SchemaS3Location *types.S3Location
+
+	// The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon
+	// S3). For more information about Amazon S3, see the Amazon Simple Storage
+	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+	// . Provide a SnapshotS3Location to start your simulation from a snapshot. If you
+	// provide a SnapshotS3Location then you can't provide a SchemaS3Location .
+	SnapshotS3Location *types.S3Location
 
 	// A list of tags for the simulation. For more information about tags, see Tagging
 	// Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)

@@ -1,0 +1,8 @@
+{
+    "id": "5b75d599-c109-4371-8fd7-f1cc3ce2201d",
+    "type": "feature",
+    "description": "Adds Jwt Support for Salesforce Credentials.",
+    "modules": [
+        "service/appflow"
+    ]
+}

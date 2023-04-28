@@ -1,0 +1,8 @@
+{
+    "id": "587ad80a-9fd4-4d40-9b7e-42a36526e679",
+    "type": "feature",
+    "description": "You can now use capacity reservations on Amazon Athena to run SQL queries on fully-managed compute capacity.",
+    "modules": [
+        "service/athena"
+    ]
+}

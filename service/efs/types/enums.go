@@ -54,6 +54,8 @@ const (
 	ReplicationStatusEnabling ReplicationStatus = "ENABLING"
 	ReplicationStatusDeleting ReplicationStatus = "DELETING"
 	ReplicationStatusError    ReplicationStatus = "ERROR"
+	ReplicationStatusPaused   ReplicationStatus = "PAUSED"
+	ReplicationStatusPausing  ReplicationStatus = "PAUSING"
 )
 
 // Values returns all known values for ReplicationStatus. Note that this can be
@@ -65,6 +67,8 @@ func (ReplicationStatus) Values() []ReplicationStatus {
 		"ENABLING",
 		"DELETING",
 		"ERROR",
+		"PAUSED",
+		"PAUSING",
 	}
 }
 

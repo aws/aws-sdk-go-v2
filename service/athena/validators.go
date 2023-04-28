@@ -70,6 +70,46 @@ func (m *validateOpBatchGetQueryExecution) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelCapacityReservation struct {
+}
+
+func (*validateOpCancelCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelCapacityReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCapacityReservation struct {
+}
+
+func (*validateOpCreateCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCapacityReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataCatalog struct {
 }
 
@@ -365,6 +405,46 @@ func (m *validateOpGetCalculationExecutionStatus) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetCalculationExecutionStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCapacityAssignmentConfiguration struct {
+}
+
+func (*validateOpGetCapacityAssignmentConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCapacityAssignmentConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCapacityAssignmentConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCapacityAssignmentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCapacityReservation struct {
+}
+
+func (*validateOpGetCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCapacityReservationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,6 +890,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutCapacityAssignmentConfiguration struct {
+}
+
+func (*validateOpPutCapacityAssignmentConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutCapacityAssignmentConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutCapacityAssignmentConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutCapacityAssignmentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartCalculationExecution struct {
 }
 
@@ -970,6 +1070,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCapacityReservation struct {
+}
+
+func (*validateOpUpdateCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCapacityReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataCatalog struct {
 }
 
@@ -1102,6 +1222,14 @@ func addOpBatchGetQueryExecutionValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpBatchGetQueryExecution{}, middleware.After)
 }
 
+func addOpCancelCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelCapacityReservation{}, middleware.After)
+}
+
+func addOpCreateCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCapacityReservation{}, middleware.After)
+}
+
 func addOpCreateDataCatalogValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataCatalog{}, middleware.After)
 }
@@ -1160,6 +1288,14 @@ func addOpGetCalculationExecutionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetCalculationExecutionStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCalculationExecutionStatus{}, middleware.After)
+}
+
+func addOpGetCapacityAssignmentConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCapacityAssignmentConfiguration{}, middleware.After)
+}
+
+func addOpGetCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCapacityReservation{}, middleware.After)
 }
 
 func addOpGetDatabaseValidationMiddleware(stack *middleware.Stack) error {
@@ -1250,6 +1386,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutCapacityAssignmentConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutCapacityAssignmentConfiguration{}, middleware.After)
+}
+
 func addOpStartCalculationExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCalculationExecution{}, middleware.After)
 }
@@ -1280,6 +1420,10 @@ func addOpTerminateSessionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCapacityReservation{}, middleware.After)
 }
 
 func addOpUpdateDataCatalogValidationMiddleware(stack *middleware.Stack) error {
@@ -1520,6 +1664,39 @@ func validateOpBatchGetQueryExecutionInput(v *BatchGetQueryExecutionInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetQueryExecutionInput"}
 	if v.QueryExecutionIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryExecutionIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelCapacityReservationInput(v *CancelCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelCapacityReservationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCapacityReservationInput(v *CreateCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCapacityReservationInput"}
+	if v.TargetDpus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDpus"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1771,6 +1948,36 @@ func validateOpGetCalculationExecutionStatusInput(v *GetCalculationExecutionStat
 	invalidParams := smithy.InvalidParamsError{Context: "GetCalculationExecutionStatusInput"}
 	if v.CalculationExecutionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CalculationExecutionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCapacityAssignmentConfigurationInput(v *GetCapacityAssignmentConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCapacityAssignmentConfigurationInput"}
+	if v.CapacityReservationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCapacityReservationInput(v *GetCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCapacityReservationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2133,6 +2340,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutCapacityAssignmentConfigurationInput(v *PutCapacityAssignmentConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutCapacityAssignmentConfigurationInput"}
+	if v.CapacityReservationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationName"))
+	}
+	if v.CapacityAssignments == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityAssignments"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartCalculationExecutionInput(v *StartCalculationExecutionInput) error {
 	if v == nil {
 		return nil
@@ -2268,6 +2493,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCapacityReservationInput(v *UpdateCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCapacityReservationInput"}
+	if v.TargetDpus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDpus"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

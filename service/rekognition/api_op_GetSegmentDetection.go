@@ -80,8 +80,18 @@ type GetSegmentDetectionOutput struct {
 	// returned in each page of information returned by GetSegmentDetection .
 	AudioMetadata []types.AudioMetadata
 
+	// Job identifier for the segment detection operation for which you want to obtain
+	// results. The job identifer is returned by an initial call to
+	// StartSegmentDetection.
+	JobId *string
+
 	// Current status of the segment detection job.
 	JobStatus types.VideoJobStatus
+
+	// A job identifier specified in the call to StartSegmentDetection and returned in
+	// the job completion notification sent to your Amazon Simple Notification Service
+	// topic.
+	JobTag *string
 
 	// If the previous response was incomplete (because there are more labels to
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
@@ -100,6 +110,11 @@ type GetSegmentDetectionOutput struct {
 
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
+
+	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
+	// operations such as StartLabelDetection use Video to specify a video for
+	// analysis. The supported file formats are .mp4, .mov and .avi.
+	Video *types.Video
 
 	// Currently, Amazon Rekognition Video returns a single object in the VideoMetadata
 	// array. The object contains information about the video stream in the input file

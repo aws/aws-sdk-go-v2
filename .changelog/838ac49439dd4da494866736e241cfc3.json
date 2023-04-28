@@ -1,0 +1,8 @@
+{
+    "id": "838ac494-39dd-4da4-9486-6736e241cfc3",
+    "type": "feature",
+    "description": "This release adds support for the grafanaVersion parameter in CreateWorkspace.",
+    "modules": [
+        "service/grafana"
+    ]
+}

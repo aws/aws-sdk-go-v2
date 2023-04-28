@@ -118,14 +118,15 @@ type SimulationStatus string
 
 // Enum values for SimulationStatus
 const (
-	SimulationStatusUnknown  SimulationStatus = "UNKNOWN"
-	SimulationStatusStarting SimulationStatus = "STARTING"
-	SimulationStatusStarted  SimulationStatus = "STARTED"
-	SimulationStatusStopping SimulationStatus = "STOPPING"
-	SimulationStatusStopped  SimulationStatus = "STOPPED"
-	SimulationStatusFailed   SimulationStatus = "FAILED"
-	SimulationStatusDeleting SimulationStatus = "DELETING"
-	SimulationStatusDeleted  SimulationStatus = "DELETED"
+	SimulationStatusUnknown            SimulationStatus = "UNKNOWN"
+	SimulationStatusStarting           SimulationStatus = "STARTING"
+	SimulationStatusStarted            SimulationStatus = "STARTED"
+	SimulationStatusStopping           SimulationStatus = "STOPPING"
+	SimulationStatusStopped            SimulationStatus = "STOPPED"
+	SimulationStatusFailed             SimulationStatus = "FAILED"
+	SimulationStatusDeleting           SimulationStatus = "DELETING"
+	SimulationStatusDeleted            SimulationStatus = "DELETED"
+	SimulationStatusSnapshotInProgress SimulationStatus = "SNAPSHOT_IN_PROGRESS"
 )
 
 // Values returns all known values for SimulationStatus. Note that this can be
@@ -141,6 +142,7 @@ func (SimulationStatus) Values() []SimulationStatus {
 		"FAILED",
 		"DELETING",
 		"DELETED",
+		"SNAPSHOT_IN_PROGRESS",
 	}
 }
 
