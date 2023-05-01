@@ -115,8 +115,10 @@ type UpdateCustomKeyStoreInput struct {
 
 	// Changes the friendly name of the custom key store to the value that you
 	// specify. The custom key store name must be unique in the Amazon Web Services
-	// account. To change this value, an CloudHSM key store must be disconnected. An
-	// external key store can be connected or disconnected.
+	// account. Do not include confidential or sensitive information in this field.
+	// This field may be displayed in plaintext in CloudTrail logs and other output. To
+	// change this value, an CloudHSM key store must be disconnected. An external key
+	// store can be connected or disconnected.
 	NewCustomKeyStoreName *string
 
 	// Changes the credentials that KMS uses to sign requests to the external key

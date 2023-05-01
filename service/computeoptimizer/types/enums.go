@@ -436,6 +436,7 @@ const (
 	ExportableECSServiceFieldRecommendationOptionsContainerRecommendations                 ExportableECSServiceField = "RecommendationOptionsContainerRecommendations"
 	ExportableECSServiceFieldRecommendationOptionsProjectedUtilizationMetricsCpuMaximum    ExportableECSServiceField = "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"
 	ExportableECSServiceFieldRecommendationOptionsProjectedUtilizationMetricsMemoryMaximum ExportableECSServiceField = "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"
+	ExportableECSServiceFieldTags                                                          ExportableECSServiceField = "Tags"
 )
 
 // Values returns all known values for ExportableECSServiceField. Note that this
@@ -466,6 +467,7 @@ func (ExportableECSServiceField) Values() []ExportableECSServiceField {
 		"RecommendationOptionsContainerRecommendations",
 		"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
 		"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+		"Tags",
 	}
 }
 
@@ -527,6 +529,7 @@ const (
 	ExportableInstanceFieldRecommendationOptionsMigrationEffort                            ExportableInstanceField = "RecommendationOptionsMigrationEffort"
 	ExportableInstanceFieldEffectiveRecommendationPreferencesExternalMetricsSource         ExportableInstanceField = "EffectiveRecommendationPreferencesExternalMetricsSource"
 	ExportableInstanceFieldInstanceState                                                   ExportableInstanceField = "InstanceState"
+	ExportableInstanceFieldTags                                                            ExportableInstanceField = "Tags"
 )
 
 // Values returns all known values for ExportableInstanceField. Note that this can
@@ -588,6 +591,7 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"RecommendationOptionsMigrationEffort",
 		"EffectiveRecommendationPreferencesExternalMetricsSource",
 		"InstanceState",
+		"Tags",
 	}
 }
 
@@ -621,6 +625,7 @@ const (
 	ExportableLambdaFunctionFieldRecommendationOptionsSavingsOpportunityPercentage                  ExportableLambdaFunctionField = "RecommendationOptionsSavingsOpportunityPercentage"
 	ExportableLambdaFunctionFieldRecommendationOptionsEstimatedMonthlySavingsCurrency               ExportableLambdaFunctionField = "RecommendationOptionsEstimatedMonthlySavingsCurrency"
 	ExportableLambdaFunctionFieldRecommendationOptionsEstimatedMonthlySavingsValue                  ExportableLambdaFunctionField = "RecommendationOptionsEstimatedMonthlySavingsValue"
+	ExportableLambdaFunctionFieldTags                                                               ExportableLambdaFunctionField = "Tags"
 )
 
 // Values returns all known values for ExportableLambdaFunctionField. Note that
@@ -655,6 +660,7 @@ func (ExportableLambdaFunctionField) Values() []ExportableLambdaFunctionField {
 		"RecommendationOptionsSavingsOpportunityPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrency",
 		"RecommendationOptionsEstimatedMonthlySavingsValue",
+		"Tags",
 	}
 }
 
@@ -691,6 +697,7 @@ const (
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsCurrency       ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsCurrency"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsValue          ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsValue"
 	ExportableVolumeFieldRootVolume                                                 ExportableVolumeField = "RootVolume"
+	ExportableVolumeFieldTags                                                       ExportableVolumeField = "Tags"
 )
 
 // Values returns all known values for ExportableVolumeField. Note that this can
@@ -727,6 +734,7 @@ func (ExportableVolumeField) Values() []ExportableVolumeField {
 		"RecommendationOptionsEstimatedMonthlySavingsCurrency",
 		"RecommendationOptionsEstimatedMonthlySavingsValue",
 		"RootVolume",
+		"Tags",
 	}
 }
 
@@ -775,6 +783,7 @@ const (
 	FilterNameFinding                  FilterName = "Finding"
 	FilterNameFindingReasonCodes       FilterName = "FindingReasonCodes"
 	FilterNameRecommendationSourceType FilterName = "RecommendationSourceType"
+	FilterNameInferredWorkloadTypes    FilterName = "InferredWorkloadTypes"
 )
 
 // Values returns all known values for FilterName. Note that this can be expanded
@@ -785,6 +794,7 @@ func (FilterName) Values() []FilterName {
 		"Finding",
 		"FindingReasonCodes",
 		"RecommendationSourceType",
+		"InferredWorkloadTypes",
 	}
 }
 
@@ -840,6 +850,7 @@ const (
 	InferredWorkloadTypePostgreSql      InferredWorkloadType = "PostgreSql"
 	InferredWorkloadTypeRedis           InferredWorkloadType = "Redis"
 	InferredWorkloadTypeKafka           InferredWorkloadType = "Kafka"
+	InferredWorkloadTypeSqlserver       InferredWorkloadType = "SQLServer"
 )
 
 // Values returns all known values for InferredWorkloadType. Note that this can be
@@ -855,6 +866,7 @@ func (InferredWorkloadType) Values() []InferredWorkloadType {
 		"PostgreSql",
 		"Redis",
 		"Kafka",
+		"SQLServer",
 	}
 }
 

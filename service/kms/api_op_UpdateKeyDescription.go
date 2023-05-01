@@ -36,7 +36,9 @@ func (c *Client) UpdateKeyDescription(ctx context.Context, params *UpdateKeyDesc
 
 type UpdateKeyDescriptionInput struct {
 
-	// New description for the KMS key.
+	// New description for the KMS key. Do not include confidential or sensitive
+	// information in this field. This field may be displayed in plaintext in
+	// CloudTrail logs and other output.
 	//
 	// This member is required.
 	Description *string

@@ -95,6 +95,8 @@ type AutoScalingGroupRecommendation struct {
 	//   - NGINX - Infers that NGINX might be running on the instances.
 	//   - PostgreSql - Infers that PostgreSQL might be running on the instances.
 	//   - Redis - Infers that Redis might be running on the instances.
+	//   - Kafka - Infers that Kafka might be running on the instance.
+	//   - SQLServer - Infers that SQLServer might be running on the instance.
 	InferredWorkloadTypes []InferredWorkloadType
 
 	// The timestamp of when the Auto Scaling group recommendation was last generated.
@@ -229,7 +231,18 @@ type CurrentPerformanceRiskRatings struct {
 type EBSFilter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific finding classification (for example, NotOptimized ).
+	// specific finding classification (for example, NotOptimized ). You can filter
+	// your Amazon EBS volume recommendations by tag:key and tag-key tags. A tag:key
+	// is a key and value combination of a tag assigned to your Amazon EBS volume
+	// recommendations. Use the tag key in the filter name and the tag value as the
+	// filter value. For example, to find all Amazon EBS volume recommendations that
+	// have a tag with the key of Owner and the value of TeamA , specify tag:Owner for
+	// the filter name and TeamA for the filter value. A tag-key is the key of a tag
+	// assigned to your Amazon EBS volume recommendations. Use this filter to find all
+	// of your Amazon EBS volume recommendations that have a tag with a specific key.
+	// This doesn’t consider the tag value. For example, you can find your Amazon EBS
+	// volume recommendations with a tag key value of Owner or without any tag keys
+	// assigned.
 	Name EBSFilterName
 
 	// The value of the filter. The valid values are Optimized , or NotOptimized .
@@ -398,6 +411,9 @@ type ECSServiceRecommendation struct {
 	// service.
 	ServiceRecommendationOptions []ECSServiceRecommendationOption
 
+	// A list of tags assigned to your Amazon ECS service recommendations.
+	Tags []Tag
+
 	// An array of objects that describe the utilization metrics of the Amazon ECS
 	// service.
 	UtilizationMetrics []ECSServiceUtilizationMetric
@@ -411,7 +427,17 @@ type ECSServiceRecommendationFilter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
 	// specific finding classification. Specify FindingReasonCode to return
-	// recommendations with a specific finding reason code.
+	// recommendations with a specific finding reason code. You can filter your Amazon
+	// ECS service recommendations by tag:key and tag-key tags. A tag:key is a key and
+	// value combination of a tag assigned to your Amazon ECS service recommendations.
+	// Use the tag key in the filter name and the tag value as the filter value. For
+	// example, to find all Amazon ECS service recommendations that have a tag with the
+	// key of Owner and the value of TeamA , specify tag:Owner for the filter name and
+	// TeamA for the filter value. A tag-key is the key of a tag assigned to your
+	// Amazon ECS service recommendations. Use this filter to find all of your Amazon
+	// ECS service recommendations that have a tag with a specific key. This doesn’t
+	// consider the tag value. For example, you can find your Amazon ECS service
+	// recommendations with a tag key value of Owner or without any tag keys assigned.
 	Name ECSServiceRecommendationFilterName
 
 	// The value of the filter. The valid values for this parameter are as follows:
@@ -606,11 +632,21 @@ type ExternalMetricsPreference struct {
 type Filter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific finding classification (for example, Underprovisioned ). Specify
-	// RecommendationSourceType to return recommendations of a specific resource type
-	// (for example, Ec2Instance ). Specify FindingReasonCodes to return
-	// recommendations with a specific finding reason code (for example,
-	// CPUUnderprovisioned ).
+	// specific finding classification. For example, Underprovisioned . Specify
+	// RecommendationSourceType to return recommendations of a specific resource type.
+	// For example, Ec2Instance . Specify FindingReasonCodes to return recommendations
+	// with a specific finding reason code. For example, CPUUnderprovisioned . Specify
+	// InferredWorkloadTypes to return recommendations of a specific inferred workload.
+	// For example, Redis . You can filter your EC2 instance recommendations by tag:key
+	// and tag-key tags. A tag:key is a key and value combination of a tag assigned to
+	// your recommendations. Use the tag key in the filter name and the tag value as
+	// the filter value. For example, to find all recommendations that have a tag with
+	// the key of Owner and the value of TeamA , specify tag:Owner for the filter name
+	// and TeamA for the filter value. A tag-key is the key of a tag assigned to your
+	// recommendations. Use this filter to find all of your recommendations that have a
+	// tag with a specific key. This doesn’t consider the tag value. For example, you
+	// can find your recommendations with a tag key value of Owner or without any tag
+	// keys assigned.
 	Name FilterName
 
 	// The value of the filter. The valid values for this parameter are as follows,
@@ -695,6 +731,36 @@ type GetRecommendationError struct {
 	noSmithyDocumentSerde
 }
 
+// The estimated monthly savings after you adjust the configurations of your
+// instances running on the inferred workload types to the recommended
+// configurations. If the inferredWorkloadTypes list contains multiple entries,
+// then the savings are the sum of the monthly savings from instances that run the
+// exact combination of the inferred workload types.
+type InferredWorkloadSaving struct {
+
+	// An object that describes the estimated monthly savings amount possible by
+	// adopting Compute Optimizer recommendations for a given resource. This is based
+	// on the On-Demand instance pricing.
+	EstimatedMonthlySavings *EstimatedMonthlySavings
+
+	// The applications that might be running on the instance as inferred by Compute
+	// Optimizer. Compute Optimizer can infer if one of the following applications
+	// might be running on the instance:
+	//   - AmazonEmr - Infers that Amazon EMR might be running on the instance.
+	//   - ApacheCassandra - Infers that Apache Cassandra might be running on the
+	//   instance.
+	//   - ApacheHadoop - Infers that Apache Hadoop might be running on the instance.
+	//   - Memcached - Infers that Memcached might be running on the instance.
+	//   - NGINX - Infers that NGINX might be running on the instance.
+	//   - PostgreSql - Infers that PostgreSQL might be running on the instance.
+	//   - Redis - Infers that Redis might be running on the instance.
+	//   - Kafka - Infers that Kafka might be running on the instance.
+	//   - SQLServer - Infers that SQLServer might be running on the instance.
+	InferredWorkloadTypes []InferredWorkloadType
+
+	noSmithyDocumentSerde
+}
+
 // Describes an Amazon EC2 instance recommendation.
 type InstanceRecommendation struct {
 
@@ -763,8 +829,8 @@ type InstanceRecommendation struct {
 	//   - EBSThroughputUnderprovisioned — The instance’s EBS throughput configuration
 	//   doesn't meet the performance requirements of your workload and there is an
 	//   alternative instance type that provides better EBS throughput performance. This
-	//   is identified by analyzing the VolumeReadBytes and VolumeWriteBytes > metrics
-	//   of EBS volumes attached to the current instance during the look-back period.
+	//   is identified by analyzing the VolumeReadBytes and VolumeWriteBytes metrics of
+	//   EBS volumes attached to the current instance during the look-back period.
 	//   - EBSIOPSOverprovisioned — The instance’s EBS IOPS configuration can be sized
 	//   down while still meeting the performance requirements of your workload. This is
 	//   identified by analyzing the VolumeReadOps and VolumeWriteOps metric of EBS
@@ -831,6 +897,7 @@ type InstanceRecommendation struct {
 	//   - PostgreSql - Infers that PostgreSQL might be running on the instance.
 	//   - Redis - Infers that Redis might be running on the instance.
 	//   - Kafka - Infers that Kafka might be running on the instance.
+	//   - SQLServer - Infers that SQLServer might be running on the instance.
 	InferredWorkloadTypes []InferredWorkloadType
 
 	// The Amazon Resource Name (ARN) of the current instance.
@@ -853,6 +920,9 @@ type InstanceRecommendation struct {
 
 	// An array of objects that describe the source resource of the recommendation.
 	RecommendationSources []RecommendationSource
+
+	// A list of tags assigned to your Amazon EC2 instance recommendations.
+	Tags []Tag
 
 	// An array of objects that describe the utilization metrics of the instance.
 	UtilizationMetrics []UtilizationMetric
@@ -1112,6 +1182,9 @@ type LambdaFunctionRecommendation struct {
 	// The number of times your function code was applied during the look-back period.
 	NumberOfInvocations int64
 
+	// A list of tags assigned to your Lambda function recommendations.
+	Tags []Tag
+
 	// An array of objects that describe the utilization metrics of the function.
 	UtilizationMetrics []LambdaFunctionUtilizationMetric
 
@@ -1128,7 +1201,17 @@ type LambdaFunctionRecommendationFilter struct {
 	// The name of the filter. Specify Finding to return recommendations with a
 	// specific finding classification (for example, NotOptimized ). Specify
 	// FindingReasonCode to return recommendations with a specific finding reason code
-	// (for example, MemoryUnderprovisioned ).
+	// (for example, MemoryUnderprovisioned ). You can filter your Lambda function
+	// recommendations by tag:key and tag-key tags. A tag:key is a key and value
+	// combination of a tag assigned to your Lambda function recommendations. Use the
+	// tag key in the filter name and the tag value as the filter value. For example,
+	// to find all Lambda function recommendations that have a tag with the key of
+	// Owner and the value of TeamA , specify tag:Owner for the filter name and TeamA
+	// for the filter value. A tag-key is the key of a tag assigned to your Lambda
+	// function recommendations. Use this filter to find all of your Lambda function
+	// recommendations that have a tag with a specific key. This doesn’t consider the
+	// tag value. For example, you can find your Lambda function recommendations with a
+	// tag key value of Owner or without any tag keys assigned.
 	Name LambdaFunctionRecommendationFilterName
 
 	// The value of the filter. The valid values for this parameter are as follows,
@@ -1345,6 +1428,12 @@ type RecommendationSummary struct {
 	// An object that describes the performance risk ratings for a given resource type.
 	CurrentPerformanceRiskRatings *CurrentPerformanceRiskRatings
 
+	// An array of objects that describes the estimated monthly saving amounts for the
+	// instances running on the specified inferredWorkloadTypes . The array contains
+	// the top three savings opportunites for the instances running inferred workload
+	// types.
+	InferredWorkloadSavings []InferredWorkloadSaving
+
 	// The resource type that the recommendation summary applies to.
 	RecommendationResourceType RecommendationSourceType
 
@@ -1439,9 +1528,9 @@ type S3DestinationConfig struct {
 // in the Cost Management User Guide.
 type SavingsOpportunity struct {
 
-	// An object that describes the estimated monthly savings amount possible, based
-	// on On-Demand instance pricing, by adopting Compute Optimizer recommendations for
-	// a given resource.
+	// An object that describes the estimated monthly savings amount possible by
+	// adopting Compute Optimizer recommendations for a given resource. This is based
+	// on the On-Demand instance pricing..
 	EstimatedMonthlySavings *EstimatedMonthlySavings
 
 	// The estimated monthly savings possible as a percentage of monthly cost by
@@ -1530,6 +1619,20 @@ type Summary struct {
 
 	// The value of the recommendation summary.
 	Value float64
+
+	noSmithyDocumentSerde
+}
+
+// A list of tag key and value pairs that you define.
+type Tag struct {
+
+	// One part of a key-value pair that makes up a tag. A key is a general label that
+	// acts like a category for more specific tag values.
+	Key *string
+
+	// One part of a key-value pair that make up a tag. A value acts as a descriptor
+	// within a tag category (key). The value can be empty or null.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1670,6 +1773,9 @@ type VolumeRecommendation struct {
 
 	// The number of days for which utilization metrics were analyzed for the volume.
 	LookBackPeriodInDays float64
+
+	// A list of tags assigned to your Amazon EBS volume recommendations.
+	Tags []Tag
 
 	// An array of objects that describe the utilization metrics of the volume.
 	UtilizationMetrics []EBSUtilizationMetric

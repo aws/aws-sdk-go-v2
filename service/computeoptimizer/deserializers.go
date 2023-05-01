@@ -4427,6 +4427,11 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 				return err
 			}
 
+		case "tags":
+			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "utilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentECSServiceUtilizationMetrics(&sv.UtilizationMetrics, value); err != nil {
 				return err
@@ -5131,6 +5136,81 @@ func awsAwsjson10_deserializeDocumentGetRecommendationErrors(v *[]types.GetRecom
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentInferredWorkloadSaving(v **types.InferredWorkloadSaving, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferredWorkloadSaving
+	if *v == nil {
+		sv = &types.InferredWorkloadSaving{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "estimatedMonthlySavings":
+			if err := awsAwsjson10_deserializeDocumentEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
+				return err
+			}
+
+		case "inferredWorkloadTypes":
+			if err := awsAwsjson10_deserializeDocumentInferredWorkloadTypes(&sv.InferredWorkloadTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInferredWorkloadSavings(v *[]types.InferredWorkloadSaving, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InferredWorkloadSaving
+	if *v == nil {
+		cv = []types.InferredWorkloadSaving{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InferredWorkloadSaving
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentInferredWorkloadSaving(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInferredWorkloadTypes(v *[]types.InferredWorkloadType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5324,6 +5404,11 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 
 		case "recommendationSources":
 			if err := awsAwsjson10_deserializeDocumentRecommendationSources(&sv.RecommendationSources, value); err != nil {
+				return err
+			}
+
+		case "tags":
+			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
 
@@ -5971,6 +6056,11 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 					return err
 				}
 				sv.NumberOfInvocations = i64
+			}
+
+		case "tags":
+			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "utilizationMetrics":
@@ -7101,6 +7191,11 @@ func awsAwsjson10_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				return err
 			}
 
+		case "inferredWorkloadSavings":
+			if err := awsAwsjson10_deserializeDocumentInferredWorkloadSavings(&sv.InferredWorkloadSavings, value); err != nil {
+				return err
+			}
+
 		case "recommendationResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7671,6 +7766,89 @@ func awsAwsjson10_deserializeDocumentSummary(v **types.Summary, value interface{
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Tag
+	if *v == nil {
+		sv = &types.Tag{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTags(v *[]types.Tag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Tag
+	if *v == nil {
+		cv = []types.Tag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Tag
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8087,6 +8265,11 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendation(v **types.VolumeRecomm
 					return fmt.Errorf("expected LookBackPeriodInDays to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "tags":
+			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "utilizationMetrics":
