@@ -52,7 +52,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.9
 	github.com/aws/aws-sdk-go-v2/service/iot v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.11
-	github.com/aws/aws-sdk-go-v2/service/kms v1.20.12
+	github.com/aws/aws-sdk-go-v2/service/kms v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.26.5
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.9
@@ -65,7 +65,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.14.9
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.7
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.8
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.4
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.6

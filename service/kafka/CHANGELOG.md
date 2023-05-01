@@ -1,3 +1,7 @@
+# v1.20.1 (2023-05-01)
+
+* No change notes available for this release.
+
 # v1.20.0 (2023-04-27)
 
 * **Feature**: Amazon MSK has added new APIs that allows multi-VPC private connectivity and cluster policy support for Amazon MSK clusters that simplify connectivity and access between your Apache Kafka clients hosted in different VPCs and AWS accounts and your Amazon MSK clusters.

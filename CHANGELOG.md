@@ -1,3 +1,11 @@
+# Release (2023-05-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.23.0](service/computeoptimizer/CHANGELOG.md#v1230-2023-05-01)
+  * **Feature**: support for tag filtering within compute optimizer. ability to filter recommendation results by tag and tag key value pairs. ability to filter by inferred workload type added.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.21.0](service/kms/CHANGELOG.md#v1210-2023-05-01)
+  * **Feature**: This release makes the NitroEnclave request parameter Recipient and the response field for CiphertextForRecipient available in AWS SDKs. It also adds the regex pattern for CloudHsmClusterId validation.
+
 # Release (2023-04-28)
 
 ## Module Highlights

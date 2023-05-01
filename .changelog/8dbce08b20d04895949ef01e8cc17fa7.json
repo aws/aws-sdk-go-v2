@@ -1,8 +1,0 @@
-{
-    "id": "8dbce08b-20d0-4895-949e-f01e8cc17fa7",
-    "type": "feature",
-    "description": "support for tag filtering within compute optimizer. ability to filter recommendation results by tag and tag key value pairs. ability to filter by inferred workload type added.",
-    "modules": [
-        "service/computeoptimizer"
-    ]
-}

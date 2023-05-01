@@ -1,3 +1,7 @@
+# v1.23.0 (2023-05-01)
+
+* **Feature**: support for tag filtering within compute optimizer. ability to filter recommendation results by tag and tag key value pairs. ability to filter by inferred workload type added.
+
 # v1.22.3 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
