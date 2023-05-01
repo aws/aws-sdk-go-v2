@@ -226,7 +226,7 @@
                 "inferredWorkloadTypes": {
                     "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The applications that might be running on the instances in the Auto Scaling group\n            as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instances:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instances.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The applications that might be running on the instances in the Auto Scaling group\n            as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instances:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQLServer</code> - Infers that SQLServer might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -737,9 +737,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-northeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -750,9 +750,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-northeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -763,9 +763,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -776,9 +776,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-southeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -789,9 +789,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-southeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -802,9 +802,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ca-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -815,9 +815,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -828,9 +828,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -841,9 +841,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -854,9 +854,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -867,9 +867,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-west-3",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -880,9 +880,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "sa-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -893,9 +893,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -906,9 +906,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -919,9 +919,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -932,9 +932,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -945,9 +945,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -958,9 +958,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -971,9 +971,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -984,9 +984,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -997,9 +997,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-northwest-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1010,9 +1010,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1023,9 +1023,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1036,9 +1036,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1049,9 +1049,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1062,9 +1062,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1075,9 +1075,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1088,9 +1088,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1099,9 +1099,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1112,9 +1112,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1123,9 +1123,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1136,9 +1136,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1147,9 +1147,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1160,9 +1160,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1171,9 +1171,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1184,9 +1184,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1197,9 +1197,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1211,8 +1211,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1222,9 +1222,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1234,9 +1234,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1625,7 +1625,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#EBSFilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (for example, <code>NotOptimized</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (for example, <code>NotOptimized</code>).</p>\n         <p>You can filter your Amazon EBS volume recommendations by <code>tag:key</code> \n            and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            Amazon EBS volume recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all Amazon EBS volume recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your Amazon EBS volume recommendations. Use \n            this filter to find all of your Amazon EBS volume recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your Amazon EBS volume recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
                     }
                 },
                 "values": {
@@ -1933,6 +1933,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The risk of the current Amazon ECS service not meeting the performance needs of its workloads. \n            The higher the risk, the more likely the current service can't meet the performance \n            requirements of its workload.\n        </p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon ECS service recommendations.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -1945,7 +1951,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceRecommendationFilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the filter.\n        </p>\n         <p>\n            Specify <code>Finding</code> to return recommendations with a specific finding classification.\n        </p>\n         <p>\n            Specify <code>FindingReasonCode</code> to return recommendations with a specific finding reason code.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The name of the filter.\n        </p>\n         <p>\n            Specify <code>Finding</code> to return recommendations with a specific finding classification.\n        </p>\n         <p>\n            Specify <code>FindingReasonCode</code> to return recommendations with a specific finding reason code.\n        </p>\n         <p>You can filter your Amazon ECS service recommendations by <code>tag:key</code> \n            and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            Amazon ECS service recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all Amazon ECS service recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your Amazon ECS service recommendations. Use \n            this filter to find all of your Amazon ECS service recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your Amazon ECS service recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
                     }
                 },
                 "values": {
@@ -3273,6 +3279,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"
                     }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tags"
+                    }
                 }
             }
         },
@@ -3608,6 +3620,12 @@
                     "traits": {
                         "smithy.api#enumValue": "InstanceState"
                     }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tags"
+                    }
                 }
             }
         },
@@ -3774,6 +3792,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValue"
+                    }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tags"
                     }
                 }
             }
@@ -3960,6 +3984,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RootVolume"
                     }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tags"
+                    }
                 }
             }
         },
@@ -4032,7 +4062,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#FilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (for example, <code>Underprovisioned</code>).</p>\n         <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific\n            resource type (for example, <code>Ec2Instance</code>).</p>\n         <p>Specify <code>FindingReasonCodes</code> to return recommendations with a specific\n            finding reason code (for example, <code>CPUUnderprovisioned</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification. For example, <code>Underprovisioned</code>.</p>\n         <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific\n            resource type. For example, <code>Ec2Instance</code>.</p>\n         <p>Specify <code>FindingReasonCodes</code> to return recommendations with a specific\n            finding reason code. For example, <code>CPUUnderprovisioned</code>.</p>\n         <p>Specify <code>InferredWorkloadTypes</code> to return recommendations of a specific\n            inferred workload. For example, <code>Redis</code>.</p>\n         <p>You can filter your EC2 instance recommendations by <code>tag:key</code> and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your recommendations. Use \n            this filter to find all of your recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
                     }
                 },
                 "values": {
@@ -4065,6 +4095,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RecommendationSourceType"
+                    }
+                },
+                "INFERRED_WORKLOAD_TYPES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InferredWorkloadTypes"
                     }
                 }
             }
@@ -5328,6 +5364,32 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.computeoptimizer#InferredWorkloadSaving": {
+            "type": "structure",
+            "members": {
+                "inferredWorkloadTypes": {
+                    "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The applications that might be running on the instance as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQLServer</code> - Infers that SQLServer might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "estimatedMonthlySavings": {
+                    "target": "com.amazonaws.computeoptimizer#EstimatedMonthlySavings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the estimated monthly savings amount possible by adopting Compute Optimizer recommendations for a given\n            resource. This is based on the On-Demand instance pricing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The estimated monthly savings after you adjust the configurations of your instances running on the \n            inferred workload types to the recommended configurations. If the <code>inferredWorkloadTypes</code>\n            list contains multiple entries, then the savings are the sum of the monthly savings from instances \n            that run the exact combination of the inferred workload types.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#InferredWorkloadSavings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#InferredWorkloadSaving"
+            }
+        },
         "com.amazonaws.computeoptimizer#InferredWorkloadType": {
             "type": "enum",
             "members": {
@@ -5377,6 +5439,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Kafka"
+                    }
+                },
+                "SQLSERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQLServer"
                     }
                 }
             }
@@ -5452,7 +5520,7 @@
                 "findingReasonCodes": {
                     "target": "com.amazonaws.computeoptimizer#InstanceRecommendationFindingReasonCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason for the finding classification of the instance.</p>\n         <p>Finding reason codes for instances include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUOverprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>CPUUtilization</code> metric of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUUnderprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration doesn't meet the performance requirements of your\n                    workload and there is an alternative instance type that provides better CPU\n                    performance. This is identified by analyzing the <code>CPUUtilization</code>\n                    metric of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                    memory utilization metric of the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    memory performance. This is identified by analyzing the memory utilization\n                    metric of the current instance during the look-back period.</p>\n               <note>\n                  <p>Memory utilization is analyzed only for resources that have the unified\n                            CloudWatch agent installed on them. For more information, see\n                            <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling memory\n                            utilization with the Amazon CloudWatch Agent</a> in the\n                                <i>Compute Optimizer User Guide</i>. On Linux\n                        instances, Compute Optimizer analyses the <code>mem_used_percent</code>\n                        metric in the <code>CWAgent</code> namespace, or the legacy\n                            <code>MemoryUtilization</code> metric in the <code>System/Linux</code>\n                        namespace. On Windows instances, Compute Optimizer analyses the <code>Memory\n                            % Committed Bytes In Use</code> metric in the <code>CWAgent</code>\n                        namespace.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code> metrics\n                    of EBS volumes attached to the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better EBS throughput performance. This is identified by analyzing the\n                    <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code>> metrics of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                    <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better EBS\n                    IOPS performance. This is identified by analyzing the\n                    <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkBandwidthOverprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkBandwidthUnderprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better network bandwidth performance. This is identified by analyzing\n                    the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the current\n                    instance during the look-back period. This finding reason happens when the\n                        <code>NetworkIn</code> or <code>NetworkOut</code> performance of an instance\n                    is impacted.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkPPSOverprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration can be sized down\n                    while still meeting the performance requirements of your workload. This is\n                    identified by analyzing the <code>NetworkPacketsIn</code> and\n                        <code>NetworkPacketsIn</code> metrics of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkPPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration doesn't meet the\n                    performance requirements of your workload and there is an alternative instance\n                    type that provides better network PPS performance. This is identified by\n                    analyzing the <code>NetworkPacketsIn</code> and <code>NetworkPacketsIn</code>\n                    metrics of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    disk IOPS performance. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics\n                    of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better disk throughput performance. This is identified by analyzing the\n                        <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n         </ul>\n         <note>\n            <p>For more information about instance metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html\">List the\n                    available CloudWatch metrics for your instances</a> in the\n                        <i>Amazon Elastic Compute Cloud User Guide</i>. For more information\n                about EBS volume metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html\">Amazon CloudWatch\n                    metrics for Amazon EBS</a> in the <i>Amazon Elastic Compute Cloud\n                    User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The reason for the finding classification of the instance.</p>\n         <p>Finding reason codes for instances include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUOverprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>CPUUtilization</code> metric of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUUnderprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration doesn't meet the performance requirements of your\n                    workload and there is an alternative instance type that provides better CPU\n                    performance. This is identified by analyzing the <code>CPUUtilization</code>\n                    metric of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                    memory utilization metric of the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    memory performance. This is identified by analyzing the memory utilization\n                    metric of the current instance during the look-back period.</p>\n               <note>\n                  <p>Memory utilization is analyzed only for resources that have the unified\n                            CloudWatch agent installed on them. For more information, see\n                            <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling memory\n                            utilization with the Amazon CloudWatch Agent</a> in the\n                                <i>Compute Optimizer User Guide</i>. On Linux\n                        instances, Compute Optimizer analyses the <code>mem_used_percent</code>\n                        metric in the <code>CWAgent</code> namespace, or the legacy\n                            <code>MemoryUtilization</code> metric in the <code>System/Linux</code>\n                        namespace. On Windows instances, Compute Optimizer analyses the <code>Memory\n                            % Committed Bytes In Use</code> metric in the <code>CWAgent</code>\n                        namespace.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code> metrics\n                    of EBS volumes attached to the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better EBS throughput performance. This is identified by analyzing the\n                    <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code> metrics of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                    <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better EBS\n                    IOPS performance. This is identified by analyzing the\n                    <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkBandwidthOverprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkBandwidthUnderprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better network bandwidth performance. This is identified by analyzing\n                    the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the current\n                    instance during the look-back period. This finding reason happens when the\n                        <code>NetworkIn</code> or <code>NetworkOut</code> performance of an instance\n                    is impacted.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkPPSOverprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration can be sized down\n                    while still meeting the performance requirements of your workload. This is\n                    identified by analyzing the <code>NetworkPacketsIn</code> and\n                        <code>NetworkPacketsIn</code> metrics of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkPPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration doesn't meet the\n                    performance requirements of your workload and there is an alternative instance\n                    type that provides better network PPS performance. This is identified by\n                    analyzing the <code>NetworkPacketsIn</code> and <code>NetworkPacketsIn</code>\n                    metrics of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    disk IOPS performance. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics\n                    of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better disk throughput performance. This is identified by analyzing the\n                        <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n         </ul>\n         <note>\n            <p>For more information about instance metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html\">List the\n                    available CloudWatch metrics for your instances</a> in the\n                        <i>Amazon Elastic Compute Cloud User Guide</i>. For more information\n                about EBS volume metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html\">Amazon CloudWatch\n                    metrics for Amazon EBS</a> in the <i>Amazon Elastic Compute Cloud\n                    User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "utilizationMetrics": {
@@ -5501,13 +5569,19 @@
                 "inferredWorkloadTypes": {
                     "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The applications that might be running on the instance as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The applications that might be running on the instance as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQLServer</code> - Infers that SQLServer might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "instanceState": {
                     "target": "com.amazonaws.computeoptimizer#InstanceState",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The state of the instance when the recommendation was generated.\n        </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon EC2 instance recommendations.\n        </p>"
                     }
                 }
             },
@@ -6049,6 +6123,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The risk of the current Lambda function not meeting the performance needs\n            of its workloads. The higher the risk, the more likely the current Lambda\n            function requires more memory.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Lambda function recommendations.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -6061,7 +6141,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (for example, <code>NotOptimized</code>).</p>\n         <p>Specify <code>FindingReasonCode</code> to return recommendations with a specific\n            finding reason code (for example, <code>MemoryUnderprovisioned</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (for example, <code>NotOptimized</code>).</p>\n         <p>Specify <code>FindingReasonCode</code> to return recommendations with a specific\n            finding reason code (for example, <code>MemoryUnderprovisioned</code>).</p>\n         <p>You can filter your Lambda function recommendations by <code>tag:key</code> \n            and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            Lambda function recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all Lambda function recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your Lambda function recommendations. Use \n            this filter to find all of your Lambda function recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your Lambda function recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
                     }
                 },
                 "values": {
@@ -6960,6 +7040,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the performance risk ratings for a given resource\n            type.</p>"
                     }
+                },
+                "inferredWorkloadSavings": {
+                    "target": "com.amazonaws.computeoptimizer#InferredWorkloadSavings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describes the estimated monthly saving amounts for the instances running on the specified \n            <code>inferredWorkloadTypes</code>. The array contains the top three savings opportunites for the instances running \n            inferred workload types.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -7121,7 +7207,7 @@
                 "estimatedMonthlySavings": {
                     "target": "com.amazonaws.computeoptimizer#EstimatedMonthlySavings",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that describes the estimated monthly savings amount possible, based on\n            On-Demand instance pricing, by adopting Compute Optimizer recommendations for a given\n            resource.</p>"
+                        "smithy.api#documentation": "<p>An object that describes the estimated monthly savings amount possible by adopting Compute Optimizer recommendations for a given\n            resource. This is based on the On-Demand instance pricing..</p>"
                     }
                 }
             },
@@ -7310,6 +7396,38 @@
             "type": "double",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.computeoptimizer#Tag": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.computeoptimizer#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            One part of a key-value pair that makes up a tag. A key is a general \n            label that acts like a category for more specific tag values.\n        </p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            One part of a key-value pair that make up a tag. A value acts as a descriptor \n            within a tag category (key). The value can be empty or null.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            A list of tag key and value pairs that you define.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#TagKey": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#TagValue": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#Tags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#Tag"
             }
         },
         "com.amazonaws.computeoptimizer#TaskDefinitionArn": {
@@ -7609,6 +7727,12 @@
                     "target": "com.amazonaws.computeoptimizer#CurrentPerformanceRisk",
                     "traits": {
                         "smithy.api#documentation": "<p>The risk of the current EBS volume not meeting the performance needs of its workloads.\n            The higher the risk, the more likely the current EBS volume doesn't have sufficient\n            capacity.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon EBS volume recommendations.\n        </p>"
                     }
                 }
             },

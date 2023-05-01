@@ -135,6 +135,15 @@
                 }
             }
         },
+        "com.amazonaws.kms#AttestationDocumentType": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 262144
+                }
+            }
+        },
         "com.amazonaws.kms#BooleanType": {
             "type": "boolean",
             "traits": {
@@ -214,7 +223,8 @@
                 "smithy.api#length": {
                     "min": 19,
                     "max": 24
-                }
+                },
+                "smithy.api#pattern": "^cluster-[2-7a-zA-Z]{11,16}$"
             }
         },
         "com.amazonaws.kms#CloudHsmClusterInUseException": {
@@ -542,7 +552,7 @@
                 "AliasName": {
                     "target": "com.amazonaws.kms#AliasNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the alias name. This value must begin with <code>alias/</code> followed by a\n      name, such as <code>alias/ExampleAlias</code>. </p>\n         <p>The <code>AliasName</code> value must be string of 1-256 characters. It can contain only\n      alphanumeric characters, forward slashes (/), underscores (_), and dashes (-). The alias name\n      cannot begin with <code>alias/aws/</code>. The <code>alias/aws/</code> prefix is reserved for\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed\n        keys</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the alias name. This value must begin with <code>alias/</code> followed by a\n      name, such as <code>alias/ExampleAlias</code>. </p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>The <code>AliasName</code> value must be string of 1-256 characters. It can contain only\n      alphanumeric characters, forward slashes (/), underscores (_), and dashes (-). The alias name\n      cannot begin with <code>alias/aws/</code>. The <code>alias/aws/</code> prefix is reserved for\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed\n        keys</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -629,7 +639,7 @@
                 "CustomKeyStoreName": {
                     "target": "com.amazonaws.kms#CustomKeyStoreNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a friendly name for the custom key store. The name must be unique in your\n      Amazon Web Services account and Region. This parameter is required for all custom key stores.</p>",
+                        "smithy.api#documentation": "<p>Specifies a friendly name for the custom key store. The name must be unique in your\n      Amazon Web Services account and Region. This parameter is required for all custom key stores.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -777,7 +787,7 @@
                 "Constraints": {
                     "target": "com.amazonaws.kms#GrantConstraints",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a grant constraint. </p>\n         <p>KMS supports the <code>EncryptionContextEquals</code> and\n        <code>EncryptionContextSubset</code> grant constraints. Each constraint value can include up\n      to 8 encryption context pairs. The encryption context value in each constraint cannot exceed\n      384 characters. For information about grant constraints, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints\">Using grant\n        constraints</a> in the <i>Key Management Service Developer Guide</i>. For more information about encryption context,\n      see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        context</a> in the <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. </p>\n         <p>The encryption context grant constraints allow the permissions in the grant only when the\n      encryption context in the request matches (<code>EncryptionContextEquals</code>) or includes\n        (<code>EncryptionContextSubset</code>) the encryption context specified in this structure. </p>\n         <p>The encryption context grant constraints are supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations\">grant operations</a> that include\n      an <code>EncryptionContext</code> parameter, such as cryptographic operations on symmetric\n      encryption KMS keys. Grants with grant constraints can include the <a>DescribeKey</a> and <a>RetireGrant</a> operations, but the constraint doesn't apply to these\n      operations. If a grant with a grant constraint includes the <code>CreateGrant</code>\n      operation, the constraint requires that any grants created with the <code>CreateGrant</code>\n      permission have an equally strict or stricter encryption context constraint.</p>\n         <p>You cannot use an encryption context grant constraint for cryptographic operations with\n      asymmetric KMS keys or HMAC KMS keys. These keys don't support an encryption context. </p>\n         <p></p>"
+                        "smithy.api#documentation": "<p>Specifies a grant constraint.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>KMS supports the <code>EncryptionContextEquals</code> and\n        <code>EncryptionContextSubset</code> grant constraints, which allow the permissions in the\n      grant only when the encryption context in the request matches\n        (<code>EncryptionContextEquals</code>) or includes (<code>EncryptionContextSubset</code>)\n      the encryption context specified in the constraint. </p>\n         <p>The encryption context grant constraints are supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations\">grant operations</a> that include\n      an <code>EncryptionContext</code> parameter, such as cryptographic operations on symmetric\n      encryption KMS keys. Grants with grant constraints can include the <a>DescribeKey</a> and <a>RetireGrant</a> operations, but the constraint doesn't apply to these\n      operations. If a grant with a grant constraint includes the <code>CreateGrant</code>\n      operation, the constraint requires that any grants created with the <code>CreateGrant</code>\n      permission have an equally strict or stricter encryption context constraint.</p>\n         <p>You cannot use an encryption context grant constraint for cryptographic operations with\n      asymmetric KMS keys or HMAC KMS keys. Operations with these keys don't support an encryption\n      context.</p>\n         <p>Each constraint value can include up to 8 encryption context pairs. The encryption context\n      value in each constraint cannot exceed 384 characters. For information about grant\n      constraints, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints\">Using grant\n        constraints</a> in the <i>Key Management Service Developer Guide</i>. For more information about encryption context,\n      see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        context</a> in the <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. </p>"
                     }
                 },
                 "GrantTokens": {
@@ -789,7 +799,7 @@
                 "Name": {
                     "target": "com.amazonaws.kms#GrantNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A friendly name for the grant. Use this value to prevent the unintended creation of\n      duplicate grants when retrying this request.</p>\n         <p>When this value is absent, all <code>CreateGrant</code> requests result in a new grant\n      with a unique <code>GrantId</code> even if all the supplied parameters are identical. This can\n      result in unintended duplicates when you retry the <code>CreateGrant</code> request.</p>\n         <p>When this value is present, you can retry a <code>CreateGrant</code> request with\n      identical parameters; if the grant already exists, the original <code>GrantId</code> is\n      returned without creating a new grant. Note that the returned grant token is unique with every\n        <code>CreateGrant</code> request, even when a duplicate <code>GrantId</code> is returned.\n      All grant tokens for the same grant ID can be used interchangeably.</p>"
+                        "smithy.api#documentation": "<p>A friendly name for the grant. Use this value to prevent the unintended creation of\n      duplicate grants when retrying this request.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>When this value is absent, all <code>CreateGrant</code> requests result in a new grant\n      with a unique <code>GrantId</code> even if all the supplied parameters are identical. This can\n      result in unintended duplicates when you retry the <code>CreateGrant</code> request.</p>\n         <p>When this value is present, you can retry a <code>CreateGrant</code> request with\n      identical parameters; if the grant already exists, the original <code>GrantId</code> is\n      returned without creating a new grant. Note that the returned grant token is unique with every\n        <code>CreateGrant</code> request, even when a duplicate <code>GrantId</code> is returned.\n      All grant tokens for the same grant ID can be used interchangeably.</p>"
                     }
                 }
             },
@@ -882,7 +892,7 @@
                 "Description": {
                     "target": "com.amazonaws.kms#DescriptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the KMS key.</p>\n         <p>Use a description that helps you decide whether the KMS key is appropriate for a task. The\n      default value is an empty string (no description).</p>\n         <p>To set or change the description after the key is created, use <a>UpdateKeyDescription</a>.</p>"
+                        "smithy.api#documentation": "<p>A description of the KMS key. Use a description that helps you decide whether the KMS key is appropriate for a task. The\n      default value is an empty string (no description).</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>To set or change the description after the key is created, use <a>UpdateKeyDescription</a>.</p>"
                     }
                 },
                 "KeyUsage": {
@@ -928,7 +938,7 @@
                 "Tags": {
                     "target": "com.amazonaws.kms#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags to the KMS key. Use this parameter to tag the KMS key when it is\n      created. To tag an existing KMS key, use the <a>TagResource</a> operation.</p>\n         <note>\n            <p>Tagging or untagging a KMS key can allow or deny permission to the KMS key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/abac.html\">ABAC for KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </note>\n         <p>To use this parameter, you must have <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:TagResource</a> permission in an IAM policy.</p>\n         <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are\n      required, but the tag value can be an empty (null) string. You cannot have more than one tag\n      on a KMS key with the same tag key. If you specify an existing tag key with a different tag\n      value, KMS replaces the current tag value with the specified one.</p>\n         <p>When you add tags to an Amazon Web Services resource, Amazon Web Services generates a cost allocation\n              report with usage and costs aggregated by tags. Tags can also be used to control access to a KMS key. For details,\n              see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">Tagging Keys</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags to the KMS key. Use this parameter to tag the KMS key when it is\n      created. To tag an existing KMS key, use the <a>TagResource</a> operation.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <note>\n            <p>Tagging or untagging a KMS key can allow or deny permission to the KMS key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/abac.html\">ABAC for KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </note>\n         <p>To use this parameter, you must have <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:TagResource</a> permission in an IAM policy.</p>\n         <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are\n      required, but the tag value can be an empty (null) string. You cannot have more than one tag\n      on a KMS key with the same tag key. If you specify an existing tag key with a different tag\n      value, KMS replaces the current tag value with the specified one.</p>\n         <p>When you add tags to an Amazon Web Services resource, Amazon Web Services generates a cost allocation\n              report with usage and costs aggregated by tags. Tags can also be used to control access to a KMS key. For details,\n              see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">Tagging Keys</a>.</p>"
                     }
                 },
                 "MultiRegion": {
@@ -1335,7 +1345,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Decrypts ciphertext that was encrypted by a KMS key using any of the following\n      operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyWithoutPlaintext</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPairWithoutPlaintext</a>\n               </p>\n            </li>\n         </ul>\n         <p>You can use this operation to decrypt ciphertext that was encrypted under a symmetric\n      encryption KMS key or an asymmetric encryption KMS key. When the KMS key is asymmetric, you\n      must specify the KMS key and the encryption algorithm that was used to encrypt the ciphertext.\n      For information about asymmetric KMS keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Asymmetric KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>The <code>Decrypt</code> operation also decrypts ciphertext that was encrypted outside of\n      KMS by the public key in an KMS asymmetric KMS key. However, it cannot decrypt symmetric\n      ciphertext produced by other libraries, such as the <a href=\"https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/\">Amazon Web Services Encryption SDK</a> or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html\">Amazon S3 client-side encryption</a>.\n      These libraries return a ciphertext format that is incompatible with KMS.</p>\n         <p>If the ciphertext was encrypted under a symmetric encryption KMS key, the\n        <code>KeyId</code> parameter is optional. KMS can get this information from metadata that\n      it adds to the symmetric ciphertext blob. This feature adds durability to your implementation\n      by ensuring that authorized users can decrypt ciphertext decades after it was encrypted, even\n      if they've lost track of the key ID. However, specifying the KMS key is always recommended as\n      a best practice. When you use the <code>KeyId</code> parameter to specify a KMS key, KMS\n      only uses the KMS key you specify. If the ciphertext was encrypted under a different KMS key,\n      the <code>Decrypt</code> operation fails. This practice ensures that you use the KMS key that\n      you intend.</p>\n         <p>Whenever possible, use key policies to give users permission to call the\n        <code>Decrypt</code> operation on a particular KMS key, instead of using &IAM; policies.\n      Otherwise, you might create an &IAM; policy that gives the user <code>Decrypt</code>\n      permission on all KMS keys. This user could decrypt ciphertext that was encrypted by KMS keys\n      in other accounts if the key policy for the cross-account KMS key permits it. If you must use\n      an IAM policy for <code>Decrypt</code> permissions, limit the user to particular KMS keys or\n      particular trusted accounts. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policies-best-practices\">Best practices for IAM\n        policies</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>Applications in Amazon Web Services Nitro Enclaves can call this operation by using the <a href=\"https://github.com/aws/aws-nitro-enclaves-sdk-c\">Amazon Web Services Nitro Enclaves Development Kit</a>. For information about the supporting parameters, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves use KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. If you use the <code>KeyId</code>\n      parameter to identify a KMS key in a different Amazon Web Services account, specify the key ARN or the alias\n      ARN of the KMS key.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:Decrypt</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ReEncrypt</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Decrypts ciphertext that was encrypted by a KMS key using any of the following\n      operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyWithoutPlaintext</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPairWithoutPlaintext</a>\n               </p>\n            </li>\n         </ul>\n         <p>You can use this operation to decrypt ciphertext that was encrypted under a symmetric\n      encryption KMS key or an asymmetric encryption KMS key. When the KMS key is asymmetric, you\n      must specify the KMS key and the encryption algorithm that was used to encrypt the ciphertext.\n      For information about asymmetric KMS keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Asymmetric KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>The <code>Decrypt</code> operation also decrypts ciphertext that was encrypted outside of\n      KMS by the public key in an KMS asymmetric KMS key. However, it cannot decrypt symmetric\n      ciphertext produced by other libraries, such as the <a href=\"https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/\">Amazon Web Services Encryption SDK</a> or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html\">Amazon S3 client-side encryption</a>.\n      These libraries return a ciphertext format that is incompatible with KMS.</p>\n         <p>If the ciphertext was encrypted under a symmetric encryption KMS key, the\n        <code>KeyId</code> parameter is optional. KMS can get this information from metadata that\n      it adds to the symmetric ciphertext blob. This feature adds durability to your implementation\n      by ensuring that authorized users can decrypt ciphertext decades after it was encrypted, even\n      if they've lost track of the key ID. However, specifying the KMS key is always recommended as\n      a best practice. When you use the <code>KeyId</code> parameter to specify a KMS key, KMS\n      only uses the KMS key you specify. If the ciphertext was encrypted under a different KMS key,\n      the <code>Decrypt</code> operation fails. This practice ensures that you use the KMS key that\n      you intend.</p>\n         <p>Whenever possible, use key policies to give users permission to call the\n        <code>Decrypt</code> operation on a particular KMS key, instead of using &IAM; policies.\n      Otherwise, you might create an &IAM; policy that gives the user <code>Decrypt</code>\n      permission on all KMS keys. This user could decrypt ciphertext that was encrypted by KMS keys\n      in other accounts if the key policy for the cross-account KMS key permits it. If you must use\n      an IAM policy for <code>Decrypt</code> permissions, limit the user to particular KMS keys or\n      particular trusted accounts. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policies-best-practices\">Best practices for IAM\n        policies</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <code>Decrypt</code> also supports <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html\">Amazon Web Services Nitro Enclaves</a>, which provide an\n      isolated compute environment in Amazon EC2. To call <code>Decrypt</code> for a Nitro enclave, use\n      the <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk\">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code> parameter to provide the\n      attestation document for the enclave. Instead of the plaintext data, the response includes the\n      plaintext data encrypted with the public key from the attestation document\n      (<code>CiphertextForRecipient</code>).For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>..</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. If you use the <code>KeyId</code>\n      parameter to identify a KMS key in a different Amazon Web Services account, specify the key ARN or the alias\n      ARN of the KMS key.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:Decrypt</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ReEncrypt</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.kms#DecryptRequest": {
@@ -1371,6 +1381,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the encryption algorithm that will be used to decrypt the ciphertext. Specify\n      the same algorithm that was used to encrypt the data. If you specify a different algorithm,\n      the <code>Decrypt</code> operation fails.</p>\n         <p>This parameter is required only when the ciphertext was encrypted under an asymmetric KMS\n      key. The default value, <code>SYMMETRIC_DEFAULT</code>, represents the only supported\n      algorithm that is valid for symmetric encryption KMS keys.</p>"
                     }
+                },
+                "Recipient": {
+                    "target": "com.amazonaws.kms#RecipientInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A signed <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc\">attestation document</a> from\n      an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave's public key.\n      The only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>\n         <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this\n      parameter, use the <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk\">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK.</p>\n         <p>When you use this parameter, instead of returning the plaintext data, KMS encrypts the\n      plaintext data with the public key in the attestation document, and returns the resulting\n      ciphertext in the <code>CiphertextForRecipient</code> field in the response. This ciphertext\n      can be decrypted only with the private key in the enclave. The <code>Plaintext</code> field in\n      the response is null or empty.</p>\n         <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1389,13 +1405,19 @@
                 "Plaintext": {
                     "target": "com.amazonaws.kms#PlaintextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Decrypted plaintext data. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
+                        "smithy.api#documentation": "<p>Decrypted plaintext data. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>\n         <p>If the response includes the <code>CiphertextForRecipient</code> field, the\n      <code>Plaintext</code> field is null or empty.</p>"
                     }
                 },
                 "EncryptionAlgorithm": {
                     "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption algorithm that was used to decrypt the ciphertext.</p>"
+                    }
+                },
+                "CiphertextForRecipient": {
+                    "target": "com.amazonaws.kms#CiphertextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The plaintext data encrypted with the public key in the attestation document. </p>\n         <p>This field is included in the response only when the <code>Recipient</code> parameter in\n      the request includes a valid attestation document from an Amazon Web Services Nitro enclave.\n      For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -2025,7 +2047,7 @@
                 "EncryptionContext": {
                     "target": "com.amazonaws.kms#EncryptionContextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used to encrypt the data.\n      An encryption context is valid only for <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> with a symmetric encryption KMS key. The standard asymmetric encryption algorithms and HMAC algorithms that KMS uses do not support an encryption context. </p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used to encrypt the data.\n      An encryption context is valid only for <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> with a symmetric encryption KMS key. The standard asymmetric encryption algorithms and HMAC algorithms that KMS uses do not support an encryption context. </p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "GrantTokens": {
@@ -2193,7 +2215,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a unique symmetric data key for use outside of KMS. This operation returns a\n      plaintext copy of the data key and a copy that is encrypted under a symmetric encryption KMS\n      key that you specify. The bytes in the plaintext key are random; they are not related \n      to the caller or the KMS key. You can use the plaintext key to encrypt your data outside of KMS \n      and store the encrypted data key with the encrypted data.</p>\n         <p>To generate a data key, specify the symmetric encryption KMS key that will be used to\n      encrypt the data key. You cannot use an asymmetric KMS key to encrypt data keys. To get the\n      type of your KMS key, use the <a>DescribeKey</a> operation.</p>\n         <p>You must also specify the length of the data key. Use either the <code>KeySpec</code> or \n      <code>NumberOfBytes</code> parameters (but not both). For 128-bit and 256-bit data keys, use \n      the <code>KeySpec</code> parameter.</p>\n         <p>To generate a 128-bit SM4 data key (China Regions only), specify a <code>KeySpec</code> value of\n      <code>AES_128</code> or a <code>NumberOfBytes</code> value of <code>16</code>. The symmetric \n      encryption key used in China Regions to encrypt your data key is an SM4 encryption key.</p>\n         <p>To get only an encrypted copy of the data key, use <a>GenerateDataKeyWithoutPlaintext</a>. To generate an asymmetric data key pair, use\n      the <a>GenerateDataKeyPair</a> or <a>GenerateDataKeyPairWithoutPlaintext</a> operation. To get a cryptographically secure\n      random byte string, use <a>GenerateRandom</a>.</p>\n         <p>You can use an optional encryption context to add additional security to the encryption\n      operation. If you specify an <code>EncryptionContext</code>, you must specify the same\n      encryption context (a case-sensitive exact match) when decrypting the encrypted data key.\n      Otherwise, the request to decrypt fails with an <code>InvalidCiphertextException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption Context</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>Applications in Amazon Web Services Nitro Enclaves can call this operation by using the <a href=\"https://github.com/aws/aws-nitro-enclaves-sdk-c\">Amazon Web Services Nitro Enclaves Development Kit</a>. For information about the supporting parameters, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves use KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>How to use your data key</b>\n         </p>\n         <p>We recommend that you use the following pattern to encrypt data locally in your\n      application. You can write your own code or use a client-side encryption library, such as the\n        <a href=\"https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/\">Amazon Web Services Encryption SDK</a>, the\n        <a href=\"https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/\">Amazon DynamoDB Encryption Client</a>,\n      or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html\">Amazon S3\n        client-side encryption</a> to do these tasks for you.</p>\n         <p>To encrypt data outside of KMS:</p>\n         <ol>\n            <li>\n               <p>Use the <code>GenerateDataKey</code> operation to get a data key.</p>\n            </li>\n            <li>\n               <p>Use the plaintext data key (in the <code>Plaintext</code> field of the response) to\n          encrypt your data outside of KMS. Then erase the plaintext data key from memory.</p>\n            </li>\n            <li>\n               <p>Store the encrypted data key (in the <code>CiphertextBlob</code> field of the\n          response) with the encrypted data.</p>\n            </li>\n         </ol>\n         <p>To decrypt data outside of KMS:</p>\n         <ol>\n            <li>\n               <p>Use the <a>Decrypt</a> operation to decrypt the encrypted data key. The\n          operation returns a plaintext copy of the data key.</p>\n            </li>\n            <li>\n               <p>Use the plaintext data key to decrypt data outside of KMS, then erase the plaintext\n          data key from memory.</p>\n            </li>\n         </ol>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GenerateDataKey</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Decrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPairWithoutPlaintext</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyWithoutPlaintext</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Returns a unique symmetric data key for use outside of KMS. This operation returns a\n      plaintext copy of the data key and a copy that is encrypted under a symmetric encryption KMS\n      key that you specify. The bytes in the plaintext key are random; they are not related \n      to the caller or the KMS key. You can use the plaintext key to encrypt your data outside of KMS \n      and store the encrypted data key with the encrypted data.</p>\n         <p>To generate a data key, specify the symmetric encryption KMS key that will be used to\n      encrypt the data key. You cannot use an asymmetric KMS key to encrypt data keys. To get the\n      type of your KMS key, use the <a>DescribeKey</a> operation.</p>\n         <p>You must also specify the length of the data key. Use either the <code>KeySpec</code> or \n      <code>NumberOfBytes</code> parameters (but not both). For 128-bit and 256-bit data keys, use \n      the <code>KeySpec</code> parameter.</p>\n         <p>To generate a 128-bit SM4 data key (China Regions only), specify a <code>KeySpec</code> value of\n      <code>AES_128</code> or a <code>NumberOfBytes</code> value of <code>16</code>. The symmetric \n      encryption key used in China Regions to encrypt your data key is an SM4 encryption key.</p>\n         <p>To get only an encrypted copy of the data key, use <a>GenerateDataKeyWithoutPlaintext</a>. To generate an asymmetric data key pair, use\n      the <a>GenerateDataKeyPair</a> or <a>GenerateDataKeyPairWithoutPlaintext</a> operation. To get a cryptographically secure\n      random byte string, use <a>GenerateRandom</a>.</p>\n         <p>You can use an optional encryption context to add additional security to the encryption\n      operation. If you specify an <code>EncryptionContext</code>, you must specify the same\n      encryption context (a case-sensitive exact match) when decrypting the encrypted data key.\n      Otherwise, the request to decrypt fails with an <code>InvalidCiphertextException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption Context</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <code>GenerateDataKey</code> also supports <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html\">Amazon Web Services Nitro Enclaves</a>, which provide an\n      isolated compute environment in Amazon EC2. To call <code>GenerateDataKey</code> for an Amazon Web Services Nitro\n      enclave, use the <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk\">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code> parameter\n      to provide the attestation document for the enclave. <code>GenerateDataKey</code> returns a\n      copy of the data key encrypted under the specified KMS key, as usual. But instead of a\n      plaintext copy of the data key, the response includes a copy of the data key encrypted under\n      the public key from the attestation document (<code>CiphertextForRecipient</code>).\n      For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>..</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>How to use your data key</b>\n         </p>\n         <p>We recommend that you use the following pattern to encrypt data locally in your\n      application. You can write your own code or use a client-side encryption library, such as the\n        <a href=\"https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/\">Amazon Web Services Encryption SDK</a>, the\n        <a href=\"https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/\">Amazon DynamoDB Encryption Client</a>,\n      or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html\">Amazon S3\n        client-side encryption</a> to do these tasks for you.</p>\n         <p>To encrypt data outside of KMS:</p>\n         <ol>\n            <li>\n               <p>Use the <code>GenerateDataKey</code> operation to get a data key.</p>\n            </li>\n            <li>\n               <p>Use the plaintext data key (in the <code>Plaintext</code> field of the response) to\n          encrypt your data outside of KMS. Then erase the plaintext data key from memory.</p>\n            </li>\n            <li>\n               <p>Store the encrypted data key (in the <code>CiphertextBlob</code> field of the\n          response) with the encrypted data.</p>\n            </li>\n         </ol>\n         <p>To decrypt data outside of KMS:</p>\n         <ol>\n            <li>\n               <p>Use the <a>Decrypt</a> operation to decrypt the encrypted data key. The\n          operation returns a plaintext copy of the data key.</p>\n            </li>\n            <li>\n               <p>Use the plaintext data key to decrypt data outside of KMS, then erase the plaintext\n          data key from memory.</p>\n            </li>\n         </ol>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GenerateDataKey</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Decrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPairWithoutPlaintext</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyWithoutPlaintext</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.kms#GenerateDataKeyPair": {
@@ -2234,7 +2256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a unique asymmetric data key pair for use outside of KMS. This operation returns\n      a plaintext public key, a plaintext private key, and a copy of the private key that is\n      encrypted under the symmetric encryption KMS key you specify. You can use the data key pair to\n      perform asymmetric cryptography and implement digital signatures outside of KMS. The bytes\n      in the keys are random; they not related to the caller or to the KMS key that is used to\n      encrypt the private key. </p>\n         <p>You can use the public key that <code>GenerateDataKeyPair</code> returns to encrypt data\n      or verify a signature outside of KMS. Then, store the encrypted private key with the data.\n      When you are ready to decrypt data or sign a message, you can use the <a>Decrypt</a> operation to decrypt the encrypted private key.</p>\n         <p>To generate a data key pair, you must specify a symmetric encryption KMS key to encrypt\n      the private key in a data key pair. You cannot use an asymmetric KMS key or a KMS key in a\n      custom key store. To get the type and origin of your KMS key, use the <a>DescribeKey</a> operation. </p>\n         <p>Use the <code>KeyPairSpec</code> parameter to choose an RSA or Elliptic Curve (ECC) data\n      key pair. In China Regions, you can also choose an SM2 data key pair. KMS recommends that you use\n      ECC key pairs for signing, and use RSA and SM2 key pairs for either encryption or signing, but not both.\n      However, KMS cannot enforce any restrictions on the use of data key pairs outside of KMS.</p>\n         <p>If you are using the data key pair to encrypt data, or for any operation where you don't\n      immediately need a private key, consider using the <a>GenerateDataKeyPairWithoutPlaintext</a> operation.\n        <code>GenerateDataKeyPairWithoutPlaintext</code> returns a plaintext public key and an\n      encrypted private key, but omits the plaintext private key that you need only to decrypt\n      ciphertext or sign a message. Later, when you need to decrypt the data or sign a message, use\n      the <a>Decrypt</a> operation to decrypt the encrypted private key in the data key\n      pair.</p>\n         <p>\n            <code>GenerateDataKeyPair</code> returns a unique data key pair for each request. The\n      bytes in the keys are random; they are not related to the caller or the KMS key that is used\n      to encrypt the private key. The public key is a DER-encoded X.509 SubjectPublicKeyInfo, as\n      specified in <a href=\"https://tools.ietf.org/html/rfc5280\">RFC 5280</a>. The private\n      key is a DER-encoded PKCS8 PrivateKeyInfo, as specified in <a href=\"https://tools.ietf.org/html/rfc5958\">RFC 5958</a>.</p>\n         <p>You can use an optional encryption context to add additional security to the encryption\n      operation. If you specify an <code>EncryptionContext</code>, you must specify the same\n      encryption context (a case-sensitive exact match) when decrypting the encrypted data key.\n      Otherwise, the request to decrypt fails with an <code>InvalidCiphertextException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption Context</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GenerateDataKeyPair</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Decrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPairWithoutPlaintext</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyWithoutPlaintext</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Returns a unique asymmetric data key pair for use outside of KMS. This operation returns\n      a plaintext public key, a plaintext private key, and a copy of the private key that is\n      encrypted under the symmetric encryption KMS key you specify. You can use the data key pair to\n      perform asymmetric cryptography and implement digital signatures outside of KMS. The bytes\n      in the keys are random; they not related to the caller or to the KMS key that is used to\n      encrypt the private key. </p>\n         <p>You can use the public key that <code>GenerateDataKeyPair</code> returns to encrypt data\n      or verify a signature outside of KMS. Then, store the encrypted private key with the data.\n      When you are ready to decrypt data or sign a message, you can use the <a>Decrypt</a> operation to decrypt the encrypted private key.</p>\n         <p>To generate a data key pair, you must specify a symmetric encryption KMS key to encrypt\n      the private key in a data key pair. You cannot use an asymmetric KMS key or a KMS key in a\n      custom key store. To get the type and origin of your KMS key, use the <a>DescribeKey</a> operation. </p>\n         <p>Use the <code>KeyPairSpec</code> parameter to choose an RSA or Elliptic Curve (ECC) data\n      key pair. In China Regions, you can also choose an SM2 data key pair. KMS recommends that you use\n      ECC key pairs for signing, and use RSA and SM2 key pairs for either encryption or signing, but not both.\n      However, KMS cannot enforce any restrictions on the use of data key pairs outside of KMS.</p>\n         <p>If you are using the data key pair to encrypt data, or for any operation where you don't\n      immediately need a private key, consider using the <a>GenerateDataKeyPairWithoutPlaintext</a> operation.\n        <code>GenerateDataKeyPairWithoutPlaintext</code> returns a plaintext public key and an\n      encrypted private key, but omits the plaintext private key that you need only to decrypt\n      ciphertext or sign a message. Later, when you need to decrypt the data or sign a message, use\n      the <a>Decrypt</a> operation to decrypt the encrypted private key in the data key\n      pair.</p>\n         <p>\n            <code>GenerateDataKeyPair</code> returns a unique data key pair for each request. The\n      bytes in the keys are random; they are not related to the caller or the KMS key that is used\n      to encrypt the private key. The public key is a DER-encoded X.509 SubjectPublicKeyInfo, as\n      specified in <a href=\"https://tools.ietf.org/html/rfc5280\">RFC 5280</a>. The private\n      key is a DER-encoded PKCS8 PrivateKeyInfo, as specified in <a href=\"https://tools.ietf.org/html/rfc5958\">RFC 5958</a>.</p>\n         <p>\n            <code>GenerateDataKeyPair</code> also supports <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html\">Amazon Web Services Nitro Enclaves</a>, which provide an\n      isolated compute environment in Amazon EC2. To call <code>GenerateDataKeyPair</code> for an Amazon Web Services Nitro\n      enclave, use the <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk\">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code> parameter\n      to provide the attestation document for the enclave. <code>GenerateDataKeyPair</code> returns the public data key and a\n      copy of the private data key encrypted under the specified KMS key, as usual. But instead of a\n      plaintext copy of the private data key (<code>PrivateKeyPlaintext</code>), the response includes a copy of the private data key encrypted under\n      the public key from the attestation document (<code>CiphertextForRecipient</code>).\n      For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>..</p>\n         <p>You can use an optional encryption context to add additional security to the encryption\n      operation. If you specify an <code>EncryptionContext</code>, you must specify the same\n      encryption context (a case-sensitive exact match) when decrypting the encrypted data key.\n      Otherwise, the request to decrypt fails with an <code>InvalidCiphertextException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption Context</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GenerateDataKeyPair</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Decrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPairWithoutPlaintext</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyWithoutPlaintext</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.kms#GenerateDataKeyPairRequest": {
@@ -2243,7 +2265,7 @@
                 "EncryptionContext": {
                     "target": "com.amazonaws.kms#EncryptionContextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the private key in the\n      data key pair.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the private key in the\n      data key pair.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "KeyId": {
@@ -2265,6 +2287,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token\">Grant token</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token\">Using a grant token</a> in the\n    <i>Key Management Service Developer Guide</i>.</p>"
                     }
+                },
+                "Recipient": {
+                    "target": "com.amazonaws.kms#RecipientInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A signed <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc\">attestation document</a> from\n      an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave's public key.\n      The only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>\n         <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this\n      parameter, use the <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk\">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK.</p>\n         <p>When you use this parameter, instead of returning a plaintext copy of the private data key, KMS encrypts\n      the plaintext private data key under the public key in the attestation document, and returns the\n      resulting ciphertext in the <code>CiphertextForRecipient</code> field in the response. This\n      ciphertext can be decrypted only with the private key in the enclave. The\n      <code>CiphertextBlob</code> field in the response contains a copy of the private data key encrypted\n      under the KMS key specified by the <code>KeyId</code> parameter. The <code>PrivateKeyPlaintext</code>\n      field in the response is null or empty.</p>\n         <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2283,7 +2311,7 @@
                 "PrivateKeyPlaintext": {
                     "target": "com.amazonaws.kms#PlaintextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The plaintext copy of the private key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
+                        "smithy.api#documentation": "<p>The plaintext copy of the private key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>\n         <p>If the response includes the <code>CiphertextForRecipient</code> field, the\n      <code>PrivateKeyPlaintext</code> field is null or empty.</p>"
                     }
                 },
                 "PublicKey": {
@@ -2302,6 +2330,12 @@
                     "target": "com.amazonaws.kms#DataKeyPairSpec",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of data key pair that was generated.</p>"
+                    }
+                },
+                "CiphertextForRecipient": {
+                    "target": "com.amazonaws.kms#CiphertextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The plaintext private data key encrypted with the public key from the Nitro enclave. This ciphertext can\n      be decrypted only by using a private key in the Nitro enclave. </p>\n         <p>This field is included in the response only when the <code>Recipient</code> parameter in\n      the request includes a valid attestation document from an Amazon Web Services Nitro enclave.\n      For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -2356,7 +2390,7 @@
                 "EncryptionContext": {
                     "target": "com.amazonaws.kms#EncryptionContextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the private key in the\n      data key pair.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the private key in the\n      data key pair.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "KeyId": {
@@ -2429,7 +2463,7 @@
                 "EncryptionContext": {
                     "target": "com.amazonaws.kms#EncryptionContextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the data key.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the data key.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "NumberOfBytes": {
@@ -2449,6 +2483,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token\">Grant token</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token\">Using a grant token</a> in the\n    <i>Key Management Service Developer Guide</i>.</p>"
                     }
+                },
+                "Recipient": {
+                    "target": "com.amazonaws.kms#RecipientInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A signed <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc\">attestation document</a> from\n      an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave's public key.\n      The only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>\n         <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this\n      parameter, use the <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk\">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK.</p>\n         <p>When you use this parameter, instead of returning the plaintext data key, KMS encrypts\n      the plaintext data key under the public key in the attestation document, and returns the\n      resulting ciphertext in the <code>CiphertextForRecipient</code> field in the response. This\n      ciphertext can be decrypted only with the private key in the enclave. The\n      <code>CiphertextBlob</code> field in the response contains a copy of the data key encrypted\n      under the KMS key specified by the <code>KeyId</code> parameter. The <code>Plaintext</code>\n      field in the response is null or empty.</p>\n         <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2467,13 +2507,19 @@
                 "Plaintext": {
                     "target": "com.amazonaws.kms#PlaintextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The plaintext data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded. Use this data key to encrypt your data outside of\n      KMS. Then, remove it from memory as soon as possible.</p>"
+                        "smithy.api#documentation": "<p>The plaintext data key. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded. Use this data key to encrypt your data outside of\n      KMS. Then, remove it from memory as soon as possible.</p>\n         <p>If the response includes the <code>CiphertextForRecipient</code> field, the\n      <code>Plaintext</code> field is null or empty.</p>"
                     }
                 },
                 "KeyId": {
                     "target": "com.amazonaws.kms#KeyIdType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the KMS key that encrypted the data key.</p>"
+                    }
+                },
+                "CiphertextForRecipient": {
+                    "target": "com.amazonaws.kms#CiphertextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The plaintext data key encrypted with the public key from the Nitro enclave. This ciphertext can\n      be decrypted only by using a private key in the Nitro enclave. </p>\n         <p>This field is included in the response only when the <code>Recipient</code> parameter in\n      the request includes a valid attestation document from an Amazon Web Services Nitro enclave.\n      For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -2516,7 +2562,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a unique symmetric data key for use outside of KMS. This operation returns a\n      data key that is encrypted under a symmetric encryption KMS key that you specify. The bytes in\n      the key are random; they are not related to the caller or to the KMS key.</p>\n         <p>\n            <code>GenerateDataKeyWithoutPlaintext</code> is identical to the <a>GenerateDataKey</a> operation except that it does not return a plaintext copy of the\n      data key. </p>\n         <p>This operation is useful for systems that need to encrypt data at some point, but not\n      immediately. When you need to encrypt the data, you call the <a>Decrypt</a>\n      operation on the encrypted copy of the key.</p>\n         <p>It's also useful in distributed systems with different levels of trust. For example, you\n      might store encrypted data in containers. One component of your system creates new containers\n      and stores an encrypted data key with each container. Then, a different component puts the\n      data into the containers. That component first decrypts the data key, uses the plaintext data\n      key to encrypt data, puts the encrypted data into the container, and then destroys the\n      plaintext data key. In this system, the component that creates the containers never sees the\n      plaintext data key.</p>\n         <p>To request an asymmetric data key pair, use the <a>GenerateDataKeyPair</a> or\n        <a>GenerateDataKeyPairWithoutPlaintext</a> operations.</p>\n         <p>To generate a data key, you must specify the symmetric encryption KMS key that is used to\n      encrypt the data key. You cannot use an asymmetric KMS key or a key in a custom key store to generate a data key. To get the\n      type of your KMS key, use the <a>DescribeKey</a> operation.</p>\n         <p>You must also specify the length of the data key. Use either the <code>KeySpec</code> or \n      <code>NumberOfBytes</code> parameters (but not both). For 128-bit and 256-bit data keys, use \n      the <code>KeySpec</code> parameter.</p>\n         <p>To generate an SM4 data key (China Regions only), specify a <code>KeySpec</code> value of\n      <code>AES_128</code> or <code>NumberOfBytes</code> value of <code>128</code>. The symmetric \n      encryption key used in China Regions to encrypt your data key is an SM4 encryption key.</p>\n         <p>If the operation succeeds, you will find the encrypted copy of the data key in the\n        <code>CiphertextBlob</code> field.</p>\n         <p>You can use an optional encryption context to add additional security to the encryption\n      operation. If you specify an <code>EncryptionContext</code>, you must specify the same\n      encryption context (a case-sensitive exact match) when decrypting the encrypted data key.\n      Otherwise, the request to decrypt fails with an <code>InvalidCiphertextException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption Context</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GenerateDataKeyWithoutPlaintext</a> (key\n      policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Decrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPairWithoutPlaintext</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Returns a unique symmetric data key for use outside of KMS. This operation returns a\n      data key that is encrypted under a symmetric encryption KMS key that you specify. The bytes in\n      the key are random; they are not related to the caller or to the KMS key.</p>\n         <p>\n            <code>GenerateDataKeyWithoutPlaintext</code> is identical to the <a>GenerateDataKey</a> operation except that it does not return a plaintext copy of the\n      data key. </p>\n         <p>This operation is useful for systems that need to encrypt data at some point, but not\n      immediately. When you need to encrypt the data, you call the <a>Decrypt</a>\n      operation on the encrypted copy of the key.</p>\n         <p>It's also useful in distributed systems with different levels of trust. For example, you\n      might store encrypted data in containers. One component of your system creates new containers\n      and stores an encrypted data key with each container. Then, a different component puts the\n      data into the containers. That component first decrypts the data key, uses the plaintext data\n      key to encrypt data, puts the encrypted data into the container, and then destroys the\n      plaintext data key. In this system, the component that creates the containers never sees the\n      plaintext data key.</p>\n         <p>To request an asymmetric data key pair, use the <a>GenerateDataKeyPair</a> or\n        <a>GenerateDataKeyPairWithoutPlaintext</a> operations.</p>\n         <p>To generate a data key, you must specify the symmetric encryption KMS key that is used to\n      encrypt the data key. You cannot use an asymmetric KMS key or a key in a custom key store to generate a data key. To get the\n      type of your KMS key, use the <a>DescribeKey</a> operation.</p>\n         <p>You must also specify the length of the data key. Use either the <code>KeySpec</code> or \n      <code>NumberOfBytes</code> parameters (but not both). For 128-bit and 256-bit data keys, use \n      the <code>KeySpec</code> parameter.</p>\n         <p>To generate an SM4 data key (China Regions only), specify a <code>KeySpec</code> value of\n        <code>AES_128</code> or <code>NumberOfBytes</code> value of <code>16</code>. The symmetric\n      encryption key used in China Regions to encrypt your data key is an SM4 encryption key.</p>\n         <p>If the operation succeeds, you will find the encrypted copy of the data key in the\n        <code>CiphertextBlob</code> field.</p>\n         <p>You can use an optional encryption context to add additional security to the encryption\n      operation. If you specify an <code>EncryptionContext</code>, you must specify the same\n      encryption context (a case-sensitive exact match) when decrypting the encrypted data key.\n      Otherwise, the request to decrypt fails with an <code>InvalidCiphertextException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption Context</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GenerateDataKeyWithoutPlaintext</a> (key\n      policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Decrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPairWithoutPlaintext</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.kms#GenerateDataKeyWithoutPlaintextRequest": {
@@ -2532,7 +2578,7 @@
                 "EncryptionContext": {
                     "target": "com.amazonaws.kms#EncryptionContextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the data key.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the data key.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "KeySpec": {
@@ -2700,7 +2746,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a random byte string that is cryptographically secure.</p>\n         <p>You must use the <code>NumberOfBytes</code> parameter to specify the length of the random\n      byte string. There is no default value for string length.</p>\n         <p>By default, the random byte string is generated in KMS. To generate the byte string in\n      the CloudHSM cluster associated with an CloudHSM key store, use the <code>CustomKeyStoreId</code>\n      parameter.</p>\n         <p>Applications in Amazon Web Services Nitro Enclaves can call this operation by using the <a href=\"https://github.com/aws/aws-nitro-enclaves-sdk-c\">Amazon Web Services Nitro Enclaves Development Kit</a>. For information about the supporting parameters, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves use KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>For more information about entropy and random number generation, see\n      <a href=\"https://docs.aws.amazon.com/kms/latest/cryptographic-details/\">Key Management Service Cryptographic Details</a>.</p>\n         <p>\n            <b>Cross-account use</b>: Not applicable.\n        <code>GenerateRandom</code> does not use any account-specific resources, such as KMS\n      keys.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GenerateRandom</a> (IAM policy)</p>"
+                "smithy.api#documentation": "<p>Returns a random byte string that is cryptographically secure.</p>\n         <p>You must use the <code>NumberOfBytes</code> parameter to specify the length of the random\n      byte string. There is no default value for string length.</p>\n         <p>By default, the random byte string is generated in KMS. To generate the byte string in\n      the CloudHSM cluster associated with an CloudHSM key store, use the <code>CustomKeyStoreId</code>\n      parameter.</p>\n         <p>\n            <code>GenerateRandom</code> also supports <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html\">Amazon Web Services Nitro Enclaves</a>, which provide an\n      isolated compute environment in Amazon EC2. To call <code>GenerateRandom</code> for a Nitro\n      enclave, use the <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk\">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code> parameter\n      to provide the attestation document for the enclave. Instead of plaintext bytes, the response\n      includes the plaintext bytes encrypted under the public key from the attestation document\n      (<code>CiphertextForRecipient</code>).For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>For more information about entropy and random number generation, see\n      <a href=\"https://docs.aws.amazon.com/kms/latest/cryptographic-details/\">Key Management Service Cryptographic Details</a>.</p>\n         <p>\n            <b>Cross-account use</b>: Not applicable.\n        <code>GenerateRandom</code> does not use any account-specific resources, such as KMS\n      keys.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GenerateRandom</a> (IAM policy)</p>"
             }
         },
         "com.amazonaws.kms#GenerateRandomRequest": {
@@ -2715,7 +2761,13 @@
                 "CustomKeyStoreId": {
                     "target": "com.amazonaws.kms#CustomKeyStoreIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Generates the random byte string in the CloudHSM cluster that is associated with the\n      specified CloudHSM key store. To find the ID of a custom key store, use the <a>DescribeCustomKeyStores</a> operation.</p>\n         <p>External key store IDs are not valid for this parameter. If you specify the ID of an\n      external key store, <code>GenerateRandom</code> throws an\n        <code>UnsupportedOperationException</code>.</p>"
+                        "smithy.api#documentation": "<p>Generates the random byte string in the CloudHSM cluster that is associated with the\n      specified CloudHSM key store. To find the ID of a custom key store, use the <a>DescribeCustomKeyStores</a> operation.</p>\n         <p>External key store IDs are not valid for this parameter. If you specify the ID of an\n      external key store, <code>GenerateRandom</code> throws an\n      <code>UnsupportedOperationException</code>.</p>"
+                    }
+                },
+                "Recipient": {
+                    "target": "com.amazonaws.kms#RecipientInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A signed <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc\">attestation document</a> from\n      an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave's public key.\n      The only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>\n         <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this\n      parameter, use the <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk\">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK.</p>\n         <p>When you use this parameter, instead of returning plaintext bytes, KMS encrypts the\n      plaintext bytes under the public key in the attestation document, and returns the resulting\n      ciphertext in the <code>CiphertextForRecipient</code> field in the response. This ciphertext\n      can be decrypted only with the private key in the enclave. The <code>Plaintext</code> field in\n      the response is null or empty.</p>\n         <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -2729,7 +2781,13 @@
                 "Plaintext": {
                     "target": "com.amazonaws.kms#PlaintextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The random byte string. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
+                        "smithy.api#documentation": "<p>The random byte string. When you use the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>\n         <p>If the response includes the <code>CiphertextForRecipient</code> field, the\n      <code>Plaintext</code> field is null or empty.</p>"
+                    }
+                },
+                "CiphertextForRecipient": {
+                    "target": "com.amazonaws.kms#CiphertextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The plaintext random bytes encrypted with the public key from the Nitro enclave. This ciphertext can\n      be decrypted only by using a private key in the Nitro enclave. </p>\n         <p>This field is included in the response only when the <code>Recipient</code> parameter in\n      the request includes a valid attestation document from an Amazon Web Services Nitro enclave.\n      For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -3655,6 +3713,17 @@
                 "smithy.api#documentation": "<p>The request was rejected because the state of the specified resource is not valid for this\n      request.</p>\n         <p>This exceptions means one of the following:</p>\n         <ul>\n            <li>\n               <p>The key state of the KMS key is not compatible with the operation. </p>\n               <p>To find the key state, use the <a>DescribeKey</a> operation. For more\n          information about which key states are compatible with each KMS operation, see\n          <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>\n                     <i>Key Management Service Developer Guide</i>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For cryptographic operations on KMS keys in custom key stores, this exception represents a general failure with many possible causes. To identify the cause, see the error message that accompanies the exception.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.kms#KeyEncryptionMechanism": {
+            "type": "enum",
+            "members": {
+                "RSAES_OAEP_SHA_256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RSAES_OAEP_SHA_256"
+                    }
+                }
             }
         },
         "com.amazonaws.kms#KeyIdType": {
@@ -5003,7 +5072,7 @@
                 "DestinationEncryptionContext": {
                     "target": "com.amazonaws.kms#EncryptionContextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that encryption context to use when the reencrypting the data.</p>\n         <p>A destination encryption context is valid only when the destination KMS key is a symmetric\n      encryption KMS key. The standard ciphertext format for asymmetric KMS keys does not include\n      fields for metadata.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies that encryption context to use when the reencrypting the data.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>A destination encryption context is valid only when the destination KMS key is a symmetric\n      encryption KMS key. The standard ciphertext format for asymmetric KMS keys does not include\n      fields for metadata.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. \nWhen you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported\nonly on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>\n         <p>For more information, see\n<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "SourceEncryptionAlgorithm": {
@@ -5065,6 +5134,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kms#RecipientInfo": {
+            "type": "structure",
+            "members": {
+                "KeyEncryptionAlgorithm": {
+                    "target": "com.amazonaws.kms#KeyEncryptionMechanism",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption algorithm that KMS should use with the public key for an Amazon Web Services Nitro Enclave to encrypt plaintext      \n      values for the response. The only valid value is <code>RSAES_OAEP_SHA_256</code>.</p>"
+                    }
+                },
+                "AttestationDocument": {
+                    "target": "com.amazonaws.kms#AttestationDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attestation document for an Amazon Web Services Nitro Enclave. This document includes the enclave's public\n      key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the party that receives the response from the API\n      operation.</p>\n         <p>This data type is designed to support Amazon Web Services Nitro Enclaves, which lets you create an isolated\n      compute environment in Amazon EC2. For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html\">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.kms#RegionType": {
@@ -5154,13 +5243,13 @@
                 "Description": {
                     "target": "com.amazonaws.kms#DescriptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the KMS key. The default value is an empty string (no\n      description).</p>\n         <p>The description is not a shared property of multi-Region keys. You can specify the same\n      description or a different description for each key in a set of related multi-Region keys.\n      KMS does not synchronize this property.</p>"
+                        "smithy.api#documentation": "<p>A description of the KMS key. The default value is an empty string (no\n      description).</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>The description is not a shared property of multi-Region keys. You can specify the same\n      description or a different description for each key in a set of related multi-Region keys.\n      KMS does not synchronize this property.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.kms#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags to the replica key. Use this parameter to tag the KMS key when it\n      is created. To tag an existing KMS key, use the <a>TagResource</a>\n      operation.</p>\n         <note>\n            <p>Tagging or untagging a KMS key can allow or deny permission to the KMS key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/abac.html\">ABAC for KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </note>\n         <p>To use this parameter, you must have <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:TagResource</a> permission in an IAM policy.</p>\n         <p>Tags are not a shared property of multi-Region keys. You can specify the same tags or\n      different tags for each key in a set of related multi-Region keys. KMS does not synchronize\n      this property.</p>\n         <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are\n      required, but the tag value can be an empty (null) string. You cannot have more than one tag\n      on a KMS key with the same tag key. If you specify an existing tag key with a different tag\n      value, KMS replaces the current tag value with the specified one.</p>\n         <p>When you add tags to an Amazon Web Services resource, Amazon Web Services generates a cost allocation\n              report with usage and costs aggregated by tags. Tags can also be used to control access to a KMS key. For details,\n              see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">Tagging Keys</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags to the replica key. Use this parameter to tag the KMS key when it\n      is created. To tag an existing KMS key, use the <a>TagResource</a>\n      operation.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <note>\n            <p>Tagging or untagging a KMS key can allow or deny permission to the KMS key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/abac.html\">ABAC for KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </note>\n         <p>To use this parameter, you must have <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:TagResource</a> permission in an IAM policy.</p>\n         <p>Tags are not a shared property of multi-Region keys. You can specify the same tags or\n      different tags for each key in a set of related multi-Region keys. KMS does not synchronize\n      this property.</p>\n         <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are\n      required, but the tag value can be an empty (null) string. You cannot have more than one tag\n      on a KMS key with the same tag key. If you specify an existing tag key with a different tag\n      value, KMS replaces the current tag value with the specified one.</p>\n         <p>When you add tags to an Amazon Web Services resource, Amazon Web Services generates a cost allocation\n              report with usage and costs aggregated by tags. Tags can also be used to control access to a KMS key. For details,\n              see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">Tagging Keys</a>.</p>"
                     }
                 }
             },
@@ -5586,7 +5675,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are\n      both required, but tag values can be empty (null) strings.</p>\n         <p>For information about the rules that apply to tag keys and tag values, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">User-Defined Tag Restrictions</a> in the <i>Amazon Web Services Billing and Cost Management\n        User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are\n      both required, but tag values can be empty (null) strings.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>For information about the rules that apply to tag keys and tag values, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">User-Defined Tag Restrictions</a> in the <i>Amazon Web Services Billing and Cost Management\n        User Guide</i>.</p>"
             }
         },
         "com.amazonaws.kms#TagException": {
@@ -5672,7 +5761,7 @@
                 "Tags": {
                     "target": "com.amazonaws.kms#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags. </p>\n         <p>Each tag consists of a tag key and a tag value. The tag value can be an empty (null)\n      string. </p>\n         <p>You cannot have more than one tag on a KMS key with the same tag key. If you specify an\n      existing tag key with a different tag value, KMS replaces the current tag value with the\n      specified one.</p>",
+                        "smithy.api#documentation": "<p>One or more tags. Each tag consists of a tag key and a tag value. The tag value can be an empty (null)\n      string. </p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>You cannot have more than one tag on a KMS key with the same tag key. If you specify an\n      existing tag key with a different tag value, KMS replaces the current tag value with the\n      specified one.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6222,9 +6311,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6235,9 +6324,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": true,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6248,9 +6337,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-east-1",
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6261,9 +6350,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-east-1",
                                 "UseFIPS": true,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6274,9 +6363,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6287,9 +6376,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6300,9 +6389,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6313,9 +6402,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6326,9 +6415,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6339,9 +6428,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6352,9 +6441,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6365,9 +6454,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6378,9 +6467,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6391,9 +6480,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6404,9 +6493,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6417,9 +6506,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6430,9 +6519,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-3",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6443,9 +6532,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-3",
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6456,9 +6545,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6469,9 +6558,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6482,9 +6571,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6495,9 +6584,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6508,9 +6597,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6521,9 +6610,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": true,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6534,9 +6623,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6547,9 +6636,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-south-1",
                                 "UseFIPS": true,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6560,9 +6649,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6573,9 +6662,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6586,9 +6675,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6599,9 +6688,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6612,9 +6701,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6625,9 +6714,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6638,9 +6727,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "me-south-1",
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6651,9 +6740,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "me-south-1",
                                 "UseFIPS": true,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6664,9 +6753,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6677,9 +6766,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": true,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6690,9 +6779,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6703,9 +6792,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6716,9 +6805,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6729,9 +6818,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6742,9 +6831,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6755,9 +6844,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6768,9 +6857,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6781,9 +6870,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6794,9 +6883,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6807,9 +6896,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6820,9 +6909,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6833,9 +6922,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6846,9 +6935,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6859,9 +6948,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6872,9 +6961,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6885,9 +6974,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6898,9 +6987,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6911,9 +7000,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6924,9 +7013,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6937,9 +7026,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6950,9 +7039,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6963,9 +7052,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6976,9 +7065,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6989,9 +7078,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7002,9 +7091,31 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-west-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7015,9 +7126,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7028,9 +7139,31 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7041,9 +7174,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -7055,8 +7188,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -7066,9 +7199,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -7078,10 +7211,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -7201,7 +7340,7 @@
                 "AliasName": {
                     "target": "com.amazonaws.kms#AliasNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the alias that is changing its KMS key. This value must begin with\n        <code>alias/</code> followed by the alias name, such as <code>alias/ExampleAlias</code>. You\n      cannot use <code>UpdateAlias</code> to change the alias name.</p>",
+                        "smithy.api#documentation": "<p>Identifies the alias that is changing its KMS key. This value must begin with\n        <code>alias/</code> followed by the alias name, such as <code>alias/ExampleAlias</code>. You\n      cannot use <code>UpdateAlias</code> to change the alias name.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7295,7 +7434,7 @@
                 "NewCustomKeyStoreName": {
                     "target": "com.amazonaws.kms#CustomKeyStoreNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Changes the friendly name of the custom key store to the value that you specify. The\n      custom key store name must be unique in the Amazon Web Services account.</p>\n         <p>To change this value, an CloudHSM key store must be disconnected. An external key store can\n      be connected or disconnected.</p>"
+                        "smithy.api#documentation": "<p>Changes the friendly name of the custom key store to the value that you specify. The\n      custom key store name must be unique in the Amazon Web Services account.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>To change this value, an CloudHSM key store must be disconnected. An external key store can\n      be connected or disconnected.</p>"
                     }
                 },
                 "KeyStorePassword": {
@@ -7394,7 +7533,7 @@
                 "Description": {
                     "target": "com.amazonaws.kms#DescriptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>New description for the KMS key.</p>",
+                        "smithy.api#documentation": "<p>New description for the KMS key.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
