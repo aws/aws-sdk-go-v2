@@ -216,6 +216,76 @@ type AttributeFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Gets information on the configuration of document fields/attributes that you
+// want to base query suggestions on. To change your configuration, use
+// AttributeSuggestionsUpdateConfig (https://docs.aws.amazon.com/kendra/latest/dg/API_AttributeSuggestionsUpdateConfig.html)
+// and then call UpdateQuerySuggestionsConfig (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html)
+// .
+type AttributeSuggestionsDescribeConfig struct {
+
+	// The mode is set to either ACTIVE or INACTIVE . If the Mode for query history is
+	// set to ENABLED when calling UpdateQuerySuggestionsConfig (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html)
+	// and AttributeSuggestionsMode to use fields/attributes is set to ACTIVE , and you
+	// haven't set your SuggestionTypes preference to DOCUMENT_ATTRIBUTES , then Amazon
+	// Kendra uses the query history.
+	AttributeSuggestionsMode AttributeSuggestionsMode
+
+	// The list of fields/attributes that you want to set as suggestible for query
+	// suggestions.
+	SuggestableConfigList []SuggestableConfig
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information for the document fields/attributes that
+// you want to base query suggestions on.
+type AttributeSuggestionsGetConfig struct {
+
+	// The list of additional document field/attribute keys or field names to include
+	// in the response. You can use additional fields to provide extra information in
+	// the response. Additional fields are not used to based suggestions on.
+	AdditionalResponseAttributes []string
+
+	// Filters the search results based on document fields/attributes.
+	AttributeFilter *AttributeFilter
+
+	// The list of document field/attribute keys or field names to use for query
+	// suggestions. If the content within any of the fields match what your user starts
+	// typing as their query, then the field content is returned as a query suggestion.
+	SuggestionAttributes []string
+
+	// Applies user context filtering so that only users who are given access to
+	// certain documents see these document in their search results.
+	UserContext *UserContext
+
+	noSmithyDocumentSerde
+}
+
+// Updates the configuration information for the document fields/attributes that
+// you want to base query suggestions on. To deactivate using documents fields for
+// query suggestions, set the mode to INACTIVE . You must also set SuggestionTypes
+// as either QUERY or DOCUMENT_ATTRIBUTES and then call GetQuerySuggestions (https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html)
+// . If you set to QUERY , then Amazon Kendra uses the query history to base
+// suggestions on. If you set to DOCUMENT_ATTRIBUTES , then Amazon Kendra uses the
+// contents of document fields to base suggestions on.
+type AttributeSuggestionsUpdateConfig struct {
+
+	// You can set the mode to ACTIVE or INACTIVE . You must also set SuggestionTypes
+	// as either QUERY or DOCUMENT_ATTRIBUTES and then call GetQuerySuggestions (https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html)
+	// . If Mode to use query history is set to ENABLED when calling
+	// UpdateQuerySuggestionsConfig (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html)
+	// and AttributeSuggestionsMode to use fields/attributes is set to ACTIVE , and you
+	// haven't set your SuggestionTypes preference to DOCUMENT_ATTRIBUTES , then Amazon
+	// Kendra uses the query history.
+	AttributeSuggestionsMode AttributeSuggestionsMode
+
+	// The list of fields/attributes that you want to set as suggestible for query
+	// suggestions.
+	SuggestableConfigList []SuggestableConfig
+
+	noSmithyDocumentSerde
+}
+
 // Provides the configuration information to connect to websites that require user
 // authentication.
 type AuthenticationConfiguration struct {
@@ -3659,6 +3729,24 @@ type SortingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The document ID and its fields/attributes that are used for a query suggestion,
+// if document fields set to use for query suggestions.
+type SourceDocument struct {
+
+	// The additional fields/attributes to include in the response. You can use
+	// additional fields to provide extra information in the response. Additional
+	// fields are not used to based suggestions on.
+	AdditionalAttributes []DocumentAttribute
+
+	// The identifier of the document used for a query suggestion.
+	DocumentId *string
+
+	// The document fields/attributes used for a query suggestion.
+	SuggestionAttributes []string
+
+	noSmithyDocumentSerde
+}
+
 // A query with suggested spell corrections.
 type SpellCorrectedQuery struct {
 
@@ -3726,11 +3814,29 @@ type Status struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information for a document field/attribute that you
+// want to base query suggestions on.
+type SuggestableConfig struct {
+
+	// The name of the document field/attribute.
+	AttributeName *string
+
+	// TRUE means the document field/attribute is suggestible, so the contents within
+	// the field can be used for query suggestions.
+	Suggestable *bool
+
+	noSmithyDocumentSerde
+}
+
 // A single query suggestion.
 type Suggestion struct {
 
 	// The UUID (universally unique identifier) of a single query suggestion.
 	Id *string
+
+	// The list of document IDs and their fields/attributes that are used for a single
+	// query suggestion, if document fields set to use for query suggestions.
+	SourceDocuments []SourceDocument
 
 	// The value for the UUID (universally unique identifier) of a single query
 	// suggestion. The value is the text string of a suggestion.

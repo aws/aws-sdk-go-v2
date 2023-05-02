@@ -15,6 +15,81 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpCancelFlowExecutions struct {
+}
+
+func (*awsRestjson1_serializeOpCancelFlowExecutions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCancelFlowExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CancelFlowExecutionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/cancel-flow-executions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCancelFlowExecutionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCancelFlowExecutionsInput(v *CancelFlowExecutionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCancelFlowExecutionsInput(v *CancelFlowExecutionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecutionIds != nil {
+		ok := object.Key("executionIds")
+		if err := awsRestjson1_serializeDocumentExecutionIds(v.ExecutionIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FlowName != nil {
+		ok := object.Key("flowName")
+		ok.String(*v.FlowName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateConnectorProfile struct {
 }
 
@@ -2853,6 +2928,17 @@ func awsRestjson1_serializeDocumentEventBridgeDestinationProperties(v *types.Eve
 		ok.String(*v.Object)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExecutionIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

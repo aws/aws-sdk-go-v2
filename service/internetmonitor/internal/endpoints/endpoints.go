@@ -156,19 +156,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor.ap-northeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
-				Region: "ap-northeast-3",
-			}: endpoints.Endpoint{
-				Hostname: "internetmonitor.ap-northeast-3.api.aws",
-			},
-			endpoints.EndpointKey{
 				Region: "ap-south-1",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.ap-south-1.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "ap-south-2",
-			}: endpoints.Endpoint{
-				Hostname: "internetmonitor.ap-south-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
@@ -181,16 +171,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor.ap-southeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
-				Region: "ap-southeast-3",
-			}: endpoints.Endpoint{
-				Hostname: "internetmonitor.ap-southeast-3.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-4",
-			}: endpoints.Endpoint{
-				Hostname: "internetmonitor.ap-southeast-4.api.aws",
-			},
-			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.ca-central-1.api.aws",
@@ -201,11 +181,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor.eu-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
-				Region: "eu-central-2",
-			}: endpoints.Endpoint{
-				Hostname: "internetmonitor.eu-central-2.api.aws",
-			},
-			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.eu-north-1.api.aws",
@@ -214,11 +189,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-south-1",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.eu-south-1.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "eu-south-2",
-			}: endpoints.Endpoint{
-				Hostname: "internetmonitor.eu-south-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
@@ -234,11 +204,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-west-3",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.eu-west-3.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "me-central-1",
-			}: endpoints.Endpoint{
-				Hostname: "internetmonitor.me-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "me-south-1",

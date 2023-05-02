@@ -8707,6 +8707,51 @@ func awsAwsjson11_deserializeDocumentAssociateEntitiesToExperienceFailedEntityLi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAttributeSuggestionsDescribeConfig(v **types.AttributeSuggestionsDescribeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AttributeSuggestionsDescribeConfig
+	if *v == nil {
+		sv = &types.AttributeSuggestionsDescribeConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttributeSuggestionsMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttributeSuggestionsMode to be of type string, got %T instead", value)
+				}
+				sv.AttributeSuggestionsMode = types.AttributeSuggestionsMode(jtv)
+			}
+
+		case "SuggestableConfigList":
+			if err := awsAwsjson11_deserializeDocumentSuggestableConfigList(&sv.SuggestableConfigList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAuthenticationConfiguration(v **types.AuthenticationConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11458,6 +11503,42 @@ func awsAwsjson11_deserializeDocumentDocumentAttributeCondition(v **types.Docume
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDocumentAttributeKeyList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DocumentAttributeKey to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -18141,6 +18222,90 @@ func awsAwsjson11_deserializeDocumentSnapshotsDataRecords(v *[][]string, value i
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSourceDocument(v **types.SourceDocument, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceDocument
+	if *v == nil {
+		sv = &types.SourceDocument{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalAttributes":
+			if err := awsAwsjson11_deserializeDocumentDocumentAttributeList(&sv.AdditionalAttributes, value); err != nil {
+				return err
+			}
+
+		case "DocumentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DocumentId = ptr.String(jtv)
+			}
+
+		case "SuggestionAttributes":
+			if err := awsAwsjson11_deserializeDocumentDocumentAttributeKeyList(&sv.SuggestionAttributes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSourceDocuments(v *[]types.SourceDocument, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SourceDocument
+	if *v == nil {
+		cv = []types.SourceDocument{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SourceDocument
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentSourceDocument(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSpellCorrectedQuery(v **types.SpellCorrectedQuery, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18399,6 +18564,89 @@ func awsAwsjson11_deserializeDocumentSubnetIdList(v *[]string, value interface{}
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSuggestableConfig(v **types.SuggestableConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SuggestableConfig
+	if *v == nil {
+		sv = &types.SuggestableConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentAttributeKey to be of type string, got %T instead", value)
+				}
+				sv.AttributeName = ptr.String(jtv)
+			}
+
+		case "Suggestable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ObjectBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Suggestable = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSuggestableConfigList(v *[]types.SuggestableConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SuggestableConfig
+	if *v == nil {
+		cv = []types.SuggestableConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SuggestableConfig
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentSuggestableConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSuggestion(v **types.Suggestion, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18428,6 +18676,11 @@ func awsAwsjson11_deserializeDocumentSuggestion(v **types.Suggestion, value inte
 					return fmt.Errorf("expected ResultId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "SourceDocuments":
+			if err := awsAwsjson11_deserializeDocumentSourceDocuments(&sv.SourceDocuments, value); err != nil {
+				return err
 			}
 
 		case "Value":
@@ -21522,6 +21775,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeQuerySuggestionsConfigOutput(v **
 
 	for key, value := range shape {
 		switch key {
+		case "AttributeSuggestionsConfig":
+			if err := awsAwsjson11_deserializeDocumentAttributeSuggestionsDescribeConfig(&sv.AttributeSuggestionsConfig, value); err != nil {
+				return err
+			}
+
 		case "IncludeQueriesWithoutUserInformation":
 			if value != nil {
 				jtv, ok := value.(bool)

@@ -594,8 +594,14 @@ type PhysicalResource struct {
 	// Indicates if a resource is included or excluded from the assessment.
 	Excluded *bool
 
+	// The name of the parent resource.
+	ParentResourceName *string
+
 	// The name of the resource.
 	ResourceName *string
+
+	// The type of input source.
+	SourceType ResourceSourceType
 
 	noSmithyDocumentSerde
 }

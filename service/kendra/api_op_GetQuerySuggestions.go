@@ -44,8 +44,21 @@ type GetQuerySuggestionsInput struct {
 	// This member is required.
 	QueryText *string
 
+	// Configuration information for the document fields/attributes that you want to
+	// base query suggestions on.
+	AttributeSuggestionsConfig *types.AttributeSuggestionsGetConfig
+
 	// The maximum number of query suggestions you want to show to your users.
 	MaxSuggestionsCount *int32
+
+	// The suggestions type to base query suggestions on. The suggestion types are
+	// query history or document fields/attributes. You can set one type or the other.
+	// If you set query history as your suggestions type, Amazon Kendra suggests
+	// queries relevant to your users based on popular queries in the query history. If
+	// you set document fields/attributes as your suggestions type, Amazon Kendra
+	// suggests queries relevant to your users based on the contents of document
+	// fields.
+	SuggestionTypes []types.SuggestionType
 
 	noSmithyDocumentSerde
 }

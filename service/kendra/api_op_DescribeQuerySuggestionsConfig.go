@@ -44,6 +44,10 @@ type DescribeQuerySuggestionsConfigInput struct {
 
 type DescribeQuerySuggestionsConfigOutput struct {
 
+	// Configuration information for the document fields/attributes that you want to
+	// base query suggestions on.
+	AttributeSuggestionsConfig *types.AttributeSuggestionsDescribeConfig
+
 	// TRUE to use all queries, otherwise use only queries that include user
 	// information to generate the query suggestions.
 	IncludeQueriesWithoutUserInformation *bool
@@ -54,7 +58,10 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	// considers re-occurences of a query from the time you cleared suggestions.
 	LastClearTime *time.Time
 
-	// The Unix timestamp when query suggestions for an index was last updated.
+	// The Unix timestamp when query suggestions for an index was last updated. Amazon
+	// Kendra automatically updates suggestions every 24 hours, after you change a
+	// setting or after you apply a block list (https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist)
+	// .
 	LastSuggestionsBuildTime *time.Time
 
 	// The minimum number of unique users who must search a query in order for the
@@ -83,7 +90,10 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	// The current total count of query suggestions for an index. This count can
 	// change when you update your query suggestions settings, if you filter out
 	// certain queries from suggestions using a block list, and as the query log
-	// accumulates more queries for Amazon Kendra to learn from.
+	// accumulates more queries for Amazon Kendra to learn from. If the count is much
+	// lower than you expected, it could be because Amazon Kendra needs more queries in
+	// the query history to learn from or your current query suggestions settings are
+	// too strict.
 	TotalSuggestionsCount *int32
 
 	// Metadata pertaining to the operation's result.

@@ -14,14 +14,16 @@ import (
 
 // Creates an Resilience Hub application. An Resilience Hub application is a
 // collection of Amazon Web Services resources structured to prevent and recover
-// Amazon Web Services application disruptions. To describe a Resilience Hub
-// application, you provide an application name, resources from one or more–up to
-// 20–CloudFormation stacks, and an appropriate resiliency policy. After you create
-// an Resilience Hub application, you publish it so that you can run a resiliency
-// assessment on it. You can then use recommendations from the assessment to
-// improve resiliency by running another assessment, comparing results, and then
-// iterating the process until you achieve your goals for recovery time objective
-// (RTO) and recovery point objective (RPO).
+// Amazon Web Services application disruptions. To describe an Resilience Hub
+// application, you provide an application name, resources from one or more
+// CloudFormation stacks, Resource Groups, Terraform state files, AppRegistry
+// applications, and an appropriate resiliency policy. For more information about
+// the number of resources supported per application, see Service Quotas (https://docs.aws.amazon.com/general/latest/gr/resiliencehub.html#limits_resiliencehub)
+// . After you create an Resilience Hub application, you publish it so that you can
+// run a resiliency assessment on it. You can then use recommendations from the
+// assessment to improve resiliency by running another assessment, comparing
+// results, and then iterating the process until you achieve your goals for
+// recovery time objective (RTO) and recovery point objective (RPO).
 func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns ...func(*Options)) (*CreateAppOutput, error) {
 	if params == nil {
 		params = &CreateAppInput{}

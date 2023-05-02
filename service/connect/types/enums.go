@@ -461,6 +461,7 @@ const (
 	EventSourceNameOnZendeskTicketCreate           EventSourceName = "OnZendeskTicketCreate"
 	EventSourceNameOnZendeskTicketStatusUpdate     EventSourceName = "OnZendeskTicketStatusUpdate"
 	EventSourceNameOnSalesforceCaseCreate          EventSourceName = "OnSalesforceCaseCreate"
+	EventSourceNameOnContactEvaluationSubmit       EventSourceName = "OnContactEvaluationSubmit"
 )
 
 // Values returns all known values for EventSourceName. Note that this can be
@@ -474,6 +475,7 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnZendeskTicketCreate",
 		"OnZendeskTicketStatusUpdate",
 		"OnSalesforceCaseCreate",
+		"OnContactEvaluationSubmit",
 	}
 }
 

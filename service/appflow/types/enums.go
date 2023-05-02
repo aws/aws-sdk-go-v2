@@ -280,9 +280,11 @@ type ExecutionStatus string
 
 // Enum values for ExecutionStatus
 const (
-	ExecutionStatusInprogress ExecutionStatus = "InProgress"
-	ExecutionStatusSuccessful ExecutionStatus = "Successful"
-	ExecutionStatusError      ExecutionStatus = "Error"
+	ExecutionStatusInprogress    ExecutionStatus = "InProgress"
+	ExecutionStatusSuccessful    ExecutionStatus = "Successful"
+	ExecutionStatusError         ExecutionStatus = "Error"
+	ExecutionStatusCancelstarted ExecutionStatus = "CancelStarted"
+	ExecutionStatusCanceled      ExecutionStatus = "Canceled"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -293,6 +295,8 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"InProgress",
 		"Successful",
 		"Error",
+		"CancelStarted",
+		"Canceled",
 	}
 }
 

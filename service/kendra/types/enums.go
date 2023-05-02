@@ -39,6 +39,24 @@ func (AlfrescoEntity) Values() []AlfrescoEntity {
 	}
 }
 
+type AttributeSuggestionsMode string
+
+// Enum values for AttributeSuggestionsMode
+const (
+	AttributeSuggestionsModeActive   AttributeSuggestionsMode = "ACTIVE"
+	AttributeSuggestionsModeInactive AttributeSuggestionsMode = "INACTIVE"
+)
+
+// Values returns all known values for AttributeSuggestionsMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeSuggestionsMode) Values() []AttributeSuggestionsMode {
+	return []AttributeSuggestionsMode{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type ConditionOperator string
 
 // Enum values for ConditionOperator
@@ -1219,6 +1237,24 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"DESC",
 		"ASC",
+	}
+}
+
+type SuggestionType string
+
+// Enum values for SuggestionType
+const (
+	SuggestionTypeQuery              SuggestionType = "QUERY"
+	SuggestionTypeDocumentAttributes SuggestionType = "DOCUMENT_ATTRIBUTES"
+)
+
+// Values returns all known values for SuggestionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SuggestionType) Values() []SuggestionType {
+	return []SuggestionType{
+		"QUERY",
+		"DOCUMENT_ATTRIBUTES",
 	}
 }
 

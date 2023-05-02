@@ -77,7 +77,7 @@ type PutAccountSettingInput struct {
 	Name types.SettingName
 
 	// The account setting value for the specified principal ARN. Accepted values are
-	// enabled and disabled .
+	// enabled , disabled , on , and off .
 	//
 	// This member is required.
 	Value *string

@@ -1705,6 +1705,28 @@ func validateAttributeFilterList(v []types.AttributeFilter) error {
 	}
 }
 
+func validateAttributeSuggestionsGetConfig(v *types.AttributeSuggestionsGetConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeSuggestionsGetConfig"}
+	if v.AttributeFilter != nil {
+		if err := validateAttributeFilter(v.AttributeFilter); err != nil {
+			invalidParams.AddNested("AttributeFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserContext != nil {
+		if err := validateUserContext(v.UserContext); err != nil {
+			invalidParams.AddNested("UserContext", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAuthenticationConfiguration(v *types.AuthenticationConfiguration) error {
 	if v == nil {
 		return nil
@@ -4476,6 +4498,11 @@ func validateOpGetQuerySuggestionsInput(v *GetQuerySuggestionsInput) error {
 	}
 	if v.QueryText == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryText"))
+	}
+	if v.AttributeSuggestionsConfig != nil {
+		if err := validateAttributeSuggestionsGetConfig(v.AttributeSuggestionsConfig); err != nil {
+			invalidParams.AddNested("AttributeSuggestionsConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

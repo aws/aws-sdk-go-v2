@@ -17187,6 +17187,11 @@ func awsAwsjson11_serializeDocumentAutoMLChannel(v *types.AutoMLChannel, value s
 		}
 	}
 
+	if v.SampleWeightAttributeName != nil {
+		ok := object.Key("SampleWeightAttributeName")
+		ok.String(*v.SampleWeightAttributeName)
+	}
+
 	if v.TargetAttributeName != nil {
 		ok := object.Key("TargetAttributeName")
 		ok.String(*v.TargetAttributeName)

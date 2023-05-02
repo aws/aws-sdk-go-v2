@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCancelFlowExecutions struct {
+}
+
+func (*validateOpCancelFlowExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelFlowExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelFlowExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelFlowExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConnectorProfile struct {
 }
 
@@ -368,6 +388,10 @@ func (m *validateOpUpdateFlow) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+func addOpCancelFlowExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelFlowExecutions{}, middleware.After)
 }
 
 func addOpCreateConnectorProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -2040,6 +2064,21 @@ func validateZendeskSourceProperties(v *types.ZendeskSourceProperties) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ZendeskSourceProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelFlowExecutionsInput(v *CancelFlowExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelFlowExecutionsInput"}
+	if v.FlowName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

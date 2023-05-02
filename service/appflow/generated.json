@@ -8,6 +8,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_CancelFlowExecutions.go",
         "api_op_CreateConnectorProfile.go",
         "api_op_CreateFlow.go",
         "api_op_DeleteConnectorProfile.go",

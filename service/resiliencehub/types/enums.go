@@ -474,6 +474,24 @@ func (ResourceResolutionStatusType) Values() []ResourceResolutionStatusType {
 	}
 }
 
+type ResourceSourceType string
+
+// Enum values for ResourceSourceType
+const (
+	ResourceSourceTypeAppTemplate ResourceSourceType = "AppTemplate"
+	ResourceSourceTypeDiscovered  ResourceSourceType = "Discovered"
+)
+
+// Values returns all known values for ResourceSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceSourceType) Values() []ResourceSourceType {
+	return []ResourceSourceType{
+		"AppTemplate",
+		"Discovered",
+	}
+}
+
 type SopServiceType string
 
 // Enum values for SopServiceType

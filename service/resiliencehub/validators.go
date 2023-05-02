@@ -1415,9 +1415,6 @@ func validateOpCreateAppVersionResourceInput(v *CreateAppVersionResourceInput) e
 	if v.AppArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
 	}
-	if v.ResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
-	}
 	if v.LogicalResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogicalResourceId"))
 	} else if v.LogicalResourceId != nil {

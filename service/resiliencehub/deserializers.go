@@ -11595,6 +11595,15 @@ func awsRestjson1_deserializeDocumentPhysicalResource(v **types.PhysicalResource
 				return err
 			}
 
+		case "parentResourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityName to be of type string, got %T instead", value)
+				}
+				sv.ParentResourceName = ptr.String(jtv)
+			}
+
 		case "physicalResourceId":
 			if err := awsRestjson1_deserializeDocumentPhysicalResourceId(&sv.PhysicalResourceId, value); err != nil {
 				return err
@@ -11616,6 +11625,15 @@ func awsRestjson1_deserializeDocumentPhysicalResource(v **types.PhysicalResource
 					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = ptr.String(jtv)
+			}
+
+		case "sourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceSourceType to be of type string, got %T instead", value)
+				}
+				sv.SourceType = types.ResourceSourceType(jtv)
 			}
 
 		default:

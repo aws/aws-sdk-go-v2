@@ -32,7 +32,7 @@ func (c *Client) UpdateFeaturedResultsSet(ctx context.Context, params *UpdateFea
 
 type UpdateFeaturedResultsSetInput struct {
 
-	// The identifier of the index used for featuring results.
+	// The identifier of the set of featured results that you want to update.
 	//
 	// This member is required.
 	FeaturedResultsSetId *string

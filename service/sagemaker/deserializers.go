@@ -35020,6 +35020,15 @@ func awsAwsjson11_deserializeDocumentAutoMLChannel(v **types.AutoMLChannel, valu
 				return err
 			}
 
+		case "SampleWeightAttributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SampleWeightAttributeName to be of type string, got %T instead", value)
+				}
+				sv.SampleWeightAttributeName = ptr.String(jtv)
+			}
+
 		case "TargetAttributeName":
 			if value != nil {
 				jtv, ok := value.(string)

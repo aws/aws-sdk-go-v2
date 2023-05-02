@@ -3808,6 +3808,60 @@ func awsAwsjson11_serializeDocumentAttributeFilterList(v []types.AttributeFilter
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAttributeSuggestionsGetConfig(v *types.AttributeSuggestionsGetConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalResponseAttributes != nil {
+		ok := object.Key("AdditionalResponseAttributes")
+		if err := awsAwsjson11_serializeDocumentDocumentAttributeKeyList(v.AdditionalResponseAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AttributeFilter != nil {
+		ok := object.Key("AttributeFilter")
+		if err := awsAwsjson11_serializeDocumentAttributeFilter(v.AttributeFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SuggestionAttributes != nil {
+		ok := object.Key("SuggestionAttributes")
+		if err := awsAwsjson11_serializeDocumentDocumentAttributeKeyList(v.SuggestionAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserContext != nil {
+		ok := object.Key("UserContext")
+		if err := awsAwsjson11_serializeDocumentUserContext(v.UserContext, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAttributeSuggestionsUpdateConfig(v *types.AttributeSuggestionsUpdateConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AttributeSuggestionsMode) > 0 {
+		ok := object.Key("AttributeSuggestionsMode")
+		ok.String(string(v.AttributeSuggestionsMode))
+	}
+
+	if v.SuggestableConfigList != nil {
+		ok := object.Key("SuggestableConfigList")
+		if err := awsAwsjson11_serializeDocumentSuggestableConfigList(v.SuggestableConfigList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAuthenticationConfiguration(v *types.AuthenticationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7226,6 +7280,47 @@ func awsAwsjson11_serializeDocumentSubnetIdList(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSuggestableConfig(v *types.SuggestableConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributeName != nil {
+		ok := object.Key("AttributeName")
+		ok.String(*v.AttributeName)
+	}
+
+	if v.Suggestable != nil {
+		ok := object.Key("Suggestable")
+		ok.Boolean(*v.Suggestable)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSuggestableConfigList(v []types.SuggestableConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentSuggestableConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSuggestionTypes(v []types.SuggestionType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8486,6 +8581,13 @@ func awsAwsjson11_serializeOpDocumentGetQuerySuggestionsInput(v *GetQuerySuggest
 	object := value.Object()
 	defer object.Close()
 
+	if v.AttributeSuggestionsConfig != nil {
+		ok := object.Key("AttributeSuggestionsConfig")
+		if err := awsAwsjson11_serializeDocumentAttributeSuggestionsGetConfig(v.AttributeSuggestionsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IndexId != nil {
 		ok := object.Key("IndexId")
 		ok.String(*v.IndexId)
@@ -8499,6 +8601,13 @@ func awsAwsjson11_serializeOpDocumentGetQuerySuggestionsInput(v *GetQuerySuggest
 	if v.QueryText != nil {
 		ok := object.Key("QueryText")
 		ok.String(*v.QueryText)
+	}
+
+	if v.SuggestionTypes != nil {
+		ok := object.Key("SuggestionTypes")
+		if err := awsAwsjson11_serializeDocumentSuggestionTypes(v.SuggestionTypes, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -9358,6 +9467,13 @@ func awsAwsjson11_serializeOpDocumentUpdateQuerySuggestionsBlockListInput(v *Upd
 func awsAwsjson11_serializeOpDocumentUpdateQuerySuggestionsConfigInput(v *UpdateQuerySuggestionsConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AttributeSuggestionsConfig != nil {
+		ok := object.Key("AttributeSuggestionsConfig")
+		if err := awsAwsjson11_serializeDocumentAttributeSuggestionsUpdateConfig(v.AttributeSuggestionsConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.IncludeQueriesWithoutUserInformation != nil {
 		ok := object.Key("IncludeQueriesWithoutUserInformation")

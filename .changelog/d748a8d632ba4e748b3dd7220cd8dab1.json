@@ -1,0 +1,8 @@
+{
+    "id": "d748a8d6-32ba-4e74-8b3d-d7220cd8dab1",
+    "type": "feature",
+    "description": "Amazon Connect Service Rules API update: Added OnContactEvaluationSubmit event source to support user configuring evaluation form rules.",
+    "modules": [
+        "service/connect"
+    ]
+}

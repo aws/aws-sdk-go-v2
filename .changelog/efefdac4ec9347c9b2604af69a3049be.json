@@ -1,0 +1,8 @@
+{
+    "id": "efefdac4-ec93-47c9-b260-4af69a3049be",
+    "type": "feature",
+    "description": "Amazon Sagemaker Autopilot supports training models with sample weights and additional objective metrics.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

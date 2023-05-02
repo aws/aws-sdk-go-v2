@@ -1,0 +1,8 @@
+{
+    "id": "9517aa70-d276-4a16-8b4d-d1dc57ee44dc",
+    "type": "feature",
+    "description": "AWS Kendra now supports configuring document fields/attributes via the GetQuerySuggestions API. You can now base query suggestions on the contents of document fields.",
+    "modules": [
+        "service/kendra"
+    ]
+}

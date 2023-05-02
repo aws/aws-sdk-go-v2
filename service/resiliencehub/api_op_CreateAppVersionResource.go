@@ -63,11 +63,6 @@ type CreateAppVersionResourceInput struct {
 	// This member is required.
 	PhysicalResourceId *string
 
-	// The name of the resource.
-	//
-	// This member is required.
-	ResourceName *string
-
 	// The type of resource.
 	//
 	// This member is required.
@@ -86,6 +81,9 @@ type CreateAppVersionResourceInput struct {
 	// string of up to 64 ASCII characters. You should not reuse the same client token
 	// for other API requests.
 	ClientToken *string
+
+	// The name of the resource.
+	ResourceName *string
 
 	noSmithyDocumentSerde
 }
