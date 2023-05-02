@@ -604,8 +604,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -617,8 +617,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -630,8 +630,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -643,8 +643,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -656,8 +656,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -669,8 +669,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -682,8 +682,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -695,8 +695,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -708,8 +708,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -721,8 +721,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -734,8 +734,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -747,8 +747,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -760,8 +760,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -773,8 +773,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -786,8 +786,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -799,8 +799,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -812,8 +812,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -825,8 +825,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -838,8 +838,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -851,8 +851,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -864,8 +864,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -877,8 +877,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -888,8 +888,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -901,8 +901,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -912,8 +912,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -925,8 +925,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -936,8 +936,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -949,8 +949,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -960,8 +960,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -973,8 +973,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -986,8 +986,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -999,8 +999,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1011,8 +1011,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1023,8 +1023,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1552,6 +1552,95 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kendra#AttributeFilter"
+            }
+        },
+        "com.amazonaws.kendra#AttributeSuggestionsDescribeConfig": {
+            "type": "structure",
+            "members": {
+                "SuggestableConfigList": {
+                    "target": "com.amazonaws.kendra#SuggestableConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fields/attributes that you want to set as suggestible for query suggestions.</p>"
+                    }
+                },
+                "AttributeSuggestionsMode": {
+                    "target": "com.amazonaws.kendra#AttributeSuggestionsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode is set to either <code>ACTIVE</code> or <code>INACTIVE</code>. If the <code>Mode</code> \n            for query history is set to <code>ENABLED</code> when calling <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html\">UpdateQuerySuggestionsConfig</a> \n            and <code>AttributeSuggestionsMode</code> to use fields/attributes is set to <code>ACTIVE</code>, \n            and you haven't set your <code>SuggestionTypes</code> preference to <code>DOCUMENT_ATTRIBUTES</code>, \n            then Amazon Kendra uses the query history.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information on the configuration of document fields/attributes that you want to base \n            query suggestions on. To change your configuration, use <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_AttributeSuggestionsUpdateConfig.html\">AttributeSuggestionsUpdateConfig</a> and then call <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html\">UpdateQuerySuggestionsConfig</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#AttributeSuggestionsGetConfig": {
+            "type": "structure",
+            "members": {
+                "SuggestionAttributes": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of document field/attribute keys or field names to use for query suggestions. \n            If the content within any of the fields match what your user starts typing as their query, \n            then the field content is returned as a query suggestion.</p>"
+                    }
+                },
+                "AdditionalResponseAttributes": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of additional document field/attribute keys or field names to include in the \n            response. You can use additional fields to provide extra information in the response. \n            Additional fields are not used to based suggestions on.</p>"
+                    }
+                },
+                "AttributeFilter": {
+                    "target": "com.amazonaws.kendra#AttributeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the search results based on document fields/attributes.</p>"
+                    }
+                },
+                "UserContext": {
+                    "target": "com.amazonaws.kendra#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applies user context filtering so that only users who are given access to certain \n            documents see these document in their search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information for the document fields/attributes that you want \n            to base query suggestions on.</p>"
+            }
+        },
+        "com.amazonaws.kendra#AttributeSuggestionsMode": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#AttributeSuggestionsUpdateConfig": {
+            "type": "structure",
+            "members": {
+                "SuggestableConfigList": {
+                    "target": "com.amazonaws.kendra#SuggestableConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fields/attributes that you want to set as suggestible for query \n            suggestions.</p>"
+                    }
+                },
+                "AttributeSuggestionsMode": {
+                    "target": "com.amazonaws.kendra#AttributeSuggestionsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can set the mode to <code>ACTIVE</code> or <code>INACTIVE</code>. You must also set \n            <code>SuggestionTypes</code> as either <code>QUERY</code> or <code>DOCUMENT_ATTRIBUTES</code> \n            and then call <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a>. If <code>Mode</code> to use query history is set to \n            <code>ENABLED</code> when calling <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html\">UpdateQuerySuggestionsConfig</a> and <code>AttributeSuggestionsMode</code> to use \n            fields/attributes is set to <code>ACTIVE</code>, and you haven't set your \n            <code>SuggestionTypes</code> preference to <code>DOCUMENT_ATTRIBUTES</code>, then \n            Amazon Kendra uses the query history.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration information for the document fields/attributes that you want \n            to base query suggestions on.</p>\n         <p>To deactivate using documents fields for query suggestions, set the mode to \n            <code>INACTIVE</code>. You must also set <code>SuggestionTypes</code> as either \n            <code>QUERY</code> or <code>DOCUMENT_ATTRIBUTES</code> and then call <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a>. If you set to <code>QUERY</code>, then \n            Amazon Kendra uses the query history to base suggestions on. If you set to \n            <code>DOCUMENT_ATTRIBUTES</code>, then Amazon Kendra uses the contents of document \n            fields to base suggestions on.</p>"
             }
         },
         "com.amazonaws.kendra#AuthenticationConfiguration": {
@@ -3945,7 +4034,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a block list to exlcude certain queries from suggestions.</p>\n         <p>Any query that contains words or phrases specified in the block \n            list is blocked or filtered out from being shown as a suggestion.</p>\n         <p>You need to provide the file location of your block list text file \n            in your S3 bucket. In your text file, enter each block word or phrase \n            on a separate line.</p>\n         <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>\n         <p>\n            <code>CreateQuerySuggestionsBlockList</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>\n         <p>For an example of creating a block list for query suggestions using the \n            Python SDK, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#suggestions-block-list\">Query \n                suggestions block list</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a block list to exlcude certain queries from suggestions.</p>\n         <p>Any query that contains words or phrases specified in the block \n            list is blocked or filtered out from being shown as a suggestion.</p>\n         <p>You need to provide the file location of your block list text file \n            in your S3 bucket. In your text file, enter each block word or phrase \n            on a separate line.</p>\n         <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>\n         <p>\n            <code>CreateQuerySuggestionsBlockList</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>\n         <p>For an example of creating a block list for query suggestions using the \n            Python SDK, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist\">Query \n                suggestions block list</a>.</p>"
             }
         },
         "com.amazonaws.kendra#CreateQuerySuggestionsBlockListRequest": {
@@ -6434,7 +6523,7 @@
                 "LastSuggestionsBuildTime": {
                     "target": "com.amazonaws.kendra#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Unix timestamp when query suggestions for an index was last updated.</p>"
+                        "smithy.api#documentation": "<p>The Unix timestamp when query suggestions for an index was last updated.</p>\n         <p>Amazon Kendra automatically updates suggestions every 24 hours, after you \n            change a setting or after you apply a <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist\">block list</a>.</p>"
                     }
                 },
                 "LastClearTime": {
@@ -6446,7 +6535,13 @@
                 "TotalSuggestionsCount": {
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current total count of query suggestions for an index.</p>\n         <p>This count can change when you update your query suggestions settings, \n            if you filter out certain queries from suggestions using a block list, \n            and as the query log accumulates more queries for Amazon Kendra to learn from.</p>"
+                        "smithy.api#documentation": "<p>The current total count of query suggestions for an index.</p>\n         <p>This count can change when you update your query suggestions settings, \n            if you filter out certain queries from suggestions using a block list, \n            and as the query log accumulates more queries for Amazon Kendra to learn from.</p>\n         <p>If the count is much lower than you expected, it could be because Amazon Kendra \n            needs more queries in the query history to learn from or your current query suggestions \n            settings are too strict.</p>"
+                    }
+                },
+                "AttributeSuggestionsConfig": {
+                    "target": "com.amazonaws.kendra#AttributeSuggestionsDescribeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the document fields/attributes that you want to base query \n            suggestions on.</p>"
                     }
                 }
             },
@@ -8421,6 +8516,18 @@
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of query suggestions you want to show \n            to your users.</p>"
+                    }
+                },
+                "SuggestionTypes": {
+                    "target": "com.amazonaws.kendra#SuggestionTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suggestions type to base query suggestions on. The suggestion \n            types are query history or document fields/attributes. You can set \n            one type or the other.</p>\n         <p>If you set query history as your suggestions type, Amazon Kendra \n            suggests queries relevant to your users based on popular queries in \n            the query history.</p>\n         <p>If you set document fields/attributes as your suggestions type, \n            Amazon Kendra suggests queries relevant to your users based on the \n            contents of document fields.</p>"
+                    }
+                },
+                "AttributeSuggestionsConfig": {
+                    "target": "com.amazonaws.kendra#AttributeSuggestionsGetConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the document fields/attributes that you \n            want to base query suggestions on.</p>"
                     }
                 }
             },
@@ -13629,6 +13736,38 @@
                 "smithy.api#documentation": "<p>Specifies the document attribute to use to sort the response to a Amazon Kendra\n            query. You can specify a single attribute for sorting. The attribute must have the\n                <code>Sortable</code> flag set to <code>true</code>, otherwise Amazon Kendra\n            returns an exception.</p>\n         <p>You can sort attributes of the following types.</p>\n         <ul>\n            <li>\n               <p>Date value</p>\n            </li>\n            <li>\n               <p>Long value</p>\n            </li>\n            <li>\n               <p>String value</p>\n            </li>\n         </ul>\n         <p>You can't sort attributes of the following type.</p>\n         <ul>\n            <li>\n               <p>String list value</p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.kendra#SourceDocument": {
+            "type": "structure",
+            "members": {
+                "DocumentId": {
+                    "target": "com.amazonaws.kendra#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the document used for a query suggestion.</p>"
+                    }
+                },
+                "SuggestionAttributes": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document fields/attributes used for a query suggestion.</p>"
+                    }
+                },
+                "AdditionalAttributes": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional fields/attributes to include in the response. You can use additional \n            fields to provide extra information in the response. Additional fields are not used \n            to based suggestions on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The document ID and its fields/attributes that are used for a query suggestion, if \n            document fields set to use for query suggestions.</p>"
+            }
+        },
+        "com.amazonaws.kendra#SourceDocuments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SourceDocument"
+            }
+        },
         "com.amazonaws.kendra#SpellCorrectedQuery": {
             "type": "structure",
             "members": {
@@ -13950,6 +14089,32 @@
                 }
             }
         },
+        "com.amazonaws.kendra#SuggestableConfig": {
+            "type": "structure",
+            "members": {
+                "AttributeName": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the document field/attribute.</p>"
+                    }
+                },
+                "Suggestable": {
+                    "target": "com.amazonaws.kendra#ObjectBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> means the document field/attribute is suggestible, so the contents within the \n            field can be used for query suggestions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information for a document field/attribute that you want to base query \n            suggestions on.</p>"
+            }
+        },
+        "com.amazonaws.kendra#SuggestableConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SuggestableConfig"
+            }
+        },
         "com.amazonaws.kendra#SuggestedQueryText": {
             "type": "string",
             "traits": {
@@ -13972,6 +14137,12 @@
                     "target": "com.amazonaws.kendra#SuggestionValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The value for the UUID (universally unique identifier) \n            of a single query suggestion.</p>\n         <p>The value is the text string of a suggestion.</p>"
+                    }
+                },
+                "SourceDocuments": {
+                    "target": "com.amazonaws.kendra#SourceDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of document IDs and their fields/attributes that are used for a \n            single query suggestion, if document fields set to use for query suggestions.</p>"
                     }
                 }
             },
@@ -14035,6 +14206,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides text and information about where to highlight the query suggestion text.</p>"
+            }
+        },
+        "com.amazonaws.kendra#SuggestionType": {
+            "type": "enum",
+            "members": {
+                "QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY"
+                    }
+                },
+                "DOCUMENT_ATTRIBUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_ATTRIBUTES"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#SuggestionTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SuggestionType"
             }
         },
         "com.amazonaws.kendra#SuggestionValue": {
@@ -14900,7 +15094,7 @@
                 "FeaturedResultsSetId": {
                     "target": "com.amazonaws.kendra#FeaturedResultsSetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index used for featuring results.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the set of featured results that you want to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15158,7 +15352,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the settings of query suggestions for an index.</p>\n         <p>Amazon Kendra supports partial updates, so you only need to provide \n            the fields you want to update.</p>\n         <p>If an update is currently processing (i.e. 'happening'), you \n            need to wait for the update to finish before making another update.</p>\n         <p>Updates to query suggestions settings might not take effect right away. \n            The time for your updated settings to take effect depends on the updates \n            made and the number of search queries in your index.</p>\n         <p>You can still enable/disable query suggestions at any time.</p>\n         <p>\n            <code>UpdateQuerySuggestionsConfig</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
+                "smithy.api#documentation": "<p>Updates the settings of query suggestions for an index.</p>\n         <p>Amazon Kendra supports partial updates, so you only need to provide \n            the fields you want to update.</p>\n         <p>If an update is currently processing, you \n            need to wait for the update to finish before making another update.</p>\n         <p>Updates to query suggestions settings might not take effect right away. \n            The time for your updated settings to take effect depends on the updates \n            made and the number of search queries in your index.</p>\n         <p>You can still enable/disable query suggestions at any time.</p>\n         <p>\n            <code>UpdateQuerySuggestionsConfig</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#UpdateQuerySuggestionsConfigRequest": {
@@ -15199,6 +15393,12 @@
                     "target": "com.amazonaws.kendra#MinimumQueryCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The the minimum number of times a query must be searched in order to be \n            eligible to suggest to your users.</p>\n         <p>Decreasing this number increases the number of suggestions. However, this \n            affects the quality of suggestions as it sets a low bar for a query to be \n            considered popular to suggest to users.</p>\n         <p>How you tune this setting depends on your specific needs.</p>"
+                    }
+                },
+                "AttributeSuggestionsConfig": {
+                    "target": "com.amazonaws.kendra#AttributeSuggestionsUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the document fields/attributes that you want to base \n            query suggestions on.</p>"
                     }
                 }
             },

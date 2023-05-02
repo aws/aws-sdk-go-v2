@@ -11117,6 +11117,12 @@
                     "traits": {
                         "smithy.api#enumValue": "OnSalesforceCaseCreate"
                     }
+                },
+                "OnContactEvaluationSubmit": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnContactEvaluationSubmit"
+                    }
                 }
             }
         },

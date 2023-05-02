@@ -499,6 +499,75 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.appflow#CancelFlowExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appflow#CancelFlowExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appflow#CancelFlowExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appflow#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels active runs for a flow.</p>\n         <p>You can cancel all of the active runs for a flow, or you can cancel specific runs by\n      providing their IDs.</p>\n         <p>You can cancel a flow run only when the run is in progress. You can't cancel a run that\n      has already completed or failed. You also can't cancel a run that's scheduled to occur but\n      hasn't started yet. To prevent a scheduled run, you can deactivate the flow with the\n        <code>StopFlow</code> action.</p>\n         <p>You cannot resume a run after you cancel it.</p>\n         <p>When you send your request, the status for each run becomes <code>CancelStarted</code>.\n      When the cancellation completes, the status becomes <code>Canceled</code>.</p>\n         <note>\n            <p>When you cancel a run, you still incur charges for any data that the run already\n        processed before the cancellation. If the run had already written some data to the flow\n        destination, then that data remains in the destination. If you configured the flow to use a\n        batch API (such as the Salesforce Bulk API 2.0), then the run will finish reading or writing\n        its entire batch of data after the cancellation. For these operations, the data processing\n        charges for Amazon AppFlow apply. For the pricing information, see <a href=\"http://aws.amazon.com/appflow/pricing/\">Amazon AppFlow pricing</a>.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/cancel-flow-executions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appflow#CancelFlowExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "flowName": {
+                    "target": "com.amazonaws.appflow#FlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a flow with active runs that you want to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionIds": {
+                    "target": "com.amazonaws.appflow#ExecutionIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of each active run to cancel. These runs must belong to the flow you specify in\n      your request.</p>\n         <p>If you omit this parameter, your request ends all active runs that belong to the\n      flow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appflow#CancelFlowExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "invalidExecutions": {
+                    "target": "com.amazonaws.appflow#ExecutionIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of runs that Amazon AppFlow couldn't cancel. These runs might be ineligible\n      for canceling because they haven't started yet or have already completed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appflow#CatalogType": {
             "type": "enum",
             "members": {
@@ -3905,6 +3974,18 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.appflow#ExecutionIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appflow#ExecutionId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.appflow#ExecutionMessage": {
             "type": "string",
             "traits": {
@@ -4022,6 +4103,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Error"
+                    }
+                },
+                "CANCELSTARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CancelStarted"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Canceled"
                     }
                 }
             }
@@ -7736,6 +7829,9 @@
             "type": "service",
             "version": "2020-08-23",
             "operations": [
+                {
+                    "target": "com.amazonaws.appflow#CancelFlowExecutions"
+                },
                 {
                     "target": "com.amazonaws.appflow#CreateConnectorProfile"
                 },

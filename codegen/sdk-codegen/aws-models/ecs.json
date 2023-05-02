@@ -7847,7 +7847,7 @@
                 "value": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account setting value for the specified principal ARN. Accepted values are\n\t\t\t\t<code>enabled</code> and <code>disabled</code>.</p>",
+                        "smithy.api#documentation": "<p>The account setting value for the specified principal ARN. Accepted values are\n\t\t\t\t<code>enabled</code>, <code>disabled</code>, <code>on</code>, and\n\t\t\t<code>off</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7883,7 +7883,7 @@
                 "value": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account setting value for the specified principal ARN. Accepted values are\n\t\t\t\t<code>enabled</code> and <code>disabled</code>.</p>",
+                        "smithy.api#documentation": "<p>The account setting value for the specified principal ARN. Accepted values are\n\t\t\t\t<code>enabled</code>, <code>disabled</code>, <code>on</code>, and\n\t\t\t<code>off</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
