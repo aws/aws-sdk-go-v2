@@ -1,3 +1,7 @@
+# v1.54.0 (2023-05-02)
+
+* **Feature**: Amazon Connect Service Rules API update: Added OnContactEvaluationSubmit event source to support user configuring evaluation form rules.
+
 # v1.53.0 (2023-04-25)
 
 * **Feature**: Amazon Connect, Contact Lens Evaluation API release including ability to manage forms and to submit contact evaluations.

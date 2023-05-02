@@ -1,8 +1,0 @@
-{
-    "id": "3321ef9f-9f27-454f-842c-781144235c14",
-    "type": "feature",
-    "description": "This release adds new API to cancel flow executions.",
-    "modules": [
-        "service/appflow"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.11.0 (2023-05-02)
+
+* **Feature**: This release will improve resource level transparency in applications by discovering previously hidden resources.
+
 # v1.10.4 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "b6d1645d-ad48-4ff0-8c80-cda0011863e3",
-    "type": "documentation",
-    "description": "Documentation only update to address Amazon ECS tickets.",
-    "modules": [
-        "service/ecs"
-    ]
-}

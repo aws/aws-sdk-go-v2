@@ -1,8 +1,0 @@
-{
-    "id": "12a4cce2-8df5-4111-a2cc-d32eab6bbec6",
-    "type": "feature",
-    "description": "This release will improve resource level transparency in applications by discovering previously hidden resources.",
-    "modules": [
-        "service/resiliencehub"
-    ]
-}

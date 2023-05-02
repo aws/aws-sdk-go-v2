@@ -1,3 +1,7 @@
+# v1.29.0 (2023-05-02)
+
+* **Feature**: This release adds new API to cancel flow executions.
+
 # v1.28.0 (2023-04-28)
 
 * **Feature**: Adds Jwt Support for Salesforce Credentials.

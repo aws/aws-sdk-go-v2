@@ -1,3 +1,7 @@
+# v1.40.0 (2023-05-02)
+
+* **Feature**: AWS Kendra now supports configuring document fields/attributes via the GetQuerySuggestions API. You can now base query suggestions on the contents of document fields.
+
 # v1.39.3 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

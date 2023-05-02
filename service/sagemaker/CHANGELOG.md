@@ -1,3 +1,7 @@
+# v1.76.0 (2023-05-02)
+
+* **Feature**: Amazon Sagemaker Autopilot supports training models with sample weights and additional objective metrics.
+
 # v1.75.0 (2023-04-27)
 
 * **Feature**: Added ml.p4d.24xlarge and ml.p4de.24xlarge as supported instances for SageMaker Studio

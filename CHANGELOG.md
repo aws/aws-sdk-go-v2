@@ -1,3 +1,19 @@
+# Release (2023-05-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.29.0](service/appflow/CHANGELOG.md#v1290-2023-05-02)
+  * **Feature**: This release adds new API to cancel flow executions.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.54.0](service/connect/CHANGELOG.md#v1540-2023-05-02)
+  * **Feature**: Amazon Connect Service Rules API update: Added OnContactEvaluationSubmit event source to support user configuring evaluation form rules.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.26.3](service/ecs/CHANGELOG.md#v1263-2023-05-02)
+  * **Documentation**: Documentation only update to address Amazon ECS tickets.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.40.0](service/kendra/CHANGELOG.md#v1400-2023-05-02)
+  * **Feature**: AWS Kendra now supports configuring document fields/attributes via the GetQuerySuggestions API. You can now base query suggestions on the contents of document fields.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.11.0](service/resiliencehub/CHANGELOG.md#v1110-2023-05-02)
+  * **Feature**: This release will improve resource level transparency in applications by discovering previously hidden resources.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.76.0](service/sagemaker/CHANGELOG.md#v1760-2023-05-02)
+  * **Feature**: Amazon Sagemaker Autopilot supports training models with sample weights and additional objective metrics.
+
 # Release (2023-05-01)
 
 ## Module Highlights
