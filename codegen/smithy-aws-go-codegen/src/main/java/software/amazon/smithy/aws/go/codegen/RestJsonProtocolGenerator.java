@@ -58,16 +58,17 @@ import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlNamespaceTrait;
-import software.amazon.smithy.go.codegen.endpoints.EndpointRulesEngineGenerator;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionV2Generator;
 import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 
-
 /**
- * Handles general components across the AWS JSON protocols that have HTTP bindings.
+ * Handles general components across the AWS JSON protocols that have HTTP
+ * bindings.
  * It handles reading and writing from document bodies, including generating any
  * functions needed for performing serde.
  *
- * @see <a href="https://smithy.io/2.0/spec/http-bindings.html">Smithy HTTP protocol bindings.</a>
+ * @see <a href="https://smithy.io/2.0/spec/http-bindings.html">Smithy HTTP
+ *      protocol bindings.</a>
  */
 abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private final Set<ShapeId> generatedDocumentBodyShapeSerializers = new HashSet<>();
@@ -90,8 +91,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void generateOperationDocumentSerializer(
             GenerationContext context,
-            OperationShape operation
-    ) {
+            OperationShape operation) {
         Model model = context.getModel();
         HttpBindingIndex bindingIndex = HttpBindingIndex.of(model);
         Set<MemberShape> documentBindings = bindingIndex.getRequestBindings(operation, HttpBinding.Location.DOCUMENT)
@@ -111,21 +111,17 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 .build());
     }
 
-
     @Override
-    public void generateEndpointRulesEngine(GenerationContext context) {
-        var generator = new EndpointRulesEngineGenerator(new AwsFnProvider());
+    public void generateEndpointResolutionV2(GenerationContext context) {
+        var generator = new EndpointResolutionV2Generator(new AwsFnProvider());
         generator.generate(context);
     }
-
-
 
     @Override
     protected void writeMiddlewarePayloadAsDocumentSerializerDelegator(
             GenerationContext context,
             MemberShape memberShape,
-            String operand
-    ) {
+            String operand) {
         GoWriter writer = context.getWriter().get();
         Model model = context.getModel();
         Shape payloadShape = model.expectShape(memberShape.getTarget());
@@ -165,7 +161,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     /**
-     * Retruns the MediaType for the payload shape derived from the MediaTypeTrait, shape type, or document content type.
+     * Retruns the MediaType for the payload shape derived from the MediaTypeTrait,
+     * shape type, or document content type.
      *
      * @param payloadShape shape bound to the payload.
      * @return string for media type.
@@ -192,8 +189,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void writeMiddlewareDocumentSerializerDelegator(
             GenerationContext context,
             OperationShape operation,
-            GoStackStepMiddlewareGenerator generator
-    ) {
+            GoStackStepMiddlewareGenerator generator) {
         GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.SMITHY);
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
@@ -238,8 +234,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void writeMiddlewareDocumentDeserializerDelegator(
             GenerationContext context,
             OperationShape operation,
-            GoStackStepMiddlewareGenerator generator
-    ) {
+            GoStackStepMiddlewareGenerator generator) {
         Model model = context.getModel();
         GoWriter writer = context.getWriter().get();
         Shape targetShape = ProtocolUtils.expectOutput(model, operation);
@@ -256,13 +251,15 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
             Shape payloadShape = model.expectShape(memberShape.getTarget());
 
-            // if target shape is of type String or type Blob, then delegate deserializers for explicit payload shapes
+            // if target shape is of type String or type Blob, then delegate deserializers
+            // for explicit payload shapes
             if (payloadShape.isStringShape() || payloadShape.isBlobShape()) {
                 writeMiddlewarePayloadBindingDeserializerDelegator(writer, context.getService(), targetShape,
                         payloadShape);
                 return;
             }
-            // for other payload target types we should deserialize using the appropriate document deserializer
+            // for other payload target types we should deserialize using the appropriate
+            // document deserializer
             targetShape = payloadShape;
             operand += "." + context.getSymbolProvider().toMemberName(memberShape);
         }
@@ -285,10 +282,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writeMiddlewareDocumentBindingDeserializerDelegator(context, writer, targetShape, operand);
     }
 
-    // Writes middleware that delegates to deserializers for shapes that have explicit payload.
+    // Writes middleware that delegates to deserializers for shapes that have
+    // explicit payload.
     private void writeMiddlewarePayloadBindingDeserializerDelegator(
-            GoWriter writer, ServiceShape service, Shape outputShape, Shape payloadShape
-    ) {
+            GoWriter writer, ServiceShape service, Shape outputShape, Shape payloadShape) {
         String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(outputShape, service,
                 getProtocolName());
 
@@ -305,13 +302,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         });
     }
 
-    // Write middleware that delegates to deserializers for shapes that have implicit payload and deserializer
+    // Write middleware that delegates to deserializers for shapes that have
+    // implicit payload and deserializer
     private void writeMiddlewareDocumentBindingDeserializerDelegator(
             GenerationContext context,
             GoWriter writer,
             Shape shape,
-            String operand
-    ) {
+            String operand) {
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                 shape, context.getService(), context.getProtocolName());
 
@@ -331,8 +328,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void generateOperationDocumentDeserializer(
             GenerationContext context,
-            OperationShape operation
-    ) {
+            OperationShape operation) {
         Model model = context.getModel();
         HttpBindingIndex bindingIndex = HttpBindingIndex.of(model);
         Set<MemberShape> documentBindings = bindingIndex.getResponseBindings(operation, HttpBinding.Location.DOCUMENT)
@@ -424,8 +420,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private void writePayloadBindingDeserializer(
             GenerationContext context,
             Shape shape,
-            Predicate<MemberShape> filterMemberShapes
-    ) {
+            Predicate<MemberShape> filterMemberShapes) {
         var writer = context.getWriter().get();
         var symbolProvider = context.getSymbolProvider();
         var shapeSymbol = symbolProvider.toSymbol(shape);
@@ -537,8 +532,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void generateEventStreamSerializers(
             GenerationContext context,
             UnionShape eventUnion,
-            Set<EventStreamInfo> eventStreamInfos
-    ) {
+            Set<EventStreamInfo> eventStreamInfos) {
         Model model = context.getModel();
 
         AwsEventStreamUtils.generateEventStreamSerializer(context, eventUnion);
@@ -586,8 +580,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void generateEventStreamDeserializers(
             GenerationContext context,
             UnionShape eventUnion,
-            Set<EventStreamInfo> eventStreamInfos
-    ) {
+            Set<EventStreamInfo> eventStreamInfos) {
         var model = context.getModel();
 
         AwsEventStreamUtils.generateEventStreamDeserializer(context, eventUnion);

@@ -27,7 +27,7 @@ import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.ErrorTrait;
-import software.amazon.smithy.go.codegen.endpoints.EndpointRulesEngineGenerator;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionV2Generator;
 import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 
 /**
@@ -194,8 +194,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     protected void generateEventStreamSerializers(
             GenerationContext context,
             UnionShape eventUnion,
-            Set<EventStreamInfo> eventStreamInfos
-    ) {
+            Set<EventStreamInfo> eventStreamInfos) {
         throw new CodegenException("event streams not supported with AWS QUERY protocol.");
     }
 
@@ -203,8 +202,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     protected void generateEventStreamDeserializers(
             GenerationContext context,
             UnionShape eventUnion,
-            Set<EventStreamInfo> eventStreamInfos
-    ) {
+            Set<EventStreamInfo> eventStreamInfos) {
         throw new CodegenException("event streams not supported with AWS QUERY protocol.");
     }
 
@@ -214,8 +212,8 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     }
 
     @Override
-    public void generateEndpointRulesEngine(GenerationContext context) {
-        var generator = new EndpointRulesEngineGenerator(new AwsFnProvider());
+    public void generateEndpointResolutionV2(GenerationContext context) {
+        var generator = new EndpointResolutionV2Generator(new AwsFnProvider());
         generator.generate(context);
     }
 
@@ -223,6 +221,5 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     protected void writeOperationSerializerMiddlewareEventStreamSetup(GenerationContext context, EventStreamInfo info) {
         throw new CodegenException("event streams not supported with AWS QUERY protocol.");
     }
-
 
 }
