@@ -29,7 +29,7 @@ func (c *Client) AssociateApi(ctx context.Context, params *AssociateApiInput, op
 
 type AssociateApiInput struct {
 
-	// The API ID.
+	// The API ID. Private APIs can not be associated with custom domains.
 	//
 	// This member is required.
 	ApiId *string

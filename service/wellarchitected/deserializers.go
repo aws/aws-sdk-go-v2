@@ -11394,6 +11394,11 @@ func awsRestjson1_deserializeDocumentWorkloadDiscoveryConfig(v **types.WorkloadD
 				sv.TrustedAdvisorIntegrationStatus = types.TrustedAdvisorIntegrationStatus(jtv)
 			}
 
+		case "WorkloadResourceDefinition":
+			if err := awsRestjson1_deserializeDocumentWorkloadResourceDefinition(&sv.WorkloadResourceDefinition, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11503,6 +11508,42 @@ func awsRestjson1_deserializeDocumentWorkloadPillarPriorities(v *[]string, value
 				return fmt.Errorf("expected PillarId to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWorkloadResourceDefinition(v *[]types.DefinitionType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DefinitionType
+	if *v == nil {
+		cv = []types.DefinitionType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DefinitionType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DefinitionType to be of type string, got %T instead", value)
+			}
+			col = types.DefinitionType(jtv)
 		}
 		cv = append(cv, col)
 

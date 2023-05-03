@@ -58,6 +58,11 @@ type CreateGraphqlApiInput struct {
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *types.UserPoolConfig
 
+	// Sets the value of the GraphQL API to public ( GLOBAL ) or private ( PRIVATE ).
+	// If no value is provided, the visibility will be set to GLOBAL by default. This
+	// value cannot be changed once the API has been created.
+	Visibility types.GraphQLApiVisibility
+
 	// A flag indicating whether to use X-Ray tracing for the GraphqlApi .
 	XrayEnabled bool
 

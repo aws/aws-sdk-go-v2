@@ -5589,6 +5589,11 @@ func awsAwsjson10_deserializeDocumentFirewallPolicy(v **types.FirewallPolicy, va
 
 	for key, value := range shape {
 		switch key {
+		case "PolicyVariables":
+			if err := awsAwsjson10_deserializeDocumentPolicyVariables(&sv.PolicyVariables, value); err != nil {
+				return err
+			}
+
 		case "StatefulDefaultActions":
 			if err := awsAwsjson10_deserializeDocumentStatefulActions(&sv.StatefulDefaultActions, value); err != nil {
 				return err
@@ -6850,6 +6855,42 @@ func awsAwsjson10_deserializeDocumentPerObjectStatus(v **types.PerObjectStatus, 
 					return fmt.Errorf("expected UpdateToken to be of type string, got %T instead", value)
 				}
 				sv.UpdateToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPolicyVariables(v **types.PolicyVariables, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PolicyVariables
+	if *v == nil {
+		sv = &types.PolicyVariables{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RuleVariables":
+			if err := awsAwsjson10_deserializeDocumentIPSets(&sv.RuleVariables, value); err != nil {
+				return err
 			}
 
 		default:

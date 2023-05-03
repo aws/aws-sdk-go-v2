@@ -1,0 +1,8 @@
+{
+    "id": "a2da0281-6e11-4aab-a903-eed16296d745",
+    "type": "feature",
+    "description": "Amazon OpenSearch Service adds the option to deploy a domain across multiple Availability Zones, with each AZ containing a complete copy of data and with nodes in one AZ acting as a standby. This option provides 99.99% availability and consistent performance in the event of infrastructure failure.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

@@ -747,6 +747,11 @@ func awsRestjson1_serializeOpDocumentCreateGraphqlApiInput(v *CreateGraphqlApiIn
 		}
 	}
 
+	if len(v.Visibility) > 0 {
+		ok := object.Key("visibility")
+		ok.String(string(v.Visibility))
+	}
+
 	if v.XrayEnabled {
 		ok := object.Key("xrayEnabled")
 		ok.Boolean(v.XrayEnabled)

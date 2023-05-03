@@ -3249,6 +3249,11 @@ func awsRestjson1_deserializeOpDocumentGetSceneOutput(v **GetSceneOutput, value 
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "error":
+			if err := awsRestjson1_deserializeDocumentSceneError(&sv.Error, value); err != nil {
+				return err
+			}
+
 		case "generatedSceneMetadata":
 			if err := awsRestjson1_deserializeDocumentGeneratedSceneMetadataMap(&sv.GeneratedSceneMetadata, value); err != nil {
 				return err
@@ -9257,6 +9262,55 @@ func awsRestjson1_deserializeDocumentSceneCapabilities(v *[]string, value interf
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSceneError(v **types.SceneError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SceneError
+	if *v == nil {
+		sv = &types.SceneError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SceneErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.SceneErrorCode(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

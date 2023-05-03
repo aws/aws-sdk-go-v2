@@ -964,6 +964,10 @@ type WorkloadDiscoveryConfig struct {
 	// Discovery integration status in respect to Trusted Advisor for the workload.
 	TrustedAdvisorIntegrationStatus TrustedAdvisorIntegrationStatus
 
+	// The mode to use for identifying resources associated with the workload. You can
+	// specify WORKLOAD_METADATA , APP_REGISTRY , or both.
+	WorkloadResourceDefinition []DefinitionType
+
 	noSmithyDocumentSerde
 }
 

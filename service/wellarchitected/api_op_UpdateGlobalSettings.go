@@ -12,7 +12,7 @@ import (
 )
 
 // Updates whether the Amazon Web Services account is opted into organization
-// sharing features.
+// sharing and discovery integration features.
 func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalSettingsInput, optFns ...func(*Options)) (*UpdateGlobalSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateGlobalSettingsInput{}
@@ -29,6 +29,9 @@ func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalS
 }
 
 type UpdateGlobalSettingsInput struct {
+
+	// The status of discovery support settings.
+	DiscoveryIntegrationStatus types.DiscoveryIntegrationStatus
 
 	// The status of organization sharing settings.
 	OrganizationSharingStatus types.OrganizationSharingStatus

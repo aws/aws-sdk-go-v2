@@ -1,0 +1,8 @@
+{
+    "id": "9f75d06f-c8ae-4485-98ea-f5348adce684",
+    "type": "feature",
+    "description": "AWS Network Firewall now supports policy level HOME_NET variable overrides.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

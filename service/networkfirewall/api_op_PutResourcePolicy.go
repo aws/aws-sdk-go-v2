@@ -54,8 +54,6 @@ type PutResourcePolicyInput struct {
 	//   - network-firewall:ListRuleGroups
 	// For a firewall policy resource, you can specify the following operations in the
 	// Actions section of the statement:
-	//   - network-firewall:CreateFirewall
-	//   - network-firewall:UpdateFirewall
 	//   - network-firewall:AssociateFirewallPolicy
 	//   - network-firewall:ListFirewallPolicies
 	// In the Resource section of the statement, you specify the ARNs for the rule

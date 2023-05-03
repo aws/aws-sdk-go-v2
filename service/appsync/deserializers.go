@@ -9692,6 +9692,11 @@ func awsRestjson1_deserializeDocumentGraphqlApi(v **types.GraphqlApi, value inte
 				sv.AuthenticationType = types.AuthenticationType(jtv)
 			}
 
+		case "dns":
+			if err := awsRestjson1_deserializeDocumentMapOfStringToString(&sv.Dns, value); err != nil {
+				return err
+			}
+
 		case "lambdaAuthorizerConfig":
 			if err := awsRestjson1_deserializeDocumentLambdaAuthorizerConfig(&sv.LambdaAuthorizerConfig, value); err != nil {
 				return err
@@ -9729,6 +9734,15 @@ func awsRestjson1_deserializeDocumentGraphqlApi(v **types.GraphqlApi, value inte
 		case "userPoolConfig":
 			if err := awsRestjson1_deserializeDocumentUserPoolConfig(&sv.UserPoolConfig, value); err != nil {
 				return err
+			}
+
+		case "visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GraphQLApiVisibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.GraphQLApiVisibility(jtv)
 			}
 
 		case "wafWebAclArn":

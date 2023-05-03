@@ -11,46 +11,42 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a finding report. By default only ACTIVE findings are returned in the
-// report. To see SUPRESSED or CLOSED findings you must specify a value for the
-// findingStatus filter criteria.
-func (c *Client) CreateFindingsReport(ctx context.Context, params *CreateFindingsReportInput, optFns ...func(*Options)) (*CreateFindingsReportOutput, error) {
+// Retrieves Amazon Inspector deep inspection activation status of multiple member
+// accounts within your organization. You must be the delegated administrator of an
+// organization in Amazon Inspector to use this API.
+func (c *Client) BatchGetMemberEc2DeepInspectionStatus(ctx context.Context, params *BatchGetMemberEc2DeepInspectionStatusInput, optFns ...func(*Options)) (*BatchGetMemberEc2DeepInspectionStatusOutput, error) {
 	if params == nil {
-		params = &CreateFindingsReportInput{}
+		params = &BatchGetMemberEc2DeepInspectionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFindingsReport", params, optFns, c.addOperationCreateFindingsReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetMemberEc2DeepInspectionStatus", params, optFns, c.addOperationBatchGetMemberEc2DeepInspectionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateFindingsReportOutput)
+	out := result.(*BatchGetMemberEc2DeepInspectionStatusOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateFindingsReportInput struct {
+type BatchGetMemberEc2DeepInspectionStatusInput struct {
 
-	// The format to generate the report in.
-	//
-	// This member is required.
-	ReportFormat types.ReportFormat
-
-	// The Amazon S3 export destination for the report.
-	//
-	// This member is required.
-	S3Destination *types.Destination
-
-	// The filter criteria to apply to the results of the finding report.
-	FilterCriteria *types.FilterCriteria
+	// The unique identifiers for the Amazon Web Services accounts to retrieve Amazon
+	// Inspector deep inspection activation status for.
+	AccountIds []string
 
 	noSmithyDocumentSerde
 }
 
-type CreateFindingsReportOutput struct {
+type BatchGetMemberEc2DeepInspectionStatusOutput struct {
 
-	// The ID of the report.
-	ReportId *string
+	// An array of objects that provide details on the activation status of Amazon
+	// Inspector deep inspection for each of the requested accounts.
+	AccountIds []types.MemberAccountEc2DeepInspectionStatusState
+
+	// An array of objects that provide details on any accounts that failed to
+	// activate Amazon Inspector deep inspection and why.
+	FailedAccountIds []types.FailedMemberAccountEc2DeepInspectionStatusState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,12 +54,12 @@ type CreateFindingsReportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateFindingsReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFindingsReport{}, middleware.After)
+func (c *Client) addOperationBatchGetMemberEc2DeepInspectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetMemberEc2DeepInspectionStatus{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFindingsReport{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetMemberEc2DeepInspectionStatus{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -103,10 +99,7 @@ func (c *Client) addOperationCreateFindingsReportMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateFindingsReportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFindingsReport(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetMemberEc2DeepInspectionStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -124,11 +117,11 @@ func (c *Client) addOperationCreateFindingsReportMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateFindingsReport(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opBatchGetMemberEc2DeepInspectionStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "inspector2",
-		OperationName: "CreateFindingsReport",
+		OperationName: "BatchGetMemberEc2DeepInspectionStatus",
 	}
 }

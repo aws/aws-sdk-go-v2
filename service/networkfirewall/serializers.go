@@ -2122,6 +2122,13 @@ func awsAwsjson10_serializeDocumentFirewallPolicy(v *types.FirewallPolicy, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.PolicyVariables != nil {
+		ok := object.Key("PolicyVariables")
+		if err := awsAwsjson10_serializeDocumentPolicyVariables(v.PolicyVariables, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StatefulDefaultActions != nil {
 		ok := object.Key("StatefulDefaultActions")
 		if err := awsAwsjson10_serializeDocumentStatefulActions(v.StatefulDefaultActions, ok); err != nil {
@@ -2385,6 +2392,20 @@ func awsAwsjson10_serializeDocumentMatchAttributes(v *types.MatchAttributes, val
 	if v.TCPFlags != nil {
 		ok := object.Key("TCPFlags")
 		if err := awsAwsjson10_serializeDocumentTCPFlags(v.TCPFlags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPolicyVariables(v *types.PolicyVariables, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RuleVariables != nil {
+		ok := object.Key("RuleVariables")
+		if err := awsAwsjson10_serializeDocumentIPSets(v.RuleVariables, ok); err != nil {
 			return err
 		}
 	}

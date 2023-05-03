@@ -319,6 +319,35 @@ type AutoTuneStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an Availability Zone on a domain.
+type AvailabilityZoneInfo struct {
+
+	// The name of the Availability Zone.
+	AvailabilityZoneName *string
+
+	// The number of data nodes active in the Availability Zone.
+	AvailableDataNodeCount *string
+
+	// The total number of data nodes configured in the Availability Zone.
+	ConfiguredDataNodeCount *string
+
+	// The total number of primary and replica shards in the Availability Zone.
+	TotalShards *string
+
+	// The total number of primary and replica shards that aren't allocated to any of
+	// the nodes in the Availability Zone.
+	TotalUnAssignedShards *string
+
+	// The current state of the Availability Zone. Current options are Active and
+	// StandBy .
+	//   - Active - Data nodes in the Availability Zone are in use.
+	//   - StandBy - Data nodes in the Availability Zone are in a standby state.
+	//   - NotAvailable - Unable to retrieve information.
+	ZoneStatus ZoneStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Amazon OpenSearch Service domain.
 type AWSDomainInformation struct {
 
@@ -405,7 +434,7 @@ type ClusterConfig struct {
 	ColdStorageOptions *ColdStorageOptions
 
 	// Number of dedicated master nodes in the cluster. This number must be greater
-	// than 1, otherwise you receive a validation exception.
+	// than 2 and not 4, otherwise you receive a validation exception.
 	DedicatedMasterCount *int32
 
 	// Indicates whether dedicated master nodes are enabled for the cluster. True if
@@ -421,6 +450,12 @@ type ClusterConfig struct {
 
 	// Instance type of data nodes in the cluster.
 	InstanceType OpenSearchPartitionInstanceType
+
+	// A boolean that indicates whether a multi-AZ domain is turned on with a standby
+	// AZ. For more information, see Configuring a multi-AZ domain in Amazon
+	// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html)
+	// .
+	MultiAZWithStandbyEnabled *bool
 
 	// The number of warm nodes in the cluster.
 	WarmCount *int32
@@ -705,8 +740,8 @@ type DomainPackageDetails struct {
 	// The current version of the package.
 	PackageVersion *string
 
-	// Denotes the location of the package on the OpenSearch Service cluster nodes.
-	// It's the same as synonym_path for dictionary files.
+	// The relative path of the package on the OpenSearch Service cluster nodes. This
+	// is synonym_path when the package is for synonym files.
 	ReferencePath *string
 
 	noSmithyDocumentSerde
@@ -959,6 +994,15 @@ type EncryptionAtRestOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the active domain environment.
+type EnvironmentInfo struct {
+
+	// A list of AvailabilityZoneInfo for the domain.
+	AvailabilityZoneInformation []AvailabilityZoneInfo
+
+	noSmithyDocumentSerde
+}
+
 // Additional information if the package is in an error state. Null otherwise.
 type ErrorDetails struct {
 
@@ -1062,6 +1106,9 @@ type InstanceTypeDetails struct {
 
 	// Whether logging is supported for the instance type.
 	AppLogsEnabled *bool
+
+	// The supported Availability Zones for the instance type.
+	AvailabilityZones []string
 
 	// Whether Amazon Cognito access is supported for the instance type.
 	CognitoEnabled *bool
@@ -1197,7 +1244,7 @@ type OffPeakWindow struct {
 type OffPeakWindowOptions struct {
 
 	// Whether to enable an off-peak window. This option is only available when
-	// modifying a domain created prior to February 13, 2023, not when creating a new
+	// modifying a domain created prior to February 16, 2023, not when creating a new
 	// domain. All domains created after this date have the off-peak window enabled by
 	// default. You can't disable the off-peak window after it's enabled for a domain.
 	Enabled *bool
@@ -1321,10 +1368,11 @@ type PackageDetails struct {
 	// The unique identifier of the package.
 	PackageID *string
 
-	// User-specified name of the package.
+	// The user-specified name of the package.
 	PackageName *string
 
-	// Current status of the package.
+	// The current status of the package. The available options are AVAILABLE , COPYING
+	// , COPY_FAILED , VALIDATNG , VALIDATION_FAILED , DELETING , and DELETE_FAILED .
 	PackageStatus PackageStatus
 
 	// The type of package.

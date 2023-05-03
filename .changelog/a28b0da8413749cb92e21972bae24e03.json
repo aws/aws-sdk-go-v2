@@ -1,0 +1,8 @@
+{
+    "id": "a28b0da8-4137-49cb-92e2-1972bae24e03",
+    "type": "feature",
+    "description": "Private API support for AWS AppSync. With Private APIs, you can now create GraphQL APIs that can only be accessed from your Amazon Virtual Private Cloud (\"VPC\").",
+    "modules": [
+        "service/appsync"
+    ]
+}

@@ -514,6 +514,9 @@ type GraphqlApi struct {
 	// The authentication type.
 	AuthenticationType AuthenticationType
 
+	// The DNS records for the API.
+	Dns map[string]string
+
 	// Configuration for Lambda function authorization.
 	LambdaAuthorizerConfig *LambdaAuthorizerConfig
 
@@ -534,6 +537,11 @@ type GraphqlApi struct {
 
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig
+
+	// Sets the value of the GraphQL API to public ( GLOBAL ) or private ( PRIVATE ).
+	// If no value is provided, the visibility will be set to GLOBAL by default. This
+	// value cannot be changed once the API has been created.
+	Visibility GraphQLApiVisibility
 
 	// The ARN of the WAF access control list (ACL) associated with this GraphqlApi ,
 	// if one exists.
@@ -578,9 +586,11 @@ type LambdaAuthorizerConfig struct {
 	// This member is required.
 	AuthorizerUri *string
 
-	// The number of seconds a response should be cached for. The default is 5 minutes
-	// (300 seconds). The Lambda function can override this by returning a ttlOverride
-	// key in its response. A value of 0 disables caching of responses.
+	// The number of seconds a response should be cached for. The default is 0
+	// seconds, which disables caching. If you don't specify a value for
+	// authorizerResultTtlInSeconds , the default value is used. The maximum value is
+	// one hour (3600 seconds). The Lambda function can override this by returning a
+	// ttlOverride key in its response.
 	AuthorizerResultTtlInSeconds int32
 
 	// A regular expression for validation of tokens before the Lambda function is

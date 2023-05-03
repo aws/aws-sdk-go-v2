@@ -350,6 +350,26 @@ func (m *validateOpDescribeDomainConfig) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDomainHealth struct {
+}
+
+func (*validateOpDescribeDomainHealth) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDomainHealth) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDomainHealthInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDomainHealthInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomain struct {
 }
 
@@ -936,6 +956,10 @@ func addOpDescribeDomainChangeProgressValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeDomainConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomainConfig{}, middleware.After)
+}
+
+func addOpDescribeDomainHealthValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDomainHealth{}, middleware.After)
 }
 
 func addOpDescribeDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -1540,6 +1564,21 @@ func validateOpDescribeDomainConfigInput(v *DescribeDomainConfigInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainConfigInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDomainHealthInput(v *DescribeDomainHealthInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainHealthInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}

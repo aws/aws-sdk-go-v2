@@ -10,6 +10,8 @@ const (
 	AttachmentStatusDeleting AttachmentStatus = "DELETING"
 	AttachmentStatusScaling  AttachmentStatus = "SCALING"
 	AttachmentStatusReady    AttachmentStatus = "READY"
+	AttachmentStatusFailed   AttachmentStatus = "FAILED"
+	AttachmentStatusError    AttachmentStatus = "ERROR"
 )
 
 // Values returns all known values for AttachmentStatus. Note that this can be
@@ -21,6 +23,8 @@ func (AttachmentStatus) Values() []AttachmentStatus {
 		"DELETING",
 		"SCALING",
 		"READY",
+		"FAILED",
+		"ERROR",
 	}
 }
 

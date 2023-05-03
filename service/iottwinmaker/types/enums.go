@@ -234,6 +234,22 @@ func (PropertyUpdateType) Values() []PropertyUpdateType {
 	}
 }
 
+type SceneErrorCode string
+
+// Enum values for SceneErrorCode
+const (
+	SceneErrorCodeMatterportError SceneErrorCode = "MATTERPORT_ERROR"
+)
+
+// Values returns all known values for SceneErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SceneErrorCode) Values() []SceneErrorCode {
+	return []SceneErrorCode{
+		"MATTERPORT_ERROR",
+	}
+}
+
 type Scope string
 
 // Enum values for Scope

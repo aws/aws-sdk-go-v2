@@ -196,6 +196,28 @@ func (DescribePackagesFilterName) Values() []DescribePackagesFilterName {
 	}
 }
 
+type DomainHealth string
+
+// Enum values for DomainHealth
+const (
+	DomainHealthRed          DomainHealth = "Red"
+	DomainHealthYellow       DomainHealth = "Yellow"
+	DomainHealthGreen        DomainHealth = "Green"
+	DomainHealthNotAvailable DomainHealth = "NotAvailable"
+)
+
+// Values returns all known values for DomainHealth. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DomainHealth) Values() []DomainHealth {
+	return []DomainHealth{
+		"Red",
+		"Yellow",
+		"Green",
+		"NotAvailable",
+	}
+}
+
 type DomainPackageStatus string
 
 // Enum values for DomainPackageStatus
@@ -217,6 +239,26 @@ func (DomainPackageStatus) Values() []DomainPackageStatus {
 		"ACTIVE",
 		"DISSOCIATING",
 		"DISSOCIATION_FAILED",
+	}
+}
+
+type DomainState string
+
+// Enum values for DomainState
+const (
+	DomainStateActive       DomainState = "Active"
+	DomainStateProcessing   DomainState = "Processing"
+	DomainStateNotAvailable DomainState = "NotAvailable"
+)
+
+// Values returns all known values for DomainState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DomainState) Values() []DomainState {
+	return []DomainState{
+		"Active",
+		"Processing",
+		"NotAvailable",
 	}
 }
 
@@ -305,6 +347,24 @@ func (LogType) Values() []LogType {
 		"SEARCH_SLOW_LOGS",
 		"ES_APPLICATION_LOGS",
 		"AUDIT_LOGS",
+	}
+}
+
+type MasterNodeStatus string
+
+// Enum values for MasterNodeStatus
+const (
+	MasterNodeStatusAvailable   MasterNodeStatus = "Available"
+	MasterNodeStatusUnAvailable MasterNodeStatus = "UnAvailable"
+)
+
+// Values returns all known values for MasterNodeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MasterNodeStatus) Values() []MasterNodeStatus {
+	return []MasterNodeStatus{
+		"Available",
+		"UnAvailable",
 	}
 }
 
@@ -932,5 +992,25 @@ func (VpcEndpointStatus) Values() []VpcEndpointStatus {
 		"UPDATE_FAILED",
 		"DELETING",
 		"DELETE_FAILED",
+	}
+}
+
+type ZoneStatus string
+
+// Enum values for ZoneStatus
+const (
+	ZoneStatusActive       ZoneStatus = "Active"
+	ZoneStatusStandBy      ZoneStatus = "StandBy"
+	ZoneStatusNotAvailable ZoneStatus = "NotAvailable"
+)
+
+// Values returns all known values for ZoneStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ZoneStatus) Values() []ZoneStatus {
+	return []ZoneStatus{
+		"Active",
+		"StandBy",
+		"NotAvailable",
 	}
 }

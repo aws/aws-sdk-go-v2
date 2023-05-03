@@ -246,6 +246,28 @@ func (DelegatedAdminStatus) Values() []DelegatedAdminStatus {
 	}
 }
 
+type Ec2DeepInspectionStatus string
+
+// Enum values for Ec2DeepInspectionStatus
+const (
+	Ec2DeepInspectionStatusActivated   Ec2DeepInspectionStatus = "ACTIVATED"
+	Ec2DeepInspectionStatusDeactivated Ec2DeepInspectionStatus = "DEACTIVATED"
+	Ec2DeepInspectionStatusPending     Ec2DeepInspectionStatus = "PENDING"
+	Ec2DeepInspectionStatusFailed      Ec2DeepInspectionStatus = "FAILED"
+)
+
+// Values returns all known values for Ec2DeepInspectionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Ec2DeepInspectionStatus) Values() []Ec2DeepInspectionStatus {
+	return []Ec2DeepInspectionStatus{
+		"ACTIVATED",
+		"DEACTIVATED",
+		"PENDING",
+		"FAILED",
+	}
+}
+
 type Ec2InstanceSortBy string
 
 // Enum values for Ec2InstanceSortBy
@@ -742,6 +764,7 @@ const (
 	PackageManagerPythonpkg PackageManager = "PYTHONPKG"
 	PackageManagerNodepkg   PackageManager = "NODEPKG"
 	PackageManagerPom       PackageManager = "POM"
+	PackageManagerGemspec   PackageManager = "GEMSPEC"
 )
 
 // Values returns all known values for PackageManager. Note that this can be
@@ -765,6 +788,7 @@ func (PackageManager) Values() []PackageManager {
 		"PYTHONPKG",
 		"NODEPKG",
 		"POM",
+		"GEMSPEC",
 	}
 }
 
@@ -1014,24 +1038,30 @@ type ScanStatusReason string
 
 // Enum values for ScanStatusReason
 const (
-	ScanStatusReasonPendingInitialScan      ScanStatusReason = "PENDING_INITIAL_SCAN"
-	ScanStatusReasonAccessDenied            ScanStatusReason = "ACCESS_DENIED"
-	ScanStatusReasonInternalError           ScanStatusReason = "INTERNAL_ERROR"
-	ScanStatusReasonUnmanagedEc2Instance    ScanStatusReason = "UNMANAGED_EC2_INSTANCE"
-	ScanStatusReasonUnsupportedOs           ScanStatusReason = "UNSUPPORTED_OS"
-	ScanStatusReasonScanEligibilityExpired  ScanStatusReason = "SCAN_ELIGIBILITY_EXPIRED"
-	ScanStatusReasonResourceTerminated      ScanStatusReason = "RESOURCE_TERMINATED"
-	ScanStatusReasonSuccessful              ScanStatusReason = "SUCCESSFUL"
-	ScanStatusReasonNoResourcesFound        ScanStatusReason = "NO_RESOURCES_FOUND"
-	ScanStatusReasonImageSizeExceeded       ScanStatusReason = "IMAGE_SIZE_EXCEEDED"
-	ScanStatusReasonScanFrequencyManual     ScanStatusReason = "SCAN_FREQUENCY_MANUAL"
-	ScanStatusReasonScanFrequencyScanOnPush ScanStatusReason = "SCAN_FREQUENCY_SCAN_ON_PUSH"
-	ScanStatusReasonEc2InstanceStopped      ScanStatusReason = "EC2_INSTANCE_STOPPED"
-	ScanStatusReasonPendingDisable          ScanStatusReason = "PENDING_DISABLE"
-	ScanStatusReasonNoInventory             ScanStatusReason = "NO_INVENTORY"
-	ScanStatusReasonStaleInventory          ScanStatusReason = "STALE_INVENTORY"
-	ScanStatusReasonExcludedByTag           ScanStatusReason = "EXCLUDED_BY_TAG"
-	ScanStatusReasonUnsupportedRuntime      ScanStatusReason = "UNSUPPORTED_RUNTIME"
+	ScanStatusReasonPendingInitialScan                           ScanStatusReason = "PENDING_INITIAL_SCAN"
+	ScanStatusReasonAccessDenied                                 ScanStatusReason = "ACCESS_DENIED"
+	ScanStatusReasonInternalError                                ScanStatusReason = "INTERNAL_ERROR"
+	ScanStatusReasonUnmanagedEc2Instance                         ScanStatusReason = "UNMANAGED_EC2_INSTANCE"
+	ScanStatusReasonUnsupportedOs                                ScanStatusReason = "UNSUPPORTED_OS"
+	ScanStatusReasonScanEligibilityExpired                       ScanStatusReason = "SCAN_ELIGIBILITY_EXPIRED"
+	ScanStatusReasonResourceTerminated                           ScanStatusReason = "RESOURCE_TERMINATED"
+	ScanStatusReasonSuccessful                                   ScanStatusReason = "SUCCESSFUL"
+	ScanStatusReasonNoResourcesFound                             ScanStatusReason = "NO_RESOURCES_FOUND"
+	ScanStatusReasonImageSizeExceeded                            ScanStatusReason = "IMAGE_SIZE_EXCEEDED"
+	ScanStatusReasonScanFrequencyManual                          ScanStatusReason = "SCAN_FREQUENCY_MANUAL"
+	ScanStatusReasonScanFrequencyScanOnPush                      ScanStatusReason = "SCAN_FREQUENCY_SCAN_ON_PUSH"
+	ScanStatusReasonEc2InstanceStopped                           ScanStatusReason = "EC2_INSTANCE_STOPPED"
+	ScanStatusReasonPendingDisable                               ScanStatusReason = "PENDING_DISABLE"
+	ScanStatusReasonNoInventory                                  ScanStatusReason = "NO_INVENTORY"
+	ScanStatusReasonStaleInventory                               ScanStatusReason = "STALE_INVENTORY"
+	ScanStatusReasonExcludedByTag                                ScanStatusReason = "EXCLUDED_BY_TAG"
+	ScanStatusReasonUnsupportedRuntime                           ScanStatusReason = "UNSUPPORTED_RUNTIME"
+	ScanStatusReasonUnsupportedMediaType                         ScanStatusReason = "UNSUPPORTED_MEDIA_TYPE"
+	ScanStatusReasonUnsupportedConfigFile                        ScanStatusReason = "UNSUPPORTED_CONFIG_FILE"
+	ScanStatusReasonDeepInspectionPackageCollectionLimitExceeded ScanStatusReason = "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED"
+	ScanStatusReasonDeepInspectionDailySsmInventoryLimitExceeded ScanStatusReason = "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"
+	ScanStatusReasonDeepInspectionCollectionTimeLimitExceeded    ScanStatusReason = "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"
+	ScanStatusReasonDeepInspectionNoInventory                    ScanStatusReason = "DEEP_INSPECTION_NO_INVENTORY"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -1057,6 +1087,12 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"STALE_INVENTORY",
 		"EXCLUDED_BY_TAG",
 		"UNSUPPORTED_RUNTIME",
+		"UNSUPPORTED_MEDIA_TYPE",
+		"UNSUPPORTED_CONFIG_FILE",
+		"DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED",
+		"DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED",
+		"DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED",
+		"DEEP_INSPECTION_NO_INVENTORY",
 	}
 }
 

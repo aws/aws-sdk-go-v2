@@ -1,0 +1,8 @@
+{
+    "id": "7d62e7ae-b823-4358-af05-ca45ff3c093d",
+    "type": "feature",
+    "description": "This feature provides deep inspection for linux based instance",
+    "modules": [
+        "service/inspector2"
+    ]
+}

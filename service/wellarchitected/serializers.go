@@ -3016,6 +3016,11 @@ func awsRestjson1_serializeOpDocumentUpdateGlobalSettingsInput(v *UpdateGlobalSe
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DiscoveryIntegrationStatus) > 0 {
+		ok := object.Key("DiscoveryIntegrationStatus")
+		ok.String(string(v.DiscoveryIntegrationStatus))
+	}
+
 	if len(v.OrganizationSharingStatus) > 0 {
 		ok := object.Key("OrganizationSharingStatus")
 		ok.String(string(v.OrganizationSharingStatus))
@@ -3677,6 +3682,13 @@ func awsRestjson1_serializeDocumentWorkloadDiscoveryConfig(v *types.WorkloadDisc
 		ok.String(string(v.TrustedAdvisorIntegrationStatus))
 	}
 
+	if v.WorkloadResourceDefinition != nil {
+		ok := object.Key("WorkloadResourceDefinition")
+		if err := awsRestjson1_serializeDocumentWorkloadResourceDefinition(v.WorkloadResourceDefinition, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3709,6 +3721,17 @@ func awsRestjson1_serializeDocumentWorkloadPillarPriorities(v []string, value sm
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkloadResourceDefinition(v []types.DefinitionType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

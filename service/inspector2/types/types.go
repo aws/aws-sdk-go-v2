@@ -388,8 +388,8 @@ type AutoEnable struct {
 	// This member is required.
 	Ecr *bool
 
-	// Represents whether AWS Lambda scans are automatically enabled for new members
-	// of your Amazon Inspector organization.
+	// Represents whether AWS Lambda standard scans are automatically enabled for new
+	// members of your Amazon Inspector organization.
 	Lambda *bool
 
 	noSmithyDocumentSerde
@@ -821,7 +821,7 @@ type Destination struct {
 	// This member is required.
 	KmsKeyArn *string
 
-	// The prefix of the KMS key used to export findings.
+	// The prefix of the Amazon S3 bucket used to export findings.
 	KeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -998,6 +998,27 @@ type FailedAccount struct {
 
 	// The status of Amazon Inspector for the account.
 	Status Status
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains details about a member account in your organization
+// that failed to activate Amazon Inspector deep inspection.
+type FailedMemberAccountEc2DeepInspectionStatusState struct {
+
+	// The unique identifier for the Amazon Web Services account of the organization
+	// member that failed to activate Amazon Inspector deep inspection.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The status of EC2 scanning in the account that failed to activate Amazon
+	// Inspector deep inspection.
+	Ec2ScanStatus Status
+
+	// The error message explaining why the account failed to activate Amazon
+	// Inspector deep inspection.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -1605,6 +1626,45 @@ type Member struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains details about the status of Amazon Inspector deep
+// inspection for a member account in your organization.
+type MemberAccountEc2DeepInspectionStatus struct {
+
+	// The unique identifier for the Amazon Web Services account of the organization
+	// member.
+	//
+	// This member is required.
+	AccountId *string
+
+	// Whether Amazon Inspector deep inspection is active in the account. If TRUE
+	// Amazon Inspector deep inspection is active, if FALSE it is not active.
+	//
+	// This member is required.
+	ActivateDeepInspection *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains details about the state of Amazon Inspector deep
+// inspection for a member account.
+type MemberAccountEc2DeepInspectionStatusState struct {
+
+	// The unique identifier for the Amazon Web Services account of the organization
+	// member
+	//
+	// This member is required.
+	AccountId *string
+
+	// The error message explaining why the account failed to activate Amazon
+	// Inspector deep inspection.
+	ErrorMessage *string
+
+	// The state of Amazon Inspector deep inspection in the member account.
+	Status Ec2DeepInspectionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information on the network path associated with a finding.
 type NetworkPath struct {
 
@@ -1952,7 +2012,7 @@ type ResourceStatus struct {
 	// This member is required.
 	Ecr Status
 
-	// The status of Amazon Inspector scanning for AWS Lambda function resources.
+	// The status of Amazon Inspector scanning for AWS Lambda function.
 	Lambda Status
 
 	noSmithyDocumentSerde

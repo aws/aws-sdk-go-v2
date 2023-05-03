@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -80,6 +81,9 @@ type GetSceneOutput struct {
 
 	// The description of the scene.
 	Description *string
+
+	// The SceneResponse error.
+	Error *types.SceneError
 
 	// The generated scene metadata.
 	GeneratedSceneMetadata map[string]string

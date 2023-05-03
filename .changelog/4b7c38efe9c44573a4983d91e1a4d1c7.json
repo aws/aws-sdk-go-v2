@@ -1,0 +1,8 @@
+{
+    "id": "4b7c38ef-e9c4-4573-a498-3d91e1a4d1c7",
+    "type": "feature",
+    "description": "Adds an SDK paginator for GetNetworkInsightsAccessScopeAnalysisFindings",
+    "modules": [
+        "service/ec2"
+    ]
+}

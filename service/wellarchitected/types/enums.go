@@ -150,6 +150,24 @@ func (ChoiceStatus) Values() []ChoiceStatus {
 	}
 }
 
+type DefinitionType string
+
+// Enum values for DefinitionType
+const (
+	DefinitionTypeWorkloadMetadata DefinitionType = "WORKLOAD_METADATA"
+	DefinitionTypeAppRegistry      DefinitionType = "APP_REGISTRY"
+)
+
+// Values returns all known values for DefinitionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DefinitionType) Values() []DefinitionType {
+	return []DefinitionType{
+		"WORKLOAD_METADATA",
+		"APP_REGISTRY",
+	}
+}
+
 type DifferenceStatus string
 
 // Enum values for DifferenceStatus
@@ -167,6 +185,24 @@ func (DifferenceStatus) Values() []DifferenceStatus {
 		"UPDATED",
 		"NEW",
 		"DELETED",
+	}
+}
+
+type DiscoveryIntegrationStatus string
+
+// Enum values for DiscoveryIntegrationStatus
+const (
+	DiscoveryIntegrationStatusEnabled  DiscoveryIntegrationStatus = "ENABLED"
+	DiscoveryIntegrationStatusDisabled DiscoveryIntegrationStatus = "DISABLED"
+)
+
+// Values returns all known values for DiscoveryIntegrationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DiscoveryIntegrationStatus) Values() []DiscoveryIntegrationStatus {
+	return []DiscoveryIntegrationStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

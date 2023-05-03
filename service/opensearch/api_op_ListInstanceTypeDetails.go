@@ -31,14 +31,17 @@ func (c *Client) ListInstanceTypeDetails(ctx context.Context, params *ListInstan
 
 type ListInstanceTypeDetailsInput struct {
 
-	// Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or
+	// The version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or
 	// OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
 	//
 	// This member is required.
 	EngineVersion *string
 
-	// Name of the domain to list instance type details for.
+	// The name of the domain.
 	DomainName *string
+
+	// An optional parameter that lists information for a given instance type.
+	InstanceType *string
 
 	// An optional parameter that specifies the maximum number of results to return.
 	// You can use nextToken to get the next page of results.
@@ -48,6 +51,9 @@ type ListInstanceTypeDetailsInput struct {
 	// include the returned nextToken in subsequent ListInstanceTypeDetails
 	// operations, which returns results in the next page.
 	NextToken *string
+
+	// An optional parameter that specifies the Availability Zones for the domain.
+	RetrieveAZs *bool
 
 	noSmithyDocumentSerde
 }

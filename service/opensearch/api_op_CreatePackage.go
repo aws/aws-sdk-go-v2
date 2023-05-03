@@ -42,7 +42,7 @@ type CreatePackageInput struct {
 	// This member is required.
 	PackageSource *types.PackageSource
 
-	// Type of package.
+	// The type of package.
 	//
 	// This member is required.
 	PackageType types.PackageType

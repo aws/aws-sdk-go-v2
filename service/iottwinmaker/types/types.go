@@ -835,6 +835,18 @@ type Row struct {
 	noSmithyDocumentSerde
 }
 
+// The scene error.
+type SceneError struct {
+
+	// The SceneError code.
+	Code SceneErrorCode
+
+	// The SceneError message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information about a scene.
 type SceneSummary struct {
 

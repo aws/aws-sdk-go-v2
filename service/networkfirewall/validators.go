@@ -675,6 +675,11 @@ func validateFirewallPolicy(v *types.FirewallPolicy) error {
 			invalidParams.AddNested("StatefulRuleGroupReferences", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.PolicyVariables != nil {
+		if err := validatePolicyVariables(v.PolicyVariables); err != nil {
+			invalidParams.AddNested("PolicyVariables", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -830,6 +835,23 @@ func validateMatchAttributes(v *types.MatchAttributes) error {
 	if v.TCPFlags != nil {
 		if err := validateTCPFlags(v.TCPFlags); err != nil {
 			invalidParams.AddNested("TCPFlags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyVariables(v *types.PolicyVariables) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyVariables"}
+	if v.RuleVariables != nil {
+		if err := validateIPSets(v.RuleVariables); err != nil {
+			invalidParams.AddNested("RuleVariables", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

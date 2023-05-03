@@ -50,6 +50,26 @@ func (m *validateOpBatchGetFreeTrialInfo) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchUpdateMemberEc2DeepInspectionStatus struct {
+}
+
+func (*validateOpBatchUpdateMemberEc2DeepInspectionStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateMemberEc2DeepInspectionStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateMemberEc2DeepInspectionStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateMemberEc2DeepInspectionStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelFindingsReport struct {
 }
 
@@ -430,12 +450,36 @@ func (m *validateOpUpdateOrganizationConfiguration) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOrgEc2DeepInspectionConfiguration struct {
+}
+
+func (*validateOpUpdateOrgEc2DeepInspectionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOrgEc2DeepInspectionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOrgEc2DeepInspectionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOrgEc2DeepInspectionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateMember{}, middleware.After)
 }
 
 func addOpBatchGetFreeTrialInfoValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetFreeTrialInfo{}, middleware.After)
+}
+
+func addOpBatchUpdateMemberEc2DeepInspectionStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateMemberEc2DeepInspectionStatus{}, middleware.After)
 }
 
 func addOpCancelFindingsReportValidationMiddleware(stack *middleware.Stack) error {
@@ -512,6 +556,10 @@ func addOpUpdateFilterValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOrganizationConfiguration{}, middleware.After)
+}
+
+func addOpUpdateOrgEc2DeepInspectionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOrgEc2DeepInspectionConfiguration{}, middleware.After)
 }
 
 func validateAggregationRequest(v types.AggregationRequest) error {
@@ -1140,6 +1188,41 @@ func validateMapFilterList(v []types.MapFilter) error {
 	}
 }
 
+func validateMemberAccountEc2DeepInspectionStatus(v *types.MemberAccountEc2DeepInspectionStatus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemberAccountEc2DeepInspectionStatus"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ActivateDeepInspection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActivateDeepInspection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemberAccountEc2DeepInspectionStatusList(v []types.MemberAccountEc2DeepInspectionStatus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemberAccountEc2DeepInspectionStatusList"}
+	for i := range v {
+		if err := validateMemberAccountEc2DeepInspectionStatus(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePackageAggregation(v *types.PackageAggregation) error {
 	if v == nil {
 		return nil
@@ -1330,6 +1413,25 @@ func validateOpBatchGetFreeTrialInfoInput(v *BatchGetFreeTrialInfoInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetFreeTrialInfoInput"}
 	if v.AccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateMemberEc2DeepInspectionStatusInput(v *BatchUpdateMemberEc2DeepInspectionStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateMemberEc2DeepInspectionStatusInput"}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	} else if v.AccountIds != nil {
+		if err := validateMemberAccountEc2DeepInspectionStatusList(v.AccountIds); err != nil {
+			invalidParams.AddNested("AccountIds", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1677,6 +1779,21 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 		if err := validateAutoEnable(v.AutoEnable); err != nil {
 			invalidParams.AddNested("AutoEnable", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOrgEc2DeepInspectionConfigurationInput(v *UpdateOrgEc2DeepInspectionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOrgEc2DeepInspectionConfigurationInput"}
+	if v.OrgPackagePaths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrgPackagePaths"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

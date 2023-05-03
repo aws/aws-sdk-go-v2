@@ -6,64 +6,52 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a finding report. By default only ACTIVE findings are returned in the
-// report. To see SUPRESSED or CLOSED findings you must specify a value for the
-// findingStatus filter criteria.
-func (c *Client) CreateFindingsReport(ctx context.Context, params *CreateFindingsReportInput, optFns ...func(*Options)) (*CreateFindingsReportOutput, error) {
+// Updates the Amazon Inspector deep inspection custom paths for your
+// organization. You must be an Amazon Inspector delegated administrator to use
+// this API.
+func (c *Client) UpdateOrgEc2DeepInspectionConfiguration(ctx context.Context, params *UpdateOrgEc2DeepInspectionConfigurationInput, optFns ...func(*Options)) (*UpdateOrgEc2DeepInspectionConfigurationOutput, error) {
 	if params == nil {
-		params = &CreateFindingsReportInput{}
+		params = &UpdateOrgEc2DeepInspectionConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFindingsReport", params, optFns, c.addOperationCreateFindingsReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateOrgEc2DeepInspectionConfiguration", params, optFns, c.addOperationUpdateOrgEc2DeepInspectionConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateFindingsReportOutput)
+	out := result.(*UpdateOrgEc2DeepInspectionConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateFindingsReportInput struct {
+type UpdateOrgEc2DeepInspectionConfigurationInput struct {
 
-	// The format to generate the report in.
+	// The Amazon Inspector deep inspection custom paths you are adding for your
+	// organization.
 	//
 	// This member is required.
-	ReportFormat types.ReportFormat
-
-	// The Amazon S3 export destination for the report.
-	//
-	// This member is required.
-	S3Destination *types.Destination
-
-	// The filter criteria to apply to the results of the finding report.
-	FilterCriteria *types.FilterCriteria
+	OrgPackagePaths []string
 
 	noSmithyDocumentSerde
 }
 
-type CreateFindingsReportOutput struct {
-
-	// The ID of the report.
-	ReportId *string
-
+type UpdateOrgEc2DeepInspectionConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateFindingsReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFindingsReport{}, middleware.After)
+func (c *Client) addOperationUpdateOrgEc2DeepInspectionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOrgEc2DeepInspectionConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFindingsReport{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOrgEc2DeepInspectionConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -103,10 +91,10 @@ func (c *Client) addOperationCreateFindingsReportMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateFindingsReportValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateOrgEc2DeepInspectionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFindingsReport(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOrgEc2DeepInspectionConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -124,11 +112,11 @@ func (c *Client) addOperationCreateFindingsReportMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateFindingsReport(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateOrgEc2DeepInspectionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "inspector2",
-		OperationName: "CreateFindingsReport",
+		OperationName: "UpdateOrgEc2DeepInspectionConfiguration",
 	}
 }

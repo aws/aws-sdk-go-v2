@@ -86,7 +86,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occured because the client wanted to access a not supported operation.
+// An error occured because the client wanted to access an unsupported operation.
 type DisabledOperationException struct {
 	Message *string
 
@@ -139,8 +139,7 @@ func (e *InternalException) ErrorCode() string {
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request processing has failed because you provided an invalid pagination
-// token.
+// Request processing failed because you provided an invalid pagination token.
 type InvalidPaginationTokenException struct {
 	Message *string
 
@@ -246,7 +245,7 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for accessing or deleting a resource that does not exist..
+// An exception for accessing or deleting a resource that doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
 

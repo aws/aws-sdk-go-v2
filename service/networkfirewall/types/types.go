@@ -69,10 +69,12 @@ type Attachment struct {
 	Status AttachmentStatus
 
 	// If Network Firewall fails to create or delete the firewall endpoint in the
-	// subnet, it populates this with the reason for the failure and how to resolve it.
-	// Depending on the error, it can take as many as 15 minutes to populate this
-	// field. For more information about the errors and solutions available for this
-	// field, see Troubleshooting firewall endpoint failures (https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html)
+	// subnet, it populates this with the reason for the error or failure and how to
+	// resolve it. A FAILED status indicates a non-recoverable state, and a ERROR
+	// status indicates an issue that you can fix. Depending on the error, it can take
+	// as many as 15 minutes to populate this field. For more information about the
+	// causes for failiure or errors and solutions available for this field, see
+	// Troubleshooting firewall endpoint failures (https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html)
 	// in the Network Firewall Developer Guide.
 	StatusMessage *string
 
@@ -303,6 +305,10 @@ type FirewallPolicy struct {
 	//
 	// This member is required.
 	StatelessFragmentDefaultActions []string
+
+	// Contains variables that you can use to override default Suricata settings in
+	// your firewall policy.
+	PolicyVariables *PolicyVariables
 
 	// The default actions to take on a packet that doesn't match any stateful rules.
 	// The stateful default action is optional, and is only valid when using the strict
@@ -685,6 +691,20 @@ type PerObjectStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Contains variables that you can use to override default Suricata settings in
+// your firewall policy.
+type PolicyVariables struct {
+
+	// The IPv4 or IPv6 addresses in CIDR notation to use for the Suricata HOME_NET
+	// variable. If your firewall uses an inspection VPC, you might want to override
+	// the HOME_NET variable with the CIDRs of your home networks. If you don't
+	// override HOME_NET with your own CIDRs, Network Firewall by default uses the
+	// CIDR of your inspection VPC.
+	RuleVariables map[string]IPSet
+
+	noSmithyDocumentSerde
+}
+
 // A single port range specification. This is used for source and destination port
 // ranges in the stateless rule MatchAttributes , SourcePorts , and
 // DestinationPorts settings.
@@ -931,7 +951,7 @@ type RulesSource struct {
 	// An array of individual stateful rules inspection criteria to be used together
 	// in a stateful rule group. Use this option to specify simple Suricata rules with
 	// protocol, source and destination, ports, direction, and rule options. For
-	// information about the Suricata Rules format, see Rules Format (https://suricata.readthedocs.iorules/intro.html#)
+	// information about the Suricata Rules format, see Rules Format (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html)
 	// .
 	StatefulRules []StatefulRule
 
@@ -1113,7 +1133,7 @@ type StatefulEngineOptions struct {
 // A single Suricata rules specification, for use in a stateful rule group. Use
 // this option to specify a simple Suricata rule with protocol, source and
 // destination, ports, direction, and rule options. For information about the
-// Suricata Rules format, see Rules Format (https://suricata.readthedocs.iorules/intro.html#)
+// Suricata Rules format, see Rules Format (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html)
 // .
 type StatefulRule struct {
 
@@ -1131,12 +1151,6 @@ type StatefulRule struct {
 	//   to use to drop traffic. You can enable the rule with ALERT action, verify in
 	//   the logs that the rule is filtering as you want, then change the action to
 	//   DROP .
-	//   - REJECT - Drops TCP traffic that matches the conditions of the stateful
-	//   rule, and sends a TCP reset packet back to sender of the packet. A TCP reset
-	//   packet is a packet with no payload and a RST bit contained in the TCP header
-	//   flags. Also sends an alert log mesage if alert logging is configured in the
-	//   Firewall LoggingConfiguration . REJECT isn't currently available for use with
-	//   IMAP and FTP protocols.
 	//
 	// This member is required.
 	Action StatefulAction
