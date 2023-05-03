@@ -1,3 +1,7 @@
+# v1.16.0 (2023-05-03)
+
+* **Feature**: Amazon OpenSearch Service adds the option to deploy a domain across multiple Availability Zones, with each AZ containing a complete copy of data and with nodes in one AZ acting as a standby. This option provides 99.99% availability and consistent performance in the event of infrastructure failure.
+
 # v1.15.5 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

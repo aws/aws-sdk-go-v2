@@ -1,3 +1,7 @@
+# v1.12.0 (2023-05-03)
+
+* **Feature**: This release adds a field for GetScene API to return error code and message from dependency services.
+
 # v1.11.5 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

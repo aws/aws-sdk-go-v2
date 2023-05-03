@@ -1,8 +1,0 @@
-{
-    "id": "97a33ce0-770c-46b6-a464-ba5bc62477e5",
-    "type": "feature",
-    "description": "This release adds a field for GetScene API to return error code and message from dependency services.",
-    "modules": [
-        "service/iottwinmaker"
-    ]
-}

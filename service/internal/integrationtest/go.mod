@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.6
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.95.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.96.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.10
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.20.0

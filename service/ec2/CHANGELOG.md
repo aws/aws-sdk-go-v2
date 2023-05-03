@@ -1,3 +1,7 @@
+# v1.96.0 (2023-05-03)
+
+* **Feature**: Adds an SDK paginator for GetNetworkInsightsAccessScopeAnalysisFindings
+
 # v1.95.0 (2023-04-27)
 
 * **Feature**: This release adds support for AMD SEV-SNP on EC2 instances.

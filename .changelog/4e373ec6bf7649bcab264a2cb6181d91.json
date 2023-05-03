@@ -1,8 +1,0 @@
-{
-    "id": "4e373ec6-bf76-49bc-ab26-4a2cb6181d91",
-    "type": "feature",
-    "description": "This release deepens integration with AWS Service Catalog AppRegistry to improve workload resource discovery.",
-    "modules": [
-        "service/wellarchitected"
-    ]
-}

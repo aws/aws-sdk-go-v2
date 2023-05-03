@@ -1,3 +1,7 @@
+# v1.20.0 (2023-05-03)
+
+* **Feature**: This release deepens integration with AWS Service Catalog AppRegistry to improve workload resource discovery.
+
 # v1.19.3 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

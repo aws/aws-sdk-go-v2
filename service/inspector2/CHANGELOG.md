@@ -1,3 +1,7 @@
+# v1.12.0 (2023-05-03)
+
+* **Feature**: This feature provides deep inspection for linux based instance
+
 # v1.11.10 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

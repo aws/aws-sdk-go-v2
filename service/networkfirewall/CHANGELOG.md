@@ -1,3 +1,7 @@
+# v1.27.0 (2023-05-03)
+
+* **Feature**: AWS Network Firewall now supports policy level HOME_NET variable overrides.
+
 # v1.26.3 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

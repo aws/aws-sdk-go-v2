@@ -1,3 +1,21 @@
+# Release (2023-05-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.20.0](service/appsync/CHANGELOG.md#v1200-2023-05-03)
+  * **Feature**: Private API support for AWS AppSync. With Private APIs, you can now create GraphQL APIs that can only be accessed from your Amazon Virtual Private Cloud ("VPC").
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.96.0](service/ec2/CHANGELOG.md#v1960-2023-05-03)
+  * **Feature**: Adds an SDK paginator for GetNetworkInsightsAccessScopeAnalysisFindings
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.12.0](service/inspector2/CHANGELOG.md#v1120-2023-05-03)
+  * **Feature**: This feature provides deep inspection for linux based instance
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.12.0](service/iottwinmaker/CHANGELOG.md#v1120-2023-05-03)
+  * **Feature**: This release adds a field for GetScene API to return error code and message from dependency services.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.27.0](service/networkfirewall/CHANGELOG.md#v1270-2023-05-03)
+  * **Feature**: AWS Network Firewall now supports policy level HOME_NET variable overrides.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.16.0](service/opensearch/CHANGELOG.md#v1160-2023-05-03)
+  * **Feature**: Amazon OpenSearch Service adds the option to deploy a domain across multiple Availability Zones, with each AZ containing a complete copy of data and with nodes in one AZ acting as a standby. This option provides 99.99% availability and consistent performance in the event of infrastructure failure.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.20.0](service/wellarchitected/CHANGELOG.md#v1200-2023-05-03)
+  * **Feature**: This release deepens integration with AWS Service Catalog AppRegistry to improve workload resource discovery.
+
 # Release (2023-05-02)
 
 ## Module Highlights
