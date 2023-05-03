@@ -579,7 +579,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates an Amazon Web Services account with an Amazon Inspector delegated administrator.</p>",
+                "smithy.api#documentation": "<p>Associates an Amazon Web Services account with an Amazon Inspector delegated administrator.   An HTTP 200 response indicates the association was successfully started, but doesn’t indicate whether it was completed. You can check if the association completed by using <a href=\"https://docs.aws.amazon.com/inspector/v2/APIReference/API_ListMembers.html\">ListMembers</a> for multiple accounts or <a href=\"https://docs.aws.amazon.com/inspector/v2/APIReference/API_GetMember.html\">GetMembers</a> for a single account.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -631,7 +631,7 @@
                 "lambda": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents whether AWS Lambda scans are automatically enabled for new members of your Amazon Inspector organization.\n      </p>"
+                        "smithy.api#documentation": "<p>Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization.\n      </p>"
                     }
                 }
             },
@@ -1102,6 +1102,137 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.inspector2#BatchGetMemberEc2DeepInspectionStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#BatchGetMemberEc2DeepInspectionStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#BatchGetMemberEc2DeepInspectionStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves Amazon Inspector deep inspection activation status of multiple member accounts within your organization. You must be the delegated administrator of an organization in Amazon Inspector to use this API.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/ec2deepinspectionstatus/member/batch/get"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#BatchGetMemberEc2DeepInspectionStatusRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.inspector2#AccountIdSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifiers for the Amazon Web Services accounts to retrieve Amazon Inspector deep inspection activation status for.\n         \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#BatchGetMemberEc2DeepInspectionStatusResponse": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatusStateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that provide details on the activation status of Amazon Inspector deep inspection for each of the requested accounts.\n         \n         </p>"
+                    }
+                },
+                "failedAccountIds": {
+                    "target": "com.amazonaws.inspector2#FailedMemberAccountEc2DeepInspectionStatusStateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that provide details on any accounts that failed to activate Amazon Inspector deep inspection and why.\n         \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#BatchUpdateMemberEc2DeepInspectionStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#BatchUpdateMemberEc2DeepInspectionStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#BatchUpdateMemberEc2DeepInspectionStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates or deactivates Amazon Inspector deep inspection for the provided member accounts in your organization. You must be the delegated administrator of an organization in Amazon Inspector to use this API.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/ec2deepinspectionstatus/member/batch/update"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#BatchUpdateMemberEc2DeepInspectionStatusRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifiers for the Amazon Web Services accounts to change Amazon Inspector deep inspection status for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#BatchUpdateMemberEc2DeepInspectionStatusResponse": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatusStateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that provide details for each of the accounts that Amazon Inspector deep inspection status was successfully changed for.       \n      </p>"
+                    }
+                },
+                "failedAccountIds": {
+                    "target": "com.amazonaws.inspector2#FailedMemberAccountEc2DeepInspectionStatusStateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that provide details for each of the accounts that Amazon Inspector deep inspection status could not be successfully changed for.  \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector2#CancelFindingsReport": {
@@ -1625,7 +1756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a finding report.</p>",
+                "smithy.api#documentation": "<p>Creates a finding report. By default only <code>ACTIVE</code> findings are returned in the report. To see <code>SUPRESSED</code> or <code>CLOSED</code> findings you must specify a value for the <code>findingStatus</code> filter criteria. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2023,7 +2154,7 @@
                 "keyPrefix": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix of the KMS key used to export findings.</p>"
+                        "smithy.api#documentation": "<p>The prefix of the Amazon S3 bucket used to export findings.</p>"
                     }
                 },
                 "kmsKeyArn": {
@@ -2233,6 +2364,29 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.inspector2#Ec2DeepInspectionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVATED",
+                        "name": "ACTIVATED"
+                    },
+                    {
+                        "value": "DEACTIVATED",
+                        "name": "DEACTIVATED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector2#Ec2InstanceAggregation": {
@@ -2878,6 +3032,45 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#FailedMemberAccountEc2DeepInspectionStatusState": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Web Services account of the organization member that failed to activate Amazon Inspector deep inspection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ec2ScanStatus": {
+                    "target": "com.amazonaws.inspector2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of EC2 scanning in the account that failed to activate Amazon Inspector deep inspection.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message explaining why the account failed to activate Amazon Inspector deep inspection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about a member account in your organization that failed to activate Amazon Inspector deep inspection.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#FailedMemberAccountEc2DeepInspectionStatusStateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#FailedMemberAccountEc2DeepInspectionStatusState"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.inspector2#FilePath": {
             "type": "string",
             "traits": {
@@ -3398,8 +3591,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
-                }
+                    "max": 100
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:finding/[a-f0-9]{32}$"
             }
         },
         "com.amazonaws.inspector2#FindingDescription": {
@@ -3807,6 +4001,76 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#GetEc2DeepInspectionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#GetEc2DeepInspectionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#GetEc2DeepInspectionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the activation status of Amazon Inspector deep inspection and custom paths associated with your account.  \n      </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/ec2deepinspectionconfiguration/get"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#GetEc2DeepInspectionConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetEc2DeepInspectionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "packagePaths": {
+                    "target": "com.amazonaws.inspector2#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Inspector deep inspection custom paths for your account.</p>"
+                    }
+                },
+                "orgPackagePaths": {
+                    "target": "com.amazonaws.inspector2#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Inspector deep inspection custom paths for your organization.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.inspector2#Ec2DeepInspectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The activation status of Amazon Inspector deep inspection in your account.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message explaining why Amazon Inspector deep inspection configurations could not be retrieved for your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#GetFindingsReportStatus": {
             "type": "operation",
             "input": {
@@ -4106,6 +4370,12 @@
                     "target": "com.amazonaws.inspector2#BatchGetFreeTrialInfo"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#BatchGetMemberEc2DeepInspectionStatus"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#BatchUpdateMemberEc2DeepInspectionStatus"
+                },
+                {
                     "target": "com.amazonaws.inspector2#CancelFindingsReport"
                 },
                 {
@@ -4140,6 +4410,9 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#GetDelegatedAdminAccount"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#GetEc2DeepInspectionConfiguration"
                 },
                 {
                     "target": "com.amazonaws.inspector2#GetFindingsReportStatus"
@@ -4187,10 +4460,16 @@
                     "target": "com.amazonaws.inspector2#UpdateConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.inspector2#UpdateFilter"
                 },
                 {
                     "target": "com.amazonaws.inspector2#UpdateOrganizationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#UpdateOrgEc2DeepInspectionConfiguration"
                 }
             ],
             "traits": {
@@ -4572,8 +4851,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4585,8 +4864,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4598,8 +4877,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4611,8 +4890,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4624,8 +4903,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4637,8 +4916,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4650,8 +4929,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4663,8 +4942,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4676,8 +4955,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4689,8 +4968,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4702,8 +4981,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4715,8 +4994,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4728,8 +5007,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4741,8 +5020,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4754,8 +5033,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4767,8 +5046,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4780,8 +5059,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4793,8 +5072,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4806,8 +5085,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4819,8 +5098,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4832,8 +5111,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4845,8 +5124,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4858,8 +5137,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4871,8 +5150,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4884,8 +5163,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4897,8 +5176,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4910,8 +5189,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4923,8 +5202,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4936,8 +5215,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4949,8 +5228,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4962,8 +5252,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4975,8 +5276,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4988,8 +5300,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5001,8 +5324,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5014,8 +5337,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5027,8 +5350,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5039,8 +5362,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5051,9 +5374,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -6375,6 +6704,79 @@
                 "smithy.api#documentation": "<p>Details on a member account in your organization.</p>"
             }
         },
+        "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatus": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Web Services account of the organization member.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "activateDeepInspection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether Amazon Inspector deep inspection is active in the account.  If <code>TRUE</code> Amazon Inspector deep inspection is active, if <code>FALSE</code> it is not active.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about the status of Amazon Inspector deep inspection for a member account in your organization.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatusState": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Web Services account of the organization member</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.inspector2#Ec2DeepInspectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of Amazon Inspector deep inspection in the member account.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message explaining why the account failed to activate Amazon Inspector deep inspection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about the state of Amazon Inspector deep inspection for a member account.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatusStateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#MemberAccountEc2DeepInspectionStatusState"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.inspector2#MemberList": {
             "type": "list",
             "member": {
@@ -6747,6 +7149,10 @@
                     {
                         "value": "POM",
                         "name": "POM"
+                    },
+                    {
+                        "value": "GEMSPEC",
+                        "name": "GEMSPEC"
                     }
                 ]
             }
@@ -6880,6 +7286,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a package vulnerability finding.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#Path": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^(?:/(?:\\.[-\\w]+|[-\\w]+(?:\\.[-\\w]+)?))+/?$"
+            }
+        },
+        "com.amazonaws.inspector2#PathList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Path"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.inspector2#Permission": {
@@ -7417,7 +7844,7 @@
                 "lambda": {
                     "target": "com.amazonaws.inspector2#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of Amazon Inspector scanning for AWS Lambda function resources.</p>"
+                        "smithy.api#documentation": "<p>The status of Amazon Inspector scanning for AWS Lambda function.</p>"
                     }
                 }
             },
@@ -7619,6 +8046,30 @@
                     {
                         "value": "UNSUPPORTED_RUNTIME",
                         "name": "UNSUPPORTED_RUNTIME"
+                    },
+                    {
+                        "value": "UNSUPPORTED_MEDIA_TYPE",
+                        "name": "UNSUPPORTED_MEDIA_TYPE"
+                    },
+                    {
+                        "value": "UNSUPPORTED_CONFIG_FILE",
+                        "name": "UNSUPPORTED_CONFIG_FILE"
+                    },
+                    {
+                        "value": "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED",
+                        "name": "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED",
+                        "name": "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED",
+                        "name": "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "DEEP_INSPECTION_NO_INVENTORY",
+                        "name": "DEEP_INSPECTION_NO_INVENTORY"
                     }
                 ]
             }
@@ -8370,6 +8821,89 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates, deactivates Amazon Inspector deep inspection, or updates custom paths for your account. </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/ec2deepinspectionconfiguration/update"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "activateDeepInspection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify <code>TRUE</code> to activate Amazon Inspector deep inspection in your account, or <code>FALSE</code> to deactivate. Member accounts in an organization cannot deactivate deep inspection, instead the delegated administrator for the organization can deactivate a member account using <a href=\"https://docs.aws.amazon.com/inspector/v2/APIReference/API_BatchUpdateMemberEc2DeepInspectionStatus.html\">BatchUpdateMemberEc2DeepInspectionStatus</a>.</p>"
+                    }
+                },
+                "packagePaths": {
+                    "target": "com.amazonaws.inspector2#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Inspector deep inspection custom paths you are adding for your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "packagePaths": {
+                    "target": "com.amazonaws.inspector2#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current Amazon Inspector deep inspection custom paths for your account.</p>"
+                    }
+                },
+                "orgPackagePaths": {
+                    "target": "com.amazonaws.inspector2#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current Amazon Inspector deep inspection custom paths for the organization.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.inspector2#Ec2DeepInspectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Amazon Inspector deep inspection in your account.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message explaining why new Amazon Inspector deep inspection custom paths could not be added.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#UpdateFilter": {
             "type": "operation",
             "input": {
@@ -8456,6 +8990,59 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.inspector2#UpdateOrgEc2DeepInspectionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#UpdateOrgEc2DeepInspectionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#UpdateOrgEc2DeepInspectionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the Amazon Inspector deep inspection custom paths for your organization. You must be an Amazon Inspector delegated administrator to use this API.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/ec2deepinspectionconfiguration/org/update"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#UpdateOrgEc2DeepInspectionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "orgPackagePaths": {
+                    "target": "com.amazonaws.inspector2#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Inspector deep inspection custom paths you are adding for your organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateOrgEc2DeepInspectionConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector2#UpdateOrganizationConfiguration": {

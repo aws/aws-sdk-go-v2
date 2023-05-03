@@ -305,7 +305,7 @@
                 "StatusMessage": {
                     "target": "com.amazonaws.networkfirewall#StatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the failure and how to resolve it. Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the errors and solutions available for this field, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html\">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it. A <code>FAILED</code> status indicates a non-recoverable state, and a <code>ERROR</code> status indicates an issue that you can fix. Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the causes for failiure or errors and solutions available for this field, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html\">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -338,6 +338,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "READY"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
                     }
                 }
             }
@@ -2108,6 +2120,12 @@
                     "target": "com.amazonaws.networkfirewall#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the TLS inspection configuration.</p>"
+                    }
+                },
+                "PolicyVariables": {
+                    "target": "com.amazonaws.networkfirewall#PolicyVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains variables that you can use to override default Suricata settings in your firewall policy.</p>"
                     }
                 }
             },
@@ -4339,6 +4357,20 @@
                 "smithy.api#pattern": "\\S"
             }
         },
+        "com.amazonaws.networkfirewall#PolicyVariables": {
+            "type": "structure",
+            "members": {
+                "RuleVariables": {
+                    "target": "com.amazonaws.networkfirewall#IPSets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 or IPv6 addresses in CIDR notation to use for the Suricata <code>HOME_NET</code> variable. If your firewall uses an inspection VPC, you might want to override the <code>HOME_NET</code> variable with the CIDRs of your home networks. If you don't override <code>HOME_NET</code> with your own CIDRs, Network Firewall by default uses the CIDR of your inspection VPC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains variables that you can use to override default Suricata settings in your firewall policy.</p>"
+            }
+        },
         "com.amazonaws.networkfirewall#Port": {
             "type": "string",
             "traits": {
@@ -4495,7 +4527,7 @@
                 "Policy": {
                     "target": "com.amazonaws.networkfirewall#PolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM policy statement that lists the accounts that you want to share your rule group or firewall policy with\n           and the operations that you want the accounts to be able to perform. </p>\n         <p>For a rule group resource, you can specify the following operations in the Actions section of the statement:</p>\n         <ul>\n            <li>\n               <p>network-firewall:CreateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:UpdateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:ListRuleGroups</p>\n            </li>\n         </ul>\n         <p>For a firewall policy resource, you can specify the following operations in the Actions section of the statement:</p>\n         <ul>\n            <li>\n               <p>network-firewall:CreateFirewall</p>\n            </li>\n            <li>\n               <p>network-firewall:UpdateFirewall</p>\n            </li>\n            <li>\n               <p>network-firewall:AssociateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:ListFirewallPolicies</p>\n            </li>\n         </ul>\n         <p>In the Resource section of the statement, you specify the ARNs for the rule groups and firewall policies that you want to share with the account that you specified in <code>Arn</code>.</p>",
+                        "smithy.api#documentation": "<p>The IAM policy statement that lists the accounts that you want to share your rule group or firewall policy with\n           and the operations that you want the accounts to be able to perform. </p>\n         <p>For a rule group resource, you can specify the following operations in the Actions section of the statement:</p>\n         <ul>\n            <li>\n               <p>network-firewall:CreateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:UpdateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:ListRuleGroups</p>\n            </li>\n         </ul>\n         <p>For a firewall policy resource, you can specify the following operations in the Actions section of the statement:</p>\n         <ul>\n            <li>\n               <p>network-firewall:AssociateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:ListFirewallPolicies</p>\n            </li>\n         </ul>\n         <p>In the Resource section of the statement, you specify the ARNs for the rule groups and firewall policies that you want to share with the account that you specified in <code>Arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4924,7 +4956,7 @@
                 "StatefulRules": {
                     "target": "com.amazonaws.networkfirewall#StatefulRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.iorules/intro.html#\">Rules Format</a>. </p>"
+                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html\">Rules Format</a>. </p>"
                     }
                 },
                 "StatelessRulesAndCustomActions": {
@@ -5173,7 +5205,7 @@
                 "Action": {
                     "target": "com.amazonaws.networkfirewall#StatefulAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines what Network Firewall should do with the packets in a traffic flow when the flow\n         matches the stateful rule criteria. For all actions, Network Firewall performs the specified\n         action and discontinues stateful inspection of the traffic flow. </p>\n         <p>The actions for a stateful rule are defined as follows: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Permits the packets to go to the\n               intended destination.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Blocks the packets from going to\n               the intended destination and sends an alert log message, if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <b>ALERT</b> - Permits the packets to go to the\n               intended destination and sends an alert log message, if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>. </p>\n               <p>You can use this action to test a rule that you intend to use to drop traffic. You\n               can enable the rule with <code>ALERT</code> action, verify in the logs that the rule\n               is filtering as you want, then change the action to <code>DROP</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECT</b> - Drops TCP traffic that matches the conditions of the stateful rule, and sends a TCP reset packet back to sender of the packet. A TCP reset packet is a packet with no payload and a <code>RST</code> bit contained in the TCP header flags. Also sends an alert log mesage if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>.</p>\n               <p>\n                  <code>REJECT</code> isn't currently available for use with IMAP and FTP protocols.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines what Network Firewall should do with the packets in a traffic flow when the flow\n         matches the stateful rule criteria. For all actions, Network Firewall performs the specified\n         action and discontinues stateful inspection of the traffic flow. </p>\n         <p>The actions for a stateful rule are defined as follows: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Permits the packets to go to the\n               intended destination.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Blocks the packets from going to\n               the intended destination and sends an alert log message, if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <b>ALERT</b> - Permits the packets to go to the\n               intended destination and sends an alert log message, if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>. </p>\n               <p>You can use this action to test a rule that you intend to use to drop traffic. You\n               can enable the rule with <code>ALERT</code> action, verify in the logs that the rule\n               is filtering as you want, then change the action to <code>DROP</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5193,7 +5225,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.iorules/intro.html#\">Rules Format</a>. </p>"
+                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html\">Rules Format</a>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#StatefulRuleDirection": {
