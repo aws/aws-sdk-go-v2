@@ -1,3 +1,7 @@
+# v1.31.0 (2023-05-04)
+
+* **Feature**: Add support for Finding History.
+
 # v1.30.3 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

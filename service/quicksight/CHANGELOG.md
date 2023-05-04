@@ -1,3 +1,7 @@
+# v1.35.0 (2023-05-04)
+
+* **Feature**: Add support for Topic, Dataset parameters and VPC
+
 # v1.34.2 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

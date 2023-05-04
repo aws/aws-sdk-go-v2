@@ -1,3 +1,7 @@
+# v1.12.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.12.0 (2023-05-03)
 
 * **Feature**: This feature provides deep inspection for linux based instance

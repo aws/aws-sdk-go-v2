@@ -1,3 +1,7 @@
+# v1.18.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.18.0 (2023-04-27)
 
 * **Feature**: AWS IoT Core Device Advisor now supports MQTT over WebSocket. With this update, customers can run all three test suites of AWS IoT Core Device Advisor - qualification, custom, and long duration tests - using Signature Version 4 for MQTT over WebSocket.

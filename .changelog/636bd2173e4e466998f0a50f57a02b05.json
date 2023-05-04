@@ -1,8 +1,0 @@
-{
-    "id": "636bd217-3e4e-4669-98f0-a50f57a02b05",
-    "type": "feature",
-    "description": "DescribeDomainNodes: A new API that provides configuration information for nodes part of the domain",
-    "modules": [
-        "service/opensearch"
-    ]
-}

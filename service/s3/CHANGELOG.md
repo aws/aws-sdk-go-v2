@@ -1,3 +1,7 @@
+# v1.33.1 (2023-05-04)
+
+* **Documentation**: Documentation updates for Amazon S3
+
 # v1.33.0 (2023-04-24)
 
 * **Feature**: added custom paginators for listMultipartUploads and ListObjectVersions

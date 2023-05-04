@@ -1,8 +1,0 @@
-{
-    "id": "c81f60c3-4a23-4c11-a660-b26e18f8f128",
-    "type": "feature",
-    "description": "Add support for Finding History.",
-    "modules": [
-        "service/securityhub"
-    ]
-}

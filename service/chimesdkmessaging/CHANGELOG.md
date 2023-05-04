@@ -1,3 +1,7 @@
+# v1.15.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.15.0 (2023-04-25)
 
 * **Feature**: Remove non actionable field from UpdateChannelReadMarker and DeleteChannelRequest.  Add precise exceptions to DeleteChannel and DeleteStreamingConfigurations error cases.

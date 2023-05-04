@@ -1,3 +1,7 @@
+# v1.27.0 (2023-05-04)
+
+* **Feature**: This release adds a new attribute FaceOccluded. Additionally, you can now select attributes individually (e.g. ["DEFAULT", "FACE_OCCLUDED", "AGE_RANGE"] instead of ["ALL"]), which can reduce response time.
+
 # v1.26.0 (2023-04-28)
 
 * **Feature**: Added support for aggregating moderation labels by video segment timestamps for Stored Video Content Moderation APIs and added additional information about the job to all Stored Video Get API responses.

@@ -1,3 +1,7 @@
+# v1.28.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.28.0 (2023-04-24)
 
 * **Feature**: added paginator for listResourceRecordSets

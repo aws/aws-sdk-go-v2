@@ -1,3 +1,7 @@
+# v1.34.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.34.0 (2023-04-27)
 
 * **Feature**: Add Java 17 (java17) support to AWS Lambda

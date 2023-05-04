@@ -1,3 +1,7 @@
+# v1.27.0 (2023-05-04)
+
+* **Feature**: Documentation update for new error type NamespaceNotFoundException for CreateCluster and UpdateCluster
+
 # v1.26.3 (2023-05-02)
 
 * **Documentation**: Documentation only update to address Amazon ECS tickets.

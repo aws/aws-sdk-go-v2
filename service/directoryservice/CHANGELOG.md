@@ -1,3 +1,7 @@
+# v1.17.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.17.0 (2023-04-25)
 
 * **Feature**: New field added in AWS Managed Microsoft AD DescribeSettings response and regex pattern update for UpdateSettings value.  Added length validation to RemoteDomainName.

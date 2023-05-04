@@ -1,3 +1,7 @@
+# v1.21.0 (2023-05-04)
+
+* **Feature**: This release enables customers to call SQS using AWS JSON-1.0 protocol.
+
 # v1.20.9 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

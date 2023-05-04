@@ -1,3 +1,7 @@
+# v1.22.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.22.0 (2023-04-27)
 
 * **Feature**: Added API support to initiate on-demand malware scan on specific resources.

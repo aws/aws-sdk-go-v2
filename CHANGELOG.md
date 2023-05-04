@@ -1,3 +1,34 @@
+# Release (2023-05-04)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.26.0](service/cloudwatch/CHANGELOG.md#v1260-2023-05-04)
+  * **Feature**: Adds support for filtering by metric names in CloudWatch Metric Streams.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.32.0](service/configservice/CHANGELOG.md#v1320-2023-05-04)
+  * **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config in April 2023.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.54.1](service/connect/CHANGELOG.md#v1541-2023-05-04)
+  * **Documentation**: Remove unused InvalidParameterException from CreateParticipant API
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.27.0](service/ecs/CHANGELOG.md#v1270-2023-05-04)
+  * **Feature**: Documentation update for new error type NamespaceNotFoundException for CreateCluster and UpdateCluster
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.28.0](service/networkfirewall/CHANGELOG.md#v1280-2023-05-04)
+  * **Feature**: This release adds support for the Suricata REJECT option in midstream exception configurations.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.17.0](service/opensearch/CHANGELOG.md#v1170-2023-05-04)
+  * **Feature**: DescribeDomainNodes: A new API that provides configuration information for nodes part of the domain
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.35.0](service/quicksight/CHANGELOG.md#v1350-2023-05-04)
+  * **Feature**: Add support for Topic, Dataset parameters and VPC
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.27.0](service/rekognition/CHANGELOG.md#v1270-2023-05-04)
+  * **Feature**: This release adds a new attribute FaceOccluded. Additionally, you can now select attributes individually (e.g. ["DEFAULT", "FACE_OCCLUDED", "AGE_RANGE"] instead of ["ALL"]), which can reduce response time.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.33.1](service/s3/CHANGELOG.md#v1331-2023-05-04)
+  * **Documentation**: Documentation updates for Amazon S3
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.77.0](service/sagemaker/CHANGELOG.md#v1770-2023-05-04)
+  * **Feature**: We added support for ml.inf2 and ml.trn1 family of instances on Amazon SageMaker for deploying machine learning (ML) models for Real-time and Asynchronous inference. You can use these instances to achieve high performance at a low cost for generative artificial intelligence (AI) models.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.31.0](service/securityhub/CHANGELOG.md#v1310-2023-05-04)
+  * **Feature**: Add support for Finding History.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.21.0](service/sqs/CHANGELOG.md#v1210-2023-05-04)
+  * **Feature**: This release enables customers to call SQS using AWS JSON-1.0 protocol.
+
 # Release (2023-05-03)
 
 ## Module Highlights

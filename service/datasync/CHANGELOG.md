@@ -1,3 +1,7 @@
+# v1.24.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.24.0 (2023-04-25)
 
 * **Feature**: This release adds 13 new APIs to support AWS DataSync Discovery GA.

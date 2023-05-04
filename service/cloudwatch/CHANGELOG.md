@@ -1,3 +1,7 @@
+# v1.26.0 (2023-05-04)
+
+* **Feature**: Adds support for filtering by metric names in CloudWatch Metric Streams.
+
 # v1.25.10 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

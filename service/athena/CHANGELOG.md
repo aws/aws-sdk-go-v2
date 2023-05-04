@@ -1,3 +1,7 @@
+# v1.26.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.26.0 (2023-04-28)
 
 * **Feature**: You can now use capacity reservations on Amazon Athena to run SQL queries on fully-managed compute capacity.

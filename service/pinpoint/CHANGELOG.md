@@ -1,3 +1,7 @@
+# v1.19.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.19.0 (2023-04-25)
 
 * **Feature**: Adds support for journey runs and querying journey execution metrics based on journey runs. Adds execution metrics to campaign activities. Updates docs for Advanced Quiet Time.

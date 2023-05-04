@@ -1,3 +1,7 @@
+# v1.11.1 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.11.0 (2023-05-02)
 
 * **Feature**: This release will improve resource level transparency in applications by discovering previously hidden resources.

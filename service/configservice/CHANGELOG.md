@@ -1,3 +1,7 @@
+# v1.32.0 (2023-05-04)
+
+* **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config in April 2023.
+
 # v1.31.3 (2023-04-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

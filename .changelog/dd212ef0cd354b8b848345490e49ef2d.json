@@ -1,8 +1,0 @@
-{
-    "id": "dd212ef0-cd35-4b8b-8483-45490e49ef2d",
-    "type": "feature",
-    "description": "We added support for ml.inf2 and ml.trn1 family of instances on Amazon SageMaker for deploying machine learning (ML) models for Real-time and Asynchronous inference. You can use these instances to achieve high performance at a low cost for generative artificial intelligence (AI) models.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

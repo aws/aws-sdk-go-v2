@@ -1,3 +1,7 @@
+# v1.28.12 (2023-05-04)
+
+* No change notes available for this release.
+
 # v1.28.11 (2023-04-28)
 
 * **Documentation**: Added Windows 11 to support Microsoft_Office_2019

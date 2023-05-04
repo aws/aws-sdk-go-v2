@@ -1,8 +1,0 @@
-{
-    "id": "af27cd6c-ee1b-4db0-a02a-93c977abc96c",
-    "type": "feature",
-    "description": "This release adds support for the Suricata REJECT option in midstream exception configurations.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}
