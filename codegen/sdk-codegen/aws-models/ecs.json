@@ -2938,6 +2938,9 @@
                     "target": "com.amazonaws.ecs#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.ecs#NamespaceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.ecs#ServerException"
                 }
             ],
@@ -11111,6 +11114,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#NamespaceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.ecs#ServerException"

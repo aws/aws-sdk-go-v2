@@ -15922,7 +15922,7 @@
                 "GeneratorId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the solution-specific component (a discrete unit of logic) that\n         generated a finding. In various security-findings providers' solutions, this generator can\n         be called a rule, a check, a detector, a plugin, etc. </p>",
+                        "smithy.api#documentation": "<p>The identifier for the solution-specific component (a discrete unit of logic) that\n         generated a finding. In various security findings providers' solutions, this generator can\n         be called a rule, a check, a detector, a plugin, etc. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15942,26 +15942,26 @@
                 "FirstObservedAt": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when the security-findings provider first observed the potential security\n         issue that a finding captured.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates when the security findings provider first observed the potential security\n         issue that a finding captured.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>"
                     }
                 },
                 "LastObservedAt": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when the security-findings provider most recently observed the potential\n         security issue that a finding captured.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates when the security findings provider most recently observed the potential\n         security issue that a finding captured.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when the security-findings provider created the potential security issue that\n         a finding captured.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>",
+                        "smithy.api#documentation": "<p>Indicates when the security findings provider created the potential security issue that\n         a finding captured.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when the security-findings provider last updated the finding record.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>",
+                        "smithy.api#documentation": "<p>Indicates when the security findings provider last updated the finding record.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16008,13 +16008,13 @@
                 "SourceUrl": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL that links to a page about the current finding in the security-findings provider's\n         solution.</p>"
+                        "smithy.api#documentation": "<p>A URL that links to a page about the current finding in the security findings provider's\n         solution.</p>"
                     }
                 },
                 "ProductFields": {
                     "target": "com.amazonaws.securityhub#FieldMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A data type where security-findings providers can include additional solution-specific\n         details that aren't part of the defined <code>AwsSecurityFinding</code> format.</p>\n         <p>Can contain up to 50 key-value pairs. For each key-value pair, the key can contain up to 128 characters, and the value can contain up to 2048 characters.</p>"
+                        "smithy.api#documentation": "<p>A data type where security findings providers can include additional solution-specific\n         details that aren't part of the defined <code>AwsSecurityFinding</code> format.</p>\n         <p>Can contain up to 50 key-value pairs. For each key-value pair, the key can contain up to 128 characters, and the value can contain up to 2048 characters.</p>"
                     }
                 },
                 "UserDefinedFields": {
@@ -16168,7 +16168,7 @@
                 "GeneratorId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the solution-specific component (a discrete unit of logic) that\n         generated a finding. In various security-findings providers' solutions, this generator can\n         be called a rule, a check, a detector, a plugin, etc.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the solution-specific component (a discrete unit of logic) that\n         generated a finding. In various security findings providers' solutions, this generator can\n         be called a rule, a check, a detector, a plugin, etc.</p>"
                     }
                 },
                 "Region": {
@@ -16186,25 +16186,25 @@
                 "FirstObservedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the security-findings provider first\n         observed the potential security issue that a finding captured.</p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
+                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the security findings provider first\n         observed the potential security issue that a finding captured.</p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
                     }
                 },
                 "LastObservedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the security-findings provider most\n         recently observed the potential security issue that a finding captured.</p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
+                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the security findings provider most\n         recently observed the potential security issue that a finding captured.</p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the security-findings provider\n         captured the potential security issue that a finding captured.</p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
+                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the security findings provider\n         captured the potential security issue that a finding captured.</p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the security-findings provider last\n         updated the finding record. </p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
+                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the security findings provider last\n         updated the finding record. </p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
                     }
                 },
                 "SeverityProduct": {
@@ -16213,7 +16213,7 @@
                         "smithy.api#deprecated": {
                             "message": "This filter is deprecated. Instead, use FindingProviderSeverityOriginal."
                         },
-                        "smithy.api#documentation": "<p>The native severity as defined by the security-findings provider's solution that\n         generated the finding.</p>"
+                        "smithy.api#documentation": "<p>The native severity as defined by the security findings provider's solution that\n         generated the finding.</p>"
                     }
                 },
                 "SeverityNormalized": {
@@ -16264,13 +16264,13 @@
                 "SourceUrl": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL that links to a page about the current finding in the security-findings provider's\n         solution.</p>"
+                        "smithy.api#documentation": "<p>A URL that links to a page about the current finding in the security findings provider's\n         solution.</p>"
                     }
                 },
                 "ProductFields": {
                     "target": "com.amazonaws.securityhub#MapFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A data type where security-findings providers can include additional solution-specific\n         details that aren't part of the defined <code>AwsSecurityFinding</code> format.</p>"
+                        "smithy.api#documentation": "<p>A data type where security findings providers can include additional solution-specific\n         details that aren't part of the defined <code>AwsSecurityFinding</code> format.</p>"
                     }
                 },
                 "ProductName": {
@@ -16765,7 +16765,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies a finding to update using <code>BatchUpdateFindings</code>.</p>"
+                "smithy.api#documentation": "<p>Identifies which finding to get the finding history for.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsSecurityFindingIdentifierList": {
@@ -21022,6 +21022,123 @@
                 "target": "com.amazonaws.securityhub#FindingAggregator"
             }
         },
+        "com.amazonaws.securityhub#FindingHistoryRecord": {
+            "type": "structure",
+            "members": {
+                "FindingIdentifier": {
+                    "target": "com.amazonaws.securityhub#AwsSecurityFindingIdentifier"
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An ISO 8601-formatted timestamp that indicates when the security findings provider last\n            updated the finding record. A correctly formatted example is\n                <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and\n            time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6,\n                Internet Date/Time Format</a>. </p>"
+                    }
+                },
+                "FindingCreated": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n         Identifies whether the event marks the creation of a new finding. A value of <code>True</code> means that the finding is \n         newly created. A value of <code>False</code> means that the finding isn’t newly created.\n      </p>"
+                    }
+                },
+                "UpdateSource": {
+                    "target": "com.amazonaws.securityhub#FindingHistoryUpdateSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Identifies the source of the event that changed the finding. For example, an integrated\n                Amazon Web Service or third-party partner integration may call <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html\">\n               <code>BatchImportFindings</code>\n            </a>, or an Security Hub customer\n            may call <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html\">\n               <code>BatchUpdateFindings</code>\n            </a>. </p>"
+                    }
+                },
+                "Updates": {
+                    "target": "com.amazonaws.securityhub#FindingHistoryUpdatesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         An array of objects that provides details about the finding change event, including the Amazon Web Services Security \n         Finding Format (ASFF) field that changed, the value of the field before the change, and the value of the field after \n         the change.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token for pagination purposes. Provide this token in the subsequent request to <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindingsHistory.html\">\n               <code>GetFindingsHistory</code>\n            </a> to get \n         up to an additional 100 results of history for the same finding that you specified in your initial request.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A list of events that changed the specified finding during the specified time period. Each record represents a single \n         finding change event.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#FindingHistoryRecordList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#FindingHistoryRecord"
+            }
+        },
+        "com.amazonaws.securityhub#FindingHistoryUpdate": {
+            "type": "structure",
+            "members": {
+                "UpdatedField": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ASFF field that changed during the finding change event.\n      </p>"
+                    }
+                },
+                "OldValue": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The value of the ASFF field before the finding change event.\n      </p>"
+                    }
+                },
+                "NewValue": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The value of the ASFF field after the finding change event. To preserve storage and readability, Security Hub omits this value \n          if <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingHistoryRecord.html\">\n               <code>FindingHistoryRecord</code>\n            </a> exceeds database limits.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> An array of objects that provides details about a change to a finding, including the\n                Amazon Web Services Security Finding Format (ASFF) field that changed, the value of\n            the field before the change, and the value of the field after the change. </p>"
+            }
+        },
+        "com.amazonaws.securityhub#FindingHistoryUpdateSource": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.securityhub#FindingHistoryUpdateSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes the type of finding change event, such as a call to <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html\">\n               <code>BatchImportFindings</code>\n            </a> (by an integrated Amazon Web Service or third party partner integration) or <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html\">\n               <code>BatchUpdateFindings</code>\n            </a> (by a Security Hub customer). \n      </p>"
+                    }
+                },
+                "Identity": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identity of the source that initiated the finding change event. For example, the Amazon Resource Name (ARN) of a partner that calls BatchImportFindings or of a customer that calls BatchUpdateFindings.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Identifies the source of the finding change event. \n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#FindingHistoryUpdateSourceType": {
+            "type": "enum",
+            "members": {
+                "BATCH_UPDATE_FINDINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BATCH_UPDATE_FINDINGS"
+                    }
+                },
+                "BATCH_IMPORT_FINDINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BATCH_IMPORT_FINDINGS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#FindingHistoryUpdatesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#FindingHistoryUpdate"
+            }
+        },
         "com.amazonaws.securityhub#FindingProviderFields": {
             "type": "structure",
             "members": {
@@ -21429,6 +21546,102 @@
                     "target": "com.amazonaws.securityhub#StringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of excluded Regions or included Regions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetFindingHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetFindingHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetFindingHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns history for a Security Hub finding in the last 90 days. The history includes changes made to any fields in \n         the Amazon Web Services Security Finding Format (ASFF).\n      </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/findingHistory/get",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Records",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetFindingHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "FindingIdentifier": {
+                    "target": "com.amazonaws.securityhub#AwsSecurityFindingIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         An ISO 8601-formatted timestamp that indicates the start time of the requested finding history. A correctly formatted \n         example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated \n         by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 \n            section 5.6, Internet Date/Time Format</a>.</p>\n         <p>If you provide values for both <code>StartTime</code> and <code>EndTime</code>,\n                Security Hub returns finding history for the specified time period. If you\n            provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub returns finding history from the <code>StartTime</code> to the time at\n            which the API is called. If you provide a value for <code>EndTime</code> but not for\n                <code>StartTime</code>, Security Hub returns finding history from the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt\">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you\n            provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub\n            returns finding history from the CreatedAt timestamp of the finding to the time at which\n            the API is called. In all of these scenarios, the response is limited to 100 results, and the maximum time period is \n            limited to 90 days. </p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         An ISO 8601-formatted timestamp that indicates the end time of the requested finding history. A correctly formatted \n         example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated \n         by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 \n            section 5.6, Internet Date/Time Format</a>.</p>\n         <p>If you provide values for both <code>StartTime</code> and <code>EndTime</code>,\n                Security Hub returns finding history for the specified time period. If you\n            provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub returns finding history from the <code>StartTime</code> to the time at\n            which the API is called. If you provide a value for <code>EndTime</code> but not for\n                <code>StartTime</code>, Security Hub returns finding history from the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt\">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you\n            provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub\n            returns finding history from the CreatedAt timestamp of the finding to the time at which\n            the API is called. In all of these scenarios, the response is limited to 100 results, and the maximum time period is \n            limited to 90 days.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token for pagination purposes. Provide <code>NULL</code> as the initial value. In subsequent requests, provide the \n         token included in the response to get up to an additional 100 results of finding history. If you don’t provide \n         <code>NextToken</code>, Security Hub returns up to 100 results of finding history for each request.\n      </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The maximum number of results to be returned. If you don’t provide it, Security Hub returns up to 100 results of finding history.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetFindingHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "Records": {
+                    "target": "com.amazonaws.securityhub#FindingHistoryRecordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A list of events that altered the specified finding during the specified time period. \n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token for pagination purposes. Provide this token in the subsequent request to <code>GetFindingsHistory</code> to \n         get up to an additional 100 results of history for the same finding that you specified in your initial request.\n      </p>"
                     }
                 }
             },
@@ -25670,6 +25883,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#GetFindingAggregator"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#GetFindingHistory"
                 },
                 {
                     "target": "com.amazonaws.securityhub#GetFindings"

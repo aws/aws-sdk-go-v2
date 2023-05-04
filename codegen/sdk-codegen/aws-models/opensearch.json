@@ -532,6 +532,9 @@
                     "target": "com.amazonaws.opensearch#DescribeDomainHealth"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#DescribeDomainNodes"
+                },
+                {
                     "target": "com.amazonaws.opensearch#DescribeDomains"
                 },
                 {
@@ -2887,7 +2890,7 @@
                 "LogPublishingOptions": {
                     "target": "com.amazonaws.opensearch#LogPublishingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key-value pairs to configure slow log publishing.</p>"
+                        "smithy.api#documentation": "<p>Key-value pairs to configure log publishing.</p>"
                     }
                 },
                 "DomainEndpointOptions": {
@@ -3546,6 +3549,22 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#DependencyFailureException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.opensearch#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception for when a failure in one of the dependencies results in the service being unable to fetch details about the resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 424
+            }
+        },
         "com.amazonaws.opensearch#DeploymentCloseDateTimeStamp": {
             "type": "timestamp"
         },
@@ -3980,6 +3999,75 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The result of a <code>DescribeDomainHealth</code> request. Contains health information for the requested domain.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#DescribeDomainNodes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#DescribeDomainNodesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#DescribeDomainNodesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DependencyFailureException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about domain and nodes, including data nodes, master nodes, ultrawarm\n   nodes, Availability Zone(s), standby nodes, node configurations, and node states.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2021-01-01/opensearch/domain/{DomainName}/nodes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#DescribeDomainNodesRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeDomainNodes</code>\n   operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#DescribeDomainNodesResponse": {
+            "type": "structure",
+            "members": {
+                "DomainNodesStatusList": {
+                    "target": "com.amazonaws.opensearch#DomainNodesStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains nodes information list <code>DomainNodesStatusList</code> with\n   details about the all nodes on the requested domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>DescribeDomainNodes</code> request. Contains information about the nodes on the requested domain. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -4459,7 +4547,7 @@
                 "Value": {
                     "target": "com.amazonaws.opensearch#DescribePackagesFilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of values for the specified filter field.</p>"
+                        "smithy.api#documentation": "<p>A non-empty list of values for the specified filter field.</p>"
                     }
                 }
             },
@@ -4979,7 +5067,7 @@
                 "LogPublishingOptions": {
                     "target": "com.amazonaws.opensearch#LogPublishingOptionsStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key-value pairs to configure slow log publishing.</p>"
+                        "smithy.api#documentation": "<p>Key-value pairs to configure log publishing.</p>"
                     }
                 },
                 "DomainEndpointOptions": {
@@ -5193,6 +5281,71 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of OpenSearch Service domain names.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DomainNodesStatus": {
+            "type": "structure",
+            "members": {
+                "NodeId": {
+                    "target": "com.amazonaws.opensearch#NodeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the node.</p>"
+                    }
+                },
+                "NodeType": {
+                    "target": "com.amazonaws.opensearch#NodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the nodes is a data, master, or ultrawarm node.</p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.opensearch#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone of the node.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.opensearch#OpenSearchPartitionInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type information of the node.</p>"
+                    }
+                },
+                "NodeStatus": {
+                    "target": "com.amazonaws.opensearch#NodeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the node is active or in standby.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.opensearch#StorageTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the node has EBS or instance storage. </p>"
+                    }
+                },
+                "StorageVolumeType": {
+                    "target": "com.amazonaws.opensearch#VolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the nodes has EBS storage, indicates if the volume type is GP2 or GP3. Only applicable\n   for data nodes. </p>"
+                    }
+                },
+                "StorageSize": {
+                    "target": "com.amazonaws.opensearch#VolumeSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage size of the node, in GiB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for information about nodes on the domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DomainNodesStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#DomainNodesStatus"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of <code>DomainNodesStatus</code> with details about nodes on\n   the requested domain.</p>"
             }
         },
         "com.amazonaws.opensearch#DomainPackageDetails": {
@@ -7534,6 +7687,38 @@
                 "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Make the call again using the\n   returned token to retrieve the next page.</p>"
             }
         },
+        "com.amazonaws.opensearch#NodeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 40
+                }
+            }
+        },
+        "com.amazonaws.opensearch#NodeStatus": {
+            "type": "enum",
+            "members": {
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "StandBy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StandBy"
+                    }
+                },
+                "NotAvailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotAvailable"
+                    }
+                }
+            }
+        },
         "com.amazonaws.opensearch#NodeToNodeEncryptionOptions": {
             "type": "structure",
             "members": {
@@ -7568,6 +7753,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Status of the node-to-node encryption options for the specified domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#NodeType": {
+            "type": "enum",
+            "members": {
+                "Data": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Data"
+                    }
+                },
+                "Ultrawarm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ultrawarm"
+                    }
+                },
+                "Master": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Master"
+                    }
+                }
             }
         },
         "com.amazonaws.opensearch#NonEmptyString": {
@@ -10121,7 +10329,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.</p>",
+                "smithy.api#documentation": "<p>Modifies the cluster configuration of the specified Amazon OpenSearch Service\n   domain.sl</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/config",
@@ -10973,6 +11181,9 @@
                 },
                 "smithy.api#pattern": "^Elasticsearch_[0-9]{1}\\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\\.[0-9]{1,2}$"
             }
+        },
+        "com.amazonaws.opensearch#VolumeSize": {
+            "type": "string"
         },
         "com.amazonaws.opensearch#VolumeType": {
             "type": "enum",
