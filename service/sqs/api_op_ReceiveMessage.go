@@ -76,15 +76,14 @@ type ReceiveMessageInput struct {
 	//   received across all queues but not deleted.
 	//   - AWSTraceHeader – Returns the X-Ray trace header string.
 	//   - SenderId
-	//   - For an IAM user, returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R
-	//   .
+	//   - For a user, returns the user ID, for example ABCDEFGHI1JKLMNOPQ23R .
 	//   - For an IAM role, returns the IAM role ID, for example
 	//   ABCDE1F2GH3I4JK5LMNOP:i-a123b456 .
 	//   - SentTimestamp – Returns the time the message was sent to the queue ( epoch
 	//   time (http://en.wikipedia.org/wiki/Unix_time) in milliseconds).
 	//   - SqsManagedSseEnabled – Enables server-side queue encryption using SQS owned
 	//   encryption keys. Only one server-side encryption option is supported per queue
-	//   (e.g. SSE-KMS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html)
+	//   (for example, SSE-KMS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html)
 	//   or SSE-SQS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html)
 	//   ).
 	//   - MessageDeduplicationId – Returns the value provided by the producer that
@@ -111,9 +110,9 @@ type ReceiveMessageInput struct {
 	//   periods in succession ( .. ).
 	//   - The name can be up to 256 characters long.
 	// When using ReceiveMessage , you can send a list of attribute names to receive,
-	// or you can return all of the attributes by specifying All or . in your request.
-	// You can also use all message attributes starting with a prefix, for example bar.
-	// .
+	// or you can return all of the attributes by specifying All or .* in your
+	// request. You can also use all message attributes starting with a prefix, for
+	// example bar.* .
 	MessageAttributeNames []string
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
@@ -189,11 +188,11 @@ type ReceiveMessageOutput struct {
 }
 
 func (c *Client) addOperationReceiveMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpReceiveMessage{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpReceiveMessage{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpReceiveMessage{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpReceiveMessage{}, middleware.After)
 	if err != nil {
 		return err
 	}

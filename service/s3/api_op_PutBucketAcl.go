@@ -30,8 +30,8 @@ import (
 // objects in it. Requests to set ACLs or update ACLs fail and return the
 // AccessControlListNotSupported error code. Requests to read ACLs are still
 // supported. For more information, see Controlling object ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
-// in the Amazon S3 User Guide. Access Permissions You can set access permissions
-// using one of the following methods:
+// in the Amazon S3 User Guide. Permissions You can set access permissions using
+// one of the following methods:
 //   - Specify a canned ACL with the x-amz-acl request header. Amazon S3 supports a
 //     set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined
 //     set of grantees and permissions. Specify the canned ACL name as the value of
@@ -76,10 +76,10 @@ import (
 //   - By the person's ID: <>ID<><>GranteesEmail<> DisplayName is optional and
 //     ignored in the request
 //   - By URI: <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
-//   - By Email address: <>Grantees@email.com<>lt;/Grantee> The grantee is resolved
-//     to the CanonicalUser and, in a response to a GET Object acl request, appears as
-//     the CanonicalUser. Using email addresses to specify a grantee is only supported
-//     in the following Amazon Web Services Regions:
+//   - By Email address: <>Grantees@email.com<>& The grantee is resolved to the
+//     CanonicalUser and, in a response to a GET Object acl request, appears as the
+//     CanonicalUser. Using email addresses to specify a grantee is only supported in
+//     the following Amazon Web Services Regions:
 //   - US East (N. Virginia)
 //   - US West (N. California)
 //   - US West (Oregon)
@@ -91,7 +91,7 @@ import (
 //     and endpoints, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
 //     in the Amazon Web Services General Reference.
 //
-// Related Resources
+// The following operations are related to PutBucketAcl :
 //   - CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //   - DeleteBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 //   - GetObjectAcl (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)

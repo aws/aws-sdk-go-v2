@@ -86,6 +86,33 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An exception for when a failure in one of the dependencies results in the
+// service being unable to fetch details about the resource.
+type DependencyFailureException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DependencyFailureException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DependencyFailureException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DependencyFailureException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DependencyFailureException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DependencyFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An error occured because the client wanted to access an unsupported operation.
 type DisabledOperationException struct {
 	Message *string

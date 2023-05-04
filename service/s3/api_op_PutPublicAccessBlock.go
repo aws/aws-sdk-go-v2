@@ -24,7 +24,7 @@ import (
 // account, Amazon S3 uses the most restrictive combination of the bucket-level and
 // account-level settings. For more information about when Amazon S3 considers a
 // bucket or an object public, see The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-// . Related Resources
+// . The following operations are related to PutPublicAccessBlock :
 //   - GetPublicAccessBlock (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html)
 //   - DeletePublicAccessBlock (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
 //   - GetBucketPolicyStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html)

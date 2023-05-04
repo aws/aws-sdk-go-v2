@@ -152,6 +152,9 @@ func ExampleTransformOperation_outputUsage() {
 	case *types.TransformOperationMemberFilterOperation:
 		_ = v.Value // Value is types.FilterOperation
 
+	case *types.TransformOperationMemberOverrideDatasetParameterOperation:
+		_ = v.Value // Value is types.OverrideDatasetParameterOperation
+
 	case *types.TransformOperationMemberProjectOperation:
 		_ = v.Value // Value is types.ProjectOperation
 
@@ -173,6 +176,7 @@ func ExampleTransformOperation_outputUsage() {
 	}
 }
 
+var _ *types.OverrideDatasetParameterOperation
 var _ *types.CreateColumnsOperation
 var _ *types.FilterOperation
 var _ *types.ProjectOperation

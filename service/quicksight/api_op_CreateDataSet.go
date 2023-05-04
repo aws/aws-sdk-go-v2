@@ -68,6 +68,9 @@ type CreateDataSetInput struct {
 	// as a source.
 	DataSetUsageConfiguration *types.DataSetUsageConfiguration
 
+	// The parameter declarations of the dataset.
+	DatasetParameters []types.DatasetParameter
+
 	// The folder that contains fields and nested subfolders for your dataset.
 	FieldFolders map[string]types.FieldFolder
 

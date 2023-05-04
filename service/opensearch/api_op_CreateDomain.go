@@ -96,7 +96,7 @@ type CreateDomainInput struct {
 	// .
 	EngineVersion *string
 
-	// Key-value pairs to configure slow log publishing.
+	// Key-value pairs to configure log publishing.
 	LogPublishingOptions map[string]types.LogPublishingOption
 
 	// Enables node-to-node encryption.

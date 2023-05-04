@@ -27,6 +27,7 @@
         "api_op_DescribeDomainChangeProgress.go",
         "api_op_DescribeDomainConfig.go",
         "api_op_DescribeDomainHealth.go",
+        "api_op_DescribeDomainNodes.go",
         "api_op_DescribeDomains.go",
         "api_op_DescribeDryRunProgress.go",
         "api_op_DescribeInboundConnections.go",

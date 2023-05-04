@@ -167,6 +167,25 @@ func (DateRangeUnit) Values() []DateRangeUnit {
 	}
 }
 
+type FindingHistoryUpdateSourceType string
+
+// Enum values for FindingHistoryUpdateSourceType
+const (
+	FindingHistoryUpdateSourceTypeBatchUpdateFindings FindingHistoryUpdateSourceType = "BATCH_UPDATE_FINDINGS"
+	FindingHistoryUpdateSourceTypeBatchImportFindings FindingHistoryUpdateSourceType = "BATCH_IMPORT_FINDINGS"
+)
+
+// Values returns all known values for FindingHistoryUpdateSourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FindingHistoryUpdateSourceType) Values() []FindingHistoryUpdateSourceType {
+	return []FindingHistoryUpdateSourceType{
+		"BATCH_UPDATE_FINDINGS",
+		"BATCH_IMPORT_FINDINGS",
+	}
+}
+
 type IntegrationType string
 
 // Enum values for IntegrationType

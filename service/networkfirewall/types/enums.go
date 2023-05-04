@@ -8,10 +8,10 @@ type AttachmentStatus string
 const (
 	AttachmentStatusCreating AttachmentStatus = "CREATING"
 	AttachmentStatusDeleting AttachmentStatus = "DELETING"
-	AttachmentStatusScaling  AttachmentStatus = "SCALING"
-	AttachmentStatusReady    AttachmentStatus = "READY"
 	AttachmentStatusFailed   AttachmentStatus = "FAILED"
 	AttachmentStatusError    AttachmentStatus = "ERROR"
+	AttachmentStatusScaling  AttachmentStatus = "SCALING"
+	AttachmentStatusReady    AttachmentStatus = "READY"
 )
 
 // Values returns all known values for AttachmentStatus. Note that this can be
@@ -21,10 +21,10 @@ func (AttachmentStatus) Values() []AttachmentStatus {
 	return []AttachmentStatus{
 		"CREATING",
 		"DELETING",
-		"SCALING",
-		"READY",
 		"FAILED",
 		"ERROR",
+		"SCALING",
+		"READY",
 	}
 }
 
@@ -386,6 +386,7 @@ type StreamExceptionPolicy string
 const (
 	StreamExceptionPolicyDrop     StreamExceptionPolicy = "DROP"
 	StreamExceptionPolicyContinue StreamExceptionPolicy = "CONTINUE"
+	StreamExceptionPolicyReject   StreamExceptionPolicy = "REJECT"
 )
 
 // Values returns all known values for StreamExceptionPolicy. Note that this can
@@ -395,6 +396,7 @@ func (StreamExceptionPolicy) Values() []StreamExceptionPolicy {
 	return []StreamExceptionPolicy{
 		"DROP",
 		"CONTINUE",
+		"REJECT",
 	}
 }
 

@@ -64,16 +64,17 @@ import (
 //     and stored.
 //   - An image ID, ImageId , assigned by the service for the input image.
 //
-// If you request all facial attributes (by using the detectionAttributes
-// parameter), Amazon Rekognition returns detailed facial attributes, such as
-// facial landmarks (for example, location of eye and mouth) and other facial
-// attributes. If you provide the same image, specify the same collection, and use
-// the same external ID in the IndexFaces operation, Amazon Rekognition doesn't
-// save duplicate face metadata. The input image is passed either as base64-encoded
-// image bytes, or as a reference to an image in an Amazon S3 bucket. If you use
-// the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't
-// supported. The image must be formatted as a PNG or JPEG file. This operation
-// requires permissions to perform the rekognition:IndexFaces action.
+// If you request ALL or specific facial attributes (e.g., FACE_OCCLUDED ) by using
+// the detectionAttributes parameter, Amazon Rekognition returns detailed facial
+// attributes, such as facial landmarks (for example, location of eye and mouth),
+// facial occlusion, and other facial attributes. If you provide the same image,
+// specify the same collection, and use the same external ID in the IndexFaces
+// operation, Amazon Rekognition doesn't save duplicate face metadata. The input
+// image is passed either as base64-encoded image bytes, or as a reference to an
+// image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition
+// operations, passing image bytes isn't supported. The image must be formatted as
+// a PNG or JPEG file. This operation requires permissions to perform the
+// rekognition:IndexFaces action.
 func (c *Client) IndexFaces(ctx context.Context, params *IndexFacesInput, optFns ...func(*Options)) (*IndexFacesOutput, error) {
 	if params == nil {
 		params = &IndexFacesInput{}
@@ -106,14 +107,14 @@ type IndexFacesInput struct {
 	// This member is required.
 	Image *types.Image
 
-	// An array of facial attributes that you want to be returned. This can be the
-	// default list of attributes or all attributes. If you don't specify a value for
-	// Attributes or if you specify ["DEFAULT"] , the API returns the following subset
-	// of facial attributes: BoundingBox , Confidence , Pose , Quality , and Landmarks
-	// . If you provide ["ALL"] , all facial attributes are returned, but the operation
-	// takes longer to complete. If you provide both, ["ALL", "DEFAULT"] , the service
-	// uses a logical AND operator to determine which attributes to return (in this
-	// case, all attributes).
+	// An array of facial attributes you want to be returned. A DEFAULT subset of
+	// facial attributes - BoundingBox , Confidence , Pose , Quality , and Landmarks -
+	// will always be returned. You can request for specific facial attributes (in
+	// addition to the default list) - by using ["DEFAULT", "FACE_OCCLUDED"] or just
+	// ["FACE_OCCLUDED"] . You can request for all facial attributes by using ["ALL"] .
+	// Requesting more attributes may increase response time. If you provide both,
+	// ["ALL", "DEFAULT"] , the service uses a logical AND operator to determine which
+	// attributes to return (in this case, all attributes).
 	DetectionAttributes []types.Attribute
 
 	// The ID you want to assign to all the faces detected in the image.

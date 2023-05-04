@@ -1,0 +1,8 @@
+{
+    "id": "7c48c984-1343-40e9-a3d7-638942e23b0b",
+    "type": "feature",
+    "description": "Add support for Topic, Dataset parameters and VPC",
+    "modules": [
+        "service/quicksight"
+    ]
+}

@@ -31,8 +31,8 @@ func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIA
 
 type UpdateIAMPolicyAssignmentInput struct {
 
-	// The name of the assignment, also called a rule. This name must be unique within
-	// an Amazon Web Services account.
+	// The name of the assignment, also called a rule. The name must be unique within
+	// the Amazon Web Services account.
 	//
 	// This member is required.
 	AssignmentName *string

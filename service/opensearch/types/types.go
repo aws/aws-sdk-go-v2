@@ -577,7 +577,7 @@ type DescribePackagesFilter struct {
 	// Any field from PackageDetails .
 	Name DescribePackagesFilterName
 
-	// A list of values for the specified filter field.
+	// A non-empty list of values for the specified filter field.
 	Value []string
 
 	noSmithyDocumentSerde
@@ -623,7 +623,7 @@ type DomainConfig struct {
 	// The OpenSearch or Elasticsearch version that the domain is running.
 	EngineVersion *VersionStatus
 
-	// Key-value pairs to configure slow log publishing.
+	// Key-value pairs to configure log publishing.
 	LogPublishingOptions *LogPublishingOptionsStatus
 
 	// Whether node-to-node encryption is enabled or disabled.
@@ -707,6 +707,37 @@ type DomainInformationContainer struct {
 
 	// Information about an Amazon OpenSearch Service domain.
 	AWSDomainInformation *AWSDomainInformation
+
+	noSmithyDocumentSerde
+}
+
+// Container for information about nodes on the domain.
+type DomainNodesStatus struct {
+
+	// The Availability Zone of the node.
+	AvailabilityZone *string
+
+	// The instance type information of the node.
+	InstanceType OpenSearchPartitionInstanceType
+
+	// The ID of the node.
+	NodeId *string
+
+	// Indicates if the node is active or in standby.
+	NodeStatus NodeStatus
+
+	// Indicates whether the nodes is a data, master, or ultrawarm node.
+	NodeType NodeType
+
+	// The storage size of the node, in GiB.
+	StorageSize *string
+
+	// Indicates if the node has EBS or instance storage.
+	StorageType *string
+
+	// If the nodes has EBS storage, indicates if the volume type is GP2 or GP3. Only
+	// applicable for data nodes.
+	StorageVolumeType VolumeType
 
 	noSmithyDocumentSerde
 }

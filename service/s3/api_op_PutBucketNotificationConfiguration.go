@@ -39,8 +39,8 @@ import (
 // topic, SQS queue, and Lambda function configurations. When you send a PUT
 // request with this configuration, Amazon S3 sends test messages to your SNS
 // topic. If the message fails, the entire PUT action will fail, and Amazon S3 will
-// not add the configuration to your bucket. Responses If the configuration in the
-// request body includes only one TopicConfiguration specifying only the
+// not add the configuration to your bucket. If the configuration in the request
+// body includes only one TopicConfiguration specifying only the
 // s3:ReducedRedundancyLostObject event type, the response will also include the
 // x-amz-sns-test-message-id header containing the message ID of the test
 // notification sent to the topic. The following action is related to

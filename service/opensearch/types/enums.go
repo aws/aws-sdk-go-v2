@@ -368,6 +368,46 @@ func (MasterNodeStatus) Values() []MasterNodeStatus {
 	}
 }
 
+type NodeStatus string
+
+// Enum values for NodeStatus
+const (
+	NodeStatusActive       NodeStatus = "Active"
+	NodeStatusStandBy      NodeStatus = "StandBy"
+	NodeStatusNotAvailable NodeStatus = "NotAvailable"
+)
+
+// Values returns all known values for NodeStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (NodeStatus) Values() []NodeStatus {
+	return []NodeStatus{
+		"Active",
+		"StandBy",
+		"NotAvailable",
+	}
+}
+
+type NodeType string
+
+// Enum values for NodeType
+const (
+	NodeTypeData      NodeType = "Data"
+	NodeTypeUltrawarm NodeType = "Ultrawarm"
+	NodeTypeMaster    NodeType = "Master"
+)
+
+// Values returns all known values for NodeType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (NodeType) Values() []NodeType {
+	return []NodeType{
+		"Data",
+		"Ultrawarm",
+		"Master",
+	}
+}
+
 type OpenSearchPartitionInstanceType string
 
 // Enum values for OpenSearchPartitionInstanceType

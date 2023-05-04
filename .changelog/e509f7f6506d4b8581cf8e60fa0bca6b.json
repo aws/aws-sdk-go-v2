@@ -1,0 +1,8 @@
+{
+    "id": "e509f7f6-506d-4b85-81cf-8e60fa0bca6b",
+    "type": "feature",
+    "description": "Adds support for filtering by metric names in CloudWatch Metric Streams.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

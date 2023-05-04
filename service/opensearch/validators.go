@@ -390,6 +390,26 @@ func (m *validateOpDescribeDomain) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDomainNodes struct {
+}
+
+func (*validateOpDescribeDomainNodes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDomainNodes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDomainNodesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDomainNodesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomains struct {
 }
 
@@ -964,6 +984,10 @@ func addOpDescribeDomainHealthValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribeDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomain{}, middleware.After)
+}
+
+func addOpDescribeDomainNodesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDomainNodes{}, middleware.After)
 }
 
 func addOpDescribeDomainsValidationMiddleware(stack *middleware.Stack) error {
@@ -1594,6 +1618,21 @@ func validateOpDescribeDomainInput(v *DescribeDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDomainNodesInput(v *DescribeDomainNodesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainNodesInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}

@@ -951,7 +951,7 @@ type RulesSource struct {
 	// An array of individual stateful rules inspection criteria to be used together
 	// in a stateful rule group. Use this option to specify simple Suricata rules with
 	// protocol, source and destination, ports, direction, and rule options. For
-	// information about the Suricata Rules format, see Rules Format (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html)
+	// information about the Suricata Rules format, see Rules Format (https://suricata.readthedocs.iorules/intro.html#)
 	// .
 	StatefulRules []StatefulRule
 
@@ -1125,6 +1125,11 @@ type StatefulEngineOptions struct {
 	//   the application layer protocol as HTTP. However, this behavior is rule
 	//   dependent—a TCP-layer rule using a flow:stateless rule would still match, as
 	//   would the aws:drop_strict default action.
+	//   - REJECT - Network Firewall fails closed and drops all subsequent traffic
+	//   going to the firewall. Network Firewall also sends a TCP reject packet back to
+	//   your client so that the client can immediately establish a new session. Network
+	//   Firewall will have context about the new session and will apply rules to the
+	//   subsequent traffic.
 	StreamExceptionPolicy StreamExceptionPolicy
 
 	noSmithyDocumentSerde
@@ -1133,7 +1138,7 @@ type StatefulEngineOptions struct {
 // A single Suricata rules specification, for use in a stateful rule group. Use
 // this option to specify a simple Suricata rule with protocol, source and
 // destination, ports, direction, and rule options. For information about the
-// Suricata Rules format, see Rules Format (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html)
+// Suricata Rules format, see Rules Format (https://suricata.readthedocs.iorules/intro.html#)
 // .
 type StatefulRule struct {
 
@@ -1151,6 +1156,12 @@ type StatefulRule struct {
 	//   to use to drop traffic. You can enable the rule with ALERT action, verify in
 	//   the logs that the rule is filtering as you want, then change the action to
 	//   DROP .
+	//   - REJECT - Drops TCP traffic that matches the conditions of the stateful
+	//   rule, and sends a TCP reset packet back to sender of the packet. A TCP reset
+	//   packet is a packet with no payload and a RST bit contained in the TCP header
+	//   flags. Also sends an alert log mesage if alert logging is configured in the
+	//   Firewall LoggingConfiguration . REJECT isn't currently available for use with
+	//   IMAP and FTP protocols.
 	//
 	// This member is required.
 	Action StatefulAction

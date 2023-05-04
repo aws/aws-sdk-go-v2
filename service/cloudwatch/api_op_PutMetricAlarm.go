@@ -32,9 +32,10 @@ import (
 // AWSServiceRoleForCloudWatchEvents and
 // AWSServiceRoleForCloudWatchAlarms_ActionSSM . For more information, see Amazon
 // Web Services service-linked role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role)
-// . Cross-account alarms You can set an alarm on metrics in the current account,
-// or in another account. To create a cross-account alarm that watches a metric in
-// a different account, you must have completed the following pre-requisites:
+// . Each PutMetricAlarm action has a maximum uncompressed payload of 120 KB.
+// Cross-account alarms You can set an alarm on metrics in the current account, or
+// in another account. To create a cross-account alarm that watches a metric in a
+// different account, you must have completed the following pre-requisites:
 //   - The account where the metrics are located (the sharing account) must
 //     already have a sharing role named CloudWatch-CrossAccountSharingRole. If it does
 //     not already have this role, you must create it using the instructions in Set up
@@ -109,7 +110,7 @@ type PutMetricAlarmInput struct {
 	//   -
 	//   arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
-	// SSN notification action:
+	// SNS notification action:
 	//   -
 	//   arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
@@ -161,7 +162,7 @@ type PutMetricAlarmInput struct {
 	//   -
 	//   arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
-	// SSN notification action:
+	// SNS notification action:
 	//   -
 	//   arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
@@ -209,7 +210,7 @@ type PutMetricAlarmInput struct {
 	//   -
 	//   arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//
-	// SSN notification action:
+	// SNS notification action:
 	//   -
 	//   arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
 	//

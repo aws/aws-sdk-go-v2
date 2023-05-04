@@ -162,6 +162,44 @@ func (AuthenticationMethodOption) Values() []AuthenticationMethodOption {
 	}
 }
 
+type AuthorSpecifiedAggregation string
+
+// Enum values for AuthorSpecifiedAggregation
+const (
+	AuthorSpecifiedAggregationCount         AuthorSpecifiedAggregation = "COUNT"
+	AuthorSpecifiedAggregationDistinctCount AuthorSpecifiedAggregation = "DISTINCT_COUNT"
+	AuthorSpecifiedAggregationMin           AuthorSpecifiedAggregation = "MIN"
+	AuthorSpecifiedAggregationMax           AuthorSpecifiedAggregation = "MAX"
+	AuthorSpecifiedAggregationMedian        AuthorSpecifiedAggregation = "MEDIAN"
+	AuthorSpecifiedAggregationSum           AuthorSpecifiedAggregation = "SUM"
+	AuthorSpecifiedAggregationAverage       AuthorSpecifiedAggregation = "AVERAGE"
+	AuthorSpecifiedAggregationStdev         AuthorSpecifiedAggregation = "STDEV"
+	AuthorSpecifiedAggregationStdevp        AuthorSpecifiedAggregation = "STDEVP"
+	AuthorSpecifiedAggregationVar           AuthorSpecifiedAggregation = "VAR"
+	AuthorSpecifiedAggregationVarp          AuthorSpecifiedAggregation = "VARP"
+	AuthorSpecifiedAggregationPercentile    AuthorSpecifiedAggregation = "PERCENTILE"
+)
+
+// Values returns all known values for AuthorSpecifiedAggregation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorSpecifiedAggregation) Values() []AuthorSpecifiedAggregation {
+	return []AuthorSpecifiedAggregation{
+		"COUNT",
+		"DISTINCT_COUNT",
+		"MIN",
+		"MAX",
+		"MEDIAN",
+		"SUM",
+		"AVERAGE",
+		"STDEV",
+		"STDEVP",
+		"VAR",
+		"VARP",
+		"PERCENTILE",
+	}
+}
+
 type AxisBinding string
 
 // Enum values for AxisBinding
@@ -277,6 +315,24 @@ func (CategoricalAggregationFunction) Values() []CategoricalAggregationFunction 
 	}
 }
 
+type CategoryFilterFunction string
+
+// Enum values for CategoryFilterFunction
+const (
+	CategoryFilterFunctionExact    CategoryFilterFunction = "EXACT"
+	CategoryFilterFunctionContains CategoryFilterFunction = "CONTAINS"
+)
+
+// Values returns all known values for CategoryFilterFunction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CategoryFilterFunction) Values() []CategoryFilterFunction {
+	return []CategoryFilterFunction{
+		"EXACT",
+		"CONTAINS",
+	}
+}
+
 type CategoryFilterMatchOperator string
 
 // Enum values for CategoryFilterMatchOperator
@@ -320,6 +376,26 @@ func (CategoryFilterSelectAllOptions) Values() []CategoryFilterSelectAllOptions 
 	}
 }
 
+type CategoryFilterType string
+
+// Enum values for CategoryFilterType
+const (
+	CategoryFilterTypeCustomFilter     CategoryFilterType = "CUSTOM_FILTER"
+	CategoryFilterTypeCustomFilterList CategoryFilterType = "CUSTOM_FILTER_LIST"
+	CategoryFilterTypeFilterList       CategoryFilterType = "FILTER_LIST"
+)
+
+// Values returns all known values for CategoryFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CategoryFilterType) Values() []CategoryFilterType {
+	return []CategoryFilterType{
+		"CUSTOM_FILTER",
+		"CUSTOM_FILTER_LIST",
+		"FILTER_LIST",
+	}
+}
+
 type ColorFillType string
 
 // Enum values for ColorFillType
@@ -335,6 +411,24 @@ func (ColorFillType) Values() []ColorFillType {
 	return []ColorFillType{
 		"DISCRETE",
 		"GRADIENT",
+	}
+}
+
+type ColumnDataRole string
+
+// Enum values for ColumnDataRole
+const (
+	ColumnDataRoleDimension ColumnDataRole = "DIMENSION"
+	ColumnDataRoleMeasure   ColumnDataRole = "MEASURE"
+)
+
+// Values returns all known values for ColumnDataRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColumnDataRole) Values() []ColumnDataRole {
+	return []ColumnDataRole{
+		"DIMENSION",
+		"MEASURE",
 	}
 }
 
@@ -357,6 +451,26 @@ func (ColumnDataType) Values() []ColumnDataType {
 		"INTEGER",
 		"DECIMAL",
 		"DATETIME",
+	}
+}
+
+type ColumnOrderingType string
+
+// Enum values for ColumnOrderingType
+const (
+	ColumnOrderingTypeGreaterIsBetter ColumnOrderingType = "GREATER_IS_BETTER"
+	ColumnOrderingTypeLesserIsBetter  ColumnOrderingType = "LESSER_IS_BETTER"
+	ColumnOrderingTypeSpecified       ColumnOrderingType = "SPECIFIED"
+)
+
+// Values returns all known values for ColumnOrderingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColumnOrderingType) Values() []ColumnOrderingType {
+	return []ColumnOrderingType{
+		"GREATER_IS_BETTER",
+		"LESSER_IS_BETTER",
+		"SPECIFIED",
 	}
 }
 
@@ -467,6 +581,26 @@ func (ConditionalFormattingIconSetType) Values() []ConditionalFormattingIconSetT
 		"BARS",
 		"FOUR_COLOR_ARROW",
 		"FOUR_GRAY_ARROW",
+	}
+}
+
+type ConstantType string
+
+// Enum values for ConstantType
+const (
+	ConstantTypeSingular   ConstantType = "SINGULAR"
+	ConstantTypeRange      ConstantType = "RANGE"
+	ConstantTypeCollective ConstantType = "COLLECTIVE"
+)
+
+// Values returns all known values for ConstantType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConstantType) Values() []ConstantType {
+	return []ConstantType{
+		"SINGULAR",
+		"RANGE",
+		"COLLECTIVE",
 	}
 }
 
@@ -735,6 +869,24 @@ func (DataSetImportMode) Values() []DataSetImportMode {
 	}
 }
 
+type DatasetParameterValueType string
+
+// Enum values for DatasetParameterValueType
+const (
+	DatasetParameterValueTypeMultiValued  DatasetParameterValueType = "MULTI_VALUED"
+	DatasetParameterValueTypeSingleValued DatasetParameterValueType = "SINGLE_VALUED"
+)
+
+// Values returns all known values for DatasetParameterValueType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetParameterValueType) Values() []DatasetParameterValueType {
+	return []DatasetParameterValueType{
+		"MULTI_VALUED",
+		"SINGLE_VALUED",
+	}
+}
+
 type DataSourceErrorInfoType string
 
 // Enum values for DataSourceErrorInfoType
@@ -903,6 +1055,58 @@ func (DayOfWeek) Values() []DayOfWeek {
 	}
 }
 
+type DefaultAggregation string
+
+// Enum values for DefaultAggregation
+const (
+	DefaultAggregationSum           DefaultAggregation = "SUM"
+	DefaultAggregationMax           DefaultAggregation = "MAX"
+	DefaultAggregationMin           DefaultAggregation = "MIN"
+	DefaultAggregationCount         DefaultAggregation = "COUNT"
+	DefaultAggregationDistinctCount DefaultAggregation = "DISTINCT_COUNT"
+	DefaultAggregationAverage       DefaultAggregation = "AVERAGE"
+)
+
+// Values returns all known values for DefaultAggregation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultAggregation) Values() []DefaultAggregation {
+	return []DefaultAggregation{
+		"SUM",
+		"MAX",
+		"MIN",
+		"COUNT",
+		"DISTINCT_COUNT",
+		"AVERAGE",
+	}
+}
+
+type DisplayFormat string
+
+// Enum values for DisplayFormat
+const (
+	DisplayFormatAuto     DisplayFormat = "AUTO"
+	DisplayFormatPercent  DisplayFormat = "PERCENT"
+	DisplayFormatCurrency DisplayFormat = "CURRENCY"
+	DisplayFormatNumber   DisplayFormat = "NUMBER"
+	DisplayFormatDate     DisplayFormat = "DATE"
+	DisplayFormatString   DisplayFormat = "STRING"
+)
+
+// Values returns all known values for DisplayFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DisplayFormat) Values() []DisplayFormat {
+	return []DisplayFormat{
+		"AUTO",
+		"PERCENT",
+		"CURRENCY",
+		"NUMBER",
+		"DATE",
+		"STRING",
+	}
+}
+
 type Edition string
 
 // Enum values for Edition
@@ -998,6 +1202,26 @@ func (FileFormat) Values() []FileFormat {
 		"ELF",
 		"XLSX",
 		"JSON",
+	}
+}
+
+type FilterClass string
+
+// Enum values for FilterClass
+const (
+	FilterClassEnforcedValueFilter    FilterClass = "ENFORCED_VALUE_FILTER"
+	FilterClassConditionalValueFilter FilterClass = "CONDITIONAL_VALUE_FILTER"
+	FilterClassNamedValueFilter       FilterClass = "NAMED_VALUE_FILTER"
+)
+
+// Values returns all known values for FilterClass. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FilterClass) Values() []FilterClass {
+	return []FilterClass{
+		"ENFORCED_VALUE_FILTER",
+		"CONDITIONAL_VALUE_FILTER",
+		"NAMED_VALUE_FILTER",
 	}
 }
 
@@ -1897,6 +2121,108 @@ func (MissingDataTreatmentOption) Values() []MissingDataTreatmentOption {
 	}
 }
 
+type NamedEntityAggType string
+
+// Enum values for NamedEntityAggType
+const (
+	NamedEntityAggTypeSum           NamedEntityAggType = "SUM"
+	NamedEntityAggTypeMin           NamedEntityAggType = "MIN"
+	NamedEntityAggTypeMax           NamedEntityAggType = "MAX"
+	NamedEntityAggTypeCount         NamedEntityAggType = "COUNT"
+	NamedEntityAggTypeAverage       NamedEntityAggType = "AVERAGE"
+	NamedEntityAggTypeDistinctCount NamedEntityAggType = "DISTINCT_COUNT"
+	NamedEntityAggTypeStdev         NamedEntityAggType = "STDEV"
+	NamedEntityAggTypeStdevp        NamedEntityAggType = "STDEVP"
+	NamedEntityAggTypeVar           NamedEntityAggType = "VAR"
+	NamedEntityAggTypeVarp          NamedEntityAggType = "VARP"
+	NamedEntityAggTypePercentile    NamedEntityAggType = "PERCENTILE"
+	NamedEntityAggTypeMedian        NamedEntityAggType = "MEDIAN"
+	NamedEntityAggTypeCustom        NamedEntityAggType = "CUSTOM"
+)
+
+// Values returns all known values for NamedEntityAggType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamedEntityAggType) Values() []NamedEntityAggType {
+	return []NamedEntityAggType{
+		"SUM",
+		"MIN",
+		"MAX",
+		"COUNT",
+		"AVERAGE",
+		"DISTINCT_COUNT",
+		"STDEV",
+		"STDEVP",
+		"VAR",
+		"VARP",
+		"PERCENTILE",
+		"MEDIAN",
+		"CUSTOM",
+	}
+}
+
+type NamedFilterAggType string
+
+// Enum values for NamedFilterAggType
+const (
+	NamedFilterAggTypeNoAggregation NamedFilterAggType = "NO_AGGREGATION"
+	NamedFilterAggTypeSum           NamedFilterAggType = "SUM"
+	NamedFilterAggTypeAverage       NamedFilterAggType = "AVERAGE"
+	NamedFilterAggTypeCount         NamedFilterAggType = "COUNT"
+	NamedFilterAggTypeDistinctCount NamedFilterAggType = "DISTINCT_COUNT"
+	NamedFilterAggTypeMax           NamedFilterAggType = "MAX"
+	NamedFilterAggTypeMedian        NamedFilterAggType = "MEDIAN"
+	NamedFilterAggTypeMin           NamedFilterAggType = "MIN"
+	NamedFilterAggTypeStdev         NamedFilterAggType = "STDEV"
+	NamedFilterAggTypeStdevp        NamedFilterAggType = "STDEVP"
+	NamedFilterAggTypeVar           NamedFilterAggType = "VAR"
+	NamedFilterAggTypeVarp          NamedFilterAggType = "VARP"
+)
+
+// Values returns all known values for NamedFilterAggType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamedFilterAggType) Values() []NamedFilterAggType {
+	return []NamedFilterAggType{
+		"NO_AGGREGATION",
+		"SUM",
+		"AVERAGE",
+		"COUNT",
+		"DISTINCT_COUNT",
+		"MAX",
+		"MEDIAN",
+		"MIN",
+		"STDEV",
+		"STDEVP",
+		"VAR",
+		"VARP",
+	}
+}
+
+type NamedFilterType string
+
+// Enum values for NamedFilterType
+const (
+	NamedFilterTypeCategoryFilter        NamedFilterType = "CATEGORY_FILTER"
+	NamedFilterTypeNumericEqualityFilter NamedFilterType = "NUMERIC_EQUALITY_FILTER"
+	NamedFilterTypeNumericRangeFilter    NamedFilterType = "NUMERIC_RANGE_FILTER"
+	NamedFilterTypeDateRangeFilter       NamedFilterType = "DATE_RANGE_FILTER"
+	NamedFilterTypeRelativeDateFilter    NamedFilterType = "RELATIVE_DATE_FILTER"
+)
+
+// Values returns all known values for NamedFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamedFilterType) Values() []NamedFilterType {
+	return []NamedFilterType{
+		"CATEGORY_FILTER",
+		"NUMERIC_EQUALITY_FILTER",
+		"NUMERIC_RANGE_FILTER",
+		"DATE_RANGE_FILTER",
+		"RELATIVE_DATE_FILTER",
+	}
+}
+
 type NamespaceErrorType string
 
 // Enum values for NamespaceErrorType
@@ -1954,6 +2280,40 @@ func (NegativeValueDisplayMode) Values() []NegativeValueDisplayMode {
 	return []NegativeValueDisplayMode{
 		"POSITIVE",
 		"NEGATIVE",
+	}
+}
+
+type NetworkInterfaceStatus string
+
+// Enum values for NetworkInterfaceStatus
+const (
+	NetworkInterfaceStatusCreating                       NetworkInterfaceStatus = "CREATING"
+	NetworkInterfaceStatusAvailable                      NetworkInterfaceStatus = "AVAILABLE"
+	NetworkInterfaceStatusCreationFailed                 NetworkInterfaceStatus = "CREATION_FAILED"
+	NetworkInterfaceStatusUpdating                       NetworkInterfaceStatus = "UPDATING"
+	NetworkInterfaceStatusUpdateFailed                   NetworkInterfaceStatus = "UPDATE_FAILED"
+	NetworkInterfaceStatusDeleting                       NetworkInterfaceStatus = "DELETING"
+	NetworkInterfaceStatusDeleted                        NetworkInterfaceStatus = "DELETED"
+	NetworkInterfaceStatusDeletionFailed                 NetworkInterfaceStatus = "DELETION_FAILED"
+	NetworkInterfaceStatusDeletionScheduled              NetworkInterfaceStatus = "DELETION_SCHEDULED"
+	NetworkInterfaceStatusAttachmentFailedRollbackFailed NetworkInterfaceStatus = "ATTACHMENT_FAILED_ROLLBACK_FAILED"
+)
+
+// Values returns all known values for NetworkInterfaceStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkInterfaceStatus) Values() []NetworkInterfaceStatus {
+	return []NetworkInterfaceStatus{
+		"CREATING",
+		"AVAILABLE",
+		"CREATION_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETED",
+		"DELETION_FAILED",
+		"DELETION_SCHEDULED",
+		"ATTACHMENT_FAILED_ROLLBACK_FAILED",
 	}
 }
 
@@ -2225,6 +2585,44 @@ func (PrimaryValueDisplayType) Values() []PrimaryValueDisplayType {
 		"HIDDEN",
 		"COMPARISON",
 		"ACTUAL",
+	}
+}
+
+type PropertyRole string
+
+// Enum values for PropertyRole
+const (
+	PropertyRolePrimary PropertyRole = "PRIMARY"
+	PropertyRoleId      PropertyRole = "ID"
+)
+
+// Values returns all known values for PropertyRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PropertyRole) Values() []PropertyRole {
+	return []PropertyRole{
+		"PRIMARY",
+		"ID",
+	}
+}
+
+type PropertyUsage string
+
+// Enum values for PropertyUsage
+const (
+	PropertyUsageInherit   PropertyUsage = "INHERIT"
+	PropertyUsageDimension PropertyUsage = "DIMENSION"
+	PropertyUsageMeasure   PropertyUsage = "MEASURE"
+)
+
+// Values returns all known values for PropertyUsage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PropertyUsage) Values() []PropertyUsage {
+	return []PropertyUsage{
+		"INHERIT",
+		"DIMENSION",
+		"MEASURE",
 	}
 }
 
@@ -3001,6 +3399,143 @@ func (TopBottomSortOrder) Values() []TopBottomSortOrder {
 	}
 }
 
+type TopicNumericSeparatorSymbol string
+
+// Enum values for TopicNumericSeparatorSymbol
+const (
+	TopicNumericSeparatorSymbolComma TopicNumericSeparatorSymbol = "COMMA"
+	TopicNumericSeparatorSymbolDot   TopicNumericSeparatorSymbol = "DOT"
+)
+
+// Values returns all known values for TopicNumericSeparatorSymbol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicNumericSeparatorSymbol) Values() []TopicNumericSeparatorSymbol {
+	return []TopicNumericSeparatorSymbol{
+		"COMMA",
+		"DOT",
+	}
+}
+
+type TopicRefreshStatus string
+
+// Enum values for TopicRefreshStatus
+const (
+	TopicRefreshStatusInitialized TopicRefreshStatus = "INITIALIZED"
+	TopicRefreshStatusRunning     TopicRefreshStatus = "RUNNING"
+	TopicRefreshStatusFailed      TopicRefreshStatus = "FAILED"
+	TopicRefreshStatusCompleted   TopicRefreshStatus = "COMPLETED"
+	TopicRefreshStatusCancelled   TopicRefreshStatus = "CANCELLED"
+)
+
+// Values returns all known values for TopicRefreshStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TopicRefreshStatus) Values() []TopicRefreshStatus {
+	return []TopicRefreshStatus{
+		"INITIALIZED",
+		"RUNNING",
+		"FAILED",
+		"COMPLETED",
+		"CANCELLED",
+	}
+}
+
+type TopicRelativeDateFilterFunction string
+
+// Enum values for TopicRelativeDateFilterFunction
+const (
+	TopicRelativeDateFilterFunctionPrevious TopicRelativeDateFilterFunction = "PREVIOUS"
+	TopicRelativeDateFilterFunctionThis     TopicRelativeDateFilterFunction = "THIS"
+	TopicRelativeDateFilterFunctionLast     TopicRelativeDateFilterFunction = "LAST"
+	TopicRelativeDateFilterFunctionNext     TopicRelativeDateFilterFunction = "NEXT"
+	TopicRelativeDateFilterFunctionNow      TopicRelativeDateFilterFunction = "NOW"
+)
+
+// Values returns all known values for TopicRelativeDateFilterFunction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TopicRelativeDateFilterFunction) Values() []TopicRelativeDateFilterFunction {
+	return []TopicRelativeDateFilterFunction{
+		"PREVIOUS",
+		"THIS",
+		"LAST",
+		"NEXT",
+		"NOW",
+	}
+}
+
+type TopicScheduleType string
+
+// Enum values for TopicScheduleType
+const (
+	TopicScheduleTypeHourly  TopicScheduleType = "HOURLY"
+	TopicScheduleTypeDaily   TopicScheduleType = "DAILY"
+	TopicScheduleTypeWeekly  TopicScheduleType = "WEEKLY"
+	TopicScheduleTypeMonthly TopicScheduleType = "MONTHLY"
+)
+
+// Values returns all known values for TopicScheduleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TopicScheduleType) Values() []TopicScheduleType {
+	return []TopicScheduleType{
+		"HOURLY",
+		"DAILY",
+		"WEEKLY",
+		"MONTHLY",
+	}
+}
+
+type TopicTimeGranularity string
+
+// Enum values for TopicTimeGranularity
+const (
+	TopicTimeGranularitySecond  TopicTimeGranularity = "SECOND"
+	TopicTimeGranularityMinute  TopicTimeGranularity = "MINUTE"
+	TopicTimeGranularityHour    TopicTimeGranularity = "HOUR"
+	TopicTimeGranularityDay     TopicTimeGranularity = "DAY"
+	TopicTimeGranularityWeek    TopicTimeGranularity = "WEEK"
+	TopicTimeGranularityMonth   TopicTimeGranularity = "MONTH"
+	TopicTimeGranularityQuarter TopicTimeGranularity = "QUARTER"
+	TopicTimeGranularityYear    TopicTimeGranularity = "YEAR"
+)
+
+// Values returns all known values for TopicTimeGranularity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TopicTimeGranularity) Values() []TopicTimeGranularity {
+	return []TopicTimeGranularity{
+		"SECOND",
+		"MINUTE",
+		"HOUR",
+		"DAY",
+		"WEEK",
+		"MONTH",
+		"QUARTER",
+		"YEAR",
+	}
+}
+
+type UndefinedSpecifiedValueType string
+
+// Enum values for UndefinedSpecifiedValueType
+const (
+	UndefinedSpecifiedValueTypeLeast UndefinedSpecifiedValueType = "LEAST"
+	UndefinedSpecifiedValueTypeMost  UndefinedSpecifiedValueType = "MOST"
+)
+
+// Values returns all known values for UndefinedSpecifiedValueType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UndefinedSpecifiedValueType) Values() []UndefinedSpecifiedValueType {
+	return []UndefinedSpecifiedValueType{
+		"LEAST",
+		"MOST",
+	}
+}
+
 type URLTargetConfiguration string
 
 // Enum values for URLTargetConfiguration
@@ -3116,6 +3651,59 @@ func (VisualCustomActionTrigger) Values() []VisualCustomActionTrigger {
 	return []VisualCustomActionTrigger{
 		"DATA_POINT_CLICK",
 		"DATA_POINT_MENU",
+	}
+}
+
+type VPCConnectionAvailabilityStatus string
+
+// Enum values for VPCConnectionAvailabilityStatus
+const (
+	VPCConnectionAvailabilityStatusAvailable          VPCConnectionAvailabilityStatus = "AVAILABLE"
+	VPCConnectionAvailabilityStatusUnavailable        VPCConnectionAvailabilityStatus = "UNAVAILABLE"
+	VPCConnectionAvailabilityStatusPartiallyAvailable VPCConnectionAvailabilityStatus = "PARTIALLY_AVAILABLE"
+)
+
+// Values returns all known values for VPCConnectionAvailabilityStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VPCConnectionAvailabilityStatus) Values() []VPCConnectionAvailabilityStatus {
+	return []VPCConnectionAvailabilityStatus{
+		"AVAILABLE",
+		"UNAVAILABLE",
+		"PARTIALLY_AVAILABLE",
+	}
+}
+
+type VPCConnectionResourceStatus string
+
+// Enum values for VPCConnectionResourceStatus
+const (
+	VPCConnectionResourceStatusCreationInProgress VPCConnectionResourceStatus = "CREATION_IN_PROGRESS"
+	VPCConnectionResourceStatusCreationSuccessful VPCConnectionResourceStatus = "CREATION_SUCCESSFUL"
+	VPCConnectionResourceStatusCreationFailed     VPCConnectionResourceStatus = "CREATION_FAILED"
+	VPCConnectionResourceStatusUpdateInProgress   VPCConnectionResourceStatus = "UPDATE_IN_PROGRESS"
+	VPCConnectionResourceStatusUpdateSuccessful   VPCConnectionResourceStatus = "UPDATE_SUCCESSFUL"
+	VPCConnectionResourceStatusUpdateFailed       VPCConnectionResourceStatus = "UPDATE_FAILED"
+	VPCConnectionResourceStatusDeletionInProgress VPCConnectionResourceStatus = "DELETION_IN_PROGRESS"
+	VPCConnectionResourceStatusDeletionFailed     VPCConnectionResourceStatus = "DELETION_FAILED"
+	VPCConnectionResourceStatusDeleted            VPCConnectionResourceStatus = "DELETED"
+)
+
+// Values returns all known values for VPCConnectionResourceStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VPCConnectionResourceStatus) Values() []VPCConnectionResourceStatus {
+	return []VPCConnectionResourceStatus{
+		"CREATION_IN_PROGRESS",
+		"CREATION_SUCCESSFUL",
+		"CREATION_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_SUCCESSFUL",
+		"UPDATE_FAILED",
+		"DELETION_IN_PROGRESS",
+		"DELETION_FAILED",
+		"DELETED",
 	}
 }
 

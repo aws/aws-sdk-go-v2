@@ -14,7 +14,7 @@ import (
 // parameter.
 //   - Only the owner of a queue can remove permissions from it.
 //   - Cross-account permissions don't apply to this action. For more information,
-//     see Grant cross-account permissions to a role and a user name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+//     see Grant cross-account permissions to a role and a username (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 //     in the Amazon SQS Developer Guide.
 //   - To remove the ability to change queue permissions, you must deny permission
 //     to the AddPermission , RemovePermission , and SetQueueAttributes actions in
@@ -59,11 +59,11 @@ type RemovePermissionOutput struct {
 }
 
 func (c *Client) addOperationRemovePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemovePermission{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRemovePermission{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRemovePermission{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRemovePermission{}, middleware.After)
 	if err != nil {
 		return err
 	}

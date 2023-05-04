@@ -6,8 +6,19 @@ type Attribute string
 
 // Enum values for Attribute
 const (
-	AttributeDefault Attribute = "DEFAULT"
-	AttributeAll     Attribute = "ALL"
+	AttributeDefault      Attribute = "DEFAULT"
+	AttributeAll          Attribute = "ALL"
+	AttributeAgeRange     Attribute = "AGE_RANGE"
+	AttributeBeard        Attribute = "BEARD"
+	AttributeEmotions     Attribute = "EMOTIONS"
+	AttributeEyeglasses   Attribute = "EYEGLASSES"
+	AttributeEyesOpen     Attribute = "EYES_OPEN"
+	AttributeGender       Attribute = "GENDER"
+	AttributeMouthOpen    Attribute = "MOUTH_OPEN"
+	AttributeMustache     Attribute = "MUSTACHE"
+	AttributeFaceOccluded Attribute = "FACE_OCCLUDED"
+	AttributeSmile        Attribute = "SMILE"
+	AttributeSunglasses   Attribute = "SUNGLASSES"
 )
 
 // Values returns all known values for Attribute. Note that this can be expanded
@@ -17,6 +28,17 @@ func (Attribute) Values() []Attribute {
 	return []Attribute{
 		"DEFAULT",
 		"ALL",
+		"AGE_RANGE",
+		"BEARD",
+		"EMOTIONS",
+		"EYEGLASSES",
+		"EYES_OPEN",
+		"GENDER",
+		"MOUTH_OPEN",
+		"MUSTACHE",
+		"FACE_OCCLUDED",
+		"SMILE",
+		"SUNGLASSES",
 	}
 }
 

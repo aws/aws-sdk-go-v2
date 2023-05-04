@@ -20,9 +20,9 @@ import (
 // resource. If you specify a tag key that is already associated with the resource,
 // the new tag value that you specify replaces the previous value for that tag. You
 // can associate as many as 50 tags with a resource. Amazon QuickSight supports
-// tagging on data set, data source, dashboard, and template. Tagging for Amazon
-// QuickSight works in a similar way to tagging for other Amazon Web Services
-// services, except for the following:
+// tagging on data set, data source, dashboard, template, and topic. Tagging for
+// Amazon QuickSight works in a similar way to tagging for other Amazon Web
+// Services services, except for the following:
 //   - You can't use tags to track costs for Amazon QuickSight. This isn't
 //     possible because you can't tag the resources that Amazon QuickSight costs are
 //     based on, for example Amazon QuickSight storage capacity (SPICE), number of

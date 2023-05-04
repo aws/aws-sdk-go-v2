@@ -29,8 +29,8 @@ import (
 // objects in it. Requests to set ACLs or update ACLs fail and return the
 // AccessControlListNotSupported error code. Requests to read ACLs are still
 // supported. For more information, see Controlling object ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
-// in the Amazon S3 User Guide. Access Permissions You can set access permissions
-// using one of the following methods:
+// in the Amazon S3 User Guide. Permissions You can set access permissions using
+// one of the following methods:
 //   - Specify a canned ACL with the x-amz-acl request header. Amazon S3 supports a
 //     set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined
 //     set of grantees and permissions. Specify the canned ACL name as the value of
@@ -90,7 +90,8 @@ import (
 //
 // Versioning The ACL of an object is set at the object version level. By default,
 // PUT sets the ACL of the current version of an object. To set the ACL of a
-// different version, use the versionId subresource. Related Resources
+// different version, use the versionId subresource. The following operations are
+// related to PutObjectAcl :
 //   - CopyObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
 //   - GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 func (c *Client) PutObjectAcl(ctx context.Context, params *PutObjectAclInput, optFns ...func(*Options)) (*PutObjectAclOutput, error) {
@@ -129,13 +130,13 @@ type PutObjectAclInput struct {
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
 	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
-	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
-	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
-	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
-	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide. When you use this action with Amazon S3 on
+	// Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on
+	// Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When you
+	// use this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts access point ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see What is S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.

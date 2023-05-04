@@ -13,10 +13,9 @@ import (
 )
 
 // Updates details about a specific evaluation form version in the specified
-// Amazon Connect instance. An evaluation form must have a unique title within an
-// instance. Question and section identifiers cannot be duplicated within the same
-// evaluation form. This operation does not support partial updates. Instead it
-// does a full update of evaluation form content.
+// Amazon Connect instance. Question and section identifiers cannot be duplicated
+// within the same evaluation form. This operation does not support partial
+// updates. Instead it does a full update of evaluation form content.
 func (c *Client) UpdateEvaluationForm(ctx context.Context, params *UpdateEvaluationFormInput, optFns ...func(*Options)) (*UpdateEvaluationFormOutput, error) {
 	if params == nil {
 		params = &UpdateEvaluationFormInput{}
@@ -56,7 +55,7 @@ type UpdateEvaluationFormInput struct {
 	// This member is required.
 	Items []types.EvaluationFormItem
 
-	// A unique title of the evaluation form.
+	// A title of the evaluation form.
 	//
 	// This member is required.
 	Title *string

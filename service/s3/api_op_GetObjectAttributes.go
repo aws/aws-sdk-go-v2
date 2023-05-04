@@ -16,14 +16,12 @@ import (
 // Retrieves all the metadata from an object without returning the object itself.
 // This action is useful if you're interested only in an object's metadata. To use
 // GetObjectAttributes , you must have READ access to the object.
-// GetObjectAttributes combines the functionality of GetObjectAcl ,
-// GetObjectLegalHold , GetObjectLockConfiguration , GetObjectRetention ,
-// GetObjectTagging , HeadObject , and ListParts . All of the data returned with
-// each of those individual calls can be returned with a single call to
-// GetObjectAttributes . If you encrypt an object by using server-side encryption
-// with customer-provided encryption keys (SSE-C) when you store the object in
-// Amazon S3, then when you retrieve the metadata from the object, you must use the
-// following headers:
+// GetObjectAttributes combines the functionality of HeadObject and ListParts . All
+// of the data returned with each of those individual calls can be returned with a
+// single call to GetObjectAttributes . If you encrypt an object by using
+// server-side encryption with customer-provided encryption keys (SSE-C) when you
+// store the object in Amazon S3, then when you retrieve the metadata from the
+// object, you must use the following headers:
 //   - x-amz-server-side-encryption-customer-algorithm
 //   - x-amz-server-side-encryption-customer-key
 //   - x-amz-server-side-encryption-customer-key-MD5
@@ -34,9 +32,9 @@ import (
 //   - Encryption request headers, such as x-amz-server-side-encryption , should
 //     not be sent for GET requests if your object uses server-side encryption with
 //     Amazon Web Services KMS keys stored in Amazon Web Services Key Management
-//     Service (SSE-KMS) or server-side encryption with Amazon S3 managed encryption
-//     keys (SSE-S3). If your object does use these types of keys, you'll get an HTTP
-//     400 Bad Request error.
+//     Service (SSE-KMS) or server-side encryption with Amazon S3 managed keys
+//     (SSE-S3). If your object does use these types of keys, you'll get an HTTP 400
+//     Bad Request error.
 //   - The last modified property in this case is the creation date of the object.
 //
 // Consider the following when using request headers:
@@ -99,13 +97,13 @@ type GetObjectAttributesInput struct {
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
 	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
-	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
-	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
-	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
-	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide. When you use this action with Amazon S3 on
+	// Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on
+	// Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When you
+	// use this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts access point ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see What is S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.

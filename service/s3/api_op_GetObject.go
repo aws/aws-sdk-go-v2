@@ -34,8 +34,8 @@ import (
 // Deep Archive storage class, or S3 Intelligent-Tiering Archive or S3
 // Intelligent-Tiering Deep Archive tiers, before you can retrieve the object you
 // must first restore a copy using RestoreObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html)
-// . Otherwise, this action returns an InvalidObjectStateError error. For
-// information about restoring archived objects, see Restoring Archived Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html)
+// . Otherwise, this action returns an InvalidObjectState error. For information
+// about restoring archived objects, see Restoring Archived Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html)
 // . Encryption request headers, like x-amz-server-side-encryption , should not be
 // sent for GET requests if your object uses server-side encryption with KMS keys
 // (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys
@@ -66,7 +66,9 @@ import (
 // To return a different version, use the versionId subresource.
 //   - If you supply a versionId , you need the s3:GetObjectVersion permission to
 //     access a specific version of an object. If you request a specific version, you
-//     do not need to have the s3:GetObject permission.
+//     do not need to have the s3:GetObject permission. If you request the current
+//     version without a specific version ID, only s3:GetObject permission is
+//     required. s3:GetObjectVersion permission won't be required.
 //   - If the current version of the object is a delete marker, Amazon S3 behaves
 //     as if the object was deleted and includes x-amz-delete-marker: true in the
 //     response.
@@ -93,7 +95,7 @@ import (
 //   - response-content-disposition
 //   - response-content-encoding
 //
-// Additional Considerations about Request Headers If both of the If-Match and
+// Overriding Response Header Values If both of the If-Match and
 // If-Unmodified-Since headers are present in the request as follows: If-Match
 // condition evaluates to true , and; If-Unmodified-Since condition evaluates to
 // false ; then, S3 returns 200 OK and the data requested. If both of the
@@ -130,13 +132,13 @@ type GetObjectInput struct {
 	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using an Object Lambda access point the
 	// hostname takes the form
-	// AccessPointName-AccountId.s3-object-lambda.Region.amazonaws.com. When using this
-	// action with Amazon S3 on Outposts, you must direct requests to the S3 on
+	// AccessPointName-AccountId.s3-object-lambda.Region.amazonaws.com. When you use
+	// this action with Amazon S3 on Outposts, you must direct requests to the S3 on
 	// Outposts hostname. The S3 on Outposts hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
-	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
-	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When you
+	// use this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts access point ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see What is S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
@@ -178,7 +180,7 @@ type GetObjectInput struct {
 
 	// Downloads the specified range bytes of an object. For more information about
 	// the HTTP Range header, see
-	// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35 (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35)
+	// https://www.rfc-editor.org/rfc/rfc9110.html#name-range (https://www.rfc-editor.org/rfc/rfc9110.html#name-range)
 	// . Amazon S3 doesn't support retrieving multiple ranges of data per GET request.
 	Range *string
 
@@ -360,12 +362,12 @@ type GetObjectOutput struct {
 	SSECustomerKeyMD5 *string
 
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
-	// (Amazon Web Services KMS) symmetric customer managed key that was used for the
-	// object.
+	// (Amazon Web Services KMS) symmetric encryption customer managed key that was
+	// used for the object.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3
-	// (for example, AES256, aws:kms).
+	// (for example, AES256, aws:kms ).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Provides storage class information of the object. Amazon S3 returns this header

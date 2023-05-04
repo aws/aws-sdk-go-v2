@@ -4063,6 +4063,12 @@ const (
 	ProductionVariantInstanceTypeMlR6gd12xlarge ProductionVariantInstanceType = "ml.r6gd.12xlarge"
 	ProductionVariantInstanceTypeMlR6gd16xlarge ProductionVariantInstanceType = "ml.r6gd.16xlarge"
 	ProductionVariantInstanceTypeMlP4de24xlarge ProductionVariantInstanceType = "ml.p4de.24xlarge"
+	ProductionVariantInstanceTypeMlTrn12xlarge  ProductionVariantInstanceType = "ml.trn1.2xlarge"
+	ProductionVariantInstanceTypeMlTrn132xlarge ProductionVariantInstanceType = "ml.trn1.32xlarge"
+	ProductionVariantInstanceTypeMlInf2Xlarge   ProductionVariantInstanceType = "ml.inf2.xlarge"
+	ProductionVariantInstanceTypeMlInf28xlarge  ProductionVariantInstanceType = "ml.inf2.8xlarge"
+	ProductionVariantInstanceTypeMlInf224xlarge ProductionVariantInstanceType = "ml.inf2.24xlarge"
+	ProductionVariantInstanceTypeMlInf248xlarge ProductionVariantInstanceType = "ml.inf2.48xlarge"
 )
 
 // Values returns all known values for ProductionVariantInstanceType. Note that
@@ -4212,6 +4218,12 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.r6gd.12xlarge",
 		"ml.r6gd.16xlarge",
 		"ml.p4de.24xlarge",
+		"ml.trn1.2xlarge",
+		"ml.trn1.32xlarge",
+		"ml.inf2.xlarge",
+		"ml.inf2.8xlarge",
+		"ml.inf2.24xlarge",
+		"ml.inf2.48xlarge",
 	}
 }
 

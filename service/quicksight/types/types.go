@@ -919,6 +919,18 @@ type BodySectionContent struct {
 	noSmithyDocumentSerde
 }
 
+// The bookmarks configuration of an embedded dashboard.
+type BookmarksConfigurations struct {
+
+	// A Boolean value that determines whether a user can bookmark an embedded
+	// dashboard.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
 // The display options for tile borders for visuals.
 type BorderStyle struct {
 
@@ -1268,6 +1280,18 @@ type CategoryFilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that represents the cell value synonym.
+type CellValueSynonym struct {
+
+	// The cell value.
+	CellValue *string
+
+	// Other names or aliases for the cell value.
+	Synonyms []string
+
+	noSmithyDocumentSerde
+}
+
 // The label options for an axis on a chart.
 type ChartAxisLabelOptions struct {
 
@@ -1300,6 +1324,15 @@ type ClusterMarkerConfiguration struct {
 
 	// The cluster marker that is a part of the cluster marker configuration
 	ClusterMarker *ClusterMarker
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a collective constant.
+type CollectiveConstant struct {
+
+	// A list of values for the collective constant.
+	ValueList []string
 
 	noSmithyDocumentSerde
 }
@@ -1639,6 +1672,23 @@ type ComboChartVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a comparative order.
+type ComparativeOrder struct {
+
+	// The list of columns to be used in the ordering.
+	SpecifedOrder []string
+
+	// The treat of undefined specified values. Valid values for this structure are
+	// LEAST and MOST .
+	TreatUndefinedSpecifiedValues UndefinedSpecifiedValueType
+
+	// The ordering type for a column. Valid values for this structure are
+	// GREATER_IS_BETTER , LESSER_IS_BETTER and SPECIFIED .
+	UseOrdering ColumnOrderingType
 
 	noSmithyDocumentSerde
 }
@@ -2472,6 +2522,18 @@ type DashboardVisualPublishOptions struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that represents a data aggregation.
+type DataAggregation struct {
+
+	// The level of time precision that is used to aggregate DateTime values.
+	DatasetRowDateGranularity TopicTimeGranularity
+
+	// The column name for the default date.
+	DefaultDateColumnName *string
+
+	noSmithyDocumentSerde
+}
+
 // The options for data bars.
 type DataBarsOptions struct {
 
@@ -2589,6 +2651,9 @@ type DataLabelOptions struct {
 
 	// Determines the position of the data labels.
 	Position DataLabelPosition
+
+	// Determines the visibility of the total.
+	TotalsVisibility Visibility
 
 	// Determines the visibility of the data labels.
 	Visibility Visibility
@@ -2739,6 +2804,9 @@ type DataSet struct {
 	// as a source.
 	DataSetUsageConfiguration *DataSetUsageConfiguration
 
+	// The parameters that are declared in a dataset.
+	DatasetParameters []DatasetParameter
+
 	// The folder that contains fields and nested subfolders for your dataset.
 	FieldFolders map[string]FieldFolder
 
@@ -2798,6 +2866,56 @@ type DataSetIdentifierDeclaration struct {
 	//
 	// This member is required.
 	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a dataset.
+type DatasetMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the dataset.
+	//
+	// This member is required.
+	DatasetArn *string
+
+	// The list of calculated field definitions.
+	CalculatedFields []TopicCalculatedField
+
+	// The list of column definitions.
+	Columns []TopicColumn
+
+	// The definition of a data aggregation.
+	DataAggregation *DataAggregation
+
+	// The description of the dataset.
+	DatasetDescription *string
+
+	// The name of the dataset.
+	DatasetName *string
+
+	// The list of filter definitions.
+	Filters []TopicFilter
+
+	// The list of named entities definitions.
+	NamedEntities []TopicNamedEntity
+
+	noSmithyDocumentSerde
+}
+
+// A dataset parameter.
+type DatasetParameter struct {
+
+	// A date time parameter that is created in the dataset.
+	DateTimeDatasetParameter *DateTimeDatasetParameter
+
+	// A decimal parameter that is created in the dataset.
+	DecimalDatasetParameter *DecimalDatasetParameter
+
+	// An integer parameter that is created in the dataset.
+	IntegerDatasetParameter *IntegerDatasetParameter
+
+	// A string parameter that is created in the dataset.
+	StringDatasetParameter *StringDatasetParameter
 
 	noSmithyDocumentSerde
 }
@@ -3408,6 +3526,44 @@ type DateMeasureField struct {
 	noSmithyDocumentSerde
 }
 
+// A date time parameter for a dataset.
+type DateTimeDatasetParameter struct {
+
+	// An identifier for the parameter that is created in the dataset.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the date time parameter that is created in the dataset.
+	//
+	// This member is required.
+	Name *string
+
+	// The value type of the dataset parameter. Valid values are single value or multi
+	// value .
+	//
+	// This member is required.
+	ValueType DatasetParameterValueType
+
+	// A list of default values for a given date time parameter. This structure only
+	// accepts static values.
+	DefaultValues *DateTimeDatasetParameterDefaultValues
+
+	// The time granularity of the date time parameter.
+	TimeGranularity TimeGranularity
+
+	noSmithyDocumentSerde
+}
+
+// The default values of a date time parameter.
+type DateTimeDatasetParameterDefaultValues struct {
+
+	// A list of static default values for a given date time parameter.
+	StaticValues []time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The default values of the DateTimeParameterDeclaration .
 type DateTimeDefaultValues struct {
 
@@ -3482,6 +3638,9 @@ type DateTimeParameterDeclaration struct {
 	// parameter, a maximum of one default value can be provided.
 	DefaultValues *DateTimeDefaultValues
 
+	// A list of dataset parameters that are mapped to an analysis parameter.
+	MappedDataSetParameters []MappedDataSetParameter
+
 	// The level of time precision that is used to aggregate DateTime values.
 	TimeGranularity TimeGranularity
 
@@ -3515,6 +3674,41 @@ type DateTimeValueWhenUnsetConfiguration struct {
 	//   - RECOMMENDED : The recommended value.
 	//   - NULL : The NULL value.
 	ValueWhenUnsetOption ValueWhenUnsetOption
+
+	noSmithyDocumentSerde
+}
+
+// A decimal parameter for a dataset.
+type DecimalDatasetParameter struct {
+
+	// An identifier for the decimal parameter created in the dataset.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the decimal parameter that is created in the dataset.
+	//
+	// This member is required.
+	Name *string
+
+	// The value type of the dataset parameter. Valid values are single value or multi
+	// value .
+	//
+	// This member is required.
+	ValueType DatasetParameterValueType
+
+	// A list of default values for a given decimal parameter. This structure only
+	// accepts static values.
+	DefaultValues *DecimalDatasetParameterDefaultValues
+
+	noSmithyDocumentSerde
+}
+
+// The default values of a decimal parameter.
+type DecimalDatasetParameterDefaultValues struct {
+
+	// A list of static default values for a given decimal parameter.
+	StaticValues []float64
 
 	noSmithyDocumentSerde
 }
@@ -3566,6 +3760,9 @@ type DecimalParameterDeclaration struct {
 	// parameter, a maximum of one default value can be provided.
 	DefaultValues *DecimalDefaultValues
 
+	// A list of dataset parameters that are mapped to an analysis parameter.
+	MappedDataSetParameters []MappedDataSetParameter
+
 	// The configuration that defines the default value of a Decimal parameter when a
 	// value has not been set.
 	ValueWhenUnset *DecimalValueWhenUnsetConfiguration
@@ -3595,6 +3792,19 @@ type DecimalValueWhenUnsetConfiguration struct {
 	//   - RECOMMENDED : The recommended value.
 	//   - NULL : The NULL value.
 	ValueWhenUnsetOption ValueWhenUnsetOption
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a default formatting definition.
+type DefaultFormatting struct {
+
+	// The display format. Valid values for this structure are AUTO , PERCENT ,
+	// CURRENCY , NUMBER , DATE , and STRING .
+	DisplayFormat DisplayFormat
+
+	// The additional options for display formatting.
+	DisplayFormatOptions *DisplayFormatOptions
 
 	noSmithyDocumentSerde
 }
@@ -3688,6 +3898,9 @@ type DestinationParameterValueConfiguration struct {
 	// The configuration that selects all options.
 	SelectAllValueOptions SelectAllValueOptions
 
+	// A column of a data set.
+	SourceColumn *ColumnIdentifier
+
 	// The source field ID of the destination parameter.
 	SourceField *string
 
@@ -3708,6 +3921,49 @@ type DimensionField struct {
 
 	// The dimension type field with numerical type columns.
 	NumericalDimensionField *NumericalDimensionField
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents additional options for display formatting.
+type DisplayFormatOptions struct {
+
+	// Determines the blank cell format.
+	BlankCellFormat *string
+
+	// The currency symbol, such as USD .
+	CurrencySymbol *string
+
+	// Determines the DateTime format.
+	DateFormat *string
+
+	// Determines the decimal separator.
+	DecimalSeparator TopicNumericSeparatorSymbol
+
+	// Determines the number of fraction digits.
+	FractionDigits int32
+
+	// Determines the grouping separator.
+	GroupingSeparator *string
+
+	// The negative format.
+	NegativeFormat *NegativeFormat
+
+	// The prefix value for a display format.
+	Prefix *string
+
+	// The suffix value for a display format.
+	Suffix *string
+
+	// The unit scaler. Valid values for this structure are: NONE , AUTO , THOUSANDS ,
+	// MILLIONS , BILLIONS , and TRILLIONS .
+	UnitScaler NumberScale
+
+	// A Boolean value that indicates whether to use blank cell format.
+	UseBlankCellFormat bool
+
+	// A Boolean value that indicates whether to use grouping.
+	UseGrouping bool
 
 	noSmithyDocumentSerde
 }
@@ -4395,6 +4651,9 @@ type FilterOperation struct {
 // is a union type structure. For this structure to be valid, only one of the
 // attributes can be defined.
 type FilterOperationSelectedFieldsConfiguration struct {
+
+	// The selected columns of a dataset.
+	SelectedColumns []ColumnIdentifier
 
 	// A structure that contains the options that choose which fields are filtered in
 	// the CustomActionFilterOperation . Valid values are defined as follows:
@@ -5905,6 +6164,41 @@ type InsightVisual struct {
 	noSmithyDocumentSerde
 }
 
+// An integer parameter for a dataset.
+type IntegerDatasetParameter struct {
+
+	// An identifier for the integer parameter created in the dataset.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the integer parameter that is created in the dataset.
+	//
+	// This member is required.
+	Name *string
+
+	// The value type of the dataset parameter. Valid values are single value or multi
+	// value .
+	//
+	// This member is required.
+	ValueType DatasetParameterValueType
+
+	// A list of default values for a given integer parameter. This structure only
+	// accepts static values.
+	DefaultValues *IntegerDatasetParameterDefaultValues
+
+	noSmithyDocumentSerde
+}
+
+// The default values of an integer parameter.
+type IntegerDatasetParameterDefaultValues struct {
+
+	// A list of static default values for a given integer parameter.
+	StaticValues []int64
+
+	noSmithyDocumentSerde
+}
+
 // The default values of the IntegerParameterDeclaration .
 type IntegerDefaultValues struct {
 
@@ -5951,6 +6245,9 @@ type IntegerParameterDeclaration struct {
 	// The default values of a parameter. If the parameter is a single-value
 	// parameter, a maximum of one default value can be provided.
 	DefaultValues *IntegerDefaultValues
+
+	// A list of dataset parameters that are mapped to an analysis parameter.
+	MappedDataSetParameters []MappedDataSetParameter
 
 	// A parameter declaration for the Integer data type.
 	ValueWhenUnset *IntegerValueWhenUnsetConfiguration
@@ -6647,6 +6944,22 @@ type ManifestFileLocation struct {
 	noSmithyDocumentSerde
 }
 
+// A dataset parameter that is mapped to an analysis parameter.
+type MappedDataSetParameter struct {
+
+	// A unique name that identifies a dataset within the analysis or dashboard.
+	//
+	// This member is required.
+	DataSetIdentifier *string
+
+	// The name of the dataset parameter.
+	//
+	// This member is required.
+	DataSetParameterName *string
+
+	noSmithyDocumentSerde
+}
+
 // The display options for margins around the outside edge of sheets.
 type MarginStyle struct {
 
@@ -6819,6 +7132,42 @@ type MySqlParameters struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that represents a named entity.
+type NamedEntityDefinition struct {
+
+	// The name of the entity.
+	FieldName *string
+
+	// The definition of a metric.
+	Metric *NamedEntityDefinitionMetric
+
+	// The property name to be used for the named entity.
+	PropertyName *string
+
+	// The property role. Valid values for this structure are PRIMARY and ID .
+	PropertyRole PropertyRole
+
+	// The property usage. Valid values for this structure are INHERIT , DIMENSION ,
+	// and MEASURE .
+	PropertyUsage PropertyUsage
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a metric.
+type NamedEntityDefinitionMetric struct {
+
+	// The aggregation of a named entity. Valid values for this structure are SUM , MIN
+	// , MAX , COUNT , AVERAGE , DISTINCT_COUNT , STDEV , STDEVP , VAR , VARP ,
+	// PERCENTILE , MEDIAN , and CUSTOM .
+	Aggregation NamedEntityAggType
+
+	// The additional parameters for an aggregation function.
+	AggregationFunctionParameters map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Errors that occur during namespace creation.
 type NamespaceError struct {
 
@@ -6855,6 +7204,18 @@ type NamespaceInfoV2 struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that represents a negative format.
+type NegativeFormat struct {
+
+	// The prefix for a negative format.
+	Prefix *string
+
+	// The suffix for a negative format.
+	Suffix *string
+
+	noSmithyDocumentSerde
+}
+
 // The options that determine the negative value configuration.
 type NegativeValueConfiguration struct {
 
@@ -6862,6 +7223,46 @@ type NegativeValueConfiguration struct {
 	//
 	// This member is required.
 	DisplayMode NegativeValueDisplayMode
+
+	noSmithyDocumentSerde
+}
+
+// The structure that contains information about a network interface.
+type NetworkInterface struct {
+
+	// The availability zone that the network interface resides in.
+	AvailabilityZone *string
+
+	// An error message.
+	ErrorMessage *string
+
+	// The network interface ID.
+	NetworkInterfaceId *string
+
+	// The status of the network interface.
+	Status NetworkInterfaceStatus
+
+	// The subnet ID associated with the network interface.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that overrides the existing default values for a dataset
+// parameter that is inherited from another dataset.
+type NewDefaultValues struct {
+
+	// A list of static default values for a given date time parameter.
+	DateTimeStaticValues []time.Time
+
+	// A list of static default values for a given decimal parameter.
+	DecimalStaticValues []float64
+
+	// A list of static default values for a given integer parameter.
+	IntegerStaticValues []int64
+
+	// A list of static default values for a given string parameter.
+	StringStaticValues []string
 
 	noSmithyDocumentSerde
 }
@@ -7141,7 +7542,7 @@ type NumericSeparatorConfiguration struct {
 // The parameters for Oracle.
 type OracleParameters struct {
 
-	// Database.
+	// The database.
 	//
 	// This member is required.
 	Database *string
@@ -7151,7 +7552,7 @@ type OracleParameters struct {
 	// This member is required.
 	Host *string
 
-	// Port.
+	// The port.
 	//
 	// This member is required.
 	Port int32
@@ -7168,8 +7569,26 @@ type OutputColumn struct {
 	// A display name for the dataset.
 	Name *string
 
-	// Type.
+	// The type.
 	Type ColumnDataType
+
+	noSmithyDocumentSerde
+}
+
+// A transform operation that overrides the dataset parameter values that are
+// defined in another dataset.
+type OverrideDatasetParameterOperation struct {
+
+	// The name of the parameter to be overridden with different values.
+	//
+	// This member is required.
+	ParameterName *string
+
+	// The new default values for the parameter.
+	NewDefaultValues *NewDefaultValues
+
+	// The new name for the parameter.
+	NewParameterName *string
 
 	noSmithyDocumentSerde
 }
@@ -8310,6 +8729,18 @@ type RadarChartVisual struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that represents a range constant.
+type RangeConstant struct {
+
+	// The maximum value for a range constant.
+	Maximum *string
+
+	// The minimum value for a range constant.
+	Minimum *string
+
+	noSmithyDocumentSerde
+}
+
 // The range ends label type of a data path label.
 type RangeEndsLabelType struct {
 
@@ -8422,8 +8853,6 @@ type ReferenceLineDynamicDataConfiguration struct {
 	Column *ColumnIdentifier
 
 	// The aggregation function that is used in the dynamic data.
-	//
-	// This member is required.
 	MeasureAggregationFunction *AggregationFunction
 
 	noSmithyDocumentSerde
@@ -8608,6 +9037,9 @@ type RegisteredUserDashboardEmbeddingConfiguration struct {
 
 // The feature configuration for an embedded dashboard.
 type RegisteredUserDashboardFeatureConfigurations struct {
+
+	// The bookmarks configuration for an embedded dashboard in Amazon QuickSight.
+	Bookmarks *BookmarksConfigurations
 
 	// The state persistence settings of an embedded dashboard.
 	StatePersistence *StatePersistenceConfigurations
@@ -9112,6 +9544,9 @@ type ScatterPlotCategoricallyAggregatedFieldWells struct {
 	// The category field well of a scatter plot.
 	Category []DimensionField
 
+	// The label field well of a scatter plot.
+	Label []DimensionField
+
 	// The size field well of a scatter plot.
 	Size []MeasureField
 
@@ -9165,13 +9600,11 @@ type ScatterPlotConfiguration struct {
 // For this structure to be valid, only one of the attributes can be defined.
 type ScatterPlotFieldWells struct {
 
-	// The aggregated field wells of a scatter plot. Scatter plots that have a field
-	// in the category (group/color) field will have aggregated field wells. The x and
-	// y-axes of these scatter plots are aggregated by category.
+	// The aggregated field wells of a scatter plot. The x and y-axes of scatter plots
+	// with aggregated field wells are aggregated by category, label, or both.
 	ScatterPlotCategoricallyAggregatedFieldWells *ScatterPlotCategoricallyAggregatedFieldWells
 
-	// The unaggregated field wells of a scatter plot. Scatter plots without a
-	// category field well have unaggregated field wells. The x and y-axes of these
+	// The unaggregated field wells of a scatter plot. The x and y-axes of these
 	// scatter plots are unaggregated.
 	ScatterPlotUnaggregatedFieldWells *ScatterPlotUnaggregatedFieldWells
 
@@ -9180,6 +9613,12 @@ type ScatterPlotFieldWells struct {
 
 // The unaggregated field wells of a scatter plot.
 type ScatterPlotUnaggregatedFieldWells struct {
+
+	// The category field well of a scatter plot.
+	Category []DimensionField
+
+	// The label field well of a scatter plot.
+	Label []DimensionField
 
 	// The size field well of a scatter plot.
 	Size []MeasureField
@@ -9364,6 +9803,48 @@ type SelectedSheetsFilterScopeConfiguration struct {
 	// The sheet ID and visual IDs of the sheet and visuals that the filter is applied
 	// to.
 	SheetVisualScopingConfigurations []SheetVisualScopingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a semantic entity type.
+type SemanticEntityType struct {
+
+	// The semantic entity sub type name.
+	SubTypeName *string
+
+	// The semantic entity type name.
+	TypeName *string
+
+	// The semantic entity type parameters.
+	TypeParameters map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a semantic type.
+type SemanticType struct {
+
+	// The semantic type falsey cell value.
+	FalseyCellValue *string
+
+	// The other names or aliases for the false cell value.
+	FalseyCellValueSynonyms []string
+
+	// The semantic type sub type name.
+	SubTypeName *string
+
+	// The semantic type truthy cell value.
+	TruthyCellValue *string
+
+	// The other names or aliases for the true cell value.
+	TruthyCellValueSynonyms []string
+
+	// The semantic type name.
+	TypeName *string
+
+	// The semantic type parameters.
+	TypeParameters map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -9796,6 +10277,41 @@ type StatePersistenceConfigurations struct {
 	noSmithyDocumentSerde
 }
 
+// A string parameter for a dataset.
+type StringDatasetParameter struct {
+
+	// An identifier for the string parameter that is created in the dataset.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the string parameter that is created in the dataset.
+	//
+	// This member is required.
+	Name *string
+
+	// The value type of the dataset parameter. Valid values are single value or multi
+	// value .
+	//
+	// This member is required.
+	ValueType DatasetParameterValueType
+
+	// A list of default values for a given string dataset parameter type. This
+	// structure only accepts static values.
+	DefaultValues *StringDatasetParameterDefaultValues
+
+	noSmithyDocumentSerde
+}
+
+// The default values of a string parameter.
+type StringDatasetParameterDefaultValues struct {
+
+	// A list of static default values for a given string parameter.
+	StaticValues []string
+
+	noSmithyDocumentSerde
+}
+
 // The default values of the StringParameterDeclaration .
 type StringDefaultValues struct {
 
@@ -9854,6 +10370,9 @@ type StringParameterDeclaration struct {
 	// The default values of a parameter. If the parameter is a single-value
 	// parameter, a maximum of one default value can be provided.
 	DefaultValues *StringDefaultValues
+
+	// A list of dataset parameters that are mapped to an analysis parameter.
+	MappedDataSetParameters []MappedDataSetParameter
 
 	// The configuration that defines the default value of a String parameter when a
 	// value has not been set.
@@ -11078,6 +11597,442 @@ type TopBottomRankedComputation struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that represents a calculated field.
+type TopicCalculatedField struct {
+
+	// The calculated field name.
+	//
+	// This member is required.
+	CalculatedFieldName *string
+
+	// The calculated field expression.
+	//
+	// This member is required.
+	Expression *string
+
+	// The default aggregation. Valid values for this structure are SUM , MAX , MIN ,
+	// COUNT , DISTINCT_COUNT , and AVERAGE .
+	Aggregation DefaultAggregation
+
+	// The list of aggregation types that are allowed for the calculated field. Valid
+	// values for this structure are COUNT , DISTINCT_COUNT , MIN , MAX , MEDIAN , SUM
+	// , AVERAGE , STDEV , STDEVP , VAR , VARP , and PERCENTILE .
+	AllowedAggregations []AuthorSpecifiedAggregation
+
+	// The calculated field description.
+	CalculatedFieldDescription *string
+
+	// The other names or aliases for the calculated field.
+	CalculatedFieldSynonyms []string
+
+	// The other names or aliases for the calculated field cell value.
+	CellValueSynonyms []CellValueSynonym
+
+	// The column data role for a calculated field. Valid values for this structure
+	// are DIMENSION and MEASURE .
+	ColumnDataRole ColumnDataRole
+
+	// The order in which data is displayed for the calculated field when it's used in
+	// a comparative context.
+	ComparativeOrder *ComparativeOrder
+
+	// The default formatting definition.
+	DefaultFormatting *DefaultFormatting
+
+	// A Boolean value that indicates if a calculated field is visible in the
+	// autocomplete.
+	DisableIndexing *bool
+
+	// A boolean value that indicates if a calculated field is included in the topic.
+	IsIncludedInTopic bool
+
+	// A Boolean value that indicates whether to never aggregate calculated field in
+	// filters.
+	NeverAggregateInFilter bool
+
+	// The list of aggregation types that are not allowed for the calculated field.
+	// Valid values for this structure are COUNT , DISTINCT_COUNT , MIN , MAX , MEDIAN
+	// , SUM , AVERAGE , STDEV , STDEVP , VAR , VARP , and PERCENTILE .
+	NotAllowedAggregations []AuthorSpecifiedAggregation
+
+	// The semantic type.
+	SemanticType *SemanticType
+
+	// The level of time precision that is used to aggregate DateTime values.
+	TimeGranularity TopicTimeGranularity
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a category filter.
+type TopicCategoryFilter struct {
+
+	// The category filter function. Valid values for this structure are EXACT and
+	// CONTAINS .
+	CategoryFilterFunction CategoryFilterFunction
+
+	// The category filter type. This element is used to specify whether a filter is a
+	// simple category filter or an inverse category filter.
+	CategoryFilterType CategoryFilterType
+
+	// The constant used in a category filter.
+	Constant *TopicCategoryFilterConstant
+
+	// A Boolean value that indicates if the filter is inverse.
+	Inverse bool
+
+	noSmithyDocumentSerde
+}
+
+// A constant used in a category filter.
+type TopicCategoryFilterConstant struct {
+
+	// A collective constant used in a category filter. This element is used to
+	// specify a list of values for the constant.
+	CollectiveConstant *CollectiveConstant
+
+	// The type of category filter constant. This element is used to specify whether a
+	// constant is a singular or collective. Valid values are SINGULAR and COLLECTIVE .
+	ConstantType ConstantType
+
+	// A singular constant used in a category filter. This element is used to specify
+	// a single value for the constant.
+	SingularConstant *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a column in a dataset.
+type TopicColumn struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The type of aggregation that is performed on the column data when it's queried.
+	// Valid values for this structure are SUM , MAX , MIN , COUNT , DISTINCT_COUNT ,
+	// and AVERAGE .
+	Aggregation DefaultAggregation
+
+	// The list of aggregation types that are allowed for the column. Valid values for
+	// this structure are COUNT , DISTINCT_COUNT , MIN , MAX , MEDIAN , SUM , AVERAGE ,
+	// STDEV , STDEVP , VAR , VARP , and PERCENTILE .
+	AllowedAggregations []AuthorSpecifiedAggregation
+
+	// The other names or aliases for the column cell value.
+	CellValueSynonyms []CellValueSynonym
+
+	// The role of the column in the data. Valid values are DIMENSION and MEASURE .
+	ColumnDataRole ColumnDataRole
+
+	// A description of the column and its contents.
+	ColumnDescription *string
+
+	// A user-friendly name for the column.
+	ColumnFriendlyName *string
+
+	// The other names or aliases for the column.
+	ColumnSynonyms []string
+
+	// The order in which data is displayed for the column when it's used in a
+	// comparative context.
+	ComparativeOrder *ComparativeOrder
+
+	// The default formatting used for values in the column.
+	DefaultFormatting *DefaultFormatting
+
+	// A Boolean value that indicates whether the column shows in the autocomplete
+	// functionality.
+	DisableIndexing *bool
+
+	// A Boolean value that indicates whether the column is included in the query
+	// results.
+	IsIncludedInTopic bool
+
+	// A Boolean value that indicates whether to aggregate the column data when it's
+	// used in a filter context.
+	NeverAggregateInFilter bool
+
+	// The list of aggregation types that are not allowed for the column. Valid values
+	// for this structure are COUNT , DISTINCT_COUNT , MIN , MAX , MEDIAN , SUM ,
+	// AVERAGE , STDEV , STDEVP , VAR , VARP , and PERCENTILE .
+	NotAllowedAggregations []AuthorSpecifiedAggregation
+
+	// The semantic type of data contained in the column.
+	SemanticType *SemanticType
+
+	// The level of time precision that is used to aggregate DateTime values.
+	TimeGranularity TopicTimeGranularity
+
+	noSmithyDocumentSerde
+}
+
+// A filter used to restrict data based on a range of dates or times.
+type TopicDateRangeFilter struct {
+
+	// The constant used in a date range filter.
+	Constant *TopicRangeFilterConstant
+
+	// A Boolean value that indicates whether the date range filter should include the
+	// boundary values. If set to true, the filter includes the start and end dates. If
+	// set to false, the filter excludes them.
+	Inclusive bool
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes the details of a topic, such as its name,
+// description, and associated data sets.
+type TopicDetails struct {
+
+	// The data sets that the topic is associated with.
+	DataSets []DatasetMetadata
+
+	// The description of the topic.
+	Description *string
+
+	// The name of the topic.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a filter used to select items for a topic.
+type TopicFilter struct {
+
+	// The name of the filter.
+	//
+	// This member is required.
+	FilterName *string
+
+	// The name of the field that the filter operates on.
+	//
+	// This member is required.
+	OperandFieldName *string
+
+	// The category filter that is associated with this filter.
+	CategoryFilter *TopicCategoryFilter
+
+	// The date range filter.
+	DateRangeFilter *TopicDateRangeFilter
+
+	// The class of the filter. Valid values for this structure are
+	// ENFORCED_VALUE_FILTER , CONDITIONAL_VALUE_FILTER , and NAMED_VALUE_FILTER .
+	FilterClass FilterClass
+
+	// A description of the filter used to select items for a topic.
+	FilterDescription *string
+
+	// The other names or aliases for the filter.
+	FilterSynonyms []string
+
+	// The type of the filter. Valid values for this structure are CATEGORY_FILTER ,
+	// NUMERIC_EQUALITY_FILTER , NUMERIC_RANGE_FILTER , DATE_RANGE_FILTER , and
+	// RELATIVE_DATE_FILTER .
+	FilterType NamedFilterType
+
+	// The numeric equality filter.
+	NumericEqualityFilter *TopicNumericEqualityFilter
+
+	// The numeric range filter.
+	NumericRangeFilter *TopicNumericRangeFilter
+
+	// The relative date filter.
+	RelativeDateFilter *TopicRelativeDateFilter
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a named entity.
+type TopicNamedEntity struct {
+
+	// The name of the named entity.
+	//
+	// This member is required.
+	EntityName *string
+
+	// The definition of a named entity.
+	Definition []NamedEntityDefinition
+
+	// The description of the named entity.
+	EntityDescription *string
+
+	// The other names or aliases for the named entity.
+	EntitySynonyms []string
+
+	// The type of named entity that a topic represents.
+	SemanticEntityType *SemanticEntityType
+
+	noSmithyDocumentSerde
+}
+
+// A filter that filters topics based on the value of a numeric field. The filter
+// includes only topics whose numeric field value matches the specified value.
+type TopicNumericEqualityFilter struct {
+
+	// An aggregation function that specifies how to calculate the value of a numeric
+	// field for a topic. Valid values for this structure are NO_AGGREGATION , SUM ,
+	// AVERAGE , COUNT , DISTINCT_COUNT , MAX , MEDIAN , MIN , STDEV , STDEVP , VAR ,
+	// and VARP .
+	Aggregation NamedFilterAggType
+
+	// The constant used in a numeric equality filter.
+	Constant *TopicSingularFilterConstant
+
+	noSmithyDocumentSerde
+}
+
+// A filter that filters topics based on the value of a numeric field. The filter
+// includes only topics whose numeric field value falls within the specified range.
+type TopicNumericRangeFilter struct {
+
+	// An aggregation function that specifies how to calculate the value of a numeric
+	// field for a topic, Valid values for this structure are NO_AGGREGATION , SUM ,
+	// AVERAGE , COUNT , DISTINCT_COUNT , MAX , MEDIAN , MIN , STDEV , STDEVP , VAR ,
+	// and VARP .
+	Aggregation NamedFilterAggType
+
+	// The constant used in a numeric range filter.
+	Constant *TopicRangeFilterConstant
+
+	// A Boolean value that indicates whether the endpoints of the numeric range are
+	// included in the filter. If set to true, topics whose numeric field value is
+	// equal to the endpoint values will be included in the filter. If set to false,
+	// topics whose numeric field value is equal to the endpoint values will be
+	// excluded from the filter.
+	Inclusive bool
+
+	noSmithyDocumentSerde
+}
+
+// A constant value that is used in a range filter to specify the endpoints of the
+// range.
+type TopicRangeFilterConstant struct {
+
+	// The data type of the constant value that is used in a range filter. Valid
+	// values for this structure are RANGE .
+	ConstantType ConstantType
+
+	// The value of the constant that is used to specify the endpoints of a range
+	// filter.
+	RangeConstant *RangeConstant
+
+	noSmithyDocumentSerde
+}
+
+// The details about the refresh of a topic.
+type TopicRefreshDetails struct {
+
+	// The Amazon Resource Name (ARN) of the topic refresh.
+	RefreshArn *string
+
+	// The ID of the refresh, which occurs as a result of topic creation or topic
+	// update.
+	RefreshId *string
+
+	// The status of the refresh job that indicates whether the job is still running,
+	// completed successfully, or failed.
+	RefreshStatus TopicRefreshStatus
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a topic refresh schedule.
+type TopicRefreshSchedule struct {
+
+	// A Boolean value that controls whether to schedule runs at the same schedule
+	// that is specified in SPICE dataset.
+	//
+	// This member is required.
+	BasedOnSpiceSchedule bool
+
+	// A Boolean value that controls whether to schedule is enabled.
+	//
+	// This member is required.
+	IsEnabled *bool
+
+	// The time of day when the refresh should run, for example, Monday-Sunday.
+	RepeatAt *string
+
+	// The starting date and time for the refresh schedule.
+	StartingAt *time.Time
+
+	// The timezone that you want the refresh schedule to use.
+	Timezone *string
+
+	// The type of refresh schedule. Valid values for this structure are HOURLY , DAILY
+	// , WEEKLY , and MONTHLY .
+	TopicScheduleType TopicScheduleType
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the refresh schedule details for a dataset.
+type TopicRefreshScheduleSummary struct {
+
+	// The Amazon Resource Name (ARN) of the dataset.
+	DatasetArn *string
+
+	// The ID of the dataset.
+	DatasetId *string
+
+	// The name of the dataset.
+	DatasetName *string
+
+	// The definition of a refresh schedule.
+	RefreshSchedule *TopicRefreshSchedule
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a relative date filter.
+type TopicRelativeDateFilter struct {
+
+	// The constant used in a relative date filter.
+	Constant *TopicSingularFilterConstant
+
+	// The function to be used in a relative date filter to determine the range of
+	// dates to include in the results. Valid values for this structure are BEFORE ,
+	// AFTER , and BETWEEN .
+	RelativeDateFilterFunction TopicRelativeDateFilterFunction
+
+	// The level of time precision that is used to aggregate DateTime values.
+	TimeGranularity TopicTimeGranularity
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a singular filter constant, used in filters to
+// specify a single value to match against.
+type TopicSingularFilterConstant struct {
+
+	// The type of the singular filter constant. Valid values for this structure are
+	// SINGULAR .
+	ConstantType ConstantType
+
+	// The value of the singular filter constant.
+	SingularConstant *string
+
+	noSmithyDocumentSerde
+}
+
+// A topic summary.
+type TopicSummary struct {
+
+	// The Amazon Resource Name (ARN) of the topic.
+	Arn *string
+
+	// The name of the topic.
+	Name *string
+
+	// The ID for the topic. This ID is unique per Amazon Web Services Region for each
+	// Amazon Web Services account.
+	TopicId *string
+
+	noSmithyDocumentSerde
+}
+
 // The total aggregation computation configuration.
 type TotalAggregationComputation struct {
 
@@ -11126,6 +12081,7 @@ type TotalOptions struct {
 //	TransformOperationMemberCastColumnTypeOperation
 //	TransformOperationMemberCreateColumnsOperation
 //	TransformOperationMemberFilterOperation
+//	TransformOperationMemberOverrideDatasetParameterOperation
 //	TransformOperationMemberProjectOperation
 //	TransformOperationMemberRenameColumnOperation
 //	TransformOperationMemberTagColumnOperation
@@ -11161,6 +12117,16 @@ type TransformOperationMemberFilterOperation struct {
 }
 
 func (*TransformOperationMemberFilterOperation) isTransformOperation() {}
+
+// A transform operation that overrides the dataset parameter values that are
+// defined in another dataset.
+type TransformOperationMemberOverrideDatasetParameterOperation struct {
+	Value OverrideDatasetParameterOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*TransformOperationMemberOverrideDatasetParameterOperation) isTransformOperation() {}
 
 // An operation that projects columns. Operations that come after a projection can
 // only refer to projected columns.
@@ -11758,6 +12724,50 @@ type VisualTitleLabelOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The structure of a VPC connection.
+type VPCConnection struct {
+
+	// The Amazon Resource Name (ARN) of the VPC connection.
+	Arn *string
+
+	// The availability status of the VPC connection.
+	AvailabilityStatus VPCConnectionAvailabilityStatus
+
+	// The time that the VPC connection was created.
+	CreatedTime *time.Time
+
+	// A list of IP addresses of DNS resolver endpoints for the VPC connection.
+	DnsResolvers []string
+
+	// The time that the VPC connection was last updated.
+	LastUpdatedTime *time.Time
+
+	// The display name for the VPC connection.
+	Name *string
+
+	// A list of network interfaces.
+	NetworkInterfaces []NetworkInterface
+
+	// The ARN of the IAM role associated with the VPC connection.
+	RoleArn *string
+
+	// The Amazon EC2 security group IDs associated with the VPC connection.
+	SecurityGroupIds []string
+
+	// The status of the VPC connection.
+	Status VPCConnectionResourceStatus
+
+	// The ID of the VPC connection that you're creating. This ID is a unique
+	// identifier for each Amazon Web Services Region in an Amazon Web Services
+	// account.
+	VPCConnectionId *string
+
+	// The Amazon EC2 VPC ID associated with the VPC connection.
+	VPCId *string
+
+	noSmithyDocumentSerde
+}
+
 // VPC connection properties.
 type VpcConnectionProperties struct {
 
@@ -11765,6 +12775,50 @@ type VpcConnectionProperties struct {
 	//
 	// This member is required.
 	VpcConnectionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary metadata that describes a VPC connection.
+type VPCConnectionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the VPC connection.
+	Arn *string
+
+	// The availability status of the VPC connection.
+	AvailabilityStatus VPCConnectionAvailabilityStatus
+
+	// The time that the VPC connection was created.
+	CreatedTime *time.Time
+
+	// A list of IP addresses of DNS resolver endpoints for the VPC connection.
+	DnsResolvers []string
+
+	// The time that the VPC connection was last updated.
+	LastUpdatedTime *time.Time
+
+	// The display name for the VPC connection.
+	Name *string
+
+	// A list of network interfaces.
+	NetworkInterfaces []NetworkInterface
+
+	// The ARN of the IAM role associated with the VPC connection.
+	RoleArn *string
+
+	// The Amazon EC2 security group IDs associated with the VPC connection.
+	SecurityGroupIds []string
+
+	// The status of the VPC connection.
+	Status VPCConnectionResourceStatus
+
+	// The ID of the VPC connection that you're creating. This ID is a unique
+	// identifier for each Amazon Web Services Region in an Amazon Web Services
+	// account.
+	VPCConnectionId *string
+
+	// The Amazon EC2 VPC ID associated with the VPC connection.
+	VPCId *string
 
 	noSmithyDocumentSerde
 }

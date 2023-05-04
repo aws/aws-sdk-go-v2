@@ -530,6 +530,26 @@ func (m *validateOpGetFindingAggregator) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFindingHistory struct {
+}
+
+func (*validateOpGetFindingHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFindingHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFindingHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFindingHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInsightResults struct {
 }
 
@@ -892,6 +912,10 @@ func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.S
 
 func addOpGetFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFindingAggregator{}, middleware.After)
+}
+
+func addOpGetFindingHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFindingHistory{}, middleware.After)
 }
 
 func addOpGetInsightResultsValidationMiddleware(stack *middleware.Stack) error {
@@ -1924,6 +1948,25 @@ func validateOpGetFindingAggregatorInput(v *GetFindingAggregatorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetFindingAggregatorInput"}
 	if v.FindingAggregatorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingAggregatorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFindingHistoryInput(v *GetFindingHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFindingHistoryInput"}
+	if v.FindingIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIdentifier"))
+	} else if v.FindingIdentifier != nil {
+		if err := validateAwsSecurityFindingIdentifier(v.FindingIdentifier); err != nil {
+			invalidParams.AddNested("FindingIdentifier", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

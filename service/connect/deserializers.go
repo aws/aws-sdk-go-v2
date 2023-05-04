@@ -2889,9 +2889,6 @@ func awsRestjson1_deserializeOpErrorCreateParticipant(response *smithyhttp.Respo
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
-		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
-
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
 

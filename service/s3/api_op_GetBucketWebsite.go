@@ -19,7 +19,7 @@ import (
 // the bucket owner can read the bucket website configuration. However, bucket
 // owners can allow other users to read the website configuration by writing a
 // bucket policy granting them the S3:GetBucketWebsite permission. The following
-// operations are related to DeleteBucketWebsite :
+// operations are related to GetBucketWebsite :
 //   - DeleteBucketWebsite (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketWebsite.html)
 //   - PutBucketWebsite (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html)
 func (c *Client) GetBucketWebsite(ctx context.Context, params *GetBucketWebsiteInput, optFns ...func(*Options)) (*GetBucketWebsiteOutput, error) {

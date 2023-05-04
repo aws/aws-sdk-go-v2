@@ -23,12 +23,12 @@ import (
 // To use HEAD, you must have READ access to the object. A HEAD request has the
 // same options as a GET action on an object. The response is identical to the GET
 // response except that there is no response body. Because of this, if the HEAD
-// request generates an error, it returns a generic 404 Not Found or 403 Forbidden
-// code. It is not possible to retrieve the exact exception beyond these error
-// codes. If you encrypt an object by using server-side encryption with
-// customer-provided encryption keys (SSE-C) when you store the object in Amazon
-// S3, then when you retrieve the metadata from the object, you must use the
-// following headers:
+// request generates an error, it returns a generic 400 Bad Request , 403 Forbidden
+// or 404 Not Found code. It is not possible to retrieve the exact exception
+// beyond these error codes. If you encrypt an object by using server-side
+// encryption with customer-provided encryption keys (SSE-C) when you store the
+// object in Amazon S3, then when you retrieve the metadata from the object, you
+// must use the following headers:
 //   - x-amz-server-side-encryption-customer-algorithm
 //   - x-amz-server-side-encryption-customer-key
 //   - x-amz-server-side-encryption-customer-key-MD5
@@ -59,9 +59,10 @@ import (
 //
 // For more information about conditional requests, see RFC 7232 (https://tools.ietf.org/html/rfc7232)
 // . Permissions You need the relevant read object (or version) permission for this
-// operation. For more information, see Specifying Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
-// . If the object you request does not exist, the error Amazon S3 returns depends
-// on whether you also have the s3:ListBucket permission.
+// operation. For more information, see Actions, resources, and condition keys for
+// Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html) .
+// If the object you request does not exist, the error Amazon S3 returns depends on
+// whether you also have the s3:ListBucket permission.
 //   - If you have the s3:ListBucket permission on the bucket, Amazon S3 returns an
 //     HTTP status code 404 ("no such key") error.
 //   - If you don’t have the s3:ListBucket permission, Amazon S3 returns an HTTP
@@ -94,13 +95,13 @@ type HeadObjectInput struct {
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
 	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
-	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
-	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When
-	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
-	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide. When you use this action with Amazon S3 on
+	// Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on
+	// Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com . When you
+	// use this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts access point ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see What is S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
@@ -144,8 +145,9 @@ type HeadObjectInput struct {
 	// object.
 	PartNumber int32
 
-	// Because HeadObject returns only the metadata for an object, this parameter has
-	// no effect.
+	// HeadObject returns only the metadata for an object. If the Range is
+	// satisfiable, only the ContentLength is affected in the response. If the Range
+	// is not satisfiable, S3 returns a 416 - Requested Range Not Satisfiable error.
 	Range *string
 
 	// Confirms that the requester knows that they will be charged for the request.
@@ -345,14 +347,12 @@ type HeadObjectOutput struct {
 	SSECustomerKeyMD5 *string
 
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
-	// (Amazon Web Services KMS) symmetric customer managed key that was used for the
-	// object.
+	// (Amazon Web Services KMS) symmetric encryption customer managed key that was
+	// used for the object.
 	SSEKMSKeyId *string
 
-	// If the object is stored using server-side encryption either with an Amazon Web
-	// Services KMS key or an Amazon S3-managed encryption key, the response includes
-	// this header with the value of the server-side encryption algorithm used when
-	// storing this object in Amazon S3 (for example, AES256, aws:kms).
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms ).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Provides storage class information of the object. Amazon S3 returns this header

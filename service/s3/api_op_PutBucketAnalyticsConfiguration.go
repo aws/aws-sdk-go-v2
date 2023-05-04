@@ -33,7 +33,7 @@ import (
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
-// . Special Errors
+// . PutBucketAnalyticsConfiguration has the following special errors:
 //   - HTTP Error: HTTP 400 Bad Request
 //   - Code: InvalidArgument
 //   - Cause: Invalid argument.
@@ -47,7 +47,7 @@ import (
 //     the s3:PutAnalyticsConfiguration bucket permission to set the configuration on
 //     the bucket.
 //
-// Related Resources
+// The following operations are related to PutBucketAnalyticsConfiguration :
 //   - GetBucketAnalyticsConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAnalyticsConfiguration.html)
 //   - DeleteBucketAnalyticsConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html)
 //   - ListBucketAnalyticsConfigurations (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html)

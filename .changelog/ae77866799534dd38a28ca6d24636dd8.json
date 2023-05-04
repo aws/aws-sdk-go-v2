@@ -1,0 +1,8 @@
+{
+    "id": "ae778667-9953-4dd3-8a28-ca6d24636dd8",
+    "type": "feature",
+    "description": "This release adds a new attribute FaceOccluded. Additionally, you can now select attributes individually (e.g. [\"DEFAULT\", \"FACE_OCCLUDED\", \"AGE_RANGE\"] instead of [\"ALL\"]), which can reduce response time.",
+    "modules": [
+        "service/rekognition"
+    ]
+}

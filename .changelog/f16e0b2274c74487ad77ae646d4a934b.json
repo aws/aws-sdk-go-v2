@@ -1,0 +1,8 @@
+{
+    "id": "f16e0b22-74c7-4487-ad77-ae646d4a934b",
+    "type": "feature",
+    "description": "Documentation update for new error type NamespaceNotFoundException for CreateCluster and UpdateCluster",
+    "modules": [
+        "service/ecs"
+    ]
+}

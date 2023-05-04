@@ -10,7 +10,7 @@ import (
 // Specifies the days since the initiation of an incomplete multipart upload that
 // Amazon S3 will wait before permanently removing all parts of the upload. For
 // more information, see Aborting Incomplete Multipart Uploads Using a Bucket
-// Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
+// Lifecycle Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
 // in the Amazon S3 User Guide.
 type AbortIncompleteMultipartUpload struct {
 
@@ -492,7 +492,7 @@ type CSVInput struct {
 
 	// A single character used to indicate that a row should be ignored when the
 	// character is present at the start of that row. You can specify any character to
-	// indicate a comment line.
+	// indicate a comment line. The default character is # . Default: #
 	Comments *string
 
 	// A single character used to separate individual fields in a record. You can
@@ -709,7 +709,7 @@ type Destination struct {
 type Encryption struct {
 
 	// The server-side encryption algorithm used when storing job results in Amazon S3
-	// (for example, AES256, aws:kms).
+	// (for example, AES256, aws:kms ).
 	//
 	// This member is required.
 	EncryptionType ServerSideEncryption
@@ -719,9 +719,9 @@ type Encryption struct {
 	KMSContext *string
 
 	// If the encryption type is aws:kms , this optional value specifies the ID of the
-	// symmetric customer managed key to use for encryption of job results. Amazon S3
-	// only supports symmetric keys. For more information, see Using symmetric and
-	// asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// symmetric encryption customer managed key to use for encryption of job results.
+	// Amazon S3 only supports symmetric encryption KMS keys. For more information, see
+	// Asymmetric keys in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KMSKeyId *string
 
@@ -735,8 +735,8 @@ type EncryptionConfiguration struct {
 	// Specifies the ID (Key ARN or Alias ARN) of the customer managed Amazon Web
 	// Services KMS key stored in Amazon Web Services Key Management Service (KMS) for
 	// the destination bucket. Amazon S3 uses this key to encrypt replica objects.
-	// Amazon S3 only supports symmetric, customer managed KMS keys. For more
-	// information, see Using symmetric and asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// Amazon S3 only supports symmetric encryption KMS keys. For more information, see
+	// Asymmetric keys in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	ReplicaKmsKeyID *string
 
@@ -755,7 +755,9 @@ type Error struct {
 
 	// The error code is a string that uniquely identifies an error condition. It is
 	// meant to be read and understood by programs that detect and handle errors by
-	// type. Amazon S3 error codes
+	// type. The following is a list of Amazon S3 error codes. For more information,
+	// see Error responses (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
+	// .
 	//   - Code: AccessDenied
 	//   - Description: Access Denied
 	//   - HTTP Status Code: 403 Forbidden
@@ -1129,7 +1131,7 @@ type Error struct {
 	//   - HTTP Status Code: 403 Forbidden
 	//   - SOAP Fault Code Prefix: Client
 	//   - Code: ServiceUnavailable
-	//   - Description: Reduce your request rate.
+	//   - Description: Service is unable to handle request.
 	//   - HTTP Status Code: 503 Service Unavailable
 	//   - SOAP Fault Code Prefix: Server
 	//   - Code: SlowDown
@@ -1206,7 +1208,7 @@ type EventBridgeConfiguration struct {
 // in the Amazon S3 User Guide.
 type ExistingObjectReplication struct {
 
-	//
+	// Specifies whether Amazon S3 replicates existing source bucket objects.
 	//
 	// This member is required.
 	Status ExistingObjectReplicationStatus
@@ -1592,7 +1594,7 @@ type LambdaFunctionConfiguration struct {
 	LambdaFunctionArn *string
 
 	// Specifies object key name filtering rules. For information about key name
-	// filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// filtering, see Configuring event notifications using object key name filtering (https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html)
 	// in the Amazon S3 User Guide.
 	Filter *NotificationConfigurationFilter
 
@@ -1603,11 +1605,13 @@ type LambdaFunctionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the expiration for the lifecycle of the object.
+// Container for the expiration for the lifecycle of the object. For more
+// information see, Managing your storage lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
+// in the Amazon S3 User Guide.
 type LifecycleExpiration struct {
 
-	// Indicates at what date the object is to be moved or deleted. Should be in GMT
-	// ISO 8601 Format.
+	// Indicates at what date the object is to be moved or deleted. The date value
+	// must conform to the ISO 8601 format. The time is always midnight UTC.
 	Date *time.Time
 
 	// Indicates the lifetime, in days, of the objects that are subject to the rule.
@@ -1623,7 +1627,9 @@ type LifecycleExpiration struct {
 	noSmithyDocumentSerde
 }
 
-// A lifecycle rule for individual objects in an Amazon S3 bucket.
+// A lifecycle rule for individual objects in an Amazon S3 bucket. For more
+// information see, Managing your storage lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
+// in the Amazon S3 User Guide.
 type LifecycleRule struct {
 
 	// If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is
@@ -1635,7 +1641,7 @@ type LifecycleRule struct {
 	// Specifies the days since the initiation of an incomplete multipart upload that
 	// Amazon S3 will wait before permanently removing all parts of the upload. For
 	// more information, see Aborting Incomplete Multipart Uploads Using a Bucket
-	// Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
+	// Lifecycle Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
 	// in the Amazon S3 User Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload
 
@@ -1850,7 +1856,8 @@ type MetricsAndOperator struct {
 // .
 type MetricsConfiguration struct {
 
-	// The ID used to identify the metrics configuration.
+	// The ID used to identify the metrics configuration. The ID has a 64 character
+	// limit and can only contain letters, numbers, periods, dashes, and underscores.
 	//
 	// This member is required.
 	Id *string
@@ -2020,7 +2027,7 @@ type NotificationConfiguration struct {
 }
 
 // Specifies object key name filtering rules. For information about key name
-// filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+// filtering, see Configuring event notifications using object key name filtering (https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html)
 // in the Amazon S3 User Guide.
 type NotificationConfigurationFilter struct {
 
@@ -2237,7 +2244,16 @@ type OutputSerialization struct {
 // Container for the owner's display name and ID.
 type Owner struct {
 
-	// Container for the display name of the owner.
+	// Container for the display name of the owner. This value is only supported in
+	// the following Amazon Web Services Regions:
+	//   - US East (N. Virginia)
+	//   - US West (N. California)
+	//   - US West (Oregon)
+	//   - Asia Pacific (Singapore)
+	//   - Asia Pacific (Sydney)
+	//   - Asia Pacific (Tokyo)
+	//   - Europe (Ireland)
+	//   - South America (São Paulo)
 	DisplayName *string
 
 	// Container for the ID of the owner.
@@ -2422,7 +2438,7 @@ type QueueConfiguration struct {
 	QueueArn *string
 
 	// Specifies object key name filtering rules. For information about key name
-	// filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// filtering, see Configuring event notifications using object key name filtering (https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html)
 	// in the Amazon S3 User Guide.
 	Filter *NotificationConfigurationFilter
 
@@ -2561,7 +2577,9 @@ type ReplicationRule struct {
 	// .
 	DeleteMarkerReplication *DeleteMarkerReplication
 
-	//
+	// Optional configuration to replicate existing source bucket objects. For more
+	// information, see Replicating Existing Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication)
+	// in the Amazon S3 User Guide.
 	ExistingObjectReplication *ExistingObjectReplication
 
 	// A filter that identifies the subset of objects to which the replication rule
@@ -2941,16 +2959,17 @@ type ServerSideEncryptionByDefault struct {
 	// Amazon Web Services Key Management Service (KMS) customer Amazon Web Services
 	// KMS key ID to use for the default encryption. This parameter is allowed if and
 	// only if SSEAlgorithm is set to aws:kms . You can specify the key ID or the
-	// Amazon Resource Name (ARN) of the KMS key. However, if you are using encryption
-	// with cross-account or Amazon Web Services service operations you must use a
-	// fully qualified KMS key ARN. For more information, see Using encryption for
-	// cross-account operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy)
-	// . For example:
+	// Amazon Resource Name (ARN) of the KMS key. If you use a key ID, you can run into
+	// a LogDestination undeliverable error when creating a VPC flow log. If you are
+	// using encryption with cross-account or Amazon Web Services service operations
+	// you must use a fully qualified KMS key ARN. For more information, see Using
+	// encryption for cross-account operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy)
+	// .
 	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//   - Key ARN:
 	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// Amazon S3 only supports symmetric KMS keys and not asymmetric KMS keys. For
-	// more information, see Using symmetric and asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// Amazon S3 only supports symmetric encryption KMS keys. For more information,
+	// see Asymmetric keys in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KMSMasterKeyID *string
 
@@ -3016,8 +3035,8 @@ type SourceSelectionCriteria struct {
 type SSEKMS struct {
 
 	// Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web
-	// Services KMS) symmetric customer managed key to use for encrypting inventory
-	// reports.
+	// Services KMS) symmetric encryption customer managed key to use for encrypting
+	// inventory reports.
 	//
 	// This member is required.
 	KeyId *string
@@ -3181,7 +3200,7 @@ type TopicConfiguration struct {
 	TopicArn *string
 
 	// Specifies object key name filtering rules. For information about key name
-	// filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// filtering, see Configuring event notifications using object key name filtering (https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html)
 	// in the Amazon S3 User Guide.
 	Filter *NotificationConfigurationFilter
 

@@ -33,8 +33,8 @@ func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIA
 
 type CreateIAMPolicyAssignmentInput struct {
 
-	// The name of the assignment, also called a rule. It must be unique within an
-	// Amazon Web Services account.
+	// The name of the assignment, also called a rule. The name must be unique within
+	// the Amazon Web Services account.
 	//
 	// This member is required.
 	AssignmentName *string
@@ -76,7 +76,7 @@ type CreateIAMPolicyAssignmentOutput struct {
 	// The ID for the assignment.
 	AssignmentId *string
 
-	// The name of the assignment. This name must be unique within the Amazon Web
+	// The name of the assignment. The name must be unique within the Amazon Web
 	// Services account.
 	AssignmentName *string
 

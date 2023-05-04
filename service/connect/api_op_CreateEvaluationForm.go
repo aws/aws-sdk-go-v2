@@ -14,9 +14,8 @@ import (
 
 // Creates an evaluation form in the specified Amazon Connect instance. The form
 // can be used to define questions related to agent performance, and create
-// sections to organize such questions. An evaluation form must have a unique title
-// within an instance. Question and section identifiers cannot be duplicated within
-// the same evaluation form.
+// sections to organize such questions. Question and section identifiers cannot be
+// duplicated within the same evaluation form.
 func (c *Client) CreateEvaluationForm(ctx context.Context, params *CreateEvaluationFormInput, optFns ...func(*Options)) (*CreateEvaluationFormOutput, error) {
 	if params == nil {
 		params = &CreateEvaluationFormInput{}
@@ -46,7 +45,7 @@ type CreateEvaluationFormInput struct {
 	// This member is required.
 	Items []types.EvaluationFormItem
 
-	// A unique title of the evaluation form.
+	// A title of the evaluation form.
 	//
 	// This member is required.
 	Title *string

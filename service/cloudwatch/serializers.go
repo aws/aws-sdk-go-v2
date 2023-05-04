@@ -2890,11 +2890,28 @@ func awsAwsquery_serializeDocumentMetricStreamFilter(v *types.MetricStreamFilter
 	object := value.Object()
 	_ = object
 
+	if v.MetricNames != nil {
+		objectKey := object.Key("MetricNames")
+		if err := awsAwsquery_serializeDocumentMetricStreamFilterMetricNames(v.MetricNames, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.Namespace != nil {
 		objectKey := object.Key("Namespace")
 		objectKey.String(*v.Namespace)
 	}
 
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricStreamFilterMetricNames(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

@@ -842,7 +842,7 @@ type EvaluationForm struct {
 	// This member is required.
 	Status EvaluationFormVersionStatus
 
-	// A unique title of the evaluation form.
+	// A title of the evaluation form.
 	//
 	// This member is required.
 	Title *string
@@ -884,7 +884,7 @@ type EvaluationFormContent struct {
 	// This member is required.
 	Items []EvaluationFormItem
 
-	// A unique title of the evaluation form.
+	// A title of the evaluation form.
 	//
 	// This member is required.
 	Title *string
@@ -1217,7 +1217,7 @@ type EvaluationFormSummary struct {
 	// This member is required.
 	LatestVersion *int32
 
-	// A unique title of the evaluation form.
+	// A title of the evaluation form.
 	//
 	// This member is required.
 	Title *string
@@ -1351,7 +1351,7 @@ type EvaluationSummary struct {
 	// This member is required.
 	EvaluationFormId *string
 
-	// A unique title of the evaluation form.
+	// A title of the evaluation form.
 	//
 	// This member is required.
 	EvaluationFormTitle *string
@@ -2100,8 +2100,8 @@ type NumberReference struct {
 //   - Duration labels, such as NON_TALK_TIME , CONTACT_DURATION ,
 //     AGENT_INTERACTION_DURATION , CUSTOMER_HOLD_TIME have a minimum value of 0 and
 //     maximum value of 28800.
-//   - Percantages have a minimum value of 0 and maximum value of 100.
-//   - NUMBER_OF_INTERRUPTIONS has a minimum value of 0 and maximum value of 100.
+//   - Percentages have a minimum value of 0 and maximum value of 100.
+//   - NUMBER_OF_INTERRUPTIONS has a minimum value of 0 and maximum value of 1000.
 type NumericQuestionPropertyValueAutomation struct {
 
 	// The property label of the automation.
@@ -3175,7 +3175,7 @@ type SingleSelectQuestionRuleCategoryAutomation struct {
 	// This member is required.
 	Condition SingleSelectQuestionRuleCategoryAutomationCondition
 
-	// The identifier of the answer option tha
+	// The identifier of the answer option.
 	//
 	// This member is required.
 	OptionRefId *string

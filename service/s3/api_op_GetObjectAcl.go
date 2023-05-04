@@ -16,13 +16,13 @@ import (
 // must have s3:GetObjectAcl permissions or READ_ACP access to the object. For
 // more information, see Mapping of ACL permissions and access policy permissions (https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#acl-access-policy-permission-mapping)
 // in the Amazon S3 User Guide This action is not supported by Amazon S3 on
-// Outposts. Versioning By default, GET returns ACL information about the current
-// version of an object. To return ACL information about a different version, use
-// the versionId subresource. If your bucket uses the bucket owner enforced setting
-// for S3 Object Ownership, requests to read ACLs are still supported and return
-// the bucket-owner-full-control ACL with the owner being the account that created
-// the bucket. For more information, see Controlling object ownership and
-// disabling ACLs (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+// Outposts. By default, GET returns ACL information about the current version of
+// an object. To return ACL information about a different version, use the
+// versionId subresource. If your bucket uses the bucket owner enforced setting for
+// S3 Object Ownership, requests to read ACLs are still supported and return the
+// bucket-owner-full-control ACL with the owner being the account that created the
+// bucket. For more information, see Controlling object ownership and disabling
+// ACLs (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
 // in the Amazon S3 User Guide. The following operations are related to
 // GetObjectAcl :
 //   - GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)

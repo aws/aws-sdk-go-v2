@@ -9541,7 +9541,7 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// Indicates when the security-findings provider created the potential security
+	// Indicates when the security findings provider created the potential security
 	// issue that a finding captured. Uses the date-time format specified in RFC 3339
 	// section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
 	// . The value cannot contain spaces, and date and time should be separated by T .
@@ -9556,7 +9556,7 @@ type AwsSecurityFinding struct {
 	Description *string
 
 	// The identifier for the solution-specific component (a discrete unit of logic)
-	// that generated a finding. In various security-findings providers' solutions,
+	// that generated a finding. In various security findings providers' solutions,
 	// this generator can be called a rule, a check, a detector, a plugin, etc.
 	//
 	// This member is required.
@@ -9590,7 +9590,7 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	Title *string
 
-	// Indicates when the security-findings provider last updated the finding record.
+	// Indicates when the security findings provider last updated the finding record.
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
 	// Format (https://tools.ietf.org/html/rfc3339#section-5.6) . The value cannot
 	// contain spaces, and date and time should be separated by T . For example,
@@ -9631,14 +9631,14 @@ type AwsSecurityFinding struct {
 	// findings, severity, and types.
 	FindingProviderFields *FindingProviderFields
 
-	// Indicates when the security-findings provider first observed the potential
+	// Indicates when the security findings provider first observed the potential
 	// security issue that a finding captured. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
 	// . The value cannot contain spaces, and date and time should be separated by T .
 	// For example, 2020-03-22T13:22:13.933Z .
 	FirstObservedAt *string
 
-	// Indicates when the security-findings provider most recently observed the
+	// Indicates when the security findings provider most recently observed the
 	// potential security issue that a finding captured. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
 	// . The value cannot contain spaces, and date and time should be separated by T .
@@ -9665,7 +9665,7 @@ type AwsSecurityFinding struct {
 	// The details of process-related information about a finding.
 	Process *ProcessDetails
 
-	// A data type where security-findings providers can include additional
+	// A data type where security findings providers can include additional
 	// solution-specific details that aren't part of the defined AwsSecurityFinding
 	// format. Can contain up to 50 key-value pairs. For each key-value pair, the key
 	// can contain up to 128 characters, and the value can contain up to 2048
@@ -9699,7 +9699,7 @@ type AwsSecurityFinding struct {
 	// A finding's severity.
 	Severity *Severity
 
-	// A URL that links to a page about the current finding in the security-findings
+	// A URL that links to a page about the current finding in the security findings
 	// provider's solution.
 	SourceUrl *string
 
@@ -9771,7 +9771,7 @@ type AwsSecurityFindingFilters struct {
 	// percent confidence and 100 means 100 percent confidence.
 	Confidence []NumberFilter
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// An ISO8601-formatted timestamp that indicates when the security findings
 	// provider captured the potential security issue that a finding captured. A
 	// correctly formatted example is 2020-05-21T20:16:34.724Z . The value cannot
 	// contain spaces, and date and time should be separated by T . For more
@@ -9820,7 +9820,7 @@ type AwsSecurityFindingFilters struct {
 	// Unusual Behaviors | Sensitive Data Identifications
 	FindingProviderFieldsTypes []StringFilter
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// An ISO8601-formatted timestamp that indicates when the security findings
 	// provider first observed the potential security issue that a finding captured. A
 	// correctly formatted example is 2020-05-21T20:16:34.724Z . The value cannot
 	// contain spaces, and date and time should be separated by T . For more
@@ -9829,7 +9829,7 @@ type AwsSecurityFindingFilters struct {
 	FirstObservedAt []DateFilter
 
 	// The identifier for the solution-specific component (a discrete unit of logic)
-	// that generated a finding. In various security-findings providers' solutions,
+	// that generated a finding. In various security findings providers' solutions,
 	// this generator can be called a rule, a check, a detector, a plugin, etc.
 	GeneratorId []StringFilter
 
@@ -9841,7 +9841,7 @@ type AwsSecurityFindingFilters struct {
 	// Deprecated: The Keyword property is deprecated.
 	Keyword []KeywordFilter
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// An ISO8601-formatted timestamp that indicates when the security findings
 	// provider most recently observed the potential security issue that a finding
 	// captured. A correctly formatted example is 2020-05-21T20:16:34.724Z . The value
 	// cannot contain spaces, and date and time should be separated by T . For more
@@ -9936,7 +9936,7 @@ type AwsSecurityFindingFilters struct {
 	// that generates findings) is registered with Security Hub.
 	ProductArn []StringFilter
 
-	// A data type where security-findings providers can include additional
+	// A data type where security findings providers can include additional
 	// solution-specific details that aren't part of the defined AwsSecurityFinding
 	// format.
 	ProductFields []MapFilter
@@ -10059,14 +10059,14 @@ type AwsSecurityFindingFilters struct {
 	// FindingProviderFieldsSeverityLabel.
 	SeverityNormalized []NumberFilter
 
-	// The native severity as defined by the security-findings provider's solution
+	// The native severity as defined by the security findings provider's solution
 	// that generated the finding.
 	//
 	// Deprecated: This filter is deprecated. Instead, use
 	// FindingProviderSeverityOriginal.
 	SeverityProduct []NumberFilter
 
-	// A URL that links to a page about the current finding in the security-findings
+	// A URL that links to a page about the current finding in the security findings
 	// provider's solution.
 	SourceUrl []StringFilter
 
@@ -10096,7 +10096,7 @@ type AwsSecurityFindingFilters struct {
 	// finding.
 	Type []StringFilter
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// An ISO8601-formatted timestamp that indicates when the security findings
 	// provider last updated the finding record. A correctly formatted example is
 	// 2020-05-21T20:16:34.724Z . The value cannot contain spaces, and date and time
 	// should be separated by T . For more information, see RFC 3339 section 5.6,
@@ -10144,7 +10144,7 @@ type AwsSecurityFindingFilters struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies a finding to update using BatchUpdateFindings .
+// Identifies which finding to get the finding history for.
 type AwsSecurityFindingIdentifier struct {
 
 	// The identifier of the finding that was specified by the finding provider.
@@ -11421,6 +11421,85 @@ type FindingAggregator struct {
 	// The ARN of the finding aggregator. You use the finding aggregator ARN to
 	// retrieve details for, update, and delete the finding aggregator.
 	FindingAggregatorArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of events that changed the specified finding during the specified time
+// period. Each record represents a single finding change event.
+type FindingHistoryRecord struct {
+
+	// Identifies whether the event marks the creation of a new finding. A value of
+	// True means that the finding is newly created. A value of False means that the
+	// finding isn’t newly created.
+	FindingCreated bool
+
+	// Identifies which finding to get the finding history for.
+	FindingIdentifier *AwsSecurityFindingIdentifier
+
+	// A token for pagination purposes. Provide this token in the subsequent request
+	// to GetFindingsHistory (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindingsHistory.html)
+	// to get up to an additional 100 results of history for the same finding that you
+	// specified in your initial request.
+	NextToken *string
+
+	// Identifies the source of the event that changed the finding. For example, an
+	// integrated Amazon Web Service or third-party partner integration may call
+	// BatchImportFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)
+	// , or an Security Hub customer may call BatchUpdateFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)
+	// .
+	UpdateSource *FindingHistoryUpdateSource
+
+	// An ISO 8601-formatted timestamp that indicates when the security findings
+	// provider last updated the finding record. A correctly formatted example is
+	// 2020-05-21T20:16:34.724Z . The value cannot contain spaces, and date and time
+	// should be separated by T . For more information, see RFC 3339 section 5.6,
+	// Internet Date/Time Format (https://www.rfc-editor.org/rfc/rfc3339#section-5.6) .
+	UpdateTime *time.Time
+
+	// An array of objects that provides details about the finding change event,
+	// including the Amazon Web Services Security Finding Format (ASFF) field that
+	// changed, the value of the field before the change, and the value of the field
+	// after the change.
+	Updates []FindingHistoryUpdate
+
+	noSmithyDocumentSerde
+}
+
+// An array of objects that provides details about a change to a finding,
+// including the Amazon Web Services Security Finding Format (ASFF) field that
+// changed, the value of the field before the change, and the value of the field
+// after the change.
+type FindingHistoryUpdate struct {
+
+	// The value of the ASFF field after the finding change event. To preserve storage
+	// and readability, Security Hub omits this value if FindingHistoryRecord (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingHistoryRecord.html)
+	// exceeds database limits.
+	NewValue *string
+
+	// The value of the ASFF field before the finding change event.
+	OldValue *string
+
+	// The ASFF field that changed during the finding change event.
+	UpdatedField *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies the source of the finding change event.
+type FindingHistoryUpdateSource struct {
+
+	// The identity of the source that initiated the finding change event. For
+	// example, the Amazon Resource Name (ARN) of a partner that calls
+	// BatchImportFindings or of a customer that calls BatchUpdateFindings.
+	Identity *string
+
+	// Describes the type of finding change event, such as a call to
+	// BatchImportFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)
+	// (by an integrated Amazon Web Service or third party partner integration) or
+	// BatchUpdateFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)
+	// (by a Security Hub customer).
+	Type FindingHistoryUpdateSourceType
 
 	noSmithyDocumentSerde
 }

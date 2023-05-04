@@ -28,7 +28,8 @@ import (
 // that has no transfer acceleration state. A bucket has no Transfer Acceleration
 // state if a state has never been set on the bucket. For more information about
 // transfer acceleration, see Transfer Acceleration (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)
-// in the Amazon S3 User Guide. Related Resources
+// in the Amazon S3 User Guide. The following operations are related to
+// GetBucketAccelerateConfiguration :
 //   - PutBucketAccelerateConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html)
 func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *GetBucketAccelerateConfigurationInput, optFns ...func(*Options)) (*GetBucketAccelerateConfigurationOutput, error) {
 	if params == nil {
