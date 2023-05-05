@@ -46,6 +46,8 @@ import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlAttributeTrait;
 import software.amazon.smithy.model.traits.XmlNamespaceTrait;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionV2Generator;
+import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 
 abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     private final Set<ShapeId> generatedDocumentBodyShapeSerializers = new HashSet<>();
@@ -93,8 +95,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void writeMiddlewareDocumentSerializerDelegator(
             GenerationContext context,
             OperationShape operation,
-            GoStackStepMiddlewareGenerator generator
-    ) {
+            GoStackStepMiddlewareGenerator generator) {
         GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.SMITHY);
         writer.addUseImports(SmithyGoDependency.SMITHY_XML);
@@ -116,8 +117,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); "
                 + "err != nil {", "}", () -> {
-            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-        });
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                });
     }
 
     private void initalizeXmlEncoder(
@@ -125,8 +126,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             GoWriter writer,
             Shape inputShape,
             String nodeDst,
-            String inputSrc
-    ) {
+            String inputSrc) {
         writer.addUseImports(SmithyGoDependency.SMITHY_XML);
         writer.addUseImports(SmithyGoDependency.BYTES);
         writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
@@ -138,8 +138,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         if (xmlNamespaceTrait.isPresent()) {
             XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
             writer.write("$L.Attr = append($L.Attr, smithyxml.NewNamespaceAttribute($S, $S))", nodeDst, nodeDst,
-                    namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
-            );
+                    namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri());
         }
     }
 
@@ -147,8 +146,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void writeMiddlewarePayloadAsDocumentSerializerDelegator(
             GenerationContext context,
             MemberShape memberShape,
-            String operand
-    ) {
+            String operand) {
         GoWriter writer = context.getWriter().get();
         Model model = context.getModel();
         Shape payloadShape = model.expectShape(memberShape.getTarget());
@@ -170,8 +168,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                         XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
                         writer.write(
                                 "payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute($S, $S))",
-                                namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
-                        );
+                                namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "",
+                                namespace.getUri());
                     }
 
                     String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
@@ -201,7 +199,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     /**
-     * Returns the MediaType for the payload shape derived from the MediaTypeTrait, shape type, or document content type.
+     * Returns the MediaType for the payload shape derived from the MediaTypeTrait,
+     * shape type, or document content type.
      *
      * @param payloadShape shape bound to the payload.
      * @return string for media type.
@@ -224,7 +223,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         return getDocumentContentType();
     }
 
-    /*     ================Deserializer===========================     */
+    /* ================Deserializer=========================== */
 
     @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
@@ -286,8 +285,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void writeMiddlewareDocumentDeserializerDelegator(
             GenerationContext context,
             OperationShape operation,
-            GoStackStepMiddlewareGenerator generator
-    ) {
+            GoStackStepMiddlewareGenerator generator) {
         Model model = context.getModel();
         GoWriter writer = context.getWriter().get();
         Shape targetShape = ProtocolUtils.expectOutput(model, operation);
@@ -303,13 +301,15 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
             Shape payloadShape = model.expectShape(memberShape.getTarget());
 
-            // if target shape is of type String or type Blob, then delegate deserializers for explicit payload shapes
+            // if target shape is of type String or type Blob, then delegate deserializers
+            // for explicit payload shapes
             if (payloadShape.isStringShape() || payloadShape.isBlobShape()) {
                 writeMiddlewarePayloadBindingDeserializerDelegator(writer, context.getService(), targetShape,
                         payloadShape);
                 return;
             }
-            // for other payload target types we should deserialize using the appropriate document deserializer
+            // for other payload target types we should deserialize using the appropriate
+            // document deserializer
             targetShape = payloadShape;
             operand += "." + context.getSymbolProvider().toMemberName(memberShape);
         }
@@ -319,8 +319,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void generateOperationDocumentDeserializer(
-            GenerationContext context, OperationShape operation
-    ) {
+            GenerationContext context, OperationShape operation) {
         Model model = context.getModel();
         HttpBindingIndex bindingIndex = HttpBindingIndex.of(model);
         Set<MemberShape> documentBindings = bindingIndex.getResponseBindings(operation, HttpBinding.Location.DOCUMENT)
@@ -364,8 +363,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     private void writePayloadBindingDeserializer(
             GenerationContext context,
             Shape shape,
-            Predicate<MemberShape> filterMemberShapes
-    ) {
+            Predicate<MemberShape> filterMemberShapes) {
         GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol shapeSymbol = symbolProvider.toSymbol(shape);
@@ -430,10 +428,10 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         }
     }
 
-    // Writes middleware that delegates to deserializers for shapes that have explicit payload.
+    // Writes middleware that delegates to deserializers for shapes that have
+    // explicit payload.
     private void writeMiddlewarePayloadBindingDeserializerDelegator(
-            GoWriter writer, ServiceShape service, Shape outputShape, Shape payloadShape
-    ) {
+            GoWriter writer, ServiceShape service, Shape outputShape, Shape payloadShape) {
         String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(outputShape, service,
                 getProtocolName());
 
@@ -450,13 +448,13 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         });
     }
 
-    // Writes middleware that delegates to deserializers for shapes that have implicit payload.
+    // Writes middleware that delegates to deserializers for shapes that have
+    // implicit payload.
     private void writeMiddlewareDocumentBindingDeserializerDelegator(
             GenerationContext context,
             GoWriter writer,
             Shape shape,
-            String operand
-    ) {
+            String operand) {
         XmlProtocolUtils.initializeXmlDecoder(writer, "response.Body", "out, metadata,", "nil");
 
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
@@ -480,8 +478,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void generateEventStreamSerializers(
             GenerationContext context,
             UnionShape eventUnion,
-            Set<EventStreamInfo> eventStreamInfos
-    ) {
+            Set<EventStreamInfo> eventStreamInfos) {
         Model model = context.getModel();
 
         AwsEventStreamUtils.generateEventStreamSerializer(context, eventUnion);
@@ -547,8 +544,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void generateEventStreamDeserializers(
             GenerationContext context,
             UnionShape eventUnion,
-            Set<EventStreamInfo> eventStreamInfos
-    ) {
+            Set<EventStreamInfo> eventStreamInfos) {
         var model = context.getModel();
 
         AwsEventStreamUtils.generateEventStreamDeserializer(context, eventUnion);
@@ -559,29 +555,28 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             AwsProtocolUtils.initializeJsonDecoder(ctxWriter, "br");
             ctxWriter.addUseImports(AwsGoDependency.AWS_XML);
             ctxWriter.write("""
-                            errorComponents, err := $T(br, $L)
-                            if err != nil {
-                                return err
-                            }
-                            errorCode := "UnknownError"
-                            errorMessage := errorCode
-                            if ev := exceptionType.String(); len(ev) > 0 {
-                                errorCode = ev
-                            } else if ev := errorComponents.Code; len(ev) > 0 {
-                                errorCode = ev
-                            }
-                            if ev := errorComponents.Message; len(ev) > 0 {
-                                errorMessage = ev
-                            }
-                            return &$T{
-                                Code: errorCode,
-                                Message: errorMessage,
-                            }
-                            """,
+                    errorComponents, err := $T(br, $L)
+                    if err != nil {
+                        return err
+                    }
+                    errorCode := "UnknownError"
+                    errorMessage := errorCode
+                    if ev := exceptionType.String(); len(ev) > 0 {
+                        errorCode = ev
+                    } else if ev := errorComponents.Code; len(ev) > 0 {
+                        errorCode = ev
+                    }
+                    if ev := errorComponents.Message; len(ev) > 0 {
+                        errorMessage = ev
+                    }
+                    return &$T{
+                        Code: errorCode,
+                        Message: errorMessage,
+                    }
+                    """,
                     SymbolUtils.createValueSymbolBuilder("GetErrorResponseComponents", AwsGoDependency.AWS_XML).build(),
                     isNoErrorWrapping(context),
-                    SymbolUtils.createValueSymbolBuilder("GenericAPIError", SmithyGoDependency.SMITHY).build()
-            );
+                    SymbolUtils.createValueSymbolBuilder("GenericAPIError", SmithyGoDependency.SMITHY).build());
         });
 
         final var eventDocumentShapes = new TreeSet<Shape>();
@@ -661,5 +656,11 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
         eventDocumentShapes.addAll(ProtocolUtils.resolveRequiredDocumentShapeSerde(model, eventDocumentShapes));
         generateDocumentBodyShapeDeserializers(context, eventDocumentShapes);
+    }
+
+    @Override
+    public void generateEndpointResolution(GenerationContext context) {
+        var generator = new EndpointResolutionV2Generator(new AwsFnProvider());
+        generator.generate(context);
     }
 }
