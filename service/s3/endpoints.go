@@ -11,9 +11,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
 	smithy "github.com/aws/smithy-go"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
-	smithytransport "github.com/aws/smithy-go/transport"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
@@ -212,8 +212,8 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 
 }
 
-// EndpointParameters provides the option parameters for influence how endpoints
-// are resolved.
+// EndpointParameters provides the parameters that influence how endpoints are
+// resolved.
 type EndpointParameters struct {
 	// The S3 bucket used to send the request. This is an optional parameter that will
 	// be set automatically for operations that are scoped to an S3 bucket.
@@ -340,24 +340,24 @@ func (p EndpointParameters) ValidateRequired() error {
 type EndpointResolverV2 interface {
 	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
 	// returning the endpoint if found. Otherwise an error is returned.
-	ResolveEndpoint(ctx context.Context, options EndpointParameters) (
-		smithytransport.Endpoint, error,
+	ResolveEndpoint(ctx context.Context, params EndpointParameters) (
+		smithyendpoints.Endpoint, error,
 	)
 }
 
-// resolverV2 provides the implementation for resolving endpoints.
-type resolverV2 struct{}
+// resolver provides the implementation for resolving endpoints.
+type resolver struct{}
 
-func NewDefaultEndpointResolverV2() *resolverV2 {
-	return &resolverV2{}
+func NewDefaultEndpointResolverV2() EndpointResolverV2 {
+	return &resolver{}
 }
 
 // ResolveEndpoint attempts to resolve the endpoint with the provided options,
 // returning the endpoint if found. Otherwise an error is returned.
-func (r *resolverV2) ResolveEndpoint(
+func (r *resolver) ResolveEndpoint(
 	ctx context.Context, params EndpointParameters,
 ) (
-	endpoint smithytransport.Endpoint, err error,
+	endpoint smithyendpoints.Endpoint, err error,
 ) {
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
@@ -416,9 +416,9 @@ func (r *resolverV2) ResolveEndpoint(
 															return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 														}
 
-														return smithytransport.Endpoint{
+														return smithyendpoints.Endpoint{
 															URI:     *uri,
-															Headers: &http.Header{},
+															Headers: http.Header{},
 															Properties: func() smithy.Properties {
 																var out smithy.Properties
 																out.Set("authSchemes", []interface{}{
@@ -452,9 +452,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -496,9 +496,9 @@ func (r *resolverV2) ResolveEndpoint(
 															return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 														}
 
-														return smithytransport.Endpoint{
+														return smithyendpoints.Endpoint{
 															URI:     *uri,
-															Headers: &http.Header{},
+															Headers: http.Header{},
 															Properties: func() smithy.Properties {
 																var out smithy.Properties
 																out.Set("authSchemes", []interface{}{
@@ -534,9 +534,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -623,9 +623,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -661,9 +661,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -702,9 +702,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -744,9 +744,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -789,9 +789,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -834,9 +834,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -880,9 +880,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -927,9 +927,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -967,9 +967,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1005,9 +1005,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1046,9 +1046,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1088,9 +1088,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1127,9 +1127,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1165,9 +1165,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1206,9 +1206,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1248,9 +1248,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1293,9 +1293,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1338,9 +1338,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1385,9 +1385,9 @@ func (r *resolverV2) ResolveEndpoint(
 															return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 														}
 
-														return smithytransport.Endpoint{
+														return smithyendpoints.Endpoint{
 															URI:     *uri,
-															Headers: &http.Header{},
+															Headers: http.Header{},
 															Properties: func() smithy.Properties {
 																var out smithy.Properties
 																out.Set("authSchemes", []interface{}{
@@ -1417,9 +1417,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -1464,9 +1464,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -1504,9 +1504,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1542,9 +1542,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1582,9 +1582,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -1615,9 +1615,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1657,9 +1657,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1746,9 +1746,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1786,9 +1786,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1829,9 +1829,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1873,9 +1873,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -1914,9 +1914,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1954,9 +1954,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -1997,9 +1997,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -2041,9 +2041,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -2082,9 +2082,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -2122,9 +2122,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -2163,9 +2163,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -2205,9 +2205,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -2246,9 +2246,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -2286,9 +2286,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -2329,9 +2329,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -2373,9 +2373,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -2421,9 +2421,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -2471,9 +2471,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -2520,9 +2520,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -2570,9 +2570,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -2621,9 +2621,9 @@ func (r *resolverV2) ResolveEndpoint(
 																return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 															}
 
-															return smithytransport.Endpoint{
+															return smithyendpoints.Endpoint{
 																URI:     *uri,
-																Headers: &http.Header{},
+																Headers: http.Header{},
 																Properties: func() smithy.Properties {
 																	var out smithy.Properties
 																	out.Set("authSchemes", []interface{}{
@@ -2653,9 +2653,9 @@ func (r *resolverV2) ResolveEndpoint(
 															return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 														}
 
-														return smithytransport.Endpoint{
+														return smithyendpoints.Endpoint{
 															URI:     *uri,
-															Headers: &http.Header{},
+															Headers: http.Header{},
 															Properties: func() smithy.Properties {
 																var out smithy.Properties
 																out.Set("authSchemes", []interface{}{
@@ -2706,9 +2706,9 @@ func (r *resolverV2) ResolveEndpoint(
 																return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 															}
 
-															return smithytransport.Endpoint{
+															return smithyendpoints.Endpoint{
 																URI:     *uri,
-																Headers: &http.Header{},
+																Headers: http.Header{},
 																Properties: func() smithy.Properties {
 																	var out smithy.Properties
 																	out.Set("authSchemes", []interface{}{
@@ -2739,9 +2739,9 @@ func (r *resolverV2) ResolveEndpoint(
 															return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 														}
 
-														return smithytransport.Endpoint{
+														return smithyendpoints.Endpoint{
 															URI:     *uri,
-															Headers: &http.Header{},
+															Headers: http.Header{},
 															Properties: func() smithy.Properties {
 																var out smithy.Properties
 																out.Set("authSchemes", []interface{}{
@@ -2790,9 +2790,9 @@ func (r *resolverV2) ResolveEndpoint(
 															return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 														}
 
-														return smithytransport.Endpoint{
+														return smithyendpoints.Endpoint{
 															URI:     *uri,
-															Headers: &http.Header{},
+															Headers: http.Header{},
 															Properties: func() smithy.Properties {
 																var out smithy.Properties
 																out.Set("authSchemes", []interface{}{
@@ -2842,9 +2842,9 @@ func (r *resolverV2) ResolveEndpoint(
 															return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 														}
 
-														return smithytransport.Endpoint{
+														return smithyendpoints.Endpoint{
 															URI:     *uri,
-															Headers: &http.Header{},
+															Headers: http.Header{},
 															Properties: func() smithy.Properties {
 																var out smithy.Properties
 																out.Set("authSchemes", []interface{}{
@@ -2885,9 +2885,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -2925,9 +2925,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -2967,9 +2967,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -2998,9 +2998,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -3040,9 +3040,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -3081,9 +3081,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -3121,9 +3121,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -3163,9 +3163,9 @@ func (r *resolverV2) ResolveEndpoint(
 														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 													}
 
-													return smithytransport.Endpoint{
+													return smithyendpoints.Endpoint{
 														URI:     *uri,
-														Headers: &http.Header{},
+														Headers: http.Header{},
 														Properties: func() smithy.Properties {
 															var out smithy.Properties
 															out.Set("authSchemes", []interface{}{
@@ -3196,9 +3196,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -3240,9 +3240,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -3299,9 +3299,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -3413,9 +3413,9 @@ func (r *resolverV2) ResolveEndpoint(
 																					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																				}
 
-																				return smithytransport.Endpoint{
+																				return smithyendpoints.Endpoint{
 																					URI:     *uri,
-																					Headers: &http.Header{},
+																					Headers: http.Header{},
 																					Properties: func() smithy.Properties {
 																						var out smithy.Properties
 																						out.Set("authSchemes", []interface{}{
@@ -3450,9 +3450,9 @@ func (r *resolverV2) ResolveEndpoint(
 																				return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																			}
 
-																			return smithytransport.Endpoint{
+																			return smithyendpoints.Endpoint{
 																				URI:     *uri,
-																				Headers: &http.Header{},
+																				Headers: http.Header{},
 																				Properties: func() smithy.Properties {
 																					var out smithy.Properties
 																					out.Set("authSchemes", []interface{}{
@@ -3485,9 +3485,9 @@ func (r *resolverV2) ResolveEndpoint(
 																			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																		}
 
-																		return smithytransport.Endpoint{
+																		return smithyendpoints.Endpoint{
 																			URI:     *uri,
-																			Headers: &http.Header{},
+																			Headers: http.Header{},
 																			Properties: func() smithy.Properties {
 																				var out smithy.Properties
 																				out.Set("authSchemes", []interface{}{
@@ -3642,9 +3642,9 @@ func (r *resolverV2) ResolveEndpoint(
 																							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																						}
 
-																						return smithytransport.Endpoint{
+																						return smithyendpoints.Endpoint{
 																							URI:     *uri,
-																							Headers: &http.Header{},
+																							Headers: http.Header{},
 																							Properties: func() smithy.Properties {
 																								var out smithy.Properties
 																								out.Set("authSchemes", []interface{}{
@@ -3680,9 +3680,9 @@ func (r *resolverV2) ResolveEndpoint(
 																							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																						}
 
-																						return smithytransport.Endpoint{
+																						return smithyendpoints.Endpoint{
 																							URI:     *uri,
-																							Headers: &http.Header{},
+																							Headers: http.Header{},
 																							Properties: func() smithy.Properties {
 																								var out smithy.Properties
 																								out.Set("authSchemes", []interface{}{
@@ -3718,9 +3718,9 @@ func (r *resolverV2) ResolveEndpoint(
 																							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																						}
 
-																						return smithytransport.Endpoint{
+																						return smithyendpoints.Endpoint{
 																							URI:     *uri,
-																							Headers: &http.Header{},
+																							Headers: http.Header{},
 																							Properties: func() smithy.Properties {
 																								var out smithy.Properties
 																								out.Set("authSchemes", []interface{}{
@@ -3762,9 +3762,9 @@ func (r *resolverV2) ResolveEndpoint(
 																									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																								}
 
-																								return smithytransport.Endpoint{
+																								return smithyendpoints.Endpoint{
 																									URI:     *uri,
-																									Headers: &http.Header{},
+																									Headers: http.Header{},
 																									Properties: func() smithy.Properties {
 																										var out smithy.Properties
 																										out.Set("authSchemes", []interface{}{
@@ -3802,9 +3802,9 @@ func (r *resolverV2) ResolveEndpoint(
 																							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																						}
 
-																						return smithytransport.Endpoint{
+																						return smithyendpoints.Endpoint{
 																							URI:     *uri,
-																							Headers: &http.Header{},
+																							Headers: http.Header{},
 																							Properties: func() smithy.Properties {
 																								var out smithy.Properties
 																								out.Set("authSchemes", []interface{}{
@@ -3912,9 +3912,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -4029,9 +4029,9 @@ func (r *resolverV2) ResolveEndpoint(
 																				return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																			}
 
-																			return smithytransport.Endpoint{
+																			return smithyendpoints.Endpoint{
 																				URI:     *uri,
-																				Headers: &http.Header{},
+																				Headers: http.Header{},
 																				Properties: func() smithy.Properties {
 																					var out smithy.Properties
 																					out.Set("authSchemes", []interface{}{
@@ -4067,9 +4067,9 @@ func (r *resolverV2) ResolveEndpoint(
 																		return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 																	}
 
-																	return smithytransport.Endpoint{
+																	return smithyendpoints.Endpoint{
 																		URI:     *uri,
-																		Headers: &http.Header{},
+																		Headers: http.Header{},
 																		Properties: func() smithy.Properties {
 																			var out smithy.Properties
 																			out.Set("authSchemes", []interface{}{
@@ -4201,9 +4201,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -4239,9 +4239,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -4280,9 +4280,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4322,9 +4322,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4367,9 +4367,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4412,9 +4412,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4458,9 +4458,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -4505,9 +4505,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -4545,9 +4545,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -4583,9 +4583,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -4624,9 +4624,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4666,9 +4666,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4705,9 +4705,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -4743,9 +4743,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -4784,9 +4784,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4826,9 +4826,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4871,9 +4871,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4916,9 +4916,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -4963,9 +4963,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -4995,9 +4995,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -5042,9 +5042,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -5082,9 +5082,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -5120,9 +5120,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -5160,9 +5160,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -5193,9 +5193,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -5235,9 +5235,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -5302,9 +5302,9 @@ func (r *resolverV2) ResolveEndpoint(
 									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 								}
 
-								return smithytransport.Endpoint{
+								return smithyendpoints.Endpoint{
 									URI:     *uri,
-									Headers: &http.Header{},
+									Headers: http.Header{},
 									Properties: func() smithy.Properties {
 										var out smithy.Properties
 										out.Set("authSchemes", []interface{}{
@@ -5335,9 +5335,9 @@ func (r *resolverV2) ResolveEndpoint(
 								return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 							}
 
-							return smithytransport.Endpoint{
+							return smithyendpoints.Endpoint{
 								URI:     *uri,
-								Headers: &http.Header{},
+								Headers: http.Header{},
 								Properties: func() smithy.Properties {
 									var out smithy.Properties
 									out.Set("authSchemes", []interface{}{
@@ -5366,9 +5366,9 @@ func (r *resolverV2) ResolveEndpoint(
 							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 						}
 
-						return smithytransport.Endpoint{
+						return smithyendpoints.Endpoint{
 							URI:     *uri,
-							Headers: &http.Header{},
+							Headers: http.Header{},
 							Properties: func() smithy.Properties {
 								var out smithy.Properties
 								out.Set("authSchemes", []interface{}{
@@ -5421,9 +5421,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -5465,9 +5465,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -5510,9 +5510,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -5556,9 +5556,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -5594,9 +5594,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -5630,9 +5630,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -5669,9 +5669,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -5709,9 +5709,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -5753,9 +5753,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -5797,9 +5797,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -5842,9 +5842,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -5888,9 +5888,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -5926,9 +5926,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -5962,9 +5962,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -6001,9 +6001,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6041,9 +6041,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6085,9 +6085,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6129,9 +6129,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6174,9 +6174,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -6220,9 +6220,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -6258,9 +6258,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -6294,9 +6294,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -6333,9 +6333,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6373,9 +6373,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6417,9 +6417,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6461,9 +6461,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6507,9 +6507,9 @@ func (r *resolverV2) ResolveEndpoint(
 													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 												}
 
-												return smithytransport.Endpoint{
+												return smithyendpoints.Endpoint{
 													URI:     *uri,
-													Headers: &http.Header{},
+													Headers: http.Header{},
 													Properties: func() smithy.Properties {
 														var out smithy.Properties
 														out.Set("authSchemes", []interface{}{
@@ -6538,9 +6538,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -6584,9 +6584,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -6622,9 +6622,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -6658,9 +6658,9 @@ func (r *resolverV2) ResolveEndpoint(
 										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 									}
 
-									return smithytransport.Endpoint{
+									return smithyendpoints.Endpoint{
 										URI:     *uri,
-										Headers: &http.Header{},
+										Headers: http.Header{},
 										Properties: func() smithy.Properties {
 											var out smithy.Properties
 											out.Set("authSchemes", []interface{}{
@@ -6696,9 +6696,9 @@ func (r *resolverV2) ResolveEndpoint(
 												return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 											}
 
-											return smithytransport.Endpoint{
+											return smithyendpoints.Endpoint{
 												URI:     *uri,
-												Headers: &http.Header{},
+												Headers: http.Header{},
 												Properties: func() smithy.Properties {
 													var out smithy.Properties
 													out.Set("authSchemes", []interface{}{
@@ -6727,9 +6727,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
@@ -6767,9 +6767,9 @@ func (r *resolverV2) ResolveEndpoint(
 											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 										}
 
-										return smithytransport.Endpoint{
+										return smithyendpoints.Endpoint{
 											URI:     *uri,
-											Headers: &http.Header{},
+											Headers: http.Header{},
 											Properties: func() smithy.Properties {
 												var out smithy.Properties
 												out.Set("authSchemes", []interface{}{
