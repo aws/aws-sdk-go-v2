@@ -1,3 +1,15 @@
+# Release (2023-05-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.97.0](service/ec2/CHANGELOG.md#v1970-2023-05-05)
+  * **Feature**: This release adds support the inf2 and trn1n instances. inf2 instances are purpose built for deep learning inference while trn1n instances are powered by AWS Trainium accelerators and they build on the capabilities of Trainium-powered trn1 instances.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.13.0](service/inspector2/CHANGELOG.md#v1130-2023-05-05)
+  * **Feature**: Amazon Inspector now allows customers to search its vulnerability intelligence database if any of the Inspector scanning types are activated.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.23.0](service/mediatailor/CHANGELOG.md#v1230-2023-05-05)
+  * **Feature**: This release adds support for AFTER_LIVE_EDGE mode configuration for avail suppression, and adding a fill-policy setting that sets the avail suppression to PARTIAL_AVAIL or FULL_AVAIL_ONLY when AFTER_LIVE_EDGE is enabled.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.22.0](service/sqs/CHANGELOG.md#v1220-2023-05-05)
+  * **Feature**: Revert previous SQS protocol change.
+
 # Release (2023-05-04)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.22.0 (2023-05-05)
+
+* **Feature**: Revert previous SQS protocol change.
+
 # v1.21.0 (2023-05-04)
 
 * **Feature**: This release enables customers to call SQS using AWS JSON-1.0 protocol.

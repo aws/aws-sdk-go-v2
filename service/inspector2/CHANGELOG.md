@@ -1,3 +1,7 @@
+# v1.13.0 (2023-05-05)
+
+* **Feature**: Amazon Inspector now allows customers to search its vulnerability intelligence database if any of the Inspector scanning types are activated.
+
 # v1.12.1 (2023-05-04)
 
 * No change notes available for this release.

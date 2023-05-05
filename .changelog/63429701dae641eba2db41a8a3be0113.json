@@ -1,8 +1,0 @@
-{
-    "id": "63429701-dae6-41eb-a2db-41a8a3be0113",
-    "type": "feature",
-    "description": "Amazon Inspector now allows customers to search its vulnerability intelligence database if any of the Inspector scanning types are activated.",
-    "modules": [
-        "service/inspector2"
-    ]
-}
