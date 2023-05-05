@@ -5,33 +5,35 @@ import "regexp"
 // Partition provides the metadata describing an AWS partition.
 type Partition struct {
 	ID            string                     `json:"id"`
-	Regions       map[string]PartitionConfig `json:"regions"`
+	Regions       map[string]RegionOverrides `json:"regions"`
 	RegionRegex   string                     `json:"regionRegex"`
 	DefaultConfig PartitionConfig            `json:"outputs"`
 }
 
 // PartitionConfig provides the endpoint metadata for an AWS region or partition.
 type PartitionConfig struct {
+	Name               string `json:"name"`
+	DnsSuffix          string `json:"dnsSuffix"`
+	DualStackDnsSuffix string `json:"dualStackDnsSuffix"`
+	SupportsFIPS       bool   `json:"supportsFIPS"`
+	SupportsDualStack  bool   `json:"supportsDualStack"`
+}
+
+type RegionOverrides struct {
 	Name               *string `json:"name"`
-	DNSSuffix          *string `json:"dnsSuffix"`
-	DualStackDNSSuffix *string `json:"dualStackDnsSuffix"`
+	DnsSuffix          *string `json:"dnsSuffix"`
+	DualStackDnsSuffix *string `json:"dualStackDnsSuffix"`
 	SupportsFIPS       *bool   `json:"supportsFIPS"`
 	SupportsDualStack  *bool   `json:"supportsDualStack"`
 }
 
 const defaultPartition = "aws"
 
-// GetPartition returns an AWS [Partition] for the region provided. If the
-// partition cannot be determined nil will be returned.
-func GetPartition(region string) *PartitionConfig {
-	return getPartition(partitions, region)
-}
-
 func getPartition(partitions []Partition, region string) *PartitionConfig {
 	for _, partition := range partitions {
 		if v, ok := partition.Regions[region]; ok {
-			v = mergePartition(v, partition.DefaultConfig)
-			return &v
+			p := mergeOverrides(partition.DefaultConfig, v)
+			return &p
 		}
 	}
 
@@ -53,21 +55,21 @@ func getPartition(partitions []Partition, region string) *PartitionConfig {
 	return nil
 }
 
-func mergePartition(into PartitionConfig, from PartitionConfig) PartitionConfig {
-	if into.Name == nil {
-		into.Name = from.Name
+func mergeOverrides(into PartitionConfig, from RegionOverrides) PartitionConfig {
+	if from.Name != nil {
+		into.Name = *from.Name
 	}
-	if into.DNSSuffix == nil {
-		into.DNSSuffix = from.DNSSuffix
+	if from.DnsSuffix != nil {
+		into.DnsSuffix = *from.DnsSuffix
 	}
-	if into.DualStackDNSSuffix == nil {
-		into.DualStackDNSSuffix = from.DualStackDNSSuffix
+	if from.DualStackDnsSuffix != nil {
+		into.DualStackDnsSuffix = *from.DualStackDnsSuffix
 	}
-	if into.SupportsFIPS == nil {
-		into.SupportsFIPS = from.SupportsFIPS
+	if from.SupportsFIPS != nil {
+		into.SupportsFIPS = *from.SupportsFIPS
 	}
-	if into.SupportsDualStack == nil {
-		into.SupportsDualStack = from.SupportsDualStack
+	if from.SupportsDualStack != nil {
+		into.SupportsDualStack = *from.SupportsDualStack
 	}
 	return into
 }

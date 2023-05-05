@@ -9,11 +9,3 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.14.4
 	github.com/aws/smithy-go v1.13.5
 )
-
-replace github.com/aws/aws-sdk-go-v2 => ../../
-
-replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../internal/configsources/
-
-replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../internal/endpoints/v2/
-
-replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../service/internal/s3shared/
