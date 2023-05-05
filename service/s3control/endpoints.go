@@ -8,9 +8,14 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3control/internal/endpoints"
+	smithy "github.com/aws/smithy-go"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
+	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -205,4 +210,1203 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 		}
 	}
 
+}
+
+// EndpointParameters provides the parameters that influence how endpoints are
+// resolved.
+type EndpointParameters struct {
+	// The AWS region used to dispatch the request.
+	//
+	// Parameter is
+	// required.
+	//
+	// AWS::Region
+	Region *string
+
+	// When true, send this request to the FIPS-compliant regional endpoint. If the
+	// configured endpoint does not have a FIPS compliant endpoint, dispatching the
+	// request will return an error.
+	//
+	// Defaults to false if no value is
+	// provided.
+	//
+	// AWS::UseFIPS
+	UseFIPS *bool
+
+	// When true, use the dual-stack endpoint. If the configured endpoint does not
+	// support dual-stack, dispatching the request MAY return an error.
+	//
+	// Defaults to
+	// false if no value is provided.
+	//
+	// AWS::UseDualStack
+	UseDualStack *bool
+
+	// Override the endpoint used to send this request
+	//
+	// Parameter is
+	// required.
+	//
+	// SDK::Endpoint
+	Endpoint *string
+
+	// The Account ID used to send the request. This is an optional parameter that will
+	// be set automatically for operations that require it.
+	//
+	// Parameter is required.
+	AccountId *string
+
+	// Internal parameter for operations that require account id host
+	// prefix.
+	//
+	// Parameter is required.
+	RequiresAccountId *bool
+
+	// The Outpost ID.  Some operations have an optional OutpostId which should be used
+	// in endpoint construction.
+	//
+	// Parameter is required.
+	OutpostId *string
+
+	// The S3 bucket used to send the request. This is an optional parameter that will
+	// be set automatically for operations that are scoped to an S3 bucket.
+	//
+	// Parameter
+	// is required.
+	Bucket *string
+
+	// The S3 AccessPointName used to send the request. This is an optional parameter
+	// that will be set automatically for operations that are scoped to an S3
+	// AccessPoint.
+	//
+	// Parameter is required.
+	AccessPointName *string
+
+	// When an Access Point ARN is provided and this flag is enabled, the SDK MUST use
+	// the ARN's region when constructing the endpoint instead of the client's
+	// configured region.
+	//
+	// Parameter is required.
+	//
+	// AWS::S3Control::UseArnRegion
+	UseArnRegion *bool
+}
+
+// ValidateRequired validates required parameters are set.
+func (p EndpointParameters) ValidateRequired() error {
+	if p.UseDualStack == nil {
+		return fmt.Errorf("parameter UseDualStack is required")
+	}
+
+	if p.UseFIPS == nil {
+		return fmt.Errorf("parameter UseFIPS is required")
+	}
+
+	return nil
+}
+
+// EndpointResolverV2 provides the interface for resolving service endpoints.
+type EndpointResolverV2 interface {
+	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
+	// returning the endpoint if found. Otherwise an error is returned.
+	ResolveEndpoint(ctx context.Context, params EndpointParameters) (
+		smithyendpoints.Endpoint, error,
+	)
+}
+
+// resolver provides the implementation for resolving endpoints.
+type resolver struct{}
+
+func NewDefaultEndpointResolverV2() EndpointResolverV2 {
+	return &resolver{}
+}
+
+// ResolveEndpoint attempts to resolve the endpoint with the provided options,
+// returning the endpoint if found. Otherwise an error is returned.
+func (r *resolver) ResolveEndpoint(
+	ctx context.Context, params EndpointParameters,
+) (
+	endpoint smithyendpoints.Endpoint, err error,
+) {
+	if err = params.ValidateRequired(); err != nil {
+		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
+	}
+	_UseFIPS := *params.UseFIPS
+	_UseDualStack := *params.UseDualStack
+
+	if exprVal := params.Region; exprVal != nil {
+		_Region := *exprVal
+		_ = _Region
+		if exprVal := params.OutpostId; exprVal != nil {
+			_OutpostId := *exprVal
+			_ = _OutpostId
+			if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+				_partitionResult := *exprVal
+				_ = _partitionResult
+				if _UseFIPS == true {
+					if _partitionResult.Name == "aws-cn" {
+						return endpoint, fmt.Errorf("endpoint rule error, %s", "Partition does not support FIPS")
+					}
+				}
+				if exprVal := params.RequiresAccountId; exprVal != nil {
+					_RequiresAccountId := *exprVal
+					_ = _RequiresAccountId
+					if _RequiresAccountId == true {
+						if !(params.AccountId != nil) {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "AccountId is required but not set")
+						}
+					}
+				}
+				if exprVal := params.AccountId; exprVal != nil {
+					_AccountId := *exprVal
+					_ = _AccountId
+					if !(rulesfn.IsValidHostLabel(_AccountId, false)) {
+						return endpoint, fmt.Errorf("endpoint rule error, %s", "AccountId must only contain a-z, A-Z, 0-9 and `-`.")
+					}
+				}
+				if !(rulesfn.IsValidHostLabel(_OutpostId, false)) {
+					return endpoint, fmt.Errorf("endpoint rule error, %s", "OutpostId must only contain a-z, A-Z, 0-9 and `-`.")
+				}
+				if rulesfn.IsValidHostLabel(_Region, true) {
+					if _UseDualStack == true {
+						return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid configuration: Outposts do not support dual-stack")
+					}
+					if exprVal := params.Endpoint; exprVal != nil {
+						_Endpoint := *exprVal
+						_ = _Endpoint
+						if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
+							_url := *exprVal
+							_ = _url
+							uriString := func() string {
+								var out strings.Builder
+								out.WriteString(_url.Scheme)
+								out.WriteString("://")
+								out.WriteString(_url.Authority)
+								out.WriteString(_url.Path)
+								return out.String()
+							}()
+
+							uri, err := url.Parse(uriString)
+							if err != nil {
+								return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+							}
+
+							return smithyendpoints.Endpoint{
+								URI:     *uri,
+								Headers: http.Header{},
+								Properties: func() smithy.Properties {
+									var out smithy.Properties
+									out.Set("authSchemes", []interface{}{
+										map[string]interface{}{
+											"disableDoubleEncoding": true,
+											"name":                  "sigv4",
+											"signingName":           "s3-outposts",
+											"signingRegion":         _Region,
+										},
+									})
+									return out
+								}(),
+							}, nil
+						}
+					}
+					if _UseFIPS == true {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://s3-outposts-fips.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_partitionResult.DnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"disableDoubleEncoding": true,
+										"name":                  "sigv4",
+										"signingName":           "s3-outposts",
+										"signingRegion":         _Region,
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+					uriString := func() string {
+						var out strings.Builder
+						out.WriteString("https://s3-outposts.")
+						out.WriteString(_Region)
+						out.WriteString(".")
+						out.WriteString(_partitionResult.DnsSuffix)
+						return out.String()
+					}()
+
+					uri, err := url.Parse(uriString)
+					if err != nil {
+						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+					}
+
+					return smithyendpoints.Endpoint{
+						URI:     *uri,
+						Headers: http.Header{},
+						Properties: func() smithy.Properties {
+							var out smithy.Properties
+							out.Set("authSchemes", []interface{}{
+								map[string]interface{}{
+									"disableDoubleEncoding": true,
+									"name":                  "sigv4",
+									"signingName":           "s3-outposts",
+									"signingRegion":         _Region,
+								},
+							})
+							return out
+						}(),
+					}, nil
+				}
+				return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid region: region was not a valid DNS name.")
+			}
+			return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+		}
+		if exprVal := params.AccessPointName; exprVal != nil {
+			_AccessPointName := *exprVal
+			_ = _AccessPointName
+			if exprVal := awsrulesfn.ParseARN(_AccessPointName); exprVal != nil {
+				_accessPointArn := *exprVal
+				_ = _accessPointArn
+				if exprVal := _accessPointArn.ResourceId.Get(0); exprVal != nil {
+					_arnType := *exprVal
+					_ = _arnType
+					if !(_arnType == "") {
+						if _accessPointArn.Service == "s3-outposts" {
+							if _UseDualStack == true {
+								return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid configuration: Outpost Access Points do not support dual-stack")
+							}
+							if exprVal := _accessPointArn.ResourceId.Get(1); exprVal != nil {
+								_outpostId := *exprVal
+								_ = _outpostId
+								if rulesfn.IsValidHostLabel(_outpostId, false) {
+									if exprVal := params.UseArnRegion; exprVal != nil {
+										_UseArnRegion := *exprVal
+										_ = _UseArnRegion
+										if _UseArnRegion == false {
+											if !(_accessPointArn.Region == _Region) {
+												return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+													var out strings.Builder
+													out.WriteString("Invalid configuration: region from ARN `")
+													out.WriteString(_accessPointArn.Region)
+													out.WriteString("` does not match client region `")
+													out.WriteString(_Region)
+													out.WriteString("` and UseArnRegion is `false`")
+													return out.String()
+												}())
+											}
+										}
+									}
+									if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+										_partitionResult := *exprVal
+										_ = _partitionResult
+										if exprVal := awsrulesfn.GetPartition(_accessPointArn.Region); exprVal != nil {
+											_arnPartition := *exprVal
+											_ = _arnPartition
+											if _arnPartition.Name == _partitionResult.Name {
+												if rulesfn.IsValidHostLabel(_accessPointArn.Region, true) {
+													if !(_accessPointArn.AccountId == "") {
+														if rulesfn.IsValidHostLabel(_accessPointArn.AccountId, false) {
+															if exprVal := params.AccountId; exprVal != nil {
+																_AccountId := *exprVal
+																_ = _AccountId
+																if !(_AccountId == _accessPointArn.AccountId) {
+																	return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+																		var out strings.Builder
+																		out.WriteString("Invalid ARN: the accountId specified in the ARN (`")
+																		out.WriteString(_accessPointArn.AccountId)
+																		out.WriteString("`) does not match the parameter (`")
+																		out.WriteString(_AccountId)
+																		out.WriteString("`)")
+																		return out.String()
+																	}())
+																}
+															}
+															if exprVal := _accessPointArn.ResourceId.Get(2); exprVal != nil {
+																_outpostType := *exprVal
+																_ = _outpostType
+																if exprVal := _accessPointArn.ResourceId.Get(3); exprVal != nil {
+																	_accessPointName := *exprVal
+																	_ = _accessPointName
+																	if _outpostType == "accesspoint" {
+																		if _UseFIPS == true {
+																			uriString := func() string {
+																				var out strings.Builder
+																				out.WriteString("https://s3-outposts-fips.")
+																				out.WriteString(_accessPointArn.Region)
+																				out.WriteString(".")
+																				out.WriteString(_arnPartition.DnsSuffix)
+																				return out.String()
+																			}()
+
+																			uri, err := url.Parse(uriString)
+																			if err != nil {
+																				return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																			}
+
+																			return smithyendpoints.Endpoint{
+																				URI: *uri,
+																				Headers: func() *http.Header {
+																					headers := http.Header{}
+																					headers.Set("x-amz-account-id", _accessPointArn.AccountId)
+																					headers.Set("x-amz-outpost-id", _outpostId)
+																					return headers
+																				}(),
+																				Properties: func() smithy.Properties {
+																					var out smithy.Properties
+																					out.Set("authSchemes", []interface{}{
+																						map[string]interface{}{
+																							"disableDoubleEncoding": true,
+																							"name":                  "sigv4",
+																							"signingName":           "s3-outposts",
+																							"signingRegion":         _accessPointArn.Region,
+																						},
+																					})
+																					return out
+																				}(),
+																			}, nil
+																		}
+																		if exprVal := params.Endpoint; exprVal != nil {
+																			_Endpoint := *exprVal
+																			_ = _Endpoint
+																			if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
+																				_url := *exprVal
+																				_ = _url
+																				uriString := func() string {
+																					var out strings.Builder
+																					out.WriteString(_url.Scheme)
+																					out.WriteString("://")
+																					out.WriteString(_url.Authority)
+																					out.WriteString(_url.Path)
+																					return out.String()
+																				}()
+
+																				uri, err := url.Parse(uriString)
+																				if err != nil {
+																					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																				}
+
+																				return smithyendpoints.Endpoint{
+																					URI: *uri,
+																					Headers: func() *http.Header {
+																						headers := http.Header{}
+																						headers.Set("x-amz-account-id", _accessPointArn.AccountId)
+																						headers.Set("x-amz-outpost-id", _outpostId)
+																						return headers
+																					}(),
+																					Properties: func() smithy.Properties {
+																						var out smithy.Properties
+																						out.Set("authSchemes", []interface{}{
+																							map[string]interface{}{
+																								"disableDoubleEncoding": true,
+																								"name":                  "sigv4",
+																								"signingName":           "s3-outposts",
+																								"signingRegion":         _accessPointArn.Region,
+																							},
+																						})
+																						return out
+																					}(),
+																				}, nil
+																			}
+																		}
+																		uriString := func() string {
+																			var out strings.Builder
+																			out.WriteString("https://s3-outposts.")
+																			out.WriteString(_accessPointArn.Region)
+																			out.WriteString(".")
+																			out.WriteString(_arnPartition.DnsSuffix)
+																			return out.String()
+																		}()
+
+																		uri, err := url.Parse(uriString)
+																		if err != nil {
+																			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																		}
+
+																		return smithyendpoints.Endpoint{
+																			URI: *uri,
+																			Headers: func() *http.Header {
+																				headers := http.Header{}
+																				headers.Set("x-amz-account-id", _accessPointArn.AccountId)
+																				headers.Set("x-amz-outpost-id", _outpostId)
+																				return headers
+																			}(),
+																			Properties: func() smithy.Properties {
+																				var out smithy.Properties
+																				out.Set("authSchemes", []interface{}{
+																					map[string]interface{}{
+																						"disableDoubleEncoding": true,
+																						"name":                  "sigv4",
+																						"signingName":           "s3-outposts",
+																						"signingRegion":         _accessPointArn.Region,
+																					},
+																				})
+																				return out
+																			}(),
+																		}, nil
+																	}
+																	return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+																		var out strings.Builder
+																		out.WriteString("Expected an outpost type `accesspoint`, found `")
+																		out.WriteString(_outpostType)
+																		out.WriteString("`")
+																		return out.String()
+																	}())
+																}
+																return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: expected an access point name")
+															}
+															return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: Expected a 4-component resource")
+														}
+														return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+															var out strings.Builder
+															out.WriteString("Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `")
+															out.WriteString(_accessPointArn.AccountId)
+															out.WriteString("`")
+															return out.String()
+														}())
+													}
+													return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: missing account ID")
+												}
+												return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+													var out strings.Builder
+													out.WriteString("Invalid region in ARN: `")
+													out.WriteString(_accessPointArn.Region)
+													out.WriteString("` (invalid DNS name)")
+													return out.String()
+												}())
+											}
+											return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+												var out strings.Builder
+												out.WriteString("Client was configured for partition `")
+												out.WriteString(_partitionResult.Name)
+												out.WriteString("` but ARN has `")
+												out.WriteString(_arnPartition.Name)
+												out.WriteString("`")
+												return out.String()
+											}())
+										}
+										return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+											var out strings.Builder
+											out.WriteString("Could not load partition for ARN region `")
+											out.WriteString(_accessPointArn.Region)
+											out.WriteString("`")
+											return out.String()
+										}())
+									}
+									return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+								}
+								return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+									var out strings.Builder
+									out.WriteString("Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`., found: `")
+									out.WriteString(_outpostId)
+									out.WriteString("`")
+									return out.String()
+								}())
+							}
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: The Outpost Id was not set")
+						}
+						return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+					}
+				}
+				return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: No ARN type specified")
+			}
+		}
+		if exprVal := params.Bucket; exprVal != nil {
+			_Bucket := *exprVal
+			_ = _Bucket
+			if exprVal := awsrulesfn.ParseARN(_Bucket); exprVal != nil {
+				_bucketArn := *exprVal
+				_ = _bucketArn
+				if exprVal := _bucketArn.ResourceId.Get(0); exprVal != nil {
+					_arnType := *exprVal
+					_ = _arnType
+					if !(_arnType == "") {
+						if _bucketArn.Service == "s3-outposts" {
+							if _UseDualStack == true {
+								return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid configuration: Outpost buckets do not support dual-stack")
+							}
+							if exprVal := _bucketArn.ResourceId.Get(1); exprVal != nil {
+								_outpostId := *exprVal
+								_ = _outpostId
+								if rulesfn.IsValidHostLabel(_outpostId, false) {
+									if exprVal := params.UseArnRegion; exprVal != nil {
+										_UseArnRegion := *exprVal
+										_ = _UseArnRegion
+										if _UseArnRegion == false {
+											if !(_bucketArn.Region == _Region) {
+												return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+													var out strings.Builder
+													out.WriteString("Invalid configuration: region from ARN `")
+													out.WriteString(_bucketArn.Region)
+													out.WriteString("` does not match client region `")
+													out.WriteString(_Region)
+													out.WriteString("` and UseArnRegion is `false`")
+													return out.String()
+												}())
+											}
+										}
+									}
+									if exprVal := awsrulesfn.GetPartition(_bucketArn.Region); exprVal != nil {
+										_arnPartition := *exprVal
+										_ = _arnPartition
+										if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+											_partitionResult := *exprVal
+											_ = _partitionResult
+											if _arnPartition.Name == _partitionResult.Name {
+												if rulesfn.IsValidHostLabel(_bucketArn.Region, true) {
+													if !(_bucketArn.AccountId == "") {
+														if rulesfn.IsValidHostLabel(_bucketArn.AccountId, false) {
+															if exprVal := params.AccountId; exprVal != nil {
+																_AccountId := *exprVal
+																_ = _AccountId
+																if !(_AccountId == _bucketArn.AccountId) {
+																	return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+																		var out strings.Builder
+																		out.WriteString("Invalid ARN: the accountId specified in the ARN (`")
+																		out.WriteString(_bucketArn.AccountId)
+																		out.WriteString("`) does not match the parameter (`")
+																		out.WriteString(_AccountId)
+																		out.WriteString("`)")
+																		return out.String()
+																	}())
+																}
+															}
+															if exprVal := _bucketArn.ResourceId.Get(2); exprVal != nil {
+																_outpostType := *exprVal
+																_ = _outpostType
+																if exprVal := _bucketArn.ResourceId.Get(3); exprVal != nil {
+																	_bucketName := *exprVal
+																	_ = _bucketName
+																	if _outpostType == "bucket" {
+																		if _UseFIPS == true {
+																			uriString := func() string {
+																				var out strings.Builder
+																				out.WriteString("https://s3-outposts-fips.")
+																				out.WriteString(_bucketArn.Region)
+																				out.WriteString(".")
+																				out.WriteString(_arnPartition.DnsSuffix)
+																				return out.String()
+																			}()
+
+																			uri, err := url.Parse(uriString)
+																			if err != nil {
+																				return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																			}
+
+																			return smithyendpoints.Endpoint{
+																				URI: *uri,
+																				Headers: func() *http.Header {
+																					headers := http.Header{}
+																					headers.Set("x-amz-account-id", _bucketArn.AccountId)
+																					headers.Set("x-amz-outpost-id", _outpostId)
+																					return headers
+																				}(),
+																				Properties: func() smithy.Properties {
+																					var out smithy.Properties
+																					out.Set("authSchemes", []interface{}{
+																						map[string]interface{}{
+																							"disableDoubleEncoding": true,
+																							"name":                  "sigv4",
+																							"signingName":           "s3-outposts",
+																							"signingRegion":         _bucketArn.Region,
+																						},
+																					})
+																					return out
+																				}(),
+																			}, nil
+																		}
+																		if exprVal := params.Endpoint; exprVal != nil {
+																			_Endpoint := *exprVal
+																			_ = _Endpoint
+																			if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
+																				_url := *exprVal
+																				_ = _url
+																				uriString := func() string {
+																					var out strings.Builder
+																					out.WriteString(_url.Scheme)
+																					out.WriteString("://")
+																					out.WriteString(_url.Authority)
+																					out.WriteString(_url.Path)
+																					return out.String()
+																				}()
+
+																				uri, err := url.Parse(uriString)
+																				if err != nil {
+																					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																				}
+
+																				return smithyendpoints.Endpoint{
+																					URI: *uri,
+																					Headers: func() *http.Header {
+																						headers := http.Header{}
+																						headers.Set("x-amz-account-id", _bucketArn.AccountId)
+																						headers.Set("x-amz-outpost-id", _outpostId)
+																						return headers
+																					}(),
+																					Properties: func() smithy.Properties {
+																						var out smithy.Properties
+																						out.Set("authSchemes", []interface{}{
+																							map[string]interface{}{
+																								"disableDoubleEncoding": true,
+																								"name":                  "sigv4",
+																								"signingName":           "s3-outposts",
+																								"signingRegion":         _bucketArn.Region,
+																							},
+																						})
+																						return out
+																					}(),
+																				}, nil
+																			}
+																		}
+																		uriString := func() string {
+																			var out strings.Builder
+																			out.WriteString("https://s3-outposts.")
+																			out.WriteString(_bucketArn.Region)
+																			out.WriteString(".")
+																			out.WriteString(_arnPartition.DnsSuffix)
+																			return out.String()
+																		}()
+
+																		uri, err := url.Parse(uriString)
+																		if err != nil {
+																			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																		}
+
+																		return smithyendpoints.Endpoint{
+																			URI: *uri,
+																			Headers: func() *http.Header {
+																				headers := http.Header{}
+																				headers.Set("x-amz-account-id", _bucketArn.AccountId)
+																				headers.Set("x-amz-outpost-id", _outpostId)
+																				return headers
+																			}(),
+																			Properties: func() smithy.Properties {
+																				var out smithy.Properties
+																				out.Set("authSchemes", []interface{}{
+																					map[string]interface{}{
+																						"disableDoubleEncoding": true,
+																						"name":                  "sigv4",
+																						"signingName":           "s3-outposts",
+																						"signingRegion":         _bucketArn.Region,
+																					},
+																				})
+																				return out
+																			}(),
+																		}, nil
+																	}
+																	return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+																		var out strings.Builder
+																		out.WriteString("Invalid ARN: Expected an outpost type `bucket`, found `")
+																		out.WriteString(_outpostType)
+																		out.WriteString("`")
+																		return out.String()
+																	}())
+																}
+																return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: expected a bucket name")
+															}
+															return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: Expected a 4-component resource")
+														}
+														return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+															var out strings.Builder
+															out.WriteString("Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `")
+															out.WriteString(_bucketArn.AccountId)
+															out.WriteString("`")
+															return out.String()
+														}())
+													}
+													return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: missing account ID")
+												}
+												return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+													var out strings.Builder
+													out.WriteString("Invalid region in ARN: `")
+													out.WriteString(_bucketArn.Region)
+													out.WriteString("` (invalid DNS name)")
+													return out.String()
+												}())
+											}
+											return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+												var out strings.Builder
+												out.WriteString("Client was configured for partition `")
+												out.WriteString(_partitionResult.Name)
+												out.WriteString("` but ARN has `")
+												out.WriteString(_arnPartition.Name)
+												out.WriteString("`")
+												return out.String()
+											}())
+										}
+										return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+									}
+									return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+										var out strings.Builder
+										out.WriteString("Could not load partition for ARN region `")
+										out.WriteString(_bucketArn.Region)
+										out.WriteString("`")
+										return out.String()
+									}())
+								}
+								return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
+									var out strings.Builder
+									out.WriteString("Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`., found: `")
+									out.WriteString(_outpostId)
+									out.WriteString("`")
+									return out.String()
+								}())
+							}
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: The Outpost Id was not set")
+						}
+						return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+					}
+				}
+				return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: No ARN type specified")
+			}
+		}
+		if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+			_partitionResult := *exprVal
+			_ = _partitionResult
+			if rulesfn.IsValidHostLabel(_Region, true) {
+				if _UseFIPS == true {
+					if _partitionResult.Name == "aws-cn" {
+						return endpoint, fmt.Errorf("endpoint rule error, %s", "Partition does not support FIPS")
+					}
+				}
+				if exprVal := params.RequiresAccountId; exprVal != nil {
+					_RequiresAccountId := *exprVal
+					_ = _RequiresAccountId
+					if _RequiresAccountId == true {
+						if !(params.AccountId != nil) {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "AccountId is required but not set")
+						}
+					}
+				}
+				if exprVal := params.AccountId; exprVal != nil {
+					_AccountId := *exprVal
+					_ = _AccountId
+					if !(rulesfn.IsValidHostLabel(_AccountId, false)) {
+						return endpoint, fmt.Errorf("endpoint rule error, %s", "AccountId must only contain a-z, A-Z, 0-9 and `-`.")
+					}
+				}
+				if exprVal := params.Endpoint; exprVal != nil {
+					_Endpoint := *exprVal
+					_ = _Endpoint
+					if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
+						_url := *exprVal
+						_ = _url
+						if _UseDualStack == true {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Dualstack and custom endpoint are not supported")
+						}
+						if exprVal := params.RequiresAccountId; exprVal != nil {
+							_RequiresAccountId := *exprVal
+							_ = _RequiresAccountId
+							if _RequiresAccountId == true {
+								if exprVal := params.AccountId; exprVal != nil {
+									_AccountId := *exprVal
+									_ = _AccountId
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString(_url.Scheme)
+										out.WriteString("://")
+										out.WriteString(_AccountId)
+										out.WriteString(".")
+										out.WriteString(_url.Authority)
+										out.WriteString(_url.Path)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											out.Set("authSchemes", []interface{}{
+												map[string]interface{}{
+													"disableDoubleEncoding": true,
+													"name":                  "sigv4",
+													"signingName":           "s3",
+													"signingRegion":         _Region,
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString(_url.Scheme)
+							out.WriteString("://")
+							out.WriteString(_url.Authority)
+							out.WriteString(_url.Path)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"disableDoubleEncoding": true,
+										"name":                  "sigv4",
+										"signingName":           "s3",
+										"signingRegion":         _Region,
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+				if _UseFIPS == true {
+					if _UseDualStack == true {
+						if exprVal := params.RequiresAccountId; exprVal != nil {
+							_RequiresAccountId := *exprVal
+							_ = _RequiresAccountId
+							if _RequiresAccountId == true {
+								if exprVal := params.AccountId; exprVal != nil {
+									_AccountId := *exprVal
+									_ = _AccountId
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://")
+										out.WriteString(_AccountId)
+										out.WriteString(".s3-control-fips.dualstack.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											out.Set("authSchemes", []interface{}{
+												map[string]interface{}{
+													"disableDoubleEncoding": true,
+													"name":                  "sigv4",
+													"signingName":           "s3",
+													"signingRegion":         _Region,
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+					}
+				}
+				if _UseFIPS == true {
+					if _UseDualStack == true {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://s3-control-fips.dualstack.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_partitionResult.DnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"disableDoubleEncoding": true,
+										"name":                  "sigv4",
+										"signingName":           "s3",
+										"signingRegion":         _Region,
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+				if _UseFIPS == true {
+					if _UseDualStack == false {
+						if exprVal := params.RequiresAccountId; exprVal != nil {
+							_RequiresAccountId := *exprVal
+							_ = _RequiresAccountId
+							if _RequiresAccountId == true {
+								if exprVal := params.AccountId; exprVal != nil {
+									_AccountId := *exprVal
+									_ = _AccountId
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://")
+										out.WriteString(_AccountId)
+										out.WriteString(".s3-control-fips.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											out.Set("authSchemes", []interface{}{
+												map[string]interface{}{
+													"disableDoubleEncoding": true,
+													"name":                  "sigv4",
+													"signingName":           "s3",
+													"signingRegion":         _Region,
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+					}
+				}
+				if _UseFIPS == true {
+					if _UseDualStack == false {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://s3-control-fips.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_partitionResult.DnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"disableDoubleEncoding": true,
+										"name":                  "sigv4",
+										"signingName":           "s3",
+										"signingRegion":         _Region,
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+				if _UseFIPS == false {
+					if _UseDualStack == true {
+						if exprVal := params.RequiresAccountId; exprVal != nil {
+							_RequiresAccountId := *exprVal
+							_ = _RequiresAccountId
+							if _RequiresAccountId == true {
+								if exprVal := params.AccountId; exprVal != nil {
+									_AccountId := *exprVal
+									_ = _AccountId
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://")
+										out.WriteString(_AccountId)
+										out.WriteString(".s3-control.dualstack.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											out.Set("authSchemes", []interface{}{
+												map[string]interface{}{
+													"disableDoubleEncoding": true,
+													"name":                  "sigv4",
+													"signingName":           "s3",
+													"signingRegion":         _Region,
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+					}
+				}
+				if _UseFIPS == false {
+					if _UseDualStack == true {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://s3-control.dualstack.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_partitionResult.DnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"disableDoubleEncoding": true,
+										"name":                  "sigv4",
+										"signingName":           "s3",
+										"signingRegion":         _Region,
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						if exprVal := params.RequiresAccountId; exprVal != nil {
+							_RequiresAccountId := *exprVal
+							_ = _RequiresAccountId
+							if _RequiresAccountId == true {
+								if exprVal := params.AccountId; exprVal != nil {
+									_AccountId := *exprVal
+									_ = _AccountId
+									uriString := func() string {
+										var out strings.Builder
+										out.WriteString("https://")
+										out.WriteString(_AccountId)
+										out.WriteString(".s3-control.")
+										out.WriteString(_Region)
+										out.WriteString(".")
+										out.WriteString(_partitionResult.DnsSuffix)
+										return out.String()
+									}()
+
+									uri, err := url.Parse(uriString)
+									if err != nil {
+										return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+									}
+
+									return smithyendpoints.Endpoint{
+										URI:     *uri,
+										Headers: http.Header{},
+										Properties: func() smithy.Properties {
+											var out smithy.Properties
+											out.Set("authSchemes", []interface{}{
+												map[string]interface{}{
+													"disableDoubleEncoding": true,
+													"name":                  "sigv4",
+													"signingName":           "s3",
+													"signingRegion":         _Region,
+												},
+											})
+											return out
+										}(),
+									}, nil
+								}
+							}
+						}
+					}
+				}
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://s3-control.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_partitionResult.DnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"disableDoubleEncoding": true,
+										"name":                  "sigv4",
+										"signingName":           "s3",
+										"signingRegion":         _Region,
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+				return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+			}
+			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid region: region was not a valid DNS name.")
+		}
+		return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+	}
+	return endpoint, fmt.Errorf("endpoint rule error, %s", "Region must be set")
 }

@@ -2,7 +2,6 @@ package awsrulesfn
 
 import (
 	"testing"
-	"github.com/aws/smithy-go/ptr"
 )
 
 var mockPartitions = []Partition{
@@ -10,24 +9,24 @@ var mockPartitions = []Partition{
 		ID:          "aws",
 		RegionRegex: "^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$",
 		DefaultConfig: PartitionConfig{
-			Name:               ptr.String("aws"),
-			DNSSuffix:          ptr.String("amazonaws.com"),
-			DualStackDNSSuffix: ptr.String("api.aws"),
-			SupportsFIPS:       ptr.Bool(true),
-			SupportsDualStack:  ptr.Bool(true),
+			Name:               "aws",
+			DnsSuffix:          "amazonaws.com",
+			DualStackDnsSuffix: "api.aws",
+			SupportsFIPS:       true,
+			SupportsDualStack:  true,
 		},
-		Regions: map[string]PartitionConfig{
+		Regions: map[string]RegionOverrides{
 			"af-south-1": {
 				Name:               nil,
-				DNSSuffix:          nil,
-				DualStackDNSSuffix: nil,
+				DnsSuffix:          nil,
+				DualStackDnsSuffix: nil,
 				SupportsFIPS:       nil,
 				SupportsDualStack:  nil,
 			},
 			"us-west-2": {
 				Name:               nil,
-				DNSSuffix:          nil,
-				DualStackDNSSuffix: nil,
+				DnsSuffix:          nil,
+				DualStackDnsSuffix: nil,
 				SupportsFIPS:       nil,
 				SupportsDualStack:  nil,
 			},
@@ -37,31 +36,31 @@ var mockPartitions = []Partition{
 		ID:          "aws-cn",
 		RegionRegex: "^cn\\-\\w+\\-\\d+$",
 		DefaultConfig: PartitionConfig{
-			Name:               ptr.String("aws-cn"),
-			DNSSuffix:          ptr.String("amazonaws.com.cn"),
-			DualStackDNSSuffix: ptr.String("api.amazonwebservices.com.cn"),
-			SupportsFIPS:       ptr.Bool(true),
-			SupportsDualStack:  ptr.Bool(true),
+			Name:               "aws-cn",
+			DnsSuffix:          "amazonaws.com.cn",
+			DualStackDnsSuffix: "api.amazonwebservices.com.cn",
+			SupportsFIPS:       true,
+			SupportsDualStack:  true,
 		},
-		Regions: map[string]PartitionConfig{
+		Regions: map[string]RegionOverrides{
 			"aws-cn-global": {
 				Name:               nil,
-				DNSSuffix:          nil,
-				DualStackDNSSuffix: nil,
+				DnsSuffix:          nil,
+				DualStackDnsSuffix: nil,
 				SupportsFIPS:       nil,
 				SupportsDualStack:  nil,
 			},
 			"cn-north-1": {
 				Name:               nil,
-				DNSSuffix:          nil,
-				DualStackDNSSuffix: nil,
+				DnsSuffix:          nil,
+				DualStackDnsSuffix: nil,
 				SupportsFIPS:       nil,
 				SupportsDualStack:  nil,
 			},
 			"cn-northwest-1": {
 				Name:               nil,
-				DNSSuffix:          nil,
-				DualStackDNSSuffix: nil,
+				DnsSuffix:          nil,
+				DualStackDnsSuffix: nil,
 				SupportsFIPS:       nil,
 				SupportsDualStack:  nil,
 			},
@@ -95,7 +94,7 @@ func TestGetPartition(t *testing.T) {
 			p := GetPartition(c.Region)
 			expected := c.PartitionName
 			actual := p.Name
-			if expected != *actual {
+			if expected != actual {
 				t.Errorf("expected %v, got %v", expected, actual)
 			}
 		})

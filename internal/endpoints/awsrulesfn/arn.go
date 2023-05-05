@@ -9,8 +9,8 @@ type ARN struct {
 	Partition  string
 	Service    string
 	Region     string
-	AccountID  string
-	ResourceID OptionalStringSlice
+	AccountId  string
+	ResourceId OptionalStringSlice
 }
 
 const (
@@ -54,8 +54,8 @@ func ParseARN(input string) *ARN {
 		Partition:  sections[sectionPartition],
 		Service:    sections[sectionService],
 		Region:     sections[sectionRegion],
-		AccountID:  sections[sectionAccountID],
-		ResourceID: splitResource(sections[sectionResource]),
+		AccountId:  sections[sectionAccountID],
+		ResourceId: splitResource(sections[sectionResource]),
 	}
 }
 
