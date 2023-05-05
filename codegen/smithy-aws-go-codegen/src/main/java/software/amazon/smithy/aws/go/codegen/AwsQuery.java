@@ -212,7 +212,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     }
 
     @Override
-    public void generateEndpointResolutionV2(GenerationContext context) {
+    public void generateEndpointResolution(GenerationContext context) {
         var generator = new EndpointResolutionV2Generator(new AwsFnProvider());
         generator.generate(context);
     }
