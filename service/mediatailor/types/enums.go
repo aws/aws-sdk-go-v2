@@ -38,6 +38,24 @@ func (ChannelState) Values() []ChannelState {
 	}
 }
 
+type FillPolicy string
+
+// Enum values for FillPolicy
+const (
+	FillPolicyFullAvailOnly FillPolicy = "FULL_AVAIL_ONLY"
+	FillPolicyPartialAvail  FillPolicy = "PARTIAL_AVAIL"
+)
+
+// Values returns all known values for FillPolicy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FillPolicy) Values() []FillPolicy {
+	return []FillPolicy{
+		"FULL_AVAIL_ONLY",
+		"PARTIAL_AVAIL",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType
@@ -78,6 +96,7 @@ type Mode string
 const (
 	ModeOff            Mode = "OFF"
 	ModeBehindLiveEdge Mode = "BEHIND_LIVE_EDGE"
+	ModeAfterLiveEdge  Mode = "AFTER_LIVE_EDGE"
 )
 
 // Values returns all known values for Mode. Note that this can be expanded in the
@@ -87,6 +106,7 @@ func (Mode) Values() []Mode {
 	return []Mode{
 		"OFF",
 		"BEHIND_LIVE_EDGE",
+		"AFTER_LIVE_EDGE",
 	}
 }
 

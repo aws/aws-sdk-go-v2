@@ -1331,3 +1331,19 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"OTHER",
 	}
 }
+
+type VulnerabilitySource string
+
+// Enum values for VulnerabilitySource
+const (
+	VulnerabilitySourceNvd VulnerabilitySource = "NVD"
+)
+
+// Values returns all known values for VulnerabilitySource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VulnerabilitySource) Values() []VulnerabilitySource {
+	return []VulnerabilitySource{
+		"NVD",
+	}
+}

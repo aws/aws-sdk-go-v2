@@ -3404,6 +3404,11 @@ const (
 	InstanceTypeM6idnMetal      InstanceType = "m6idn.metal"
 	InstanceTypeR6inMetal       InstanceType = "r6in.metal"
 	InstanceTypeR6idnMetal      InstanceType = "r6idn.metal"
+	InstanceTypeInf2Xlarge      InstanceType = "inf2.xlarge"
+	InstanceTypeInf28xlarge     InstanceType = "inf2.8xlarge"
+	InstanceTypeInf224xlarge    InstanceType = "inf2.24xlarge"
+	InstanceTypeInf248xlarge    InstanceType = "inf2.48xlarge"
+	InstanceTypeTrn1n32xlarge   InstanceType = "trn1n.32xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -4054,6 +4059,11 @@ func (InstanceType) Values() []InstanceType {
 		"m6idn.metal",
 		"r6in.metal",
 		"r6idn.metal",
+		"inf2.xlarge",
+		"inf2.8xlarge",
+		"inf2.24xlarge",
+		"inf2.48xlarge",
+		"trn1n.32xlarge",
 	}
 }
 

@@ -147,10 +147,17 @@ type AvailMatchingCriteria struct {
 // .
 type AvailSuppression struct {
 
+	// Defines the policy to apply to the avail suppression mode. BEHIND_LIVE_EDGE
+	// will always use the full avail suppression policy. AFTER_LIVE_EDGE mode can be
+	// used to invoke partial ad break fills when a session starts mid-break.
+	FillPolicy FillPolicy
+
 	// Sets the ad suppression mode. By default, ad suppression is off and all ad
 	// breaks are filled with ads or slate. When Mode is set to BEHIND_LIVE_EDGE , ad
 	// suppression is active and MediaTailor won't fill ad breaks on or behind the ad
-	// suppression Value time in the manifest lookback window.
+	// suppression Value time in the manifest lookback window. When Mode is set to
+	// AFTER_LIVE_EDGE , ad suppression is active and MediaTailor won't fill ad breaks
+	// that are within the live edge plus the avail suppression value.
 	Mode Mode
 
 	// A live edge offset time in HH:MM:SS. MediaTailor won't fill ad breaks on or

@@ -15,7 +15,12 @@ import (
 // DeleteMessage . The result of the action on each message is reported
 // individually in the response. Because the batch request can result in a
 // combination of successful and unsuccessful actions, you should check for batch
-// errors even when the call returns an HTTP status code of 200 .
+// errors even when the call returns an HTTP status code of 200 . Some actions take
+// lists of parameters. These lists are specified using the param.n notation.
+// Values of n are integers starting from 1. For example, a parameter list with
+// two elements looks like this: &AttributeName.1=first
+//
+//	&AttributeName.2=second
 func (c *Client) DeleteMessageBatch(ctx context.Context, params *DeleteMessageBatchInput, optFns ...func(*Options)) (*DeleteMessageBatchOutput, error) {
 	if params == nil {
 		params = &DeleteMessageBatchInput{}
@@ -69,11 +74,11 @@ type DeleteMessageBatchOutput struct {
 }
 
 func (c *Client) addOperationDeleteMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteMessageBatch{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteMessageBatch{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteMessageBatch{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteMessageBatch{}, middleware.After)
 	if err != nil {
 		return err
 	}

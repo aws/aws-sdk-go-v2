@@ -350,6 +350,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchVulnerabilities struct {
+}
+
+func (*validateOpSearchVulnerabilities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchVulnerabilities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchVulnerabilitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchVulnerabilitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -536,6 +556,10 @@ func addOpListFindingsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpSearchVulnerabilitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchVulnerabilities{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1316,6 +1340,21 @@ func validateRepositoryAggregation(v *types.RepositoryAggregation) error {
 	}
 }
 
+func validateSearchVulnerabilitiesFilterCriteria(v *types.SearchVulnerabilitiesFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchVulnerabilitiesFilterCriteria"}
+	if v.VulnerabilityIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VulnerabilityIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSortCriteria(v *types.SortCriteria) error {
 	if v == nil {
 		return nil
@@ -1685,6 +1724,25 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchVulnerabilitiesInput(v *SearchVulnerabilitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchVulnerabilitiesInput"}
+	if v.FilterCriteria == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterCriteria"))
+	} else if v.FilterCriteria != nil {
+		if err := validateSearchVulnerabilitiesFilterCriteria(v.FilterCriteria); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

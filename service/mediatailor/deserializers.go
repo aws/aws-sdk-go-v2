@@ -7980,6 +7980,15 @@ func awsRestjson1_deserializeDocumentAvailSuppression(v **types.AvailSuppression
 
 	for key, value := range shape {
 		switch key {
+		case "FillPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FillPolicy to be of type string, got %T instead", value)
+				}
+				sv.FillPolicy = types.FillPolicy(jtv)
+			}
+
 		case "Mode":
 			if value != nil {
 				jtv, ok := value.(string)

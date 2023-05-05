@@ -38,6 +38,7 @@
         "api_op_ListMembers.go",
         "api_op_ListTagsForResource.go",
         "api_op_ListUsageTotals.go",
+        "api_op_SearchVulnerabilities.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateConfiguration.go",

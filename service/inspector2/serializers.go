@@ -2154,6 +2154,81 @@ func awsRestjson1_serializeOpDocumentListUsageTotalsInput(v *ListUsageTotalsInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchVulnerabilities struct {
+}
+
+func (*awsRestjson1_serializeOpSearchVulnerabilities) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchVulnerabilities) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchVulnerabilitiesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/vulnerabilities/search")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchVulnerabilitiesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchVulnerabilitiesInput(v *SearchVulnerabilitiesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchVulnerabilitiesInput(v *SearchVulnerabilitiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FilterCriteria != nil {
+		ok := object.Key("filterCriteria")
+		if err := awsRestjson1_serializeDocumentSearchVulnerabilitiesFilterCriteria(v.FilterCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -3904,6 +3979,20 @@ func awsRestjson1_serializeDocumentRepositoryAggregation(v *types.RepositoryAggr
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSearchVulnerabilitiesFilterCriteria(v *types.SearchVulnerabilitiesFilterCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VulnerabilityIds != nil {
+		ok := object.Key("vulnerabilityIds")
+		if err := awsRestjson1_serializeDocumentVulnIdList(v.VulnerabilityIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSortCriteria(v *types.SortCriteria, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3999,6 +4088,17 @@ func awsRestjson1_serializeDocumentTitleAggregation(v *types.TitleAggregation, v
 }
 
 func awsRestjson1_serializeDocumentUsageAccountIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVulnIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

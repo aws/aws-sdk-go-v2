@@ -32,7 +32,15 @@ type BatchResultErrorEntry struct {
 }
 
 // Encloses a receipt handle and an entry id for each message in
-// ChangeMessageVisibilityBatch .
+// ChangeMessageVisibilityBatch . All of the following list parameters must be
+// prefixed with ChangeMessageVisibilityBatchRequestEntry.n , where n is an
+// integer value starting with 1 . For example, a parameter list for this action
+// might look like this:
+// &ChangeMessageVisibilityBatchRequestEntry.1.Id=change_visibility_msg_2
+//
+//	&ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle
+//
+//	&ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45
 type ChangeMessageVisibilityBatchRequestEntry struct {
 
 	// An identifier for this particular receipt handle used to communicate the
@@ -145,8 +153,7 @@ type Message struct {
 // attribute has the same restrictions on the content as the message body. For more
 // information, see SendMessage . Name , type , value and the message body must
 // not be empty or null. All parts of the message attribute, including Name , Type
-// , and Value , are part of the message size restriction (256 KiB or 262,144
-// bytes).
+// , and Value , are part of the message size restriction (256 KB or 262,144 bytes).
 type MessageAttributeValue struct {
 
 	// Amazon SQS supports the following logical data types: String , Number , and

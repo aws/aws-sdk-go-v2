@@ -372,6 +372,26 @@ type AmiAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Web Services Threat Intel Group (ATIG) details for a specific
+// vulnerability.
+type AtigData struct {
+
+	// The date and time this vulnerability was first observed.
+	FirstSeen *time.Time
+
+	// The date and time this vulnerability was last observed.
+	LastSeen *time.Time
+
+	// The commercial sectors this vulnerability targets.
+	Targets []string
+
+	// The MITRE ATT&CK (https://attack.mitre.org/) tactics, techniques, and
+	// procedures (TTPs) associated with vulnerability.
+	Ttps []string
+
+	noSmithyDocumentSerde
+}
+
 // Represents which scan types are automatically enabled for new members of your
 // Amazon Inspector organization.
 type AutoEnable struct {
@@ -573,6 +593,22 @@ type AwsLambdaFunctionDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The Cybersecurity and Infrastructure Security Agency (CISA) details for a
+// specific vulnerability.
+type CisaData struct {
+
+	// The remediation action recommended by CISA for this vulnerability.
+	Action *string
+
+	// The date and time CISA added this vulnerability to their catalogue.
+	DateAdded *time.Time
+
+	// The date and time CISA expects a fix to have been provided vulnerability.
+	DateDue *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // a structure that contains information on the count of resources within a group.
 type Counts struct {
 
@@ -691,6 +727,32 @@ type CoveredResource struct {
 
 	// The status of the scan covering the resource.
 	ScanStatus *ScanStatus
+
+	noSmithyDocumentSerde
+}
+
+// The Common Vulnerability Scoring System (CVSS) version 2 details for the
+// vulnerability.
+type Cvss2 struct {
+
+	// The CVSS v2 base score for the vulnerability.
+	BaseScore float64
+
+	// The scoring vector associated with the CVSS v2 score.
+	ScoringVector *string
+
+	noSmithyDocumentSerde
+}
+
+// The Common Vulnerability Scoring System (CVSS) version 3 details for the
+// vulnerability.
+type Cvss3 struct {
+
+	// The CVSS v3 base score for the vulnerability.
+	BaseScore float64
+
+	// The scoring vector associated with the CVSS v3 score.
+	ScoringVector *string
 
 	noSmithyDocumentSerde
 }
@@ -963,6 +1025,15 @@ type EcrRescanDurationState struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the Exploit Prediction Scoring System (EPSS) score.
+type Epss struct {
+
+	// The Exploit Prediction Scoring System (EPSS) score.
+	Score float64
+
+	noSmithyDocumentSerde
+}
+
 // The details of an exploit available for a finding discovered in your
 // environment.
 type ExploitabilityDetails struct {
@@ -970,6 +1041,18 @@ type ExploitabilityDetails struct {
 	// The date and time of the last exploit associated with a finding discovered in
 	// your environment.
 	LastKnownExploitAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on when this exploit was observed.
+type ExploitObserved struct {
+
+	// The date an time when the exploit was first seen.
+	FirstSeen *time.Time
+
+	// The date an time when the exploit was last seen.
+	LastSeen *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -2034,6 +2117,17 @@ type ScanStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Details on the criteria used to define the filter for a vulnerability search.
+type SearchVulnerabilitiesFilterCriteria struct {
+
+	// The IDs for specific vulnerabilities.
+	//
+	// This member is required.
+	VulnerabilityIds []string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains the counts of aggregated finding per severity.
 type SeverityCounts struct {
 
@@ -2205,6 +2299,69 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a specific vulnerability Amazon Inspector can detect.
+type Vulnerability struct {
+
+	// The ID for the specific vulnerability.
+	//
+	// This member is required.
+	Id *string
+
+	// An object that contains information about the Amazon Web Services Threat Intel
+	// Group (ATIG) details for the vulnerability.
+	AtigData *AtigData
+
+	// An object that contains the Cybersecurity and Infrastructure Security Agency
+	// (CISA) details for the vulnerability.
+	CisaData *CisaData
+
+	// An object that contains the Common Vulnerability Scoring System (CVSS) Version
+	// 2 details for the vulnerability.
+	Cvss2 *Cvss2
+
+	// An object that contains the Common Vulnerability Scoring System (CVSS) Version
+	// 3 details for the vulnerability.
+	Cvss3 *Cvss3
+
+	// The Common Weakness Enumeration (CWE) associated with the vulnerability.
+	Cwes []string
+
+	// A description of the vulnerability.
+	Description *string
+
+	// Platforms that the vulnerability can be detected on.
+	DetectionPlatforms []string
+
+	// An object that contains the Exploit Prediction Scoring System (EPSS) score.
+	Epss *Epss
+
+	// An object that contains details on when the exploit was observed.
+	ExploitObserved *ExploitObserved
+
+	// Links to various resources with more information on this vulnerability.
+	ReferenceUrls []string
+
+	// A list of related vulnerabilities.
+	RelatedVulnerabilities []string
+
+	// The source of the vulnerability information.
+	Source VulnerabilitySource
+
+	// A link to the official source material for this vulnerability.
+	SourceUrl *string
+
+	// The date and time when the vendor created this vulnerability.
+	VendorCreatedAt *time.Time
+
+	// The severity assigned by the vendor.
+	VendorSeverity *string
+
+	// The date and time when the vendor last updated this vulnerability.
+	VendorUpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }

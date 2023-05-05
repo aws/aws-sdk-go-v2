@@ -1,0 +1,8 @@
+{
+    "id": "a35e9431-0ea6-4de4-b43e-2eea663c211a",
+    "type": "feature",
+    "description": "Revert previous SQS protocol change.",
+    "modules": [
+        "service/sqs"
+    ]
+}

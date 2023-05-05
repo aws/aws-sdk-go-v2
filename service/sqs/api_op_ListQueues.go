@@ -21,7 +21,7 @@ import (
 // additional results to display, the response includes a value for NextToken . Use
 // NextToken as a parameter in your next request to listQueues to receive the next
 // page of results. Cross-account permissions don't apply to this action. For more
-// information, see Grant cross-account permissions to a role and a username (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// information, see Grant cross-account permissions to a role and a user name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon SQS Developer Guide.
 func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns ...func(*Options)) (*ListQueuesOutput, error) {
 	if params == nil {
@@ -74,11 +74,11 @@ type ListQueuesOutput struct {
 }
 
 func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListQueues{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpListQueues{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListQueues{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListQueues{}, middleware.After)
 	if err != nil {
 		return err
 	}

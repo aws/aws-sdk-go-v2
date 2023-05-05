@@ -3490,6 +3490,11 @@ func awsRestjson1_serializeDocumentAvailSuppression(v *types.AvailSuppression, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.FillPolicy) > 0 {
+		ok := object.Key("FillPolicy")
+		ok.String(string(v.FillPolicy))
+	}
+
 	if len(v.Mode) > 0 {
 		ok := object.Key("Mode")
 		ok.String(string(v.Mode))

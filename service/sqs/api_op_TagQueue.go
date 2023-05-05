@@ -24,7 +24,7 @@ import (
 // For a full list of tag restrictions, see Quotas related to queues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues)
 // in the Amazon SQS Developer Guide. Cross-account permissions don't apply to this
 // action. For more information, see Grant cross-account permissions to a role and
-// a username (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// a user name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon SQS Developer Guide.
 func (c *Client) TagQueue(ctx context.Context, params *TagQueueInput, optFns ...func(*Options)) (*TagQueueOutput, error) {
 	if params == nil {
@@ -64,11 +64,11 @@ type TagQueueOutput struct {
 }
 
 func (c *Client) addOperationTagQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTagQueue{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTagQueue{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTagQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}

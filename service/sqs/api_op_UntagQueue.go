@@ -14,7 +14,7 @@ import (
 // overview, see Tagging Your Amazon SQS Queues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html)
 // in the Amazon SQS Developer Guide. Cross-account permissions don't apply to this
 // action. For more information, see Grant cross-account permissions to a role and
-// a username (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// a user name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon SQS Developer Guide.
 func (c *Client) UntagQueue(ctx context.Context, params *UntagQueueInput, optFns ...func(*Options)) (*UntagQueueOutput, error) {
 	if params == nil {
@@ -54,11 +54,11 @@ type UntagQueueOutput struct {
 }
 
 func (c *Client) addOperationUntagQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUntagQueue{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUntagQueue{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUntagQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}
