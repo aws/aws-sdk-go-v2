@@ -42,6 +42,8 @@ import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.ErrorTrait;
 import software.amazon.smithy.model.traits.EventHeaderTrait;
 import software.amazon.smithy.model.traits.EventPayloadTrait;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionV2Generator;
+import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 
 /**
  * Handles generating the aws.rest-json protocol for services.
@@ -79,7 +81,8 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter().get();
 
-        // Stub synthetic inputs mean there never was an input modeled, always serialize empty JSON object
+        // Stub synthetic inputs mean there never was an input modeled, always serialize
+        // empty JSON object
         // as place holder.
         if (CodegenUtils.isStubSynthetic(ProtocolUtils.expectInput(context.getModel(), operation))) {
             writer.addUseImports(SmithyGoDependency.STRINGS);
@@ -209,8 +212,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     protected void generateEventStreamSerializers(
             GenerationContext context,
             UnionShape eventUnion,
-            Set<EventStreamInfo> eventStreamInfos
-    ) {
+            Set<EventStreamInfo> eventStreamInfos) {
         Model model = context.getModel();
 
         AwsEventStreamUtils.generateEventStreamSerializer(context, eventUnion);
@@ -276,8 +278,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     protected void generateEventStreamDeserializers(
             GenerationContext context,
             UnionShape eventUnion,
-            Set<EventStreamInfo> eventStreamInfos
-    ) {
+            Set<EventStreamInfo> eventStreamInfos) {
         var model = context.getModel();
 
         AwsEventStreamUtils.generateEventStreamDeserializer(context, eventUnion);
@@ -314,7 +315,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
                                     payloadTarget, ctx.getService(), getProtocolName());
                             var ctxWriter = ctx.getWriter().get();
                             ctxWriter.openBlock("if err := $L(&$L, shape); err != nil {", "}", functionName, operand,
-                                            () -> handleDecodeError(ctxWriter))
+                                    () -> handleDecodeError(ctxWriter))
                                     .write("return nil");
                         });
 
@@ -347,7 +348,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
                         AwsProtocolUtils.initializeJsonEventMessageDeserializer(ctx, "nil,");
                         var ctxWriter = ctx.getWriter().get();
                         ctxWriter.openBlock("if err := $L(&$L, shape); err != nil {", "}", functionName, operand,
-                                        () -> handleDecodeError(ctxWriter, "nil,"))
+                                () -> handleDecodeError(ctxWriter, "nil,"))
                                 .write("return v, nil");
                     });
             var initialMessageMembers = streamInfo.getInitialMessageMembers()
@@ -358,6 +359,12 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
                     .deserializerNameProvider((shape, serviceShape, proto) -> functionName)
                     .build());
         }
+    }
+
+    @Override
+    public void generateEndpointResolution(GenerationContext context) {
+        var generator = new EndpointResolutionV2Generator(new AwsFnProvider());
+        generator.generate(context);
     }
 
 }

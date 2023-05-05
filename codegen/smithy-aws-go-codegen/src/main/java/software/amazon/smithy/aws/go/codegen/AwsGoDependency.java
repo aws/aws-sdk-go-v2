@@ -39,6 +39,9 @@ public class AwsGoDependency {
     public static final GoDependency SERVICE_INTERNAL_EVENTSTREAMAPI = awsModuleDep("aws/protocol/eventstream",
             "eventstreamapi", Versions.AWS_PROTOCOL_EVENTSTREAM, "eventstreamapi");
 
+    public static final GoDependency AWS_ENDPOINT_RULESFN = aws("internal/endpoints/awsrulesfn");
+
+
     public static final GoDependency INTERNAL_ENDPOINTS_V2 = awsModuleDep("internal/endpoints/v2", null,
             Versions.INTERNAL_ENDPOINTS_V2, "endpoints");
     public static final GoDependency S3_SHARED_CONFIG = aws("service/internal/s3shared/config", "s3sharedconfig");
