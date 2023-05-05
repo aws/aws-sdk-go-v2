@@ -611,6 +611,38 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#AtigData": {
+            "type": "structure",
+            "members": {
+                "firstSeen": {
+                    "target": "com.amazonaws.inspector2#FirstSeen",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time this vulnerability was first observed.</p>"
+                    }
+                },
+                "lastSeen": {
+                    "target": "com.amazonaws.inspector2#LastSeen",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time this vulnerability was last observed.</p>"
+                    }
+                },
+                "targets": {
+                    "target": "com.amazonaws.inspector2#Targets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The commercial sectors this vulnerability targets.</p>"
+                    }
+                },
+                "ttps": {
+                    "target": "com.amazonaws.inspector2#Ttps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://attack.mitre.org/\">MITRE ATT&amp;CK</a> tactics, techniques, and procedures (TTPs) associated with vulnerability.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services Threat Intel Group (ATIG) details for a specific vulnerability.</p>"
+            }
+        },
         "com.amazonaws.inspector2#AutoEnable": {
             "type": "structure",
             "members": {
@@ -1293,6 +1325,46 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#CisaAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisaData": {
+            "type": "structure",
+            "members": {
+                "dateAdded": {
+                    "target": "com.amazonaws.inspector2#CisaDateAdded",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time CISA added this vulnerability to their catalogue.</p>"
+                    }
+                },
+                "dateDue": {
+                    "target": "com.amazonaws.inspector2#CisaDateDue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time CISA expects a fix to have been provided vulnerability.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.inspector2#CisaAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remediation action recommended by CISA for this vulnerability.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Cybersecurity and Infrastructure Security Agency (CISA) details for a specific vulnerability.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisaDateAdded": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.inspector2#CisaDateDue": {
+            "type": "timestamp"
+        },
         "com.amazonaws.inspector2#ClientToken": {
             "type": "string",
             "traits": {
@@ -1811,6 +1883,76 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#Cvss2": {
+            "type": "structure",
+            "members": {
+                "baseScore": {
+                    "target": "com.amazonaws.inspector2#Cvss2BaseScore",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The CVSS v2 base score for the vulnerability.</p>"
+                    }
+                },
+                "scoringVector": {
+                    "target": "com.amazonaws.inspector2#Cvss2ScoringVector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scoring vector associated with the CVSS v2 score.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Common Vulnerability Scoring System (CVSS) version 2 details for the vulnerability.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#Cvss2BaseScore": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.inspector2#Cvss2ScoringVector": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Cvss3": {
+            "type": "structure",
+            "members": {
+                "baseScore": {
+                    "target": "com.amazonaws.inspector2#Cvss3BaseScore",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The CVSS v3 base score for the vulnerability.</p>"
+                    }
+                },
+                "scoringVector": {
+                    "target": "com.amazonaws.inspector2#Cvss3ScoringVector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scoring vector associated with the CVSS v3 score.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Common Vulnerability Scoring System (CVSS) version 3 details for the vulnerability.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#Cvss3BaseScore": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.inspector2#Cvss3ScoringVector": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.inspector2#CvssScore": {
             "type": "structure",
             "members": {
@@ -1927,6 +2069,25 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#CvssScore"
+            }
+        },
+        "com.amazonaws.inspector2#Cwe": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Cwes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Cwe"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.inspector2#DateFilter": {
@@ -2167,6 +2328,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details of the Amazon S3 bucket and KMS key used to export findings.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#DetectionPlatforms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.inspector2#Disable": {
@@ -2855,6 +3028,27 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#Epss": {
+            "type": "structure",
+            "members": {
+                "score": {
+                    "target": "com.amazonaws.inspector2#EpssScore",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The Exploit Prediction Scoring System (EPSS) score.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the Exploit Prediction Scoring System (EPSS) score.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#EpssScore": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.inspector2#ErrorCode": {
             "type": "string",
             "traits": {
@@ -2940,6 +3134,26 @@
                         "name": "NO"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#ExploitObserved": {
+            "type": "structure",
+            "members": {
+                "lastSeen": {
+                    "target": "com.amazonaws.inspector2#LastSeen",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date an time when the exploit was last seen.</p>"
+                    }
+                },
+                "firstSeen": {
+                    "target": "com.amazonaws.inspector2#FirstSeen",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date an time when the exploit was first seen.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on when this exploit was observed.</p>"
             }
         },
         "com.amazonaws.inspector2#ExploitabilityDetails": {
@@ -3730,6 +3944,9 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#FirstSeen": {
+            "type": "timestamp"
+        },
         "com.amazonaws.inspector2#FixAvailable": {
             "type": "string",
             "traits": {
@@ -4449,6 +4666,9 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#ListUsageTotals"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#SearchVulnerabilities"
                 },
                 {
                     "target": "com.amazonaws.inspector2#TagResource"
@@ -5741,6 +5961,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to an AWS Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
             }
+        },
+        "com.amazonaws.inspector2#LastSeen": {
+            "type": "timestamp"
         },
         "com.amazonaws.inspector2#LayerList": {
             "type": "list",
@@ -7435,6 +7658,26 @@
                 "smithy.api#documentation": "<p>Details about the recommended course of action to remediate the finding.</p>"
             }
         },
+        "com.amazonaws.inspector2#RelatedVulnerabilities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#RelatedVulnerability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#RelatedVulnerability": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.inspector2#RelationshipStatus": {
             "type": "string",
             "traits": {
@@ -8089,6 +8332,99 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#SearchVulnerabilities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#SearchVulnerabilitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#SearchVulnerabilitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists Amazon Inspector coverage details for a specific vulnerability.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/vulnerabilities/search"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "vulnerabilities"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#SearchVulnerabilitiesFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "vulnerabilityIds": {
+                    "target": "com.amazonaws.inspector2#VulnIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs for specific vulnerabilities.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details on the criteria used to define the filter for a vulnerability search.\n      </p>"
+            }
+        },
+        "com.amazonaws.inspector2#SearchVulnerabilitiesRequest": {
+            "type": "structure",
+            "members": {
+                "filterCriteria": {
+                    "target": "com.amazonaws.inspector2#SearchVulnerabilitiesFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria used to filter the results of a vulnerability search.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value\n         of this parameter to null for the first request to a list action. For subsequent calls, use\n         the <code>NextToken</code> value returned from the previous request to continue listing\n         results after the first page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#SearchVulnerabilitiesResponse": {
+            "type": "structure",
+            "members": {
+                "vulnerabilities": {
+                    "target": "com.amazonaws.inspector2#Vulnerabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the listed vulnerability.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more items.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#SecurityGroupId": {
             "type": "string",
             "traits": {
@@ -8603,6 +8939,26 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.inspector2#Target": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Targets": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Target"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.inspector2#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -8717,6 +9073,26 @@
                         "name": "ALL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#Ttp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Ttps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Ttp"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.inspector2#UntagResource": {
@@ -9292,6 +9668,21 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#VendorCreatedAt": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.inspector2#VendorSeverity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.inspector2#VendorUpdatedAt": {
+            "type": "timestamp"
+        },
         "com.amazonaws.inspector2#Version": {
             "type": "string",
             "traits": {
@@ -9303,6 +9694,150 @@
             "traits": {
                 "smithy.api#pattern": "^vpc-([a-z0-9]{8}|[a-z0-9]{17}|\\*)$"
             }
+        },
+        "com.amazonaws.inspector2#VulnId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^CVE-[12][0-9]{3}-[0-9]{1,10}$"
+            }
+        },
+        "com.amazonaws.inspector2#VulnIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#VulnId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Vulnerabilities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Vulnerability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Vulnerability": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the specific vulnerability.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cwes": {
+                    "target": "com.amazonaws.inspector2#Cwes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Common Weakness Enumeration (CWE) associated with the vulnerability.</p>"
+                    }
+                },
+                "cisaData": {
+                    "target": "com.amazonaws.inspector2#CisaData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the Cybersecurity and Infrastructure Security Agency (CISA) details for the vulnerability.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.inspector2#VulnerabilitySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the vulnerability information.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.inspector2#VulnerabilityDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the vulnerability.</p>"
+                    }
+                },
+                "atigData": {
+                    "target": "com.amazonaws.inspector2#AtigData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the Amazon Web Services Threat Intel Group (ATIG) details for the vulnerability.</p>"
+                    }
+                },
+                "vendorSeverity": {
+                    "target": "com.amazonaws.inspector2#VendorSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity assigned by the vendor.</p>"
+                    }
+                },
+                "cvss3": {
+                    "target": "com.amazonaws.inspector2#Cvss3",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the Common Vulnerability Scoring System (CVSS) Version 3 details for the vulnerability.</p>"
+                    }
+                },
+                "relatedVulnerabilities": {
+                    "target": "com.amazonaws.inspector2#RelatedVulnerabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of related vulnerabilities.</p>"
+                    }
+                },
+                "cvss2": {
+                    "target": "com.amazonaws.inspector2#Cvss2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the Common Vulnerability Scoring System (CVSS) Version 2 details for the vulnerability.</p>"
+                    }
+                },
+                "vendorCreatedAt": {
+                    "target": "com.amazonaws.inspector2#VendorCreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the vendor created this vulnerability.</p>"
+                    }
+                },
+                "vendorUpdatedAt": {
+                    "target": "com.amazonaws.inspector2#VendorUpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the vendor last updated this vulnerability.</p>"
+                    }
+                },
+                "sourceUrl": {
+                    "target": "com.amazonaws.inspector2#VulnerabilitySourceUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A link to the official source material for this vulnerability.</p>"
+                    }
+                },
+                "referenceUrls": {
+                    "target": "com.amazonaws.inspector2#VulnerabilityReferenceUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Links to various resources with more information on this vulnerability. </p>"
+                    }
+                },
+                "exploitObserved": {
+                    "target": "com.amazonaws.inspector2#ExploitObserved",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details on when the exploit was observed.</p>"
+                    }
+                },
+                "detectionPlatforms": {
+                    "target": "com.amazonaws.inspector2#DetectionPlatforms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Platforms that the vulnerability can be detected on.</p>"
+                    }
+                },
+                "epss": {
+                    "target": "com.amazonaws.inspector2#Epss",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the Exploit Prediction Scoring System (EPSS) score.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a specific vulnerability Amazon Inspector can detect.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#VulnerabilityDescription": {
+            "type": "string"
         },
         "com.amazonaws.inspector2#VulnerabilityId": {
             "type": "string",
@@ -9317,6 +9852,45 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#VulnerabilityId"
+            }
+        },
+        "com.amazonaws.inspector2#VulnerabilityReferenceUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#VulnerabilityReferenceUrls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#VulnerabilityReferenceUrl"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#VulnerabilitySource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NVD",
+                        "name": "NVD"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#VulnerabilitySourceUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.inspector2#VulnerablePackage": {
