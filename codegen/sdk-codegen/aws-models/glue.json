@@ -1014,8 +1014,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "af-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1027,8 +1027,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1040,8 +1040,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1053,8 +1053,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1066,8 +1066,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-northeast-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1079,8 +1079,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1092,8 +1092,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1105,8 +1105,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1118,8 +1118,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1131,8 +1131,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1144,8 +1144,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1157,8 +1157,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1170,8 +1170,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1183,8 +1183,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1196,8 +1196,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1209,8 +1209,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "me-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1222,8 +1222,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1235,8 +1235,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1248,8 +1248,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1261,8 +1261,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1274,8 +1274,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1287,8 +1287,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1300,8 +1300,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-west-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1313,8 +1313,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1326,8 +1326,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-west-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1339,8 +1339,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1352,8 +1352,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1365,8 +1365,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1378,8 +1378,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-northwest-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1391,8 +1391,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1404,8 +1404,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1417,8 +1417,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1430,8 +1430,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1443,8 +1443,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1456,8 +1456,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-gov-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1469,8 +1469,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-gov-west-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1482,8 +1482,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1495,8 +1495,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1506,8 +1506,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1519,8 +1519,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1530,8 +1530,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1543,8 +1543,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1554,8 +1554,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
@@ -1567,8 +1567,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -1578,8 +1578,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
@@ -1591,8 +1591,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
@@ -1604,8 +1604,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1629,8 +1629,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1641,8 +1641,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -20189,13 +20189,13 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.glue#NullableDouble",
                     "traits": {
-                        "smithy.api#documentation": "<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure\n      of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory.\n      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue\n      pricing page</a>.</p>\n         <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p>\n         <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are\n      running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL\n      job:</p>\n         <ul>\n            <li>\n               <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can\n          allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>\n            </li>\n            <li>\n               <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\") or Apache \n            Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate from 2 to 100 DPUs. \n            The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>\n            </li>\n         </ul>\n         <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>"
+                        "smithy.api#documentation": "<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure\n      of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory.\n      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue\n      pricing page</a>.</p>\n         <p>For Glue version 2.0 or later jobs, you cannot specify a <code>Maximum capacity</code>.\n      Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>\n         <p>Do not set <code>MaxCapacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p>\n         <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are\n      running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL\n      job:</p>\n         <ul>\n            <li>\n               <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can\n          allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>\n            </li>\n            <li>\n               <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\") or Apache \n            Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate from 2 to 100 DPUs. \n            The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "WorkerType": {
                     "target": "com.amazonaws.glue#WorkerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X.</p>\n         <ul>\n            <li>\n               <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p>\n            </li>\n            <li>\n               <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.025X</code> worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for low volume streaming jobs. This worker type is only available for Glue version 3.0 streaming jobs.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X.</p>\n         <ul>\n            <li>\n               <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p>\n            </li>\n            <li>\n               <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.4X</code> worker type, each worker maps to 4 DPU (16 vCPU, 64 GB of memory, 256 GB disk), and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.8X</code> worker type, each worker maps to 8 DPU (32 vCPU, 128 GB of memory, 512 GB disk), and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.025X</code> worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for low volume streaming jobs. This worker type is only available for Glue version 3.0 streaming jobs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NumberOfWorkers": {
@@ -33777,6 +33777,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "G.025X"
+                    }
+                },
+                "G_4X": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "G.4X"
+                    }
+                },
+                "G_8X": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "G.8X"
                     }
                 }
             }

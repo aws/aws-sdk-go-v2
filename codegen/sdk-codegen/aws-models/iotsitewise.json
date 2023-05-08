@@ -638,8 +638,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -651,8 +651,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -664,8 +664,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -677,8 +677,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -690,8 +690,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -703,8 +703,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -716,8 +716,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -729,8 +729,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -742,8 +742,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -755,8 +755,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -768,8 +768,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -781,8 +781,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -794,8 +794,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -807,8 +807,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -820,8 +820,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -833,8 +833,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -846,8 +846,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -859,8 +859,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -872,8 +872,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -885,8 +885,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -898,8 +898,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -911,8 +911,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -924,8 +924,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -937,8 +937,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -950,8 +950,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -963,8 +963,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -976,8 +976,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -989,8 +1000,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1002,8 +1024,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1015,8 +1048,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1028,8 +1072,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1041,8 +1085,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1054,8 +1098,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1066,8 +1110,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1078,9 +1122,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2875,7 +2925,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs\n      first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is less than 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is less than the value of\n            <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs\n      first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is equal to 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is equal to the value of\n          <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3346,7 +3396,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs\n      first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is less than 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is less than the value of\n            <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs\n      first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is equal to 4 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is equal to the value of\n            <code>maxResults</code>. The maximum value of <code>maxResults</code> is 20000.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7894,9 +7944,9 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.iotsitewise#MaxResults",
+                    "target": "com.amazonaws.iotsitewise#GetAssetPropertyValueAggregatesMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request.</p>\n         <p>Default: 100</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs\n      first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is equal to 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is equal to the value of\n          <code>maxResults</code>. The maximum value of <code>maxResults</code> is 250.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -7963,6 +8013,14 @@
                 }
             }
         },
+        "com.amazonaws.iotsitewise#GetAssetPropertyValueAggregatesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.iotsitewise#GetAssetPropertyValueHistory": {
             "type": "operation",
             "input": {
@@ -8003,6 +8061,14 @@
                     "outputToken": "nextToken",
                     "items": "assetPropertyValueHistory",
                     "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#GetAssetPropertyValueHistoryMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
                 }
             }
         },
@@ -8066,9 +8132,9 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.iotsitewise#MaxResults",
+                    "target": "com.amazonaws.iotsitewise#GetAssetPropertyValueHistoryMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request.</p>\n         <p>Default: 100</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs\n      first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is equal to 4 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is equal to the value of\n          <code>maxResults</code>. The maximum value of <code>maxResults</code> is 20000.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -11281,9 +11347,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
-                    "max": 2
+                    "max": 3
                 },
-                "smithy.api#pattern": "^1m|1h|1d$"
+                "smithy.api#pattern": "^1m|15m|1h|1d$"
             }
         },
         "com.amazonaws.iotsitewise#Resource": {

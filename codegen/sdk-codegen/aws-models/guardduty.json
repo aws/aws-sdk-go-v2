@@ -192,6 +192,30 @@
                 "smithy.api#documentation": "<p>Contains information on the current access control policies for the bucket.</p>"
             }
         },
+        "com.amazonaws.guardduty#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error type.</p>",
+                        "smithy.api#jsonName": "__type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An access denied exception object.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.guardduty#AccessKeyDetails": {
             "type": "structure",
             "members": {
@@ -8897,6 +8921,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.guardduty#BadRequestException"
                 },
                 {
@@ -12048,6 +12075,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.guardduty#BadRequestException"
                 },
                 {
@@ -12474,6 +12504,9 @@
                 "target": "com.amazonaws.guardduty#UntagResourceResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.guardduty#BadRequestException"
                 },
