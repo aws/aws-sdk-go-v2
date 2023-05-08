@@ -83,7 +83,7 @@
 //	var records []Record
 //	err := attributevalue.UnmarshalListOfMaps(results.Items, &records)
 //	if err != nil {
-//	     return fmt.Errorf("failed to unmarshal Items, %w", err))
+//	     return fmt.Errorf("failed to unmarshal Items, %w", err)
 //	}
 //
 // # Struct tags
