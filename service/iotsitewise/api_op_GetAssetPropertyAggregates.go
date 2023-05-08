@@ -64,7 +64,11 @@ type GetAssetPropertyAggregatesInput struct {
 	// The ID of the asset.
 	AssetId *string
 
-	// The maximum number of results to return for each paginated request. Default: 100
+	// The maximum number of results to return for each paginated request. A result
+	// set is returned in the two cases, whichever occurs first.
+	//   - The size of the result set is equal to 1 MB.
+	//   - The number of data points in the result set is equal to the value of
+	//   maxResults . The maximum value of maxResults is 250.
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -212,7 +216,11 @@ var _ GetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 // GetAssetPropertyAggregatesPaginatorOptions is the paginator options for
 // GetAssetPropertyAggregates
 type GetAssetPropertyAggregatesPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. Default: 100
+	// The maximum number of results to return for each paginated request. A result
+	// set is returned in the two cases, whichever occurs first.
+	//   - The size of the result set is equal to 1 MB.
+	//   - The number of data points in the result set is equal to the value of
+	//   maxResults . The maximum value of maxResults is 250.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

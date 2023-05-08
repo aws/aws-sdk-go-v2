@@ -40,9 +40,9 @@ type BatchGetAssetPropertyValueHistoryInput struct {
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
-	//   - The size of the result set is less than 1 MB.
-	//   - The number of data points in the result set is less than the value of
-	//   maxResults . The maximum value of maxResults is 4000.
+	//   - The size of the result set is equal to 4 MB.
+	//   - The number of data points in the result set is equal to the value of
+	//   maxResults . The maximum value of maxResults is 20000.
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -192,9 +192,9 @@ var _ BatchGetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 type BatchGetAssetPropertyValueHistoryPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
-	//   - The size of the result set is less than 1 MB.
-	//   - The number of data points in the result set is less than the value of
-	//   maxResults . The maximum value of maxResults is 4000.
+	//   - The size of the result set is equal to 4 MB.
+	//   - The number of data points in the result set is equal to the value of
+	//   maxResults . The maximum value of maxResults is 20000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

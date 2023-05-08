@@ -1,0 +1,8 @@
+{
+    "id": "951d7771-28ce-4bf9-a0f1-2a55fff42684",
+    "type": "feature",
+    "description": "We don't do release notes https://w.amazon.com/bin/view/AWSDocs/common-tasks/release-notes",
+    "modules": [
+        "service/glue"
+    ]
+}

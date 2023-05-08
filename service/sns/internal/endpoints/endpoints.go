@@ -466,14 +466,14 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{
-				Protocols: []string{"http", "https"},
+				Protocols: []string{"https"},
 			},
 			endpoints.EndpointKey{
 				Region:  "us-gov-west-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname:  "sns.us-gov-west-1.amazonaws.com",
-				Protocols: []string{"http", "https"},
+				Protocols: []string{"https"},
 			},
 		},
 	},
