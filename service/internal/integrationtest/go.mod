@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.18.0
-	github.com/aws/aws-sdk-go-v2/config v1.18.23
+	github.com/aws/aws-sdk-go-v2/config v1.18.24
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.11
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.11
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.6
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.12
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.11
-	github.com/aws/aws-sdk-go-v2/service/glue v1.45.5
+	github.com/aws/aws-sdk-go-v2/service/glue v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.10
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.10
@@ -75,10 +75,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.10
 	github.com/aws/aws-sdk-go-v2/service/sms v1.13.10
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.19.2
-	github.com/aws/aws-sdk-go-v2/service/sns v1.20.10
+	github.com/aws/aws-sdk-go-v2/service/sns v1.20.11
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.4
-	github.com/aws/aws-sdk-go-v2/service/sts v1.18.11
+	github.com/aws/aws-sdk-go-v2/service/sts v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.16.6
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.10

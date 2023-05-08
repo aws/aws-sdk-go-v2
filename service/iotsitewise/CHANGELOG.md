@@ -1,3 +1,7 @@
+# v1.29.0 (2023-05-08)
+
+* **Feature**: Provide support for 20,000 max results for GetAssetPropertyValueHistory/BatchGetAssetPropertyValueHistory and 15 minute aggregate resolution for GetAssetPropertyAggregates/BatchGetAssetPropertyAggregates
+
 # v1.28.4 (2023-05-04)
 
 * No change notes available for this release.

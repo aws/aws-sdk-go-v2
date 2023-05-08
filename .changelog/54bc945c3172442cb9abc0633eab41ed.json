@@ -1,8 +1,0 @@
-{
-    "id": "54bc945c-3172-442c-b9ab-c0633eab41ed",
-    "type": "feature",
-    "description": "Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs",
-    "modules": [
-        "service/guardduty"
-    ]
-}

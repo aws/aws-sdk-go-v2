@@ -1,3 +1,18 @@
+# Release (2023-05-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.46.0](service/glue/CHANGELOG.md#v1460-2023-05-08)
+  * **Feature**: We don't do release notes https://w.amazon.com/bin/view/AWSDocs/common-tasks/release-notes
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.23.0](service/guardduty/CHANGELOG.md#v1230-2023-05-08)
+  * **Feature**: Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.29.0](service/iotsitewise/CHANGELOG.md#v1290-2023-05-08)
+  * **Feature**: Provide support for 20,000 max results for GetAssetPropertyValueHistory/BatchGetAssetPropertyValueHistory and 15 minute aggregate resolution for GetAssetPropertyAggregates/BatchGetAssetPropertyAggregates
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.19.0](service/sts/CHANGELOG.md#v1190-2023-05-08)
+  * **Feature**: Documentation updates for AWS Security Token Service.
+
 # Release (2023-05-05)
 
 ## Module Highlights

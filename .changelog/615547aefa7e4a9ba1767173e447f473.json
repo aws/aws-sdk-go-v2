@@ -1,8 +1,0 @@
-{
-    "id": "615547ae-fa7e-4a9b-a176-7173e447f473",
-    "type": "feature",
-    "description": "Provide support for 20,000 max results for GetAssetPropertyValueHistory/BatchGetAssetPropertyValueHistory and 15 minute aggregate resolution for GetAssetPropertyAggregates/BatchGetAssetPropertyAggregates",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

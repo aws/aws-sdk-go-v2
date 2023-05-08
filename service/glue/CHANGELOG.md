@@ -1,3 +1,7 @@
+# v1.46.0 (2023-05-08)
+
+* **Feature**: We don't do release notes https://w.amazon.com/bin/view/AWSDocs/common-tasks/release-notes
+
 # v1.45.5 (2023-05-04)
 
 * No change notes available for this release.
