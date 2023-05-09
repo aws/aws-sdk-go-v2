@@ -1,3 +1,16 @@
+# Release (2023-05-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.20.0](service/applicationautoscaling/CHANGELOG.md#v1200-2023-05-09)
+  * **Feature**: With this release, Amazon SageMaker Serverless Inference customers can use Application Auto Scaling to auto scale the provisioned concurrency of their serverless endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.47.0](service/glue/CHANGELOG.md#v1470-2023-05-09)
+  * **Feature**: This release adds AmazonRedshift Source and Target nodes in addition to DynamicTransform OutputSchemas
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.78.0](service/sagemaker/CHANGELOG.md#v1780-2023-05-09)
+  * **Feature**: This release includes support for (1) Provisioned Concurrency for Amazon SageMaker Serverless Inference and (2) UpdateEndpointWeightsAndCapacities API for Serverless endpoints.
+
 # Release (2023-05-08)
 
 ## General Highlights

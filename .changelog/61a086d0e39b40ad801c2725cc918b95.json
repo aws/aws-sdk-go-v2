@@ -1,8 +1,0 @@
-{
-    "id": "61a086d0-e39b-40ad-801c-2725cc918b95",
-    "type": "feature",
-    "description": "With this release, Amazon SageMaker Serverless Inference customers can use Application Auto Scaling to auto scale the provisioned concurrency of their serverless endpoints.",
-    "modules": [
-        "service/applicationautoscaling"
-    ]
-}

@@ -2,10 +2,10 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.18.0
-	github.com/aws/aws-sdk-go-v2/config v1.18.24
+	github.com/aws/aws-sdk-go-v2/config v1.18.25
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.11
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.11
-	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.6
+	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.11
 	github.com/aws/aws-sdk-go-v2/service/athena v1.26.1
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.12
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.11
-	github.com/aws/aws-sdk-go-v2/service/glue v1.46.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.47.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.10
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.10

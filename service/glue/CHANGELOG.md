@@ -1,3 +1,7 @@
+# v1.47.0 (2023-05-09)
+
+* **Feature**: This release adds AmazonRedshift Source and Target nodes in addition to DynamicTransform OutputSchemas
+
 # v1.46.0 (2023-05-08)
 
 * **Feature**: Support large worker types G.4x and G.8x for Glue Spark

@@ -1,8 +1,0 @@
-{
-    "id": "624d3829-be85-48e6-8f09-8bc815a51ee5",
-    "type": "feature",
-    "description": "This release includes support for (1) Provisioned Concurrency for Amazon SageMaker Serverless Inference and (2) UpdateEndpointWeightsAndCapacities API for Serverless endpoints.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
