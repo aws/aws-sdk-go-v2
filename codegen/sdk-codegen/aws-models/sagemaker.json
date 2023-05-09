@@ -7256,7 +7256,7 @@
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided. If setting up the domain for use with RStudio, this value must be set to <code>Service</code>.</p>"
                     }
                 },
                 "DomainSettings": {
@@ -20644,6 +20644,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The variant's capacity.</p>"
                     }
+                },
+                "ServerlessUpdateConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the serverless update concurrency configuration for an endpoint variant.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21445,7 +21451,7 @@
                 "RStudioServerProDomainSettingsForUpdate": {
                     "target": "com.amazonaws.sagemaker#RStudioServerProDomainSettingsForUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to\n            update.</p>"
+                        "smithy.api#documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to\n            update. A single <code>RStudioServerPro</code> application is created for a domain.</p>"
                     }
                 },
                 "ExecutionRoleIdentityConfig": {
@@ -44592,10 +44598,36 @@
                         "smithy.api#documentation": "<p>The maximum number of concurrent invocations your serverless endpoint can process.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ProvisionedConcurrency": {
+                    "target": "com.amazonaws.sagemaker#ServerlessProvisionedConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of provisioned concurrency to allocate for the serverless endpoint.\n   Should be less than or equal to <code>MaxConcurrency</code>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the serverless configuration for an endpoint variant.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ProductionVariantServerlessUpdateConfig": {
+            "type": "structure",
+            "members": {
+                "MaxConcurrency": {
+                    "target": "com.amazonaws.sagemaker#ServerlessMaxConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated maximum number of concurrent invocations your serverless endpoint can process.</p>"
+                    }
+                },
+                "ProvisionedConcurrency": {
+                    "target": "com.amazonaws.sagemaker#ServerlessProvisionedConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated amount of provisioned concurrency to allocate for the serverless endpoint.\n   Should be less than or equal to <code>MaxConcurrency</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the serverless update concurrency configuration for an endpoint variant.</p>"
             }
         },
         "com.amazonaws.sagemaker#ProductionVariantStatus": {
@@ -50031,6 +50063,15 @@
                 "smithy.api#range": {
                     "min": 1024,
                     "max": 6144
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ServerlessProvisionedConcurrency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
                 }
             }
         },
@@ -55691,7 +55732,7 @@
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided. If setting up the domain for use with RStudio, this value must be set to <code>Service</code>.</p>"
                     }
                 }
             },

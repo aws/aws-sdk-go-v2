@@ -1930,6 +1930,243 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.glue#AmazonRedshiftAdvancedOption": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key when specifying a key-value pair.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value when specifying a key-value pair.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Amazon Redshift data store.</p>"
+            }
+        },
+        "com.amazonaws.glue#AmazonRedshiftAdvancedOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#AmazonRedshiftAdvancedOption"
+            }
+        },
+        "com.amazonaws.glue#AmazonRedshiftNodeData": {
+            "type": "structure",
+            "members": {
+                "AccessType": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access type for the Redshift connection. Can be a direct connection or catalog connections.</p>"
+                    }
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source type to specify whether a specific table is the source or a custom query.</p>"
+                    }
+                },
+                "Connection": {
+                    "target": "com.amazonaws.glue#Option",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Glue connection to the Redshift cluster.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.glue#Option",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Redshift schema name when working with a direct connection.</p>"
+                    }
+                },
+                "Table": {
+                    "target": "com.amazonaws.glue#Option",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Redshift table name when working with a direct connection.</p>"
+                    }
+                },
+                "CatalogDatabase": {
+                    "target": "com.amazonaws.glue#Option",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue Data Catalog database when working with a data catalog.</p>"
+                    }
+                },
+                "CatalogTable": {
+                    "target": "com.amazonaws.glue#Option",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Glue Data Catalog table name when working with a data catalog.</p>"
+                    }
+                },
+                "CatalogRedshiftSchema": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Redshift schema name when working with a data catalog.</p>"
+                    }
+                },
+                "CatalogRedshiftTable": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database table to read from.</p>"
+                    }
+                },
+                "TempDir": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 path where temporary data can be staged when copying out of the database.</p>"
+                    }
+                },
+                "IamRole": {
+                    "target": "com.amazonaws.glue#Option",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. The role name use when connection to S3. The IAM role ill default to the role on the job when left blank.</p>"
+                    }
+                },
+                "AdvancedOptions": {
+                    "target": "com.amazonaws.glue#AmazonRedshiftAdvancedOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional values when connecting to the Redshift cluster.</p>"
+                    }
+                },
+                "SampleQuery": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SQL used to fetch the data from a Redshift sources when the SourceType is 'query'.</p>"
+                    }
+                },
+                "PreAction": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SQL used before a MERGE or APPEND with upsert is run.</p>"
+                    }
+                },
+                "PostAction": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SQL used before a MERGE or APPEND with upsert is run.</p>"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how writing to a Redshift cluser will occur.</p>"
+                    }
+                },
+                "TablePrefix": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the prefix to a table.</p>"
+                    }
+                },
+                "Upsert": {
+                    "target": "com.amazonaws.glue#BooleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The action used on Redshift sinks when doing an APPEND.</p>"
+                    }
+                },
+                "MergeAction": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action used when to detemine how a MERGE in a Redshift sink will be handled.</p>"
+                    }
+                },
+                "MergeWhenMatched": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action used when to detemine how a MERGE in a Redshift sink will be handled when an existing record matches a new record.</p>"
+                    }
+                },
+                "MergeWhenNotMatched": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action used when to detemine how a MERGE in a Redshift sink will be handled when an existing record doesn't match a new record.</p>"
+                    }
+                },
+                "MergeClause": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SQL used in a custom merge to deal with matching records.</p>"
+                    }
+                },
+                "CrawlerConnection": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the connection that is associated with the catalog table used.</p>"
+                    }
+                },
+                "TableSchema": {
+                    "target": "com.amazonaws.glue#OptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of schema output for a given node.</p>"
+                    }
+                },
+                "StagingTable": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the temporary staging table that is used when doing a MERGE or APPEND with upsert.</p>"
+                    }
+                },
+                "SelectedColumns": {
+                    "target": "com.amazonaws.glue#OptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of column names used to determine a matching record when doing a MERGE or APPEND with upsert.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Amazon Redshift node.</p>"
+            }
+        },
+        "com.amazonaws.glue#AmazonRedshiftSource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Redshift source.</p>"
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.glue#AmazonRedshiftNodeData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data of the Amazon Reshift source node.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Amazon Redshift source.</p>"
+            }
+        },
+        "com.amazonaws.glue#AmazonRedshiftTarget": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Redshift target.</p>"
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.glue#AmazonRedshiftNodeData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data of the Amazon Reshift target node.</p>"
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#OneInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nodes that are inputs to the data target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Amazon Redshift target.</p>"
+            }
+        },
         "com.amazonaws.glue#ApplyMapping": {
             "type": "structure",
             "members": {
@@ -5015,6 +5252,18 @@
                     "target": "com.amazonaws.glue#S3DeltaDirectTarget",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a target that writes to a Delta Lake data source in Amazon S3.</p>"
+                    }
+                },
+                "AmazonRedshiftSource": {
+                    "target": "com.amazonaws.glue#AmazonRedshiftSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a target that writes to a data source in Amazon Redshift.</p>"
+                    }
+                },
+                "AmazonRedshiftTarget": {
+                    "target": "com.amazonaws.glue#AmazonRedshiftTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a target that writes to a data target in Amazon Redshift.</p>"
                     }
                 }
             },
@@ -12526,6 +12775,12 @@
                     "target": "com.amazonaws.glue#EnclosedInStringProperty",
                     "traits": {
                         "smithy.api#documentation": "<p>This field is not used and will be deprecated in future release.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the dynamic transform.</p>"
                     }
                 }
             },
@@ -23849,6 +24104,38 @@
             "traits": {
                 "smithy.api#documentation": "<p>The operation timed out.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.glue#Option": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the value of the option.</p>"
+                    }
+                },
+                "Label": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the label of the option.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the description of the option.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an option value.</p>"
+            }
+        },
+        "com.amazonaws.glue#OptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#Option"
             }
         },
         "com.amazonaws.glue#OracleSQLCatalogSource": {
