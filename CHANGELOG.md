@@ -5,7 +5,7 @@
 
 ## Module Highlights
 * `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.46.0](service/glue/CHANGELOG.md#v1460-2023-05-08)
-  * **Feature**: We don't do release notes https://w.amazon.com/bin/view/AWSDocs/common-tasks/release-notes
+  * **Feature**: Support large worker types G.4x and G.8x for Glue Spark
 * `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.23.0](service/guardduty/CHANGELOG.md#v1230-2023-05-08)
   * **Feature**: Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs
 * `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.29.0](service/iotsitewise/CHANGELOG.md#v1290-2023-05-08)
