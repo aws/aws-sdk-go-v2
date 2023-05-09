@@ -98,7 +98,9 @@ type CreateDomainInput struct {
 	// The entity that creates and manages the required security groups for inter-app
 	// communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType
 	// is VPCOnly and
-	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
+	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is
+	// provided. If setting up the domain for use with RStudio, this value must be set
+	// to Service .
 	AppSecurityGroupManagement types.AppSecurityGroupManagement
 
 	// The default settings used to create a space.

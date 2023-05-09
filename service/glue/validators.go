@@ -5623,6 +5623,11 @@ func validateDynamicTransform(v *types.DynamicTransform) error {
 	if v.Path == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Path"))
 	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

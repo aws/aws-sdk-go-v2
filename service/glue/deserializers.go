@@ -26106,6 +26106,413 @@ func awsAwsjson11_deserializeDocumentAlreadyExistsException(v **types.AlreadyExi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAmazonRedshiftAdvancedOption(v **types.AmazonRedshiftAdvancedOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonRedshiftAdvancedOption
+	if *v == nil {
+		sv = &types.AmazonRedshiftAdvancedOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAmazonRedshiftAdvancedOptions(v *[]types.AmazonRedshiftAdvancedOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AmazonRedshiftAdvancedOption
+	if *v == nil {
+		cv = []types.AmazonRedshiftAdvancedOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AmazonRedshiftAdvancedOption
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAmazonRedshiftAdvancedOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAmazonRedshiftNodeData(v **types.AmazonRedshiftNodeData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonRedshiftNodeData
+	if *v == nil {
+		sv = &types.AmazonRedshiftNodeData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.AccessType = ptr.String(jtv)
+			}
+
+		case "Action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Action = ptr.String(jtv)
+			}
+
+		case "AdvancedOptions":
+			if err := awsAwsjson11_deserializeDocumentAmazonRedshiftAdvancedOptions(&sv.AdvancedOptions, value); err != nil {
+				return err
+			}
+
+		case "CatalogDatabase":
+			if err := awsAwsjson11_deserializeDocumentOption(&sv.CatalogDatabase, value); err != nil {
+				return err
+			}
+
+		case "CatalogRedshiftSchema":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CatalogRedshiftSchema = ptr.String(jtv)
+			}
+
+		case "CatalogRedshiftTable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CatalogRedshiftTable = ptr.String(jtv)
+			}
+
+		case "CatalogTable":
+			if err := awsAwsjson11_deserializeDocumentOption(&sv.CatalogTable, value); err != nil {
+				return err
+			}
+
+		case "Connection":
+			if err := awsAwsjson11_deserializeDocumentOption(&sv.Connection, value); err != nil {
+				return err
+			}
+
+		case "CrawlerConnection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CrawlerConnection = ptr.String(jtv)
+			}
+
+		case "IamRole":
+			if err := awsAwsjson11_deserializeDocumentOption(&sv.IamRole, value); err != nil {
+				return err
+			}
+
+		case "MergeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.MergeAction = ptr.String(jtv)
+			}
+
+		case "MergeClause":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.MergeClause = ptr.String(jtv)
+			}
+
+		case "MergeWhenMatched":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.MergeWhenMatched = ptr.String(jtv)
+			}
+
+		case "MergeWhenNotMatched":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.MergeWhenNotMatched = ptr.String(jtv)
+			}
+
+		case "PostAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.PostAction = ptr.String(jtv)
+			}
+
+		case "PreAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.PreAction = ptr.String(jtv)
+			}
+
+		case "SampleQuery":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.SampleQuery = ptr.String(jtv)
+			}
+
+		case "Schema":
+			if err := awsAwsjson11_deserializeDocumentOption(&sv.Schema, value); err != nil {
+				return err
+			}
+
+		case "SelectedColumns":
+			if err := awsAwsjson11_deserializeDocumentOptionList(&sv.SelectedColumns, value); err != nil {
+				return err
+			}
+
+		case "SourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.SourceType = ptr.String(jtv)
+			}
+
+		case "StagingTable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.StagingTable = ptr.String(jtv)
+			}
+
+		case "Table":
+			if err := awsAwsjson11_deserializeDocumentOption(&sv.Table, value); err != nil {
+				return err
+			}
+
+		case "TablePrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.TablePrefix = ptr.String(jtv)
+			}
+
+		case "TableSchema":
+			if err := awsAwsjson11_deserializeDocumentOptionList(&sv.TableSchema, value); err != nil {
+				return err
+			}
+
+		case "TempDir":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.TempDir = ptr.String(jtv)
+			}
+
+		case "Upsert":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.Upsert = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAmazonRedshiftSource(v **types.AmazonRedshiftSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonRedshiftSource
+	if *v == nil {
+		sv = &types.AmazonRedshiftSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Data":
+			if err := awsAwsjson11_deserializeDocumentAmazonRedshiftNodeData(&sv.Data, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAmazonRedshiftTarget(v **types.AmazonRedshiftTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonRedshiftTarget
+	if *v == nil {
+		sv = &types.AmazonRedshiftTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Data":
+			if err := awsAwsjson11_deserializeDocumentAmazonRedshiftNodeData(&sv.Data, value); err != nil {
+				return err
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentApplyMapping(v **types.ApplyMapping, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28142,6 +28549,16 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 		switch key {
 		case "Aggregate":
 			if err := awsAwsjson11_deserializeDocumentAggregate(&sv.Aggregate, value); err != nil {
+				return err
+			}
+
+		case "AmazonRedshiftSource":
+			if err := awsAwsjson11_deserializeDocumentAmazonRedshiftSource(&sv.AmazonRedshiftSource, value); err != nil {
+				return err
+			}
+
+		case "AmazonRedshiftTarget":
+			if err := awsAwsjson11_deserializeDocumentAmazonRedshiftTarget(&sv.AmazonRedshiftTarget, value); err != nil {
 				return err
 			}
 
@@ -34244,6 +34661,11 @@ func awsAwsjson11_deserializeDocumentDynamicTransform(v **types.DynamicTransform
 					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
 			}
 
 		case "Parameters":
@@ -41501,6 +41923,98 @@ func awsAwsjson11_deserializeDocumentOperationTimeoutException(v **types.Operati
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOption(v **types.Option, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Option
+	if *v == nil {
+		sv = &types.Option{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOptionList(v *[]types.Option, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Option
+	if *v == nil {
+		cv = []types.Option{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Option
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

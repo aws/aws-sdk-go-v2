@@ -62083,6 +62083,19 @@ func awsAwsjson11_deserializeDocumentProductionVariantServerlessConfig(v **types
 				sv.MemorySizeInMB = ptr.Int32(int32(i64))
 			}
 
+		case "ProvisionedConcurrency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ServerlessProvisionedConcurrency to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProvisionedConcurrency = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 

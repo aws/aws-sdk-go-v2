@@ -11267,6 +11267,236 @@ func awsAwsjson11_serializeDocumentAggregateOperations(v []types.AggregateOperat
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAmazonRedshiftAdvancedOption(v *types.AmazonRedshiftAdvancedOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAmazonRedshiftAdvancedOptions(v []types.AmazonRedshiftAdvancedOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAmazonRedshiftAdvancedOption(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAmazonRedshiftNodeData(v *types.AmazonRedshiftNodeData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessType != nil {
+		ok := object.Key("AccessType")
+		ok.String(*v.AccessType)
+	}
+
+	if v.Action != nil {
+		ok := object.Key("Action")
+		ok.String(*v.Action)
+	}
+
+	if v.AdvancedOptions != nil {
+		ok := object.Key("AdvancedOptions")
+		if err := awsAwsjson11_serializeDocumentAmazonRedshiftAdvancedOptions(v.AdvancedOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CatalogDatabase != nil {
+		ok := object.Key("CatalogDatabase")
+		if err := awsAwsjson11_serializeDocumentOption(v.CatalogDatabase, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CatalogRedshiftSchema != nil {
+		ok := object.Key("CatalogRedshiftSchema")
+		ok.String(*v.CatalogRedshiftSchema)
+	}
+
+	if v.CatalogRedshiftTable != nil {
+		ok := object.Key("CatalogRedshiftTable")
+		ok.String(*v.CatalogRedshiftTable)
+	}
+
+	if v.CatalogTable != nil {
+		ok := object.Key("CatalogTable")
+		if err := awsAwsjson11_serializeDocumentOption(v.CatalogTable, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Connection != nil {
+		ok := object.Key("Connection")
+		if err := awsAwsjson11_serializeDocumentOption(v.Connection, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CrawlerConnection != nil {
+		ok := object.Key("CrawlerConnection")
+		ok.String(*v.CrawlerConnection)
+	}
+
+	if v.IamRole != nil {
+		ok := object.Key("IamRole")
+		if err := awsAwsjson11_serializeDocumentOption(v.IamRole, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MergeAction != nil {
+		ok := object.Key("MergeAction")
+		ok.String(*v.MergeAction)
+	}
+
+	if v.MergeClause != nil {
+		ok := object.Key("MergeClause")
+		ok.String(*v.MergeClause)
+	}
+
+	if v.MergeWhenMatched != nil {
+		ok := object.Key("MergeWhenMatched")
+		ok.String(*v.MergeWhenMatched)
+	}
+
+	if v.MergeWhenNotMatched != nil {
+		ok := object.Key("MergeWhenNotMatched")
+		ok.String(*v.MergeWhenNotMatched)
+	}
+
+	if v.PostAction != nil {
+		ok := object.Key("PostAction")
+		ok.String(*v.PostAction)
+	}
+
+	if v.PreAction != nil {
+		ok := object.Key("PreAction")
+		ok.String(*v.PreAction)
+	}
+
+	if v.SampleQuery != nil {
+		ok := object.Key("SampleQuery")
+		ok.String(*v.SampleQuery)
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		if err := awsAwsjson11_serializeDocumentOption(v.Schema, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelectedColumns != nil {
+		ok := object.Key("SelectedColumns")
+		if err := awsAwsjson11_serializeDocumentOptionList(v.SelectedColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceType != nil {
+		ok := object.Key("SourceType")
+		ok.String(*v.SourceType)
+	}
+
+	if v.StagingTable != nil {
+		ok := object.Key("StagingTable")
+		ok.String(*v.StagingTable)
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		if err := awsAwsjson11_serializeDocumentOption(v.Table, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TablePrefix != nil {
+		ok := object.Key("TablePrefix")
+		ok.String(*v.TablePrefix)
+	}
+
+	if v.TableSchema != nil {
+		ok := object.Key("TableSchema")
+		if err := awsAwsjson11_serializeDocumentOptionList(v.TableSchema, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TempDir != nil {
+		ok := object.Key("TempDir")
+		ok.String(*v.TempDir)
+	}
+
+	if v.Upsert {
+		ok := object.Key("Upsert")
+		ok.Boolean(v.Upsert)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAmazonRedshiftSource(v *types.AmazonRedshiftSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Data != nil {
+		ok := object.Key("Data")
+		if err := awsAwsjson11_serializeDocumentAmazonRedshiftNodeData(v.Data, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAmazonRedshiftTarget(v *types.AmazonRedshiftTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Data != nil {
+		ok := object.Key("Data")
+		if err := awsAwsjson11_serializeDocumentAmazonRedshiftNodeData(v.Data, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentApplyMapping(v *types.ApplyMapping, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11899,6 +12129,20 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 	if v.Aggregate != nil {
 		ok := object.Key("Aggregate")
 		if err := awsAwsjson11_serializeDocumentAggregate(v.Aggregate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AmazonRedshiftSource != nil {
+		ok := object.Key("AmazonRedshiftSource")
+		if err := awsAwsjson11_serializeDocumentAmazonRedshiftSource(v.AmazonRedshiftSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AmazonRedshiftTarget != nil {
+		ok := object.Key("AmazonRedshiftTarget")
+		if err := awsAwsjson11_serializeDocumentAmazonRedshiftTarget(v.AmazonRedshiftTarget, ok); err != nil {
 			return err
 		}
 	}
@@ -13826,6 +14070,13 @@ func awsAwsjson11_serializeDocumentDynamicTransform(v *types.DynamicTransform, v
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.OutputSchemas != nil {
+		ok := object.Key("OutputSchemas")
+		if err := awsAwsjson11_serializeDocumentGlueSchemas(v.OutputSchemas, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Parameters != nil {
@@ -15775,6 +16026,41 @@ func awsAwsjson11_serializeDocumentOneInput(v []string, value smithyjson.Value) 
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOption(v *types.Option, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Label != nil {
+		ok := object.Key("Label")
+		ok.String(*v.Label)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOptionList(v []types.Option, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentOption(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

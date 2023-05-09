@@ -1,0 +1,8 @@
+{
+    "id": "004484bc-dd4a-426f-a58d-6030592683d9",
+    "type": "feature",
+    "description": "This release adds AmazonRedshift Source and Target nodes in addition to DynamicTransform OutputSchemas",
+    "modules": [
+        "service/glue"
+    ]
+}

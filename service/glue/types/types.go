@@ -88,6 +88,139 @@ type AggregateOperation struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an Amazon Redshift data store.
+type AmazonRedshiftAdvancedOption struct {
+
+	// The key when specifying a key-value pair.
+	Key *string
+
+	// The value when specifying a key-value pair.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Amazon Redshift node.
+type AmazonRedshiftNodeData struct {
+
+	// The access type for the Redshift connection. Can be a direct connection or
+	// catalog connections.
+	AccessType *string
+
+	// Specifies how writing to a Redshift cluser will occur.
+	Action *string
+
+	// Optional values when connecting to the Redshift cluster.
+	AdvancedOptions []AmazonRedshiftAdvancedOption
+
+	// The name of the Glue Data Catalog database when working with a data catalog.
+	CatalogDatabase *Option
+
+	// The Redshift schema name when working with a data catalog.
+	CatalogRedshiftSchema *string
+
+	// The database table to read from.
+	CatalogRedshiftTable *string
+
+	// The Glue Data Catalog table name when working with a data catalog.
+	CatalogTable *Option
+
+	// The Glue connection to the Redshift cluster.
+	Connection *Option
+
+	// Specifies the name of the connection that is associated with the catalog table
+	// used.
+	CrawlerConnection *string
+
+	// Optional. The role name use when connection to S3. The IAM role ill default to
+	// the role on the job when left blank.
+	IamRole *Option
+
+	// The action used when to detemine how a MERGE in a Redshift sink will be handled.
+	MergeAction *string
+
+	// The SQL used in a custom merge to deal with matching records.
+	MergeClause *string
+
+	// The action used when to detemine how a MERGE in a Redshift sink will be handled
+	// when an existing record matches a new record.
+	MergeWhenMatched *string
+
+	// The action used when to detemine how a MERGE in a Redshift sink will be handled
+	// when an existing record doesn't match a new record.
+	MergeWhenNotMatched *string
+
+	// The SQL used before a MERGE or APPEND with upsert is run.
+	PostAction *string
+
+	// The SQL used before a MERGE or APPEND with upsert is run.
+	PreAction *string
+
+	// The SQL used to fetch the data from a Redshift sources when the SourceType is
+	// 'query'.
+	SampleQuery *string
+
+	// The Redshift schema name when working with a direct connection.
+	Schema *Option
+
+	// The list of column names used to determine a matching record when doing a MERGE
+	// or APPEND with upsert.
+	SelectedColumns []Option
+
+	// The source type to specify whether a specific table is the source or a custom
+	// query.
+	SourceType *string
+
+	// The name of the temporary staging table that is used when doing a MERGE or
+	// APPEND with upsert.
+	StagingTable *string
+
+	// The Redshift table name when working with a direct connection.
+	Table *Option
+
+	// Specifies the prefix to a table.
+	TablePrefix *string
+
+	// The array of schema output for a given node.
+	TableSchema []Option
+
+	// The Amazon S3 path where temporary data can be staged when copying out of the
+	// database.
+	TempDir *string
+
+	// The action used on Redshift sinks when doing an APPEND.
+	Upsert bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Amazon Redshift source.
+type AmazonRedshiftSource struct {
+
+	// Specifies the data of the Amazon Reshift source node.
+	Data *AmazonRedshiftNodeData
+
+	// The name of the Amazon Redshift source.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Amazon Redshift target.
+type AmazonRedshiftTarget struct {
+
+	// Specifies the data of the Amazon Reshift target node.
+	Data *AmazonRedshiftNodeData
+
+	// The nodes that are inputs to the data target.
+	Inputs []string
+
+	// The name of the Amazon Redshift target.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a transform that maps data property keys in the data source to data
 // property keys in the data target. You can rename keys, modify the data types for
 // keys, and choose which keys to drop from the dataset.
@@ -675,6 +808,12 @@ type CodeGenConfigurationNode struct {
 	// Specifies a transform that groups rows by chosen fields and computes the
 	// aggregated value by specified function.
 	Aggregate *Aggregate
+
+	// Specifies a target that writes to a data source in Amazon Redshift.
+	AmazonRedshiftSource *AmazonRedshiftSource
+
+	// Specifies a target that writes to a data target in Amazon Redshift.
+	AmazonRedshiftTarget *AmazonRedshiftTarget
 
 	// Specifies a transform that maps data property keys in the data source to data
 	// property keys in the data target. You can rename keys, modify the data types for
@@ -2673,6 +2812,9 @@ type DynamicTransform struct {
 	//
 	// This member is required.
 	TransformName *string
+
+	// Specifies the data schema for the dynamic transform.
+	OutputSchemas []GlueSchema
 
 	// Specifies the parameters of the dynamic transform.
 	Parameters []TransformConfigParameter
@@ -4734,6 +4876,21 @@ type NullValueField struct {
 	// The value of the null placeholder.
 	//
 	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an option value.
+type Option struct {
+
+	// Specifies the description of the option.
+	Description *string
+
+	// Specifies the label of the option.
+	Label *string
+
+	// Specifies the value of the option.
 	Value *string
 
 	noSmithyDocumentSerde

@@ -101,6 +101,9 @@ type DescribeScheduledActionsInput struct {
 	//   Example: replication-group/mycluster .
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
+	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
+	//   identifier is the resource ID. Example:
+	//   endpoint/my-end-point/variant/KMeansClustering .
 	ResourceId *string
 
 	// The scalable dimension. This string consists of the service namespace, resource
@@ -145,6 +148,8 @@ type DescribeScheduledActionsInput struct {
 	//   group for an Amazon ElastiCache replication group.
 	//   - neptune:cluster:ReadReplicaCount - The count of read replicas in an Amazon
 	//   Neptune DB cluster.
+	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
+	//   concurrency for a SageMaker Serverless endpoint.
 	ScalableDimension types.ScalableDimension
 
 	// The names of the scheduled actions to describe.

@@ -3146,6 +3146,10 @@ type DesiredWeightAndCapacity struct {
 	// The variant's weight.
 	DesiredWeight *float32
 
+	// Specifies the serverless update concurrency configuration for an endpoint
+	// variant.
+	ServerlessUpdateConfig *ProductionVariantServerlessUpdateConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -3366,7 +3370,8 @@ type DomainSettingsForUpdate struct {
 	// or Pending state.
 	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
 
-	// A collection of RStudioServerPro Domain-level app settings to update.
+	// A collection of RStudioServerPro Domain-level app settings to update. A single
+	// RStudioServerPro application is created for a domain.
 	RStudioServerProDomainSettingsForUpdate *RStudioServerProDomainSettingsForUpdate
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses
@@ -10769,6 +10774,25 @@ type ProductionVariantServerlessConfig struct {
 	//
 	// This member is required.
 	MemorySizeInMB *int32
+
+	// The amount of provisioned concurrency to allocate for the serverless endpoint.
+	// Should be less than or equal to MaxConcurrency .
+	ProvisionedConcurrency *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the serverless update concurrency configuration for an endpoint
+// variant.
+type ProductionVariantServerlessUpdateConfig struct {
+
+	// The updated maximum number of concurrent invocations your serverless endpoint
+	// can process.
+	MaxConcurrency *int32
+
+	// The updated amount of provisioned concurrency to allocate for the serverless
+	// endpoint. Should be less than or equal to MaxConcurrency .
+	ProvisionedConcurrency *int32
 
 	noSmithyDocumentSerde
 }

@@ -18964,6 +18964,13 @@ func awsAwsjson11_serializeDocumentDesiredWeightAndCapacity(v *types.DesiredWeig
 		}
 	}
 
+	if v.ServerlessUpdateConfig != nil {
+		ok := object.Key("ServerlessUpdateConfig")
+		if err := awsAwsjson11_serializeDocumentProductionVariantServerlessUpdateConfig(v.ServerlessUpdateConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VariantName != nil {
 		ok := object.Key("VariantName")
 		ok.String(*v.VariantName)
@@ -23254,6 +23261,28 @@ func awsAwsjson11_serializeDocumentProductionVariantServerlessConfig(v *types.Pr
 	if v.MemorySizeInMB != nil {
 		ok := object.Key("MemorySizeInMB")
 		ok.Integer(*v.MemorySizeInMB)
+	}
+
+	if v.ProvisionedConcurrency != nil {
+		ok := object.Key("ProvisionedConcurrency")
+		ok.Integer(*v.ProvisionedConcurrency)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProductionVariantServerlessUpdateConfig(v *types.ProductionVariantServerlessUpdateConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxConcurrency != nil {
+		ok := object.Key("MaxConcurrency")
+		ok.Integer(*v.MaxConcurrency)
+	}
+
+	if v.ProvisionedConcurrency != nil {
+		ok := object.Key("ProvisionedConcurrency")
+		ok.Integer(*v.ProvisionedConcurrency)
 	}
 
 	return nil
