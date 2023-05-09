@@ -8,7 +8,7 @@ ARG HUGO_DOWNLOAD_SHA256=8c3adf2ace1604468325a6dd094bcc41c141c4a28a0c1ebbeb0022e
 
 ARG GO_VERSION=go1.19
 
-RUN yum update -y && yum install -y tar xz gzip git coreutils make golang
+RUN yum update -y && yum install -y tar xz gzip git make golang
 
 RUN curl -L -o nodejs.tar.xz ${NODEJS_LTS_DOWNLOAD_URL} && \
     echo "${NODEJS_LTS_DOWNLOAD_SHA256} nodejs.tar.xz" | sha256sum -c -
