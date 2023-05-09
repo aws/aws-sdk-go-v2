@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.111.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://aws.github.io/aws-sdk-go-v2/docs/migrating/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -25,7 +25,6 @@
 <meta property="og:description" content="How to migrate to the AWS SDK for Go V2 from AWS SDK for Go V1." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/migrating/" /><meta property="og:site_name" content="AWS SDK for Go V2" />
-
 <meta itemprop="name" content="Migrating to the AWS SDK for Go V2">
 <meta itemprop="description" content="How to migrate to the AWS SDK for Go V2 from AWS SDK for Go V1."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Migrating to the AWS SDK for Go V2"/>
@@ -101,7 +100,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -416,39 +415,43 @@
 
 <div class="td-toc"><nav id="TableOfContents">
   <ul>
-    <li><a href="#minimum-go-version">Minimum Go Version</a></li>
-    <li><a href="#modularization">Modularization</a></li>
-    <li><a href="#configuration-loading">Configuration Loading</a>
+    <li>
       <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#credentials--credential-providers">Credentials &amp; Credential Providers</a>
-      <ul>
-        <li><a href="#static-credentials">Static Credentials</a></li>
-        <li><a href="#amazon-ec2-iam-role-credentials">Amazon EC2 IAM Role Credentials</a></li>
-        <li><a href="#endpoint-credentials">Endpoint Credentials</a></li>
-        <li><a href="#process-credentials">Process Credentials</a></li>
-        <li><a href="#aws-security-token-service-credentials">AWS Security Token Service Credentials</a></li>
-      </ul>
-    </li>
-    <li><a href="#service-clients">Service Clients</a>
-      <ul>
-        <li><a href="#client-construction">Client Construction</a></li>
-        <li><a href="#endpoints">Endpoints</a></li>
-        <li><a href="#invoking-api-operations">Invoking API Operations</a></li>
-        <li><a href="#service-data-types">Service Data Types</a></li>
-        <li><a href="#pointer-parameters">Pointer Parameters</a></li>
-        <li><a href="#errors-types">Errors Types</a></li>
-        <li><a href="#paginators">Paginators</a></li>
-        <li><a href="#waiters">Waiters</a></li>
-      </ul>
-    </li>
-    <li><a href="#features">Features</a>
-      <ul>
-        <li><a href="#amazon-ec2-instance-metadata-service">Amazon EC2 Instance Metadata Service</a></li>
-        <li><a href="#amazon-s3-transfer-manager">Amazon S3 Transfer Manager</a></li>
-        <li><a href="#amazon-cloudfront-signing-utilities">Amazon CloudFront Signing Utilities</a></li>
+        <li><a href="#minimum-go-version">Minimum Go Version</a></li>
+        <li><a href="#modularization">Modularization</a></li>
+        <li><a href="#configuration-loading">Configuration Loading</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#credentials--credential-providers">Credentials &amp; Credential Providers</a>
+          <ul>
+            <li><a href="#static-credentials">Static Credentials</a></li>
+            <li><a href="#amazon-ec2-iam-role-credentials">Amazon EC2 IAM Role Credentials</a></li>
+            <li><a href="#endpoint-credentials">Endpoint Credentials</a></li>
+            <li><a href="#process-credentials">Process Credentials</a></li>
+            <li><a href="#aws-security-token-service-credentials">AWS Security Token Service Credentials</a></li>
+          </ul>
+        </li>
+        <li><a href="#service-clients">Service Clients</a>
+          <ul>
+            <li><a href="#client-construction">Client Construction</a></li>
+            <li><a href="#endpoints">Endpoints</a></li>
+            <li><a href="#invoking-api-operations">Invoking API Operations</a></li>
+            <li><a href="#service-data-types">Service Data Types</a></li>
+            <li><a href="#pointer-parameters">Pointer Parameters</a></li>
+            <li><a href="#errors-types">Errors Types</a></li>
+            <li><a href="#paginators">Paginators</a></li>
+            <li><a href="#waiters">Waiters</a></li>
+          </ul>
+        </li>
+        <li><a href="#features">Features</a>
+          <ul>
+            <li><a href="#amazon-ec2-instance-metadata-service">Amazon EC2 Instance Metadata Service</a></li>
+            <li><a href="#amazon-s3-transfer-manager">Amazon S3 Transfer Manager</a></li>
+            <li><a href="#amazon-cloudfront-signing-utilities">Amazon CloudFront Signing Utilities</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -1341,7 +1344,7 @@ client import path. This module can be retrieved by using <code>go get</code>.</
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2022 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
+        <small class="text-white">&copy; 2023 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
         
 	
 		

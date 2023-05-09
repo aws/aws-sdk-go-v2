@@ -45,7 +45,7 @@
     <lastmod>2022-05-16T15:58:05-04:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/making-requests/</loc>
-    <lastmod>2022-08-05T21:08:18+02:00</lastmod>
+    <lastmod>2022-10-06T12:21:54-07:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/</loc>
     <lastmod>2021-06-23T15:45:17-07:00</lastmod>
@@ -66,10 +66,10 @@
     <lastmod>2020-12-23T13:28:16-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/</loc>
-    <lastmod>2021-01-14T12:54:53-08:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/rds/</loc>
-    <lastmod>2021-04-20T16:59:04-07:00</lastmod>
+    <lastmod>2023-02-14T12:11:29-05:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</loc>
     <lastmod>2020-11-24T14:29:02-08:00</lastmod>
@@ -102,231 +102,231 @@
     <lastmod>2022-04-18T10:28:56-07:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/accesskeylastused/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</loc>
-    <lastmod>2021-01-15T13:01:18-08:00</lastmod>
+    <lastmod>2023-02-01T05:55:09-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/</loc>
-    <lastmod>2021-03-18T10:34:41-07:00</lastmod>
+    <lastmod>2023-02-16T04:35:09+09:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sts/assumerole/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/attachuserpolicy/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/</loc>
     <lastmod>2020-12-23T13:28:16-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/changemsgvisibility/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/configurelpqueue/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/copyobject/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createaccesskey/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createaccountalias/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/createbucket/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/createcustommetric/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/createenablemetricalarm/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/createimage/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/createinstance/</loc>
-    <lastmod>2022-05-16T16:17:17-04:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/createkey/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createpolicy/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/createqueue/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/createtopic/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createuser/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deadletterqueue/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/decryptdata/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteaccesskey/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteaccountalias/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/deletebucket/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deletemessage/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/deleteobject/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ssm/deleteparameter/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deletequeue/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteservercert/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteuser/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/describealarms/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/describeinstances/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/describetable/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/describevpcendpoints/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/detachuserpolicy/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/disablealarm/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/encryptdata/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/generatepresignedurl/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/getbucketacl/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/getobjectacl/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ssm/getparameter/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/getpolicy/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/getqueueurl/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/getservercert/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listaccesskeys/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listaccountaliases/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listadmins/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/listbuckets/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/listmetrics/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/listobjects/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/listqueues/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listservercerts/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/listsubscriptions/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/listtopics/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listusers/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/monitorinstances/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/publish/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/putevent/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/putobject/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ssm/putparameter/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/rebootinstances/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/receivelpmessage/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/receivemessage/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/reencryptdata/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/</loc>
     <lastmod>2022-03-07T15:24:12-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/sendmessage/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/startinstances/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/stopinstances/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/subscribe/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateaccesskey/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateservercert/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateuser/</loc>
-    <lastmod>2022-05-16T14:47:58-07:00</lastmod>
+    <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url>
 </urlset>

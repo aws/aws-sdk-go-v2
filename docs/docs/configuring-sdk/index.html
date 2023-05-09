@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.111.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -26,7 +26,6 @@ retry configuration. Most settings …">
 <meta property="og:description" content="The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go applications that use AWS services." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/" /><meta property="og:site_name" content="AWS SDK for Go V2" />
-
 <meta itemprop="name" content="Configuring the AWS SDK for Go V2">
 <meta itemprop="description" content="The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go applications that use AWS services."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuring the AWS SDK for Go V2"/>
@@ -102,7 +101,7 @@ retry configuration. Most settings …">
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +123,7 @@ retry configuration. Most settings …">
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -417,19 +416,23 @@ retry configuration. Most settings …">
 
 <div class="td-toc"><nav id="TableOfContents">
   <ul>
-    <li><a href="#loading-aws-shared-configuration">Loading AWS Shared Configuration</a></li>
-    <li><a href="#specifying-the-aws-region">Specifying the AWS Region</a>
+    <li>
       <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#specifying-credentials">Specifying Credentials</a>
-      <ul>
-        <li><a href="#iam-roles-for-tasks">IAM Roles for Tasks</a></li>
-        <li><a href="#iam-roles-for-amazon-ec2-instances">IAM Roles for Amazon EC2 Instances</a></li>
-        <li><a href="#shared-credentials-and-configuration">Shared Credentials and Configuration</a></li>
-        <li><a href="#environment-variables">Environment Variables</a></li>
-        <li><a href="#specify-credentials-programmatically">Specify Credentials Programmatically</a></li>
+        <li><a href="#loading-aws-shared-configuration">Loading AWS Shared Configuration</a></li>
+        <li><a href="#specifying-the-aws-region">Specifying the AWS Region</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#specifying-credentials">Specifying Credentials</a>
+          <ul>
+            <li><a href="#iam-roles-for-tasks">IAM Roles for Tasks</a></li>
+            <li><a href="#iam-roles-for-amazon-ec2-instances">IAM Roles for Amazon EC2 Instances</a></li>
+            <li><a href="#shared-credentials-and-configuration">Shared Credentials and Configuration</a></li>
+            <li><a href="#environment-variables">Environment Variables</a></li>
+            <li><a href="#specify-credentials-programmatically">Specify Credentials Programmatically</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -786,18 +789,22 @@ IAM Identity Center account again using the AWS CLI.</p>
 <p>For example, you can create a profile, <code>dev-profile</code>, authenticate and authorize that profile using the
 AWS CLI, and configure your application as shown below.</p>
 <ol>
-<li>First create the <code>dev-profile</code></li>
+<li>First create the <code>profile</code> and <code>sso-session</code></li>
 </ol>
 <pre tabindex="0"><code>[profile dev-profile]
-sso_start_url = https://company-sso-portal.awsapps.com/start
-sso_region = us-west-2
+sso_session = dev-session
 sso_account_id = 012345678901
 sso_role_name = Developer
 region = us-east-1
+
+[sso-session dev-session]
+sso_region = us-west-2
+sso_start_url = https://company-sso-portal.awsapps.com/start
+sso_registration_scopes = sso:account:access
 </code></pre><ol start="2">
 <li>Login using the AWS CLI to authenticate and authorize the SSO profile.</li>
 </ol>
-<pre tabindex="0"><code>$ aws sso login --profile dev-profile
+<pre tabindex="0"><code>$ aws --profile dev-profile sso login 
 Attempting to automatically open the SSO authorization page in your default browser.
 If the browser does not open or you wish to use a different device to authorize this request, open the following URL:
 
@@ -945,7 +952,7 @@ will be invoked by the host environment&rsquo;s shell.</p>
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2022 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
+        <small class="text-white">&copy; 2023 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
         
 	
 		

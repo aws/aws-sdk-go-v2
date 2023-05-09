@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.111.3">
 <meta name="robots" content="index, follow">
 
 
@@ -25,11 +25,10 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-08-05T21:08:18+02:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
-
+<meta property="article:modified_time" content="2022-10-06T12:21:54-07:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 <meta itemprop="name" content="Using the AWS SDK for Go V2 with AWS Services">
 <meta itemprop="description" content="Construct service clients and make operation calls to send requests to AWS services."><meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-08-05T21:08:18+02:00" />
+<meta itemprop="dateModified" content="2022-10-06T12:21:54-07:00" />
 <meta itemprop="wordCount" content="2692">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using the AWS SDK for Go V2 with AWS Services"/>
@@ -105,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -420,24 +419,28 @@
 
 <div class="td-toc"><nav id="TableOfContents">
   <ul>
-    <li><a href="#constructing-a-service-client">Constructing a Service Client</a>
+    <li>
       <ul>
-        <li><a href="#newfromconfig">NewFromConfig</a></li>
-        <li><a href="#new">New</a></li>
-      </ul>
-    </li>
-    <li><a href="#calling-service-operations">Calling Service Operations</a>
-      <ul>
-        <li><a href="#passing-parameters-to-a-service-operation">Passing Parameters to a Service Operation</a></li>
-        <li><a href="#OverrideClientOptionsForOperation">Overriding Client Options For Operation Call</a></li>
-        <li><a href="#HandlingOperationResponses">Handling Operation Responses</a></li>
-      </ul>
-    </li>
-    <li><a href="#concurrently-using-service-clients">Concurrently Using Service Clients</a></li>
-    <li><a href="#using-paginators">Using Operation Paginators</a></li>
-    <li><a href="#using-waiters">Using Waiters</a>
-      <ul>
-        <li></li>
+        <li><a href="#constructing-a-service-client">Constructing a Service Client</a>
+          <ul>
+            <li><a href="#newfromconfig">NewFromConfig</a></li>
+            <li><a href="#new">New</a></li>
+          </ul>
+        </li>
+        <li><a href="#calling-service-operations">Calling Service Operations</a>
+          <ul>
+            <li><a href="#passing-parameters-to-a-service-operation">Passing Parameters to a Service Operation</a></li>
+            <li><a href="#OverrideClientOptionsForOperation">Overriding Client Options For Operation Call</a></li>
+            <li><a href="#HandlingOperationResponses">Handling Operation Responses</a></li>
+          </ul>
+        </li>
+        <li><a href="#concurrently-using-service-clients">Concurrently Using Service Clients</a></li>
+        <li><a href="#using-paginators">Using Operation Paginators</a></li>
+        <li><a href="#using-waiters">Using Waiters</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -620,7 +623,7 @@ in the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws">aws</a> to 
 used to convert a <code>string</code> to a <code>*string</code> type for input parameters that require a pointer to a string. Inversely
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ToString">aws.ToString</a> can be used to transform a <code>*string</code> to a <code>string</code> while providing
 protection from dereferencing a nil pointer. The <code>To&lt;Type&gt;</code> functions are helpful when handling service responses.</p>
-<p>Let&rsquo;s look at an example of how we can use a Amazon S3 client to call the <code>GetObject</code> API, and construct
+<p>Let&rsquo;s look at an example of how we can use an Amazon S3 client to call the <code>GetObject</code> API, and construct
 our input using the <code>types</code> package, and <code>aws.&lt;Type&gt;</code> helpers.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
@@ -1001,7 +1004,7 @@ retryable function. The waiter-specific options also provides <code>APIOptions</
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified August 5, 2022: <a href="https://github.com/aws/aws-sdk-go-v2/commit/0659028e26713159a57dbefbd187c2adfd063105">fix issue 1571: recursive link in docs/making_requests.md (#1757) (0659028)</a>
+  Last modified October 6, 2022: <a href="https://github.com/aws/aws-sdk-go-v2/commit/4b56845262ccafb8cab42bb03931c797e80f4809">Update making-requests.md (#1879) (4b56845)</a>
 </div>
 
 </div>
@@ -1049,7 +1052,7 @@ retryable function. The waiter-specific options also provides <code>APIOptions</
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2022 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
+        <small class="text-white">&copy; 2023 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
         
 	
 		
