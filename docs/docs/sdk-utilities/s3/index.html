@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.111.3">
 <meta name="robots" content="index, follow">
 
 
@@ -28,12 +28,11 @@ Upload Manager The Amazon Simple Storage Service upload manager determines if a 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2021-03-18T10:34:41-07:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
-
+<meta property="article:modified_time" content="2023-02-16T04:35:09+09:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 <meta itemprop="name" content="Amazon S3 Utilities">
 <meta itemprop="description" content="Transfer Managers The Amazon Simple Storage Service upload and download managers can break up large objects, so they can be transferred in multiple parts, in parallel. This makes it easy to resume interrupted transfers.
 Upload Manager The Amazon Simple Storage Service upload manager determines if a file can be split into smaller parts and uploaded in parallel. You can customize the number of parallel uploads and the size of the uploaded parts.">
-<meta itemprop="dateModified" content="2021-03-18T10:34:41-07:00" />
+<meta itemprop="dateModified" content="2023-02-16T04:35:09+09:00" />
 <meta itemprop="wordCount" content="2069">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Amazon S3 Utilities"/>
@@ -110,7 +109,7 @@ Upload Manager The Amazon Simple Storage Service upload manager determines if a 
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -132,7 +131,7 @@ Upload Manager The Amazon Simple Storage Service upload manager determines if a 
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -425,22 +424,27 @@ Upload Manager The Amazon Simple Storage Service upload manager determines if a 
 
 <div class="td-toc"><nav id="TableOfContents">
   <ul>
-    <li><a href="#upload-manager">Upload Manager</a>
+    <li><a href="#transfer-managers">Transfer Managers</a>
       <ul>
-        <li><a href="#configuration-options">Configuration Options</a></li>
-        <li><a href="#putobjectinput-body-field-ioreadseeker-vs-ioreader">PutObjectInput Body Field (io.ReadSeeker vs. io.Reader)</a></li>
-        <li><a href="#handling-failed-uploads">Handling Failed Uploads</a></li>
-        <li><a href="#overriding-uploader-options-per-upload">Overriding Uploader Options Per Upload</a></li>
-        <li><a href="#examples">Examples</a></li>
+        <li><a href="#upload-manager">Upload Manager</a>
+          <ul>
+            <li><a href="#configuration-options">Configuration Options</a></li>
+            <li><a href="#putobjectinput-body-field-ioreadseeker-vs-ioreader">PutObjectInput Body Field (io.ReadSeeker vs. io.Reader)</a></li>
+            <li><a href="#handling-failed-uploads">Handling Failed Uploads</a></li>
+            <li><a href="#overriding-uploader-options-per-upload">Overriding Uploader Options Per Upload</a></li>
+            <li><a href="#examples">Examples</a></li>
+          </ul>
+        </li>
+        <li><a href="#download-manager">Download Manager</a>
+          <ul>
+            <li></li>
+            <li><a href="#overriding-downloader-options-per-download">Overriding Downloader Options Per Download</a></li>
+          </ul>
+        </li>
+        <li><a href="#getbucketregion">GetBucketRegion</a></li>
       </ul>
     </li>
-    <li><a href="#download-manager">Download Manager</a>
-      <ul>
-        <li></li>
-        <li><a href="#overriding-downloader-options-per-download">Overriding Downloader Options Per Download</a></li>
-      </ul>
-    </li>
-    <li><a href="#getbucketregion">GetBucketRegion</a></li>
+    <li><a href="#unseekable-streaming-input">Unseekable Streaming Input</a></li>
   </ul>
 </nav></div>
 
@@ -872,7 +876,7 @@ client&rsquo;s configured Region.</p>
 <p>For API operations like <code>PutObject</code> and <code>UploadPart</code>, the Amazon S3 client expects the value of the <code>Body</code> input parameter to implement the <a href="https://pkg.go.dev/io#Seeker">io.Seeker</a> interface by default. The <code>io.Seeker</code> interface is used by the client to determine the length of the value to upload, and to compute payload hash for the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">request signature</a>. If the <code>Body</code> input parameter value does not implement <code>io.Seeker</code>, your application will receive an error.</p>
 <pre tabindex="0"><code>operation error S3: PutObject, failed to compute payload hash: failed to seek
 body to start, request stream is not seekable
-</code></pre><p>You can change this behavior by modifying the operation method&rsquo;s <a href="https://aws.github.io/aws-sdk-go-v2/docs/middleware/">Middleware</a> using functional options. The <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#WithAPIOptions">WithAPIOptions</a> helper returns a functional option for zero or more middleware mutators. To disable the client computing the payload hash and use <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html">Unsigned Payload</a> request signature add <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#RemoveComputePayloadSHA256Middleware">v4.SwapComputePayloadSHA256ForUnsignedPayloadMiddleware</a>.</p>
+</code></pre><p>You can change this behavior by modifying the operation method&rsquo;s <a href="https://aws.github.io/aws-sdk-go-v2/docs/middleware/">Middleware</a> using functional options. The <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#WithAPIOptions">WithAPIOptions</a> helper returns a functional option for zero or more middleware mutators. To disable the client computing the payload hash and use <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html">Unsigned Payload</a> request signature add <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#SwapComputePayloadSHA256ForUnsignedPayloadMiddleware">v4.SwapComputePayloadSHA256ForUnsignedPayloadMiddleware</a>.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">bucketName</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">objectName</span><span style="color:#000;font-weight:bold">,</span>
@@ -893,7 +897,7 @@ body to start, request stream is not seekable
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified March 18, 2021: <a href="https://github.com/aws/aws-sdk-go-v2/commit/48411e2fec29a1987ec52f5f17382455133f00b0">Add documentation for using Amazon S3 with unseekable body (#1175) (48411e2)</a>
+  Last modified February 16, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/01cae8c31ec1c3249bfae0334cbf1dfed562d206">doc: fix incorrectly link url (#2024) (01cae8c)</a>
 </div>
 
 </div>
@@ -941,7 +945,7 @@ body to start, request stream is not seekable
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2022 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
+        <small class="text-white">&copy; 2023 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
         
 	
 		

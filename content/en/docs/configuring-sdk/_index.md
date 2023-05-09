@@ -374,18 +374,24 @@ If your SSO credentials expire, you must explicitly renew them by logging in to 
 For example, you can create a profile, `dev-profile`, authenticate and authorize that profile using the
 {{% alias service=CLI %}}, and configure your application as shown below.
 
-1. First create the `dev-profile`
+1. First create the `profile` and `sso-session`
+
 ```
 [profile dev-profile]
-sso_start_url = https://company-sso-portal.awsapps.com/start
-sso_region = us-west-2
+sso_session = dev-session
 sso_account_id = 012345678901
 sso_role_name = Developer
 region = us-east-1
+
+[sso-session dev-session]
+sso_region = us-west-2
+sso_start_url = https://company-sso-portal.awsapps.com/start
+sso_registration_scopes = sso:account:access
+
 ```
 2. Login using the {{% alias service=CLI %}} to authenticate and authorize the SSO profile.
 ```
-$ aws sso login --profile dev-profile
+$ aws --profile dev-profile sso login 
 Attempting to automatically open the SSO authorization page in your default browser.
 If the browser does not open or you wish to use a different device to authorize this request, open the following URL:
 

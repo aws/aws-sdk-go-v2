@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.111.3">
 <meta name="robots" content="index, follow">
 
 
@@ -25,11 +25,10 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2021-01-15T13:01:18-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
-
+<meta property="article:modified_time" content="2023-02-01T05:55:09-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 <meta itemprop="name" content="Amazon EC2 Instance Metadata Service">
 <meta itemprop="description" content="Using the AWS SDK for Go V2 Amazon EC2 Instance Metadata Service Client">
-<meta itemprop="dateModified" content="2021-01-15T13:01:18-08:00" />
+<meta itemprop="dateModified" content="2023-02-01T05:55:09-08:00" />
 <meta itemprop="wordCount" content="310">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Amazon EC2 Instance Metadata Service"/>
@@ -105,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.b72800ff9f162da780238d86bb1fe844.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.6031b00f9c477f93ed55541508b521cb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -418,6 +417,20 @@
             
 
 
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#retrieving-an-instances-region">Retrieving an Instance&rsquo;s Region</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+
 
 
             
@@ -520,19 +533,19 @@ in the Amazon EC2 User Guide.</p>
 <p>There&rsquo;s no instance metadata category that returns only the Region of an
 instance. Instead, use the included <code>Region</code> method to easily return
 an instance&rsquo;s Region.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">region</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetRegion</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">imds</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetRegionInput</span><span style="color:#000;font-weight:bold">{})</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">response</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetRegion</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">imds</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetRegionInput</span><span style="color:#000;font-weight:bold">{})</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Unable to retrieve the region from the EC2 instance %v\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;region: %v\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;region: %v\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">response</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Region</span><span style="color:#000;font-weight:bold">)</span>
 </span></span></code></pre></div><p>For more information about the EC2 metadata utility, see the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/ec2/imds">feature/ec2/imds</a> package in the
 AWS SDK for Go V2 API Reference.</p>
 
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified January 15, 2021: <a href="https://github.com/aws/aws-sdk-go-v2/commit/495b900f9e48f8dcc166b2cd1eef9a08b36dd040">Code Example Highlighting, Vairous Documentation Fixes (#1045) (495b900)</a>
+  Last modified February 1, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/a704fcb4de09ac53dba0e09b86ef8c9bc081bceb">fix example for IMDS client `getRegion()` (#1977) (a704fcb)</a>
 </div>
 
 </div>
@@ -580,7 +593,7 @@ AWS SDK for Go V2 API Reference.</p>
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2022 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
+        <small class="text-white">&copy; 2023 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
         
 	
 		
